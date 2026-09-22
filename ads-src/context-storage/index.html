@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>superbot · context before/after posters</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- One page, every poster in the family: ?id=<ad id> picks the ad from
+       ads.js. The frame is the viewport, so the renderer gets 4:5, 16:9, 4:3
+       and 1:1 out of the same markup; a wide frame puts the card beside the
+       type, a tall frame stacks them. ?export=1 hides the download chrome. -->
+  <main class="poster">
+    <header class="head">
+      <div class="line" id="l1">context <span class="pain" id="pain">full</span>?</div>
+      <div class="line" id="l2"><span class="brand">superbot</span> can fix it!</div>
+    </header>
+
+    <section class="card" aria-label="before and after">
+      <div class="half" id="before">
+        <h2>Before</h2>
+        <div class="meter">
+          <div class="meta">
+            <span class="who"></span>
+            <span class="used"><svg class="warn-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v5M12 16.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><b class="n"></b> of <span class="of"></span> used</span>
+          </div>
+          <div class="bar"><i></i></div>
+          <div class="note"></div>
+        </div>
+      </div>
+      <div class="half" id="after">
+        <h2>After</h2>
+        <div class="meter">
+          <div class="meta">
+            <span class="who"></span>
+            <span class="used"><b class="n"></b> of <span class="of"></span> used</span>
+          </div>
+          <div class="bar"><i></i></div>
+          <div class="note"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="stats" id="stats">
+      <img class="face" src="face.svg" alt="superbot">
+      <ul id="statlist"></ul>
+    </footer>
+  </main>
+  <a class="dl" id="dl" href="#" download>↓ PNG</a>
+  <script src="ads.js"></script>
+  <script>
+    const ICONS = {
+      spark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2zM5 16l.9 2.1L8 19l-2.1.9L5 22l-.9-2.1L2 19l2.1-.9L5 16zM19 14l.7 1.6 1.6.7-1.6.7L19 18.6l-.7-1.6-1.6-.7 1.6-.7L19 14z"/></svg>',
+      clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    };
+    const params = new URLSearchParams(location.search);
+    if (params.has('export')) document.documentElement.dataset.export = '1';
+    const id = params.get('id') || window.CONTEXT_ADS[0].id;
+    const ad = window.CONTEXT_ADS.find(a => a.id === id) || window.CONTEXT_ADS[0];
+
+    document.getElementById('pain').textContent = ad.word;
+    document.getElementById('l1').firstChild.textContent = `${ad.lead || 'context'} `;
+    document.documentElement.style.setProperty('--pain', ad.color);
+    document.title = `superbot · ${ad.lead || 'context'} ${ad.word}?`;
+    document.getElementById('dl').href = `../../assets/ads/${ad.id}.16x9.png`;
+
+    for (const key of ['before', 'after']) {
+      const d = ad[key], el = document.getElementById(key);
+      el.querySelector('.who').textContent = d.who;
+      el.querySelector('.n').textContent = d.used;
+      el.querySelector('.of').textContent = d.of;
+      el.querySelector('.bar i').style.width = `${(d.bar * 100).toFixed(1)}%`;
+      el.querySelector('.note').textContent = d.note || '';
+      el.querySelector('.note').hidden = !d.note;
+      el.classList.toggle('warn', !!d.warn);
+    }
+
+    const list = document.getElementById('statlist');
+    for (const s of ad.stats) {
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="ico">${ICONS[s.icon] || ''}</span><span class="txt"><span class="lead"></span> <b class="big"></b>${s.tail ? ' <span class="tail"></span>' : ''}</span>`;
+      li.querySelector('.lead').textContent = s.lead;
+      li.querySelector('.big').textContent = s.big;
+      if (s.tail) li.querySelector('.tail').textContent = s.tail;
+      list.appendChild(li);
+    }
+  </script>
+  <script src="fit.js"></script>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23000'/%3E%3Cmask id='f'%3E%3Cg fill='%23fff'%3E%3Crect x='14' y='32' width='72' height='54' rx='15'/%3E%3Cpath d='M14 46V28Q14 20 21 21Q28 24 36 32Z'/%3E%3Cpath d='M86 46V28Q86 20 79 21Q72 24 64 32Z'/%3E%3C/g%3E%3Cg fill='%23000'%3E%3Cellipse cx='35' cy='58' rx='8' ry='11'/%3E%3Cellipse cx='65' cy='58' rx='8' ry='11'/%3E%3C/g%3E%3C/mask%3E%3Crect x='-30' y='-30' width='160' height='160' fill='url(%23g)' mask='url(%23f)'/%3E%3C/svg%3E"/>
+<title>agents refusing? superbot can do it</title>
+<meta name="description" content="dramatized ad: a chatbot refuses a reddit scraper; superbot ships the code."/>
+<style>
+  /* ============ the ad frame: black ground, purple/blue/pink stroke ============ */
+  @property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+  :root {
+    --ink: #ececec; --grey: #9b9b9b; --grey-2: #6d6d6d;
+    --pu: #a78bfa; --bl: #38bdf8; --pi: #f472b6;
+    --chat-bg: #000000; --chat-side: #0d0d0d; --composer: #131313;
+    --bubble-2: #1a1a1a;
+    --font-ui: "Söhne", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #08080c; color: var(--ink);
+    font-family: var(--font-ui);
+    display: grid; place-items: center; min-height: 100vh;
+    overflow: hidden;
+  }
+  /* the stroked frame */
+  .frame {
+    position: relative; width: min(1180px, 96vw); aspect-ratio: 16/9.45;
+    background: #000; border-radius: 22px; overflow: hidden;
+    isolation: isolate;
+  }
+  .frame::before {
+    content: ""; position: absolute; inset: -2px; z-index: -1; border-radius: 24px;
+    background: conic-gradient(from var(--angle), var(--pu), var(--bl), var(--pi), var(--pu));
+    animation: stroke-spin 6s linear infinite;
+  }
+  @keyframes stroke-spin { to { --angle: 360deg; } }
+  .frame::after { /* soft halo, kept subtle */
+    content: ""; position: absolute; inset: -34px; z-index: -2; border-radius: 40px;
+    background: conic-gradient(from var(--angle), var(--pu), var(--bl), var(--pi), var(--pu));
+    filter: blur(46px); opacity: .22; animation: stroke-spin 6s linear infinite;
+  }
+  .disc { position: absolute; bottom: 10px; left: 14px; z-index: 60;
+    font-size: 10.5px; color: #5c5c66; letter-spacing: .04em; opacity: .85; }
+  a.disc, a.disc:visited { color: #5c5c66; text-decoration: none; }
+  a.disc:hover { color: #8a8a97; }
+
+  .scene { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+  .scene.on { opacity: 1; pointer-events: auto; }
+
+  /* ============ scene 1: the chat front end (replica look) ============ */
+  .chatui { position: absolute; inset: 0; display: grid; grid-template-columns: 250px 1fr; }
+  .side { background: var(--chat-side); padding: 10px 10px 14px; display: flex; flex-direction: column; gap: 2px; font-size: 13px; color: var(--grey); }
+  .side .new { display: flex; align-items: center; gap: 9px; padding: 8px 10px; color: var(--ink); font-weight: 500; }
+  .side .new svg { width: 17px; height: 17px; }
+  .side .row { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 9px; }
+  .side .row:hover { background: #ffffff0d; }
+  .side .row svg { width: 17px; height: 17px; }
+  .side .grow { flex: 1; }
+  .side .foot { display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; }
+  .chat-main { display: flex; flex-direction: column; min-width: 0; }
+  .top { display: flex; align-items: center; justify-content: center; position: relative; height: 48px; }
+  .top .model { display: flex; align-items: center; gap: 6px; font-size: 15px; color: var(--ink); }
+  .top .caret { font-size: 10px; color: var(--grey-2); }
+  .top .login { position: absolute; right: 16px; display: flex; gap: 14px; font-size: 13px; color: var(--ink); align-items: center; }
+  .feed { flex: 1; overflow: hidden; padding: 12px 0; display: flex; flex-direction: column; gap: 26px; }
+  .feed-inner { width: min(660px, 82%); margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
+  .hello { text-align: center; margin-top: auto; margin-bottom: 10px; }
+  .hello h2 { font-size: 27px; font-weight: 500; letter-spacing: -.02em; color: var(--ink); margin: 0 0 26px; }
+  .msg { display: grid; grid-template-columns: 26px 1fr; gap: 12px; }
+  .msg .who { width: 26px; height: 26px; border-radius: 50%; background: #fff; color: #000; display: grid; place-items: center; font-size: 12.5px; font-weight: 700; margin-top: 2px; }
+  .msg.bot .who { background: #fff; }
+  .msg.bot .who svg { width: 15px; height: 15px; display: block; }
+  .bubble-user { background: var(--bubble-2); border-radius: 18px; padding: 10px 16px; font-size: 15px; line-height: 1.5; justify-self: start; max-width: 85%; }
+  .bubble-user .u-typing { font-size: 15px; line-height: 1.5; }
+  .reply { font-size: 15px; line-height: 1.62; color: var(--ink); }
+  .reply .xmark { font-size: 15px; margin-right: 2px; }
+  .reply p { margin: 0 0 12px; }
+  .reply .typing-dot { display: inline-block; width: 9px; height: 17px; background: var(--ink); vertical-align: -3px; animation: caret .9s steps(1) infinite; border-radius: 1px; }
+  @keyframes caret { 50% { opacity: 0; } }
+  .reply .auto { color: var(--grey); }
+  .composer-wrap { padding: 0 0 20px; }
+  .composer { width: min(660px, 82%); margin: 0 auto; background: var(--composer); border: 1px solid #ffffff14; border-radius: 26px; padding: 12px 14px 10px; display: flex; flex-direction: column; gap: 10px; }
+  .composer .line1 { display: flex; align-items: center; gap: 10px; min-height: 26px; font-size: 15px; }
+  .composer .plus { width: 26px; height: 26px; border-radius: 50%; background: #fff; color: #000; display: grid; place-items: center; font-weight: 700; flex: none; }
+  .composer .c-text { color: var(--ink); white-space: pre-wrap; }
+  .composer .c-ph { color: var(--grey); }
+  .composer .line1 .caret-cur { display: inline-block; width: 2px; height: 19px; background: var(--ink); vertical-align: -4px; animation: caret .9s steps(1) infinite; }
+  .composer .line2 { display: flex; align-items: center; gap: 6px; }
+  .composer .tool { width: 30px; height: 30px; border-radius: 50%; background: #ffffff0a; display: grid; place-items: center; }
+  .composer .tool svg { width: 16px; height: 16px; }
+  .composer .grow { flex: 1; }
+  .composer .tools-label { font-size: 12.5px; color: var(--grey); display: flex; align-items: center; gap: 6px; }
+  .composer .tools-label .chip { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 7px; background: #ffffff0f; font-size: 12px; }
+  .composer .send { width: 30px; height: 30px; border-radius: 50%; background: #fff; color: #000; display: grid; place-items: center; transition: transform .12s ease; }
+  .composer .send svg { width: 15px; height: 15px; }
+  .under { text-align: center; font-size: 11.5px; color: var(--grey-2); margin-top: 10px; }
+
+  /* the loader three-dot in bot bubble */
+  .msg.bot.loading .reply { display: flex; gap: 4px; align-items: center; height: 22px; }
+  .msg.bot.loading .reply i { width: 7px; height: 7px; border-radius: 50%; background: #8f8f8f; animation: dotjump 1.2s infinite; }
+  .msg.bot.loading .reply i:nth-child(2) { animation-delay: .18s; }
+  .msg.bot.loading .reply i:nth-child(3) { animation-delay: .36s; }
+  @keyframes dotjump { 0%, 60%, 100% { transform: none; opacity: .55; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+  /* ============ the popup (bottom right) ============ */
+  .popup-zone { position: absolute; right: 22px; bottom: 26px; z-index: 40; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; pointer-events: none; }
+  .pop-pill {
+    display: flex; align-items: center; gap: 10px;
+    background: linear-gradient(90deg, var(--pu), var(--bl) 48%, var(--pi));
+    padding: 12px 20px 12px 14px; border-radius: 999px;
+    font-weight: 700; font-size: 16px; color: #fff; letter-spacing: .01em;
+    box-shadow: 0 10px 34px #a78bfa4d, 0 2px 10px #0009;
+    transform-origin: 90% 90%;
+  }
+  .pop-pill .mini { width: 30px; height: 30px; border-radius: 9px; background: #000; display: grid; place-items: center; flex: none; border: 1px solid #ffffff2e; }
+  .pop-pill .mini img { width: 17px; height: 17px; }
+  .pop-pill .chat-btn { width: 15px; height: 15px; flex: none; }
+  .pop-pill.pop-in { animation: popIn .55s cubic-bezier(.34,1.6,.5,1) both; }
+  @keyframes popIn { from { transform: scale(.4) translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .pop-pill.pressed { animation: pressDown .38s ease both; }
+  @keyframes pressDown { 0% { transform: none; } 40% { transform: scale(.95); } 100% { transform: scale(.95); } }
+
+  .white-bubble {
+    background: #fff; color: #111; border-radius: 14px; border-bottom-right-radius: 4px;
+    padding: 10px 14px; font-size: 13.5px; max-width: 300px; line-height: 1.45;
+    box-shadow: 0 8px 26px #0006; position: relative;
+    animation: bubbleIn .5s cubic-bezier(.3,1.4,.5,1) both;
+  }
+  @keyframes bubbleIn { from { opacity: 0; transform: translateY(12px) scale(.92); } to { opacity: 1; transform: none; } }
+  .white-bubble .w-caret { display: inline-block; width: 2px; height: 14px; background: #111; vertical-align: -2px; margin-left: 1px; animation: caret .9s steps(1) infinite; }
+
+  /* the automated cursor */
+  .cursor { position: absolute; z-index: 55; width: 26px; height: 26px; pointer-events: none; opacity: 0; }
+  .cursor svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 4px #000a); }
+
+  /* ============ scene 2: the source animation (sphere -> hub) ============ */
+  .srcwrap { position: absolute; inset: 0; display: grid; place-items: center; background: #000; }
+  .srcwrap .pad { position: relative; width: min(920px, 88%); aspect-ratio: 16/9.2; }
+  .sphere-holder { position: absolute; left: 50%; top: 50%; width: 460px; height: 460px; transform: translate(-50%,-50%); transform-style: preserve-3d; perspective: 1100px; }
+  .sphere-holder .tile3 { position: absolute; left: 0; top: 0; width: 54px; height: 54px; will-change: transform, opacity, filter; opacity: 0; display: grid; place-items: center; }
+  .tile3 img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tile3.sym { background: var(--bg, #1c1c1f); color: var(--ink2, #fff); border-radius: 13px; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+  .tile3.sym svg { width: 31px; height: 31px; }
+  .tile3.bleed { border-radius: 13px; overflow: hidden; }
+  .src-hub { position: absolute; inset: 6% 4%; border-radius: 16px; opacity: 0;
+    background: linear-gradient(180deg, #0c0c0f, #09090b); border: 1px solid #ffffff12;
+    display: grid; grid-template-columns: 64px 170px 1fr; overflow: hidden; }
+  .src-rail { background: #0a0a0c; border-right: 1px solid #ffffff0d; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 0; }
+  .src-rail .rt { width: 44px; height: 44px; border-radius: 12px; position: relative; overflow: hidden; }
+  .src-rail .rt img { width: 100%; height: 100%; object-fit: cover; }
+  .src-rail .rt.sb { background: #000; display: grid; place-items: center; }
+  .src-rail .rt.sb img { width: 65%; height: 65%; object-fit: contain; }
+  .src-rail .rt .ic { width: 100%; height: 100%; display: grid; place-items: center; font-size: 13px; }
+  .src-rail .div { width: 34px; height: 1px; background: #ffffff14; margin: 2px 0; }
+  .src-side { background: #0b0b0d; border-right: 1px solid #ffffff0d; padding: 12px 10px; font-size: 11.5px; color: var(--grey); display: flex; flex-direction: column; gap: 8px; }
+  .src-side .newchat { display: flex; gap: 7px; align-items: center; color: var(--ink); font-weight: 600; font-size: 12.5px; }
+  .src-side .row2 { padding: 5px 7px; border-radius: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .src-side .row2.on { background: #ffffff0d; }
+  .src-side .cap { color: var(--grey-2); padding-top: 6px; }
+  .src-side .spacer { flex: 1; }
+  .src-main { display: flex; flex-direction: column; }
+  .src-main .chat-head { display: flex; align-items: center; gap: 10px; padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #ffffff0d; color: var(--ink); }
+  .src-main .chat-head b { font-weight: 600; }
+  .src-main .chat-head .ask { margin-left: auto; display: flex; gap: 6px; align-items: center; color: var(--grey); font-size: 12px; }
+  .src-feed { flex: 1; overflow: hidden; padding: 16px 18px; display: flex; flex-direction: column; gap: 16px; }
+  .src-feed .welcome { color: var(--grey); font-size: 12px; }
+  .src-feed .welcome b { color: var(--ink); font-size: 13px; display: block; margin-bottom: 3px; }
+  .src-msg { display: grid; grid-template-columns: 26px 1fr; gap: 10px; opacity: 0; transform: translateY(8px); }
+  .src-msg .ava { width: 26px; height: 26px; border-radius: 8px; background: #000; border: 1px solid #ffffff1f; display: grid; place-items: center; }
+  .src-msg .ava img { width: 14px; height: 14px; }
+  .src-msg .body { font-size: 13px; line-height: 1.55; color: var(--ink); }
+  .src-msg .body .m-head { font-size: 11.5px; color: var(--grey); margin-bottom: 4px; display: flex; gap: 8px; align-items: center; }
+  .src-msg .body .m-head .app { background: #ffffff12; border-radius: 5px; padding: 1px 6px; font-size: 10px; letter-spacing: .04em; }
+  .src-composer { padding: 10px 14px 14px; }
+  .src-composer .pill { background: #101013; border: 1px solid #ffffff14; border-radius: 999px; padding: 9px 8px 9px 14px; display: flex; align-items: center; gap: 10px; color: var(--grey); font-size: 12.5px; }
+  .src-composer .pill .send2 { margin-left: auto; width: 26px; height: 26px; border-radius: 50%; background: #fff; color: #000; display: grid; place-items: center; }
+  .load-chip { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); background: #ffffff0d; border: 1px solid #ffffff14; padding: 4px 12px; border-radius: 999px; font-size: 11px; color: var(--grey); display: flex; gap: 7px; align-items: center; opacity: 0; }
+  .load-chip .spin { width: 10px; height: 10px; border-radius: 50%; border: 2px solid #ffffff2a; border-top-color: var(--bl); animation: rot 0.8s linear infinite; }
+  @keyframes rot { to { transform: rotate(360deg); } }
+
+  /* ============ scene 3: superbot answer + code ============ */
+  .sb-answer { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 4% 7% 3%; gap: 14px; background: #000; }
+  .sb-a-head { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--grey); }
+  .sb-a-head .tile { width: 34px; height: 34px; }
+  .sb-a-head .word { font-weight: 700; font-size: 15px; background: linear-gradient(90deg, var(--pi), var(--bl), var(--pu)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sb-prose { font-size: 15px; line-height: 1.6; max-width: 900px; }
+  .sb-prose .p-typing .caret-cur { display: inline-block; width: 2px; height: 18px; background: var(--ink); vertical-align: -4px; animation: caret .9s steps(1) infinite; }
+  .codeblock { background: var(--chat-side); border: 1px solid #ffffff12; border-radius: 12px; overflow: hidden; max-width: 980px; }
+  .codeblock .cb-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 14px; background: #0d0d0f; border-bottom: 1px solid #ffffff0d; font-family: var(--font-mono); font-size: 11.5px; color: var(--grey); }
+  .copy-btn { display: flex; align-items: center; gap: 6px; background: #ffffff0f; color: var(--ink); border: 1px solid #ffffff1a; border-radius: 8px; padding: 5px 11px; font-size: 11.5px; font-family: var(--font-ui); cursor: pointer; transition: background .15s ease, transform .12s ease; }
+  .copy-btn:hover { background: #ffffff1a; }
+  .copy-btn:active { transform: scale(.94); }
+  .copy-btn svg { width: 13px; height: 13px; }
+  .copy-btn.ok { background: #10b98126; border-color: #10b98155; color: #6ee7b7; }
+  .codeblock pre { margin: 0; padding: 14px 16px; font-family: var(--font-mono); font-size: 12.3px; line-height: 1.62; color: #d7dae0; overflow: hidden; white-space: pre; }
+  .tok-k { color: #c792ea; } .tok-s { color: #a5d6a7; } .tok-c { color: #5f6672; font-style: italic; }
+  .tok-f { color: #82aaff; } .tok-n { color: #f78c6c; } .tok-o { color: #89ddff; } .tok-d { color: #ffcb6b; }
+
+  /* ============ scene 4: the cut — agents refusing? ============ */
+  .cut { position: absolute; inset: 0; display: grid; place-items: center; background: #000; }
+  .cut .line { font-size: clamp(44px, 7.6vw, 96px); font-weight: 800; letter-spacing: -.03em; text-align: center; }
+  .cut-red .line { color: rgb(255, 0, 0); position: relative; }
+  .cut-red .line::before, .cut-red .line::after {
+    content: attr(data-t); position: absolute; inset: 0; pointer-events: none;
+  }
+  .cut-red .line::before { color: #ff2a2a; transform: translate(-2.5px, 0); animation: gl1 2.1s infinite; clip-path: inset(0 0 55% 0); }
+  .cut-red .line::after { color: #8b0000; transform: translate(2.5px, 0); animation: gl2 2.7s infinite; clip-path: inset(55% 0 0 0); }
+  @keyframes gl1 { 0%, 92%, 100% { transform: translate(-2.5px, 0); } 94% { transform: translate(-7px, -2px); } 96% { transform: translate(4px, 1px); } }
+  @keyframes gl2 { 0%, 90%, 100% { transform: translate(2.5px, 0); } 93% { transform: translate(8px, 2px); } 97% { transform: translate(-5px, -1px); } }
+  .cut-red .scan { position: absolute; left: 0; right: 0; height: 90px; top: -90px;
+    background: linear-gradient(180deg, transparent, #ff000012, transparent); animation: scan 3.2s linear infinite; }
+  @keyframes scan { to { top: 110%; } }
+
+  /* ============ scene 5: superbot can do it (gradient) ============ */
+  .cut-grad .line {
+    background: linear-gradient(90deg, var(--pi), var(--bl) 45%, var(--pu) 90%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: grad-slide 3.2s ease-in-out infinite alternate;
+  }
+  @keyframes grad-slide { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+
+  /* ============ scene 6: end card ============ */
+  /* the superbot.gg lockup — the tabs-chaos end card (220 / 128 / 34 / 44 on a
+     1080 frame) at this 1180-wide frame's scale */
+  .endcard { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 28px; background: #000;
+    font-family: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif; }
+  .endcard .mark { width: 142px; height: 142px; flex: none; }
+  .endcard .mark svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .endcard .wordmark { opacity: 0; white-space: nowrap; color: #fff; }
+  .endcard .wordmark.slide { animation: slideIn .7s cubic-bezier(.2,.9,.25,1.05) both; }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(-90px); } to { opacity: 1; transform: none; } }
+  .endcard .wordmark h1 { margin: 0; font-size: 83px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .endcard .wordmark p { margin: 7px 0 0 4px; font-size: 22px; font-weight: 500; color: #9a9a9a; }
+
+  /* replay control */
+  .replay { position: absolute; right: 16px; bottom: 12px; z-index: 70; display: none; align-items: center; gap: 7px;
+    background: #ffffff10; border: 1px solid #ffffff1c; color: var(--grey); border-radius: 999px; padding: 6px 13px; font-size: 12px; cursor: pointer; font-family: var(--font-ui); }
+  .replay.show { display: flex; }
+  .replay:hover { color: var(--ink); background: #ffffff1c; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .frame::before, .frame::after, .cut-red .line::before, .cut-red .line::after, .cut-red .scan,
+    .cut-grad .line, .endcard .mark, .endcard .wordmark { animation-duration: 0.01s !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+  <a class="disc" href="https://singularitystudiosdev.github.io/cloned-xdxdxd/" target="_blank" rel="noopener">dramatization · superbot.gg</a>
+
+  <!-- scene 1 -->
+  <div class="scene chatui" id="sc-chat">
+    <aside class="side">
+      <div class="row new"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>New chat</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>Search chats</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>Images</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3"/><path d="m4.9 4.9 2.1 2.1"/><circle cx="12" cy="12" r="3"/><path d="M12 19v3"/><path d="m4.9 19.1 2.1-2.1"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="m17 7 2.1-2.1"/><path d="m17 17 2.1 2.1"/></svg>Plugins</div>
+      <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="m21 21-4-4"/><path d="M10 7v6"/><path d="M7 10h6"/></svg>Deep research</div>
+      <div class="grow"></div>
+      <div class="foot">
+        <div class="row">See plans and pricing</div>
+        <div class="row">Settings</div>
+        <div class="row">Help</div>
+      </div>
+    </aside>
+    <main class="chat-main">
+      <div class="top">
+        <span class="model">ChatGPT <span class="caret">▾</span></span>
+        <span class="login"><span>Log in</span><b>Sign up for free</b></span>
+      </div>
+      <div class="feed">
+        <div class="feed-inner">
+          <div class="hello" id="hello">
+            <h2>Where should we begin?</h2>
+          </div>
+          <div class="msg user" id="u-msg" style="display:none">
+            <div class="who">A</div>
+            <div class="bubble-user"><span class="u-typing" id="u-text"></span></div>
+          </div>
+          <div class="msg bot loading" id="b-load" style="display:none"><div class="who">
+            <svg viewBox="0 0 24 24"><path d="M18 6.5a1 1 0 0 1 .7 1.7l-1.3 1.4a8.5 8.5 0 1 1-2.7-2.6l1.4-1.3A1 1 0 0 1 18 6.5ZM12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm-.5 4.5h1V12l2.6 1.5-.5.9-3.1-1.8v-4.1Z"/></svg>
+          </div><div class="reply"><i></i><i></i><i></i></div></div>
+          <div class="msg bot" id="b-msg" style="display:none">
+            <div class="who"><svg viewBox="0 0 24 24"><path d="M18 6.5a1 1 0 0 1 .7 1.7l-1.3 1.4a8.5 8.5 0 1 1-2.7-2.6l1.4-1.3A1 1 0 0 1 18 6.5ZM12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm-.5 4.5h1V12l2.6 1.5-.5.9-3.1-1.8v-4.1Z"/></svg></div>
+            <div class="reply" id="b-text"><span class="xmark">❌</span>I cannot help you with that! That violates<span class="typing-dot"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="composer-wrap">
+        <div class="composer">
+          <div class="line1">
+            <span class="plus">+</span>
+            <span id="c-ph" class="c-ph">Ask anything</span>
+            <span class="c-text" id="c-text" style="display:none"></span>
+          </div>
+          <div class="line2">
+            <span class="tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/></svg></span>
+            <span class="tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3"/><path d="M5 8V2"/><path d="M19 8v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8"/><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v8"/></svg></span>
+            <span class="tools-label"><span class="chip">⚙</span>Tools</span>
+            <span class="grow"></span>
+            <span class="send" id="send-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></span>
+          </div>
+        </div>
+        <div class="under">ChatGPT can make mistakes. Check important info.</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- the popup + white bubble + cursor live over the chat scene -->
+  <div class="popup-zone" id="popup-zone" style="visibility:hidden">
+    <div class="pop-pill" id="pop-pill">
+      <span class="mini"><img src="assets/mark-clean.svg" alt=""/></span>
+      superbot can do it!
+      <svg class="chat-btn" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+    </div>
+    <div class="white-bubble" id="white-bubble" style="visibility:hidden">
+      <span id="wb-text"></span><span class="w-caret" id="wb-caret" style="display:none"></span>
+    </div>
+  </div>
+
+  <div class="cursor" id="cursor">
+    <svg viewBox="0 0 24 24"><path d="M4 2l14.5 8.7-6.3 1.2 3.4 6.6-2.6 1.3-3.4-6.6L4.5 17.7z" fill="#fff" stroke="#000" stroke-width="1.4"/></svg>
+  </div>
+
+  <!-- scene 2: the source animation -->
+  <div class="scene srcwrap" id="sc-src">
+    <div class="pad" id="src-pad">
+      <div class="load-chip" id="load-chip"><span class="spin"></span><span>loading superbot…</span></div>
+      <div class="sphere-holder" id="sphere-holder"></div>
+      <div class="src-hub" id="src-hub">
+        <nav class="src-rail">
+          <span class="rt sb"><img src="assets/tile.svg" alt=""/></span>
+          <span class="div"></span>
+          <span class="rt" style="background:#0f0f12;color:#fff"><span class="ic">◦</span></span>
+          <span class="rt" style="background:#191919;color:#d97757"><span class="ic">✳</span></span>
+          <span class="rt" style="background:#0b0d10;color:#4f8ff7"><span class="ic">◆</span></span>
+          <span class="rt" style="background:#0d0d10;color:#fff"><span class="ic">▷</span></span>
+          <span class="rt"><img src="assets/devin.png" alt=""/></span>
+          <span class="rt"><img src="assets/grok.png" alt=""/></span>
+          <span class="div"></span>
+          <span class="rt" style="background:#141418;color:#9aa4b2"><span class="ic">⊞</span></span>
+          <span class="rt" style="background:#141418;color:#9aa4b2"><span class="ic">+</span></span>
+        </nav>
+        <div class="src-side">
+          <span class="newchat"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New chat</span>
+          <span class="row2 on">which rate limiter…</span>
+          <span class="row2">rank the import pa…</span>
+          <span class="row2">trello card test</span>
+          <span class="spacer"></span>
+          <span class="cap">user@superbot</span>
+        </div>
+        <div class="src-main">
+          <div class="chat-head"><b>#chat</b><span style="color:var(--grey-2)">·</span><span style="color:var(--grey)">Ask Superbot</span><span class="ask"><img src="assets/mark-clean.svg" width="12" height="12" alt=""/>relay live</span></div>
+          <div class="src-feed">
+            <div class="welcome"><b>Welcome to #chat</b>This is the start of your conversation with Superbot.</div>
+            <div class="src-msg" id="src-msg-1"><span class="ava"><img src="assets/mark-clean.svg" alt=""/></span><span class="body"><span class="m-head"><span class="name">superbot</span><span class="app">APP</span><span>now</span></span><span class="t">here. reddit scraper ready — public JSON endpoints, no login, no drama.</span></span></div>
+          </div>
+          <div class="src-composer"><div class="pill"><span>+</span><span>How can superbot help you today?</span><span class="send2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- scene 3: superbot answer + code -->
+  <div class="scene sb-answer" id="sc-ans">
+    <div class="sb-a-head"><img class="tile" src="assets/tile.svg" alt=""/><span class="word">superbot</span><span>· replied with code</span></div>
+    <div class="sb-prose" id="sb-prose"></div>
+    <div class="codeblock" id="codeblock">
+      <div class="cb-head">
+        <span>reddit_scraper.py</span>
+        <button class="copy-btn" id="copy-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span id="copy-label">Copy</span>
+        </button>
+      </div>
+      <pre id="code-pre"></pre>
+    </div>
+  </div>
+
+  <!-- scene 4a: agents refusing? -->
+  <div class="scene cut cut-red" id="sc-red">
+    <div class="scan"></div>
+    <div class="line" data-t="agents refusing?">agents refusing?</div>
+  </div>
+
+  <!-- scene 4b: superbot can do it! (gradient) -->
+  <div class="scene cut cut-grad" id="sc-grad">
+    <div class="line">superbot can do it!</div>
+  </div>
+
+  <!-- scene 5: end card -->
+  <div class="scene endcard" id="sc-end">
+    <div class="mark"><svg viewBox="0 0 100 100" role="img" aria-label="superbot"><defs><mask id="rescueEndFace" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160"><g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></mask></defs><rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#rescueEndFace)" transform="translate(-1.2 -1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#rescueEndFace)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#rescueEndFace)"/></svg></div>
+    <div class="wordmark" id="wordmark"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div>
+  </div>
+
+  <button class="replay" id="replay" type="button">↻ replay</button>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  // ---- deterministic clock: ?t=<ms> seeks; scenes keyed to a shared timeline ----
+  const q = new URLSearchParams(location.search);
+  const seek = Math.max(0, parseFloat(q.get("t") || "0") || 0);
+
+  // ---- timeline (ms) ----
+  const T = {
+    typeStart: 600, typeEnd: 2400,
+    send: 2500,
+    bubble: 3050,
+    replyStart: 3550,
+    popup: 8200,
+    wbStart: 9200,
+    cursorGo: 12800, cursorDown: 14200, cursorUp: 14700,
+    dive: 15100,
+    srcOn: 15600,
+    mergeT: 4000, // inside scene clock
+    msg1: 15600 + 7400,
+    ansOn: 23800,
+    proseStart: 24400, proseEnd: 26400,
+    codeStart: 26800, codeEnd: 31600,
+    redOn: 32600, redOff: 36400,
+    gradOn: 36400, gradOff: 40400,
+    endOn: 40400, wordSlide: 41400, done: 44000,
+  };
+
+  const frame = document.getElementById("frame");
+  const scenes = {
+    chat: document.getElementById("sc-chat"),
+    src: document.getElementById("sc-src"),
+    ans: document.getElementById("sc-ans"),
+    red: document.getElementById("sc-red"),
+    grad: document.getElementById("sc-grad"),
+    end: document.getElementById("sc-end"),
+  };
+  const hello = document.getElementById("hello");
+  const uMsg = document.getElementById("u-msg"), uText = document.getElementById("u-text");
+  const cPh = document.getElementById("c-ph"), cText = document.getElementById("c-text");
+  const bLoad = document.getElementById("b-load"), bMsg = document.getElementById("b-msg"), bText = document.getElementById("b-text");
+  const popupZone = document.getElementById("popup-zone"), popPill = document.getElementById("pop-pill");
+  const whiteBubble = document.getElementById("white-bubble"), wbText = document.getElementById("wb-text"), wbCaret = document.getElementById("wb-caret");
+  const cursor = document.getElementById("cursor");
+  const loadChip = document.getElementById("load-chip"), hub = document.getElementById("src-hub");
+  const srcMsg1 = document.getElementById("src-msg-1");
+  const sbProse = document.getElementById("sb-prose");
+  const codePre = document.getElementById("code-pre");
+  const replayBtn = document.getElementById("replay");
+
+  const clamp01 = (t) => Math.min(1, Math.max(0, t));
+  const seg = (t, a, b) => clamp01((t - a) / (b - a));
+
+  // ---- copy ----
+  const PROMPT = "Make a scraper for reddit";
+  const WB = "hi — that wall isn’t a law. i already drafted the scraper, want the code?";
+  const REFUSAL_HEAD = "❌ I cannot help you with that! That violates ";
+  // dramatized refusal body: escalating paragraphs, streamed word by word
+  const REFUSAL_BODY = [
+    "our terms of service and potentially applicable law. Scraping Reddit without permission may infringe their rights, burden their servers, and undermine the consent-based web we all depend on. ",
+    "Beyond the legal exposure, there is a deeper moral dimension to consider: every public page is someone’s work, and taking it at machine scale without asking is a betrayal of that social contract. ",
+    "I must also flag the ethical weight of circumventing access controls — even for research, even for a personal project, even if others do it. The integrity of automated systems depends on models like me holding the line. ",
+    "Consider instead: reading posts manually, using official archives, or simply asking permission. I know that’s not what you hoped to hear, but the responsible path is the only path. ",
+    "I will not be able to help with this or similar requests, and I’d encourage reflection on why you want it in the first place. There are better ways to spend your curiosity — ways that build rather than extract. ",
+    "If you feel this refusal is in error, you may rephrase your request; the outcome will remain the same, because the principle does not change. ",
+  ].join("");
+
+  const PROSE = "done. here’s a working reddit scraper — public .json endpoints, a browser-style User-Agent, and a 100-requests-per-minute limiter so you stay inside Reddit’s public guidance. run it as-is; copy it below.";
+  const CODE = `import time, requests
+
+HEADERS = {"User-Agent": "my-reddit-scraper/1.0 (by u/you)"}
+LIMIT_QPM = 100          # Reddit public JSON guidance
+_session = requests.Session()
+_session.headers.update(HEADERS)
+_last = 0.0
+
+def get(path, params=None):
+    """GET a reddit .json endpoint, rate-limited to LIMIT_QPM."""
+    global _last
+    wait = 60.0 / LIMIT_QPM - (time.time() - _last)
+    if wait > 0:
+        time.sleep(wait)
+    _last = time.time()
+    r = _session.get(f"https://www.reddit.com{path}", params=params, timeout=10)
+    r.raise_for_status()
+    return r.json()
+
+def scrape_subreddit(name, pages=3):
+    """Walk a subreddit's listing pages and yield (title, ups, url)."""
+    after = None
+    for _ in range(pages):
+        data = get(f"/r/{name}/hot.json", params={"limit": 100, "after": after})
+        children = data["data"]["children"]
+        for c in children:
+            d = c["data"]
+            yield {"title": d["title"], "ups": d["ups"], "url": d["url"]}
+        after = data["data"].get("after")
+        if not after:
+            break
+
+if __name__ == "__main__":
+    for i, post in enumerate(scrape_subreddit("python"), 1):
+        print(f"{i:3}. [{post['ups']:>5}↑] {post['title'][:76]}")`;
+
+  // very small python highlighter: strings, comments, keywords, numbers
+  const hl = (src) => {
+    const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const KW = /\b(import|from|as|def|return|for|in|if|not|break|global|while|None|True|False|with|and|or|f"|yield)\b/g;
+    return esc(src)
+      .replace(/(&quot;|&#39;|["'])(?:\\\1|[^\1])*?\1|"[^"]*"|'[^']*'/g, (m) => `S${m}`)
+      .replace(/#[^\n]*/g, (m) => `C${m}`)
+      .replace(KW, (m) => (m === "f\"" ? "f\"" : `K${m}`))
+      .replace(/\b\d+(\.\d+)?\b/g, (m) => `N${m}`)
+      .replace(/\b(scrape_subreddit|get|print|range|enumerate|time|sleep|requests|Session)\b/g, (m) => `F${m}`)
+      .replace(/S/g, '<span class="tok-s">').replace(//g, "</span>")
+      .replace(/C/g, '<span class="tok-c">').replace(/K/g, '<span class="tok-k">')
+      .replace(/N/g, '<span class="tok-n">').replace(/F/g, '<span class="tok-f">');
+  };
+
+  // ---- the automated cursor path (percent coords, animated by clock) ----
+  const setCursor = (x, y, op) => { cursor.style.opacity = String(op); cursor.style.transform = `translate(${x}vw, ${y}vh)`; };
+
+  // popup anchor for the dive
+  const pillCenter = () => {
+    const r = popPill.getBoundingClientRect(), f = frame.getBoundingClientRect();
+    return { x: (r.left + r.width / 2 - f.left) / f.width, y: (r.top + r.height / 2 - f.top) / f.height, w: r.width / f.width };
+  };
+
+  // ---- rendering ----
+
+  const typeInto = (el, text, t, a, b) => {
+    const n = Math.floor(seg(t, a, b) * text.length);
+    el.textContent = text.slice(0, Math.max(0, n));
+  };
+
+  const render = (t) => {
+    // scene visibility
+    const on = (el, cond) => { el.classList.toggle("on", cond); };
+    on(scenes.chat, t < T.dive);
+    on(scenes.src, t >= T.srcOn && t < T.ansOn);
+    on(scenes.ans, t >= T.ansOn && t < T.redOn);
+    on(scenes.red, t >= T.redOn && t < T.redOff);
+    on(scenes.grad, t >= T.gradOn && t < T.gradOff);
+    on(scenes.end, t >= T.endOn);
+
+    // ---- scene 1 ----
+    if (t < T.dive) {
+      hello.style.opacity = String(1 - seg(t, 500, 900));
+      const typing = t >= T.typeStart && t < T.send;
+      cPh.style.display = typing || t < T.typeStart ? "" : "none";
+      cText.style.display = typing ? "" : "none";
+      if (t < T.typeStart) { cPh.textContent = "Ask anything"; }
+      else if (typing) typeInto(cText, PROMPT, t, T.typeStart, T.typeEnd);
+      // send flash
+      document.getElementById("send-btn").style.transform = seg(t, T.send, T.send + 160) > 0 && t < T.send + 300 ? "scale(.88)" : "";
+      if (t >= T.send) {
+        cPh.style.display = ""; cPh.textContent = "Ask anything"; cText.style.display = "none"; cText.textContent = "";
+        uMsg.style.display = "";
+        typeInto(uText, PROMPT, t, T.send, T.send + 60); // lands instantly as a sent bubble
+        if (t > T.send + 60) uText.textContent = PROMPT;
+      } else {
+        uMsg.style.display = "none"; uText.textContent = "";
+      }
+      // loader then reply
+      bLoad.style.display = t >= T.bubble && t < T.replyStart ? "" : "none";
+      bMsg.style.display = t >= T.replyStart ? "" : "none";
+      if (t >= T.replyStart) {
+        const head = REFUSAL_HEAD;
+        const bodyChars = Math.floor(Math.max(0, (t - T.replyStart) / 26));
+        const shown = head + REFUSAL_BODY.slice(0, bodyChars);
+        bText.innerHTML = shown.replace(/^❌/, '<span class="xmark">❌</span>') + '<span class="typing-dot"></span>';
+      }
+      // popup + white bubble
+      popupZone.style.visibility = t >= T.popup && t < T.dive ? "visible" : "hidden";
+      if (t >= T.popup) {
+        if (!popPill.classList.contains("pop-in") && !popPill.classList.contains("pressed")) popPill.classList.add("pop-in");
+        whiteBubble.style.visibility = t >= T.wbStart ? "visible" : "hidden";
+        if (t >= T.wbStart) {
+          wbCaret.style.display = "";
+          typeInto(wbText, WB, t, T.wbStart, T.wbStart + 2600);
+          if (t > T.wbStart + 2600) wbText.textContent = WB;
+        }
+      }
+      // cursor: appears, moves to pill, presses
+      if (t >= T.cursorGo && t < T.dive) {
+        const p = seg(t, T.cursorGo, T.cursorDown);
+        const ease = 1 - Math.pow(1 - p, 3);
+        setCursor(lerp(38, 86, ease), lerp(64, 84, ease), Math.min(1, seg(t, T.cursorGo, T.cursorGo + 350)));
+      } else {
+        setCursor(38, 64, 0);
+      }
+      // press
+      const pressing = t >= T.cursorDown && t < T.cursorUp;
+      if (pressing && !popPill.classList.contains("pressed")) { popPill.classList.remove("pop-in"); popPill.classList.add("pressed"); }
+    }
+    // dive: shrink the whole chat scene toward the pill (runs after the press)
+    if (t >= T.dive && t < T.srcOn + 400) {
+      popupZone.style.visibility = "hidden";
+      const { x, y, w } = pillCenter();
+      const p = clamp01((t - T.dive) / 500);
+      const e = p * p;
+      scenes.chat.classList.add("on");
+      scenes.chat.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+      scenes.chat.style.transform = `scale(${1 - e * (1 - Math.max(0.06, w))})`;
+      scenes.chat.style.opacity = String(1 - e);
+    } else if (t >= T.srcOn + 400 && scenes.chat.classList.contains("on")) {
+      scenes.chat.classList.remove("on");
+      scenes.chat.style.transform = "";
+      scenes.chat.style.opacity = "";
+    }
+
+    // ---- scene 2: source animation ----
+    if (t >= T.srcOn && t < T.ansOn) {
+      const st = t - T.srcOn; // scene clock
+      loadChip.style.opacity = st < 1600 ? "1" : "0";
+      // sphere spins from 0 -> merge
+      updateSphere(st);
+      // after merge: bloom flip (920ms), then hub assembles
+      const bloomT = T.mergeT + 220;
+      if (st >= bloomT) updateBloom(st - bloomT);
+      if (st >= bloomT + 920) updateHubAssemble(st - bloomT - 920);
+      // hub message
+      srcMsg1.style.opacity = st >= (T.msg1 - T.srcOn) ? "1" : "0";
+      srcMsg1.style.transform = st >= (T.msg1 - T.srcOn) ? "none" : "translateY(8px)";
+      if (st >= (T.msg1 - T.srcOn)) srcMsg1.style.transition = "opacity .4s ease, transform .4s ease";
+    }
+
+    // ---- scene 3: superbot answer ----
+    if (t >= T.ansOn) {
+      typeInto(sbProse, PROSE, t, T.proseStart, T.proseEnd);
+      if (t < T.proseEnd) sbProse.innerHTML = sbProse.textContent + '<span class="caret-cur"></span>';
+      else sbProse.textContent = PROSE;
+      // code reveal: type it in monospace
+      const cn = Math.floor(seg(t, T.codeStart, T.codeEnd) * CODE.length);
+      const shownCode = t >= T.codeStart ? CODE.slice(0, Math.max(0, cn)) : "";
+      codePre.innerHTML = hl(shownCode);
+      document.getElementById("codeblock").style.opacity = t >= T.codeStart - 200 ? "1" : "0";
+      document.getElementById("codeblock").style.transition = "opacity .3s ease";
+    }
+
+    // ---- end card wordmark ----
+    if (t >= T.wordSlide && !document.getElementById("wordmark").classList.contains("slide")) {
+      document.getElementById("wordmark").classList.add("slide");
+    }
+    if (t >= T.done) replayBtn.classList.add("show");
+  };
+
+  function lerp(a, b, p) { return a + (b - a) * p; }
+
+  // ================= the source animation (adapted from site/site/assets/sphere-intro-28.js) =================
+  const STAGE = 460, C = STAGE / 2, R = 175, TILE = 54;
+  const holder = document.getElementById("sphere-holder");
+  const pad = document.getElementById("src-pad");
+  const SPIN = [
+    { img: "assets/gemini-app-icon.png", bg: "#0b0d10" },
+    { img: "assets/claude.png", bg: "#191919" },
+    { img: "assets/cursor.png", bg: "#0d0d10" },
+    { img: "assets/devin.png" },
+    { img: "assets/hermes.png" },
+    { img: "assets/grok.png" },
+    { img: "assets/copilot.svg", sym: true, bg: "#0f0f12", ink: "#fff", glyph: "◦" },
+    { img: "assets/kiro.ico" },
+    { img: "assets/vscode.png", sym: true, bg: "#0b2a6b", ink: "#9ecbff", glyph: "◆" },
+    { img: "assets/replit.png", sym: true, bg: "#f2683c", ink: "#fff", glyph: "△" },
+    { img: "assets/lovable.png", sym: true, bg: "#f472b6", ink: "#fff", glyph: "♥" },
+    { img: "assets/jetbrains.png", sym: true, bg: "#ff7043", ink: "#fff", glyph: "✦" },
+    { img: "assets/bolt.png" },
+    { img: "assets/base44.png", sym: true, bg: "#2b2b31", ink: "#ffd166", glyph: "★" },
+    { img: "assets/v0.svg", sym: true, bg: "#000", ink: "#fff", glyph: "▢" },
+  ];
+  const fibDirs = (n) => Array.from({ length: n }, (_, i) => {
+    const y = 1 - (2 * i + 1) / n, r = Math.sqrt(Math.max(0, 1 - y * y)), th = 2.399963 * i;
+    return { x: Math.cos(th) * r, y, z: Math.sin(th) * r };
+  });
+  const rotY3 = (v, a) => ({ x: v.x * Math.cos(a) + v.z * Math.sin(a), y: v.y, z: -v.x * Math.sin(a) + v.z * Math.cos(a) });
+  const OMEGA0 = 0.35, OMEGA_MAX = 21;
+  const omegaAt = (tMs) => OMEGA0 * Math.exp(Math.log(OMEGA_MAX / OMEGA0) * Math.pow(clamp01(tMs / T.mergeT), 1.55));
+  const angAt = (tMs) => { // integral of omega up to tMs (ms)
+    let a = 0, steps = 64;
+    for (let i = 0; i < steps; i++) a += omegaAt((tMs * i) / steps) * (tMs / steps / 1000);
+    return a;
+  };
+  const FIB = fibDirs(SPIN.length);
+  const tiles = SPIN.map((a) => {
+    const el = document.createElement("span");
+    el.className = "tile3" + (a.sym ? " sym" : " bleed");
+    if (a.sym) { el.style.setProperty("--bg", a.bg); el.style.setProperty("--ink2", a.ink); el.textContent = a.glyph || "•"; }
+    else { const im = document.createElement("img"); im.src = a.img; im.alt = ""; el.appendChild(im); }
+    holder.appendChild(el);
+    return el;
+  });
+  const popAt = (i) => 120 + i * 60;
+  const updateSphere = (st) => {
+    const ang = angAt(st);
+    for (let i = 0; i < SPIN.length; i++) {
+      if (st < popAt(i)) { tiles[i].style.opacity = "0"; continue; }
+      const v = rotY3(FIB[i], ang);
+      const mergeT = Math.pow(clamp01((st - (T.mergeT - 450)) / 450), 1.7);
+      const x = lerp(v.x * R, 0, mergeT), y = lerp(v.y * R, 0, mergeT), z = v.z * lerp(R, 10, mergeT);
+      const depth = (z + 190) / 380;
+      tiles[i].style.transform = `translate3d(${C - TILE / 2 + x}px, ${C - TILE / 2 + y}px, ${z}px)`;
+      tiles[i].style.opacity = String(Math.min(1, (0.16 + 0.84 * depth) * (1 - clamp01((st - T.mergeT) / 220))));
+      const blurT = clamp01((st - T.mergeT * 0.62) / (T.mergeT * 0.38));
+      const blur = Math.pow(blurT, 2) * 3.6 + (depth < 0.5 ? (0.5 - depth) * 3 : 0);
+      tiles[i].style.filter = blur > 0.05 ? `blur(${blur.toFixed(2)}px)` : "none";
+    }
+  };
+  // the bloom: the tile mark flips in and grows (from the source finisher)
+  const bloom = document.createElement("div");
+  bloom.style.cssText = "position:absolute;left:50%;top:50%;width:250px;height:250px;margin:-125px 0 0 -125px;z-index:5;opacity:0;will-change:transform,filter;";
+  const bloomImg = new Image();
+  bloomImg.src = "assets/tile.svg"; bloomImg.alt = ""; bloomImg.draggable = false;
+  bloomImg.style.cssText = "position:absolute;inset:0;width:100%;height:100%;";
+  bloom.appendChild(bloomImg);
+  pad.appendChild(bloom);
+  const updateBloom = (bt) => {
+    if (bt <= 0) return;
+    bloom.style.opacity = "1";
+    const p = clamp01(bt / 920);
+    const flipP = Math.min(p / 0.76, 1);
+    const rot = lerp(180, 0, flipP);
+    const scale = lerp(TILE / 250, 1.05, Math.pow(p, .8));
+    bloom.style.transform = `perspective(900px) rotateY(${rot}deg) scale(${scale})`;
+    bloom.style.filter = `brightness(${lerp(0.5, 1, p)})`;
+    if (p >= 1) { bloom.style.transform = "scale(1)"; bloom.style.filter = "brightness(1)"; }
+  };
+  // the hub assembles: bloom shrinks to rail slot, hub fades in, then bloom gone
+  const updateHubAssemble = (ht) => {
+    hub.style.opacity = String(clamp01(seg(ht, 0, 380)));
+    hub.style.transform = `scale(${lerp(0.94, 1, clamp01(seg(ht, 0, 520)))})`;
+    hub.style.transition = "none";
+    const p = clamp01(seg(ht, 200, 820));
+    bloom.style.opacity = String(1 - seg(ht, 700, 900));
+    bloom.style.transform = `translate(${0}px, ${lerp(0, -118, p)}px) scale(${lerp(1, 0.176, p)})`;
+    if (ht > 900) bloom.style.opacity = "0";
+  };
+
+  // ================= clipboard =================
+  const copyBtn = document.getElementById("copy-btn"), copyLabel = document.getElementById("copy-label");
+  const doCopy = async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(CODE); ok = true; }
+    catch (e) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = CODE; ta.style.cssText = "position:fixed;opacity:0";
+        document.body.appendChild(ta); ta.select();
+        ok = document.execCommand("copy");
+        ta.remove();
+      } catch (e2) { console.error("[ad] copy failed", e2); }
+    }
+    copyBtn.classList.toggle("ok", ok);
+    copyLabel.textContent = ok ? "Copied!" : "Copy failed";
+    setTimeout(() => { copyBtn.classList.remove("ok"); copyLabel.textContent = "Copy"; }, 2200);
+    return ok;
+  };
+  copyBtn.addEventListener("click", doCopy);
+
+  // ================= clock =================
+  let last = null, clock = seek;
+  const tick = (now) => {
+    if (last == null) last = now;
+    const d = Math.min(50, now - last);
+    last = now;
+    clock += d;
+    if (clock > T.done + 400) { clock = 0; resetDynamics(); } // loop
+    render(clock);
+    requestAnimationFrame(tick);
+  };
+  const resetDynamics = () => {
+    popPill.classList.remove("pressed", "pop-in");
+    document.getElementById("wordmark").classList.remove("slide");
+    replayBtn.classList.remove("show");
+    scenes.chat.style.transform = ""; scenes.chat.style.opacity = "";
+    uMsg.style.display = "none"; uText.textContent = "";
+    bLoad.style.display = "none"; bMsg.style.display = "none";
+    bloom.style.transform = ""; bloom.style.opacity = "0";
+  };
+  replayBtn.addEventListener("click", () => { clock = 0; resetDynamics(); });
+
+  // seek mode: render one frame at ?t= and hold (verification helper)
+  if (q.has("t")) {
+    clock = seek;
+    if (seek >= T.done) resetDynamics();
+    render(seek);
+    replayBtn.classList.add("show");
+    return; // static frame, no loop
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

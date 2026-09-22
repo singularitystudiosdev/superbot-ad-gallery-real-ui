@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8">
+<title>ratio frame</title>
+<style>
+  /* the imported posters are flat black, so a narrower ratio is COMPOSED, not
+     re-drawn: the art is scaled to the frame width and the frame is padded
+     with the same black. */
+  * { margin: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #000; }
+  body { display: grid; place-items: center; overflow: hidden; }
+  img { width: 100vw; height: auto; max-height: 100vh; display: block; }
+</style>
+<img id="art" alt="">
+<script>
+  document.getElementById('art').src = new URLSearchParams(location.search).get('src');
+</script>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>superbot · agents pain posters</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- One page, every poster in the family: ?id=<ad id> picks the headline
+       from ads.js. The frame is the viewport, so the renderer gets 4:5, 16:9,
+       4:3 and 1:1 out of the same markup; fit.js sizes the rows to the frame.
+       ?export=1 hides the download chrome so it never rasterizes in. -->
+  <main class="poster">
+    <div class="lock">
+      <div class="line" id="l1">agents <span class="pain" id="pain">slow</span>?</div>
+      <div class="line" id="l2"><span class="brand">superbot</span> can <span id="verb">fix</span> it!</div>
+      <img class="face" src="face.svg" alt="superbot">
+    </div>
+  </main>
+  <a class="dl" id="dl" href="#" download>↓ PNG</a>
+  <script src="ads.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    if (params.has('export')) document.documentElement.dataset.export = '1';
+    const id = params.get('id') || window.PAIN_ADS[0].id;
+    const ad = window.PAIN_ADS.find(a => a.id === id) || window.PAIN_ADS[0];
+    document.getElementById('pain').textContent = ad.word;
+    document.getElementById('verb').textContent = ad.verb || 'fix';
+    document.documentElement.style.setProperty('--pain', ad.color);
+    document.title = `superbot · agents ${ad.word}?`;
+    document.getElementById('dl').href = `../../assets/ads/${ad.id}.16x9.png`;
+  </script>
+  <script src="fit.js"></script>
+</body>
+</html>

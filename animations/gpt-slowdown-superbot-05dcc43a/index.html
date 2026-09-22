@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>agents getting slowww? superbot can do it — ad spot</title>
+<link rel="icon" href="assets/tile.svg" type="image/svg+xml"/>
+<style>
+  /* ── the frame: black stage, blue→purple→pink stroke, fit to the viewport ── */
+  :root {
+    --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+    --stroke: linear-gradient(135deg, var(--storm-1) 0%, var(--storm-2) 38%, var(--storm-3) 70%, var(--storm-4) 100%);
+    --ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+    --gpt: -apple-system-body, ui-sans-serif, -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  #frame {
+    position: absolute; left: 50%; top: 50%; width: 1286px; height: 726px; padding: 3px; border-radius: 21px;
+    transform: translate(-50%, -50%) scale(var(--fit, 1)); transform-origin: center;
+    background: var(--stroke); background-size: 260% 260%; animation: stroke-drift 9s ease-in-out infinite alternate;
+  }
+  @keyframes stroke-drift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+  #stage { position: relative; width: 1280px; height: 720px; border-radius: 18px; overflow: hidden; background: #000; }
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; will-change: opacity, transform; }
+  .scene.on { visibility: visible; }
+
+  /* ── scene 1: ChatGPT, dark (tokens read off chatgpt.com 2026-09-09: page #000,
+       sidebar 260px, column 640px, message-surface #323232d9, border-light #ffffff0d) ── */
+  #s1 { display: grid; grid-template-columns: 260px 1fr; font-family: var(--gpt); color: #fff; font-size: 16px; line-height: 24px; background: #000; }
+  .gs { position: relative; border-right: 1px solid #ffffff0d; padding: 0 6px; display: flex; flex-direction: column; }
+  .gs-top { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px 0 14px; }
+  .gs-top svg { display: block; }
+  .gs-item { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 8px 0 8px; border-radius: 10px; font-size: 14px; color: #fff; margin: 0 0 2px; }
+  .gs-item svg { width: 18px; height: 18px; flex: none; }
+  .gs-item .chip { margin-left: 6px; font-size: 9px; letter-spacing: .06em; padding: 1px 5px; border: 1px solid #ffffff26; border-radius: 4px; color: #cdcdcd; }
+  .gs-sec { font-size: 12px; color: #afafaf; padding: 22px 8px 6px; }
+  .gs-chat { height: 36px; display: flex; align-items: center; padding: 0 8px; border-radius: 10px; font-size: 14px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0 0 2px; }
+  .gs-chat.on { background: #2f2f2f; }
+  .gs-bot { margin-top: auto; border-top: 1px solid #ffffff0d; padding: 10px 6px 12px; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .gs-bot .av { width: 32px; height: 32px; border-radius: 50%; background: #5f36b8; display: grid; place-items: center; font-weight: 600; font-size: 13px; }
+  .gs-bot small { display: block; color: #afafaf; font-size: 12px; line-height: 16px; }
+  .gm { position: relative; overflow: hidden; }
+  .gh { position: absolute; left: 0; right: 0; top: 0; height: 52px; display: flex; align-items: center; padding: 0 16px 0 24px; }
+  .gh .name { font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 5px; color: #fff; }
+  .gh .name svg { width: 16px; height: 16px; color: #afafaf; }
+  .gh .right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .gh .share { display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border: 1px solid #ffffff26; border-radius: 999px; font-size: 14px; }
+  .gh .share svg { width: 16px; height: 16px; }
+  .gh .av { width: 32px; height: 32px; border-radius: 50%; background: #5f36b8; display: grid; place-items: center; font-weight: 600; font-size: 13px; }
+  .gempty { position: absolute; left: 0; right: 0; top: 296px; text-align: center; font-size: 28px; font-weight: 500; line-height: 34px; }
+  .gcol { position: absolute; left: 50%; top: 52px; width: 640px; transform: translateX(-50%); }
+  .gu { display: flex; justify-content: flex-end; padding: 20px 0 0; }
+  .gub { max-width: 70%; background: rgba(50, 50, 50, .85); border-radius: 22px; padding: 10px 16px; font-size: 16px; line-height: 24px; }
+  .ga { padding: 22px 0 0; font-size: 16px; line-height: 24px; }
+  .ga p { margin: 0 0 18px; }
+  .ga .dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: #fff; vertical-align: -1px; margin-left: 1px; transform-origin: center; }
+  .ga .think { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: #fff; }
+  .ch { opacity: 0; }
+  .gcomp { position: absolute; left: 50%; top: 348px; width: 768px; height: 52px; transform: translateX(-50%); border-radius: 28px; background: #2b2b2b; display: flex; align-items: center; padding: 0 8px 0 12px; gap: 8px; }
+  .gcomp .plus { width: 36px; height: 36px; display: grid; place-items: center; color: #fff; flex: none; }
+  .gcomp .plus svg { width: 20px; height: 20px; }
+  .gcomp .txt { flex: 1; min-width: 0; font-size: 16px; line-height: 24px; color: #fff; white-space: nowrap; overflow: hidden; position: relative; }
+  .gcomp .ph { position: absolute; left: 0; top: 0; color: #afafaf; }
+  .gcomp .mic, .gcomp .go { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+  .gcomp .mic svg { width: 20px; height: 20px; color: #fff; }
+  .gcomp .go { background: #fff; color: #000; position: relative; }
+  .gcomp .go svg { width: 20px; height: 20px; position: absolute; }
+  .gfoot { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; font-size: 12px; line-height: 16px; color: #afafaf; }
+
+  /* ── the popup: bottom right of the stage, then a white chat bubble under it ── */
+  #toast { position: absolute; right: 26px; bottom: 96px; opacity: 0; display: flex; align-items: center; gap: 10px; padding: 12px 16px 12px 14px; border-radius: 14px; background: #0d0d0d; color: #ececec; font: 650 15px/20px var(--ui); box-shadow: 0 12px 30px -10px rgb(0 0 0 / .8); will-change: transform, opacity; }
+  #toast::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; background: var(--stroke); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  #toast img { width: 20px; height: 20px; display: block; }
+  #bubble { position: absolute; right: 26px; bottom: 30px; opacity: 0; display: flex; align-items: center; gap: 8px; padding: 10px 18px 10px 14px; border-radius: 18px 18px 6px 18px; background: #fff; color: #000; font: 650 15px/20px var(--ui); box-shadow: 0 12px 30px -10px rgb(0 0 0 / .8); will-change: transform, opacity; transform-origin: 100% 100%; }
+  #bubble .mk { width: 20px; height: 20px; display: block; }
+  #bubble::after { content: ""; position: absolute; right: -2px; bottom: -8px; width: 14px; height: 14px; background: #fff; clip-path: polygon(0 0, 100% 0, 100% 100%); border-radius: 0 0 3px 0; }
+
+  /* ── scene 2: the hub site itself, 1488×837 at 0.86 = 1280×720 ── */
+  #s2 { background: #000; }
+  #site { position: absolute; left: 0; top: 0; width: 1488px; height: 837px; border: 0; transform: scale(.86); transform-origin: 0 0; pointer-events: none; background: #000; }
+
+  /* ── scene 3: the cards ── */
+  .card { display: grid; place-items: center; text-align: center; font-family: var(--ui); }
+  .big { font-size: 84px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: #fff; white-space: nowrap; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); will-change: transform, opacity, filter; }
+  .big .ch { display: inline-block; white-space: pre; opacity: 0; }
+  #cando .ch { color: transparent; -webkit-background-clip: text; background-clip: text; background-repeat: no-repeat; }
+
+  /* ── scene 4: the mascot icon, then the superbot.gg logo slides in ── */
+  #lock { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 30px; font-family: var(--ui); }
+  /* the superbot.gg lockup — the tabs-chaos end card (220 / 128 / 34 / 44 on a
+     1080 frame) at this 720-high stage's scale */
+  #tile { width: 147px; height: 147px; display: block; flex: none; overflow: visible; opacity: 0; will-change: transform, opacity; }
+  #word { color: #fff; white-space: nowrap; opacity: 0; will-change: transform, opacity, clip-path; }
+  #word h1 { margin: 0; font-size: 85px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  #word p { margin: 8px 0 0 4px; font-size: 23px; font-weight: 500; color: #9a9a9a; }
+
+  /* ── the pointer and the loop fade ── */
+  #cursor { position: absolute; left: 0; top: 0; width: 26px; height: 30px; opacity: 0; pointer-events: none; z-index: 40; will-change: transform, opacity; filter: drop-shadow(0 2px 3px rgb(0 0 0 / .5)); }
+  #cursor svg { display: block; width: 26px; height: 30px; }
+  #fade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+  #hud { position: fixed; left: 10px; bottom: 8px; color: #555; font: 11px/14px ui-monospace, monospace; opacity: .7; }
+</style>
+</head>
+<body>
+<div id="frame"><div id="stage">
+
+  <!-- ══ scene 1: ChatGPT ══ -->
+  <div class="scene" id="s1">
+    <aside class="gs">
+      <div class="gs-top">
+        <svg width="22" height="22" viewBox="0 0 2406 2406" fill="#fff" aria-hidden="true"><path id="oai" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#oai" transform="rotate(60 1203 1203)"/><use href="#oai" transform="rotate(120 1203 1203)"/><use href="#oai" transform="rotate(180 1203 1203)"/><use href="#oai" transform="rotate(240 1203 1203)"/><use href="#oai" transform="rotate(300 1203 1203)"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#cdcdcd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg>
+      </div>
+      <div class="gs-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4Z"/></svg>New chat</div>
+      <div class="gs-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Search chats</div>
+      <div class="gs-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-8 8"/></svg>Images<span class="chip">UPDATED</span></div>
+      <div class="gs-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M15.5 12v1.5a2 2 0 0 0 4 0V12"/></svg>Plugins</div>
+      <div class="gs-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l14-6-2 8-6 2z"/><path d="M9 15l-1.5 5"/><path d="M17 5l3 3"/></svg>Deep research</div>
+      <div class="gs-sec">Chats</div>
+      <div class="gs-chat on">Email to my boss</div>
+      <div class="gs-chat">Q3 report outline</div>
+      <div class="gs-chat">Rewrite my cover letter</div>
+      <div class="gs-chat">Meeting notes summary</div>
+      <div class="gs-chat">Slack message to the team</div>
+      <div class="gs-chat">Python CSV cleanup script</div>
+      <div class="gs-chat">Weekend in Lisbon</div>
+      <div class="gs-bot"><span class="av">D</span><span>Dan Ortiz<small>Plus</small></span></div>
+    </aside>
+    <main class="gm">
+      <div class="gh">
+        <span class="name">ChatGPT <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        <span class="right"><span class="share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>Share</span><span class="av">D</span></span>
+      </div>
+      <div class="gempty" id="gempty">Where should we begin?</div>
+      <div class="gcol">
+        <div class="gu" id="gu" style="opacity:0"><div class="gub" id="gub"></div></div>
+        <div class="ga" id="ga"></div>
+      </div>
+      <div class="gcomp" id="gcomp">
+        <span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span class="txt"><span class="ph" id="gph">Ask anything</span><span id="gtyped"></span></span>
+        <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></span>
+        <span class="go" id="ggo">
+          <svg id="gvoice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 10v4M9 7v10M12 4v16M15 8v8M19 10v4"/></svg>
+          <svg id="gsend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:0"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg>
+          <svg id="gstop" viewBox="0 0 24 24" fill="currentColor" style="opacity:0"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>
+        </span>
+      </div>
+      <div class="gfoot">ChatGPT can make mistakes. Check important info.</div>
+    </main>
+  </div>
+
+  <!-- ══ scene 2: the superbot.gg site, playing its own intro ══ -->
+  <div class="scene" id="s2"><iframe id="site" title="superbot.gg" tabindex="-1"></iframe></div>
+
+  <!-- ══ scene 3: the cards ══ -->
+  <div class="scene card" id="s3"><div class="big" id="slow"></div><div class="big" id="cando"></div></div>
+
+  <!-- ══ scene 4: the end card ══ -->
+  <div class="scene card" id="s4"><div id="lock"><svg id="tile" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><defs><mask id="slowEndFace" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160"><g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></mask></defs><rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#slowEndFace)" transform="translate(-1.2 -1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#slowEndFace)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#slowEndFace)"/></svg><div id="word"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div></div>
+
+  <div id="toast"><img src="assets/mark-clean.svg" alt=""/>superbot can do it!</div>
+  <div id="bubble"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="bm" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160"><g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></mask></defs><rect x="-30" y="-30" width="160" height="160" fill="#000" mask="url(#bm)"/></svg>chat</div>
+  <div id="cursor"><svg viewBox="0 0 26 30" aria-hidden="true"><path d="M4 2.5v20.4l5.4-5 3.5 8 3.6-1.6-3.5-7.8h7.5z" fill="#000" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+  <div id="fade"></div>
+</div></div>
+<div id="hud" hidden></div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const q = new URLSearchParams(location.search);
+  const hold = q.has('hold');
+
+  // ── the timeline (seconds). One clock, render(T) is a pure function of it:
+  //    ?t=<s> seeks, ?hold freezes that frame, ?hud prints the clock ──
+  const B = {
+    fadeIn: [0.0, 0.5], type: [0.7, 3.75], send: 4.1, layout: [4.15, 4.75], think: [4.6, 5.25], stream: 5.25,
+    // toast, bubble, cur, press are derived from the stream's stall (below)
+    cut: [10.95, 11.45], load: 10.85, scroll: [11.6, 12.5],
+    ask: 24.7, perm: 27.0, cur2: [27.4, 28.2], press2: 28.4, done: 28.75,
+    s3: 30.6, // cando, s4, tile, logo, end, loop are derived from the slowww card's own typing
+  };
+  const PROMPT = "Write a email back to my boss quickly, tell him I am sorry I missed the meeting and I have the finalized report ready to go";
+  const REPLY = [
+    "Sure can do! Here is that email!",
+    "Subject: Sorry I missed the meeting",
+    "Hi Mark,",
+    "I'm sorry I missed the meeting this morning. Something urgent came up and I couldn't step away in time, and I should have let you know sooner.",
+    "The good news is the finalized report is ready to go. I've attached it here, and I'm happy to walk you through it whenever works for you.",
+    "Thanks for your patience, and apologies again for the inconvenience.",
+    "Best regards,\nDan",
+  ];
+  const ASK = "I see chat gpt has 43 unused rules that are slowing it down and unused memory storage as well! Want me to remove?";
+
+  const clamp01 = (x) => Math.min(1, Math.max(0, x));
+  const seg = (t, a, b) => clamp01((t - a) / (b - a));
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+  const inOutCubic = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+  const outBack = (p, c1 = 1.70158) => { const c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const spring = (p) => 1 - Math.exp(-6 * p) * Math.cos(9 * p); // a quick settle
+  const hash = (i) => { let x = (i + 1) * 2654435761 % 4294967296; x ^= x >>> 13; x = (x * 1274126177) % 4294967296; return (x >>> 0) / 4294967296; };
+  const hexLerp = (a, b, p) => { const A = a.match(/\w\w/g).map((h) => parseInt(h, 16)), C = b.match(/\w\w/g).map((h) => parseInt(h, 16)); return 'rgb(' + A.map((v, i) => Math.round(lerp(v, C[i], p))).join(',') + ')'; };
+
+  // fit the 1286×726 frame to the window
+  const fit = () => document.documentElement.style.setProperty('--fit', String(Math.min(innerWidth / 1286, innerHeight / 726) * 0.96));
+  fit(); addEventListener('resize', fit);
+
+  // ── typewriter: chars as spans, each fading in over `fade` s from its own reveal time ──
+  const spanify = (host, text, cls = 'ch') => {
+    const spans = [];
+    for (const c of text) {
+      if (c === '\n') { host.appendChild(document.createElement('br')); continue; }
+      const s = document.createElement('span'); s.className = cls; s.textContent = c; host.appendChild(s); spans.push(s);
+    }
+    return spans;
+  };
+  const reveal = (spans, times, T, fade = 0.16) => {
+    let last = -1;
+    for (let i = 0; i < spans.length; i++) {
+      const p = (T - times[i]) / fade;
+      spans[i].style.opacity = p <= 0 ? '0' : p >= 1 ? '1' : String(outCubic(p));
+      if (p > 0) last = i;
+    }
+    return last;
+  };
+  // human typing cadence (deterministic jitter)
+  const typeTimes = (text, t0, cps) => { const out = []; let t = t0; for (let i = 0; i < text.length; i++) { out.push(t); t += (1 / cps) * (0.7 + 0.6 * hash(i)) + (text[i] === ' ' ? 0.01 : 0); } return out; };
+  // the stream's rate schedule: 300 wpm (25 cps) held until the decay lands the
+  // crawl exactly on "Hi Mark,", then a log-linear decay to 10 wpm (0.83 cps)
+  // over 1.4 s, then the crawl. Cumulative reveal times integrate 1/rate, so the
+  // slowdown is continuous rather than stepped. While fast the paint lands a
+  // WORD at a time (the way a model streams tokens); below 8 cps every char
+  // arrives alone — the switch from word bursts to letter drips is the signal
+  const RATE_HI = 300 * 5 / 60, RATE_LO = 10 * 5 / 60, DECAY = 1.4;
+  const DECAY_CHARS = RATE_HI * DECAY * (RATE_LO / RATE_HI - 1) / Math.log(RATE_LO / RATE_HI); // chars painted during the decay (~9.9)
+  const CRAWL_AT = REPLY[0].length + REPLY[1].length; // the first char of "Hi Mark,"
+  const HOLD = (CRAWL_AT - DECAY_CHARS) / RATE_HI;
+  const rateAt = (t) => t < HOLD ? RATE_HI : t < HOLD + DECAY ? RATE_HI * Math.pow(RATE_LO / RATE_HI, (t - HOLD) / DECAY) : RATE_LO;
+  const streamTimes = (text, t0) => {
+    const out = []; let t = 0, i = 0;
+    while (i < text.length) {
+      const r = rateAt(t);
+      let len = 1;
+      if (r > 8) { len = 0; do { len++; } while (i + len < text.length && text[i + len - 1] !== ' '); } // a word plus its space
+      for (let k = 0; k < len && i < text.length; k++, i++) out.push(t0 + t);
+      t += len / r;
+    }
+    return out;
+  };
+  // the popup lands once the stall is perceptible (0.7 s into the decay), the
+  // bubble half a second later, the pointer a second after that
+  B.toast = B.stream + HOLD + 0.7; B.bubble = B.toast + 0.5; B.cur = [B.bubble + 0.8, B.bubble + 1.8]; B.press = B.cur[1] + 0.2;
+
+  // ── scene 1 setup ──
+  const promptSpans = spanify($('gtyped'), PROMPT);
+  const promptTimes = typeTimes(PROMPT, B.type[0], PROMPT.length / (B.type[1] - B.type[0]));
+  $('gub').textContent = PROMPT;
+  const ga = $('ga'), replySpans = [];
+  for (const para of REPLY) { const p = document.createElement('p'); replySpans.push(...spanify(p, para)); ga.appendChild(p); }
+  const replyTimes = streamTimes(REPLY.join(''), B.stream);
+  const think = document.createElement('span'); think.className = 'think'; think.style.opacity = '0';
+  ga.prepend(think);
+  const dot = document.createElement('span'); dot.className = 'dot';
+  let dotAfter = null;
+
+  // ── scene 3 setup: "agents getting slowww?" slows on the word, whitens to a slow blue ──
+  const SLOW = 'agents getting slowww?';
+  const slowSpans = spanify($('slow'), SLOW);
+  const slowTimes = (() => { const out = []; let t = B.s3 + 0.35; const gaps = { 15: .14, 16: .22, 17: .34, 18: .5, 19: .72, 20: .95 }; for (let i = 0; i < SLOW.length; i++) { out.push(t); t += gaps[i] ?? 0.045; } return out; })();
+  const slowEnd = slowTimes[SLOW.length - 1] + 0.3;
+  // the card swaps 0.35 s after the "?" lands (blurring away), the gradient line
+  // types once the swap is done and holds, then the end card
+  B.swap = [slowEnd + 0.35, slowEnd + 0.7]; B.cando = slowEnd + 0.7; B.s4 = B.cando + 2.4; B.tile = B.s4 + 0.2; B.logo = B.s4 + 1.1; B.end = B.logo + 3.2; B.loop = B.end + 0.4;
+  const CANDO = 'superbot can do it!';
+  const candoSpans = spanify($('cando'), CANDO);
+  const candoTimes = typeTimes(CANDO, B.cando + 0.1, 30);
+  // one continuous pink→purple→blue gradient across the per-char spans
+  const paintGradient = () => { const el = $('cando'); const w = el.offsetWidth || 1; for (const s of candoSpans) { s.style.backgroundImage = 'linear-gradient(90deg, #ff3d9a 0%, #c026d3 35%, #6a1fd8 65%, #2b6bff 100%)'; s.style.backgroundSize = w + 'px 100%'; s.style.backgroundPosition = (-s.offsetLeft) + 'px 0'; } };
+
+  // ── the pointer: one eased sweep along a quadratic Bézier (so it never stops
+  //    mid-path), a tiny overshoot into the target, a 0.88 squeeze on the click ──
+  const cursor = $('cursor');
+  const sweep = (a, c, b, t0, t1, T) => {
+    const p = outBack(seg(T, t0, t1), 0.45);
+    const u = 1 - p;
+    return { x: u * u * a.x + 2 * u * p * c.x + p * p * b.x, y: u * u * a.y + 2 * u * p * c.y + p * p * b.y };
+  };
+  const pressScale = (T, at) => { const p = seg(T, at, at + 0.16); return p <= 0 ? 1 : p >= 1 ? 1 : 1 - 0.12 * Math.sin(p * Math.PI); };
+  const targetPress = (T, at) => { const p = seg(T, at, at + 0.26); return p <= 0 || p >= 1 ? 1 : 1 - 0.05 * Math.sin(p * Math.PI); }; // the 5% shrink
+
+  // ── scene 2: the site in an iframe, its own clock offset by B.load ──
+  const site = $('site'), SITE_SCALE = 0.86;
+  let loadedAt = null, siteDoc = null, askSpans = null, askTimes = null, askMsg = null, perm = null, yesRect = null, scrolledTo = -1;
+  const loadSite = (T) => {
+    if (loadedAt != null) return;
+    loadedAt = T;
+    const intro = Math.max(0, Math.round((T - B.load) * 1000));
+    site.src = 'site/index.html' + (intro > 0 ? '?intro=' + intro : '');
+    site.addEventListener('load', () => { siteDoc = site.contentDocument; scrolledTo = -1; if (hold) render(lastT); }, { once: true });
+  };
+  const unloadSite = () => { if (loadedAt == null) return; loadedAt = null; siteDoc = null; askSpans = null; askMsg = null; perm = null; yesRect = null; site.src = 'about:blank'; };
+  const injectAsk = () => {
+    if (askSpans || !siteDoc) return;
+    const feed = siteDoc.getElementById('feed'); if (!feed) return;
+    const st = siteDoc.createElement('style');
+    st.textContent = `
+      .perm{margin-top:4px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:grid;gap:5px;max-width:380px;opacity:0;transform:translateY(6px);will-change:transform,opacity}
+      .perm .p-t{font-weight:700;color:var(--fg)} .perm .p-l{color:var(--muted);display:grid;gap:1px} .perm .p-l span::before{content:"–  "}
+      .perm .p-q{color:var(--fg)} .perm .p-b{display:flex;gap:6px;margin-top:1px;flex-wrap:wrap}
+      .perm .btn{display:inline-flex;align-items:center;gap:5px;padding:0 10px;line-height:22px;border-radius:6px;font-weight:650;will-change:transform}
+      .perm .btn kbd{font:600 .82em/1 var(--font-mono);opacity:.75}
+      .perm .yes{background:var(--storm-action);color:#fff;box-shadow:var(--action-glow)} .perm .no{background:var(--raised);border:1px solid var(--line);color:var(--fg)}
+      .perm .p-d{display:none;color:var(--ok);font-weight:650} .perm.done .p-l,.perm.done .p-q,.perm.done .p-b{display:none} .perm.done .p-d{display:block}`;
+    siteDoc.head.appendChild(st);
+    askMsg = siteDoc.createElement('div'); askMsg.className = 'msg'; askMsg.dataset.m = '9';
+    askMsg.innerHTML = '<span class="avatar sb"><img src="site/assets/brand/mark-clean.svg" alt=""></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">11:17 AM</span></div><div class="m-text" id="sb-ask"></div>'
+      + '<div class="perm" id="sb-perm"><div class="p-t">Clean up ChatGPT?</div><div class="p-l"><span>remove 43 unused rules</span><span>clear unused memory storage</span></div><div class="p-q">Do you want to proceed?</div><div class="p-b"><span class="btn yes" id="sb-yes">Yes <kbd>⏎</kbd></span><span class="btn no">Yes, and don&#39;t ask again</span><span class="btn no">No <kbd>esc</kbd></span></div><div class="p-d">✓ done — 43 rules removed, memory cleared. ChatGPT is fast again.</div></div></div>';
+    feed.appendChild(askMsg);
+    askSpans = spanify(siteDoc.getElementById('sb-ask'), ASK);
+    askTimes = typeTimes(ASK, B.ask + 0.3, 62);
+    perm = siteDoc.getElementById('sb-perm');
+  };
+  // the Yes button in stage px: iframe px × SITE_SCALE (the iframe's own scroll is already inside the rect)
+  const yesCenter = () => { const el = siteDoc && siteDoc.getElementById('sb-yes'); if (!el) return null; const r = el.getBoundingClientRect(); return { x: (r.left + r.width / 2) * SITE_SCALE, y: (r.top + r.height / 2) * SITE_SCALE }; };
+  const scrollSite = (y) => { if (y === scrolledTo || !siteDoc) return; scrolledTo = y; try { site.contentWindow.scrollTo({ top: y, left: 0, behavior: 'instant' }); } catch (e) { console.error('[ad] scroll', e); } };
+
+  // ── render ──
+  const s1 = $('s1'), s2 = $('s2'), s3 = $('s3'), s4 = $('s4'), fade = $('fade');
+  const show = (el, on) => el.classList.toggle('on', on);
+  const gcomp = $('gcomp'), gempty = $('gempty'), gu = $('gu'), gph = $('gph'), ggo = $('ggo'), gvoice = $('gvoice'), gsend = $('gsend'), gstop = $('gstop');
+  const toast = $('toast'), bubble = $('bubble'), tile = $('tile'), word = $('word'), lock = $('lock'), slow = $('slow'), cando = $('cando');
+  let lastT = -1, gradientPainted = false;
+  const render = (T) => {
+    if (T < lastT) { unloadSite(); }
+    lastT = T;
+    const inS1 = T < B.cut[1], inS2 = T >= B.load && T < B.s3 + 0.05, inS3 = T >= B.s3 - 0.3 && T < B.s4 + 0.05, inS4 = T >= B.s4 - 0.3;
+    show(s1, inS1); show(s2, inS2); show(s3, inS3); show(s4, inS4);
+
+    // scene 1 — ChatGPT
+    if (inS1) {
+      const cut = seg(T, B.cut[0], B.cut[1]);
+      s1.style.opacity = String(seg(T, B.fadeIn[0], B.fadeIn[1]) * (1 - cut));
+      s1.style.transform = 'scale(' + lerp(1, 1.05, outCubic(cut)) + ')';
+      s1.style.filter = cut > 0 ? 'blur(' + (cut * 8).toFixed(1) + 'px)' : 'none';
+      const typedLast = reveal(promptSpans, promptTimes, T, 0.1);
+      gph.style.opacity = typedLast >= 0 ? '0' : '1';
+      const hasText = typedLast >= 0 && T < B.send;
+      const busy = T >= B.think[0]; // ChatGPT swaps the send arrow for a stop square while it generates
+      gvoice.style.opacity = hasText || busy ? '0' : '1'; gsend.style.opacity = hasText ? '1' : '0'; gstop.style.opacity = busy ? '1' : '0';
+      // send: the button presses, the typed text clears
+      const sp = seg(T, B.send - 0.02, B.send + 0.18);
+      ggo.style.transform = 'scale(' + (sp <= 0 || sp >= 1 ? 1 : 1 - 0.1 * Math.sin(sp * Math.PI)) + ')';
+      if (T >= B.send) { for (const s of promptSpans) s.style.opacity = '0'; gph.style.opacity = '1'; }
+      // layout: the empty state gives way — the composer glides to the foot, the column narrows, the bubble lands
+      const lp = outQuint(seg(T, B.layout[0], B.layout[1]));
+      gempty.style.opacity = String(1 - seg(T, B.layout[0], B.layout[0] + 0.25));
+      gcomp.style.top = lerp(348, 640, lp) + 'px';
+      gcomp.style.width = lerp(768, 640, lp) + 'px';
+      const bp = outQuint(seg(T, B.layout[0] + 0.1, B.layout[0] + 0.5));
+      gu.style.opacity = String(bp); gu.style.transform = 'translateY(' + ((1 - bp) * 10).toFixed(1) + 'px)';
+      // thinking dot, then the stream with its live-edge dot: solid while the
+      // tokens fly, then it swells and starts to blink at the rate of the crawl
+      const tp = seg(T, B.think[0], B.think[1]);
+      const streaming = T >= B.stream;
+      think.style.opacity = streaming ? '0' : String(tp * (0.55 + 0.45 * Math.abs(Math.sin(T * 5))));
+      const last = streaming ? reveal(replySpans, replyTimes, T, 0.14) : -1;
+      if (streaming && last >= 0 && dotAfter !== replySpans[last]) { dotAfter = replySpans[last]; dotAfter.after(dot); }
+      if (!streaming && dot.isConnected) { dot.remove(); dotAfter = null; }
+      if (streaming) {
+        const r = rateAt(T - B.stream), slowness = 1 - clamp01((r - RATE_LO) / (RATE_HI - RATE_LO));
+        const period = Math.min(1.2, Math.max(0.25, 1 / r));
+        dot.style.transform = 'scale(' + lerp(1, 1.3, slowness).toFixed(3) + ')';
+        dot.style.opacity = r > 6 ? '1' : String(0.45 + 0.55 * (0.5 + 0.5 * Math.sin(T * 2 * Math.PI / period)));
+      }
+      // the popup arrives from the right edge, then the white chat bubble springs in under it
+      const tpop = outQuint(seg(T, B.toast, B.toast + 0.45));
+      toast.style.opacity = String(seg(T, B.toast, B.toast + 0.22) * (1 - cut)); toast.style.transform = 'translateX(' + ((1 - tpop) * 44).toFixed(1) + 'px)';
+      const bpop = spring(seg(T, B.bubble, B.bubble + 0.7));
+      bubble.style.opacity = String(seg(T, B.bubble, B.bubble + 0.2) * (1 - cut));
+      bubble.style.transform = 'scale(' + ((0.6 + 0.4 * bpop) * targetPress(T, B.press)).toFixed(4) + ')';
+      toast.style.visibility = bubble.style.visibility = T >= B.toast && T < B.cut[1] ? 'visible' : 'hidden';
+    } else { toast.style.visibility = bubble.style.visibility = 'hidden'; }
+
+    // the pointer (scene 1: in from below the frame to the bubble; scene 2: to Yes)
+    let cur = null, cscale = 1, calpha = 0;
+    if (T >= B.cur[0] - 0.3 && T < B.cut[1]) {
+      cur = sweep({ x: 900, y: 760 }, { x: 1010, y: 640 }, { x: 1178, y: 668 }, B.cur[0], B.cur[1], T);
+      calpha = seg(T, B.cur[0] - 0.05, B.cur[0] + 0.3) * (1 - seg(T, B.cut[0], B.cut[0] + 0.3));
+      cscale = pressScale(T, B.press);
+    } else if (T >= B.cur2[0] - 0.3 && T < B.s3) {
+      if (!yesRect || T < B.press2) yesRect = yesCenter() || yesRect;
+      if (yesRect) {
+        cur = sweep({ x: yesRect.x + 260, y: 760 }, { x: yesRect.x + 120, y: yesRect.y + 120 }, { x: yesRect.x + 4, y: yesRect.y + 3 }, B.cur2[0], B.cur2[1], T);
+        calpha = seg(T, B.cur2[0] - 0.05, B.cur2[0] + 0.3) * (1 - seg(T, B.done + 0.5, B.done + 0.9));
+        cscale = pressScale(T, B.press2);
+      }
+    }
+    if (cur) { cursor.style.opacity = String(calpha); cursor.style.transform = 'translate(' + cur.x.toFixed(1) + 'px,' + cur.y.toFixed(1) + 'px) scale(' + cscale.toFixed(3) + ')'; }
+    else cursor.style.opacity = '0';
+
+    // scene 2 — the site: load ahead of the cut, scroll the stage into frame, then superbot asks
+    if (inS2) {
+      loadSite(T);
+      const cut = seg(T, B.cut[0], B.cut[1]);
+      const out = seg(T, B.s3 - 0.3, B.s3);
+      s2.style.opacity = String(cut * (1 - out));
+      s2.style.transform = 'scale(' + lerp(0.985, 1, outCubic(cut)) + ')';
+      // 144 px: the stage's title bar sits just under the site's sticky header and the whole hub stays in frame
+      if (T >= B.scroll[0]) scrollSite(Math.round(lerp(0, 144, inOutCubic(seg(T, B.scroll[0], B.scroll[1])))));
+      if (T >= B.ask && siteDoc) injectAsk();
+      if (askSpans) {
+        const mp = outBack(seg(T, B.ask, B.ask + 0.35));
+        askMsg.style.opacity = String(seg(T, B.ask, B.ask + 0.2)); askMsg.style.transform = 'translateY(' + ((1 - mp) * 6).toFixed(1) + 'px)';
+        reveal(askSpans, askTimes, T, 0.14);
+        const pp = outQuint(seg(T, B.perm, B.perm + 0.45));
+        // the done state crossfades in place: the card holds its height while the buttons dissolve
+        const dip = T < B.done ? 1 : T < B.done + 0.18 ? 1 - seg(T, B.done, B.done + 0.18) : seg(T, B.done + 0.18, B.done + 0.42);
+        if (T >= B.done + 0.18 && !perm.classList.contains('done')) { perm.style.minHeight = perm.offsetHeight + 'px'; perm.classList.add('done'); }
+        if (T < B.done + 0.18 && perm.classList.contains('done')) { perm.classList.remove('done'); perm.style.minHeight = ''; }
+        perm.style.opacity = String(pp * dip); perm.style.transform = 'translateY(' + ((1 - pp) * 6).toFixed(1) + 'px)';
+        const yes = siteDoc.getElementById('sb-yes');
+        if (yes) yes.style.transform = 'scale(' + targetPress(T, B.press2) + ')';
+      }
+    } else if (T < B.load) unloadSite();
+
+    // scene 3 — the cards
+    if (inS3) {
+      s3.style.opacity = String(seg(T, B.s3 - 0.15, B.s3 + 0.15) * (1 - seg(T, B.s4 - 0.3, B.s4)));
+      const swap = outQuint(seg(T, B.swap[0], B.swap[1]));
+      slow.style.opacity = String(1 - swap); slow.style.transform = 'translate(-50%,' + (-50 - swap * 10).toFixed(1) + '%)';
+      slow.style.filter = swap > 0 ? 'blur(' + (swap * 4).toFixed(1) + 'px)' : 'none';
+      slow.style.visibility = swap < 1 ? 'visible' : 'hidden';
+      reveal(slowSpans, slowTimes, T, 0.18);
+      // white → a slow blue over the word slowww (the ramp ends on the last w, so the "?" lands readable)
+      slow.style.color = hexLerp('#ffffff', '#2a4bd0', seg(T, slowTimes[15], slowTimes[20]));
+      cando.style.visibility = T >= B.cando ? 'visible' : 'hidden';
+      if (T >= B.cando) { if (!gradientPainted) { paintGradient(); gradientPainted = true; } reveal(candoSpans, candoTimes, T, 0.18); }
+    }
+
+    // scene 4 — the mascot icon pops, the superbot.gg logo slides in beside it
+    if (inS4) {
+      s4.style.opacity = String(seg(T, B.s4 - 0.15, B.s4 + 0.2) * (1 - seg(T, B.end, B.loop)));
+      const tp = outBack(seg(T, B.tile, B.tile + 0.6));
+      tile.style.opacity = String(seg(T, B.tile, B.tile + 0.2)); tile.style.transform = 'scale(' + (0.4 + 0.6 * tp).toFixed(3) + ')';
+      const ww = word.offsetWidth || 440, gap = 30;
+      const lp = outQuint(seg(T, B.logo, B.logo + 0.9));
+      // the row starts with the tile centred (the word's half width pushed right), then settles as one lockup
+      lock.style.transform = 'translate(calc(-50% + ' + ((1 - lp) * (ww + gap) / 2).toFixed(1) + 'px), -50%)';
+      word.style.opacity = String(seg(T, B.logo + 0.05, B.logo + 0.5));
+      word.style.transform = 'translateX(' + ((1 - lp) * 60).toFixed(1) + 'px)';
+      word.style.clipPath = 'inset(0 ' + ((1 - lp) * 100).toFixed(1) + '% 0 0)';
+    }
+    fade.style.opacity = String(T >= B.end ? seg(T, B.end, B.loop) : 0);
+  };
+
+  // ── the clock ──
+  let seek = Math.max(0, parseFloat(q.get('t') || '0') || 0);
+  const hud = $('hud'); if (q.has('hud')) hud.hidden = false;
+  let t0 = null;
+  const tick = (now) => {
+    if (t0 == null) t0 = now;
+    let T = seek + (now - t0) / 1000;
+    if (T >= B.loop) { t0 = now; seek = 0; T = 0; }
+    render(T);
+    if (!hud.hidden) hud.textContent = T.toFixed(2) + 's';
+    if (!hold) requestAnimationFrame(tick);
+  };
+  render(seek);
+  requestAnimationFrame(tick);
+  if (hold) requestAnimationFrame(() => requestAnimationFrame(() => render(seek)));
+  // for the harness: the beat table, so a capture can ask where the beats are
+  window.__beats = B;
+})();
+</script>
+</body>
+</html>

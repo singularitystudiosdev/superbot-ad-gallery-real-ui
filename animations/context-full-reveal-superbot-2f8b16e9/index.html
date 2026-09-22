@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>context full? superbot can fix it! · animated reveal · ad spot</title>
+<meta name="description" content="The context-full-poster brought to life: 'context full?' pops in tight, 'superbot can fix it!' drops in below, the camera pulls back to the Before/After context-window cards, pushes into the Before bar as it fills to 197K, pans down into the After bar filling to 31K, then pulls back out as the freed-tokens and saved-hours stats land beside the mark. 10.2s looping ad spot, 1920x1080."/>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<style>
+/* ---------- tokens ---------- */
+/* Palette and card chrome are the context-storage poster family's own
+   (ads-src/context-storage/style.css), not invented here, so this spot and
+   the static context-full-poster read as one continuous piece: the poster
+   frozen mid-motion becomes this reveal, and this reveal frozen becomes the
+   poster. */
+:root {
+  --bg: #000; --fg: #ececec; --card: #0d0d0d; --line: #262626; --muted: #9a9a9a;
+  --red: #ff453a; --green: #30d158; --blue: #2b6bff; --pain: #ff0000;
+  --ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm-x: linear-gradient(90deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  /* the card/stats base unit: ads-src/context-storage's own --u resolves to
+     this exact value at 1920x1080 (measured off the live poster), so every
+     em below reproduces the poster's proportions pixel-for-pixel */
+  --u: 31.68px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+/* ---------- the 1920x1080 stage, scaled to the viewport by ar.js ---------- */
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+/* the camera: one transform, computed per frame from story time */
+#cam { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform; }
+
+/* ---------- headline (left) ----------
+   Position, font sizes and letter-spacing are the static context-full-poster's
+   own resolved values at 16:9 (measured off its live DOM: ads-src/context-storage,
+   fit.js sets .head's font-size to 88.31px at this frame), not approximated —
+   so the animation's resting frame is pixel-identical to the poster. */
+#headline { position: absolute; left: 65px; top: 357px; width: 852px; text-align: center; }
+#headline .line { width: max-content; margin: 0 auto; font-weight: 800; letter-spacing: -.035em; line-height: 1.02; color: #fff; white-space: nowrap; }
+#headline .pain { color: var(--pain); }
+#headline .brand { background-image: var(--storm-x); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#l1 { font-size: 88.31px; }
+#l2 { font-size: 102.44px; }
+
+/* ---------- stats row (left, below headline) ---------- */
+#statsrow { position: absolute; left: 65px; top: 609px; width: 852px; display: flex; align-items: center; justify-content: center; gap: calc(var(--u) * 1.1); font-size: var(--u); }
+#statsrow .face { width: 3.6em; height: auto; flex: none; }
+/* the poster's own .stats ul (nested flex>grid) resolves 40px wider than its
+   li content and right-aligns them — a flex/grid intrinsic-sizing quirk of
+   its exact nesting, reproduced here directly (measured off the live poster)
+   rather than re-derived, since it's what actually ships */
+#statsrow ul { list-style: none; margin: 0; padding: 0; display: grid; row-gap: .5em; width: 578.5px; justify-content: end; }
+#statsrow li { display: flex; align-items: center; gap: .55em; line-height: 1.15; }
+#statsrow .ico { width: 1.25em; height: 1.25em; flex: none; color: #ffd60a; display: grid; place-items: center; }
+#statsrow .ico svg { width: 100%; height: 100%; }
+#statsrow .ico svg:not([fill]) { fill: currentColor; }
+#statsrow .txt { font-size: 1.02em; font-weight: 600; color: var(--fg); letter-spacing: -.02em; white-space: nowrap; }
+#statsrow .big { font-weight: 800; color: var(--blue); font-size: 1.22em; }
+#statsrow .tail { color: var(--fg); }
+
+/* ---------- the before/after card (right) ----------
+   Same principle: position and every internal em are the poster's own
+   .card/.half/.meter rules at its resolved --u, not hand-tuned numbers. */
+#cardwrap { position: absolute; left: 1003px; top: 302px; width: 852px; font-size: var(--u); background: var(--card); border: 1px solid var(--line); border-radius: 1.1em; padding: 1.25em 1.35em 1.3em; display: grid; row-gap: 1.15em; }
+#cardwrap .half h2 { font-size: 1.22em; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin: 0 0 .55em; color: #fff; }
+#cardwrap .meter { background: #151515; border: 1px solid var(--line); border-radius: .6em; padding: .7em .8em .75em; box-shadow: 0 .18em .6em rgba(0,0,0,.55); }
+#cardwrap .meta { display: flex; align-items: baseline; justify-content: space-between; gap: 1em; font-size: .78em; line-height: 1.2; margin-bottom: .55em; }
+#cardwrap .who { font-weight: 700; color: var(--fg); white-space: nowrap; }
+#cardwrap .used { color: var(--muted); white-space: nowrap; display: inline-flex; align-items: center; gap: .3em; }
+#cardwrap .used b { font-weight: 800; }
+#before .used b { color: var(--red); }
+#after .used b { color: var(--green); }
+.warn-ico { width: 1.05em; height: 1.05em; color: var(--red); opacity: 0; transition: none; }
+#cardwrap .bar { height: .82em; border-radius: .41em; overflow: hidden; background: var(--green); }
+#cardwrap .bar i { display: block; height: 100%; width: 0%; background: var(--red); border-radius: .41em 0 0 .41em; }
+
+/* reduced motion: land on the fully-revealed final frame, no camera moves */
+@media (prefers-reduced-motion: reduce) {
+  #cam { transform: none !important; }
+  #headline .line, #cardwrap, #statsrow, .warn-ico { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---------- narrow ratios: stack headline / cards / stats instead of
+   left-right (the gallery's ratio picker drives every animation, this one
+   included) — top offsets stay put since the stage height never changes,
+   only left/width/font-size follow --ar-w ---------- */
+html[data-ar]:not([data-ar="16x9"]) {
+  /* the card's --u is tuned to fill an 852px-wide 16:9 card; at a narrower
+     stacked width it has to shrink in the same proportion or the meta row
+     ("ChatGPT ... 197K of 200K used") wraps and blows out the card's height
+     into the stats row below it. Card content height is ~15.06 * --u
+     (measured at 16:9: 477px / 31.68px), so the stats row's top is computed
+     from it rather than fixed, or a taller ratio's bigger --u pushes the
+     card past a hardcoded offset. */
+  --u: min(31.68px, calc((var(--ar-w, 1920px) - 200px) / 26.89));
+}
+html[data-ar]:not([data-ar="16x9"]) #headline {
+  left: 100px; top: 90px; width: calc(var(--ar-w, 1920px) - 200px);
+}
+html[data-ar]:not([data-ar="16x9"]) #headline .line {
+  font-size: calc(var(--ar-w, 1920px) * .079); white-space: normal;
+}
+html[data-ar]:not([data-ar="16x9"]) #cardwrap {
+  left: 100px; top: 350px; width: calc(var(--ar-w, 1920px) - 200px);
+}
+html[data-ar]:not([data-ar="16x9"]) #statsrow {
+  left: 100px; top: calc(350px + var(--u) * 15.06 + 50px); width: calc(var(--ar-w, 1920px) - 200px);
+}
+/* the 578.5px stats-ul quirk width is specific to the 16:9 pixel-match at
+   --u=31.68px; at any other font-size it would be the wrong width, so let it
+   auto-size normally outside 16:9 */
+html[data-ar]:not([data-ar="16x9"]) #statsrow ul {
+  width: auto; justify-content: normal;
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="cam">
+
+    <!-- ============ headline ============ -->
+    <div id="headline">
+      <div class="line" id="l1">context <span class="pain">full</span>?</div>
+      <div class="line" id="l2">
+        <span class="brand">superbot</span> can fix it!
+      </div>
+    </div>
+
+    <!-- ============ the before/after card ============ -->
+    <!-- markup mirrors ads-src/context-storage/index.html's .card exactly
+         (.half#before/#after > h2 + .meter > .meta > .who/.used + .bar) -->
+    <div id="cardwrap">
+      <div class="half" id="before">
+        <h2>Before</h2>
+        <div class="meter" id="before-meter">
+          <div class="meta">
+            <span class="who">ChatGPT</span>
+            <span class="used">
+              <svg class="warn-ico" id="before-warn" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v5M12 16.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <b id="before-num">0K</b> of 200K used
+            </span>
+          </div>
+          <div class="bar"><i id="before-fill"></i></div>
+        </div>
+      </div>
+      <div class="half" id="after">
+        <h2>After</h2>
+        <div class="meter" id="after-meter">
+          <div class="meta">
+            <span class="who">ChatGPT</span>
+            <span class="used"><b id="after-num">0K</b> of 200K used</span>
+          </div>
+          <div class="bar"><i id="after-fill"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ stats + mark ============ -->
+    <!-- same icon SVG paths and .txt/.lead/.big/.tail structure as the poster -->
+    <div id="statsrow">
+      <svg class="face" viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <mask id="face-mask" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+            <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+            <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+          </mask>
+        </defs>
+        <rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face-mask)" transform="translate(-1.2 -1.2)"/>
+        <rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face-mask)" transform="translate(1.2 1.2)"/>
+        <rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face-mask)"/>
+      </svg>
+      <ul>
+        <li id="stat-freed">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2zM5 16l.9 2.1L8 19l-2.1.9L5 22l-.9-2.1L2 19l2.1-.9L5 16zM19 14l.7 1.6 1.6.7-1.6.7L19 18.6l-.7-1.6-1.6-.7 1.6-.7L19 14z"/></svg></span>
+          <span class="txt"><span class="lead">you have freed</span> <b class="big">166K tokens</b></span>
+        </li>
+        <li id="stat-saved">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="txt"><span class="lead">saved</span> <b class="big">1.2 hours</b> <span class="tail">of re-explaining</span></span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ---------- the clock: one render(t), a pure function of story time ----------
+// Every visual is recomputed from t each frame (the house convention: see
+// agents-slower-superbot-7bf1a6c6), so seeking (`?t=4.2`) or capturing any
+// frame yields the same picture. Frame-indexed at 30fps.
+const FPS = 30, LOOP = 10.2;
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the beat sheet (story seconds) ----------
+const B = {
+  line1: 0,          // "context full?" pops in (0.35s rise-and-settle, house entrance)
+  line2: 0.55,       // "superbot can fix it!" drops down and fades in below it
+  zoomOut: 1.55,      // camera pulls back from the headline to the full frame (0.9s)
+  cardsIn: 1.75,      // the Before/After card fades in as the pull-back lands
+  zoomBefore: 2.85,   // camera pushes into the Before meter (0.7s)
+  beforeFill: 3.55,   // Before bar fills 0 -> 197K/98.5% (1.0s), warn icon and note land with it
+  zoomAfter: 5.0,     // camera pans down into the After meter (0.7s)
+  afterFill: 5.7,     // After bar fills 0 -> 31K/15.5% (1.0s)
+  zoomBack: 7.15,     // camera pulls back out to the full frame (0.8s)
+  statsIn: 8.05,      // freed-tokens / saved-hours stats and the mark land, staggered
+};
+
+const cam = $('cam'), headline = $('headline'), l1 = $('l1'), l2 = $('l2'), cardwrap = $('cardwrap'), statsrow = $('statsrow');
+const beforeFill = $('before-fill'), afterFill = $('after-fill');
+const beforeNum = $('before-num'), afterNum = $('after-num');
+const beforeWarn = $('before-warn'), beforeMeter = $('before-meter');
+const statFreed = $('stat-freed'), statSaved = $('stat-saved');
+const stage = $('stage');
+
+// ---------- camera: one focal point + zoom level, eased between shots ----------
+// Scale 1 is the full frame; higher zooms are closeups on the headline or one
+// card. The gallery's ratio picker re-flows this ad (16:9 side-by-side vs the
+// stacked narrow layout above), so the focal points are MEASURED off the live
+// DOM rather than hardcoded: `centerOf` reads an element's centre in
+// stage-design-space (0..AR.w, 0..1080) with the camera transform neutralised,
+// so the shot list always points at wherever CSS actually put things.
+function centerOf(el) {
+  const prevT = cam.style.transform;
+  cam.style.transform = 'none';
+  const sR = stage.getBoundingClientRect(), eR = el.getBoundingClientRect();
+  cam.style.transform = prevT;
+  const k = sR.width / stage.offsetWidth || 1;
+  return { x: (eR.left + eR.width / 2 - sR.left) / k, y: (eR.top + eR.height / 2 - sR.top) / k, w: eR.width / k };
+}
+let SHOTS = [];
+function remeasure() {
+  const H = centerOf(l1), BEF = centerOf(beforeMeter), AFT = centerOf($('after-meter'));
+  const full = () => ({ x: AR.w / 2, y: 540 });
+  // the headline closeup wants to fill most of the frame width without
+  // clipping a letter off the edge, so its zoom is capped by how much room
+  // line 1 actually measures at the current ratio (narrow frames get a
+  // gentler push-in than the wide 16:9 shot)
+  const headS = Math.min(1.62, (AR.w * 0.86) / Math.max(1, H.w));
+  // same safety cap on the card closeup: the meter is a fixed-ish design
+  // width, so a narrow stacked frame needs a gentler push-in than 16:9's
+  // side-by-side layout gives room for
+  const cardS = Math.min(2.05, (AR.w * 0.9) / Math.max(1, BEF.w));
+  SHOTS = [
+    { t: 0,                    x: H.x, y: H.y, s: headS }, // tight on line 1 ("context full?")
+    { t: B.zoomOut,            x: H.x, y: H.y + 60, s: headS }, // held, drifting down as line 2 lands
+    { t: B.zoomOut + 0.9,      ...full(), s: 1.0 }, // full frame
+    { t: B.zoomBefore,         ...full(), s: 1.0 },
+    { t: B.zoomBefore + 0.7,   x: BEF.x, y: BEF.y, s: cardS }, // pushed into the Before meter
+    { t: B.zoomAfter,          x: BEF.x, y: BEF.y, s: cardS },
+    { t: B.zoomAfter + 0.7,    x: AFT.x, y: AFT.y, s: cardS }, // panned down into the After meter
+    { t: B.zoomBack,           x: AFT.x, y: AFT.y, s: cardS },
+    { t: B.zoomBack + 0.8,     ...full(), s: 1.0 }, // full frame for the stats landing
+    { t: LOOP,                 ...full(), s: 1.0 },
+  ];
+}
+function camAt(t) {
+  let a = SHOTS[0], b = SHOTS[SHOTS.length - 1];
+  for (let i = 0; i < SHOTS.length - 1; i++) {
+    if (t >= SHOTS[i].t && t <= SHOTS[i + 1].t) { a = SHOTS[i]; b = SHOTS[i + 1]; break; }
+  }
+  const span = Math.max(1e-6, b.t - a.t);
+  const p = outQuint(clamp01((t - a.t) / span));
+  return { x: lerp(a.x, b.x, p), y: lerp(a.y, b.y, p), s: lerp(a.s, b.s, p) };
+}
+
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+
+function render(t) {
+  // camera: centres the focal point in whatever frame width the current ratio gives
+  const c = camAt(t), cx = AR.w / 2;
+  cam.style.transform = `translate(${(cx - c.x * c.s).toFixed(2)}px, ${(540 - c.y * c.s).toFixed(2)}px) scale(${c.s.toFixed(4)})`;
+
+  // line 1: house pop-in (0.35s rise-and-settle)
+  const a1 = seg(t, B.line1, B.line1 + 0.35);
+  op(l1, a1);
+  l1.style.transform = `translateY(${((1 - outQuint(a1)) * 14).toFixed(2)}px) scale(${lerp(0.96, 1, outQuint(a1)).toFixed(3)})`;
+
+  // line 2: drops down and fades in below line 1
+  const a2 = seg(t, B.line2, B.line2 + 0.45);
+  op(l2, a2);
+  l2.style.transform = `translateY(${((1 - outQuint(a2)) * -22).toFixed(2)}px)`;
+
+  // the headline steps out of the way while the camera pushes into the cards
+  // (it would otherwise bleed into the tight card closeups) and returns for
+  // the final full-frame reveal
+  const hOut = seg(t, B.zoomBefore - 0.3, B.zoomBefore + 0.1);
+  const hIn = seg(t, B.zoomBack + 0.3, B.zoomBack + 0.8);
+  op(headline, t < B.zoomBefore ? 1 : (1 - hOut) + hIn);
+
+  // the card fades in as the camera lands on the full frame
+  op(cardwrap, seg(t, B.cardsIn, B.cardsIn + 0.5));
+
+  // the Before bar fills while the camera is pushed into it; the number counts
+  // up with it and the warn triangle + note land at the same time
+  const bf = outQuint(seg(t, B.beforeFill, B.beforeFill + 1.0));
+  beforeFill.style.width = (bf * 98.5).toFixed(1) + '%';
+  beforeNum.textContent = Math.round(bf * 197) + 'K';
+  op(beforeWarn, seg(t, B.beforeFill, B.beforeFill + 0.25));
+
+  // the After bar fills the same way, one beat later
+  const af = outQuint(seg(t, B.afterFill, B.afterFill + 1.0));
+  afterFill.style.width = (af * 15.5).toFixed(1) + '%';
+  afterNum.textContent = Math.round(af * 31) + 'K';
+
+  // the freed-tokens / saved-hours stats and the mark land staggered, once the
+  // camera has pulled back out to the full frame
+  op(statsrow, seg(t, B.statsIn, B.statsIn + 0.35));
+  op(statFreed, seg(t, B.statsIn, B.statsIn + 0.45));
+  op(statSaved, seg(t, B.statsIn + 0.2, B.statsIn + 0.65));
+}
+
+// ---------- fit the stage to the viewport ----------
+function fit() {
+  const k = Math.min(innerWidth / AR.w, innerHeight / AR.h);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+  stage.style.left = '50%'; stage.style.top = '50%';
+}
+addEventListener('resize', fit);
+// a ratio change re-flows the stacked/side-by-side layout, so the camera's
+// focal points have to be re-measured, not just the outer fit scale
+addEventListener('archange', () => { fit(); remeasure(); });
+
+// ---------- the clock ----------
+// `?t=<s>` seeks and holds (frame capture); `?t=<s>&play=1` seeks and runs on;
+// otherwise it plays and loops.
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+let t0, last = -1;
+function frame(now) {
+  const t = ((now - t0) / 1000) % LOOP;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  requestAnimationFrame(frame);
+}
+// fonts settled -> layout is final -> safe to measure the camera's focal points
+function start() {
+  fit();
+  remeasure();
+  t0 = performance.now() - (seekTo || 0) * 1000;
+  if (reduced) { render(B.statsIn + 1); }
+  else if (seekTo !== null && !q.has('play')) { render(Math.floor(seekTo * FPS) / FPS); }
+  else requestAnimationFrame(frame);
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+</script>
+</body>
+</html>

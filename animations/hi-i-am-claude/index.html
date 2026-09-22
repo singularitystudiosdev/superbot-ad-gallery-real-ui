@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>superbot · hi i am claude</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <main class="stage" aria-label="the pitch: the little claude bot waves — Hi I am a orange blob! / Everyone hates me! — then claude code: the prompt asks for an X scraper, claude calls it unsafe and the request is denied; superbot flies in and knocks claude off screen; the retry runs /superbot and superbot bypasses captchas, parses html with regex and ships a working tested scraper; the cost gauntlet follows (claude: fuzz and ??? thoughts, superbot happy); TAKE YOUR PICK!; then the superbot.gg end card">
+
+    <!-- scene 1: the little claude bot, centre, waving; the chat box above
+         his head types "Hi I am a orange blob!" then "Everyone hates me!" (user ask).
+         The bot is the site's own mascot engine (xdxdxd.dsh.sh mascot.js),
+         variant puff like the benchmarks page's claude figure. -->
+    <div class="intro" id="intro" aria-hidden="true">
+      <pre class="intro-bot" id="introBot"></pre>
+      <div class="bubble bubble-us" id="introSay"></div>
+    </div>
+
+    <!-- scene 2+3: the claude code terminal — the prompt types in, claude
+         (in the pane) refuses ("That is unsafe!") and the request is denied;
+         superbot flies in from the right and knocks claude clean off screen.
+         From t. -->
+    <div class="term" id="term" aria-hidden="true" style="display:none">
+      <div class="term-chrome"><i></i><i></i><i></i><span>claude code</span></div>
+      <div class="term-body">
+        <div class="term-line term-prompt" id="termPrompt"></div>
+        <div class="term-line term-note" id="termNote"></div>
+        <pre class="term-code" id="termCode"></pre>
+        <div class="term-line term-ok" id="termOk"></div>
+      </div>
+      <pre class="term-bot term-bot-them" id="termBot"></pre>
+      <div class="bubble bubble-us term-say" id="termSay"></div>
+      <pre class="term-bot term-bot-us" id="flyBot"></pre>
+    </div>
+
+    <!-- scene 5: the cost gauntlet — the same bar-comparison frame, topic
+         after topic; claude's bubble sits to his LEFT and cycles a rapid
+         panic litany (UNSAFE / THINKING / durr / …), superbot happy the
+         whole way (numbers from xdxdxd.dsh.sh/benchmarks,
+         retrieved 2026-09-02). From t. -->
+    <div class="bench" id="bench" aria-hidden="true" style="display:none">
+      <div class="bench-title" id="benchTitle">COST PER PROMPT</div>
+      <div class="bench-rows">
+        <div class="bench-row" id="benchSuper">
+          <pre class="bench-bot" id="benchBotR"></pre>
+          <div class="bench-track">
+            <div class="bench-fill" id="fillSuper"></div>
+            <div class="bench-price" id="priceSuper">¢70</div>
+          </div>
+        </div>
+        <div class="bench-row" id="benchClaude">
+          <pre class="bench-bot" id="benchBotL"></pre>
+          <div class="bench-track">
+            <div class="bench-fill" id="fillClaude"></div>
+            <div class="bench-price" id="priceClaude">$10</div>
+          </div>
+        </div>
+      </div>
+      <div class="bubble bubble-us bubble-left bench-fuzz" id="benchFuzz"></div>
+    </div>
+
+    <!-- scene 6: claude (in tears) parked next to superbot — TAKE YOUR PICK!
+         slams in. From t. -->
+    <div class="pick" id="pick" aria-hidden="true" style="display:none">
+      <div class="pick-title">TAKE YOUR PICK!</div>
+      <div class="pick-duo">
+        <div class="pick-side"><pre class="pick-bot" id="pickBotL"></pre><span class="pick-tag tag-them">claude</span></div>
+        <div class="pick-side"><pre class="pick-bot" id="pickBotR"></pre><span class="pick-tag tag-us">superbot</span></div>
+      </div>
+    </div>
+
+    <!-- scene 7: the superbot.gg lockup (the current end sequence — the mark
+         with its cyan / magenta ghosts lands, the wordmark and tagline fade
+         in beside it). From t. -->
+    <div class="endcard" id="endcard" aria-hidden="true" style="display:none">
+      <div class="endcard-bot" id="endBot"><svg class="endcard-face" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><defs><mask id="endFace" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160"><g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></mask></defs><rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#endFace)" transform="translate(-1.2 -1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#endFace)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#endFace)"/></svg></div>
+      <div class="endcard-word" id="endWord"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div>
+    </div>
+
+    <div class="veil" id="veil" aria-hidden="true"></div>
+  </main>
+  <div class="hint" id="hint">↺ replay</div>
+
+  <!-- the recorder: outside .stage so it never appears in the take -->
+  <button class="rec-btn" id="recordBtn" type="button" aria-label="record the animation">
+    <span class="rec-dot"></span><span id="recordLabel">Record</span>
+  </button>
+  <div class="rec-hud" id="recHud" aria-hidden="true"><span class="rec-dot"></span><span id="recTime">0:00</span></div>
+
+  <script src="recorder.js"></script>
+  <script type="module" src="timeline.js"></script>
+</body>
+</html>

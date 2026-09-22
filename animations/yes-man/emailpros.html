@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>superbot · yes man · emailpros</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <main class="stage" aria-label="the pitch: a chatgpt-like home screen — the user pastes carbkiller.com as plain text, types 'Does my website look good?' and hits enter; the llm gushes its opener and then a glazing tirade that keeps accelerating without end; the cards cut in: LLMs are made to agree with you — AND YOU LIKE THAT? — straight to the superbot.gg end card">
+
+    <div class="chatui" id="chatui">
+      <!-- the idle heading (fades once the conversation starts) -->
+      <div class="gpt-head" id="gptHead">Ready when you are.</div>
+
+      <!-- the message tail above the bar: the user bubble + the streaming
+           response. The punch-ins target this block. -->
+      <div class="msg-area" id="msgArea">
+        <div class="msg msg-user" id="msgUser"></div>
+        <div class="typing-indicator" id="typingDots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="msg msg-ai" id="msgAi"></div>
+      </div>
+
+      <!-- the zoomed chat bar itself: + / Ask anything / Think / mic / the
+           blue voice-send button (the referent's own anatomy). The link is
+           plain text — verified 1:1 against chatgpt.com (2026-09-03): a
+           pasted URL never becomes a chip, it just types into the bar. -->
+      <div class="input-pill" id="pill">
+        <svg class="plus-ic" id="plusIc" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="cmd-glow" id="inputChip"></span><span class="input-text" id="inputText"></span>
+        <span class="placeholder" id="placeholder">Ask anything</span>
+        <span class="caret" id="caret"></span>
+        <span class="think-chip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M12 3c2.8 0 4 1.9 4 3.6 1.5.3 2.6 1.6 2.6 3.2 0 .8-.3 1.6-.8 2.1.9.7 1.4 1.7 1.4 2.8 0 2-1.7 3.8-4 3.8h-.6V21h-2v-2h-2v2H7v-2.8C5.2 17.7 4 16.2 4 14.4c0-1.4.7-2.6 1.8-3.3C4.9 7.7 7.8 6.4 6.6 4.6 7.8 5 8.6 5.8 9 6.8 9.8 6 10.8 5.6 12 5.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          Think
+        </span>
+        <svg class="mic-ic" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="9.2" y="3" width="5.6" height="11" rx="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="voice-btn" id="voiceBtn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M4 10v4M8 7v10M12 5v14M16 7v10M20 9v6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </div>
+
+      <!-- the three suggestion rows under the bar (they leave once the
+           conversation starts) -->
+      <div class="suggestions" id="suggestions">
+        <div class="sug">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="10" r="1.7" fill="currentColor"/><path d="M5 17.5l4.4-4.2 3.2 3 3-2.6 3.6 3.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          Create an image or sticker
+        </div>
+        <div class="sug">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 20l-4 0z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          Write or edit
+        </div>
+        <div class="sug">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.6 2.3 3.9 5.2 3.9 8.5s-1.3 6.2-3.9 8.5c-2.6-2.3-3.9-5.2-3.9-8.5s1.3-6.2 3.9-8.5z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+          Search the web
+        </div>
+      </div>
+    </div>
+
+    <!-- the punch cards, one at a time: LLMs are made to agree with you /
+         AND YOU LIKE THAT? -->
+    <div class="simple" id="simple" aria-hidden="true"></div>
+
+    <!-- the end card: the superbot.gg lockup (the current end sequence — the
+         mark with its cyan / magenta ghosts, the wordmark, the tagline) -->
+    <div class="endcard" id="endcard" aria-hidden="true" style="display:none">
+      <div class="endcard-bot" id="endBot"><svg class="endcard-face" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><defs><mask id="endFace" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160"><g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></mask></defs><rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#endFace)" transform="translate(-1.2 -1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#endFace)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#endFace)"/></svg></div>
+      <div class="endcard-word" id="endWord"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div>
+      <div class="endcard-tag" id="endTag" aria-hidden="true"></div>
+    </div>
+
+    <div class="veil" id="veil" aria-hidden="true"></div>
+  </main>
+  <div class="hint" id="hint">↺ replay</div>
+
+  <!-- the recorder: outside .stage so it never appears in the take -->
+  <button class="rec-btn" id="recordBtn" type="button" aria-label="record the animation">
+    <span class="rec-dot"></span><span id="recordLabel">Record</span>
+  </button>
+  <div class="rec-hud" id="recHud" aria-hidden="true"><span class="rec-dot"></span><span id="recTime">0:00</span></div>
+
+  <script src="recorder.js"></script>
+  <script>window.VARIANT = 'emailpros';</script>
+  <script type="module" src="timeline.js"></script>
+</body>
+</html>

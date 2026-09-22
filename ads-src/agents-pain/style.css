@@ -1,0 +1,77 @@
+/* superbot — the "agents <pain>? superbot can do it!" poster family.
+   One page renders every headline (?id=) at every gallery ratio: .poster is a
+   size container, fit.js sizes each line to the frame, so the type fills the
+   width whatever the ratio or the length of the pain word. */
+
+:root {
+  --bg: #000;
+  --fg: #ffffff;
+  /* the ad-spot type, taken verbatim from the gpt-refusal animation's
+     "agents refusing? / superbot can do it!" card (animations/
+     gpt-refusal-superbot-824cef28: --ui, #card .line, --storm-x) so the
+     posters and the spot read as one family */
+  --font-ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  display: grid; place-items: center;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.poster {
+  width: 100vw; height: 100vh;
+  container-type: size;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: min(4.5cqh, 4cqw);
+  padding: min(5cqh, 5cqw);
+  font-family: var(--font-ui);
+  color: var(--fg);
+}
+
+/* the lockup: the two rows and the face, measured as one block by fit.js */
+.lock {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: min(4.5cqh, 4cqw);
+}
+
+/* the two headline rows — fit.js writes the font-size; nothing here wraps */
+.line {
+  white-space: nowrap;
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1;
+  text-align: center;
+  color: #fff;
+}
+
+/* the pain word: flat brand colour, one per ad (set from ads.js) */
+.pain { color: var(--pain, #2f6bff); }
+
+/* superbot: the blue → violet → pink wordmark gradient */
+.brand {
+  /* --storm-x from the animation, verbatim */
+  background-image: linear-gradient(90deg, #2b6bff 0%, #6a1fd8 45%, #c026d3 75%, #ff3d9a 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+.face { display: block; width: min(19cqh, 15cqw); height: auto; margin-top: min(1.5cqh, 1.5cqw); }
+
+/* the download chrome: never part of an export capture */
+.dl {
+  position: fixed; top: 18px; right: 18px; z-index: 40;
+  padding: 9px 16px; border-radius: 999px;
+  background: #101010; color: #f3f3f3; border: 1px solid #232323;
+  font: 700 13px/1 ui-monospace, Menlo, monospace; letter-spacing: .04em;
+  text-decoration: none;
+}
+.dl:hover { border-color: #7cb389; }
+html[data-export] .dl { display: none; }

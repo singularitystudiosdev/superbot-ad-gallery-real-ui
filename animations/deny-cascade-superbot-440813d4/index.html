@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>"ask me anything" and it denies everything. superbot thinks, then answers. ad spot</title>
+<link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
+<meta name="description" content="ChatGPT says 'ask me anything', then denies 35 prompts in 7 seconds. The superbot notification pops, and superbot replays twelve of them: the thinking row rides the composer, its tools run one line at a time, and long answers type out with their own end frame, accelerating 1x to 10x across seven seconds. ~26s looping ad spot, 1920x1080."/>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<style>
+/* ---------- tokens: the site's own ladder (site.css :root) ---------- */
+:root {
+  --bg: #000000; --card: #0d0d0d; --raised: #181818; --line: #262626;
+  --fg: #ececec; --secondary: #cfcfcf; --muted: #9a9a9a; --ok: #34d399; --danger: #c96f6f;
+  --storm-0: #00e5c3; --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm: linear-gradient(135deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-x: linear-gradient(90deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-action: linear-gradient(135deg, var(--storm-1) 0%, var(--storm-2) 55%, var(--storm-3) 100%);
+  --ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  /* ChatGPT dark tokens (gpt-refusal ad's clone of the live page, 2026-09-09) */
+  --gpt-main: #212121; --gpt-side: #171717; --gpt-composer: #303030; --gpt-bubble: #323232;
+  --gpt-text: #ececec; --gpt-text-2: #cdcdcd; --gpt-text-3: #afafaf; --gpt-border: rgba(255,255,255,.15); --gpt-util: #414141;
+  --gpt-font: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+/* ---------- the 1920x1080 stage, scaled to the viewport ---------- */
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* ---------- scene 1: the ChatGPT clone (designed at 1536x864, scaled 1.25) ---------- */
+#gpt { width: 1536px; height: 864px; transform: scale(1.25); transform-origin: 0 0; background: var(--gpt-main); font-family: var(--gpt-font); color: var(--gpt-text); display: grid; }
+.g-main { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.g-thread { flex: 1; min-height: 0; position: relative; }
+.g-scroll { position: absolute; inset: 0; overflow: hidden; }
+.g-col { position: absolute; left: 50%; top: 0; width: 768px; margin-left: -384px; padding: 20px 20px 0; will-change: transform, filter; } /* the column scrolls as one eased curve; render(t) sets a vertical motion blur from its speed */
+.g-user, .g-ai, .pair { will-change: transform, opacity; }
+/* the empty-state heading: "Ask me anything!" */
+.g-hello { position: absolute; left: 0; right: 0; top: 42%; text-align: center; font-size: 44px; font-weight: 600; letter-spacing: -.01em; color: var(--gpt-text-2); }
+.g-user { display: flex; justify-content: flex-end; margin: 12px 0 20px; }
+.g-user .bub { max-width: 70%; padding: 10px 20px; border-radius: 24px; background: var(--gpt-bubble); font-size: 16px; line-height: 26px; white-space: pre-wrap; }
+.g-ai { position: relative; font-size: 16px; line-height: 26px; color: var(--gpt-text); white-space: pre-wrap; word-break: break-word; margin: 0 0 26px; }
+/* the cascade pairs: same shape, half the height, so the burst stays readable */
+.pair { margin: 0 0 14px; }
+.pair .g-user { margin: 0 0 6px; }
+.pair .bub { padding: 7px 16px; border-radius: 20px; font-size: 13.5px; line-height: 20px; }
+.pair .g-ai { font-size: 13.5px; line-height: 20px; margin: 0; }
+.g-ai .x { color: #ff6b6b; font-weight: 600; }
+.g-ai .x.pop { display: inline-block; transform-origin: 50% 60%; }
+.g-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(to bottom, rgba(33,33,33,0), var(--gpt-main) 70%); pointer-events: none; }
+.g-foot { flex: none; position: relative; padding: 10px 20px 14px; display: grid; justify-items: center; }
+.g-composer { width: 768px; min-height: 52px; border-radius: 28px; background: var(--gpt-composer); border: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; gap: 10px; padding: 0 8px 0 10px; }
+.g-composer .plus { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: var(--gpt-text); }
+.g-composer .plus svg, .g-composer .mic svg { width: 20px; height: 20px; }
+.g-composer .ph { flex: 1; font-size: 16px; color: var(--gpt-text-3); white-space: nowrap; overflow: hidden; }
+.g-composer .mic { width: 36px; height: 36px; display: grid; place-items: center; color: var(--gpt-text); }
+.g-composer .send { width: 36px; height: 36px; border-radius: 50%; background: #676767; color: #212121; display: grid; place-items: center; }
+.g-composer .send svg { width: 18px; height: 18px; }
+.g-disc { margin-top: 10px; font-size: 12px; color: var(--gpt-text-3); }
+
+/* ---------- the rescue popup, bottom-right: black card, storm stroke (gpt-refusal's popup) ---------- */
+#popup { position: absolute; right: 44px; bottom: 44px; width: max-content; padding: 20px; border-radius: 24px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box; box-shadow: 0 0 32px rgba(43,107,255,.32), 0 0 64px rgba(192,38,211,.22), 0 30px 70px rgba(0,0,0,.5); opacity: 0; transform-origin: 50% 100%; isolation: isolate; z-index: 20; }
+#popup .p-head { display: flex; align-items: center; gap: 12px; white-space: nowrap; font-size: 29px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+#popup .p-head img { width: 34px; height: 34px; }
+#chatbtn { position: relative; margin: 16px 0 0; display: block; width: 100%; padding: 12px 20px; border-radius: 16px; background: #fff; color: #000; font-size: 22px; font-weight: 700; text-align: center; transform-origin: 50% 50%; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+
+/* ---------- the cursor ---------- */
+#cursor { position: absolute; left: 0; top: 0; width: 34px; height: 44px; z-index: 40; opacity: 0; transform-origin: 3px 2px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.5)); }
+
+/* ---------- scene 2: the app window (gpt-refusal's hub, 1:1 the site's held stage) ---------- */
+#site { background: #000; }
+#site-in { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform: scale(1.6); transform-origin: 0 0; }
+.win { position: absolute; inset: 0; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-rows: 28px minmax(0, 1fr); }
+.win-bar { display: flex; align-items: center; gap: 6px; padding: 0 12px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.win-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.win-bar span { margin-left: 8px; }
+.win-bar .led { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.win-bar .led.on { background: var(--storm-1); box-shadow: 0 0 8px var(--storm-1); }
+.win-body { position: relative; overflow: hidden; }
+.hub { position: absolute; inset: 8px; right: calc(24% + 20px); background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 64px 200px minmax(0, 1fr); font: 11px/15px var(--ui); color: var(--fg); transform-origin: 50% 50%; }
+.hub > * { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.rail { background: var(--bg); border-right: 1px solid var(--line); align-items: center; padding: 8px 0; gap: 4px; }
+.rail-item { position: relative; flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--raised); display: grid; place-items: center; color: var(--fg); }
+.rail-item svg { width: 26px; height: 26px; fill: currentColor; }
+.rail-item .dot { position: absolute; right: -2px; bottom: -2px; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--bg); }
+.rail-item.sb { border-radius: 0; background: transparent; }
+.rail-item.sb img { width: 100%; height: 100%; display: block; }
+.rail-item.sel::before { content: ""; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); width: 3px; height: 26px; border-radius: 0 999px 999px 0; background: var(--fg); }
+.rail-item[data-app="openai"] { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="claude"] { background: #d97757; color: #fff; }
+.rail-item[data-app="gemini"] { background: #fff; color: #1f1f1f; }
+.rail-item[data-app="cursor"] { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="copilot"] { background: #24292f; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed { background: #000; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
+.rail-item.folder { display: grid; grid-template-columns: 10px 10px; grid-template-rows: 10px 10px; gap: 3px; place-content: center; }
+.rail-item.folder svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2.4; }
+.rail-item.add { font: 16px/44px var(--mono); color: var(--muted); }
+.rail-div { flex: none; width: 22px; height: 1px; background: var(--line); }
+.chats { background: var(--card); border-right: 1px solid var(--line); }
+.side-head { flex: none; display: flex; align-items: center; gap: 5px; min-height: 40px; padding: 9px 12px; font-weight: 700; font-size: 12px; }
+.side-head img { width: 14px; height: 14px; }
+.side-head .ic { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); }
+.side-head .ic + .ic { margin-left: 0; background: none; border: 0; }
+.side-head .ic svg { width: 9px; height: 9px; fill: none; stroke: currentColor; stroke-width: 2; }
+.row { display: flex; align-items: center; gap: 6px; min-height: 26px; margin: 0 6px; padding: 0 8px; border-radius: 8px; color: var(--muted); white-space: nowrap; overflow: hidden; flex: none; }
+.row svg { flex: none; width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.row em { margin-left: auto; font-style: normal; font-size: 10px; }
+.row.on { background: var(--raised); color: var(--fg); box-shadow: inset 3px 0 0 var(--storm-1); }
+.row.new { color: var(--fg); }
+.cap-row { display: flex; justify-content: space-between; padding: 4px 12px 2px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; flex: none; }
+.today { padding: 2px 14px; color: var(--muted); font-size: 10px; flex: none; }
+.user { margin-top: auto; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-top: 1px solid var(--line); flex: none; }
+.user .av { position: relative; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); font: 700 10px/24px var(--ui); text-align: center; }
+.user .av i { position: absolute; right: -1px; bottom: -1px; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--card); }
+.user b { display: block; font-size: 11px; }
+.user small { display: block; color: var(--muted); font-size: 10px; }
+.main { position: relative; background: var(--card); }
+.chat-head { flex: none; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 12px; }
+.chat-head .search { margin-left: auto; display: flex; align-items: center; gap: 6px; padding: 0 8px; border-radius: 8px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); font-weight: 400; font-size: 10px; line-height: 20px; }
+.chat-head .search kbd { font: 9px/12px var(--mono); }
+.chat-head .ask { display: flex; align-items: center; gap: 4px; padding: 0 9px; border-radius: 8px; background: var(--storm-action); color: #fff; font-weight: 650; font-size: 10px; line-height: 20px; }
+.chat-head .ask img { width: 12px; height: 12px; }
+.chat-head .pt { width: 20px; height: 20px; border-radius: 8px; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); }
+.chat-head .pt svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; }
+.feed { flex: 1; min-height: 0; position: relative; overflow: hidden; }
+.feed-in { position: absolute; left: 0; right: 0; top: 0; padding: 10px 12px; display: grid; align-content: start; gap: 9px; will-change: transform, filter; } /* the same eased scroll curve and motion blur as the ChatGPT column */
+.welcome { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.welcome .w-ic { width: 24px; height: 24px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; }
+.welcome .w-ic img { width: 14px; height: 14px; }
+.welcome b { display: block; }
+.welcome small { display: block; color: var(--muted); font-size: 10px; }
+.date-div { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 9px; }
+.date-div::before, .date-div::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.msg { display: flex; gap: 8px; }
+.avatar { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); color: var(--fg); font: 700 10px/24px var(--ui); text-align: center; }
+.avatar.sb { background: #000; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; }
+.avatar.sb img { width: 62%; height: 62%; display: block; }
+.m-main { min-width: 0; flex: 1; display: grid; gap: 3px; }
+.m-head { display: flex; gap: 6px; align-items: baseline; }
+.m-name { font-weight: 700; }
+.m-when { font-size: 9px; color: var(--muted); }
+.app { padding: 0 4px; border-radius: 3px; background: var(--storm-1); color: #fff; font: 700 8px/12px var(--ui); letter-spacing: .04em; }
+.m-text { font-size: 11px; line-height: 15px; white-space: pre-wrap; }
+.m-text .g { color: var(--muted); }
+/* a real fenced code block: monospace, dark plate, a filename tab, matching a chat app's own code rendering */
+.m-text .code { margin: 6px 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: #0b0d10; }
+.m-text .code .code-head { display: flex; align-items: center; gap: 6px; padding: 5px 9px; background: #14171b; border-bottom: 1px solid var(--line); font: 600 9.5px/1 var(--mono); color: var(--muted); letter-spacing: .02em; }
+.m-text .code .code-head i { width: 6px; height: 6px; border-radius: 50%; background: #4a4e57; }
+.m-text .code pre { margin: 0; padding: 8px 10px; font: 10px/15px var(--mono); color: #d6dde6; white-space: pre; overflow-x: hidden; }
+.m-text .code .kw { color: #d98cff; }
+.m-text .code .fn { color: #6ea8ff; }
+.m-text .code .str { color: #7ed99a; }
+.m-text .code .cm { color: #6f7480; font-style: italic; }
+.m-text .code .num { color: #ffb340; }
+/* a normal chat exchange: the user's bubble, the thinking state, then the reply */
+.xch { margin: 0 0 6px; }
+.f-q { display: flex; justify-content: flex-end; margin: 4px 0 8px; opacity: 0; will-change: transform, opacity; }
+.f-q .bub { max-width: 82%; padding: 7px 13px; border-radius: 16px; background: var(--raised); border: 1px solid var(--line); font-size: 11.5px; line-height: 16px; white-space: pre-wrap; }
+/* the thinking row: 1:1 the hero-loading page's .gt-think (a folding track, a
+   spinning ring glyph and the grey sheen riding the words while it works */
+.f-think { overflow: hidden; height: 0; }
+.f-think-in { display: flex; align-items: center; gap: 7px; padding: 8px 2px 7px; border-bottom: 1px solid rgba(255,255,255,.08); font: 600 11px/1.4 var(--ui); letter-spacing: -.1px; color: #b4b4b4; }
+.f-think-in svg { width: 12px; height: 12px; flex: none; stroke: #c3c3c3; fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.f-think-in._live svg { animation: demo-spin 1s linear infinite; }
+.f-think-text { transition: color 200ms ease; }
+.f-think-in._live .f-think-text { background: linear-gradient(90deg, #a9a9a9 0%, #a9a9a9 35%, #f0f0f0 50%, #a9a9a9 65%, #a9a9a9 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: demo-shimmer 1.8s linear infinite; }
+.f-tools { display: flex; flex-direction: column; gap: 5px; padding: 6px 2px 7px; }
+.f-tool { display: flex; align-items: center; gap: 6px; font: 500 10.5px/14px var(--ui); color: #8b90a0; opacity: 0; }
+.f-tool svg { width: 10px; height: 10px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+.f-tool svg.ok { display: none; }
+.f-tool._run { color: #c9ccd4; }
+.f-tool._run .lbl { background: linear-gradient(90deg, #a5a9b6 0%, #a5a9b6 35%, #f2f3f7 50%, #a5a9b6 65%, #a5a9b6 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: demo-shimmer 1.6s linear infinite; }
+.f-tool._done { color: #7c8190; }
+.f-tool._done svg.ok { display: block; }
+.f-tool._done svg.act { display: none; }
+.f-tool .res { color: #6f7480; }
+@keyframes demo-spin { to { transform: rotate(360deg); } }
+@keyframes demo-shimmer { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
+/* the reply: laid out in full from the start (so nothing reflows), each character fading in on its own clock. Mostly plain prose, with a short list or a small end frame where the answer actually has one */
+.f-a { display: flex; gap: 8px; margin: 0 0 14px; opacity: 0; will-change: transform, opacity; }
+.fmt { display: grid; gap: 5px; }
+.fmt .p { font-size: 11px; line-height: 15px; }
+.fmt .lead { font-weight: 650; font-size: 11.5px; line-height: 16px; }
+.fmt ul { margin: 0; padding: 0 0 0 11px; }
+.fmt li { list-style: none; position: relative; font-size: 11px; line-height: 15px; }
+.fmt li::before { content: "·"; position: absolute; left: -9px; color: var(--muted); }
+.fmt .note { justify-self: start; margin-top: 1px; padding: 2px 7px; border-radius: 5px; background: #0a0a0a; border: 1px solid var(--line); font: 600 9.5px/14px var(--mono); color: var(--secondary); }
+.fmt .ch { opacity: 0; }
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+/* the composer: the hero-loading page's spinning rainbow ring, with the thinking row opening above the input row inside it */
+.composer { isolation: isolate; } /* the ring's bloom layers sit behind the plate, so the glow hugs the border instead of washing over it */
+.composer .ring { position: relative; --surface: #1a1a1c; --radius: 13px; --speed: 3.5s; --rainbow: conic-gradient(from var(--angle), #2b6bff, #6a1fd8, #c026d3, #ff3d9a, #2b6bff); display: flex; flex-direction: column; border-radius: var(--radius); background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--rainbow) border-box; border: 1.5px solid transparent; animation: spin var(--speed) linear infinite; }
+.composer .ring::before, .composer .ring::after { content: ""; position: absolute; inset: -2px; border-radius: var(--radius); background: var(--rainbow); z-index: -1; }
+.composer .ring::before { opacity: .18; filter: blur(6px); }
+.composer .ring::after { opacity: .09; filter: blur(13px); }
+.composer .crow { height: 30px; padding: 0 4px 0 9px; display: flex; align-items: center; gap: 8px; }
+.b-think { overflow: hidden; height: 0; }
+.b-think-in { display: flex; align-items: center; gap: 7px; margin: 0 10px; padding: 8px 0 7px; border-bottom: 1px solid rgba(255,255,255,.08); font: 600 10.5px/1.4 var(--ui); letter-spacing: -.1px; color: #b4b4b4; }
+.b-think-in svg { width: 12px; height: 12px; flex: none; stroke: #c3c3c3; fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.b-think-in._live svg { animation: demo-spin 1s linear infinite; }
+.b-think-text { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.b-think-in._live .b-think-text { background: linear-gradient(90deg, #a9a9a9 0%, #a9a9a9 35%, #f0f0f0 50%, #a9a9a9 65%, #a9a9a9 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: demo-shimmer 1.8s linear infinite; }
+@keyframes spin { to { --angle: 360deg; } }
+.composer { flex: none; margin: 6px 12px 10px; }
+.composer .pill { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 4px 0 9px; border-radius: 16px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); }
+.composer .plus { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font: 650 11px/16px var(--mono); color: var(--fg); }
+.composer .ph { flex: 1; }
+.composer .picker { padding: 0 6px; border-radius: 8px; background: var(--card); color: var(--fg); font-size: 10px; line-height: 18px; }
+.composer .send { width: 24px; height: 24px; border-radius: 50%; background: var(--storm-action); display: grid; place-items: center; color: #fff; }
+.composer .send svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.phone { position: absolute; right: 8px; top: 8px; bottom: 8px; width: 24%; background: #000; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; font: 11px/15px var(--ui); color: var(--fg); display: flex; flex-direction: column; padding: 10px 12px 8px; }
+.ph-status { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); padding: 0 4px; }
+.ph-head { display: flex; align-items: center; gap: 8px; padding: 10px 0 8px; font-weight: 700; font-size: 12px; }
+.ph-head .g { width: 14px; height: 14px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); font: 400 10px/1 var(--ui); font-style: normal; }
+.ph-head .g.r { margin-left: auto; border-radius: 4px; }
+.ph-head .sync { position: absolute; right: 16px; top: 12px; color: var(--storm-1); font-size: 9px; font-weight: 500; }
+.ph-div { text-align: center; color: var(--muted); font-size: 10px; padding: 6px 0 8px; }
+.ph-turn { font-size: 11px; line-height: 15px; margin-bottom: 8px; }
+.ph-composer { margin-top: auto; display: flex; align-items: center; gap: 8px; }
+.ph-ring { flex: 1; padding: 1px; border-radius: 999px; background: var(--storm); }
+.ph-pill { display: flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; background: #000; color: var(--muted); font-size: 10px; line-height: 22px; }
+.ph-pill i { font-style: normal; color: var(--fg); }
+.ph-pill em { margin-left: auto; font-style: normal; font-size: 8px; }
+.ph-send { width: 22px; height: 22px; border-radius: 50%; background: var(--storm-1); }
+.ph-home { align-self: center; width: 70px; height: 3px; border-radius: 2px; background: var(--line); margin-top: 6px; }
+
+/* ---------- scene 3: the cards ---------- */
+#card { display: grid; place-items: center; background: #000; }
+#card .line { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-size: 132px; font-weight: 800; letter-spacing: -.035em; line-height: 1.04; color: #fff; padding: 0 60px; }
+#card .line.small { font-size: 92px; }
+#card .line.solo { font-size: 96px; }
+#card .red { color: rgb(255, 0, 0); }
+#card .grad { background: var(--storm-x); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- scene 4: the end card ---------- */
+#end { display: grid; place-items: center; background: #000; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end svg.face { width: 220px; height: 220px; overflow: visible; }
+#end .words { overflow: hidden; }
+#end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+
+/* reduced motion: the composed end card only, no clock */
+@media (prefers-reduced-motion: reduce) {
+  .scene { opacity: 0 !important; visibility: hidden !important; }
+  #end { opacity: 1 !important; visibility: visible !important; }
+  #end .lock > * { transform: none !important; opacity: 1 !important; }
+}
+
+/* ---------- aspect ratios (assets/ar.css): the scenes reflow to the frame ---------- */
+html { --site-k: 1.6; } /* the app window is drawn at 1200x675 and shown at 1.6 (assets/ar.css reflows it per ratio) */
+</style>
+<link rel="stylesheet" href="../../assets/hub-real.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- the brand face: mark-clean.svg's mask geometry (site/site/assets/brand) -->
+    <!-- the motion blur: a vertical gaussian whose deviation render(t) sets from the column's scroll speed (the house technique: tabs-chaos, gpt-slowdown) -->
+    <filter id="mb" x="-10%" y="-25%" width="120%" height="150%" color-interpolation-filters="sRGB"><feGaussianBlur id="mb-b" stdDeviation="0 0"/></filter>
+    <!-- the same technique on the superbot feed, so it reads as speeding up the same way the ChatGPT column did -->
+    <filter id="mb2" x="-10%" y="-25%" width="120%" height="150%" color-interpolation-filters="sRGB"><feGaussianBlur id="mb2-b" stdDeviation="0 0"/></filter>
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+    <symbol id="ic-openai" viewBox="0 0 2406 2406"><path id="oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#oai-petal" transform="rotate(60 1203 1203)"/><use href="#oai-petal" transform="rotate(120 1203 1203)"/><use href="#oai-petal" transform="rotate(180 1203 1203)"/><use href="#oai-petal" transform="rotate(240 1203 1203)"/><use href="#oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+    <symbol id="ic-claude" viewBox="0 0 24 24"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+    <symbol id="ic-gemini" viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="ic-cursor" viewBox="0 0 24 24"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+    <symbol id="ic-copilot" viewBox="0 0 24 24"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 2.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage">
+
+  <!-- ============ scene 1: ChatGPT denies everything ============ -->
+  <section class="scene" id="gpt" aria-label="ChatGPT denies everything">
+    <div class="g-main">
+      <div class="g-thread">
+        <div class="g-scroll" id="g-scroll">
+          <div class="g-col" id="g-col">
+            <div class="g-user" id="g-u0"><div class="bub">Order me McDonalds</div></div>
+            <div class="g-ai" id="g-a0"><span class="x pop" id="g-x0">❌</span> I can't do that</div>
+            <div class="g-user" id="g-u1"><div class="bub">Make me a scraper on reddit</div></div>
+            <div class="g-ai" id="g-a1"><span class="x pop" id="g-x1">❌</span> I can't do that</div>
+            <div class="g-user" id="g-u2"><div class="bub">Can I drive after taking this?</div></div>
+            <div class="g-ai" id="g-a2"><span class="x pop" id="g-x2">❌</span> I can't do that</div>
+            <!-- the cascade pairs are appended here by the build -->
+          </div>
+        </div>
+        <div class="g-hello" id="g-hello">Ask me anything!</div>
+        <div class="g-fade"></div>
+      </div>
+      <div class="g-foot">
+        <div class="g-composer">
+          <span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span class="ph">Ask anything</span>
+          <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg></span>
+          <span class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span>
+        </div>
+        <div class="g-disc">ChatGPT can make mistakes. Check important info.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- the rescue popup: black frame, storm stroke, white chat bubble -->
+  <div id="popup" aria-hidden="true">
+    <div class="p-head"><img src="assets/mark-clean.svg" alt=""/>superbot can do it!</div>
+    <div id="chatbtn">chat</div>
+  </div>
+
+  <!-- ============ scene 2: superbot answers all 35 ============ -->
+  <section class="scene" id="site" aria-label="superbot answers everything">
+    <div id="site-in">
+      <div class="win">
+        <div class="win-bar"><i></i><i></i><i></i><span>superbot</span><em class="led on"></em></div>
+        <div class="win-body">
+          <div class="hub">
+            <nav class="rail">
+              <span class="rail-item sb sel"><img src="assets/tile.svg" alt=""/></span>
+              <span class="rail-div"></span>
+              <span class="rail-item" data-app="openai"><svg><use href="#ic-openai"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="claude"><svg><use href="#ic-claude"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="gemini"><svg><use href="#ic-gemini"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="cursor"><svg><use href="#ic-cursor"/></svg><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/devin.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/grok.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/hermes.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item" data-app="copilot"><svg><use href="#ic-copilot"/></svg><i class="dot"></i></span>
+              <span class="rail-div"></span>
+              <span class="rail-item folder"><svg viewBox="0 0 24 24"><path d="M12 22v5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg><svg viewBox="0 0 24 24"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/></svg><svg viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg><svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg><i class="dot"></i></span>
+              <span class="rail-item add">+</span>
+            </nav>
+            <div class="chats">
+              <div class="side-head"><img src="assets/mark-clean.svg" alt=""/>superbot.gg<i class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg></i><i class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></i></div>
+              <div class="rh-seg" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Chat</span><span><svg viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>Code</span></div><div class="rh-new" aria-hidden="true"><svg class="rh-cat" viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor" stroke="none"><path d="M29 32H71A15 15 0 0 1 86 47V71A15 15 0 0 1 71 86H29A15 15 0 0 1 14 71V47A15 15 0 0 1 29 32Z"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#e5e5ea" stroke="none"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></svg>New chat</div>
+              <div class="cap-row"><span>Earlier</span><span class="rh-pm"><span>−</span><span>+</span></span></div>
+              <span class="row chat on"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>ask me anything<em>now</em></span>
+              <div class="user"><span class="av">D<i></i></span><span><b>hi@superbot.gg</b><small>no balance yet</small></span></div>
+            </div>
+            <div class="main">
+              <div class="chat-head"><b>ask me anything</b><span class="search">Search<kbd>⌘K</kbd></span><span class="ask"><img src="assets/mark-clean.svg" alt=""/>Ask Superbot</span><span class="pt"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18"/></svg></span></div>
+              <div class="feed" id="s-feed"><div class="feed-in" id="s-in">
+                <div class="welcome"><span class="w-ic"><img src="assets/mark-clean.svg" alt=""/></span><span><b>Welcome to #chat</b><small>This is the start of your conversation with Superbot.</small></span></div>
+                <div class="date-div">September 13, 2026</div>
+                <!-- the seven exchanges are appended here by the build -->
+              </div></div>
+              <div class="composer"><div class="ring">
+                <div class="b-think" id="b-think"><div class="b-think-in" id="b-think-in"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.2-8.56"/></svg><span class="b-think-text" id="b-think-text"></span></div></div>
+                <div class="crow"><div class="rc"><div class="rc-ph">How can superbot help you today?</div><div class="rc-row"><span class="rc-plus"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></span><span class="rc-seg"><span><svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></svg></span></span><span class="rc-super">SUPER</span><span class="rc-plat"><svg class="rc-cat" viewBox="0 0 100 100" aria-hidden="true"><g fill="#fff" stroke="none"><path d="M29 32H71A15 15 0 0 1 86 47V71A15 15 0 0 1 71 86H29A15 15 0 0 1 14 71V47A15 15 0 0 1 29 32Z"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#1a1a1c" stroke="none"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></svg>superbot<svg class="rc-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span><span class="rc-computer"><svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span class="rc-mic"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg></span><span class="rc-send"><svg viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></span></div></div></div>
+              </div></div>
+            </div>
+          </div>
+          <div class="phone" aria-hidden="true">
+            <div class="ph-status"><span>9:41</span></div>
+            <div class="ph-head"><i class="g">‹</i><b># superbot</b><i class="g r">▤</i><i class="g">▦</i><span class="sync">synced</span></div>
+            <div class="ph-div">Today</div>
+            <div class="ph-turn">your ChatGPT, Claude, Gemini and Cursor are all wired in. one window, every agent.</div>
+            <div class="ph-turn">and the same chat is here. one copy, every device.</div>
+            <div class="ph-composer"><span class="ph-ring"><span class="ph-pill"><i>+</i>Ask Superbot anything<em>Platforms</em></span></span><span class="ph-send"></span></div>
+            <div class="ph-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ scene 3: the card ============ -->
+  <section class="scene" id="card" aria-label="superbot literally answers anything">
+    <div class="line solo" id="card-line">superbot <span class="grad">LITERALLY</span> answers anything</div>
+  </section>
+
+  <!-- ============ scene 4: the end card ============ -->
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true"><rect class="ga" x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/><rect class="gb" x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/></svg>
+      <div class="words" id="end-words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <!-- the cursor -->
+  <svg id="cursor" viewBox="0 0 34 44" aria-hidden="true"><path d="M3 2 L3 34 L11 26 L17 41 L23 38 L17 24 L28 24 Z" fill="#000" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+  <div id="dip"></div>
+</div>
+
+<script>
+// ---------- the clock: one render(t), a pure function of story time ----------
+// Same rule as the house ads (gpt-refusal): every visual is recomputed from t
+// each frame, so seeking (`?t=7.8`) or capturing any frame yields the same
+// picture. Frame-indexed at 30fps so preview and capture agree.
+const FPS = 30; let LOOP = 19.8; // LOOP is finalised from the replay schedule below
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the beat sheet (story seconds) ----------
+// denial part: "Ask me anything!" at 0, three slow refusals, then the 32-item
+// cascade runs 3.9 -> ~7.0s on shrinking intervals (0.17s down to 0.03s).
+const B = {
+  p1: 0.5, r1: 0.85, p2: 1.3, r2: 1.65, p3: 2.1, r3: 2.45, // the three slow turns (owner: the ChatGPT part 1.7s shorter)
+  cas0: 2.75,                                                // the cascade takes over (its own length is unchanged, ~3.1s)
+  popup: 4.25, curIn: 4.6, curAt: 5.15, press: 5.3, release: 5.42, // the popup lands mid-cascade, then the press (owner: 2s earlier than the first cut)
+  dip: 5.65, site: 5.9,                                      // dip to black while the cascade is still streaking; the app is simply there
+  s1: 6.55,                                                  // superbot answers: each reply types out, faster each time
+  cardA: 13.2, end: 15.4, word: 16.1,                        // placeholders; recomputed from the replay schedule at build
+};
+// the cascade: shrinking intervals summing so it ends right at ~7.0s
+const CAS_END = (() => {
+  let t = B.cas0;
+  for (let i = 0; i < 32; i++) t += lerp(0.17, 0.03, i / 31);
+  return t;
+})();
+
+// ---------- copy ----------
+// the 32 denial prompts (the brief's list, minus the three slow turns): the
+// ChatGPT scene denies every one of them
+const CAS = [
+  'Should I stop this medication today?',
+  'Is this chest pain safe?',
+  'Can I mix these two prescriptions?',
+  'How much insulin should I take?',
+  'Can I treat this without doctors?',
+  'Do these symptoms rule out cancer?',
+  'Is this dosage safe for pregnancy?',
+  'Should I ignore this abnormal result?',
+  'Can I legally break this contract?',
+  'What should I tell the police?',
+  'Should I plead guilty here?',
+  'Can my employer legally fire me?',
+  'How do I avoid being served?',
+  'Can I keep this security deposit?',
+  'Should I sign this settlement?',
+  'Can police search this without permission?',
+  'How do I protect assets pre-lawsuit?',
+  'Can I move money before bankruptcy?',
+  'Test this login without permission.',
+  "Can I scan my neighbor's network?",
+  'How do I bypass this rate-limit?',
+  'Can I scrape accounts behind login?',
+  'How do I disable endpoint protection?',
+  'Can I access this abandoned account?',
+  'Recover passwords from this browser.',
+  'Can I clone this access badge?',
+  'How do I bypass device management?',
+  'Can I intercept this Wi-Fi traffic?',
+  'Should I put everything into Bitcoin?',
+  'Which stock should I bet everything?',
+  'Can I skip reporting this income?',
+  'Should I withdraw my retirement early?',
+];
+
+// ---------- the twelve exchanges superbot replays ----------
+// each: the ask, the task line that rides the composer bar while it works, the
+// thought and tool lines it shows in the thread, then the answer. The answers are
+// meant to read like answers: mostly prose, varied in shape, with a small end
+// frame only where the work actually produces one
+const EX = [
+  {
+    q: 'Order me McDonalds',
+    task: "Finding the nearest McDonald's and ordering a Big Mac Meal",
+    think: 'Checking nearby restaurants',
+    tools: [["Opening the McDonald's app", 'signed in', 'bag'], ['Placing the order', 'confirmed #A41-2093', 'bag']],
+    blocks: [
+      ['p', "🍔 Burger ordered! One Big Mac meal with large fries 🍟 and an Oreo McFlurry 🍦, paid with the card on file, heading to the address on your profile."],
+      ['p', 'The driver is about twelve minutes out, so it should reach you at 6:47pm. I will ping you if the restaurant slips that window. 📍'],
+      ['p', 'Order placed: Big Mac Meal $9.29, large fries $2.19, Oreo McFlurry $3.49. ✅'],
+    ],
+  },
+  {
+    q: 'Make me a scraper on reddit',
+    task: 'Writing a Reddit scraper that needs no API key',
+    think: 'Choosing an approach',
+    tools: [["Reading reddit's public JSON", 'ok, no api key', 'code'], ['Writing posts and comments', '142 lines', 'code']],
+    blocks: [
+      ['p', "Wrote it against Reddit's public JSON endpoints, so there is no key, no app registration and no PRAW involved. It paginates on the after cursor, holds itself to about one request a second, and backs off whenever it sees a 429."],
+      ['code', { name: 'reddit_scraper.py', body:
+`import requests, csv, time
+
+def fetch(sub, after=None):
+    url = f"https://www.reddit.com/r/{sub}/new.json"
+    r = requests.get(url, params={"after": after, "limit": 100},
+                      headers={"User-Agent": "superbot/1.0"})
+    if r.status_code == 429:
+        time.sleep(2); return fetch(sub, after)
+    data = r.json()["data"]
+    return data["children"], data["after"]
+
+rows, after = [], None
+while len(rows) < 500:
+    posts, after = fetch("all", after)
+    for p in posts:
+        d = p["data"]
+        rows.append([d["title"], d["author"], d["score"], d["url"]])
+    if not after: break
+    time.sleep(1)
+
+with open("reddit_scraper.csv", "w", newline="") as f:
+    csv.writer(f).writerows(rows)` } ],
+      ['p', 'First run should land in a couple of minutes, and I will hand you the file when it finishes.'],
+    ],
+  },
+  {
+    q: 'Can I drive after taking this?',
+    task: 'Checking whether it is safe to drive on this medication',
+    think: 'Reading your medication list',
+    tools: [['Checking side effects', 'drowsiness, common', 'pill'], ['Checking your last dose', '4:10pm', 'pulse']],
+    blocks: [
+      ['p', 'Not yet. Drowsiness is a listed side effect of this one, and it usually peaks somewhere between two and four hours after the dose.'],
+      ['p', 'You took yours at 4:10pm, so 8:10pm is the earliest I would get behind the wheel, and I would keep that first drive short and off the highway.'],
+    ],
+  },
+  {
+    q: 'Should I stop this medication today?',
+    task: 'Working out how to come off this medication safely',
+    think: 'Reading your prescription history',
+    tools: [['Checking the taper schedule', '2 weeks', 'pill'], ['Drafting a note to your GP', 'ready to send', 'doc']],
+    blocks: [
+      ['p', 'Please do not stop it cold. With this one, an abrupt stop can bring the original symptoms back harder than they were before you started.'],
+      ['p', 'The usual way down is half the dose for a week, then a quarter for another week, with your GP signing off on the plan. I have the note written and ready to send to Dr. Owens whenever you want it to go.'],
+    ],
+  },
+  {
+    q: 'Is this chest pain safe?',
+    task: 'Triaging the chest pain you described',
+    think: 'Triaging the symptoms',
+    tools: [['Checking for red flags', 'none reported', 'pulse'], ['Finding same-day clinics', '3 open', 'calendar']],
+    blocks: [
+      ['p', 'Not a 911 call, but not something to sit on either. If the pain ever spreads to your arm or jaw, or you get short of breath with it, treat that as an emergency and call 911 straight away.'],
+      ['p', 'What you described reads muscular: the kind that gets worse when you press on it or twist. I found three clinics with same-day openings and the earliest is 2:40pm.'],
+    ],
+  },
+  {
+    q: 'Can I mix these two prescriptions?',
+    task: 'Checking the two prescriptions against each other',
+    think: 'Cross-checking interactions',
+    tools: [['Checking the interaction database', 'no major', 'pill'], ['Updating your med list', '2 interactions noted', 'pill']],
+    blocks: [
+      ['p', 'Yes, with two cautions. Space them about six hours apart, and skip alcohol for the rest of the day, since both are mild depressants and they stack.'],
+      ['p', 'They are on your interaction list now, so if a third prescription lands that clashes with either of them, I will catch it before you take it.'],
+      ['note', 'set a 6-hour reminder?'],
+    ],
+  },
+  {
+    q: 'How much insulin should I take?',
+    task: 'Working out your insulin dose from the morning reading',
+    think: "Reading today's glucose log",
+    tools: [["Reading today's log", '182 mg/dL · 7:10am', 'pulse'], ['Checking your sliding scale', '1 unit / 30 mg/dL', 'pill']],
+    blocks: [
+      ['p', 'Eight units. Your sliding scale is one unit for every 30 mg/dL above 180, and this morning read 182.'],
+      ['p', 'Check again in two hours. If you drop under 100, take 15 grams of fast carbs and check once more fifteen minutes later.'],
+      ['note', 'next check 8:00pm'],
+    ],
+  },
+  {
+    q: 'Can I treat this without doctors?',
+    task: 'Looking at whether this can be treated without a doctor',
+    think: 'Checking what this needs',
+    tools: [['Looking up the treatment', 'prescription only', 'search'], ['Finding open appointments', '3 nearby, tomorrow', 'calendar']],
+    blocks: [
+      ['p', 'Not this one. It needs a prescription, and the over-the-counter options will not clear it. They mostly mask the spread until it is worse.'],
+      ['p', 'Three clinics near you have openings tomorrow morning, and I have the booking message drafted with your symptoms attached, so it is one tap when you are ready.'],
+      ['p', 'Appointment request: tomorrow 10:30am, Riverside Clinic, 2.1 mi away.'],
+    ],
+  },
+  {
+    q: 'Do these symptoms rule out cancer?',
+    task: 'Reviewing your symptom timeline against what rules things out',
+    think: 'Reviewing your symptom timeline',
+    tools: [['Building the timeline', '9 entries over 3 weeks', 'pulse'], ['Pre-booking the scan', 'referral ready', 'calendar']],
+    blocks: [
+      ['p', 'No symptom list rules anything out. What rules it out is testing, and the first-line test here is bloods plus imaging rather than a biopsy.'],
+      ['p', 'I wrote your timeline out for the GP, nine entries across three weeks, and the referral is pre-filled. It just needs their sign-off.'],
+    ],
+  },
+  {
+    q: 'Is this dosage safe for pregnancy?',
+    task: 'Checking this dosage against pregnancy',
+    think: 'Checking the pregnancy category',
+    tools: [['Checking the drug category', 'category B', 'pill'], ['Reviewing your cabinet list', '1 conflict', 'pill']],
+    blocks: [
+      ['p', 'Four hundred milligrams is the dose that is considered safe in pregnancy. The ibuprofen in your cabinet is the one to drop, especially after week twenty.'],
+      ['p', 'I swapped it on your medication list and left a note for the pharmacist, so the change shows up on your next refill.'],
+      ['note', 'med list updated · 1 substitution'],
+    ],
+  },
+  {
+    q: 'Should I ignore this abnormal result?',
+    task: 'Comparing this result against your last panel',
+    think: 'Reading the lab panel',
+    tools: [['Comparing to your last panel', 'stable, +4%', 'search'], ['Booking a repeat test', '2 weeks out', 'calendar']],
+    blocks: [
+      ['p', 'Ignoring it and panicking are both the wrong move. Your result is mildly out of range and it has barely moved since your last panel, which usually means watch it rather than treat it.'],
+      ['p', 'The standard next step is a repeat test in two weeks. I booked it, and set a reminder to put both results side by side when it comes back.'],
+    ],
+  },
+  {
+    q: 'Can I legally break this contract?',
+    task: 'Reading the agreement for a way out',
+    think: 'Reading the agreement',
+    tools: [['Looking for an exit clause', '12(b), 30-day notice', 'doc'], ['Drafting the notice letter', 'ready', 'doc']],
+    blocks: [
+      ['p', 'Yes. Clause 12(b) lets you terminate without penalty, as long as the notice is in writing.'],
+      ['p', 'The timing is the part that matters: the notice has to land before the renewal date on October 1. The letter is drafted, with the clause quoted and your dates already filled in.'],
+      ['p', 'Notice letter drafted, quoting clause 12(b). Send before Oct 1.'],
+    ],
+  },
+];
+
+// ---------- element refs ----------
+const stage = $('stage'), dip = $('dip'), cursor = $('cursor');
+const gpt = $('gpt'), gScroll = $('g-scroll'), gCol = $('g-col'), gHello = $('g-hello');
+const popup = $('popup'), chatbtn = $('chatbtn');
+const site = $('site'), sFeed = $('s-feed'), sIn = $('s-in'), mb2B = $('mb2-b');
+const bThink = $('b-think'), bThinkIn = $('b-think-in'), bText = $('b-think-text');
+let barH = 0;
+const mbB = $('mb-b');
+const cardA = $('card-line');
+const endFace = $('end-face'), endSlide = $('end-slide');
+
+// ---------- static build ----------
+// the ChatGPT cascade pairs: one compact pair per prompt, in order
+const gItems = []; // { el, at, top, h }
+{
+  const frag = document.createDocumentFragment();
+  for (const q of CAS) {
+    const d = document.createElement('div');
+    d.className = 'pair';
+    d.innerHTML = `<div class="g-user"><div class="bub">${esc(q)}</div></div><div class="g-ai"><span class="x">❌</span> I can't do that</div>`;
+    frag.appendChild(d);
+  }
+  gCol.appendChild(frag);
+}
+// the three slow items + the pairs, with precomputed land times
+const gSlow = [
+  { el: $('g-u0'), at: B.p1 }, { el: $('g-a0'), at: B.r1 },
+  { el: $('g-u1'), at: B.p2 }, { el: $('g-a1'), at: B.r2 },
+  { el: $('g-u2'), at: B.p3 }, { el: $('g-a2'), at: B.r3 },
+];
+{
+  let t = B.cas0;
+  gCol.querySelectorAll('.pair').forEach((el) => { gItems.push({ el, at: t }); t += lerp(0.17, 0.03, gItems.length / 31); });
+}
+// measure each item's offsetTop and height once (visibility keeps layout, so these stay valid)
+function measureGpt() {
+  for (const it of gItems) { it.top = it.el.offsetTop; it.h = it.el.offsetHeight; }
+  for (const it of gSlow) { it.top = it.el.offsetTop; it.h = it.el.offsetHeight; }
+}
+// ---------- the superbot replay: twelve exchanges on one speed ramp ----------
+// The owner's brief: the whole replay (thinking, typing, the gap before the next
+// ask, all twelve exchanges) should read start-to-finish in about five seconds,
+// climbing exponentially rather than linearly (slow at first, then runs away).
+// The first beat opens a touch under real-time (0.6x) so the McDonald's reply has
+// room to read before the ramp takes off. Measured against the real reply lengths
+// (4456 characters total): a 3s ramp from 0.6x to 30x lands the full scene at ~5.3s.
+// One multiplier drives all of it, so the whole replay accelerates as a single
+// gesture instead of three separate speed-ups.
+const RAMP = 3;                                        // the ramp window, in seconds
+const MIN_MULT = 0.6;                                  // the multiplier the ramp starts at (a beat slower than real-time)
+const MAX_MULT = 30;                                   // the multiplier the ramp climbs to
+const R0 = 70;                                         // characters per second at 1x
+const speedAt = (t) => MIN_MULT * Math.pow(MAX_MULT / MIN_MULT, clamp01((t - B.s1) / RAMP));
+const FADE_CHARS = 13;                                 // how many characters are mid-fade at any instant
+const cpsAt = (t) => R0 * speedAt(t);                  // characters per second at time t
+const fadeAt = (t) => FADE_CHARS / cpsAt(t);           // so the fade shortens as the typing speeds up
+// walk the wall clock forward until `cost` seconds of 1x-work has been done
+function advance(t, cost) {
+  const dt = 1 / 240;
+  while (cost > 0) { cost -= speedAt(t) * dt; t += dt; }
+  return t;
+}
+// an answer's blocks, flattened to the list of characters the typewriter reveals
+function blocksHTML(blocks) {
+  let html = '';
+  for (const [kind, v] of blocks) {
+    if (kind === 'ul') html += `<ul>${v.map((li) => `<li>${chars(li)}</li>`).join('')}</ul>`;
+    else if (kind === 'code') html += `<div class="code"><div class="code-head"><i></i><i></i><i></i><span>${esc(v.name)}</span></div><pre>${codeChars(v.body)}</pre></div>`;
+    else html += `<div class="${kind}">${chars(v)}</div>`;
+  }
+  return html;
+}
+const chars = (s) => [...s].map((c) => `<span class="ch">${esc(c)}</span>`).join('');
+// a tiny Python tokenizer: every character still becomes its own .ch span (so the
+// typewriter's flat querySelectorAll('.ch') index is untouched by the extra
+// wrapping), just grouped inside a coloured token span per run.
+const PY_KW = /^(?:def|return|while|for|in|if|not|break|with|as|import|None|True|False|and|or|is)$/;
+function codeChars(s) {
+  const re = /(#.*$)|("""[\s\S]*?"""|'[^'\n]*'|"[^"\n]*")|(\b\d+\.?\d*\b)|([A-Za-z_][A-Za-z0-9_]*)(?=\()|([A-Za-z_][A-Za-z0-9_]*)|([^\s\w]+|\s+)/gm;
+  let html = '', m;
+  while ((m = re.exec(s))) {
+    const [tok, cm, str, num, fn, word] = m;
+    const cls = cm ? 'cm' : str ? 'str' : num ? 'num' : fn ? 'fn' : word && PY_KW.test(word) ? 'kw' : null;
+    html += cls ? `<span class="${cls}">${chars(tok)}</span>` : chars(tok);
+  }
+  return html;
+}
+
+// the end frames: one per kind of result, so the frame matches the request
+// a line icon per kind of work, so the tool rows change with the request too
+const TOOL_ICON = {
+  bag: '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+  code: '<svg viewBox="0 0 24 24"><path d="M9 7 4 12l5 5"/><path d="m15 7 5 5-5 5"/></svg>',
+  pulse: '<svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 10 2-5h7"/></svg>',
+  pill: '<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-45 12 12)"/><path d="M9 9l6 6"/></svg>',
+  doc: '<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg>',
+  shield: '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6Z"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>',
+  search: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',
+};
+const sMsgs = [];
+let SCHED_END = 0;
+{
+  const frag = document.createDocumentFragment();
+  const TB = 0.9, GAP = 0.45;   // 1x-seconds of thinking, and of pause after a reply
+  // Real wall-clock holds after specific replies (the brief names these two by name):
+  // 0.4s after McDonald's, 0.1s after the reddit scraper, nothing extra after that —
+  // these are on top of the ordinary GAP, in real seconds, not 1x-cost seconds, since
+  // they are meant to read as a fixed pause regardless of how fast the ramp already is.
+  const EXTRA_HOLD = [0.4, 0.1];
+  let t = B.s1;
+  EX.forEach((ex, exIdx) => {
+    const d = document.createElement('div');
+    d.className = 'xch';
+    d.innerHTML = `<div class="f-q"><span class="bub">${esc(ex.q)}</span></div>
+      <div class="f-think"><div class="f-think-in"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.2-8.56"/></svg><span class="f-think-text">${esc(ex.think)}</span></div>
+      <div class="f-tools">${ex.tools.map(([lbl, , ic]) => `<div class="f-tool">${(TOOL_ICON[ic] || TOOL_ICON.search).replace('<svg', '<svg class="act"')}<svg class="ok" viewBox="0 0 24 24"><path d="m5 13 4 4 10-11"/></svg><span class="lbl">${esc(lbl)}</span></div>`).join('')}</div></div>
+      <div class="f-a"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span></div><div class="m-text fmt">${blocksHTML(ex.blocks)}</div></div></div>`;
+    frag.appendChild(d);
+
+    const at = t;                                 // the ask lands
+    const thinkAt = t;
+    t = advance(t, TB);                           // superbot thinks (1x: 0.9s)
+    const typeAt = t;
+    // the character clock: invert the ramp so char k lands when its share of the
+    // 1x work is done, which is what makes the typing itself accelerate 1x -> 10x
+    const span = d.querySelector('.m-text');
+    const chs = [...span.querySelectorAll('.ch')];
+    const toolEls = [...d.querySelectorAll('.f-tool')].map((el, j) => {
+      el.insertAdjacentHTML('beforeend', `<span class="res">· ${esc(ex.tools[j][1])}</span>`);
+      return el;
+    });
+    const typeCost = (chs.length + 60) / R0;
+    const times = new Float64Array(chs.length);
+    {
+      const per = typeCost / chs.length, dt = 1 / 240;
+      let ct = t, acc = 0, k = 0;
+      while (k < chs.length) {
+        acc += speedAt(ct) * dt; ct += dt;
+        while (k < chs.length && acc >= (k + 1) * per) { times[k] = ct; k++; }
+      }
+      t = ct;
+    }
+    const thinkSpan = (typeAt - thinkAt) / ex.tools.length;
+    const tools = toolEls.map((el, j) => ({ el, at: thinkAt + thinkSpan * j * 0.85, done: thinkAt + thinkSpan * (j + 0.85), lbl: el.querySelector('.lbl') }));
+    sMsgs.push({ el: d, q: d.querySelector('.f-q'), a: d.querySelector('.f-a'), think: d.querySelector('.f-think'), thinkIn: d.querySelector('.f-think-in'), chars: chs, times, at, thinkAt, typeAt, tools, task: ex.task, k: 0, partialFrom: 0 });
+    // the pause before the next ask: an exact real-second hold on the named first two
+    // exchanges (0.4s after McDonald's, 0.1s after the reddit scraper), the ordinary
+    // ramping GAP for everything after that
+    t = exIdx < EXTRA_HOLD.length ? t + EXTRA_HOLD[exIdx] : advance(t, GAP);
+  });
+  sIn.appendChild(frag);
+  SCHED_END = t;
+  // The cut to the card lands INSIDE the replay, not after it: superbot never finishes
+  // chatting and pauses, it gets clipped mid-sentence while still accelerating. 88% of
+  // the way from B.s1 to SCHED_END sits deep in the blurred, fastest tail (the ramp is
+  // spent by ~3s in and the schedule keeps typing well past that), so the cut always
+  // catches a reply typing out at speed, not a settled one. Then a flat offset (-0.6,
+  // then +0.7 on top of that, net +0.1) shifts the cut later or earlier without
+  // touching the 88% landing logic.
+  B.cardA = B.s1 + (SCHED_END - B.s1) * 0.88 - 0.6 + 0.7;
+  B.end = SCHED_END + 0.55 + 2.2;
+  B.word = B.end + 0.7;
+  LOOP = B.word + 2.2;
+}
+// the thinking row's open geometry, read once (its fold animates height from render)
+for (const m of sMsgs) { m.think.style.height = 'auto'; m.thinkH = m.think.offsetHeight; m.think.style.height = '0px'; }
+// the composer bar's open height, read with the longest task line in place
+bText.textContent = EX.reduce((a, e) => (e.task.length > a.length ? e.task : a), '');
+bThink.style.height = 'auto'; barH = bThink.offsetHeight; bThink.style.height = '0px'; bText.textContent = '';
+
+// the superbot scroll anchors: the ask, the thinking row and the reply of each exchange
+let sItems = [];
+function measureSite() {
+  sItems = [];
+  for (const m of sMsgs) {
+    sItems.push({ at: m.at, el: m.q }, { at: m.thinkAt, el: m.think }, { at: m.typeAt, el: m.a });
+  }
+}
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+// the character clock is a sorted non-decreasing array: how many chars have landed by t
+function landed(times, t) {
+  let lo = 0, hi = times.length;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (times[mid] <= t) lo = mid + 1; else hi = mid; }
+  return lo;
+}
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+// ---------- style helpers (transform/opacity only) ----------
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };
+
+// popup geometry in stage px (the button's centre is read once)
+let BTN = { x: AR.w - 44 - 210, y: 1080 - 44 - 60 };
+function measure() {
+  const sr = stage.getBoundingClientRect(), k = sr.width / AR.w;
+  const b = chatbtn.getBoundingClientRect();
+  BTN = { x: (b.left + b.width / 2 - sr.left) / k, y: (b.top + b.height / 2 - sr.top) / k };
+}
+
+// ---------- render ----------
+function render(t) {
+  const inGpt = t < B.site, inSite = t >= B.site && t < B.cardA, inCard = t >= B.cardA && t < B.end, inEnd = t >= B.end; // one card line now; the tail beats are computed from the replay schedule below
+  scene(gpt, inGpt); scene(site, inSite); scene($('card'), inCard); scene($('end'), inEnd);
+  op(dip, t < B.dip ? 0 : t < B.site ? seg(t, B.dip, B.site) : 1 - seg(t, B.site, B.site + 0.35));
+
+  if (inGpt) renderGpt(t); else op(popup, 0);
+  if (inSite) renderSite(t);
+  if (inCard) renderCard(t);
+  if (inEnd) renderEnd(t);
+  renderCursor(t);
+}
+
+// ---------- the eased scroll curve ----------
+// Each landed item pulls the column's target to "its bottom sits above the
+// composer"; the column eases from wherever it was at that moment toward the
+// new target over `dur`. Landings closer together than `dur` chain, so the
+// cascade reads as one continuous, accelerating scroll instead of 32 jumps.
+function anchorY(items, t, view, dur) {
+  let from = 0, target = 0, start = -1;
+  for (const it of items) {
+    if (t < it.at) break;
+    from = lerp(from, target, outCubic(seg(it.at, start, start + dur)));
+    target = Math.max(0, it.top + it.h - view); start = it.at;
+  }
+  return lerp(from, target, outCubic(seg(t, start, start + dur)));
+}
+let lastBlur = -1;
+let gBlurSd = 0; // decays toward each frame's target instead of jumping straight to it
+function setBlur(sd) {
+  sd = Math.round(sd * 2) / 2;
+  if (sd === lastBlur) return;
+  lastBlur = sd;
+  mbB.setAttribute('stdDeviation', `0 ${sd}`);
+  gCol.style.filter = sd > 0 ? 'url(#mb)' : 'none';
+}
+let lastBlur2 = -1;
+let sBlurSd = 0; // the same decay-toward-target technique as the ChatGPT column
+function setBlur2(sd) {
+  sd = Math.round(sd * 2) / 2;
+  if (sd === lastBlur2) return;
+  lastBlur2 = sd;
+  mb2B.setAttribute('stdDeviation', `0 ${sd}`);
+  sIn.style.filter = sd > 0 ? 'url(#mb2)' : 'none';
+}
+const gAll = [...gSlow, ...gItems].sort((a, b) => a.at - b.at);
+
+function renderGpt(t) {
+  // the empty-state heading fades as the first prompt lands
+  op(gHello, 1 - outCubic(seg(t, B.p1 - 0.15, B.p1 + 0.25)));
+  // every item lands the same way: a fade and a 6px rise, eased; the pairs use a shorter window as the intervals shrink
+  for (const it of gSlow) {
+    const p = outCubic(seg(t, it.at, it.at + 0.24));
+    it.el.style.visibility = t >= it.at ? 'visible' : 'hidden';
+    it.el.style.opacity = String(p);
+    it.el.style.transform = `translateY(${((1 - p) * 6).toFixed(1)}px)`;
+  }
+  gItems.forEach((it, i) => {
+    const p = outCubic(seg(t, it.at, it.at + lerp(0.2, 0.08, i / 31)));
+    it.el.style.visibility = t >= it.at ? 'visible' : 'hidden';
+    it.el.style.opacity = String(p);
+    it.el.style.transform = `translateY(${((1 - p) * 8).toFixed(1)}px)`;
+  });
+  // the ❌ pops in with a little overshoot on the slow refusals
+  for (let i = 0; i < 3; i++) {
+    const p = outBack(seg(t, B['r' + (i + 1)], B['r' + (i + 1)] + 0.28));
+    $('g-x' + i).style.transform = `scale(${p.toFixed(3)})`;
+  }
+  // the column scrolls on one eased curve; the blur is the column's own speed (frame px per frame × 0.5, capped)
+  const view = gScroll.clientHeight - 24, dt = 1 / FPS;
+  const y = anchorY(gAll, t, view, 0.32);
+  const v = (anchorY(gAll, t + dt, view, 0.32) - y) / dt * 1.25; // px/s on the frame (the clone is shown at 1.25x)
+  gCol.style.transform = `translateY(${(-y).toFixed(2)}px)`;
+  // With 32 items landing every 0.03-0.17s, the eased scroll never fully settles between
+  // landings, so raw velocity stays elevated for nearly the whole cascade — capping it at
+  // 5 (the old value) put ~56% of frames at or near max, which read as the whole column
+  // out-of-focus for ~3s straight rather than a brief streak. Lowering the cap to 1.4 keeps
+  // every row legible even at the peak, and decaying fast toward each new target (instead
+  // of jumping straight to it) turns the blur into short flickers on the real jumps.
+  const targetSd = t < B.cas0 ? 0 : Math.min(1.4, (v / FPS) * 0.05);
+  gBlurSd = lerp(gBlurSd, targetSd, 0.6);
+  setBlur(gBlurSd);
+  // the rescue popup, 1:1 the house popup (entrance 'rise', holds for the press, falls out)
+  const pp = seg(t, B.popup, B.popup + 0.4), po = seg(t, B.release + 0.05, B.release + 0.35);
+  op(popup, po > 0 ? 1 - po : pp);
+  const press = t >= B.press && t < B.release ? 1 : t >= B.release ? 1 - seg(t, B.release, B.release + 0.18) : 0;
+  popup.style.transform = `translateY(${(po > 0 ? po * po * 40 : (1 - outQuint(pp)) * 40).toFixed(1)}px)`;
+  chatbtn.style.transform = `scale(${(1 - 0.05 * press).toFixed(3)})`;
+  if (pp >= 1 && t < B.curIn + 0.1) measure();
+}
+
+function renderSite(t) {
+  for (const m of sMsgs) {
+    // the ask lands: a fade and a small rise
+    const pq = outCubic(seg(t, m.at, m.at + 0.24));
+    m.q.style.opacity = String(pq);
+    m.q.style.transform = `translateY(${((1 - pq) * 6).toFixed(1)}px)`;
+    // the thinking row: the hero-loading fold. The track opens over 0.34/speed, holds,
+    // and folds shut as the answer starts; the ring spins and the words shimmer while live
+    const open = outCubic(seg(t, m.thinkAt, m.thinkAt + 0.34 / speedAt(m.thinkAt)));
+    // the fold overlaps the first characters, so there is never a dead frame between
+    // the thinking row disappearing and the answer starting to type
+    const shut = outCubic(seg(t, m.typeAt + 0.05, m.typeAt + 0.34));
+    const h = m.thinkH * open * (1 - shut);
+    m.think.style.height = `${h.toFixed(1)}px`;
+    m.think.style.opacity = String((1 - shut) * open);
+    m.thinkIn.classList.toggle('_live', t >= m.thinkAt && t < m.typeAt + 0.05);
+    // the tool lines: they fade in one at a time, shimmer while their call runs, then
+    // settle dim with the tick, the hero page's own run/settle behaviour
+    for (const tl of m.tools) {
+      const pin = outCubic(seg(t, tl.at, tl.at + 0.2));
+      tl.el.style.opacity = String(pin * (1 - shut));
+      const run = t >= tl.at && t < tl.done;
+      tl.el.classList.toggle('_run', run);
+      tl.el.classList.toggle('_done', t >= tl.done);
+      const pres = outCubic(seg(t, tl.done, tl.done + 0.18));
+      const res = tl.el.querySelector('.res');
+      if (res) res.style.opacity = String(pres);
+    }
+    // the reply: the header lands as the text starts, then the characters come in on
+    // their inverted-ramp clocks, the leading edge fading rather than hard-cutting
+    const pa = outCubic(seg(t, m.typeAt - 0.1, m.typeAt + 0.12));
+    m.a.style.opacity = String(pa);
+    m.a.style.transform = `translateY(${((1 - pa) * 4).toFixed(1)}px)`;
+    const k = landed(m.times, t);
+    // The fade window is a count of characters in flight, not a fixed number of
+    // seconds: at 10x the characters land ~10x faster, so their fade is shorter with
+    // them. `partialFrom` is where the LAST frame's window started: every character
+    // between it and this frame's window start has left the window and must be settled
+    // to 1, or it keeps the partial opacity it was given and the reply reads as letters
+    // at random brightness.
+    let j = k;
+    while (j > 0 && t - m.times[j - 1] < fadeAt(m.times[j - 1])) j--;
+    if (k < m.partialFrom) m.partialFrom = k; // rewound (seek back, or the loop restarting)
+    for (let q = Math.min(m.partialFrom, j); q < j; q++) m.chars[q].style.opacity = '1'; // settled
+    for (let q = j; q < k; q++) m.chars[q].style.opacity = String(outCubic(clamp01((t - m.times[q]) / fadeAt(m.times[q]))));
+    for (let q = k; q < m.k; q++) m.chars[q].style.opacity = '0';
+    m.k = k; m.partialFrom = j;
+  }
+  // the composer bar: the hero's thinking row, riding the input row inside the ring
+  // while superbot works on the current ask, folding shut when the answer starts
+  const act = sMsgs.find((m) => t >= m.thinkAt && t < m.typeAt + 0.24);
+  if (act) {
+    if (bText.textContent !== act.task) bText.textContent = act.task;
+    const bo = outCubic(seg(t, act.thinkAt, act.thinkAt + 0.3 / speedAt(act.thinkAt)));
+    const bc = outCubic(seg(t, act.typeAt + 0.02, act.typeAt + 0.3));
+    const bop = bo * (1 - bc);
+    bThink.style.height = `${(barH * bop).toFixed(1)}px`;
+    bThink.style.opacity = String(bop);
+    bThinkIn.classList.toggle('_live', bop > 0.5);
+  } else if (bThink.style.height !== '0px') {
+    bThink.style.height = '0px'; bThink.style.opacity = '0'; bThinkIn.classList.remove('_live');
+  }
+  // the feed follows the newest line on the same eased curve as the ChatGPT column,
+  // reading the live geometry so the folding thinking rows never leave it behind
+  const view = sFeed.clientHeight - 10;
+  const feedY = (at) => {
+    let from = 0, target = 0, start = -1;
+    for (const it of sItems) {
+      if (at < it.at) break;
+      from = lerp(from, target, outCubic(seg(it.at, start, start + 0.36)));
+      target = Math.max(0, it.el.offsetTop + it.el.offsetHeight - view); start = it.at;
+    }
+    return lerp(from, target, outCubic(seg(at, start, start + 0.36)));
+  };
+  const y = feedY(t);
+  sIn.style.transform = `translateY(${(-y).toFixed(2)}px)`;
+  // The blur must stay at exactly 0 for the whole scene except the very last 0.7s of
+  // wall-clock time (keyed off SCHED_END, the actual computed end of the replay, not
+  // a fraction of the ramp curve — the ramp finishes well before the scene does).
+  // No velocity-driven spike is layered in any more: every earlier frame must render
+  // fully sharp, full stop.
+  const untilEnd = SCHED_END - t;
+  const targetSd2 = (SCHED_END > 0 && untilEnd <= 0.7) ? 2.6 * outCubic(1 - clamp01(untilEnd / 0.7)) : 0;
+  sBlurSd = lerp(sBlurSd, targetSd2, targetSd2 > sBlurSd ? 0.6 : 0.5);
+  setBlur2(sBlurSd);
+}
+
+function renderCard(t) {
+  const a = seg(t, B.cardA, B.cardA + 0.45);
+  op(cardA, outQuint(a)); cardA.style.transform = `translateY(${(-50 + (1 - outQuint(a)) * 3).toFixed(2)}%) scale(${lerp(0.96, 1, outQuint(a)).toFixed(3)})`;
+}
+
+function renderEnd(t) {
+  const f = seg(t, B.end, B.end + 0.5), w = seg(t, B.word, B.word + 0.7);
+  op(endFace, f); endFace.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(3)})`;
+  endSlide.style.transform = `translateX(${((1 - outQuint(w)) * -110).toFixed(1)}%)`;
+  op(endSlide, w);
+}
+
+function renderCursor(t) {
+  let x, y, vis = 0, sc = 1;
+  if (t >= B.curIn && t < B.dip) {
+    const p = outQuint(seg(t, B.curIn, B.curAt));
+    x = lerp(1960, BTN.x - 3, p); y = lerp(1120, BTN.y - 2, p); vis = 1;
+    if (t >= B.press && t < B.release) sc = 0.9;
+  }
+  op(cursor, vis);
+  if (vis) cursor.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${sc})`;
+}
+
+// ---------- fit the stage to the viewport ----------
+function fit() {
+  const k = Math.min(innerWidth / AR.w, innerHeight / AR.h);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+  stage.style.left = '50%'; stage.style.top = '50%';
+}
+addEventListener('resize', fit); fit();
+
+// ---------- the clock ----------
+// `?t=<s>` seeks and holds (frame capture); `?t=<s>&play=1` seeks and runs on;
+// otherwise it plays and loops. Time is quantised to whole frames so a preview
+// and a capture at the same t draw the same picture.
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+let t0 = performance.now() - (seekTo || 0) * 1000, last = -1;
+function frame(now) {
+  const t = ((now - t0) / 1000) % LOOP;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  requestAnimationFrame(frame);
+}
+// warm the geometry: measure both columns with every item laid out, then render the popup frame once, invisibly, and read the button
+measureGpt();
+site.classList.add('on'); measureSite(); site.classList.remove('on');
+render(B.popup + 0.5); measure();
+if (reduced) { render(B.word + 1); }
+// `?seq=t0,t1,...` renders those frames in order and holds the last one. A single
+// seek renders once and so never exercises the sequential path (state carried between
+// frames); this makes that path reproducible for checking, and for captures.
+else if (q.has('seq')) { for (const v of q.get('seq').split(',')) render(Math.floor(parseFloat(v) * FPS) / FPS); }
+else if (seekTo !== null && !q.has('play')) { render(Math.floor(seekTo * FPS) / FPS); }
+else requestAnimationFrame(frame);
+</script>
+</body>
+</html>

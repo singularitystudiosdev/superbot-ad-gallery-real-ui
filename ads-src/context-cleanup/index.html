@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>superbot · context cleanup posters</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- One page, every poster in the family: ?id=<ad id> picks the ad from
+       ads.js and build.js fills .poster. The frame is the viewport, so the
+       renderer gets 4:5, 16:9, 4:3 and 1:1 out of the same markup.
+       ?export=1 hides the download chrome so it never rasterizes in. -->
+  <main class="poster"></main>
+  <a class="dl" id="dl" href="#" download>↓ PNG</a>
+  <script src="ads.js"></script>
+  <script src="build.js"></script>
+</body>
+</html>

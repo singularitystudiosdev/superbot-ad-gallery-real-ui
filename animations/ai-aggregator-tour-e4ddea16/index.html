@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The AI Aggregator is here — superbot.gg</title>
+<style>
+/* The AI Aggregator chat tour: the site's expand beat (sphere of agent icons
+   -> merge into the tile -> the hub's rail forms -> the frontend extends),
+   then a cursor clicks through every chat at a 0.85s cadence, then the card,
+   then the same end lockup as urgent-email-slow-superbot. One render(t) clock
+   (Remotion's rule: a frame is a function of its number), frame-indexed 30fps. */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif; }
+:root {
+  --bg: #000000; --fg: #ffffff; --muted: #9a9a9a; --line: #2a2a2a;
+  --raised: #212121; --surface: #181818; --window: #0d0d0d; --win: #0d0d0d; --side: #0d0d0d;
+  --accent: #7c4dff; --accent-ink: #ffffff;
+  --ok: #34d399; --warn: #f59e0b; --danger: #ef4444;
+  --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm-x: linear-gradient(90deg, #2b6bff 0%, #6a1fd8 50%, #c026d3 100%);
+  --grad-pbp: linear-gradient(90deg, #ff3d9a 0%, #2b6bff 52%, #c026d3 100%);
+  --ui: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --r-control: 8px; --r-pill: 999px; --r-lg: 14px; --r-surface: 16px;
+}
+#stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { visibility: visible; }
+
+/* ---------- scene 1: the cosmos (agent icons on a fibonacci sphere) ---------- */
+#cosmos { overflow: visible; }
+#cosmos .icon { position: absolute; left: 0; top: 0; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 16px; background: var(--window); border: 1px solid var(--line); display: grid; place-items: center; color: var(--fg); box-shadow: 0 8px 16px rgba(0,0,0,.28); opacity: 0; will-change: transform; }
+#cosmos .icon svg { width: 34px; height: 34px; }
+#cosmos .icon img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
+#cosmos .icon.bleed { background: #000; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14), 0 8px 16px rgba(0,0,0,.28); }
+/* the tile: everything merges into it */
+#fly { position: absolute; left: 0; top: 0; width: 180px; height: 180px; margin: -90px 0 0 -90px; opacity: 0; will-change: transform; filter: drop-shadow(0 8px 16px rgba(0,0,0,.4)); }
+#fly img { display: block; width: 100%; height: 100%; }
+
+/* ---------- scene 2: the hub frontend ---------- */
+#site-in { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; }
+.win { position: relative; width: 1200px; height: 675px; transform: scale(1.6); border-radius: 12px; overflow: hidden; background: var(--win); border: 1px solid var(--line); box-shadow: 0 24px 48px rgba(0,0,0,.4); }
+.hub { position: absolute; inset: 0; display: grid; grid-template-columns: 64px 200px minmax(0, 1fr); font: 11px/15px var(--ui); }
+.hub > * { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.hub .inner { opacity: 0; }
+.hub .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; }
+.hub .dot.ok { background: var(--ok); }
+.hub .dot.bad { background: var(--danger); }
+
+.rail { background: var(--bg); border-right: 1px solid var(--line); align-items: center; padding: 8px 0; gap: 4px; }
+.rail-item { position: relative; flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--surface); display: grid; place-items: center; color: var(--fg); }
+.rail-item svg { width: 26px; height: 26px; }
+.rail .rail-item .dot { position: absolute; right: -2px; bottom: -2px; background: var(--ok); box-shadow: 0 0 0 2px var(--bg); }
+.rail-item.sb { border-radius: 0; background: transparent; overflow: visible; }
+.rail-item.sb img { width: 100%; height: 100%; display: block; }
+.rail-item.sel::before { content: ""; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); width: 3px; height: 26px; border-radius: 0 999px 999px 0; background: var(--fg); }
+.rail-item[data-app="openai"]  { background: #000000; color: #ffffff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="claude"]  { background: #d97757; color: #ffffff; }
+.rail-item[data-app="gemini"]  { background: #ffffff; color: #1f1f1f; }
+.rail-item[data-app="cursor"]  { background: #000000; color: #ffffff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="copilot"] { background: #24292f; color: #ffffff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed { background: #000; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
+.rail-item.folder { display: grid; grid-template-columns: 10px 10px; grid-template-rows: 10px 10px; gap: 3px; place-content: center; background: var(--surface); }
+.rail-item.folder svg { width: 10px; height: 10px; color: var(--fg); }
+.rail-item.add { background: var(--surface); font: 16px/44px var(--mono); color: var(--muted); }
+.rail-div { flex: none; width: 22px; height: 1px; background: var(--line); }
+
+.chats { position: relative; background: var(--side); border-right: 1px solid var(--line); }
+.side-head { flex: none; display: flex; align-items: center; gap: 5px; min-height: 40px; padding: 9px 12px; font-weight: 700; font-size: 12px; color: var(--fg); }
+.side-head img { flex: none; width: 14px; height: 14px; }
+.side-head .ic { flex: none; display: grid; place-items: center; color: var(--muted); }
+.side-head .ic + .ic { margin-left: 0; }
+.side-head .ic:first-of-type { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); }
+.side-head .ic svg { width: 9px; height: 9px; }
+.cap-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 12px 2px; color: var(--muted); font-size: .91em; }
+.cap-row .cap { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .82em; }
+.cap-row .cap svg { width: 9px; height: 9px; }
+.cap-row .cnt-r { font: 400 .91em/1 var(--mono); }
+.today { padding: 5px 12px 2px; color: var(--muted); font-size: .82em; }
+.row { display: flex; align-items: center; gap: 6px; min-height: 26px; margin: 0 6px; padding: 0 8px; border-radius: var(--r-control); color: var(--muted); white-space: nowrap; overflow: hidden; }
+.row svg { flex: none; width: 12px; height: 12px; stroke-width: 2; }
+.row em { margin-left: auto; font-style: normal; font-size: .91em; }
+.row .t { min-width: 0; flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; }
+.row.chat i { flex: none; display: grid; place-items: center; }
+.row.chat i svg { width: 14px; height: 14px; fill: currentColor; stroke: none; stroke-width: 0; }
+.row.chat i img { width: 14px; height: 14px; border-radius: 4px; display: block; }
+.row.on { background: var(--raised); color: var(--fg); box-shadow: inset 3px 0 0 var(--accent); }
+.row.chat.on { box-shadow: none; } /* the chat rows' selection rides the sliding bar instead */
+#selbar { position: absolute; left: 6px; width: 3px; height: 26px; border-radius: 0 999px 999px 0; background: var(--accent); opacity: 0; will-change: transform; }
+.row.new { color: var(--fg); }
+.user { margin-top: auto; display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--line); }
+.user .avatar { position: relative; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); color: var(--fg); font: 700 10px/24px var(--ui); text-align: center; }
+.user .avatar .dot { position: absolute; right: -1px; bottom: -1px; box-shadow: 0 0 0 2px var(--side); }
+.user .u-tx { min-width: 0; flex: 1; }
+.user .u-tx b { display: block; white-space: nowrap; font-size: 1em; }
+.user .u-tx small { display: block; color: var(--muted); font-size: .82em; }
+.user .u-gear { flex: none; width: 12px; height: 12px; color: var(--muted); }
+
+.main { position: relative; background: var(--side); }
+.chat-head { flex: none; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 12px; color: var(--fg); }
+.chat-head b { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-head .search { margin-left: auto; display: flex; align-items: center; gap: 6px; flex: none; padding: 0 8px; border-radius: var(--r-control); background: var(--raised); border: 1px solid var(--line); color: var(--muted); font-weight: 400; font-size: .91em; line-height: 20px; }
+.chat-head .search kbd { font: 9px/12px var(--mono); }
+.chat-head .ask { display: flex; align-items: center; gap: 4px; flex: none; padding: 0 9px; border-radius: var(--r-control); background: linear-gradient(90deg, #2b6bff, #c026d3); color: #fff; font-weight: 650; font-size: .91em; line-height: 20px; }
+.chat-head .ask img { flex: none; width: 12px; height: 12px; }
+.feed { position: absolute; inset: 34px 0 44px; padding: 10px 12px; display: grid; align-content: start; gap: 9px; overflow: hidden; opacity: 0; }
+.date-div { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .82em; }
+.date-div::before, .date-div::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.msg { display: flex; gap: 8px; }
+.avatar { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--c, #facc15); color: #000; font: 700 10px/24px var(--ui); text-align: center; }
+.avatar.sb { background: #000; box-shadow: inset 0 0 0 1px var(--line); font-size: 0; overflow: hidden; display: grid; place-items: center; }
+.avatar.sb img { width: 62%; height: 62%; display: block; }
+.m-main { min-width: 0; flex: 1; display: grid; gap: 5px; }
+.m-head { display: flex; gap: 6px; align-items: baseline; }
+.m-name { font-weight: 700; }
+.m-when { font-size: .82em; color: var(--muted); }
+.app { padding: 0 4px; border-radius: 3px; background: var(--accent); color: var(--accent-ink); font: 700 8px/12px var(--ui); letter-spacing: .04em; }
+.m-text { font-size: 1em; line-height: 15px; color: var(--fg); }
+.quote { padding: 5px 8px; border-left: 3px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--muted); font-size: .95em; line-height: 14px; }
+.composer { position: absolute; left: 0; right: 0; bottom: 0; margin: 6px 12px 10px; }
+.composer .pill { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 4px 0 9px; border-radius: var(--r-surface); background: var(--raised); border: 1px solid var(--line); color: var(--muted); }
+.composer .plus { flex: none; width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font: 650 11px/16px var(--mono); color: var(--fg); }
+.composer .ph { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.composer .picker { flex: none; padding: 0 6px; border-radius: var(--r-control); background: var(--surface); color: var(--fg); font-size: .91em; line-height: 18px; }
+.composer .send { flex: none; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(90deg, #2b6bff, #c026d3); display: grid; place-items: center; color: #fff; }
+.composer .send svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- scene 3: the card ---------- */
+#card { display: grid; place-items: center; background: #000; }
+#card .line { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-size: 118px; font-weight: 800; letter-spacing: -.035em; line-height: 1; color: #fff; }
+#card .grad3 { background: var(--grad-pbp); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- scene 4: the end card (same lockup as urgent-email-slow) ---------- */
+#end { display: grid; place-items: center; background: #000; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end svg.face { width: 220px; height: 220px; overflow: visible; }
+#end .ga { animation: glitch-a 7s ease-in-out infinite; }
+#end .gb { animation: glitch-b 11s ease-in-out infinite; }
+@keyframes glitch-a { 0%, 100% { transform: translate(-1.2px, -1.2px); } 38% { transform: translate(-0.5px, -0.6px); } 41% { transform: translate(-2.2px, -1px); } 44% { transform: translate(-1.2px, -1.2px); } 72% { transform: translate(-0.7px, -0.5px); } }
+@keyframes glitch-b { 0%, 100% { transform: translate(1.2px, 1.2px); } 27% { transform: translate(0.6px, 0.5px); } 61% { transform: translate(1.2px, 1.2px); } 63% { transform: translate(2px, 0.6px); } 66% { transform: translate(1.2px, 1.2px); } 84% { transform: translate(0.5px, 0.8px); } }
+#end .words { overflow: hidden; }
+#end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+
+/* the cursor + the dip */
+#cursor { position: absolute; left: 0; top: 0; width: 40px; height: 52px; margin: 0 0 0 0; opacity: 0; z-index: 40; will-change: transform; filter: drop-shadow(0 3px 8px rgba(0,0,0,.5)); }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 50; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { opacity: 0 !important; visibility: hidden !important; }
+  #end { opacity: 1 !important; visibility: visible !important; }
+  #end .lock > * { transform: none !important; opacity: 1 !important; }
+  #end .ga, #end .gb { animation: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- the brand face: mark-clean.svg's mask geometry (site/site/assets/brand) -->
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+    <symbol id="ic-openai" viewBox="0 0 2406 2406"><path id="oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#oai-petal" transform="rotate(60 1203 1203)"/><use href="#oai-petal" transform="rotate(120 1203 1203)"/><use href="#oai-petal" transform="rotate(180 1203 1203)"/><use href="#oai-petal" transform="rotate(240 1203 1203)"/><use href="#oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+    <symbol id="ic-claude" viewBox="0 0 24 24"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+    <symbol id="ic-gemini" viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="ic-cursor" viewBox="0 0 24 24"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+    <symbol id="ic-copilot" viewBox="0 0 24 24"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage">
+  <!-- scene 1: every agent on a fibonacci sphere, merging into the tile -->
+  <section class="scene" id="cosmos" aria-label="all your agents merge into superbot"></section>
+
+  <!-- scene 2: the hub frontend, extended into view -->
+  <section class="scene" id="site" aria-label="the superbot frontend">
+    <div id="site-in">
+      <div class="win">
+        <div class="hub">
+          <nav class="rail">
+            <span class="rail-item sb sel" id="rail-sb"><img src="assets/tile.svg" alt=""/></span>
+            <span class="rail-div"></span>
+            <span class="rail-item" data-app="openai"><svg><use href="#ic-openai"/></svg><i class="dot"></i></span>
+            <span class="rail-item" data-app="claude"><svg><use href="#ic-claude"/></svg><i class="dot"></i></span>
+            <span class="rail-item" data-app="gemini"><svg><use href="#ic-gemini"/></svg><i class="dot"></i></span>
+            <span class="rail-item" data-app="cursor"><svg><use href="#ic-cursor"/></svg><i class="dot"></i></span>
+            <span class="rail-item bleed"><img src="assets/devin.png" alt=""/><i class="dot"></i></span>
+            <span class="rail-item bleed"><img src="assets/hermes.png" alt=""/><i class="dot"></i></span>
+            <span class="rail-item bleed"><img src="assets/grok.png" alt=""/><i class="dot"></i></span>
+            <span class="rail-item" data-app="copilot"><svg><use href="#ic-copilot"/></svg><i class="dot"></i></span>
+            <span class="rail-div"></span>
+            <span class="rail-item folder"><svg viewBox="0 0 24 24"><path d="M12 22v5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg><svg viewBox="0 0 24 24"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/></svg><svg viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg><svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 1-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg><i class="dot"></i></span>
+            <span class="rail-item add">+</span>
+          </nav>
+          <div class="chats">
+            <div class="side-head"><img src="assets/mark-clean.svg" alt=""/>superbot.gg<i class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg></i><i class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></i></div>
+            <span class="row new"><svg viewBox="0 0 24 24"><path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4Z"/></svg>New chat</span>
+            <span class="row"><svg viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>Manage Context</span>
+            <span class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11"/><path d="M14.6 9.4c-.9-1.3-5.8-1.4-5.8.9 0 2.5 6.2 1.4 6.2 3.8 0 2.3-5.2 2.1-6.4.7"/></svg>View Savings</span>
+            <span class="row"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-6"/><path d="M13 17V7"/><path d="M18 17v-3"/></svg>View Usage</span>
+            <span id="selbar"></span>
+            <div class="cap-row"><span class="cap"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>Recents</span><span class="cnt-r">1</span></div>
+            <div class="today">Today</div>
+            <span class="row chat" data-c="0" data-app="openai"><i style="color:#10a37f"><svg><use href="#ic-openai"/></svg></i><span class="t">which rate limiter…</span><em>12m</em></span>
+            <span class="row chat" data-c="1" data-app="claude"><i style="color:#d97757"><svg><use href="#ic-claude"/></svg></i><span class="t">rank the import pa…</span><em>3h</em></span>
+            <span class="row chat" data-c="2" data-app="gemini"><i style="color:#4285f4"><svg><use href="#ic-gemini"/></svg></i><span class="t">trello card test</span><em>1d</em></span>
+            <span class="row chat" data-c="3" data-app="cursor"><i style="color:#2b6bff"><svg><use href="#ic-cursor"/></svg></i><span class="t">dedupe the always…</span><em>3d</em></span>
+            <span class="row chat" data-c="4" data-app="grok"><i><img src="assets/grok.png" alt=""/></i><span class="t">macapp notarizati…</span><em>1w</em></span>
+            <div class="user"><span class="avatar">D<i class="dot ok"></i></span><span class="u-tx"><b>hi@superbot.gg</b><small>no balance yet</small></span><svg class="u-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          </div>
+          <div class="main">
+            <div class="chat-head"><b id="ch-title">which rate limiter for 40 rps?</b><span class="search">Search<kbd>⌘K</kbd></span><span class="ask"><img src="assets/mark-clean.svg" alt=""/>Ask Superbot</span></div>
+            <!-- one feed per chat; the click-through hard-cuts between them -->
+            <div class="feed" data-f="0">
+              <div class="date-div">September 9, 2026</div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">11:15 AM</span></div><div class="m-text">asked all four of your coders at once. ChatGPT answered first:</div></div></div>
+              <div class="msg"><span class="avatar" style="--c:#10a37f">C</span><div class="m-main"><div class="m-head"><span class="m-name">chatgpt</span><span class="app" style="background:#10a37f">APP</span><span class="m-when">11:15 AM</span></div><div class="m-text">token bucket, 40/min refill. GCRA gives smoother bursts without the timer.</div></div></div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">11:16 AM</span></div><div class="m-text">consensus: token bucket. same answer synced to your other clients.</div></div></div>
+            </div>
+            <div class="feed" data-f="1">
+              <div class="date-div">September 9, 2026</div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">3:42 PM</span></div><div class="m-text">Claude took this one. ranked by cost of failure:</div></div></div>
+              <div class="msg"><span class="avatar" style="--c:#d97757">C</span><div class="m-main"><div class="m-head"><span class="m-name">claude</span><span class="app" style="background:#d97757">APP</span><span class="m-when">3:42 PM</span></div><div class="m-text">1. auth (blocks everything) 2. payments 3. rate limiting 4. analytics. import the analytics one last.</div></div></div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">3:43 PM</span></div><div class="m-text">pinned that order to the Setup checklist for you.</div></div></div>
+            </div>
+            <div class="feed" data-f="2">
+              <div class="date-div">September 8, 2026</div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">9:02 AM</span></div><div class="m-text">Gemini drafted the Trello card, Devin opened the branch. both in your boards:</div></div></div>
+              <div class="msg"><span class="avatar" style="--c:#4285f4">G</span><div class="m-main"><div class="m-head"><span class="m-name">gemini</span><span class="app" style="background:#4285f4">APP</span><span class="m-when">9:02 AM</span></div><div class="m-text">Card: "test trello sync" — acceptance: card edits land in both directions within 5s, no dupes on reconnect.</div></div></div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">9:05 AM</span></div><div class="m-text">first sync test passed at 1.8s. two dupes on reconnect, filed as one bug.</div></div></div>
+            </div>
+            <div class="feed" data-f="3">
+              <div class="date-div">September 6, 2026</div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">2:18 PM</span></div><div class="m-text">your rules file kept duplicating on save. Cursor found the writer:</div></div></div>
+              <div class="msg"><span class="avatar" style="--c:#2b6bff">X</span><div class="m-main"><div class="m-head"><span class="m-name">cursor</span><span class="app" style="background:#2b6bff">APP</span><span class="m-when">2:18 PM</span></div><div class="m-text">the sync hook fires twice: once on write, once on the fs watcher. gate the watcher on a write flag.</div></div></div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">2:20 PM</span></div><div class="m-text">patched in all three clients from one copy. 315.8k tokens saved.</div></div></div>
+            </div>
+            <div class="feed" data-f="4">
+              <div class="date-div">September 2, 2026</div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">4:47 PM</span></div><div class="m-text">notarization kept failing. Grok had seen this exact error last week:</div></div></div>
+              <div class="msg"><span class="avatar" style="--c:#fff;border:1px solid var(--line)">K</span><div class="m-main"><div class="m-head"><span class="m-name">grok</span><span class="app" style="background:#555">APP</span><span class="m-when">4:47 PM</span></div><div class="m-text">the hardened-runtime entitlements are missing the provisioning profile key. add it, re-staple.</div></div></div>
+              <div class="msg"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">4:49 PM</span></div><div class="m-text">notarized clean on the next run. the fix is in your repo now.</div></div></div>
+            </div>
+            <div class="composer"><div class="pill"><span class="plus">+</span><span class="ph">How can superbot help you today?</span><span class="picker">superbot ▾</span><span class="send"><svg viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- scene 3: the card -->
+  <section class="scene" id="card" aria-label="The AI Aggregator is here">
+    <div class="line" id="card-line">The AI <span class="grad3">Aggregator</span> is here</div>
+  </section>
+
+  <!-- scene 4: the end lockup -->
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true"><rect class="ga" x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/><rect class="gb" x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/></svg>
+      <div class="words" id="end-words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <div id="fly" aria-hidden="true"></div>
+  <svg id="cursor" viewBox="0 0 34 44" aria-hidden="true"><path d="M3 2 L3 34 L11 26 L17 41 L23 38 L17 24 L28 24 Z" fill="#000" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+  <div id="dip"></div>
+</div>
+
+<script>
+// ---------- the clock: one render(t), a pure function of story time ----------
+// Same skeleton as the repo's other ads (urgent-email-slow-superbot):
+// seg() windows, pure tweens, no timers. Frame-indexed at 30fps so preview and
+// capture agree; ?t=<s> seeks, ?t=<s>&pause freezes on that frame.
+const FPS = 30, LOOP = 15.0;
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the beat sheet (story seconds; every window a frame multiple of 1/30) ----------
+const B = {
+  pop: 0.15, POP_STEP: 0.06, POP_DUR: 0.5,       // the agent icons pop in, staggered
+  merge: 1.8, mergeEnd: 2.7,                     // the sphere collapses inward while still spinning
+  flip: 2.3, flipEnd: 2.9,                       // the tile flips out of the collapse (the site's flip)
+  grow: 2.9, growEnd: 3.3,                       // the tile grows to land weight
+  site: 3.3,                                     // cosmos out / the frontend in
+  glide: 3.4, glideEnd: 4.4,                     // the tile glides into the rail's superbot slot
+  extend: 4.3, extendEnd: 5.2,                   // the frontend extends: chats lane + chat canvas fade in
+  curIn: 5.35, curAt: 6.0,                       // the cursor enters; row 1's chat is already open
+  CLICK: 0.8,                                    // 0.800s exactly: a metronome, not UI lag
+  clicks: [6.0, 6.8, 7.6, 8.4, 9.2],             // one press per chat row (all five get visited)
+  hold: 0.9,                                     // the last chat holds one more beat, readable
+  dip: 10.3,                                     // 0.1s black dip into the card
+  card: 10.4,                                    // 0.1s black, then the card
+  dip2: 12.8, end: 12.9, face: 12.95, word: 13.55,// dip, then the lockup, held to the seam
+  seam: 14.9,                                    // 0.1s black: the loop restarts into the pop
+  out: 14.9,                                     // the end card dips out over the seam
+};
+
+// ---------- the sphere ----------
+const MARKS = [
+  { el: '<svg><use href="#ic-openai"/></svg>' },
+  { el: '<svg><use href="#ic-claude"/></svg>' },
+  { el: '<svg><use href="#ic-gemini"/></svg>' },
+  { el: '<svg><use href="#ic-cursor"/></svg>' },
+  { el: '<img src="assets/devin.png" alt=""/>', bleed: true },
+  { el: '<img src="assets/hermes.png" alt=""/>', bleed: true },
+  { el: '<img src="assets/grok.png" alt=""/>', bleed: true },
+  { el: '<svg><use href="#ic-copilot"/></svg>' },
+];
+const N = 8, R = 230, CX = 960, CY = 540; // one icon per agent — a repeated logo on the sphere reads as a mockup
+const cosmos = $('cosmos'), fly = $('fly'), cursor = $('cursor'), dip = $('dip');
+const site = $('site'), siteIn = $('site-in');
+const chTitle = $('ch-title'), cardLine = $('card-line'), endFace = $('end-face'), endSlide = $('end-slide');
+const icons = [];
+for (let i = 0; i < N; i++) {
+  const d = document.createElement('div');
+  const m = MARKS[i % MARKS.length];
+  d.className = 'icon' + (m.bleed ? ' bleed' : '');
+  d.innerHTML = m.el;
+  cosmos.appendChild(d);
+  icons.push(d);
+}
+fly.innerHTML = '<img src="assets/tile.svg" alt=""/>';
+
+// fibonacci sphere points (the site's fibonacci-sphere layout, projected compactly)
+function fib(i, n) {
+  const g = Math.PI * (3 - Math.sqrt(5));
+  const y = 1 - (i / (n - 1)) * 2;
+  const r = Math.sqrt(Math.max(0, 1 - y * y));
+  const th = g * i;
+  return { x: Math.cos(th) * r, y, z: Math.sin(th) * r };
+}
+// spin: eased spin-up over 1.6s, never zeroed — the icons keep drifting as they
+// collapse, so the merge carries momentum (constant speed reads as a screensaver).
+// w(t) is integrated once into a lookup table at 1/30s steps, so render stays pure.
+function spinW(t) {
+  return 0.55 * outCubic(Math.min(t / 1.6, 1)) + 1.6 * outCubic(seg(t, B.merge, B.mergeEnd));
+}
+const ANG = (() => {
+  const n = Math.ceil(LOOP * FPS), a = new Float64Array(n + 1);
+  for (let i = 0; i < n; i++) a[i + 1] = a[i] + spinW(i / FPS) / FPS;
+  return a;
+})();
+function angleAt(t) {
+  const i = Math.min(ANG.length - 2, Math.max(0, Math.floor(t * FPS)));
+  return lerp(ANG[i], ANG[i + 1], t * FPS - i);
+}
+
+// ---------- element refs ----------
+const stage = $('stage');
+const chatRows = [...document.querySelectorAll('.row.chat')];
+const feeds = [...document.querySelectorAll('.feed[data-f]')];
+const selbar = $('selbar');
+const railSb = $('rail-sb');
+const railByApp = {};
+document.querySelectorAll('.rail-item[data-app]').forEach((el) => { railByApp[el.dataset.app] = el; });
+// the rail echoes the metronome: the chat you land on pops its agent's rail icon
+// on the same 0.800s beat, so the cadence reads as touring your agents' chats
+const APP_CLICK = { openai: B.clicks[0], claude: B.clicks[1], gemini: B.clicks[2], cursor: B.clicks[3], grok: B.clicks[4] };
+const inners = [...document.querySelectorAll('.hub .chats, .hub .main')];
+const TITLES = ['which rate limiter for 40 rps?', 'rank the import pa… wait, rank them', 'trello card test', 'dedupe the always-on rules', 'macapp notarization fails'];
+
+// ---------- style helpers ----------
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };
+
+// cursor geometry in stage px: chat row centres + left edges + the rail slot centre, read once
+const ROWS = [], SLOT = { x: 0, y: 0, s: 0.392 };
+function measure() {
+  const sr = stage.getBoundingClientRect(), k = sr.width / 1920;
+  chatRows.forEach((r) => {
+    const b = r.getBoundingClientRect();
+    ROWS[Number(r.dataset.c)] = {
+      x: (b.left + b.width / 2 - sr.left) / k - 26,
+      y: (b.top + b.height / 2 - sr.top) / k - 10,
+      barY: (b.top - sr.top) / k + (b.height / k - 26) / 2,
+      barX: (b.left - sr.left) / k,
+    };
+  });
+  const s = railSb.getBoundingClientRect();
+  SLOT.x = (s.left + s.width / 2 - sr.left) / k;
+  SLOT.y = (s.top + s.height / 2 - sr.top) / k;
+}
+
+// cursor path: it enters, then hops row to row, one press per row
+// after click i the cursor glides from row i to row i+1, arriving at click i+1
+function cursorAt(t) {
+  if (t < B.curIn || t > B.dip - 0.25) return { x: -100, y: -100, o: 0, press: 0 };
+  const press = B.clicks.map((c) => 1 - seg(t, c, c + 0.18) + seg(t, c, c + 0.06));
+  const pi = B.clicks.findIndex((c) => t < c + 0.18);
+  const pressing = pi >= 0 && t >= B.clicks[pi] && t < B.clicks[pi] + 0.15;
+  let x, y;
+  if (t < B.curAt) {
+    const p = outQuint(seg(t, B.curIn, B.curAt));
+    x = lerp(2100, ROWS[0].x, p); y = lerp(1150, ROWS[0].y, p);
+  } else {
+    const i = Math.min(4, B.clicks.findIndex((c, j) => t < B.clicks[j + 1]) === -1 ? 4 : B.clicks.findIndex((c, j) => t < B.clicks[j + 1]));
+    const j = Math.min(i + 1, 4);
+    const p = outQuint(seg(t, B.clicks[i] + 0.15, Math.max(B.clicks[i] + 0.15, B.clicks[j] - 0.05)));
+    x = lerp(ROWS[i].x, ROWS[j].x, p); y = lerp(ROWS[i].y, ROWS[j].y, p);
+  }
+  return { x, y, o: 1, press: pressing ? 1 : 0 };
+}
+
+// ---------- render ----------
+function render(t) {
+  const inCosmos = t < B.site, inSite = t >= B.site && t < B.card, inCard = t >= B.card && t < B.end, inEnd = t >= B.end;
+  scene(cosmos, inCosmos); scene(site, inSite); scene($('card'), inCard); scene($('end'), inEnd);
+  // dips: into the card, into the end, and out at the loop seam
+  op(dip, inCosmos || inSite ? (t >= B.dip ? seg(t, B.dip, B.card) : 0)
+    : inCard ? (t >= B.dip2 ? seg(t, B.dip2, B.end) : 0)
+    : (t >= B.out ? seg(t, B.out, LOOP) : 1 - seg(t, B.end, B.end + 0.3)));
+
+  if (inCosmos) renderCosmos(t);
+  if (inSite) renderSite(t);
+  if (inCard) renderCard(t);
+  if (inEnd) renderEnd(t);
+  renderCursor(t);
+}
+
+function renderCosmos(t) {
+  const ang = angleAt(t), tilt = -0.18;
+  const mergeP = outCubic(seg(t, B.merge, B.mergeEnd));
+  const sin = Math.sin(ang), cos = Math.cos(ang);
+  for (let i = 0; i < N; i++) {
+    const f = fib(i, N);
+    let x = f.x * cos - f.z * sin;
+    const z = f.x * sin + f.z * cos;
+    const y = f.y * Math.cos(tilt) - z * Math.sin(tilt);
+    const zt = f.y * Math.sin(tilt) + z * Math.cos(tilt);
+    // pop-in staggered, then merge: every icon flies to the centre and fades
+    const pop = outBack(seg(t, B.pop + i * B.POP_STEP, B.pop + i * B.POP_STEP + B.POP_DUR));
+    const s = pop * lerp(1, 0.18, mergeP);
+    const depth = 0.55 + 0.45 * ((zt + 1) / 2);
+    const px = CX + x * R * (1 - mergeP * 0.92);
+    const py = CY + y * R * 0.92 * (1 - mergeP * 0.92);
+    icons[i].style.transform = `translate3d(${px}px, ${py}px, 0) scale(${s * depth})`;
+    op(icons[i], pop * lerp(0.35 + 0.65 * ((zt + 1) / 2), 0, mergeP));
+  }
+  // the tile flips out of the collapse, then grows
+  const flipP = seg(t, B.flip, B.flipEnd), growP = outCubic(seg(t, B.grow, B.growEnd));
+  const fs = lerp(0.55, 1, outBack(flipP)) * lerp(1, 1.22, growP);
+  fly.style.transform = `translate3d(${CX}px, ${CY}px, 0) scale(${fs}) perspective(900px) rotateY(${(1 - outCubic(flipP)) * 180}deg)`;
+  fly.style.filter = `drop-shadow(0 8px 16px rgba(0,0,0,.4)) brightness(${lerp(0.5, 1, Math.min(1, flipP * 1.6))})`;
+  op(fly, seg(t, B.merge + 0.25, B.flip) * 2);
+}
+
+function renderSite(t) {
+  // the frontend extends: the chats lane and chat canvas fade in, the pill takes its place
+  const extendP = outCubic(seg(t, B.extend, B.extendEnd));
+  inners.forEach((el) => op(el, extendP));
+  // the tile glides from the centre into the rail's superbot slot
+  const g = outQuint(seg(t, B.glide, B.glideEnd));
+  op(siteIn, seg(t, B.site, B.site + 0.22));
+  if (g < 1) {
+    // fly the overlay tile along the glide; the rail's own tile hides until it lands
+    railSb.style.visibility = 'hidden';
+    fly.style.transform = `translate3d(${lerp(CX, SLOT.x, g)}px, ${lerp(CY, SLOT.y, g)}px, 0) scale(${lerp(1.22, SLOT.s, g)}) perspective(900px) rotateY(0deg)`;
+    op(fly, 1);
+  } else {
+    railSb.style.visibility = 'visible';
+    op(fly, 0);
+  }
+  // the click-through: one press per row, the .on selection and the feed hard-cut
+  const active = B.clicks.reduce((a, c, i) => (t >= c ? i : a), 0);
+  chatRows.forEach((r, i) => {
+    const on = i === active && extendP > 0.5;
+    r.classList.toggle('on', on);
+    const press = 1 - outCubic(seg(t, B.clicks[i], B.clicks[i] + 0.15)) * 0.03;
+    r.style.transform = `scale(${press})`;
+  });
+  chTitle.textContent = TITLES[active];
+  feeds.forEach((f, i) => {
+    if (i !== active) { op(f, 0); return; }
+    if (t < B.clicks[0]) { op(f, extendP); f.style.transform = 'none'; return; }
+    const p = outCubic(seg(t, B.clicks[i], B.clicks[i] + 0.22));
+    op(f, p);
+    f.style.transform = `translateY(${(1 - p) * 8}px)`;
+  });
+  // the agent icons take the beat: one pop per metronome click, on the matching app
+  for (const app in APP_CLICK) {
+    const el = railByApp[app];
+    if (!el) continue;
+    const c = APP_CLICK[app];
+    const b = outBack(clamp01((t - c) / 0.3)) * (1 - clamp01((t - c - 0.3) / 0.3));
+    el.style.transform = b > 0.001 ? `scale(${1 + 0.16 * b})` : '';
+  }
+  renderCursor(t);
+}
+
+function renderCard(t) {
+  const p = outQuint(seg(t, B.card, B.card + 0.55));
+  cardLine.style.transform = `translateY(-50%) translateY(${(1 - p) * 34}px) scale(${lerp(0.96, 1, p)})`;
+  op(cardLine, p);
+  renderCursor(t);
+}
+
+function renderEnd(t) {
+  const fp = outBack(seg(t, B.face, B.face + 0.5));
+  endFace.style.transform = `scale(${lerp(0.6, 1, fp)})`;
+  op(endFace, seg(t, B.face, B.face + 0.3) * 2);
+  const wp = outQuint(seg(t, B.word, B.word + 0.75));
+  endSlide.style.transform = `translateY(${(1 - wp) * 110}px)`;
+  op(endSlide, wp);
+  renderCursor(t);
+}
+
+function renderCursor(t) {
+  const c = cursorAt(t);
+  cursor.style.transform = `translate3d(${c.x}px, ${c.y}px, 0) scale(${c.press ? 0.88 : 1})`;
+  op(cursor, c.o);
+}
+
+// ---------- boot: measure, then run ----------
+function fit() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `translate(${(innerWidth - 1920 * k) / 2}px, ${(innerHeight - 1080 * k) / 2}px) scale(${k})`;
+}
+addEventListener('resize', fit);
+fit();
+
+const q = new URLSearchParams(location.search);
+const seek = parseFloat(q.get('t'));
+const paused = q.has('pause');
+requestAnimationFrame(() => {
+  // warm the layout at a state where the hub is fully visible, then read geometry
+  render(5.0);
+  measure();
+  SLOT.s = 0.392; // 70.4px face / 180px face
+  if (seek >= 0) render(seek);
+  if (paused) { render(seek >= 0 ? seek : 0); return; }
+  let t0 = performance.now() - (seek >= 0 ? seek * 1000 : 0);
+  (function frame(now) {
+    render(((now - t0) / 1000) % LOOP);
+    requestAnimationFrame(frame);
+  })(performance.now());
+});
+</script>
+</body>
+</html>

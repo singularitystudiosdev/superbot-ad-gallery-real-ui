@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>automate the routine: superbot enters the records · ad spot</title>
+<link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
+<meta name="description" content="The superbot.gg hero boots 1:1, a title card, a data entry operator asks superbot to automate everything that needs no creativity or judgement, superbot scans two weeks of work and classifies each task, then enters records across six ERP pages in seven seconds. ~38s loop, 1920x1080."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"/>
+<!-- the stage box: the site's own stylesheet, verbatim (site/site/assets/hub-boot-3.css) -->
+<link rel="stylesheet" href="assets/hub-boot-3.css"/>
+<style>
+/* ---------- tokens: the site's own ladder (site/site/assets/site.css :root), verbatim ---------- */
+:root {
+  color-scheme: dark;
+  --bg: #000000; --card: #0d0d0d; --raised: #181818; --line: #262626;
+  --fg: #ececec; --secondary: #cfcfcf; --muted: #9a9a9a;
+  --accent: #2b6bff; --accent-ink: #ffffff;
+  --danger: #c96f6f; --danger-line: #5c3030; --warn: #d9b86b;
+  --storm-0: #00e5c3; --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm-gradient: linear-gradient(135deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-gradient-x: linear-gradient(90deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-action: linear-gradient(135deg, var(--storm-1) 0%, var(--storm-2) 55%, var(--storm-3) 100%);
+  --storm: var(--storm-gradient);
+  --storm-x: linear-gradient(90deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  /* the title cards' word: purple, blue, pink (owner's order) */
+  --wsp: linear-gradient(90deg, #6a1fd8 0%, #2b6bff 42%, #c026d3 72%, #ff3d9a 100%);
+  --tile-bg: #000000;
+  --font-ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --ui: var(--font-ui); --mono: var(--font-mono);
+  --r-control: 8px; --r-surface: 16px; --r-pill: 9999px; --r-sm: 8px; --r-md: 8px; --r-lg: 16px; --r-xl: 16px;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px;
+  --dur-1: 100ms; --dur-2: 150ms; --dur-3: 200ms; --dur-4: 300ms; --dur-5: 500ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-std: cubic-bezier(0.2, 0, 0, 1); --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --stage: #0d0d0d; --window: #0d0d0d; /* hero-6.css: the stage ground and the window ground */
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+/* ---------- the 1920x1080 frame, scaled to the viewport ---------- */
+#frame { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* ---------- scene 1: the site's hero box, 1:1 ----------
+   The live stage measures 1205x753 at a 1920 viewport (hero-6.css --hero-stage-w,
+   16/10); it is drawn at that size and scaled 1.434x to 1728x1080, centered, so
+   every beat of sphere-intro plays at S=1 exactly as on the page. */
+#site { background: #000; }
+#site-in { position: absolute; left: 96px; top: 0; width: 1205px; height: 753.125px; transform: scale(1.43402); transform-origin: 0 0; }
+#site-in .stage { width: 1205px; height: 753.125px; }
+.hub .inner.rail { opacity: 0; }
+/* the story's own conversation (the site's two story lines are not used) */
+.msg { will-change: opacity, transform; }
+.composer .ph.typing { color: var(--fg); }
+.composer .ph .caret { display: inline-block; width: 1px; height: 11px; background: var(--fg); vertical-align: -2px; margin-left: 1px; }
+.composer .send { transform-origin: 50% 50%; }
+.m-text .ch { opacity: 0; }
+
+/* ---------- scenes 2 + 5: the cards (gpt-refusal-superbot-824cef28 #card, verbatim) ---------- */
+.card-scene { display: grid; place-items: center; background: #000; }
+.card-scene .line { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-size: 132px; font-weight: 800; letter-spacing: -.035em; line-height: 1.04; color: #fff; }
+.card-scene .grad { background: var(--wsp); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- scene 6: the end card (gpt-refusal-superbot-824cef28 #end, verbatim) ---------- */
+#end { display: grid; place-items: center; background: #000; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end svg.face { width: 220px; height: 220px; overflow: visible; }
+#end .words { overflow: hidden; }
+#end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { opacity: 0 !important; visibility: hidden !important; }
+  #end { opacity: 1 !important; visibility: visible !important; }
+  #end .lock > * { transform: none !important; opacity: 1 !important; }
+}
+/* ---------- the hub's story card: the job analysis, on the app's own .card ---------- */
+.m-main .card { margin-top: 4px; max-width: 360px; padding: 9px 11px 10px; gap: 0; border-radius: 8px; }
+.card .c-head { display: flex; align-items: baseline; gap: 8px; font-weight: 700; color: var(--fg); padding-bottom: 7px; }
+.card .c-head small { margin-left: auto; font-size: .91em; font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
+.an-scan { display: grid; grid-template-columns: 1fr 34px; align-items: center; gap: 6px 8px; color: var(--muted); font-size: .91em; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.an-scan .bar { grid-column: 1 / -1; height: 3px; border-radius: 2px; background: var(--raised); overflow: hidden; }
+.an-scan .bar i { display: block; height: 100%; width: 0; border-radius: 2px; background: var(--accent); }
+.an-scan b { text-align: right; color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+#an-rows { display: grid; gap: 1px; padding: 6px 0 7px; border-bottom: 1px solid var(--line); }
+.an-row { display: grid; grid-template-columns: minmax(0, 1fr) 44px 66px; align-items: center; gap: 8px; height: 19px; opacity: 0; }
+.an-row .n { color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.an-row .f { color: var(--muted); font-size: .91em; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.an-row .tag { display: flex; align-items: center; justify-content: center; gap: 4px; height: 16px; border-radius: 4px; font-size: .82em; font-weight: 600; background: var(--raised); color: var(--muted); }
+.an-row .tag::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .9; }
+.an-row .tag.auto { background: rgba(52,211,153,.12); color: #34d399; }
+.an-row .tag.keep { background: rgba(217,184,107,.12); color: var(--warn); }
+.an-sum { display: grid; gap: 5px; padding-top: 8px; color: var(--muted); font-size: .91em; opacity: 0; }
+.an-sum .top { display: flex; align-items: baseline; justify-content: space-between; }
+.an-sum .big { font-size: 1.2em; font-weight: 700; color: var(--fg); font-variant-numeric: tabular-nums; }
+.an-sum b { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+.an-sum .bar { height: 4px; border-radius: 2px; background: var(--raised); overflow: hidden; }
+.an-sum .bar i { display: block; height: 100%; width: 0; border-radius: 2px; background: var(--storm-x); }
+
+/* ---------- scene 4: the ERP data-entry app ---------- */
+#erp { background: #f4f5f7; font-family: "Inter", "SF Pro Text", -apple-system, system-ui, "Segoe UI", sans-serif; color: #111827; -webkit-font-smoothing: antialiased; }
+#erp svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.er-nav { position: absolute; left: 0; top: 0; bottom: 0; width: 240px; background: #0f172a; color: #cbd5e1; padding: 20px 14px; display: grid; align-content: start; gap: 4px; }
+.er-brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 22px; color: #fff; font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
+.er-brand i { width: 30px; height: 30px; border-radius: 8px; background: #22d3ee; display: grid; place-items: center; color: #0f172a; font-style: normal; font: 800 15px/30px var(--ui); }
+.er-nav .it { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: 8px; font-size: 14px; font-weight: 500; }
+.er-nav .it.on { background: #1e293b; color: #fff; box-shadow: inset 3px 0 0 #22d3ee; }
+.er-nav .sec { padding: 16px 12px 6px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #64748b; }
+.er-top { position: absolute; left: 240px; right: 0; top: 0; height: 64px; background: #fff; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; padding: 0 32px; gap: 16px; }
+.er-crumb { font-size: 14px; color: #6b7280; display: flex; align-items: center; gap: 8px; }
+.er-crumb b { color: #111827; font-weight: 600; }
+.er-search { margin-left: auto; width: 300px; height: 38px; border-radius: 8px; background: #f3f4f6; display: flex; align-items: center; gap: 8px; padding: 0 12px; color: #6b7280; font-size: 14px; }
+.er-search svg { width: 16px; height: 16px; }
+.er-new { height: 38px; padding: 0 16px; border-radius: 8px; background: #0f172a; color: #fff; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.er-me { width: 36px; height: 36px; border-radius: 50%; background: #e0f2fe; color: #0369a1; font: 600 14px/36px var(--ui); text-align: center; }
+.er-main { position: absolute; left: 240px; right: 0; top: 64px; bottom: 0; padding: 28px 32px; }
+.er-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.er-head h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.01em; }
+.er-head .id { height: 26px; padding: 0 10px; border-radius: 6px; background: #e0f2fe; color: #0369a1; font: 600 13px/26px var(--font-mono); }
+.er-head .st { height: 26px; padding: 0 10px; border-radius: 13px; background: #f3f4f6; color: #374151; font-size: 12px; font-weight: 600; line-height: 26px; }
+.er-form { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 26px 28px 24px; width: 1120px; box-shadow: 0 1px 2px rgba(17,24,39,.04); }
+.er-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+.er-f { display: grid; gap: 6px; }
+.er-f.wide { grid-column: 1 / -1; }
+.er-f label { font-size: 13px; font-weight: 600; color: #374151; }
+.er-f .in { height: 42px; border-radius: 8px; border: 1px solid #d1d5db; background: #fff; padding: 0 12px; font-size: 15px; line-height: 40px; color: #111827; white-space: nowrap; overflow: hidden; display: flex; align-items: center; gap: 8px; position: relative; }
+.er-f .in .ph { color: #9ca3af; }
+.er-f .in .v { opacity: 0; }
+.er-f .in.focus { border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,.2); }
+.er-f .in.done { border-color: #a7f3d0; background: #f0fdf4; }
+.er-f .in .ok { position: absolute; right: 10px; width: 18px; height: 18px; border-radius: 50%; background: #10b981; display: grid; place-items: center; opacity: 0; }
+.er-f .in .ok svg { width: 11px; height: 11px; stroke: #fff; stroke-width: 3; }
+.er-f .in.sel::after { content: ""; position: absolute; right: 12px; width: 8px; height: 8px; border-right: 2px solid #6b7280; border-bottom: 2px solid #6b7280; transform: rotate(45deg) translateY(-3px); }
+.er-f .in.sel.done::after { display: none; }
+.er-foot { display: flex; align-items: center; gap: 10px; margin-top: 24px; padding-top: 18px; border-top: 1px solid #f3f4f6; }
+.er-foot .cancel { height: 40px; padding: 0 16px; border-radius: 8px; border: 1px solid #d1d5db; color: #374151; font-size: 14px; font-weight: 600; display: flex; align-items: center; }
+.er-save { height: 40px; padding: 0 20px; border-radius: 8px; background: #0ea5e9; color: #fff; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; transform-origin: 50% 50%; }
+.er-save.pressed { background: #0284c7; }
+.er-foot small { margin-left: auto; color: #9ca3af; font-size: 12px; }
+.er-toast { position: absolute; right: 32px; top: 88px; height: 48px; padding: 0 18px 0 14px; border-radius: 10px; background: #111827; color: #fff; display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; box-shadow: 0 12px 30px rgba(17,24,39,.3); opacity: 0; z-index: 5; }
+.er-toast i { width: 22px; height: 22px; border-radius: 50%; background: #10b981; display: grid; place-items: center; font-style: normal; }
+.er-toast i svg { width: 12px; height: 12px; stroke: #fff; stroke-width: 3; }
+.er-toast b { font-family: var(--font-mono); font-weight: 600; }
+.er-recent { position: absolute; left: 32px; top: 640px; width: 1120px; }
+.er-recent h3 { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6b7280; }
+.er-row { display: grid; grid-template-columns: 130px 1fr 220px 120px 110px; gap: 16px; height: 40px; align-items: center; padding: 0 16px; background: #fff; border: 1px solid #e5e7eb; border-top: 0; font-size: 13px; color: #374151; }
+.er-row:first-of-type { border-top: 1px solid #e5e7eb; border-radius: 8px 8px 0 0; }
+.er-row:last-of-type { border-radius: 0 0 8px 8px; }
+.er-row b { font-family: var(--font-mono); font-weight: 600; color: #111827; }
+.er-row .pill { justify-self: start; height: 22px; padding: 0 8px; border-radius: 11px; background: #ecfdf5; color: #047857; font-size: 12px; font-weight: 600; line-height: 22px; }
+.er-row.new { background: #f0fdf4; }
+/* superbot at work, bottom-right: the storm-stroke card */
+#agent { position: absolute; right: 44px; bottom: 44px; width: 400px; padding: 18px 20px 16px; border-radius: 22px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box; box-shadow: 0 30px 70px rgba(0,0,0,.35), 0 0 40px rgba(106,31,216,.25); opacity: 0; transform-origin: 100% 100%; z-index: 20; font-family: var(--ui); color: #fff; }
+#agent .p-head { display: flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+#agent .p-head img { width: 32px; height: 32px; }
+#agent .p-line { margin-top: 10px; display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 600; color: var(--secondary); }
+#agent .p-line i { width: 10px; height: 10px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399; }
+#agent .p-line b { color: #fff; font-variant-numeric: tabular-nums; margin-left: auto; }
+#agent .p-sub { margin-top: 6px; font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- the brand face: mark-clean.svg's mask geometry (site/site/assets/brand) -->
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+    <!-- the site's icon registry (site/index.html #sb-ic-*), verbatim: the rail and the sphere draw from it -->
+    <symbol id="sb-ic-claude" viewBox="0 0 24 24" fill="currentColor"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+    <symbol id="sb-ic-cursor" viewBox="0 0 24 24" fill="currentColor"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+    <symbol id="sb-ic-vscode" viewBox="0 0 100 100" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M70.9119 99.3171C72.4869 99.9307 74.2828 99.8914 75.8725 99.1264L96.4608 89.2197C98.6242 88.1787 100 85.9892 100 83.5872V16.4133C100 14.0113 98.6243 11.8218 96.4609 10.7808L75.8725 0.873756C73.7862 -0.130129 71.3446 0.11576 69.5135 1.44695C69.252 1.63711 69.0028 1.84943 68.769 2.08341L29.3551 38.0415L12.1872 25.0096C10.589 23.7965 8.35363 23.8959 6.86933 25.2461L1.36303 30.2549C-0.452552 31.9064 -0.454633 34.7627 1.35853 36.417L16.2471 50.0001L1.35853 63.5832C-0.454633 65.2374 -0.452552 68.0938 1.36303 69.7453L6.86933 74.7541C8.35363 76.1043 10.589 76.2037 12.1872 74.9905L29.3551 61.9587L68.769 97.9167C69.3925 98.5406 70.1246 99.0104 70.9119 99.3171ZM75.0152 27.2989L45.1091 50.0001L75.0152 72.7012V27.2989Z"/></symbol>
+    <symbol id="sb-ic-openai" viewBox="0 0 2406 2406" fill="currentColor"><path id="sb-oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#sb-oai-petal" transform="rotate(60 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(120 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(180 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(240 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+    <symbol id="sb-ic-gemini" viewBox="0 0 24 24" fill="currentColor"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="sb-ic-zed" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 1.5a.75.75 0 0 0-.75.75v16.5H0V2.25A2.25 2.25 0 0 1 2.25 0h20.095c1.002 0 1.504 1.212.795 1.92L10.764 14.298h3.486V12.75h1.5v1.922a1.125 1.125 0 0 1-1.125 1.125H9.264l-2.578 2.578h11.689V9h1.5v9.375a1.5 1.5 0 0 1-1.5 1.5H5.185L2.562 22.5H21.75a.75.75 0 0 0 .75-.75V5.25H24v16.5A2.25 2.25 0 0 1 21.75 24H1.655C.653 24 .151 22.788.86 22.08L13.19 9.75H9.75v1.5h-1.5V9.375A1.125 1.125 0 0 1 9.375 8.25h5.314l2.625-2.625H5.625V15h-1.5V5.625a1.5 1.5 0 0 1 1.5-1.5h13.19L21.438 1.5z"/></symbol>
+    <symbol id="sb-ic-windsurf" viewBox="0 0 24 24" fill="currentColor"><path d="M23.55 5.067c-1.2038-.002-2.1806.973-2.1806 2.1765v4.8676c0 .972-.8035 1.7594-1.7597 1.7594-.568 0-1.1352-.286-1.4718-.7659l-4.9713-7.1003c-.4125-.5896-1.0837-.941-1.8103-.941-1.1334 0-2.1533.9635-2.1533 2.153v4.8957c0 .972-.7969 1.7594-1.7596 1.7594-.57 0-1.1363-.286-1.4728-.7658L.4076 5.1598C.2822 4.9798 0 5.0688 0 5.2882v4.2452c0 .2147.0656.4228.1884.599l5.4748 7.8183c.3234.462.8006.8052 1.3509.9298 1.3771.313 2.6446-.747 2.6446-2.0977v-4.893c0-.972.7875-1.7593 1.7596-1.7593h.003a1.798 1.798 0 0 1 1.4718.7658l4.9723 7.0994c.4135.5905 1.05.941 1.8093.941 1.1587 0 2.1515-.9645 2.1515-2.153v-4.8948c0-.972.7875-1.7594 1.7596-1.7594h.194a.22.22 0 0 0 .2204-.2202v-4.622a.22.22 0 0 0-.2203-.2203Z"/></symbol>
+    <symbol id="sb-ic-copilot" viewBox="0 0 24 24" fill="currentColor"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+    <!-- Material icons, for the Gmail scene -->
+    <!-- the Gmail M -->
+  </defs>
+</svg>
+
+<div id="frame">
+
+  <!-- ============ scene 1: the site's hero box (site/index.html #stage), 1:1 ============ -->
+  <section class="scene on" id="site" aria-label="superbot boots">
+    <div id="site-in">
+      <div class="stage" id="stage" role="figure" aria-label="superbot's apps spin up, merge into the mark, the rail drops from it and the frontend extends">
+        <div class="stage-bar"><i></i><i></i><i></i><span>superbot</span><em class="led" id="led"></em></div>
+        <div class="body">
+          <div class="margin" id="margin" aria-hidden="true"></div>
+          <div class="arena" id="arena">
+            <!-- the hub: the real app's layout (rail, chats, chat lane), from site/index.html -->
+            <div class="hub" id="hub" aria-hidden="true">
+              <nav class="rail inner">
+                <span class="rail-item sb sel"><img src="assets/tile.svg" alt="" width="44" height="44"/></span>
+                <span class="rail-div"></span>
+                <span class="rail-item" data-app="openai"><svg><use href="#sb-ic-openai"/></svg><i class="dot"></i></span>
+                <span class="rail-item" data-app="claude"><svg><use href="#sb-ic-claude"/></svg><i class="dot bad"></i></span>
+                <span class="rail-item" data-app="gemini"><svg><use href="#sb-ic-gemini"/></svg><i class="dot"></i></span>
+                <span class="rail-item" data-app="cursor"><svg><use href="#sb-ic-cursor"/></svg><i class="dot"></i></span>
+                <span class="rail-item bleed" data-app="devin"><img src="assets/devin.png" alt="" width="44" height="44"/><i class="dot"></i></span>
+                <span class="rail-item bleed" data-app="hermes"><img src="assets/hermes.png" alt="" width="44" height="44"/><i class="dot"></i></span>
+                <span class="rail-item bleed" data-app="grok"><img src="assets/grok.png" alt="" width="44" height="44"/><i class="dot"></i></span>
+                <span class="rail-item" data-app="copilot"><svg><use href="#sb-ic-copilot"/></svg><i class="dot"></i></span>
+                <span class="rail-div"></span>
+                <span class="rail-item folder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+                  <i class="dot"></i>
+                </span>
+                <span class="rail-item add">+</span>
+              </nav>
+              <div class="chats inner">
+                <div class="side-head"><img src="assets/mark-clean.svg" alt="" width="14" height="14"/><b>superbot.gg</b><i class="side-ic ic-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg></i><i class="side-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></i></div>
+                <span class="row new"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4Z"/></svg>New chat</span>
+                <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>Manage Context</span>
+                <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11"/><path d="M14.6 9.4c-.9-1.3-5.8-1.4-5.8.9 0 2.5 6.2 1.4 6.2 3.8 0 2.3-5.2 2.1-6.4.7"/></svg>View Savings</span>
+                <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 17v-6"/><path d="M13 17V7"/><path d="M18 17v-3"/></svg>View Usage</span>
+                <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 2 2 4-4"/><path d="m3 14 2 2 4-4"/><path d="M13 6h8"/><path d="M13 16h8"/></svg>Setup<i class="cnt">3</i></span>
+                <div class="cap-row"><span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>Recents</span><span class="cnt-r">1</span></div>
+                <div class="today">Today</div>
+                <span class="row chat on"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">which rate limiter…</span><em>12m</em></span>
+                <span class="row chat"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">rank the import pa…</span><em>3h</em></span>
+                <span class="row chat"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">trello card test</span><em>1d</em></span>
+                <span class="row chat"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">dedupe the always…</span><em>3d</em></span>
+                <span class="row chat"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">macapp notarizati…</span><em>1w</em></span>
+                <div class="ctx-mini" aria-hidden="true"><div class="cx-in">
+                  <div class="cx"><span>this week</span><b>$5.15</b></div>
+                  <div class="bar"><i style="--p:82%"></i></div>
+                  <div class="cx"><span>context</span><b>361k</b></div>
+                </div></div>
+                <div class="user"><span class="avatar" style="--c:var(--raised)">D<i class="dot ok"></i></span><span class="u-tx"><b>hi@superbot.gg</b><small>no balance yet</small></span><svg class="u-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              </div>
+              <div class="main inner">
+                <div class="chat-head"><b>chat</b><span class="search">Search<kbd>⌘K</kbd></span><span class="ask"><img src="assets/mark-clean.svg" alt="" width="12" height="12"/>Ask Superbot</span><span class="ptoggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18"/></svg></span></div>
+                <div class="feed" id="feed">
+                  <div class="welcome"><span class="w-ic"><img src="assets/mark-clean.svg" alt="" width="14" height="14"/></span><span class="w-tx"><b>Welcome to #chat</b><small>This is the start of your conversation with Superbot.</small></span></div>
+                  <div class="date-div">September 11, 2026</div>
+                  <div class="msg" id="h-user"><span class="avatar" style="--c:#fb7185">D</span><div class="m-main"><div class="m-head"><span class="m-name">dan</span><span class="m-when">9:02 AM</span></div><div class="m-text" id="h-ask"></div></div></div>
+                  <div class="msg" id="h-bot1"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">9:02 AM</span></div><div class="m-text" id="h-r1"></div>
+                    <div class="card" id="acard"><div class="c-head">Analyzing your job<small id="an-n">0 tasks</small></div><div class="an-scan"><span id="an-lab">watching 2 weeks of activity</span><b id="an-pct">0%</b><span class="bar"><i id="an-bar"></i></span></div><div id="an-rows"></div><div class="an-sum" id="an-sum"><div class="top"><span class="big" id="an-share">0% automatable</span><span><b id="an-auto">0</b> of <b id="an-tot">0</b> tasks</span></div><span class="bar"><i id="an-sbar"></i></span></div></div>
+                  </div></div>
+                  <div class="msg" id="h-bot2"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">9:03 AM</span></div><div class="m-text" id="h-r2"></div></div></div>
+                </div>
+                <div class="composer" aria-hidden="true"><div class="pill"><span class="plus">+</span><span class="ph" id="h-ph">How can superbot help you today?</span><span class="picker">superbot ▾</span><span class="send" id="h-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ scene 2: the title card ============ -->
+  <section class="scene card-scene" id="card1" aria-label="Your all in one agent workspace">
+    <div class="line" id="card1-l">Your all in one<br/>agent <span class="grad">workspace</span></div>
+  </section>
+
+  <!-- ============ scene 4: the ERP data-entry app ============ -->
+  <section class="scene" id="erp" aria-label="superbot enters the records">
+    <nav class="er-nav">
+      <div class="er-brand"><i>O</i>Orbit ERP</div>
+      <span class="sec">Operations</span>
+      <span class="it" data-nav="Dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</span>
+      <span class="it" data-nav="Invoices"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8"/></svg>Invoices</span>
+      <span class="it" data-nav="Customers"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Customers</span>
+      <span class="it" data-nav="Vendors"><svg viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v9h14v-9"/><path d="M10 21v-6h4v6"/></svg>Vendors</span>
+      <span class="it" data-nav="Inventory"><svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>Inventory</span>
+      <span class="it" data-nav="Orders"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Orders</span>
+      <span class="sec">Insights</span>
+      <span class="it" data-nav="Reports"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 4 5-6"/></svg>Reports</span>
+      <span class="it" data-nav="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</span>
+    </nav>
+    <div class="er-top"><span class="er-crumb" id="er-crumb"></span><span class="er-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>Search records…</span><span class="er-new"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg>New</span><span class="er-me">D</span></div>
+    <div class="er-main">
+      <div class="er-head"><h1 id="er-title"></h1><span class="id" id="er-id"></span><span class="st">Draft</span></div>
+      <div class="er-form" id="er-form"><div class="er-grid" id="er-grid"></div><div class="er-foot"><span class="cancel">Cancel</span><span class="er-save" id="er-save"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Save record</span><small>Autosave on · last saved just now</small></div></div>
+      <div class="er-recent"><h3>Recent records</h3><div id="er-recent"></div></div>
+    </div>
+    <div class="er-toast" id="er-toast"><i><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></i>Saved <b id="er-toast-id"></b></div>
+    <div id="agent" aria-hidden="true">
+      <div class="p-head"><img src="assets/mark-clean.svg" alt=""/>superbot<span style="color:var(--muted);font-weight:600">.gg</span></div>
+      <div class="p-line"><i></i>entering your records<b id="ag-n">0 records</b></div>
+      <div class="p-sub"><span id="ag-f">0 fields</span><span id="ag-r">0 fields / min</span></div>
+    </div>
+  </section>
+
+  <!-- ============ scene 5: the second card ============ -->
+  <section class="scene card-scene" id="card2" aria-label="With a agent made to work">
+    <div class="line" id="card2-l">With a agent<br/>made to <span class="grad">work</span></div>
+  </section>
+
+  <!-- ============ scene 6: the end card ============ -->
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true"><rect class="ga" x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/><rect class="gb" x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/></svg>
+      <div class="words" id="end-words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <div id="dip"></div>
+</div>
+<script src="assets/sphere-intro.js"></script>
+<script>
+// ---------- the clock ----------
+// Scene 1 is the site's own sphere-intro (real-time WAAPI, verbatim, ~7.6s); it
+// hands off when the frontend has extended, and from that moment the story is
+// one render(t), a pure function of story time (gpt-refusal-superbot-824cef28's
+// skeleton: seg() windows, pure tweens, 30fps frame quantisation), so `?t=<s>`
+// seeks any story frame (the intro is skipped and the hub composed in its end
+// state) and `?t=<s>&play=1` runs on from there.
+const FPS = 30;
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+
+// ---------- copy ----------
+const PROMPT = "I do data entry, help me do it";
+const R1 = 'On it. Let me look at how you actually spend the day.';
+const TASKS = [
+  { n: 'Copy invoice fields into the ERP', s: '61 / wk', tag: 'auto' },
+  { n: 'Create customers from signup CSV', s: '38 / wk', tag: 'auto' },
+  { n: 'Reconcile mismatched totals', s: '9 / wk', tag: 'keep' },
+  { n: 'Receive stock and log quantities', s: '44 / wk', tag: 'auto' },
+  { n: 'Approve vendor exceptions', s: '6 / wk', tag: 'keep' },
+  { n: 'Key in phone orders', s: '31 / wk', tag: 'auto' },
+];
+const TOTAL = 212, AUTO = 174;
+const R2 = 'Starting now. I take the routine entry, you keep the judgement calls.';
+const PAGES = [
+  { nav: 'Invoices', crumb: ['Invoices', 'New invoice'], title: 'New invoice', id: 'INV-10231', fields: [['Customer', 'Northwind Traders', 1], ['Invoice date', '09/11/2026'], ['Due date', '10/11/2026'], ['PO number', 'PO-88213'], ['Line item', 'Cloud hosting · Sept', 0, 1], ['Quantity', '1'], ['Unit price', '$4,120.00'], ['Tax', '8.25%', 1]] },
+  { nav: 'Customers', crumb: ['Customers', 'New customer'], title: 'New customer', id: 'CUS-5518', fields: [['Company', 'Lumen Devices Inc.'], ['Contact', 'Marcus Lee'], ['Email', 'marcus@lumen.dev'], ['Phone', '+1 (312) 555-0198'], ['Billing address', '400 W Madison St, Chicago, IL 60606', 0, 1], ['Payment terms', 'Net 30', 1], ['Segment', 'Mid-market', 1]] },
+  { nav: 'Inventory', crumb: ['Inventory', 'Receive stock'], title: 'Receive stock', id: 'RCV-2207', fields: [['Purchase order', 'PO-88190'], ['Warehouse', 'Oakland · Bay 4', 1], ['SKU', 'HX-220-BLK'], ['Description', 'Hex bracket, black, 20mm'], ['Quantity received', '1,200'], ['Lot number', 'L-26-0911'], ['Received by', 'Dan Park'], ['Condition', 'Good', 1]] },
+  { nav: 'Vendors', crumb: ['Vendors', 'New vendor'], title: 'New vendor', id: 'VEN-0342', fields: [['Legal name', 'Studio Rossi S.r.l.'], ['Contact', 'Elena Rossi'], ['Email', 'elena@studiorossi.it'], ['Tax ID', 'IT02938470961'], ['Address', 'Via Torino 12, 20123 Milano, IT', 0, 1], ['Currency', 'EUR', 1], ['Category', 'Creative services', 1]] },
+  { nav: 'Orders', crumb: ['Orders', 'New order'], title: 'New order', id: 'ORD-77120', fields: [['Customer', 'Sarah Kim', 1], ['Channel', 'Phone', 1], ['Item', 'Field kit · large'], ['Quantity', '3'], ['Ship to', '221 Valencia St, San Francisco, CA 94103', 0, 1], ['Shipping', 'Ground · 3–5 days', 1], ['Total', '$486.00']] },
+  { nav: 'Invoices', crumb: ['Invoices', 'New invoice'], title: 'New invoice', id: 'INV-10232', fields: [['Customer', 'Becker Labs', 1], ['Invoice date', '09/11/2026'], ['Due date', '10/11/2026'], ['PO number', 'PO-88221'], ['Line item', 'Onboarding package', 0, 1], ['Quantity', '2'], ['Unit price', '$1,250.00'], ['Tax', '8.25%', 1]] },
+];
+const RECENT = [['INV-10230', 'Acme Freight', 'Invoice', '$2,310.00'], ['CUS-5517', 'Harbor & Co', 'Customer', '—'], ['RCV-2206', 'PO-88188', 'Receipt', '640 units']];
+
+// ---------- the beat sheet (story seconds, 0 = the frontend has fully extended) ----------
+const B = {
+  card1: 1.0, card1Out: 2.55, back: 2.9,
+  typeA: 3.5, typeB: 4.29, send: 4.49, ask: 4.59,             // the operator's prompt
+  r1: 5.29, cps: 60,                                        // "let me look at how you spend the day"
+  acard: 6.29, scanA: 6.49, scanB: 7.89,                     // the analysis card, the scan counter climbs
+  rows: [7.19, 7.54, 7.89, 8.24, 8.59, 8.94], verdict: 0.45, // each task lands, its verdict flips in
+  sum: 9.59,                                               // the summary bar
+  r2: 10.29,                                                // "Starting now…"
+  erp: 11.99,                                               // dip to the ERP
+  pageAt: [12.39, 13.59, 14.79, 15.99, 17.19, 18.39], pageDur: 1.2, fieldStep: 0.09, fieldIn: 0.15, save: 0.98, // six pages, ~4.39s of entry
+  card2: 20.19, card2Out: 22.69, end: 23.09, word: 23.79, loop: 27.09,
+};
+const CUTS = [B.card1, B.back, B.erp, B.card2, B.end, B.loop];
+
+// ---------- build ----------
+const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const anRows = TASKS.map((k) => {
+  const r = document.createElement('div'); r.className = 'an-row';
+  r.innerHTML = `<span class="n">${esc(k.n)}</span><span class="f">${k.s}</span><span class="tag">…</span>`;
+  $('an-rows').appendChild(r); return r;
+});
+$('er-recent').innerHTML = RECENT.map((r) => `<div class="er-row"><b>${r[0]}</b><span>${r[1]}</span><span>${r[2]}</span><span>${r[3]}</span><span class="pill">Posted</span></div>`).join('');
+const navItems = [...document.querySelectorAll('.er-nav .it')];
+
+// ---------- element refs ----------
+const frame = $('frame'), dip = $('dip');
+const scenes = { site: $('site'), card1: $('card1'), erp: $('erp'), card2: $('card2'), end: $('end') };
+const hub = $('hub'), rail = hub.querySelector('.rail'), sb = hub.querySelector('.rail-item.sb');
+const feedEl = $('feed'), hPh = $('h-ph'), hSend = $('h-send');
+const hUser = $('h-user'), hAsk = $('h-ask'), hBot1 = $('h-bot1'), hR1 = $('h-r1'), hBot2 = $('h-bot2'), hR2 = $('h-r2');
+const acard = $('acard'), anN = $('an-n'), anLab = $('an-lab'), anBar = $('an-bar'), anPct = $('an-pct'), anSum = $('an-sum'), anAuto = $('an-auto'), anTot = $('an-tot'), anShare = $('an-share'), anSbar = $('an-sbar');
+const card1L = $('card1-l'), card2L = $('card2-l');
+const erCrumb = $('er-crumb'), erTitle = $('er-title'), erId = $('er-id'), erForm = $('er-form'), erGrid = $('er-grid'), erSave = $('er-save'), erToast = $('er-toast'), erToastId = $('er-toast-id'), erRecent = $('er-recent');
+const agent = $('agent'), agN = $('ag-n'), agF = $('ag-f'), agR = $('ag-r');
+const endFace = $('end-face'), endSlide = $('end-slide');
+hAsk.textContent = PROMPT;
+let pageFor = -1, fieldEls = [];
+
+// ---------- render(t): every visual from story time ----------
+function sceneAt(t) {
+  if (t < B.card1) return 'site';
+  if (t < B.back) return 'card1';
+  if (t < B.erp) return 'site';
+  if (t < B.card2) return 'erp';
+  if (t < B.end) return 'card2';
+  return 'end';
+}
+function render(t) {
+  const cur = sceneAt(t);
+  for (const k in scenes) { scenes[k].classList.toggle('on', k === cur); op(scenes[k], k === cur ? 1 : 0); }
+  let d = 0;
+  for (const c of CUTS) d = Math.max(d, seg(t, c - 0.3, c) * (1 - seg(t, c, c + 0.3)));
+  op(dip, d);
+  renderHub(t);
+  renderCard(card1L, t, B.card1, B.card1Out);
+  renderCard(card2L, t, B.card2, B.card2Out);
+  renderErp(t);
+  renderEnd(t);
+}
+
+const typed = (text, t, at, cps) => (t < at ? '' : text.slice(0, Math.min(text.length, Math.floor((t - at) * cps))));
+const land = (el, t, at) => { const p = seg(t, at, at + 0.25); op(el, p); el.style.transform = `translateY(${((1 - outCubic(p)) * 6).toFixed(1)}px)`; };
+
+function renderHub(t) {
+  const typing = t >= B.typeA && t < B.ask;
+  const text = typing ? PROMPT.slice(0, Math.floor(seg(t, B.typeA, B.typeB) * PROMPT.length)) : '';
+  hPh.classList.toggle('typing', typing);
+  hPh.innerHTML = typing ? esc(text) + '<span class="caret"></span>' : 'How can superbot help you today?';
+  const press = t >= B.send && t < B.send + 0.14 ? 1 : 0;
+  hSend.style.transform = `scale(${(1 - 0.12 * press).toFixed(3)})`;
+  land(hUser, t, B.ask); land(hBot1, t, B.r1); land(hBot2, t, B.r2);
+  hR1.textContent = typed(R1, t, B.r1, B.cps);
+  hR2.textContent = typed(R2, t, B.r2, B.cps);
+  // the analysis card: the scan climbs to 212 tasks, each task lands and gets its verdict, then the share
+  op(acard, seg(t, B.acard, B.acard + 0.3)); acard.style.display = t >= B.acard - 0.01 ? '' : 'none';
+  const sc = outCubic(seg(t, B.scanA, B.scanB));
+  anN.textContent = `${Math.round(sc * TOTAL)} tasks`;
+  anBar.style.width = `${(sc * 100).toFixed(1)}%`; anPct.textContent = `${Math.round(sc * 100)}%`;
+  anLab.textContent = sc >= 1 ? 'activity scanned' : 'watching 2 weeks of activity';
+  anRows.forEach((r, i) => {
+    const at = B.rows[i], p = seg(t, at, at + 0.25);
+    r.style.display = t >= at - 0.01 ? '' : 'none';
+    r.style.opacity = String(p); r.style.transform = `translateY(${((1 - outCubic(p)) * 4).toFixed(1)}px)`;
+    const tag = r.querySelector('.tag'), on = t >= at + B.verdict;
+    tag.className = 'tag' + (on ? ' ' + TASKS[i].tag : '');
+    tag.textContent = on ? (TASKS[i].tag === 'auto' ? 'automate' : 'keep') : 'scanning';
+  });
+  const sp = seg(t, B.sum, B.sum + 0.5);
+  op(anSum, sp * 2); anSum.style.display = t >= B.sum - 0.01 ? '' : 'none';
+  anAuto.textContent = String(Math.round(outCubic(sp) * AUTO)); anTot.textContent = String(TOTAL);
+  anShare.textContent = `${Math.round(outCubic(sp) * 100 * AUTO / TOTAL)}% automatable`;
+  anSbar.style.width = `${(outCubic(sp) * 100 * AUTO / TOTAL).toFixed(1)}%`;
+  feedEl.scrollTop = feedEl.scrollHeight;
+}
+
+function renderCard(el, t, at, out) {
+  const a = seg(t, at, at + 0.35), o = seg(t, out, out + 0.3);
+  op(el, a * (1 - o));
+  el.style.transform = `translateY(${(-50 + (1 - outQuint(a)) * 3 - o * 3).toFixed(2)}%) scale(${lerp(0.96, 1, outQuint(a)).toFixed(3)})`;
+}
+
+// one form page: the nav highlight, the crumb, the title, the fields (label, value, select?, wide?)
+function buildPage(i) {
+  const p = PAGES[i];
+  navItems.forEach((el) => el.classList.toggle('on', el.dataset.nav === p.nav));
+  erCrumb.innerHTML = `${p.crumb[0]} <span>/</span> <b>${p.crumb[1]}</b>`;
+  erTitle.textContent = p.title; erId.textContent = p.id;
+  erGrid.innerHTML = p.fields.map(([l, v, sel, wide]) => `<div class="er-f${wide ? ' wide' : ''}"><label>${l}</label><div class="in${sel ? ' sel' : ''}"><span class="ph">${sel ? 'Select…' : 'Enter ' + l.toLowerCase()}</span><span class="v">${esc(v)}</span><span class="ok"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></div></div>`).join('');
+  fieldEls = [...erGrid.querySelectorAll('.in')];
+}
+function renderErp(t) {
+  let page = -1, saved = 0, fields = 0;
+  PAGES.forEach((p, i) => {
+    const at = B.pageAt[i];
+    if (t >= at) page = i;
+    if (t >= at + B.save) saved++;
+    if (t >= at) fields += Math.min(p.fields.length, Math.max(0, Math.floor((t - at - B.fieldIn) / B.fieldStep) + 1));
+  });
+  if (page < 0) page = 0;
+  if (pageFor !== page) { pageFor = page; buildPage(page); }
+  const at = B.pageAt[page], u = t - at;
+  // the form slides in with each page
+  const fi = outCubic(seg(u, 0, 0.18));
+  op(erForm, fi); erForm.style.transform = `translateY(${((1 - fi) * 10).toFixed(1)}px)`;
+  const hd = document.querySelector('.er-head'); op(hd, fi);
+  // the fields: each takes focus for a beat, its value lands, then reads done with a check
+  fieldEls.forEach((el, i) => {
+    const fAt = B.fieldIn + i * B.fieldStep, q = u - fAt;
+    const filled = q >= 0.05, focus = q >= -0.04 && q < B.fieldStep + 0.02;
+    el.classList.toggle('focus', focus); el.classList.toggle('done', filled && !focus);
+    el.querySelector('.ph').style.display = q >= 0 ? 'none' : '';
+    el.querySelector('.v').style.opacity = String(clamp01(q / 0.08));
+    el.querySelector('.ok').style.opacity = String(seg(q, 0.06, 0.2));
+  });
+  // the save press, then the toast and a fresh row in the recent list
+  const press = u >= B.save - 0.14 && u < B.save ? 1 : 0;
+  erSave.style.transform = `scale(${(1 - 0.06 * press).toFixed(3)})`; erSave.classList.toggle('pressed', press === 1);
+  // the toast belongs to the LAST saved page (it may still be up as the next page opens)
+  let toastAt = -1, toastId = '';
+  PAGES.forEach((p, i) => { if (t >= B.pageAt[i] + B.save) { toastAt = B.pageAt[i] + B.save; toastId = p.id; } });
+  erToastId.textContent = toastId;
+  const tv = toastAt < 0 ? 0 : seg(t, toastAt, toastAt + 0.18) * (1 - seg(t, toastAt + 1.0, toastAt + 1.25));
+  op(erToast, tv); erToast.style.transform = `translateY(${((1 - outBack(seg(t, toastAt, toastAt + 0.3))) * -10).toFixed(1)}px)`;
+  // the recent list: every saved record sits on top, newest first, lit
+  const savedRows = PAGES.slice(0, saved).reverse().map((p) => `<div class="er-row new"><b>${p.id}</b><span>${p.fields[0][1]}</span><span>${p.title.replace('New ', '').replace(/^\w/, (c) => c.toUpperCase())}</span><span>${p.fields[p.fields.length - 1][1]}</span><span class="pill">Posted</span></div>`);
+  const all = savedRows.concat(RECENT.map((r) => `<div class="er-row"><b>${r[0]}</b><span>${r[1]}</span><span>${r[2]}</span><span>${r[3]}</span><span class="pill">Posted</span></div>`)).slice(0, 3).join('');
+  if (erRecent.dataset.k !== String(saved)) { erRecent.dataset.k = String(saved); erRecent.innerHTML = all; }
+  // superbot at work, bottom-right
+  const pp = seg(t, B.erp + 0.35, B.erp + 0.8);
+  op(agent, pp * 2);
+  agent.style.transform = `translate(${((1 - outBack(pp)) * 30).toFixed(1)}px, ${((1 - outBack(pp)) * 60).toFixed(1)}px) scale(${lerp(0.9, 1, outBack(pp)).toFixed(3)})`;
+  agN.textContent = `${saved} record${saved === 1 ? '' : 's'}`;
+  agF.textContent = `${fields} fields`;
+  const el = Math.max(0.001, t - B.pageAt[0]);
+  agR.textContent = `${t > B.pageAt[0] + 0.5 ? Math.round(fields / el * 60) : 0} fields / min`;
+}
+
+function renderEnd(t) {
+  const f = seg(t, B.end, B.end + 0.5), w = seg(t, B.word, B.word + 0.7);
+  op(endFace, f); endFace.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(3)})`;
+  endSlide.style.transform = `translateX(${((1 - outQuint(w)) * -110).toFixed(1)}%)`;
+  op(endSlide, w);
+}
+
+// ---------- the hub between runs ----------
+function resetHub() {
+  hub.getAnimations({ subtree: true }).forEach((a) => a.cancel());
+  [hub, rail, ...rail.children, ...hub.querySelectorAll('.inner')].forEach((el) => el.removeAttribute('style'));
+  sb.classList.add('sel');
+}
+function composeHubEnd() {
+  const body = $('stage').querySelector('.body'), mg = $('margin');
+  body.style.transition = 'none'; body.style.gridTemplateColumns = '0% minmax(0, 1fr)';
+  mg.style.opacity = '0'; mg.style.padding = '0'; mg.style.borderRight = '0'; mg.style.overflow = 'hidden';
+  hub.style.opacity = '1';
+  hub.querySelectorAll('.inner').forEach((el) => { el.style.opacity = '1'; });
+  [...rail.children].forEach((el) => { el.style.opacity = '1'; });
+  sb.classList.add('sel');
+}
+
+// ---------- fit the frame to the viewport ----------
+function fit() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  frame.style.transform = `translate(-50%, -50%) scale(${k})`;
+}
+addEventListener('resize', fit); fit();
+
+// ---------- play ----------
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+let phase = 'intro', t0 = 0, last = -1;
+function startStory() { t0 = performance.now(); last = -1; phase = 'story'; }
+function startIntro() {
+  phase = 'intro';
+  render(0);
+  op(dip, 1);
+  dip.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards', easing: 'ease-out' });
+  window.runSphereIntro(startStory);
+}
+function tick(now) {
+  requestAnimationFrame(tick);
+  if (phase !== 'story') return;
+  const t = (now - t0) / 1000;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  if (t >= B.loop) { resetHub(); startIntro(); }
+}
+if (reduced) { composeHubEnd(); render(B.word + 1); }
+else if (seekTo !== null) {
+  composeHubEnd();
+  if (q.has('play')) { startStory(); t0 -= seekTo * 1000; requestAnimationFrame(tick); }
+  else render(Math.floor(seekTo * FPS) / FPS);
+} else {
+  render(0);
+  window.runSphereIntro(startStory);
+  requestAnimationFrame(tick);
+}
+window.__ad = { B, phase: () => phase, t: () => (phase === 'story' ? (performance.now() - t0) / 1000 : -1) };
+</script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+[
+  {
+    "id": "tabs-chaos-superbot-6f50ea56",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "14 tabs? the same prompt pasted into fourteen AI tabs, then superbot asks every agent from one window (15s loop)",
+    "src": "animations/tabs-chaos-superbot-6f50ea56/",
+    "thumb": "assets/shots/tabs-chaos-superbot-6f50ea56.png"
+  },
+  {
+    "id": "youtube-refusal-superbot-7f2c9a41",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "youtube to mp3? ChatGPT refuses with the terms-of-service lecture; superbot pops in mid-refusal and the click downloads instantly; the pain words cascade, accelerating to 3x (21.9s loop)",
+    "src": "animations/youtube-refusal-superbot-7f2c9a41/",
+    "thumb": "assets/shots/youtube-refusal-superbot-7f2c9a41.png"
+  },
+  {
+    "id": "deny-cascade-superbot-440813d4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "\"ask me anything\", and ChatGPT denies 35 prompts in 7 seconds; superbot thinks, runs its tools and answers in plain text, ramping 1x to 10x (~19s loop)",
+    "src": "animations/deny-cascade-superbot-440813d4/",
+    "thumb": "assets/shots/deny-cascade-superbot-440813d4.png"
+  },
+  {
+    "id": "agents-slower-superbot-7bf1a6c6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "agents getting slower overtime? · the house card pop, 1.9 seconds flat, then superbot knows why in the wordmark gradient and the end screen (6.5s loop)",
+    "src": "animations/agents-slower-superbot-7bf1a6c6/",
+    "thumb": "assets/shots/agents-slower-superbot-7bf1a6c6.png"
+  },
+  {
+    "id": "favorite-color",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "favorite color — the chat pitch",
+    "src": "animations/favorite-color/",
+    "thumb": "assets/shots/favorite-color.png"
+  },
+  {
+    "id": "mayonnaise-superbot-5c2f8e47",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "is mayonnaise an instrument? · Patrick asks with the ChatGPT icon on his head; ChatGPT classifies mayonnaise by Hornbostel-Sachs forever and the camera flies down the wall; Patrick asks again wearing the superbot icon; superbot, in blue, pink and purple: \"No.\" · stop burning tokens · the end card (29s loop, with sound)",
+    "src": "animations/mayonnaise-superbot-5c2f8e47/",
+    "thumb": "assets/shots/mayonnaise-superbot-5c2f8e47.png"
+  },
+  {
+    "id": "who-are-you-superbot-4a7e2c19",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "who are you? · the Kazoo Kid asks with the ChatGPT icon on his head; ChatGPT rambles about identity forever and the camera flies down the wall; the kid asks again wearing the superbot icon; superbot, in blue, pink and purple: \"I'm superbot. I can do anything, test me.\" · stop burning tokens · the end card (28.5s loop, with sound)",
+    "src": "animations/who-are-you-superbot-4a7e2c19/",
+    "thumb": "assets/shots/who-are-you-superbot-4a7e2c19.png"
+  },
+  {
+    "id": "stop-burning-tokens",
+    "type": "image",
+    "group": "Ad spots",
+    "title": "stop burning tokens · the three-word poster with the superbot icon (static)",
+    "ars": [
+      "4x5",
+      "16x9",
+      "4x3",
+      "1x1"
+    ],
+    "sizes": {
+      "4x5": {
+        "w": 1080,
+        "h": 1350
+      },
+      "16x9": {
+        "w": 2400,
+        "h": 1350
+      },
+      "4x3": {
+        "w": 1800,
+        "h": 1350
+      },
+      "1x1": {
+        "w": 1350,
+        "h": 1350
+      }
+    },
+    "src": "assets/ads/stop-burning-tokens.{ar}.png",
+    "thumb": "assets/ads/stop-burning-tokens.{ar}.png"
+  },
+  {
+    "id": "agents-refusing-poster",
+    "type": "image",
+    "group": "Ad spots",
+    "title": "agents refusing? superbot can do it! · the refusal poster (static)",
+    "ars": [
+      "4x5",
+      "16x9",
+      "4x3",
+      "1x1"
+    ],
+    "sizes": {
+      "4x5": {
+        "w": 864,
+        "h": 1080
+      },
+      "16x9": {
+        "w": 1920,
+        "h": 1080
+      },
+      "4x3": {
+        "w": 1440,
+        "h": 1080
+      },
+      "1x1": {
+        "w": 1080,
+        "h": 1080
+      }
+    },
+    "src": "assets/ads/agents-refusing-poster.{ar}.png",
+    "thumb": "assets/ads/agents-refusing-poster.{ar}.png"
+  },
+  {
+    "id": "agents-slow-poster",
+    "type": "image",
+    "group": "Ad spots",
+    "title": "agents slow? superbot can do it! · the speed poster (static)",
+    "ars": [
+      "4x5",
+      "16x9",
+      "4x3",
+      "1x1"
+    ],
+    "sizes": {
+      "4x5": {
+        "w": 864,
+        "h": 1080
+      },
+      "16x9": {
+        "w": 1920,
+        "h": 1080
+      },
+      "4x3": {
+        "w": 1440,
+        "h": 1080
+      },
+      "1x1": {
+        "w": 1080,
+        "h": 1080
+      }
+    },
+    "src": "assets/ads/agents-slow-poster.{ar}.png",
+    "thumb": "assets/ads/agents-slow-poster.{ar}.png"
+  },
+  {
+    "id": "agent-workspace-poster",
+    "type": "image",
+    "group": "Ad spots",
+    "title": "your all in one agent workspace · the workspace poster (static)",
+    "ars": [
+      "4x5",
+      "16x9",
+      "4x3",
+      "1x1"
+    ],
+    "sizes": {
+      "4x5": {
+        "w": 864,
+        "h": 1080
+      },
+      "16x9": {
+        "w": 1920,
+        "h": 1080
+      },
+      "4x3": {
+        "w": 1440,
+        "h": 1080
+      },
+      "1x1": {
+        "w": 1080,
+        "h": 1080
+      }
+    },
+    "src": "assets/ads/agent-workspace-poster.{ar}.png",
+    "thumb": "assets/ads/agent-workspace-poster.{ar}.png"
+  },
+  {
+    "id": "context-full-poster",
+    "type": "image",
+    "group": "Ad spots",
+    "title": "context full? superbot can fix it! · before/after: ChatGPT at 197K of 200K, ChatGPT (with superbot) at 31K; 166K tokens freed (static)",
+    "ars": [
+      "4x5",
+      "16x9",
+      "4x3",
+      "1x1"
+    ],
+    "sizes": {
+      "4x5": {
+        "w": 864,
+        "h": 1080
+      },
+      "16x9": {
+        "w": 1920,
+        "h": 1080
+      },
+      "4x3": {
+        "w": 1440,
+        "h": 1080
+      },
+      "1x1": {
+        "w": 1080,
+        "h": 1080
+      }
+    },
+    "src": "assets/ads/context-full-poster.{ar}.png",
+    "thumb": "assets/ads/context-full-poster.{ar}.png"
+  },
+  {
+    "id": "context-slow-poster",
+    "type": "image",
+    "group": "Ad spots",
+    "title": "agent slow? superbot can fix it! · before/after: ChatGPT at 190K and 84s replies, ChatGPT (with superbot) at 28K and 36.5s; 2.3x faster (static)",
+    "ars": [
+      "4x5",
+      "16x9",
+      "4x3",
+      "1x1"
+    ],
+    "sizes": {
+      "4x5": {
+        "w": 864,
+        "h": 1080
+      },
+      "16x9": {
+        "w": 1920,
+        "h": 1080
+      },
+      "4x3": {
+        "w": 1440,
+        "h": 1080
+      },
+      "1x1": {
+        "w": 1080,
+        "h": 1080
+      }
+    },
+    "src": "assets/ads/context-slow-poster.{ar}.png",
+    "thumb": "assets/ads/context-slow-poster.{ar}.png"
+  },
+  {
+    "id": "context-costly-poster",
+    "type": "image",
+    "group": "Ad spots",
+    "title": "context costly? superbot can fix it! · before/after: Claude Code at $46.80 of a $50 daily cap by 4:10 pm, Claude Code (with superbot) at $8.20; $38.60 a day saved (static)",
+    "ars": [
+      "4x5",
+      "16x9",
+      "4x3",
+      "1x1"
+    ],
+    "sizes": {
+      "4x5": {
+        "w": 864,
+        "h": 1080
+      },
+      "16x9": {
+        "w": 1920,
+        "h": 1080
+      },
+      "4x3": {
+        "w": 1440,
+        "h": 1080
+      },
+      "1x1": {
+        "w": 1080,
+        "h": 1080
+      }
+    },
+    "src": "assets/ads/context-costly-poster.{ar}.png",
+    "thumb": "assets/ads/context-costly-poster.{ar}.png"
+  }
+]

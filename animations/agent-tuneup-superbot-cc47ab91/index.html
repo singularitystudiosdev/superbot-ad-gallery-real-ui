@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>your agent's a mess? superbot tunes it · ad spot</title>
+<link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
+<meta name="description" content="ChatGPT flails at a simple trip plan, forgetting what it was told; the superbot popup takes you to the tune-up, where your rules and skills get organized and your context pinned; back in ChatGPT the same question lands instantly, and the timer says so. 26.2s looping ad spot, 1920x1080."/>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<style>
+/* ---------- tokens: the site's own ladder + ChatGPT dark (the house clone, 2026-09-09) ---------- */
+:root {
+  --bg: #000000; --card: #0d0d0d; --raised: #181818; --line: #262626;
+  --fg: #ececec; --secondary: #cfcfcf; --muted: #9a9a9a; --ok: #34d399; --danger: #c96f6f;
+  --storm-0: #00e5c3; --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm: linear-gradient(135deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-x: linear-gradient(90deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-action: linear-gradient(135deg, var(--storm-1) 0%, var(--storm-2) 55%, var(--storm-3) 100%);
+  --ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --gpt-main: #212121; --gpt-side: #171717; --gpt-composer: #303030; --gpt-bubble: #323232;
+  --gpt-text: #ececec; --gpt-text-2: #cdcdcd; --gpt-text-3: #afafaf;
+  --gpt-font: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* ---------- the ChatGPT clone, used twice: before (messy) and after (crisp) ---------- */
+.gpt { width: 1536px; height: 864px; transform: scale(1.25); transform-origin: 0 0; background: var(--gpt-main); font-family: var(--gpt-font); color: var(--gpt-text); display: grid; grid-template-columns: minmax(0, 1fr); }
+.g-main { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.g-thread { flex: 1; min-height: 0; overflow: hidden; position: relative; }
+.g-col { position: absolute; left: 50%; top: 0; width: 768px; margin-left: -384px; padding: 20px 20px 0; }
+.g-user { display: flex; justify-content: flex-end; margin: 12px 0 28px; }
+.g-user .bub { max-width: 70%; padding: 10px 20px; border-radius: 24px; background: var(--gpt-bubble); font-size: 16px; line-height: 28px; white-space: pre-wrap; }
+.g-ai { position: relative; font-size: 16px; line-height: 28px; color: var(--gpt-text); white-space: pre-wrap; word-break: break-word; }
+.g-ai .cur { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--gpt-text); vertical-align: -1px; margin-left: 2px; }
+.g-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(to bottom, rgba(33,33,33,0), var(--gpt-main) 70%); pointer-events: none; }
+.g-foot { flex: none; position: relative; padding: 10px 20px 14px; display: grid; justify-items: center; }
+.g-composer { width: 768px; min-height: 52px; border-radius: 28px; background: var(--gpt-composer); border: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; gap: 10px; padding: 0 8px 0 10px; }
+.g-composer .plus { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: var(--gpt-text); }
+.g-composer .ph { flex: 1; font-size: 16px; color: var(--gpt-text-3); white-space: nowrap; overflow: hidden; }
+.g-composer .ph.typing { color: var(--gpt-text); }
+.g-composer .ph .caret { display: inline-block; width: 1px; height: 18px; background: var(--gpt-text); vertical-align: -4px; margin-left: 1px; }
+.g-composer .mic { width: 36px; height: 36px; display: grid; place-items: center; color: var(--gpt-text); }
+.g-composer .send { width: 36px; height: 36px; border-radius: 50%; background: #676767; color: #212121; display: grid; place-items: center; }
+.g-composer .send.ready { background: #fff; }
+.g-composer .send svg { width: 18px; height: 18px; }
+.g-disc { margin-top: 10px; font-size: 12px; color: var(--gpt-text-3); }
+.g-thinking { display: inline-flex; align-items: center; gap: 8px; color: var(--gpt-text-2); font-size: 15px; }
+.g-thinking i { width: 10px; height: 10px; border-radius: 50%; background: var(--gpt-text); }
+/* the verdict chip: the speed comparison, red before and green after */
+.g-verdict { position: absolute; left: 50%; transform: translateX(-50%); bottom: 118px; padding: 8px 18px; border-radius: 999px; font: 700 15px/20px var(--ui); opacity: 0; }
+.g-verdict.bad { background: rgba(255,80,80,.12); color: #ff9d9d; border: 1px solid rgba(255,80,80,.3); }
+.g-verdict.good { background: rgba(52,211,153,.12); color: var(--ok); border: 1px solid rgba(52,211,153,.35); }
+.g-sent { position: absolute; right: 26px; top: 20px; font: 700 12px/16px var(--ui); color: var(--gpt-text-3); opacity: 0; }
+
+/* ---------- the rescue popup: the house popup, kept (owner verdict: "that part's cool") ---------- */
+#popup { position: absolute; right: 44px; bottom: 44px; width: max-content; padding: 20px; border-radius: 24px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box; box-shadow: 0 0 32px rgba(43,107,255,.32), 0 0 64px rgba(192,38,211,.22), 0 30px 70px rgba(0,0,0,.5); opacity: 0; transform-origin: 50% 100%; isolation: isolate; z-index: 20; }
+#popup .p-head { display: flex; align-items: center; gap: 12px; white-space: nowrap; font-size: 29px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+#popup .p-head img { width: 34px; height: 34px; }
+#chatbtn { position: relative; margin: 16px 0 0; display: block; width: 100%; padding: 12px 20px; border-radius: 16px; background: #fff; color: #000; font-size: 22px; font-weight: 700; text-align: center; transform-origin: 50% 50%; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+
+/* ---------- the cursor ---------- */
+#cursor { position: absolute; left: 0; top: 0; width: 34px; height: 44px; z-index: 40; opacity: 0; transform-origin: 3px 2px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.5)); }
+
+/* ---------- scene 2: the tune-up, the house app window ---------- */
+#site { background: #000; }
+#site-in { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform: scale(1.6); transform-origin: 0 0; }
+.win { position: absolute; inset: 0; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-rows: 28px minmax(0, 1fr); }
+.win-bar { display: flex; align-items: center; gap: 6px; padding: 0 12px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.win-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.win-bar span { margin-left: 8px; }
+.win-bar .led { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--storm-1); box-shadow: 0 0 8px var(--storm-1); }
+.win-body { position: relative; overflow: hidden; }
+.hub { position: absolute; inset: 8px; right: calc(24% + 20px); background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 64px 200px minmax(0, 1fr); font: 11px/15px var(--ui); color: var(--fg); }
+.hub > * { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.rail { background: var(--bg); border-right: 1px solid var(--line); align-items: center; padding: 8px 0; gap: 4px; }
+.rail-item { position: relative; flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--raised); display: grid; place-items: center; color: var(--fg); }
+.rail-item svg { width: 26px; height: 26px; fill: currentColor; }
+.rail-item .dot { position: absolute; right: -2px; bottom: -2px; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--bg); }
+.rail-item.sb { border-radius: 0; background: transparent; }
+.rail-item.sb img { width: 100%; height: 100%; display: block; }
+.rail-item.sel::before { content: ""; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); width: 3px; height: 26px; border-radius: 0 999px 999px 0; background: var(--fg); }
+.rail-item[data-app="openai"] { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="claude"] { background: #d97757; color: #fff; }
+.rail-item[data-app="gemini"] { background: #fff; color: #1f1f1f; }
+.rail-div { flex: none; width: 22px; height: 1px; background: var(--line); }
+.chats { background: var(--card); border-right: 1px solid var(--line); }
+.side-head { flex: none; display: flex; align-items: center; gap: 5px; min-height: 40px; padding: 9px 12px; font-weight: 700; font-size: 12px; }
+.side-head img { width: 14px; height: 14px; }
+.row { display: flex; align-items: center; gap: 6px; min-height: 26px; margin: 0 6px; padding: 0 8px; border-radius: 8px; color: var(--muted); white-space: nowrap; overflow: hidden; }
+.row svg { flex: none; width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.row em { margin-left: auto; font-style: normal; font-size: 10px; }
+.row.on { background: var(--raised); color: var(--fg); box-shadow: inset 3px 0 0 var(--storm-1); }
+.cap-row { display: flex; justify-content: space-between; padding: 4px 12px 2px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.today { padding: 2px 14px; color: var(--muted); font-size: 10px; }
+.user { margin-top: auto; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-top: 1px solid var(--line); }
+.user .av { position: relative; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); font: 700 10px/24px var(--ui); text-align: center; }
+.user .av i { position: absolute; right: -1px; bottom: -1px; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--card); }
+.user b { display: block; font-size: 11px; }
+.user small { display: block; color: var(--muted); font-size: 10px; }
+.main { position: relative; background: var(--card); }
+.chat-head { flex: none; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 12px; }
+.chat-head .ask { display: flex; align-items: center; gap: 4px; padding: 0 9px; border-radius: 8px; background: var(--storm-action); color: #fff; font-weight: 650; font-size: 10px; line-height: 20px; }
+.chat-head .ask img { width: 12px; height: 12px; }
+.feed { flex: 1; min-height: 0; padding: 10px 12px; display: grid; align-content: start; gap: 9px; overflow: hidden; }
+.msg { display: flex; gap: 8px; }
+.avatar { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); color: var(--fg); font: 700 10px/24px var(--ui); text-align: center; }
+.avatar.sb { background: #000; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; }
+.avatar.sb img { width: 62%; height: 62%; display: block; }
+.m-main { min-width: 0; flex: 1; }
+.m-head { display: flex; gap: 6px; align-items: baseline; }
+.m-name { font-weight: 700; }
+.m-text { font-size: 11px; line-height: 15px; white-space: pre-wrap; margin-top: 3px; }
+.tune { margin-top: 7px; display: grid; gap: 6px; }
+.tune-row { display: flex; align-items: center; gap: 7px; padding: 6px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--raised); font: 10.5px/14px var(--ui); opacity: 0; }
+.tune-row .tk { flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--ok); color: #000; display: grid; place-items: center; font: 800 9px/16px var(--ui); }
+.tune-row .ai { flex: none; width: 16px; height: 16px; border-radius: 5px; background: #000; display: grid; place-items: center; box-shadow: inset 0 0 0 1px var(--line); }
+.tune-row .ai svg { width: 10px; height: 10px; fill: #fff; }
+.tune-row b { font-weight: 700; }
+.tune-row small { color: var(--muted); margin-left: auto; font-size: 9.5px; }
+/* the connection card: superbot reaching into chatgpt, the owner's round-3 note */
+#h-connect { margin-top: 8px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 10px; background: #000; display: flex; align-items: center; gap: 9px; opacity: 0; }
+#h-connect .ic { flex: none; width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; }
+#h-connect .ic.oa { background: #000; box-shadow: inset 0 0 0 1px var(--line); }
+#h-connect .ic.oa svg { width: 17px; height: 17px; fill: #fff; }
+#h-connect .ic.sb { background: #000; }
+#h-connect .ic.sb img { width: 22px; height: 22px; }
+#h-connect .lbl { font: 700 10.5px/13px var(--ui); }
+#h-connect .lbl small { display: block; color: var(--muted); font-weight: 500; font-size: 9px; }
+#h-connect .wire { flex: 1; height: 2px; border-radius: 1px; background: linear-gradient(90deg, var(--line), var(--storm-1)); position: relative; overflow: hidden; }
+#h-connect .wire i { position: absolute; top: -2px; width: 14px; height: 6px; border-radius: 3px; background: var(--storm-1); filter: blur(1px); }
+#h-connect .state { flex: none; font: 700 9.5px/12px var(--mono); color: var(--storm-1); }
+#h-connect.done .state { color: var(--ok); }
+#h-connect.done .wire { background: linear-gradient(90deg, var(--ok), rgba(52,211,153,.2)); }
+#h-connect.done .wire i { background: var(--ok); }
+.composer { flex: none; margin: 6px 12px 10px; }
+.composer .pill { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 4px 0 9px; border-radius: 16px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); }
+.composer .ph { flex: 1; }
+.composer .send { width: 24px; height: 24px; border-radius: 50%; background: var(--storm-action); display: grid; place-items: center; color: #fff; }
+.phone { position: absolute; right: 8px; top: 8px; bottom: 8px; width: 24%; background: #000; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; font: 11px/15px var(--ui); color: var(--fg); display: flex; flex-direction: column; padding: 10px 12px 8px; }
+.ph-status { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); padding: 0 4px; }
+.ph-head { display: flex; align-items: center; gap: 8px; padding: 10px 0 8px; font-weight: 700; font-size: 12px; }
+.ph-turn { font-size: 11px; line-height: 15px; margin-bottom: 8px; }
+.ph-home { align-self: center; width: 70px; height: 3px; border-radius: 2px; background: var(--line); margin-top: 6px; }
+
+/* ---------- scene 3: the pain-words card ---------- */
+#card { display: grid; place-items: center; background: #000; }
+#card .line { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-size: 132px; font-weight: 800; letter-spacing: -.035em; line-height: 1; color: #fff; }
+#card .red { color: rgb(255, 0, 0); }
+#card .blue { color: var(--storm-1); }
+#card .orange { color: #ff8c1a; }
+#card .yellow { color: #ffd60a; }
+#card .green { color: var(--ok); }
+
+/* ---------- scene 4: the end card ---------- */
+#end { display: grid; place-items: center; background: #000; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end svg.face { width: 220px; height: 220px; overflow: visible; }
+#end .words { overflow: hidden; }
+#end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { opacity: 0 !important; visibility: hidden !important; }
+  #end { opacity: 1 !important; visibility: visible !important; }
+  #end .lock > * { transform: none !important; opacity: 1 !important; }
+}
+html { --site-k: 1.6; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+    <symbol id="ic-openai" viewBox="0 0 2406 2406"><path id="oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#oai-petal" transform="rotate(60 1203 1203)"/><use href="#oai-petal" transform="rotate(120 1203 1203)"/><use href="#oai-petal" transform="rotate(180 1203 1203)"/><use href="#oai-petal" transform="rotate(240 1203 1203)"/><use href="#oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage">
+
+  <!-- ============ scene 1: ChatGPT flails (BEFORE) ============ -->
+  <section class="scene gpt" id="gpt" aria-label="ChatGPT flails at a trip plan">
+    <div class="g-main">
+      <div class="g-thread">
+        <div class="g-col" id="g-col">
+          <div class="g-user" id="g-user"><div class="bub" id="g-bub">plan 5 days in japan this april, under $2k, no seafood</div></div>
+          <div class="g-ai" id="g-ai"><span class="g-thinking" id="g-think"><i></i>Thinking</span><span id="g-text"></span><span class="cur" id="g-cur"></span></div>
+        </div>
+        <div class="g-fade"></div>
+      </div>
+      <div class="g-foot">
+        <div class="g-composer" id="g-comp">
+          <span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span class="ph" id="g-ph">Ask anything</span>
+          <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg></span>
+          <span class="send" id="g-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span>
+        </div>
+        <div class="g-disc">ChatGPT can make mistakes. Check important info.</div>
+      </div>
+    </div>
+    <div class="g-verdict bad" id="g-verdict1">48 seconds later: still asking your dates back</div>
+  </section>
+
+  <!-- the rescue popup (kept, owner verdict) -->
+  <div id="popup" aria-hidden="true">
+    <div class="p-head"><img src="assets/mark-clean.svg" alt=""/>superbot can do it!</div>
+    <div id="chatbtn">fix it</div>
+  </div>
+
+  <!-- ============ scene 2: the tune-up ============ -->
+  <section class="scene" id="site" aria-label="superbot organizes your rules and skills">
+    <div id="site-in">
+      <div class="win">
+        <div class="win-bar"><i></i><i></i><i></i><span>superbot</span><em class="led"></em></div>
+        <div class="win-body">
+          <div class="hub" id="hub">
+            <nav class="rail">
+              <span class="rail-item sb sel"><img src="assets/tile.svg" alt=""/></span>
+              <span class="rail-div"></span>
+              <span class="rail-item" data-app="openai"><svg><use href="#ic-openai"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="claude"><svg viewBox="0 0 24 24"><path d="m4.7 15.9 4.7-2.6.1-.2-.1-.1h-.2l-.8 0-2.7-.1-2.3-.1-2.3-.1-.6-.1-.5-.7.1-.4.5-.3.7.1 1.5.1 2.3.2 1.7.1 2.4.3h.4l.1-.2-.1-.1-.1-.1-2.6-1.7-2.6-1.7-1.3-1-.7-.5-.4-.5-.2-1 .7-.7.9.1.2.1.9.7 1.9 1.5 2.5 1.8.4.3.1-.1v-.1l-.2-.3-1.4-2.4-1.4-2.5-.6-1-.2-.6-.2-1 .7-.7.4 0 1 .1.4.4.6 1.4 1 2.2 1.6 3 .5.9.2.8.1.3h.2v-.1l.1-1.7.2-2.1.2-2.7.1-.8.4-.9.7-.5.6.3.5.7-.1.4-.3 1.9-.6 2.9-.4 1.9h.2l.2-.2 1-1.3 1.7-2.1.7-.8.9-.9.5-.4h1l.8 1.1-.3 1.2-1.1 1.3-.9 1.1-1.3 1.7-.8 1.4.1.1.2 0 2.9-.6 1.5-.3 1.8-.3.8.4.1.4-.3.8-2 .5-2.3.5-3.4.8h0l0 .1 1.5.1.7 0h1.6l3 .2.8.5.5.6-.1.5-1.2.6-1.6-.4-3.8-.9-1.3-.3h-.2v.1l1.1 1.1 2 1.8 2.5 2.3.1.6-.3.5-.3 0-2.2-1.7-.9-.7-1.9-1.6h-.1v.2l.4.6 2.3 3.5.1 1.1-.2.4-.6.2-.7-.1-1.4-1.9-.9-1.2-1.1-1.9-.1.1-.7 7.3-.3.4-.7.3-.6-.5-.3-.7.3-1.5.4-1.9.3-1.5.3-1.5.2-.6v0l0 0-1.4 2-2.2 2.9-1.7 1.8-.4.2-.7-.4.1-.7.4-.6 2.4-3 1.4-1.9.9-1.1z"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="gemini"><svg viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg><i class="dot"></i></span>
+            </nav>
+            <div class="chats">
+              <div class="side-head"><img src="assets/mark-clean.svg" alt=""/>superbot.gg</div>
+              <span class="row on"><svg viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>Agents</span>
+              <span class="row"><svg viewBox="0 0 24 24"><path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4Z"/></svg>Rules</span>
+              <span class="row"><svg viewBox="0 0 24 24"><path d="M12 22v5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>Skills</span>
+              <span class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11"/></svg>Memory</span>
+              <div class="cap-row"><span>Connected</span><span>3</span></div>
+              <div class="today">chatgpt · claude · gemini</div>
+              <div class="user"><span class="av">D<i></i></span><span><b>hi@superbot.gg</b><small>tuning 3 agents</small></span></div>
+            </div>
+            <div class="main">
+              <div class="chat-head"><b>agents</b><span class="ask"><img src="assets/mark-clean.svg" alt=""/>Tune my agents</span></div>
+              <div class="feed">
+                <div class="msg" id="h-user"><span class="avatar">D</span><div class="m-main"><div class="m-head"><span class="m-name">dev</span></div><div class="m-text">my chatgpt keeps forgetting everything i tell it</div></div></div>
+                <div class="msg" id="h-bot"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span></div><div class="m-text" id="h-text"></div>
+                  <div id="h-connect">
+                    <span class="ic oa"><svg viewBox="0 0 2406 2406"><use href="#ic-openai"/></svg></span>
+                    <span class="lbl">chatgpt<small>your setup, not the model</small></span>
+                    <span class="wire"><i id="h-pulse"></i></span>
+                    <span class="ic sb"><img src="assets/mark-clean.svg" alt=""/></span>
+                    <span class="state" id="h-state">tuning…</span>
+                  </div>
+                  <div class="tune" id="h-tune">
+                    <div class="tune-row" id="t1"><span class="ai"><svg viewBox="0 0 2406 2406"><use href="#ic-openai"/></svg></span><span class="tk">✓</span><b>14 rules organized</b><small>were scattered in chats</small></div>
+                    <div class="tune-row" id="t2"><span class="ai"><svg viewBox="0 0 2406 2406"><use href="#ic-openai"/></svg></span><span class="tk">✓</span><b>37 skills curated to 8</b><small>the rest were noise</small></div>
+                    <div class="tune-row" id="t3"><span class="ai"><svg viewBox="0 0 2406 2406"><use href="#ic-openai"/></svg></span><span class="tk">✓</span><b>your facts pinned</b><small>april · $2k · no seafood</small></div>
+                  </div>
+                </div></div>
+              </div>
+              <div class="composer"><div class="pill"><span class="ph">Ask Superbot anything</span><span class="send"><svg viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></div></div>
+            </div>
+          </div>
+          <div class="phone" aria-hidden="true">
+            <div class="ph-status"><span>9:41</span></div>
+            <div class="ph-head">tuned ✓ everywhere</div>
+            <div class="ph-turn">the same rules and skills, on every device.</div>
+            <div class="ph-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ scene 3: ChatGPT again (AFTER) ============ -->
+  <section class="scene gpt" id="gpt2" aria-label="the same question, answered instantly">
+    <div class="g-main">
+      <div class="g-thread">
+        <div class="g-col" id="g2-col">
+          <div class="g-user" id="g2-user"><div class="bub" id="g2-bub">plan 5 days in japan this april, under $2k, no seafood</div></div>
+          <div class="g-ai" id="g2-ai"><span class="g-thinking" id="g2-think"><i></i>Thinking</span><span id="g2-text"></span><span class="cur" id="g2-cur"></span></div>
+        </div>
+        <div class="g-fade"></div>
+      </div>
+      <div class="g-foot">
+        <div class="g-composer" id="g2-comp">
+          <span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span class="ph">Ask anything</span>
+          <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg></span>
+          <span class="send ready"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span>
+        </div>
+        <div class="g-disc">ChatGPT can make mistakes. Check important info.</div>
+      </div>
+    </div>
+    <div class="g-verdict good" id="g2-verdict">5 seconds. every fact remembered.</div>
+    <div class="g-sent" id="g2-stamp">after superbot</div>
+  </section>
+
+  <!-- ============ scene 4: the pain words ============ -->
+  <section class="scene" id="card" aria-label="agents disorganized, forgetting, rambling, guessing, slow?">
+    <div class="line" id="card-0">agents <span class="red">disorganized</span>?</div>
+    <div class="line" id="card-1">agents <span class="blue">forgetting</span>?</div>
+    <div class="line" id="card-2">agents <span class="orange">rambling</span>?</div>
+    <div class="line" id="card-3">agents <span class="yellow">guessing</span>?</div>
+    <div class="line" id="card-4">agents <span class="green">slow</span>?</div>
+  </section>
+
+  <!-- ============ scene 5: the end card ============ -->
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true"><rect class="ga" x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/><rect class="gb" x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/></svg>
+      <div class="words" id="end-words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <svg id="cursor" viewBox="0 0 34 44" aria-hidden="true"><path d="M3 2 L3 34 L11 26 L17 41 L23 38 L17 24 L28 24 Z" fill="#000" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+  <div id="dip"></div>
+</div>
+
+<script>
+// the house clock: one render(t), a pure function of story time
+const FPS = 30, LOOP = 28.0;
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the beat sheet (story seconds) ----------
+const B = {
+  typeA: 0.6, typeB: 2.5, send: 2.75,        // the ask types and sends
+  think: 2.95, reply: 3.45,                   // the flail streams
+  popup: 4.95, curIn: 4.85, curAt: 5.90, press: 6.10, release: 6.30, // the house popup, click 1.15s after it appears
+  verdict1: 6.35,                             // the red verdict chip lands just before the dip
+  dip1: 6.55, site: 6.85,                     // the tune-up
+  ask: 7.45, reply2: 8.0, connect: 8.7, tune: 9.6, tuneGap: 1.15, tuned: 13.3, // three rows, slow, one at a time
+  dip2: 13.8, back: 14.1,                     // back to ChatGPT
+  think2: 14.6, reply3: 15.1,                 // the crisp answer streams fast
+  verdict2: 18.5,                             // the green verdict chip
+  cardA: 19.9, cardStep: 1.45, end: 26.2, word: 26.8,
+};
+
+// ---------- copy ----------
+const PROMPT = 'plan 5 days in japan this april, under $2k, no seafood';
+// the flail: forgets the facts it was just given, restarts itself, drowns the answer
+const MESS = "I'd love to help! Quick questions first: what's your budget? What kind of traveler are you? Also, when are you going again? Sorry, I know you told me. Let's start over. Here are 47 things you could do in Japan: temples, food, more temples, trains (maybe?). Actually, scratch that. Tell me your dates and I'll try again!";
+// the tune-up line
+const TUNE_REPLY = "that's not the model, that's the setup. tuning:";
+// the crisp answer: every pinned fact used, instantly
+const AFTER = "April, under $2k, no seafood:\nDay 1 · Tokyo: Asakusa at dawn, teamLab, Shibuya at night\nDay 2 · Tsukiji breakfast, Aoyama, Golden Gai\nDay 3 · Shinkansen to Kyoto: Fushimi Inari early, Gion walk\nDay 4 · Arashiyama bamboo grove, Kiyomizu, tea ceremony\nDay 5 · Nara day trip, home for your late flight\nPacking: light jacket, walking shoes, Suica loaded.";
+
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+// ---------- element refs ----------
+const stage = $('stage'), dip = $('dip'), cursor = $('cursor');
+const gpt = $('gpt'), gPh = $('g-ph'), gSend = $('g-send'), gUser = $('g-user'), gBub = $('g-bub'), gAi = $('g-ai'), gThink = $('g-think'), gText = $('g-text'), gCur = $('g-cur'), gCol = $('g-col'), gVerdict1 = $('g-verdict1');
+const gpt2 = $('gpt2'), g2User = $('g2-user'), g2Bub = $('g2-bub'), g2Ai = $('g2-ai'), g2Think = $('g2-think'), g2Text = $('g2-text'), g2Cur = $('g2-cur'), g2Col = $('g2-col'), g2Verdict = $('g2-verdict'), g2Stamp = $('g2-stamp');
+const gThread = gCol.parentElement;
+const popup = $('popup'), chatbtn = $('chatbtn');
+const site = $('site'), hub = $('hub'), feedEl = hub.querySelector('.feed');
+const hUser = $('h-user'), hBot = $('h-bot'), hText = $('h-text');
+const hConnect = $('h-connect'), hPulse = $('h-pulse'), hState = $('h-state');
+const tuneRows = ['t1','t2','t3'].map($);
+const card = $('card'); const cardLines = [...card.querySelectorAll('.line')];
+const end = $('end'), endFace = $('end-face'), endSlide = $('end-slide');
+
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };
+
+let BTN = { x: 1920 - 44 - 210, y: 1080 - 44 - 60 };
+function measure() {
+  const sr = stage.getBoundingClientRect(), k = sr.width / 1920;
+  const b = chatbtn.getBoundingClientRect();
+  BTN = { x: (b.left + b.width / 2 - sr.left) / k, y: (b.top + b.height / 2 - sr.top) / k };
+}
+
+// one streamer shared by both chat scenes
+function stream(t, b, text, el, cps) {
+  const n = t < b ? 0 : Math.min(text.length, Math.floor((t - b) * cps));
+  el.textContent = text.slice(0, n);
+  return n;
+}
+
+function renderGpt(t) {
+  const typed = Math.floor(seg(t, B.typeA, B.typeB) * PROMPT.length);
+  if (t < B.send) {
+    gPh.className = 'ph' + (typed ? ' typing' : '');
+    gPh.innerHTML = typed ? esc(PROMPT.slice(0, typed)) + '<span class="caret"></span>' : 'Ask anything';
+    gSend.className = 'send' + (typed ? ' ready' : '');
+  } else {
+    gPh.className = 'ph'; gPh.textContent = 'Ask anything';
+  }
+  const pu = seg(t, B.send, B.send + 0.3);
+  op(gUser, pu); gUser.style.transform = `translateY(${((1 - outCubic(pu)) * 10).toFixed(1)}px)`;
+  const thinking = t >= B.think && t < B.reply;
+  gThink.style.display = thinking ? '' : 'none';
+  gThink.style.opacity = thinking ? String(0.55 + 0.45 * Math.abs(Math.sin((t - B.think) * 6))) : '0';
+  stream(t, B.reply, MESS, gText, 110);
+  gCur.style.display = t >= B.reply ? '' : 'none';
+  op(gAi, t >= B.think ? 1 : 0);
+  const over = Math.max(0, gCol.offsetHeight - gThread.clientHeight + 24);
+  gCol.style.transform = `translateY(${(-over).toFixed(0)}px)`;
+  const vd = seg(t, B.verdict1, B.verdict1 + 0.3);
+  op(gVerdict1, vd);
+  // the popup (kept): rises over 0.4s, holds for the press, falls back out
+  const pp = seg(t, B.popup, B.popup + 0.4), po = seg(t, B.release + 0.05, B.release + 0.35);
+  op(popup, po > 0 ? 1 - po : pp);
+  const press = t >= B.press && t < B.release ? 1 : t >= B.release ? 1 - seg(t, B.release, B.release + 0.18) : 0;
+  popup.style.transform = `translateY(${(po > 0 ? po * po * 40 : (1 - outQuint(pp)) * 40).toFixed(1)}px)`;
+  chatbtn.style.transform = `scale(${(1 - 0.05 * press).toFixed(3)})`;
+  if (pp >= 1 && t < B.press) measure();
+}
+
+function renderSite(t) {
+  const au = seg(t, B.ask, B.ask + 0.25); op(hUser, au); hUser.style.transform = `translateY(${((1 - outCubic(au)) * 6).toFixed(1)}px)`;
+  const bo = seg(t, B.reply2, B.reply2 + 0.25); op(hBot, bo); hBot.style.transform = `translateY(${((1 - outCubic(bo)) * 6).toFixed(1)}px)`;
+  const chars = t < B.reply2 ? 0 : Math.min(TUNE_REPLY.length, Math.floor((t - B.reply2) * 60));
+  hText.textContent = TUNE_REPLY.slice(0, chars);
+  // the connection card: the wire pulses while superbot works inside chatgpt, then flips to tuned
+  const cc = seg(t, B.connect, B.connect + 0.3); op(hConnect, cc);
+  const done = t >= B.tuned;
+  hConnect.classList.toggle('done', done);
+  hState.textContent = done ? 'tuned ✓' : 'tuning…';
+  hPulse.style.left = done ? '100%' : `${(8 + 78 * ((t * 1.4) % 1)).toFixed(1)}%`;
+  // the rows land one at a time, slow enough to read
+  tuneRows.forEach((el, i) => {
+    const at = B.tune + i * B.tuneGap, p = seg(t, at, at + 0.45);
+    op(el, p);
+    el.style.transform = `translateY(${((1 - outQuint(p)) * 6).toFixed(1)}px)`;
+  });
+  feedEl.scrollTop = feedEl.scrollHeight;
+}
+
+function renderGpt2(t) {
+  const pu = seg(t, B.back + 0.4, B.back + 0.7);
+  op(g2User, pu); g2User.style.transform = `translateY(${((1 - outCubic(pu)) * 10).toFixed(1)}px)`;
+  const thinking = t >= B.think2 && t < B.reply3;
+  g2Think.style.display = thinking ? '' : 'none';
+  g2Think.style.opacity = thinking ? '1' : '0';
+  stream(t, B.reply3, AFTER, g2Text, 150);
+  g2Cur.style.display = t >= B.reply3 ? '' : 'none';
+  op(g2Ai, t >= B.think2 ? 1 : 0);
+  const over = Math.max(0, g2Col.offsetHeight - gThread.clientHeight + 24);
+  g2Col.style.transform = `translateY(${(-over).toFixed(0)}px)`;
+  const stamp = seg(t, B.back, B.back + 0.3); op(g2Stamp, stamp * 0.9);
+  const vd = seg(t, B.verdict2, B.verdict2 + 0.3);
+  op(g2Verdict, vd);
+}
+
+const STEPS = [1.45, 1.10, 0.84, 0.64, 0.48];
+function renderCard(t) {
+  let at = B.cardA;
+  cardLines.forEach((line, i) => {
+    const k = STEPS[i] / 1.45;
+    const a = seg(t, at, at + 0.35 * k);
+    const out = seg(t, at + STEPS[i] - 0.3 * k, at + STEPS[i]);
+    op(line, a * (1 - out));
+    line.style.transform = `translateY(${(-50 + (1 - outQuint(a)) * 22 - outCubic(out) * 40).toFixed(2)}%)`;
+    at += STEPS[i];
+  });
+}
+
+function renderEnd(t) {
+  const f = seg(t, B.end, B.end + 0.5), w = seg(t, B.word, B.word + 0.7);
+  op(endFace, f); endFace.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(3)})`;
+  endSlide.style.transform = `translateX(${((1 - outQuint(w)) * -110).toFixed(1)}%)`;
+  op(endSlide, w);
+}
+
+function render(t) {
+  const inGpt = t < B.dip1, inSite = t >= B.site && t < B.dip2, inGpt2 = t >= B.back && t < B.cardA, inCard = t >= B.cardA && t < B.end, inEnd = t >= B.end;
+  scene(gpt, inGpt); scene(site, inSite); scene(gpt2, inGpt2); scene(card, inCard); scene(end, inEnd);
+  // two dips: into the tune-up, then back to ChatGPT
+  op(dip, t < B.site ? seg(t, B.dip1, B.site)
+    : t < B.back ? seg(t, B.dip2, B.back)
+    : 1 - seg(t, B.back, B.back + 0.35));
+
+  if (inGpt) renderGpt(t); else op(popup, 0);
+  if (inSite) renderSite(t);
+  if (inGpt2) renderGpt2(t);
+  if (inCard) renderCard(t);
+  if (inEnd) renderEnd(t);
+  renderCursor(t);
+}
+
+function renderCursor(t) {
+  let x, y, vis = 0, sc = 1;
+  if (t >= B.curIn && t < B.dip1) {
+    const p = outQuint(seg(t, B.curIn, B.curAt));
+    x = lerp(1960, BTN.x - 3, p); y = lerp(1120, BTN.y - 2, p); vis = 1;
+    if (t >= B.press && t < B.release) sc = 0.9;
+  }
+  op(cursor, vis);
+  if (vis) cursor.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${sc})`;
+}
+
+function fit() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+  stage.style.left = '50%'; stage.style.top = '50%';
+}
+addEventListener('resize', fit); fit();
+
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+let t0 = performance.now() - (seekTo || 0) * 1000, last = -1;
+function frame(now) {
+  const t = ((now - t0) / 1000) % LOOP;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  requestAnimationFrame(frame);
+}
+render(B.popup + 0.5); measure();
+if (reduced) { render(B.word + 1); }
+else if (q.has('t') && !q.has('play')) { render(Math.floor(seekTo * FPS) / FPS); }
+else requestAnimationFrame(frame);
+</script>
+</body>
+</html>

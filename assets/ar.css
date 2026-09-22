@@ -1,0 +1,57 @@
+/* ar.css — the aspect-ratio stage shared by the 1920x1080 ad spots (pairs with ar.js).
+   The stage keeps its 1080 height and takes --ar-w for its width; every .scene is inset:0, so it
+   IS the frame. Nothing is cropped or letterboxed: each scene's window (the ChatGPT clone, the
+   Chrome window, the superbot hero, the call desk, Gmail) is an HTML layout drawn at a design
+   size and scaled up, so it is given the stage width divided by its own scale and reflows to
+   fill the frame edge to edge. Per-ad knobs:
+     --site-k   the hero window's scale (1.43402 in the hero-clone spots, 1.6 in the ChatGPT spots)
+     --ar-fs    title-card zoom for the .line headlines (per ratio, defaults below) */
+/* the readiness sentinel ar.js polls for: until this file has actually applied, a spot
+   designed at 1920 wide paints at its 16:9 inline widths inside a narrower stage, so the
+   scene is laid out wider than the frame and clipped (seen at 4:5 in the gallery lightbox,
+   2026-09-14). ar.js holds the first paint on a non-16:9 frame until it reads 1. */
+html { --ar-ready: 1; }
+
+html[data-ar] body > #stage, html[data-ar] body > #frame { width: var(--ar-w, 1920px); } /* body > : the hero clone carries its own inner #stage */
+
+html { --ar-fs: 1; }
+html[data-ar="4x3"] { --ar-fs: .84; }
+html[data-ar="1x1"] { --ar-fs: .68; }
+html[data-ar="4x5"] { --ar-fs: .56; }
+
+/* the ChatGPT clone: 1536x864 drawn at 1.25 -> its width follows the stage, its column shrinks to fit */
+html[data-ar]:not([data-ar="16x9"]) #gpt { width: calc(var(--ar-w) / 1.25); }
+html[data-ar]:not([data-ar="16x9"]) .g-col { width: auto; margin-left: 0; left: max(20px, calc(50% - 384px)); right: max(20px, calc(50% - 384px)); }
+html[data-ar]:not([data-ar="16x9"]) .g-composer { max-width: calc(100% - 16px); }
+
+/* the Chrome window (tabs spot): 1536x864 drawn at 1.25 */
+html[data-ar]:not([data-ar="16x9"]) #cam { width: var(--ar-w); }
+html[data-ar]:not([data-ar="16x9"]) #browser { width: calc(var(--ar-w) / 1.25); grid-template-columns: minmax(0, 1fr); } /* minmax(0,…): the fourteen-tab strip no longer widens the pane past the window */
+html[data-ar]:not([data-ar="16x9"]) #browser .strip { overflow: hidden; }
+
+/* the superbot hero / app window: keeps a 5% side margin, its inner stage follows the width
+   (hub-boot's @container queries then shed columns on their own) */
+html[data-ar]:not([data-ar="16x9"]) #site-in { left: calc(var(--ar-w) * .05); width: calc(var(--ar-w) * .9 / var(--site-k, 1.6)); }
+html[data-ar]:not([data-ar="16x9"]) #site-in .stage { width: 100%; }
+html[data-ar="1x1"] .hub, html[data-ar="4x5"] .hub { grid-template-columns: 64px minmax(0, 1fr); }
+html[data-ar="1x1"] .hub .chats, html[data-ar="4x5"] .hub .chats { display: none; }
+
+/* title cards: the headline wraps inside the frame and zooms down with it */
+html[data-ar]:not([data-ar="16x9"]) .card-scene .line,
+html[data-ar]:not([data-ar="16x9"]) #card .line,
+html[data-ar]:not([data-ar="16x9"]) #tag .line {
+  zoom: var(--ar-fs); left: 0; right: 0; padding: 0 calc(40px / var(--ar-fs));
+}
+
+/* the end card: face beside the words on wide frames, face above the words on 1:1 and 4:5 */
+html[data-ar="1x1"] #end .lock, html[data-ar="4x5"] #end .lock {
+  flex-direction: column; gap: 28px; text-align: center;
+}
+html[data-ar="1x1"] #end .words p, html[data-ar="4x5"] #end .words p { margin-left: 0; }
+html[data-ar="1x1"] #end .lock { zoom: .95; }
+html[data-ar="4x5"] #end .lock { zoom: .86; }
+
+/* the phone beside the hub (the ChatGPT-style spots' app window): 16:9 only — at any narrower
+   ratio it is a sliver, so it goes and the hub takes the whole window */
+html[data-ar]:not([data-ar="16x9"]) .win-body .phone { display: none; }
+html[data-ar]:not([data-ar="16x9"]) .win-body .hub { right: 8px; }

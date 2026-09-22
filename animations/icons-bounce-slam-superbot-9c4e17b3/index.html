@@ -1,0 +1,482 @@
+<!doctype html>
+<!-- superbot ad spot — "icons bounce slam"
+     1. skill chips + app tiles pop in and bounce off each other (elastic circle
+        physics, pre-simulated frame-exact so every frame is a function of t)
+     2. the crowd tightens toward center until it's packed
+     3. the superbot mark FLIPs in dead center and SLAMs — screen shake, squash,
+        shockwave, everyone shoved back
+     4. the mark grows and vacuums the whole crowd in (farthest-first wave, gulp)
+     5. it spits everything back out organized: a list card, then a dropdown of
+        all the apps fading in / sizing up beneath it
+     6. tagline: "The agent for your agents"
+     7. logo lockup end, same sequence as the urgent-email-slow ad
+     Loop 21.6s @ 30fps, ?t=<s> seek-hold (frame capture), ?play=1 seek+run. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot — the agent for your agents</title>
+<link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml">
+<style>
+  :root {
+    --a: #00e5c3; --b: #c026d3;
+    --fg: #f2f2f2; --muted: #9a9a9a;
+    --raised: #0e0e12; --sunken: #0b0b0f; --line: #232329;
+    --ui: "SF Pro Rounded","SF Pro Display",-apple-system,system-ui,"Segoe UI",sans-serif;
+  }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  #stage {
+    position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px;
+    transform-origin: 50% 50%; background: #000; overflow: hidden;
+    font-family: var(--ui); color: var(--fg);
+  }
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+  .scene.on { visibility: visible; }
+  #dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+  /* ---- scene 1-4: the field, the mark, the card ---- */
+  #shakeWrap { position: absolute; inset: 0; will-change: transform; z-index: 24; /* its stacking context must sit above the card so the mark lands in the slot */ }
+  .it { position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, opacity; }
+  .it.tile { width: 92px; height: 92px; border-radius: 22px; background: var(--raised);
+             border: 1px solid var(--line); display: grid; place-items: center;
+             box-shadow: 0 10px 26px rgba(0,0,0,.55); }
+  .it.tile svg { width: 54px; height: 54px; fill: var(--fg); }
+  .it.tile img { width: 58px; height: 58px; border-radius: 12px; }
+  .it.chip { height: 52px; padding: 0 20px; border-radius: 26px; background: var(--raised);
+             border: 1px solid var(--line); display: flex; align-items: center; gap: 10px;
+             box-shadow: 0 8px 22px rgba(0,0,0,.5); }
+  .it.chip i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .it.chip b { font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+
+  #mark { position: absolute; left: 0; top: 0; width: 200px; height: 200px; opacity: 0;
+          will-change: transform, opacity, filter; z-index: 24; /* above the card: it lands in the slot */
+          perspective: 900px; }
+  #mark .flip3d { width: 100%; height: 100%; transform-style: preserve-3d; will-change: transform; }
+  #mark svg { width: 100%; height: 100%; overflow: visible; display: block; }
+
+  #ring { position: absolute; left: 960px; top: 540px; width: 120px; height: 120px;
+          margin: -60px 0 0 -60px; border: 3px solid rgba(255,255,255,.9); border-radius: 50%;
+          opacity: 0; will-change: transform, opacity; z-index: 15; }
+  #flash { position: absolute; inset: 0; opacity: 0; pointer-events: none; z-index: 30;
+           background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.85), rgba(255,255,255,0) 46%); }
+
+  #card { position: absolute; left: 600px; top: 138px; width: 720px; border-radius: 20px;
+          background: var(--raised); border: 1px solid var(--line); overflow: hidden;
+          box-shadow: 0 24px 60px rgba(0,0,0,.6); opacity: 0; will-change: transform, opacity; z-index: 22; }
+  #card .head { display: flex; align-items: center; gap: 14px; padding: 18px 24px; }
+  #card .slot { width: 64px; height: 64px; border-radius: 16px; background: var(--sunken);
+                border: 1px solid var(--line); flex: none; }
+  #card .head h2 { margin: 0; font-size: 27px; font-weight: 700; letter-spacing: -.02em; }
+  #card .head span { margin-left: auto; font-size: 17px; color: var(--muted); font-weight: 500; }
+  #card .row { display: flex; align-items: center; gap: 12px; padding: 15px 26px;
+               border-top: 1px solid var(--line); opacity: 0; will-change: transform, opacity; }
+  #card .row b { font-size: 21px; font-weight: 600; }
+  #card .row em { font-style: normal; color: var(--muted); font-size: 19px; }
+  #card .row u { margin-left: auto; text-decoration: none; font-size: 19px; font-weight: 650; }
+
+  #drop { position: absolute; left: 600px; top: 528px; width: 720px; border-radius: 16px;
+          background: var(--sunken); border: 1px solid var(--line); overflow: hidden;
+          opacity: 0; will-change: transform, opacity, height; z-index: 21; height: 0; }
+  #drop .dhead { display: flex; align-items: center; padding: 12px 20px 0; }
+  #drop .dhead b { font-size: 16px; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+  #drop .dhead i { margin-left: auto; width: 0; height: 0; border-left: 6px solid transparent;
+                   border-right: 6px solid transparent; border-top: 7px solid var(--muted); }
+  #drop .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; padding: 12px 20px 18px; }
+  #drop .app { aspect-ratio: 1; border-radius: 14px; background: var(--raised); border: 1px solid var(--line);
+               display: grid; place-items: center; opacity: 0; will-change: transform, opacity; }
+  #drop .app svg { width: 38px; height: 38px; fill: var(--fg); }
+  #drop .app img { width: 42px; height: 42px; border-radius: 9px; }
+
+  /* ---- scene 5: tagline ---- */
+  #tag { display: grid; place-items: center; background: #000; }
+  #tag h1 { margin: 0; font-size: 84px; font-weight: 700; letter-spacing: -.025em; color: #fff;
+            text-align: center; opacity: 0; will-change: transform, opacity; }
+
+  /* ---- scene 6: logo lockup end (same style as urgent-email-slow) ---- */
+  #end { display: grid; place-items: center; background: #000; }
+  #end .lock { display: flex; align-items: center; gap: 44px; }
+  #end svg.face { width: 220px; height: 220px; overflow: visible; opacity: 0; will-change: transform, opacity; }
+  #end .words { overflow: hidden; }
+  #end .slide { opacity: 0; will-change: transform, opacity; }
+  #end h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+  #end p  { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- scenes 1-4 share one continuous surface: the dip never fires inside them -->
+  <section class="scene" id="main" aria-label="the agent for your agents">
+    <div id="shakeWrap">
+      <div id="field"></div>
+      <div id="ring"></div>
+      <div id="mark"><div class="flip3d" id="mark3d">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/>
+          <rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/>
+          <rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/>
+        </svg>
+      </div></div>
+      <div id="flash"></div>
+    </div>
+    <div id="card">
+      <div class="head">
+        <div class="slot"></div>
+        <h2>superbot</h2><span>14 skills &middot; 8 apps</span>
+      </div>
+      <div class="row"><b>scrape</b><em>&rarr;</em><u style="color:var(--a)">released</u></div>
+      <div class="row"><b>inbox</b><em>&rarr;</em><u style="color:var(--a)">triaged</u></div>
+      <div class="row"><b>patches</b><em>&rarr;</em><u style="color:var(--a)">merged</u></div>
+      <div class="row"><b>posts</b><em>&rarr;</em><u style="color:var(--a)">shipped</u></div>
+      <div class="row"><b>crawls</b><em>&rarr;</em><u style="color:var(--a)">cached</u></div>
+    </div>
+    <div id="drop">
+      <div class="dhead"><b>apps &middot; 8</b><i></i></div>
+      <div class="grid" id="drop-grid"></div>
+    </div>
+  </section>
+
+  <section class="scene" id="tag" aria-label="the agent for your agents">
+    <h1 id="tag-h">The agent for your agents</h1>
+  </section>
+
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/>
+        <rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/>
+        <rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/>
+      </svg>
+      <div class="words"><div class="slide" id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <div id="dip"></div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- the brand face: mark-clean.svg's mask geometry (site/site/assets/brand) -->
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+    <!-- the OpenAI mark, from the site's icon registry (site/index.html #sb-ic-openai) -->
+    <symbol id="ic-openai" viewBox="0 0 2406 2406"><path id="oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#oai-petal" transform="rotate(60 1203 1203)"/><use href="#oai-petal" transform="rotate(120 1203 1203)"/><use href="#oai-petal" transform="rotate(180 1203 1203)"/><use href="#oai-petal" transform="rotate(240 1203 1203)"/><use href="#oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+    <symbol id="ic-claude" viewBox="0 0 24 24"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+    <symbol id="ic-gemini" viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="ic-cursor" viewBox="0 0 24 24"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+    <symbol id="ic-copilot" viewBox="0 0 24 24"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+  </defs>
+</svg>
+
+<script>
+(() => {
+'use strict';
+// ---------- helpers (same vocabulary as the other spots) ----------
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };
+// cubic-bezier(x1,y1,x2,y2) as a function of progress-x (bisection, 18 iters)
+const bez = (x1, y1, x2, y2) => (p) => {
+  const cx = (t) => 3 * t * (1 - t) * (1 - t) * x1 + 3 * t * t * (1 - t) * x2 + t * t * t;
+  const cy = (t) => 3 * t * (1 - t) * (1 - t) * y1 + 3 * t * t * (1 - t) * y2 + t * t * t;
+  let lo = 0, hi = 1, t = p;
+  for (let i = 0; i < 18; i++) { t = (lo + hi) / 2; if (cx(t) < p) lo = t; else hi = t; }
+  return cy(t);
+};
+const FLIP_EASE = bez(.3, .85, .3, 1.04);   // the site's mark-flip curve
+const GLIDE = bez(.3, .7, .2, 1);           // the site's glide curve
+const SUCK_EASE = bez(.5, 0, .7, .2);       // the site's vacuum curve
+const mulberry32 = (seed) => () => {
+  seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+  let z = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  z = (z + Math.imul(z ^ (z >>> 7), 61 | z)) ^ z;
+  return ((z ^ (z >>> 14)) >>> 0) / 4294967296;
+};
+
+// ---------- beats ----------
+const B = {
+  pop: 0.15,                 // chips + tiles pop in (staggered)
+  tight: 3.8,                // the crowd starts tightening toward center
+  flip: 8.0,                 // the mark flips in dead center (920ms)
+  slam: 8.92,                // landing: shake + squash + shockwave + push back
+  pushEnd: 9.52,
+  grow: 9.9,                 // the mark grows; the crowd is vacuumed in
+  gulp: 11.05,               // gulp pulse
+  spit: 11.6,                // the card pops; the mark glides into its slot
+  rows: 12.0,                // list rows stagger in
+  drop: 13.05,               // the dropdown opens; the apps spit out
+  dipA: 15.4, tag: 15.7,     // dip, then the tagline
+  dipB: 17.6, end: 17.9, word: 18.7, // dip, then the logo lockup
+  out: 21.1,                 // final fade so the loop restarts through black
+};
+const FPS = 30, LOOP = 21.6;
+const CX = 960, CY = 540;
+
+// ---------- build the field: 8 app tiles + 10 skill chips ----------
+const APPS = [
+  { sym: 'ic-openai' }, { sym: 'ic-claude' }, { sym: 'ic-gemini' },
+  { sym: 'ic-cursor' }, { sym: 'ic-copilot' },
+  { img: 'assets/devin.png' }, { img: 'assets/grok.png' }, { img: 'assets/hermes.png' },
+];
+const SKILLS = [
+  ['scrape', 'var(--a)'], ['inbox', 'var(--b)'], ['patch', 'var(--a)'],
+  ['post', 'var(--b)'], ['crawl', 'var(--a)'], ['merge', 'var(--b)'],
+  ['ship', 'var(--a)'], ['triage', 'var(--b)'], ['release', 'var(--a)'], ['cache', 'var(--b)'],
+];
+const rng = mulberry32(0x50e8b07);
+const field = $('field');
+const items = [];
+for (const a of APPS) {
+  const el = document.createElement('div');
+  el.className = 'it tile';
+  el.innerHTML = a.sym ? `<svg><use href="#${a.sym}"/></svg>` : `<img src="${a.img}" alt="">`;
+  field.appendChild(el);
+  items.push({ el, tile: true });
+}
+for (const [label, color] of SKILLS) {
+  const el = document.createElement('div');
+  el.className = 'it chip';
+  el.innerHTML = `<i style="background:${color}"></i><b>${label}</b>`;
+  field.appendChild(el);
+  items.push({ el, tile: false });
+}
+for (const it of items) {
+  const r = it.el.getBoundingClientRect();
+  it.w = r.width; it.h = r.height;
+  it.r = it.tile ? 46 : 38;                       // collision radius
+}
+const N = items.length;
+// drop grid: the same 8 apps, revealed under the card
+const grid = $('drop-grid');
+for (const a of APPS) {
+  const el = document.createElement('div');
+  el.className = 'app';
+  el.innerHTML = a.sym ? `<svg><use href="#${a.sym}"/></svg>` : `<img src="${a.img}" alt="">`;
+  grid.appendChild(el);
+}
+const appEls = [...grid.children];
+
+// ---------- pre-simulate the bounce (deterministic; frame is a function of t) ----------
+const FR = Math.round(B.flip * FPS);              // frames of chaos before the flip
+const sim = new Float32Array(N * 2 * (FR + 1));
+{
+  const BX0 = 90, BX1 = 1830, BY0 = 110, BY1 = 970;   // item-center bounds
+  const px = new Float64Array(N), py = new Float64Array(N);
+  const vx = new Float64Array(N), vy = new Float64Array(N);
+  for (let i = 0; i < N; i++) {
+    let x, y, tries = 0;
+    do {
+      x = BX0 + rng() * (BX1 - BX0); y = BY0 + rng() * (BY1 - BY0); tries++;
+    } while (tries < 80 && (Math.hypot(x - CX, y - CY) < 300 ||
+             items.some((o, j) => j < i && Math.hypot(x - px[j], y - py[j]) < 150)));
+    px[i] = x; py[i] = y;
+    const ang = rng() * Math.PI * 2, sp = 150 + rng() * 160;
+    vx[i] = Math.cos(ang) * sp; vy[i] = Math.sin(ang) * sp;
+  }
+  const set = (f) => { for (let i = 0; i < N; i++) { const o = (f * N + i) * 2; sim[o] = px[i]; sim[o + 1] = py[i]; } };
+  set(0);
+  const dt = 1 / FPS;
+  for (let f = 1; f <= FR; f++) {
+    const st = (f - 1) / FPS;                      // story time of this step's start
+    const rp = seg(st, B.tight, B.flip - 0.1);
+    const tight = rp * rp * (3 - 2 * rp);          // smoothstep
+    for (let i = 0; i < N; i++) {
+      vx[i] += (CX - px[i]) * 3.4 * tight * dt;    // center spring
+      vy[i] += (CY - py[i]) * 3.4 * tight * dt;
+      const damp = 1 - (0.008 + 0.03 * tight);
+      vx[i] *= damp; vy[i] *= damp;
+      const sp = Math.hypot(vx[i], vy[i]);
+      if (sp > 560) { vx[i] *= 560 / sp; vy[i] *= 560 / sp; }
+      px[i] += vx[i] * dt; py[i] += vy[i] * dt;
+      const rr = items[i].r;
+      if (px[i] < BX0 + rr) { px[i] = BX0 + rr; vx[i] = Math.abs(vx[i]) * .94; }
+      if (px[i] > BX1 - rr) { px[i] = BX1 - rr; vx[i] = -Math.abs(vx[i]) * .94; }
+      if (py[i] < BY0 + rr) { py[i] = BY0 + rr; vy[i] = Math.abs(vy[i]) * .94; }
+      if (py[i] > BY1 - rr) { py[i] = BY1 - rr; vy[i] = -Math.abs(vy[i]) * .94; }
+    }
+    for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {   // elastic circles
+      const dx = px[j] - px[i], dy = py[j] - py[i];
+      const min = items[i].r + items[j].r, d2 = dx * dx + dy * dy;
+      if (d2 >= min * min || d2 === 0) continue;
+      const d = Math.sqrt(d2), nx = dx / d, ny = dy / d;
+      const rel = (vx[i] - vx[j]) * nx + (vy[i] - vy[j]) * ny;     // approach speed
+      if (rel > 0) {
+        const imp = rel * 0.96;                                    // restitution .96
+        vx[i] -= imp * nx; vy[i] -= imp * ny;
+        vx[j] += imp * nx; vy[j] += imp * ny;
+      }
+      const push = (min - d) / 2;
+      px[i] -= nx * push; py[i] -= ny * push;
+      px[j] += nx * push; py[j] += ny * push;
+    }
+    set(f);
+  }
+}
+// frozen crowd at flip time + per-item slam vectors
+const frozen = new Float64Array(N * 2), dir = new Float64Array(N * 2), tilt = new Float64Array(N);
+for (let i = 0; i < N; i++) {
+  frozen[i * 2] = sim[(FR * N + i) * 2]; frozen[i * 2 + 1] = sim[(FR * N + i) * 2 + 1];
+  let dx = frozen[i * 2] - CX, dy = frozen[i * 2 + 1] - CY;
+  let d = Math.hypot(dx, dy);
+  if (d < 1) { const a = rng() * Math.PI * 2; dx = Math.cos(a); dy = Math.sin(a); d = 1; }
+  dir[i * 2] = dx / d; dir[i * 2 + 1] = dy / d;
+  tilt[i] = (rng() - .5) * 22;
+}
+// pop order (shuffled) and suck order (farthest from center first)
+const popOrder = items.map((_, i) => i).sort(() => rng() - .5);
+const popAt = new Float64Array(N);
+popOrder.forEach((i, k) => { popAt[i] = B.pop + k * 0.09; });
+const suckOrder = items.map((_, i) => i)
+  .sort((a, b) => Math.hypot(frozen[b * 2] - CX, frozen[b * 2 + 1] - CY)
+                - Math.hypot(frozen[a * 2] - CX, frozen[a * 2 + 1] - CY));
+const suckAt = new Float64Array(N);
+suckOrder.forEach((i, k) => { suckAt[i] = B.grow + 0.05 + k * 0.04; });
+
+// ---------- elements ----------
+const main = $('main'), tag = $('tag'), end = $('end'), shakeWrap = $('shakeWrap');
+const tagH = $('tag-h'), endFace = $('end-face'), endSlide = $('end-slide');
+
+// ---------- mark / card geometry ----------
+const SLOT = { x: 600 + 24 + 32, y: 138 + 18 + 32 };   // the card's header icon slot
+const mark = $('mark'), mark3d = $('mark3d'), ring = $('ring'), flash = $('flash');
+const card = $('card'), drop = $('drop'), dip = $('dip');
+const rowEls = [...document.querySelectorAll('#card .row')];
+
+// ---------- render: a frame is a function of its number ----------
+function render(t) {
+  scene(main, t < B.tag); scene(tag, t >= B.tag && t < B.end); scene(end, t >= B.end);
+
+  // screen shake around the slam
+  const shp = seg(t, B.slam, B.slam + 0.44);
+  const amp = 17 * (1 - outCubic(shp));
+  shakeWrap.style.transform = amp < .05 ? '' :
+    `translate(${(Math.sin(t * 151) * amp).toFixed(1)}px, ${(Math.cos(t * 187) * amp * .6).toFixed(1)}px)`;
+
+  // mark: flip in -> squash -> grow -> glide into the card slot
+  let mx = CX, my = CY, ms = 0, mb = 1, ry = 0;
+  const fp = seg(t, B.flip, B.flip + 0.92);
+  if (fp > 0) {
+    const e = FLIP_EASE(fp);
+    ms = lerp(0.4, 1.05, e); mb = lerp(0.45, 1, e); ry = (1 - e) * 180;
+    const sq = seg(t, B.slam, B.slam + 0.45);
+    if (sq > 0 && sq < 1) {                          // landing squash
+      const s = Math.sin(Math.PI * sq);
+      ms *= 1 + 0.15 * s; my += 8 * s; mb += 0.35 * s * (1 - sq);
+    }
+    const g = GLIDE(seg(t, B.grow, B.grow + 0.65));  // grow for the vacuum
+    if (g > 0) { ms = lerp(1.05, 2.35, g); mb = lerp(1, 1.12, g); }
+    const gp = seg(t, B.gulp, B.gulp + 0.4);         // gulp pulse
+    if (gp > 0 && gp < 1) { ms *= 1 + 0.16 * Math.sin(Math.PI * gp); mb += 0.3 * Math.sin(Math.PI * gp); }
+    const mg = seg(t, B.spit, B.spit + 0.75);        // glide into the slot
+    if (mg > 0) { const ge = GLIDE(mg); mx = lerp(CX, SLOT.x, ge); my = lerp(CY, SLOT.y, ge); ms = lerp(ms, 0.33, ge); mb = 1; }
+  }
+  op(mark, fp * 3);
+  mark.style.transform = `translate(${(mx - 100).toFixed(1)}px, ${(my - 100).toFixed(1)}px) scale(${ms.toFixed(3)})`;
+  mark.style.filter = `brightness(${mb.toFixed(3)})`;
+  mark3d.style.transform = `rotateY(${ry.toFixed(2)}deg)`;
+
+  // shockwave + flash at the slam
+  const rp = seg(t, B.slam, B.slam + 0.68);
+  op(ring, rp > 0 && rp < 1 ? (1 - rp) * 0.55 : 0);
+  ring.style.transform = `scale(${lerp(0.7, 6.4, outCubic(rp)).toFixed(3)})`;
+  const fp2 = seg(t, B.slam, B.slam + 0.3);
+  op(flash, fp2 > 0 && fp2 < 1 ? (1 - fp2) * 0.5 : 0);
+
+  // the field: pop -> bounce -> frozen -> shoved back -> vacuumed in
+  for (let i = 0; i < N; i++) {
+    const it = items[i], el = it.el;
+    let x, y, s = 1, o = 1, rot = 0;
+    if (t < B.flip) {
+      const f = Math.min(FR, Math.floor(t * FPS));
+      x = sim[(f * N + i) * 2]; y = sim[(f * N + i) * 2 + 1];
+      const p = seg(t, popAt[i], popAt[i] + 0.5);
+      s = lerp(0.2, 1, outBack(p)); o = p * 2;
+    } else {
+      x = frozen[i * 2]; y = frozen[i * 2 + 1];
+      const pe = outCubic(seg(t, B.slam, B.pushEnd));
+      if (pe > 0) { x += dir[i * 2] * 235 * pe; y += dir[i * 2 + 1] * 235 * pe; rot = tilt[i] * pe; }
+      const q = seg(t, suckAt[i], suckAt[i] + 0.47);
+      if (q > 0) {
+        const b = SUCK_EASE(q);
+        x = lerp(x, CX, b); y = lerp(y, CY, b);
+        s = lerp(1, 0.12, b); rot *= 1 - b; o = 1 - q;
+      }
+    }
+    if (o <= 0) { op(el, 0); el.style.visibility = 'hidden'; continue; }
+    el.style.visibility = 'visible';
+    op(el, o);
+    el.style.transform = `translate(${(x - it.w / 2).toFixed(1)}px, ${(y - it.h / 2).toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${s.toFixed(3)})`;
+  }
+
+  // the card pops, the mark lands in its slot, rows stagger in
+  const cp = seg(t, B.spit, B.spit + 0.5);
+  op(card, cp * 2);
+  card.style.transform = `translateY(${(lerp(26, 0, GLIDE(cp))).toFixed(1)}px) scale(${lerp(0.93, 1, outBack(cp)).toFixed(3)})`;
+  rowEls.forEach((el, i) => {
+    const r = seg(t, B.rows + i * 0.09, B.rows + i * 0.09 + 0.42);
+    op(el, r * 2);
+    el.style.transform = `translateY(${(lerp(15, 0, GLIDE(r))).toFixed(1)}px)`;
+  });
+
+  // the dropdown opens; the apps spit out (fade in + size up)
+  const dp = seg(t, B.drop, B.drop + 0.45);
+  op(drop, dp * 2);
+  drop.style.height = `${Math.round(152 * GLIDE(dp))}px`;
+  appEls.forEach((el, i) => {
+    const p = seg(t, B.drop + 0.15 + i * 0.055, B.drop + 0.15 + i * 0.055 + 0.38);
+    op(el, p * 2);
+    el.style.transform = `translateY(${(lerp(10, 0, outBack(p))).toFixed(1)}px) scale(${lerp(0.5, 1, outBack(p)).toFixed(3)})`;
+  });
+
+  // tagline
+  const tp = seg(t, B.tag + 0.1, B.tag + 0.7);
+  op(tagH, tp); tagH.style.transform = `translateY(${(lerp(26, 0, outQuint(tp))).toFixed(1)}px)`;
+
+  // logo lockup end (same sequence as the urgent-email spot)
+  const ef = seg(t, B.end, B.end + 0.5), ew = seg(t, B.word, B.word + 0.7);
+  op(endFace, ef); endFace.style.transform = `scale(${lerp(0.5, 1, outBack(ef)).toFixed(3)})`;
+  endSlide.style.transform = `translateX(${((1 - outQuint(ew)) * -110).toFixed(1)}%)`;
+  op(endSlide, ew);
+
+  // dips: into the tagline, into the lockup, and out before the loop seam
+  op(dip,
+    t < B.dipA ? 0
+    : t < B.tag ? seg(t, B.dipA, B.tag)
+    : t < B.dipB ? 1 - seg(t, B.tag, B.tag + 0.35)
+    : t < B.end ? seg(t, B.dipB, B.end)
+    : t < B.out ? 1 - seg(t, B.end, B.end + 0.35)
+    : seg(t, B.out, B.out + 0.4));
+}
+
+// ---------- clock / fit / seek ----------
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+let t0 = performance.now() - (seekTo || 0) * 1000, last = -1;
+function frame(now) {
+  const t = ((now - t0) / 1000) % LOOP;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  requestAnimationFrame(frame);
+}
+const stage = $('stage');
+function fit() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+}
+addEventListener('resize', fit); fit();
+
+if (reduced) { render(B.word + 1); }
+else if (seekTo !== null && !q.has('play')) { render(Math.floor(seekTo * FPS) / FPS); }
+else requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

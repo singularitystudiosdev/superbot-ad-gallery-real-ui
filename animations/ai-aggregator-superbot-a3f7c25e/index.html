@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The AI Aggregator is here — superbot.gg</title>
+<style>
+/* The AI Aggregator spot: the site's expand beat only (sphere of agent icons ->
+   accelerating merge -> superbot tile flip-grow -> rail assembles -> the whole
+   lockup glides left -> the frontend extends), then a cursor clicks through
+   every chat at a 0.8s cadence (inside the user's 0.7-0.9s window), then the
+   tagline with "Aggregator" in pink/blue/purple, then the same end lockup as
+   urgent-email-slow-superbot. One render(t) clock (Remotion's rule: a frame is
+   a pure function of its time), looping 19.6s, 30fps-rasterized by rAF. */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif; }
+:root {
+  --bg: #000000; --fg: #ffffff; --muted: #9a9a9a; --line: #2a2a2a;
+  --raised: #212121; --surface: #181818; --window: #0d0d0d; --win: #0d0d0d; --side: #0d0d0d;
+  --accent: #7c4dff; --accent-ink: #ffffff;
+  --ok: #34d399; --warn: #f59e0b; --danger: #ef4444;
+  --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --grad-pbp: linear-gradient(90deg, #ff3d9a 0%, #2b6bff 52%, #c026d3 100%);
+  --brand-openai: #000000;   --brand-openai-ink: #ffffff;
+  --brand-claude: #d97757;   --brand-claude-ink: #ffffff;
+  --brand-gemini: #ffffff;   --brand-gemini-ink: #1f1f1f;
+  --brand-cursor: #000000;   --brand-cursor-ink: #ffffff;
+  --brand-vscode: #0078d4;   --brand-vscode-ink: #ffffff;
+  --brand-zed: #084ccf;      --brand-zed-ink: #ffffff;
+  --brand-windsurf: #0b100f; --brand-windsurf-ink: #58e5bb;
+  --brand-copilot: #24292f;  --brand-copilot-ink: #ffffff;
+  --ui: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --r-control: 8px; --r-pill: 999px; --r-lg: 14px; --r-surface: 16px;
+}
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 0 0; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { opacity: 1; visibility: visible; }
+
+/* ---------- the window the sphere boots inside ---------- */
+.win { position: absolute; inset: 40px 110px 88px; background: var(--win); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; grid-template-rows: 28px minmax(0, 1fr); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.bar { display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #161616; border-bottom: 1px solid var(--line); }
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+.win-title { margin-left: 10px; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
+.hub { position: relative; display: grid; grid-template-columns: 64px 208px minmax(0, 1fr); min-height: 0; }
+
+/* rail: the strip that assembles mid-stage and glides home */
+.rail { position: relative; z-index: 6; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 0; }
+.rail-bg { position: absolute; inset: 0; background: #131313; border-right: 1px solid var(--line); }
+.rail-item { position: relative; z-index: 1; width: 40px; height: 40px; border-radius: 11px; background: var(--raised); display: grid; place-items: center; }
+.rail-item svg { width: 22px; height: 22px; }
+.rail-item img { width: 26px; height: 26px; object-fit: contain; border-radius: 7px; }
+.rail-item.sb { background: #fff; }
+.rail-item.sb img { width: 30px; height: 30px; }
+.rail-hr { position: relative; z-index: 1; width: 26px; height: 1px; background: var(--line); margin: 2px 0; }
+
+/* chats sidebar */
+.chats { position: relative; background: #101010; border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
+.side-cap { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); padding: 0 8px 6px; }
+.row { display: flex; align-items: center; gap: 9px; padding: 9px 10px; border-radius: 10px; color: #cfcfcf; font-size: 13.5px; white-space: nowrap; }
+.row-ic { width: 17px; height: 17px; border-radius: 6px; display: grid; place-items: center; flex: none; }
+.row-ic svg { width: 12px; height: 12px; }
+.row .row-tx { overflow: hidden; text-overflow: ellipsis; }
+.row.chat.on { background: #232323; color: #fff; box-shadow: inset 2.5px 0 0 var(--storm-4); }
+.row.press { transform: scale(.975); }
+
+/* main chat lane */
+.main { position: relative; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; min-height: 0; background: var(--win); }
+.chat-head { display: flex; align-items: center; gap: 10px; padding: 13px 18px; border-bottom: 1px solid var(--line); }
+.ch-ic { width: 22px; height: 22px; border-radius: 7px; background: var(--raised); display: grid; place-items: center; flex: none; }
+.ch-ic svg { width: 14px; height: 14px; }
+.ch-title { font-size: 15px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ch-tag { margin-left: auto; font-size: 11px; color: var(--ok); border: 1px solid rgba(52,211,153,.35); border-radius: var(--r-pill); padding: 2px 9px; }
+.feed { position: relative; min-height: 0; padding: 16px 18px; overflow: hidden; }
+.turns { position: absolute; inset: 16px 18px; opacity: 0; }
+.msg { display: flex; margin-bottom: 10px; }
+.msg.me { justify-content: flex-end; }
+.bub { max-width: 72%; border-radius: 13px; padding: 9px 13px; font-size: 14px; line-height: 1.45; }
+.me .bub { background: var(--raised); color: #e9e9e9; border-bottom-right-radius: 4px; }
+.bot .bub { background: #151515; border: 1px solid var(--line); color: #d9d9d9; border-bottom-left-radius: 4px; }
+.bub b { color: #fff; }
+.bub .pk { color: var(--storm-4); }
+.composer { display: flex; align-items: center; gap: 10px; margin: 0 18px 14px; border: 1px solid var(--line); background: #141414; border-radius: 12px; padding: 10px 14px; color: var(--muted); font-size: 13.5px; }
+.composer .send { margin-left: auto; color: var(--accent); }
+
+/* ---------- sphere overlay + bloom + cursor ---------- */
+.sphere { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+.tile { position: absolute; left: 0; top: 0; width: 54px; height: 54px; margin: -27px 0 0 -27px; border-radius: 13px; background: #242424; border: 1px solid rgba(255,255,255,.09); display: grid; place-items: center; will-change: transform; }
+.tile svg { width: 30px; height: 30px; }
+.tile img { width: 34px; height: 34px; object-fit: contain; border-radius: 8px; }
+.bloom { position: absolute; z-index: 24; width: 250px; height: 250px; margin: -125px 0 0 -125px; left: 0; top: 0; opacity: 0; will-change: transform; filter: drop-shadow(0 10px 34px rgba(124,77,255,.35)); }
+.bloom img { width: 100%; height: 100%; }
+.cursor { position: absolute; z-index: 30; left: 0; top: 0; width: 26px; height: 26px; margin: -2px 0 0 -2px; opacity: 0; will-change: transform; }
+.cursor svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
+.cur-ring { position: absolute; left: 0; top: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); opacity: 0; }
+
+/* ---------- dim + tagline ---------- */
+.dim { position: absolute; inset: 0; z-index: 32; background: #000; opacity: 0; }
+.tag { position: absolute; inset: 0; z-index: 34; display: grid; place-items: center; opacity: 0; }
+.tag h1 { margin: 0; font-size: 92px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+.agg { background: var(--grad-pbp); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- end card (same lockup as urgent-email-slow) ---------- */
+#card { display: grid; place-items: center; }
+.card-wrap { position: relative; display: grid; place-items: center; }
+.face { width: 300px; height: 300px; opacity: 0; }
+.ghost { position: absolute; border-radius: 24px; opacity: 0; will-change: transform; }
+.ghost.a { width: 236px; height: 170px; left: -196px; top: 44px; background: linear-gradient(135deg, rgba(43,107,255,.34), rgba(43,107,255,.06)); }
+.ghost.b { width: 210px; height: 150px; right: -190px; top: 96px; background: linear-gradient(135deg, rgba(192,38,211,.32), rgba(192,38,211,.06)); }
+.ghost.c { width: 178px; height: 128px; left: -120px; bottom: -96px; background: linear-gradient(135deg, rgba(106,31,216,.3), rgba(106,31,216,.05)); }
+.wordmark { overflow: hidden; margin-top: 26px; }
+.wordmark h1 { margin: 0; font-size: 84px; font-weight: 800; letter-spacing: -.03em; color: #fff; transform: translateY(-110%); }
+.sub { margin-top: 10px; font-size: 21px; color: var(--muted); opacity: 0; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <div class="scene" id="tour">
+    <div class="win" id="win">
+      <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="win-title">superbot — every agent, one desk</span></div>
+      <div class="hub">
+        <aside class="rail" id="rail">
+          <div class="rail-bg" id="railBg"></div>
+          <div class="rail-item sb" id="sbSlot"><img src="assets/tile.svg" alt=""/></div>
+          <div class="rail-item"><svg style="color:var(--brand-openai-ink)"><use href="#sb-ic-openai"/></svg></div>
+          <div class="rail-item"><svg style="color:var(--brand-claude)"><use href="#sb-ic-claude"/></svg></div>
+          <div class="rail-item"><svg style="color:var(--brand-gemini)"><use href="#sb-ic-gemini"/></svg></div>
+          <div class="rail-item"><svg style="color:var(--brand-cursor-ink)"><use href="#sb-ic-cursor"/></svg></div>
+          <div class="rail-item"><svg style="color:var(--brand-copilot-ink)"><use href="#sb-ic-copilot"/></svg></div>
+          <div class="rail-hr"></div>
+          <div class="rail-item"><svg style="color:var(--brand-vscode)"><use href="#sb-ic-vscode"/></svg></div>
+          <div class="rail-item"><svg style="color:var(--brand-windsurf-ink)"><use href="#sb-ic-windsurf"/></svg></div>
+          <div class="rail-item"><svg style="color:var(--brand-zed)"><use href="#sb-ic-zed"/></svg></div>
+        </aside>
+        <aside class="chats" id="chatsCol">
+          <div class="side-cap">today</div>
+          <div class="row chat" data-c="0"><span class="row-ic" style="background:#2c2320;color:var(--brand-claude)"><svg><use href="#sb-ic-claude"/></svg></span><span class="row-tx">urgent email slow</span></div>
+          <div class="row chat" data-c="1"><span class="row-ic" style="background:#1d2030;color:#8e8ea0"><svg><use href="#sb-ic-openai"/></svg></span><span class="row-tx">which rate limiter…</span></div>
+          <div class="row chat" data-c="2"><span class="row-ic" style="background:#22201e;color:#d7d7d7"><svg><use href="#sb-ic-cursor"/></svg></span><span class="row-tx">rank the import pa…</span></div>
+          <div class="row chat" data-c="3"><span class="row-ic" style="background:#20262c;color:var(--brand-vscode)"><svg><use href="#sb-ic-vscode"/></svg></span><span class="row-tx">trello card test</span></div>
+          <div class="row chat" data-c="4"><span class="row-ic" style="background:#262028;color:var(--storm-3)"><svg><use href="#sb-ic-gemini"/></svg></span><span class="row-tx">dedupe the always…</span></div>
+          <div class="row chat" data-c="5"><span class="row-ic" style="background:#1f2421;color:var(--brand-windsurf-ink)"><svg><use href="#sb-ic-windsurf"/></svg></span><span class="row-tx">spin up the spin-…</span></div>
+        </aside>
+        <section class="main" id="mainCol">
+          <div class="chat-head"><span class="ch-ic" id="chIc"><svg><use href="#sb-ic-claude"/></svg></span><span class="ch-title" id="chTitle">urgent email slow</span><span class="ch-tag">wired</span></div>
+          <div class="feed" id="feed">
+            <div class="turns" data-c="0">
+              <div class="msg me"><div class="bub">why is the urgent email so slow</div></div>
+              <div class="msg bot"><div class="bub">found it — the sync ran <b>before</b> the fetch. moved it after; resends drop from <b>9 to 1</b>, send p95 down to <span class="pk">312ms</span>.</div></div>
+            </div>
+            <div class="turns" data-c="1">
+              <div class="msg me"><div class="bub">rate limiter: token bucket or leaky?</div></div>
+              <div class="msg bot"><div class="bub">token bucket. GCRA held <b>2.1M rps</b> in the burst test — config ships today.</div></div>
+            </div>
+            <div class="turns" data-c="2">
+              <div class="msg me"><div class="bub">rank the import paths by cost</div></div>
+              <div class="msg bot"><div class="bub">three are hot. css-in-js is <b>41% of parse</b> — swapping it for cascade layers.</div></div>
+            </div>
+            <div class="turns" data-c="3">
+              <div class="msg me"><div class="bub">run the trello card test</div></div>
+              <div class="msg bot"><div class="bub">green. card → board → webhook all ack in <b>240ms</b>.</div></div>
+            </div>
+            <div class="turns" data-c="4">
+              <div class="msg me"><div class="bub">dedupe the always-on listeners</div></div>
+              <div class="msg bot"><div class="bub">five were double-bound. one registry now — every client shares it.</div></div>
+            </div>
+            <div class="turns" data-c="5">
+              <div class="msg me"><div class="bub">spin up the spin-merge spot</div></div>
+              <div class="msg bot"><div class="bub">rendering… sphere → merge → lockup. loop lands in <b>19.6s</b>.</div></div>
+            </div>
+          </div>
+          <div class="composer">reply to the wired agent… <span class="send">↵</span></div>
+        </section>
+      </div>
+    </div>
+    <div class="sphere" id="sphere"></div>
+    <div class="bloom" id="bloom"><img src="assets/tile.svg" alt=""/></div>
+    <div class="cursor" id="cur"><svg viewBox="0 0 24 24"><path fill="#fff" stroke="#000" stroke-width="1.2" d="M5 3l14 8-6.5 1.5L9 19z"/></svg><span class="cur-ring" id="curRing"></span></div>
+    <div class="dim" id="dim"></div>
+    <div class="tag" id="tag"><h1>The AI <span class="agg">Aggregator</span> is here</h1></div>
+  </div>
+
+  <div class="scene" id="card">
+    <div class="card-wrap">
+      <span class="ghost a" id="gA"></span><span class="ghost b" id="gB"></span><span class="ghost c" id="gC"></span>
+      <svg class="face" id="face" viewBox="0 0 100 100">
+        <defs><mask id="faceM" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+          <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/>
+          <path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/>
+          <path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+          <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+        </mask></defs>
+        <rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#faceM)" transform="translate(-1.2 -1.2)"/>
+        <rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#faceM)" transform="translate(1.2 1.2)"/>
+        <rect x="-30" y="-30" width="160" height="160" fill="#ffffff" mask="url(#faceM)"/>
+      </svg>
+      <div class="wordmark"><h1 id="word">superbot.gg</h1></div>
+      <div class="sub" id="sub">the agent to manage your agents.</div>
+    </div>
+  </div>
+
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sb-ic-openai" viewBox="0 0 2406 2406" fill="currentColor"><path id="sb-oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#sb-oai-petal" transform="rotate(60 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(120 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(180 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(240 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+  <symbol id="sb-ic-claude" viewBox="0 0 24 24" fill="currentColor"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+  <symbol id="sb-ic-cursor" viewBox="0 0 24 24" fill="currentColor"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+  <symbol id="sb-ic-gemini" viewBox="0 0 24 24" fill="currentColor"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+  <symbol id="sb-ic-copilot" viewBox="0 0 24 24" fill="currentColor"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+  <symbol id="sb-ic-vscode" viewBox="0 0 100 100" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M70.9119 99.3171C72.4869 99.9307 74.2828 99.8914 75.8725 99.1264L96.4608 89.2197C98.6242 88.1787 100 85.9892 100 83.5872V16.4133C100 14.0113 98.6243 11.8218 96.4609 10.7808L75.8725 0.873756C73.7862 -0.130129 71.3446 0.11576 69.5135 1.44695C69.252 1.63711 69.0028 1.84943 68.769 2.08341L29.3551 38.0415L12.1872 25.0096C10.589 23.7965 8.35363 23.8959 6.86933 25.2461L1.36303 30.2549C-0.452552 31.9064 -0.454633 34.7627 1.35853 36.417L16.2471 50.0001L1.35853 63.5832C-0.454633 65.2374 -0.452552 68.0938 1.36303 69.7453L6.86933 74.7541C8.35363 76.1043 10.589 76.2037 12.1872 74.9905L29.3551 61.9587L68.769 97.9167C69.3925 98.5406 70.1246 99.0104 70.9119 99.3171ZM75.0152 27.2989L45.1091 50.0001L75.0152 72.7012V27.2989Z"/></symbol>
+  <symbol id="sb-ic-windsurf" viewBox="0 0 24 24" fill="currentColor"><path d="M23.55 5.067c-1.2038-.002-2.1806.973-2.1806 2.1765v4.8676c0 .972-.8035 1.7594-1.7597 1.7594-.568 0-1.1352-.286-1.4718-.7659l-4.9713-7.1003c-.4125-.5896-1.0837-.941-1.8103-.941-1.1334 0-2.1533.9635-2.1533 2.153v4.8957c0 .972-.7969 1.7594-1.7596 1.7594-.57 0-1.1363-.286-1.4728-.7658L.4076 5.1598C.2822 4.9798 0 5.0688 0 5.2882v4.2452c0 .2147.0656.4228.1884.599l5.4748 7.8183c.3234.462.8006.8052 1.3509.9298 1.3771.313 2.6446-.747 2.6446-2.0977v-4.893c0-.972.7875-1.7593 1.7596-1.7593h.003a1.798 1.798 0 0 1 1.4718.7658l4.9723 7.0994c.4135.5905 1.05.941 1.8093.941 1.1587 0 2.1515-.9645 2.1515-2.153v-4.8948c0-.972.7875-1.7594 1.7596-1.7594h.194a.22.22 0 0 0 .2204-.2202v-4.622a.22.22 0 0 0-.2203-.2203Z"/></symbol>
+  <symbol id="sb-ic-zed" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 1.5a.75.75 0 0 0-.75.75v16.5H0V2.25A2.25 2.25 0 0 1 2.25 0h20.095c1.002 0 1.504 1.212.795 1.92L10.764 14.298h3.486V12.75h1.5v1.922a1.125 1.125 0 0 1-1.125 1.125H9.264l-2.578 2.578h11.689V9h1.5v9.375a1.5 1.5 0 0 1-1.5 1.5H5.185L2.562 22.5H21.75a.75.75 0 0 0 .75-.75V5.25H24v16.5A2.25 2.25 0 0 1 21.75 24H1.655C.653 24 .151 22.788.86 22.08L13.19 9.75H9.75v1.5h-1.5V9.375A1.125 1.125 0 0 1 9.375 8.25h5.314l2.625-2.625H5.625V15h-1.5V5.625a1.5 1.5 0 0 1 1.5-1.5h13.19L21.438 1.5z"/></symbol>
+</svg>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------- timeline (ms) ---------- */
+const LOOP        = 19600;
+const BAR_T       = 300;    // window chrome fades in
+const POP_START   = 140;    // tiles pop onto the sphere
+const POP_STAG    = 62;
+const POP_DUR     = 380;
+const MERGE_T     = 4000;   // spin ends, flip-grow begins
+const MERGE_LEAD  = 440;    // tiles start converging this early
+const FLIP_DUR    = 920;
+const SHRINK_T    = 4920;   // bloom shrinks to rail-head size
+const SHRINK_DUR  = 620;
+const DROP_T      = 5540;   // rail icons drop in (while rail is mid-stage)
+const DROP_DUR    = 480;
+const DROP_STAG   = 90;
+const GLIDE_T     = 6650;   // whole lockup glides left onto the real rail
+const GLIDE_DUR   = 640;
+const INNER_T     = 7290;   // sidebar + chat lane fade in
+const INNER_DUR   = 380;
+const FIRST_MSG_T = 7860;   // chat 0's first bubble pops
+const CHAT_START  = 8300;   // click-through begins
+const CHAT_STEP   = 800;    // user window is 0.7-0.9s per switch
+const N_CHATS     = 6;
+const DIM_T       = 13300;  // frontend dims under the tagline
+const DIM_DUR     = 400;
+const TAG_T       = 13600;  // "The AI Aggregator is here"
+const TAG_DUR     = 400;
+const DIP_T       = 15500;  // dip to black before the cut
+const DIP_END     = 15900;
+const CARD_T      = 15900;  // end card (same lockup as urgent-email-slow)
+
+/* ---------- easings ---------- */
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+const outCubic = t => 1 - Math.pow(1 - t, 3);
+const inCubic = t => t * t * t;
+const outBack = t => { const c = 1.70158, u = t - 1; return 1 + (c + 1) * u * u * u + c * u * u; };
+
+/* ---------- dom ---------- */
+const $ = id => document.getElementById(id);
+const stage = $("stage"), tour = $("tour"), card = $("card"), win = $("win");
+const rail = $("rail"), railBg = $("railBg"), sbSlot = $("sbSlot");
+const chatsCol = $("chatsCol"), mainCol = $("mainCol");
+const chTitle = $("chTitle"), chIc = $("chIc");
+const sphere = $("sphere"), bloom = $("bloom"), cur = $("cur"), curRing = $("curRing");
+const dim = $("dim"), tag = $("tag");
+const face = $("face"), word = $("word"), sub = $("sub");
+const rows = [...document.querySelectorAll(".row.chat")];
+const turns = [...document.querySelectorAll(".turns")];
+const railItems = [...rail.querySelectorAll(".rail-item:not(.sb)")]; // 8, drop order = dom order
+
+/* ---------- sphere population (18 tiles: 8 app icons + 10 artwork) ---------- */
+const APPS = [
+  ["openai",  "var(--brand-openai-ink)"],
+  ["claude",  "var(--brand-claude)"],
+  ["gemini",  "var(--brand-gemini)"],
+  ["cursor",  "var(--brand-cursor-ink)"],
+  ["copilot", "var(--brand-copilot-ink)"],
+];
+const IMGS = ["devin.png", "hermes.png", "grok.png", "kiro.ico", "replit.png", "lovable.png", "jetbrains.png", "bolt.png", "base44.png", "v0.svg"];
+const tiles = [];
+APPS.forEach(([app, ink]) => {
+  const s = document.createElement("span");
+  s.className = "tile";
+  s.innerHTML = `<svg style="color:${ink}"><use href="#sb-ic-${app}"/></svg>`;
+  sphere.appendChild(s); tiles.push(s);
+});
+IMGS.forEach(f => {
+  const s = document.createElement("span");
+  s.className = "tile";
+  s.innerHTML = `<img src="assets/${f}" alt=""/>`;
+  sphere.appendChild(s); tiles.push(s);
+});
+const N_TILES = tiles.length;
+
+/* fibonacci sphere, as in the site's sphere-intro */
+const FIB = [];
+for (let i = 0; i < N_TILES; i++) {
+  const y = 1 - (2 * i) / (N_TILES - 1);
+  const r = Math.sqrt(Math.max(0, 1 - y * y));
+  const phi = i * 2.39996323;
+  FIB.push([r * Math.cos(phi), y, r * Math.sin(phi)]);
+}
+
+/* ---------- measured geometry (stage coords, once) ---------- */
+const R = 175;
+let GM = { cx: 960, cy: 520 }, SB_HOME = { x: 60, y: 100 };
+let ROW_POS = [], CUR_HOME = { x: 1500, y: 900 };
+function measure() {
+  const st = stage.getBoundingClientRect();
+  const conv = r => { const b = r.getBoundingClientRect(); return { x: b.left - st.left + b.width / 2, y: b.top - st.top + b.height / 2 }; };
+  GM = conv($("mainCol"));
+  const sb = conv(sbSlot);
+  SB_HOME = { x: sb.x, y: sb.y };
+  ROW_POS = rows.map(conv);
+  CUR_HOME = { x: GM.x + 420, y: GM.y + 330 };
+}
+
+/* chat metadata (title + icon per sidebar row) */
+const META = [
+  ["urgent email slow",     "#sb-ic-claude",   "var(--brand-claude)"],
+  ["which rate limiter…",   "#sb-ic-openai",   "#8e8ea0"],
+  ["rank the import pa…",   "#sb-ic-cursor",   "#d7d7d7"],
+  ["trello card test",      "#sb-ic-vscode",   "var(--brand-vscode)"],
+  ["dedupe the always…",    "#sb-ic-gemini",   "var(--storm-3)"],
+  ["spin up the spin-…",    "#sb-ic-windsurf", "var(--brand-windsurf-ink)"],
+];
+
+/* exponential spin: omega(t) = (A/tau) * exp(t/tau); ~6 turns by merge */
+const TAU = 1.2, A = 1.16;
+const angAt = t => A * (Math.exp(t / 1000 / TAU) - 1);
+
+/* ---------- render: a frame is a pure function of t ---------- */
+function render(t) {
+  /* scenes */
+  const onCard = t >= CARD_T;
+  card.classList.toggle("on", onCard);
+  tour.classList.toggle("on", !onCard);
+
+  /* window chrome */
+  win.style.opacity = clamp01(t / BAR_T);
+
+  /* rail rides translate(rx,ry) mid-stage, then glides home */
+  const rx = GM.x - SB_HOME.x, ry = GM.y - SB_HOME.y;
+  let gx = rx, gy = ry, glideP = 0;
+  if (t >= GLIDE_T) {
+    glideP = clamp01((t - GLIDE_T) / GLIDE_DUR);
+    const e = outCubic(glideP);
+    gx = rx * (1 - e); gy = ry * (1 - e);
+  }
+  rail.style.transform = `translate(${gx}px, ${gy}px)`;
+  railBg.style.opacity = glideP; // strip ground grows in during the glide
+
+  /* sb slot: hidden until the glide lands, then pops */
+  const sbP = onCard || t >= INNER_T ? 1 : 0;
+  sbSlot.style.opacity = sbP;
+  if (sbP > 0) sbSlot.style.transform = `scale(${Math.max(0.001, outBack(clamp01((t - INNER_T) / 220)))})`;
+
+  /* rail icons drop in (they land mid-stage, riding the translated rail) */
+  railItems.forEach((el, i) => {
+    const p = clamp01((t - DROP_T - i * DROP_STAG) / DROP_DUR);
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - outBack(p)) * -26}px)`;
+  });
+
+  /* sidebar + chat lane fade in after the glide */
+  const ip = clamp01((t - INNER_T) / INNER_DUR);
+  chatsCol.style.opacity = mainCol.style.opacity = ip;
+
+  /* sphere tiles */
+  const vis = t < MERGE_T + 200;
+  tiles.forEach((el, i) => {
+    el.style.visibility = vis ? "visible" : "hidden";
+    if (!vis) return;
+    const pop = clamp01((t - POP_START - i * POP_STAG) / POP_DUR);
+    if (pop <= 0) { el.style.opacity = 0; return; }
+    const [fx, fy, fz] = FIB[i];
+    const ang = angAt(t);
+    const x = fx * Math.cos(ang) + fz * Math.sin(ang);
+    const z = -fx * Math.sin(ang) + fz * Math.cos(ang);
+    let px = GM.x + R * x, py = GM.y + R * fy, sc = 0.62 + 0.38 * ((z + 1) / 2), op = pop * ((z + 1.15) / 2.15);
+    const mg = clamp01((t - (MERGE_T - MERGE_LEAD)) / MERGE_LEAD);
+    if (mg > 0) { const e = inCubic(mg); px += (GM.x - px) * e; py += (GM.y - py) * e; sc *= 1 - 0.8 * e; }
+    el.style.opacity = op;
+    el.style.zIndex = 10 + Math.round((z + 1) * 5);
+    el.style.filter = `blur(${(1 - (z + 1) / 2) * 2.2}px)`;
+    el.style.transform = `translate(${px}px, ${py}px) scale(${sc * (0.4 + 0.6 * outBack(pop))})`;
+  });
+
+  /* bloom: flip-grow from the merge point, shrink to rail-head, ride the glide */
+  let bShow = false, bx = GM.x, by = GM.y, bSize = 250, bRot = 180, bOp = 0;
+  if (t >= MERGE_T && t < INNER_T) {
+    bShow = true;
+    if (t < SHRINK_T) {
+      const q = clamp01((t - MERGE_T) / FLIP_DUR);
+      bRot = 180 * (1 - q);
+      bSize = 54 + (250 - 54) * outBack(q);
+      bOp = q;
+    } else {
+      const q = clamp01((t - SHRINK_T) / SHRINK_DUR);
+      bSize = 250 + (40 - 250) * q;
+      bRot = 0; bOp = 1;
+    }
+    bx = SB_HOME.x + gx; by = SB_HOME.y + gy;
+  }
+  bloom.style.opacity = bShow ? bOp : 0;
+  if (bShow) {
+    bloom.style.transform = `translate(${bx}px, ${by}px) rotateY(${bRot}deg) scale(${bSize / 250})`;
+  }
+
+  /* cursor + click-through of every chat */
+  let sel = -1, selAt = -1;
+  if (t >= CHAT_START) {
+    sel = Math.min(Math.floor((t - CHAT_START) / CHAT_STEP), N_CHATS - 1);
+    selAt = CHAT_START + sel * CHAT_STEP;
+  } else if (t >= FIRST_MSG_T) { sel = 0; selAt = FIRST_MSG_T; }
+  rows.forEach((el, k) => {
+    const on = k === sel;
+    el.classList.toggle("on", on);
+    el.classList.toggle("press", on && t - selAt < 150);
+  });
+  turns.forEach((el, k) => {
+    const act = k <= sel ? (k === 0 ? FIRST_MSG_T : CHAT_START + k * CHAT_STEP) : Infinity;
+    const p = t >= act ? clamp01((t - act) / 180) : 0;
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - outCubic(p)) * 8}px)`;
+  });
+  if (t >= FIRST_MSG_T && !onCard) {
+    /* cursor glides toward the row it is about to click, flash on click */
+    const target = sel >= 0 ? ROW_POS[sel] : CUR_HOME;
+    const from = sel > 0 ? ROW_POS[sel - 1] : CUR_HOME;
+    const legStart = selAt - CHAT_STEP * 0.45;
+    const p = clamp01((t - legStart) / (CHAT_STEP * 0.45));
+    const e = outCubic(p);
+    cur.style.opacity = 1;
+    cur.style.transform = `translate(${from.x + (target.x - from.x) * e}px, ${from.y + (target.y - from.y) * e}px)`;
+    const rp = clamp01((t - selAt) / 300);
+    curRing.style.opacity = rp < 1 ? 0.85 * (1 - rp) : 0;
+    curRing.style.transform = `translate(${target.x}px, ${target.y}px) scale(${0.5 + rp * 0.9})`;
+    chTitle.textContent = META[sel][0];
+    chIc.innerHTML = `<svg style="color:${META[sel][2]}"><use href="${META[sel][1]}"/></svg>`;
+  } else {
+    cur.style.opacity = 0; curRing.style.opacity = 0;
+  }
+
+  /* dim + tagline */
+  const dp = clamp01((t - DIM_T) / DIM_DUR);
+  const dip = clamp01((t - DIP_T) / (DIP_END - DIP_T));
+  dim.style.opacity = Math.max(dp * 0.74, dip);
+  const tp = clamp01((t - TAG_T) / TAG_DUR);
+  tag.style.opacity = tp;
+  tag.firstElementChild.style.transform = `scale(${0.7 + 0.3 * outBack(tp)})`;
+
+  /* end card */
+  const ct = t - CARD_T;
+  const fp = clamp01(ct / 500);
+  face.style.opacity = fp;
+  face.style.transform = `translateY(${(1 - outBack(fp)) * 30}px)`;
+  [["gA", 100], ["gB", 160], ["gC", 220]].forEach(([id, off]) => {
+    const el = $(id), p = clamp01((ct - off) / 500);
+    el.style.opacity = 0.9 * p;
+    el.style.transform = `translateX(${(1 - outCubic(p)) * 60}px)`;
+  });
+  const wp = clamp01((ct - 600) / 700);
+  word.style.transform = `translateY(${(outCubic(wp) - 1) * 110}%)`;
+  const sp = clamp01((ct - 1300) / 300);
+  sub.style.opacity = sp;
+  sub.style.transform = `translateY(${(1 - outCubic(sp)) * 8}px)`;
+}
+
+/* ---------- fit + clock ---------- */
+function fit() {
+  const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `translate(${-960 * s}px, ${-540 * s}px) scale(${s})`;
+}
+addEventListener("resize", fit); fit();
+
+const params = new URLSearchParams(location.search);
+const seek = params.has("t") ? parseFloat(params.get("t")) : null;
+measure();
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  render(CARD_T + 1900);
+} else if (seek !== null && !isNaN(seek)) {
+  const t0 = ((seek % LOOP) + LOOP) % LOOP;
+  render(t0); setInterval(() => render(t0), 33); // frozen seek for harness screenshots
+} else {
+  const start = performance.now();
+  const tick = now => { render((now - start) % LOOP); requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+})();
+</script>
+</body>
+</html>

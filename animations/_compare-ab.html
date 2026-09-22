@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="Cache-Control" content="no-store"/>
+<title>rating round 5: A vs B</title>
+<style>
+  body { margin: 0; background: #000; color: #fff; font: 600 20px/28px -apple-system, system-ui, sans-serif; }
+  header { padding: 22px 32px 10px; }
+  header b { font-size: 28px; }
+  header p { margin: 6px 0 0; color: #9a9a9a; font-weight: 500; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 8px 32px 20px; }
+  .cell iframe { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 12px; background: #000; }
+  .cell h2 { margin: 0 0 8px; font-size: 22px; }
+  .cell p { margin: 8px 0 0; color: #9a9a9a; font-size: 15px; font-weight: 500; }
+  .tag { display: inline-block; padding: 3px 12px; border-radius: 999px; background: #1a1a1a; border: 1px solid #333; font-size: 14px; margin-right: 8px; }
+</style>
+</head>
+<body>
+<header>
+  <b>rating round 5 · pick the winner</b>
+  <p>say your rating out loud, then say "done done done" or press ENTER here. the mic is live and listening.</p>
+</header>
+<div class="row">
+  <div class="cell">
+    <h2><span class="tag">VARIANT A</span> ignored rules</h2>
+    <iframe src="tuneup-rules-a-a1b6c9d3/?v=7" allow="autoplay"></iframe>
+    <p>dev states the rules, agent breaks them in the same breath, three times. superbot pulls the rules out of the chat and wires them into every session.</p>
+  </div>
+  <div class="cell">
+    <h2><span class="tag">VARIANT B</span> the ramble</h2>
+    <iframe src="tuneup-ramble-b-e5f2078a/?v=7" allow="autoplay"></iframe>
+    <p>"fix the login bug" gets an endless restarting monologue, timer climbing. superbot curates skills, trims context, straight-to-it.</p>
+  </div>
+</div>
+<script>
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { fetch('http://127.0.0.1:8473/end', { mode: 'no-cors' }).catch(() => {}); }
+  });
+</script>
+</body>
+</html>

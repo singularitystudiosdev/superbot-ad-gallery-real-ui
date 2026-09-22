@@ -1,0 +1,297 @@
+/* superbot pitch — "yes man" spot. Same anatomy as the "favorite color"
+   spot: black screen, "Ready when you are." heading, the Ask-anything pill
+   (+ / Think / mic / blue voice button) and three suggestion rows, at the
+   real site's proportions in a 16:9 frame. New here: the pasted link
+   (carbkiller.com, plain text, blue), the accelerating glazing tirade, and
+   the two hard-cut cards before the straight cut to the superbot.gg end
+   card. All motion is computed in JS from t (see timeline.js) so frames are
+   deterministic; no CSS animations live on rebuilt DOM. */
+
+:root {
+  --bg: #000;
+  --fg: #f3f3f3;
+  --muted: #9a9a9f;
+  --line: #232323;
+  --card: #101010;
+  --raised: #161616;
+  --accent: #7cb389;
+  --danger: #c96f6f;
+  --gpt-input: #2a2a2c;
+  --gpt-bubble: #3a5fd0;
+  --voice: #3f6ff0;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --font-ui: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/22px var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+.stage {
+  position: relative;
+  /* the frame follows the gallery's ratio pick (assets/ar.js: --ar-f / --ar-ratio), 16:9 by default */
+  width: min(1280px, 96vw, calc(92vh * var(--ar-f, 1.7778)));
+  aspect-ratio: var(--ar-ratio, 16 / 9);
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  /* the ad frame IS the stage: anything pushed past it (the composer, the
+     punch-in spill) is gone, matching what the recorder captures */
+  overflow: hidden;
+}
+
+/* ---- the chatgpt-like screen: heading, the Ask-anything pill, the
+   suggestion rows. The message area rides between heading and bar once the
+   conversation starts. ---- */
+.chatui {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column;
+  /* conversation state: the composer pins to the bottom and the thread
+     grows up above it (real chat layout) */
+  justify-content: flex-end;
+  padding: 0 clamp(26px, 4vw, 72px) clamp(18px, 3.6vh, 40px);
+  background: var(--bg);
+  font-family: var(--font-ui);
+    will-change: filter, transform, opacity;
+}
+/* the real frontend's centered column: thread, composer and suggestions
+   all live in it */
+.chatui > * { width: min(100%, 73%); margin-inline: auto; }
+/* home state (chatgpt.com): greeting → composer → suggestions grouped in
+   the upper-middle of the frame */
+.chatui.home { justify-content: flex-start; padding-top: 14%; }
+.chatui.home .gpt-head { position: static; order: -1; margin: 0 auto 24px; }
+.chatui.home .msg-area { display: none; }
+.gpt-head {
+  position: absolute; left: 0; right: 0; top: 18%;
+  text-align: center;
+  font-size: clamp(18px, 1.95vw, 26px);
+  font-weight: 400; letter-spacing: -0.01em;
+  color: var(--fg);
+  will-change: opacity, filter;
+}
+.msg-area {
+  flex: 0 1 auto; min-height: 0;
+  max-height: 56%;
+  display: flex; flex-direction: column;
+  justify-content: flex-start; gap: 15px;
+  padding: 14px 0 22px;
+  overflow: hidden;
+  will-change: transform, filter;
+}
+.msg {
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-size: clamp(15px, 1.37vw, 18px); line-height: 1.5;
+  color: #ececf1;
+  white-space: pre-wrap; word-break: break-word;
+  will-change: opacity, transform;
+}
+.msg-user {
+  align-self: flex-end;
+  max-width: 70%;
+  background: var(--gpt-bubble);
+  border-bottom-right-radius: 6px;
+  opacity: 0;
+}
+.msg-ai {
+  align-self: stretch;
+  background: transparent;
+  padding: 0 4px;
+  opacity: 0;
+}
+/* the pasted link renders BLUE in the bar and the bubble (user ask) */
+.link { color: #6cb0ff; }
+/* the scene variants paste a short Slides/Gmail URL + question — the sent
+   bubble widens a touch so it all holds one line */
+.scene .msg-user { max-width: 80%; }
+/* the user bubble is BLUE in the real thing (verified on chatgpt.com,
+   2026-09-03: the sent message renders as a royal-blue bubble) — the
+   bubble rules below pick it up via --gpt-bubble */
+/* the input pill: the zoomed chat bar itself */
+.input-pill {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  background: rgb(33, 33, 33);
+  border-radius: 28px;
+  padding: 9px 12px 9px 16px;
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, .2);
+  will-change: filter, opacity;
+}
+.plus-ic { width: 22px; height: 22px; color: #b6b6ba; flex: none; will-change: transform, color; }
+.input-text, .cmd-glow, .caret, .placeholder {
+  font-size: clamp(15px, 1.43vw, 19px); line-height: 1.4;
+  white-space: pre;
+}
+.placeholder { color: var(--muted); }
+.input-text { color: #ececf1; }
+.caret { color: #ececf1; will-change: opacity; }
+/* the /superbot chip — the LIVE SITE's rule, verbatim: accent tint fill,
+   inset ring, static 12px glow, bolt from ::before */
+.cmd-glow, .msg-chip {
+  display: inline-block; color: var(--accent); font-weight: 700; letter-spacing: .01em;
+  font-family: var(--font-mono);
+  padding: 0 6px; margin-right: 2px; border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 0 0 transparent;
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.cmd-glow::before, .msg-chip::before {
+  content: '⚡'; font-size: .85em; margin-right: 4px; opacity: .9;
+}
+#inputChip { display: none; }
+.think-chip {
+  margin-left: auto; flex: none;
+  display: inline-flex; align-items: center; gap: 5px;
+  color: #b6b6ba;
+  font-size: clamp(14px, 1.24vw, 17px);
+}
+.think-chip svg { width: 19px; height: 19px; }
+.mic-ic { width: 21px; height: 21px; color: #b6b6ba; flex: none; }
+.voice-btn {
+  margin-left: 2px; flex: none;
+  width: clamp(39px, 3.25vw, 46px); height: clamp(39px, 3.25vw, 46px);
+  border-radius: 50%;
+  background: var(--voice);
+  display: grid; place-items: center;
+  will-change: transform, filter;
+}
+/* the three suggestion rows */
+.suggestions {
+  display: flex; flex-direction: column; gap: 13px;
+  padding: 17px 8px 0;
+  will-change: opacity, transform;
+}
+.sug {
+  display: flex; align-items: center; gap: 11px;
+  color: #b9b9be;
+  font-size: clamp(14px, 1.3vw, 17.5px);
+}
+.sug svg { width: 21px; height: 21px; color: #b9b9be; flex: none; }
+/* the typing indicator: lives IN the thread flow between the bubbles */
+.typing-indicator {
+  align-self: flex-start;
+  display: none; gap: 9px;
+  padding: 10px 6px 2px;
+  will-change: opacity;
+}
+.typing-indicator i {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #8f8f95;
+  will-change: opacity, transform;
+}
+
+/* the punch cards */
+.simple {
+  position: absolute; inset: 0; z-index: 6;   /* above the end card so the collapsing text lands over the mascot */
+  display: grid; place-items: center;
+  background: var(--bg);
+  font-family: var(--font-ui);
+  font-size: clamp(24px, 3vw, 44px);
+  font-weight: 700; letter-spacing: -0.01em;
+  color: var(--fg);
+  opacity: 0; will-change: opacity, transform, filter;
+}
+/* the poster card: the reference image's stack — FEEDBACK / ISN'T FOR /
+   EVERYONE., huge and tight */
+.simple.poster {
+  font-size: clamp(48px, 8.5vw, 128px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+/* the end card: PURE black (user ask — was 90% alpha over the blurred wall) */
+.endcard {
+  position: absolute; inset: 0; z-index: 5;
+  background: var(--bg);
+  will-change: opacity;
+}
+/* the lockup is the tabs-chaos end card (220px face, 128px wordmark, 34px
+   tagline, 44px gap on a 1080-high frame); --k is this stage's scale
+   against that frame, set every frame by timeline.js */
+.endcard-bot {
+  position: absolute; left: 0; top: 0; z-index: 2;
+  width: calc(220px * var(--k, .667)); height: calc(220px * var(--k, .667));
+  pointer-events: none; user-select: none;
+  will-change: transform;
+}
+.endcard-face { width: 100%; height: 100%; display: block; overflow: visible; }
+.endcard-word {
+  position: absolute; left: 0; top: 50%; z-index: 2;
+  font-family: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  color: #fff; white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+.endcard-word h1 { margin: 0; font-size: calc(128px * var(--k, .667)); font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+.endcard-word p { margin: calc(12px * var(--k, .667)) 0 0 calc(6px * var(--k, .667)); font-size: calc(34px * var(--k, .667)); font-weight: 500; color: #9a9a9a; }
+.endcard-tag {
+  position: absolute; left: 0; top: 0; z-index: 2;
+  font-family: "Arial Rounded MT Bold", ui-rounded, "Nunito", "Segoe UI", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(15px, 1.9vw, 26px);
+  letter-spacing: 0.02em;
+  color: #d7d7dc;
+  opacity: 0; white-space: nowrap;
+  will-change: transform, opacity, filter;
+}
+.endcard-tag.italic { font-style: italic; }
+.endcard-tag.long { font-size: clamp(13px, 1.6vw, 21px); }
+
+.veil {
+  position: absolute; inset: 0; z-index: 5;
+  background: var(--bg); opacity: 0; pointer-events: none;
+}
+.hint {
+  position: fixed; right: 18px; bottom: 14px;
+  font-size: 11px; color: var(--muted); opacity: .6; user-select: none;
+}
+body.freeze .hint { display: none; }
+
+/* the record button: fixed chrome OUTSIDE .stage */
+.rec-btn {
+  position: fixed; top: 18px; right: 18px; z-index: 40;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px; border-radius: 999px;
+  background: var(--card); color: var(--fg);
+  border: 1px solid var(--line);
+  font: 700 13px/1 var(--font-mono); letter-spacing: .04em;
+  cursor: pointer; transition: border-color .15s, background-color .15s;
+}
+.rec-btn:hover { border-color: var(--accent); }
+.rec-btn .rec-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--danger); flex: none;
+}
+.rec-btn.recording { background: #1a0e0e; border-color: var(--danger); color: #fff; }
+.rec-btn.recording .rec-dot { background: var(--danger); animation: rec-blink 1s steps(2) infinite; }
+@keyframes rec-blink { 50% { opacity: .25; } }
+.rec-btn:disabled { opacity: .7; cursor: default; }
+.rec-hud {
+  display: none; position: fixed; bottom: 18px; left: 18px; z-index: 40;
+  align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+  background: rgba(20, 8, 8, .85); border: 1px solid #5c3030;
+  color: #fff; font: 700 12px/1 var(--font-mono);
+}
+.rec-hud .rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: rec-blink 1s steps(2) infinite; }
+body.freeze .rec-btn { display: none; }
+
+/* ---- narrow frames (the gallery's 1:1 / 4:5 pick, assets/ar.js) ---- */
+.endcard.stacked .endcard-word { text-align: center; }
+.endcard.stacked .endcard-word p { margin-left: 0; }
+html[data-ar="1x1"] .chatui > * { width: min(100%, 86%); }
+html[data-ar="4x5"] .chatui > * { width: 100%; }
+html[data-ar="4x5"] .input-pill { gap: 6px; padding: 9px 10px 9px 12px; }
+html[data-ar="4x5"] .mic-ic { display: none; } /* the 4:5 pill keeps the typed prompt readable: no mic, no Think, tighter gaps */
+html[data-ar="1x1"] .input-pill .input-text, html[data-ar="4x5"] .input-pill .input-text { white-space: pre-wrap; flex: 0 1 auto; min-width: 0; overflow-wrap: anywhere; }
+html[data-ar="4x5"] .think-chip { display: none; }

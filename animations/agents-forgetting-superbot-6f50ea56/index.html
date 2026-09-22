@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>agents forgetting? superbot remembers — ad spot</title>
+<link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
+<meta name="description" content="ChatGPT asks for the trip plan again, and again; one click opens superbot, which picks the plan up at step 3. 27s looping ad spot, 1920x1080."/>
+<style>
+/* ---------- tokens: the site's own ladder (site.css :root) ---------- */
+:root {
+  --bg: #000000; --card: #0d0d0d; --raised: #181818; --line: #262626;
+  --fg: #ececec; --secondary: #cfcfcf; --muted: #9a9a9a; --ok: #34d399; --danger: #c96f6f;
+  --storm-0: #00e5c3; --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm: linear-gradient(135deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-x: linear-gradient(90deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-action: linear-gradient(135deg, var(--storm-1) 0%, var(--storm-2) 55%, var(--storm-3) 100%);
+  --ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --gpt-main: #212121; --gpt-side: #171717; --gpt-composer: #303030; --gpt-bubble: #323232;
+  --gpt-text: #ececec; --gpt-text-2: #cdcdcd; --gpt-text-3: #afafaf; --gpt-border: rgba(255,255,255,.15);
+  --gpt-font: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* ---------- scene 1: the ChatGPT clone (1536x864, scaled 1.25) ---------- */
+#gpt { width: 1536px; height: 864px; transform: scale(1.25); transform-origin: 0 0; background: var(--gpt-main); font-family: var(--gpt-font); color: var(--gpt-text); display: grid; grid-template-columns: 260px minmax(0, 1fr); }
+.g-side { background: var(--gpt-side); padding: 14px 10px; font-size: 14px; color: var(--gpt-text-2); display: flex; flex-direction: column; gap: 2px; }
+.g-side .s-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.g-side .s-row svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.g-side .s-row.on { background: var(--gpt-composer); color: var(--gpt-text); }
+.g-side .s-cap { margin: 16px 10px 6px; font-size: 12px; color: var(--gpt-text-3); }
+.g-side .s-chat { padding: 7px 10px; border-radius: 10px; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; }
+.g-main { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.g-top { flex: none; display: flex; align-items: center; gap: 6px; padding: 12px 18px; font-size: 17px; font-weight: 500; color: var(--gpt-text); }
+.g-top small { color: var(--gpt-text-3); font-weight: 400; font-size: 15px; }
+.g-thread { flex: 1; min-height: 0; overflow: hidden; position: relative; }
+.g-col { position: absolute; left: 50%; top: 0; width: 768px; margin-left: -384px; padding: 8px 20px 0; }
+.g-user { display: flex; justify-content: flex-end; margin: 12px 0 24px; opacity: 0; }
+.g-user .bub { max-width: 72%; padding: 10px 20px; border-radius: 24px; background: var(--gpt-bubble); font-size: 16px; line-height: 28px; white-space: pre-wrap; }
+.g-user .bub.paste { max-width: 86%; font: 12.5px/19px var(--mono); color: var(--gpt-text-2); padding: 12px 18px; }
+.g-ai { position: relative; margin: 0 0 24px; font-size: 16px; line-height: 28px; color: var(--gpt-text); white-space: pre-wrap; word-break: break-word; opacity: 0; }
+.g-ai .cur { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--gpt-text); vertical-align: -1px; margin-left: 2px; }
+.g-thinking { display: inline-flex; align-items: center; gap: 8px; color: var(--gpt-text-2); font-size: 15px; }
+.g-thinking i { width: 10px; height: 10px; border-radius: 50%; background: var(--gpt-text); }
+.g-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(to bottom, rgba(33,33,33,0), var(--gpt-main) 70%); pointer-events: none; }
+.g-foot { flex: none; position: relative; padding: 10px 20px 14px; display: grid; justify-items: center; }
+.g-composer { width: 768px; min-height: 52px; border-radius: 28px; background: var(--gpt-composer); border: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; gap: 10px; padding: 0 8px 0 10px; }
+.g-composer .plus, .g-composer .mic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: var(--gpt-text); }
+.g-composer .plus svg, .g-composer .mic svg { width: 20px; height: 20px; }
+.g-composer .ph { flex: 1; font-size: 16px; color: var(--gpt-text-3); white-space: nowrap; overflow: hidden; }
+.g-composer .ph.typing { color: var(--gpt-text); }
+.g-composer .ph .caret { display: inline-block; width: 1px; height: 18px; background: var(--gpt-text); vertical-align: -4px; margin-left: 1px; }
+.g-composer .send { width: 36px; height: 36px; border-radius: 50%; background: #676767; color: #212121; display: grid; place-items: center; }
+.g-composer .send.ready, .g-composer .send.stop { background: #fff; }
+.g-composer .send svg { width: 18px; height: 18px; }
+.g-disc { margin-top: 10px; font-size: 12px; color: var(--gpt-text-3); }
+/* the amnesia counter, top-right of the thread: how many times the plan was pasted */
+.g-count { position: absolute; right: 26px; top: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--gpt-border); font-size: 13px; color: var(--gpt-text-2); opacity: 0; }
+.g-count b { color: #fff; font-variant-numeric: tabular-nums; }
+
+/* ---------- the rescue popup ---------- */
+#popup { position: absolute; right: 44px; bottom: 44px; width: max-content; padding: 20px; border-radius: 24px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box; box-shadow: 0 0 32px rgba(43,107,255,.32), 0 0 64px rgba(192,38,211,.22), 0 30px 70px rgba(0,0,0,.5); opacity: 0; transform-origin: 50% 100%; isolation: isolate; z-index: 20; } /* 1:1 superbot-tool-calls 'superbot can do it! · soft glow': hug width, storm stroke, the same ring blurred behind it */
+#popup .p-head { display: flex; align-items: center; gap: 12px; white-space: nowrap; font-size: 29px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+#popup .p-head img { width: 34px; height: 34px; }
+#chatbtn { position: relative; margin: 16px 0 0; display: block; width: 100%; padding: 12px 20px; border-radius: 16px; background: #fff; color: #000; font-size: 22px; font-weight: 700; text-align: center; transform-origin: 50% 50%; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+
+#cursor { position: absolute; left: 0; top: 0; width: 34px; height: 44px; z-index: 40; opacity: 0; transform-origin: 3px 2px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.5)); }
+
+/* ---------- scene 2: the app window (1200x675 at 1.6) ---------- */
+#site { background: #000; }
+#site-in { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform: scale(1.6); transform-origin: 0 0; }
+.win { position: absolute; inset: 0; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-rows: 28px minmax(0, 1fr); }
+.win-bar { display: flex; align-items: center; gap: 6px; padding: 0 12px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.win-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.win-bar span { margin-left: 8px; }
+.win-bar .led { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--storm-1); box-shadow: 0 0 8px var(--storm-1); }
+.win-body { position: relative; overflow: hidden; }
+.hub { position: absolute; inset: 8px; right: calc(24% + 20px); background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 64px 200px minmax(0, 1fr); font: 11px/15px var(--ui); color: var(--fg); }
+.hub > * { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.rail { background: var(--bg); border-right: 1px solid var(--line); align-items: center; padding: 8px 0; gap: 4px; }
+.rail-item { position: relative; flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--raised); display: grid; place-items: center; color: var(--fg); }
+.rail-item svg { width: 26px; height: 26px; fill: currentColor; }
+.rail-item .dot { position: absolute; right: -2px; bottom: -2px; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--bg); }
+.rail-item.sb { border-radius: 0; background: transparent; }
+.rail-item.sb img { width: 100%; height: 100%; display: block; }
+.rail-item.sel::before { content: ""; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); width: 3px; height: 26px; border-radius: 0 999px 999px 0; background: var(--fg); }
+.rail-item[data-app="openai"], .rail-item[data-app="cursor"] { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="claude"] { background: #d97757; color: #fff; }
+.rail-item[data-app="gemini"] { background: #fff; color: #1f1f1f; }
+.rail-item[data-app="copilot"] { background: #24292f; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed { background: #000; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
+.rail-item.add { font: 16px/44px var(--mono); color: var(--muted); }
+.rail-div { flex: none; width: 22px; height: 1px; background: var(--line); }
+.chats { background: var(--card); border-right: 1px solid var(--line); }
+.side-head { flex: none; display: flex; align-items: center; gap: 5px; min-height: 40px; padding: 9px 12px; font-weight: 700; font-size: 12px; }
+.side-head img { width: 14px; height: 14px; }
+.row { display: flex; align-items: center; gap: 6px; min-height: 26px; margin: 0 6px; padding: 0 8px; border-radius: 8px; color: var(--muted); white-space: nowrap; overflow: hidden; }
+.row svg { flex: none; width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.row em { margin-left: auto; font-style: normal; font-size: 10px; }
+.row .cnt { margin-left: auto; min-width: 13px; padding: 0 3px; border-radius: 999px; background: var(--danger); color: #fff; font: 700 8px/13px var(--mono); text-align: center; }
+.row.on { background: var(--raised); color: var(--fg); box-shadow: inset 3px 0 0 var(--storm-1); }
+.row.new { color: var(--fg); }
+.row.glow { background: var(--raised); color: var(--fg); box-shadow: inset 3px 0 0 var(--storm-0), 0 0 0 1px rgba(0,229,195,.35); }
+.cap-row { display: flex; justify-content: space-between; padding: 4px 12px 2px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.today { padding: 2px 14px; color: var(--muted); font-size: 10px; }
+.user { margin-top: auto; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-top: 1px solid var(--line); }
+.user .av { position: relative; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); font: 700 10px/24px var(--ui); text-align: center; }
+.user .av i { position: absolute; right: -1px; bottom: -1px; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--card); }
+.user b { display: block; font-size: 11px; }
+.user small { display: block; color: var(--muted); font-size: 10px; }
+.main { position: relative; background: var(--card); }
+.chat-head { flex: none; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 12px; }
+.chat-head .ctx { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; padding: 0 8px; border-radius: 999px; border: 1px solid transparent; background: linear-gradient(var(--raised), var(--raised)) padding-box, var(--storm) border-box; color: var(--fg); font-weight: 600; font-size: 9.5px; line-height: 18px; opacity: 0; }
+.chat-head .ctx i { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
+.chat-head .ask { margin-left: auto; display: flex; align-items: center; gap: 4px; padding: 0 9px; border-radius: 8px; background: var(--storm-action); color: #fff; font-weight: 650; font-size: 10px; line-height: 20px; }
+.chat-head .ask img { width: 12px; height: 12px; }
+.feed { flex: 1; min-height: 0; padding: 10px 12px; display: grid; align-content: start; gap: 9px; overflow: hidden; }
+.welcome { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.welcome .w-ic { width: 24px; height: 24px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; }
+.welcome .w-ic img { width: 14px; height: 14px; }
+.welcome b { display: block; }
+.welcome small { display: block; color: var(--muted); font-size: 10px; }
+.date-div { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 9px; }
+.date-div::before, .date-div::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.msg { display: flex; gap: 8px; opacity: 0; }
+.msg.old { opacity: .55; }
+.avatar { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); color: var(--fg); font: 700 10px/24px var(--ui); text-align: center; }
+.avatar.sb { background: #000; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; }
+.avatar.sb img { width: 62%; height: 62%; display: block; }
+.m-main { min-width: 0; flex: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 5px; }
+.m-head { display: flex; gap: 6px; align-items: baseline; }
+.m-name { font-weight: 700; }
+.m-when { font-size: 9px; color: var(--muted); }
+.app { padding: 0 4px; border-radius: 3px; background: var(--storm-1); color: #fff; font: 700 8px/12px var(--ui); letter-spacing: .04em; }
+.m-text { font-size: 11px; line-height: 15px; white-space: pre-wrap; }
+/* the context card: what superbot loaded before answering */
+.ctxcard { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; opacity: 0; }
+.ctxcard .kv { padding: 6px 8px; border-radius: 8px; background: #000; border: 1px solid var(--line); }
+.ctxcard .kv small { display: block; color: var(--muted); font-size: 8.5px; letter-spacing: .06em; text-transform: uppercase; }
+.ctxcard .kv b { display: block; font-size: 11px; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the plan: seven steps, the first two already done when superbot opens it */
+.plan { background: #000; border: 1px solid var(--line); border-radius: 8px; opacity: 0; }
+.plan .p-bar { display: flex; align-items: center; gap: 6px; padding: 5px 8px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 9px; }
+.plan .p-bar .lang { margin-left: 4px; padding: 0 5px; border-radius: 4px; background: var(--raised); color: var(--secondary); }
+.plan .p-bar .pct { margin-left: auto; font: 600 9px/14px var(--mono); color: var(--fg); }
+.step { display: flex; align-items: center; gap: 8px; padding: 4px 10px; font: 10.5px/15px var(--mono); color: var(--muted); }
+.step .bx { flex: none; width: 12px; height: 12px; border-radius: 4px; border: 1px solid var(--line); display: grid; place-items: center; }
+.step .bx svg { width: 8px; height: 8px; fill: none; stroke: #000; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+.step.done { color: var(--fg); }
+.step.done .bx { background: var(--ok); border-color: var(--ok); }
+.step.done .bx svg { opacity: 1; }
+.step.run { color: var(--fg); }
+.step.run .bx { border-color: var(--storm-1); box-shadow: 0 0 0 2px rgba(43,107,255,.25); }
+.step .tag { margin-left: auto; padding: 0 5px; border-radius: 4px; font: 600 8px/13px var(--ui); background: var(--raised); color: var(--muted); }
+.step.run .tag { background: rgba(43,107,255,.2); color: #8fb0ff; }
+.step.done .tag { background: rgba(52,211,153,.14); color: var(--ok); }
+.phone { position: absolute; right: 8px; top: 8px; bottom: 8px; width: 24%; background: #000; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; font: 11px/15px var(--ui); color: var(--fg); display: flex; flex-direction: column; padding: 10px 12px 8px; }
+.ph-status { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted); padding: 0 4px; }
+.ph-head { position: relative; display: flex; align-items: center; gap: 8px; padding: 10px 0 8px; font-weight: 700; font-size: 12px; }
+.ph-head .g { width: 14px; height: 14px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); font: 400 10px/1 var(--ui); font-style: normal; }
+.ph-head .g.r { margin-left: auto; border-radius: 4px; }
+.ph-head .sync { position: absolute; right: 0; top: 12px; color: var(--storm-1); font-size: 9px; font-weight: 500; }
+.ph-div { text-align: center; color: var(--muted); font-size: 10px; padding: 6px 0 8px; }
+.ph-turn { font-size: 11px; line-height: 15px; margin-bottom: 8px; }
+.ph-turn b { color: var(--storm-0); }
+.ph-composer { margin-top: auto; display: flex; align-items: center; gap: 8px; }
+.ph-ring { flex: 1; padding: 1px; border-radius: 999px; background: var(--storm); }
+.ph-pill { display: flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; background: #000; color: var(--muted); font-size: 10px; line-height: 22px; }
+.ph-pill i { font-style: normal; color: var(--fg); }
+.ph-send { width: 22px; height: 22px; border-radius: 50%; background: var(--storm-1); }
+.ph-home { align-self: center; width: 70px; height: 3px; border-radius: 2px; background: var(--line); margin-top: 6px; }
+.composer { flex: none; margin: 6px 12px 10px; }
+.composer .pill { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 4px 0 9px; border-radius: 16px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); }
+.composer .plus { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font: 650 11px/16px var(--mono); color: var(--fg); }
+.composer .ph { flex: 1; }
+.composer .picker { padding: 0 6px; border-radius: 8px; background: var(--card); color: var(--fg); font-size: 10px; line-height: 18px; }
+.composer .send { width: 24px; height: 24px; border-radius: 50%; background: var(--storm-action); display: grid; place-items: center; color: #fff; }
+.composer .send svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- scene 3: the cards ---------- */
+#card { display: grid; place-items: center; background: #000; }
+#card .line { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-size: 132px; font-weight: 800; letter-spacing: -.035em; line-height: 1; color: #fff; }
+#card .red { color: rgb(255, 0, 0); }
+#card .grad { background: var(--storm-x); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- scene 4: the end card ---------- */
+#end { display: grid; place-items: center; background: #000; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end svg.face { width: 220px; height: 220px; overflow: visible; }
+#end .words { overflow: hidden; }
+#end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { opacity: 0 !important; visibility: hidden !important; }
+  #end { opacity: 1 !important; visibility: visible !important; }
+  #end .lock > * { transform: none !important; opacity: 1 !important; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+    <symbol id="ic-openai" viewBox="0 0 2406 2406"><path id="oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#oai-petal" transform="rotate(60 1203 1203)"/><use href="#oai-petal" transform="rotate(120 1203 1203)"/><use href="#oai-petal" transform="rotate(180 1203 1203)"/><use href="#oai-petal" transform="rotate(240 1203 1203)"/><use href="#oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+    <symbol id="ic-claude" viewBox="0 0 24 24"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+    <symbol id="ic-gemini" viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="ic-cursor" viewBox="0 0 24 24"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+    <symbol id="ic-copilot" viewBox="0 0 24 24"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+    <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></symbol>
+    <symbol id="ic-tick" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage">
+
+  <!-- ============ scene 1: ChatGPT forgets ============ -->
+  <section class="scene" id="gpt" aria-label="ChatGPT forgets the plan">
+    <aside class="g-side">
+      <div class="s-row on"><svg viewBox="0 0 24 24"><path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4Z"/></svg>New chat</div>
+      <div class="s-row"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>Search chats</div>
+      <div class="s-row"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12h8M12 8v8"/></svg>Projects</div>
+      <div class="s-cap">Chats</div>
+      <div class="s-chat" id="s-c0">Trip plan (again)</div>
+      <div class="s-chat">Trip plan (cont.)</div>
+      <div class="s-chat">Japan trip plan v3</div>
+      <div class="s-chat">Japan trip, oct 12–24</div>
+      <div class="s-chat">Re: trip plan</div>
+      <div class="s-chat">Trip plan</div>
+      <div class="s-chat">help me plan japan</div>
+      <div class="s-chat">Tokyo hotel ideas</div>
+      <div class="s-chat">Trip plan (final)</div>
+      <div class="s-chat">Trip plan (final final)</div>
+    </aside>
+    <div class="g-main">
+      <div class="g-top">ChatGPT <small>▾</small></div>
+      <div class="g-count" id="g-count">plan pasted <b id="g-n">3</b>×</div>
+      <div class="g-thread">
+        <div class="g-col" id="g-col">
+          <div class="g-user" id="u1"><div class="bub">hey can we keep going on my trip plan from yesterday?</div></div>
+          <div class="g-ai" id="a1"><span class="g-thinking" id="th1"><i></i>Thinking</span><span id="t1"></span><span class="cur" id="c1"></span></div>
+          <div class="g-user" id="u2"><div class="bub paste" id="paste"></div></div>
+          <div class="g-ai" id="a2"><span class="g-thinking" id="th2"><i></i>Thinking</span><span id="t2"></span><span class="cur" id="c2"></span></div>
+          <div class="g-user" id="u3"><div class="bub">japan! it's in the plan you just read. flights and hotel are already booked.</div></div>
+          <div class="g-ai" id="a3"><span class="g-thinking" id="th3"><i></i>Thinking</span><span id="t3"></span><span class="cur" id="c3"></span></div>
+        </div>
+        <div class="g-fade"></div>
+      </div>
+      <div class="g-foot">
+        <div class="g-composer" id="g-comp">
+          <span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span class="ph" id="g-ph">Ask anything</span>
+          <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg></span>
+          <span class="send" id="g-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span>
+        </div>
+        <div class="g-disc">ChatGPT can make mistakes. Check important info.</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="popup" aria-hidden="true">
+    <div class="p-head"><img src="assets/mark-clean.svg" alt=""/>superbot can do it!</div>
+    <div id="chatbtn">chat</div>
+  </div>
+
+  <!-- ============ scene 2: the hub picks the plan up ============ -->
+  <section class="scene" id="site" aria-label="superbot picks up the plan">
+    <div id="site-in">
+      <div class="win">
+        <div class="win-bar"><i></i><i></i><i></i><span>superbot</span><em class="led"></em></div>
+        <div class="win-body">
+          <div class="hub" id="hub">
+            <nav class="rail">
+              <span class="rail-item sb sel"><img src="assets/tile.svg" alt=""/></span>
+              <span class="rail-div"></span>
+              <span class="rail-item" data-app="openai"><svg><use href="#ic-openai"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="claude"><svg><use href="#ic-claude"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="gemini"><svg><use href="#ic-gemini"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="cursor"><svg><use href="#ic-cursor"/></svg><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/devin.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/hermes.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/grok.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item" data-app="copilot"><svg><use href="#ic-copilot"/></svg><i class="dot"></i></span>
+              <span class="rail-div"></span>
+              <span class="rail-item add">+</span>
+            </nav>
+            <div class="chats">
+              <div class="side-head"><img src="assets/mark-clean.svg" alt=""/>superbot.gg</div>
+              <span class="row new"><svg viewBox="0 0 24 24"><path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4Z"/></svg>New chat</span>
+              <span class="row" id="row-ctx"><svg viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>Manage Context<em id="ctx-em"></em></span>
+              <span class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11"/><path d="M14.6 9.4c-.9-1.3-5.8-1.4-5.8.9 0 2.5 6.2 1.4 6.2 3.8 0 2.3-5.2 2.1-6.4.7"/></svg>View Savings</span>
+              <span class="row"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-6"/><path d="M13 17V7"/><path d="M18 17v-3"/></svg>View Usage</span>
+              <span class="row"><svg viewBox="0 0 24 24"><path d="m3 6 2 2 4-4"/><path d="m3 14 2 2 4-4"/><path d="M13 6h8"/><path d="M13 16h8"/></svg>Setup<i class="cnt">3</i></span>
+              <div class="cap-row"><span>⌄ Recents</span><span>4</span></div>
+              <div class="today">Today</div>
+              <span class="row on"><svg><use href="#ic-chat"/></svg>trip plan<em>now</em></span>
+              <div class="today">Yesterday</div>
+              <span class="row"><svg><use href="#ic-chat"/></svg>trip plan · hotel<em>1d</em></span>
+              <span class="row"><svg><use href="#ic-chat"/></svg>trip plan · flights<em>1d</em></span>
+              <span class="row"><svg><use href="#ic-chat"/></svg>japan trip: the plan<em>2d</em></span>
+              <div class="user"><span class="av">D<i></i></span><span><b>hi@superbot.gg</b><small>context: 4 chats · 2 days</small></span></div>
+            </div>
+            <div class="main">
+              <div class="chat-head"><b>chat</b><span class="ctx" id="ctx-chip"><i></i>context: japan-trip.md · 4 chats</span><span class="ask"><img src="assets/mark-clean.svg" alt=""/>Ask Superbot</span></div>
+              <div class="feed" id="feed">
+                <div class="date-div">Yesterday</div>
+                <div class="msg old" id="o1"><span class="avatar">D</span><div class="m-main"><div class="m-head"><span class="m-name">dev</span><span class="m-when">6:12 PM</span></div><div class="m-text">hotel booked, confirmation saved. let's finish this tomorrow.</div></div></div>
+                <div class="msg old" id="o2"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">6:12 PM</span></div><div class="m-text">saved. step 3 (kyoto train + hotel) is next, I'll have options ready.</div></div></div>
+                <div class="date-div">Today</div>
+                <div class="msg" id="h-user"><span class="avatar">D</span><div class="m-main"><div class="m-head"><span class="m-name">dev</span><span class="m-when">9:02 AM</span></div><div class="m-text">hey can we keep going on my trip plan from yesterday?</div></div></div>
+                <div class="msg" id="h-bot"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">9:02 AM</span></div><div class="m-text" id="h-text"></div>
+                  <div class="ctxcard" id="ctxcard">
+                    <div class="kv"><small>plan</small><b>japan-trip.md</b></div>
+                    <div class="kv"><small>trip</small><b>japan · oct 12–24</b></div>
+                    <div class="kv"><small>history</small><b>4 chats · 2 days</b></div>
+                    <div class="kv"><small>shared with</small><b>ChatGPT · Claude · Cursor</b></div>
+                  </div>
+                  <div class="plan" id="plan">
+                    <div class="p-bar"><span>japan-trip.md</span><span class="lang">7 steps</span><span class="pct" id="pct">2/7</span></div>
+                    <div class="step done"><span class="bx"><svg><use href="#ic-tick"/></svg></span>1 · book flights (SFO → tokyo)<span class="tag">done · yesterday</span></div>
+                    <div class="step done"><span class="bx"><svg><use href="#ic-tick"/></svg></span>2 · book tokyo hotel, 5 nights<span class="tag">done · yesterday</span></div>
+                    <div class="step" id="s3"><span class="bx"><svg><use href="#ic-tick"/></svg></span>3 · kyoto train + hotel<span class="tag" id="g3">queued</span></div>
+                    <div class="step" id="s4"><span class="bx"><svg><use href="#ic-tick"/></svg></span>4 · day trips: nara, osaka<span class="tag" id="g4">queued</span></div>
+                    <div class="step" id="s5"><span class="bx"><svg><use href="#ic-tick"/></svg></span>5 · dinner reservations<span class="tag" id="g5">queued</span></div>
+                    <div class="step"><span class="bx"><svg><use href="#ic-tick"/></svg></span>6 · travel insurance + esim<span class="tag">queued</span></div>
+                    <div class="step"><span class="bx"><svg><use href="#ic-tick"/></svg></span>7 · packing list<span class="tag">queued</span></div>
+                  </div>
+                </div></div>
+              </div>
+              <div class="composer"><div class="pill"><span class="plus">+</span><span class="ph">How can superbot help you today?</span><span class="picker">superbot ▾</span><span class="send"><svg viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></div></div>
+            </div>
+          </div>
+          <div class="phone" aria-hidden="true">
+            <div class="ph-status"><span>9:02</span></div>
+            <div class="ph-head"><i class="g">‹</i><b># superbot</b><i class="g r">▤</i><span class="sync">synced</span></div>
+            <div class="ph-div">Today</div>
+            <div class="ph-turn">one context for every agent: ChatGPT, Claude, Gemini and Cursor all read the same plan.</div>
+            <div class="ph-turn">switch agents mid-task. nobody asks <b>"what were we doing?"</b></div>
+            <div class="ph-composer"><span class="ph-ring"><span class="ph-pill"><i>+</i>Ask Superbot anything</span></span><span class="ph-send"></span></div>
+            <div class="ph-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ scene 3: the cards ============ -->
+  <section class="scene" id="card" aria-label="agents forgetting? superbot remembers.">
+    <div class="line" id="card-a">agents <span class="red">forgetting</span>?</div>
+    <div class="line" id="card-b"><span class="grad">superbot</span> remembers.</div>
+  </section>
+
+  <!-- ============ scene 4: the end card ============ -->
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true"><rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/></svg>
+      <div class="words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <svg id="cursor" viewBox="0 0 34 44" aria-hidden="true"><path d="M3 2 L3 34 L11 26 L17 41 L23 38 L17 24 L28 24 Z" fill="#000" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+  <div id="dip"></div>
+</div>
+
+<script>
+// ---------- the clock: one render(t), a pure function of story time ----------
+// Every visual is recomputed from t each frame, so seeking (`?t=9.4`) or capturing
+// any frame yields the same picture. Frame-indexed at 30fps.
+const FPS = 30, LOOP = 27.5;
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the beat sheet (story seconds) ----------
+const B = {
+  typeA: 0.5, typeB: 1.7, send1: 1.9,            // "hey can we keep going on my trip plan from yesterday?"
+  think1: 2.0, reply1: 2.55,                      // "I don't have access to previous conversations…"
+  paste: 5.3, send2: 5.55,                        // the plan is pasted (again)
+  think2: 5.65, reply2: 6.2,                      // "Thanks! Which database…"
+  typeC: 8.3, typeD: 9.3, send3: 9.45,            // "postgres. it's in the plan you just read."
+  think3: 9.55, reply3: 10.1,                     // the apology that asks for the plan again, and never stops
+  popup: 11.6,                                    // the rescue popup
+  curIn: 13.2, curAt: 14.1, press: 14.35, release: 14.5,
+  dip: 14.85, site: 15.1,
+  ask: 15.6, botIn: 16.1, ctx: 16.4, plan: 17.4,  // the ask, superbot's line, the context card, the plan
+  s3run: 17.9, s3done: 19.1, s4run: 19.15, s4done: 20.3, s5run: 20.35,
+  cardA: 21.6, cardB: 23.4, end: 25.2, word: 26.0,
+};
+
+// ---------- copy ----------
+const PROMPT = 'hey can we keep going on my trip plan from yesterday?';
+const R1 = "I don't have access to our previous conversations, so I can't see your trip plan. Could you paste it here so I can pick up where we left off?";
+const PASTE = "TRIP PLAN v3 — japan, oct 12–24\n1. book flights (SFO → tokyo)      [done]\n2. book tokyo hotel, 5 nights       [done]\n3. kyoto train + hotel\n4. day trips: nara, osaka\n5. dinner reservations\n6. travel insurance + esim\n7. packing list";
+const R2 = "Thanks for sharing! Before I continue, where are you traveling to? And could you remind me what step 1 was?";
+const PROMPT3 = "japan! it's in the plan you just read. flights and hotel are already booked.";
+const R3_HEAD = "You're absolutely right, I apologize for the confusion! Since I don't retain context between sessions, could you re-share the trip plan? ";
+const R3_TAIL = [
+  "Also, just to confirm: which country is this for? ",
+  "To make sure I have everything, could you remind me what we were working on? ",
+  "Would you like me to create a trip plan for you? ",
+  "As I mentioned, I don't have memory of earlier chats. Could you paste the plan? ",
+  "What was step 1 again? ",
+  "Are we planning a trip? ",
+  "I'm happy to help, but I'll need the plan. ",
+];
+const R3_WORDS = (() => {
+  const words = R3_HEAD.split(' ').filter(Boolean).map((w) => w + ' ');
+  for (let k = 0; k < 8; k++) for (const s of R3_TAIL) words.push(...s.split(' ').filter(Boolean).map((w) => w + ' '));
+  return words;
+})();
+const WORDS_PER_S = 30, ACCEL = 4;
+const wordsAt = (dt) => Math.floor(WORDS_PER_S * dt + ACCEL * dt * dt);
+const BOT = "picking up where we left off. loaded the plan, the 4 chats and your booking confirmations. steps 1–2 are done, doing step 3 now:";
+
+// ---------- element refs ----------
+const stage = $('stage'), dip = $('dip'), cursor = $('cursor');
+const gpt = $('gpt'), gPh = $('g-ph'), gSend = $('g-send'), gCol = $('g-col'), gThread = gCol.parentElement;
+const popup = $('popup'), chatbtn = $('chatbtn');
+const site = $('site'), feedEl = $('feed');
+const hUser = $('h-user'), hBot = $('h-bot'), hText = $('h-text');
+const card = $('card'), cardA = $('card-a'), cardB = $('card-b');
+const end = $('end'), endFace = $('end-face'), endSlide = $('end-slide');
+
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+let BTN = { x: 1920 - 44 - 220, y: 1080 - 44 - 60 };
+function measure() {
+  const sr = stage.getBoundingClientRect(), k = sr.width / 1920;
+  const b = chatbtn.getBoundingClientRect();
+  BTN = { x: (b.left + b.width / 2 - sr.left) / k, y: (b.top + b.height / 2 - sr.top) / k };
+}
+
+// ---------- render ----------
+function render(t) {
+  const inGpt = t < B.site, inSite = t >= B.site && t < B.cardA, inCard = t >= B.cardA && t < B.end, inEnd = t >= B.end;
+  scene(gpt, inGpt); scene(site, inSite); scene(card, inCard); scene(end, inEnd);
+  op(dip, t < B.dip ? 0 : t < B.site ? seg(t, B.dip, B.site) : 1 - seg(t, B.site, B.site + 0.35));
+  if (inGpt) renderGpt(t); else op(popup, 0);
+  if (inSite) renderSite(t);
+  if (inCard) renderCard(t);
+  if (inEnd) renderEnd(t);
+  renderCursor(t);
+}
+
+// one ChatGPT turn: the user bubble rises in at `send`, "Thinking" pulses, then the reply streams
+function turn(uEl, aEl, thEl, tEl, cEl, send, think, reply, text, cps) {
+  const pu = seg(t_, send, send + 0.3);
+  op(uEl, pu); uEl.style.transform = `translateY(${((1 - outCubic(pu)) * 10).toFixed(1)}px)`;
+  const thinking = t_ >= think && t_ < reply;
+  thEl.style.display = thinking ? '' : 'none';
+  thEl.style.opacity = thinking ? String(0.55 + 0.45 * Math.abs(Math.sin((t_ - think) * 6))) : '0';
+  const n = t_ < reply ? 0 : Math.min(text.length, Math.floor((t_ - reply) * cps));
+  tEl.textContent = text.slice(0, n);
+  cEl.style.display = t_ >= reply && n < text.length ? '' : 'none';
+  op(aEl, t_ >= think ? 1 : 0);
+}
+let t_ = 0;
+function composer(t, from, to, sendAt, text) {
+  const typed = Math.floor(seg(t, from, to) * text.length);
+  if (t >= from && t < sendAt) {
+    gPh.className = 'ph typing';
+    gPh.innerHTML = esc(text.slice(0, typed)) + '<span class="caret"></span>';
+    gSend.className = 'send ready';
+    return true;
+  }
+  return false;
+}
+function renderGpt(t) {
+  t_ = t;
+  // the composer: the first prompt, later the third
+  const typing = composer(t, B.typeA, B.typeB, B.send1, PROMPT) || composer(t, B.typeC, B.typeD, B.send3, PROMPT3);
+  if (!typing) { gPh.className = 'ph'; gPh.textContent = 'Ask anything'; gSend.className = 'send'; }
+  // three turns
+  turn($('u1'), $('a1'), $('th1'), $('t1'), $('c1'), B.send1, B.think1, B.reply1, R1, 62);
+  // the paste lands whole (a paste is instant), sends a beat later
+  $('paste').textContent = t >= B.paste ? PASTE : '';
+  turn($('u2'), $('a2'), $('th2'), $('t2'), $('c2'), B.paste, B.think2, B.reply2, R2, 62);
+  turn($('u3'), $('a3'), $('th3'), $('t3'), $('c3'), B.send3, B.think3, B.reply3, '', 1);
+  // the third reply streams word by word, faster and faster, and never finishes
+  const n3 = t < B.reply3 ? 0 : Math.min(R3_WORDS.length, wordsAt(t - B.reply3));
+  $('t3').textContent = R3_WORDS.slice(0, n3).join('');
+  $('c3').style.display = t >= B.reply3 ? '' : 'none';
+  // the amnesia counter
+  op($('g-count'), seg(t, B.paste + 0.2, B.paste + 0.6));
+  $('g-n').textContent = t >= B.reply3 + 1.2 ? '4' : '3';
+  // the sidebar: yesterday's chats, all named "migration plan"
+  const sc = document.querySelectorAll('.s-chat');
+  sc.forEach((el, i) => op(el, seg(t, 0.2 + i * 0.05, 0.5 + i * 0.05)));
+  // keep the newest line in view
+  const over = Math.max(0, gCol.offsetHeight - gThread.clientHeight + 24);
+  gCol.style.transform = `translateY(${(-over).toFixed(0)}px)`;
+  // the composer dims once the popup is up
+  op($('g-comp'), 1 - 0.55 * seg(t, B.popup, B.popup + 0.6));
+  // the rescue popup
+  // the popup, 1:1 the tool-calls page's 'superbot can do it! · soft glow' (entrance 'rise'): rises 40px in over 0.4s,
+  // holds for the chat press, then falls back out over 0.3s before the dip
+  const pp = seg(t, B.popup, B.popup + 0.4), po = seg(t, B.release + 0.05, B.release + 0.35);
+  op(popup, po > 0 ? 1 - po : pp);
+  const press = t >= B.press && t < B.release ? 1 : t >= B.release ? 1 - seg(t, B.release, B.release + 0.18) : 0;
+  popup.style.transform = `translateY(${(po > 0 ? po * po * 40 : (1 - outQuint(pp)) * 40).toFixed(1)}px)`;
+  chatbtn.style.transform = `scale(${(1 - 0.05 * press).toFixed(3)})`;
+  if (pp >= 1 && t < B.curIn + 0.1) measure();
+}
+
+function renderSite(t) {
+  // yesterday's messages are simply there; today's ask rises in
+  op($('o1'), 0.55); op($('o2'), 0.55);
+  const au = seg(t, B.ask, B.ask + 0.25); op(hUser, au); hUser.style.transform = `translateY(${((1 - outCubic(au)) * 6).toFixed(1)}px)`;
+  const bo = seg(t, B.botIn, B.botIn + 0.25); op(hBot, bo); hBot.style.transform = `translateY(${((1 - outCubic(bo)) * 6).toFixed(1)}px)`;
+  const chars = t < B.botIn ? 0 : Math.min(BOT.length, Math.floor((t - B.botIn) * 95));
+  hText.textContent = BOT.slice(0, chars);
+  // the context loads: the sidebar row glows, the chip appears, the card lands
+  $('row-ctx').className = 'row' + (t >= B.ctx ? ' glow' : '');
+  $('ctx-em').textContent = t >= B.ctx ? '4 chats' : '';
+  op($('ctx-chip'), seg(t, B.ctx, B.ctx + 0.3));
+  const cc = seg(t, B.ctx, B.ctx + 0.35); op($('ctxcard'), cc); $('ctxcard').style.transform = `translateY(${((1 - outCubic(cc)) * 6).toFixed(1)}px)`;
+  const pl = seg(t, B.plan, B.plan + 0.35); op($('plan'), pl); $('plan').style.transform = `translateY(${((1 - outCubic(pl)) * 6).toFixed(1)}px)`;
+  // steps 3–5 run and land
+  const st = (id, tag, runAt, doneAt) => {
+    const el = $(id), g = $(tag);
+    const state = doneAt !== null && t >= doneAt ? 'done' : t >= runAt ? 'run' : '';
+    el.className = 'step' + (state ? ' ' + state : '');
+    g.textContent = state === 'done' ? 'done' : state === 'run' ? 'running' + '.'.repeat(1 + Math.floor((t * 3) % 3)) : 'queued';
+  };
+  st('s3', 'g3', B.s3run, B.s3done); st('s4', 'g4', B.s4run, B.s4done); st('s5', 'g5', B.s5run, null);
+  $('pct').textContent = (t >= B.s4done ? 4 : t >= B.s3done ? 3 : 2) + '/7';
+  feedEl.scrollTop = feedEl.scrollHeight;
+}
+
+function renderCard(t) {
+  const a = seg(t, B.cardA, B.cardA + 0.35), b = seg(t, B.cardB, B.cardB + 0.35);
+  const out = seg(t, B.cardB - 0.2, B.cardB);
+  op(cardA, a * (1 - out)); cardA.style.transform = `translateY(${(-50 + (1 - outQuint(a)) * 3 - out * 3).toFixed(2)}%) scale(${lerp(0.96, 1, outQuint(a)).toFixed(3)})`;
+  op(cardB, b); cardB.style.transform = `translateY(${(-50 + (1 - outQuint(b)) * 3).toFixed(2)}%) scale(${lerp(0.96, 1, outQuint(b)).toFixed(3)})`;
+}
+
+function renderEnd(t) {
+  const f = seg(t, B.end, B.end + 0.5), w = seg(t, B.word, B.word + 0.7);
+  op(endFace, f); endFace.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(3)})`;
+  endSlide.style.transform = `translateX(${((1 - outQuint(w)) * -110).toFixed(1)}%)`;
+  op(endSlide, w);
+}
+
+function renderCursor(t) {
+  let x, y, vis = 0, sc = 1;
+  if (t >= B.curIn && t < B.dip) {
+    const p = outQuint(seg(t, B.curIn, B.curAt));
+    x = lerp(1960, BTN.x - 3, p); y = lerp(1120, BTN.y - 2, p); vis = 1;
+    if (t >= B.press && t < B.release) sc = 0.9;
+  }
+  op(cursor, vis);
+  if (vis) cursor.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${sc})`;
+}
+
+// ---------- fit the stage to the viewport ----------
+function fit() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+}
+addEventListener('resize', fit); fit();
+
+// ---------- the clock ----------
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+let t0 = performance.now() - (seekTo || 0) * 1000, last = -1;
+function frame(now) {
+  const t = ((now - t0) / 1000) % LOOP;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  requestAnimationFrame(frame);
+}
+render(B.popup + 0.5); measure();
+if (reduced) { render(B.word + 1); }
+else if (seekTo !== null && !q.has('play')) { render(Math.floor(seekTo * FPS) / FPS); }
+else requestAnimationFrame(frame);
+</script>
+</body>
+</html>

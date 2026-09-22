@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>superbot hub (ad act two)</title>
+<link rel="icon" href="site/assets/brand/mark-clean.svg" type="image/svg+xml"/>
+<!-- the site's own sheets, unmodified copies of site/site/assets (the one
+     source this ad may take work from, owner 2026-09-09): tokens, the stage
+     frame, the hub miniature -->
+<link rel="stylesheet" href="site/assets/site.css"/>
+<link rel="stylesheet" href="site/assets/hero-6.css"/>
+<link rel="stylesheet" href="site/assets/hub-boot-3.css"/>
+<style>
+  /* the stage alone, filling the iframe. The site zooms 1.25 above 1200px;
+     this frame is 1600x1000 CSS px and zooms 1.6 so the hub's 11px miniature
+     reads at ~17.6px in the ad (the site's own zoom path, so sphere-intro's
+     rect/Z conversion is exercised the same way) */
+  html { zoom: 1.6; height: 100%; }
+  body { min-height: 0; height: 100%; margin: 0; overflow: hidden; background: #000; cursor: none; }
+  .desk { position: absolute; inset: 0; }
+  .stage { width: 100%; height: 100%; max-width: none; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; }
+  /* the story's two feed lines belong to the phone beat, which this cut drops
+     (the question has to land on a still hub); they never show */
+  .feed .msg[data-m] { display: none; }
+  /* superbot's message rides the site's .msg / .m-text rules; the typewriter
+     caret is the stage's own accent block */
+  .m-text .tc { display: inline-block; width: .5em; height: 1em; vertical-align: -.15em; background: var(--accent); margin-left: 1px; }
+  /* the permission card: the Claude Code prompt shape (box, question, a
+     "❯ 1. Yes" list) on the site's own tokens — raised surface, hairline,
+     a storm bar on the left, the chosen row in the storm outline */
+  .perm { position: relative; margin-top: 2px; padding: 8px 10px 7px 12px; background: var(--raised); border: 1px solid var(--line); border-radius: var(--r-control); font: 1em/15px var(--font-mono); color: var(--fg); opacity: 0; max-width: 340px; }
+  .perm::before { content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 3px; border-radius: 3px 0 0 3px; background: var(--storm-gradient); }
+  .perm .p-title { font-weight: 700; margin-bottom: 2px; }
+  .perm .p-sub { color: var(--muted); font-size: .91em; margin-bottom: 6px; }
+  .perm .p-q { margin-bottom: 4px; }
+  .perm .p-opt { display: flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 6px; border: 2px solid transparent; color: var(--muted); transform-origin: 50% 50%; }
+  .perm .p-opt i { font-style: normal; width: 1em; color: transparent; }
+  .perm .p-opt.sel { color: var(--fg); background: linear-gradient(var(--raised), var(--raised)) padding-box, var(--storm-gradient) border-box; }
+  .perm .p-opt.sel i { color: var(--accent); }
+  .perm .p-opt.done { color: var(--accent); }
+  .perm .p-hint { margin-top: 5px; color: var(--muted); font-size: .82em; }
+  /* the ad's cursor: a macOS arrow, drawn in stage px, over everything */
+  .cur { position: absolute; left: 0; top: 0; width: 18px; height: 26px; z-index: 50; opacity: 0; pointer-events: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
+  .ring { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0; z-index: 49; pointer-events: none; }
+</style>
+</head>
+<body>
+<!-- the icon registry the stage's rail uses (site/index.html lines 251-270,
+     the marks the sphere and the rail draw with) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="sb-ic-claude" viewBox="0 0 24 24" fill="currentColor"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+    <symbol id="sb-ic-cursor" viewBox="0 0 24 24" fill="currentColor"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+    <symbol id="sb-ic-vscode" viewBox="0 0 100 100" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M70.9119 99.3171C72.4869 99.9307 74.2828 99.8914 75.8725 99.1264L96.4608 89.2197C98.6242 88.1787 100 85.9892 100 83.5872V16.4133C100 14.0113 98.6243 11.8218 96.4609 10.7808L75.8725 0.873756C73.7862 -0.130129 71.3446 0.11576 69.5135 1.44695C69.252 1.63711 69.0028 1.84943 68.769 2.08341L29.3551 38.0415L12.1872 25.0096C10.589 23.7965 8.35363 23.8959 6.86933 25.2461L1.36303 30.2549C-0.452552 31.9064 -0.454633 34.7627 1.35853 36.417L16.2471 50.0001L1.35853 63.5832C-0.454633 65.2374 -0.452552 68.0938 1.36303 69.7453L6.86933 74.7541C8.35363 76.1043 10.589 76.2037 12.1872 74.9905L29.3551 61.9587L68.769 97.9167C69.3925 98.5406 70.1246 99.0104 70.9119 99.3171ZM75.0152 27.2989L45.1091 50.0001L75.0152 72.7012V27.2989Z"/></symbol>
+    <symbol id="sb-ic-openai" viewBox="0 0 2406 2406" fill="currentColor"><path id="sb-oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#sb-oai-petal" transform="rotate(60 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(120 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(180 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(240 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+    <symbol id="sb-ic-gemini" viewBox="0 0 24 24" fill="currentColor"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="sb-ic-zed" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 1.5a.75.75 0 0 0-.75.75v16.5H0V2.25A2.25 2.25 0 0 1 2.25 0h20.095c1.002 0 1.504 1.212.795 1.92L10.764 14.298h3.486V12.75h1.5v1.922a1.125 1.125 0 0 1-1.125 1.125H9.264l-2.578 2.578h11.689V9h1.5v9.375a1.5 1.5 0 0 1-1.5 1.5H5.185L2.562 22.5H21.75a.75.75 0 0 0 .75-.75V5.25H24v16.5A2.25 2.25 0 0 1 21.75 24H1.655C.653 24 .151 22.788.86 22.08L13.19 9.75H9.75v1.5h-1.5V9.375A1.125 1.125 0 0 1 9.375 8.25h5.314l2.625-2.625H5.625V15h-1.5V5.625a1.5 1.5 0 0 1 1.5-1.5h13.19L21.438 1.5z"/></symbol>
+    <symbol id="sb-ic-windsurf" viewBox="0 0 24 24" fill="currentColor"><path d="M23.55 5.067c-1.2038-.002-2.1806.973-2.1806 2.1765v4.8676c0 .972-.8035 1.7594-1.7597 1.7594-.568 0-1.1352-.286-1.4718-.7659l-4.9713-7.1003c-.4125-.5896-1.0837-.941-1.8103-.941-1.1334 0-2.1533.9635-2.1533 2.153v4.8957c0 .972-.7969 1.7594-1.7596 1.7594-.57 0-1.1363-.286-1.4728-.7658L.4076 5.1598C.2822 4.9798 0 5.0688 0 5.2882v4.2452c0 .2147.0656.4228.1884.599l5.4748 7.8183c.3234.462.8006.8052 1.3509.9298 1.3771.313 2.6446-.747 2.6446-2.0977v-4.893c0-.972.7875-1.7593 1.7596-1.7593h.003a1.798 1.798 0 0 1 1.4718.7658l4.9723 7.0994c.4135.5905 1.05.941 1.8093.941 1.1587 0 2.1515-.9645 2.1515-2.153v-4.8948c0-.972.7875-1.7594 1.7596-1.7594h.194a.22.22 0 0 0 .2204-.2202v-4.622a.22.22 0 0 0-.2203-.2203Z"/></symbol>
+    <symbol id="sb-ic-copilot" viewBox="0 0 24 24" fill="currentColor"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+  </defs>
+</svg>
+
+<!-- the site's stage, verbatim (site/index.html #stage) minus the phone: the
+     terminal bar, the collapsed margin, the arena and the hub miniature. The
+     sphere plays in an overlay sphere-intro.js appends to .body; the rail
+     tiles it drops in ARE this rail's tiles. -->
+<div class="desk" id="desk">
+<div class="stage" id="stage" role="figure" aria-label="superbot boots: app icons gather into one hub">
+  <div class="stage-bar"><i></i><i></i><i></i><span>superbot</span><em class="led on" id="led"></em></div>
+  <div class="body">
+    <div class="margin" id="margin" aria-hidden="true"></div>
+    <button class="replay-park" id="replay" type="button" hidden aria-label="play again">↻</button>
+    <div class="arena" id="arena">
+      <div class="scan" id="scan" aria-hidden="true"></div>
+      <pre class="mascot" id="mascot"></pre>
+      <div class="bubble" id="bubble" aria-hidden="true"><span class="t"></span><span class="caret"></span></div>
+      <div id="items" aria-hidden="true"></div>
+      <div class="badge" id="badge" aria-hidden="true"><img src="site/assets/brand/tile.svg" alt="" width="88" height="88"/></div>
+      <div class="hub" id="hub" aria-hidden="true">
+        <nav class="rail inner">
+          <span class="rail-item sb sel"><img src="site/assets/brand/tile.svg" alt="" width="44" height="44"/></span>
+          <span class="rail-div"></span>
+          <span class="rail-item" data-app="openai"><svg><use href="#sb-ic-openai"/></svg><i class="dot"></i></span>
+          <span class="rail-item" data-app="claude"><svg><use href="#sb-ic-claude"/></svg><i class="dot bad"></i></span>
+          <span class="rail-item" data-app="gemini"><svg><use href="#sb-ic-gemini"/></svg><i class="dot"></i></span>
+          <span class="rail-item" data-app="cursor"><svg><use href="#sb-ic-cursor"/></svg><i class="dot"></i></span>
+          <span class="rail-item bleed" data-app="devin"><img src="site/assets/intro/devin.png" alt="" width="44" height="44"/><i class="dot"></i></span>
+          <span class="rail-item bleed" data-app="hermes"><img src="site/assets/intro/hermes.png" alt="" width="44" height="44"/><i class="dot"></i></span>
+          <span class="rail-item bleed" data-app="grok"><img src="site/assets/intro/grok.png" alt="" width="44" height="44"/><i class="dot"></i></span>
+          <span class="rail-item" data-app="copilot"><svg><use href="#sb-ic-copilot"/></svg><i class="dot"></i></span>
+          <span class="rail-div"></span>
+          <span class="rail-item folder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+            <i class="dot"></i>
+          </span>
+          <span class="rail-item add">+</span>
+        </nav>
+        <div class="chats inner">
+          <div class="side-head"><img src="site/assets/brand/mark-clean.svg" alt="" width="14" height="14"/><b>superbot.gg</b><i class="side-ic ic-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg></i><i class="side-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></i></div>
+          <span class="row new"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4Z"/></svg>New chat</span>
+          <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>Manage Context</span>
+          <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11"/><path d="M14.6 9.4c-.9-1.3-5.8-1.4-5.8.9 0 2.5 6.2 1.4 6.2 3.8 0 2.3-5.2 2.1-6.4.7"/></svg>View Savings</span>
+          <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M8 17v-6"/><path d="M13 17V7"/><path d="M18 17v-3"/></svg>View Usage</span>
+          <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 2 2 4-4"/><path d="m3 14 2 2 4-4"/><path d="M13 6h8"/><path d="M13 16h8"/></svg>Setup<i class="cnt">3</i></span>
+          <div class="cap-row"><span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>Recents</span><span class="cnt-r">1</span></div>
+          <div class="today">Today</div>
+          <span class="row chat on"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">email to my boss</span><em>now</em></span>
+          <span class="row chat"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">rank the import pa…</span><em>3h</em></span>
+          <span class="row chat"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">trello card test</span><em>1d</em></span>
+          <span class="row chat"><i class="sp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></i><span class="t">dedupe the always…</span><em>3d</em></span>
+          <div class="user"><span class="avatar" style="--c:var(--raised)">A<i class="dot ok"></i></span><span class="u-tx"><b>alex@superbot.gg</b><small>no balance yet</small></span><svg class="u-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        </div>
+        <div class="main inner">
+          <div class="chat-head"><b>chat</b><span class="search">Search<kbd>⌘K</kbd></span><span class="ask"><img src="site/assets/brand/mark-clean.svg" alt="" width="12" height="12"/>Ask Superbot</span><span class="ptoggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18"/></svg></span></div>
+          <div class="feed" id="feed">
+            <div class="welcome"><span class="w-ic"><img src="site/assets/brand/mark-clean.svg" alt="" width="14" height="14"/></span><span class="w-tx"><b>Welcome to #chat</b><small>This is the start of your conversation with Superbot.</small></span></div>
+            <div class="date-div">Today</div>
+            <div class="msg" data-m="1"></div>
+            <div class="msg" data-m="2"></div>
+            <!-- act three: superbot's question and the permission card (this ad's beat) -->
+            <div class="msg" id="ask"><span class="avatar sb"><img src="site/assets/brand/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">now</span></div><div class="m-text" id="ask-text"></div>
+              <div class="perm" id="perm">
+                <div class="p-title">Remove 43 unused rules + stale memory from ChatGPT</div>
+                <div class="p-sub">43 rules never matched a chat · 1.2 GB of memory unused since June · reversible</div>
+                <div class="p-q">Do you want to proceed?</div>
+                <div class="p-opt sel" id="opt-yes"><i>❯</i><span id="opt-yes-t">1. Yes</span></div>
+                <div class="p-opt"><i>❯</i><span>2. No, keep them</span></div>
+                <div class="p-hint">enter to confirm · esc to cancel</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="composer" aria-hidden="true"><div class="pill"><span class="plus">+</span><span class="ph">How can superbot help you today?</span><span class="picker">superbot ▾</span><span class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></div></div>
+        </div>
+        <aside class="panel inner"></aside>
+      </div>
+      <svg class="beam" id="beam" aria-hidden="true"><path class="rail" id="beam-path" d=""/><path class="run" id="beam-run-path" d=""/></svg>
+    </div>
+  </div>
+  <div class="ring" id="ring"></div>
+  <svg class="cur" id="cur" viewBox="0 0 18 26" aria-hidden="true"><path d="M1.5 1.5v20l5-4.6 3.3 7.2 3.2-1.4-3.3-7.1 6.6-.5z" fill="#000" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+</div>
+</div>
+
+<script>
+  // ---------- act three: the question, the card, the click ----------
+  // sphere-intro.js owns the clock until it dissolves its overlay; from that
+  // frame this beat runs on its own rAF clock (u = seconds since ready):
+  //   0.3-3.0  superbot's line types in
+  //   3.2      the permission card pops
+  //   3.4-4.4  the cursor glides to "1. Yes"
+  //   4.8      press (row scale .95), 4.95 release + ring, row → "✓ 1. Yes"
+  //   5.6      the parent is told; it cuts to the title card
+  const $ = (id) => document.getElementById(id);
+  const ask = $('ask'), askText = $('ask-text'), perm = $('perm'), yes = $('opt-yes'), yesT = $('opt-yes-t');
+  const cur = $('cur'), ring = $('ring'), stage = $('stage');
+  const LINE = "I see chat gpt has 43 unused rules that are slowing it down and unused memory storage as well! Want me to remove?";
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+  const seg = (t, a, b) => clamp01((t - a) / (b - a));
+  const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+  const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const lerp = (a, b, p) => a + (b - a) * p;
+  const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+  const popIn = (el, u, at, dur = 0.25, dy = 6) => { const p = seg(u, at, at + dur); op(el, p * 2); el.style.transform = `translateY(${((1 - outBack(p)) * dy).toFixed(1)}px)`; };
+  op(ask, 0); op(perm, 0);
+
+  // where "1. Yes" is, in the stage's own px: rects are screen px and the
+  // page is zoomed, so divide by the same Z sphere-intro derives
+  const yesPoint = () => {
+    const r = yes.getBoundingClientRect(), s = stage.getBoundingClientRect();
+    const Z = r.width / (yes.offsetWidth || r.width) || 1;
+    return { x: (r.left - s.left) / Z + r.width / Z * 0.3, y: (r.top - s.top) / Z + r.height / Z * 0.55 };
+  };
+  const tell = (beat) => { try { parent.postMessage({ type: 'hub', beat }, '*'); } catch (e) { console.error(e); } };
+
+  let readyAt = null, told = false, pressed = false;
+  function render(u) {
+    popIn(ask, u, 0.3);
+    const n = Math.round(seg(u, 0.3, 3.0) * LINE.length);
+    askText.innerHTML = LINE.slice(0, n) + (u < 3.1 ? '<i class="tc"></i>' : '');
+    popIn(perm, u, 3.2, 0.3);
+    if (u >= 3.4) {
+      const P = yesPoint();
+      const from = { x: stage.clientWidth * 0.92, y: stage.clientHeight * 0.98 };
+      const p = outQuint(seg(u, 3.4, 4.4));
+      const x = lerp(from.x, P.x, p), y = lerp(from.y, P.y, p);
+      op(cur, seg(u, 3.4, 3.7));
+      cur.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+      const press = u >= 4.8 && u < 4.95;
+      yes.style.transform = press ? 'scale(0.95)' : '';
+      if (u >= 4.95) {
+        const q = seg(u, 4.95, 5.4);
+        ring.style.left = `${P.x}px`; ring.style.top = `${P.y}px`;
+        ring.style.transform = `scale(${(1 + q * 5).toFixed(2)})`;
+        op(ring, 0.8 * (1 - q));
+        if (!pressed) { pressed = true; yes.classList.add('done'); yesT.textContent = '✓ 1. Yes'; }
+      }
+      if (u >= 5.6 && !told) { told = true; tell('done'); }
+    }
+  }
+  function tick(now) {
+    if (readyAt != null) render((now - readyAt) / 1000);
+    requestAnimationFrame(tick);
+  }
+  // ready = the sphere overlay is gone (sphere-intro's dissolve() removes it
+  // 320ms after the frontend has faded in). A watchdog covers a stalled intro.
+  const arm = () => { if (readyAt == null) { readyAt = performance.now(); tell('ready'); } };
+  const ob = new MutationObserver(() => { if (document.querySelector('.sphere-intro') == null && document.getElementById('hub').style.opacity === '1') { ob.disconnect(); arm(); } });
+  ob.observe(document.body, { childList: true, subtree: true });
+  setTimeout(arm, 12000);
+  requestAnimationFrame(tick);
+  window.__hub = { u: () => (readyAt == null ? -1 : (performance.now() - readyAt) / 1000) };
+</script>
+<!-- the site's hero opening, verbatim: the sphere, the flip, the rail, the hub -->
+<script src="site/assets/sphere-intro-28.js"></script>
+</body>
+</html>

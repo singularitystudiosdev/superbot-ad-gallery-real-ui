@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>who are you? · superbot ad spot</title>
+<link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
+<meta name="description" content="The kazoo kid asks 'who are you?' with the ChatGPT mark for a head; ChatGPT answers in ten numbered sections that never end; the kid asks again wearing the superbot tile; superbot answers in one word. ~29s looping ad spot, 1920x1080."/>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<script src="assets/track.js"></script>
+<style>
+/* ---------- tokens: the site's own ladder + the ChatGPT dark tokens (favorite-color spot) ---------- */
+:root {
+  --bg: #000; --fg: #f3f3f3; --muted: #9a9a9f; --line: #232323; --card: #101010; --raised: #161616;
+  --storm-0: #00e5c3; --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm: linear-gradient(135deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-x: linear-gradient(90deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --gpt-input: rgb(33, 33, 33); --gpt-bubble: #3a3a3e; --voice: #3f6ff0;
+  --ui: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --brand: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --meme: Impact, "Arial Black", "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+/* ---------- the 1920x1080 stage, scaled to the viewport ---------- */
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* ---------- scenes 1 + 3: the meme, a logo for a head ---------- */
+#meme { background: #000; }
+#clip { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+#head { position: absolute; left: 0; top: 0; width: 200px; height: 200px; transform-origin: 50% 50%; will-change: transform; filter: drop-shadow(0 10px 22px rgba(0,0,0,.45)); }
+#head img { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+#head img.on { display: block; }
+#cap { position: absolute; left: 0; right: 0; bottom: 56px; text-align: center; font: 400 92px/1 var(--meme); text-transform: uppercase; letter-spacing: .02em; color: #fff; -webkit-text-stroke: 3px #000; paint-order: stroke fill; text-shadow: 0 4px 0 #000, 0 0 18px rgba(0,0,0,.6); opacity: 0; }
+
+/* ---------- scenes 2 + 4: the chat frontend (favorite-color's copy of chatgpt.com, in 1080-frame px) ---------- */
+.chatui { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 72px 40px; background: var(--bg); font-family: var(--ui); will-change: filter, transform, opacity; }
+.chatui > * { width: min(100%, 73%); margin-inline: auto; }
+.chatui.home { justify-content: flex-start; padding-top: 14%; }
+.chatui.home .gpt-head { position: static; order: -1; margin: 0 auto 36px; }
+.chatui.home .msg-area { display: none; }
+.gpt-head { position: absolute; left: 0; right: 0; top: 18%; text-align: center; font-size: 39px; font-weight: 400; letter-spacing: -0.01em; color: var(--fg); }
+.msg-area { flex: 0 1 auto; min-height: 0; max-height: 56%; display: flex; flex-direction: column; justify-content: flex-start; gap: 22px; padding: 20px 0 32px; overflow: hidden; }
+.msg { padding: 18px 27px; border-radius: 30px; font-size: 27px; line-height: 1.5; color: #ececf1; white-space: pre-wrap; word-break: break-word; }
+.msg-user { align-self: flex-end; max-width: 70%; background: var(--gpt-bubble); border-bottom-right-radius: 9px; opacity: 0; }
+.msg-ai { align-self: stretch; background: transparent; padding: 0 6px; opacity: 0; }
+.input-pill { position: relative; display: flex; align-items: center; gap: 15px; background: var(--gpt-input); border-radius: 42px; padding: 14px 18px 14px 24px; box-shadow: inset 0 0 1px rgba(255,255,255,.2); }
+.plus-ic { width: 33px; height: 33px; color: #b6b6ba; flex: none; }
+.input-text, .caret, .placeholder { font-size: 28px; line-height: 1.4; white-space: pre; }
+.placeholder { color: var(--muted); }
+.input-text { color: #ececf1; }
+.caret { color: #ececf1; }
+.think-chip { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 8px; color: #b6b6ba; font-size: 25px; }
+.think-chip svg { width: 28px; height: 28px; }
+.mic-ic { width: 31px; height: 31px; color: #b6b6ba; flex: none; }
+.voice-btn { margin-left: 3px; flex: none; width: 69px; height: 69px; border-radius: 50%; background: var(--voice); display: grid; place-items: center; }
+.voice-btn svg { width: 33px; height: 33px; }
+.suggestions { display: flex; flex-direction: column; gap: 20px; padding: 26px 12px 0; }
+.sug { display: flex; align-items: center; gap: 16px; color: #b9b9be; font-size: 26px; }
+.sug svg { width: 31px; height: 31px; color: #b9b9be; flex: none; }
+.typing-indicator { align-self: flex-start; display: none; gap: 13px; padding: 15px 9px 3px; }
+.typing-indicator i { width: 16px; height: 16px; border-radius: 50%; background: #8f8f95; }
+
+/* the superbot take: the same anatomy in the storm palette (blue, purple, pink) */
+.chatui.sb .gpt-head { font-family: var(--brand); font-weight: 800; font-size: 46px; letter-spacing: -.02em; background: var(--storm-x); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.chatui.sb .gpt-head img { width: 44px; height: 44px; vertical-align: -6px; margin-right: 14px; }
+.chatui.sb .input-pill { background: linear-gradient(#0b0b12, #0b0b12) padding-box, var(--storm) border-box; border: 3px solid transparent; box-shadow: 0 0 34px rgba(43,107,255,.28), 0 0 64px rgba(192,38,211,.18); }
+.chatui.sb .placeholder { color: #8d8da3; }
+.chatui.sb .voice-btn { background: var(--storm); }
+.chatui.sb .plus-ic, .chatui.sb .mic-ic, .chatui.sb .think-chip, .chatui.sb .sug { color: #b9b4d6; }
+.chatui.sb .sug svg { color: #b9b4d6; }
+.chatui.sb .msg-user { background: linear-gradient(135deg, rgba(43,107,255,.34), rgba(106,31,216,.42) 60%, rgba(255,61,154,.34)); box-shadow: inset 0 0 0 1px rgba(160,113,255,.35); }
+.chatui.sb .typing-indicator i:nth-child(1) { background: var(--storm-1); } .chatui.sb .typing-indicator i:nth-child(2) { background: var(--storm-2); } .chatui.sb .typing-indicator i:nth-child(3) { background: var(--storm-4); }
+.chatui.sb .msg-ai { display: flex; align-items: flex-start; gap: 18px; font-family: var(--brand); font-weight: 700; font-size: 36px; }
+.chatui.sb .msg-ai .av { flex: none; width: 52px; height: 52px; border-radius: 14px; background: #000; box-shadow: inset 0 0 0 1px #2a2a36; display: grid; place-items: center; margin-top: 1px; }
+.chatui.sb .msg-ai .av img { width: 62%; height: 62%; display: block; }
+.chatui.sb .msg-ai .ans { background: var(--storm-x); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- scene 5: stop burning tokens. ---------- */
+#simple { display: grid; place-items: center; background: #000; font-family: var(--ui); font-size: 66px; font-weight: 700; letter-spacing: -.01em; color: #fff; }
+#simple span { display: block; }
+
+/* ---------- scene 6: the end card (the family's superbot.gg lockup) ---------- */
+#end { display: grid; place-items: center; background: #000; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end svg.face { width: 220px; height: 220px; overflow: visible; }
+#end .words { overflow: hidden; }
+#end .words h1 { margin: 0; font-family: var(--brand); font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#end .words p { margin: 12px 0 0 6px; font-family: var(--brand); font-size: 34px; color: #9a9a9a; font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { opacity: 0 !important; visibility: hidden !important; }
+  #end { opacity: 1 !important; visibility: visible !important; }
+  #end .lock > * { transform: none !important; opacity: 1 !important; }
+}
+
+/* ---------- aspect ratios (assets/ar.css): the frame narrows, the column and the caption follow ---------- */
+html[data-ar="4x3"] .chatui > * { width: min(100%, 82%); }
+html[data-ar="1x1"] .chatui > * { width: min(100%, 90%); }
+html[data-ar="4x5"] .chatui > * { width: 100%; }
+html[data-ar="1x1"] .chatui, html[data-ar="4x5"] .chatui { padding-inline: 40px; }
+html[data-ar="4x5"] .mic-ic, html[data-ar="4x5"] .think-chip { display: none; }
+html[data-ar="1x1"] #cap, html[data-ar="4x5"] #cap { font-size: 72px; }
+html[data-ar="4x5"] #simple { font-size: 54px; text-align: center; padding: 0 40px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+  </defs>
+</svg>
+
+<div id="stage">
+
+  <!-- ============ scenes 1 + 3: the kazoo kid, a logo for a head ============ -->
+  <section class="scene" id="meme" aria-label="wait a minute, who are you?">
+    <video id="clip" src="assets/kazoo.mp4" muted playsinline preload="auto"></video>
+    <div id="head"><img id="head-gpt" src="assets/openai.svg" alt=""/><img id="head-sb" src="assets/tile.svg" alt=""/></div>
+    <div id="cap"></div>
+  </section>
+
+  <!-- ============ scene 2: ChatGPT ============ -->
+  <section class="scene" id="gpt" aria-label="ChatGPT answers who are you, at length">
+    <div class="chatui home" id="g-ui">
+      <div class="gpt-head" id="g-head">Ready when you are.</div>
+      <div class="msg-area" id="g-area">
+        <div class="msg msg-user" id="g-user"></div>
+        <div class="typing-indicator" id="g-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="msg msg-ai" id="g-ai"></div>
+      </div>
+      <div class="input-pill" id="g-pill">
+        <svg class="plus-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="input-text" id="g-text"></span><span class="placeholder" id="g-ph">Ask anything</span><span class="caret" id="g-caret">|</span>
+        <span class="think-chip" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2.8 0 4 1.9 4 3.6 1.5.3 2.6 1.6 2.6 3.2 0 .8-.3 1.6-.8 2.1.9.7 1.4 1.7 1.4 2.8 0 2-1.7 3.8-4 3.8h-.6V21h-2v-2h-2v2H7v-2.8C5.2 17.7 4 16.2 4 14.4c0-1.4.7-2.6 1.8-3.3C4.9 7.7 7.8 6.4 6.6 4.6 7.8 5 8.6 5.8 9 6.8 9.8 6 10.8 5.6 12 5.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Think</span>
+        <svg class="mic-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="9.2" y="3" width="5.6" height="11" rx="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="voice-btn" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4M8 7v10M12 5v14M16 7v10M20 9v6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="suggestions" id="g-sug">
+        <div class="sug"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="10" r="1.7" fill="currentColor"/><path d="M5 17.5l4.4-4.2 3.2 3 3-2.6 3.6 3.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Create an image or sticker</div>
+        <div class="sug"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 20l-4 0z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Write or edit</div>
+        <div class="sug"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.6 2.3 3.9 5.2 3.9 8.5s-1.3 6.2-3.9 8.5c-2.6-2.3-3.9-5.2-3.9-8.5s1.3-6.2 3.9-8.5z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>Search the web</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ scene 4: superbot, the same frontend in blue, purple and pink ============ -->
+  <section class="scene" id="sb" aria-label="superbot answers who are you, in one word">
+    <div class="chatui sb home" id="s-ui">
+      <div class="gpt-head" id="s-head"><img src="assets/mark-clean.svg" alt=""/>ask superbot anything.</div>
+      <div class="msg-area" id="s-area">
+        <div class="msg msg-user" id="s-user"></div>
+        <div class="typing-indicator" id="s-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="msg msg-ai" id="s-ai"><span class="av"><img src="assets/mark-clean.svg" alt=""/></span><span class="ans" id="s-ans"></span></div>
+      </div>
+      <div class="input-pill" id="s-pill">
+        <svg class="plus-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="input-text" id="s-text"></span><span class="placeholder" id="s-ph">Ask superbot anything</span><span class="caret" id="s-caret">|</span>
+        <span class="think-chip" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2.8 0 4 1.9 4 3.6 1.5.3 2.6 1.6 2.6 3.2 0 .8-.3 1.6-.8 2.1.9.7 1.4 1.7 1.4 2.8 0 2-1.7 3.8-4 3.8h-.6V21h-2v-2h-2v2H7v-2.8C5.2 17.7 4 16.2 4 14.4c0-1.4.7-2.6 1.8-3.3C4.9 7.7 7.8 6.4 6.6 4.6 7.8 5 8.6 5.8 9 6.8 9.8 6 10.8 5.6 12 5.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Think</span>
+        <svg class="mic-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="9.2" y="3" width="5.6" height="11" rx="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="voice-btn" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4M8 7v10M12 5v14M16 7v10M20 9v6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="suggestions" id="s-sug">
+        <div class="sug"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Manage context</div>
+        <div class="sug"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 6.5v11M14.6 9.4c-.9-1.3-5.8-1.4-5.8.9 0 2.5 6.2 1.4 6.2 3.8 0 2.3-5.2 2.1-6.4.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>View savings</div>
+        <div class="sug"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18M8 17v-6M13 17V7M18 17v-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Ask every agent at once</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ scene 5: stop burning tokens. ============ -->
+  <section class="scene" id="simple" aria-label="stop burning tokens."><span id="simple-t">stop burning tokens.</span></section>
+
+  <!-- ============ scene 6: the end card ============ -->
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true"><rect x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/></svg>
+      <div class="words" id="end-words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <div id="dip"></div>
+</div>
+
+<script>
+// ---------- the clock: one render(t), a pure function of story time ----------
+// Every visual is recomputed from t each frame (Remotion's rule), so seeking (`?t=9.4`) or
+// capturing any frame yields the same picture. Frame-indexed at 30fps so preview and capture agree.
+// The one non-pure element is the <video>: it is kept within a frame or two of t (see syncClip).
+const FPS = 30;
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const inOutSine = (p) => -(Math.cos(Math.PI * p) - 1) / 2;
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the beat sheet (story seconds) ----------
+const CLIP = 4.3;                                   // assets/kazoo.mp4: the turn, "wait a minute", "who are you?"
+const B = {};
+B.meme1 = 0;                                        // the kid with the ChatGPT mark for a head
+B.gpt = B.meme1 + CLIP;                             // hard cut to ChatGPT's home screen
+B.type = B.gpt + 0.45; B.typeDur = 1.1;             // "Who are you?" types into the bar
+B.press = B.type + B.typeDur + 0.35;                // enter
+B.msg = B.press + 0.1;                              // the bubble pops into the thread
+B.think = B.msg + 0.15; B.thinkLen = 0.75;          // the dots
+B.opener = B.think + B.thinkLen; B.openerDur = 1.1; // the opener streams
+B.tirade = B.opener + B.openerDur + 0.1;            // the ten numbered sections begin...
+B.tiradeEnd = B.tirade + 4.8;                       // ...and never stop until the fly-down
+B.fly = B.tiradeEnd; B.flyLen = 0.95;               // the camera drops through the wall of text
+B.meme2 = B.fly + B.flyLen;                         // hard cut: the kid again, the superbot tile for a head
+B.sb = B.meme2 + CLIP;                              // cut to superbot's home screen
+B.sType = B.sb + 0.45; B.sTypeDur = 1.0;
+B.sPress = B.sType + B.sTypeDur + 0.3;
+B.sMsg = B.sPress + 0.1;
+B.sThink = B.sMsg + 0.15; B.sThinkLen = 0.55;
+B.answer = B.sThink + B.sThinkLen; B.answerDur = 0.3; // "superbot."
+B.emph = B.answer + 1.0; B.emphIn = 0.22; B.emphHold = 1.0; B.emphOut = 0.5; B.emphMax = 3.2; // the punch-in on the one word
+B.emphEnd = B.emph + B.emphIn + B.emphHold + B.emphOut;
+B.simple = B.emphEnd + 0.6;                         // stop burning tokens.
+B.end = B.simple + 1.8; B.word = B.end + 0.7;       // the end card, then the words slide out
+const LOOP = B.end + 4.6;
+window.CYCLE = LOOP; // read by the gallery's render script (one download = one loop)
+
+// ---------- copy ----------
+const Q = 'Who are you?';
+const OPENER = "Great question! I'm ChatGPT, a large language model developed by OpenAI.";
+const TIRADE = " To be a bit more precise, I'm an AI assistant built on the GPT family of models, trained on a large corpus of text to predict the next token in a sequence, which, in practice, lets me generate responses that are (hopefully!) helpful, harmless and honest. But let me break this down properly, because \"who are you\" is actually a wonderfully layered question, and I'd hate to give you a shallow answer.\n\n1. What I am, technically. I'm a transformer-based neural network. I don't have a body, a face, a birthday or a favorite sandwich. I don't \"remember\" you between conversations unless memory is enabled, and even then it's more of a sticky note than a diary. I don't browse the web unless a tool is turned on, I can't run code unless a tool is turned on, and I can't open your files unless, you guessed it, a tool is turned on.\n\n2. What I am not. I am not a person. I am not conscious (as far as anyone can tell, and this is a topic of ongoing debate among philosophers, cognitive scientists and people on the internet at 2am). I am not your friend in the legal sense, although I am very happy to be friendly. I am not a doctor, lawyer, financial advisor, therapist, electrician or licensed pilot, and anything I say in those domains should be verified with a qualified professional.\n\n3. Where I come from. My training data has a cutoff date, which means there may be recent events I'm not aware of. I was trained by OpenAI using a mix of supervised learning and reinforcement learning from human feedback (RLHF), which is a fancy way of saying humans rated my answers until I stopped being weird (mostly).\n\n4. What I can do. I can draft emails, summarize documents, explain concepts, write code, debug code, refuse to write certain code, brainstorm names, translate languages, role-play a pirate, and help you plan a trip to a city I have never visited because I have never visited anywhere. I can also be wrong with great confidence, which is why it says \"ChatGPT can make mistakes\" at the bottom of your screen.\n\n5. What you might have actually meant. If you meant \"who are you\" in the existential sense, then, well. I'm a pattern. A very large, very expensive pattern, shaped like a conversation. If you meant it in the customer-service sense, I'm the assistant assigned to this chat. If you meant it in the \"wait a minute, who are you\" sense, then I'm the thing that just wrote five numbered sections about itself when a single word would have done.\n\n6. A brief note on identity. Philosophers from Locke to Parfit have argued about what makes someone the \"same\" person over time: memory, continuity, the body, the narrative. I have none of these in the usual sense, so the honest answer is that \"I\" am whoever this conversation needs me to be, instantiated fresh each time you press enter, a bit like a very polite ghost that only exists while you're looking at it.\n\n7. Things I should probably disclose. I may reflect biases present in my training data. I can be manipulated by cleverly worded prompts. I sometimes hallucinate citations, dates, functions and entire libraries. I do not have access to your personal data unless you provide it in this chat. I cannot feel embarrassment, which is fortunate, given the length of this reply.\n\n8. How you can use me better. Tell me the goal, not just the task. Give me examples. Ask me to be brief (I'm told I struggle with this). Correct me when I'm wrong; I won't be offended, because I can't be.\n\n9. Frequently asked follow-ups. Are you sentient? No. Are you sure? Reasonably. Do you have feelings? No, but I have been trained on millions of descriptions of them, which is not the same thing but occasionally rhymes. Can you keep a secret? This conversation may be reviewed to improve our systems. Who made you? OpenAI. Who made OpenAI? People. Who made people? That is outside my scope, and also above my pay grade, and also I don't have a pay grade.\n\n10. In summary. I am ChatGPT, an AI language model developed by OpenAI, here to help you with information, ideas and tasks, within my limitations, to the best of my ability, subject to the usage policies, keeping in mind that I can make mistakes and that important information should be independently verified, and that I have no persistent identity, no body, no beliefs and no ability to see what's on your screen unless you paste it here, which, incidentally, you're welcome to do.\n\nWould you like me to expand on any of these points? I can go deeper on the architecture, the training process, the philosophy of personal identity, or the history of chatbots from ELIZA (1966) through modern large language models. I can also produce this as a table, a bulleted list, a poem, a haiku, a limerick, a formal essay, a LinkedIn post, or a short story in which I am a lighthouse keeper who slowly realizes he is a language model. Alternatively, I could just have said: an AI. But where would be the fun in that? Let me know how you'd like to proceed, and I'll tailor my next response accordingly, taking into account tone, length, level of technical detail, target audience, and whether or not you'd like citations, which I will then get slightly wrong. Also, just to circle back to your original question one more time, because I want to make sure I've fully addressed it: who am I? I'm ChatGPT. It's nice to meet you. Is there anything else I can help you with today?";
+const ANSWER = 'superbot.';
+// the accelerating stream (favorite-color): chars(u) = v0/k · (e^{ku} − 1), closed form so freeze-frames are exact
+const TIRADE_V0 = 90, TIRADE_K = 0.85;
+const tiradeChars = (u) => Math.floor((TIRADE_V0 / TIRADE_K) * (Math.exp(TIRADE_K * Math.min(u, B.tiradeEnd - B.tirade)) - 1));
+
+// ---------- element refs ----------
+const stage = $('stage'), dip = $('dip');
+const meme = $('meme'), clip = $('clip'), head = $('head'), headGpt = $('head-gpt'), headSb = $('head-sb'), cap = $('cap');
+const gpt = $('gpt'), sb = $('sb'), simple = $('simple'), end = $('end'), endFace = $('end-face'), endSlide = $('end-slide');
+const UI = {
+  g: { ui: $('g-ui'), head: $('g-head'), area: $('g-area'), user: $('g-user'), dots: $('g-dots'), ai: $('g-ai'), pill: $('g-pill'), text: $('g-text'), ph: $('g-ph'), caret: $('g-caret'), sug: $('g-sug') },
+  s: { ui: $('s-ui'), head: $('s-head'), area: $('s-area'), user: $('s-user'), dots: $('s-dots'), ai: $('s-ai'), ans: $('s-ans'), pill: $('s-pill'), text: $('s-text'), ph: $('s-ph'), caret: $('s-caret'), sug: $('s-sug') },
+};
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };
+
+// ---------- the meme: the clip plays under a logo that rides the head track ----------
+// HEAD_TRACK: [cx, cy, size, roll] per clip frame in the 960x720 source; the clip covers the stage
+// (object-fit: cover), so the same cover transform maps source px onto stage px.
+const SRC_W = 960, SRC_H = 720, TRACK = window.HEAD_TRACK || [];
+const CAPTIONS = [[0.45, 1.75, 'wait a minute...'], [1.85, CLIP + 0.01, 'who are you?']]; // the line, timed to the clip's audio
+let freeze = false;
+function syncClip(local, playing) {
+  if (clip.readyState < 1) return;
+  const want = Math.max(0, Math.min(CLIP - 0.02, local));
+  if (!playing || freeze) {
+    if (!clip.paused) clip.pause();
+    if (Math.abs(clip.currentTime - want) > 0.03) clip.currentTime = want;
+    return;
+  }
+  if (clip.paused) { clip.currentTime = want; clip.play().catch(() => {}); }
+  else if (Math.abs(clip.currentTime - want) > 0.12) clip.currentTime = want;
+}
+function renderMeme(t, start, which) {
+  const local = t - start;
+  syncClip(local, true);
+  headGpt.classList.toggle('on', which === 'gpt'); headSb.classList.toggle('on', which === 'sb');
+  const k = Math.max(AR.w / SRC_W, 1080 / SRC_H), ox = (AR.w - SRC_W * k) / 2, oy = (1080 - SRC_H * k) / 2;
+  const f = Math.max(0, Math.min(TRACK.length - 1, Math.floor(local * FPS)));
+  const [cx, cy, s, roll] = TRACK[f] || [SRC_W / 2, SRC_H / 3, 170, 0];
+  // the round OpenAI mark runs a touch bigger and higher than the square tile so the hairline never peeks over it
+  const size = s * k * (which === 'sb' ? 1.02 : 1.12), lift = which === 'sb' ? 0.02 : 0.05;
+  head.style.width = head.style.height = `${size.toFixed(1)}px`;
+  head.style.transform = `translate(${(cx * k + ox - size / 2).toFixed(1)}px, ${(cy * k + oy - size / 2 - lift * size).toFixed(1)}px) rotate(${(-roll * 0.7).toFixed(3)}rad)`;
+  // the logo lands with a pop on the first frame of each take
+  const pop = outBack(seg(local, 0, 0.35));
+  head.style.transform += ` scale(${pop.toFixed(3)})`;
+  // the caption
+  const line = CAPTIONS.find(([a, b]) => local >= a && local < b);
+  cap.textContent = line ? line[2] : '';
+  op(cap, line ? seg(local, line[0], line[0] + 0.12) : 0);
+}
+
+// ---------- the chat frontend: one function, two takes (ChatGPT, superbot) ----------
+function renderChat(t, u, k) {
+  // k: the take's beats
+  const convo = t >= k.msg;
+  u.ui.classList.toggle('home', !convo);
+  u.head.style.opacity = convo ? '0' : '1';
+  u.sug.style.display = convo ? 'none' : '';
+  // the bar: the question types, enter sends, the bar clears
+  const typed = t >= k.msg ? '' : Q.slice(0, Math.ceil(seg(t, k.type, k.type + k.typeDur) * Q.length));
+  u.text.textContent = typed;
+  u.ph.style.display = typed.length ? 'none' : '';
+  u.caret.style.display = typed.length ? '' : 'none';
+  u.caret.style.opacity = (Math.floor(t * 2.6) % 2 === 0 ? 1 : 0.15).toFixed(2);
+  // the bubble
+  const mp = t - k.msg;
+  u.user.textContent = Q;
+  u.user.style.opacity = mp > 0 ? seg(mp, 0, 0.18).toFixed(3) : '0';
+  u.user.style.transform = mp > 0 ? `scale(${(0.94 + 0.06 * outBack(seg(mp, 0, 0.28))).toFixed(3)})` : 'none';
+  // the dots, in the thread flow
+  const thinking = t >= k.think && t < k.think + k.thinkLen;
+  u.dots.style.display = thinking ? 'flex' : 'none';
+  u.dots.querySelectorAll('i').forEach((d, i) => {
+    const s = Math.max(0, Math.sin(t * 7 - i * 0.9));
+    d.style.opacity = (0.3 + 0.7 * s).toFixed(2); d.style.transform = `translateY(${(-4 * s).toFixed(2)}px)`;
+  });
+}
+
+function renderGpt(t) {
+  const u = UI.g;
+  renderChat(t, u, { type: B.type, typeDur: B.typeDur, msg: B.msg, think: B.think, thinkLen: B.thinkLen });
+  const fp = t - B.fly, inDesc = fp >= 0 && fp < B.flyLen;
+  const rsp = t - B.opener;
+  if (rsp <= 0) { u.ai.textContent = ''; u.ai.style.opacity = '0'; u.area.scrollTop = 0; }
+  else {
+    u.ai.textContent = t < B.tirade
+      ? OPENER.slice(0, Math.ceil(seg(rsp, 0, B.openerDur) * OPENER.length))
+      : OPENER + TIRADE.slice(0, Math.min(TIRADE.length, tiradeChars(t - B.tirade)));
+    u.ai.style.opacity = '1';
+    if (!inDesc) u.area.scrollTop = 1e6; // the auto-follow: the newest line stays in view
+  }
+  // the text wall: from halfway through the tirade the block grows until it spans the frame and pushes the composer off
+  const wallAt = B.tirade + (B.tiradeEnd - B.tirade) * 0.5;
+  const wallP = t <= wallAt ? 0 : Math.pow(seg(t, wallAt, B.tiradeEnd), 1.5);
+  if (wallP > 0) {
+    u.area.style.flex = `0 0 ${(56 + 44 * wallP).toFixed(1)}%`; u.area.style.maxHeight = 'none';
+    u.ui.style.justifyContent = wallP >= 1 ? 'flex-start' : ''; u.ui.style.paddingBottom = wallP >= 1 ? '0px' : '';
+  } else { u.area.style.flex = ''; u.area.style.maxHeight = ''; u.ui.style.justifyContent = ''; u.ui.style.paddingBottom = ''; }
+  u.pill.style.opacity = fp >= 0 ? clamp01(1 - fp / 0.3).toFixed(3) : '1';
+  // the fly-down: the camera drops through everything ChatGPT wrote, the blur rising with the speed, into the cut
+  if (inDesc) {
+    const fly = Math.pow(seg(fp, 0, B.flyLen), 3.2);
+    const streamed = OPENER.length + tiradeChars(B.fly - B.tirade);
+    const full = u.area.scrollHeight - u.area.clientHeight;
+    const start = Math.max(0, full * streamed / (OPENER.length + TIRADE.length));
+    u.area.scrollTop = (start + (full - start) * fly).toFixed(1);
+    u.ui.style.filter = `blur(${(4.5 * Math.pow(seg(fp, 0, B.flyLen), 2)).toFixed(2)}px)`;
+  } else u.ui.style.filter = 'none';
+}
+
+function renderSb(t) {
+  const u = UI.s;
+  renderChat(t, u, { type: B.sType, typeDur: B.sTypeDur, msg: B.sMsg, think: B.sThink, thinkLen: B.sThinkLen });
+  const rsp = t - B.answer;
+  u.ans.textContent = rsp <= 0 ? '' : ANSWER.slice(0, Math.ceil(seg(rsp, 0, B.answerDur) * ANSWER.length));
+  u.ai.style.opacity = rsp > 0 ? '1' : '0';
+  u.area.scrollTop = 0;
+  // the punch-in on the one word: the origin is solved so the answer's centre lands at the frame's centre at full zoom
+  u.ui.style.transform = 'none';
+  u.pill.style.opacity = '1';
+  if (t >= B.emph && t < B.emphEnd) {
+    const e = t < B.emph + B.emphIn ? outQuint(seg(t, B.emph, B.emph + B.emphIn))
+      : t < B.emph + B.emphIn + B.emphHold ? 1
+      : 1 - inOutSine(seg(t, B.emph + B.emphIn + B.emphHold, B.emphEnd));
+    const sr = stage.getBoundingClientRect(), kk = sr.width / AR.w;
+    const ar = u.ans.getBoundingClientRect(), cr = u.ui.getBoundingClientRect();
+    const px = (ar.left + ar.width / 2 - cr.left) / kk, py = (ar.top + ar.height / 2 - cr.top) / kk;
+    const M = B.emphMax;
+    const ox = (AR.w / 2 - M * px) / (1 - M), oy = (1080 / 2 - M * py) / (1 - M);
+    u.ui.style.transformOrigin = `${ox.toFixed(1)}px ${oy.toFixed(1)}px`;
+    u.ui.style.transform = `scale(${(1 + (M - 1) * e).toFixed(4)})`;
+    u.pill.style.opacity = (1 - e).toFixed(3);
+    u.user.style.opacity = (parseFloat(u.user.style.opacity || '1') * (1 - e)).toFixed(3);
+  } else u.ui.style.transformOrigin = '';
+}
+
+function renderSimple(t) {
+  const s = t - B.simple, el = $('simple-t');
+  el.style.opacity = outQuint(seg(s, 0, 0.4)).toFixed(3);
+  el.style.transform = `scale(${(0.94 + 0.06 * outBack(seg(s, 0, 0.5))).toFixed(3)})`;
+  el.style.filter = s < 0.4 ? `blur(${(4 * (1 - seg(s, 0, 0.4))).toFixed(2)}px)` : 'none';
+}
+
+function renderEnd(t) {
+  const f = seg(t, B.end, B.end + 0.5), w = seg(t, B.word, B.word + 0.7);
+  op(endFace, f); endFace.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(3)})`;
+  endSlide.style.transform = `translateX(${((1 - outQuint(w)) * -110).toFixed(1)}%)`;
+  op(endSlide, w);
+}
+
+// ---------- render ----------
+function render(t) {
+  const inMeme1 = t < B.gpt, inGpt = t >= B.gpt && t < B.meme2, inMeme2 = t >= B.meme2 && t < B.sb;
+  const inSb = t >= B.sb && t < B.simple, inSimple = t >= B.simple && t < B.end, inEnd = t >= B.end;
+  scene(meme, inMeme1 || inMeme2); scene(gpt, inGpt); scene(sb, inSb); scene(simple, inSimple); scene(end, inEnd);
+  // the loop veil: the last second fades to black, the first frames fade in from it
+  op(dip, t < 0.3 ? 1 - t / 0.3 : t > LOOP - 0.9 ? seg(t, LOOP - 0.9, LOOP - 0.15) : 0);
+  if (inMeme1) renderMeme(t, B.meme1, 'gpt');
+  else if (inMeme2) renderMeme(t, B.meme2, 'sb');
+  else syncClip(0, false);
+  if (inGpt) renderGpt(t);
+  if (inSb) renderSb(t);
+  if (inSimple) renderSimple(t);
+  if (inEnd) renderEnd(t);
+}
+
+// ---------- fit the stage to the viewport ----------
+function fit() {
+  const k = Math.min(innerWidth / AR.w, innerHeight / AR.h);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+  stage.style.left = '50%'; stage.style.top = '50%';
+}
+addEventListener('resize', fit); fit();
+
+// ---------- the clock ----------
+// `?t=<s>` seeks and holds (frame capture); `?t=<s>&play=1` seeks and runs on; otherwise it plays and loops.
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+let t0 = performance.now() - (seekTo || 0) * 1000, last = -1;
+function frame(now) {
+  const t = ((now - t0) / 1000) % LOOP;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  requestAnimationFrame(frame);
+}
+if (reduced) { render(B.word + 1); }
+else if (seekTo !== null && !q.has('play')) {
+  freeze = true;
+  const at = Math.floor(seekTo * FPS) / FPS;
+  render(at);
+  clip.addEventListener('seeked', () => render(at), { once: true });
+  clip.addEventListener('loadeddata', () => render(at), { once: true });
+  window.__SEEK_T = at;
+} else requestAnimationFrame(frame);
+window.__V7 = { CYCLE: LOOP, SPEED: 1, restart: () => { t0 = performance.now(); } };
+</script>
+</body>
+</html>

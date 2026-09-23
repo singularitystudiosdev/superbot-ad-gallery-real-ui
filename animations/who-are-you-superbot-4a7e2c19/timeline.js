@@ -298,8 +298,13 @@ function renderChat(t) {
     const cr = chat.getBoundingClientRect();
     const px = ar.left + ar.width / 2 - cr.left;
     const py = ar.top + ar.height / 2 - cr.top;
-    const ox = (cr.width / 2 - EMPH_MAX * px) / (1 - EMPH_MAX) / K;
-    const oy = (cr.height / 2 - EMPH_MAX * py) / (1 - EMPH_MAX) / K;
+    // an origin inside the chat keeps the zoomed chat covering the whole frame: on a tall
+    // frame the answer sits low, and the solved origin fell below the chat's bottom edge, so
+    // the punch-in showed a black band under the chat. Clamped, the answer lands a little
+    // above centre instead.
+    const clamp = (v, hi) => Math.min(Math.max(v, 0), hi);
+    const ox = clamp((cr.width / 2 - EMPH_MAX * px) / (1 - EMPH_MAX) / K, cr.width / K);
+    const oy = clamp((cr.height / 2 - EMPH_MAX * py) / (1 - EMPH_MAX) / K, cr.height / K);
     chat.style.transformOrigin = `${ox.toFixed(1)}px ${oy.toFixed(1)}px`;
     chat.style.transform = `scale(${(1 + (EMPH_MAX - 1) * e).toFixed(4)})`;
     const dim = 1 - e;

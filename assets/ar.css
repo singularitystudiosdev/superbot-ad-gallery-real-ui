@@ -23,6 +23,11 @@ html[data-ar="4x5"] { --ar-fs: .56; }
 html[data-ar]:not([data-ar="16x9"]) #gpt { width: calc(var(--ar-w) / 1.25); }
 html[data-ar]:not([data-ar="16x9"]) .g-col { width: auto; margin-left: 0; left: max(20px, calc(50% - 384px)); right: max(20px, calc(50% - 384px)); }
 html[data-ar]:not([data-ar="16x9"]) .g-composer { max-width: calc(100% - 16px); }
+/* the composer's foot is a grid with one auto track: an auto track sizes to the composer's 768px
+   (a percentage max-width is indefinite while the track is being sized), so on a narrow frame the
+   composer ran off the right edge with its mic and send button. A minmax(0,1fr) track is the foot's
+   own width, so the max-width above resolves and the composer ends inside the frame. */
+html[data-ar]:not([data-ar="16x9"]) .g-foot { grid-template-columns: minmax(0, 1fr); }
 
 /* the Chrome window (tabs spot): 1536x864 drawn at 1.25 */
 html[data-ar]:not([data-ar="16x9"]) #cam { width: var(--ar-w); }

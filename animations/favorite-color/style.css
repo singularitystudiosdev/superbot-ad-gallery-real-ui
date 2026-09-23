@@ -270,10 +270,16 @@ body.freeze .rec-btn { display: none; }
 .endcard.stacked .endcard-word p { margin-left: 0; }
 html[data-ar="1x1"] .chatui > * { width: min(100%, 86%); }
 html[data-ar="4x5"] .chatui > * { width: 100%; }
-html[data-ar="4x5"] .input-pill { gap: 6px; padding: 9px 10px 9px 12px; }
-html[data-ar="4x5"] .mic-ic { display: none; } /* the 4:5 pill keeps the typed prompt readable: no mic, no Think, tighter gaps */
+html[data-ar="4x5"] .input-pill { gap: 8px; padding: 9px 10px 9px 14px; }
+/* the ChatGPT composer keeps its real layout at every ratio: '+', the prompt, then Think, mic and the
+   blue voice button pinned to the right end. The pill is a size container, so a narrow frame drops
+   Think first (the mic then takes the auto margin) and never slides the voice button up to the text. */
+.chatui:not(.sb) .input-pill { container-type: inline-size; }
+@container (max-width: 420px) {
+  .think-chip { display: none; }
+  .mic-ic { margin-left: auto; }
+}
 html[data-ar="1x1"] .input-pill .input-text, html[data-ar="4x5"] .input-pill .input-text { white-space: pre-wrap; flex: 0 1 auto; min-width: 0; overflow-wrap: anywhere; }
-html[data-ar="4x5"] .think-chip { display: none; }
 
 /* the superbot take keeps this spot's black canvas (the chat is a framed zoom target) */
 :root { --sb-canvas: #000; }

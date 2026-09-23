@@ -17,7 +17,10 @@
      viewer's left), backed by assets/mark-backing.js (a black rect behind the eye cut-outs so it reads as it does
      on superbot.gg's black page; the mark itself is never redrawn). On the clip's clean last frame the same mascot, live in this page, takes over
      from the baked pose and hops into the end card, where it stays as the end card's 220px mark.
-     Rebuild: build/build-clip.sh. -->
+     Rebuild: build/build-clip.sh.
+     ORDER CARD PHOTO: assets/dennys-location.jpg is "Denny's Restaurant, Webb County, TX IMG 3175" by Billy Hathorn,
+     CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/), Wikimedia Commons:
+     https://commons.wikimedia.org/wiki/File:Denny%27s_Restaurant,_Webb_County,_TX_IMG_3175.JPG (retrieved 2026-09-23). -->
 <script src="../../assets/ar.js"></script>
 <link rel="stylesheet" href="../../assets/ar.css">
 <link rel="stylesheet" href="../../assets/sb-mark-live.css">
@@ -83,7 +86,7 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
 .g-thinking i { width: 10px; height: 10px; border-radius: 50%; background: var(--gpt-text); }
 
 /* ---------- the rescue popup, bottom-right: black card, storm stroke, white chat bubble ---------- */
-#popup { position: absolute; right: 44px; bottom: 44px; width: max-content; max-width: calc(100% - 88px); padding: 20px; border-radius: 24px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box; box-shadow: 0 0 32px rgba(43,107,255,.32), 0 0 64px rgba(192,38,211,.22), 0 30px 70px rgba(0,0,0,.5); opacity: 0; transform-origin: 50% 100%; isolation: isolate; z-index: 20; } /* 1:1 superbot-tool-calls 'superbot can do it! · soft glow': hug width, storm stroke, the same ring blurred behind it */
+#popup { zoom: 1.3; position: absolute; right: 44px; bottom: 44px; width: max-content; max-width: calc(100% - 88px); padding: 20px; border-radius: 24px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box; box-shadow: 0 0 32px rgba(43,107,255,.32), 0 0 64px rgba(192,38,211,.22), 0 30px 70px rgba(0,0,0,.5); opacity: 0; transform-origin: 50% 100%; isolation: isolate; z-index: 20; } /* 1:1 superbot-tool-calls 'superbot can do it! · soft glow': hug width, storm stroke, the same ring blurred behind it */
 #popup .p-head { display: flex; align-items: center; gap: 12px; white-space: nowrap; font-size: 29px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
 #popup .p-head img { width: 34px; height: 34px; }
 #popup .p-head .gg { color: var(--muted); font-weight: 600; }
@@ -206,7 +209,11 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
 #hopper { position: absolute; left: 0; top: 0; width: 220px; height: 220px; transform-origin: 0 0; z-index: 30; opacity: 0; pointer-events: none; }
 #hopper .sb-mark { filter: drop-shadow(0 5px 7px rgba(0,0,0,.42)) drop-shadow(0 0 2px rgba(0,0,0,.35)); }
 /* the order card's thumbnail: a waffle, drawn (golden square, a pressed grid) */
-.dl-thumb.waffle { background-color: #e9a53a; background-image: linear-gradient(90deg, rgba(122,62,0,.5) 2px, transparent 2px), linear-gradient(0deg, rgba(122,62,0,.5) 2px, transparent 2px); background-size: 7px 7px; background-position: 2px 2px; box-shadow: inset 0 0 0 2px #c07a1c; }
+/* the order card shows the real restaurant: a photo of a Denny's location (credit in the head comment) */
+.dl-photo { position: relative; height: 92px; border-bottom: 1px solid var(--line); overflow: hidden; }
+.dl-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; display: block; }
+.dl-photo span { position: absolute; left: 8px; bottom: 6px; padding: 2px 7px; border-radius: 999px; background: rgba(0,0,0,.62); color: #fff; font: 600 9px/14px var(--ui); }
+.dl-thumb.waffle { background: url(assets/dennys-location.jpg) 50% 40% / cover; }
 .dl-thumb.waffle::after { content: none; }
 
 /* ---------- scene 4: the end card ---------- */
@@ -320,6 +327,7 @@ html { --site-k: 1.6; } /* the app window is drawn at 1200x675 and shown at 1.6 
                 <div class="msg" id="h-user"><span class="avatar">D</span><div class="m-main"><div class="m-head"><span class="m-name">dev</span><span class="m-when">11:15 AM</span></div><div class="m-text">Order me waffles</div></div></div>
                 <div class="msg" id="h-bot"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">11:15 AM</span></div><div class="m-text" id="h-text"></div>
                   <div class="code" id="h-code"><div class="c-bar"><span>DoorDash order</span><span class="lang">Denny's</span></div>
+                    <div class="dl-photo"><img src="assets/dennys-location.jpg" alt="Denny's restaurant"/><span>Denny's · Webb County, TX</span></div>
                     <div class="dl-row"><span class="dl-thumb waffle"></span><span class="dl-meta"><b>Classic Waffle Breakfast</b><small>Denny's via DoorDash · to your door</small></span><span class="lang" id="h-eta">1 item</span></div>
                     <div class="dl-btn" id="h-dlbtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="h-dl-t">Placing order</span></div>
                   </div>

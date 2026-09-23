@@ -1,30 +1,24 @@
-/* publish-ui.css: the REAL Superbot desktop project head and its Publish control,
-   copied rule for rule from the superbot-desktop source with every design token
-   resolved to its value from packages/tokens (dist/tokens.css).
+/* publish-ui.css: the Superbot desktop project head (copied rule for rule from the superbot-desktop
+   source with every design token resolved to its value from packages/tokens) and the Publish button,
+   restyled per the owner's reference (2026-09-23): a cyan-to-violet gradient pill with a soft glow,
+   a white rocket and a white bold "Publish", no readiness dot or label. The press sweeps a light
+   shine across it and the rocket turns into a white check (timeline.js drives both).
 
    Source: superbot-desktop @ 2e6a8bdce945466e9db1ca9aa10585a8404f07c7
-     apps/desktop/src/renderer/src/hub/publish/PublishButton.tsx
-         connected state: <span.publish-button-group> [Preview] [button.project-badge:
-         Rocket 14 + "Publish" + span.publish-button-state[data-tone=ok] (StatusDot ok + readinessLabel = "Ready")]
      apps/desktop/src/renderer/src/hub/publish/preview/PreviewButton.tsx
          idle: button.project-badge.preview-badge.focus-ring (Play 14 + "Preview")
-     apps/desktop/src/renderer/src/hub/publish/readiness-store.ts   readinessLabel(): 'ready' -> "Ready"
      apps/desktop/src/renderer/src/hub/project/project-pane.css      .project-head, .project-head-row,
          .project-title, .project-badge, button.project-badge, .project-head-row > .publish-button-group
-     apps/desktop/src/renderer/src/hub/publish/publish-sheet.css     .publish-button-group, .publish-button-state
+     apps/desktop/src/renderer/src/hub/publish/publish-sheet.css     .publish-button-group
      apps/desktop/src/renderer/src/hub/publish/preview/preview.css   .preview-badge hover
-     packages/ui/src/components/status-dot.tsx                       StatusDot: xs 8px, rounded-pill,
-         ok = .status-fill, ring 0 0 0 --size-ring var(--dot-ring, --color-bg)
-     icons: lucide-react 1.41.0 Rocket / Play (24 viewBox, stroke 2, round caps)
+     icons: lucide-react 1.41.0 Rocket / Play / Check (24 viewBox, stroke 2, round caps)
 
    Tokens used (packages/tokens):
-     --spacing-4 4px  --spacing-8 8px  --spacing-12 12px  --spacing-32 32px
-     --radius-8 8px   --radius-16 16px --size-hairline 1px --size-ring 2px --size-status-xs 8px
+     --spacing-4 4px  --spacing-8 8px  --spacing-12 12px
+     --radius-8 8px   --radius-16 16px --size-hairline 1px
      --text-caption 11px/16px 400    --text-title 15px/20px 500
-     --color-bg #0d0d0d  --color-card #0a0a0a  --color-line #1e1e21  --color-line-strong #3a3b40
-     --color-fg #e6e8ee  --color-fg-secondary #c9ccd4  --color-muted #aeb1bc
-     --color-status-ok #23a559  --color-warn #f0b132  --color-brand-storm-1 #2b6bff
-     --gradient-status linear-gradient(90deg, #22d3ee 0%, #5b8dff 52%, #8b5cf6 100%)
+     --color-card #0a0a0a  --color-line #1e1e21  --color-line-strong #3a3b40
+     --color-fg #e6e8ee  --color-fg-secondary #c9ccd4
      --font-sans SF Pro Rounded, ui-rounded, Inter, system-ui, sans-serif
    Everything below is scoped under .sbpub so it cannot leak into the rest of the ad. */
 
@@ -82,14 +76,6 @@
   box-sizing: border-box;
   margin: 0;
 }
-/* project-pane.css:380 */
-.sbpub .project-badge[data-tone='ok'] {
-  color: #2b6bff;
-  background-image: linear-gradient(90deg, #22d3ee 0%, #5b8dff 52%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 /* project-pane.css:418 */
 .sbpub button.project-badge {
   background: transparent;
@@ -110,32 +96,37 @@
   min-width: 0;
   max-width: 100%;
 }
-/* publish-sheet.css:412 */
-.sbpub .publish-button-state { color: #aeb1bc; }
-.sbpub .publish-button-state[data-tone='ok'] { color: #23a559; }
-.sbpub .publish-button-state[data-tone='warn'] { color: #f0b132; }
-
-/* Tailwind utilities the JSX carries: "inline-flex items-center gap-4" */
-.sbpub .inline-flex { display: inline-flex; }
-.sbpub .items-center { align-items: center; }
-.sbpub .gap-4 { gap: 4px; }
-
-/* status-dot.tsx: "inline-block shrink-0 rounded-pill" + size xs + ring + tone ok (.status-fill) */
-.sbpub .status-dot {
-  display: inline-block;
-  flex-shrink: 0;
-  border-radius: 9999px;
-  width: 8px;
-  height: 8px;
-  box-shadow: 0 0 0 2px var(--dot-ring, #0d0d0d);
-}
-.sbpub .status-dot.status-fill {
-  background-color: #2b6bff;
-  background-image: linear-gradient(90deg, #22d3ee 0%, #5b8dff 52%, #8b5cf6 100%);
-}
-/* the project head is a card: its dots ring on the card surface */
-.sbpub .project-head { --dot-ring: #0a0a0a; }
 
 /* lucide icons at size 14 */
 .sbpub .lucide { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor;
   stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- the Publish button: gradient pill, soft glow, white icon + white bold label ---------- */
+.sbpub button.project-badge.pub-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  gap: 7px;
+  padding: 4px 16px 4px 13px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5ec8e6 0%, #6e7cf2 52%, #a86ef0 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .005em;
+  box-shadow: 0 0 14px rgba(110, 124, 242, .45), 0 0 30px rgba(168, 110, 240, .22), inset 0 1px 0 rgba(255, 255, 255, .22);
+  transform-origin: 50% 50%;
+}
+.sbpub .pub-cta .pub-ic { position: relative; width: 14px; height: 14px; flex: none; }
+.sbpub .pub-cta .pub-ic svg { position: absolute; inset: 0; stroke-width: 2.2; transform-origin: 50% 50%; }
+.sbpub .pub-cta #pub-check { opacity: 0; stroke-width: 2.6; }
+.sbpub .pub-cta #pub-check-p { stroke-dasharray: 23; stroke-dashoffset: 23; }
+.sbpub .pub-cta .pub-label { position: relative; }
+/* the shine: a soft white band, skewed, swept left to right across the pill on the press */
+.sbpub .pub-cta .pub-shine {
+  position: absolute; top: -30%; bottom: -30%; left: 0; width: 42%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .6) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-160%) skewX(-20deg);
+  opacity: 0; pointer-events: none; z-index: 1;
+}

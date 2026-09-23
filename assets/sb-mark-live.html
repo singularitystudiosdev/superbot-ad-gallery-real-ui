@@ -1,0 +1,17 @@
+<!-- sb-mark-live.html
+     The real superbot.gg animated mascot ("the mark"), markup fragment, verbatim.
+
+     Source URL : https://beta.superbot.gg/
+     Snapshot   : /Users/adrianagne/Documents/cosmos/work/refs/beta.superbot.gg-2026-09-23.html
+     Retrieved  : 2026-09-23
+     Copied from: line 163 of that snapshot, the block
+                    <div class="mark-wrap"><svg class="sb-mark" viewBox="0 0 100 100" ...>...</svg></div>
+                  with mask id sb-gate-mark. The markup below is byte-for-byte that block.
+     Styles     : assets/sb-mark-live.css (load it, or the mark is unstyled).
+     Helper     : assets/sb-mark-live.js (window.sbMarkLive) injects this same svg with a
+                  per-instance mask id, wrapped in <span class="mark-wrap">; prefer it when a page
+                  hosts more than one mark, since the id below is fixed and would collide.
+
+     Static drop-in: paste this block into the page next to the stylesheet, and give .sb-mark a
+     width/height (the source used 96px). Replace sb-gate-mark with a unique id per copy. -->
+<div class="mark-wrap"><svg class="sb-mark" viewBox="0 0 100 100" role="img" aria-label="superbot" focusable="false"><defs><mask id="sb-gate-mark" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160"><g fill="white"><rect x="14" y="32" width="72" height="54" rx="15"/><path class="mark-ear mark-ear-l" d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path class="mark-ear mark-ear-r" d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="black"><ellipse class="mark-eye mark-eye-l" cx="35" cy="58" rx="8" ry="11"/><ellipse class="mark-eye mark-eye-r" cx="65" cy="58" rx="8" ry="11"/></g><g class="mark-happy" fill="none" stroke="black" stroke-width="4.5" stroke-linecap="round"><path d="M27 61Q35 53.5 43 61"/><path d="M57 61Q65 53.5 73 61"/></g></mask></defs><g class="mark-body"><rect class="sb-mark-a" x="-30" y="-30" width="160" height="160" mask="url(#sb-gate-mark)"/><rect class="sb-mark-b" x="-30" y="-30" width="160" height="160" mask="url(#sb-gate-mark)"/><rect class="sb-mark-c" x="-30" y="-30" width="160" height="160" mask="url(#sb-gate-mark)"/></g></svg>

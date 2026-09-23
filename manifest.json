@@ -8,100 +8,12 @@
     "thumb": "assets/shots/free-beta-flash-v04-superbot-ea5050ae.png"
   },
   {
-    "id": "free-beta-flash-v08-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · v8 ticker brake",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/v08.html",
-    "thumb": "assets/shots/free-beta-flash-v08-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-strobe-storm-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · strobe · storm grounds",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/strobe-storm.html",
-    "thumb": "assets/shots/free-beta-flash-strobe-storm-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-strobe-jump-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · strobe · jump cuts",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/strobe-jump.html",
-    "thumb": "assets/shots/free-beta-flash-strobe-jump-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-strobe-build-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · strobe · stack build",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/strobe-build.html",
-    "thumb": "assets/shots/free-beta-flash-strobe-build-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-ticker-tilt-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · ticker · tilted, staggered stop",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/ticker-tilt.html",
-    "thumb": "assets/shots/free-beta-flash-ticker-tilt-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-ticker-wall-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · ticker · full wall",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/ticker-wall.html",
-    "thumb": "assets/shots/free-beta-flash-ticker-wall-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-ticker-ramp-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · ticker · speed ramp",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/ticker-ramp.html",
-    "thumb": "assets/shots/free-beta-flash-ticker-ramp-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-box-stamp-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · Supreme · box logo stamp",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/box-stamp.html",
-    "thumb": "assets/shots/free-beta-flash-box-stamp-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-box-wall-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · Supreme · box logo wallpaper",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/box-wall.html",
-    "thumb": "assets/shots/free-beta-flash-box-wall-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-box-strobe-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · Supreme · box logo strobe",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/box-strobe.html",
-    "thumb": "assets/shots/free-beta-flash-box-strobe-superbot-ea5050ae.png"
-  },
-  {
     "id": "free-beta-flash-box-ticker-superbot-ea5050ae",
     "type": "animation",
     "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · Supreme · box logo ticker",
+    "title": "FREE BETA SUPERBOT FLASH · box logo ticker",
     "src": "animations/free-beta-flash-superbot-ea5050ae/box-ticker.html",
     "thumb": "assets/shots/free-beta-flash-box-ticker-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-kruger-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · Supreme · Kruger red captions",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/kruger.html",
-    "thumb": "assets/shots/free-beta-flash-kruger-superbot-ea5050ae.png"
   },
   {
     "id": "tabs-chaos-superbot-6f50ea56",

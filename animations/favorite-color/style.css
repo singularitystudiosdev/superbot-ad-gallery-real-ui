@@ -208,12 +208,12 @@ body {
   backdrop-filter: blur(6px);
   will-change: opacity;
 }
-/* the lockup is the tabs-chaos end card (300px face, 128px wordmark, 34px
+/* the lockup is the tabs-chaos end card (220px face, 128px wordmark, 34px
    tagline, 44px gap on a 1080-high frame); --k is this stage's scale
    against that frame, set every frame by timeline.js */
 .endcard-bot {
   position: absolute; left: 0; top: 0; z-index: 2;
-  width: calc(300px * var(--k, .667)); height: calc(300px * var(--k, .667));
+  width: calc(220px * var(--k, .667)); height: calc(220px * var(--k, .667));
   pointer-events: none; user-select: none;
   will-change: transform;
 }

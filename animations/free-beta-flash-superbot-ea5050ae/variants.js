@@ -1,81 +1,17 @@
-/* variants.js — ten takes on one script: "FREE FREE FREE FREE" -> "FREE BETA SUPERBOT FLASH"
-   -> hard cut to the end card (engine.js). One registry, one envelope: each take is
-   { title, D (the cut, in s), build(root, x), render(t, x) }, and render is a pure function of
-   story time so ?t= can hold any frame. The key order is the vNN.html numbering. */
+/* variants.js — takes on one script: "FREE FREE FREE FREE" -> "FREE BETA SUPERBOT FLASH" -> hard
+   cut to the end card (engine.js). One registry, one envelope: each take is
+   { title, group, file?, D (the cut, in s), build(root, x), render(t, x) }, and render is a pure
+   function of story time so ?t= can hold any frame. Page = file, else `<key>.html`; the picker
+   lists them in key order under their group. Every lockup fits the narrowest stage (864 wide, 4:5). */
 (function () {
   'use strict';
   const A = ['FREE', 'FREE', 'FREE', 'FREE'];
   const B = ['FREE', 'BETA', 'SUPERBOT', 'FLASH'];
   const V = (window.FBF_VARIANTS = {});
 
-  // 01 · stamp slam: each FREE slams in with a camera kick, then the phrase slams the same way
-  V.stamp = {
-    title: 'stamp slam', D: 3.9,
-    build(r, x) { this.r = r; this.a = x.stack(r, A, 230); this.b = x.stack(r, B, 230); this.b[2].classList.add('storm'); },
-    render(t, x) {
-      const hitsA = [0.2, 0.5, 0.8, 1.1], hitsB = [2.1, 2.4, 2.7, 3.0], inB = t >= 1.95;
-      const slam = (lines, hits, on) => lines.forEach((e, i) => {
-        const p = x.seg(t, hits[i] - 0.12, hits[i]);
-        x.op(e, on ? p : 0);
-        e.style.transform = `scale(${x.lerp(2.6, 1, x.outCubic(p)).toFixed(3)})`;
-      });
-      slam(this.a, hitsA, !inB);
-      slam(this.b, hitsB, inB);
-      const [dx, dy] = x.shake(t, inB ? hitsB : hitsA, 26);
-      this.r.style.transform = `translate(${dx}px, ${dy}px)`;
-    },
-  };
-
-  // 02 · slot flip: four FREEs slide in from alternate sides, lines 2-4 flip over to the phrase
-  V.flip = {
-    title: 'slot flip', D: 3.7,
-    build(r, x) { this.l = x.stack(r, A, 230); this.l[0].parentNode.style.perspective = '1400px'; },
-    render(t, x) {
-      this.l.forEach((e, i) => {
-        const a = x.seg(t, 0.1 + 0.2 * i, 0.55 + 0.2 * i), dir = i % 2 ? 1 : -1;
-        let rx = 0, txt = 'FREE';
-        if (i > 0) {
-          const p = x.seg(t, 1.85 + 0.18 * (i - 1), 2.3 + 0.18 * (i - 1));
-          rx = p < 0.5 ? p * 180 : (p - 1) * 180;
-          if (p >= 0.5) txt = B[i];
-        }
-        x.setText(e, txt);
-        e.classList.toggle('storm', txt === 'SUPERBOT');
-        x.op(e, a);
-        e.style.transform = `translateX(${((1 - x.outQuint(a)) * dir * x.W * 0.8).toFixed(1)}px) rotateX(${rx.toFixed(1)}deg)`;
-      });
-    },
-  };
-
-  // 03 · decode: a 2x2 mono grid of FREEs, words 2-4 scramble and lock letter by letter
-  const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&@$!?';
-  V.decode = {
-    title: 'glitch decode', D: 3.7,
-    build(r, x) {
-      const g = x.el('div', 'fb-grid', null, r);
-      const rows = [x.el('div', 'fb-grow', null, g), x.el('div', 'fb-grow', null, g)];
-      this.w = A.map((w, i) => x.el('span', 'fb-gw', w, rows[i >> 1]));
-    },
-    render(t, x) {
-      const f = Math.floor(t * 30);
-      this.w.forEach((e, i) => {
-        const a = x.seg(t, 0.15 + 0.28 * i, 0.35 + 0.28 * i);
-        x.op(e, a);
-        e.style.transform = `scale(${x.lerp(1.35, 1, x.outCubic(a)).toFixed(3)})`;
-        const st = 1.75 + 0.15 * (i - 1);
-        if (i === 0 || t < st) { x.setText(e, 'FREE'); e.classList.remove('storm'); return; }
-        const tgt = B[i];
-        let s = '';
-        for (let c = 0; c < tgt.length; c++) s += t >= st + 0.35 + c * 0.07 ? tgt[c] : POOL[x.hash(i * 31 + c * 7 + f * 131) % POOL.length];
-        x.setText(e, s);
-        e.classList.toggle('storm', i === 2 && s === tgt);
-      });
-    },
-  };
-
-  // 04 · strobe: one word at a time on inverting grounds (every beat >= .35s, under 3 flashes/s)
+  // ---------- picked: v4 strobe beats (one word at a time on inverting grounds, every beat >= .35s) ----------
   V.strobe = {
-    title: 'strobe beats', D: 3.8,
+    title: 'strobe beats', group: 'Picked', file: 'v04.html', D: 3.8,
     build(r, x) { this.r = r; this.solo = x.el('div', 'fb-w', null, r); this.b = x.stack(r, B, 220); this.b[2].classList.add('storm'); },
     render(t, x) {
       const beats = [['FREE', 0, 0], ['FREE', 0.35, 1], ['FREE', 0.7, 0], ['FREE', 1.05, 1], ['BETA', 1.5, 1], ['SUPERBOT', 1.85, 2], ['FLASH', 2.2, 0]], P = 2.6;
@@ -99,89 +35,9 @@
     },
   };
 
-  // 05 · outline fill: hollow FREEs rise, fill with the storm gradient, then lines 2-4 roll over
-  V.fill = {
-    title: 'outline fill + roll', D: 3.7,
-    build(r, x) {
-      const s = x.el('div', 'fb-stack', null, r);
-      this.s = A.map((w, i) => {
-        const slot = x.el('div', 'fb-ln fb-slot', null, s);
-        slot.style.setProperty('--fs', '230px');
-        return {
-          slot,
-          o: x.el('span', 'fb-o', w, slot),
-          f: x.el('span', 'fb-f storm', w, slot),
-          n: x.el('span', 'fb-n' + (i === 2 ? ' storm' : ''), B[i], slot),
-        };
-      });
-    },
-    render(t, x) {
-      this.s.forEach((o, i) => {
-        const a = x.seg(t, 0.1 + 0.2 * i, 0.5 + 0.2 * i);
-        x.op(o.slot, a);
-        o.slot.style.transform = `translateY(${((1 - x.outCubic(a)) * 60).toFixed(1)}px)`;
-        const p = x.seg(t, 0.95 + 0.14 * i, 1.4 + 0.14 * i);
-        o.f.style.clipPath = `inset(0 ${(100 - p * 100).toFixed(1)}% 0 0)`;
-        const roll = i ? x.outQuint(x.seg(t, 2.0 + 0.14 * (i - 1), 2.5 + 0.14 * (i - 1))) : 0;
-        o.o.style.transform = o.f.style.transform = `translateY(${(-115 * roll).toFixed(1)}%)`;
-        o.n.style.transform = `translateX(-50%) translateY(${(115 * (1 - roll)).toFixed(1)}%)`;
-      });
-    },
-  };
-
-  // 06 · tunnel: FREEs fly out of the distance through the camera, the phrase lands from depth
-  V.tunnel = {
-    title: 'depth tunnel', D: 3.6,
-    build(r, x) {
-      this.z = A.map((w, i) => { const e = x.el('div', 'fb-w' + (i % 2 ? ' storm' : ''), w, r); e.style.setProperty('--fs', '260px'); return e; });
-      this.b = x.stack(r, B, 220); this.b[2].classList.add('storm');
-    },
-    render(t, x) {
-      this.z.forEach((e, i) => {
-        const s = x.seg(t, 0.05 + 0.32 * i, 1.0 + 0.32 * i);
-        x.op(e, s <= 0 || s >= 1 ? 0 : x.seg(s, 0, 0.12) * (1 - x.seg(s, 0.72, 1)));
-        e.style.transform = `translate(-50%, -50%) scale(${(0.04 * Math.pow(160, s)).toFixed(3)})`;
-      });
-      this.b.forEach((e, i) => {
-        const q = x.seg(t, 1.95 + 0.06 * i, 2.45 + 0.06 * i);
-        x.op(e, q);
-        e.style.transform = `scale(${x.lerp(0.15, 1, x.outBack(q)).toFixed(3)})`;
-      });
-      if (t >= 1.95) x.flash(0.5 * (1 - x.seg(t, 1.95, 2.2)));
-    },
-  };
-
-  // 07 · split flap: a departures board clacks to FREE x4, rows 2-4 clack on to the phrase
-  const pad = (w) => { const n = 8 - w.length, l = Math.floor(n / 2); return ' '.repeat(l) + w + ' '.repeat(n - l); };
-  const STORM8 = ['#00e5c3', '#1fb3d9', '#2b6bff', '#4a45eb', '#6a1fd8', '#9523d6', '#c026d3', '#ff3d9a'];
-  const FLAPS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  V.flap = {
-    title: 'split-flap board', D: 3.8,
-    build(r, x) {
-      const b = x.el('div', 'fb-board', null, r);
-      this.rows = [0, 1, 2, 3].map(() => { const row = x.el('div', 'fb-frow', null, b); return Array.from({ length: 8 }, () => x.el('span', 'fb-cell', ' ', row)); });
-    },
-    render(t, x) {
-      const f = Math.floor(t * 30);
-      this.rows.forEach((cells, i) => {
-        const sA = 0.05 + 0.16 * i, sB = 1.8 + 0.15 * (i - 1), inB = i > 0 && t >= sB;
-        const tgt = pad(inB ? B[i] : A[i]), start = inB ? sB : sA;
-        cells.forEach((c, k) => {
-          const land = start + (inB ? 0.35 : 0.3) + 0.06 * k;
-          let ch = ' ', spin = false;
-          if (t >= land) ch = tgt[k];
-          else if (t >= start) { ch = FLAPS[x.hash(i * 97 + k * 13 + (f >> 1) * 7919) % FLAPS.length]; spin = true; }
-          x.setText(c, ch === ' ' ? ' ' : ch);
-          c.style.transform = spin && f % 2 ? 'scaleY(.82)' : '';
-          c.style.color = inB && i === 2 ? STORM8[k] : '#fff';
-        });
-      });
-    },
-  };
-
-  // 08 · ticker: four FREE tapes scroll against each other, a flash, and they brake to the phrase
+  // ---------- picked: v8 ticker brake (four FREE tapes scroll against each other, a flash, brake to the phrase) ----------
   V.ticker = {
-    title: 'ticker brake', D: 3.9,
+    title: 'ticker brake', group: 'Picked', file: 'v08.html', D: 3.9,
     build(r, x) {
       const s = x.el('div', 'fb-stack', null, r);
       this.rows = [0, 1, 2, 3].map((i) => {
@@ -217,71 +73,291 @@
     },
   };
 
-  // 09 · stickers + tape: red FREE stickers slap the frame, then the phrase runs in as tape strips
-  V.tape = {
-    title: 'stickers + tape', D: 3.8,
+  // ---------- shared: the phrase lockup ----------
+  // lines of words (SUPERBOT in the storm), or with o.box each line one box logo (o.box: true for
+  // the storm box, a class, or a class per line)
+  function lockup(r, x, lines, o) {
+    const s = x.el('div', 'fb-stack' + (o.gap ? ' fb-gap' : ''), null, r);
+    return lines.map((words, i) => {
+      const ln = x.el('div', 'fb-ln' + (o.box ? ' fb-lrow' : ''), null, s);
+      ln.style.setProperty('--fs', o.fs + 'px');
+      words.forEach((w, j) => {
+        if (o.box) x.el('span', 'fb-box ' + (Array.isArray(o.box) ? o.box[i] : o.box === true ? '' : o.box), w, ln);
+        else { x.el('span', w === 'SUPERBOT' ? 'storm' : '', w, ln); if (j < words.length - 1) ln.append(' '); }
+      });
+      return ln;
+    });
+  }
+  // lines pop (scale down from o.from) or slide in from alternate sides, o.stagger apart from o.at
+  function landLockup(lines, t, x, o) {
+    lines.forEach((e, i) => {
+      const a = o.at + (o.stagger || 0) * i, p = x.seg(t, a, a + (o.dur || 0.25));
+      x.op(e, p);
+      e.style.transform = o.slide
+        ? `translateX(${((1 - x.outQuint(p)) * (i % 2 ? 1 : -1) * x.W).toFixed(1)}px)`
+        : `scale(${x.lerp(o.from || 1.3, 1, x.outCubic(p)).toFixed(3)})`;
+    });
+  }
+
+  // ---------- strobe family: one word per beat on its own ground, then the lockup at P ----------
+  // beat: { w, t, bg, fg ('storm' = gradient text), box? (solo box fill), fs?, x?, y? (stage fractions), rot? }
+  function strobeTake(o) {
+    return {
+      title: o.title, group: o.group || 'Strobe variants', D: o.D,
+      build(r, x) {
+        this.r = r;
+        this.solo = x.el('div', 'fb-w ' + (o.soloCls || ''), null, r);
+        this.lines = lockup(r, x, o.lines, o.lock);
+      },
+      render(t, x) {
+        let cur = o.beats[0];
+        for (const b of o.beats) if (t >= b.t) cur = b;
+        const solo = t < o.P;
+        this.solo.style.display = solo ? '' : 'none';
+        this.r.style.background = solo ? cur.bg : '#000';
+        if (solo) {
+          x.setText(this.solo, cur.w);
+          this.solo.style.setProperty('--fs', (cur.fs || (cur.w.length > 5 ? 280 : 400)) + 'px');
+          this.solo.classList.toggle('storm', cur.fg === 'storm');
+          this.solo.style.color = cur.fg === 'storm' ? '' : cur.fg;
+          if (cur.box) this.solo.style.background = cur.box;
+          const k = x.outCubic(x.seg(t, cur.t, cur.t + 0.2));
+          this.solo.style.transform = `translate(-50%, -50%) translate(${((cur.x || 0) * x.W).toFixed(1)}px, ${((cur.y || 0) * x.H).toFixed(1)}px) rotate(${cur.rot || 0}deg) scale(${x.lerp(1.22, 1, k).toFixed(3)})`;
+        }
+        landLockup(this.lines, t, x, { at: o.P, ...o.lock });
+      },
+    };
+  }
+
+  V['strobe-storm'] = strobeTake({
+    title: 'strobe · storm grounds', D: 3.8, P: 2.6,
+    beats: [
+      { w: 'FREE', t: 0, bg: '#00e5c3', fg: '#000' },
+      { w: 'FREE', t: 0.35, bg: '#2b6bff', fg: '#fff' },
+      { w: 'FREE', t: 0.7, bg: '#6a1fd8', fg: '#fff' },
+      { w: 'FREE', t: 1.05, bg: '#c026d3', fg: '#fff' },
+      { w: 'BETA', t: 1.5, bg: '#ff3d9a', fg: '#000' },
+      { w: 'SUPERBOT', t: 1.85, bg: '#000', fg: 'storm' },
+      { w: 'FLASH', t: 2.2, bg: '#fff', fg: '#000' },
+    ],
+    lines: B.map((w) => [w]), lock: { fs: 220, stagger: 0.05 },
+  });
+
+  V['strobe-jump'] = strobeTake({
+    title: 'strobe · jump cuts', D: 3.8, P: 2.55,
+    beats: [
+      { w: 'FREE', t: 0, bg: '#fff', fg: '#000', fs: 330, x: -0.2, y: -0.18, rot: -6 },
+      { w: 'FREE', t: 0.35, bg: '#000', fg: '#fff', fs: 330, x: 0.2, y: 0.18, rot: 5 },
+      { w: 'FREE', t: 0.7, bg: '#fff', fg: '#000', fs: 330, x: -0.18, y: 0.2, rot: 4 },
+      { w: 'FREE', t: 1.05, bg: '#000', fg: '#fff', fs: 330, x: 0.2, y: -0.18, rot: -5 },
+      { w: 'BETA', t: 1.45, bg: '#fff', fg: '#000', fs: 440 },
+      { w: 'SUPERBOT', t: 1.8, bg: '#000', fg: 'storm', fs: 280 },
+      { w: 'FLASH', t: 2.15, bg: '#fff', fg: '#000', fs: 400 },
+    ],
+    lines: [['FREE', 'BETA'], ['SUPERBOT', 'FLASH']], lock: { fs: 170, stagger: 0.12, slide: true, dur: 0.4 },
+  });
+
+  // the stack builds a line per beat on inverting grounds, then lines 2-4 swap to the phrase per beat
+  V['strobe-build'] = {
+    title: 'strobe · stack build', group: 'Strobe variants', D: 3.5,
+    build(r, x) { this.r = r; this.l = x.stack(r, A, 220); },
+    render(t, x) {
+      const beats = [0, 0.35, 0.7, 1.05, 1.5, 1.85, 2.2, 2.55];
+      let n = 0;
+      for (const b of beats) if (t >= b) n++;
+      const light = n < 8 && n % 2 === 1;
+      this.r.style.background = light ? '#fff' : '#000';
+      this.l.forEach((e, i) => {
+        const swap = i > 0 && n >= 4 + i, w = swap ? B[i] : 'FREE', at = swap ? beats[3 + i] : beats[i];
+        x.setText(e, w);
+        e.classList.toggle('storm', w === 'SUPERBOT');
+        e.style.color = light ? '#000' : '#fff';
+        x.op(e, n > i ? 1 : 0);
+        e.style.transform = `scale(${x.lerp(1.25, 1, x.outCubic(x.seg(t, at, at + 0.18))).toFixed(3)})`;
+      });
+    },
+  };
+
+  // ---------- ticker family: rows of copies scroll against each other, then brake onto the phrase ----------
+  // row: { fs, to (the word it lands on; none = a FREE row that dims away), a / b (copy classes before / after B1) }
+  function tickerTake(o) {
+    return {
+      title: o.title, group: o.group || 'Ticker variants', D: o.D,
+      build(r, x) {
+        this.r = r;
+        const s = x.el('div', 'fb-stack', null, r);
+        if (o.tilt) s.style.transform = `rotate(${o.tilt}deg) scale(1.15)`;
+        this.rows = o.rows.map((spec, i) => {
+          const row = x.el('div', 'fb-ln fb-row ' + (o.rowCls || ''), null, s);
+          row.style.setProperty('--fs', spec.fs + 'px');
+          const cp = [];
+          for (let j = -9; j <= 9; j++) cp.push(x.el('span', 'fb-cp', 'FREE', row));
+          return { row, cp, spec, dir: i % 2 ? 1 : -1, cls: '' };
+        });
+      },
+      render(t, x) {
+        const inB = t >= o.B1, n = this.rows.length;
+        this.rows.forEach((r, i) => {
+          const { spec } = r, stop = o.STOP + (o.stagger || 0) * i;
+          const word = inB && spec.to ? spec.to : 'FREE', cls = 'fb-cp ' + ((inB ? spec.b : spec.a) || '');
+          if (cls !== r.cls) { r.cls = cls; r.cp.forEach((c) => { c.className = cls; }); }
+          r.cp.forEach((c) => x.setText(c, word));
+          const w = r.cp[9].offsetWidth, sp = w + parseFloat(getComputedStyle(r.row).fontSize) * (o.space || 0.4);
+          let off, skew = 0;
+          if (!inB) {
+            off = r.dir * ((o.ramp ? 140 * t + 300 * t * t * t : 560 * t) + i * 170);
+            off = ((off % sp) + sp) % sp - sp / 2;
+            if (o.ramp) skew = -r.dir * Math.min(24, (140 + 900 * t * t) / 160);
+          } else {
+            const p = x.seg(t, o.B1, stop);
+            off = r.dir * 3.2 * sp * (1 - (o.ramp ? x.outBack(p) : x.outCubic(p)));
+          }
+          const dim = !inB ? 1 : 1 - (spec.to ? 0.82 : 0.9) * x.seg(t, stop - 0.25, stop + 0.25);
+          r.cp.forEach((c, k) => {
+            const j = k - 9;
+            c.style.transform = `translateX(${(off + j * sp - w / 2).toFixed(1)}px) skewX(${skew.toFixed(1)}deg)`;
+            x.op(c, j === 0 && spec.to ? 1 : dim);
+          });
+          x.op(r.row, x.seg(t, 0.05 + (0.48 / n) * i, 0.35 + (0.48 / n) * i));
+        });
+        if (inB && o.flash !== false) x.flash(1 - x.seg(t, o.B1, o.B1 + 0.3));
+        if (o.ramp) { const [dx, dy] = x.shake(t, [o.STOP], 30); this.r.style.transform = `translate(${dx}px, ${dy}px)`; }
+      },
+    };
+  }
+
+  V['ticker-tilt'] = tickerTake({
+    title: 'ticker · tilted, staggered stop', D: 4.0, B1: 1.95, STOP: 2.8, stagger: 0.14, tilt: -8, flash: false,
+    rows: [
+      { fs: 190, to: 'FREE' },
+      { fs: 190, to: 'BETA', a: 'fb-hollow' },
+      { fs: 190, to: 'SUPERBOT', a: 'storm', b: 'storm' },
+      { fs: 190, to: 'FLASH', a: 'fb-hollow' },
+    ],
+  });
+
+  V['ticker-wall'] = tickerTake({
+    title: 'ticker · full wall', D: 4.0, B1: 1.95, STOP: 3.05,
+    rows: [
+      { fs: 100, a: 'fb-hollow', b: 'fb-hollow' },
+      { fs: 100 },
+      { fs: 170, to: 'FREE' },
+      { fs: 170, to: 'BETA', a: 'fb-hollow' },
+      { fs: 170, to: 'SUPERBOT', b: 'storm' },
+      { fs: 170, to: 'FLASH', a: 'fb-hollow' },
+      { fs: 100, a: 'fb-hollow', b: 'fb-hollow' },
+      { fs: 100 },
+    ],
+  });
+
+  V['ticker-ramp'] = tickerTake({
+    title: 'ticker · speed ramp', D: 3.9, B1: 1.95, STOP: 2.85, ramp: true,
+    rows: B.map((w, i) => ({ fs: 190, to: w, a: i % 2 ? 'fb-hollow' : '', b: w === 'SUPERBOT' ? 'storm' : '' })),
+  });
+
+  // ---------- Supreme: the box logo (white heavy oblique in a box, after Barbara Kruger), ours in the storm ----------
+  const PHRASE_BOXES = [['FREE BETA'], ['SUPERBOT FLASH']];
+  function pin(r, x, text, cls, fs) {
+    const e = x.el('div', 'fb-box fb-pin ' + cls, text, r);
+    e.style.setProperty('--fs', fs + 'px');
+    return e;
+  }
+  const place = (e, x, o, extra) => {
+    e.style.transform = `translate(-50%, -50%) translate(${(o.dx * x.W).toFixed(1)}px, ${(o.dy * x.H).toFixed(1)}px) ${extra}`;
+  };
+
+  // four FREE boxes stamp onto a pile, then the phrase stamps on as a two-box lockup
+  V['box-stamp'] = {
+    title: 'box logo stamp', group: 'Supreme', D: 3.4,
     build(r, x) {
       this.r = r;
-      this.stk = [[-0.24, -0.2, -9], [0.22, -0.19, 7], [-0.2, 0.21, 6], [0.23, 0.2, -8]].map(([dx, dy, rot]) => {
-        const e = x.el('div', 'fb-sticker', 'FREE', r); e.style.setProperty('--fs', '170px');
-        return { e, dx, dy, rot };
-      });
-      const s = x.el('div', 'fb-stack', null, r);
-      this.tp = B.map((w, i) => { const e = x.el('div', `fb-ln fb-tape fb-tape-${i}`, w, s); e.style.setProperty('--fs', '180px'); return e; });
+      this.a = [[-0.05, -0.07, -4], [0.04, 0.03, 3], [-0.03, 0.08, -2], [0.03, -0.02, 5]].map(([dx, dy, rot], i) =>
+        ({ e: pin(r, x, 'FREE', i % 2 ? 'ink' : '', 260), dx, dy, rot }));
+      this.b = lockup(r, x, PHRASE_BOXES, { fs: 150, box: ['ink', ''], gap: true });
     },
     render(t, x) {
-      const hits = [0.15, 0.45, 0.75, 1.05], T = 1.6;
-      this.stk.forEach((o, i) => {
-        const p = x.seg(t, hits[i] - 0.14, hits[i]);
-        x.op(o.e, t < T ? p : 0);
-        o.e.style.transform = `translate(-50%, -50%) translate(${(o.dx * x.W).toFixed(1)}px, ${(o.dy * 1080).toFixed(1)}px) rotate(${o.rot}deg) scale(${x.lerp(2.1, 1, x.outCubic(p)).toFixed(3)})`;
+      const hitsA = [0.2, 0.5, 0.8, 1.1], hitsB = [1.75, 2.05], inB = t >= 1.6;
+      this.a.forEach((o, i) => {
+        const p = x.seg(t, hitsA[i] - 0.12, hitsA[i]);
+        x.op(o.e, inB ? 0 : p);
+        place(o.e, x, o, `rotate(${o.rot}deg) scale(${x.lerp(2.4, 1, x.outCubic(p)).toFixed(3)})`);
       });
-      this.tp.forEach((e, i) => {
-        const p = x.outQuint(x.seg(t, T + 0.05 + 0.2 * i, T + 0.5 + 0.2 * i)), dir = i % 2 ? 1 : -1;
-        x.op(e, t < T ? 0 : 1);
-        e.style.transform = `translateX(${((1 - p) * dir * x.W * 1.1).toFixed(1)}px) skewX(-8deg) rotate(${i % 2 ? 1.5 : -1.5}deg)`;
+      this.b.forEach((e, i) => {
+        const p = x.seg(t, hitsB[i] - 0.12, hitsB[i]);
+        x.op(e, p);
+        e.style.transform = `scale(${x.lerp(2.2, 1, x.outCubic(p)).toFixed(3)})`;
       });
-      const [dx, dy] = x.shake(t, t < T ? hits : [T + 0.5, T + 0.7, T + 0.9, T + 1.1], 20);
+      const [dx, dy] = x.shake(t, inB ? hitsB : hitsA, 24);
       this.r.style.transform = `translate(${dx}px, ${dy}px)`;
     },
   };
 
-  // 10 · terminal: `superbot --price` prints FREE x4, then `superbot flash --beta` types the phrase
-  const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-  V.terminal = {
-    title: 'terminal', D: 3.9,
+  // box-logo wallpaper: FREE boxes tile the frame in scattered order, a white hit clears it, and
+  // the phrase runs in as four stacked boxes
+  V['box-wall'] = {
+    title: 'box logo wallpaper', group: 'Supreme', D: 3.6,
     build(r, x) {
-      const term = x.el('div', 'fb-term', null, r);
-      this.p1 = x.el('div', 'fb-prompt', null, term);
-      this.out = A.map((w) => x.el('div', 'fb-out', w, term));
-      this.p2 = x.el('div', 'fb-prompt', null, term);
-      this.big = B.map((w, i) => x.el('div', 'fb-big' + (i === 2 ? ' fb-big-storm' : ''), null, term));
-      this.cache = new Map();
-    },
-    line(e, text, cursor) {
-      const html = esc(text) + (cursor ? '<span class="fb-cur">▌</span>' : '');
-      if (this.cache.get(e) !== html) { e.innerHTML = html; this.cache.set(e, html); }
+      const k = Math.min(1, (x.W / 1920) * 1.25), cols = Math.floor(x.W / (80 * k * 4)), rows = Math.floor(x.H / (80 * k * 1.55));
+      const g = x.el('div', 'fb-tiles', null, r);
+      g.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      g.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+      const N = cols * rows, order = [...Array(N).keys()].sort((p, q) => x.hash(p + 11) - x.hash(q + 11));
+      this.tiles = [];
+      order.forEach((cell, rank) => { this.tiles[cell] = { rank }; });
+      for (let c = 0; c < N; c++) this.tiles[c].e = x.el('span', 'fb-box' + (((c % cols) + Math.floor(c / cols)) % 2 ? ' ink' : ''), 'FREE', g);
+      this.N = N;
+      this.b = lockup(r, x, B.map((w) => [w]), { fs: 150, box: ['ink', 'ink', '', 'ink'], gap: true });
     },
     render(t, x) {
-      const CUT = 2.0, c1 = 'superbot --price', c2 = 'superbot flash --beta';
-      const blink = Math.floor(t * 2.5) % 2 === 0, inA = t < CUT;
-      [this.p1, ...this.out].forEach((e) => { e.style.display = inA ? '' : 'none'; });
-      [this.p2, ...this.big].forEach((e) => { e.style.display = inA ? 'none' : ''; });
-      if (inA) {
-        const n = Math.floor(x.seg(t, 0.1, 0.7) * c1.length);
-        this.line(this.p1, '$ ' + c1.slice(0, n), t < 0.95 && (n < c1.length || blink));
-        this.out.forEach((e, i) => x.op(e, t >= 0.95 + 0.18 * i ? 1 : 0));
-        return;
-      }
-      const n2 = Math.floor(x.seg(t, 2.05, 2.4) * c2.length);
-      this.line(this.p2, '$ ' + c2.slice(0, n2), t < 2.5);
-      let left = Math.floor(x.seg(t, 2.5, 3.3) * 21), placed = false;
-      this.big.forEach((e, i) => {
-        const k = Math.min(left, B[i].length); left -= k;
-        const typing = !placed && t >= 2.5 && (k < B[i].length || i === 3);
-        if (typing) placed = true;
-        this.line(e, B[i].slice(0, k), typing && (k < B[i].length || blink));
+      const C = 1.55;
+      this.tiles.forEach(({ e, rank }) => {
+        const a = 0.1 + (1.25 * rank) / this.N, p = x.seg(t, a, a + 0.12);
+        x.op(e, t < C ? p : 0);
+        e.style.transform = `scale(${x.lerp(0.4, 1, x.outBack(p)).toFixed(3)})`;
       });
+      if (t >= C) x.flash(0.8 * (1 - x.seg(t, C, C + 0.3)));
+      landLockup(this.b, t, x, { at: C + 0.1, stagger: 0.12, slide: true, dur: 0.4 });
+    },
+  };
+
+  V['box-strobe'] = strobeTake({
+    title: 'box logo strobe', group: 'Supreme', D: 3.8, P: 2.6, soloCls: 'fb-box',
+    beats: [
+      { w: 'FREE', t: 0, bg: '#000', fg: '#fff', box: 'var(--storm)', fs: 300 },
+      { w: 'FREE', t: 0.35, bg: '#fff', fg: '#fff', box: '#000', fs: 300 },
+      { w: 'FREE', t: 0.7, bg: '#000', fg: '#000', box: '#fff', fs: 300 },
+      { w: 'FREE', t: 1.05, bg: '#fff', fg: '#fff', box: 'var(--storm)', fs: 300 },
+      { w: 'BETA', t: 1.5, bg: '#000', fg: '#fff', box: 'var(--storm)', fs: 300 },
+      { w: 'SUPERBOT', t: 1.85, bg: '#fff', fg: '#fff', box: '#000', fs: 220 },
+      { w: 'FLASH', t: 2.2, bg: '#000', fg: '#000', box: '#fff', fs: 300 },
+    ],
+    lines: PHRASE_BOXES, lock: { fs: 150, box: ['ink', ''], gap: true, stagger: 0.1 },
+  });
+
+  V['box-ticker'] = tickerTake({
+    title: 'box logo ticker', group: 'Supreme', D: 3.9, B1: 1.95, STOP: 3.05, rowCls: 'fb-boxrow', space: 0.3,
+    rows: [
+      { fs: 150, to: 'FREE', a: 'fb-box ink', b: 'fb-box ink' },
+      { fs: 150, to: 'BETA', a: 'fb-box', b: 'fb-box ink' },
+      { fs: 150, to: 'SUPERBOT', a: 'fb-box ink', b: 'fb-box' },
+      { fs: 150, to: 'FLASH', a: 'fb-box', b: 'fb-box ink' },
+    ],
+  });
+
+  // Barbara Kruger's red captions, where the box logo came from: FREE captions hard-cut onto a
+  // grainy frame one per beat (no easing, Kruger is static), then the phrase as two red strips
+  V.kruger = {
+    title: 'Kruger red captions', group: 'Supreme', D: 3.5,
+    build(r, x) {
+      this.grain = x.el('div', 'fb-grain', null, r);
+      this.a = [[-0.2, -0.28], [0.17, -0.08], [-0.15, 0.12], [0.19, 0.32]].map(([dx, dy]) => ({ e: pin(r, x, 'FREE', 'red', 150), dx, dy }));
+      this.b = lockup(r, x, PHRASE_BOXES, { fs: 150, box: 'red', gap: true });
+    },
+    render(t, x) {
+      const f = Math.floor(t * 12), hits = [0.15, 0.5, 0.85, 1.2], inB = t >= 1.7;
+      this.grain.style.backgroundPosition = `${x.hash(f) % 200}px ${x.hash(f + 7) % 200}px, 0 0`;
+      this.a.forEach((o, i) => { x.op(o.e, !inB && t >= hits[i] ? 1 : 0); place(o.e, x, o, ''); });
+      this.b.forEach((e, i) => x.op(e, t >= 1.7 + 0.35 * i ? 1 : 0));
     },
   };
 })();

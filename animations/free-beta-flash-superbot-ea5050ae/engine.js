@@ -60,6 +60,7 @@
     seg, lerp, clamp01, outQuint, outCubic, outBack, op, hash, el, setText, stack, shake,
     flash: (v) => op(flashEl, v),
     get W() { return window.AR.w; },
+    get H() { return window.AR.h; },
   };
   V.build(root, x);
 

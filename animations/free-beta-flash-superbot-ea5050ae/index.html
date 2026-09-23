@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>FREE BETA SUPERBOT FLASH · 10 takes</title>
+<title>FREE BETA SUPERBOT FLASH · takes</title>
 <style>
   :root { color-scheme: dark; --line: #262626; --muted: #9a9a9a; }
   body { margin: 0; background: #0d0d0d; color: #ececec; font: 14px/1.4 -apple-system, system-ui, sans-serif; }
   header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 24px; background: #0d0d0dee; border-bottom: 1px solid var(--line); }
   h1 { margin: 0 auto 0 0; font-size: 16px; font-weight: 700; }
-  button, a.btn { font: inherit; color: #ececec; background: #181818; border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; cursor: pointer; text-decoration: none; }
+  h2 { grid-column: 1 / -1; margin: 12px 0 0; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  button, a.btn { font: inherit; color: #ececec; background: #181818; border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; min-height: 36px; cursor: pointer; text-decoration: none; box-sizing: border-box; }
   button[aria-pressed="true"] { background: #2b6bff; border-color: #2b6bff; }
-  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(460px, 1fr)); gap: 20px; padding: 20px 24px 40px; }
+  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr)); gap: 20px; padding: 8px 24px 40px; }
   figure { margin: 0; background: #000; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
   .view { position: relative; aspect-ratio: var(--ratio, 16 / 9); max-height: 70vh; margin: 0 auto; }
   iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -22,7 +23,7 @@
 </head>
 <body>
 <header>
-  <h1>FREE BETA SUPERBOT FLASH · 10 takes</h1>
+  <h1 id="title">FREE BETA SUPERBOT FLASH</h1>
   <span id="ratios"></span>
   <button id="all">Replay all</button>
 </header>
@@ -32,16 +33,20 @@
 const RATIOS = [['16x9', '16 / 9'], ['1x1', '1 / 1'], ['4x5', '4 / 5'], ['4x3', '4 / 3']];
 let ar = new URLSearchParams(location.search).get('ar') || '16x9';
 const grid = document.getElementById('grid'), frames = [];
-Object.entries(window.FBF_VARIANTS).forEach(([key, v], i) => {
-  const file = `v${String(i + 1).padStart(2, '0')}.html`;
+let group = null, n = 0;
+Object.entries(window.FBF_VARIANTS).forEach(([key, v]) => {
+  const file = v.file || `${key}.html`;
+  if (v.group !== group) { group = v.group; const h = document.createElement('h2'); h.textContent = group; grid.appendChild(h); }
+  n++;
   const fig = document.createElement('figure');
   fig.innerHTML = `<div class="view"><iframe title="${v.title}" loading="eager"></iframe></div>
-    <figcaption><b>v${i + 1} <span>· ${v.title}</span></b><button>Replay</button><a class="btn" target="_blank">Open</a></figcaption>`;
+    <figcaption><b>${n} <span>· ${v.title}</span></b><button>Replay</button><a class="btn" target="_blank">Open</a></figcaption>`;
   const f = fig.querySelector('iframe');
   fig.querySelector('button').onclick = () => f.contentWindow.postMessage({ type: 'replay' }, '*');
   frames.push({ f, a: fig.querySelector('a'), file });
   grid.appendChild(fig);
 });
+document.getElementById('title').textContent += ` · ${n} takes`;
 function load() {
   document.documentElement.style.setProperty('--ratio', RATIOS.find((r) => r[0] === ar)[1]);
   frames.forEach(({ f, a, file }) => { f.src = `${file}?ar=${ar}`; a.href = `${file}?ar=${ar}`; });

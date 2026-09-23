@@ -1,13 +1,13 @@
 /* ad.css — the FREE BETA SUPERBOT FLASH spots. Tokens and the end card are the tabs-chaos spot's
-   (the site ladder, verbatim values); the fb-* blocks are the ten takes in variants.js. Type is
+   (the site ladder, verbatim values); the fb-* blocks are the takes in variants.js. Type is
    sized --fs (design px on a 1920-wide stage) times --k, which engine.js sets per ratio. */
 :root {
   color-scheme: dark;
   --bg: #000; --fg: #ececec; --muted: #9a9a9a;
   --storm-0: #00e5c3; --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
   --storm: linear-gradient(90deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --kruger-red: #e2231a;
   --font-ui: "SF Pro Display", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --k: 1;
 }
 html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
@@ -20,46 +20,30 @@ body { font-family: var(--font-ui); -webkit-font-smoothing: antialiased; }
 
 /* ---------- shared type ---------- */
 .fb-stack { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.fb-gap { gap: calc(18px * var(--k)); }
 .fb-ln, .fb-w { --fs: 200px; font-size: calc(var(--fs) * var(--k)); font-weight: 900; text-transform: uppercase; letter-spacing: -.045em; line-height: .9; color: #fff; white-space: nowrap; }
 .fb-w { position: absolute; left: 50%; top: 50%; }
+.fb-lrow { display: flex; justify-content: center; }
 .storm { background: var(--storm); -webkit-background-clip: text; background-clip: text; color: transparent !important; }
 .fb-hollow { color: transparent; -webkit-text-stroke: .012em #fff; }
 
-/* 03 decode */
-.fb-grid { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(20px * var(--k)); font-family: var(--font-mono); font-weight: 800; font-size: calc(170px * var(--k)); line-height: 1; }
-.fb-grow { display: flex; gap: .5em; }
-.fb-gw { display: inline-block; color: #fff; }
-
-/* 05 outline fill */
-.fb-slot { position: relative; overflow-y: clip; overflow-x: visible; }
-.fb-o { display: block; color: transparent; -webkit-text-stroke: .012em #fff; }
-.fb-f { position: absolute; left: 0; top: 0; }
-.fb-n { position: absolute; left: 50%; top: 0; }
-
-/* 07 split flap */
-.fb-board { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(16px * var(--k)); font-size: calc(150px * var(--k)); font-weight: 800; }
-.fb-frow { display: flex; gap: .06em; }
-.fb-cell { position: relative; display: grid; place-items: center; width: .8em; height: 1.1em; line-height: 1; border-radius: .07em; background: linear-gradient(#1d1d1d 0 50%, #151515 50% 100%); }
-.fb-cell::after { content: ''; position: absolute; left: 0; right: 0; top: calc(50% - .01em); height: .02em; background: #000; }
-
-/* 08 ticker */
+/* ticker rows */
 .fb-row { position: relative; width: 100%; height: .95em; }
+.fb-boxrow { height: 1.3em; }
 .fb-cp { position: absolute; left: 50%; top: 0; }
 
-/* 09 stickers + tape */
-.fb-sticker { position: absolute; left: 50%; top: 50%; font-size: calc(var(--fs) * var(--k)); font-weight: 900; letter-spacing: -.04em; line-height: 1; padding: .12em .3em .08em; background: #ff1a1a; color: #fff; border: .04em solid #fff; border-radius: .16em; box-shadow: 0 .08em .25em rgba(0, 0, 0, .6); }
-.fb-tape { padding: .08em .28em .02em; margin: .05em 0; }
-.fb-tape-0 { background: #ff1a1a; color: #fff; }
-.fb-tape-1, .fb-tape-3 { background: #fff; color: #000; }
-.fb-tape-2 { background: var(--storm); color: #fff; }
-
-/* 10 terminal */
-.fb-term { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 9%; font-family: var(--font-mono); }
-.fb-prompt { font-size: calc(50px * var(--k)); color: var(--muted); margin-bottom: calc(24px * var(--k)); white-space: pre; }
-.fb-out { font-size: calc(130px * var(--k)); font-weight: 800; line-height: 1; color: var(--storm-0); }
-.fb-big { font-size: calc(175px * var(--k)); font-weight: 800; line-height: .98; color: #fff; min-height: .98em; white-space: pre; }
-.fb-big-storm { background: var(--storm); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.fb-cur { color: var(--storm-0); -webkit-text-fill-color: var(--storm-0); }
+/* ---------- box logo: white heavy oblique in a box (storm by default) ---------- */
+.fb-box { display: inline-block; font-style: italic; font-weight: 900; text-transform: uppercase; letter-spacing: -.035em; line-height: 1; color: #fff; background: var(--storm); padding: .1em .26em .06em .2em; white-space: nowrap; }
+.fb-box.ink { background: #fff; color: #000; }
+.fb-box.red { background: var(--kruger-red); color: #fff; }
+.fb-pin { position: absolute; left: 50%; top: 50%; font-size: calc(var(--fs) * var(--k)); }
+.fb-tiles { position: absolute; inset: 0; display: grid; place-items: center; font-size: calc(80px * var(--k)); }
+.fb-grain {
+  position: absolute; inset: 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 45%, #2c2c2c, #0a0a0a 75%);
+}
 
 /* ---------- the end card (tabs-chaos-superbot-6f50ea56, verbatim) ---------- */
 #end { display: grid; place-items: center; background: #000; z-index: 20; }

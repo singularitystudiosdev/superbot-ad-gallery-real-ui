@@ -8,6 +8,9 @@
 <meta name="description" content="Two title cards and the end screen, each popping in the way the 'agents refusing?' card does: 'agents getting slower overtime?' with slower in storm blue for 1.9 seconds, then 'superbot knows why' with superbot on the storm-x wordmark gradient, then the superbot.gg end card. 6.5s looping ad spot, 1920x1080."/>
 <script src="../../assets/ar.js"></script>
 <link rel="stylesheet" href="../../assets/ar.css">
+<!-- the end-card mascot: the real beta.superbot.gg mark (breath, glitch, ears, bob, blink, eyes) -->
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<script src="../../assets/sb-mark-live.js"></script>
 <style>
 /* ---------- tokens ---------- */
 /* The type and colour are the house card's, not this file's invention: the same
@@ -40,7 +43,7 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
 /* ---------- the end card (house lockup: face beside the words) ---------- */
 #end { display: grid; place-items: center; background: #000; }
 #end .lock { display: flex; align-items: center; gap: 44px; }
-#end svg.face { width: 220px; height: 220px; overflow: visible; }
+#end .face { flex: none; width: 220px; height: 220px; display: grid; place-items: center; } /* the host; sbMarkLive fills it at 220px */
 #end .words { overflow: hidden; }
 #end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
 #end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
@@ -54,16 +57,6 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <!-- the brand face: mark-clean.svg's mask geometry (site/site/assets/brand) -->
-    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
-      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
-      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
-    </mask>
-  </defs>
-</svg>
-
 <div id="stage">
 
   <!-- ============ the two title cards ============ -->
@@ -81,7 +74,7 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
   <!-- ============ the end card ============ -->
   <section class="scene" id="end" aria-label="superbot.gg">
     <div class="lock">
-      <svg class="face" id="end-face" viewBox="0 0 100 100" aria-hidden="true"><rect class="ga" x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#face)" transform="translate(-1.2 -1.2)"/><rect class="gb" x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#face)" transform="translate(1.2 1.2)"/><rect x="-30" y="-30" width="160" height="160" fill="#fff" mask="url(#face)"/></svg>
+      <div class="face" id="end-face"></div>
       <div class="words" id="end-words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
     </div>
   </section>
@@ -112,6 +105,8 @@ const B = {
 const stage = $('stage');
 const card = $('card'), cardA = $('card-a'), cardB = $('card-b');
 const end = $('end'), endFace = $('end-face'), endSlide = $('end-slide');
+// the live mascot, the same 220px box the static face filled; render(t) still scales and fades the host
+sbMarkLive(endFace, { size: 220 });
 
 const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
 const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };

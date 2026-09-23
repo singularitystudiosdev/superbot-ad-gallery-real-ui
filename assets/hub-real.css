@@ -68,7 +68,9 @@
 .rc-send { width: 25px; height: 25px; border-radius: 50%; background: #2c2c2e; color: #5d606f !important; }
 .rc-send svg { width: 12px; height: 12px; stroke-width: 2.2; }
 
-/* The real thread is a centered reading column (superbot-desktop hub-chat.css: every feed row at --size-measure 600px, the composer at --size-thread-column 768px), scaled by this mock's 11.5px type against the app's 15px. */
-.hub { --hub-measure: 540px; --hub-column: 590px; }
-.hub .feed > .msg, .hub .feed-in > * { box-sizing: border-box; width: 100%; max-width: var(--hub-measure); margin-inline: auto; }
+/* User turns sit flush right at the feed's inner edge; replies sit flush left, 10px in (under the header title), capped at --hub-reply so they never span the pane. */
+.hub { --hub-bubble: 445px; --hub-reply: 471px; --hub-reply-inset: 10px; --hub-column: 590px; }
+.hub .feed > .msg, .hub .feed-in > * { box-sizing: border-box; width: 100%; max-width: none; margin-inline: 0; }
+.hub .msg:not(:has(.avatar.sb)) .m-main, .hub .f-q .bub { max-width: var(--hub-bubble); }
+.hub .msg:has(.avatar.sb) .m-main, .hub .f-a .m-main, .hub .f-think { box-sizing: border-box; max-width: var(--hub-reply); margin-left: var(--hub-reply-inset); }
 .hub .composer { align-self: center; box-sizing: border-box; width: calc(100% - 24px); max-width: var(--hub-column); margin-inline: auto; }

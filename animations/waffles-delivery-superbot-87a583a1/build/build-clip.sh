@@ -1,6 +1,6 @@
 #!/bin/sh
-# Rebuilds assets/video/waffles-delivery-clip.mp4: a 3.04s Pexels plate + the real animated mascot (kawaii
-# dressing: blush, hearts, sparkles) riding the courier's RIGHT shoulder, i.e. the viewer's LEFT.
+# Rebuilds assets/video/waffles-delivery-clip.mp4: a 3.04s Pexels plate + the real animated mascot (plain beta
+# mark, black eye backing) riding the courier's RIGHT shoulder, i.e. the viewer's LEFT.
 #   sh build-clip.sh <workdir>
 # Source: Pexels 7706071 "Man Opens a Door and Receives Food Delivery" by MART PRODUCTION, Pexels License
 #   https://www.pexels.com/video/man-opens-a-door-and-receives-food-delivery-7706071/

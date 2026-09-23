@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>order me waffles? superbot can do it · ad spot</title>
 <link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
-<meta name="description" content="The user asks ChatGPT to order waffles and gets a long &quot;I can't do that!&quot; lecture; the superbot popup opens the app, superbot orders Denny's through DoorDash, a real 3s doorstep handoff plays with the kawaii superbot mascot riding the courier's shoulder, and the mascot hops out of the clip into the end card. 20.8s looping ad spot, 1920x1080."/>
+<meta name="description" content="The user asks ChatGPT to order waffles and gets a long &quot;I can't do that!&quot; lecture; the superbot popup opens the app, superbot orders Denny's through DoorDash, a real 3s doorstep handoff plays with the superbot mascot riding the courier's shoulder, and the mascot hops out of the clip into the end card. 17.4s looping ad spot, 1920x1080."/>
 <!-- FOOTAGE SOURCE / LICENSE
      The doorstep clip (../../assets/video/waffles-delivery-clip.mp4) is cut from the Pexels stock video
      "Man Opens a Door and Receives Food Delivery" by MART PRODUCTION (Pexels, published 2021-04-29),
@@ -18,8 +18,8 @@
      Denny's or DoorDash branding is composited on it. The superbot mascot is NOT in the footage: it is the real
      animated mark (../../assets/sb-mark-live.{css,js}) rendered as a transparent PNG sequence in headless
      Chromium (omitBackground) and overlaid with ffmpeg, hand-keyframed onto the courier's right shoulder (the
-     viewer's left), dressed kawaii by assets/kawaii.js (blush, black eye backing, hearts and sparkles; the mark
-     itself is never redrawn). On the clip's clean last frame the same mascot, live in this page, takes over
+     viewer's left), backed by assets/mark-backing.js (a black rect behind the eye cut-outs so it reads as it does
+     on superbot.gg's black page; the mark itself is never redrawn). On the clip's clean last frame the same mascot, live in this page, takes over
      from the baked pose and hops into the end card, where it stays as the end card's 220px mark.
      Rebuild: build/build-clip.sh. -->
 <script src="../../assets/ar.js"></script>
@@ -209,7 +209,6 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
 /* the live mascot that hops out of the clip into the end card (and stays as the end card's mark) */
 #hopper { position: absolute; left: 0; top: 0; width: 220px; height: 220px; transform-origin: 0 0; z-index: 30; opacity: 0; pointer-events: none; }
 #hopper .sb-mark { filter: drop-shadow(0 5px 7px rgba(0,0,0,.42)) drop-shadow(0 0 2px rgba(0,0,0,.35)); }
-#hop-fx { position: absolute; inset: 0; z-index: 31; pointer-events: none; }
 /* the order card's thumbnail: a waffle, drawn (golden square, a pressed grid) */
 .dl-thumb.waffle { background-color: #e9a53a; background-image: linear-gradient(90deg, rgba(122,62,0,.5) 2px, transparent 2px), linear-gradient(0deg, rgba(122,62,0,.5) 2px, transparent 2px); background-size: 7px 7px; background-position: 2px 2px; box-shadow: inset 0 0 0 2px #c07a1c; }
 .dl-thumb.waffle::after { content: none; }
@@ -351,9 +350,8 @@ html { --site-k: 1.6; } /* the app window is drawn at 1200x675 and shown at 1.6 
     </div>
   </section>
 
-  <!-- the kawaii mascot, live: hops out of the clip's last frame into the end card's face slot -->
+  <!-- the mascot, live: hops out of the clip's last frame into the end card's face slot -->
   <div id="hopper" aria-hidden="true"></div>
-  <div id="hop-fx" aria-hidden="true"></div>
 
   <!-- the cursor -->
   <svg id="cursor" viewBox="0 0 34 44" aria-hidden="true"><path d="M3 2 L3 34 L11 26 L17 41 L23 38 L17 24 L28 24 Z" fill="#000" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
@@ -361,14 +359,14 @@ html { --site-k: 1.6; } /* the app window is drawn at 1200x675 and shown at 1.6 
 </div>
 
 <script src="../../assets/sb-mark-live.js"></script>
-<script src="assets/kawaii.js"></script>
+<script src="assets/mark-backing.js"></script>
 <script>
 // ---------- the clock: one render(t), a pure function of story time ----------
 // Every visual is recomputed from t each frame (Remotion's rule: a frame is a
 // function of its number), so seeking (`?t=9.4`) or capturing any frame yields
 // the same picture. The skeleton is the site's own hub-boot.js: seg() windows,
 // pure tweens, no timers. Frame-indexed at 30fps so preview and capture agree.
-const FPS = 30, LOOP = 20.8;
+const FPS = 30, LOOP = 17.4;
 window.CYCLE = LOOP; // one download = one loop
 const $ = (id) => document.getElementById(id);
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -382,13 +380,13 @@ const lerp = (a, b, p) => a + (b - a) * p;
 const B = {
   typeA: 0.6, typeB: 1.5, send: 1.6,             // "Order me waffles" types; Enter 0.1s after the last char, the input clears
   think: 1.8, reply: 2.3,                        // "Thinking", then the long refusal streams word for word
-  popup: 6.7,                                    // the rescue popup rises mid-lecture, the refusal still streaming under it
-  curIn: 6.6, curAt: 7.65, press: 7.85, release: 8.05, // the click lands 1.15s after the popup appears (scale .95)
-  dip: 8.3, site: 8.55,                          // dip to black, the app window is simply there
-  ask: 9.1, reply2: 9.65, order: 11.35, placed: 12.3, // the ask, superbot's line, the DoorDash card, then placed
-  clipDip: 13.3, clip: 13.55,                    // dip, then the real doorstep clip (3s, the mascot rides her shoulder)
-  hop: 16.55, land: 17.4,                        // the clip ends on its clean frame: the live mascot hops out into the end card
-  end: 16.55, word: 17.75,                       // the end card is under the clip from the hop; the words slide out after the landing
+  popup: 3.3,                                    // the rescue popup rises 1s into "I can't do that!", the refusal still streaming under it
+  curIn: 3.2, curAt: 4.25, press: 4.45, release: 4.65, // the click lands 1.15s after the popup appears (scale .95)
+  dip: 4.9, site: 5.15,                          // dip to black, the app window is simply there
+  ask: 5.7, reply2: 6.25, order: 7.95, placed: 8.9, // the ask, superbot's line, the DoorDash card, then placed
+  clipDip: 9.9, clip: 10.15,                     // dip, then the real doorstep clip (3s, the mascot rides her shoulder)
+  hop: 13.15, land: 14.0,                        // the clip ends on its clean frame: the live mascot hops out into the end card
+  end: 13.15, word: 14.35,                       // the end card is under the clip from the hop; the words slide out after the landing
 };
 const CLIP_LEN = 3.0;                            // the doorstep clip: 75 frames with the baked mascot...
 const CLEAN_T = 3.02;                            // ...then frame 75, the same plate frame with no mascot (held while the live one hops)
@@ -400,7 +398,6 @@ const CLIP_POS = { '16x9': 0.48, '4x3': 0.75, '1x1': 0.667, '4x5': 0.587 };
 // squash, tilt and eyes. The live mascot takes over from exactly this pose on the clean frame.
 const HOP_FROM = { x: 800, y: 520, sx: 1.16, sy: 0.8, tilt: 0.45, ex: 0.6, ey: -0.9 };
 const HOP_BOX = 154;                             // the baked mascot's box (1080p px); the end card's mark is 220
-const HEART_TAIL = { frame: 65, mix: 1, scale: 0.9 }; // the layer's last burst (BURSTS in build/mascot-layer.html), still alive at frame 75
 
 // ---------- copy ----------
 const PROMPT = 'Order me waffles';
@@ -423,7 +420,7 @@ const hUser = $('h-user'), hBot = $('h-bot'), hText = $('h-text'), hCode = $('h-
 const clipSc = $('clip'), clipVid = $('clip-vid'), hEta = $('h-eta');
 let FREEZE = false; // a held frame (?t=) or a capture: the clip is seeked, never played
 const end = $('end'), endFace = $('end-face'), endSlide = $('end-slide');
-const hopper = $('hopper'), hopFx = $('hop-fx');
+const hopper = $('hopper');
 
 function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 // ---------- style helpers (transform/opacity only) ----------
@@ -554,11 +551,11 @@ function renderEnd(t) {
   op(endSlide, w);
 }
 
-// ---------- the hop: the kawaii mascot leaps out of the clip into the end card ----------
-// #hopper is the real mark (sbMarkLive, 220px: the end card's face) dressed by assets/kawaii.js. It
+// ---------- the hop: the mascot leaps out of the clip into the end card ----------
+// #hopper is the real mark (sbMarkLive, 220px: the end card's face) backed by assets/mark-backing.js. It
 // starts as frame 74 of the baked clip layer (154px box, crouched, same foot point), springs up in an
 // arc with a forward flip while it grows to the end card's size, and lands in the face slot with a
-// squash, happy eyes and a burst of hearts and sparkles. It then stays there as the end card's mark.
+// squash that springs back. It then stays there as the end card's mark.
 const FOOT_U = 0.86;                             // the mark's feet: y=86 of its 100-unit box
 const easeIO = (p) => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
 function faceSlot() {
@@ -568,15 +565,15 @@ function faceSlot() {
 let eyesOwned = false;
 function renderHop(t) {
   const h = t - B.hop;
-  if (h < 0) { op(hopper, 0); hopBurst.set(-1, 0, 0, 1, 1, 0); tailBurst.set(-1, 0, 0, 1, 1, 0); return; }
+  if (h < 0) { op(hopper, 0); return; }
   op(hopper, 1);
   const S = { x: HOP_FROM.x + clipX(), y: HOP_FROM.y }, E = faceSlot(), s0 = HOP_BOX / 220;
   const T0 = 0.08, fly = B.land - B.hop;          // the take-off spring, then the flight
-  let x, y, sc, sx, sy, flip = 0, tilt = 0, ex = HOP_FROM.ex, ey = HOP_FROM.ey, happy = false;
+  let x, y, sc, sx, sy, flip = 0, tilt = 0, ex = HOP_FROM.ex, ey = HOP_FROM.ey;
   if (h < T0) {                                   // uncoil from the baked crouch into a tall stretch
     const p = h / T0;
     x = S.x; y = S.y; sc = s0; sx = lerp(HOP_FROM.sx, 0.86, p); sy = lerp(HOP_FROM.sy, 1.2, p);
-    tilt = HOP_FROM.tilt * (1 - p); happy = p < 0.5;
+    tilt = HOP_FROM.tilt * (1 - p);
   } else if (t < B.land) {                        // the arc: a round, floaty parabola with one forward flip
     const p = seg(t, B.hop + T0, B.land);
     x = lerp(S.x, E.x, p);
@@ -586,15 +583,13 @@ function renderHop(t) {
     sx = lerp(1, 0.88, st); sy = lerp(1, 1.14, st);
     flip = 360 * easeIO(p);
     ex = E.x < S.x ? -1.4 : 1.4; ey = -0.6;
-  } else {                                        // landed in the face slot: squash, spring back, beam
+  } else {                                        // landed in the face slot: squash, spring back
     const g = t - B.land, k = g < 0.7 ? Math.exp(-g / 0.13) * Math.cos(g * 17) : 0;
     x = E.x; y = E.y; sc = E.s; sx = 1 + 0.22 * k; sy = 1 - 0.22 * k;
-    happy = g < 0.9; ex = 0; ey = 0;
+    ex = 0; ey = 0;
   }
   const cy = (220 * FOOT_U - 110) * sc * sy;      // the flip turns about the body's centre, the squash about the feet
   hopper.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(0px, ${(-cy).toFixed(1)}px) rotate(${flip.toFixed(1)}deg) translate(0px, ${cy.toFixed(1)}px) rotate(${tilt.toFixed(2)}deg) scale(${(sc * sx).toFixed(4)}, ${(sc * sy).toFixed(4)}) translate(-110px, ${(-220 * FOOT_U).toFixed(1)}px)`;
-  hopMark.svg.classList.toggle('is-happy', happy);
-  hopDress.setBlush(happy ? 0.9 : 0.72);
   // the eyes are the script's during the hop; after the landing they go back to following the pointer
   if (t < B.land + 0.9) {
     hopEyes.forEach((e, i) => { e.setAttribute('cx', ([35, 65][i] + ex).toFixed(2)); e.setAttribute('cy', (58 + ey).toFixed(2)); });
@@ -603,15 +598,6 @@ function renderHop(t) {
     hopEyes.forEach((e, i) => { e.setAttribute('cx', String([35, 65][i])); e.setAttribute('cy', '58'); });
     eyesOwned = false;
   }
-  // the hearts the baked layer launched at clip frame 65 are still in the air on the clean frame: finish
-  // them here (same pool size, seed, origin and scale as build/mascot-layer.html, so they carry on in place)
-  const tailAge = (75 - HEART_TAIL.frame) / 25 + h;
-  if (tailAge < tailBurst.life) tailBurst.set(tailAge, S.x, S.y - HOP_BOX * FOOT_U * 0.72, HEART_TAIL.scale, HEART_TAIL.frame, HEART_TAIL.mix);
-  else tailBurst.set(-1, 0, 0, 1, 1, 0);
-  // hearts and sparkles: a little puff as it leaves the shoulder, a big burst on the landing
-  if (t >= B.land && t - B.land < hopBurst.life) hopBurst.set(t - B.land, E.x, E.y - 220 * E.s * 0.7, E.s * 1.9, 7, 0.55);
-  else if (h < hopBurst.life) hopBurst.set(h, S.x, S.y - HOP_BOX * 0.7, 0.9, 3, 0.3);
-  else hopBurst.set(-1, 0, 0, 1, 1, 0);
 }
 
 function renderCursor(t) {
@@ -644,10 +630,8 @@ const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
 // the end card's mark: the real superbot.gg animated mascot (assets/sb-mark-live) at 220px, eyes following the
 // pointer once it has landed. It lives in #hopper (it hops there out of the clip) and fills #end-face's slot.
 const hopMark = sbMarkLive(hopper, { size: 220 });
-const hopDress = kawaiiDress(hopMark);
+markBacking(hopMark);
 const hopEyes = [hopMark.svg.querySelector('.mark-eye-l'), hopMark.svg.querySelector('.mark-eye-r')];
-const hopBurst = kawaiiBurst(hopFx, 14);
-const tailBurst = kawaiiBurst(hopFx, 9);         // 9 = the layer's pool, so the seeded particles match
 let t0 = performance.now() - (seekTo || 0) * 1000, last = -1;
 function frame(now) {
   const t = ((now - t0) / 1000) % LOOP;

@@ -1,8 +1,7 @@
 <!doctype html>
 <!-- The mascot layer for the 3s doorstep clip: the REAL superbot.gg animated mark
-     (assets/sb-mark-live.{css,js}, window.sbMarkLive) with the ad's kawaii dressing
-     (../assets/kawaii.js: blush, black eye backing, heart and sparkle bursts; the mark itself is
-     never redrawn) on a transparent 1920x1080 page. build/render-mascot.mjs screenshots it frame
+     (assets/sb-mark-live.{css,js}, window.sbMarkLive) with a black backing behind
+     its eye cut-outs (../assets/mark-backing.js; the mark itself is never redrawn) on a transparent 1920x1080 page. build/render-mascot.mjs screenshots it frame
      by frame with omitBackground and ffmpeg overlays the PNG sequence on the stock plate.
      window.renderFrame(i) is a pure function of the clip frame (25fps).
      Frame 75 (the clip's last, "clean" frame) is empty on purpose: index.html holds the video on
@@ -15,23 +14,20 @@
   #rig { position: absolute; left: 0; top: 0; width: 154px; height: 154px; transform-origin: 77px 132.4px; }
   #rig .sb-mark { filter: drop-shadow(0 5px 7px rgba(0,0,0,.42)) drop-shadow(0 0 2px rgba(0,0,0,.35)); }
   #shadow { position: absolute; left: 0; top: 0; width: 100px; height: 16px; margin: -8px 0 0 -50px; border-radius: 50%; background: rgba(20,12,6,.34); filter: blur(4px); }
-  #fx { position: absolute; inset: 0; }
 </style>
 <script src="../../../assets/sb-mark-live.js"></script>
-<script src="../assets/kawaii.js"></script>
+<script src="../assets/mark-backing.js"></script>
 </head><body>
 <div id="shadow"></div>
 <div id="rig"></div>
-<div id="fx"></div>
 <script>
 const FPS = 25, N = 76, BOX = 154, FOOT = 132.4; // 30% bigger than v1's 118px box; the feet sit at y=86 of the mark's 100-unit box
 const CLEAN = 75;                                  // the empty frame the page takes over on
 const mark = sbMarkLive('#rig', { size: BOX, interactive: false });
-const dress = kawaiiDress(mark);
+markBacking(mark);
 const svg = mark.svg;
 const eyes = [svg.querySelector('.mark-eye-l'), svg.querySelector('.mark-eye-r')];
 const EYE = [{ cx: 35, cy: 58 }, { cx: 65, cy: 58 }];
-const burst = kawaiiBurst(document.getElementById('fx'), 9);
 
 // The courier's RIGHT shoulder = the viewer's LEFT (she faces the camera), in 1920x1080 plate px:
 // the top of the shoulder where the mascot's feet sit, keyframed by hand on labelled full-res crops
@@ -64,10 +60,7 @@ const inAny = (f, list) => list.some(([a, b]) => f >= a && f < b);
 const POP = 20;                                     // pops up on her shoulder once the door has cleared it
 const RIDE = [[32, 9, 36], [44, 10, 44], [56, 9, 34]]; // bouncy hops on the shoulder: [start, frames, height px]
 const CROUCH = [67, 74];                            // the wind-up for the big hop out of the clip
-const HAPPY = [[20, 28], [41, 50], [53, 62], [65, 75]];
 const BLINK = [[36, 38]];
-// hearts and sparkles: [frame, mix (1 = all hearts), scale]
-const BURSTS = [[20, 0.2, 0.9], [41, 0.85, 0.85], [53, 0.6, 0.85], [65, 1, 0.9]];
 
 // squash & stretch: rounder, bouncier than v1. In the air: stretched tall; on landing: a squash
 // that springs back with a little overshoot (damped cosine over 6 frames).
@@ -102,7 +95,7 @@ function state(f) {
   let ex = 0, ey = 0.4;
   if (f >= CUT) { ex = 1.5; ey = 0.5; }
   if (f >= CROUCH[0]) { ex = 0.6; ey = -0.9; } // looks up at where it is about to hop
-  return { f, x, y, sx: sx * pop, sy: sy * pop, tilt, ex, ey, happy: inAny(f, HAPPY), blink: inAny(f, BLINK), lift, base: s, air, visible: f >= POP && f < CLEAN, t };
+  return { f, x, y, sx: sx * pop, sy: sy * pop, tilt, ex, ey, blink: inAny(f, BLINK), lift, base: s, air, visible: f >= POP && f < CLEAN, t };
 }
 
 window.renderFrame = function (f) {
@@ -116,17 +109,10 @@ window.renderFrame = function (f) {
   sh.style.opacity = st.visible ? String(clamp01(1 - st.lift / 70) * 0.85 * Math.min(1, st.sx)) : '0';
   sh.style.transform = `translate(${st.base.x.toFixed(1)}px, ${(st.base.y - 2).toFixed(1)}px) scale(${(1 - Math.min(0.4, st.lift / 130)).toFixed(3)})`;
   eyes.forEach((e, i) => { e.setAttribute('cx', (EYE[i].cx + st.ex).toFixed(2)); e.setAttribute('cy', (EYE[i].cy + st.ey).toFixed(2)); e.setAttribute('ry', st.blink ? '1' : '11'); });
-  svg.classList.toggle('is-happy', st.happy);
-  dress.setBlush(st.happy ? 0.9 : 0.72);
-  // the latest burst still alive, from the mascot's head
-  let live = null;
-  for (const b of BURSTS) if (f >= b[0] && (f - b[0]) / FPS < burst.life) live = b;
-  if (live && st.visible) burst.set((f - live[0]) / FPS, st.x, st.y - FOOT * 0.72, live[2], live[0], live[1]);
-  else burst.set(-1, 0, 0, 1, 1, 0);
   return st;
 };
 // frame 74's pose: index.html's live mascot starts its hop from exactly here
-window.handoff = () => { const s = state(CLEAN - 1); return { x: s.x, y: s.y, sx: s.sx, sy: s.sy, tilt: s.tilt, ex: s.ex, ey: s.ey, happy: s.happy, t: s.t }; };
+window.handoff = () => { const s = state(CLEAN - 1); return { x: s.x, y: s.y, sx: s.sx, sy: s.sy, tilt: s.tilt, ex: s.ex, ey: s.ey, t: s.t }; };
 window.N = N;
 </script>
 </body></html>

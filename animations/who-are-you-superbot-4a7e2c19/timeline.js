@@ -154,7 +154,10 @@ function renderClips(t, wrapped) {
     }
     const off = clamp(t - c.at, 0, CLIP_LEN - 0.001);
     if (FREEZE) {
-      if (Math.abs(c.vid.currentTime - off) > 0.02) c.vid.currentTime = off;
+      // aim at the middle of the clip frame: a seek onto an exact i/30 boundary is
+      // truncated to whole microseconds and lands on the previous frame every third step
+      const mid = Math.min((Math.floor(off * 30 + 1e-6) + 0.5) / 30, CLIP_LEN - 0.001);
+      if (Math.abs(c.vid.currentTime - mid) > 0.02) c.vid.currentTime = mid;
     } else if (!c.started) {
       c.started = true;
       playClip(c);
@@ -417,3 +420,21 @@ if (urlT !== null) {
 // the recorder contract
 window.__V7 = { CYCLE, SPEED };
 window.__V7.restart = () => { t0 = performance.now(); lastT = -1; };
+
+// the capture contract (waffles' build/render-ad.mjs): hold a frame, wait for
+// every visible clip's seek to land, pin the CSS loops to show time. A stepped
+// capture that screenshots straight after a ?t= seek grabs the previous decoded
+// frame, which froze both clips in the first 16x9 render.
+window.CYCLE = CYCLE; // the renderer's loop length, in seconds
+const CAPTURE_WAIT_MS = 5000;
+const whenClip = (vid, ev) => new Promise((res, rej) => {
+  const timer = setTimeout(() => rej(new Error(`${vid.id}: no ${ev} within ${CAPTURE_WAIT_MS}ms (readyState ${vid.readyState})`)), CAPTURE_WAIT_MS);
+  vid.addEventListener(ev, () => { clearTimeout(timer); res(); }, { once: true });
+});
+window.__frame = async (t) => {
+  await Promise.all(clips.filter(c => c.vid.readyState < 2).map(c => whenClip(c.vid, 'loadeddata')));
+  render(t);
+  for (const a of document.getAnimations()) { a.pause(); a.currentTime = t * 1000; }
+  await Promise.all(clips.filter(c => c.box.style.display === 'block' && c.vid.seeking).map(c => whenClip(c.vid, 'seeked')));
+  await new Promise(res => requestAnimationFrame(() => requestAnimationFrame(res)));
+};

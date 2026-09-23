@@ -64,6 +64,16 @@ const items = anims.map(([id, src, title, desc]) => ({
 // Second sweep — ad spots, site variants, hero FX and related pages.
 // [name, pagePath, title, group]
 const more = [
+  ['free-beta-flash-v01-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v01.html', 'FREE BETA SUPERBOT FLASH · v1 stamp slam', 'Ad spots'],
+  ['free-beta-flash-v02-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v02.html', 'FREE BETA SUPERBOT FLASH · v2 slot flip', 'Ad spots'],
+  ['free-beta-flash-v03-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v03.html', 'FREE BETA SUPERBOT FLASH · v3 glitch decode', 'Ad spots'],
+  ['free-beta-flash-v04-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v04.html', 'FREE BETA SUPERBOT FLASH · v4 strobe beats', 'Ad spots'],
+  ['free-beta-flash-v05-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v05.html', 'FREE BETA SUPERBOT FLASH · v5 outline fill + roll', 'Ad spots'],
+  ['free-beta-flash-v06-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v06.html', 'FREE BETA SUPERBOT FLASH · v6 depth tunnel', 'Ad spots'],
+  ['free-beta-flash-v07-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v07.html', 'FREE BETA SUPERBOT FLASH · v7 split-flap board', 'Ad spots'],
+  ['free-beta-flash-v08-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v08.html', 'FREE BETA SUPERBOT FLASH · v8 ticker brake', 'Ad spots'],
+  ['free-beta-flash-v09-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v09.html', 'FREE BETA SUPERBOT FLASH · v9 stickers + tape', 'Ad spots'],
+  ['free-beta-flash-v10-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v10.html', 'FREE BETA SUPERBOT FLASH · v10 terminal', 'Ad spots'],
     ['tabs-chaos-superbot-6f50ea56', 'tabs-chaos-superbot-6f50ea56/', 'KILL THE TABS', 'Ad spots'],
   ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
   ['waffles-delivery-superbot-87a583a1', 'waffles-delivery-superbot-87a583a1/', 'order me waffles pls', 'Ad spots'],

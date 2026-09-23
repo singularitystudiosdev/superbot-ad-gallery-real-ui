@@ -1,5 +1,85 @@
 [
   {
+    "id": "free-beta-flash-v01-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v1 stamp slam",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v01.html",
+    "thumb": "assets/shots/free-beta-flash-v01-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v02-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v2 slot flip",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v02.html",
+    "thumb": "assets/shots/free-beta-flash-v02-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v03-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v3 glitch decode",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v03.html",
+    "thumb": "assets/shots/free-beta-flash-v03-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v04-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v4 strobe beats",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v04.html",
+    "thumb": "assets/shots/free-beta-flash-v04-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v05-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v5 outline fill + roll",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v05.html",
+    "thumb": "assets/shots/free-beta-flash-v05-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v06-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v6 depth tunnel",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v06.html",
+    "thumb": "assets/shots/free-beta-flash-v06-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v07-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v7 split-flap board",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v07.html",
+    "thumb": "assets/shots/free-beta-flash-v07-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v08-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v8 ticker brake",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v08.html",
+    "thumb": "assets/shots/free-beta-flash-v08-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v09-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v9 stickers + tape",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v09.html",
+    "thumb": "assets/shots/free-beta-flash-v09-superbot-ea5050ae.png"
+  },
+  {
+    "id": "free-beta-flash-v10-superbot-ea5050ae",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FREE BETA SUPERBOT FLASH · v10 terminal",
+    "src": "animations/free-beta-flash-superbot-ea5050ae/v10.html",
+    "thumb": "assets/shots/free-beta-flash-v10-superbot-ea5050ae.png"
+  },
+  {
     "id": "tabs-chaos-superbot-6f50ea56",
     "type": "animation",
     "group": "Ad spots",

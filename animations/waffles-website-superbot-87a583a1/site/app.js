@@ -152,7 +152,12 @@
 
   var memoryState = null;
 
+  /* ?ad=1: the ad embeds this page and must never read or write the viewer's
+     real scores, so it runs on the in-memory store for that visit only. */
+  var AD_MODE = /(?:^|[?&])ad=1(?:&|$)/.test(window.location.search);
+
   function storage() {
+    if (AD_MODE) return null;
     try {
       var probe = '__waffleRankProbe';
       window.localStorage.setItem(probe, '1');
@@ -741,7 +746,7 @@
 
   /* ------------------------------------------------------------------ boot */
 
-  if (!persistent) {
+  if (!persistent && !AD_MODE) {
     toast('This browser is hiding local storage, so scores last for this visit only.');
   }
 

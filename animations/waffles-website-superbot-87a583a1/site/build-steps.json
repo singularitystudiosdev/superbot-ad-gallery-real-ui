@@ -6,7 +6,7 @@
   "generator": "make-build-steps.mjs",
   "totals": {
     "steps": 22,
-    "snippetChars": 14803
+    "snippetChars": 14742
   },
   "steps": [
     {
@@ -134,18 +134,18 @@
       "file": "app.js",
       "kind": "write",
       "title": "storage with an in-memory fallback",
-      "startLine": 155,
-      "endLine": 168,
-      "snippet": "  function storage() {\n    try {\n      var probe = '__waffleRankProbe';\n      window.localStorage.setItem(probe, '1');\n      window.localStorage.removeItem(probe);\n      return window.localStorage;\n    } catch (err) {\n      return null;\n    }\n  }\n\n  var store = storage();\n\n  function blankState() { return { v: VERSION, ratings: {}, uploads: [], sort: 'top' }; }",
-      "chars": 363
+      "startLine": 159,
+      "endLine": 172,
+      "snippet": "  function storage() {\n    if (AD_MODE) return null;\n    try {\n      var probe = '__waffleRankProbe';\n      window.localStorage.setItem(probe, '1');\n      window.localStorage.removeItem(probe);\n      return window.localStorage;\n    } catch (err) {\n      return null;\n    }\n  }\n\n  var store = storage();",
+      "chars": 302
     },
     {
       "step": 14,
       "file": "app.js",
       "kind": "write",
       "title": "rating maths: base votes plus yours",
-      "startLine": 224,
-      "endLine": 235,
+      "startLine": 229,
+      "endLine": 240,
       "snippet": "  function statsFor(photo) {\n    var mine = state.ratings[photo.id];\n    var count = photo.base.count + (mine ? 1 : 0);\n    var sum = photo.base.sum + (mine || 0);\n    var avg = count ? sum / count : 0;\n    return { count: count, sum: sum, avg: avg, mine: mine || 0 };\n  }\n\n  function totals() {\n    var list = photos();\n    var count = 0, sum = 0;\n    list.forEach(function (p) { var s = statsFor(p); count += s.count; sum += s.sum; });",
       "chars": 437
     },
@@ -154,8 +154,8 @@
       "file": "app.js",
       "kind": "write",
       "title": "sorting the board three ways",
-      "startLine": 239,
-      "endLine": 256,
+      "startLine": 244,
+      "endLine": 261,
       "snippet": "  function sorted() {\n    var list = photos();\n    var sort = state.sort;\n    list.sort(function (a, b) {\n      var sa = statsFor(a), sb = statsFor(b);\n      if (sort === 'rated') {\n        if (sb.count !== sa.count) return sb.count - sa.count;\n        if (sb.avg !== sa.avg) return sb.avg - sa.avg;\n      } else if (sort === 'new') {\n        if (a.addedAt !== b.addedAt) return a.addedAt < b.addedAt ? 1 : -1;\n      } else {\n        if (sb.avg !== sa.avg) return sb.avg - sa.avg;\n        if (sb.count !== sa.count) return sb.count - sa.count;\n      }\n      return a.name.localeCompare(b.name);\n    });\n    return list;\n  }",
       "chars": 623
     },
@@ -164,8 +164,8 @@
       "file": "app.js",
       "kind": "write",
       "title": "card markup with the score widget",
-      "startLine": 296,
-      "endLine": 315,
+      "startLine": 301,
+      "endLine": 320,
       "snippet": "  function cardHtml(photo, rank) {\n    var s = statsFor(photo);\n    var badge = photo.mine ? '<span class=\"badge is-mine\">YOURS</span>' : '<span class=\"badge\">#' + rank + '</span>';\n    var mineTag = s.mine ? '<span class=\"mine-tag\">your ' + s.mine + ' of 5</span>' : '';\n    return '' +\n      '<article class=\"card' + (photo.mine ? ' is-mine' : '') + '\" data-id=\"' + esc(photo.id) + '\">' +\n        '<div class=\"shot\">' +\n          '<img src=\"' + esc(photo.src) + '\" alt=\"' + esc(photo.name + ', waffle photo by ' + photo.author) + '\" loading=\"lazy\">' +\n          badge +\n          '<button class=\"open\" type=\"button\" data-open=\"' + esc(photo.id) + '\" aria-label=\"Open ' + esc(photo.name) + '\"></button>' +\n        '</div>' +\n        '<div class=\"card-body\">' +\n          '<h3>' + esc(photo.name) + '</h3>' +\n          '<p class=\"credit\">photo by ' + esc(photo.author) + (photo.license ? ', ' + esc(photo.license) : '') + '</p>' +\n          '<div class=\"score\">' + meter(s.avg) +\n            '<span class=\"avg\">' + avgText(s) + '</span>' +\n            '<span class=\"count\">' + countText(s.count) + '</span>' + mineTag +\n          '</div>' +\n          rateWidget(photo, s.mine, false) +\n        '</div>' +",
       "chars": 1204
     },
@@ -174,8 +174,8 @@
       "file": "app.js",
       "kind": "write",
       "title": "upload: downscale to 1200 pixels, then store",
-      "startLine": 445,
-      "endLine": 464,
+      "startLine": 450,
+      "endLine": 469,
       "snippet": "  function readPhoto(file) {\n    if (!file) return;\n    if (!/^image\\//.test(file.type)) { setPending(null, '', 'That file is not an image. Choose a JPG, PNG or WebP photo.'); return; }\n    var reader = new FileReader();\n    reader.onerror = function () { setPending(null, '', 'That photo could not be read. Try another one.'); };\n    reader.onload = function () {\n      var img = new Image();\n      img.onerror = function () { setPending(null, '', 'That photo could not be opened. Try another one.'); };\n      img.onload = function () {\n        var scale = Math.min(1, MAX_EDGE / Math.max(img.width, img.height));\n        var w = Math.max(1, Math.round(img.width * scale));\n        var h = Math.max(1, Math.round(img.height * scale));\n        var canvas = document.createElement('canvas');\n        canvas.width = w;\n        canvas.height = h;\n        canvas.getContext('2d').drawImage(img, 0, 0, w, h);\n        var dataUrl;\n        try { dataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY); }\n        catch (err) { setPending(null, '', 'That photo could not be prepared. Try another one.'); return; }\n        setPending(dataUrl, file.name);",
       "chars": 1144
     },
@@ -184,8 +184,8 @@
       "file": "app.js",
       "kind": "write",
       "title": "scoring a waffle and saving it",
-      "startLine": 550,
-      "endLine": 571,
+      "startLine": 555,
+      "endLine": 576,
       "snippet": "  function rate(id, score) {\n    var photo = find(id);\n    if (!photo) return false;\n    var was = state.ratings[id];\n    if (was === score) {\n      delete state.ratings[id];\n      toast('Score cleared from ' + photo.name + '.');\n    } else {\n      state.ratings[id] = score;\n      toast('Saved: ' + photo.name + ' gets ' + score + ' of 5.');\n    }\n    pulseTarget = { id: id, score: score };\n    if (!saveState()) {\n      if (was) state.ratings[id] = was; else delete state.ratings[id];\n      toast('Could not save that score in this browser.');\n      return false;\n    }\n    render();\n    refreshDetail(id);\n    applyPulse();\n    document.dispatchEvent(new CustomEvent('wafflerank:change', {\n      detail: { id: id, score: state.ratings[id] || 0, stats: statsFor(photo) }",
       "chars": 773
     },
@@ -194,8 +194,8 @@
       "file": "app.js",
       "kind": "write",
       "title": "the API another page can call",
-      "startLine": 750,
-      "endLine": 763,
+      "startLine": 755,
+      "endLine": 768,
       "snippet": "  window.WaffleRank = {\n    version: VERSION,\n    getState: function () { return JSON.parse(JSON.stringify(state)); },\n    photos: function () { return photos().map(function (p) {\n      var s = statsFor(p);\n      return { id: p.id, name: p.name, author: p.author, mine: !!p.mine,\n               ratings: s.count, average: Number(s.avg.toFixed(2)), yourScore: s.mine };\n    }); },\n    rate: rate,\n    open: openDetail,\n    reset: function () { state = blankState(); saveState(); render(); },\n    toast: toast\n  };\n})();",
       "chars": 518
     },

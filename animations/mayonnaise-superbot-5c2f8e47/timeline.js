@@ -24,7 +24,7 @@ const A_AT = 0, A_END = A_AT + CLIP_LEN;
 
 /* ---- scene 2: the ChatGPT take ---- */
 const GPT_AT = A_END;                              // the hard cut
-const TYPE_AT = GPT_AT + 0.4, TYPE_DUR = 1.25;     // "Is mayonnaise an instrument?"
+const TYPE_AT = GPT_AT + 0.4, TYPE_DUR = 0.8;      // "Is mayonnaise an instrument?" (faster, user ask)
 const PRESS_AT = TYPE_AT + TYPE_DUR + 0.45;
 const USER_MSG_AT = PRESS_AT + 0.1;
 const THINK_AT = USER_MSG_AT + 0.15, THINK_LEN = 0.8;
@@ -47,7 +47,7 @@ const B_END = B_AT + CLIP_LEN;
 
 /* ---- scene 4: the superbot take ---- */
 const SB_AT = B_END;                                   // the hard cut
-const SB_TYPE_AT = SB_AT + 0.4, SB_TYPE_DUR = 1.25;
+const SB_TYPE_AT = SB_AT + 0.4, SB_TYPE_DUR = 0.8; // faster, same as take 1
 const SB_PRESS = SB_TYPE_AT + SB_TYPE_DUR + 0.45;
 const SB_MSG_AT = SB_PRESS + 0.1;
 const SB_THINK_AT = SB_MSG_AT + 0.15, SB_THINK_LEN = 0.6;

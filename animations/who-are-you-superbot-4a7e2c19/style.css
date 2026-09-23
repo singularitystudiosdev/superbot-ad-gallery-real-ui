@@ -228,7 +228,7 @@ body {
 }
 .endcard-bot {
   position: absolute; left: 0; top: 0; z-index: 2;
-  width: calc(220px * var(--k, .667)); height: calc(220px * var(--k, .667));
+  width: calc(300px * var(--k, .667)); height: calc(300px * var(--k, .667));
   pointer-events: none; user-select: none;
   will-change: transform;
 }

@@ -24,7 +24,7 @@ const num = (k, d) => { const v = parseFloat(Q.get(k)); return Number.isFinite(v
 const SPEED = 1.15;          // the whole show plays ~15% faster (user ask)
 
 /* ---- scene 1: the typing + the send ---- */
-const TYPE_AT = 0.4, TYPE_DUR = 1.5;   // "whats ur favorite color"
+const TYPE_AT = 0.4, TYPE_DUR = 0.9;   // "whats ur favorite color" (faster, user ask)
 const PRESS_AT = 2.95;                 // enter is pressed (user ask: no cursor)
 const USER_MSG_AT = 3.05;              // the user bubble pops into the thread
 const THINK_AT = 3.2, THINK_LEN = 0.8; // the typing dots
@@ -62,7 +62,7 @@ const EMPH_DELAY = num('delay', 1.2);
 const EMPH_IN = 0.22, EMPH_HOLD = num('hold', 1.05), EMPH_OUT = 0.5, EMPH_MAX = num('emph', 7);
 
 /* ---- scene 4: the /superbot take ---- */
-const SB_TYPE_AT = FLY_AT + FLY_TOTAL + 0.35, SB_TYPE_DUR = 1.3;
+const SB_TYPE_AT = FLY_AT + FLY_TOTAL + 0.35, SB_TYPE_DUR = 0.85; // faster, same as take 1
 const SB_PRESS = SB_TYPE_AT + SB_TYPE_DUR + 0.45;
 const SB_MSG_AT = SB_PRESS + 0.1;
 const SB_THINK_AT = SB_MSG_AT + 0.15, SB_THINK_LEN = 0.6;
@@ -122,7 +122,10 @@ function renderChat(t) {
   const msgAi = document.getElementById('msgAi');
   const dots = document.getElementById('typingDots');
   const suggestions = document.getElementById('suggestions');
-  const live = t < SIMPLE_AT + 0.8;
+  // hidden the moment .simple is fully opaque (SIMPLE_AT + 0.4s ramp), not
+  // 0.8s later: that extra half-second used to leave the composer and the
+  // sent bubble showing THROUGH "Stop burning tokens." while it faded in
+  const live = t < SIMPLE_AT + 0.4;
   chat.style.display = live ? '' : 'none';
   if (!live) return;
 

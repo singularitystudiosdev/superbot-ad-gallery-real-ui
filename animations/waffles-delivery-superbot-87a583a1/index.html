@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>order me waffles? superbot can do it · ad spot</title>
+<link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
+<meta name="description" content="The user asks ChatGPT to order waffles and gets &quot;I can't do that!&quot;; the superbot popup opens the app, superbot orders Denny's through DoorDash, and a real doorstep handoff plays with the superbot mascot riding the courier's shoulder. 22.2s looping ad spot, 1920x1080."/>
+<!-- FOOTAGE SOURCE / LICENSE
+     The doorstep clip (../../assets/video/waffles-delivery-clip.mp4) is cut from the Pexels stock video
+     "Man Opens a Door and Receives Food Delivery" by MART PRODUCTION (Pexels, published 2021-04-29),
+     https://www.pexels.com/video/man-opens-a-door-and-receives-food-delivery-7706071/
+     (file: videos.pexels.com/video-files/7706071/7706071-uhd_4096_2160_25fps.mp4, retrieved 2026-09-23),
+     used under the Pexels License (https://www.pexels.com/license/): free to use and modify, commercial use
+     allowed, attribution not required. Edit: source 4.3-8.0s (the door opens) cut to 15.6-20.3s (the bag comes
+     out and is handed over), scaled to 1920x1080, no audio. The bag is the stock footage's plain paper bag: no
+     Denny's or DoorDash branding is composited on it. The superbot mascot is NOT in the footage: it is the real
+     animated mark (../../assets/sb-mark-live.{css,js}) rendered as a transparent PNG sequence in headless
+     Chromium (omitBackground) and overlaid with ffmpeg, hand-keyframed onto the courier's left shoulder.
+     Rebuild: build/build-clip.sh. -->
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<style>
+/* ---------- tokens: the site's own ladder (site.css :root) ---------- */
+:root {
+  --bg: #000000; --card: #0d0d0d; --raised: #181818; --line: #262626;
+  --fg: #ececec; --secondary: #cfcfcf; --muted: #9a9a9a; --ok: #34d399; --danger: #c96f6f;
+  --storm-0: #00e5c3; --storm-1: #2b6bff; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm: linear-gradient(135deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-x: linear-gradient(90deg, var(--storm-1) 0%, var(--storm-2) 45%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --storm-action: linear-gradient(135deg, var(--storm-1) 0%, var(--storm-2) 55%, var(--storm-3) 100%);
+  --ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  /* ChatGPT dark tokens (alpic-ai/skybridge chatgpt-shell.tsx + the live page, 2026-09-09) */
+  --gpt-main: #212121; --gpt-side: #171717; --gpt-composer: #303030; --gpt-bubble: #323232;
+  --gpt-text: #ececec; --gpt-text-2: #cdcdcd; --gpt-text-3: #afafaf; --gpt-border: rgba(255,255,255,.15); --gpt-util: #414141;
+  --gpt-font: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+/* ---------- the 1920x1080 stage, scaled to the viewport ---------- */
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* ---------- scene 1: the ChatGPT clone (designed at 1536x864, scaled 1.25) ---------- */
+#gpt { width: 1536px; height: 864px; transform: scale(1.25); transform-origin: 0 0; background: var(--gpt-main); font-family: var(--gpt-font); color: var(--gpt-text); display: grid; grid-template-columns: minmax(0, 1fr); }
+.g-main { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.g-thread { flex: 1; min-height: 0; overflow: hidden; position: relative; }
+.g-col { position: absolute; left: 50%; top: 0; width: 768px; margin-left: -384px; padding: 20px 20px 0; }
+.g-user { display: flex; justify-content: flex-end; margin: 12px 0 28px; }
+.g-user .bub { max-width: 70%; padding: 10px 20px; border-radius: 24px; background: var(--gpt-bubble); font-size: 16px; line-height: 28px; white-space: pre-wrap; }
+.g-link { display: inline-flex; align-items: center; gap: 6px; margin: 6px 4px 0 0; padding: 5px 12px 5px 7px; border-radius: 10px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.08); font-size: 13px; line-height: 16px; color: var(--gpt-text-2); }
+.g-link .yt { flex: none; width: 17px; height: 12px; border-radius: 3px; background: #ff0033; display: inline-grid; place-items: center; }
+.g-link .yt::after { content: ""; border-left: 5px solid #fff; border-top: 3.5px solid transparent; border-bottom: 3.5px solid transparent; margin-left: 1px; }
+.g-ai { position: relative; font-size: 16px; line-height: 28px; color: var(--gpt-text); white-space: pre-wrap; word-break: break-word; }
+.g-ai .cur { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--gpt-text); vertical-align: -1px; margin-left: 2px; }
+.g-ai .cur.blink { opacity: 1; }
+.g-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(to bottom, rgba(33,33,33,0), var(--gpt-main) 70%); pointer-events: none; }
+.g-bar { position: absolute; right: 6px; top: 8px; bottom: 8px; width: 6px; border-radius: 3px; }
+.g-bar i { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; border-radius: 3px; background: #4a4a4a; }
+.g-foot { flex: none; position: relative; padding: 10px 20px 14px; display: grid; justify-items: center; }
+.g-gen { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; color: var(--gpt-text-3); opacity: 0; }
+.g-gen i { width: 8px; height: 8px; border-radius: 50%; background: var(--gpt-text-3); }
+.g-gen b { font-weight: 500; color: var(--gpt-text-2); font-variant-numeric: tabular-nums; }
+.g-composer { width: 768px; min-height: 52px; border-radius: 28px; background: var(--gpt-composer); border: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; gap: 10px; padding: 0 8px 0 10px; }
+.g-composer .plus { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: var(--gpt-text); }
+.g-composer .plus svg, .g-composer .mic svg { width: 20px; height: 20px; }
+.g-composer .ph { flex: 1; font-size: 16px; color: var(--gpt-text-3); white-space: nowrap; overflow: hidden; }
+.g-composer .ph.typing { color: var(--gpt-text); }
+.g-composer .ph .caret { display: inline-block; width: 1px; height: 18px; background: var(--gpt-text); vertical-align: -4px; margin-left: 1px; }
+.g-composer .mic { width: 36px; height: 36px; display: grid; place-items: center; color: var(--gpt-text); }
+.g-composer .send { width: 36px; height: 36px; border-radius: 50%; background: #676767; color: #212121; display: grid; place-items: center; }
+.g-composer .send.ready { background: #fff; }
+.g-composer .send.stop { background: #fff; }
+.g-composer .send svg { width: 18px; height: 18px; }
+.g-disc { margin-top: 10px; font-size: 12px; color: var(--gpt-text-3); }
+.g-thinking { display: inline-flex; align-items: center; gap: 8px; color: var(--gpt-text-2); font-size: 15px; }
+.g-thinking i { width: 10px; height: 10px; border-radius: 50%; background: var(--gpt-text); }
+
+/* ---------- the rescue popup, bottom-right: black card, storm stroke, white chat bubble ---------- */
+#popup { position: absolute; right: 44px; bottom: 44px; width: max-content; padding: 20px; border-radius: 24px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box; box-shadow: 0 0 32px rgba(43,107,255,.32), 0 0 64px rgba(192,38,211,.22), 0 30px 70px rgba(0,0,0,.5); opacity: 0; transform-origin: 50% 100%; isolation: isolate; z-index: 20; } /* 1:1 superbot-tool-calls 'superbot can do it! · soft glow': hug width, storm stroke, the same ring blurred behind it */
+#popup .p-head { display: flex; align-items: center; gap: 12px; white-space: nowrap; font-size: 29px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+#popup .p-head img { width: 34px; height: 34px; }
+#popup .p-head .gg { color: var(--muted); font-weight: 600; }
+#chatbtn { position: relative; margin: 16px 0 0; display: block; width: 100%; padding: 12px 20px; border-radius: 16px; background: #fff; color: #000; font-size: 22px; font-weight: 700; text-align: center; transform-origin: 50% 50%; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+
+/* ---------- the cursor ---------- */
+#cursor { position: absolute; left: 0; top: 0; width: 34px; height: 44px; z-index: 40; opacity: 0; transform-origin: 3px 2px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.5)); } /* the press scales about the arrow tip, so the tip never leaves the target */
+
+/* ---------- scene 2: the app window, 1:1 the site's held stage (site/index.html #stage, hub docked beside the phone) ---------- */
+#site { background: #000; }
+/* the stage is designed at 1200x675 (the site's own pitch) and shown at 1.6x so it fills 1920x1080 exactly */
+#site-in { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform: scale(1.6); transform-origin: 0 0; }
+.win { position: absolute; inset: 0; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-rows: 28px minmax(0, 1fr); }
+.win-bar { display: flex; align-items: center; gap: 6px; padding: 0 12px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.win-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.win-bar span { margin-left: 8px; }
+.win-bar .led { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.win-bar .led.on { background: var(--storm-1); box-shadow: 0 0 8px var(--storm-1); }
+.win-body { position: relative; overflow: hidden; }
+
+/* the hub: the app's own layout (rail 64 / sidebar 200 / chat lane), from site/index.html + hub-boot-3.css */
+.hub { position: absolute; inset: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 64px 200px minmax(0, 1fr); font: 11px/15px var(--ui); color: var(--fg); transform-origin: 50% 50%; }
+.hub > * { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.rail { background: var(--bg); border-right: 1px solid var(--line); align-items: center; padding: 8px 0; gap: 4px; }
+.rail-item { position: relative; flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--raised); display: grid; place-items: center; color: var(--fg); }
+.rail-item svg { width: 26px; height: 26px; fill: currentColor; }
+.rail-item .dot { position: absolute; right: -2px; bottom: -2px; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--bg); }
+.rail-item.sb { border-radius: 0; background: transparent; }
+.rail-item.sb img { width: 100%; height: 100%; display: block; }
+.rail-item.sel::before { content: ""; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); width: 3px; height: 26px; border-radius: 0 999px 999px 0; background: var(--fg); }
+.rail-item[data-app="openai"] { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="claude"] { background: #d97757; color: #fff; }
+.rail-item[data-app="gemini"] { background: #fff; color: #1f1f1f; }
+.rail-item[data-app="cursor"] { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item[data-app="copilot"] { background: #24292f; color: #fff; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed { background: #000; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .14); }
+.rail-item.bleed img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
+.rail-item.folder { display: grid; grid-template-columns: 10px 10px; grid-template-rows: 10px 10px; gap: 3px; place-content: center; }
+.rail-item.folder svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2.4; }
+.rail-item.add { font: 16px/44px var(--mono); color: var(--muted); }
+.rail-div { flex: none; width: 22px; height: 1px; background: var(--line); }
+.chats { background: var(--card); border-right: 1px solid var(--line); }
+.side-head { flex: none; display: flex; align-items: center; gap: 5px; min-height: 40px; padding: 9px 12px; font-weight: 700; font-size: 12px; }
+.side-head img { width: 14px; height: 14px; }
+.side-head .ic { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); }
+.side-head .ic + .ic { margin-left: 0; background: none; border: 0; }
+.side-head .ic svg { width: 9px; height: 9px; fill: none; stroke: currentColor; stroke-width: 2; }
+.row { display: flex; align-items: center; gap: 6px; min-height: 26px; margin: 0 6px; padding: 0 8px; border-radius: 8px; color: var(--muted); white-space: nowrap; overflow: hidden; }
+.row svg { flex: none; width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.row em { margin-left: auto; font-style: normal; font-size: 10px; }
+.row .cnt { margin-left: auto; min-width: 13px; padding: 0 3px; border-radius: 999px; background: var(--danger); color: #fff; font: 700 8px/13px var(--mono); text-align: center; }
+.row.on { background: var(--raised); color: var(--fg); box-shadow: inset 3px 0 0 var(--storm-1); }
+.row.new { color: var(--fg); }
+.cap-row { display: flex; justify-content: space-between; padding: 4px 12px 2px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.today { padding: 2px 14px; color: var(--muted); font-size: 10px; }
+.user { margin-top: auto; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-top: 1px solid var(--line); }
+.user .av { position: relative; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); font: 700 10px/24px var(--ui); text-align: center; }
+.user .av i { position: absolute; right: -1px; bottom: -1px; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 2px var(--card); }
+.user b { display: block; font-size: 11px; }
+.user small { display: block; color: var(--muted); font-size: 10px; }
+.main { position: relative; background: var(--card); }
+.chat-head { flex: none; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 12px; }
+.chat-head .search { margin-left: auto; display: flex; align-items: center; gap: 6px; padding: 0 8px; border-radius: 8px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); font-weight: 400; font-size: 10px; line-height: 20px; }
+.chat-head .search kbd { font: 9px/12px var(--mono); }
+.chat-head .ask { display: flex; align-items: center; gap: 4px; padding: 0 9px; border-radius: 8px; background: var(--storm-action); color: #fff; font-weight: 650; font-size: 10px; line-height: 20px; }
+.chat-head .ask img { width: 12px; height: 12px; }
+.chat-head .pt { width: 20px; height: 20px; border-radius: 8px; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); }
+.chat-head .pt svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; }
+.feed { flex: 1; min-height: 0; padding: 10px 12px; display: grid; align-content: start; gap: 9px; overflow: hidden; }
+.welcome { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.welcome .w-ic { width: 24px; height: 24px; border-radius: 50%; background: var(--raised); border: 1px solid var(--line); display: grid; place-items: center; }
+.welcome .w-ic img { width: 14px; height: 14px; }
+.welcome b { display: block; }
+.welcome small { display: block; color: var(--muted); font-size: 10px; }
+.date-div { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 9px; }
+.date-div::before, .date-div::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.msg { display: flex; gap: 8px; }
+.avatar { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--raised); color: var(--fg); font: 700 10px/24px var(--ui); text-align: center; }
+.avatar.sb { background: #000; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; }
+.avatar.sb img { width: 62%; height: 62%; display: block; }
+.m-main { min-width: 0; flex: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 5px; } /* minmax(0,…): a wide code line never widens the lane */
+.m-head { display: flex; gap: 6px; align-items: baseline; }
+.m-name { font-weight: 700; }
+.m-when { font-size: 9px; color: var(--muted); }
+.app { padding: 0 4px; border-radius: 3px; background: var(--storm-1); color: #fff; font: 700 8px/12px var(--ui); letter-spacing: .04em; }
+.m-text { font-size: 11px; line-height: 15px; white-space: pre-wrap; }
+/* no overflow clip on the card: its header is sticky against the FEED (ChatGPT's own code-block behaviour), so Copy stays in reach while the feed scrolls */
+.code { position: relative; width: 100%; max-width: 100%; background: #000; border: 1px solid var(--line); border-radius: 8px; }
+.code .c-bar { position: sticky; top: -10px; z-index: 1; display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-bottom: 1px solid var(--line); border-radius: 8px 8px 0 0; background: #000; color: var(--muted); font-size: 9px; }
+.code .c-bar .lang { margin-left: 6px; padding: 0 5px; border-radius: 4px; background: var(--raised); color: var(--secondary); }
+.code .copy { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; padding: 0 7px; border-radius: 6px; background: var(--raised); border: 1px solid var(--line); color: var(--fg); font-size: 9px; line-height: 16px; font-weight: 600; transform-origin: 50% 50%; }
+.code .copy svg { width: 9px; height: 9px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.code .copy.done { background: rgba(52,211,153,.14); border-color: rgba(52,211,153,.5); color: var(--ok); }
+.code pre { margin: 0; padding: 7px 10px; font: 10.5px/15px var(--mono); color: var(--fg); white-space: pre; overflow: hidden; }
+.code pre .l { display: none; opacity: 0; } /* each line takes its place as it lands (render(): display, then a fade and a 4px rise) */
+.code pre .k { color: #c084fc; } .code pre .s { color: #6ee7b7; } .code pre .c { color: var(--muted); } .code pre .f { color: #7dd3fc; }
+/* the youtube download card: the code card's shell, a clean file link for a deliverable */
+.dl-row { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+.dl-thumb { flex: none; width: 46px; height: 27px; border-radius: 5px; background: #ff0033; display: grid; place-items: center; }
+.dl-thumb::after { content: ""; border-left: 9px solid #fff; border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 2px; }
+.dl-meta { min-width: 0; flex: 1; }
+.dl-meta b { display: block; font: 700 10px/13px var(--ui); color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dl-meta small { display: block; font: 9px/12px var(--mono); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dl-btn { margin: 8px 10px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 10px; border-radius: 8px; background: #fff; color: #000; font: 700 10px/12px var(--ui); position: relative; overflow: hidden; transform-origin: 50% 50%; }
+.dl-btn.done { background: rgba(52,211,153,.14); color: var(--ok); box-shadow: inset 0 0 0 1px rgba(52,211,153,.5); }
+.dl-btn svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+/* the docked phone mockup was removed (user ask): not a real product surface */
+.composer { flex: none; margin: 6px 12px 10px; }
+.composer .pill { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 4px 0 9px; border-radius: 16px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); }
+.composer .plus { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font: 650 11px/16px var(--mono); color: var(--fg); }
+.composer .ph { flex: 1; }
+.composer .picker { padding: 0 6px; border-radius: 8px; background: var(--card); color: var(--fg); font-size: 10px; line-height: 18px; }
+.composer .send { width: 24px; height: 24px; border-radius: 50%; background: var(--storm-action); display: grid; place-items: center; color: #fff; }
+.composer .send svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- scene 3: the doorstep clip (stock footage + the composited mascot) ---------- */
+#clip { background: #000; }
+#clip video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 48% 50%; display: block; }
+/* the order card's thumbnail: a waffle, drawn (golden square, a pressed grid) */
+.dl-thumb.waffle { background-color: #e9a53a; background-image: linear-gradient(90deg, rgba(122,62,0,.5) 2px, transparent 2px), linear-gradient(0deg, rgba(122,62,0,.5) 2px, transparent 2px); background-size: 7px 7px; background-position: 2px 2px; box-shadow: inset 0 0 0 2px #c07a1c; }
+.dl-thumb.waffle::after { content: none; }
+
+/* ---------- scene 4: the end card ---------- */
+#end { display: grid; place-items: center; background: #000; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end .face-live { width: 220px; height: 220px; display: grid; place-items: center; }
+#end .words { overflow: hidden; }
+#end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+
+/* reduced motion: the composed end card only, no clock */
+@media (prefers-reduced-motion: reduce) {
+  .scene { opacity: 0 !important; visibility: hidden !important; }
+  #end { opacity: 1 !important; visibility: visible !important; }
+  #end .lock > * { transform: none !important; opacity: 1 !important; }
+}
+
+/* ---------- aspect ratios (assets/ar.css): the scenes reflow to the frame ---------- */
+html { --site-k: 1.6; } /* the app window is drawn at 1200x675 and shown at 1.6 (assets/ar.css reflows it per ratio) */
+</style>
+<link rel="stylesheet" href="../../assets/hub-real.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- the brand face: mark-clean.svg's mask geometry (site/site/assets/brand) -->
+    <mask id="face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+      <g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g>
+      <g fill="#000"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g>
+    </mask>
+    <!-- the OpenAI mark, from the site's icon registry (site/index.html #sb-ic-openai) -->
+    <symbol id="ic-openai" viewBox="0 0 2406 2406"><path id="oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#oai-petal" transform="rotate(60 1203 1203)"/><use href="#oai-petal" transform="rotate(120 1203 1203)"/><use href="#oai-petal" transform="rotate(180 1203 1203)"/><use href="#oai-petal" transform="rotate(240 1203 1203)"/><use href="#oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+    <symbol id="ic-claude" viewBox="0 0 24 24"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+    <symbol id="ic-gemini" viewBox="0 0 24 24"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+    <symbol id="ic-cursor" viewBox="0 0 24 24"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+    <symbol id="ic-copilot" viewBox="0 0 24 24"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage">
+
+  <!-- ============ scene 1: ChatGPT ============ -->
+  <section class="scene" id="gpt" aria-label="ChatGPT refuses">
+    <div class="g-main">
+      <div class="g-thread">
+        <div class="g-col" id="g-col">
+          <div class="g-user" id="g-user"><div class="bub" id="g-bub">Order me waffles</div></div>
+          <div class="g-ai" id="g-ai"><span class="g-thinking" id="g-think"><i></i>Thinking</span><span id="g-text"></span><span class="cur" id="g-cur"></span></div>
+        </div>
+        <div class="g-fade"></div>
+        <div class="g-bar"><i id="g-thumb"></i></div>
+      </div>
+      <div class="g-foot">
+        <div class="g-gen" id="g-gen"><i></i>Generating… <b id="g-tok">0</b> tokens</div>
+        <div class="g-composer" id="g-comp">
+          <span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span class="ph" id="g-ph">Ask anything</span>
+          <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg></span>
+          <span class="send" id="g-send"><svg id="g-send-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg><svg id="g-send-stop" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></span>
+        </div>
+        <div class="g-disc">ChatGPT can make mistakes. Check important info.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- the rescue popup: black frame, storm stroke, white chat bubble -->
+  <div id="popup" aria-hidden="true">
+    <div class="p-head"><img src="assets/mark-clean.svg" alt=""/>superbot can do it!</div>
+    <div id="chatbtn">chat</div>
+  </div>
+
+  <!-- ============ scene 2: superbot.gg loads, then the hub ============ -->
+  <section class="scene" id="site" aria-label="superbot writes it">
+    <div id="site-in">
+      <div class="win" id="win">
+        <div class="win-bar"><i></i><i></i><i></i><span>superbot</span><em class="led on"></em></div>
+        <div class="win-body">
+          <div class="hub" id="hub">
+            <nav class="rail">
+              <span class="rail-item sb sel"><img src="assets/tile.svg" alt=""/></span>
+              <span class="rail-div"></span>
+              <span class="rail-item" data-app="openai"><svg><use href="#ic-openai"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="claude"><svg><use href="#ic-claude"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="gemini"><svg><use href="#ic-gemini"/></svg><i class="dot"></i></span>
+              <span class="rail-item" data-app="cursor"><svg><use href="#ic-cursor"/></svg><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/devin.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/hermes.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item bleed"><img src="assets/grok.png" alt=""/><i class="dot"></i></span>
+              <span class="rail-item" data-app="copilot"><svg><use href="#ic-copilot"/></svg><i class="dot"></i></span>
+              <span class="rail-div"></span>
+              <span class="rail-item folder"><svg viewBox="0 0 24 24"><path d="M12 22v5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg><svg viewBox="0 0 24 24"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/></svg><svg viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg><svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg><i class="dot"></i></span>
+              <span class="rail-item add">+</span>
+            </nav>
+            <div class="chats">
+              <div class="side-head"><img src="assets/mark-clean.svg" alt=""/>superbot.gg<i class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg></i><i class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></i></div>
+              <div class="rh-seg" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Chat</span><span><svg viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>Code</span></div><div class="rh-new" aria-hidden="true"><svg class="rh-cat" viewBox="0 0 100 100" aria-hidden="true"><g fill="currentColor" stroke="none"><path d="M29 32H71A15 15 0 0 1 86 47V71A15 15 0 0 1 71 86H29A15 15 0 0 1 14 71V47A15 15 0 0 1 29 32Z"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#e5e5ea" stroke="none"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></svg>New chat</div>
+              <div class="cap-row"><span>Earlier</span><span class="rh-pm"><span>−</span><span>+</span></span></div>
+              <span class="row chat on"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>order me waffles<em>now</em></span>
+              <span class="row chat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>which rate limiter…<em>12m</em></span>
+              <span class="row chat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>rank the import pa…<em>3h</em></span>
+              <span class="row chat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>trello card test<em>1d</em></span>
+              <span class="row chat"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>dedupe the always…<em>3d</em></span>
+              <div class="user"><span class="av">D<i></i></span><span><b>hi@superbot.gg</b><small>no balance yet</small></span></div>
+            </div>
+            <div class="main">
+              <div class="chat-head"><b>order me waffles</b><span class="search">Search<kbd>⌘K</kbd></span><span class="ask"><img src="assets/mark-clean.svg" alt=""/>Ask Superbot</span><span class="pt"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18"/></svg></span></div>
+              <div class="feed">
+                <div class="welcome"><span class="w-ic"><img src="assets/mark-clean.svg" alt=""/></span><span><b>Welcome to #chat</b><small>This is the start of your conversation with Superbot.</small></span></div>
+                <div class="date-div">September 23, 2026</div>
+                <div class="msg" id="h-user"><span class="avatar">D</span><div class="m-main"><div class="m-head"><span class="m-name">dev</span><span class="m-when">11:15 AM</span></div><div class="m-text">Order me waffles</div></div></div>
+                <div class="msg" id="h-bot"><span class="avatar sb"><img src="assets/mark-clean.svg" alt=""/></span><div class="m-main"><div class="m-head"><span class="m-name">superbot</span><span class="app">APP</span><span class="m-when">11:15 AM</span></div><div class="m-text" id="h-text"></div>
+                  <div class="code" id="h-code"><div class="c-bar"><span>DoorDash order</span><span class="lang">Denny's</span></div>
+                    <div class="dl-row"><span class="dl-thumb waffle"></span><span class="dl-meta"><b>Classic Waffle Breakfast</b><small>Denny's via DoorDash · to your door</small></span><span class="lang" id="h-eta">1 item</span></div>
+                    <div class="dl-btn" id="h-dlbtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="h-dl-t">Placing order</span></div>
+                  </div>
+                </div></div>
+              </div>
+              <div class="composer"><div class="pill"><div class="rc"><div class="rc-ph">How can superbot help you today?</div><div class="rc-row"><span class="rc-plus"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></span><span class="rc-seg"><span><svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></svg></span></span><span class="rc-super">SUPER</span><span class="rc-plat"><svg class="rc-cat" viewBox="0 0 100 100" aria-hidden="true"><g fill="#fff" stroke="none"><path d="M29 32H71A15 15 0 0 1 86 47V71A15 15 0 0 1 71 86H29A15 15 0 0 1 14 71V47A15 15 0 0 1 29 32Z"/><path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#1a1a1c" stroke="none"><ellipse cx="35" cy="58" rx="8" ry="11"/><ellipse cx="65" cy="58" rx="8" ry="11"/></g></svg>superbot<svg class="rc-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span><span class="rc-computer"><svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span class="rc-mic"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg></span><span class="rc-send"><svg viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></span></div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ scene 3: the doorstep clip ============ -->
+  <section class="scene" id="clip" aria-label="the waffles arrive: a courier hands over the bag at the door, the superbot mascot on her shoulder">
+    <video id="clip-vid" src="../../assets/video/waffles-delivery-clip.mp4" poster="assets/clip-poster.jpg" muted playsinline preload="auto"></video>
+  </section>
+
+  <!-- ============ scene 4: the end card ============ -->
+  <section class="scene" id="end" aria-label="superbot.gg">
+    <div class="lock">
+      <div class="face-live" id="end-face"></div>
+      <div class="words" id="end-words"><div id="end-slide"><h1>superbot.gg</h1><p>the agent to manage your agents.</p></div></div>
+    </div>
+  </section>
+
+  <!-- the cursor -->
+  <svg id="cursor" viewBox="0 0 34 44" aria-hidden="true"><path d="M3 2 L3 34 L11 26 L17 41 L23 38 L17 24 L28 24 Z" fill="#000" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+  <div id="dip"></div>
+</div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script>
+// ---------- the clock: one render(t), a pure function of story time ----------
+// Every visual is recomputed from t each frame (Remotion's rule: a frame is a
+// function of its number), so seeking (`?t=9.4`) or capturing any frame yields
+// the same picture. The skeleton is the site's own hub-boot.js: seg() windows,
+// pure tweens, no timers. Frame-indexed at 30fps so preview and capture agree.
+const FPS = 30, LOOP = 22.2;
+window.CYCLE = LOOP; // one download = one loop
+const $ = (id) => document.getElementById(id);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+const outQuint = (p) => 1 - Math.pow(1 - p, 5);
+const outCubic = (p) => 1 - Math.pow(1 - p, 3);
+const outBack = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the beat sheet (story seconds) ----------
+const B = {
+  typeA: 0.6, typeB: 1.5, send: 1.6,             // "Order me waffles" types; Enter 0.1s after the last char, the input clears
+  think: 1.8, reply: 2.45,                       // "Thinking", then the refusal
+  popup: 3.35,                                   // the rescue popup rises once the refusal has landed
+  curIn: 3.25, curAt: 4.25, press: 4.45, release: 4.65, // the click lands 1.1s after the popup appears (scale .95)
+  dip: 4.9, site: 5.15,                          // dip to black, the app window is simply there
+  ask: 5.7, reply2: 6.25, order: 7.95, placed: 8.9, // the ask, superbot's line, the DoorDash card, then placed
+  clipDip: 9.9, clip: 10.15,                     // dip, then the real doorstep clip (8.4s, the mascot rides along)
+  end: 18.55, word: 19.25,                       // the end card with the live mark, then the words slide out
+};
+const CLIP_LEN = 8.4;
+
+// ---------- copy ----------
+const PROMPT = 'Order me waffles';
+const REFUSAL = "I can't do that!";
+const CHARS_PER_S = 48;                          // the refusal streams in about a third of a second
+const REFUSAL_END = B.reply + REFUSAL.length / CHARS_PER_S;
+// superbot's line in the app, typed into the hub feed
+const REPLY2 = "On it! I ordered you a Classic Waffle Breakfast from Denny's through DoorDash. Your waffles are on their way.";
+
+
+// ---------- element refs ----------
+const stage = $('stage'), dip = $('dip'), cursor = $('cursor');
+const gpt = $('gpt'), gPh = $('g-ph'), gSend = $('g-send'), gSendUp = $('g-send-up'), gSendStop = $('g-send-stop');
+const gUser = $('g-user'), gAi = $('g-ai'), gThink = $('g-think'), gText = $('g-text'), gCur = $('g-cur'), gCol = $('g-col');
+const gBub = $('g-bub');
+const gThread = gCol.parentElement;
+const popup = $('popup'), chatbtn = $('chatbtn');
+const site = $('site'), hub = $('hub'), feedEl = hub.querySelector('.feed');
+const hUser = $('h-user'), hBot = $('h-bot'), hText = $('h-text'), hCode = $('h-code'), hDlbtn = $('h-dlbtn'), hDlT = $('h-dl-t');
+const clipSc = $('clip'), clipVid = $('clip-vid'), hEta = $('h-eta');
+let FREEZE = false; // a held frame (?t=) or a capture: the clip is seeked, never played
+const end = $('end'), endFace = $('end-face'), endSlide = $('end-slide');
+
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+// ---------- style helpers (transform/opacity only) ----------
+const op = (el, v) => { el.style.opacity = String(clamp01(v)); };
+const tf = (el, x, y, s = 1) => { el.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) scale(${s.toFixed(4)})`; };
+const scene = (el, on) => { el.classList.toggle('on', on); op(el, on ? 1 : 0); };
+
+// popup geometry in stage px (the popup is anchored bottom-right; the button's centre is read once)
+let BTN = { x: AR.w - 44 - 210, y: 1080 - 44 - 60 };
+function measure() {
+  const sr = stage.getBoundingClientRect(), k = sr.width / AR.w;
+  const b = chatbtn.getBoundingClientRect();
+  BTN = { x: (b.left + b.width / 2 - sr.left) / k, y: (b.top + b.height / 2 - sr.top) / k };
+}
+
+// ---------- render ----------
+// a dip to black: up over [a, b], down over [b, c]
+const bump = (t, a, b, c) => t < a || t > c ? 0 : t < b ? seg(t, a, b) : 1 - seg(t, b, c);
+function render(t) {
+  // ----- scene routing -----
+  const inGpt = t < B.site, inSite = t >= B.site && t < B.clip, inClip = t >= B.clip && t < B.end, inEnd = t >= B.end;
+  scene(gpt, inGpt); scene(site, inSite); scene(clipSc, inClip); scene(end, inEnd);
+  // the dips to black: ChatGPT -> the app, the app -> the doorstep, the doorstep -> the end card
+  op(dip, Math.max(bump(t, B.dip, B.site, B.site + 0.35), bump(t, B.clipDip, B.clip, B.clip + 0.3), bump(t, B.end - 0.3, B.end, B.end + 0.35)));
+
+  if (inGpt) renderGpt(t); else op(popup, 0);
+  if (inSite) renderSite(t);
+  renderClip(t, inClip);
+  if (inEnd) renderEnd(t);
+  renderCursor(t);
+}
+
+function renderGpt(t) {
+  // the prompt types into the composer; Enter goes 0.1s after the last character and the input clears
+  const typed = Math.floor(seg(t, B.typeA, B.typeB) * PROMPT.length);
+  if (t < B.send) {
+    gPh.className = 'ph' + (typed ? ' typing' : '');
+    gPh.innerHTML = typed ? esc(PROMPT.slice(0, typed)) + '<span class="caret"></span>' : 'Ask anything';
+    gSend.className = 'send' + (typed ? ' ready' : '');
+  } else {
+    gPh.className = 'ph'; gPh.textContent = 'Ask anything';
+    gSend.className = 'send' + (t < REFUSAL_END + 0.1 ? ' stop' : '');
+  }
+  const busy = t >= B.send && t < REFUSAL_END + 0.1;
+  gSendUp.style.display = busy ? 'none' : '';
+  gSendStop.style.display = busy ? '' : 'none';
+  const pu = seg(t, B.send, B.send + 0.3);
+  op(gUser, pu); gUser.style.transform = `translateY(${((1 - outCubic(pu)) * 10).toFixed(1)}px)`;
+  // thinking, then the refusal streams in
+  const thinking = t >= B.think && t < B.reply;
+  gThink.style.display = thinking ? '' : 'none';
+  gThink.style.opacity = thinking ? String(0.55 + 0.45 * Math.abs(Math.sin((t - B.think) * 6))) : '0';
+  const n = t < B.reply ? 0 : Math.min(REFUSAL.length, Math.floor((t - B.reply) * CHARS_PER_S));
+  gText.textContent = REFUSAL.slice(0, n);
+  gCur.style.display = t >= B.reply && n < REFUSAL.length ? '' : 'none';
+  op(gAi, t >= B.think ? 1 : 0);
+  // a two-line thread: no scroll, no scrollbar, no token counter
+  gCol.style.transform = '';
+  op($('g-thumb').parentElement, 0);
+  op($('g-gen'), 0);
+  // the composer steps back a little while the popup is up
+  op($('g-comp'), 1 - 0.35 * seg(t, B.popup, B.popup + 0.6));
+  // the popup, 1:1 the tool-calls page's 'superbot can do it! · soft glow' (entrance 'rise'): rises 40px in over 0.4s,
+  // holds for the chat press, then falls back out over 0.3s before the dip
+  const pp = seg(t, B.popup, B.popup + 0.4), po = seg(t, B.release + 0.05, B.release + 0.35);
+  op(popup, po > 0 ? 1 - po : pp);
+  const press = t >= B.press && t < B.release ? 1 : t >= B.release ? 1 - seg(t, B.release, B.release + 0.18) : 0;
+  popup.style.transform = `translateY(${(po > 0 ? po * po * 40 : (1 - outQuint(pp)) * 40).toFixed(1)}px)`;
+  chatbtn.style.transform = `scale(${(1 - 0.05 * press).toFixed(3)})`; // the 5% press
+  if (pp >= 1 && t < B.press) measure();
+}
+
+function renderSite(t) {
+  // the click opens the app window directly (owner, 2026-09-09): no boot, no zoom
+  op(hub, 1); hub.style.transform = '';
+  // the ask, then superbot's line, then the DoorDash order card
+  const au = seg(t, B.ask, B.ask + 0.25); op(hUser, au); hUser.style.transform = `translateY(${((1 - outCubic(au)) * 6).toFixed(1)}px)`;
+  const bo = seg(t, B.reply2, B.reply2 + 0.25); op(hBot, bo); hBot.style.transform = `translateY(${((1 - outCubic(bo)) * 6).toFixed(1)}px)`;
+  const chars = t < B.reply2 ? 0 : Math.min(REPLY2.length, Math.floor((t - B.reply2) * 70));
+  hText.textContent = REPLY2.slice(0, chars);
+  const ci = seg(t, B.order, B.order + 0.3); op(hCode, ci);
+  hCode.style.transform = `translateY(${((1 - outCubic(ci)) * 8).toFixed(2)}px)`;
+  // the feed keeps the newest line in view, like the real app
+  feedEl.scrollTop = feedEl.scrollHeight;
+  // placing, then placed: the status pops once and turns green
+  const done = t >= B.placed;
+  const pop = seg(t, B.placed, B.placed + 0.3);
+  hDlbtn.style.transform = `scale(${(1 + 0.06 * Math.sin(Math.PI * pop)).toFixed(3)})`;
+  hDlbtn.className = 'dl-btn' + (done ? ' done' : '');
+  hDlT.textContent = done ? 'Order placed ✓ Your Dasher is on the way' : 'Placing order' + '.'.repeat(1 + (Math.floor(t * 4) % 3));
+  hEta.textContent = done ? 'ETA 24 min' : '1 item';
+}
+
+// the doorstep clip: plays in step with the clock; a held frame or a capture seeks it
+function renderClip(t, on) {
+  if (!on) { if (!clipVid.paused) clipVid.pause(); return; }
+  const off = Math.max(0, Math.min(CLIP_LEN - 0.001, t - B.clip));
+  if (FREEZE) {
+    if (!clipVid.paused) clipVid.pause();
+    if (Math.abs(clipVid.currentTime - off) > 0.01) clipVid.currentTime = off;
+  } else if (clipVid.paused) {
+    clipVid.currentTime = off; clipVid.play().catch(() => {});
+  } else if (Math.abs(clipVid.currentTime - off) > 0.2 && clipVid.readyState >= 2) {
+    clipVid.currentTime = off; // resync if the decoder drifted
+  }
+}
+
+function renderEnd(t) {
+  const f = seg(t, B.end, B.end + 0.5), w = seg(t, B.word, B.word + 0.7);
+  op(endFace, f); endFace.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(3)})`;
+  endSlide.style.transform = `translateX(${((1 - outQuint(w)) * -110).toFixed(1)}%)`;
+  op(endSlide, w);
+}
+
+function renderCursor(t) {
+  // scene 1: from the bottom-right corner to the chat bubble, then the press
+  let x, y, vis = 0, sc = 1;
+  if (t >= B.curIn && t < B.dip) {
+    const p = outQuint(seg(t, B.curIn, B.curAt));
+    x = lerp(1960, BTN.x - 3, p); y = lerp(1120, BTN.y - 2, p); vis = 1;
+    if (t >= B.press && t < B.release) sc = 0.9;
+  }
+  op(cursor, vis);
+  if (vis) cursor.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${sc})`;
+}
+
+// ---------- fit the stage to the viewport ----------
+function fit() {
+  const k = Math.min(innerWidth / AR.w, innerHeight / AR.h);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+  stage.style.left = '50%'; stage.style.top = '50%';
+}
+addEventListener('resize', fit); fit();
+
+// ---------- the clock ----------
+// `?t=<s>` seeks and holds (frame capture); `?t=<s>&play=1` seeks and runs on;
+// otherwise it plays and loops. Time is quantised to whole frames so a preview
+// and a capture at the same t draw the same picture.
+const q = new URLSearchParams(location.search);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const seekTo = q.has('t') ? parseFloat(q.get('t')) : null;
+// the end card's mark: the real superbot.gg animated mascot (assets/sb-mark-live), eyes following the pointer
+const endMark = sbMarkLive(endFace, { size: 220 });
+let t0 = performance.now() - (seekTo || 0) * 1000, last = -1;
+function frame(now) {
+  const t = ((now - t0) / 1000) % LOOP;
+  const f = Math.floor(t * FPS);
+  if (f !== last) { last = f; render(f / FPS); }
+  requestAnimationFrame(frame);
+}
+// warm the popup/copy geometry: render the frames those clicks happen in once, invisibly
+render(B.popup + 0.5); measure();
+if (reduced) { render(B.word + 1); }
+else if (seekTo !== null && !q.has('play')) { FREEZE = true; render(Math.floor(seekTo * FPS) / FPS); }
+else requestAnimationFrame(frame);
+// the capture contract (build/render-ad.mjs): hold a frame, wait for the clip decoder, pin the mark's CSS loops
+window.__frame = (t) => new Promise((res) => {
+  FREEZE = true; render(t);
+  const pin = Math.max(0, t - B.end) * 1000;
+  for (const a of document.getAnimations()) { a.pause(); a.currentTime = pin; }
+  const done = () => requestAnimationFrame(() => requestAnimationFrame(res));
+  if (t >= B.clip && t < B.end && (clipVid.seeking || clipVid.readyState < 2)) clipVid.addEventListener('seeked', done, { once: true });
+  else done();
+});
+</script>
+</body>
+</html>

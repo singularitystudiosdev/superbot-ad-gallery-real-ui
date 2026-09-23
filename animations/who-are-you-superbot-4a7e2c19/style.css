@@ -232,7 +232,6 @@ body {
   pointer-events: none; user-select: none;
   will-change: transform;
 }
-.endcard-face { width: 100%; height: 100%; display: block; overflow: visible; }
 .endcard-word {
   position: absolute; left: 0; top: 50%; z-index: 2;
   font-family: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
@@ -305,3 +304,7 @@ html[data-ar="4x5"] .simple { font-size: 34px; }
 html[data-ar="1x1"] .simple { font-size: 40px; }
 /* no page chrome inside the gallery iframe or a ?ar= render */
 body.embedded .rec-btn, body.embedded .hint { display: none; }
+
+/* the live mascot host: sbMarkLive fills it; the svg is stretched to the old face box */
+.endcard-bot .mark-wrap { width: 100%; height: 100%; }
+.endcard-bot .sb-mark { width: 100% !important; height: 100% !important; }

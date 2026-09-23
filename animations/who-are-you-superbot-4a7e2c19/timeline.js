@@ -24,8 +24,12 @@ const A_AT = 0, A_END = A_AT + CLIP_LEN;
 /* ---- scene 2: the ChatGPT take ---- */
 const GPT_AT = A_END;                              // the hard cut
 const TYPE_AT = GPT_AT + 0.4, TYPE_DUR = 0.6;      // "Who are you" (faster, user ask)
-const PRESS_AT = TYPE_AT + TYPE_DUR + 0.45;
-const USER_MSG_AT = PRESS_AT + 0.1;
+// the text types with ceil, so the last character lands at at + dur*(n-1)/n
+const lastCharAt = (at, dur, n) => at + dur * (n - 1) / n;
+const Q_TEXT = 'Who are you';
+const SEND_GAP = 0.1;                             // the send lands 100ms after the last key
+// the send: the user bubble pops AND the bar clears on this one frame (user ask)
+const USER_MSG_AT = lastCharAt(TYPE_AT, TYPE_DUR, Q_TEXT.length) + SEND_GAP;
 const THINK_AT = USER_MSG_AT + 0.15, THINK_LEN = 0.8;
 const RESP_AT = THINK_AT + THINK_LEN, RESP_DUR = 1.1;   // the opener streams
 const TIRADE_AT = RESP_AT + 1.2;                        // the tirade begins...
@@ -47,8 +51,7 @@ const B_END = B_AT + CLIP_LEN;
 /* ---- scene 4: the superbot take ---- */
 const SB_AT = B_END;                                   // the hard cut
 const SB_TYPE_AT = SB_AT + 0.4, SB_TYPE_DUR = 0.6; // faster, same as take 1
-const SB_PRESS = SB_TYPE_AT + SB_TYPE_DUR + 0.45;
-const SB_MSG_AT = SB_PRESS + 0.1;
+const SB_MSG_AT = lastCharAt(SB_TYPE_AT, SB_TYPE_DUR, Q_TEXT.length) + SEND_GAP;
 const SB_THINK_AT = SB_MSG_AT + 0.15, SB_THINK_LEN = 0.6;
 const ANSWER_AT = SB_THINK_AT + SB_THINK_LEN, ANSWER_DUR = 0.9;
 /* the answer emphasis: a beat after the answer lands the camera punches in
@@ -70,7 +73,6 @@ const END_LEN = 4.8;
 const CYCLE = END_AT + END_LEN + 1.8;
 window.CYCLE = CYCLE;
 
-const Q_TEXT = 'Who are you';
 const OPENER = "Great question! Who am I? That is honestly one of the most interesting things you could ask.";
 const ANSWER = "I'm superbot. I can do anything, test me.";
 
@@ -320,6 +322,9 @@ function renderSimple(t) {
   simple.style.transform = `scale(${(0.92 + 0.08 * easeOutBack(inP(s, 0.5))).toFixed(3)})`;
   simple.style.filter = s < 0.4 ? `blur(${(5 * (1 - inP(s, 0.4))).toFixed(2)}px)` : 'none';
 }
+
+// the live beta.superbot.gg mascot, mounted once into the old face's box
+{ const m = window.sbMarkLive(document.getElementById('endBot'), { size: 220 }); m.svg.style.width = m.svg.style.height = '100%'; }
 
 /* ---- the end card: the superbot.gg lockup ---- */
 function renderEndcard(t) {

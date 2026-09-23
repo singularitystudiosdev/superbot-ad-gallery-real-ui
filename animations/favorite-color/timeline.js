@@ -25,14 +25,18 @@ const SPEED = 1.15;          // the whole show plays ~15% faster (user ask)
 
 /* ---- scene 1: the typing + the send ---- */
 const TYPE_AT = 0.4, TYPE_DUR = 0.9;   // "whats ur favorite color" (faster, user ask)
-const PRESS_AT = 2.95;                 // enter is pressed (user ask: no cursor)
-const USER_MSG_AT = 3.05;              // the user bubble pops into the thread
-const THINK_AT = 3.2, THINK_LEN = 0.8; // the typing dots
+// the text types with ceil, so the last character lands at at + dur*(n-1)/n
+const lastCharAt = (at, dur, n) => at + dur * (n - 1) / n;
+const Q_TEXT = 'whats ur favorite color';
+const SEND_GAP = 0.1 * SPEED;         // the send lands 100ms (real) after the last key
+// the send: the user bubble pops AND the bar clears on this one frame (user ask)
+const USER_MSG_AT = lastCharAt(TYPE_AT, TYPE_DUR, Q_TEXT.length) + SEND_GAP;
+const THINK_AT = USER_MSG_AT + 0.15, THINK_LEN = 0.8; // the typing dots
 
 /* ---- scene 2: the llm's answer — opener, then the accelerating tirade ---- */
-const RESP_AT = 4.1, RESP_DUR = 1.1;   // the opener streams
-const TIRADE_AT = 5.3;                 // the tirade begins...
-const TIRADE_END = 9.5;                // ...and never stops until the fly-down
+const RESP_AT = THINK_AT + THINK_LEN + 0.1, RESP_DUR = 1.1;   // the opener streams
+const TIRADE_AT = RESP_AT + 1.2;       // the tirade begins...
+const TIRADE_END = TIRADE_AT + 4.2;    // ...and never stops until the fly-down
 const TIRADE_V0 = 90;                  // chars/s at the start
 const TIRADE_K = 1.0;                  // accelerating e^{kt} — ×2 (user ask)
 // the corpus is long enough that the accelerating stream never outruns it:
@@ -63,8 +67,7 @@ const EMPH_IN = 0.22, EMPH_HOLD = num('hold', 1.05), EMPH_OUT = 0.5, EMPH_MAX = 
 
 /* ---- scene 4: the /superbot take ---- */
 const SB_TYPE_AT = FLY_AT + FLY_TOTAL + 0.35, SB_TYPE_DUR = 0.85; // faster, same as take 1
-const SB_PRESS = SB_TYPE_AT + SB_TYPE_DUR + 0.45;
-const SB_MSG_AT = SB_PRESS + 0.1;
+const SB_MSG_AT = lastCharAt(SB_TYPE_AT, SB_TYPE_DUR, Q_TEXT.length) + SEND_GAP;
 const SB_THINK_AT = SB_MSG_AT + 0.15, SB_THINK_LEN = 0.6;
 const ANSWER_AT = SB_THINK_AT + SB_THINK_LEN, ANSWER_DUR = 0.35;   // "Black."
 
@@ -81,7 +84,6 @@ const END_LEN = 4.8;
 const CYCLE = END_AT + END_LEN + 1.8;
 window.CYCLE = CYCLE; // read by the gallery's render script (one download = one loop)
 
-const Q_TEXT = 'whats ur favorite color';
 const SB_PREFIX = '/superbot';
 const OPENER = 'Well I am glad you asked! Colors are a great concept to think about!';
 const ANSWER = 'Black.';
@@ -158,13 +160,11 @@ function renderChat(t) {
     const typed = Q_TEXT.slice(0, Math.ceil(inP(t - SB_TYPE_AT, SB_TYPE_DUR) * Q_TEXT.length));
     txt = typed;
   } else {
-    // take 1: the question STAYS in the bar through the whole stream and
-    // the fly-down (user ask: the bar never deletes fully) — only the
-    // take-2 swap resets it
+    // take 1: the question types into the bar
     txt = Q_TEXT.slice(0, Math.ceil(inP(tp, TYPE_DUR) * Q_TEXT.length));
   }
-  // take 2 still clears its bar the moment its message pops
-  const sent = sbTake && t >= SB_MSG_AT;
+  // both takes clear the bar on the very frame the user bubble pops
+  const sent = t >= (sbTake ? SB_MSG_AT : USER_MSG_AT);
   if (sent) txt = '';
   const chipLive = false; // the real composer has no /superbot chip
   chip.style.display = chipLive ? 'inline-block' : 'none';
@@ -182,11 +182,6 @@ function renderChat(t) {
   placeholder.style.display = (txt.length === 0 && !chipLive) ? '' : 'none';
   caret.style.opacity = (Math.floor(t * 2.6) % 2 === 0 ? 1 : 0.15).toFixed(2);
   caret.style.display = (txt.length > 0 || chipLive) ? '' : 'none';
-
-  // — the send: an Enter keypress (user ask: no mouse cursor, and the
-  // keycap UI is gone — the caret blink carries the beat) —
-  const press = sbTake ? SB_PRESS : PRESS_AT;
-  const cp = t - press;
 
   // — the message area —
   const msgAt = sbTake ? SB_MSG_AT : USER_MSG_AT;
@@ -329,6 +324,9 @@ function renderSimple(t) {
   simple.style.transform = `scale(${(0.94 + 0.06 * easeOutBack(inP(s, 0.5))).toFixed(3)})`;
   simple.style.filter = s < 0.4 ? `blur(${(4 * (1 - inP(s, 0.4))).toFixed(2)}px)` : 'none';
 }
+
+// the live beta.superbot.gg mascot, mounted once into the old face's box
+{ const m = window.sbMarkLive(document.getElementById('endBot'), { size: 220 }); m.svg.style.width = m.svg.style.height = '100%'; }
 
 /* ---- the end card: the superbot.gg lockup (the tabs-chaos end sequence) ---- */
 

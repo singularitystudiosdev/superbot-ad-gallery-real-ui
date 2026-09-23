@@ -1,7 +1,7 @@
 // waffles-website-superbot: the whole spot is a pure function of t.
 //   0.0  ChatGPT home, the prompt types at a steady 60 chars/s and is sent 0.1s after the last key
 //   ~2.9 ChatGPT answers with a code block and a list of chores
-//   ~6.8 the "superbot can do it!" popup rises (the refusal spots' card), a cursor presses chat
+//   ~4.8 the "superbot can do it!" popup rises (the refusal spots' card), a cursor presses chat
 //   ~8.6 the Superbot app: the ask in the chat, Superbot's reply streams, the preview builds
 //  +4.0 the real site (site/index.html?ad=1) appears in the preview
 //  +5.5 the camera pushes into the gradient Publish button, a cursor presses it: shine + check
@@ -63,7 +63,7 @@ const lenOf = (a) => (a.kind === 'list' ? a.text.join('').length : a.text.length
 const ANS_END = ANSWER[ANSWER.length - 1].t1;
 
 // the rescue popup, 1:1 the refusal spots' beats: it rises, the cursor lands 1.1s later, a 0.2s press
-T.popup = ANS_END + 0.3;
+T.popup = ANS_END - 1.7;                 // 2s before the answer ends: the list is still streaming under it
 T.curIn = T.popup - 0.1; T.curAt = T.popup + 0.9; T.pPress = T.popup + 1.1; T.pRelease = T.popup + 1.3;
 T.dip1 = T.pRelease + 0.25; T.app = T.dip1 + 0.25;
 // the Superbot app, relative to the cut
@@ -213,7 +213,7 @@ const pubRocket = $('pub-rocket'), pubCheck = $('pub-check'), pubCheckP = $('pub
 const chFeed = $('ch-feed'), chFeedIn = $('ch-feed-in'), chUser = $('ch-user'), chBot = $('ch-bot');
 const chTool = $('ch-tool'), chSpin = $('ch-spin'), chToolT = $('ch-tool-t');
 const pvSkel = $('pv-skel'), pvFrame = $('pv-frame'), pvState = $('pv-state');
-const siteFrame = $('site'), cursor = $('cursor'), ripple = $('ripple'), rowDot = $('row-dot');
+const siteFrame = $('site'), cursor = $('cursor'), rowDot = $('row-dot');
 const CARET = '<i class="ch-caret"></i>';
 
 let lastChat = '';
@@ -318,12 +318,7 @@ function drawApp(t) {
     const fx = lerp(W * 0.86, aim.x, m) + Math.sin(m * Math.PI) * -40;
     const fy = lerp(1000, aim.y, m) + Math.sin(m * Math.PI) * 30;
     cursor.style.transform = `translate(${(fx - 17).toFixed(1)}px, ${(fy - 11).toFixed(1)}px) scale(${(1 - 0.12 * down).toFixed(3)})`;
-    const rp = seg(t, T.press, T.press + 0.55);
-    op(ripple, rp > 0 ? (1 - rp) * 0.9 : 0);
-    const rs = lerp(10, 260, outCubic(rp));
-    ripple.style.width = ripple.style.height = rs.toFixed(1) + 'px';
-    ripple.style.transform = `translate(${(aim.x - rs / 2).toFixed(1)}px, ${(aim.y - rs / 2).toFixed(1)}px)`;
-  } else op(ripple, 0);
+  }
 }
 
 // ---------- scenes 3 + 4 ----------

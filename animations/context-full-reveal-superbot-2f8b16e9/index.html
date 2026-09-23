@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>context full? superbot can fix it! · animated reveal · ad spot</title>
-<meta name="description" content="The context-full-poster brought to life: 'context full?' pops in tight, 'superbot can fix it!' drops in below, the camera pulls back to the Before/After context-window cards, pushes into the Before bar as it fills to 197K, pans down into the After bar filling to 31K, then pulls back out as the freed-tokens and saved-hours stats land beside the mark. 10.2s looping ad spot, 1920x1080."/>
+<meta name="description" content="The context-full-poster brought to life: 'context full?' pops in tight, 'superbot can fix it!' drops in below, the camera pulls back to the Before/After context-window cards, pushes into the Before bar as it fills to 188K of 196K, pans down into the After bar filling to 113K, then pulls back out as the freed-tokens and saved-hours stats land beside the mark. 10.2s looping ad spot, 1920x1080."/>
 <script src="../../assets/ar.js"></script>
 <link rel="stylesheet" href="../../assets/ar.css">
 <style>
@@ -91,7 +91,7 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
 html[data-ar]:not([data-ar="16x9"]) {
   /* the card's --u is tuned to fill an 852px-wide 16:9 card; at a narrower
      stacked width it has to shrink in the same proportion or the meta row
-     ("ChatGPT ... 197K of 200K used") wraps and blows out the card's height
+     ("ChatGPT ... 188K of 196K used") wraps and blows out the card's height
      into the stats row below it. Card content height is ~15.06 * --u
      (measured at 16:9: 477px / 31.68px), so the stats row's top is computed
      from it rather than fixed, or a taller ratio's bigger --u pushes the
@@ -141,7 +141,7 @@ html[data-ar]:not([data-ar="16x9"]) #statsrow ul {
             <span class="who">ChatGPT</span>
             <span class="used">
               <svg class="warn-ico" id="before-warn" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v5M12 16.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              <b id="before-num">0K</b> of 200K used
+              <b id="before-num">0K</b> of 196K used
             </span>
           </div>
           <div class="bar"><i id="before-fill"></i></div>
@@ -152,7 +152,7 @@ html[data-ar]:not([data-ar="16x9"]) #statsrow ul {
         <div class="meter" id="after-meter">
           <div class="meta">
             <span class="who">ChatGPT</span>
-            <span class="used"><b id="after-num">0K</b> of 200K used</span>
+            <span class="used"><b id="after-num">0K</b> of 196K used</span>
           </div>
           <div class="bar"><i id="after-fill"></i></div>
         </div>
@@ -176,11 +176,11 @@ html[data-ar]:not([data-ar="16x9"]) #statsrow ul {
       <ul>
         <li id="stat-freed">
           <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2zM5 16l.9 2.1L8 19l-2.1.9L5 22l-.9-2.1L2 19l2.1-.9L5 16zM19 14l.7 1.6 1.6.7-1.6.7L19 18.6l-.7-1.6-1.6-.7 1.6-.7L19 14z"/></svg></span>
-          <span class="txt"><span class="lead">you have freed</span> <b class="big">166K tokens</b></span>
+          <span class="txt"><span class="lead">you have freed</span> <b class="big">75K tokens</b></span>
         </li>
         <li id="stat-saved">
           <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span class="txt"><span class="lead">saved</span> <b class="big">1.2 hours</b> <span class="tail">of re-explaining</span></span>
+          <span class="txt"><span class="lead">saved</span> <b class="big">25 minutes</b> <span class="tail">of re-explaining</span></span>
         </li>
       </ul>
     </div>
@@ -208,9 +208,9 @@ const B = {
   zoomOut: 1.55,      // camera pulls back from the headline to the full frame (0.9s)
   cardsIn: 1.75,      // the Before/After card fades in as the pull-back lands
   zoomBefore: 2.85,   // camera pushes into the Before meter (0.7s)
-  beforeFill: 3.55,   // Before bar fills 0 -> 197K/98.5% (1.0s), warn icon and note land with it
+  beforeFill: 3.55,   // Before bar fills 0 -> 188K/95.9% (1.0s), warn icon and note land with it
   zoomAfter: 5.0,     // camera pans down into the After meter (0.7s)
-  afterFill: 5.7,     // After bar fills 0 -> 31K/15.5% (1.0s)
+  afterFill: 5.7,     // After bar fills 0 -> 113K/57.7% (1.0s)
   zoomBack: 7.15,     // camera pulls back out to the full frame (0.8s)
   statsIn: 8.05,      // freed-tokens / saved-hours stats and the mark land, staggered
 };
@@ -303,14 +303,14 @@ function render(t) {
   // the Before bar fills while the camera is pushed into it; the number counts
   // up with it and the warn triangle + note land at the same time
   const bf = outQuint(seg(t, B.beforeFill, B.beforeFill + 1.0));
-  beforeFill.style.width = (bf * 98.5).toFixed(1) + '%';
-  beforeNum.textContent = Math.round(bf * 197) + 'K';
+  beforeFill.style.width = (bf * 95.9).toFixed(1) + '%';
+  beforeNum.textContent = Math.round(bf * 188) + 'K';
   op(beforeWarn, seg(t, B.beforeFill, B.beforeFill + 0.25));
 
   // the After bar fills the same way, one beat later
   const af = outQuint(seg(t, B.afterFill, B.afterFill + 1.0));
-  afterFill.style.width = (af * 15.5).toFixed(1) + '%';
-  afterNum.textContent = Math.round(af * 31) + 'K';
+  afterFill.style.width = (af * 57.7).toFixed(1) + '%';
+  afterNum.textContent = Math.round(af * 113) + 'K';
 
   // the freed-tokens / saved-hours stats and the mark land staggered, once the
   // camera has pulled back out to the full frame

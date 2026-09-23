@@ -11,15 +11,31 @@
     "id": "youtube-refusal-superbot-7f2c9a41",
     "type": "animation",
     "group": "Ad spots",
-    "title": "youtube to mp3? ChatGPT refuses with the terms-of-service lecture; superbot pops in mid-refusal and the click downloads instantly; the pain words cascade, accelerating to 3x (21.9s loop)",
+    "title": "youtube to mp3? ChatGPT refuses with the terms-of-service lecture; superbot pops in mid-refusal and the click downloads instantly; the pain words cascade, accelerating to 3x (21.75s loop)",
     "src": "animations/youtube-refusal-superbot-7f2c9a41/",
     "thumb": "assets/shots/youtube-refusal-superbot-7f2c9a41.png"
+  },
+  {
+    "id": "waffles-delivery-superbot-87a583a1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "order me waffles? ChatGPT says \"I can't do that!\"; superbot pops in, orders Denny's through DoorDash, and the real doorstep handoff plays with the superbot mascot riding the courier's shoulder (22.2s loop)",
+    "src": "animations/waffles-delivery-superbot-87a583a1/",
+    "thumb": "assets/shots/waffles-delivery-superbot-87a583a1.png"
+  },
+  {
+    "id": "waffles-website-superbot-87a583a1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make me a website where people can rate waffle pics? ChatGPT hands back a code block and a list of chores; superbot builds it, the real rate-waffle-pics site runs in its preview, and the camera pushes into the real Publish button: \"Live in one click.\" (24.5s loop)",
+    "src": "animations/waffles-website-superbot-87a583a1/",
+    "thumb": "assets/shots/waffles-website-superbot-87a583a1.png"
   },
   {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",
-    "title": "\"ask me anything\", and ChatGPT denies 35 prompts in 7 seconds; superbot thinks, runs its tools and answers in plain text, ramping 1x to 10x (~19s loop)",
+    "title": "\"ask me anything\", and ChatGPT denies 35 prompts in 7 seconds; superbot thinks, runs its tools and answers in plain text, ramping 1x to 10x (17.77s loop)",
     "src": "animations/deny-cascade-superbot-440813d4/",
     "thumb": "assets/shots/deny-cascade-superbot-440813d4.png"
   },
@@ -35,7 +51,7 @@
     "id": "favorite-color",
     "type": "animation",
     "group": "Ad spots",
-    "title": "favorite color — the chat pitch",
+    "title": "favorite color · the chat pitch",
     "src": "animations/favorite-color/",
     "thumb": "assets/shots/favorite-color.png"
   },
@@ -43,7 +59,7 @@
     "id": "mayonnaise-superbot-5c2f8e47",
     "type": "animation",
     "group": "Ad spots",
-    "title": "is mayonnaise an instrument? · Patrick asks with the ChatGPT icon on his head; ChatGPT classifies mayonnaise by Hornbostel-Sachs forever and the camera flies down the wall; Patrick asks again wearing the superbot icon; superbot, in its own composer: \"No.\" · stop burning tokens · the end card (29s loop, with sound)",
+    "title": "is mayonnaise an instrument? · Patrick asks with the ChatGPT icon on his head; ChatGPT classifies mayonnaise by Hornbostel-Sachs forever and the camera flies down the wall; Patrick asks again wearing the superbot icon; superbot, in its own composer: \"No.\" · stop burning tokens · the end card (27.53s loop, with sound)",
     "src": "animations/mayonnaise-superbot-5c2f8e47/",
     "thumb": "assets/shots/mayonnaise-superbot-5c2f8e47.png"
   },
@@ -51,7 +67,7 @@
     "id": "who-are-you-superbot-4a7e2c19",
     "type": "animation",
     "group": "Ad spots",
-    "title": "who are you? · the Kazoo Kid asks with the ChatGPT icon on his head; ChatGPT rambles about identity forever and the camera flies down the wall; the kid asks again wearing the superbot icon; superbot, in its own composer: \"I'm superbot. I can do anything, test me.\" · stop burning tokens · the end card (28.5s loop, with sound)",
+    "title": "who are you? · the Kazoo Kid asks with the ChatGPT icon on his head; ChatGPT rambles about identity forever and the camera flies down the wall; the kid asks again wearing the superbot icon; superbot, in its own composer: \"I'm superbot. I can do anything, test me.\" · stop burning tokens · the end card (26.84s loop, with sound)",
     "src": "animations/who-are-you-superbot-4a7e2c19/",
     "thumb": "assets/shots/who-are-you-superbot-4a7e2c19.png"
   },

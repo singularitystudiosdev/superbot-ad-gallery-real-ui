@@ -27,16 +27,16 @@ const groups = [
 // download label.
 const AD_ARS = ['4x5', '16x9', '4x3', '1x1'];
 const ads = [
-  ['stop-burning-tokens', 'stop burning tokens · the three-word poster with the superbot icon (static)'],
-  ['agents-refusing-poster', 'agents refusing? superbot can do it! · the refusal poster (static)'],
-  ['agents-slow-poster', 'agents slow? superbot can do it! · the speed poster (static)'],
-  ['agent-workspace-poster', 'your all in one agent workspace · the workspace poster (static)'],
+  ['stop-burning-tokens', 'STOP BURNING TOKENS'],
+  ['agents-refusing-poster', 'superbot can do it!'],
+  ['agents-slow-poster', 'superbot can do it!'],
+  ['agent-workspace-poster', 'Your all in one agent workspace'],
   // the context before/after family, built from ads-src/context-storage (the
   // phone-cleaner "Optimize Storage" before/after bars, re-drawn for an agent's
   // context window; 2026-09-16)
-  ['context-full-poster', 'context full? superbot can fix it! · before/after: ChatGPT at 188K of 196K, ChatGPT (with superbot) at 113K; 75K tokens freed (static)'],
-  ['context-slow-poster', 'agent slow? superbot can fix it! · before/after: ChatGPT at 170K and 36s replies, ChatGPT (with superbot) at 102K and 27s; 1.3x faster (static)'],
-  ['context-costly-poster', 'context costly? superbot can fix it! · before/after: Claude Code at $26.40 of a $30 daily budget by 4 pm, Claude Code (with superbot) at $15.84; $10.56 a day saved (static)'],
+  ['context-full-poster', 'superbot can fix it!'],
+  ['context-slow-poster', 'superbot can fix it!'],
+  ['context-costly-poster', 'superbot can fix it!'],
 ];
 
 const anims = [
@@ -64,15 +64,15 @@ const items = anims.map(([id, src, title, desc]) => ({
 // Second sweep — ad spots, site variants, hero FX and related pages.
 // [name, pagePath, title, group]
 const more = [
-    ['tabs-chaos-superbot-6f50ea56', 'tabs-chaos-superbot-6f50ea56/', '14 tabs? the same prompt pasted into fourteen AI tabs, then superbot asks every agent from one window (15s loop)', 'Ad spots'],
-  ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "youtube to mp3? ChatGPT refuses with the terms-of-service lecture; superbot pops in mid-refusal and the click downloads instantly; the pain words cascade, accelerating to 3x (21.75s loop)", 'Ad spots'],
-  ['waffles-delivery-superbot-87a583a1', 'waffles-delivery-superbot-87a583a1/', 'order me waffles? ChatGPT lectures "I can\'t do that!"; superbot pops in, orders Denny\'s through DoorDash, a 1s first-person Denny\'s handoff (AI-generated) plays with the superbot mascot on the courier\'s shoulder, and it hops into the end card (15.4s loop)', 'Ad spots'],
-  ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', 'make me a website where people can rate waffle pics? ChatGPT hands back a code block and a list of chores; superbot pops in, answers in its chat while the real rate-waffle-pics site builds in the preview, and one press of the gradient Publish button: "Live in one click." (23.2s loop)', 'Ad spots'],
-  ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ask me anything", and ChatGPT denies 35 prompts in 7 seconds; superbot thinks, runs its tools and answers in plain text, ramping 1x to 10x (17.77s loop)', 'Ad spots'],
-  ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime? · the house card pop, 1.9 seconds flat, then superbot knows why in the wordmark gradient and the end screen (6.5s loop)', 'Ad spots'],
+    ['tabs-chaos-superbot-6f50ea56', 'tabs-chaos-superbot-6f50ea56/', 'KILL THE TABS', 'Ad spots'],
+  ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
+  ['waffles-delivery-superbot-87a583a1', 'waffles-delivery-superbot-87a583a1/', 'order me waffles pls', 'Ad spots'],
+  ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
+  ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
+  ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],
-  ['mayonnaise-superbot-5c2f8e47', 'mayonnaise-superbot-5c2f8e47/', 'is mayonnaise an instrument? · Patrick asks with the ChatGPT icon on his head; ChatGPT classifies mayonnaise by Hornbostel-Sachs forever and the camera flies down the wall; Patrick asks again wearing the superbot icon; superbot, in its own composer: "No." · stop burning tokens · the end card (27.53s loop, with sound)', 'Ad spots'],
-  ['who-are-you-superbot-4a7e2c19', 'who-are-you-superbot-4a7e2c19/', 'who are you? · the Kazoo Kid asks with the ChatGPT icon on his head; ChatGPT rambles about identity forever and the camera flies down the wall; the kid asks again wearing the superbot icon; superbot, in its own composer: "I\'m superbot. I can do anything, test me." · stop burning tokens · the end card (26.84s loop, with sound)', 'Ad spots'],
+  ['mayonnaise-superbot-5c2f8e47', 'mayonnaise-superbot-5c2f8e47/', 'is mayonnaise an instrument?', 'Ad spots'],
+  ['who-are-you-superbot-4a7e2c19', 'who-are-you-superbot-4a7e2c19/', 'WHO ARE YOU', 'Ad spots'],
   ['gg-site-variants', 'gg-site/variants.html', 'superbot.gg — character variants', 'Site variants'],
   ['gg-site-lander-zen', 'gg-site/lander-zen.html', 'lander — zen', 'Site variants'],
   ['gg-site-lander-minimal', 'gg-site/lander-minimal.html', 'lander — minimal', 'Site variants'],

@@ -1,0 +1,89 @@
+Waffle Rank image credits
+=======================
+
+All ten photos come from Wikimedia Commons. Each one was downloaded at 1100 pixels
+wide and saved as a JPEG in site/img, so the files here are resized copies of the
+originals. The author and license of every file are listed below, together with a
+link to the license text and to the Commons file page where the original lives.
+
+Photo files are used only to show what a rated waffle looks like. If you reuse the
+site, keep this file with it: CC BY and CC BY-SA both require attribution, and the
+CC BY-SA photos also require that any adaptation you publish carries the same
+license.
+
+1. img/berlin-waffle-ice-cream.jpg
+   File: Berlin Waffle with ice cream.jpg
+   Author: Susanne Nilsson
+   License: CC BY-SA 2.0
+   License text: https://creativecommons.org/licenses/by-sa/2.0/
+   Source: https://commons.wikimedia.org/wiki/File:Berlin_Waffle_with_ice_cream.jpg
+
+2. img/belgian-chocolate-waffles.jpg
+   File: Belgian chocolate waffles (2026) 02.jpg
+   Author: Gpkp
+   License: CC BY-SA 4.0
+   License text: https://creativecommons.org/licenses/by-sa/4.0/
+   Source: https://commons.wikimedia.org/wiki/File:Belgian_chocolate_waffles_(2026)_02.jpg
+
+3. img/mickey-waffles.jpg
+   File: Mickey Mouse Waffles with Fruit and Sausages.jpg
+   Author: Slamforeman
+   License: CC BY 4.0
+   License text: https://creativecommons.org/licenses/by/4.0/
+   Source: https://commons.wikimedia.org/wiki/File:Mickey_Mouse_Waffles_with_Fruit_and_Sausages.jpg
+
+4. img/diner-waffle-plate.jpg
+   File: Waffle, Baytree Waffle House, Remerton.jpg
+   Author: Michael Rivera
+   License: CC BY-SA 4.0
+   License text: https://creativecommons.org/licenses/by-sa/4.0/
+   Source: https://commons.wikimedia.org/wiki/File:Waffle,_Baytree_Waffle_House,_Remerton.jpg
+
+5. img/savoury-waffle.jpg
+   File: Savoury Waffle - Malt Cafe 2025-11-30.jpg
+   Author: Andy Li
+   License: CC0 1.0 (public domain dedication)
+   License text: https://creativecommons.org/publicdomain/zero/1.0/
+   Source: https://commons.wikimedia.org/wiki/File:Savoury_Waffle_-_Malt_Cafe_2025-11-30.jpg
+
+6. img/pistachio-raspberry-waffle.jpg
+   File: Pistachio and raspberry waffle.jpg
+   Author: Attonio
+   License: CC BY-SA 4.0
+   License text: https://creativecommons.org/licenses/by-sa/4.0/
+   Source: https://commons.wikimedia.org/wiki/File:Pistachio_and_raspberry_waffle.jpg
+
+7. img/strawberry-sugar-waffle.jpg
+   File: Waffle with strawberries and confectioner's sugar.jpg
+   Author: Ralph Daily
+   License: CC BY 2.0
+   License text: https://creativecommons.org/licenses/by/2.0/
+   Source: https://commons.wikimedia.org/wiki/File:Waffle_with_strawberries_and_confectioner%27s_sugar.jpg
+
+8. img/egg-waffle-taco.jpg
+   File: Egg waffle taco meat burger.jpg
+   Author: Syced
+   License: CC0 1.0 (public domain dedication)
+   License text: https://creativecommons.org/publicdomain/zero/1.0/
+   Source: https://commons.wikimedia.org/wiki/File:Egg_waffle_taco_meat_burger.jpg
+
+9. img/granola-breakfast-waffle.jpg
+   File: "granola breakfast" waffle - Wafflemeister 2024-08-25.jpg
+   Author: Andy Li
+   License: CC0 1.0 (public domain dedication)
+   License text: https://creativecommons.org/publicdomain/zero/1.0/
+   Source: https://commons.wikimedia.org/wiki/File:%22granola_breakfast%22_waffle_-_Wafflemeister_2024-08-25.jpg
+
+10. img/waffle-shop-counter.jpg
+    File: Manneken Belgian waffle shop, Otemae-dori, Himeji, 2016.jpg
+    Author: DimiTalen
+    License: CC0 1.0 (public domain dedication)
+    License text: https://creativecommons.org/publicdomain/zero/1.0/
+    Source: https://commons.wikimedia.org/wiki/File:Manneken_Belgian_waffle_shop,_Otemae-dori,_Himeji,_2016.jpg
+
+Machine readable copy
+---------------------
+
+The same fields are kept in img/sources.json, which is the file the download step
+wrote when the photos were fetched. The site itself never reads it; it is there so
+the attribution can be checked by a script.

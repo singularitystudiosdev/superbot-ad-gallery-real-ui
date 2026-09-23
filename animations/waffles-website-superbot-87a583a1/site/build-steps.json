@@ -1,0 +1,231 @@
+{
+  "app": "Waffle Rank",
+  "entry": "index.html",
+  "servedFrom": "the site/ directory",
+  "description": "Build steps in the order the site would be written. Each snippet is a real slice of the shipped file, so an animation can stream them one after another to look like the site generating itself.",
+  "generator": "make-build-steps.mjs",
+  "totals": {
+    "steps": 22,
+    "snippetChars": 14803
+  },
+  "steps": [
+    {
+      "step": 1,
+      "file": "index.html",
+      "kind": "write",
+      "title": "doctype, head and the icon sprite",
+      "startLine": 1,
+      "endLine": 22,
+      "snippet": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n<title>Waffle Rank | rate waffle pics</title>\n<meta name=\"description\" content=\"Upload your waffle photo, score others from one to five syrup drops, and watch the syrup board reshuffle. Everything is stored on your device.\">\n<meta name=\"color-scheme\" content=\"dark\">\n<link rel=\"icon\" href=\"favicon.svg\" type=\"image/svg+xml\">\n<link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n\n<svg class=\"sprite\" aria-hidden=\"true\" focusable=\"false\">\n  <!-- paint lives in attributes: page CSS does not reach inside a <use> shadow tree -->\n  <symbol id=\"i-drop\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M12 2.4c3.9 4.7 6.7 8.1 6.7 11.6a6.7 6.7 0 1 1-13.4 0C5.3 10.5 8.1 7.1 12 2.4Z\"/></symbol>\n  <symbol id=\"i-grid\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 9h18M3 15h18M9 3v18M15 3v18\"/></symbol>\n  <symbol id=\"i-plus\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M5 12h14\"/></symbol>\n  <symbol id=\"i-close\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 6l12 12M18 6L6 18\"/></symbol>\n  <symbol id=\"i-search\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4.5 4.5\"/></symbol>\n  <symbol id=\"i-trophy\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 4h8v5a4 4 0 0 1-8 0V4Z\"/><path d=\"M8 5H5.5a3 3 0 0 0 3 3M16 5h2.5a3 3 0 0 1-3 3\"/><path d=\"M12 13v4M9 20h6M10 20c0-1.7 1-2.4 2-2.4s2 .7 2 2.4\"/></symbol>\n  <symbol id=\"i-shuffle\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7h3.5l3 4M4 17h3.5l9-10H20M20 7l-2.5-2.5M20 7l-2.5 2.5M13.5 14.5 16 17h4M20 17l-2.5-2.5M20 17l-2.5 2.5\"/></symbol>",
+      "chars": 2189
+    },
+    {
+      "step": 2,
+      "file": "index.html",
+      "kind": "write",
+      "title": "topbar with the live counters",
+      "startLine": 28,
+      "endLine": 43,
+      "snippet": "<header class=\"topbar\">\n  <a class=\"brand\" href=\"#top\">\n    <span class=\"brand-mark\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><use href=\"#i-grid\"/></svg></span>\n    <span class=\"brand-text\">Waffle<span>Rank</span></span>\n  </a>\n  <dl class=\"stats\" id=\"stats\">\n    <div class=\"stat\"><dt>Waffles</dt><dd id=\"stat-photos\">0</dd></div>\n    <div class=\"stat\"><dt>Ratings</dt><dd id=\"stat-ratings\">0</dd></div>\n    <div class=\"stat\"><dt>Avg syrup</dt><dd id=\"stat-avg\">0.0</dd></div>\n  </dl>\n</header>\n\n<main id=\"top\">\n\n  <section class=\"hero\">\n    <p class=\"eyebrow\">A tiny public gallery with no backend</p>",
+      "chars": 606
+    },
+    {
+      "step": 3,
+      "file": "index.html",
+      "kind": "write",
+      "title": "hero and its three actions",
+      "startLine": 42,
+      "endLine": 63,
+      "snippet": "  <section class=\"hero\">\n    <p class=\"eyebrow\">A tiny public gallery with no backend</p>\n    <h1>Rate waffle pics.<br><em>Crown the crispiest.</em></h1>\n    <p class=\"lede\">\n      Upload the waffle you are proud of, hand out one to five syrup drops to the rest,\n      and watch the syrup board reshuffle live. Votes and uploads stay in this browser.\n    </p>\n    <div class=\"hero-actions\">\n      <button class=\"btn btn-primary\" id=\"btn-add\" type=\"button\">\n        <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><use href=\"#i-plus\"/></svg>\n        Add your waffle\n      </button>\n      <button class=\"btn btn-ghost\" id=\"btn-random\" type=\"button\">\n        <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><use href=\"#i-shuffle\"/></svg>\n        Rate a random one\n      </button>\n      <a class=\"btn btn-quiet\" href=\"#board\">See the board</a>\n    </div>\n    <p class=\"hero-note\" id=\"hero-note\">10 seeded waffles are already in the running.</p>\n  </section>\n\n  <section class=\"board\" id=\"board\" aria-labelledby=\"board-title\">",
+      "chars": 1013
+    },
+    {
+      "step": 4,
+      "file": "index.html",
+      "kind": "write",
+      "title": "syrup board shell with the sort tabs",
+      "startLine": 63,
+      "endLine": 76,
+      "snippet": "  <section class=\"board\" id=\"board\" aria-labelledby=\"board-title\">\n    <div class=\"section-head\">\n      <h2 id=\"board-title\">\n        <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><use href=\"#i-trophy\"/></svg>\n        Syrup board\n      </h2>\n      <div class=\"seg\" role=\"tablist\" aria-label=\"Sort waffles\">\n        <button class=\"seg-btn is-on\" type=\"button\" role=\"tab\" aria-selected=\"true\" data-sort=\"top\">Top rated</button>\n        <button class=\"seg-btn\" type=\"button\" role=\"tab\" aria-selected=\"false\" data-sort=\"rated\">Most rated</button>\n        <button class=\"seg-btn\" type=\"button\" role=\"tab\" aria-selected=\"false\" data-sort=\"new\">Newest</button>\n      </div>\n    </div>\n    <ol class=\"leaders\" id=\"leaders\"></ol>\n  </section>",
+      "chars": 731
+    },
+    {
+      "step": 5,
+      "file": "index.html",
+      "kind": "write",
+      "title": "gallery and the search box",
+      "startLine": 78,
+      "endLine": 89,
+      "snippet": "  <section class=\"gallery\" id=\"gallery\" aria-labelledby=\"gallery-title\">\n    <div class=\"section-head\">\n      <h2 id=\"gallery-title\">Every waffle in the running</h2>\n      <div class=\"search\">\n        <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><use href=\"#i-search\"/></svg>\n        <input id=\"q\" type=\"search\" placeholder=\"Search waffles\" aria-label=\"Search waffles\" autocomplete=\"off\">\n      </div>\n    </div>\n    <div class=\"cards\" id=\"cards\"></div>\n    <p class=\"empty\" id=\"empty\" hidden>No waffle matches that search. Clear the box to see them all again.</p>\n  </section>",
+      "chars": 576
+    },
+    {
+      "step": 6,
+      "file": "index.html",
+      "kind": "write",
+      "title": "the two overlay sheets",
+      "startLine": 121,
+      "endLine": 136,
+      "snippet": "<!-- add a waffle -->\n<div class=\"overlay\" id=\"add-overlay\" hidden>\n  <div class=\"sheet\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"add-title\">\n    <header class=\"sheet-head\">\n      <h2 id=\"add-title\">Add your waffle</h2>\n      <button class=\"x\" type=\"button\" data-close aria-label=\"Close\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><use href=\"#i-close\"/></svg></button>\n    </header>\n    <div class=\"sheet-body\">\n      <label class=\"drop\" id=\"drop\">\n        <input type=\"file\" id=\"file\" accept=\"image/*\" hidden>\n        <img id=\"drop-preview\" alt=\"\" hidden>\n        <span class=\"drop-copy\" id=\"drop-copy\">\n          <strong>Drop a waffle photo</strong>\n          <span>or tap to choose one from your device</span>\n        </span>\n      </label>",
+      "chars": 752
+    },
+    {
+      "step": 7,
+      "file": "styles.css",
+      "kind": "write",
+      "title": "theme tokens: espresso, cream, syrup gold",
+      "startLine": 3,
+      "endLine": 21,
+      "snippet": ":root {\n  --bg: #100b07;\n  --panel: #1d1510;\n  --panel-2: #251a13;\n  --line: #362518;\n  --line-soft: #2a1d13;\n  --cream: #f7ecdd;\n  --muted: #b49a85;\n  --gold: #f0a93b;\n  --gold-soft: #ffc96b;\n  --gold-deep: #b5701c;\n  --danger: #e8734a;\n  --radius: 18px;\n  --radius-sm: 12px;\n  --shadow: 0 22px 44px -26px rgba(0, 0, 0, 0.95);\n  --font: ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n  --speed: 180ms;\n}",
+      "chars": 455
+    },
+    {
+      "step": 8,
+      "file": "styles.css",
+      "kind": "write",
+      "title": "waffle grid backdrop",
+      "startLine": 59,
+      "endLine": 72,
+      "snippet": ".grid-backdrop {\n  position: fixed;\n  inset: 0;\n  z-index: 0;\n  pointer-events: none;\n  opacity: 0.5;\n  background-image:\n    linear-gradient(rgba(240, 169, 59, 0.05) 1px, transparent 1px),\n    linear-gradient(90deg, rgba(240, 169, 59, 0.05) 1px, transparent 1px);\n  background-size: 46px 46px;\n  mask-image: radial-gradient(70% 55% at 50% 0%, #000 30%, transparent 100%);\n  -webkit-mask-image: radial-gradient(70% 55% at 50% 0%, #000 30%, transparent 100%);\n}",
+      "chars": 460
+    },
+    {
+      "step": 9,
+      "file": "styles.css",
+      "kind": "write",
+      "title": "cards and the fractional syrup meter",
+      "startLine": 240,
+      "endLine": 253,
+      "snippet": ".card {\n  background: var(--panel);\n  border: 1px solid var(--line-soft);\n  border-radius: var(--radius);\n  overflow: hidden;\n  display: flex; flex-direction: column;\n  box-shadow: var(--shadow);\n  transition: border-color var(--speed) ease, transform var(--speed) ease;\n}\n.card:hover { border-color: var(--line); transform: translateY(-2px); }\n.card.is-mine { border-color: rgba(240, 169, 59, 0.45); }\n\n.shot { position: relative; background: #0b0705; }\n.shot img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }",
+      "chars": 521
+    },
+    {
+      "step": 10,
+      "file": "styles.css",
+      "kind": "write",
+      "title": "rating drops and the pulse",
+      "startLine": 287,
+      "endLine": 302,
+      "snippet": ".rate { display: flex; gap: 4px; margin-top: auto; }\n.drop-btn {\n  background: transparent; border: 0; cursor: pointer; color: #43332a;\n  padding: 4px; line-height: 0; border-radius: 8px;\n  transition: color 120ms ease, transform 120ms ease;\n}\n.drop-btn svg { width: 26px; height: 26px; }\n.drop-btn:hover, .drop-btn.is-peek { color: #7a5828; }\n.drop-btn.is-on { color: var(--gold); }\n.drop-btn.is-peek.is-on, .rate:hover .drop-btn.is-on { color: var(--gold-soft); }\n.drop-btn:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 1px; }\n.drop-btn.is-pulse { animation: pulse 420ms ease; }\n\n@keyframes pulse {\n  0% { transform: scale(1); }\n  40% { transform: scale(1.28); }",
+      "chars": 687
+    },
+    {
+      "step": 11,
+      "file": "styles.css",
+      "kind": "write",
+      "title": "phone widths",
+      "startLine": 414,
+      "endLine": 427,
+      "snippet": "@media (max-width: 760px) {\n  .detail { grid-template-columns: 1fr; }\n  .stats { width: 100%; margin-left: 0; }\n  .seg, .search { margin-left: 0; width: 100%; }\n  .seg { display: grid; grid-template-columns: repeat(3, 1fr); }\n  .seg-btn { text-align: center; }\n  .search input { width: 100%; min-width: 0; }\n  .foot button { margin-left: 0; }\n  .hero { padding-top: 34px; }\n}\n\n@media (max-width: 460px) {\n  .cards { grid-template-columns: 1fr; }\n  .leader img { width: 46px; height: 46px; flex-basis: 46px; }",
+      "chars": 508
+    },
+    {
+      "step": 12,
+      "file": "app.js",
+      "kind": "write",
+      "title": "seed gallery: ten real waffles with their votes",
+      "startLine": 20,
+      "endLine": 33,
+      "snippet": "  var SEEDS = [\n    {\n      id: 'berlin-cherry-sundae',\n      name: 'Berlin Cherry Sundae',\n      note: 'Hot cherries, vanilla ice cream and a small tower of cream over one waffle.',\n      src: 'img/berlin-waffle-ice-cream.jpg',\n      author: 'Susanne Nilsson',\n      license: 'CC BY-SA 2.0',\n      page: 'https://commons.wikimedia.org/wiki/File:Berlin_Waffle_with_ice_cream.jpg',\n      base: { count: 24, sum: 111 },\n      addedAt: '2026-09-02T09:10:00Z'\n    },\n    {\n      id: 'double-belgian-chocolate',",
+      "chars": 506
+    },
+    {
+      "step": 13,
+      "file": "app.js",
+      "kind": "write",
+      "title": "storage with an in-memory fallback",
+      "startLine": 155,
+      "endLine": 168,
+      "snippet": "  function storage() {\n    try {\n      var probe = '__waffleRankProbe';\n      window.localStorage.setItem(probe, '1');\n      window.localStorage.removeItem(probe);\n      return window.localStorage;\n    } catch (err) {\n      return null;\n    }\n  }\n\n  var store = storage();\n\n  function blankState() { return { v: VERSION, ratings: {}, uploads: [], sort: 'top' }; }",
+      "chars": 363
+    },
+    {
+      "step": 14,
+      "file": "app.js",
+      "kind": "write",
+      "title": "rating maths: base votes plus yours",
+      "startLine": 224,
+      "endLine": 235,
+      "snippet": "  function statsFor(photo) {\n    var mine = state.ratings[photo.id];\n    var count = photo.base.count + (mine ? 1 : 0);\n    var sum = photo.base.sum + (mine || 0);\n    var avg = count ? sum / count : 0;\n    return { count: count, sum: sum, avg: avg, mine: mine || 0 };\n  }\n\n  function totals() {\n    var list = photos();\n    var count = 0, sum = 0;\n    list.forEach(function (p) { var s = statsFor(p); count += s.count; sum += s.sum; });",
+      "chars": 437
+    },
+    {
+      "step": 15,
+      "file": "app.js",
+      "kind": "write",
+      "title": "sorting the board three ways",
+      "startLine": 239,
+      "endLine": 256,
+      "snippet": "  function sorted() {\n    var list = photos();\n    var sort = state.sort;\n    list.sort(function (a, b) {\n      var sa = statsFor(a), sb = statsFor(b);\n      if (sort === 'rated') {\n        if (sb.count !== sa.count) return sb.count - sa.count;\n        if (sb.avg !== sa.avg) return sb.avg - sa.avg;\n      } else if (sort === 'new') {\n        if (a.addedAt !== b.addedAt) return a.addedAt < b.addedAt ? 1 : -1;\n      } else {\n        if (sb.avg !== sa.avg) return sb.avg - sa.avg;\n        if (sb.count !== sa.count) return sb.count - sa.count;\n      }\n      return a.name.localeCompare(b.name);\n    });\n    return list;\n  }",
+      "chars": 623
+    },
+    {
+      "step": 16,
+      "file": "app.js",
+      "kind": "write",
+      "title": "card markup with the score widget",
+      "startLine": 296,
+      "endLine": 315,
+      "snippet": "  function cardHtml(photo, rank) {\n    var s = statsFor(photo);\n    var badge = photo.mine ? '<span class=\"badge is-mine\">YOURS</span>' : '<span class=\"badge\">#' + rank + '</span>';\n    var mineTag = s.mine ? '<span class=\"mine-tag\">your ' + s.mine + ' of 5</span>' : '';\n    return '' +\n      '<article class=\"card' + (photo.mine ? ' is-mine' : '') + '\" data-id=\"' + esc(photo.id) + '\">' +\n        '<div class=\"shot\">' +\n          '<img src=\"' + esc(photo.src) + '\" alt=\"' + esc(photo.name + ', waffle photo by ' + photo.author) + '\" loading=\"lazy\">' +\n          badge +\n          '<button class=\"open\" type=\"button\" data-open=\"' + esc(photo.id) + '\" aria-label=\"Open ' + esc(photo.name) + '\"></button>' +\n        '</div>' +\n        '<div class=\"card-body\">' +\n          '<h3>' + esc(photo.name) + '</h3>' +\n          '<p class=\"credit\">photo by ' + esc(photo.author) + (photo.license ? ', ' + esc(photo.license) : '') + '</p>' +\n          '<div class=\"score\">' + meter(s.avg) +\n            '<span class=\"avg\">' + avgText(s) + '</span>' +\n            '<span class=\"count\">' + countText(s.count) + '</span>' + mineTag +\n          '</div>' +\n          rateWidget(photo, s.mine, false) +\n        '</div>' +",
+      "chars": 1204
+    },
+    {
+      "step": 17,
+      "file": "app.js",
+      "kind": "write",
+      "title": "upload: downscale to 1200 pixels, then store",
+      "startLine": 445,
+      "endLine": 464,
+      "snippet": "  function readPhoto(file) {\n    if (!file) return;\n    if (!/^image\\//.test(file.type)) { setPending(null, '', 'That file is not an image. Choose a JPG, PNG or WebP photo.'); return; }\n    var reader = new FileReader();\n    reader.onerror = function () { setPending(null, '', 'That photo could not be read. Try another one.'); };\n    reader.onload = function () {\n      var img = new Image();\n      img.onerror = function () { setPending(null, '', 'That photo could not be opened. Try another one.'); };\n      img.onload = function () {\n        var scale = Math.min(1, MAX_EDGE / Math.max(img.width, img.height));\n        var w = Math.max(1, Math.round(img.width * scale));\n        var h = Math.max(1, Math.round(img.height * scale));\n        var canvas = document.createElement('canvas');\n        canvas.width = w;\n        canvas.height = h;\n        canvas.getContext('2d').drawImage(img, 0, 0, w, h);\n        var dataUrl;\n        try { dataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY); }\n        catch (err) { setPending(null, '', 'That photo could not be prepared. Try another one.'); return; }\n        setPending(dataUrl, file.name);",
+      "chars": 1144
+    },
+    {
+      "step": 18,
+      "file": "app.js",
+      "kind": "write",
+      "title": "scoring a waffle and saving it",
+      "startLine": 550,
+      "endLine": 571,
+      "snippet": "  function rate(id, score) {\n    var photo = find(id);\n    if (!photo) return false;\n    var was = state.ratings[id];\n    if (was === score) {\n      delete state.ratings[id];\n      toast('Score cleared from ' + photo.name + '.');\n    } else {\n      state.ratings[id] = score;\n      toast('Saved: ' + photo.name + ' gets ' + score + ' of 5.');\n    }\n    pulseTarget = { id: id, score: score };\n    if (!saveState()) {\n      if (was) state.ratings[id] = was; else delete state.ratings[id];\n      toast('Could not save that score in this browser.');\n      return false;\n    }\n    render();\n    refreshDetail(id);\n    applyPulse();\n    document.dispatchEvent(new CustomEvent('wafflerank:change', {\n      detail: { id: id, score: state.ratings[id] || 0, stats: statsFor(photo) }",
+      "chars": 773
+    },
+    {
+      "step": 19,
+      "file": "app.js",
+      "kind": "write",
+      "title": "the API another page can call",
+      "startLine": 750,
+      "endLine": 763,
+      "snippet": "  window.WaffleRank = {\n    version: VERSION,\n    getState: function () { return JSON.parse(JSON.stringify(state)); },\n    photos: function () { return photos().map(function (p) {\n      var s = statsFor(p);\n      return { id: p.id, name: p.name, author: p.author, mine: !!p.mine,\n               ratings: s.count, average: Number(s.avg.toFixed(2)), yourScore: s.mine };\n    }); },\n    rate: rate,\n    open: openDetail,\n    reset: function () { state = blankState(); saveState(); render(); },\n    toast: toast\n  };\n})();",
+      "chars": 518
+    },
+    {
+      "step": 20,
+      "file": "img",
+      "kind": "fetch",
+      "title": "download ten Commons waffle photos at 1100 pixels",
+      "snippet": "curl -L \"commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1100\" > img/sources.json",
+      "chars": 127
+    },
+    {
+      "step": 21,
+      "file": "CREDITS.txt",
+      "kind": "write",
+      "title": "author and license for every photo",
+      "startLine": 14,
+      "endLine": 20,
+      "snippet": "1. img/berlin-waffle-ice-cream.jpg\n   File: Berlin Waffle with ice cream.jpg\n   Author: Susanne Nilsson\n   License: CC BY-SA 2.0\n   License text: https://creativecommons.org/licenses/by-sa/2.0/\n   Source: https://commons.wikimedia.org/wiki/File:Berlin_Waffle_with_ice_cream.jpg",
+      "chars": 277
+    },
+    {
+      "step": 22,
+      "file": "README.md",
+      "kind": "write",
+      "title": "what it is, how to run it, how to embed it",
+      "startLine": 9,
+      "endLine": 20,
+      "snippet": "## Run it\n\nAny static server works. From this `site` directory:\n\n    python3 -m http.server 8080\n    # then open http://localhost:8080/\n\nOpening `index.html` straight from disk also works. Some browsers hide storage on\n`file://` origins, and the app detects that and keeps scores in memory for the visit\ninstead of failing.\n\n## Files",
+      "chars": 333
+    }
+  ]
+}

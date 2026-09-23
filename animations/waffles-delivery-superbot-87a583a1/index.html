@@ -554,7 +554,7 @@ function renderEnd(t) {
 // ---------- the hop: the mascot leaps out of the clip into the end card ----------
 // #hopper is the real mark (sbMarkLive, 220px: the end card's face) backed by assets/mark-backing.js. It
 // starts as frame 74 of the baked clip layer (154px box, crouched, same foot point), springs up in an
-// arc with a forward flip while it grows to the end card's size, and lands in the face slot with a
+// arc (upright, no flip) while it grows to the end card's size, and lands in the face slot with a
 // squash that springs back. It then stays there as the end card's mark.
 const FOOT_U = 0.86;                             // the mark's feet: y=86 of its 100-unit box
 const easeIO = (p) => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
@@ -574,14 +574,14 @@ function renderHop(t) {
     const p = h / T0;
     x = S.x; y = S.y; sc = s0; sx = lerp(HOP_FROM.sx, 0.86, p); sy = lerp(HOP_FROM.sy, 1.2, p);
     tilt = HOP_FROM.tilt * (1 - p);
-  } else if (t < B.land) {                        // the arc: a round, floaty parabola with one forward flip
+  } else if (t < B.land) {                        // the arc: a round, floaty parabola, upright
     const p = seg(t, B.hop + T0, B.land);
     x = lerp(S.x, E.x, p);
     y = lerp(S.y, E.y, p) - (300 + Math.max(0, E.y - S.y) * 0.3) * 4 * p * (1 - p);
     sc = lerp(s0, E.s, easeIO(p));
     const st = Math.abs(p - 0.5) * 2;              // stretched leaving and arriving, round at the top
     sx = lerp(1, 0.88, st); sy = lerp(1, 1.14, st);
-    flip = 360 * easeIO(p);
+    flip = 0;                                     // no flip: it just arcs over, upright
     ex = E.x < S.x ? -1.4 : 1.4; ey = -0.6;
   } else {                                        // landed in the face slot: squash, spring back
     const g = t - B.land, k = g < 0.7 ? Math.exp(-g / 0.13) * Math.cos(g * 17) : 0;

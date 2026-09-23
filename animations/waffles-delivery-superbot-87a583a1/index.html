@@ -5,17 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>order me waffles? superbot can do it · ad spot</title>
 <link rel="icon" href="assets/mark-clean.svg" type="image/svg+xml"/>
-<meta name="description" content="The user asks ChatGPT to order waffles and gets a long &quot;I can't do that!&quot; lecture; the superbot popup opens the app, superbot orders Denny's through DoorDash, a real 3s doorstep handoff plays with the superbot mascot riding the courier's shoulder, and the mascot hops out of the clip into the end card. 17.4s looping ad spot, 1920x1080."/>
+<meta name="description" content="The user asks ChatGPT to order waffles and gets a long &quot;I can't do that!&quot; lecture; the superbot popup opens the app, superbot orders Denny's through DoorDash, a 1s first-person Denny's handoff plays with the superbot mascot riding the courier's shoulder, and the mascot hops out of the clip into the end card. 15.4s looping ad spot, 1920x1080."/>
 <!-- FOOTAGE SOURCE / LICENSE
-     The doorstep clip (../../assets/video/waffles-delivery-clip.mp4) is cut from the Pexels stock video
-     "Man Opens a Door and Receives Food Delivery" by MART PRODUCTION (Pexels, published 2021-04-29),
-     https://www.pexels.com/video/man-opens-a-door-and-receives-food-delivery-7706071/
-     (file: videos.pexels.com/video-files/7706071/7706071-uhd_4096_2160_25fps.mp4, retrieved 2026-09-23),
-     used under the Pexels License (https://www.pexels.com/license/): free to use and modify, commercial use
-     allowed, attribution not required. Edit (3s): source 5.40-6.52s (the door opens, the courier is revealed) cut
-     to 17.60-19.48s (the bag comes up and is handed over), plus one clean copy of the last frame, scaled to
-     1920x1080, no audio. The bag is the stock footage's plain paper bag: no
-     Denny's or DoorDash branding is composited on it. The superbot mascot is NOT in the footage: it is the real
+     The doorstep clip (../../assets/video/waffles-delivery-clip.mp4) is a 1s first-person Denny's handoff generated
+     for this ad (fal.ai: nano-banana edit from the Denny's bag photo, then Kling 2.1 master image-to-video; see
+     build/build-clip.sh).
+     The bag is the Denny's bag from the reference photo, generated into the frame (nothing composited on it).
+     The superbot mascot is NOT in the footage: it is the real
      animated mark (../../assets/sb-mark-live.{css,js}) rendered as a transparent PNG sequence in headless
      Chromium (omitBackground) and overlaid with ffmpeg, hand-keyframed onto the courier's right shoulder (the
      viewer's left), backed by assets/mark-backing.js (a black rect behind the eye cut-outs so it reads as it does
@@ -366,7 +362,7 @@ html { --site-k: 1.6; } /* the app window is drawn at 1200x675 and shown at 1.6 
 // function of its number), so seeking (`?t=9.4`) or capturing any frame yields
 // the same picture. The skeleton is the site's own hub-boot.js: seg() windows,
 // pure tweens, no timers. Frame-indexed at 30fps so preview and capture agree.
-const FPS = 30, LOOP = 17.4;
+const FPS = 30, LOOP = 15.4;
 window.CYCLE = LOOP; // one download = one loop
 const $ = (id) => document.getElementById(id);
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -384,19 +380,19 @@ const B = {
   curIn: 3.2, curAt: 4.25, press: 4.45, release: 4.65, // the click lands 1.15s after the popup appears (scale .95)
   dip: 4.9, site: 5.15,                          // dip to black, the app window is simply there
   ask: 5.7, reply2: 6.25, order: 7.95, placed: 8.9, // the ask, superbot's line, the DoorDash card, then placed
-  clipDip: 9.9, clip: 10.15,                     // dip, then the real doorstep clip (3s, the mascot rides her shoulder)
-  hop: 13.15, land: 14.0,                        // the clip ends on its clean frame: the live mascot hops out into the end card
-  end: 13.15, word: 14.35,                       // the end card is under the clip from the hop; the words slide out after the landing
+  clipDip: 9.9, clip: 10.15,                     // dip, then the doorstep handoff (1s, the mascot rides her shoulder)
+  hop: 11.15, land: 12.0,                        // the clip ends on its clean frame: the live mascot hops out into the end card
+  end: 11.15, word: 12.35,                       // the end card is under the clip from the hop; the words slide out after the landing
 };
-const CLIP_LEN = 3.0;                            // the doorstep clip: 75 frames with the baked mascot...
-const CLEAN_T = 3.02;                            // ...then frame 75, the same plate frame with no mascot (held while the live one hops)
+const CLIP_LEN = 1.0;                            // the doorstep clip: 25 frames with the baked mascot...
+const CLEAN_T = 1.02;                            // ...then frame 25, the same plate frame with no mascot (held while the live one hops)
 // the clip's horizontal crop per ratio (object-position x): the plate is drawn 1:1 at 1080 high, so
 // stage x = plate x + (AR.w - 1920) * CLIP_POS. Chosen so the mascot, the courier AND the customer's
-// reaching hand stay in frame at 4:5 (plate window 620-1484) and 1:1 (560-1640).
-const CLIP_POS = { '16x9': 0.48, '4x3': 0.75, '1x1': 0.667, '4x5': 0.587 };
-// frame 74 of the baked mascot layer (build/render-mascot.mjs writes it to handoff.json): plate px foot point,
+// reaching hand stay in frame at 4:5 (plate window 539-1403) and 1:1 (504-1584).
+const CLIP_POS = { '16x9': 0.48, '4x3': 0.75, '1x1': 0.6, '4x5': 0.51 };
+// frame 24 of the baked mascot layer (build/render-mascot.mjs writes it to handoff.json): plate px foot point,
 // squash, tilt and eyes. The live mascot takes over from exactly this pose on the clean frame.
-const HOP_FROM = { x: 800, y: 520, sx: 1.16, sy: 0.8, tilt: 0.45, ex: 0.6, ey: -0.9 };
+const HOP_FROM = { x: 732, y: 508, sx: 1.16, sy: 0.8, tilt: 1.71, ex: 0.6, ey: -0.9 };
 const HOP_BOX = 154;                             // the baked mascot's box (1080p px); the end card's mark is 220
 
 // ---------- copy ----------

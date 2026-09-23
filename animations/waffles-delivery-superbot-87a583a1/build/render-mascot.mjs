@@ -16,7 +16,7 @@ for (let f = 0; f < n; f++) {
   await page.evaluate((i) => window.renderFrame(i), f);
   await page.screenshot({ path: path.join(out, `m${String(f).padStart(4, '0')}.png`), omitBackground: true });
 }
-// frame 74's pose, for index.html's HOP_FROM (the live mascot takes over from it on the clean frame 75)
+// frame 24's pose, for index.html's HOP_FROM (the live mascot takes over from it on the clean frame 25)
 const hand = await page.evaluate(() => window.handoff());
 writeFileSync(path.join(out, 'handoff.json'), JSON.stringify(hand, null, 1));
 await browser.close();

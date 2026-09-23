@@ -1,11 +1,11 @@
 <!doctype html>
-<!-- The mascot layer for the 3s doorstep clip: the REAL superbot.gg animated mark
+<!-- The mascot layer for the 1s doorstep clip: the REAL superbot.gg animated mark
      (assets/sb-mark-live.{css,js}, window.sbMarkLive) with a black backing behind
      its eye cut-outs (../assets/mark-backing.js; the mark itself is never redrawn) on a transparent 1920x1080 page. build/render-mascot.mjs screenshots it frame
      by frame with omitBackground and ffmpeg overlays the PNG sequence on the stock plate.
      window.renderFrame(i) is a pure function of the clip frame (25fps).
-     Frame 75 (the clip's last, "clean" frame) is empty on purpose: index.html holds the video on
-     it and the SAME mascot, live in the page, takes over from frame 74's exact pose and hops out
+     Frame 25 (the clip's last, "clean" frame) is empty on purpose: index.html holds the video on
+     it and the SAME mascot, live in the page, takes over from frame 24's exact pose and hops out
      of the clip into the end card. window.handoff() reports that pose for index.html's HOP_FROM. -->
 <html><head><meta charset="utf-8">
 <link rel="stylesheet" href="../../../assets/sb-mark-live.css">
@@ -21,26 +21,19 @@
 <div id="shadow"></div>
 <div id="rig"></div>
 <script>
-const FPS = 25, N = 76, BOX = 154, FOOT = 132.4; // 30% bigger than v1's 118px box; the feet sit at y=86 of the mark's 100-unit box
-const CLEAN = 75;                                  // the empty frame the page takes over on
+const FPS = 25, N = 26, BOX = 154, FOOT = 132.4; // 30% bigger than v1's 118px box; the feet sit at y=86 of the mark's 100-unit box
+const CLEAN = 25;                                  // the empty frame the page takes over on
 const mark = sbMarkLive('#rig', { size: BOX, interactive: false });
 markBacking(mark);
 const svg = mark.svg;
 const eyes = [svg.querySelector('.mark-eye-l'), svg.querySelector('.mark-eye-r')];
 const EYE = [{ cx: 35, cy: 58 }, { cx: 65, cy: 58 }];
 
-// The courier's RIGHT shoulder = the viewer's LEFT (she faces the camera), in 1920x1080 plate px:
-// the top of the shoulder where the mascot's feet sit, keyframed by hand on labelled full-res crops
-// of the plate (25px grid, build/ notes in build-clip.sh), Catmull-Rom between keys.
-// The plate is a jump cut: frames 0-27 are source 5.40-6.48s (the door swings open and she is
-// revealed), frames 28-74 are source 17.60-19.44s (she lifts the bag and hands it over).
-// The door edge covers her shoulder until frame ~19, so the mascot only pops in at frame 20.
-const CUT = 28;
-const KEYS = [
-  [20, 748, 552], [22, 752, 552], [24, 758, 553], [27, 768, 560],
-  [28, 905, 575], [30, 905, 572], [36, 910, 545], [42, 893, 510], [48, 880, 492],
-  [54, 848, 495], [60, 818, 505], [66, 800, 510], [70, 802, 515], [74, 800, 520],
-];
+// The courier's RIGHT shoulder = the viewer's LEFT (she faces the camera), in 1920x1080 plate px: the top
+// of the shoulder where the mascot's feet sit, keyed on 50px-grid crops of the plate at 0, 0.5 and 1.0s
+// (the camera pushes in slightly, so the shoulder drifts down and right). One continuous shot, no cut.
+const CUT = -1;
+const KEYS = [[0, 712, 445], [6, 712, 458], [12, 712, 472], [18, 722, 490], [24, 732, 508]];
 function cr(p0, p1, p2, p3, u) { // catmull-rom
   return 0.5 * ((2 * p1) + (-p0 + p2) * u + (2 * p0 - 5 * p1 + 4 * p2 - p3) * u * u + (-p0 + 3 * p1 - 3 * p2 + p3) * u * u * u);
 }
@@ -57,10 +50,10 @@ function shoulder(f) {
 const clamp01 = v => Math.max(0, Math.min(1, v));
 const inAny = (f, list) => list.some(([a, b]) => f >= a && f < b);
 
-const POP = 20;                                     // pops up on her shoulder once the door has cleared it
-const RIDE = [[32, 9, 36], [44, 10, 44], [56, 9, 34]]; // bouncy hops on the shoulder: [start, frames, height px]
-const CROUCH = [67, 74];                            // the wind-up for the big hop out of the clip
-const BLINK = [[36, 38]];
+const POP = 0;                                      // pops up on her shoulder as the clip starts
+const RIDE = [[8, 7, 26]]; // bouncy hops on the shoulder: [start, frames, height px]
+const CROUCH = [19, 24];                            // the wind-up for the big hop out of the clip
+const BLINK = [[4, 6]];
 
 // squash & stretch: rounder, bouncier than v1. In the air: stretched tall; on landing: a squash
 // that springs back with a little overshoot (damped cosine over 6 frames).
@@ -72,7 +65,7 @@ function squash(f) {
   }
   if (f >= CROUCH[0]) { const k = Math.pow(clamp01((f - CROUCH[0]) / (CROUCH[1] - CROUCH[0])), 1.6); return { sx: 1 + 0.16 * k, sy: 1 - 0.2 * k, air: 0 }; }
   const g = f - CUT; // a little settle on the cut, so the jump reads as a landing
-  if (g >= 0 && g < 5) { const k = Math.exp(-g / 1.8) * Math.cos(g * 1.2); return { sx: 1 + 0.1 * k, sy: 1 - 0.1 * k, air: 0 }; }
+  if (CUT > 0 && g >= 0 && g < 5) { const k = Math.exp(-g / 1.8) * Math.cos(g * 1.2); return { sx: 1 + 0.1 * k, sy: 1 - 0.1 * k, air: 0 }; }
   return { sx: 1, sy: 1, air: 0 };
 }
 
@@ -85,15 +78,14 @@ function state(f) {
   let { sx, sy, air } = squash(f);
   let pop = 1;
   if (f < POP) pop = 0;
-  else if (f < POP + 8) { // elastic pop-in from its feet: 0 -> 1.18 -> 0.94 -> 1
-    const p = (f - POP) / 8;
+  else if (f < POP + 6) { // elastic pop-in from its feet: 0 -> 1.18 -> 0.94 -> 1
+    const p = (f - POP) / 6;
     pop = Math.max(0, 1 - Math.exp(-5 * p) * Math.cos(p * Math.PI * 2.6));
     y -= 18 * Math.sin(Math.PI * Math.min(1, p * 1.6)) * (1 - p);
   }
   const tilt = air ? Math.sin(f * 0.8) * 5 : Math.sin(t * 2.2) * 2;
   // eyes: at the camera as it pops up, then at the customer (screen right) and the bag
-  let ex = 0, ey = 0.4;
-  if (f >= CUT) { ex = 1.5; ey = 0.5; }
+  let ex = 1.5, ey = 0.5;                          // at the customer's reaching hand (screen right)
   if (f >= CROUCH[0]) { ex = 0.6; ey = -0.9; } // looks up at where it is about to hop
   return { f, x, y, sx: sx * pop, sy: sy * pop, tilt, ex, ey, blink: inAny(f, BLINK), lift, base: s, air, visible: f >= POP && f < CLEAN, t };
 }
@@ -111,7 +103,7 @@ window.renderFrame = function (f) {
   eyes.forEach((e, i) => { e.setAttribute('cx', (EYE[i].cx + st.ex).toFixed(2)); e.setAttribute('cy', (EYE[i].cy + st.ey).toFixed(2)); e.setAttribute('ry', st.blink ? '1' : '11'); });
   return st;
 };
-// frame 74's pose: index.html's live mascot starts its hop from exactly here
+// frame 24's pose: index.html's live mascot starts its hop from exactly here
 window.handoff = () => { const s = state(CLEAN - 1); return { x: s.x, y: s.y, sx: s.sx, sy: s.sy, tilt: s.tilt, ex: s.ex, ey: s.ey, t: s.t }; };
 window.N = N;
 </script>

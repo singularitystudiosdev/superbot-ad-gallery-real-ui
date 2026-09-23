@@ -67,3 +67,8 @@
 .rc-mic svg { width: 11px; height: 11px; }
 .rc-send { width: 25px; height: 25px; border-radius: 50%; background: #2c2c2e; color: #5d606f !important; }
 .rc-send svg { width: 12px; height: 12px; stroke-width: 2.2; }
+
+/* The real thread is a centered reading column (superbot-desktop hub-chat.css: every feed row at --size-measure 600px, the composer at --size-thread-column 768px), scaled by this mock's 11.5px type against the app's 15px. */
+.hub { --hub-measure: 460px; --hub-column: 590px; }
+.hub .feed > .msg, .hub .feed-in > * { box-sizing: border-box; width: 100%; max-width: var(--hub-measure); margin-inline: auto; }
+.hub .composer { align-self: center; box-sizing: border-box; width: calc(100% - 24px); max-width: var(--hub-column); margin-inline: auto; }

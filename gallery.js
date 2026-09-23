@@ -9,6 +9,39 @@ let openIdx = -1; // index into filtered list currently shown in the lightbox
 
 const $ = (id) => document.getElementById(id);
 
+// ---- caption edits: type over any tile's caption; edits live in localStorage until they are
+// applied to gen-manifest.mjs. "copy" puts the edited ones on the clipboard as {id: caption} JSON.
+const EDITS_KEY = 'gallery.captionEdits.v1';
+let EDITS = {};
+try { EDITS = JSON.parse(localStorage.getItem(EDITS_KEY) || '{}') || {}; } catch { EDITS = {}; }
+const titleOf = (it) => EDITS[it.id] ?? it.title;
+const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function saveEdit(it, text) {
+  const v = text.replace(/\s+/g, ' ').trim();
+  if (!v || v === it.title) delete EDITS[it.id]; else EDITS[it.id] = v;
+  localStorage.setItem(EDITS_KEY, JSON.stringify(EDITS));
+  renderCopy();
+}
+function renderCopy() {
+  const n = Object.keys(EDITS).length, b = $('capCopy');
+  if (b.dataset.flash) return;
+  b.textContent = n ? `⧉ copy ${n} edit${n === 1 ? '' : 's'}` : '⧉ copy';
+  b.classList.toggle('has', n > 0);
+}
+async function copyEdits() {
+  const b = $('capCopy'), n = Object.keys(EDITS).length;
+  const flash = (msg) => { b.dataset.flash = '1'; b.textContent = msg; setTimeout(() => { delete b.dataset.flash; renderCopy(); }, 1600); };
+  if (!n) return flash('no edits yet: click a caption and type');
+  const text = 'Rename these ad gallery captions (superbot-ad-gallery-real-ui, {id: new caption}):\n```json\n' + JSON.stringify(EDITS, null, 2) + '\n```';
+  try { await navigator.clipboard.writeText(text); }
+  catch (err) { // clipboard API refused (no focus / http): the textarea fallback
+    console.error(err);
+    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); ta.remove();
+  }
+  flash(`✓ copied ${n} edit${n === 1 ? '' : 's'}`);
+}
+
 // ---- aspect ratio (the animations read ?ar= through assets/ar.js) ----
 const RATIOS = [['4x5', '4:5', 4 / 5], ['16x9', '16:9', 16 / 9], ['4x3', '4:3', 4 / 3], ['1x1', '1:1', 1]];
 let ar = localStorage.getItem('gallery.ar') || '16x9';
@@ -152,18 +185,28 @@ function renderGrid() {
   $('empty').hidden = list.length > 0;
   $('count').textContent = `${list.length} items`;
   for (const it of list) {
-    const t = document.createElement('button');
+    // the tile is a container: the thumbnail and the badge open the lightbox, the caption is editable
+    const t = document.createElement('div');
     t.className = 'tile' + (it.type === 'animation' ? ' anim' : '');
     const s = sizeOf(it);
     const wh = s ? ` width="${s.w}" height="${s.h}"` : '';
+    const title = titleOf(it);
     t.innerHTML =
-      `<img src="${srcFor(it, it.thumb)}" alt="${it.title}" loading="lazy"${wh}>` +
-      `<span class="meta"><span class="badge">${it.type === 'animation' ? '▶ play' : '⤢ zoom'}</span>` +
-      `<span class="g">${it.group}</span><br><span class="t">${it.title}</span></span>`;
+      `<button type="button" class="open" aria-label="${it.type === 'animation' ? 'play' : 'zoom'}: ${esc(title)}"><img src="${srcFor(it, it.thumb)}" alt="${esc(title)}" loading="lazy"${wh}></button>` +
+      `<span class="meta"><button type="button" class="badge">${it.type === 'animation' ? '▶ play' : '⤢ zoom'}</button>` +
+      `<span class="g">${it.group}</span><br><span class="t${EDITS[it.id] ? ' edited' : ''}" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="caption for ${esc(it.id)}" title="click to rename"></span></span>`;
+    const cap = t.querySelector('.t');
+    cap.textContent = title;
+    cap.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); cap.blur(); }
+      else if (e.key === 'Escape') { cap.textContent = titleOf(it); cap.blur(); }
+    });
+    cap.addEventListener('blur', () => { saveEdit(it, cap.textContent); cap.classList.toggle('edited', !!EDITS[it.id]); cap.textContent = titleOf(it); });
     const im = t.querySelector('img');
     if (im.complete) im.classList.add('loaded');
     else im.onload = () => im.classList.add('loaded');
-    t.onclick = (e) => open(it, e);
+    t.querySelector('.open').onclick = (e) => open(it, e);
+    t.querySelector('.badge').onclick = (e) => open(it, e);
     grid.appendChild(t);
   }
 }
@@ -200,7 +243,7 @@ function renderStage() {
     sizeFrame();
   }
   renderDl();
-  $('lbTitle').textContent = it.title;
+  $('lbTitle').textContent = titleOf(it);
   const arLabel = RATIOS.find(x => x[0] === (it.type === 'image' ? arOf(it) : ar))[1];
   $('lbPos').textContent = `${openIdx + 1} / ${list.length} · ${it.group}${it.type === 'animation' || it.ars ? ` · ${arLabel}` : ''}`;
 }
@@ -243,6 +286,9 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ---- boot ----
+$('capCopy').onclick = copyEdits;
+renderCopy();
+
 fetch('manifest.json')
   .then(r => r.json())
   .then(data => { ITEMS = data; renderAr(); renderTypePicker(); renderChips(); renderGrid(); })

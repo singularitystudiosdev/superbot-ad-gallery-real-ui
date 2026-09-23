@@ -190,9 +190,15 @@ body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antiali
 .dl-meta { min-width: 0; flex: 1; }
 .dl-meta b { display: block; font: 700 10px/13px var(--ui); color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dl-meta small { display: block; font: 9px/12px var(--mono); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dl-btn { margin: 8px 10px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 10px; border-radius: 8px; background: #fff; color: #000; font: 700 10px/12px var(--ui); position: relative; overflow: hidden; transform-origin: 50% 50%; }
-.dl-btn.done { background: rgba(52,211,153,.14); color: var(--ok); box-shadow: inset 0 0 0 1px rgba(52,211,153,.5); }
-.dl-btn svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+/* the order button: the waffles-website ad's gradient Publish pill (publish-ui.css .pub-cta), same colours,
+   glow and press: on "placed" it dips 5%, a light shine sweeps it and the bag turns into a white check */
+.dl-btn { margin: 8px 10px; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 7px 14px 7px 11px; border-radius: 999px; background: linear-gradient(90deg, #5ec8e6 0%, #6e7cf2 52%, #a86ef0 100%); color: #fff; font: 700 10px/12px var(--ui); letter-spacing: .005em; position: relative; isolation: isolate; overflow: hidden; transform-origin: 50% 50%; box-shadow: 0 0 14px rgba(110,124,242,.45), 0 0 30px rgba(168,110,240,.22), inset 0 1px 0 rgba(255,255,255,.22); }
+.dl-btn .dl-ic { position: relative; width: 12px; height: 12px; flex: none; }
+.dl-btn .dl-ic svg { position: absolute; inset: 0; width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; transform-origin: 50% 50%; }
+.dl-btn #dl-check { opacity: 0; stroke-width: 2.7; }
+.dl-btn #dl-check-p { stroke-dasharray: 23; stroke-dashoffset: 23; }
+.dl-btn #h-dl-t { position: relative; }
+.dl-btn .dl-shine { position: absolute; top: -30%; bottom: -30%; left: 0; width: 42%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.6) 50%, rgba(255,255,255,0) 100%); transform: translateX(-160%) skewX(-20deg); opacity: 0; pointer-events: none; z-index: 1; }
 /* the docked phone mockup was removed (user ask): not a real product surface */
 .composer { flex: none; margin: 6px 12px 10px; }
 .composer .pill { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 4px 0 9px; border-radius: 16px; background: var(--raised); border: 1px solid var(--line); color: var(--muted); }
@@ -329,7 +335,7 @@ html { --site-k: 1.6; } /* the app window is drawn at 1200x675 and shown at 1.6 
                   <div class="code" id="h-code"><div class="c-bar"><span>DoorDash order</span><span class="lang">Denny's</span></div>
                     <div class="dl-photo"><img src="assets/dennys-location.jpg" alt="Denny's restaurant"/><span>Denny's · Webb County, TX</span></div>
                     <div class="dl-row"><span class="dl-thumb waffle"></span><span class="dl-meta"><b>Classic Waffle Breakfast</b><small>Denny's via DoorDash · to your door</small></span><span class="lang" id="h-eta">1 item</span></div>
-                    <div class="dl-btn" id="h-dlbtn"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span id="h-dl-t">Placing order</span></div>
+                    <div class="dl-btn" id="h-dlbtn"><span class="dl-ic" aria-hidden="true"><svg id="dl-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><svg id="dl-check" viewBox="0 0 24 24"><path id="dl-check-p" d="M4.5 12.5l5 5L19.5 7"/></svg></span><span id="h-dl-t">Placing order</span><i class="dl-shine" id="dl-shine" aria-hidden="true"></i></div>
                   </div>
                 </div></div>
               </div>
@@ -420,7 +426,7 @@ const gBub = $('g-bub');
 const gThread = gCol.parentElement;
 const popup = $('popup'), chatbtn = $('chatbtn');
 const site = $('site'), hub = $('hub'), feedEl = hub.querySelector('.feed');
-const hUser = $('h-user'), hBot = $('h-bot'), hText = $('h-text'), hCode = $('h-code'), hDlbtn = $('h-dlbtn'), hDlT = $('h-dl-t');
+const hUser = $('h-user'), hBot = $('h-bot'), hText = $('h-text'), hCode = $('h-code'), hDlbtn = $('h-dlbtn'), hDlT = $('h-dl-t'), dlBag = $('dl-bag'), dlCheck = $('dl-check'), dlCheckP = $('dl-check-p'), dlShine = $('dl-shine');
 const clipSc = $('clip'), clipVid = $('clip-vid'), hEta = $('h-eta');
 let FREEZE = false; // a held frame (?t=) or a capture: the clip is seeked, never played
 const end = $('end'), endFace = $('end-face'), endSlide = $('end-slide');
@@ -516,12 +522,23 @@ function renderSite(t) {
   hCode.style.transform = `translateY(${((1 - outCubic(ci)) * 8).toFixed(2)}px)`;
   // the feed keeps the newest line in view, like the real app
   feedEl.scrollTop = feedEl.scrollHeight;
-  // placing, then placed: the status pops once and turns green
-  const done = t >= B.placed;
-  const pop = seg(t, B.placed, B.placed + 0.3);
-  hDlbtn.style.transform = `scale(${(1 + 0.06 * Math.sin(Math.PI * pop)).toFixed(3)})`;
-  hDlbtn.className = 'dl-btn' + (done ? ' done' : '');
-  hDlT.textContent = done ? 'Order placed ✓ Your Dasher is on the way' : 'Placing order' + '.'.repeat(1 + (Math.floor(t * 4) % 3));
+  // placing, then placed: the Publish press (waffles-website timeline.js): a 5% dip, a light shine sweeps
+  // the pill, the bag turns into a white check
+  const P = B.placed, done = t >= P;
+  const down = seg(t, P - 0.06, P + 0.04) * (1 - seg(t, P + 0.1, P + 0.24));
+  hDlbtn.style.transform = `scale(${(1 - 0.05 * down).toFixed(4)})`;
+  const sh = seg(t, P + 0.02, P + 0.62);
+  op(dlShine, sh > 0 && sh < 1 ? Math.sin(Math.PI * Math.min(1, sh * 1.25)) : 0);
+  dlShine.style.transform = `translateX(${lerp(-160, 300, 0.5 - Math.cos(Math.PI * sh) / 2).toFixed(1)}%) skewX(-20deg)`;
+  const ro = seg(t, P + 0.04, P + 0.24);
+  op(dlBag, 1 - ro);
+  dlBag.style.transform = `translate(${(ro * 2.5).toFixed(2)}px, ${(-ro * 2.5).toFixed(2)}px) rotate(${(-40 * ro).toFixed(1)}deg) scale(${(1 - 0.6 * ro).toFixed(3)})`;
+  const ck = seg(t, P + 0.14, P + 0.44);
+  op(dlCheck, ck > 0 ? 1 : 0);
+  dlCheckP.style.strokeDashoffset = (23 * (1 - outCubic(ck))).toFixed(2);
+  const cb = seg(t, P + 0.14, P + 0.4), ob = 1 + 2.70158 * Math.pow(cb - 1, 3) + 1.70158 * Math.pow(cb - 1, 2); // outBack
+  dlCheck.style.transform = `scale(${lerp(0.55, 1, ob).toFixed(3)})`;
+  hDlT.textContent = done ? 'Order placed · Your Dasher is on the way' : 'Placing order' + '.'.repeat(1 + (Math.floor(t * 4) % 3));
   hEta.textContent = done ? 'ETA 24 min' : '1 item';
 }
 

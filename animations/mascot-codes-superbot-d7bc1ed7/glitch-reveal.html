@@ -56,7 +56,7 @@ function drawWall(cv, ctx) {
   g.fillRect(0, 0, cv.width, cv.height);
   g.font = '700 ' + f + 'px "SF Mono", ui-monospace, Menlo, Consolas, monospace';
   g.textBaseline = 'middle';
-  var cw = g.measureText('XXXX-XXXX-XXXX-XXXX').width + f * 1.4;
+  var cw = g.measureText('XXXXXXXXXXXXXXXX').width + f * 1.4;
   var k = 0, rnd = SB.rng(77);
   for (var r = 0, y = lh * 0.6; y < 1080 + lh; y += lh, r++) {
     var x0 = -((r * 0.37) % 1) * cw;

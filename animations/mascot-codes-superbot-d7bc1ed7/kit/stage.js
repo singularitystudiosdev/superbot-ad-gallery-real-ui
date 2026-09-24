@@ -63,16 +63,19 @@
   function code(rand) {
     var out = '';
     for (var i = 0; i < 16; i++) {
-      if (i && i % 4 === 0) out += '-';
       out += ALPHA[Math.floor(rand() * ALPHA.length)];
     }
     return out;
   }
 
-  // n codes: the real ones in kit/codes.js first, then placeholders in the invite format.
+  // n codes, each exactly 16 characters: the real ones in kit/codes.js first (dashes and spaces dropped),
+  // then placeholders over the invite page's alphabet.
   function codes(n, seed) {
     var rand = SBMark.rng(seed || 42), real = window.SB_CODES || [], out = [];
-    for (var i = 0; i < n; i++) out.push(real[i] || code(rand));
+    for (var i = 0; i < n; i++) {
+      var r = real[i] ? String(real[i]).toUpperCase().replace(/[^0-9A-Z]/g, '') : '';
+      out.push(r.length === 16 ? r : code(rand));
+    }
     return out;
   }
 

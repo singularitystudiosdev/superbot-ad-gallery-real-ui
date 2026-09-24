@@ -384,6 +384,14 @@
     "thumb": "assets/shots/dvd-bounce-8h-superbot-d7bc1ed7.png"
   },
   {
+    "id": "comments-release-superbot-d7bc1ed7",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FIRST 100 COMMENTS = EARLY ACCESS ON RELEASE · cards",
+    "src": "animations/mascot-codes-superbot-d7bc1ed7/comments-release.html",
+    "thumb": "assets/shots/comments-release-superbot-d7bc1ed7.png"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -44,7 +44,7 @@ function codeWall(parent, ctx, list, opts) {
   opts = opts || {};
   var W = ctx.w, H = 1080, n = list.length;
   var pad = Math.round(Math.min(W, H) * (opts.padK || 0.045)), top = opts.label ? 84 : 0;
-  var aw = W - 2 * pad, ah = H - 2 * pad - top, GAP = 1.2, LH = 1.28, CH = 11.9, best = null;
+  var aw = W - 2 * pad, ah = H - 2 * pad - top, GAP = 1.2, LH = 1.28, CH = 10.0, best = null;
   for (var c = 1; c <= 8; c++) {
     var r = Math.ceil(n / c);
     var f = Math.min(aw / (c * CH + (c - 1) * GAP), ah / (r * LH), opts.maxFont || 999);

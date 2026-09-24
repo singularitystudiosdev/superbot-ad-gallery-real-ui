@@ -85,7 +85,7 @@ SB.ad({
     hl.style.fontSize = ctx.narrow ? '176px' : '168px';
     hl.innerHTML = ctx.narrow ? 'CATCH<br>ONE.' : 'CATCH ONE.';
     CODE = SB.codes(1, 71)[0];
-    slot = SB.el('div', 'mc-mono slot', col, 'XXXX-XXXX-XXXX-XXXX');
+    slot = SB.el('div', 'mc-mono slot', col, 'XXXXXXXXXXXXXXXX');
     place.style.paddingTop = ctx.narrow ? '250px' : '220px';
     fitS = SB.fit(plate, ctx.w * (ctx.narrow ? 0.9 : 0.84), 700);
 
@@ -141,15 +141,19 @@ SB.ad({
     var landed = SB.seg(t, LAND - 0.05, LAND + 0.5);
     grab.style.background = 'rgba(0,0,0,' + (0.82 * (1 - landed)).toFixed(3) + ')';
     grab.style.boxShadow = '0 0 36px 26px rgba(0,0,0,' + (0.82 * (1 - landed)).toFixed(3) + ')';
+    // All 16 glyphs hold their places the whole time the code is on screen, so it never reads short:
+    // a glyph not yet locked (or already melting) is a dim scrambled rain character.
+    var first = EMERGE - 0.3, last = MELT + (chars.length - 1) * 0.03 + 0.25;
     for (var i = 0; i < chars.length; i++) {
       var on = EMERGE + i * 0.055, off = MELT + (chars.length - 1 - i) * 0.03;
       var s = chars[i];
-      if (t < on - 0.3 || t >= off + 0.25) { s.style.visibility = 'hidden'; continue; }
+      if (t < first || t >= last) { s.style.visibility = 'hidden'; continue; }
       s.style.visibility = 'visible';
       var scram = t < on || t >= off;
-      s.textContent = CODE[i] === '-' ? '-' : scram ? SB.ALPHA[rt(i * 577 + fi * 37) & 31] : CODE[i];
+      s.textContent = scram ? SB.ALPHA[rt(i * 577 + fi * 37) & 31] : CODE[i];
       if (scram) {
-        s.style.color = 'rgba(0,229,195,0.55)';
+        var ramp = t < on ? SB.seg(t, first, on) : 1 - SB.seg(t, off, last);
+        s.style.color = 'rgba(0,229,195,' + (0.16 + 0.39 * ramp).toFixed(3) + ')';
         s.style.textShadow = 'none';
       } else {
         var glow = 1 - landed * 0.7;

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIRST 100 COMMENTS = EARLY ACCESS ON RELEASE · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .card { text-align: center; line-height: 0.95; transform-origin: 50% 50%; }
+  .eq { font-size: 420px; line-height: 1; }
+</style>
+</head>
+<body>
+<script>
+/* FIRST 100 COMMENTS = EARLY ACCESS ON RELEASE, as three cards on black: the offer, the equals sign, the
+   payoff, each a hard cut with a small settle. Then the mark alone: it blinks, smiles, and the loop cuts back. */
+var BEATS = [0.0, 1.7, 2.5, 4.6], LOOP = 7.4;
+var cards = [], markLayer, mark;
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 3.6,
+  build: function (frame, ctx) {
+    var copy = ctx.narrow
+      ? ['FIRST 100<br>COMMENTS', '=', 'EARLY<br>ACCESS ON<br>RELEASE']
+      : ['FIRST 100<br>COMMENTS', '=', 'EARLY ACCESS<br>ON RELEASE'];
+    cards = copy.map(function (html, i) {
+      var center = SB.el('div', 'mc-center', frame);
+      var card = SB.el('div', 'mc-type card' + (i === 1 ? ' eq' : ''), center);
+      card.innerHTML = html;
+      if (i !== 1) card.style.fontSize = '190px';
+      SB.fit(card, ctx.w * 0.86, 1080 * 0.78);
+      return { center: center, card: card, fit: parseFloat(card.style.transform.replace('scale(', '')) || 1 };
+    });
+    markLayer = SB.el('div', 'mc-center', frame);
+    mark = SB.mascot(markLayer, { size: ctx.narrow ? 360 : 420, happy: [[5.35, 1.2]], blinks: [{ t: 4.95, right: false }, { t: 6.85, right: true }] });
+  },
+  frame: function (t) {
+    cards.forEach(function (c, i) {
+      var on = t >= BEATS[i] && t < BEATS[i + 1];
+      c.center.style.visibility = on ? 'visible' : 'hidden';
+      if (on) {
+        var p = SB.easeOut(SB.seg(t, BEATS[i], BEATS[i] + 0.22));
+        c.card.style.transform = 'scale(' + (c.fit * SB.lerp(1.07, 1, p)).toFixed(4) + ')';
+      }
+    });
+    var alone = t >= BEATS[3];
+    markLayer.style.visibility = alone ? 'visible' : 'hidden';
+    var q = SB.easeOut(SB.seg(t, BEATS[3], BEATS[3] + 0.3));
+    markLayer.style.transform = 'scale(' + SB.lerp(0.9, 1, q).toFixed(4) + ')';
+  }
+});
+</script>
+</body>
+</html>

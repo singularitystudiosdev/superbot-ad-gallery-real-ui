@@ -126,8 +126,8 @@ SB.ad({
     cells = codes.map(function (code, k) {
       var el = SB.el('div', 'cell', grid);
       el.style.padding = n ? '6px 7px' : '8px 11px';
-      var a = SB.el('div', null, el, code.slice(0, 9));
-      var b = SB.el('div', null, el, code.slice(10));
+      var a = SB.el('div', null, el, code.slice(0, 8));
+      var b = SB.el('div', null, el, code.slice(8));
       var r = Math.floor(k / COLS), c = k % COLS;
       return { el: el, a: a, b: b, code: code, r: r, c: c, k: k, lit: -1,
         d: Math.hypot(r - TR, c - TC), settle: c * 0.045 + r * 0.014 };
@@ -152,12 +152,11 @@ SB.ad({
       // text: settle wave at loop start, scramble ripple from the chosen cell at the end
       var sc0 = SCR0 + C.d * 0.075;
       var txtA = '', txtB = '';
-      for (var j = 0; j < 19; j++) {
-        if (j === 9) continue;
+      for (var j = 0; j < 16; j++) {
         var ch = C.code[j];
-        var scram = ch !== '-' && (t < C.settle + j * 0.012 || t >= sc0 + (j % 10) * 0.01);
+        var scram = t < C.settle + j * 0.012 || t >= sc0 + (j % 8) * 0.01;
         if (scram) ch = SB.ALPHA[rt(C.k * 41 + j * 7 + fi * 977) & 31];
-        if (j < 9) txtA += ch; else txtB += ch;
+        if (j < 8) txtA += ch; else txtB += ch;
       }
       C.a.textContent = txtA;
       C.b.textContent = txtB;

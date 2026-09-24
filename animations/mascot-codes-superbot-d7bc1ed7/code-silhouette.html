@@ -56,7 +56,7 @@ function layout() {
   }
   function build(f) {
     probe.font = '600 ' + f + 'px ' + FONT;
-    var cw = probe.measureText('XXXX-XXXX-XXXX-XXXX').width, gap = f * 0.9, rh = f * 1.34;
+    var cw = probe.measureText('XXXXXXXXXXXXXXXX').width, gap = f * 0.9, rh = f * 1.34;
     var out = [], row = 0;
     for (var y = box.top + 20.5 * s + rh * 0.35; y < box.top + 86 * s + rh * 0.3; y += rh, row++) {
       var off = (row % 2) * (cw + gap) * 0.5;
@@ -76,7 +76,8 @@ function layout() {
   var best = null;
   for (var f = 6; f <= 24; f += 0.05) {
     var b = build(f);
-    var err = Math.abs(b.list.length - N) + (b.list.length < N ? 0.5 : 0);
+    // Never fewer than N: every code needs a slot; surplus slots are trimmed below.
+    var err = b.list.length < N ? 1000 + N - b.list.length : b.list.length - N;
     if (!best || err < best.err || (err === best.err && f > best.f)) best = { f: f, b: b, err: err };
   }
   F = best.f;

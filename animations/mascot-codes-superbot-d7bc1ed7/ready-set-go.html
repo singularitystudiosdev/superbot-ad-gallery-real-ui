@@ -67,7 +67,7 @@ SB.ad({
     SB.fit(lockup, ctx.w * 0.86, 1080 * 0.78);
 
     var fs = ctx.narrow ? 30 : 40;
-    var cols = Math.max(1, Math.floor((ctx.w - 40) / (19 * 0.62 * fs + 34)));
+    var cols = Math.max(1, Math.floor((ctx.w - 40) / (16 * 0.62 * fs + 34)));
     var per = cols * Math.ceil(1080 / (fs * 1.12 + 6));
     var all = SB.codes(per * 3, 7331);
     var rand = SB.rng(99);

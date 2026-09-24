@@ -48,6 +48,7 @@ let ar = localStorage.getItem('gallery.ar') || '16x9';
 if (!RATIOS.some(r => r[0] === ar)) ar = '16x9';
 
 // the download link: assets/video/<id>.<ratio>.mp4, rendered offline by .tmp/ar-render (one loop, 1080 high)
+let dlGen = 0; // bumped per renderDl call so a stale existence probe cannot relabel a live button
 function renderDl() {
   const a = $('lbDl');
   const it = $('lb').hidden ? null : filtered()[openIdx];
@@ -62,10 +63,26 @@ function renderDl() {
     return;
   }
   const label = RATIOS.find(x => x[0] === ar)[1];
-  a.href = `assets/video/${it.id}.${ar}.mp4`;
+  const href = `assets/video/${it.id}.${ar}.mp4`;
+  a.href = href;
   a.download = `${it.id}-${label.replace(':', 'x')}.mp4`;
   a.textContent = `⤓ download ${label}`;
+  a.title = '';
+  a.classList.remove('no-render');
   a.hidden = false;
+  // the mp4 only exists where the offline render was produced: an ad whose page shipped
+  // without one must not offer a button that 404s on click (it reads "file wasn't
+  // available on site"). Probe it; a later open or ratio change wins the race.
+  const gen = ++dlGen;
+  fetch(href, { method: 'HEAD' })
+    .then((r) => { if (gen === dlGen && !r.ok) markNoRender(a, label); })
+    .catch(() => { if (gen === dlGen) markNoRender(a, label); });
+}
+function markNoRender(a, label) {
+  a.removeAttribute('href'); // no href: nothing to navigate to, so nothing to 404
+  a.classList.add('no-render');
+  a.textContent = `⤓ ${label} not rendered`;
+  a.title = 'this spot has no offline render at this ratio yet';
 }
 
 // a static ad ships one PNG per ratio (assets/ads/<id>.<ar>.png) and its src

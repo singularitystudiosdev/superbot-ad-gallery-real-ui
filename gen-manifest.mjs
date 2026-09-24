@@ -136,3 +136,21 @@ const shipped = items.filter(i => i.group === ONLY_GROUP);
 
 writeFileSync('manifest.json', JSON.stringify(shipped, null, 2));
 console.log(`manifest.json: ${shipped.length} items (${ONLY_GROUP})`);
+
+// every shipped animation's download button points at assets/video/<id>.<ar>.mp4.
+// Name the ones with no render, so a page added without its offline video shows up
+// here instead of as a dead download in the gallery.
+const VIDEO_ARS = ['16x9', '4x3', '1x1', '4x5'];
+const noRender = [];
+for (const it of shipped) {
+  if (it.type !== 'animation') continue;
+  for (const k of VIDEO_ARS) {
+    const p = `assets/video/${it.id}.${k}.mp4`;
+    try { statSync(p); } catch { noRender.push(p); }
+  }
+}
+if (noRender.length) {
+  console.log(`\nWARNING: ${noRender.length} download${noRender.length === 1 ? '' : 's'} have no offline render:`);
+  for (const p of noRender) console.log(`  ${p}`);
+  console.log('  render with: node .tmp/ar-render.mjs <port> all <id ...>');
+}

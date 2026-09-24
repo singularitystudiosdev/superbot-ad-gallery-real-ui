@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8 HOURS · DVD bounce with hidden code flashes · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .mover { position: absolute; left: 0; top: 0; will-change: transform; }
+  .squash { transform-origin: 50% 50%; }
+  .ha { position: absolute; left: 0; top: 0; font-size: 58px; font-weight: 900; letter-spacing: 0.02em; white-space: nowrap; }
+  .flash { position: absolute; inset: 0; pointer-events: none; }
+  .cluster { position: absolute; font-size: 40px; line-height: 1.25; color: #fff; white-space: nowrap; }
+  .wall { position: absolute; inset: 0; display: grid; align-content: center; justify-content: center; gap: 14px 30px; color: #fff; }
+</style>
+</head>
+<body>
+<script>
+/* 8 hours of black. The mark drifts like the old DVD logo, and every time it meets an edge it squashes,
+   smiles (the invite page's own happy state) and a little HA pops off the wall. Hidden in the 8 hours:
+   code flashes, 3 frames each (0.1 s), in seeded random places, the first at exactly 1.2 s.
+
+   The bounce closes on PERIOD (each axis makes a whole number of round trips in it), so the recorder
+   (render-long.mjs) renders one period of 2 s segments once and re-renders only the segments holding a
+   flash. ?noflash renders the bare bounce for those base segments. */
+var HOURS = 8, LOOP = HOURS * 3600, PERIOD = 60, FPS = 30, SEG = 60, SIZE = 230, SPEED = 300;
+var FIRST_FLASH = 36, FLASH_FRAMES = 3, LAUGH = 0.75;
+var NOFLASH = new URLSearchParams(location.search).has('noflash');
+var mark, mover, squash, pops = [], flashLayer, flashes, hits, blinks, shownFlash = -1;
+var W, Rx, Ry, vx, vy, x0, y0;
+
+function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+function tri(u, R) { var m = ((u % (2 * R)) + 2 * R) % (2 * R); return m <= R ? m : 2 * R - m; }
+function pos(t) { return { x: tri(vx * t + x0, Rx), y: tri(vy * t + y0, Ry) }; }
+
+// Every wall contact inside one period: u = k*R on an axis; k even is the left/top wall, odd right/bottom.
+function periodHits() {
+  var out = [];
+  [[vx, x0, Rx, 'x'], [vy, y0, Ry, 'y']].forEach(function (a) {
+    for (var k = Math.ceil(a[1] / a[2]); ; k++) {
+      var t = (k * a[2] - a[1]) / a[0];
+      if (t >= PERIOD) break;
+      if (t >= 0) out.push({ t: t, axis: a[3], far: k % 2 !== 0 });
+    }
+  });
+  return out.sort(function (a, b) { return a.t - b.t; });
+}
+
+// Seeded over the whole 8 h: gaps of 20 s to 4 min, never straddling a 2 s segment edge.
+function flashPlan() {
+  var rand = SB.rng(20260924), out = [], f = FIRST_FLASH;
+  while (f + FLASH_FRAMES < LOOP * FPS) {
+    if (f % SEG > SEG - FLASH_FRAMES) f += SEG - (f % SEG) + 1;
+    var wall = out.length > 0 && rand() < 0.14;
+    out.push({ f: f, wall: wall, n: 1 + Math.floor(rand() * 6), fx: rand(), fy: rand(), seed: 1 + Math.floor(rand() * 1e9) });
+    f += Math.round((20 + rand() * 220) * FPS);
+  }
+  return out;
+}
+
+function activeFlash(frameNo) {
+  var lo = 0, hi = flashes.length - 1;
+  while (lo <= hi) {
+    var mid = (lo + hi) >> 1;
+    if (flashes[mid].f <= frameNo) lo = mid + 1; else hi = mid - 1;
+  }
+  return hi >= 0 && frameNo < flashes[hi].f + FLASH_FRAMES ? hi : -1;
+}
+
+function drawFlash(i, ctx) {
+  flashLayer.innerHTML = '';
+  if (i < 0) return;
+  var fl = flashes[i], list = SB.codes(fl.wall ? 100 : fl.n, fl.seed);
+  if (fl.wall) {
+    var cols = ctx.w >= 1400 ? 10 : ctx.w >= 1000 ? 5 : 4;
+    var wall = SB.el('div', 'wall mc-mono', flashLayer);
+    wall.style.gridTemplateColumns = 'repeat(' + cols + ', auto)';
+    wall.style.fontSize = (ctx.w / cols / 11.5) + 'px';
+    list.slice(0, cols * Math.floor(100 / cols)).forEach(function (c) { SB.el('div', '', wall, c); });
+    return;
+  }
+  var box = SB.el('div', 'cluster mc-mono', flashLayer);
+  box.innerHTML = list.join('<br>');
+  var bw = box.offsetWidth, bh = box.offsetHeight;
+  // Never under the mark: if the spot would overlap it at that moment, take the mirrored spot.
+  var m = pos(fl.f / FPS), fx = fl.fx, fy = fl.fy;
+  var place = function (u, v) { return { x: 24 + u * Math.max(0, ctx.w - bw - 48), y: 24 + v * Math.max(0, 1080 - bh - 48) }; };
+  var at = place(fx, fy);
+  if (at.x < m.x + SIZE + 40 && at.x + bw > m.x - 40 && at.y < m.y + SIZE + 40 && at.y + bh > m.y - 40) at = place(1 - fx, 1 - fy);
+  box.style.left = Math.round(at.x) + 'px';
+  box.style.top = Math.round(at.y) + 'px';
+}
+
+SB.ad({
+  loop: LOOP,
+  period: PERIOD,
+  thumbAt: FIRST_FLASH / FPS,
+  build: function (frame, ctx) {
+    W = ctx.w; Rx = W - SIZE; Ry = 1080 - SIZE;
+    var nx = Math.max(1, Math.round(SPEED * PERIOD / (2 * Rx)));
+    var ny = Math.max(1, Math.round(SPEED * PERIOD / (2 * Ry)));
+    while (gcd(nx, ny) > 1 || nx === ny) ny++;
+    vx = 2 * Rx * nx / PERIOD; vy = 2 * Ry * ny / PERIOD;
+    x0 = 0.37 * Rx; y0 = 0.21 * Ry;
+    hits = periodHits();
+    var brand = SB.rng(7);
+    blinks = [];
+    for (var b = 1.8 + brand() * 3.2; b < PERIOD - 0.2; b += 1.8 + brand() * 3.2) blinks.push(b);
+    mover = SB.el('div', 'mover', frame);
+    squash = SB.el('div', 'squash', mover);
+    mark = SB.mascot(squash, {
+      size: SIZE, blinks: false,
+      closed: function (t) {
+        var p = t % PERIOD;
+        for (var i = 0; i < blinks.length; i++) if (p >= blinks[i] && p < blinks[i] + 0.12) return true;
+        return false;
+      }
+    });
+    pops = [0, 1, 2].map(function () { return SB.el('div', 'ha', frame); });
+    flashLayer = SB.el('div', 'flash', frame);
+    flashes = flashPlan();
+    shownFlash = -2;
+    window.__long = { period: PERIOD, seg: SEG, fps: FPS, loop: LOOP, flashes: flashes.map(function (f) { return f.f; }) };
+  },
+  frame: function (t, ctx) {
+    var base = Math.floor(t / PERIOD) * PERIOD, p = t - base;
+    var here = pos(t);
+    mover.style.transform = 'translate(' + here.x.toFixed(2) + 'px, ' + here.y.toFixed(2) + 'px)';
+
+    // Smile windows for this period and the tail of the last one (the kit syncs the happy bob to them).
+    var happy = [], recent = [];
+    [base - PERIOD, base].forEach(function (b) {
+      if (b < 0) return;
+      hits.forEach(function (h, i) {
+        var at = b + h.t;
+        happy.push([at, LAUGH]);
+        if (t >= at && t < at + 0.8) recent.push({ h: h, at: at, n: i });
+      });
+    });
+    mark.happy = happy;
+
+    var sx = 1, sy = 1;
+    recent.forEach(function (r) {
+      var k = Math.pow(1 - SB.seg(t - r.at, 0, 0.2), 2) * 0.16;
+      if (r.h.axis === 'x') { sx -= k; sy += k * 0.6; } else { sy -= k; sx += k * 0.6; }
+    });
+    squash.style.transform = 'scale(' + sx.toFixed(4) + ', ' + sy.toFixed(4) + ')';
+
+    pops.forEach(function (el, i) {
+      var r = recent[recent.length - 1 - i];
+      if (!r) { el.style.opacity = '0'; return; }
+      var at = pos(r.at), age = t - r.at, q = SB.easeOut(SB.seg(age, 0, 0.8));
+      var words = ['HA', 'HA!', 'HAHA', 'HA HA', 'HEHE'];
+      el.textContent = words[r.n % words.length];
+      // Off the wall it hit, into the frame, drifting up.
+      var ox = r.h.axis === 'x' ? (r.h.far ? -120 - 60 * q : SIZE + 20 + 60 * q) : SIZE * 0.35;
+      var oy = r.h.axis === 'y' ? (r.h.far ? -70 - 40 * q : SIZE + 10 + 40 * q) : -10 - 60 * q;
+      var tilt = (r.n % 2 ? 1 : -1) * 8;
+      el.style.transform = 'translate(' + (at.x + ox).toFixed(1) + 'px, ' + (at.y + oy).toFixed(1) + 'px) rotate(' + tilt + 'deg) scale(' + SB.lerp(0.6, 1, SB.backOut(SB.seg(age, 0, 0.25))).toFixed(3) + ')';
+      el.style.opacity = String(1 - SB.seg(age, 0.45, 0.8));
+    });
+
+    var idx = NOFLASH ? -1 : activeFlash(Math.round(t * FPS));
+    if (idx !== shownFlash) { drawFlash(idx, ctx); shownFlash = idx; }
+  }
+});
+</script>
+</body>
+</html>

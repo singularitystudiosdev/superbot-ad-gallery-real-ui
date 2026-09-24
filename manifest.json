@@ -376,6 +376,14 @@
     "thumb": "assets/shots/one-works-superbot-d7bc1ed7.png"
   },
   {
+    "id": "dvd-bounce-8h-superbot-d7bc1ed7",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "8 HOURS · DVD bounce, hidden code flashes",
+    "src": "animations/mascot-codes-superbot-d7bc1ed7/dvd-bounce-8h.html",
+    "thumb": "assets/shots/dvd-bounce-8h-superbot-d7bc1ed7.png"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

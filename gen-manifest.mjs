@@ -111,6 +111,7 @@ const more = [
   ['glitch-reveal-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/glitch-reveal.html', 'CODES INSIDE · glitch reveal', 'Ad spots'],
   ['screenshot-shutter-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/screenshot-shutter.html', 'SCREENSHOT THIS · shutter', 'Ad spots'],
   ['one-works-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/one-works.html', 'ONE OF THESE WORKS · scan', 'Ad spots'],
+  ['dvd-bounce-8h-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/dvd-bounce-8h.html', '8 HOURS · DVD bounce, hidden code flashes', 'Ad spots'],
   ['gg-site-variants', 'gg-site/variants.html', 'superbot.gg — character variants', 'Site variants'],
   ['gg-site-lander-zen', 'gg-site/lander-zen.html', 'lander — zen', 'Site variants'],
   ['gg-site-lander-minimal', 'gg-site/lander-minimal.html', 'lander — minimal', 'Site variants'],

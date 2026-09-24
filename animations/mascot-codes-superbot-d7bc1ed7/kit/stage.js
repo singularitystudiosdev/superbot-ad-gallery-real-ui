@@ -2,6 +2,7 @@
 
      SB.ad({
        loop: 6,                 seconds; the spot repeats exactly on this period
+       period: 60,              optional: the marks' idle cycles are fitted to this instead of loop (long spots)
        thumbAt: 2.5,            the moment the gallery thumbnail is taken from
        build(frame, ctx) {},    make the DOM once (again on an aspect change); make marks with SB.mascot()
        frame(t, ctx) {}         set every moving style from t in [0, loop); a pure function of t
@@ -128,7 +129,8 @@
     frameEl.style.width = AR.w + 'px';
     marks = [];
     spec.build(frameEl, ctx);
-    marks.forEach(function (m) { SBMark.retime(m, spec.loop); });
+    // A long spot (hours) can repeat its motion on a shorter period; the marks' idle cycles close on it.
+    marks.forEach(function (m) { SBMark.retime(m, spec.period || spec.loop); });
     place();
   }
 

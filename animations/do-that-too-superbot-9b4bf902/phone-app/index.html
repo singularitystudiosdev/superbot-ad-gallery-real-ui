@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1, viewport-fit=cover">
+<title>Appling</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<!-- Appling: the app for making apps, as Superbot builds it in the "build" scene.
+     ?ad=1  the parent drives window.adRender(t); window.AD_DUR is the length in seconds.
+     ?t=<s> freezes one frame (with or without ad=1). Otherwise it loops on its own. -->
+<div id="screen">
+
+  <!-- ============ HOME ============ -->
+  <section id="home">
+    <div id="home-scroll">
+      <header class="topbar in" data-in="0">
+        <div class="brand">
+          <span class="brand-tile"><i data-icon="sprout"></i></span>
+          <span class="brand-name">Appling</span>
+        </div>
+        <div class="topbar-r">
+          <span class="round-btn"><i data-icon="bell"></i><b class="badge"></b></span>
+          <span class="avatar">S</span>
+        </div>
+      </header>
+
+      <p class="greet in" data-in="1">Good morning, Sam</p>
+      <h1 class="headline in" data-in="1">What should<br>we build?</h1>
+
+      <div id="prompt" class="in" data-in="2">
+        <div class="prompt-text">
+          <span id="placeholder">Describe an app idea</span><span id="ptext"></span><span id="caret"></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool"><i data-icon="image"></i></span>
+          <span class="tool"><i data-icon="mic"></i></span>
+          <span id="build"><span id="build-bg"></span><i data-icon="sparkles"></i><span>Build</span>
+            <span class="touch" id="touch-build"><b></b><s></s></span>
+          </span>
+        </div>
+        <span class="touch" id="touch-field"><b></b><s></s></span>
+      </div>
+
+      <p class="label in" data-in="3">Start from a template</p>
+      <div class="chips in" data-in="3">
+        <span class="chip" id="chip-habit"><i data-icon="calendar-check" class="c-orange"></i>Habit tracker</span>
+        <span class="chip"><i data-icon="chef-hat" class="c-amber"></i>Recipe box</span>
+        <span class="chip"><i data-icon="dumbbell" class="c-blue"></i>Workout log</span>
+        <span class="chip"><i data-icon="wallet" class="c-green"></i>Budget</span>
+      </div>
+
+      <div class="apps-head in" data-in="4">
+        <h2>Your apps</h2><span class="see-all">See all</span>
+      </div>
+      <div class="apps in" data-in="5">
+        <div class="app-tile">
+          <span class="ic g-amber"><i data-icon="chef-hat"></i></span>
+          <b>Pantry</b><small>Edited today</small>
+        </div>
+        <div class="app-tile">
+          <span class="ic g-blue"><i data-icon="dumbbell"></i></span>
+          <b>Lift Log</b><small>3 screens</small>
+        </div>
+        <div class="app-tile">
+          <span class="ic g-pink"><i data-icon="wallet"></i></span>
+          <b>Pennies</b><small>Shared</small>
+        </div>
+      </div>
+    </div>
+
+    <nav class="tabbar in" data-in="6">
+      <span class="tab on"><i data-icon="house"></i></span>
+      <span class="tab"><i data-icon="layout-grid"></i></span>
+      <span class="tab"><i data-icon="compass"></i></span>
+      <span class="tab"><i data-icon="user"></i></span>
+    </nav>
+    <div id="home-shade"></div>
+  </section>
+
+  <!-- ============ BUILD / PREVIEW ============ -->
+  <section id="gen">
+    <header class="nav">
+      <span class="nav-btn"><i data-icon="chevron-left"></i></span>
+      <div class="nav-title">
+        <span id="nt-build">New app</span>
+        <span id="nt-live"><b class="live-dot"></b>Habit Hero</span>
+      </div>
+      <span class="nav-btn"><i data-icon="ellipsis"></i></span>
+    </header>
+
+    <div id="bubble"><i data-icon="sparkles"></i><span>A habit tracker with streaks</span></div>
+
+    <!-- the generated app, a live mini habit tracker -->
+    <div id="appcard">
+      <div class="hh">
+        <div class="blk" id="b-head">
+          <div class="real">
+            <p class="hh-date">Thursday, Sep 24</p>
+            <div class="hh-title-row"><h3>Today</h3><span class="hh-plus"><i data-icon="plus"></i></span></div>
+          </div>
+          <div class="sk"><i style="width:44%;height:14px"></i><i style="width:36%;height:30px;margin-top:10px"></i></div>
+        </div>
+
+        <div class="blk" id="b-streak">
+          <div class="real streak">
+            <div class="streak-top">
+              <span class="flame-wrap" id="flame"><i data-icon="flame"></i>
+                <b class="spark s1"></b><b class="spark s2"></b><b class="spark s3"></b><b class="spark s4"></b><b class="spark s5"></b><b class="spark s6"></b>
+              </span>
+              <div class="streak-num">
+                <span class="num-box"><span id="num-old">6</span><span id="num-new">7</span></span>
+                <span class="num-label">day streak</span>
+              </div>
+              <span class="best">Best 12</span>
+            </div>
+            <div class="heat">
+              <div class="cell"><b class="fill l2"></b><span>M</span></div>
+              <div class="cell"><b class="fill l3"></b><span>T</span></div>
+              <div class="cell"><b class="fill l3"></b><span>W</span></div>
+              <div class="cell today"><b class="fill l3" id="today-fill"></b><span>T</span></div>
+              <div class="cell future"><b class="fill"></b><span>F</span></div>
+              <div class="cell future"><b class="fill"></b><span>S</span></div>
+              <div class="cell future"><b class="fill"></b><span>S</span></div>
+            </div>
+          </div>
+          <div class="sk sk-card"></div>
+        </div>
+
+        <div class="blk" id="b-lt">
+          <div class="real list-title"><h4>Today's habits</h4>
+            <span class="lt-count"><span id="cnt-a">2 of 3 done</span><span id="cnt-b">All done!</span></span>
+          </div>
+          <div class="sk"><i style="width:48%;height:18px"></i></div>
+        </div>
+
+        <div class="blk row-blk" id="b-r1">
+          <div class="real habit">
+            <span class="h-ic hb-blue"><i data-icon="droplet"></i></span>
+            <div class="h-txt"><b>Drink water</b><small>8 glasses</small></div>
+            <span class="h-check on"><i data-icon="check"></i></span>
+          </div>
+          <div class="sk sk-row"><i class="sq"></i><i style="width:46%;height:16px"></i><i class="ci"></i></div>
+        </div>
+        <div class="blk row-blk" id="b-r2">
+          <div class="real habit">
+            <span class="h-ic hb-yellow"><i data-icon="sun"></i></span>
+            <div class="h-txt"><b>Morning stretch</b><small>10 minutes</small></div>
+            <span class="h-check on"><i data-icon="check"></i></span>
+          </div>
+          <div class="sk sk-row"><i class="sq"></i><i style="width:54%;height:16px"></i><i class="ci"></i></div>
+        </div>
+        <div class="blk row-blk" id="b-r3">
+          <div class="real habit" id="row3">
+            <span class="h-ic hb-purple"><i data-icon="book-open"></i></span>
+            <div class="h-txt"><b>Read 20 minutes</b><small>Before bed</small></div>
+            <span class="h-check" id="check3">
+              <b class="check-fill" id="check3-fill"></b>
+              <svg viewBox="0 0 24 24" class="check-draw"><path id="check3-path" d="M6 12.5l4 4 8-9"/></svg>
+              <span class="touch" id="touch-check"><b></b><s></s></span>
+            </span>
+          </div>
+          <div class="sk sk-row"><i class="sq"></i><i style="width:50%;height:16px"></i><i class="ci"></i></div>
+        </div>
+
+        <div class="blk" id="b-tab">
+          <div class="real hh-tabs">
+            <span class="on"><i data-icon="calendar-check"></i></span>
+            <span><i data-icon="chart"></i></span>
+            <span><i data-icon="user"></i></span>
+          </div>
+          <div class="sk sk-tabs"><i class="ci"></i><i class="ci"></i><i class="ci"></i></div>
+        </div>
+      </div>
+      <div id="scan"></div>
+    </div>
+
+    <div id="progress">
+      <div class="pg-head">
+        <div class="pg-title"><span id="pg-t1">Building your app</span><span id="pg-t2">Building Habit Hero</span></div>
+        <span id="pg-pct">0%</span>
+      </div>
+      <div class="pg-bar"><b id="pg-fill"></b></div>
+      <ul class="steps">
+        <li class="step" id="st0"><span class="st-ic"><svg class="spin" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11"/></svg><b class="st-done"><i data-icon="check"></i></b></span>Designing screens</li>
+        <li class="step" id="st1"><span class="st-ic"><svg class="spin" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11"/></svg><b class="st-done"><i data-icon="check"></i></b></span>Writing code</li>
+        <li class="step" id="st2"><span class="st-ic"><svg class="spin" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11"/></svg><b class="st-done"><i data-icon="check"></i></b></span>Adding streaks</li>
+        <li class="step" id="st3"><span class="st-ic"><svg class="spin" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11"/></svg><b class="st-done"><i data-icon="check"></i></b></span>Testing on device</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ KEYBOARD ============ -->
+  <div id="kbd">
+    <div class="kb-sugg"><span id="sg0"></span><i></i><span id="sg1"></span><i></i><span id="sg2"></span></div>
+    <div id="kb-rows"></div>
+    <div class="kb-bottom"><i data-icon="globe"></i><i data-icon="mic"></i></div>
+    <div id="kb-pop"><span></span></div>
+  </div>
+
+  <!-- ============ SUCCESS SHEET ============ -->
+  <div id="dim"></div>
+  <div id="sheet">
+    <b class="grabber"></b>
+    <span class="sh-icon" id="sh-icon"><i data-icon="flame"></i></span>
+    <h2 class="sh-in">Habit Hero is ready</h2>
+    <p class="sh-in">Running on your phone now.<br>Share it or keep it on your Home Screen.</p>
+    <span class="sh-btn primary sh-in"><i data-icon="square-plus"></i>Add to Home Screen</span>
+    <span class="sh-btn secondary sh-in"><i data-icon="share"></i>Share</span>
+  </div>
+  <div id="confetti"></div>
+
+  <!-- ============ LAUNCH ============ -->
+  <div id="wall">
+    <span class="wall-label">Appling</span>
+  </div>
+  <div id="splash">
+    <div id="splash-in">
+      <span id="splash-glyph"><i data-icon="sprout"></i></span>
+      <span id="splash-word">Appling</span>
+    </div>
+  </div>
+
+  <!-- ============ SYSTEM CHROME ============ -->
+  <div id="sb-back"></div>
+  <div id="statusbar">
+    <span class="sb-time">9:41</span>
+    <span class="sb-icons">
+      <svg viewBox="0 0 19 12" width="19" height="12"><rect x="0" y="7.5" width="3.2" height="4.5" rx="1"/><rect x="5.2" y="5.2" width="3.2" height="6.8" rx="1"/><rect x="10.4" y="2.6" width="3.2" height="9.4" rx="1"/><rect x="15.6" y="0" width="3.2" height="12" rx="1"/></svg>
+      <svg viewBox="0 0 17 12" width="17" height="12"><path d="M8.5 2.6c2.4 0 4.6.9 6.3 2.5.1.1.3.1.4 0l1.2-1.2c.1-.1.1-.3 0-.4C14.3 1.4 11.5.3 8.5.3S2.7 1.4.6 3.5c-.1.1-.1.3 0 .4l1.2 1.2c.1.1.3.1.4 0C3.9 3.5 6.1 2.6 8.5 2.6zm0 3.6c1.4 0 2.6.5 3.6 1.4.1.1.3.1.4 0l1.2-1.2c.1-.1.1-.3 0-.4-1.4-1.3-3.2-2-5.2-2s-3.8.7-5.2 2c-.1.1-.1.3 0 .4l1.2 1.2c.1.1.3.1.4 0 1-.9 2.2-1.4 3.6-1.4zm2.4 2.8c.1-.1.1-.3 0-.4-.7-.6-1.5-.9-2.4-.9s-1.7.3-2.4.9c-.1.1-.1.3 0 .4l2.2 2.2c.1.1.3.1.4 0l2.2-2.2z"/></svg>
+      <svg viewBox="0 0 28 13" width="28" height="13"><rect x=".5" y=".5" width="24" height="12" rx="3.8" fill="none" stroke="currentColor" opacity=".38"/><rect x="2.2" y="2.2" width="20.6" height="8.6" rx="2.3"/><path d="M26 4.4v4.2c.8-.3 1.4-1.1 1.4-2.1s-.6-1.8-1.4-2.1z" opacity=".45"/></svg>
+    </span>
+  </div>
+  <div id="homeind"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

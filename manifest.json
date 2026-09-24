@@ -48,6 +48,14 @@
     "thumb": "assets/shots/waffles-website-superbot-87a583a1.png"
   },
   {
+    "id": "do-that-too-superbot-9b4bf902",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "I can do that too!",
+    "src": "animations/do-that-too-superbot-9b4bf902/",
+    "thumb": "assets/shots/do-that-too-superbot-9b4bf902.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,36 @@
+/* cards.css: the black text cards. Type is the waffles-website "Live in one click." card (var(--ui), 700,
+   -.02em) at 96px. Every moving part is driven from timeline.js per frame; nothing here animates on its own.
+   --cap (the font's cap height in px) is measured at runtime by the engine so wordmarks and logos can be
+   sized and seated on the text's baseline / cap line exactly. */
+.card { display: grid; place-items: center; background: #000; }
+.card .cl { position: relative; margin: 0; padding: 0; max-width: calc(var(--ar-w, 1920px) - 160px);
+  font-family: var(--ui); font-size: 96px; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; color: #fff;
+  text-align: center; white-space: nowrap; transform-origin: 50% 55%; --cap: 68px; }
+.card .w { display: inline-block; white-space: nowrap; transform-origin: 50% 70%; }
+.card .tail { white-space: nowrap; }
+
+/* brand wordmarks: an SVG sized to the cap height and seated on the baseline, so it reads as a word in the line */
+.card .wm { display: inline-block; height: var(--cap); width: auto; vertical-align: 0; }
+/* measured boxes (Chromium getBBox): Lovable viewBox is cap line (y 3) to baseline (y 12) + .09 of the e's
+   overshoot; Cursor's caps run 4.61..274.23 of 278.83 (O overshoots); DoorDash's .91..41.14 of 42 */
+.card .wm-lovable { height: calc(var(--cap) * 1.01); vertical-align: calc(var(--cap) * -0.01); margin-left: .01em; }
+.card .wm-cursor { height: calc(var(--cap) * 1.034); vertical-align: calc(var(--cap) * -0.017); margin-left: .02em; }
+.card .wm-dash { height: calc(var(--cap) * 1.045); vertical-align: calc(var(--cap) * -0.021); margin-left: .02em; }
+
+/* the brand logo to the right of the line: cap-height sized, centred on the cap band, pops in */
+.card .lg { display: inline-block; width: auto; height: calc(var(--cap) * 1.08); vertical-align: calc(var(--cap) * -0.04);
+  margin-left: .30em; transform-origin: 50% 50%; opacity: 0; }
+.card .lg-lovable { height: calc(var(--cap) * 1.12); vertical-align: calc(var(--cap) * -0.06); }
+.card .lg-cursor { height: calc(var(--cap) * 1.16); vertical-align: calc(var(--cap) * -0.08); margin-left: .26em; }
+.card .lg-dash { height: calc(var(--cap) * 0.78); vertical-align: calc(var(--cap) * 0.11); margin-left: .30em; }
+.card .lg-imp { height: calc(var(--cap) * 1.14); vertical-align: calc(var(--cap) * -0.07); margin-left: .26em; }
+.card .purple { color: var(--sb-violet); }
+.card .red { color: #FF3008; }
+
+/* narrow frames: the line may wrap to two lines; it must never overflow */
+html[data-ar="4x3"] .card .cl, html[data-ar="1x1"] .card .cl, html[data-ar="4x5"] .card .cl { white-space: normal; text-wrap: balance; }
+html[data-ar="1x1"] .card .cl { font-size: 84px; max-width: calc(var(--ar-w, 1080px) - 120px); }
+html[data-ar="4x5"] .card .cl { font-size: 76px; max-width: calc(var(--ar-w, 864px) - 96px); }
+/* DoorDash's wordmark is widely tracked caps: this one line runs a touch smaller so it keeps its margins */
+html:not([data-ar="1x1"]):not([data-ar="4x5"]) #c-dash .cl { font-size: 88px; }
+.card .wm-lovable, .card .wm-cursor, .card .wm-dash { margin-left: .07em; }

@@ -1,0 +1,66 @@
+/* scene 'dash': the DoorDash order card + the "Ordered!" resolve. Layout px inside the 1.6x window.
+   Order button = waffles-delivery .dl-btn (the waffles-website gradient Publish pill), grown for the close-up. */
+#s-dash .ch-bot { position: relative; }             /* offsetParent for the card maths in dash.js */
+#s-dash .dd-reply .dd-hid { color: transparent; }  /* the unstreamed rest keeps its space: no reflow */
+#s-dash .dd-chiprow { display: block; }
+#s-dash .dd-chiprow .ch-tool { margin: 0 0 7px; }
+
+#s-dash .dd-card { position: relative; margin-top: 4px; width: 430px; border-radius: 12px; background: #0e0e10;
+  box-shadow: inset 0 0 0 1px #2e2e31, 0 10px 30px rgba(0,0,0,.35); overflow: hidden; color: #f2f2f7; }
+#s-dash .dd-head { display: flex; align-items: center; gap: 7px; padding: 7px 10px; border-bottom: 1px solid #242427;
+  font-size: 10.5px; line-height: 14px; color: #c7c7cc; }
+#s-dash .dd-head b { font-weight: 650; color: #f2f2f7; }
+#s-dash .dd-logo { width: 19px; height: auto; display: block; }
+#s-dash .dd-tag { margin-left: auto; padding: 1px 7px; border-radius: 5px; background: #1f1f22; color: #c7c7cc; font: 600 9.5px/15px var(--ui); }
+
+#s-dash .dd-photo { position: relative; height: 104px; overflow: hidden; background: #fff; border-bottom: 1px solid #242427; }
+#s-dash .dd-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; display: block; }
+#s-dash .dd-place { position: absolute; left: 8px; bottom: 7px; display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px;
+  border-radius: 999px; background: rgba(0,0,0,.72); color: #fff; font: 600 9.5px/15px var(--ui); }
+#s-dash .dd-place i { display: inline-flex; align-items: center; gap: 2px; font-style: normal; color: #ffd166; }
+#s-dash .dd-place i svg { width: 9px; height: 9px; fill: currentColor; stroke: none; }
+#s-dash .dd-place em { font-style: normal; color: #c7c7cc; font-weight: 500; }
+
+#s-dash .dd-item { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-bottom: 1px solid #242427; }
+#s-dash .dd-thumb { flex: none; width: 34px; height: 34px; border-radius: 7px; background: #fff 50% 55% / 150% auto no-repeat; }
+#s-dash .dd-meta { min-width: 0; flex: 1; }
+#s-dash .dd-meta b { display: block; font: 700 12px/15px var(--ui); color: #f2f2f7; }
+#s-dash .dd-meta small { display: block; font: 9.5px/13px var(--ui); color: #8e8e93; }
+#s-dash .dd-qty { font: 600 10px/14px var(--ui); color: #8e8e93; }
+#s-dash .dd-price { font: 700 11.5px/14px var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+
+#s-dash .dd-fees { padding: 6px 10px 7px; border-bottom: 1px solid #242427; font: 10px/15px var(--ui); color: #a1a1a6; font-variant-numeric: tabular-nums; }
+#s-dash .dd-fees > div { display: flex; justify-content: space-between; }
+#s-dash .dd-fees .dd-total { margin-top: 3px; padding-top: 4px; border-top: 1px dashed #2e2e31; font: 700 11.5px/16px var(--ui); color: #f2f2f7; }
+
+#s-dash .dd-addr { display: flex; align-items: center; gap: 8px; padding: 7px 10px; }
+#s-dash .dd-pin { flex: none; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,48,8,.14); color: #ff3008; display: grid; place-items: center; }
+#s-dash .dd-pin svg, #s-dash .dd-eta svg, #s-dash .dd-etaline svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+#s-dash .dd-where { min-width: 0; flex: 1; }
+#s-dash .dd-where b { display: block; font: 600 10.5px/14px var(--ui); color: #f2f2f7; }
+#s-dash .dd-where small { display: block; font: 9.5px/13px var(--ui); color: #8e8e93; }
+/* the ETA pill: grey while placing, lights green on "Ordered!" (--lit 0..1 from dash.js) */
+#s-dash .dd-eta { --lit: 0; position: relative; flex: none; transform-origin: 50% 50%; }
+#s-dash .dd-eta-a { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px;
+  font: 700 10px/15px var(--ui); font-variant-numeric: tabular-nums;
+  background: color-mix(in srgb, rgba(52,211,153,.16) calc(var(--lit) * 100%), #1f1f22);
+  color: color-mix(in srgb, #34d399 calc(var(--lit) * 100%), #a1a1a6);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, rgba(52,211,153,.5) calc(var(--lit) * 100%), #2e2e31); }
+
+#s-dash .dd-btn { position: relative; height: 40px; margin: 3px 10px 0; border-radius: 999px; isolation: isolate; overflow: hidden;
+  background: linear-gradient(90deg, #5ec8e6 0%, #6e7cf2 52%, #a86ef0 100%); color: #fff; transform-origin: 50% 50%;
+  box-shadow: 0 0 14px rgba(110,124,242,.45), 0 0 30px rgba(168,110,240,.22), inset 0 1px 0 rgba(255,255,255,.22); }
+#s-dash .dd-grp { position: absolute; left: 50%; top: 50%; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transform: translate(-50%, -50%); }
+#s-dash .dd-grp svg { flex: none; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; transform-origin: 50% 50%; }
+#s-dash .dd-grp-a { font: 700 11.5px/14px var(--ui); letter-spacing: .005em; }
+#s-dash .dd-lab-a { display: inline-block; width: 86px; }   /* fixed width: the stepping dots never shift the pill */
+#s-dash .dd-bag { width: 13px; height: 13px; stroke-width: 2.3; }
+#s-dash .dd-grp-b { gap: 8px; font: 800 17px/20px var(--ui); letter-spacing: -.01em; opacity: 0; }
+#s-dash .dd-check { width: 18px; height: 18px; stroke-width: 2.9; }
+#s-dash .dd-check-p { stroke-dasharray: 23; stroke-dashoffset: 23; }
+#s-dash .dd-shine { position: absolute; top: -30%; bottom: -30%; left: 0; width: 42%; z-index: 1; pointer-events: none; opacity: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.6) 50%, rgba(255,255,255,0) 100%); transform: translateX(-160%) skewX(-20deg); }
+
+#s-dash .dd-etaline { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 7px 10px 9px; font: 10.5px/14px var(--ui); color: #a1a1a6; opacity: 0; }
+#s-dash .dd-etaline b { color: #34d399; font-weight: 700; }
+#s-dash .dd-etaline svg { color: #34d399; }

@@ -1,0 +1,99 @@
+/* scene 'tabs': tabs-chaos's Chrome (macOS, dark, full bleed, zoom 1.25) + sphere-intro's tiles and flip.
+   Every selector scoped under #s-tabs. No transitions or keyframes: tabs.js sets every moving value from lt. */
+#s-tabs { background: #000; }
+#s-tabs .tbs-root {
+  --ch-frame: #202124; --ch-tool: #35363a; --ch-text: #e8eaed; --ch-text-2: #bdc1c6; --ch-omni: #202124; --ch-sep: rgba(255,255,255,.22);
+  position: absolute; inset: 0; overflow: hidden; background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+#s-tabs .tbs-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- the camera: scales about the stage centre ---------- */
+#s-tabs .cam { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform, opacity; }
+#s-tabs .browser {
+  position: absolute; left: 0; top: 0; width: 1536px; height: 864px; transform: scale(1.25); transform-origin: 0 0;
+  background: var(--ch-frame); color: var(--ch-text); display: grid; grid-template-rows: 40px 40px minmax(0, 1fr); overflow: hidden;
+}
+
+/* ---------- the tab strip (tabs laid out absolutely by tabs.js) ---------- */
+#s-tabs .strip { position: relative; height: 40px; }
+#s-tabs .strip .lights { position: absolute; left: 13px; top: 14px; display: flex; gap: 8px; }
+#s-tabs .strip .lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.2); }
+#s-tabs .strip .lights i:nth-child(2) { background: #febc2e; }
+#s-tabs .strip .lights i:nth-child(3) { background: #28c840; }
+#s-tabs .strip .tabsearch { position: absolute; right: 12px; top: 8px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+#s-tabs .strip svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .strip .tabsearch svg { width: 14px; height: 14px; }
+#s-tabs .tab { position: absolute; left: 0; top: 6px; height: 34px; border-radius: 8px 8px 0 0; color: var(--ch-text-2); font-size: 12px; white-space: nowrap; }
+#s-tabs .tab .in { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
+#s-tabs .tab.on { background: var(--ch-tool); color: var(--ch-text); z-index: 2; }
+#s-tabs .tab.on::before, #s-tabs .tab.on::after { content: ""; position: absolute; bottom: 0; width: 8px; height: 8px; background: radial-gradient(circle at 0 0, transparent 8px, var(--ch-tool) 8.5px); }
+#s-tabs .tab.on::before { left: -8px; transform: scaleX(-1); }
+#s-tabs .tab.on::after { right: -8px; }
+#s-tabs .tab .fav { position: absolute; left: 0; top: 9px; width: 16px; height: 16px; }
+#s-tabs .tab .fav .tl { transform: scale(.25); transform-origin: 0 0; }
+#s-tabs .tab .tt { position: absolute; left: 0; top: 0; line-height: 34px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 14px), transparent); }
+#s-tabs .tab .x { position: absolute; right: 8px; top: 9px; width: 16px; height: 16px; border-radius: 50%; display: grid; place-items: center; }
+#s-tabs .tab .x svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+#s-tabs .tab .sep { position: absolute; right: -1px; top: 9px; width: 1px; height: 16px; background: var(--ch-sep); }
+#s-tabs .newtab { position: absolute; left: 0; top: 7px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+#s-tabs .newtab svg { width: 16px; height: 16px; }
+
+/* ---------- toolbar ---------- */
+#s-tabs .toolbar { display: flex; align-items: center; gap: 4px; padding: 0 8px 0 6px; background: var(--ch-tool); min-width: 0; }
+#s-tabs .tb { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+#s-tabs .tb.dim { color: #7a7d81; }
+#s-tabs .tb svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .tb.profile { width: 26px; height: 26px; margin: 0 4px; background: #8ab4f8; color: #202124; font: 600 13px/26px -apple-system, system-ui, sans-serif; text-align: center; display: block; }
+#s-tabs .omni { flex: 1; min-width: 0; height: 32px; margin: 0 4px; border-radius: 16px; background: var(--ch-omni); display: flex; align-items: center; gap: 10px; padding: 0 12px 0 10px; color: var(--ch-text); font-size: 14px; }
+#s-tabs .omni .site { width: 20px; height: 20px; display: grid; place-items: center; color: var(--ch-text-2); }
+#s-tabs .omni .site svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .omni .url { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+#s-tabs .omni .url b { font-weight: 400; color: var(--ch-text); }
+#s-tabs .omni .star { width: 20px; height: 20px; color: var(--ch-text-2); }
+#s-tabs .omni .star svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+
+/* ---------- the pages (one per tab, stacked in opening order) ---------- */
+#s-tabs .pane { position: relative; overflow: hidden; background: #202124; }
+#s-tabs .pg { position: absolute; inset: 0; background: var(--p-bg); color: var(--p-fg); }
+#s-tabs .pg .side { position: absolute; left: 0; top: 0; bottom: 0; width: var(--p-side); background: var(--p-side-bg); padding: 14px 10px; display: grid; align-content: start; gap: 2px; color: var(--p-muted); font-size: 13.5px; box-sizing: border-box; }
+#s-tabs .pg .side .r { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; white-space: nowrap; overflow: hidden; }
+#s-tabs .pg .side .r.on { background: rgba(255,255,255,.08); color: var(--p-fg); }
+#s-tabs .pg .side .r i { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid currentColor; opacity: .7; box-sizing: border-box; }
+#s-tabs .pg .side .cap { margin: 14px 10px 4px; font-size: 12px; }
+#s-tabs .pg .side .c { padding: 6px 10px; border-radius: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: .85; }
+#s-tabs .pg .mid { position: absolute; left: var(--p-side); right: 0; top: 0; bottom: 0; display: grid; place-items: center; align-content: center; gap: 28px; padding: 0 24px 40px; }
+#s-tabs .browser.narrow .pg .side { display: none; }
+#s-tabs .browser.narrow .pg .mid, #s-tabs .browser.narrow .pg .foot { left: 0; }
+#s-tabs .pg .greet { display: flex; align-items: center; gap: 14px; font-size: var(--p-gs); font-weight: var(--p-gw); letter-spacing: -.02em; color: var(--p-fg); font-family: var(--p-gfont); text-align: center; white-space: nowrap; }
+#s-tabs .pg .greet.grad span { background: var(--p-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#s-tabs .pg .greet .mk { position: relative; flex: none; width: 40px; height: 40px; }
+#s-tabs .pg .greet .mk .tl { transform: scale(.625); transform-origin: 0 0; }
+#s-tabs .pg .comp { width: min(760px, 88%); min-height: 54px; border-radius: var(--p-cr); background: var(--p-comp); border: 1px solid var(--p-cb); display: flex; align-items: center; gap: 10px; padding: 0 8px 0 18px; color: var(--p-muted); font-size: 15px; box-sizing: border-box; }
+#s-tabs .pg .comp .ph { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+#s-tabs .pg .comp .go { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--p-acc); }
+#s-tabs .pg .comp .go.sq { border-radius: 8px; }
+#s-tabs .pg .foot { position: absolute; left: var(--p-side); right: 0; bottom: 14px; text-align: center; font-size: 12px; color: var(--p-muted); }
+#s-tabs .pg .btn { padding: 12px 22px; border-radius: 10px; background: #fff; color: #000; font-size: 15px; font-weight: 600; }
+
+/* the tab counter (tabs-chaos #tabcount) */
+#s-tabs .tabcount { position: absolute; right: 48px; top: 96px; padding: 8px 14px; border-radius: 10px; background: rgba(32,33,36,.96); color: var(--ch-text); font: 500 13px/18px -apple-system, system-ui, sans-serif; box-shadow: 0 6px 20px rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.08); opacity: 0; z-index: 50; }
+#s-tabs .tabcount b { color: #f28b82; font-variant-numeric: tabular-nums; }
+
+/* ---------- a tile: the rail's tile rules (brand ground, glyph at 57%, bleed art, logo at 60%) ---------- */
+#s-tabs .tl { position: absolute; left: 0; top: 0; width: 64px; height: 64px; border-radius: 19px; display: grid; place-items: center; overflow: hidden; box-sizing: border-box; }
+#s-tabs .tl.hair { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.16); }
+#s-tabs .tl svg { width: 37px; height: 37px; fill: currentColor; }
+#s-tabs .tl.bleed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#s-tabs .tl.logo img { width: 60%; height: 60%; object-fit: contain; display: block; }
+#s-tabs .tl b { font: 800 32px/1 "SF Pro Rounded", -apple-system, system-ui, sans-serif; letter-spacing: -.02em; }
+
+/* ---------- the sphere, the glow, the mark ---------- */
+#s-tabs .orb { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+#s-tabs .orb .tl { transform-origin: 0 0; will-change: transform, opacity, filter; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+#s-tabs .orb .tl.hair { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.16), 0 6px 18px rgba(0,0,0,.35); }
+#s-tabs .glow {
+  position: absolute; left: 50%; top: 540px; width: 820px; height: 820px; border-radius: 50%; opacity: 0; z-index: 4; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(106,31,216,.42), rgba(43,107,255,.18) 45%, rgba(192,38,211,.06) 70%, transparent 100%);
+}
+#s-tabs .mark { position: absolute; left: 810px; top: 390px; width: 300px; height: 300px; z-index: 6; visibility: hidden; transform-origin: 50% 50%; user-select: none; }

@@ -1,0 +1,100 @@
+/* build scene: Superbot Code view with an iPhone 16 emulator in the Preview pane. Scoped to .bld (the scene's .sbx-cam). */
+
+/* ---------- chat feed ---------- */
+.bld .bp-in { overflow: hidden; }
+.bld .bp-user .ch-user { margin: 4px 0 14px; }
+.bld .bp-reply .ch-bot p { margin-bottom: 9px; }
+.bld .bp-chip { display: flex; padding-left: 2px; }
+.bld .bp-chip .ch-tool { margin: 0 0 7px; }
+.bld .bp-finw .ch-bot { margin-top: 4px; }
+.bld .bp-finw .ch-bot p { margin-bottom: 8px; }
+.bld .bp-cardw { padding-left: 2px; }
+.bld .bp-cardw .sbx-link { margin: 0 0 8px; max-width: 340px; }
+
+/* focused composer */
+.bld .composer .rc { transition: none; }
+.bld .composer.bp-empty .rc-ph { position: relative; }
+.bld .composer.bp-empty .rc-text { position: absolute; left: 0; top: 0; }
+.bld .composer.bp-focus .rc { box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 0 0 4px rgba(255, 255, 255, .035); }
+
+/* preview head: live dot sits just before the state text */
+.bld .pane-head .bp-live { margin-left: auto; width: 6px; height: 6px; border-radius: 50%; background: #48484a; flex: none; }
+.bld .pane-head .bp-live + em { margin-left: 0; }
+.bld .pane-head .bp-live.busy { background: #ffd60a; box-shadow: 0 0 0 3px rgba(255, 214, 10, .14); }
+.bld .pane-head .bp-live.on { background: #30d158; box-shadow: 0 0 0 3px rgba(48, 209, 88, .16); }
+
+/* cursor */
+.bld .cursor { position: absolute; left: 0; top: 0; width: 22px; height: 22px; z-index: 60; pointer-events: none;
+  transform-origin: 17px 11px; fill: #fff; stroke: #111; stroke-width: 1.3; stroke-linejoin: round;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .45)); }
+
+/* ---------- preview pane: a quiet emulator backdrop ---------- */
+.bld .pv-body.is-phone { background: radial-gradient(60% 55% at 50% 48%, #151518 0%, #0b0b0c 70%); }
+.bld .sbx-phone-slot { position: relative; flex: none; margin-top: -14px; }
+
+/* ---------- iPhone 16 (design box 432 x 880, scaled to the slot from JS) ---------- */
+.bld .bp-phone { position: absolute; left: 0; top: 0; width: 432px; height: 880px; transform-origin: 0 0; }
+
+.bld .bp-band { position: absolute; left: 5px; top: 0; width: 422px; height: 880px; border-radius: 74px; z-index: 2;
+  background: linear-gradient(90deg, #7c7c83 0%, #34343a 1.4%, #4a4a51 3.5%, #2b2b30 12%, #232327 50%, #2b2b30 88%, #4a4a51 96.5%, #34343a 98.6%, #7c7c83 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .26),
+    inset 0 2px 1px rgba(255, 255, 255, .30),
+    inset 0 0 0 5px rgba(0, 0, 0, .18),
+    inset 0 -2px 1px rgba(0, 0, 0, .5),
+    0 0 0 1px rgba(0, 0, 0, .7),
+    0 36px 70px -18px rgba(0, 0, 0, .75),
+    0 10px 24px rgba(0, 0, 0, .35); }
+/* a hair of specular along the top edge of the titanium */
+.bld .bp-band::before { content: ''; position: absolute; left: 60px; right: 60px; top: 0; height: 1.5px; border-radius: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45) 30%, rgba(255, 255, 255, .45) 70%, transparent); }
+.bld .bp-bezel { position: absolute; inset: 5px; border-radius: 69px; background: #030303;
+  box-shadow: inset 0 0 0 1.5px #151517, inset 0 0 6px rgba(0, 0, 0, .9); }
+.bld .bp-screen { position: absolute; left: 11px; top: 13px; width: 390px; height: 844px; border-radius: 56px; overflow: hidden;
+  background: #000; isolation: isolate; }
+
+.bld .bp-app { position: absolute; left: 0; top: 0; width: 390px; height: 844px; border: 0; display: block; background: #000; visibility: hidden; }
+.bld .bp-phone.is-ready .bp-app { visibility: visible; }
+
+/* install cover: the home wallpaper patched over the app's own launch icon until the launch beat */
+.bld .bp-cover { position: absolute; inset: 0; background: radial-gradient(90% 70% at 30% 20%, #3a2a6e 0%, #1a1433 45%, #07060c 100%);
+  clip-path: inset(360px 112px 334px 112px); visibility: hidden; }
+.bld .bp-phone:not(.is-ready) .bp-cover { display: none; }
+.bld .bp-icon { position: absolute; left: 151px; top: 378px; width: 88px; height: 88px; border-radius: 20px; overflow: hidden; opacity: 0;
+  background: linear-gradient(140deg, #6ee7b7 0%, #14b886 46%, #0b7f69 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3); }
+.bld .bp-glyph { position: absolute; left: 18px; top: 18px; width: 52px; height: 52px; color: #fff; }
+.bld .bp-glyph svg { width: 100%; height: 100%; display: block; }
+.bld .bp-dim { position: absolute; inset: 0; background: #000; opacity: .55; }
+.bld .bp-pie { position: absolute; left: 20px; top: 20px; width: 48px; height: 48px; transform: rotate(-90deg); overflow: visible; }
+.bld .bp-pie-bg { fill: rgba(0, 0, 0, .28); stroke: none; }
+.bld .bp-pie-ring { fill: none; stroke: rgba(255, 255, 255, .92); stroke-width: 2; }
+.bld .bp-pie-fill { fill: none; stroke: rgba(255, 255, 255, .92); stroke-width: 15; stroke-dasharray: 100 100; stroke-dashoffset: 100; }
+.bld .bp-label { position: absolute; left: 0; right: 0; top: 474px; height: 20px; color: #fff; font-size: 13px; font-weight: 500; text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+.bld .bp-label span { position: absolute; left: 0; right: 0; top: 0; opacity: 0; }
+
+/* black rim over the very edge of the pixels (hides clip antialias fringe) */
+.bld .bp-rim { position: absolute; left: 9px; top: 11px; width: 394px; height: 848px; box-sizing: border-box; border: 3px solid #030303;
+  border-radius: 58px; z-index: 3; pointer-events: none; }
+.bld .bp-off { position: absolute; inset: 0; background: #000; }
+.bld .bp-island { position: absolute; left: 132px; top: 11px; width: 126px; height: 37px; border-radius: 19px; background: #000; z-index: 3; }
+.bld .bp-lens { position: absolute; right: 13px; top: 12px; width: 13px; height: 13px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 36%, #2a3350 0%, #0d1120 45%, #020203 72%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04); }
+.bld .bp-glass { position: absolute; inset: 0; border-radius: 56px; pointer-events: none; z-index: 4;
+  background: linear-gradient(118deg, rgba(255, 255, 255, .075) 0%, rgba(255, 255, 255, .02) 22%, rgba(255, 255, 255, 0) 34%);
+  box-shadow: inset 0 0 0 2px #000, inset 0 0 0 3px rgba(0, 0, 0, .35); }
+
+/* side buttons (titanium), tucked under the band edge */
+.bld .bp-btn { position: absolute; width: 7px; border-radius: 3px; z-index: 1;
+  background: linear-gradient(90deg, #1c1c20 0%, #62626a 40%, #3a3a40 70%, #18181b 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, .25), inset 0 -1.5px 0 rgba(0, 0, 0, .55), 0 0 0 .5px rgba(0, 0, 0, .6); }
+.bld .bp-action { left: -1px; top: 172px; height: 38px; }
+.bld .bp-volu { left: -1px; top: 246px; height: 66px; }
+.bld .bp-vold { left: -1px; top: 328px; height: 66px; }
+.bld .bp-power { right: -1px; top: 268px; height: 104px; }
+.bld .bp-camctl { right: -1px; top: 566px; height: 74px; width: 6px;
+  background: linear-gradient(90deg, #0d0d0f 0%, #2d2f35 50%, #0d0d0f 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
+
+.bld .bp-caption { position: absolute; left: -100px; right: -100px; top: 904px; text-align: center; color: #8e8e93;
+  font: 500 26px/1 Inter, system-ui, sans-serif; letter-spacing: .01em; white-space: nowrap; }

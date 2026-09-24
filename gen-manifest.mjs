@@ -70,6 +70,7 @@ const more = [
   ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
   ['waffles-delivery-superbot-87a583a1', 'waffles-delivery-superbot-87a583a1/', 'order me waffles pls', 'Ad spots'],
   ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
+  ['do-that-too-superbot-9b4bf902', 'do-that-too-superbot-9b4bf902/', 'I can do that too!', 'Ad spots'],
   ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
   ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],

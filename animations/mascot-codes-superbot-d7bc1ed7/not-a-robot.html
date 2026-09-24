@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I'M NOT A ROBOT · captcha confession · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .lock { display: flex; align-items: center; gap: 64px; transform-origin: 50% 50%; white-space: nowrap; }
+  .slot { display: grid; align-items: center; }
+  .slot > * { grid-area: 1 / 1; }
+  .card { display: flex; align-items: center; gap: 40px; padding: 0 44px 0 48px; height: 220px; background: #0d0d0d;
+    border: 2px solid rgba(255,255,255,0.2); border-radius: 22px; transform-origin: 0 50%; }
+  .cb { position: relative; width: 92px; height: 92px; flex: none; border: 5px solid rgba(255,255,255,0.88); border-radius: 14px; box-sizing: border-box; }
+  .cb svg { position: absolute; overflow: visible; }
+  .lab { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .words { font-size: 70px; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+  .w { display: inline-block; vertical-align: top; }
+  .not { overflow: visible; }
+  .not > span { display: inline-block; padding-right: 0.27em; }
+  .im { padding-right: 0.27em; }
+  .sub { font-size: 30px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); height: 34px; white-space: nowrap; }
+  .brand { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-left: 14px; flex: none; }
+  .brand svg { width: 64px; height: 64px; }
+  .brand div { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); }
+  .punch { font-size: 132px; line-height: 0.92; text-transform: uppercase; }
+  .punch > div { transform-origin: 0 50%; }
+  .q { text-shadow: -2.4px 0 var(--storm-0), 2.4px 0 var(--storm-3); }
+</style>
+</head>
+<body>
+<script>
+/* I'M NOT A ROBOT, confessed: a captcha appears beside the mark. It reads the line, stares at the box,
+   the box spins and ticks. Smug smile. Then NOT glitches out of the sentence and falls away, leaving
+   I'M A ROBOT (the captcha shrugs: CLOSE ENOUGH.), and the punchline lands: IT PASSED. YOU JUST COMMENT. */
+var LOOP = 9;
+var CARD_IN = 0.2, READ = 0.75, STARE = 1.2, SPIN_A = 1.35, CHECK = 2.3, GLITCH = 3.35, DROP = 3.7, SHRUG = 4.35;
+var CARD_OUT = 5.3, P1 = 5.45, P2 = 5.85, OUT = 8.3;
+var mark, card, cb, spinner, check, notW, notIn, notWidth, sub, subText = 'CLOSE ENOUGH.', p1, p2, ripple, lb = null, cbb = null;
+
+function fitUp(node, maxW, maxH, cap) {
+  node.style.transform = '';
+  var s = Math.min(cap, maxW / Math.max(1, node.offsetWidth), maxH / Math.max(1, node.offsetHeight));
+  node.style.transform = 'scale(' + s + ')';
+  return s;
+}
+SB.ad({
+  loop: LOOP,
+  thumbAt: 4.75,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    var lock = SB.el('div', 'lock', center);
+    mark = SB.mascot(lock, { size: 300, happy: [[CHECK + 0.12, 0.9], [P2 + 0.25, 1.5]], blinks: [{ t: 0.5 }, { t: 3.05 }, { t: 4.9, right: true }, { t: 5.02, right: true }, { t: 5.14, right: true }, { t: 7.6 }] });
+    var slot = SB.el('div', 'slot', lock);
+    card = SB.el('div', 'card', slot);
+    cb = SB.el('div', 'cb', card);
+    cb.innerHTML =
+      '<svg class="rip" viewBox="0 0 100 100" style="left:-4px;top:-4px;width:92px;height:92px"><rect x="2" y="2" width="96" height="96" rx="14" fill="none" stroke="#fff" stroke-width="3"/></svg>' +
+      '<svg class="spin" viewBox="0 0 100 100" style="left:6px;top:6px;width:70px;height:70px"><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-dasharray="150 239"/></svg>' +
+      '<svg class="chk" viewBox="0 0 100 100" style="left:-6px;top:-18px;width:104px;height:104px"><path d="M18 54 L42 76 L90 18" fill="none" stroke="var(--storm-0)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100 100"/></svg>';
+    ripple = cb.querySelector('.rip');
+    spinner = cb.querySelector('.spin');
+    check = cb.querySelector('.chk path');
+    var lab = SB.el('div', 'lab', card);
+    var words = SB.el('div', 'words', lab);
+    SB.el('span', 'w im', words, 'I’M');
+    notW = SB.el('span', 'w not', words);
+    notIn = SB.el('span', '', notW, 'NOT');
+    if (ctx.narrow) SB.el('br', '', words);
+    SB.el('span', 'w', words, 'A ROBOT');
+    notWidth = notW.offsetWidth;
+    sub = SB.el('div', 'sub', lab, '');
+    var brand = SB.el('div', 'brand', card);
+    brand.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-13.7 5.6"/><path d="M4 12A8 8 0 0 1 17.7 6.4"/><path d="M18 2.5v4h-4"/><path d="M6 21.5v-4h4"/></svg><div>PRIVACY · TERMS</div>';
+    if (ctx.narrow) { brand.style.display = 'none'; card.style.height = '260px'; }
+    var punch = SB.el('div', 'punch', slot);
+    p1 = SB.el('div', '', punch, 'IT PASSED.');
+    p2 = SB.el('div', '', punch);
+    p2.innerHTML = 'YOU JUST<br><span class="q">COMMENT.</span>';
+    card.style.width = card.offsetWidth + 'px';
+    fitUp(lock, ctx.w * 0.88, 1080 * 0.8, 1.2);
+    lb = SB.box(words); cbb = SB.box(cb);
+    mark.look = function (t) {
+      if (t < READ || t >= CARD_OUT) return null;
+      if (t < STARE) return { x: lb.left + (t - READ) / (STARE - READ) * lb.width, y: lb.y };
+      if (t < GLITCH + 0.1) return { x: cbb.x, y: cbb.y };
+      if (t < SHRUG) return { x: lb.x, y: lb.y + 200 };
+      return null;
+    };
+  },
+  frame: function (t) {
+    // card in, card out
+    var ci = SB.seg(t, CARD_IN, CARD_IN + 0.45), co = SB.easeInOut(SB.seg(t, CARD_OUT, CARD_OUT + 0.35));
+    card.style.opacity = String(Math.min(1, ci * 2.5) * (1 - co));
+    card.style.transform = 'translateY(' + (-co * 60).toFixed(1) + 'px) scale(' + (SB.lerp(0.9, 1, SB.backOut(ci)) * (1 - co * 0.04)).toFixed(4) + ')';
+
+    // the click: a ripple off the box, then the spinner, then the tick draws in
+    var rp = SB.seg(t, SPIN_A - 0.05, SPIN_A + 0.4);
+    ripple.style.opacity = t >= SPIN_A - 0.05 && rp < 1 ? String((1 - rp) * 0.8) : '0';
+    ripple.style.transform = 'scale(' + (1 + SB.easeOut(rp) * 0.55).toFixed(3) + ')';
+    var spinning = t >= SPIN_A && t < CHECK;
+    spinner.style.opacity = spinning ? String(Math.min(1, SB.seg(t, SPIN_A, SPIN_A + 0.1)) * (1 - SB.seg(t, CHECK - 0.08, CHECK))) : '0';
+    spinner.style.transform = 'rotate(' + ((t - SPIN_A) * 560).toFixed(1) + 'deg)';
+    var ck = SB.easeOut(SB.seg(t, CHECK, CHECK + 0.22));
+    check.style.strokeDashoffset = (100 - ck * 100).toFixed(2);
+    check.parentNode.style.opacity = t >= CHECK ? '1' : '0';
+    var pop = Math.sin(SB.seg(t, CHECK, CHECK + 0.3) * Math.PI);
+    cb.style.transform = 'scale(' + (1 + pop * 0.12).toFixed(4) + ')';
+
+    // NOT: glitch in the mark's split, then fall out of the sentence while the gap closes
+    var gl = t >= GLITCH && t < DROP + 0.1;
+    var f = Math.floor(t * 30 + 1e-6);
+    if (gl) {
+      var j = ((f * 7) % 5) - 2;
+      notIn.style.textShadow = (-4 - Math.abs(j) * 3) + 'px 0 var(--storm-0), ' + (4 + Math.abs(j) * 3) + 'px 0 var(--storm-3)';
+      notIn.style.transform = 'translate(' + (j * 3) + 'px,' + (((f * 3) % 3) - 1) * 2 + 'px)';
+    } else {
+      notIn.style.textShadow = 'none';
+    }
+    var dp = SB.seg(t, DROP, DROP + 0.6);
+    if (t >= DROP + 0.1) {
+      var e = dp * dp;
+      notIn.style.transform = 'translate(' + (dp * 30).toFixed(1) + 'px,' + (e * 420).toFixed(1) + 'px) rotate(' + (e * 38).toFixed(1) + 'deg)';
+      notIn.style.opacity = String(1 - SB.seg(t, DROP + 0.35, DROP + 0.6));
+    } else {
+      if (!gl) notIn.style.transform = 'none';
+      notIn.style.opacity = '1';
+    }
+    var close = SB.easeInOut(SB.seg(t, DROP + 0.2, DROP + 0.6));
+    notW.style.width = (notWidth * (1 - close)).toFixed(2) + 'px';
+
+    // the captcha shrugs
+    var n = t >= SHRUG ? Math.min(subText.length, Math.floor((t - SHRUG) / 0.04) + 1) : 0;
+    sub.textContent = subText.slice(0, n);
+
+    // punchline
+    var o = 1 - SB.seg(t, OUT, OUT + 0.4);
+    [[p1, P1], [p2, P2]].forEach(function (a) {
+      var p = SB.seg(t, a[1], a[1] + 0.34);
+      a[0].style.opacity = String((t >= a[1] ? Math.min(1, p * 3) : 0) * o);
+      a[0].style.transform = 'scale(' + (t < a[1] ? 1.3 : SB.lerp(1.3, 1, SB.backOut(p))).toFixed(4) + ')';
+    });
+  }
+});
+</script>
+</body>
+</html>

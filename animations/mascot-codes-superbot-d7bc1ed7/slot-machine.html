@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slot machine · reels lock · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .col { display: flex; flex-direction: column; align-items: flex-start; gap: 44px; }
+  .reels { display: grid; grid-template-columns: repeat(4, auto); gap: 26px; }
+  .reels.two { grid-template-columns: repeat(2, auto); }
+  .grp { position: relative; display: flex; gap: 2px; padding: 0 22px; height: 290px; background: #0b0b0b;
+         border: 3px solid #2a2a2a; border-radius: 26px; overflow: hidden; }
+  .reel { position: relative; width: 82px; height: 100%;
+          -webkit-mask-image: linear-gradient(transparent 2%, #000 34%, #000 66%, transparent 98%);
+                  mask-image: linear-gradient(transparent 2%, #000 34%, #000 66%, transparent 98%); }
+  .g { position: absolute; left: 0; right: 0; top: 50%; height: 150px; margin-top: -75px; text-align: center;
+       font-size: 124px; line-height: 150px; color: #fff; will-change: transform; }
+  .shade { position: absolute; inset: 0; pointer-events: none;
+           background: linear-gradient(rgba(0,0,0,.55), transparent 30%, transparent 70%, rgba(0,0,0,.55)); }
+  .line { display: block; width: max-content; text-transform: uppercase; line-height: 0.96; }
+</style>
+</head>
+<body>
+<script>
+/* Slot machine: the invite code as four reels of four glyph columns. The reels are already spinning at
+   t=0; they brake and lock left to right with a small spring overshoot, each group flashing on lock, and
+   the mark smiles on the last lock. After the hold the reels kick back up to speed, and each column's
+   speed is solved so that its total travel over the loop is a whole number of strip revolutions: the
+   spin at t -> loop is exactly the spin at t = 0. Motion blur is stacked glyph ghosts scaled by speed. */
+var LOOP = 8, N = 32, D = 0.55, VL = 7, W = Math.PI * 2 * 3.2, K = 7.0, TA = 0.4;
+var LOCK0 = 1.5, GSTEP = 0.42, CSTEP = 0.05;
+var CODE = SB.codes(1, 77)[0].replace(/-/g, '');
+var LAST = LOCK0 + 3 * GSTEP + 3 * CSTEP;
+var H = 150, TH = Math.PI / 5, R = H / (Math.PI / 5);
+var mark, reelsEl, grps = [], cols = [], head, cta, B = null;
+
+// per column: its lock time, its solved speed, its glyph strip (a seeded shuffle of the alphabet, target at 0)
+var COLS = (function () {
+  var out = [], r = SB.rng(404);
+  for (var i = 0; i < 16; i++) {
+    var L = LOCK0 + Math.floor(i / 4) * GSTEP + (i % 4) * CSTEP;
+    var den = LOOP - K - TA / 2 + L - D / 2;
+    var M = Math.round((24 * den + VL * D / 2) / N);
+    var v = (M * N - VL * D / 2) / den;
+    var a = SB.ALPHA.split('');
+    for (var j = a.length - 1; j > 0; j--) { var k = Math.floor(r() * (j + 1)); var tmp = a[j]; a[j] = a[k]; a[k] = tmp; }
+    var at = a.indexOf(CODE[i]);
+    var strip = a.slice(at).concat(a.slice(0, at));
+    out.push({ L: L, v: v, D1: v * (L - D) + (v + VL) * D / 2, strip: strip });
+  }
+  return out;
+})();
+
+function pos(c, t) {
+  var L = c.L, v = c.v;
+  if (t < L - D) return -c.D1 + v * t;
+  if (t < L) { var s = t - (L - D); return -c.D1 + v * (L - D) + v * s - (v - VL) * s * s / (2 * D); }
+  var p = 0;
+  if (t < K + 0.01) { var tau = t - L; p = (VL / W) * Math.sin(W * tau) * Math.exp(-7 * tau); }
+  if (t >= K) {
+    var u = t - K;
+    p += u < TA ? (v / TA) * u * u / 2 : v * TA / 2 + v * (u - TA);
+  }
+  return p;
+}
+function glyph(c, k) { return c.strip[((k % N) + N) % N]; }
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: Math.round((LAST + 0.5) * 30) / 30,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    var lockup = SB.el('div', 'mc-lockup', center);
+    lockup.style.gap = '64px';
+    mark = SB.mascot(lockup, { size: ctx.narrow ? 270 : 320, happy: [[LAST + 0.05, 1.5]] });
+    var col = SB.el('div', 'col', lockup);
+    head = SB.el('div', 'line mc-type', col);
+    head.innerHTML = 'SPIN FOR<br>EARLY ACCESS';
+    reelsEl = SB.el('div', 'reels mc-mono' + (ctx.narrow ? ' two' : ''), col);
+    grps = []; cols = [];
+    for (var g = 0; g < 4; g++) {
+      var grp = SB.el('div', 'grp', reelsEl);
+      grps.push(grp);
+      for (var c = 0; c < 4; c++) {
+        var reel = SB.el('div', 'reel', grp);
+        var spans = [];
+        for (var s = 0; s < 4; s++) spans.push(SB.el('div', 'g', reel));
+        cols.push(spans);
+      }
+      SB.el('div', 'shade', grp);
+    }
+    cta = SB.el('div', 'line mc-type', col, 'COMMENT TO SPIN.');
+    var rw = reelsEl.offsetWidth;
+    [[head, 240], [cta, 120]].forEach(function (p) {
+      p[0].style.fontSize = p[1] + 'px';
+      p[0].style.fontSize = (p[1] * rw / p[0].offsetWidth) + 'px';
+      if (p[0].offsetWidth > rw * 1.001) p[0].style.fontSize = (parseFloat(p[0].style.fontSize) * rw / p[0].offsetWidth) + 'px';
+    });
+    if (parseFloat(cta.style.fontSize) > parseFloat(head.style.fontSize) * 0.5) {
+      cta.style.fontSize = (parseFloat(head.style.fontSize) * 0.5) + 'px';
+    }
+    SB.fit(lockup, ctx.w * 0.9, 1080 * 0.84);
+    B = null;
+    mark.look = function (t) {
+      if (!B) B = { g: grps.map(function (n) { return SB.box(n); }), cta: SB.box(cta), head: SB.box(head) };
+      if (t >= K - 0.35 || t < LOCK0 - 0.6) return { x: B.g[0].x, y: B.g[0].y };
+      for (var g = 0; g < 4; g++) {
+        var gl = LOCK0 + g * GSTEP + 3 * CSTEP;
+        if (t < gl + 0.08) return { x: B.g[g].x, y: B.g[g].y };
+      }
+      if (t < LAST + 1.9) {
+        var p = SB.easeInOut(SB.seg(t, LAST + 0.5, LAST + 1.5));
+        return { x: SB.lerp(B.cta.left, B.cta.right, p), y: B.cta.y };
+      }
+      return null;
+    };
+  },
+  frame: function (t) {
+    for (var i = 0; i < 16; i++) {
+      var c = COLS[i], p = pos(c, t);
+      var vel = Math.abs(pos(c, t + 0.004) - pos(c, t - 0.004)) / 0.008;
+      var b = SB.clamp01((vel - 2) / 22);
+      var base = Math.floor(p);
+      var locked = t >= c.L && t < K;
+      var sh = 'none';
+      if (b > 0.01) {
+        var a1 = (0.42 * b).toFixed(3), a2 = (0.2 * b).toFixed(3), d1 = (0.22 * H * b).toFixed(1), d2 = (0.46 * H * b).toFixed(1);
+        sh = '0 -' + d1 + 'px rgba(255,255,255,' + a1 + '),0 ' + d1 + 'px rgba(255,255,255,' + a1 + '),0 -' + d2 + 'px rgba(255,255,255,' + a2 + '),0 ' + d2 + 'px rgba(255,255,255,' + a2 + ')';
+      } else if (locked) {
+        var sp = SB.lerp(10, 1.8, SB.easeOut(SB.seg(t, c.L, c.L + 0.45)));
+        sh = (-sp).toFixed(2) + 'px 0 var(--storm-0),' + sp.toFixed(2) + 'px 0 var(--storm-3)';
+      }
+      for (var s = 0; s < 4; s++) {
+        var k = base - 1 + s;
+        var el = cols[i][s];
+        el.textContent = glyph(c, k);
+        // reels run downward: the next glyph drops in from above
+        var th = SB.clamp01((Math.abs(p - k) * TH) / (Math.PI / 2)) * (Math.PI / 2) * Math.sign(p - k);
+        var cs = Math.cos(th);
+        el.style.transform = 'translateY(' + (R * Math.sin(th)).toFixed(2) + 'px) scaleY(' + (cs * (1 + 0.3 * b)).toFixed(3) + ')';
+        el.style.opacity = String((1 - 0.45 * b) * (0.25 + 0.75 * cs * cs * cs));
+        el.style.textShadow = sh;
+      }
+    }
+    for (var g = 0; g < 4; g++) {
+      var gl = LOCK0 + g * GSTEP + 3 * CSTEP;
+      var f = t >= gl && t < K ? 1 - SB.easeOut(SB.seg(t, gl, gl + 0.6)) : 0;
+      var win = t >= LAST && t < K ? (1 - SB.seg(t, K - 0.4, K)) : 0;
+      var v = Math.round(SB.lerp(SB.lerp(42, 90, win), 255, f));
+      grps[g].style.borderColor = 'rgb(' + v + ',' + v + ',' + v + ')';
+    }
+    var w = SB.easeOut(SB.seg(t, LAST + 0.12, LAST + 0.5));
+    var out = SB.seg(t, K - 0.45, K - 0.1);
+    cta.style.clipPath = 'inset(-12% ' + (100 - w * 100) + '% -12% 0)';
+    cta.style.opacity = String(1 - out);
+  }
+});
+</script>
+</body>
+</html>

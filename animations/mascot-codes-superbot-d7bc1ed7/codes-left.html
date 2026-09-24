@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codes left · counts down to gone · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .rig { position: relative; }
+  .col { position: relative; }
+  .layer { display: flex; flex-direction: column; align-items: flex-start; }
+  .layer.b { position: absolute; left: 0; top: 50%; }
+  .num { display: block; width: max-content; font-size: 560px; line-height: 0.84; font-variant-numeric: tabular-nums;
+         letter-spacing: -0.02em; transform-origin: 0% 60%; }
+  .lbl { display: block; width: max-content; line-height: 0.95; text-transform: uppercase; margin-top: 26px; }
+  .track { position: relative; height: 16px; border-radius: 8px; background: #1c1c1c; margin-top: 44px; overflow: hidden; }
+  .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: #fff; }
+  .gone { display: block; width: max-content; line-height: 0.86; text-transform: uppercase; transform-origin: 0% 60%; }
+  .cta { display: block; width: max-content; line-height: 0.98; text-transform: uppercase; margin-top: 30px; }
+</style>
+</head>
+<body>
+<script>
+/* Codes left: "100 CODES LEFT" drains to zero on a seeded, irregular schedule that speeds up as the
+   stock drops, then crawls through the last three for suspense. The mark gets more and more nervous:
+   its darting glances (seeded, denser as the count falls) turn the head a few degrees each way and it
+   blinks faster. At zero "GONE." slams in, the CTA wipes on and the mark smiles. The counter then
+   slides back in at 100 with the bar refilling, which is the state the loop opens on. */
+var LOOP = 9, TICK0 = 0.7, ZERO_AT = 5.2, GONE_AT = 5.45, RESET0 = 8.15, RESET1 = 8.65;
+var TICKS = (function () {
+  var r = SB.rng(19), vals = [], v = 100;
+  while (v > 3) { var d = 1 + Math.floor(r() * r() * 9); v = Math.max(3, v - d); vals.push(v); }
+  // gaps shrink as it drains (urgency), then the last three crawl
+  var gaps = vals.map(function (x, i) { return (0.35 + r()) * SB.lerp(1.6, 0.45, i / vals.length); });
+  var sum = gaps.reduce(function (a, b) { return a + b; }, 0), span = 4.05 - TICK0, at = TICK0, out = [];
+  for (var i = 0; i < vals.length; i++) { out.push({ t: at, v: vals[i] }); at += gaps[i] * span / sum; }
+  out.push({ t: 4.38, v: 2 }, { t: 4.74, v: 1 }, { t: ZERO_AT, v: 0 });
+  return out;
+})();
+function countAt(t) {
+  if (t >= RESET0 || t < TICK0) return { v: 100, t: -9, prev: 100 };
+  var v = 100, at = -9, prev = 100;
+  for (var i = 0; i < TICKS.length && TICKS[i].t <= t; i++) { prev = v; v = TICKS[i].v; at = TICKS[i].t; }
+  return { v: v, t: at, prev: prev };
+}
+// nervous glances: seeded, denser as the count falls
+var GLANCES = (function () {
+  var r = SB.rng(88), out = [], at = 0.95, side = r() < 0.5 ? -1 : 1;
+  while (at < ZERO_AT - 0.1) {
+    var urg = SB.clamp01((at - TICK0) / (ZERO_AT - TICK0));
+    var dur = SB.lerp(0.34, 0.16, urg) * (0.8 + r() * 0.4);
+    out.push({ t: at, d: dur, s: side });
+    side = r() < 0.8 ? -side : side;
+    at += dur + SB.lerp(0.55, 0.03, urg) * (0.6 + r() * 0.8);
+  }
+  return out;
+})();
+function glanceAt(t) {                       // smoothed head turn -1..1
+  var g = 0;
+  for (var i = 0; i < GLANCES.length; i++) {
+    var e = GLANCES[i];
+    if (t < e.t - 0.1 || t > e.t + e.d + 0.2) continue;
+    var up = SB.easeOut(SB.seg(t, e.t, e.t + 0.08)), down = SB.easeInOut(SB.seg(t, e.t + e.d, e.t + e.d + 0.14));
+    g += e.s * up * (1 - down);
+  }
+  return Math.max(-1, Math.min(1, g));
+}
+function glanceSide(t) {
+  for (var i = 0; i < GLANCES.length; i++) { var e = GLANCES[i]; if (t >= e.t && t < e.t + e.d) return e.s; }
+  return 0;
+}
+var BLINKS = (function () {
+  var r = SB.rng(51), out = [], at = 0.9;
+  while (at < LOOP - 0.5) {
+    out.push({ t: at, right: r() < 0.08 });
+    var urg = at < ZERO_AT ? SB.clamp01((at - TICK0) / (ZERO_AT - TICK0)) : 0;
+    at += SB.lerp(2.4, 0.55, urg) * (0.7 + r() * 0.6);
+  }
+  return out.filter(function (b) { return !(b.t > GONE_AT + 0.4 && b.t < GONE_AT + 2.2); });
+})();
+
+var mark, rig, layA, layB, num, lbl, track, fill, gone, cta, B = null;
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 3.6,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    var lockup = SB.el('div', 'mc-lockup', center);
+    lockup.style.gap = '100px';
+    rig = SB.el('div', 'rig', lockup);
+    mark = SB.mascot(rig, { size: ctx.narrow ? 400 : 440, blinks: BLINKS, happy: [[GONE_AT + 0.75, 1.4]] });
+    var col = SB.el('div', 'col', lockup);
+    layA = SB.el('div', 'layer a', col);
+    num = SB.el('div', 'num mc-type', layA, '100');
+    if (ctx.narrow) num.style.fontSize = '420px';
+    lbl = SB.el('div', 'lbl mc-type', layA, 'CODES LEFT');
+    track = SB.el('div', 'track', layA);
+    fill = SB.el('div', 'fill', track);
+    layB = SB.el('div', 'layer b', col);
+    gone = SB.el('div', 'gone mc-type', layB, 'GONE.');
+    cta = SB.el('div', 'cta mc-type', layB);
+    cta.innerHTML = 'COMMENT FOR<br>THE NEXT DROP.';
+    // the label sets the column width; everything else keys off it
+    var nw = num.offsetWidth;
+    lbl.style.fontSize = '140px'; lbl.style.fontSize = (140 * nw * 1.12 / lbl.offsetWidth) + 'px';
+    var cw = Math.max(nw, lbl.offsetWidth);
+    track.style.width = cw + 'px';
+    gone.style.fontSize = '300px'; gone.style.fontSize = (300 * cw / gone.offsetWidth) + 'px';
+    cta.style.fontSize = '100px'; cta.style.fontSize = (100 * cw / cta.offsetWidth) + 'px';
+    layB.style.marginTop = (-layB.offsetHeight / 2) + 'px';
+    col.style.width = cw + 'px';
+    SB.fit(lockup, ctx.w * 0.86, 1080 * 0.8);
+    B = null;
+    mark.look = function (t) {
+      if (!B) B = { num: SB.box(num), m: SB.box(mark.svg), gone: SB.box(gone), cta: SB.box(cta) };
+      if (t >= RESET0 - 0.1 || t < TICK0) return { x: B.num.x, y: B.num.y };
+      if (t >= GONE_AT) {
+        if (t < GONE_AT + 0.5) return { x: B.gone.x, y: B.gone.y };
+        if (t < GONE_AT + 1.6) {
+          var p = SB.easeInOut(SB.seg(t, GONE_AT + 0.55, GONE_AT + 1.4));
+          return { x: SB.lerp(B.cta.left, B.cta.right, p), y: B.cta.y };
+        }
+        return null;
+      }
+      var s = glanceSide(t);
+      if (s) return { x: B.m.x + s * 3000, y: B.m.y - 200 };
+      return { x: B.num.x, y: B.num.y };
+    };
+  },
+  frame: function (t) {
+    var c = countAt(t);
+    var inA = t < GONE_AT || t >= RESET0;
+    // counter layer
+    num.textContent = String(c.v);
+    var pop = SB.seg(t, c.t, c.t + 0.14);
+    var urg = 1 - c.v / 100;
+    num.style.transform = 'scale(' + SB.lerp(1 + 0.06 + 0.06 * urg, 1, SB.easeOut(pop)) + ')';
+    var sp = c.t > 0 ? SB.lerp(4 + 12 * urg, 1.2 * urg, SB.easeOut(SB.seg(t, c.t, c.t + 0.22))) : 0;
+    num.style.textShadow = sp > 0.05 ? (-sp).toFixed(2) + 'px 0 var(--storm-0),' + sp.toFixed(2) + 'px 0 var(--storm-3)' : 'none';
+    var barFrom = c.prev / 100, barTo = c.v / 100;
+    var bar = SB.lerp(barFrom, barTo, SB.easeOut(SB.seg(t, c.t, c.t + 0.1)));
+    if (t >= RESET0) bar = SB.easeInOut(SB.seg(t, RESET0 + 0.1, RESET1 + 0.2));
+    fill.style.width = (bar * 100).toFixed(3) + '%';
+    var inE = SB.easeOut(SB.seg(t, RESET0, RESET1));
+    layA.style.visibility = inA ? 'visible' : 'hidden';
+    layA.style.opacity = String(t >= RESET0 ? inE : 1);
+    layA.style.transform = t >= RESET0 ? 'translateY(' + SB.lerp(60, 0, inE) + 'px)' : '';
+    // gone layer
+    var g = SB.seg(t, GONE_AT, GONE_AT + 0.34);
+    var bo = SB.seg(t, RESET0 - 0.25, RESET0 + 0.05);
+    layB.style.visibility = t >= GONE_AT && t < RESET0 + 0.05 ? 'visible' : 'hidden';
+    layB.style.opacity = String(1 - bo);
+    layB.style.transform = 'translateY(' + SB.lerp(0, -50, SB.easeInOut(bo)) + 'px)';
+    gone.style.transform = 'scale(' + SB.lerp(1.7, 1, SB.backOut(g)) + ')';
+    var gsp = t >= GONE_AT ? SB.lerp(22, 2.6, SB.easeOut(SB.seg(t, GONE_AT, GONE_AT + 0.6))) : 0;
+    gone.style.textShadow = (-gsp).toFixed(2) + 'px 0 var(--storm-0),' + gsp.toFixed(2) + 'px 0 var(--storm-3)';
+    var w = SB.easeOut(SB.seg(t, GONE_AT + 0.45, GONE_AT + 0.85));
+    cta.style.clipPath = 'inset(-12% ' + (100 - w * 100) + '% -12% 0)';
+    // the head: turns with each glance, shivers once stock is low
+    var gl = glanceAt(t);
+    var shiver = t < ZERO_AT && c.v < 25 ? Math.sin(t * 91) * 1.6 * (1 - c.v / 25) : 0;
+    rig.style.transform = 'translateX(' + (gl * 14 + shiver).toFixed(2) + 'px) rotate(' + (gl * 4).toFixed(2) + 'deg)';
+  }
+});
+</script>
+</body>
+</html>

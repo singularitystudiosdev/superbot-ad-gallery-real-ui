@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EARLY ACCESS · FIRST 100 COMMENTS doors · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .ed-all { position: absolute; inset: 0; }
+  .ed-room { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 8%, rgba(255,255,255,0.09), rgba(255,255,255,0) 70%), #000; }
+  .ed-floor { position: absolute; left: 12%; right: 12%; height: 3px; background: linear-gradient(90deg, rgba(255,255,255,0), #fff 30%, #fff 70%, rgba(255,255,255,0));
+              box-shadow: 0 0 22px 2px rgba(255,255,255,0.45); }
+  .ed-glow { position: absolute; left: 12%; right: 12%; height: 220px; background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(255,255,255,0.1), rgba(255,255,255,0) 70%); }
+  .ed-light { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, #dff, #fff 30%, #fff 70%, #fdf); }
+  .ed-door { position: absolute; top: 0; bottom: 0; overflow: hidden; background: #050505; }
+  .ed-panel { position: absolute; top: 56px; bottom: 56px; border: 2px solid rgba(255,255,255,0.07); border-radius: 6px; }
+  .ed-handle { position: absolute; top: 50%; width: 10px; height: 180px; margin-top: -90px; border-radius: 5px; background: rgba(255,255,255,0.16); }
+  .ed-head { position: absolute; top: 0; height: 1080px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .ed-head div { font-size: 1em; line-height: 0.92; white-space: nowrap; }
+  .ed-edge { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: #fff; }
+  .ed-word { font-size: 1em; line-height: 0.9; white-space: nowrap; }
+</style>
+</head>
+<body>
+<script>
+/* Early access, behind closed doors: two black doors carry FIRST 100 COMMENTS GET IN. across the seam
+   between them. A thin white light seam flickers on, the doors crack open onto blinding light (the mark
+   squints), then glide apart and the light settles into a black inner room lit by a white glow line, so
+   the mark always stays on black: the mark and EARLY ACCESS stand inside. The doors slam shut, the
+   headline rejoins with a thud, and everything fades to black for the seam. */
+var LOOP = 8.6;
+var CRACK0 = 2.3, CRACK1 = 2.7, OPEN0 = 2.95, OPEN1 = 4.0, CLOSE0 = 6.15, CLOSE1 = 7.0;
+var details = [], W, CX, mark, room, light, doorL, doorR, edgeL, edgeR, headL, headR, all, word, seamGlow;
+var flick = [1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1];
+
+function easeIn(p) { return p * p * p; }
+
+function gap(t) {
+  var full = W + 260;
+  if (t < CRACK0) return 0;
+  if (t < OPEN0) return 70 * SB.easeOut(SB.seg(t, CRACK0, CRACK1));
+  if (t < CLOSE0) return SB.lerp(70, full, SB.easeInOut(SB.seg(t, OPEN0, OPEN1)));
+  return full * (1 - easeIn(SB.seg(t, CLOSE0, CLOSE1)));
+}
+
+function headline(parent, ctx, left) {
+  var h = SB.el('div', 'ed-head', parent);
+  h.style.left = left + 'px'; h.style.width = W + 'px';
+  h.style.fontSize = (ctx.narrow ? 128 : 138) + 'px';
+  var lines = ctx.narrow ? ['FIRST <span class="mc-cyan">100</span>', 'COMMENTS', 'GET IN.'] : ['FIRST <span class="mc-cyan">100</span> COMMENTS', 'GET IN.'];
+  var box = SB.el('div', '', h);
+  box.innerHTML = lines.join('<br>');
+  return h;
+}
+
+function door(frame, ctx, side) {
+  var d = SB.el('div', 'ed-door', frame);
+  d.style.left = (side < 0 ? 0 : CX) + 'px';
+  d.style.width = (side < 0 ? CX : W - CX) + 'px';
+  var p = SB.el('div', 'ed-panel', d);
+  var inset = ctx.narrow ? 36 : 56;
+  p.style.left = (side < 0 ? inset : 18) + 'px';
+  p.style.right = (side < 0 ? 18 : inset) + 'px';
+  var hd = SB.el('div', 'ed-handle', d);
+  hd.style[side < 0 ? 'right' : 'left'] = '44px';
+  var h = headline(d, ctx, side < 0 ? 0 : -CX);
+  return { d: d, h: h, p: p, hd: hd };
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 5.0,
+  build: function (frame, ctx) {
+    W = ctx.w; CX = W / 2;
+    all = SB.el('div', 'ed-all', frame);
+    room = SB.el('div', 'ed-room', all);
+    var center = SB.el('div', 'mc-center', room);
+    var lockup = SB.el('div', 'mc-lockup', center);
+    lockup.style.fontSize = (ctx.narrow ? 190 : 230) + 'px';
+    mark = SB.mascot(lockup, {
+      size: ctx.narrow ? 290 : 350,
+      blinks: [{ t: 5.55 }],
+      closed: function (t) { return t >= CRACK0 + 0.05 && t < OPEN0 + 0.45; },
+      happy: [[4.35, 1.55]],
+      look: function (t) {
+        if (t > CLOSE0 - 0.1 && t < CLOSE1) return { x: CX + (t < CLOSE0 + 0.4 ? -900 : 900), y: 540 };
+        if (t > OPEN1 - 0.25 && t < 4.3) return { x: CX + 1100, y: 420 };
+        return null;
+      }
+    });
+    word = SB.el('div', 'ed-word', lockup);
+    word.innerHTML = 'EARLY<br>ACCESS';
+    SB.fit(lockup, W * 0.82, 1080 * 0.62);
+    var lb = SB.box(lockup);
+    var floor = SB.el('div', 'ed-floor', room);
+    floor.style.top = Math.round(lb.top + lb.height + 64) + 'px';
+    var glow = SB.el('div', 'ed-glow', room);
+    glow.style.top = Math.round(lb.top + lb.height + 66) + 'px';
+
+    light = SB.el('div', 'ed-light', all);
+    var L = door(all, ctx, -1), R = door(all, ctx, 1);
+    doorL = L.d; headL = L.h; doorR = R.d; headR = R.h;
+    details = [L.p, L.hd, R.p, R.hd];
+    edgeL = SB.el('div', 'ed-edge', all);
+    edgeR = SB.el('div', 'ed-edge', all);
+    edgeL.style.boxShadow = '-3px 0 0 var(--storm-0), 0 0 30px 6px rgba(255,255,255,0.55)';
+    edgeR.style.boxShadow = '3px 0 0 var(--storm-3), 0 0 30px 6px rgba(255,255,255,0.55)';
+  },
+  frame: function (t) {
+    var g = gap(t), half = g / 2;
+    room.style.clipPath = 'inset(0 ' + Math.max(0, CX - half).toFixed(1) + 'px 0 ' + Math.max(0, CX - half).toFixed(1) + 'px)';
+    doorL.style.transform = 'translateX(' + (-half).toFixed(1) + 'px)';
+    doorR.style.transform = 'translateX(' + half.toFixed(1) + 'px)';
+
+    // the seam: flickers on, holds, flashes on the slam, fades at the end
+    var fi = Math.floor(SB.seg(t, 0.3, 0.3 + flick.length / 30) * flick.length);
+    var seam = t < 0.3 ? 0 : t < 0.3 + flick.length / 30 ? flick[Math.min(fi, flick.length - 1)] * 0.8 : 1;
+    seam *= 1 - SB.easeInOut(SB.seg(t, 8.05, 8.45));
+    var thud = SB.seg(t, CLOSE1, CLOSE1 + 0.5);
+    var shine = g < 1 ? seam * (t >= CLOSE1 ? 1 + 1.4 * (1 - thud) : 1) : 1;
+    var edgeO = Math.min(1, shine);
+    var off = g >= W + 200;
+    [edgeL, edgeR].forEach(function (e, i) {
+      e.style.left = (CX + (i ? half : -half)).toFixed(1) + 'px';
+      e.style.opacity = off ? '0' : String(g < 1 ? edgeO : 1);
+      e.style.width = (g < 1 ? 2 : 3) + 'px';
+    });
+    edgeL.style.boxShadow = '-3px 0 0 var(--storm-0), 0 0 ' + (30 * Math.max(1, shine)).toFixed(0) + 'px 6px rgba(255,255,255,0.55)';
+    edgeR.style.boxShadow = '3px 0 0 var(--storm-3), 0 0 ' + (30 * Math.max(1, shine)).toFixed(0) + 'px 6px rgba(255,255,255,0.55)';
+
+    var det = SB.easeOut(SB.seg(t, 0.3, 0.9)) * (1 - SB.easeInOut(SB.seg(t, 8.05, 8.45)));
+    details.forEach(function (n) { n.style.opacity = det.toFixed(3); });
+
+    // light pouring through the crack, settling as the doors glide apart
+    var lo = g <= 0.5 ? 0 : 1 - SB.easeOut(SB.seg(g, 90, 820));
+    if (t > CLOSE0) lo = g <= 0.5 ? 0 : 0.85 * (1 - SB.seg(g, 20, 500));
+    light.style.left = (CX - half).toFixed(1) + 'px';
+    light.style.width = g.toFixed(1) + 'px';
+    light.style.opacity = lo.toFixed(3);
+
+    // headline on the doors: in after the seam, out at the end
+    var ho = SB.easeOut(SB.seg(t, 0.7, 1.15)) * (1 - SB.easeInOut(SB.seg(t, 7.9, 8.35)));
+    var sp = t >= CLOSE1 ? SB.lerp(16, 2.2, SB.easeOut(thud)) : SB.lerp(14, 2.2, SB.easeOut(SB.seg(t, 0.7, 1.2)));
+    [headL, headR].forEach(function (h) {
+      h.style.opacity = ho.toFixed(3);
+      h.style.textShadow = (-sp).toFixed(1) + 'px 0 var(--storm-0), ' + sp.toFixed(1) + 'px 0 var(--storm-3)';
+    });
+
+    // slam shake
+    var sh = t >= CLOSE1 && t < CLOSE1 + 0.35 ? 14 * Math.sin(SB.seg(t, CLOSE1, CLOSE1 + 0.35) * Math.PI * 5) * (1 - SB.seg(t, CLOSE1, CLOSE1 + 0.35)) : 0;
+    all.style.transform = sh ? 'translateX(' + sh.toFixed(2) + 'px)' : 'none';
+
+    var wi = SB.seg(t, OPEN0 + 0.3, OPEN0 + 0.9);
+    word.style.opacity = String(SB.easeOut(wi));
+    word.style.transform = 'translateY(' + (30 * (1 - SB.easeOut(wi))).toFixed(1) + 'px)';
+  }
+});
+</script>
+</body>
+</html>

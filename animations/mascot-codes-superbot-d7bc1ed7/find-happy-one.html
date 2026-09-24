@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIND THE HAPPY ONE · crowd puzzle · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .head { position: absolute; left: 0; right: 0; display: flex; justify-content: center; }
+  .hin { display: flex; flex-direction: column; align-items: center; gap: 14px; white-space: nowrap; transform-origin: 50% 0; }
+  .h1 { font-size: 92px; line-height: 0.92; text-transform: uppercase; }
+  .h2 { display: flex; align-items: center; gap: 18px; font-size: 50px; line-height: 1; text-transform: uppercase; color: rgba(255,255,255,0.72); }
+  .h2 svg { width: 50px; height: 50px; flex: none; }
+  .q { color: #fff; text-shadow: -2px 0 var(--storm-0), 2px 0 var(--storm-3); }
+  .cell { position: absolute; display: flex; align-items: center; justify-content: center; }
+  .num { position: absolute; left: 6px; top: 2px; font-size: 17px; color: rgba(255,255,255,0.26); letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<script>
+/* FIND THE HAPPY ONE, a crowd puzzle: a grid of marks idling out of phase, blinking on their own seeded
+   clocks and glancing around, each cell faintly numbered. For just under a second exactly one of them
+   smiles. The headline asks for its number in the comments; nothing ever points at it. */
+var LOOP = 8, SMILE_AT = 4.1, SMILE_FOR = 0.75;
+var GRIDS = { '16x9': [10, 6], '4x3': [8, 6], '1x1': [7, 7], '4x5': [6, 7] };
+var marks = [], headEl;
+// own seeded blink clock per mark, kept clear of the smile so a blink never reads as a second smile
+function blinkPlan(rand) {
+  var out = [], at = 0.3 + rand() * 3.2;
+  while (at + 0.12 < LOOP) {
+    if (at + 0.12 < SMILE_AT - 0.15 || at > SMILE_AT + SMILE_FOR + 0.15) out.push({ t: Math.round(at * 30) / 30, right: rand() < 0.2 });
+    at += 1.8 + rand() * 3.2;
+  }
+  return out;
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 4.4,
+  build: function (frame, ctx) {
+    var W = ctx.w, g = GRIDS[ctx.ar] || [10, 6], cols = g[0], rows = g[1];
+    var narrow = ctx.narrow;
+    var headWrap = SB.el('div', 'head', frame);
+    headWrap.style.top = (narrow ? 56 : 44) + 'px';
+    headEl = SB.el('div', 'hin', headWrap);
+    var h1 = SB.el('div', 'h1', headEl);
+    h1.innerHTML = 'FIND THE <span class="q">HAPPY</span> ONE.';
+    var h2 = SB.el('div', 'h2', headEl);
+    h2.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17.5H4A1.5 1.5 0 0 1 2.5 16V7A1.5 1.5 0 0 1 4 5.5z"/></svg><span>COMMENT ITS NUMBER.</span>';
+    var hs = SB.fit(headEl, W * 0.9, 240);
+    var headH = headEl.offsetHeight * hs;
+    var top = (narrow ? 56 : 44) + headH + (narrow ? 40 : 34), bottom = 1080 - (narrow ? 44 : 30);
+    var cell = Math.min(W * 0.94 / cols, (bottom - top) / rows);
+    var gx = (W - cell * cols) / 2, gy = top + (bottom - top - cell * rows) / 2;
+    var size = Math.round(cell * 0.74);
+    var rand = SB.rng(4242);
+    // the happy one: off-centre, never on an edge
+    var hr = Math.floor(rows * 0.55), hc = Math.floor(cols * 0.68);
+    var happyIdx = hr * cols + hc;
+    marks = [];
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var i = r * cols + c;
+        var cellEl = SB.el('div', 'cell', frame);
+        cellEl.style.left = (gx + c * cell) + 'px'; cellEl.style.top = (gy + r * cell) + 'px';
+        cellEl.style.width = cell + 'px'; cellEl.style.height = cell + 'px';
+        var n = SB.el('div', 'num mc-mono', cellEl, (i + 1 < 10 ? '0' : '') + (i + 1));
+        n.style.fontSize = Math.max(14, Math.round(cell * 0.13)) + 'px';
+        var cx = gx + (c + 0.5) * cell, cy = gy + (r + 0.5) * cell;
+        // seeded glances: most of the crowd looks somewhere once or twice a loop
+        var glances = [];
+        var ng = Math.floor(rand() * 3);
+        for (var k = 0; k < ng; k++) {
+          var a = rand() * Math.PI * 2, st = 0.4 + rand() * (LOOP - 2.2);
+          glances.push({ a: st, b: Math.min(LOOP - 0.6, st + 0.8 + rand() * 1.2), x: cx + Math.cos(a) * 600, y: cy + Math.sin(a) * 600 });
+        }
+        var m = SB.mascot(cellEl, {
+          size: size, phase: rand(), seed: 1000 + i * 37,
+          happy: i === happyIdx ? [[SMILE_AT, SMILE_FOR]] : [],
+          blinks: blinkPlan(rand)
+        });
+        if (glances.length) {
+          m.look = (function (gl) {
+            return function (t) {
+              for (var q = 0; q < gl.length; q++) if (t >= gl[q].a && t < gl[q].b) return { x: gl[q].x, y: gl[q].y };
+              return null;
+            };
+          })(glances);
+        }
+        marks.push(m);
+      }
+    }
+  },
+  frame: function (t) {}
+});
+</script>
+</body>
+</html>

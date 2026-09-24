@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FREE TOKENS · scratch card · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .sc-col { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; }
+  .sc-wrap { position: relative; }
+  .sc-card { position: relative; overflow: hidden; border-radius: 30px; background: #000; box-shadow: 0 0 0 4px #fff; }
+  .sc-under { position: absolute; inset: 0; }
+  .sc-under > div { position: absolute; left: 0; right: 0; text-align: center; }
+  .sc-big { font-size: 1em; line-height: 0.9; white-space: nowrap; text-shadow: -2.2px 0 var(--storm-0), 2.2px 0 var(--storm-3); }
+  .sc-code { font-size: 0.34em; color: var(--storm-0); white-space: nowrap; }
+  .sc-canvas { position: absolute; left: 0; top: 0; }
+  .sc-coin { position: absolute; left: 0; top: 0; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 50%;
+             background: radial-gradient(circle at 38% 34%, #ffffff 0, #e4e4e4 38%, #a9a9a9 100%);
+             box-shadow: inset 0 0 0 9px #b9b9b9, inset 0 0 0 12px #f4f4f4, 10px 16px 0 rgba(0,0,0,0.55); }
+  .sc-coin::after { content: ''; position: absolute; inset: 32px; border-radius: 50%; border: 6px solid #9d9d9d; }
+  .sc-cap { font-size: 74px; line-height: 0.95; white-space: nowrap; text-transform: uppercase; transform-origin: 0 50%; }
+  .sc-row { display: flex; align-items: center; gap: 36px; }
+</style>
+</head>
+<body>
+<script>
+/* Scratch card: a silver scratch-off panel sits right of the mark. A coin scrubs it in thick, rounded,
+   human zigzags (canvas destination-out, the path revealed up to a length driven by t), flecks of foil
+   trailing the coin: FREE TOKENS comes up in full, the code under it only a few characters deep. The
+   mark follows the coin and smiles when the words land; COMMENT TO SCRATCH THE REST. slams in, then a
+   fresh sheet of foil wipes down over the card for the loop. */
+var LOOP = 7.5, S0 = 0.75, S1 = 3.95, CAP = 4.1, COVER0 = 6.45, COVER1 = 7.05;
+var W, H, cv, g, foil, coin, cap, card, mark, segs, total, flecks, boxes = null;
+var drawEase = SB.bezier(0.35, 0, 0.72, 1);
+
+function buildPath(rand) {
+  var pts = [], s = [];
+  // pass 1: tight zigzag across the headline band, left to right
+  var x = W * 0.07, up = true;
+  pts.push({ x: x, y: H * 0.2, d: false });
+  while (x < W * 0.93) {
+    x += W * (0.032 + rand() * 0.018);
+    pts.push({ x: x, y: up ? H * (0.5 + rand() * 0.04) : H * (0.18 + rand() * 0.04), d: true });
+    up = !up;
+  }
+  // lift and move to the code line
+  pts.push({ x: W * 0.14, y: H * 0.74, d: false });
+  x = W * 0.14; up = true;
+  while (x < W * 0.44) {
+    x += W * (0.03 + rand() * 0.015);
+    pts.push({ x: x, y: up ? H * (0.84 + rand() * 0.02) : H * (0.72 + rand() * 0.02), d: true });
+    up = !up;
+  }
+  var L = 0;
+  for (var i = 1; i < pts.length; i++) {
+    var dx = pts[i].x - pts[i - 1].x, dy = pts[i].y - pts[i - 1].y, l = Math.sqrt(dx * dx + dy * dy);
+    // lifted moves cost less path time than scrubbing
+    var cost = pts[i].d ? l : l * 0.35;
+    s.push({ a: pts[i - 1], b: pts[i], l0: L, l: cost, d: pts[i].d });
+    L += cost;
+  }
+  segs = s; total = L;
+}
+
+function headAt(len) {
+  for (var i = 0; i < segs.length; i++) {
+    var S = segs[i];
+    if (len <= S.l0 + S.l) {
+      var p = S.l ? (len - S.l0) / S.l : 0;
+      return { x: SB.lerp(S.a.x, S.b.x, p), y: SB.lerp(S.a.y, S.b.y, p), i: i, p: p };
+    }
+  }
+  var last = segs[segs.length - 1];
+  return { x: last.b.x, y: last.b.y, i: segs.length - 1, p: 1 };
+}
+
+function scratchLen(t) { return total * drawEase(SB.seg(t, S0, S1)); }
+
+function coinPos(t) {
+  var h = headAt(scratchLen(t));
+  var enter = SB.easeOut(SB.seg(t, S0 - 0.5, S0));
+  var exit = SB.easeInOut(SB.seg(t, S1, S1 + 0.5));
+  var off = (1 - enter) + exit;
+  return { x: h.x + 34 + off * W * 0.5, y: h.y - 34 - off * H * 0.9, o: t < S0 - 0.5 || t > S1 + 0.5 ? 0 : 1 };
+}
+
+function makeFoil(rand) {
+  var c = document.createElement('canvas'); c.width = W; c.height = H;
+  var x = c.getContext('2d');
+  var gr = x.createLinearGradient(0, 0, W, H);
+  gr.addColorStop(0, '#8e8e8e'); gr.addColorStop(0.35, '#d6d6d6'); gr.addColorStop(0.55, '#a4a4a4');
+  gr.addColorStop(0.8, '#cfcfcf'); gr.addColorStop(1, '#8a8a8a');
+  x.fillStyle = gr; x.fillRect(0, 0, W, H);
+  for (var i = 0; i < 5200; i++) {
+    x.fillStyle = rand() < 0.5 ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.12)';
+    x.fillRect(rand() * W, rand() * H, 1.6, 1.6);
+  }
+  x.save();
+  x.translate(W / 2, H / 2); x.rotate(-0.26);
+  x.font = '800 44px "SF Pro Display", -apple-system, "Helvetica Neue", Arial, sans-serif';
+  x.textAlign = 'center'; x.textBaseline = 'middle';
+  for (var r = -7; r <= 7; r++) for (var k = -4; k <= 4; k++) {
+    var px = k * 330 + (r % 2 ? 165 : 0), py = r * 74;
+    x.fillStyle = 'rgba(255,255,255,0.22)'; x.fillText('SCRATCH', px - 1.5, py - 1.5);
+    x.fillStyle = 'rgba(0,0,0,0.14)'; x.fillText('SCRATCH', px, py);
+  }
+  x.restore();
+  return c;
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 5.2,
+  build: function (frame, ctx) {
+    boxes = null;
+    var rand = SB.rng(4242);
+    W = ctx.narrow ? 780 : 1180; H = ctx.narrow ? 460 : 560;
+    var center = SB.el('div', 'mc-center', frame);
+    var lockup = SB.el('div', 'mc-lockup', center);
+    var col;
+    function cardBlock(parent) {
+      var wrap = SB.el('div', 'sc-wrap', parent);
+      card = SB.el('div', 'sc-card', wrap);
+      card.style.width = W + 'px'; card.style.height = H + 'px';
+      var under = SB.el('div', 'sc-under', card);
+      under.style.fontSize = Math.round(W * 0.125) + 'px';
+      SB.el('div', 'sc-big', under, 'FREE TOKENS').style.top = (H * 0.36 - W * 0.125 * 0.45) + 'px';
+      SB.el('div', 'sc-code mc-mono', under, SB.codes(1, 311)[0]).style.top = (H * 0.79 - W * 0.125 * 0.34 * 0.6) + 'px';
+      cv = SB.el('canvas', 'sc-canvas', card);
+      cv.width = W; cv.height = H;
+      g = cv.getContext('2d');
+      coin = SB.el('div', 'sc-coin', wrap);
+    }
+    if (ctx.narrow) {
+      lockup.style.flexDirection = 'column';
+      lockup.style.gap = '56px';
+      cardBlock(lockup);
+      var row = SB.el('div', 'sc-row', lockup);
+      mark = SB.mascot(row, { size: 230, happy: [[2.95, 1.9]] });
+      cap = SB.el('div', 'sc-cap', row);
+      cap.innerHTML = 'COMMENT TO<br>SCRATCH THE REST.';
+      cap.style.fontSize = '66px';
+    } else {
+      mark = SB.mascot(lockup, { size: 380, happy: [[2.95, 1.9]] });
+      col = SB.el('div', 'sc-col', lockup);
+      cardBlock(col);
+      cap = SB.el('div', 'sc-cap', col, 'COMMENT TO SCRATCH THE REST.');
+    }
+    buildPath(rand);
+    foil = makeFoil(rand);
+    flecks = [];
+    for (var i = 0; i < 16; i++) flecks.push({ back: 10 + i * 16, ox: (rand() - 0.5) * 90, oy: (rand() - 0.5) * 90, s: 3 + rand() * 5, r: rand() * 3 });
+    SB.fit(lockup, ctx.w * 0.9, 1080 * 0.88);
+    mark.look = function (t) {
+      if (!boxes) { var b = SB.box(card); boxes = { c: b, k: b.width / W, cap: SB.box(cap) }; }
+      if (t < S0 - 0.4 || t > S1 + 0.3) return t > CAP && t < COVER0 ? { x: boxes.cap.x, y: boxes.cap.y } : null;
+      var p = coinPos(t);
+      return { x: boxes.c.left + p.x * boxes.k, y: boxes.c.top + p.y * boxes.k };
+    };
+  },
+  frame: function (t) {
+    g.globalCompositeOperation = 'source-over';
+    g.clearRect(0, 0, W, H);
+    g.drawImage(foil, 0, 0);
+    var len = scratchLen(t);
+    if (len > 0) {
+      g.globalCompositeOperation = 'destination-out';
+      g.lineCap = 'round'; g.lineJoin = 'round';
+      var h = headAt(len);
+      g.beginPath();
+      var pen = false;
+      for (var i = 0; i <= h.i; i++) {
+        var S = segs[i], end = i === h.i ? { x: SB.lerp(S.a.x, S.b.x, h.p), y: SB.lerp(S.a.y, S.b.y, h.p) } : S.b;
+        if (!S.d) { pen = false; continue; }
+        if (!pen) { g.moveTo(S.a.x, S.a.y); pen = true; }
+        g.lineTo(end.x, end.y);
+      }
+      g.lineWidth = W * 0.07; g.stroke();
+      g.lineWidth = W * 0.082; g.globalAlpha = 0.45; g.stroke(); g.globalAlpha = 1;
+      // foil flecks trailing the coin while it scrubs
+      if (t > S0 && t < S1 + 0.25) {
+        g.globalCompositeOperation = 'source-over';
+        var fade = 1 - SB.seg(t, S1, S1 + 0.25);
+        flecks.forEach(function (f) {
+          var q = headAt(Math.max(0, len - f.back));
+          g.globalAlpha = fade * (1 - f.back / 280);
+          g.fillStyle = f.r < 1.5 ? '#c9c9c9' : '#8f8f8f';
+          g.fillRect(q.x + f.ox, q.y + f.oy, f.s, f.s * 0.7);
+        });
+        g.globalAlpha = 1;
+      }
+    }
+    // a fresh sheet of foil wipes down for the loop
+    var cv0 = SB.easeInOut(SB.seg(t, COVER0, COVER1));
+    if (cv0 > 0) {
+      g.globalCompositeOperation = 'source-over';
+      var hh = Math.max(1, H * cv0);
+      g.drawImage(foil, 0, 0, W, hh, 0, 0, W, hh);
+      if (cv0 < 1) { g.fillStyle = 'rgba(255,255,255,0.9)'; g.fillRect(0, hh - 5, W, 5); }
+    }
+    var p = coinPos(t);
+    coin.style.opacity = String(p.o);
+    coin.style.transform = 'translate(' + p.x.toFixed(1) + 'px,' + p.y.toFixed(1) + 'px) rotate(' + (-18 + 10 * Math.sin(t * 9)).toFixed(2) + 'deg)';
+    var ci = SB.seg(t, CAP, CAP + 0.18), co = SB.easeInOut(SB.seg(t, COVER0 - 0.2, COVER0 + 0.15));
+    cap.style.opacity = String(t < CAP ? 0 : 1 - co);
+    cap.style.transform = 'scale(' + SB.lerp(1.1, 1, SB.easeOut(ci)).toFixed(4) + ')';
+    var sp = SB.lerp(14, 0, SB.easeOut(SB.seg(t, CAP, CAP + 0.35)));
+    cap.style.textShadow = sp > 0.2 ? (-sp).toFixed(1) + 'px 0 var(--storm-0), ' + sp.toFixed(1) + 'px 0 var(--storm-3)' : 'none';
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>READY SET GO · FREE TOKENS start lights · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .rg-hold { display: flex; transform-origin: 50% 100%; }
+  .rg-col { position: relative; display: flex; flex-direction: column; align-items: flex-start; }
+  .rg-words { position: relative; }
+  .rg-word { position: absolute; left: 0; top: 0; font-size: 1em; line-height: 0.9; text-transform: uppercase; white-space: nowrap; transform-origin: 0 60%; }
+  .rg-sizer { visibility: hidden; font-size: 1em; line-height: 0.9; }
+  .rg-lights { position: absolute; left: 0.03em; top: 1.44em; display: flex; gap: 0.12em; }
+  .rg-light { width: 0.5em; height: 0.12em; border-radius: 0.06em; background: #fff; }
+  .rg-wall { position: absolute; inset: 0; display: none; flex-wrap: wrap; align-content: center; justify-content: center;
+             column-gap: 34px; row-gap: 6px; font-size: 40px; line-height: 1.12; padding: 0 20px; background: #000; }
+  .rg-wall span { white-space: nowrap; }
+</style>
+</head>
+<body>
+<script>
+/* READY / SET / GO: three hard beats beside the mark, one start light per beat. The mark crouches and
+   hops on each, higher on GO, while its eyes hold on the word. GO lights all three cyan and fires a 0.1 s
+   wall of invite codes (three different walls, one per frame), then the frame slams into FREE TOKENS
+   and the mark smiles. The whole spot fades to black for the seam. */
+var LOOP = 6;
+var BEATS = [0.4, 1.1, 1.8];
+var WORDS = ['READY', 'SET', 'GO'];
+var FLASH_F = 63;                 // frames 63, 64, 65 at 30 fps = 2.100 s to 2.200 s
+var LOCK = 66 / 30;
+var mark, hold, words = [], lights = [], walls = [], lockWord, col, wrap, boxes = null;
+
+function frameIdx(t) { return Math.floor(t * 30 + 1e-6); }
+
+function slam(p, from) { return SB.lerp(from, 1, SB.easeOut(p)); }
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 1.95,
+  build: function (frame, ctx) {
+    words = []; lights = []; walls = []; boxes = null;
+    wrap = SB.el('div', 'mc-center', frame);
+    var lockup = SB.el('div', 'mc-lockup', wrap);
+    lockup.style.fontSize = (ctx.narrow ? 250 : 300) + 'px';
+    lockup.style.gap = (ctx.narrow ? 44 : 64) + 'px';
+    hold = SB.el('div', 'rg-hold', lockup);
+    mark = SB.mascot(hold, { size: ctx.narrow ? 270 : 340, blinks: false, happy: [[LOCK + 0.05, 2.2]] });
+    col = SB.el('div', 'rg-col', lockup);
+    var stack = SB.el('div', 'rg-words', col);
+    var sizer = SB.el('div', 'rg-sizer', stack);
+    sizer.innerHTML = 'TOKENS<br>&nbsp;';
+    WORDS.forEach(function (w) { var n = SB.el('div', 'rg-word', stack, w); n.style.top = '0.45em'; words.push(n); });
+    lockWord = SB.el('div', 'rg-word', stack);
+    lockWord.innerHTML = 'FREE<br>TOKENS';
+    var lrow = SB.el('div', 'rg-lights', stack);
+    for (var i = 0; i < 3; i++) lights.push(SB.el('div', 'rg-light', lrow));
+    // sizer is one line of READY; the lockup is two lines, so give the stack room for both
+    sizer.style.height = '1.8em';
+    lrow.style.display = 'flex';
+    SB.fit(lockup, ctx.w * 0.86, 1080 * 0.78);
+
+    var fs = ctx.narrow ? 30 : 40;
+    var cols = Math.max(1, Math.floor((ctx.w - 40) / (19 * 0.62 * fs + 34)));
+    var per = cols * Math.ceil(1080 / (fs * 1.12 + 6));
+    var all = SB.codes(per * 3, 7331);
+    var rand = SB.rng(99);
+    for (var k = 0; k < 3; k++) {
+      var wall = SB.el('div', 'rg-wall mc-mono', frame);
+      for (var j = 0; j < per; j++) {
+        var s = SB.el('span', '', wall, all[k * per + j]);
+        var r = rand();
+        if (r < 0.14) s.className = 'mc-cyan'; else if (r < 0.26) s.className = 'mc-magenta';
+        else if (r < 0.4) s.style.opacity = '0.45';
+      }
+      wall.style.justifyContent = k === 1 ? 'flex-start' : 'center';
+      wall.style.fontSize = fs + 'px';
+      walls.push(wall);
+    }
+    mark.look = function (t) {
+      if (!boxes) boxes = { w: words.map(function (n) { return SB.box(n); }) };
+      if (t < BEATS[0] - 0.05 || t > LOCK) return null;
+      var i = t < BEATS[1] ? 0 : t < BEATS[2] ? 1 : 2;
+      var b = boxes.w[i];
+      return { x: b.left + Math.min(b.width, 400) * 0.5, y: b.y - 40 };
+    };
+  },
+  frame: function (t) {
+    var fi = frameIdx(t);
+    walls.forEach(function (w, k) { w.style.display = fi === FLASH_F + k ? 'flex' : 'none'; });
+
+    var fadeIn = SB.easeOut(SB.seg(t, 0.05, 0.32));
+    var fadeOut = SB.easeInOut(SB.seg(t, 5.3, 5.72));
+    wrap.style.opacity = String(fadeIn * (1 - fadeOut));
+
+    var active = -1;
+    for (var i = 0; i < 3; i++) if (t >= BEATS[i]) active = i;
+    var locked = t >= LOCK;
+    words.forEach(function (n, i) {
+      var on = !locked && i === active;
+      n.style.display = on ? 'block' : 'none';
+      if (!on) return;
+      var p = SB.seg(t, BEATS[i], BEATS[i] + 0.16);
+      var sc = slam(p, i === 2 ? 1.3 : 1.16);
+      var sp = SB.lerp(i === 2 ? 26 : 16, 0, SB.easeOut(SB.seg(t, BEATS[i], BEATS[i] + 0.28)));
+      n.style.transform = 'scale(' + sc.toFixed(4) + ')';
+      n.style.textShadow = sp > 0.2 ? (-sp).toFixed(1) + 'px 0 var(--storm-0), ' + sp.toFixed(1) + 'px 0 var(--storm-3)' : 'none';
+    });
+    lockWord.style.display = locked ? 'block' : 'none';
+    if (locked) {
+      var lp = SB.seg(t, LOCK, LOCK + 0.2);
+      lockWord.style.transform = 'scale(' + slam(lp, 1.12).toFixed(4) + ')';
+      var ls = SB.lerp(22, 2.2, SB.easeOut(SB.seg(t, LOCK, LOCK + 0.45)));
+      lockWord.style.textShadow = (-ls).toFixed(1) + 'px 0 var(--storm-0), ' + ls.toFixed(1) + 'px 0 var(--storm-3)';
+    }
+    lights.forEach(function (l, i) {
+      var on = !locked && active >= i;
+      var go = !locked && active === 2;
+      l.style.background = go ? 'var(--storm-0)' : '#fff';
+      l.style.opacity = locked ? '0' : on ? '1' : '0.18';
+      l.style.boxShadow = go ? '0 0 24px var(--storm-0)' : 'none';
+    });
+
+    // hops: crouch before each beat, launch on it, squash on landing
+    var y = 0, sx = 1, sy = 1;
+    BEATS.forEach(function (b, i) {
+      var hgt = i === 2 ? 120 : 70, dur = i === 2 ? 0.36 : 0.28;
+      var pre = SB.seg(t, b - 0.09, b);
+      if (t >= b - 0.09 && t < b) { sy *= 1 - 0.1 * Math.sin(Math.PI * 0.5 * pre); sx *= 1 + 0.06 * Math.sin(Math.PI * 0.5 * pre); }
+      if (t >= b && t < b + dur) {
+        var p = SB.seg(t, b, b + dur);
+        y -= hgt * 4 * p * (1 - p);
+        sy *= 1 + 0.08 * Math.sin(Math.PI * p); sx *= 1 - 0.05 * Math.sin(Math.PI * p);
+      }
+      if (t >= b + dur && t < b + dur + 0.14) {
+        var q = SB.seg(t, b + dur, b + dur + 0.14);
+        sy *= 1 - 0.1 * Math.sin(Math.PI * q); sx *= 1 + 0.06 * Math.sin(Math.PI * q);
+      }
+    });
+    var lk = SB.seg(t, LOCK, LOCK + 0.22);
+    if (t >= LOCK && t < LOCK + 0.22) { sy *= 1 - 0.08 * Math.sin(Math.PI * lk); sx *= 1 + 0.05 * Math.sin(Math.PI * lk); }
+    hold.style.transform = 'translateY(' + y.toFixed(2) + 'px) scale(' + sx.toFixed(4) + ',' + sy.toFixed(4) + ')';
+  }
+});
+</script>
+</body>
+</html>

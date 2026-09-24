@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>READY? · 100 codes flash · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .wall { position: absolute; inset: 0; background: #000; }
+  .wall-grid { position: absolute; display: grid; justify-content: space-between; align-items: center; color: #fff; }
+  .wall-grid > div { white-space: nowrap; text-align: center; }
+  .wall-grid .d { opacity: 0.42; }
+  .ready { font-size: 340px; transform-origin: 50% 55%; }
+  .fitbox { transform-origin: 50% 50%; }
+</style>
+</head>
+<body>
+<script>
+/* READY? then 100 codes for exactly three frames, hard cut to black, and the mark arrives alone:
+   idles, blinks, smiles. READY? creeps toward the lens while its cyan/magenta split tightens, so the
+   wall of codes lands like a shutter. Pause on frames 42 to 44 to read every code. */
+var FPS = 30, LOOP = 6;
+var IN = 0.2, FLASH = 42, MARK_IN = 1.9, OUT = 5.3;
+var ready, wall, markHold, mark;
+
+function fi(t) { return Math.floor(t * FPS + 1e-4); }
+function flashOn(t, k) { var f = fi(t); return f >= k && f < k + 3; }
+function split(node, px) { node.style.textShadow = (-px).toFixed(2) + 'px 0 var(--storm-0), ' + px.toFixed(2) + 'px 0 var(--storm-3)'; }
+
+// 100 codes laid out edge to edge: pick the column count that gives the biggest legible type.
+function codeWall(parent, ctx, list, opts) {
+  opts = opts || {};
+  var W = ctx.w, H = 1080, n = list.length;
+  var pad = Math.round(Math.min(W, H) * (opts.padK || 0.045)), top = opts.label ? 84 : 0;
+  var aw = W - 2 * pad, ah = H - 2 * pad - top, GAP = 1.2, LH = 1.28, CH = 11.9, best = null;
+  for (var c = 1; c <= 8; c++) {
+    var r = Math.ceil(n / c);
+    var f = Math.min(aw / (c * CH + (c - 1) * GAP), ah / (r * LH), opts.maxFont || 999);
+    var score = f * (n % c === 0 ? 1.12 : 1);
+    if (!best || score > best.score) best = { c: c, r: r, f: f, score: score };
+  }
+  var wallEl = SB.el('div', 'wall', parent);
+  var grid = SB.el('div', 'wall-grid mc-mono', wallEl);
+  grid.style.left = pad + 'px'; grid.style.top = (pad + top) + 'px';
+  grid.style.width = aw + 'px'; grid.style.height = ah + 'px';
+  grid.style.gridTemplateColumns = 'repeat(' + best.c + ', auto)';
+  grid.style.gridTemplateRows = 'repeat(' + best.r + ', 1fr)';
+  grid.style.fontSize = best.f + 'px';
+  list.forEach(function (code) {
+    var cell = SB.el('div', '', grid);
+    code.split('-').forEach(function (part, i) {
+      if (i) SB.el('span', 'd', cell, '-');
+      SB.el('span', '', cell, part);
+    });
+  });
+  if (n % best.c) { grid.lastChild.style.gridColumn = '1 / -1'; }
+  if (best.c === 1) grid.style.justifyContent = 'center';
+  var cw = grid.firstChild.offsetWidth, need = cw * best.c + GAP * best.f * (best.c - 1);
+  if (need > aw) grid.style.fontSize = (best.f * aw / need * 0.99) + 'px';
+  if (best.f >= 24) split(grid, 1);
+  var label = null;
+  if (opts.label) {
+    label = SB.el('div', 'mc-mono mc-cyan', wallEl, opts.label);
+    var lx = best.c === 1 ? pad + (aw - grid.firstChild.offsetWidth) / 2 : pad;
+    label.style.cssText += 'position:absolute;left:' + lx + 'px;top:' + pad + 'px;font-size:40px;';
+  }
+  return { el: wallEl, label: label };
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 43 / FPS,
+  build: function (frame, ctx) {
+    var c1 = SB.el('div', 'mc-center', frame);
+    var fitA = SB.el('div', 'fitbox', c1);
+    ready = SB.el('div', 'mc-type ready', fitA, 'READY?');
+    SB.fit(fitA, ctx.w * 0.78, 1080 * 0.5);
+
+    wall = codeWall(frame, ctx, SB.codes(100, 100));
+
+    var c2 = SB.el('div', 'mc-center', frame);
+    markHold = SB.el('div', '', c2);
+    mark = SB.mascot(markHold, {
+      size: ctx.narrow ? 460 : 540,
+      blinks: [{ t: 2.6, right: false }, { t: 4.72, right: true }],
+      happy: [[3.3, 1.25]]
+    });
+  },
+  frame: function (t) {
+    var f = fi(t);
+    // READY?: hard cut in with a settle, then a slow creep toward the lens until the shutter.
+    var onA = t >= IN && f < FLASH;
+    ready.style.visibility = onA ? 'visible' : 'hidden';
+    if (onA) {
+      var land = SB.easeOut(SB.seg(t, IN, IN + 0.3));
+      var creep = SB.seg(t, IN + 0.3, FLASH / FPS);
+      ready.style.transform = 'scale(' + (SB.lerp(1.16, 1, land) * SB.lerp(1, 1.07, creep * creep)).toFixed(4) + ')';
+      split(ready, SB.lerp(24, 3, land) + 5 * Math.pow(SB.seg(t, 1.05, FLASH / FPS), 2));
+    }
+    wall.el.style.visibility = flashOn(t, FLASH) ? 'visible' : 'hidden';
+    // The mark alone on black: pops in, idles, blinks, smiles, winks, fades.
+    var onB = t >= MARK_IN && t < OUT + 0.45;
+    markHold.style.visibility = onB ? 'visible' : 'hidden';
+    var pin = SB.easeOut(SB.seg(t, MARK_IN, MARK_IN + 0.42));
+    var pout = SB.easeInOut(SB.seg(t, OUT, OUT + 0.45));
+    markHold.style.opacity = String(SB.seg(t, MARK_IN, MARK_IN + 0.1) * (1 - pout));
+    markHold.style.transform = 'scale(' + (SB.lerp(0.86, 1, pin) * SB.lerp(1, 0.94, pout)).toFixed(4) + ')';
+  }
+});
+</script>
+</body>
+</html>

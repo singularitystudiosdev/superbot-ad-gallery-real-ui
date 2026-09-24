@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FREE TOKENS · still · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+</head>
+<body>
+<script>
+/* FREE TOKENS, the plain one: the mark idles beside the words, reads them, smiles once a loop. */
+var lockup, words, mark;
+SB.ad({
+  loop: 6,
+  thumbAt: 4.1,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    lockup = SB.el('div', 'mc-lockup', center);
+    mark = SB.mascot(lockup, { size: 300, happy: [[3.7, 1.1]] });
+    words = SB.el('div', 'mc-type', lockup);
+    words.style.fontSize = '190px';
+    words.innerHTML = ctx.narrow ? 'FREE<br>TOKENS' : 'FREE TOKENS';
+    SB.fit(lockup, ctx.w * 0.86, 1080 * 0.7);
+    mark.look = function () { var b = SB.box(words); return { x: b.x, y: b.y }; };
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCREENSHOT THIS · shutter · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .place { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .texts { display: grid; }
+  .texts > .mc-type { grid-area: 1 / 1; white-space: nowrap; }
+  .vf { position: absolute; width: 90px; height: 90px; border: 0 solid #fff; }
+  .vf.tl { border-width: 7px 0 0 7px; } .vf.tr { border-width: 7px 7px 0 0; }
+  .vf.bl { border-width: 0 0 7px 7px; } .vf.br { border-width: 0 7px 7px 0; }
+  .card { position: absolute; left: 0; top: 0; background: #fff; transform-origin: 50% 50%; overflow: hidden; visibility: hidden; }
+  .shot { position: absolute; left: 0; top: 0; background: #000; transform-origin: 0 0; }
+  .grid { position: absolute; inset: 0; display: grid; align-content: center; justify-content: center; }
+  .grid span { color: #ececec; white-space: nowrap; font-weight: 700; }
+  .grid span.c { color: #00e5c3; }
+  .flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+</style>
+</head>
+<body>
+<script>
+/* SCREENSHOT THIS. The viewfinder frames the mark, which poses. The shutter fires: for exactly three
+   frames (0.1 s) the screen is a wall of invite codes, then a white flash, and the capture shrinks into a
+   tilted screenshot thumbnail in the corner. The line flips to COMMENT WHAT YOU GOT; the mark looks at the
+   shot and grins. The thumbnail swipes away for the loop. */
+var L = 7, FPS = 30;
+var CODES0 = 49, FLASH = 52;           // frames 49, 50, 51 = 1.6333 s .. 1.7 s: exactly 0.1 s of codes
+var SHRINK0 = 1.95, SHRINK1 = 2.6, AWAY0 = 5.85, AWAY1 = 6.3;
+var placeEl, DROP = 0, W, mark, tA, tB, card, shot, flash, vfs = [], target;
+
+function cardState(t) {
+  var p = SB.easeInOut(SB.seg(t, SHRINK0, SHRINK1));
+  var out = SB.seg(t, AWAY0, AWAY1), o = out * out * out;
+  var s = SB.lerp(1, target.s, p);
+  return {
+    x: SB.lerp(W / 2, target.x, p) + o * W * 0.62,
+    y: SB.lerp(540, target.y, p) - o * 60,
+    s: s, rot: SB.lerp(0, target.rot, p) + o * 14, p: p
+  };
+}
+
+SB.ad({
+  loop: L,
+  thumbAt: 3.3,
+  build: function (frame, ctx) {
+    W = ctx.w;
+    var n = ctx.narrow;
+    target = n ? { x: W - 190, y: 235, s: 0.36, rot: 5 } : { x: W - 350, y: 240, s: 0.3, rot: 4.5 };
+
+    var place = SB.el('div', 'place', frame);
+    placeEl = place;
+    DROP = n ? 250 : 140;
+    var row = SB.el('div', 'mc-lockup', place);
+    mark = SB.mascot(row, {
+      size: 300,
+      blinks: [{ t: 0.5 }, { t: 4.7 }, { t: 5.6, right: true }],
+      happy: [[0.85, 0.65], [2.95, 1.45]],
+      closed: function (t) { return t > 1.62 && t < 1.97; },
+      look: function (t) {
+        if (t < 2.35 || t > 5.95) return null;
+        var c = cardState(t);
+        return { x: c.x, y: c.y };
+      }
+    });
+    var texts = SB.el('div', 'texts', row);
+    tA = SB.el('div', 'mc-type', texts);
+    tA.innerHTML = 'SCREENSHOT<br>THIS.';
+    tB = SB.el('div', 'mc-type', texts);
+    tB.innerHTML = n ? 'COMMENT<br>WHAT<br>YOU GOT' : 'COMMENT<br>WHAT YOU GOT';
+    tA.style.fontSize = tB.style.fontSize = n ? '150px' : '140px';
+    SB.fit(row, W * (n ? 0.82 : 0.8), n ? 560 : 600);
+
+    // viewfinder corners
+    vfs = ['tl', 'tr', 'bl', 'br'].map(function (k) { return { k: k, el: SB.el('div', 'vf ' + k, frame) }; });
+
+    // the capture: a full-frame code wall that becomes the thumbnail
+    card = SB.el('div', 'card', frame);
+    card.style.width = W + 'px';
+    card.style.height = '1080px';
+    shot = SB.el('div', 'shot', card);
+    shot.style.width = W + 'px';
+    shot.style.height = '1080px';
+    var grid = SB.el('div', 'grid mc-mono', shot);
+    var cols = n ? 2 : 4, rowsN = n ? 15 : 13, fs = n ? 31 : 35;
+    grid.style.gridTemplateColumns = 'repeat(' + cols + ', auto)';
+    grid.style.columnGap = (n ? 44 : 58) + 'px';
+    grid.style.rowGap = (n ? 22 : 30) + 'px';
+    grid.style.fontSize = fs + 'px';
+    var list = SB.codes(cols * rowsN, 5150), rnd = SB.rng(33);
+    list.forEach(function (c) { var s = SB.el('span', null, grid, c); if (rnd() < 0.09) s.className = 'c'; });
+
+    flash = SB.el('div', 'flash', frame);
+  },
+  frame: function (t, ctx) {
+    var fi = Math.round(t * FPS) % (L * FPS);
+    // the lockup makes room for the thumbnail, and returns for the loop
+    var drop = SB.easeInOut(SB.seg(t, SHRINK0 + 0.1, SHRINK1 + 0.1)) * (1 - SB.easeInOut(SB.seg(t, 6.2, 6.8)));
+    placeEl.style.transform = 'translateY(' + (drop * DROP).toFixed(1) + 'px)';
+    // copy swap
+    var aIn = fi < CODES0 ? 1 : SB.seg(t, 6.4, 6.75);
+    var bIn = fi >= FLASH ? 1 - SB.seg(t, 6.15, 6.4) : 0;
+    tA.style.opacity = aIn.toFixed(3);
+    tB.style.opacity = bIn.toFixed(3);
+    tB.style.transform = 'translateY(' + ((1 - SB.easeOut(SB.seg(t, 2.1, 2.6))) * 18).toFixed(1) + 'px)';
+
+    // viewfinder: frames the shot, squeezes in as it focuses, gone after the shutter, back for the loop
+    var vIn = fi < CODES0 ? SB.seg(t, 0.0, 0.01) : SB.easeOut(SB.seg(t, 6.55, 6.95));
+    if (fi < CODES0) vIn = 1;
+    var squeeze = SB.easeInOut(SB.seg(t, 1.05, 1.55)) * (fi < CODES0 ? 1 : 0);
+    var ins = (ctx.narrow ? 48 : 64) + squeeze * 26;
+    vfs.forEach(function (v) {
+      var st = v.el.style;
+      st.opacity = vIn.toFixed(3);
+      st.left = v.k[1] === 'l' ? ins + 'px' : 'auto';
+      st.right = v.k[1] === 'r' ? ins + 'px' : 'auto';
+      st.top = v.k[0] === 't' ? ins + 'px' : 'auto';
+      st.bottom = v.k[0] === 'b' ? ins + 'px' : 'auto';
+    });
+
+    // capture card
+    var show = fi >= CODES0 && t < AWAY1 + 0.02;
+    card.style.visibility = show ? 'visible' : 'hidden';
+    if (show) {
+      var c = cardState(t);
+      var bv = 14 * c.p, bl = bv / c.s;            // border in screen px -> card-local px
+      card.style.transform = 'translate(' + (c.x - W / 2).toFixed(1) + 'px,' + (c.y - 540).toFixed(1) + 'px) rotate(' + c.rot.toFixed(2) + 'deg) scale(' + c.s.toFixed(4) + ')';
+      card.style.borderRadius = (18 * c.p / c.s).toFixed(1) + 'px';
+      card.style.boxShadow = c.p > 0 ? '0 ' + (26 / c.s).toFixed(0) + 'px ' + (70 / c.s).toFixed(0) + 'px rgba(0,0,0,0.75), 0 0 ' + (40 / c.s).toFixed(0) + 'px rgba(0,229,195,' + (0.18 * c.p).toFixed(2) + ')' : 'none';
+      var k = (W - 2 * bl) / W;
+      shot.style.transform = 'translate(' + bl.toFixed(1) + 'px,' + bl.toFixed(1) + 'px) scale(' + k.toFixed(4) + ')';
+      shot.style.borderRadius = (10 * c.p / c.s / k).toFixed(1) + 'px';
+      shot.style.height = ((1080 - 2 * bl) / k).toFixed(1) + 'px';
+    }
+
+    // flash
+    var f = fi === FLASH ? 1 : fi > FLASH ? Math.pow(1 - SB.seg(t, FLASH / FPS, 2.1), 2) : 0;
+    flash.style.opacity = f.toFixed(3);
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FREE TOKENS · TOKENS avalanche · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .ts-world { position: absolute; left: 0; top: 0; height: 1080px; }
+  .ts-word { position: absolute; left: 0; top: 0; line-height: 1; white-space: nowrap; will-change: transform; }
+  .ts-hold { position: absolute; left: 0; top: 0; display: flex; }
+  .ts-col { position: absolute; inset: 0; }
+  .ts-outline { color: transparent; -webkit-text-stroke: 4px #fff; }
+</style>
+</head>
+<body>
+<script>
+/* FREE stays put beside the mark while TOKENS repeats line after line down the screen, each line
+   dropping in faster than the last, filled and outlined lines interleaved with the odd cyan or magenta
+   one, until the column overflows and streams upward in a blur. The mark's eyes dart from line to line,
+   it trembles, squeezes its eyes shut, and everything snaps back to one clean FREE TOKENS as it smiles. */
+var LOOP = 7, T1 = 1.0, T2 = 4.4;
+var A = 1.6, B = 1.05;           // n(t) = A (e^{B (t - T1)} - 1) lines stacked
+var POOL = 18;
+var LIFT = 0, KS = 1, TOPW = 0, BOTW = 1080, F, P, world, freeEl, row0, pool = [], hold, mark, colX, row0Y, V, darts = [], markBox = null;
+
+function nAt(t) { return t < T1 || t >= T2 ? 0 : A * (Math.exp(B * (t - T1)) - 1); }
+function tAt(k) { return T1 + Math.log(k / A + 1) / B; }
+function scrollAt(t) {
+  var n = nAt(t);
+  var over = n - V;
+  if (over <= 0) return 0;
+  return over * P;
+}
+function easeIn2(p) { return p * p; }
+function hash(i) { var x = Math.sin(i * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); }
+
+function styleRow(node, k) {
+  node.className = 'ts-word';
+  node.style.color = '';
+  if (k % 3 === 1) node.classList.add('ts-outline');
+  else if (k % 5 === 0) node.style.color = 'var(--storm-0)';
+  else if (k % 7 === 3) node.style.color = 'var(--storm-3)';
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 3.75,
+  build: function (frame, ctx) {
+    pool = []; darts = []; markBox = null;
+    F = ctx.narrow ? 200 : 190;
+    P = F * 0.86;
+    world = SB.el('div', 'ts-world', frame);
+    world.style.width = ctx.w + 'px';
+    world.style.fontSize = F + 'px';
+    hold = SB.el('div', 'ts-hold', world);
+    var ms = ctx.narrow ? 300 : 320;
+    mark = SB.mascot(hold, {
+      size: ms,
+      blinks: [{ t: 0.55 }, { t: 5.9 }],
+      closed: function (t) { return t >= T2 - 0.3 && t < T2; },
+      happy: [[T2 + 0.06, 1.9]]
+    });
+    freeEl = SB.el('div', 'ts-word', world, 'FREE');
+    var col = SB.el('div', 'ts-col', world);
+    row0 = SB.el('div', 'ts-word', col, 'TOKENS');
+    var fw = freeEl.offsetWidth, tw = row0.offsetWidth;
+    var gap = 56, sp = F * 0.26;
+    var markH = ms * (144 / 160);
+    var total, x0, freeY;
+    if (ctx.narrow) {
+      total = ms + gap + Math.max(fw, tw);
+      x0 = (ctx.w - total) / 2;
+      colX = x0 + ms + gap;
+      freeY = 540 - P;             // FREE row top
+      row0Y = freeY + P;
+      hold.style.transform = 'translate(' + x0 + 'px,' + (540 - markH / 2 - F * 0.04) + 'px)';
+    } else {
+      total = ms + gap + fw + sp + tw;
+      x0 = (ctx.w - total) / 2;
+      colX = x0 + ms + gap + fw + sp;
+      freeY = 540 - F * 0.5;
+      row0Y = freeY;
+      hold.style.transform = 'translate(' + x0 + 'px,' + (540 - markH / 2 - F * 0.02) + 'px)';
+    }
+    freeEl.style.transform = 'translate(' + (x0 + ms + gap) + 'px,' + freeY + 'px)';
+    row0.style.transform = 'translate(' + colX + 'px,' + row0Y + 'px)';
+    var k = Math.min(1, (ctx.w * 0.92) / total);
+    KS = k;
+    // narrow: the lockup lifts to the top while the column streams, so the stack fills the frame
+    LIFT = ctx.narrow ? (freeY - (540 - 470 / k)) : 0;
+    TOPW = 540 - 540 / k; BOTW = 540 + 540 / k + LIFT;
+    V = Math.floor((BOTW - row0Y) / P) - 0.35;
+    // narrow: the column streams under FREE, never over it
+    if (ctx.narrow) col.style.clipPath = 'inset(' + (row0Y - F * 0.04) + 'px -2000px -2000px -2000px)';
+    world.style.transformOrigin = (ctx.w / 2) + 'px 540px';
+    world.style.transform = 'scale(' + k + ')';
+    for (var i = 0; i < POOL; i++) { var n = SB.el('div', 'ts-word', col, 'TOKENS'); n.style.display = 'none'; pool.push(n); }
+    // eye darts: a new random line to look at, faster and faster
+    var rand = SB.rng(606), tt = T1 + 0.2, dt = 0.4;
+    while (tt < T2 - 0.3) { darts.push({ t: tt, y: 60 + rand() * 960, x: (colX + tw * (0.2 + rand() * 0.6)) * k + (ctx.w / 2) * (1 - k) }); tt += dt; dt = Math.max(0.07, dt * 0.8); }
+    mark.look = function (t) {
+      if (t < T1 + 0.2 || t >= T2 - 0.3) return null;
+      var d = darts[0];
+      for (var j = 0; j < darts.length; j++) if (darts[j].t <= t) d = darts[j];
+      return { x: d.x, y: d.y };
+    };
+  },
+  frame: function (t) {
+    var n = nAt(t), sc = scrollAt(t);
+    var v = Math.abs(scrollAt(t + 1 / 60) - scrollAt(t - 1 / 60)) * 30; // px per second
+    var smear = Math.min(F * 0.45, v * 0.012);
+    var shadow = smear > 1 ? '0 ' + smear.toFixed(1) + 'px 0 rgba(255,255,255,0.28), 0 ' + (-smear).toFixed(1) + 'px 0 rgba(255,255,255,0.28)' : 'none';
+    var active = t >= T1 && t < T2;
+    // row 0 (the TOKENS beside FREE) rides the scroll too
+    row0.style.transform = 'translate(' + colX + 'px,' + (row0Y - sc).toFixed(1) + 'px)';
+    row0.style.textShadow = active ? shadow : 'none';
+    var used = {};
+    pool.forEach(function (p) { p.style.display = 'none'; });
+    if (active) {
+      var kmax = Math.floor(n);
+      var kmin = Math.max(1, Math.floor((sc - P * 1.2) / P));
+      for (var k = kmin; k <= kmax; k++) {
+        var y = row0Y + k * P - sc;
+        if (y > BOTW || y < TOPW - P * 1.3) continue;
+        var node = pool[k % POOL];
+        if (used[k % POOL]) continue;
+        used[k % POOL] = 1;
+        styleRow(node, k);
+        var tk = tAt(k), dp = SB.easeOut(SB.seg(t, tk, tk + 0.14));
+        node.style.display = 'block';
+        node.style.opacity = String(Math.min(1, dp * 1.6));
+        node.style.transform = 'translate(' + colX + 'px,' + (y - P * 0.45 * (1 - dp)).toFixed(1) + 'px)';
+        node.style.textShadow = shadow;
+      }
+    }
+    // the snap back: one clean lockup, split flare decaying
+    var snap = SB.seg(t, T2, T2 + 0.4);
+    var s = t >= T2 ? SB.lerp(1.07, 1, SB.backOut(snap)) : 1;
+    var fl = t >= T2 ? SB.lerp(18, 0, SB.easeOut(SB.seg(t, T2, T2 + 0.5))) : 0;
+    [freeEl, row0].forEach(function (e) {
+      if (fl > 0.2) e.style.textShadow = (-fl).toFixed(1) + 'px 0 var(--storm-0), ' + fl.toFixed(1) + 'px 0 var(--storm-3)';
+      else if (!active) e.style.textShadow = 'none';
+    });
+    // tremble while overwhelmed (a pure function of the frame index), none outside the stack
+    var fi = Math.round(t * 30);
+    var amp = active ? 9 * easeIn2(SB.seg(t, T1 + 1.4, T2)) : 0;
+    mark.el.parentNode.style.marginLeft = (amp * (hash(fi) - 0.5) * 2).toFixed(2) + 'px';
+    mark.el.parentNode.style.marginTop = (amp * (hash(fi + 999) - 0.5) * 2).toFixed(2) + 'px';
+    world.style.scale = String(s);
+    var lift = t < T2 ? LIFT * SB.easeInOut(SB.seg(t, T1 - 0.35, T1 + 0.2)) : 0;
+    world.style.transform = 'scale(' + KS + ') translateY(' + (-lift).toFixed(1) + 'px)';
+  }
+});
+</script>
+</body>
+</html>

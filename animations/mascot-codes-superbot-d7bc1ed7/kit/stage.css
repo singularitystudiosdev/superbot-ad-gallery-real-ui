@@ -1,0 +1,20 @@
+/* stage.css: shared frame for the mascot-codes spots. Black field, white type, one fixed 1080px-tall stage
+   scaled to the window. Motion is driven from JS on the ad clock, so nothing here transitions. */
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+*, *::before, *::after { box-sizing: border-box; transition: none !important; }
+#frame {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--ar-w, 1920px); height: 1080px;
+  background: #000; color: #fff; overflow: hidden;
+  transform-origin: 50% 50%;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 800; letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+.mc-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.mc-lockup { display: flex; align-items: center; gap: 56px; transform-origin: 50% 50%; white-space: nowrap; }
+.mc-type { font-size: 150px; line-height: 0.92; text-transform: uppercase; color: #fff; }
+.mc-mono { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-weight: 600; letter-spacing: 0.02em; }
+.mc-cyan { color: var(--storm-0); }
+.mc-magenta { color: var(--storm-3); }
+.mc-abs { position: absolute; }

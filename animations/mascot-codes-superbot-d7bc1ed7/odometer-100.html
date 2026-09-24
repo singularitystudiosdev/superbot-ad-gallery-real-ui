@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Odometer · rolls to 100 · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .col { display: flex; flex-direction: column; align-items: flex-start; gap: 34px; }
+  .row { display: flex; align-items: center; gap: 44px; }
+  .row.stack { flex-direction: column; align-items: flex-start; gap: 30px; }
+  .line { display: block; width: max-content; text-transform: uppercase; line-height: 0.92; }
+  .housing { display: flex; gap: 12px; padding: 14px; background: #050505; border: 3px solid #2a2a2a; border-radius: 36px; }
+  .wheel { position: relative; width: 200px; height: 320px; border-radius: 22px; overflow: hidden;
+           background: linear-gradient(#060606, #141414 50%, #060606); border: 2px solid #1e1e1e; }
+  .dg { position: absolute; left: 0; right: 0; top: 50%; height: 260px; margin-top: -130px; text-align: center;
+        font-size: 270px; line-height: 260px; color: #fff; font-variant-numeric: tabular-nums; }
+  .drum { position: absolute; inset: 0; pointer-events: none;
+          background: linear-gradient(rgba(0,0,0,.92), rgba(0,0,0,0) 32%, rgba(0,0,0,0) 68%, rgba(0,0,0,.92)); }
+  .hair { position: absolute; left: 0; right: 0; height: 2px; background: rgba(255,255,255,.06); }
+  .cta { color: #fff; }
+</style>
+</head>
+<body>
+<script>
+/* Odometer: "WE'RE GIVING AWAY" / a three-wheel mechanical counter / "CODES". Each wheel is a real
+   ten-digit drum (digits ride a cylinder: y = R sin, squash = cos) and rolls several turns, braking with
+   a spring overshoot; they land left to right, 1 then 0 then 0, "CODES" slams on the last landing and
+   the mark smiles. Everything but the mark fades out before the seam and back in from 000. */
+var LOOP = 7, S0 = 0.75, ENDS = [2.05, 2.3, 2.55], DIST = [11, 20, 30], VL = 4.5, W = Math.PI * 2 * 3, KD = 6;
+var OUT0 = 6.35, OUT1 = 6.75;
+var HD = 260, TH = Math.PI / 5, R = HD / TH;
+var mark, lockup, head, housing, wheels = [], digs = [], codes, cta, B = null;
+
+// Hermite from rest-ish kick to the target, arriving with residual speed VL, then a damped spring
+function wheelPos(i, t) {
+  var S = S0, E = ENDS[i], d = DIST[i], T = E - S;
+  if (t <= S) return 0;
+  if (t < E) {
+    var u = (t - S) / T, u2 = u * u, u3 = u2 * u;
+    var v0 = 2.1 * d / T, v1 = VL;
+    return (u3 - 2 * u2 + u) * v0 * T + (-2 * u3 + 3 * u2) * d + (u3 - u2) * v1 * T;
+  }
+  var tau = t - E;
+  return d + (VL / W) * Math.sin(W * tau) * Math.exp(-KD * tau);
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 3.2,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    lockup = SB.el('div', 'mc-lockup', center);
+    lockup.style.gap = '72px';
+    mark = SB.mascot(lockup, { size: ctx.narrow ? 290 : 360, happy: [[ENDS[2] + 0.04, 1.5]] });
+    var col = SB.el('div', 'col', lockup);
+    head = SB.el('div', 'line mc-type', col, 'WE’RE GIVING AWAY');
+    var row = SB.el('div', 'row' + (ctx.narrow ? ' stack' : ''), col);
+    housing = SB.el('div', 'housing', row);
+    wheels = []; digs = [];
+    for (var w = 0; w < 3; w++) {
+      var wh = SB.el('div', 'wheel mc-type', housing);
+      var ds = [];
+      for (var k = 0; k < 4; k++) ds.push(SB.el('div', 'dg', wh));
+      SB.el('div', 'drum', wh);
+      var h1 = SB.el('div', 'hair', wh); h1.style.top = '26%';
+      var h2 = SB.el('div', 'hair', wh); h2.style.top = '74%';
+      wheels.push(wh); digs.push(ds);
+    }
+    codes = SB.el('div', 'line mc-type', row, 'CODES');
+    cta = SB.el('div', 'line mc-type cta', col);
+    cta.innerHTML = ctx.narrow ? 'COMMENT TO<br>CLAIM ONE.' : 'COMMENT TO CLAIM ONE.';
+    // size the words off the odometer so the lockup reads as one block
+    var hw = housing.offsetWidth;
+    codes.style.fontSize = '300px';
+    if (ctx.narrow) codes.style.fontSize = (300 * hw / codes.offsetWidth) + 'px';
+    else codes.style.fontSize = '230px';
+    var rw = row.offsetWidth;
+    head.style.fontSize = '120px'; head.style.fontSize = (120 * rw / head.offsetWidth) + 'px';
+    cta.style.fontSize = '70px'; cta.style.fontSize = Math.min(70 * rw / cta.offsetWidth, parseFloat(head.style.fontSize) * (ctx.narrow ? 1 : 0.7)) + 'px';
+    SB.fit(lockup, ctx.w * 0.88, 1080 * 0.86);
+    B = null;
+    mark.look = function (t) {
+      if (!B) B = { w: wheels.map(function (n) { return SB.box(n); }), head: SB.box(head), codes: SB.box(row), cta: SB.box(cta) };
+      if (t < S0 + 0.2 || t >= OUT0) return { x: B.head.x, y: B.head.y };
+      for (var i = 0; i < 3; i++) if (t < ENDS[i] + 0.06) return { x: B.w[i].x, y: B.w[i].y };
+      if (t < ENDS[2] + 0.75) return { x: B.codes.right - 40, y: B.codes.y };
+      if (t < ENDS[2] + 2.0) {
+        var p = SB.easeInOut(SB.seg(t, ENDS[2] + 0.85, ENDS[2] + 1.8));
+        return { x: SB.lerp(B.cta.left, B.cta.right, p), y: B.cta.y };
+      }
+      return null;
+    };
+  },
+  frame: function (t) {
+    var fadeIn = SB.easeOut(SB.seg(t, 0.05, 0.45)), fadeOut = SB.seg(t, OUT0, OUT1);
+    var vis = fadeIn * (1 - fadeOut);
+    head.style.opacity = String(vis);
+    head.style.transform = 'translateY(' + SB.lerp(24, 0, fadeIn) + 'px)';
+    housing.style.opacity = String(SB.easeOut(SB.seg(t, 0.2, 0.6)) * (1 - fadeOut));
+    for (var i = 0; i < 3; i++) {
+      var p = wheelPos(i, t);
+      var vel = Math.abs(wheelPos(i, t + 0.004) - wheelPos(i, t - 0.004)) / 0.008;
+      var b = SB.clamp01((vel - 1.5) / 20);
+      var base = Math.floor(p);
+      var sh = 'none';
+      if (b > 0.01) {
+        var d1 = (0.2 * HD * b).toFixed(1), d2 = (0.42 * HD * b).toFixed(1);
+        sh = '0 -' + d1 + 'px rgba(255,255,255,' + (0.4 * b).toFixed(3) + '),0 ' + d1 + 'px rgba(255,255,255,' + (0.4 * b).toFixed(3) + '),0 -' + d2 + 'px rgba(255,255,255,' + (0.18 * b).toFixed(3) + '),0 ' + d2 + 'px rgba(255,255,255,' + (0.18 * b).toFixed(3) + ')';
+      } else if (t >= ENDS[i]) {
+        var sp = SB.lerp(12, 2.4, SB.easeOut(SB.seg(t, ENDS[i], ENDS[i] + 0.5)));
+        sh = (-sp).toFixed(2) + 'px 0 var(--storm-0),' + sp.toFixed(2) + 'px 0 var(--storm-3)';
+      }
+      for (var s = 0; s < 4; s++) {
+        var k = base - 1 + s;
+        var el = digs[i][s];
+        el.textContent = String(((k % 10) + 10) % 10);
+        // counting up: the next digit rises from below
+        var o = k - p;
+        var th = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, o * TH));
+        var cs = Math.cos(th);
+        el.style.transform = 'translateY(' + (R * Math.sin(th)).toFixed(2) + 'px) scaleY(' + (cs * (1 + 0.25 * b)).toFixed(3) + ')';
+        el.style.opacity = String((1 - 0.4 * b) * cs);
+        el.style.textShadow = sh;
+      }
+    }
+    var L = ENDS[2];
+    var slam = SB.seg(t, L, L + 0.32);
+    codes.style.opacity = String(t >= L ? 1 - fadeOut : 0);
+    codes.style.transform = 'scale(' + SB.lerp(1.5, 1, SB.backOut(slam)) + ')';
+    var csp = t >= L ? SB.lerp(16, 2.6, SB.easeOut(SB.seg(t, L, L + 0.5))) : 0;
+    codes.style.textShadow = csp ? (-csp) + 'px 0 var(--storm-0),' + csp + 'px 0 var(--storm-3)' : 'none';
+    var w = SB.easeOut(SB.seg(t, L + 0.5, L + 0.9));
+    cta.style.clipPath = 'inset(-12% ' + (100 - w * 100) + '% -12% 0)';
+    cta.style.opacity = String(1 - fadeOut);
+  }
+});
+</script>
+</body>
+</html>

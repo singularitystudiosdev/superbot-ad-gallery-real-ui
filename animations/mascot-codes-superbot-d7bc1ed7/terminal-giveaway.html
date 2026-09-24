@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminal · 100 codes issued · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .col { display: flex; flex-direction: column; align-items: flex-start; gap: 44px; }
+  .term { position: relative; background: #0a0a0a; border: 2px solid #2a2a2a; border-radius: 22px; overflow: hidden;
+          box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+  .bar { height: 58px; border-bottom: 2px solid #1c1c1c; display: flex; align-items: center; padding: 0 24px; gap: 12px;
+         position: relative; }
+  .dot { width: 16px; height: 16px; border-radius: 50%; background: #333; }
+  .ttl { position: absolute; left: 0; right: 0; text-align: center; font-size: 22px; color: #6a6a6a; letter-spacing: .04em; }
+  .body { position: relative; }
+  .clip { position: relative; overflow: hidden; }
+  .lines { position: absolute; left: 0; top: 0; right: 0; }
+  .ln { white-space: pre; color: #d8d8d8; }
+  .mut { color: #5c5c5c; }
+  .cy { color: var(--storm-0); }
+  .wh { color: #fff; font-weight: 700; }
+  .caret { display: inline-block; background: #fff; vertical-align: top; }
+  .cap { display: block; width: max-content; line-height: 0.98; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<script>
+/* Terminal giveaway: a real-feeling shell. The command types itself, 100 codes stream out line by line
+   (the pane scrolls a whole row at a time like a real tty), the summary prints and the mark smiles. The
+   mark reads along: its gaze sits on the newest line and flicks along it. At the end the screen clears to
+   the bare prompt, the same frame the loop opens on. */
+var LOOP = 9, TYPE_AT = 0.45, CMD = 'superbot codes give 100', ENTER, STREAM0, STREAM1, DONE_AT, CLEAR_AT = 8.45;
+var CODES = SB.codes(100, 100);
+var CTIMES = (function () {
+  var r = SB.rng(3), out = [], at = TYPE_AT;
+  for (var i = 0; i < CMD.length; i++) { out.push(at); at += 0.032 + r() * 0.03 + (CMD[i] === ' ' ? 0.04 : 0); }
+  ENTER = at + 0.22;
+  STREAM0 = ENTER + 0.2; STREAM1 = STREAM0 + 2.4; DONE_AT = STREAM1 + 0.14;
+  return out;
+})();
+var ROWS = 12;
+var mark, term, body, lines, cmdSpan, caret0, caretEnd, rowsEls = [], cap, FS, LH, CW, NARROW, B = null;
+
+function typedN(t) { var n = 0; while (n < CMD.length && CTIMES[n] <= t) n++; return n; }
+function streamed(t) {
+  if (t < STREAM0) return 0;
+  return Math.min(100, Math.floor(100 * SB.bezier(0.45, 0, 0.7, 1)(SB.seg(t, STREAM0, STREAM1)) + 0.0001));
+}
+// total visible rows (index into rowsEls) at t
+function visibleRows(t) {
+  if (t >= CLEAR_AT) return 0;
+  if (t < ENTER) return 1;
+  var v = 2 + streamed(t);                 // prompt, "issuing", codes
+  if (t >= DONE_AT) v = rowsEls.length;    // blank, summary, new prompt
+  return v;
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: Math.round((DONE_AT + 0.75) * 30) / 30,
+  build: function (frame, ctx) {
+    NARROW = ctx.w < 1600;
+    FS = NARROW ? 32 : 36; LH = NARROW ? 46 : 52;
+    var center = SB.el('div', 'mc-center', frame);
+    var lockup = SB.el('div', 'mc-lockup', center);
+    lockup.style.gap = ctx.narrow ? '48px' : '72px';
+    mark = SB.mascot(lockup, { size: ctx.narrow ? 230 : 300, happy: [[DONE_AT + 0.05, 1.3]] });
+    var col = SB.el('div', 'col', lockup);
+    term = SB.el('div', 'term mc-mono', col);
+    var bar = SB.el('div', 'bar', term);
+    for (var d = 0; d < 3; d++) SB.el('div', 'dot', bar);
+    SB.el('div', 'ttl', bar, 'superbot');
+    body = SB.el('div', 'body', term);
+    var clip = SB.el('div', 'clip', body);
+    lines = SB.el('div', 'lines', clip);
+    lines.style.fontSize = FS + 'px'; lines.style.lineHeight = LH + 'px';
+    var probe = SB.el('span', 'ln', lines, 'MMMMMMMMMM');
+    CW = probe.getBoundingClientRect().width / 10;
+    probe.remove();
+    var cols = NARROW ? 26 : 42;
+    var padX = 36, padY = 26;
+    term.style.width = Math.ceil(cols * CW + padX * 2) + 'px';
+    body.style.padding = padY + 'px ' + padX + 'px';
+    clip.style.height = (ROWS * LH) + 'px';
+    rowsEls = [];
+    function row(html) { var e = SB.el('div', 'ln', lines); e.innerHTML = html; rowsEls.push(e); return e; }
+    var r0 = row('<span class="cy">$</span> ');
+    cmdSpan = SB.el('span', '', r0);
+    caret0 = SB.el('span', 'caret', r0, ' ');
+    row('<span class="mut">issuing 100 invite codes</span>');
+    for (var i = 0; i < 100; i++) {
+      var n = String(i + 1); while (n.length < 3) n = '0' + n;
+      row('<span class="mut">' + n + '</span>  ' + CODES[i] + (NARROW ? '' : '  <span class="mut">issued</span>'));
+    }
+    row(' ');
+    if (NARROW) {
+      row('<span class="cy">&#10003;</span> <span class="wh">100 codes issued.</span>');
+      row('  <span class="wh">comment to claim one.</span>');
+    } else row('<span class="cy">&#10003;</span> <span class="wh">100 codes issued. comment to claim one.</span>');
+    var rl = row('<span class="cy">$</span> ');
+    caretEnd = SB.el('span', 'caret', rl, ' ');
+    [caret0, caretEnd].forEach(function (c) { c.style.width = CW + 'px'; c.style.height = LH + 'px'; });
+    cap = SB.el('div', 'cap mc-type', col);
+    cap.innerHTML = NARROW ? 'COMMENT TO<br>CLAIM ONE.' : 'COMMENT TO CLAIM ONE.';
+    cap.style.fontSize = '120px';
+    var tw = term.offsetWidth;
+    cap.style.fontSize = (120 * tw / cap.offsetWidth) + 'px';
+    SB.fit(lockup, ctx.w * 0.9, 1080 * 0.9);
+    B = null;
+    mark.look = function (t) {
+      if (!B) B = { body: SB.box(body), cap: SB.box(cap), s: SB.box(body).width / body.offsetWidth };
+      var s = B.s, x0 = B.body.left + 36 * s, y0 = B.body.top + 26 * s;
+      function at(r, c) { return { x: x0 + c * CW * s, y: y0 + (r + 0.5) * LH * s }; }
+      if (t >= CLEAR_AT || t < ENTER) return at(0, 2 + typedN(t));
+      if (t >= DONE_AT + 1.6) {
+        if (t >= DONE_AT + 3.4) return null;
+        var p = SB.easeInOut(SB.seg(t, DONE_AT + 1.7, DONE_AT + 2.8));
+        return { x: SB.lerp(B.cap.left, B.cap.right, p), y: B.cap.y };
+      }
+      var v = visibleRows(t);
+      var r = Math.min(v, ROWS) - 1;
+      if (t >= DONE_AT) {
+        // reads the summary line left to right
+        var sr = Math.min(rowsEls.length, ROWS) - (NARROW ? 3 : 2);
+        var q = SB.easeInOut(SB.seg(t, DONE_AT + 0.1, DONE_AT + 1.2));
+        return at(sr, SB.lerp(2, NARROW ? 20 : 40, q));
+      }
+      // streaming: flick along the newest line
+      var saw = (t * 6.5) % 1;
+      return at(r, SB.lerp(3, NARROW ? 24 : 30, saw < 0.8 ? saw / 0.8 : 1 - (saw - 0.8) / 0.2));
+    };
+  },
+  frame: function (t) {
+    var v = visibleRows(t);
+    for (var i = 0; i < rowsEls.length; i++) rowsEls[i].style.display = i < v || (i === 0 && v === 0) ? 'block' : 'none';
+    if (t >= CLEAR_AT) rowsEls[0].style.display = 'block';
+    var cleared = t >= CLEAR_AT;
+    cmdSpan.textContent = cleared ? '' : CMD.slice(0, typedN(t));
+    var shown = cleared ? 1 : v;
+    var scroll = Math.max(0, shown - ROWS);
+    lines.style.transform = 'translateY(' + (-scroll * LH) + 'px)';
+    var typing = t >= TYPE_AT - 0.05 && t < ENTER && !cleared;
+    var blink = Math.floor(t * 2) % 2 === 0;
+    caret0.style.visibility = (t < ENTER || cleared) && (typing || blink) ? 'visible' : 'hidden';
+    caretEnd.style.visibility = t >= DONE_AT && !cleared && blink ? 'visible' : 'hidden';
+    var w = SB.easeOut(SB.seg(t, DONE_AT + 0.3, DONE_AT + 0.7));
+    cap.style.clipPath = 'inset(-12% ' + (100 - w * 100) + '% -12% 0)';
+    cap.style.opacity = String(1 - SB.seg(t, CLEAR_AT - 0.35, CLEAR_AT - 0.05));
+    var glow = t >= DONE_AT ? 1 - SB.easeOut(SB.seg(t, DONE_AT, DONE_AT + 0.8)) : 0;
+    term.style.borderColor = 'rgb(' + Math.round(SB.lerp(42, 200, glow)) + ',' + Math.round(SB.lerp(42, 200, glow)) + ',' + Math.round(SB.lerp(42, 200, glow)) + ')';
+  }
+});
+</script>
+</body>
+</html>

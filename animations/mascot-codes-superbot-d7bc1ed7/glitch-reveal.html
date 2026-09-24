@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CODES INSIDE · glitch reveal · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .layer { position: absolute; inset: 0; }
+  .slice { position: absolute; inset: 0; background: #000; visibility: hidden; overflow: hidden; }
+  .inner { position: absolute; inset: 0; }
+  .wall { position: absolute; left: 0; top: 0; visibility: hidden; }
+  .hl { white-space: nowrap; }
+</style>
+</head>
+<body>
+<script>
+/* CODES INSIDE: a calm lockup. The frame twitches, tears into horizontal slices with the mark's own
+   cyan / magenta split, and for exactly three frames (0.1 s) the tear shows the wall of invite codes
+   hiding underneath. It snaps back; the mark smiles like it knows, and winks. */
+var L = 6, FPS = 30;
+var GW = 1920, W, base, slices = [], table = {}, wallCodes;
+var FLASH = [74, 75, 76];                 // 2.4667 s, 2.5 s, 2.5333 s: exactly 0.1 s of codes
+var LIGHT = { 57: 0.25, 60: 0.35, 66: 0.45, 67: 0.3, 69: 0.6, 71: 0.7, 72: 0.85, 73: 1, 77: 0.8, 78: 0.55, 80: 0.4, 83: 0.25, 88: 0.15 };
+var MOPTS = function () {
+  return {
+    size: 300,
+    blinks: [{ t: 0.95 }, { t: 4.95, right: true }],
+    happy: [[3.05, 1.6]],
+    look: function (t) { return t > 1.25 && t < 2.2 ? { x: GW * 0.95, y: 470 } : null; }
+  };
+};
+
+function makeScene(parent, ctx) {
+  var c = SB.el('div', 'mc-center', parent);
+  var row = SB.el('div', 'mc-lockup', c);
+  row.style.gap = '60px';
+  var m = SB.mascot(row, MOPTS());
+  var hl = SB.el('div', 'mc-type hl', row);
+  hl.style.fontSize = ctx.narrow ? '190px' : '172px';
+  hl.innerHTML = ctx.narrow ? 'CODES<br>INSIDE' : 'CODES INSIDE';
+  SB.fit(row, ctx.w * (ctx.narrow ? 0.86 : 0.86), 800);
+  return m;
+}
+
+function drawWall(cv, ctx) {
+  var g = cv.getContext('2d');
+  var n = ctx.narrow, f = n ? 25 : 32, lh = Math.round(f * 1.55);
+  g.fillStyle = '#000';
+  g.fillRect(0, 0, cv.width, cv.height);
+  g.font = '700 ' + f + 'px "SF Mono", ui-monospace, Menlo, Consolas, monospace';
+  g.textBaseline = 'middle';
+  var cw = g.measureText('XXXX-XXXX-XXXX-XXXX').width + f * 1.4;
+  var k = 0, rnd = SB.rng(77);
+  for (var r = 0, y = lh * 0.6; y < 1080 + lh; y += lh, r++) {
+    var x0 = -((r * 0.37) % 1) * cw;
+    for (var x = x0; x < cv.width; x += cw) {
+      var hot = rnd();
+      g.fillStyle = hot < 0.08 ? '#00e5c3' : hot < 0.12 ? '#c026d3' : 'rgba(236,236,236,' + (0.55 + rnd() * 0.45).toFixed(2) + ')';
+      g.fillText(wallCodes[k++ % wallCodes.length], x, y);
+    }
+  }
+}
+
+SB.ad({
+  loop: L,
+  thumbAt: 75 / 30,
+  build: function (frame, ctx) {
+    W = ctx.w; GW = ctx.w;
+    wallCodes = SB.codes(160, 404);
+    base = SB.el('div', 'layer', frame);
+    makeScene(base, ctx);
+    var master = document.createElement('canvas');
+    master.width = W; master.height = 1080;
+    drawWall(master, ctx);
+    slices = [];
+    for (var i = 0; i < 16; i++) {
+      var s = SB.el('div', 'slice', frame);
+      var inner = SB.el('div', 'inner', s);
+      var sc = SB.el('div', 'layer', inner);
+      makeScene(sc, ctx);
+      var wc = SB.el('canvas', 'wall', inner);
+      wc.width = W; wc.height = 1080;
+      wc.getContext('2d').drawImage(master, 0, 0);
+      slices.push({ el: s, inner: inner, scene: sc, wall: wc });
+    }
+    // glitch table, built once from a seeded rng: per frame index, which bands tear, by how much, showing what
+    var rnd = SB.rng(2501);
+    table = {};
+    Object.keys(LIGHT).forEach(function (k) {
+      var I = LIGHT[k], bands = [], nb = 1 + Math.floor(rnd() * (1 + I * 5));
+      for (var b = 0; b < nb && b < slices.length; b++) {
+        var h = 6 + rnd() * (20 + I * 120);
+        var y = rnd() * (1080 - h);
+        bands.push({ y0: y, y1: y + h, dx: (rnd() < 0.5 ? -1 : 1) * (8 + rnd() * 150 * I), wall: false });
+      }
+      table[k] = { split: 3 + I * 9, shift: (rnd() - 0.5) * 18 * I, bands: bands };
+    });
+    FLASH.forEach(function (k, j) {
+      var bands = [], y = 0;
+      while (y < 1080 && bands.length < slices.length) {
+        var h = bands.length === slices.length - 1 ? 1080 - y : 30 + rnd() * 140;
+        var wall = j === 1 ? rnd() < 0.9 : rnd() < 0.72;
+        bands.push({ y0: y, y1: Math.min(1080, y + h), dx: (rnd() - 0.5) * (wall ? 90 : 260), wall: wall });
+        y += h;
+      }
+      table[k] = { split: 12, shift: 0, bands: bands };
+    });
+  },
+  frame: function (t, ctx) {
+    var fi = Math.round(t * FPS) % (L * FPS);
+    var G = table[fi];
+    base.style.transform = G ? 'translateX(' + G.shift.toFixed(1) + 'px)' : 'none';
+    base.style.filter = G ? 'drop-shadow(' + (-G.split).toFixed(1) + 'px 0 #00e5c3) drop-shadow(' + G.split.toFixed(1) + 'px 0 #c026d3)' : 'none';
+    for (var i = 0; i < slices.length; i++) {
+      var S = slices[i], B = G && G.bands[i];
+      if (!B) { S.el.style.visibility = 'hidden'; S.wall.style.visibility = 'hidden'; S.scene.style.visibility = 'hidden'; continue; }
+      S.el.style.visibility = 'visible';
+      S.el.style.clipPath = 'inset(' + B.y0.toFixed(1) + 'px 0 ' + (1080 - B.y1).toFixed(1) + 'px 0)';
+      S.inner.style.transform = 'translateX(' + B.dx.toFixed(1) + 'px)';
+      var sp = G.split * (B.wall ? 0.6 : 1);
+      S.inner.style.filter = 'drop-shadow(' + (-sp).toFixed(1) + 'px 0 #00e5c3) drop-shadow(' + sp.toFixed(1) + 'px 0 #c026d3)';
+      S.wall.style.visibility = B.wall ? 'visible' : 'hidden';
+      S.scene.style.visibility = B.wall ? 'hidden' : 'visible';
+    }
+  }
+});
+</script>
+</body>
+</html>

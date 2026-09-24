@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONE OF THESE WORKS · scan · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .place { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .wrap { display: flex; align-items: center; }
+  .right { display: flex; flex-direction: column; align-items: flex-start; }
+  .hl { white-space: nowrap; }
+  .grid { display: grid; grid-template-columns: repeat(10, auto); }
+  .cell { position: relative; background: rgba(255,255,255,0.035); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07);
+          color: rgba(236,236,236,0.5); font-weight: 600; text-align: center; white-space: pre; }
+  .cell div { letter-spacing: 0.02em; }
+  .cursor { position: absolute; left: 0; top: 0; box-shadow: inset 0 0 0 2px rgba(0,229,195,0.85), 0 0 22px rgba(0,229,195,0.35);
+            pointer-events: none; }
+</style>
+</head>
+<body>
+<script>
+/* ONE OF THESE WORKS. A 10x10 wall of invite codes. The mark reads it like a scanner, its eyes and a
+   cyan focus box sweeping row by row, slows, and locks onto one cell, which lights up while the mark
+   smiles. Then the wall scrambles outward from that cell before you can read it, and settles for the loop. */
+var L = 8, FPS = 30, COLS = 10, ROWS = 10, TR = 6, TC = 7;
+var SCAN0 = 0.75, SCAN1 = 4.05, LOCK = 4.05, SCR0 = 5.15;
+var W, mark, cells = [], cursor, R, boxes = null, mbox = null, path = [], narrow;
+
+function rt(i) { return R[i & 65535]; }
+
+function geo() {
+  if (boxes) return;
+  boxes = cells.map(function (c) { return SB.box(c.el); });
+  mbox = SB.box(mark.svg);
+}
+
+// boustrophedon scan path over cell indices, rows 0..TR, ending on the target
+function buildPath() {
+  path = [];
+  for (var r = 0; r <= TR; r++) {
+    for (var k = 0; k < COLS; k++) {
+      var c = r % 2 === 0 ? k : COLS - 1 - k;
+      path.push(r * COLS + c);
+      if (r === TR && c === TC) return;
+    }
+  }
+}
+
+function scanU(t) { // position along the path, in cells
+  var p = SB.seg(t, SCAN0, SCAN1);
+  var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+  e = 0.35 * p + 0.65 * (1 - Math.pow(1 - p, 3)); // quick start, long glide into the lock
+  return e * (path.length - 1);
+}
+
+function cursorAt(t) {
+  geo();
+  var u = scanU(t), i = Math.floor(u), f = u - i;
+  var a = boxes[path[Math.min(i, path.length - 1)]], b = boxes[path[Math.min(i + 1, path.length - 1)]];
+  return { x: SB.lerp(a.x, b.x, f), y: SB.lerp(a.y, b.y, f), w: a.width, h: a.height, u: u };
+}
+
+SB.ad({
+  loop: L,
+  thumbAt: 4.6,
+  build: function (frame, ctx) {
+    W = ctx.w; narrow = ctx.narrow; boxes = null;
+    var rnd = SB.rng(1010);
+    R = new Uint16Array(65536);
+    for (var i = 0; i < R.length; i++) R[i] = Math.floor(rnd() * 65536);
+    buildPath();
+
+    var place = SB.el('div', 'place', frame);
+    var wrap = SB.el('div', 'wrap', place);
+    var n = narrow, stack = W < 1600;
+    var mopts = {
+      size: n ? 250 : W < 1600 ? 220 : 330,
+      blinks: [{ t: 0.3 }, { t: 5.7 }, { t: 7.2, right: true }],
+      happy: [[LOCK + 0.3, 1.25]],
+      look: function (t) {
+        if (t < SCAN0 - 0.15 || t > SCR0 + 0.2) return null;
+        var c = cursorAt(t);
+        // map the grid onto the eye's range so the scan reads: columns sweep, rows step
+        var u = (c.x - boxes[0].x) / (boxes[COLS - 1].x - boxes[0].x), v = (c.y - boxes[0].y) / (boxes[(ROWS - 1) * COLS].y - boxes[0].y);
+        var span = mbox.width * 2;
+        var st = W < 1600;
+        var nx = st ? SB.lerp(-0.55, 1, u) : SB.lerp(0.2, 1, u);
+        var ny = st ? SB.lerp(0.15, 1, v) : SB.lerp(-0.85, 0.85, v);
+        return { x: mbox.x + nx * span, y: mbox.y + ny * span };
+      }
+    };
+    var right;
+    if (stack) {
+      wrap.style.flexDirection = 'column';
+      wrap.style.alignItems = 'center';
+      var head = SB.el('div', 'mc-lockup', wrap);
+      head.style.gap = '36px';
+      mark = SB.mascot(head, mopts);
+      var hl = SB.el('div', 'mc-type hl', head);
+      hl.style.fontSize = '104px';
+      hl.innerHTML = n ? 'ONE OF<br>THESE WORKS.' : 'ONE OF THESE WORKS.';
+      right = SB.el('div', 'right', wrap);
+      right.style.marginTop = '46px';
+    } else {
+      wrap.style.gap = '70px';
+      mark = SB.mascot(wrap, mopts);
+      right = SB.el('div', 'right', wrap);
+      var hl2 = SB.el('div', 'mc-type hl', right);
+      hl2.style.fontSize = '104px';
+      hl2.textContent = 'ONE OF THESE WORKS.';
+      hl2.style.marginBottom = '40px';
+    }
+    var grid = SB.el('div', 'grid mc-mono', right);
+    var fs = n ? 15 : 17.5;
+    grid.style.fontSize = fs + 'px';
+    grid.style.lineHeight = '1.28';
+    grid.style.gap = n ? '6px 6px' : '10px 12px';
+    var codes = SB.codes(COLS * ROWS, 1111);
+    cells = codes.map(function (code, k) {
+      var el = SB.el('div', 'cell', grid);
+      el.style.padding = n ? '6px 7px' : '8px 11px';
+      var a = SB.el('div', null, el, code.slice(0, 9));
+      var b = SB.el('div', null, el, code.slice(10));
+      var r = Math.floor(k / COLS), c = k % COLS;
+      return { el: el, a: a, b: b, code: code, r: r, c: c, k: k, lit: -1,
+        d: Math.hypot(r - TR, c - TC), settle: c * 0.045 + r * 0.014 };
+    });
+    SB.fit(wrap, W * (n ? 0.94 : 0.92), n ? 1010 : 980);
+    cursor = SB.el('div', 'cursor', frame);
+  },
+  frame: function (t, ctx) {
+    geo();
+    var fi = Math.round(t * FPS);
+    var cur = cursorAt(t);
+    var scanning = t >= SCAN0 - 0.1 && t < SCR0 + 0.05;
+    var lock = SB.seg(t, LOCK, LOCK + 0.25) * (1 - SB.seg(t, SCR0 - 0.05, SCR0 + 0.15));
+    var pad = 4 + lock * 6;
+    cursor.style.opacity = (scanning ? SB.seg(t, SCAN0 - 0.1, SCAN0 + 0.1) * (1 - SB.seg(t, SCR0, SCR0 + 0.15)) : 0).toFixed(3);
+    cursor.style.transform = 'translate(' + (cur.x - cur.w / 2 - pad).toFixed(1) + 'px,' + (cur.y - cur.h / 2 - pad).toFixed(1) + 'px)';
+    cursor.style.width = (cur.w + pad * 2).toFixed(1) + 'px';
+    cursor.style.height = (cur.h + pad * 2).toFixed(1) + 'px';
+
+    for (var i = 0; i < cells.length; i++) {
+      var C = cells[i];
+      // text: settle wave at loop start, scramble ripple from the chosen cell at the end
+      var sc0 = SCR0 + C.d * 0.075;
+      var txtA = '', txtB = '';
+      for (var j = 0; j < 19; j++) {
+        if (j === 9) continue;
+        var ch = C.code[j];
+        var scram = ch !== '-' && (t < C.settle + j * 0.012 || t >= sc0 + (j % 10) * 0.01);
+        if (scram) ch = SB.ALPHA[rt(C.k * 41 + j * 7 + fi * 977) & 31];
+        if (j < 9) txtA += ch; else txtB += ch;
+      }
+      C.a.textContent = txtA;
+      C.b.textContent = txtB;
+
+      // brightness: scanned trail, the lock, the dim of the rest while locked
+      var bright = 0.5, pk = path.indexOf(i);
+      if (pk >= 0 && scanning && cur.u >= pk - 0.5) bright = 0.5 + 0.5 * Math.exp(-(cur.u - pk) / 2.5);
+      var isT = C.r === TR && C.c === TC;
+      if (isT) bright = Math.max(bright, 0.5 + 0.5 * lock);
+      else bright *= 1 - lock * 0.55;
+      var sc = t >= sc0 ? 1 : 0;
+      var key = Math.round(bright * 100) + (isT ? lock.toFixed(2) : '') + sc;
+      if (key === C.lit) continue;
+      C.lit = key;
+      C.el.style.color = isT && lock > 0 ? 'rgba(255,255,255,' + bright.toFixed(3) + ')' : 'rgba(236,236,236,' + bright.toFixed(3) + ')';
+      if (isT) {
+        C.el.style.background = 'rgba(0,229,195,' + (0.035 + lock * 0.17).toFixed(3) + ')';
+        C.el.style.textShadow = lock > 0 ? '0 0 ' + (12 * lock).toFixed(1) + 'px rgba(0,229,195,' + (0.9 * lock).toFixed(2) + ')' : 'none';
+        C.el.style.transform = 'scale(' + (1 + lock * 0.16).toFixed(3) + ')';
+        C.el.style.zIndex = lock > 0 ? '2' : '';
+      }
+    }
+    cursor.style.zIndex = '3';
+  }
+});
+</script>
+</body>
+</html>

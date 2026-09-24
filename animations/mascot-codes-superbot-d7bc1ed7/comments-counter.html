@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIRST 100 COMMENTS = EARLY ACCESS · counter · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .num { font-variant-numeric: tabular-nums; display: inline-block; }
+  .pay { display: block; }
+</style>
+</head>
+<body>
+<script>
+/* FIRST 100 COMMENTS = EARLY ACCESS, counted: the 100 runs up from 000 like a comment tally, the mark
+   watches it climb, smiles when it locks on 100, and the payoff line wipes in under it. */
+var COUNT_A = 0.45, COUNT_B = 2.5, WIPE = 2.75, OUT = 6.7, LOOP = 7.5;
+var mark, num, pay, type, lines;
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 4.6,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    var lockup = SB.el('div', 'mc-lockup', center);
+    mark = SB.mascot(lockup, { size: 300, happy: [[COUNT_B, 1.3]] });
+    type = SB.el('div', 'mc-type', lockup);
+    type.style.fontSize = '150px';
+    var top = SB.el('div', '', type);
+    SB.el('span', '', top, 'FIRST ');
+    num = SB.el('span', 'num', top, '100');
+    SB.el(ctx.narrow ? 'div' : 'span', '', top, ctx.narrow ? 'COMMENTS' : ' COMMENTS');
+    pay = SB.el('div', 'pay', type, ctx.narrow ? '= EARLY' : '= EARLY ACCESS');
+    if (ctx.narrow) pay.innerHTML = '= EARLY<br>ACCESS';
+    SB.fit(lockup, ctx.w * 0.88, 1080 * 0.76);
+    mark.look = function (t) {
+      if (t < COUNT_A - 0.2 || t > OUT) return null;
+      var b = SB.box(t < WIPE ? num : pay);
+      return { x: b.x, y: b.y };
+    };
+  },
+  frame: function (t) {
+    var p = SB.easeOut(SB.seg(t, COUNT_A, COUNT_B));
+    var n = Math.round(100 * p);
+    num.textContent = ('00' + n).slice(-3);
+    var w = SB.easeOut(SB.seg(t, WIPE, WIPE + 0.45));
+    pay.style.clipPath = 'inset(-10% ' + (100 - w * 100) + '% -10% 0)';
+    var fade = 1 - SB.seg(t, OUT, OUT + 0.4);
+    var fadeIn = SB.seg(t, 0, 0.3);
+    type.style.opacity = String(Math.min(fade, fadeIn));
+    num.style.color = n === 100 ? '#fff' : 'rgba(255,255,255,0.72)';
+  }
+});
+</script>
+</body>
+</html>

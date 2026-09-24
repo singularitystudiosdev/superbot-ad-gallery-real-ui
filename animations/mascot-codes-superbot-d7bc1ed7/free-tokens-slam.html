@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FREE TOKENS · slam · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .word { display: inline-block; transform-origin: 50% 60%; }
+</style>
+</head>
+<body>
+<script>
+/* FREE TOKENS, slammed: each word hits on a beat with the mark's own cyan/magenta split flaring off it
+   and settling to the same 1.2px offset the mark carries; the mark hops on each hit. */
+var HITS = [0.25, 0.85], OUT = 5.1;
+var words = [], mark, lockup, type;
+
+function hit(t, at) {
+  var p = SB.seg(t, at, at + 0.32);
+  return { p: p, scale: t < at ? 0 : SB.lerp(1.9, 1, SB.backOut(p)), split: t < at ? 0 : SB.lerp(22, 2.2, SB.easeOut(p)) };
+}
+
+SB.ad({
+  loop: 6,
+  thumbAt: 1.6,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    lockup = SB.el('div', 'mc-lockup', center);
+    mark = SB.mascot(lockup, { size: 300, happy: [[HITS[0], 0.6], [HITS[1] + 0.02, 1.3]] });
+    type = SB.el('div', 'mc-type', lockup);
+    type.style.fontSize = '200px';
+    words = ['FREE', 'TOKENS'].map(function (w, i) {
+      var s = SB.el('span', 'word', type, w);
+      if (i === 0) SB.el('span', '', type, ctx.narrow ? '' : ' ');
+      if (i === 0 && ctx.narrow) SB.el('br', '', type);
+      return s;
+    });
+    SB.fit(lockup, ctx.w * 0.86, 1080 * 0.7);
+    mark.look = function (t) {
+      if (t < HITS[1] || t > OUT) return null;
+      var b = SB.box(words[1]);
+      return { x: b.x, y: b.y };
+    };
+  },
+  frame: function (t) {
+    var out = SB.easeInOut(SB.seg(t, OUT, OUT + 0.35));
+    words.forEach(function (w, i) {
+      var h = hit(t, HITS[i]);
+      var s = h.scale * (1 - out * 0.15);
+      w.style.transform = 'scale(' + s + ')';
+      w.style.opacity = String((h.scale > 0 ? 1 : 0) * (1 - out));
+      w.style.textShadow = (-h.split) + 'px 0 var(--storm-0), ' + h.split + 'px 0 var(--storm-3)';
+    });
+  }
+});
+</script>
+</body>
+</html>

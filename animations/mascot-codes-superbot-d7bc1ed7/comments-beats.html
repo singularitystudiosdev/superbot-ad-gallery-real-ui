@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FIRST 100 COMMENTS = EARLY ACCESS · beats · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .slot { position: relative; }
+  .beat { position: absolute; left: 0; top: 50%; transform-origin: 0 50%; white-space: nowrap; }
+</style>
+</head>
+<body>
+<script>
+/* FIRST 100 COMMENTS = EARLY ACCESS, on beats: one word per beat cuts in beside the mark (hard cut, a
+   small settle), the mark blinks on every cut, then the whole offer lands at once and it smiles. */
+var BEATS = [['FIRST', 0.0], ['100', 0.5], ['COMMENTS', 1.0], ['=', 1.6], ['EARLY ACCESS', 2.0]];
+var FULL = 2.85, OUT = 5.55;
+var mark, beats = [], full, slot;
+
+SB.ad({
+  loop: 6,
+  thumbAt: 4.2,
+  build: function (frame, ctx) {
+    var center = SB.el('div', 'mc-center', frame);
+    var lockup = SB.el('div', 'mc-lockup', center);
+    mark = SB.mascot(lockup, {
+      size: 300,
+      blinks: BEATS.slice(1).map(function (b) { return { t: b[1], right: false }; }).concat([{ t: FULL, right: false }]),
+      happy: [[FULL + 0.15, 1.4]]
+    });
+    slot = SB.el('div', 'mc-type slot', lockup);
+    slot.style.fontSize = '150px';
+    full = SB.el('div', '', slot);
+    full.innerHTML = ctx.narrow ? 'FIRST 100<br>COMMENTS<br>= EARLY<br>ACCESS' : 'FIRST 100 COMMENTS<br>= EARLY ACCESS';
+    beats = BEATS.map(function (b) {
+      var node = SB.el('div', 'beat', slot);
+      node.innerHTML = ctx.narrow ? b[0].replace(' ', '<br>') : b[0];
+      node.style.fontSize = ctx.narrow ? '0.92em' : '1.3em';
+      node.style.lineHeight = '0.92';
+      return node;
+    });
+    SB.fit(lockup, ctx.w * 0.88, 1080 * 0.76);
+    mark.look = function (t) {
+      if (t >= OUT) return null;
+      var b = SB.box(t < FULL ? slot : full);
+      return { x: t < FULL ? b.left + 200 : b.x, y: b.y };
+    };
+  },
+  frame: function (t) {
+    var active = -1;
+    for (var i = 0; i < BEATS.length; i++) if (t >= BEATS[i][1] && t < FULL) active = i;
+    beats.forEach(function (node, i) {
+      var on = i === active;
+      node.style.visibility = on ? 'visible' : 'hidden';
+      if (on) {
+        var p = SB.easeOut(SB.seg(t, BEATS[i][1], BEATS[i][1] + 0.18));
+        node.style.transform = 'translateY(-50%) scale(' + SB.lerp(1.12, 1, p) + ')';
+      }
+    });
+    var landed = t >= FULL && t < OUT;
+    full.style.visibility = landed ? 'visible' : 'hidden';
+    var p = SB.easeOut(SB.seg(t, FULL, FULL + 0.22));
+    full.style.transform = 'scale(' + SB.lerp(1.06, 1, p) + ')';
+  }
+});
+</script>
+</body>
+</html>

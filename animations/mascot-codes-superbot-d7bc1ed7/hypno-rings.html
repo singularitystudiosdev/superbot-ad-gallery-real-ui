@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FREE TOKENS · hypno rings · superbot ad spot</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="kit/mascot.css">
+<link rel="stylesheet" href="kit/stage.css">
+<script src="kit/mascot.js"></script>
+<script src="kit/codes.js"></script>
+<script src="kit/stage.js"></script>
+<style>
+  .hy-svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .hy-svg text { font-family: inherit; font-weight: 800; text-transform: uppercase; }
+  .hy-hold { position: relative; display: flex; }
+</style>
+</head>
+<body>
+<script>
+/* FREE TOKENS, hypnotised: four concentric rings of FREE TOKENS turn in alternating directions around
+   the mark, filled and outlined rings interleaved, each breathing on its own phase. The mark's eyes roll
+   round with the spin and fall shut for long, heavy blinks; then the trance takes: every ring whips
+   through an extra turn and the mark smiles. All spins close on whole repeats of the ring text, so the
+   seam is invisible. */
+var LOOP = 8;
+var WHIP0 = 5.2, WHIP1 = 6.6;
+var RINGS = [
+  { r: 250, f: 50, dir: 1, fill: true, m: 2, s: 2 },
+  { r: 356, f: 66, dir: -1, fill: false, m: 2, s: 2 },
+  { r: 486, f: 90, dir: 1, fill: true, m: 1, s: 1 },
+  { r: 652, f: 122, dir: -1, fill: false, m: 1, s: 1 },
+  { r: 860, f: 158, dir: 1, fill: true, m: 1, s: 1 }
+];
+var groups = [], mark, hold, cx = 0, cy = 540, sc = 1;
+var whipEase = SB.bezier(0.55, 0, 0.25, 1);
+var NS = 'http://www.w3.org/2000/svg';
+
+function svgEl(tag, attrs, parent) {
+  var n = document.createElementNS(NS, tag);
+  for (var k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+
+function closed(t) {
+  return (t >= 1.55 && t < 2.2) || (t >= 3.25 && t < 4.3) || (t >= 4.62 && t < 5.05);
+}
+
+SB.ad({
+  loop: LOOP,
+  thumbAt: 6.3,
+  build: function (frame, ctx) {
+    groups = [];
+    cx = ctx.w / 2; cy = 540;
+    sc = ctx.narrow ? Math.max(0.74, ctx.w / 1180) : 1;
+    var svg = svgEl('svg', { class: 'hy-svg', width: ctx.w, height: 1080, viewBox: '0 0 ' + ctx.w + ' 1080' }, frame);
+    RINGS.forEach(function (R, i) {
+      var r = R.r, g = svgEl('g', {}, svg);
+      var id = 'hy-ring-' + i;
+      svgEl('path', { id: id, fill: 'none', d: 'M ' + (cx - r) + ' ' + cy + ' a ' + r + ' ' + r + ' 0 1 1 ' + (2 * r) + ' 0 a ' + r + ' ' + r + ' 0 1 1 ' + (-2 * r) + ' 0' }, g);
+      var circ = 2 * Math.PI * r;
+      var n = Math.max(2, Math.round(circ / (R.f * 7.9)));
+      var text = svgEl('text', { 'font-size': R.f, 'letter-spacing': (R.f * 0.02).toFixed(1) }, g);
+      if (R.fill) text.setAttribute('fill', '#fff');
+      else { text.setAttribute('fill', 'none'); text.setAttribute('stroke', '#fff'); text.setAttribute('stroke-width', (R.f / 40).toFixed(2)); }
+      var tp = svgEl('textPath', { href: '#' + id, textLength: (circ - R.f * 0.35).toFixed(1), lengthAdjust: 'spacing' }, text);
+      for (var k = 0; k < n; k++) {
+        var w = svgEl('tspan', {}, tp); w.textContent = 'FREE TOKENS';
+        var d = svgEl('tspan', {}, tp); d.textContent = ' ● ';
+        var col = (k + i) % 2 ? 'var(--storm-3)' : 'var(--storm-0)';
+        if (R.fill) d.setAttribute('fill', col); else { d.setAttribute('stroke', 'none'); d.setAttribute('fill', col); }
+      }
+      groups.push({ g: g, R: R, n: n, i: i });
+    });
+    var center = SB.el('div', 'mc-center', frame);
+    hold = SB.el('div', 'hy-hold', center);
+    mark = SB.mascot(hold, {
+      size: 330,
+      blinks: false,
+      closed: closed,
+      happy: [[WHIP1 - 0.35, 1.3]],
+      look: function (t) {
+        var a = 2 * Math.PI * (3 * t / LOOP) - Math.PI / 2;
+        var k = SB.seg(t, WHIP0, WHIP1);
+        var rad = 900 * (1 - 0.6 * Math.sin(Math.PI * k));
+        return { x: cx + rad * Math.cos(a), y: cy + rad * Math.sin(a) };
+      }
+    });
+    hold.style.transform = 'scale(' + sc + ')';
+  },
+  frame: function (t) {
+    var whip = whipEase(SB.seg(t, WHIP0, WHIP1));
+    groups.forEach(function (G) {
+      var R = G.R, rep = 360 / G.n;
+      var a = R.dir * rep * (R.m * t / LOOP + R.s * whip);
+      var br = 1 + 0.022 * Math.sin(2 * Math.PI * (2 * t / LOOP - G.i * 0.14));
+      var pulse = 1 + 0.05 * Math.sin(Math.PI * SB.seg(t, WHIP0 + 0.1 * G.i, WHIP1 + 0.1 * G.i));
+      var s = sc * br * pulse;
+      G.g.setAttribute('transform', 'translate(' + cx + ' ' + cy + ') rotate(' + a.toFixed(3) + ') scale(' + s.toFixed(4) + ') translate(' + (-cx) + ' ' + (-cy) + ')');
+      var fade = G.R.fill ? (G.i === 4 ? 0.9 : 1) : 0.8;
+      G.g.setAttribute('opacity', fade);
+    });
+    var sway = 0.9 * Math.sin(2 * Math.PI * (2 * t / LOOP));
+    var pk = Math.sin(Math.PI * SB.seg(t, WHIP1 - 0.4, WHIP1 + 0.5));
+    hold.style.transform = 'scale(' + (sc * (1 + 0.06 * pk)).toFixed(4) + ') rotate(' + sway.toFixed(2) + 'deg)';
+  }
+});
+</script>
+</body>
+</html>

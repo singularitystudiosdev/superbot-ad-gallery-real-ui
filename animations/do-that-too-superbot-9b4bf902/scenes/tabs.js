@@ -4,6 +4,7 @@
 // the tabs' own favicons ARE the sphere tiles. render(lt) is a pure function of local time: no
 // WAAPI, no CSS animation, no timers; every position below is math on lt.
 import { SYMBOLS } from './tabs-assets/icons.js';
+import { hubMarkup } from './tabs-assets/hub-markup.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
 
@@ -37,6 +38,10 @@ function bezier(x1, y1, x2, y2) {
   };
 }
 const flipEase = bezier(0.3, 0.85, 0.3, 1.04); // sphere-intro fv-flip-icon-grow, segment 1
+// sphere-intro showFrontend's GLIDE is cubic-bezier(.3,.7,.2,1); it starts at speed, which after the flip's settle
+// (and after the drop) reads as a jolt from rest. Same fast settle, zero initial slope:
+const GLIDE = bezier(0.45, 0, 0.2, 1);           // the rise to the column head and the glide home
+const DROP = bezier(0.34, 1.56, 0.64, 1);        // its per-icon drop (an overshooting ease-out)
 const cssEaseOut = bezier(0, 0, 0.58, 1);       // its segment 2 ('ease-out')
 
 // ---------- the apps ----------
@@ -122,9 +127,16 @@ const T = {
   K: 2.50,                                 // the kill: favicons lift out of the strip onto the sphere
   stagger: 0.28, fly: 0.60,                // lifted from the middle of the strip outward, 0.6s flights
   M: 3.92, merge: 0.45,                    // sphere-intro's MERGE_T and its 450ms accelerating merge window
-  flip: 0.92,                              // fv-flip-icon-grow, exact duration
-  dur: 5.6,
+  flip: 0.92,                              // fv-flip-icon-grow, exact duration (ends 4.84)
+  // the rail drop + window build (sphere-intro showFrontend, beats 3a / 3b / 4 and the extend)
+  rise: 4.90,                              // 3a: the mark shrinks to the rail tile and rises to the column head, 620ms GLIDE
+  drop: 5.52, dropGap: 0.07, dropDur: 0.48,// 3b: the rail's own icons drop from it one by one (-34px, overshoot)
+  glide: 6.70, glideDur: 0.64,             // 4: the whole column glides home as one; the window grounds fade in (520ms)
+  rest: 0.38,                              // on landing: sidebar, chat lane, selection pill fade in
+  msg: 7.62, msgDur: 0.90,                 // the reply streams in, word by word
+  dur: 9.4,
 };
+const LAND = T.glide + T.glideDur;
 const openAt = (k) => (k === 0 ? -1 : k < PRE ? -3 + k * 0.5 : T.open0 + (T.open1 - T.open0) * Math.pow((k - PRE) / (N - 1 - PRE), T.openPow));
 const SEQ = [...Array(N).keys()].sort((a, b) => openAt(a) - openAt(b)); // opening order (ChatGPT, tab 0, is on top)
 const MID = (N - 1) / 2;
@@ -176,6 +188,25 @@ function page(app) {
   return `<div class="pg${p.side ? ' has-side' : ''}" style="${vars}">${side}<div class="mid">${greet}${comp}</div>${foot}</div>`;
 }
 
+// the Superbot window's placement for a stage width W, and where its rail slot lands (design px measured
+// with offsetLeft/Top, which transforms never touch; converted to stage px by the site's own scale)
+function siteGeo(W) {
+  if (el.geo && el.geo.W === W) return el.geo;
+  const DW = 1205, k = Math.min(1.43402, (W - 48) / DW);
+  const DH = Math.min(1080 / k, DW * 1.25);
+  const L = (W - DW * k) / 2, Tp = (1080 - DH * k) / 2;
+  el.site.style.width = DW + 'px';
+  el.site.style.height = DH.toFixed(3) + 'px';
+  el.site.style.transform = `translate(${L.toFixed(3)}px,${Tp.toFixed(3)}px) scale(${k.toFixed(5)})`;
+  if (!el.sb.offsetWidth) return null; // not laid out (scene hidden): measure on a later frame
+  const off = (n) => { let x = 0, y = 0; while (n && n !== el.site) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; } return { x, y }; };
+  const s = off(el.sb), lastEl = el.drops[el.drops.length - 1], l = off(lastEl);
+  const slotDx = s.x + el.sb.offsetWidth / 2, slotDy = s.y + el.sb.offsetHeight / 2;
+  const span = l.y + lastEl.offsetHeight / 2 - slotDy;
+  el.geo = { W, k, L, T: Tp, slotDx, slotDy, span, slotX: L + k * slotDx, slotY: Tp + k * slotDy };
+  return el.geo;
+}
+
 let el = null; // mounted DOM refs
 
 export default {
@@ -208,6 +239,7 @@ export default {
       <div class="tabcount"><b>3</b> tabs open</div>
     </div>
   </div>
+  <div class="sbsite"><div class="stage"><div class="stage-bar"><i></i><i></i><i></i><span>superbot</span><em class="led"></em></div><div class="body"><div class="arena">${hubMarkup(asset)}</div></div></div></div>
   <div class="glow"></div>
   <div class="orb">${ORDER.map((id) => tile(APPS[id].ic)).join('')}</div>
   <img class="mark" src="${asset('tile.svg')}" alt="" draggable="false"/>
@@ -219,6 +251,17 @@ export default {
       count: q('.tabcount'), countN: q('.tabcount b'),
       tabs: qa('.strip .tab'), pages: qa('.pane .pg'), orb: qa('.orb .tl'), glow: q('.glow'), mark: q('.mark'),
     };
+    // the hub (tabs-chaos's #hub, verbatim): the rail, its superbot slot, the dropping icons, the rest of the window
+    const hub = q('.sbsite .hub');
+    el.site = q('.sbsite'); el.stage = q('.sbsite .stage'); el.bar = q('.sbsite .stage-bar'); el.hub = hub;
+    el.rail = hub.querySelector('.rail'); el.sb = hub.querySelector('.rail-item.sb');
+    el.drops = [...el.rail.children].filter((n) => n !== el.sb);
+    el.rest = [...hub.querySelectorAll('.inner')].filter((n) => n !== el.rail);
+    el.msg = hub.querySelector('[data-k="h-bot"]');
+    const txt = hub.querySelector('[data-k="h-text"]');
+    txt.innerHTML = txt.textContent.trim().split(/\s+/).map((w) => `<span class="w">${esc(w)}</span>`).join(' ');
+    el.words = [...txt.querySelectorAll('.w')];
+    el.geo = null;
     el.tabParts = el.tabs.map((t) => ({ fav: t.querySelector('.fav'), tt: t.querySelector('.tt'), x: t.querySelector('.x'), sep: t.querySelector('.sep') }));
     el.last = { url: '', count: '', W: 0, act: -1 };
   },
@@ -345,10 +388,16 @@ export default {
       tl.style.zIndex = String(1000 + Math.round(lerp(R + 60, sz3, e)));
     }
 
-    // ---- the mark: fv-flip-icon-grow, exact curve, from the merged tile's size ----
+    // ---- the Superbot window's geometry (tabs-chaos draws its stage at 1205 design px, 1.434x at 16:9) ----
+    const G = siteGeo(W);
+    const pRise = GLIDE(seg(t, T.rise, T.rise + 0.62));
+    const pGl = GLIDE(seg(t, T.glide, LAND));
+    const colY = G ? cy - (G.span / 2) * G.k : cy; // the column head: the rail stood up centred in the frame
+
+    // ---- the mark: fv-flip-icon-grow, exact curve, from the merged tile's size; then it becomes the rail's head ----
     const u = (t - T.M) / T.flip;
     const mOp = seg(t, T.M - 0.03, T.M + 0.06);
-    if (mOp <= 0) {
+    if (mOp <= 0 || t >= LAND || !G) {
       el.mark.style.visibility = 'hidden';
     } else {
       el.mark.style.visibility = 'visible';
@@ -356,16 +405,60 @@ export default {
       let rot, sc, br;
       if (u < 0.76) { const p = flipEase(clamp01(u / 0.76)); rot = 180 * (1 - p); sc = lerp(s0, 1.05, p); br = lerp(0.5, 1, p); }
       else { const p = cssEaseOut(clamp01((u - 0.76) / 0.24)); rot = 0; sc = lerp(1.05, 1, p); br = 1; }
-      el.mark.style.left = (cx - MARK / 2).toFixed(2) + 'px';
-      el.mark.style.top = (cy - MARK / 2).toFixed(2) + 'px';
+      // 3a: shrink to the rail tile (44 design px) and rise to the column head; 4: ride the slot home
+      sc *= lerp(1, (44 * G.k) / MARK, pRise);
+      const mx = lerp(cx, G.slotX, pGl);
+      const my = lerp(lerp(cy, colY, pRise), G.slotY, pGl);
+      el.mark.style.left = (mx - MARK / 2).toFixed(2) + 'px';
+      el.mark.style.top = (my - MARK / 2).toFixed(2) + 'px';
       el.mark.style.transform = `perspective(${(MARK * 3.6).toFixed(0)}px) rotateY(${rot.toFixed(3)}deg) scale(${sc.toFixed(5)})`;
       el.mark.style.filter = br < 0.999 ? `brightness(${br.toFixed(3)})` : 'none';
       el.mark.style.opacity = mOp.toFixed(3);
     }
-    // a calm storm glow settles in behind it
-    const g = outCubic(seg(t, T.M + 0.3, T.M + 1.0));
+    // a calm storm glow settles in behind it, and clears as the mark heads for the rail
+    const g = outCubic(seg(t, T.M + 0.3, T.M + 1.0)) * (1 - outCubic(seg(t, T.rise, T.rise + 0.5)));
     el.glow.style.left = cx + 'px';
     el.glow.style.opacity = (0.55 * g).toFixed(3);
     el.glow.style.transform = `translate(-50%,-50%) scale(${lerp(0.85, 1, g).toFixed(4)})`;
+
+    // ---- 3b / 4 / extend: the REAL rail stands under the mark, its icons drop, it glides home, the window builds ----
+    if (!G || t < T.drop) {
+      if (el.site.style.visibility !== 'hidden') el.site.style.visibility = 'hidden';
+      return;
+    }
+    el.site.style.visibility = 'visible';
+    const rx = (cx - G.L) / G.k - G.slotDx, ry = (colY - G.T) / G.k - G.slotDy; // design px: slot under the column head
+    el.rail.style.transform = `translate(${(rx * (1 - pGl)).toFixed(3)}px,${(ry * (1 - pGl)).toFixed(3)}px)`;
+    el.drops.forEach((n, i) => {
+      const e = DROP(seg(t, T.drop + i * T.dropGap, T.drop + i * T.dropGap + T.dropDur));
+      n.style.opacity = clamp01(e).toFixed(3);
+      n.style.transform = e >= 1 ? 'none' : `translateY(${(-34 * (1 - e)).toFixed(3)}px)`;
+    });
+    // the window's grounds grow in around the gliding column (tabs-chaos: a 520ms ease-out transition; eased in
+    // and out here, so the large dark ground starts from rest with the glide instead of stepping on)
+    const a = inOutCubic(seg(t, T.glide, T.glide + 0.56));
+    const A = a.toFixed(3);
+    el.stage.style.backgroundColor = `rgba(13,13,13,${A})`;
+    el.stage.style.borderColor = `rgba(38,38,38,${A})`;
+    el.bar.style.opacity = A;
+    el.hub.style.opacity = '1';
+    el.hub.style.backgroundColor = `rgba(13,13,13,${A})`;
+    el.hub.style.borderColor = `rgba(38,38,38,${A})`;
+    el.hub.style.boxShadow = 'none';
+    el.rail.style.opacity = '1';
+    el.rail.style.backgroundColor = `rgba(0,0,0,${A})`;
+    el.rail.style.borderRightColor = `rgba(38,38,38,${A})`;
+    // landed: the slot draws the same tile.svg at the same pixel, so it takes over in the same frame
+    el.sb.style.opacity = t >= LAND ? '1' : '0';
+    const r = cssEaseOut(seg(t, LAND, LAND + T.rest));
+    el.sb.style.setProperty('--sel-a', r.toFixed(3));
+    el.rest.forEach((n) => { n.style.opacity = r.toFixed(3); });
+    // the reply streams in, a word at a time (laid out in full from the start, so nothing reflows)
+    el.msg.style.opacity = '1';
+    const nw = el.words.length;
+    el.words.forEach((w, i) => {
+      const s = T.msg + (T.msgDur * i) / nw;
+      w.style.opacity = seg(t, s, s + 0.1).toFixed(3);
+    });
   },
 };

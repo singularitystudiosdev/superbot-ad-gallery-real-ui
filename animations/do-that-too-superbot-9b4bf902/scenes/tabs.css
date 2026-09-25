@@ -1,5 +1,6 @@
 /* scene 'tabs': tabs-chaos's Chrome (macOS, dark, full bleed, zoom 1.25) + sphere-intro's tiles and flip.
    Every selector scoped under #s-tabs. No transitions or keyframes: tabs.js sets every moving value from lt. */
+@import url("tabs-assets/hub.css"); /* tabs-chaos's Superbot hub stylesheets, scoped under #s-tabs .sbsite (generated) */
 #s-tabs { background: #000; }
 #s-tabs .tbs-root {
   --ch-frame: #202124; --ch-tool: #35363a; --ch-text: #e8eaed; --ch-text-2: #bdc1c6; --ch-omni: #202124; --ch-sep: rgba(255,255,255,.22);
@@ -9,7 +10,7 @@
 #s-tabs .tbs-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 /* ---------- the camera: scales about the stage centre ---------- */
-#s-tabs .cam { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform, opacity; }
+#s-tabs .cam { position: absolute; inset: 0; transform-origin: 0 0; }
 #s-tabs .browser {
   position: absolute; left: 0; top: 0; width: 1536px; height: 864px; transform: scale(1.25); transform-origin: 0 0;
   background: var(--ch-frame); color: var(--ch-text); display: grid; grid-template-rows: 40px 40px minmax(0, 1fr); overflow: hidden;
@@ -90,10 +91,17 @@
 
 /* ---------- the sphere, the glow, the mark ---------- */
 #s-tabs .orb { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
-#s-tabs .orb .tl { transform-origin: 0 0; will-change: transform, opacity, filter; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+#s-tabs .orb .tl { transform-origin: 0 0; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
 #s-tabs .orb .tl.hair { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.16), 0 6px 18px rgba(0,0,0,.35); }
 #s-tabs .glow {
   position: absolute; left: 50%; top: 540px; width: 820px; height: 820px; border-radius: 50%; opacity: 0; z-index: 4; pointer-events: none;
   background: radial-gradient(closest-side, rgba(106,31,216,.42), rgba(43,107,255,.18) 45%, rgba(192,38,211,.06) 70%, transparent 100%);
 }
 #s-tabs .mark { position: absolute; left: 810px; top: 390px; width: 300px; height: 300px; z-index: 6; visibility: hidden; transform-origin: 50% 50%; user-select: none; }
+
+/* ---------- the Superbot window (tabs-chaos's site stage + #hub; rules in tabs-assets/hub.css) ---------- */
+#s-tabs .sbsite { position: absolute; left: 0; top: 0; width: 1205px; height: 753.125px; transform-origin: 0 0; z-index: 3; visibility: hidden; }
+#s-tabs .sbsite .stage { width: 100%; height: 100%; aspect-ratio: auto; background-color: transparent; border-color: transparent; }
+#s-tabs .sbsite .stage-bar { opacity: 0; }
+#s-tabs .sbsite .body { grid-template-columns: minmax(0, 1fr); } /* the site's margin column is closed ("perched"), as in the ad's end state */
+#s-tabs .sbsite .rail-item.sb.sel::before { opacity: var(--sel-a, 0); } /* the selection pill fades in with the sidebar */

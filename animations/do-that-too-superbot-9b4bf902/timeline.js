@@ -32,7 +32,7 @@ const END_DUR = 4.4, DIP = 0.35;
 // or { html } for styled words. The last part and the logo are kept on one line (never orphan the logo).
 const B = (f) => new URL('./brand/' + f, import.meta.url).href;
 const CARDS = {
-  agents: { dur: 2.4, parts: ['All', 'your', 'agents', { g: 'in' }, { g: 'one' }] },
+  agents: { dur: 2.4, parts: ['All', { g: 'in' }, { g: 'one' }, 'app'] },
   lovable: {
     dur: 2.6, parts: ['Can', 'it', 'make', 'an', 'app', 'like', { img: B('lovable-wordmark.svg'), cls: 'wm wm-lovable', alt: 'Lovable', after: '?' }],
     logo: { src: B('lovable-logo.svg'), cls: 'lg lg-lovable', alt: '' },

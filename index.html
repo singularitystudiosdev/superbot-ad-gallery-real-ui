@@ -8,6 +8,10 @@
 </head>
 <body>
 <div class="ar-pick" id="lbAr" role="radiogroup" aria-label="aspect ratio"></div>
+<div class="soon-pick" role="group" aria-label="coming-soon intro before every ad">
+  <button type="button" id="soonToggle" aria-pressed="false" title="play a coming-soon card before every ad, in the viewer and in downloads">○ soon intro</button>
+  <select id="soonVariant" aria-label="intro variant"></select>
+</div>
 <button type="button" class="cap-copy" id="capCopy" title="copy your caption edits to send them in">⧉ copy</button>
 <a class="lb-dl" id="lbDl" hidden download>⤓ download</a>
 <header class="top">
@@ -32,6 +36,7 @@
   <div class="lb-caption"><span id="lbTitle"></span><span class="dim" id="lbPos"></span></div>
 </div>
 
+<script src="soon.js"></script>
 <script src="gallery.js"></script>
 </body>
 </html>

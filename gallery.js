@@ -59,6 +59,7 @@ function renderDl() {
     a.download = `${it.id}-${k}.png`;
     const s = sizeOf(it, k);
     a.textContent = s ? `⤓ download ${s.w}×${s.h}` : '⤓ download png';
+    soonLabel(a, ' (mp4)');
     a.hidden = false;
     return;
   }
@@ -69,6 +70,7 @@ function renderDl() {
     a.textContent = `⤓ download ${it.downloadLabel || label}`;
     a.title = '';
     a.classList.remove('no-render');
+    delete a.dataset.soon; // cross-origin and hours long: it downloads as-is, without the card
     a.hidden = false;
     return;
   }
@@ -78,6 +80,7 @@ function renderDl() {
   a.textContent = `⤓ download ${label}`;
   a.title = '';
   a.classList.remove('no-render');
+  soonLabel(a, '');
   a.hidden = false;
   // the mp4 only exists where the offline render was produced: an ad whose page shipped
   // without one must not offer a button that 404s on click (it reads "file wasn't
@@ -90,9 +93,69 @@ function renderDl() {
 function markNoRender(a, label) {
   a.removeAttribute('href'); // no href: nothing to navigate to, so nothing to 404
   a.classList.add('no-render');
+  delete a.dataset.soon;
   a.textContent = `⤓ ${label} not rendered`;
   a.title = 'this spot has no offline render at this ratio yet';
 }
+
+// ---- coming-soon intro (soon.js draws the card; this wires the top-right control) ----
+// with the intro on, a same-origin file is re-recorded in the browser with the card in front
+function soonLabel(a, suffix) {
+  if (!Soon.isOn()) { delete a.dataset.soon; return; }
+  a.dataset.soon = '1';
+  a.textContent += ` + soon${suffix}`;
+  a.title = `recorded in this tab with the "${Soon.variant().label}" card first; plays in real time, keep the tab visible`;
+}
+
+async function exportSoon(a) {
+  const it = filtered()[openIdx];
+  const showing = () => !$('lb').hidden && filtered()[openIdx] === it;
+  const base = a.download.replace(/\.(png|mp4)$/, '');
+  a.dataset.busy = '1';
+  try {
+    const file = await Soon.exportWithIntro({
+      kind: it.type,
+      url: a.getAttribute('href'),
+      onProgress: (p) => { if (showing()) a.textContent = `⏺ recording ${Math.round(p * 100)}%`; },
+    });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(file.blob);
+    link.download = `${base}-${Soon.variant().id}.${file.ext}`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 60000);
+    delete a.dataset.busy;
+    if (showing()) renderDl();
+  } catch (err) {
+    console.error(err);
+    delete a.dataset.busy;
+    if (showing()) { a.textContent = `⚠ recording failed: ${err.message}`; setTimeout(() => showing() && renderDl(), 4000); }
+  }
+}
+
+$('lbDl').addEventListener('click', (e) => {
+  const a = $('lbDl');
+  if (!a.dataset.soon || !a.getAttribute('href')) return; // intro off, or a cross-origin file: plain download
+  e.preventDefault();
+  if (!a.dataset.busy) exportSoon(a);
+});
+
+function renderSoon() {
+  const on = Soon.isOn(), b = $('soonToggle'), sel = $('soonVariant');
+  b.textContent = on ? '● soon intro' : '○ soon intro';
+  b.classList.toggle('on', on);
+  b.setAttribute('aria-pressed', String(on));
+  if (!sel.options.length) sel.innerHTML = Soon.VARIANTS.map(v => `<option value="${v.id}">${esc(v.label)}</option>`).join('');
+  sel.value = Soon.variant().id;
+}
+
+function setSoon(on, variantId) {
+  if (variantId) Soon.setVariant(variantId);
+  Soon.setOn(on);
+  renderSoon();
+  if (!$('lb').hidden) renderStage(); // replays the open ad with (or without) the card
+}
+$('soonToggle').onclick = () => setSoon(!Soon.isOn());
+$('soonVariant').onchange = (e) => setSoon(true, e.target.value); // picking a variant means "use it"
 
 // a static ad ships one PNG per ratio (assets/ads/<id>.<ar>.png) and its src
 // carries a {ar} slot; an item without `ars` is served as-is
@@ -238,11 +301,14 @@ function renderGrid() {
 }
 
 // ---- lightbox ----
+let stageGen = 0; // bumped per renderStage so a card still running for the last ad stands down
 function renderStage() {
   const list = filtered();
   const it = list[openIdx];
   const stage = $('lbStage');
   stage.innerHTML = '';
+  const gen = ++stageGen;
+  const alive = () => gen === stageGen && !$('lb').hidden;
   if (it.type === 'image') {
     const img = document.createElement('img');
     img.src = srcFor(it, it.src);
@@ -253,9 +319,24 @@ function renderStage() {
       img.classList.toggle('zoomed');
     };
     stage.appendChild(img);
+    if (Soon.isOn()) { // the card needs the poster's box, so it starts once the poster is decoded
+      img.decode()
+        .catch((err) => console.error(err))
+        .then(() => (alive() ? Soon.playIntro(stage, alive) : null))
+        .then((card) => Soon.fadeOut(card));
+    }
   } else {
     const f = document.createElement('iframe');
-    f.src = `${it.src}${it.src.includes('?') ? '&' : '?'}ar=${ar}`;
+    const src = `${it.src}${it.src.includes('?') ? '&' : '?'}ar=${ar}`;
+    if (!Soon.isOn()) f.src = src;
+    else { // the spot loads only after the card, so its timeline starts at 0 when the card leaves
+      Soon.playIntro(stage, alive).then((card) => {
+        if (!card) return;
+        f.addEventListener('load', () => Soon.fadeOut(card), { once: true });
+        setTimeout(() => Soon.fadeOut(card), 4000); // a frame that never fires load must not stay hidden
+        f.src = src;
+      });
+    }
     f.allow = 'autoplay';
     f.title = it.title;
     // refocus the parent so ESC/arrows keep working after the frame grabs focus
@@ -314,6 +395,7 @@ document.addEventListener('keydown', (e) => {
 // ---- boot ----
 $('capCopy').onclick = copyEdits;
 renderCopy();
+renderSoon();
 
 fetch('manifest.json')
   .then(r => r.json())

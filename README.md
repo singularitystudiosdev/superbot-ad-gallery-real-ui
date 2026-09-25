@@ -7,7 +7,7 @@ zoom the full-size image or watch the animation play live. Static — no build, 
 
 ## Contents
 
-14 ad spots, gathered from the workspace projects and the GitHub repos:
+32 ad spots, gathered from the workspace projects and the GitHub repos:
 
 - **14 tabs?** — the same prompt pasted into fourteen AI tabs; superbot asks every agent from one window (15s loop).
 - **youtube to mp3?** — ChatGPT refuses in 166 words; the superbot popup opens the app, which fetches,

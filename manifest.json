@@ -80,68 +80,12 @@
     "thumb": "assets/shots/agent-switch-superbot-4207ac22.png"
   },
   {
-    "id": "context-switch-superbot-c93ff0a4",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Claude out of usage · one tap to ChatGPT · rules · refusal",
-    "src": "animations/context-switch-superbot-c93ff0a4/",
-    "thumb": "assets/shots/context-switch-superbot-c93ff0a4.png"
-  },
-  {
-    "id": "new-number-one-superbot-693c3a7f",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "A NEW #1 EVERY WEEK",
-    "src": "animations/new-number-one-superbot-693c3a7f/",
-    "thumb": "assets/shots/new-number-one-superbot-693c3a7f.png"
-  },
-  {
-    "id": "subscriptions-stack-superbot-693c3a7f",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "STOP PAYING FOR EVERY NEW #1",
-    "src": "animations/subscriptions-stack-superbot-693c3a7f/",
-    "thumb": "assets/shots/subscriptions-stack-superbot-693c3a7f.png"
-  },
-  {
-    "id": "super-picks-superbot-693c3a7f",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "NEVER PICK A MODEL AGAIN",
-    "src": "animations/super-picks-superbot-693c3a7f/",
-    "thumb": "assets/shots/super-picks-superbot-693c3a7f.png"
-  },
-  {
     "id": "same-chat-new-model-superbot-693c3a7f",
     "type": "animation",
     "group": "Ad spots",
     "title": "NEW MODEL. SAME CHAT",
     "src": "animations/same-chat-new-model-superbot-693c3a7f/",
     "thumb": "assets/shots/same-chat-new-model-superbot-693c3a7f.png"
-  },
-  {
-    "id": "just-works-couch-local-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Mid-century couches, 20 miles out",
-    "src": "animations/just-works-couch-local-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-couch-local-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-dresses-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "10 Dresses on Amazon",
-    "src": "animations/just-works-dresses-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-dresses-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-espresso-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Espresso, by the reviews",
-    "src": "animations/just-works-espresso-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-espresso-gpt-superbot-42aac446.png"
   },
   {
     "id": "just-works-f-series-superbot-42aac446",
@@ -184,28 +128,12 @@
     "thumb": "assets/shots/just-works-leather-jacket-superbot-42aac446.png"
   },
   {
-    "id": "just-works-running-shoes-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Size 10, in stock",
-    "src": "animations/just-works-running-shoes-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-running-shoes-gpt-superbot-42aac446.png"
-  },
-  {
     "id": "just-works-standing-desk-gpt-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",
     "title": "Standing desks, compared",
     "src": "animations/just-works-standing-desk-gpt-superbot-42aac446/",
     "thumb": "assets/shots/just-works-standing-desk-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-tickets-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Two seats together, Friday",
-    "src": "animations/just-works-tickets-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-tickets-superbot-42aac446.png"
   },
   {
     "id": "just-works-tv-price-gpt-superbot-42aac446",

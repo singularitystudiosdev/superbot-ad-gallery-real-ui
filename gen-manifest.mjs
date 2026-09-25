@@ -74,27 +74,18 @@ const more = [
   ['do-that-too-superbot-9b4bf902', 'do-that-too-superbot-9b4bf902/', 'I can do that too!', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
   ['agent-switch-superbot-4207ac22', 'agent-switch-superbot-4207ac22/', 'Context carries from agent to agent', 'Ad spots'],
-  ['context-switch-superbot-c93ff0a4', 'context-switch-superbot-c93ff0a4/', 'Claude out of usage · one tap to ChatGPT · rules · refusal', 'Ad spots'],
-  // the no-switch family (2026-09-25): four spots forked from context-switch-superbot-c93ff0a4, all
-  // built on the real superbot hub UI, each keeping the same thread while a new model joins the rail.
-  ['new-number-one-superbot-693c3a7f', 'new-number-one-superbot-693c3a7f/', 'A NEW #1 EVERY WEEK', 'Ad spots'],
-  ['subscriptions-stack-superbot-693c3a7f', 'subscriptions-stack-superbot-693c3a7f/', 'STOP PAYING FOR EVERY NEW #1', 'Ad spots'],
-  ['super-picks-superbot-693c3a7f', 'super-picks-superbot-693c3a7f/', 'NEVER PICK A MODEL AGAIN', 'Ad spots'],
-  ['same-chat-new-model-superbot-693c3a7f', 'same-chat-new-model-superbot-693c3a7f/', 'NEW MODEL. SAME CHAT', 'Ad spots'],
-  // the "Superbot just works" family (2026-09-25): 12 spots on one kit (animations/just-works-kit-42aac446).
+    // the no-switch family (2026-09-25): forked from the context-switch spot, built on the real superbot
+  // hub UI, each keeping the same thread while a new model joins the rail. One member still listed.
+    ['same-chat-new-model-superbot-693c3a7f', 'same-chat-new-model-superbot-693c3a7f/', 'NEW MODEL. SAME CHAT', 'Ad spots'],
+  // the "Superbot just works" family (2026-09-25): built on one kit (animations/just-works-kit-42aac446).
   // superbot aggregates a real ask across platforms and hands back a finished frontend in Chrome.
-  ['just-works-couch-local-superbot-42aac446', 'just-works-couch-local-superbot-42aac446/', 'Mid-century couches, 20 miles out', 'Ad spots'],
-  ['just-works-dresses-superbot-42aac446', 'just-works-dresses-superbot-42aac446/', '10 Dresses on Amazon', 'Ad spots'],
-  ['just-works-espresso-gpt-superbot-42aac446', 'just-works-espresso-gpt-superbot-42aac446/', 'Espresso, by the reviews', 'Ad spots'],
-  ['just-works-f-series-superbot-42aac446', 'just-works-f-series-superbot-42aac446/', 'Used F-Series, every platform', 'Ad spots'],
+    ['just-works-f-series-superbot-42aac446', 'just-works-f-series-superbot-42aac446/', 'Used F-Series, every platform', 'Ad spots'],
   ['just-works-gift-dad-gpt-superbot-42aac446', 'just-works-gift-dad-gpt-superbot-42aac446/', 'Fishing gifts for dad, under $50', 'Ad spots'],
   ['just-works-gmail-manage-superbot-42aac446', 'just-works-gmail-manage-superbot-42aac446/', 'Inbox, handled', 'Ad spots'],
   ['just-works-gmail-receipts-gpt-superbot-42aac446', 'just-works-gmail-receipts-gpt-superbot-42aac446/', 'What I spent this year', 'Ad spots'],
   ['just-works-leather-jacket-superbot-42aac446', 'just-works-leather-jacket-superbot-42aac446/', 'Vintage leather jacket, size M', 'Ad spots'],
-  ['just-works-running-shoes-gpt-superbot-42aac446', 'just-works-running-shoes-gpt-superbot-42aac446/', 'Size 10, in stock', 'Ad spots'],
-  ['just-works-standing-desk-gpt-superbot-42aac446', 'just-works-standing-desk-gpt-superbot-42aac446/', 'Standing desks, compared', 'Ad spots'],
-  ['just-works-tickets-superbot-42aac446', 'just-works-tickets-superbot-42aac446/', 'Two seats together, Friday', 'Ad spots'],
-  ['just-works-tv-price-gpt-superbot-42aac446', 'just-works-tv-price-gpt-superbot-42aac446/', 'OLED 65, today', 'Ad spots'],
+    ['just-works-standing-desk-gpt-superbot-42aac446', 'just-works-standing-desk-gpt-superbot-42aac446/', 'Standing desks, compared', 'Ad spots'],
+    ['just-works-tv-price-gpt-superbot-42aac446', 'just-works-tv-price-gpt-superbot-42aac446/', 'OLED 65, today', 'Ad spots'],
   ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
   ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],

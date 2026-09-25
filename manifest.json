@@ -104,132 +104,14 @@
     "thumb": "assets/shots/ready-100-flash-superbot-d7bc1ed7.png"
   },
   {
-    "id": "ready-countdown-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "READY? 3, 2, 1 · countdown to 100 codes",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/ready-countdown.html",
-    "thumb": "assets/shots/ready-countdown-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "dont-blink-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "DON'T BLINK. · the codes hide in its blink",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/dont-blink.html",
-    "thumb": "assets/shots/dont-blink-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "five-flashes-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "5 FLASHES · 20 codes on every beat",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/five-flashes.html",
-    "thumb": "assets/shots/five-flashes-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "pause-at-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "PAUSE AT 0:03 · a timecode that tells the truth",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/pause-at.html",
-    "thumb": "assets/shots/pause-at-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "invite-slot-type-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Invite field · types itself",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/invite-slot-type.html",
-    "thumb": "assets/shots/invite-slot-type-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "slot-machine-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Slot machine · reels lock",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/slot-machine.html",
-    "thumb": "assets/shots/slot-machine-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "terminal-giveaway-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Terminal · 100 codes issued",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/terminal-giveaway.html",
-    "thumb": "assets/shots/terminal-giveaway-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "odometer-100-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Odometer · rolls to 100",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/odometer-100.html",
-    "thumb": "assets/shots/odometer-100-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "codes-left-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Codes left · counts down to gone",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/codes-left.html",
-    "thumb": "assets/shots/codes-left-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "drop-timer-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Drop timer · 0.1 s drop",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/drop-timer.html",
-    "thumb": "assets/shots/drop-timer-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "matrix-rain-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "CATCH ONE · code rain",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/matrix-rain.html",
-    "thumb": "assets/shots/matrix-rain-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "code-silhouette-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "100 CODES · silhouette",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/code-silhouette.html",
-    "thumb": "assets/shots/code-silhouette-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "glitch-reveal-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "CODES INSIDE · glitch reveal",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/glitch-reveal.html",
-    "thumb": "assets/shots/glitch-reveal-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "screenshot-shutter-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "SCREENSHOT THIS · shutter",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/screenshot-shutter.html",
-    "thumb": "assets/shots/screenshot-shutter-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "one-works-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "ONE OF THESE WORKS · scan",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/one-works.html",
-    "thumb": "assets/shots/one-works-superbot-d7bc1ed7.png"
-  },
-  {
     "id": "dvd-bounce-8h-superbot-d7bc1ed7",
     "type": "animation",
     "group": "Ad spots",
     "title": "8 HOURS · DVD bounce, hidden code flashes",
     "src": "animations/mascot-codes-superbot-d7bc1ed7/dvd-bounce-8h.html",
-    "thumb": "assets/shots/dvd-bounce-8h-superbot-d7bc1ed7.png"
+    "thumb": "assets/shots/dvd-bounce-8h-superbot-d7bc1ed7.png",
+    "download": "https://github.com/singularitystudiosdev/superbot-ad-gallery/releases/download/dvd-bounce-8h-d7bc1ed7/dvd-bounce-8h-superbot-d7bc1ed7.16x9.mp4",
+    "downloadLabel": "16:9 · 8 hours"
   },
   {
     "id": "stop-burning-tokens",

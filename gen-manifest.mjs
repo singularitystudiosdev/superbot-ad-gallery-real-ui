@@ -77,22 +77,7 @@ const more = [
   ['mayonnaise-superbot-5c2f8e47', 'mayonnaise-superbot-5c2f8e47/', 'is mayonnaise an instrument?', 'Ad spots'],
   ['who-are-you-superbot-4a7e2c19', 'who-are-you-superbot-4a7e2c19/', 'WHO ARE YOU', 'Ad spots'],
   ['ready-100-flash-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/ready-100-flash.html', 'READY? · 100 codes flash', 'Ad spots'],
-  ['ready-countdown-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/ready-countdown.html', 'READY? 3, 2, 1 · countdown to 100 codes', 'Ad spots'],
-  ['dont-blink-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/dont-blink.html', 'DON\'T BLINK. · the codes hide in its blink', 'Ad spots'],
-  ['five-flashes-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/five-flashes.html', '5 FLASHES · 20 codes on every beat', 'Ad spots'],
-  ['pause-at-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/pause-at.html', 'PAUSE AT 0:03 · a timecode that tells the truth', 'Ad spots'],
-  ['invite-slot-type-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/invite-slot-type.html', 'Invite field · types itself', 'Ad spots'],
-  ['slot-machine-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/slot-machine.html', 'Slot machine · reels lock', 'Ad spots'],
-  ['terminal-giveaway-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/terminal-giveaway.html', 'Terminal · 100 codes issued', 'Ad spots'],
-  ['odometer-100-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/odometer-100.html', 'Odometer · rolls to 100', 'Ad spots'],
-  ['codes-left-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/codes-left.html', 'Codes left · counts down to gone', 'Ad spots'],
-  ['drop-timer-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/drop-timer.html', 'Drop timer · 0.1 s drop', 'Ad spots'],
-  ['matrix-rain-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/matrix-rain.html', 'CATCH ONE · code rain', 'Ad spots'],
-  ['code-silhouette-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/code-silhouette.html', '100 CODES · silhouette', 'Ad spots'],
-  ['glitch-reveal-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/glitch-reveal.html', 'CODES INSIDE · glitch reveal', 'Ad spots'],
-  ['screenshot-shutter-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/screenshot-shutter.html', 'SCREENSHOT THIS · shutter', 'Ad spots'],
-  ['one-works-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/one-works.html', 'ONE OF THESE WORKS · scan', 'Ad spots'],
-  ['dvd-bounce-8h-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/dvd-bounce-8h.html', '8 HOURS · DVD bounce, hidden code flashes', 'Ad spots'],
+  ['dvd-bounce-8h-superbot-d7bc1ed7', 'mascot-codes-superbot-d7bc1ed7/dvd-bounce-8h.html', '8 HOURS · DVD bounce, hidden code flashes', 'Ad spots', { download: 'https://github.com/singularitystudiosdev/superbot-ad-gallery/releases/download/dvd-bounce-8h-d7bc1ed7/dvd-bounce-8h-superbot-d7bc1ed7.16x9.mp4', downloadLabel: '16:9 · 8 hours' }],
   ['gg-site-variants', 'gg-site/variants.html', 'superbot.gg — character variants', 'Site variants'],
   ['gg-site-lander-zen', 'gg-site/lander-zen.html', 'lander — zen', 'Site variants'],
   ['gg-site-lander-minimal', 'gg-site/lander-minimal.html', 'lander — minimal', 'Site variants'],
@@ -126,9 +111,10 @@ const more = [
   ['swarm-constellation', 'swarm-constellation/', 'SWARM.GG — agent constellation', 'Mascot & toys'],
   ['agent-feed', 'agent-feed/', 'superbot optimizer — agent feed', 'Mascot & toys'],
 ];
-for (const [name, src, title, group] of more) {
+// an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
+for (const [name, src, title, group, extra] of more) {
   items.push({ id: name, type: 'animation', group, title, src: `animations/${src}`,
-    thumb: `assets/shots/${name}.png` });
+    thumb: `assets/shots/${name}.png`, ...(extra || {}) });
 }
 
 for (const g of groups.filter(g => g.group === ONLY_GROUP)) {
@@ -161,7 +147,7 @@ console.log(`manifest.json: ${shipped.length} items (${ONLY_GROUP})`);
 const VIDEO_ARS = ['16x9', '4x3', '1x1', '4x5'];
 const noRender = [];
 for (const it of shipped) {
-  if (it.type !== 'animation') continue;
+  if (it.type !== 'animation' || it.download) continue; // an external download ships no per-ratio renders
   for (const k of VIDEO_ARS) {
     const p = `assets/video/${it.id}.${k}.mp4`;
     try { statSync(p); } catch { noRender.push(p); }

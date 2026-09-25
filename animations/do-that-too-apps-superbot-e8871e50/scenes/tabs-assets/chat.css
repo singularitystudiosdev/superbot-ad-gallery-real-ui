@@ -1,0 +1,107 @@
+/* The hub's four-request chat (chat.js). Every moving value is written from lt, so nothing here transitions. */
+#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
+#s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
+#s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
+
+/* composer: the ask is typed in, the send button lights while there is text */
+#s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
+#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+#s-tabs .sbsite .hub .rc-send.qc-on { background: linear-gradient(90deg, #5d91ec, #866cf6); color: #fff !important; }
+#s-tabs .sbsite .hub .qc-pi { display: inline-grid; place-items: center; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi img { width: 12px; height: 12px; object-fit: contain; }
+#s-tabs .sbsite .hub .qc-pi img[data-app="doordash"] { height: 8px; }
+
+/* rail: DoorDash's tile grows in when superbot connects it */
+#s-tabs .sbsite .rail-item.qc-rail-dd { background: #ff3008; overflow: visible; }
+#s-tabs .sbsite .rail-item.qc-rail-dd img { width: 26px; height: 15px; filter: brightness(0) invert(1); }
+
+/* app tiles */
+#s-tabs .sbsite .hub .qc-tile { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-tile img { width: 15px; height: 15px; object-fit: contain; display: block; }
+#s-tabs .sbsite .hub .qc-t-gemini { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-cursor { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-cursor img { width: 16px; height: 16px; }
+#s-tabs .sbsite .hub .qc-t-doordash { background: #ff3008; }
+#s-tabs .sbsite .hub .qc-t-doordash img { width: 15px; height: 9px; filter: brightness(0) invert(1); }
+#s-tabs .sbsite .hub .qc-t-superbot { background: transparent; }
+#s-tabs .sbsite .hub .qc-t-superbot img { width: 100%; height: 100%; }
+
+/* superbot's routing chip: "Switching to X", shimmering until it resolves to a check */
+#s-tabs .sbsite .hub .qc-sw { display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 12px 0 6px; border-radius: 999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 13px/1 var(--ui); }
+#s-tabs .sbsite .hub .qc-swl { background: linear-gradient(90deg, #8e8e93 0%, #8e8e93 40%, #ffffff 50%, #8e8e93 60%, #8e8e93 100%); background-size: 250% 100%; background-position: var(--sh, 100%) 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+#s-tabs .sbsite .hub .qc-sw.qc-done .qc-swl { background: none; color: #ececec; }
+#s-tabs .sbsite .hub .qc-st { position: relative; width: 14px; height: 14px; margin-left: 2px; }
+#s-tabs .sbsite .hub .qc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .qc-ok { width: 14px; height: 14px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .qc-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the routed app's answer */
+#s-tabs .sbsite .hub .qc-who { display: flex; align-items: center; gap: 7px; margin: 2px 0 7px; font: 600 12.5px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .qc-who .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .qc-who .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-who .qc-t-doordash img { width: 12px; height: 7px; }
+#s-tabs .sbsite .hub .qc-who .qc-t-superbot img { width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .qc-who small { font-weight: 500; font-size: 10.5px; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-say { min-height: 18px; margin-bottom: 8px; font: 12.5px/18px var(--ui); color: #e5e5ea; }
+
+/* Gemini: the meme resolves out of a blur under a sweeping band */
+#s-tabs .sbsite .hub .qc-img { position: relative; width: 236px; border-radius: 12px; overflow: hidden; background: #111; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .qc-img img { display: block; width: 100%; height: auto; }
+#s-tabs .sbsite .hub .qc-gen { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 25%, rgba(120, 160, 255, .38) 45%, rgba(214, 120, 255, .38) 55%, transparent 75%); mix-blend-mode: screen; }
+#s-tabs .sbsite .hub .qc-genl { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .qc-genl .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .qc-genl .qc-tile img { width: 13px; height: 13px; }
+
+/* Cursor: the script types in, then runs */
+#s-tabs .sbsite .hub .qc-code { width: 430px; border-radius: 10px; overflow: hidden; background: #0b0b0d; box-shadow: 0 0 0 1px #26262a; }
+#s-tabs .sbsite .hub .qc-bar { display: flex; align-items: center; gap: 7px; height: 27px; padding: 0 11px; border-bottom: 1px solid #1f1f23; font: 500 11px/1 var(--ui); color: #c8c8d0; }
+#s-tabs .sbsite .hub .qc-bar img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .qc-bar small { margin-left: auto; font-size: 10px; color: #6e6e76; }
+#s-tabs .sbsite .hub .qc-pre { padding: 8px 0 9px; font: 10.5px/16px var(--font-mono, ui-monospace, Menlo, monospace); color: #d4d4d4; }
+#s-tabs .sbsite .hub .qc-ln { display: flex; white-space: pre; min-height: 16px; }
+#s-tabs .sbsite .hub .qc-ln > i { flex: none; width: 28px; padding-right: 12px; box-sizing: border-box; text-align: right; font-style: normal; color: #4a4a52; }
+#s-tabs .sbsite .hub .qc-k { color: #c586c0; }
+#s-tabs .sbsite .hub .qc-f { color: #dcdcaa; }
+#s-tabs .sbsite .hub .qc-s { color: #ce9178; }
+#s-tabs .sbsite .hub .qc-run { display: grid; gap: 7px; padding: 8px 11px 10px; border-top: 1px solid #1f1f23; opacity: 0; }
+#s-tabs .sbsite .hub .qc-cmd { font: 10.5px/1 var(--font-mono, ui-monospace, Menlo, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-hs { display: flex; flex-wrap: wrap; gap: 6px; }
+#s-tabs .sbsite .hub .qc-h { display: inline-flex; align-items: center; gap: 4px; height: 21px; padding: 0 9px 0 7px; border-radius: 999px; background: rgba(52, 211, 153, .12); font: 600 10.5px/1 var(--ui); color: #34d399; opacity: 0; }
+#s-tabs .sbsite .hub .qc-h .qc-ok { width: 11px; height: 11px; }
+
+/* DoorDash: the order card fills in, the tracker hits Ordered */
+#s-tabs .sbsite .hub .qc-dd { width: 330px; box-sizing: border-box; padding: 12px 13px 13px; border-radius: 12px; background: #111113; box-shadow: 0 0 0 1px #2a2a2e; font: 11.5px/1.3 var(--ui); color: #d9d9de; }
+#s-tabs .sbsite .hub .qc-dd-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; }
+#s-tabs .sbsite .hub .qc-dd-top img { height: 11px; width: auto; }
+#s-tabs .sbsite .hub .qc-dd-top span { font-size: 10.5px; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-dd-row { display: grid; grid-template-columns: 24px 1fr auto; padding: 3px 0; opacity: 0; }
+#s-tabs .sbsite .hub .qc-dd-row span:first-child { color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-dd-row span:last-child, #s-tabs .sbsite .hub .qc-dd-tot b { font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .qc-dd-tot { display: flex; justify-content: space-between; margin-top: 5px; padding-top: 8px; border-top: 1px solid #232327; opacity: 0; }
+#s-tabs .sbsite .hub .qc-dd-tot b { font-size: 12.5px; color: #fff; }
+#s-tabs .sbsite .hub .qc-dd-trk { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin: 13px 0 6px; }
+#s-tabs .sbsite .hub .qc-dd-trk i { height: 4px; border-radius: 99px; background: linear-gradient(90deg, #ff3008 calc(var(--f, 0) * 100%), #2a2a2e 0); }
+#s-tabs .sbsite .hub .qc-dd-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; font-size: 10px; color: #6e6e76; }
+#s-tabs .sbsite .hub .qc-dd-steps span:nth-child(2) { text-align: center; }
+#s-tabs .sbsite .hub .qc-dd-steps span:nth-child(3) { text-align: right; }
+#s-tabs .sbsite .hub .qc-dd-steps span.on { color: #ff5a36; font-weight: 600; }
+#s-tabs .sbsite .hub .qc-dd-st { display: flex; align-items: center; gap: 9px; margin-top: 12px; opacity: 0; }
+#s-tabs .sbsite .hub .qc-dd-ok { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #ff3008; }
+#s-tabs .sbsite .hub .qc-dd-ok .qc-ok { width: 13px; height: 13px; stroke: #fff; }
+#s-tabs .sbsite .hub .qc-dd-st b { font-size: 14px; color: #fff; }
+#s-tabs .sbsite .hub .qc-dd-st small { margin-left: auto; font-size: 10.5px; color: #8e8e93; }
+
+/* superbot: 100 mp3s count up into the Music folder */
+#s-tabs .sbsite .hub .qc-dl { width: 360px; box-sizing: border-box; padding: 12px 13px 12px; border-radius: 12px; background: #111113; box-shadow: 0 0 0 1px #2a2a2e; color: #d9d9de; }
+#s-tabs .sbsite .hub .qc-dl-top { display: flex; align-items: center; gap: 7px; font: 10.5px/1 var(--font-mono, ui-monospace, Menlo, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-dl svg { width: 13px; height: 13px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .qc-dl-top b { margin-left: auto; font: 700 12px/1 var(--font-mono, ui-monospace, Menlo, monospace); color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .qc-dl-top b.on { color: #34d399; }
+#s-tabs .sbsite .hub .qc-dl-bar { height: 5px; margin: 10px 0 8px; border-radius: 99px; background: #26262a; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-dl-bar i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #2b6bff, #6a1fd8, #c026d3, #ff3d9a); }
+#s-tabs .sbsite .hub .qc-dl-rows { display: grid; }
+#s-tabs .sbsite .hub .qc-dl-row { display: grid; grid-template-columns: 13px 1fr auto 13px; align-items: center; gap: 8px; height: 22px; font: 10.5px/1 var(--font-mono, ui-monospace, Menlo, monospace); color: #cfcfd4; visibility: hidden; }
+#s-tabs .sbsite .hub .qc-dl-row svg:first-child { color: #866cf6; }
+#s-tabs .sbsite .hub .qc-dl-row small { font-size: 9.5px; color: #6e6e76; }
+#s-tabs .sbsite .hub .qc-dl-row .qc-ok { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-fin { display: flex; align-items: center; gap: 7px; margin-top: 8px; padding-top: 9px; border-top: 1px solid #232327; font: 600 12px/1 var(--ui); color: #ececec; opacity: 0; }

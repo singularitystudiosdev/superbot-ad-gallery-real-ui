@@ -64,6 +64,14 @@
     "thumb": "assets/shots/do-that-too-superbot-9b4bf902.png"
   },
   {
+    "id": "do-that-too-apps-superbot-e8871e50",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "I can do that too · every app in one chat",
+    "src": "animations/do-that-too-apps-superbot-e8871e50/",
+    "thumb": "assets/shots/do-that-too-apps-superbot-e8871e50.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

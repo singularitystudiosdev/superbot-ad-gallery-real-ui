@@ -1,6 +1,6 @@
 // scene yt: "Convert these 10 YouTube videos to MP3" -> superbot converts all ten and hands back a tidy
 // two-column list of MP3s (the youtube-refusal-superbot-7f2c9a41 delivery look: cardGroup header strip,
-// fileCard rows with the gradient audio tile and the green Saved pill).
+// fileCard rows with the gradient audio tile and the green Saved pill). Real, recognisable tracks per the client.
 // YouTube mark: yt-assets/youtube-icon.svg, the full-color icon exactly as YouTube serves it
 // (YouTube brand resources "YouTube icon", fetched via upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg).
 // Pure function of lt: every frame writes every animated property.
@@ -12,18 +12,19 @@ const YT = () => `<img class="yt-mark" src="${asset('youtube-icon.svg')}" alt=""
 
 const PROMPT = 'Convert these 10 YouTube videos to MP3';
 const REPLY = 'On it. Converting all 10 to MP3.';
-const TRACKS = [
-  ['Lo-fi Study Mix', '6:12', '5.9 MB'],
-  ['Morning Run Playlist', '4:48', '4.6 MB'],
-  ['Rainy Cafe Ambience', '5:30', '5.3 MB'],
-  ['Acoustic Sunday', '3:41', '3.5 MB'],
-  ['Deep Focus Beats', '4:55', '4.7 MB'],
-  ['Road Trip Anthems', '3:58', '3.8 MB'],
-  ['Piano for Sleep', '5:05', '4.9 MB'],
-  ['Synthwave Night Drive', '3:27', '3.3 MB'],
-  ['Jazz Hop Evening', '2:44', '2.6 MB'],
-  ['Chill Guitar Loops', '3:32', '3.4 MB'],
-]; // sums to 42.0 MB
+const TRACKS = [ // [title, artist, duration, size at 320 kbps = 2.34 MB/min]
+  ['The Final Countdown', 'Europe', '5:10', '12.1 MB'],
+  ['Sandstorm', 'Darude', '3:45', '8.8 MB'],
+  ['Pump It Up', 'Danzel', '3:37', '8.5 MB'],
+  ['Eye of the Tiger', 'Survivor', '4:05', '9.6 MB'],
+  ['Mr. Brightside', 'The Killers', '3:42', '8.7 MB'],
+  ['Blinding Lights', 'The Weeknd', '3:20', '7.8 MB'],
+  ['Levels', 'Avicii', '3:19', '7.8 MB'],
+  ['Seven Nation Army', 'The White Stripes', '3:51', '9.0 MB'],
+  ['Uptown Funk', 'Mark Ronson ft. Bruno Mars', '4:30', '10.5 MB'],
+  ['Bohemian Rhapsody', 'Queen', '5:55', '13.8 MB'],
+]; // sums to 96.6 MB
+const TOTAL = '96.6 MB';
 
 // ---------- beat sheet (local seconds) ----------
 const B = {
@@ -45,7 +46,7 @@ B.camA = B.chip - 0.1;               // camera push onto the card
 B.camB = B.foot + 0.55;
 const DUR = +(B.camB + 1.75).toFixed(2); // ~1.6s settled hold on the finished card
 
-const ROW_H = 36, HEAD_H = 28, FOOT_H = 64; // layout px (match yt.css)
+const ROW_H = 46, HEAD_H = 28, FOOT_H = 64; // layout px (match yt.css)
 
 let S, u, uAtt, bot, replyP, chip, chipN, wrap, card, rows = [], foot, att, attWrap, sec;
 
@@ -95,8 +96,11 @@ export default {
     chip.appendChild(chipN);
     bot.appendChild(chip);
 
-    rows = TRACKS.map(([title, dur, size], i) => {
+    rows = TRACKS.map(([title, artist, dur, size], i) => {
       const r = fileCard({ name: title, meta: `${dur} · ${size}`, kind: 'audio', action: 'Saved' });
+      const ar = document.createElement('i'); // artist line between title and meta
+      ar.className = 'yt-artist'; ar.textContent = artist;
+      const t = r.querySelector('.sbx-file-t'); t.insertBefore(ar, t.querySelector('small'));
       r.classList.add('yt-row');
       const n = document.createElement('span');
       n.className = 'yt-num';
@@ -111,11 +115,11 @@ export default {
     const grid = document.createElement('div'); grid.className = 'yt-grid';
     grid.append(colL, colR);
 
-    card = cardGroup(`${YT()}<span class="yt-h-t">10 videos <i>→</i> audio</span><span class="sbx-badge">mp3</span><span class="yt-h-r">10 files · 42 MB</span>`, [grid]);
+    card = cardGroup(`${YT()}<span class="yt-h-t">10 videos <i>→</i> audio</span><span class="sbx-badge">mp3</span><span class="yt-h-r">10 files · ${TOTAL}</span>`, [grid]);
     card.classList.add('yt-card');
     foot = document.createElement('div');
     foot.className = 'yt-foot';
-    foot.innerHTML = `<span class="yt-dl">${ICON.download}<b>Download all (.zip)</b><em>42 MB</em></span><span class="yt-saved">${ICON.folder}Saved to <code>~/Music/Superbot</code></span>`;
+    foot.innerHTML = `<span class="yt-dl">${ICON.download}<b>Download all (.zip)</b><em>${TOTAL}</em></span><span class="yt-saved">${ICON.folder}Saved to <code>~/Music/Superbot</code></span>`;
     card.appendChild(foot);
     wrap = document.createElement('div');
     wrap.className = 'yt-clip';
@@ -203,7 +207,10 @@ export default {
       const finalH = HEAD_H + 5 * ROW_H + FOOT_H + 2;
       // top edge pinned just above the reply line: the reply is fully in, the user bubble fully out
       const top = rp.y - 7 * 1.6, bottom = bx.y + finalH * 1.6;
-      const sc = L.clamp(Math.min((W * 0.9) / bx.w, (H * 0.95) / (bottom - top)), 1, 1.75);
+      // visible height: the content plus a little air, but never reaching the composer below the card
+      const compTop = L.boxIn(S.composer, S.root).y;
+      const V = L.clamp((bottom - top) / 0.95, bottom - top, compTop - top - 6);
+      const sc = L.clamp(Math.min((W * 0.9) / bx.w, H / V), 1, 1.75);
       return frame(bx.x + bx.w / 2, top + H / sc / 2, sc);
     };
     const KEYS = [ // [start, end, from, to]

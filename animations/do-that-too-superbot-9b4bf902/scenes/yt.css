@@ -36,13 +36,14 @@
 
 #s-yt .yt-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 #s-yt .yt-col + .yt-col { border-left: 1px solid #1e1e21; }
-#s-yt .yt-col .sbx-file.yt-row { height: 36px; min-height: 36px; box-sizing: border-box; padding: 0 10px 0 8px; gap: 8px; }
+#s-yt .yt-col .sbx-file.yt-row { height: 46px; min-height: 46px; box-sizing: border-box; padding: 0 10px 0 8px; gap: 8px; }
 #s-yt .yt-col .sbx-file.yt-row + .sbx-file.yt-row { border-top: 1px solid #1a1a1c; }
 #s-yt .yt-num { width: 15px; flex: none; text-align: right; color: #6e6e73; font: 600 9.5px/13px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
 #s-yt .yt-row .sbx-file-ic { width: 24px; height: 24px; }
 #s-yt .yt-row .sbx-file-t { min-width: 0; flex: 1 1 auto; }
 #s-yt .yt-row .sbx-file-t b { font-size: 11.5px; line-height: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-#s-yt .yt-row .sbx-file-t small { font-size: 9.5px; line-height: 13px; white-space: nowrap; }
+#s-yt .yt-row .sbx-file-t small { font-size: 9.5px; line-height: 12px; white-space: nowrap; }
+#s-yt .yt-row .yt-artist { display: block; font: 500 10px/13px var(--ui, Inter, system-ui); font-style: normal; color: #aeaeb2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #s-yt .yt-row .sbx-file-act { flex: none; transform-origin: 50% 50%; }
 
 #s-yt .yt-foot { height: 64px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 12px; border-top: 1px solid #1e1e21; }

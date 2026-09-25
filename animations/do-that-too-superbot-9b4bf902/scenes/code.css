@@ -1,14 +1,14 @@
-/* scenes/code.css: every rule scoped under #s-code. Sizes are window layout px (the .sbx is scaled 1.6x). */
+/* scenes/code.css: every rule scoped under #s-code. Sizes are window layout px (the .sbx is scaled 1.6x).
+   Hub chat only: the thread is bottom-anchored on the composer; cards + the GitHub authorize sheet. */
 #s-code .oct { width: 12px; height: 12px; fill: currentColor; flex: none; }
 
 /* ---- chat thread: flat grow-in items, gaps owned by the wrappers ---- */
 #s-code .sbx .ch-feed-in { gap: 0; top: auto; bottom: 0; }
+#s-code .cd-g .ch-user { margin: 0; }
 #s-code .cd-g { overflow: hidden; }
 #s-code .cd-g > * { margin: 0; }
 #s-code .cd-g .ch-bot p { margin: 0; }
 #s-code .cd-g .ch-tool { margin: 0; }
-#s-code .pane-head em.cd-br { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 10.5px; color: #c9c9cf; }
-#s-code .pane-head em.cd-br .oct { width: 11px; height: 11px; color: #8b8b92; }
 
 /* GitHub connect card */
 #s-code .cd-gh { display: grid; perspective: 700px; }
@@ -45,70 +45,6 @@
   background: #161b22; box-shadow: inset 0 0 0 1px #30363d; font-size: 10.5px; color: #e6edf3; }
 #s-code .cd-ck .cd-dot { position: absolute; left: 9px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: #d29922; }
 #s-code .cd-ck .okc { position: absolute; left: 7px; top: 5px; width: 12px; height: 12px; color: #3fb950; }
-
-/* ---- editor (VS Code Dark Modern / Cursor dark) ---- */
-#s-code .sbx .pv-body.cd-body { background: #1f1f1f; }
-#s-code .cd-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: #181818; }
-#s-code .cd-empty-gh { width: 42px; height: 42px; color: #3c3c3c; }
-#s-code .cd-empty-gh .gh { width: 42px; height: 42px; }
-#s-code .cd-empty b { font-size: 12px; font-weight: 500; color: #8b8b8b; }
-#s-code .cd-prog { width: 150px; height: 3px; border-radius: 3px; background: #2b2b2b; overflow: hidden; }
-#s-code .cd-prog i { display: block; height: 100%; background: #0078d4; transform-origin: 0 50%; }
-#s-code .cd-ed { position: absolute; inset: 0; display: flex; flex-direction: column; background: #1f1f1f; font-family: var(--font-mono); }
-
-#s-code .cd-tabs { flex: none; display: flex; height: 30px; background: #181818; border-bottom: 1px solid #2b2b2b; }
-#s-code .cd-tab { position: relative; display: flex; align-items: center; gap: 6px; padding: 0 10px 0 11px; overflow: hidden; white-space: nowrap;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 11px; color: #9d9d9d; background: #181818;
-  border-right: 1px solid #2b2b2b; }
-#s-code .cd-tab.t2 { max-width: 0; }
-#s-code .cd-tab em { font-style: normal; color: transparent; font-size: 12px; }
-#s-code .cd-tab.on { background: #1f1f1f; color: #ffffff; margin-bottom: -1px; }
-#s-code .cd-tab.on::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: #0078d4; }
-#s-code .cd-tab.on em { color: #cccccc; }
-#s-code .cd-tabs-fill { flex: 1; }
-#s-code .cd-ts { font-style: normal; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 8px; font-weight: 800; color: #3178c6; letter-spacing: -.2px; }
-#s-code .cd-crumbs { flex: none; position: relative; height: 22px; }
-#s-code .cd-crumb { position: absolute; inset: 0; display: flex; align-items: center; gap: 5px; padding: 0 14px; font-size: 10px; color: #a9a9a9;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-#s-code .cd-crumb b { color: #6e6e6e; font-weight: 400; }
-#s-code .cd-crumb .k-fn, #s-code .cd-crumb .k-var { font-family: var(--font-mono); font-size: 10px; }
-
-#s-code .cd-code { position: relative; flex: 1; min-height: 0; overflow: hidden; }
-#s-code .cd-file { position: absolute; inset: 0; padding-top: 2px; }
-#s-code .cd-ln { position: relative; display: flex; align-items: center; height: 16px; overflow: hidden; font-size: 10.5px; line-height: 16px;
-  white-space: pre; color: #cccccc; --red: 0; --grow: 1; }
-#s-code .cd-no { flex: none; width: 34px; padding-right: 4px; text-align: right; color: #6e7681; font-size: 10px; }
-#s-code .cd-mk { flex: none; width: 16px; text-align: center; font-weight: 700; }
-#s-code .cd-tx { flex: 1; min-width: 0; }
-#s-code .cd-ln.kd { background: rgba(255, 35, 45, calc(.24 * var(--red))); }
-#s-code .cd-ln.kd .cd-no { color: color-mix(in srgb, #f85149 calc(var(--red) * 100%), #6e7681); }
-#s-code .cd-ln.kd .cd-mk { color: #f85149; opacity: var(--red); }
-#s-code .cd-ln.kd::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #f85149; opacity: var(--red); }
-#s-code .cd-ln.kd .cd-tx { opacity: calc(1 - .3 * var(--red)); text-decoration: line-through; text-decoration-color: rgba(248, 81, 73, calc(.75 * var(--red))); text-decoration-thickness: 1px; }
-#s-code .cd-ln.ka { background: linear-gradient(90deg, rgba(46,160,67,.22) calc(var(--grow) * 100%), transparent 0); }
-#s-code .cd-ln.ka .cd-mk { color: #3fb950; }
-#s-code .cd-ln.ka .cd-no { color: #8fd49c; }
-#s-code .cd-ln.ka::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #3fb950; }
-#s-code .cd-ln.cur { box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
-#s-code .cd-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #aeafad; }
-
-/* syntax: Dark Modern */
-#s-code .cd-tx i { font-style: normal; }
-#s-code .k-ctl { color: #c586c0; } #s-code .k-sto { color: #569cd6; } #s-code .k-fn { color: #dcdcaa; }
-#s-code .k-typ { color: #4ec9b0; } #s-code .k-prop, #s-code .k-var { color: #9cdcfe; } #s-code .k-str { color: #ce9178; }
-#s-code .k-num { color: #b5cea8; } #s-code .k-com { color: #6a9955; } #s-code .k-op { color: #d4d4d4; }
-
-/* terminal strip */
-#s-code .cd-term { flex: none; border-top: 1px solid #2b2b2b; background: #181818; }
-#s-code .cd-term-h { display: flex; align-items: center; gap: 14px; height: 22px; padding: 0 14px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 9px; letter-spacing: .4px; color: #8b8b8b; }
-#s-code .cd-term-h b { color: #e7e7e7; font-weight: 500; box-shadow: inset 0 -1px 0 #0078d4; line-height: 21px; }
-#s-code .cd-term-h em { margin-left: auto; font-style: normal; letter-spacing: 0; }
-#s-code .cd-term-b { padding: 3px 14px 16px; }
-#s-code .cd-tl { font-size: 10px; line-height: 15px; color: #cccccc; white-space: pre; }
-#s-code .cd-tl .tp { color: #3b8eea; } #s-code .cd-tl .tb { color: #c586c0; } #s-code .cd-tl .td { color: #8b8b8b; }
-#s-code .cd-tl .tok { color: #3fb950; } #s-code .cd-tl .tm { color: #8b8b8b; }
-#s-code .cd-tl .caret { background: #cccccc; }
 
 /* ---- GitHub authorize sheet (GitHub dark) ---- */
 #s-code .cd-auth { position: absolute; inset: 0; z-index: 30; pointer-events: none; }
@@ -147,6 +83,3 @@
 #s-code .cd-sheet p { margin: 9px 0 0; text-align: center; font-size: 9.5px; color: #9198a1; }
 #s-code .cd-sheet p b { color: #c9d1d9; font-weight: 600; }
 
-/* chat recedes while the editor is framed */
-#s-code .sbx .pane.chatp { position: relative; }
-#s-code .cd-veil { position: absolute; inset: 0; z-index: 20; background: #050506; opacity: 0; pointer-events: none; border-radius: inherit; }

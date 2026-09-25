@@ -26,13 +26,32 @@ const B = {
   iconIn: 1.3,                 // app icon pops onto the home screen, waiting/loading
   pieA: 1.45, pieB: 3.62,      // install progress fills across the chips
   launch: 3.8,                 // phoneT = 0 (the app's own icon launch)
-  rate: 1.15,                  // phone clock speed
   doneAt: 4.05,                // final chat line streams (behind the push)
   cardAt: 4.55,
   pushA: 2.85, pushB: 4.0,     // camera push from the chat+phone framing into the phone
-  pullA: 11.35, pullB: 12.4,   // pull back to the chat+phone framing after "Habit Hero is ready"
-  dur: 13.0,
+  // pullA / pullB / dur are derived below from the phone clock (sheet settled + 0.15s)
 };
+const AD_SETTLED = 8.5;        // app beat: "Habit Hero is ready" sheet has landed
+
+// Variable phone clock: rate (app-seconds per scene-second) as a function of app time, blended smoothly.
+// 1.3x through launch + typing (typing stays readable), 1.9x through the build checklist and preview,
+// 1.5x through the streak tap and the ready sheet. Integrated once into a lookup table (pure).
+const PH_RATE = (p) => {
+  const sm = (a, b, x) => { const k = clamp((x - a) / (b - a)); return k * k * (3 - 2 * k); };
+  return 1.3 + (1.9 - 1.3) * sm(2.95, 3.3, p) + (1.5 - 1.9) * sm(6.8, 7.1, p);
+};
+const PH_DT = 1 / 600, PH_TAB = [0];
+while (PH_TAB[PH_TAB.length - 1] < 9.8) { const pv = PH_TAB[PH_TAB.length - 1]; PH_TAB.push(pv + PH_RATE(pv) * PH_DT); }
+const phoneClock = (u) => {
+  if (u <= 0) return 0;
+  const i = u / PH_DT, k = Math.floor(i);
+  if (k >= PH_TAB.length - 1) return 9.8;
+  return Math.min(9.8, lerp(PH_TAB[k], PH_TAB[k + 1], i - k));
+};
+const U_SETTLED = PH_TAB.findIndex((v) => v >= AD_SETTLED) * PH_DT;   // scene-seconds from launch to the settled sheet
+B.pullA = Math.round((B.launch + U_SETTLED + 0.15) * 100) / 100;      // pull back to the chat+phone framing
+B.pullB = Math.round((B.pullA + 1.05) * 100) / 100;
+B.dur = Math.round((B.pullB + 0.5) * 100) / 100;
 const AD_DUR = 9.8;
 const PH_W = 432, PH_H = 880;          // phone design box (incl. side buttons), screen is 390x844 inside
 
@@ -276,7 +295,7 @@ function renderPhone(t) {
   const w = S.iframe.contentWindow;
   const ready = !!(w && typeof w.adRender === 'function');
   if (ready !== S.ready) { S.ready = ready; S.phone.classList.toggle('is-ready', ready); S.lastPT = NaN; }
-  const phoneT = clamp((t - B.launch) * B.rate, 0, AD_DUR);
+  const phoneT = clamp(phoneClock(t - B.launch), 0, AD_DUR);
   const pt = Math.round(phoneT * 1000) / 1000;
   if (ready && pt !== S.lastPT) { try { w.adRender(pt); S.lastPT = pt; } catch (e) { /* app not settled yet */ } }
 

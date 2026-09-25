@@ -32,7 +32,7 @@ const END_DUR = 4.4, DIP = 0.35;
 // or { html } for styled words. The last part and the logo are kept on one line (never orphan the logo).
 const B = (f) => new URL('./brand/' + f, import.meta.url).href;
 const CARDS = {
-  agents: { dur: 2.4, parts: ['All', 'your', 'agents', 'in', 'one'] },
+  agents: { dur: 2.4, parts: ['All', 'your', 'agents', { g: 'in' }, { g: 'one' }] },
   lovable: {
     dur: 2.6, parts: ['Can', 'it', 'make', 'an', 'app', 'like', { img: B('lovable-wordmark.svg'), cls: 'wm wm-lovable', alt: 'Lovable', after: '?' }],
     logo: { src: B('lovable-logo.svg'), cls: 'lg lg-lovable', alt: '' },
@@ -49,8 +49,8 @@ const CARDS = {
     dur: 2.6, parts: ['And', 'what', 'the', 'others', { html: '<span class="purple">can’t</span>' }],
     logo: { src: B('imp-1f608.svg'), cls: 'lg lg-imp', alt: '' },
   },
-  platforms: { dur: 2.3, parts: ['It’s', 'all', 'your', 'platforms', 'in', 'one'] },
-  agents2: { dur: 2.4, parts: ['With', 'all', 'your', 'agents', 'in', 'one'] },
+  platforms: { dur: 2.3, parts: ['It’s', 'all', 'your', 'platforms', { g: 'in' }, { g: 'one' }] },
+  agents2: { dur: 2.4, parts: ['With', 'all', 'your', 'agents', { g: 'in' }, { g: 'one' }] },
 };
 // card motion (seconds, local): words rise 18px + unblur 8px, outQuint .55s, staggered .06s
 // The design timings are scaled by one factor K shared by every card, chosen so the busiest card still has
@@ -65,11 +65,18 @@ function buildCard(sec, spec) {
   sec.classList.add('card');
   const line = document.createElement('p');
   line.className = 'cl';
-  const words = [];
+  const words = [], grads = [];
   const mk = (part) => {
     const w = document.createElement('span');
     w.className = 'w';
     if (typeof part === 'string') w.textContent = part;
+    else if (part.g) {
+      // gradient words: the gradient lives on an INNER span so the outer .w can carry the blur filter and
+      // the rise without fighting background-clip:text (no filter + clip on one element)
+      const gt = document.createElement('span');
+      gt.className = 'gt'; gt.textContent = part.g;
+      w.appendChild(gt); grads.push(gt);
+    }
     else if (part.html) w.innerHTML = part.html;
     else {
       const img = document.createElement('img');
@@ -94,7 +101,7 @@ function buildCard(sec, spec) {
   line.appendChild(tail);
   sec.appendChild(line);
   const land = W_IN + (words.length - 1) * W_STAG + W_DUR;
-  return { line, words, logo, land, logoAt: land + LOGO_GAP };
+  return { line, words, logo, land, logoAt: land + LOGO_GAP, grads, gm: null };
 }
 
 function renderCard(c, lt, dur) {
@@ -109,9 +116,38 @@ function renderCard(c, lt, dur) {
     c.logo.style.opacity = outCubic(clamp(f * 2.2)).toFixed(3);
     c.logo.style.transform = `scale(${lerp(0.6, 1, outBack(f)).toFixed(4)})`;
   }
+  if (c.grads.length) renderGrads(c, lt);
   const e = inOutCubic(seg(lt, dur - CARD_OUT, dur));
   c.line.style.opacity = (1 - e).toFixed(3);
   c.line.style.transform = e > 0 ? `scale(${lerp(1, 0.985, e).toFixed(4)})` : 'none';
+}
+
+// ---------- the animated brand gradient on "in one" ----------
+// Two background layers clipped to the text of each .gt span, laid out in ONE coordinate space across the
+// whole phrase (each word's layers are offset by its own left edge, so the colours run on across the space):
+//   1. a soft white shine band, sweeping left to right once, SHINE_DUR after the words land;
+//   2. the superbot storm gradient (blue -> violet -> magenta -> pink and back), a seamless tile GRAD_P px
+//      wide drifting left at GRAD_V px/s. Both positions are pure functions of lt.
+const GRAD_P = 900, GRAD_V = 110, SHINE_DELAY = 0.08, SHINE_DUR = 0.9;
+function measureGrads(c) {
+  // walk the offsetParent chain up to the line: a word mid-rise carries a transform, which makes IT the
+  // offsetParent of its .gt in Chromium, so a bare offsetLeft would read 0 during the entrance
+  const offX = (el) => { let x = 0; while (el && el !== c.line) { x += el.offsetLeft; el = el.offsetParent; } return x; };
+  const xs = c.grads.map((g) => ({ g, x: offX(g), w: g.offsetWidth }));
+  const x0 = Math.min(...xs.map((a) => a.x)), x1 = Math.max(...xs.map((a) => a.x + a.w));
+  c.gm = { items: xs.map((a) => ({ g: a.g, dx: a.x - x0 })), W: Math.max(1, x1 - x0) };
+}
+function renderGrads(c, lt) {
+  if (!c.gm) measureGrads(c);
+  const { items, W } = c.gm;
+  const drift = ((lt * GRAD_V) % GRAD_P + GRAD_P) % GRAD_P;
+  const band = W * 0.55;
+  const f = inOutCubic(seg(lt, c.land + SHINE_DELAY, c.land + SHINE_DELAY + SHINE_DUR));
+  const sx = lerp(-band, W, f); // band's left edge in phrase px
+  for (const { g, dx } of items) {
+    g.style.backgroundSize = `${band.toFixed(1)}px 100%, ${GRAD_P}px 100%`;
+    g.style.backgroundPosition = `${(sx - dx).toFixed(1)}px 0, ${(-drift - dx).toFixed(1)}px 0`;
+  }
 }
 
 // the font's cap height in px at the card size, so wordmarks / logos seat on the baseline and cap line
@@ -124,6 +160,7 @@ function measureCaps() {
     const m = cv.measureText('HIKMN');
     const cap = m.actualBoundingBoxAscent || parseFloat(cs.fontSize) * 0.71;
     s.card.line.style.setProperty('--cap', cap.toFixed(2) + 'px');
+    s.card.gm = null; // re-measure the gradient phrase at the new metrics
   }
 }
 

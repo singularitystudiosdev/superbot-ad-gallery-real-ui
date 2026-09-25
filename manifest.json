@@ -112,6 +112,22 @@
     "thumb": "assets/shots/just-works-standing-desk-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-waiver-night-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Waiver night, three leagues",
+    "src": "animations/just-works-waiver-night-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-waiver-night-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-waiver-night-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Waiver night, ChatGPT vs Superbot",
+    "src": "animations/just-works-waiver-night-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-waiver-night-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

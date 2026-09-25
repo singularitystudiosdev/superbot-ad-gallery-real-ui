@@ -1,0 +1,39 @@
+CREDITS for just-works-waiver-night-superbot-42aac446
+
+PHOTOS
+Every photo below is a sourced photo of a real football stadium, crowd or field, fetched from Wikimedia
+Commons, cropped to the size this ad needs and re-encoded to JPEG. No product art and no illustration was
+drawn for this ad. No photo is of an identifiable player, and no real player is named anywhere in the ad:
+the player names in data.js are invented for this spot.
+
+img/hero.jpg | https://commons.wikimedia.org/wiki/File:Autzen_Stadium_at_night.jpg | Ray Terrill | CC BY-SA 2.0 (crop 1920x912 -> 1600x760, re-encoded)
+img/strip.jpg | https://commons.wikimedia.org/wiki/File:Scott_Stadium_panoramic_2013_night.jpg | B (Wikimedia Commons) | CC BY-SA 4.0 (letterbox cropped off, 3840x960 -> 1280x320, re-encoded)
+img/stands.jpg | https://commons.wikimedia.org/wiki/File:Stripe_out_Game_at_Bill_Snyder_Family_Stadium_01.jpg | Dawson Wagner | CC BY 4.0 (crop 1728x1080 -> 640x400, re-encoded)
+img/field.jpg | https://commons.wikimedia.org/wiki/File:Football_players_on_field_(Unsplash).jpg | Nathan Shively (Unsplash) | CC0 1.0 (crop 1920x1080 -> 960x540, re-encoded)
+img/goal.jpg | https://commons.wikimedia.org/wiki/File:Angelo_State_vs._Texas_A%26M%E2%80%93Commerce_football_2015_22_(A%26M%E2%80%93Commerce_field_goal).jpg | Michael Barera | CC BY-SA 4.0 (crop 1920x1200 -> 640x400, re-encoded)
+
+The CC BY and CC BY-SA photos above keep their licence: reuse of this folder must carry the same
+attribution and the same licence for those five files. There is no other photo asset in this folder: the
+player rows, the boards and the icons are typography and inline SVG drawn in site.js/site.css, and the
+invented faces on this page are initials-free text, not pictures of anyone.
+
+PLATFORM MARKS (fetched, not redrawn)
+Each mark is the platform's own icon, embedded as a base64 image inside a small self contained SVG under
+brand/, so the file is one asset the page can point at:
+brand/espn.svg | https://www.espn.com/apple-touch-icon.png | ESPN | official apple touch icon (152x152, wrapped at 64x64)
+brand/yahoo.svg | https://www.google.com/s2/favicons?domain=fantasy.yahoo.com&sz=128 | Yahoo | official favicon
+brand/sleeper.svg | https://www.google.com/s2/favicons?domain=sleeper.com&sz=128 | Sleeper | official favicon (48x48, wrapped at 64x64)
+brand/nfl.svg | https://www.google.com/s2/favicons?domain=nfl.com&sz=128 | NFL | official favicon
+brand/app.svg | https://api.iconify.design/mdi/football.svg?color=%2335d68b | Pictogrammers (Material Design Icons) | Apache License 2.0 (the app's own tab icon; a football glyph, no club or league mark in it)
+
+The three league platforms and the injury wire are shown as sources of data, the way a search tool lists
+where it read. Their marks stay their own; nothing in this folder claims any of them as a partner.
+
+FONTS
+None downloaded. The page uses the system sans stack, so no font files ship with this spot.
+
+TEXT
+Every name of a player, a club, a league and an opponent on this page is invented for this spot. Team
+codes (BUF, DAL, MIA and the rest) are only a shorthand for the matchup a fake lineup plays, the way a
+real fantasy line sits next to a defense it plays. No real league standings, no real player and no real
+score is quoted anywhere.

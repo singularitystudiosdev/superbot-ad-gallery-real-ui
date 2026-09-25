@@ -44,6 +44,23 @@ svg { flex: none; }
 .cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 30; pointer-events: none;
   fill: #fff; stroke: #000; stroke-width: 1.3; stroke-linejoin: round; filter: drop-shadow(0 3px 6px rgb(0 0 0 / .5)); transform-origin: 17px 11px; }
 
+/* ---------- the opt-in rescue popup (cfg.popup) ----------
+   1:1 the refusal ads' bottom-right "superbot can do it!" card: black, a cyan -> blue -> violet -> magenta
+   storm stroke, the mascot mark, and a white chat pill. scenes/gpt.js writes it only when cfg.popup is set
+   (it is the only scene that renders it), so an ad without the key has none of this markup and not one of
+   these rules matches: every existing ad renders exactly as before. Everything that moves is written per
+   frame by gpt.js - no keyframes, no transitions, no :hover. z-index 20 sits the card under .cursor (30). */
+.gpt-pop { position: absolute; right: 44px; bottom: 44px; width: max-content; padding: 20px;
+  border-radius: 24px; border: 3px solid transparent; background: linear-gradient(#000, #000) padding-box, var(--storm) border-box;
+  box-shadow: 0 0 32px rgba(43,107,255,.32), 0 0 64px rgba(192,38,211,.22), 0 30px 70px rgba(0,0,0,.5);
+  opacity: 0; transform-origin: 50% 100%; isolation: isolate; z-index: 20; font-family: var(--ui); }
+.gpt-pop-h { display: flex; align-items: center; gap: 12px; white-space: nowrap; font-size: 29px;
+  font-weight: 800; letter-spacing: -.02em; color: #fff; }
+.gpt-pop-h img { width: 34px; height: 34px; }
+.gpt-pop-b { position: relative; margin: 16px 0 0; display: block; width: 100%; padding: 12px 20px;
+  border-radius: 16px; background: #fff; color: #000; font-size: 22px; font-weight: 700; text-align: center;
+  transform-origin: 50% 50%; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+
 /* a scene that threw: a quiet placeholder so the spot keeps playing */
 .scene-err { position: absolute; inset: 0; display: grid; place-items: center; font: 600 28px/1.3 var(--font-mono); color: #5c5f68; }
 

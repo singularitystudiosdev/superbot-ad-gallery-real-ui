@@ -1,0 +1,678 @@
+/* site.css - superbot.app/p/waiver-night, "Waiver Night".
+   The page the Superbot hands back: a waiver night across three leagues, read in the Chrome beat.
+   Two states come from the kit and nowhere else: .is-hover on a claim row and .is-active on a league
+   tab. The Sleeper tab's .is-active swaps the whole league panel through :has() + sibling rules below,
+   so no JS runs on the click and every frame is a pure function of the plan. No CSS animations, no
+   transitions: the kit draws every moving thing itself. */
+
+.site-waiver-night {
+  --wn-bg: #0a0f14;
+  --wn-bg2: #0d141b;
+  --wn-panel: #131a21;
+  --wn-panel2: #182129;
+  --wn-bar: #0c1218;
+  --wn-line: rgba(255, 255, 255, 0.07);
+  --wn-line2: rgba(255, 255, 255, 0.13);
+  --wn-ink: #e9eef3;
+  --wn-dim: #8b97a4;
+  --wn-dim2: #64707d;
+  --wn-green: #35d68b;
+  --wn-green-soft: rgba(53, 214, 139, 0.13);
+  --wn-amber: #ffb83d;
+  --wn-amber-soft: rgba(255, 184, 61, 0.13);
+  --wn-red: #ff6a76;
+  --wn-blue: #57a9ff;
+
+  width: 100%;
+  min-width: 0;
+  background: var(--wn-bg);
+  color: var(--wn-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-waiver-night *,
+.site-waiver-night *::before,
+.site-waiver-night *::after { box-sizing: border-box; }
+
+.site-waiver-night p,
+.site-waiver-night h1,
+.site-waiver-night h2,
+.site-waiver-night h3,
+.site-waiver-night ul,
+.site-waiver-night li,
+.site-waiver-night figure { margin: 0; padding: 0; }
+
+.site-waiver-night ul { list-style: none; }
+.site-waiver-night img { display: block; max-width: 100%; }
+.site-waiver-night b, .site-waiver-night em, .site-waiver-night i { font-style: normal; }
+.site-waiver-night b { font-weight: 650; }
+
+.site-waiver-night .wn-clock,
+.site-waiver-night .wn-hstat b,
+.site-waiver-night .wn-total b,
+.site-waiver-night .wn-del b,
+.site-waiver-night .wn-lproj,
+.site-waiver-night .wn-crowv b,
+.site-waiver-night .wn-bros b,
+.site-waiver-night .wn-brank,
+.site-waiver-night .wn-srcrow-c,
+.site-waiver-night .wn-boardn,
+.site-waiver-night .wn-club i { font-variant-numeric: tabular-nums; }
+
+/* the glyph inside a text run: an inline SVG sized to the line it sits in */
+.site-waiver-night .wn-ic { width: 13px; height: 13px; flex: none; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it, so every scroll key lands below) ---------- */
+.site-waiver-night .wn-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--wn-bg);
+  border-bottom: 1px solid var(--wn-line);
+}
+
+.site-waiver-night .wn-toprow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 11px 22px 9px;
+}
+
+.site-waiver-night .wn-brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+
+.site-waiver-night .wn-mark {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 8px;
+  background: linear-gradient(150deg, #35d68b, #17925c);
+  color: #04180f;
+}
+.site-waiver-night .wn-mark svg { width: 17px; height: 17px; stroke-width: 1.7; }
+
+.site-waiver-night .wn-wordmark { font-size: 14.5px; font-weight: 650; letter-spacing: -0.02em; }
+.site-waiver-night .wn-wordmark em { color: var(--wn-dim); font-weight: 500; }
+
+.site-waiver-night .wn-week {
+  padding: 2.5px 7px;
+  border: 1px solid var(--wn-line2);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wn-dim);
+}
+
+.site-waiver-night .wn-status { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.site-waiver-night .wn-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--wn-green);
+  box-shadow: 0 0 0 3px var(--wn-green-soft);
+}
+.site-waiver-night .wn-status b { font-size: 12px; }
+.site-waiver-night .wn-sync { font-size: 11.5px; color: var(--wn-dim); }
+
+.site-waiver-night .wn-clockbox {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  flex: 0 0 auto;
+  padding: 5px 11px;
+  border: 1px solid var(--wn-line2);
+  border-radius: 9px;
+  background: var(--wn-panel);
+}
+.site-waiver-night .wn-clockk { font-size: 11px; color: var(--wn-dim); }
+.site-waiver-night .wn-clock { font-size: 15px; font-weight: 650; color: var(--wn-amber); }
+
+/* league tabs: the click target lives here, in the sticky bar, so it is on screen from the first scroll */
+.site-waiver-night .wn-tabbar {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  padding: 0 22px;
+  border-top: 1px solid var(--wn-line);
+}
+
+.site-waiver-night .wn-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px 10px;
+  border-bottom: 2px solid transparent;
+  color: var(--wn-dim);
+}
+.site-waiver-night .wn-tab.is-active { color: var(--wn-ink); border-bottom-color: var(--wn-green); }
+.site-waiver-night .wn-tab-t { display: flex; flex-direction: column; gap: 1px; }
+.site-waiver-night .wn-tab-t b { font-size: 12.5px; }
+.site-waiver-night .wn-tab-t small { font-size: 10.5px; color: var(--wn-dim2); }
+.site-waiver-night .wn-tab.is-active .wn-tab-t small { color: var(--wn-dim); }
+
+.site-waiver-night .wn-tabmeta {
+  margin-left: auto;
+  align-self: center;
+  font-size: 11px;
+  color: var(--wn-dim2);
+  white-space: nowrap;
+}
+
+.site-waiver-night .wn-scanline {
+  display: block;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(53, 214, 139, 0.1), var(--wn-green));
+}
+
+.site-waiver-night .wn-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  flex: none;
+  object-fit: contain;
+  background: #fff;
+  padding: 2px;
+}
+.site-waiver-night .wn-logo--sm { width: 17px; height: 17px; padding: 1.5px; }
+
+/* ---------- hero ---------- */
+.site-waiver-night .wn-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 34px 26px 30px;
+}
+
+.site-waiver-night .wn-heroimg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+.site-waiver-night .wn-heroshade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(92deg, rgba(6, 10, 14, 0.96) 0%, rgba(6, 10, 14, 0.86) 42%, rgba(6, 10, 14, 0.42) 72%, rgba(6, 10, 14, 0.62) 100%),
+    linear-gradient(180deg, rgba(6, 10, 14, 0.55), rgba(10, 15, 20, 0.92));
+}
+
+.site-waiver-night .wn-heroin { position: relative; display: flex; flex-direction: column; gap: 11px; max-width: 760px; }
+
+.site-waiver-night .wn-herotag {
+  align-self: flex-start;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--wn-green-soft);
+  color: var(--wn-green);
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.site-waiver-night .wn-h1 { font-size: 33px; font-weight: 680; line-height: 1.08; letter-spacing: -0.035em; }
+.site-waiver-night .wn-lede { font-size: 13.5px; line-height: 1.5; color: #b6c2cd; max-width: 620px; }
+
+.site-waiver-night .wn-herostats { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 4px; }
+.site-waiver-night .wn-hstat {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 5px 10px;
+  border: 1px solid var(--wn-line2);
+  border-radius: 8px;
+  background: rgba(10, 15, 20, 0.6);
+}
+.site-waiver-night .wn-hstat b { font-size: 14px; }
+.site-waiver-night .wn-hstat small { font-size: 11px; color: var(--wn-dim); }
+
+.site-waiver-night .wn-clockcard {
+  position: absolute;
+  right: 26px;
+  top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 214px;
+  padding: 14px 16px 13px;
+  border: 1px solid var(--wn-line2);
+  border-radius: 13px;
+  background: rgba(11, 16, 22, 0.88);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.42);
+}
+.site-waiver-night .wn-clockcard-k {
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--wn-dim2);
+}
+.site-waiver-night .wn-clock--big { font-size: 34px; font-weight: 660; line-height: 1; letter-spacing: -0.02em; color: var(--wn-ink); }
+.site-waiver-night .wn-clockcard-s { font-size: 12px; color: var(--wn-dim); }
+.site-waiver-night .wn-lockbar {
+  display: block;
+  height: 4px;
+  margin-top: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+.site-waiver-night .wn-clockfill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--wn-green), #9ff0c4);
+}
+.site-waiver-night .wn-clockcard-f { font-size: 11px; color: var(--wn-dim2); }
+
+/* ---------- section heads ---------- */
+.site-waiver-night .wn-claims,
+.site-waiver-night .wn-lineup,
+.site-waiver-night .wn-kickoff { padding: 24px 26px 6px; }
+
+.site-waiver-night .wn-secthead {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--wn-line);
+  margin-bottom: 15px;
+}
+.site-waiver-night .wn-secthead > .wn-dek { max-width: 720px; }
+.site-waiver-night .wn-h2 { font-size: 20px; font-weight: 660; letter-spacing: -0.02em; }
+.site-waiver-night .wn-h3 { font-size: 14px; font-weight: 650; }
+.site-waiver-night .wn-dek { font-size: 12px; color: var(--wn-dim); }
+.site-waiver-night .wn-sectmeta {
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border: 1px solid var(--wn-line2);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--wn-dim);
+  white-space: nowrap;
+}
+
+/* ---------- claim card + board ---------- */
+.site-waiver-night .wn-claimgrid,
+.site-waiver-night .wn-lineupgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.site-waiver-night .wn-lineupgrid { grid-template-columns: minmax(0, 1fr); }
+.site-waiver-night .wn-panel { min-width: 0; display: none; }
+.site-waiver-night .wn-panel--1 { display: block; }
+
+/* the click: the Sleeper tab goes .is-active, its panel comes in and league 1's goes out. Both the claim
+   panels and the lineup panels follow from the same header state, and the tab's own highlight moves too. */
+.site-waiver-night .wn-top:has(.wn-tab--3.is-active) ~ .wn-live .wn-panel--1 { display: none; }
+.site-waiver-night .wn-top:has(.wn-tab--3.is-active) ~ .wn-live .wn-panel--3 { display: block; }
+.site-waiver-night .wn-top:has(.wn-tab--3.is-active) .wn-tab--1 {
+  color: var(--wn-dim);
+  border-bottom-color: transparent;
+}
+
+.site-waiver-night .wn-claimcard,
+.site-waiver-night .wn-lineupcard,
+.site-waiver-night .wn-board,
+.site-waiver-night .wn-match {
+  border: 1px solid var(--wn-line);
+  border-radius: 13px;
+  background: linear-gradient(180deg, var(--wn-panel2), var(--wn-panel));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.site-waiver-night .wn-claimhead,
+.site-waiver-night .wn-lineuphead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--wn-line);
+  background: rgba(10, 15, 20, 0.5);
+}
+.site-waiver-night .wn-claimwho,
+.site-waiver-night .wn-lineupwho { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.site-waiver-night .wn-claimwho b,
+.site-waiver-night .wn-lineupwho b { font-size: 13px; }
+.site-waiver-night .wn-claimwho small,
+.site-waiver-night .wn-lineupwho small { font-size: 11px; color: var(--wn-dim); }
+
+.site-waiver-night .wn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--wn-green-soft);
+  color: var(--wn-green);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.site-waiver-night .wn-crows { display: flex; flex-direction: column; }
+.site-waiver-night .wn-crow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--wn-line);
+}
+.site-waiver-night .wn-crow.is-hover {
+  background: rgba(53, 214, 139, 0.07);
+  box-shadow: inset 2px 0 0 var(--wn-green);
+}
+.site-waiver-night .wn-crowk {
+  flex: 0 0 auto;
+  width: 40px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--wn-dim2);
+}
+.site-waiver-night .wn-crow--add .wn-crowk { color: var(--wn-green); }
+.site-waiver-night .wn-crow--drop .wn-crowk { color: var(--wn-red); }
+.site-waiver-night .wn-crow--bid .wn-crowk { color: var(--wn-amber); }
+
+.site-waiver-night .wn-pos {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  padding: 2px 4px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.07);
+  color: #c7d2dc;
+}
+.site-waiver-night .wn-pos--qb { background: rgba(255, 106, 118, 0.16); color: #ff9aa3; }
+.site-waiver-night .wn-pos--rb { background: rgba(53, 214, 139, 0.16); color: #77e6b3; }
+.site-waiver-night .wn-pos--wr { background: rgba(87, 169, 255, 0.16); color: #93c6ff; }
+.site-waiver-night .wn-pos--te { background: rgba(255, 184, 61, 0.16); color: #ffd189; }
+.site-waiver-night .wn-pos--k { background: rgba(190, 140, 255, 0.16); color: #cbb0ff; }
+.site-waiver-night .wn-pos--dst { background: rgba(255, 255, 255, 0.1); color: #ccd6de; }
+
+.site-waiver-night .wn-crown { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1 1 auto; }
+.site-waiver-night .wn-crown b { font-size: 13px; }
+.site-waiver-night .wn-crown small { font-size: 11px; color: var(--wn-dim); }
+.site-waiver-night .wn-crowv {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+.site-waiver-night .wn-crowv b { font-size: 15px; }
+.site-waiver-night .wn-crowv small { font-size: 10px; color: var(--wn-dim2); }
+.site-waiver-night .wn-crow--drop .wn-crowv b { color: var(--wn-dim); }
+
+.site-waiver-night .wn-bid {
+  flex: 0 0 auto;
+  width: 84px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+.site-waiver-night .wn-bidfill { display: block; height: 100%; background: var(--wn-amber); }
+.site-waiver-night .wn-crow--bid .wn-crowv b { color: var(--wn-amber); font-size: 13px; }
+
+.site-waiver-night .wn-claimwhy { padding: 11px 14px; font-size: 12px; line-height: 1.5; color: #a3aeba; }
+.site-waiver-night .wn-claimfoot,
+.site-waiver-night .wn-linefoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--wn-line);
+  background: rgba(10, 15, 20, 0.45);
+  font-size: 11.5px;
+  color: var(--wn-dim);
+}
+.site-waiver-night .wn-claimlock { display: inline-flex; align-items: center; gap: 5px; color: var(--wn-amber); }
+
+/* ---------- free agent board ---------- */
+.site-waiver-night .wn-boardhead {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--wn-line);
+  background: rgba(10, 15, 20, 0.5);
+}
+.site-waiver-night .wn-boardt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.site-waiver-night .wn-boardt b { font-size: 13px; }
+.site-waiver-night .wn-boardt small { font-size: 11px; color: var(--wn-dim); }
+.site-waiver-night .wn-boardn { margin-left: auto; flex: 0 0 auto; font-size: 11.5px; color: var(--wn-green); }
+
+.site-waiver-night .wn-brow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--wn-line);
+}
+.site-waiver-night .wn-brow--1,
+.site-waiver-night .wn-brow--2,
+.site-waiver-night .wn-brow--3 { background: rgba(53, 214, 139, 0.05); }
+.site-waiver-night .wn-brank { flex: 0 0 auto; width: 16px; font-size: 11.5px; color: var(--wn-dim2); }
+.site-waiver-night .wn-brow--1 .wn-brank { color: var(--wn-green); font-weight: 700; }
+.site-waiver-night .wn-bname { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1 1 auto; }
+.site-waiver-night .wn-bname b { font-size: 12.5px; }
+.site-waiver-night .wn-bname small { font-size: 10.5px; color: var(--wn-dim2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.site-waiver-night .wn-bros { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; }
+.site-waiver-night .wn-bros b { font-size: 13px; }
+.site-waiver-night .wn-bros small { font-size: 9.5px; color: var(--wn-dim2); }
+.site-waiver-night .wn-btrend {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: 46px;
+  justify-content: flex-end;
+  font-size: 11.5px;
+  font-weight: 650;
+}
+.site-waiver-night .wn-btrend .wn-ic { width: 11px; height: 11px; }
+.site-waiver-night .wn-btrend--up { color: var(--wn-green); }
+.site-waiver-night .wn-btrend--down { color: var(--wn-red); }
+
+.site-waiver-night .wn-boardfoot {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 14px;
+  font-size: 11px;
+  color: var(--wn-dim2);
+}
+
+/* ---------- lineup ---------- */
+.site-waiver-night .wn-lpair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.site-waiver-night .wn-total,
+.site-waiver-night .wn-del { margin-left: auto; flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; }
+.site-waiver-night .wn-total { margin-left: auto; }
+.site-waiver-night .wn-total b { font-size: 21px; letter-spacing: -0.02em; }
+.site-waiver-night .wn-total small,
+.site-waiver-night .wn-del small { font-size: 10px; color: var(--wn-dim2); }
+.site-waiver-night .wn-del { margin-left: 12px; }
+.site-waiver-night .wn-del b { font-size: 14px; color: var(--wn-green); }
+
+.site-waiver-night .wn-ltable { display: flex; flex-direction: column; }
+.site-waiver-night .wn-lrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--wn-line);
+}
+.site-waiver-night .wn-lrow--head { padding: 6px 14px; background: rgba(10, 15, 20, 0.45); }
+.site-waiver-night .wn-lrow--head span { font-size: 10px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wn-dim2); }
+.site-waiver-night .wn-lrow--moved { background: rgba(53, 214, 139, 0.06); }
+.site-waiver-night .wn-lslot { flex: 0 0 auto; width: 40px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--wn-dim); }
+.site-waiver-night .wn-lname { display: flex; align-items: center; gap: 7px; min-width: 0; flex: 1 1 auto; }
+.site-waiver-night .wn-lname b { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-waiver-night .wn-lname small { font-size: 10.5px; color: var(--wn-dim2); }
+.site-waiver-night .wn-moved {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--wn-green-soft);
+  color: var(--wn-green);
+  font-size: 10px;
+  font-weight: 650;
+}
+.site-waiver-night .wn-moved .wn-ic { width: 10px; height: 10px; }
+.site-waiver-night .wn-lopp { flex: 0 0 auto; width: 40px; font-size: 11.5px; color: var(--wn-dim); }
+.site-waiver-night .wn-lproj { flex: 0 0 auto; width: 44px; text-align: right; font-size: 12.5px; font-weight: 650; }
+
+.site-waiver-night .wn-lsum {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px;
+  font-size: 11.5px;
+  color: var(--wn-dim);
+}
+.site-waiver-night .wn-lsum-d { margin-left: auto; color: var(--wn-green); }
+.site-waiver-night .wn-linefoot { justify-content: center; color: var(--wn-green); font-weight: 600; }
+.site-waiver-night .wn-linefoot .wn-ic { width: 14px; height: 14px; }
+
+/* ---------- matchup ---------- */
+.site-waiver-night .wn-matchimg { width: 100%; height: 132px; object-fit: cover; object-position: 50% 68%; }
+.site-waiver-night .wn-matchb { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px 14px; }
+.site-waiver-night .wn-matchk { font-size: 10.5px; font-weight: 650; letter-spacing: 0.09em; text-transform: uppercase; color: var(--wn-dim2); }
+.site-waiver-night .wn-matchrow { display: flex; align-items: center; gap: 10px; }
+.site-waiver-night .wn-club { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1 1 0; }
+.site-waiver-night .wn-club--r { align-items: flex-end; text-align: right; }
+.site-waiver-night .wn-club b { font-size: 12.5px; }
+.site-waiver-night .wn-club i { font-size: 15px; font-weight: 650; }
+.site-waiver-night .wn-vsword { flex: 0 0 auto; font-size: 11px; color: var(--wn-dim2); }
+.site-waiver-night .wn-prob { display: block; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.09); overflow: hidden; }
+.site-waiver-night .wn-prob i { display: block; height: 100%; background: linear-gradient(90deg, var(--wn-green), #8fe9ba); }
+.site-waiver-night .wn-matchnote { font-size: 11px; color: var(--wn-dim); }
+
+/* ---------- kickoff ---------- */
+.site-waiver-night .wn-kickgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.site-waiver-night .wn-kickcard {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 16px;
+  border: 1px solid rgba(53, 214, 139, 0.28);
+  border-radius: 13px;
+  background: linear-gradient(180deg, rgba(53, 214, 139, 0.1), var(--wn-panel));
+}
+.site-waiver-night .wn-kickk { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wn-green); }
+.site-waiver-night .wn-clock--kick { font-size: 40px; font-weight: 660; line-height: 1; letter-spacing: -0.03em; }
+.site-waiver-night .wn-kickrow { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; color: #b0bcc7; }
+.site-waiver-night .wn-kickrow .wn-ic { margin-top: 2px; color: var(--wn-green); }
+.site-waiver-night .wn-kickfoot {
+  margin-top: 3px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(53, 214, 139, 0.24);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wn-green);
+}
+
+.site-waiver-night .wn-newsl { display: flex; flex-direction: column; gap: 10px; }
+.site-waiver-night .wn-news {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--wn-line);
+  border-radius: 12px;
+  background: var(--wn-panel);
+}
+.site-waiver-night .wn-newsimg { width: 112px; height: 78px; flex: 0 0 auto; border-radius: 8px; object-fit: cover; }
+.site-waiver-night .wn-newsb { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.site-waiver-night .wn-newsm { display: flex; align-items: center; gap: 7px; font-size: 10.5px; color: var(--wn-dim2); }
+.site-waiver-night .wn-newstag {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--wn-amber-soft);
+  color: var(--wn-amber);
+  font-weight: 650;
+}
+.site-waiver-night .wn-newsm b { color: var(--wn-dim); }
+.site-waiver-night .wn-newshead { font-size: 12.5px; font-weight: 650; line-height: 1.3; }
+.site-waiver-night .wn-newsbody { font-size: 11px; line-height: 1.45; color: var(--wn-dim); }
+
+.site-waiver-night .wn-strip {
+  position: relative;
+  margin-top: 16px;
+  border: 1px solid var(--wn-line);
+  border-radius: 13px;
+  overflow: hidden;
+}
+.site-waiver-night .wn-stripimg { width: 100%; height: 150px; object-fit: cover; object-position: 50% 50%; }
+.site-waiver-night .wn-stripin {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, rgba(6, 10, 14, 0), rgba(6, 10, 14, 0.88));
+}
+.site-waiver-night .wn-striptag {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.site-waiver-night .wn-stript { font-size: 14px; font-weight: 600; }
+
+/* ---------- footer ---------- */
+.site-waiver-night .wn-foot {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+  padding: 22px 26px 30px;
+  border-top: 1px solid var(--wn-line);
+  background: var(--wn-bar);
+}
+.site-waiver-night .wn-footcol { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.site-waiver-night .wn-footp { font-size: 11.5px; line-height: 1.5; color: var(--wn-dim); }
+.site-waiver-night .wn-srclist { display: flex; flex-direction: column; gap: 6px; }
+.site-waiver-night .wn-srcrow { display: flex; align-items: center; gap: 8px; font-size: 11.5px; }
+.site-waiver-night .wn-srcrow-n { color: #c3ced8; }
+.site-waiver-night .wn-srcrow-c { margin-left: auto; font-weight: 650; }
+.site-waiver-night .wn-srcrow-k { color: var(--wn-dim2); font-size: 10.5px; white-space: nowrap; }
+.site-waiver-night .wn-footmark { margin-top: 2px; font-size: 11.5px; color: var(--wn-dim); }
+.site-waiver-night .wn-sb { color: var(--wn-green); font-weight: 650; }

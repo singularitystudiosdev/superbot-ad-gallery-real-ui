@@ -13,9 +13,17 @@
 //             reply: '...\n\n...' }
 // dur(cfg) is laid out from the ask length and the reply length: 6.5s to 7.5s, cfg.dur.gpt overrides.
 // (7.5s is the ceiling the ad series keeps so gpt + card spots stay under the ~34s loop.)
+//
+// OPT-IN rescue popup. cfg.popup brings the refusal ads' "superbot can do it!" card into this scene:
+//   cfg.popup = { text?: 'superbot can do it!', button?: 'chat',
+//                 in?: <seconds into this scene - when the popup lands>, click?: <seconds - the click> }
+// It is drawn only when cfg.popup is set (and cfg.gpt is set, since the scene only exists then), and it
+// changes nothing else: with cfg.popup absent this module lays out and renders exactly as it did, so every
+// shipped ad that does not set the key is pixel-identical. The popup, the cursor glide to its button, the
+// 5% press and its fall-out are all pure functions of lt, like everything else here.
 import {
   clamp, seg, op, esc, window01, typed, caret, blink, press, pressScale,
-  path, placeCursor, boxIn,
+  path, placeCursor, boxIn, outQuint, outBack, lerp,
 } from '../lib.js';
 import { makeCursor } from '../shell.js';
 
@@ -38,6 +46,19 @@ const ATTEMPT = 1.20;    // the spinner is up this long before the browse fails
 const FAIL_GAP = 0.35;   // the failed line is read before the refusal starts
 const HOLD = 1.50;       // the finished refusal sits still this long
 const DUR_MIN = 6.5, DUR_MAX = 7.5;   // the band a cfg-less spot lands in (gpt + card + hub + browser + end)
+
+// the opt-in popup's own constants
+const POP_TEXT = 'superbot can do it!';
+const POP_BUTTON = 'chat';
+const POP_RISE = 0.40;   // the card rises 40px over this, the reference ad's entrance
+const POP_LEAD = 1.15;   // default gap between the popup landing and the click (the reference's cadence)
+const POP_TAIL = 0.55;   // click down/hold/up (0.26s) plus the card's fall-out, all inside the scene
+const POP_OUT = [0.26, 0.55];  // fall-out window, measured from the click
+const POP_DIM = 0.55;    // how far the composer dims behind the card, as in the reference
+const POP_ICON = new URL('../assets/mark-clean.svg', import.meta.url).href;  // the kit's own mascot mark
+
+/** a positive, finite number from cfg, else null */
+const num = (x) => (x != null && isFinite(+x) && +x >= 0 ? +x : null);
 
 let ST = null;
 
@@ -119,7 +140,26 @@ function layout(cfg) {
     type0: at(type0), type1: at(type1), pressAt: at(pressAt), sendAt: at(sendAt),
     toolAt: at(toolAt), failAt: at(failAt), replyAt: at(replyAt), stream1: at(stream1),
   };
-  return { ask, reply, ends, attempt, dur, failText: failTextFor(spec, attempt), ...b };
+
+  // the opt-in popup. `in` and `click` are seconds into THIS scene; with `in` unset it lands 0.30s after the
+  // refusal finishes streaming, with `click` unset 1.15s after the popup. The click always fits inside the
+  // scene: when the ad does not pin cfg.dur.gpt the scene grows to click + POP_TAIL; when it does, the click
+  // is pulled in to the pinned duration instead, so an explicit dur can never chop the press off the end.
+  const popSpec = cfg && cfg.popup ? (typeof cfg.popup === 'object' ? cfg.popup : {}) : null;
+  let pop = null;
+  if (popSpec) {
+    const text = popSpec.text != null && String(popSpec.text).length ? String(popSpec.text) : POP_TEXT;
+    const button = popSpec.button != null && String(popSpec.button).length ? String(popSpec.button) : POP_BUTTON;
+    const wantIn = num(popSpec.in) != null ? num(popSpec.in) : b.stream1 + 0.30;
+    const wantClick = num(popSpec.click) != null ? num(popSpec.click) : wantIn + POP_LEAD;
+    const click = ov != null && isFinite(ov) && +ov > 0
+      ? clamp(wantClick, 0.60, Math.max(0.60, +ov - POP_TAIL))
+      : Math.max(0.60, wantClick);
+    const inn = Math.max(0.15, Math.min(wantIn, click - 0.45));
+    pop = { text, button, in: inn, click };
+  }
+  const durOut = pop ? Math.max(dur, pop.click + POP_TAIL) : dur;
+  return { ask, reply, ends, attempt, dur: durOut, failText: failTextFor(spec, attempt), ...b, pop };
 }
 
 function dur(cfg) { return layout(cfg).dur; }
@@ -144,7 +184,14 @@ const IC = {
 const svg = (inner, w, stroke = 2) => `<svg viewBox="0 0 24 24" width="${w}" height="${w}" fill="none" `
   + `stroke="currentColor" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
 
-function markup() {
+function markup(L) {
+  // the opt-in rescue popup: the refusal spots' bottom-right "superbot can do it!" card, in scene px (not
+  // inside the 1.25-scaled replica), so its 29px head and 22px chat pill are the reference's own sizes.
+  const pop = L && L.pop ? `
+  <div class="gpt-pop" aria-hidden="true">
+    <div class="gpt-pop-h"><img src="${POP_ICON}" alt=""/>${esc(L.pop.text)}</div>
+    <div class="gpt-pop-b">${esc(L.pop.button)}</div>
+  </div>` : '';
   return `
 <div class="gpt-frame">
   <aside class="g-side">
@@ -190,7 +237,7 @@ function markup() {
       <div class="g-fine">ChatGPT can make mistakes. Check important info.</div>
     </div>
   </div>
-</div>`;
+</div>${pop}`;
 }
 
 const $ = (sel, root) => root.querySelector(sel);
@@ -200,8 +247,10 @@ function mount(sec, ctx) {
   const cfg = (ctx && ctx.cfg) || {};
   const L = layout(cfg);
   const tmp = document.createElement('div');
-  tmp.innerHTML = markup();
+  tmp.innerHTML = markup(L);
   const frame = tmp.firstElementChild;
+  const popEl = $('.gpt-pop', tmp);       // null unless cfg.popup is set
+  const popBtn = $('.gpt-pop-b', tmp);
 
   const r = {
     frame,
@@ -222,6 +271,8 @@ function mount(sec, ctx) {
     ph: $('.g-ph', frame),
     draft: $('.g-draft', frame),
     send: $('.g-send', frame),
+    pop: popEl,
+    popBtn,
   };
   r.bub.textContent = L.ask;
   r.toolT.textContent = L.attempt || '';
@@ -231,6 +282,7 @@ function mount(sec, ctx) {
   const cursor = makeCursor();
   sec.appendChild(cursor);
   sec.insertBefore(frame, cursor);
+  if (popEl) sec.insertBefore(popEl, cursor);   // scene px, under the cursor (kit.css .gpt-pop z-index)
 
   ST = { sec, r, L, cfg, cursor, mw: 0, mar: '', meas: '', anchors: null };
 }
@@ -241,9 +293,12 @@ function anchors(st) {
   const r = st.r;
   const cb = boxIn(r.composer, st.sec);
   const sb = boxIn(r.send, st.sec);
+  const pb = r.popBtn ? boxIn(r.popBtn, st.sec) : null;
   return {
     entry: { x: cb.x + cb.w * 0.52, y: cb.y - 168 },
     send: { x: sb.cx, y: sb.cy },
+    // the popup's chat button, 3px up-left of its centre, the offset the reference ad clicks at
+    pop: pb ? { x: pb.cx - 3, y: pb.cy - 2 } : null,
   };
 }
 
@@ -269,8 +324,8 @@ function render(lt, ctx) {
   const generating = sent && t < L.stream1;
   r.send.classList.toggle('ready', !!draft && !generating);
   r.send.classList.toggle('stop', generating);
-  const p = press(t, L.pressAt);
-  r.send.style.transform = p ? `scale(${pressScale(t, L.pressAt, 0.12).toFixed(3)})` : '';
+  const pSend = press(t, L.pressAt);
+  r.send.style.transform = pSend ? `scale(${pressScale(t, L.pressAt, 0.12).toFixed(3)})` : '';
 
   // ---- the empty home hands over to the thread on send
   op(r.home, 1 - seg(t, L.sendAt - 0.15, L.sendAt + 0.20));
@@ -307,14 +362,32 @@ function render(lt, ctx) {
     }
   }
 
-  // ---- the pointer: glides in above the composer, settles on the send button while the ask types, presses
-  const vis = window01(t, 0.18, L.sendAt + 0.34, 0.26, 0.30);
+  // ---- the opt-in rescue popup (cfg.popup): rises in with a spring, is clicked, falls out into the dip.
+  // Nothing above this line reads it: with cfg.popup unset L.pop is null and not one popup style is written.
+  const pop = L.pop;
+  let pPop = 0;
+  if (pop) {
+    const pp = seg(t, pop.in, pop.in + POP_RISE);                        // rise in
+    const out = seg(t, pop.click + POP_OUT[0], pop.click + POP_OUT[1]);  // fall out, over the boundary dip
+    op(r.pop, out > 0 ? 1 - out : pp);
+    r.pop.style.transform = `translateY(${(out > 0 ? out * out * 40 : (1 - outQuint(pp)) * 40).toFixed(1)}px) `
+      + `scale(${lerp(0.94, 1, outBack(pp)).toFixed(3)})`;               // a spring, never linear
+    pPop = press(t, pop.click);
+    r.popBtn.style.transform = `scale(${pressScale(t, pop.click, 0.05).toFixed(3)})`;  // the 5% press
+    op(r.composer, 1 - POP_DIM * seg(t, pop.in, pop.in + 0.6));          // composer dims behind the card
+  }
+
+  // ---- the pointer: glides in above the composer, settles on the send button while the ask types, presses,
+  // and with cfg.popup glides on to the card's chat button for the click that hands the spot to the next scene
+  const vis = window01(t, 0.18, pop ? pop.click + POP_TAIL : L.sendAt + 0.34, 0.26, 0.30);
   const a = st.anchors;
-  const pos = path(t, [
+  const keys = [
     { t: 0.18, x: a.entry.x, y: a.entry.y },
     { t: Math.max(0.5, L.pressAt - 0.40), x: a.send.x, y: a.send.y },
-  ]);
-  placeCursor(st.cursor, pos.x, pos.y, p, vis);
+  ];
+  if (pop && a.pop) keys.push({ t: Math.max(keys[1].t + 0.25, pop.click - 0.20), x: a.pop.x, y: a.pop.y });
+  const pos = path(t, keys);
+  placeCursor(st.cursor, pos.x, pos.y, Math.max(pSend, pPop), vis);
 }
 
 export default { id: 'gpt', dur, mount, render };

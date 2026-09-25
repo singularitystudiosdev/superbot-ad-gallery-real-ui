@@ -1,7 +1,7 @@
 // superbot beat: the do-that-too 'yt' scene's delivery, inside the hub. A converting chip counts 0 -> 100, the
 // card header opens, the left column grows row by row while the right fills in place (gradient audio tiles, green
-// Saved pills), "+90 more" and the Download all footer open, the camera pushes onto the card, and the pointer
-// presses Download all: it fills while downloading and resolves to Downloaded.
+// Saved pills), "+90 more" and the Download all footer open, and the pointer presses Download all: it fills
+// while downloading and resolves to Downloaded.
 // YouTube mark: brand/youtube-icon.svg (YouTube full-color icon, 2017, as YouTube serves it).
 import { lerp, seg, outCubic, outBack, inOutCubic, streamCount, press, path } from '../../../lib.js';
 
@@ -34,8 +34,8 @@ export default {
     T.more = T.row0 + 9 * T.gap + 0.15;
     T.done = T.more + 0.18;
     T.foot = T.done + 0.08;
-    T.curIn = T.foot + 0.15; T.press = T.foot + 0.75;   // the pointer presses Download all
-    T.dl = [T.press + 0.06, T.press + 0.66];           // the pill fills
+    T.curIn = T.foot + 0.1; T.press = T.foot + 0.8;    // the pointer glides in, rests, presses Download all
+    T.dl = [T.press + 0.12, T.press + 0.8];            // the pill fills
     T.got = T.dl[1];                                   // Downloaded
     T.end = T.got + 1.0;
     return T;
@@ -51,12 +51,12 @@ export default {
       <div class="sbx-group-h">${yt}<span class="yt-h-t">100 videos <i>→</i> audio</span><span class="sbx-badge">mp3</span><span class="yt-h-r">100 files · ${TOTAL}</span></div>
       <div class="yt-grid"><div class="yt-col">${TRACKS.slice(0, 5).map((r, i) => row(r, i)).join('')}</div><div class="yt-col">${TRACKS.slice(5).map((r, i) => row(r, i + 5)).join('')}</div></div>
       <div class="yt-more"><span class="yt-stackic">${MUSIC}${MUSIC}${MUSIC}</span><b>+ 90 more tracks</b><small>11 – 100 · all saved</small></div>
-      <div class="yt-foot"><span class="yt-dl"><i class="yt-dl-fill"></i><span class="yt-dl-a">${DL}<b>Download all (.zip)</b><em>${TOTAL}</em></span><span class="yt-dl-b">${CHECK}<b>Downloaded</b><em>${TOTAL}</em></span></span><span class="yt-saved">${FOLDER}Saved to <code>~/Music/superbot</code></span></div>
+      <div class="yt-foot"><span class="yt-dl"><i class="yt-dl-fill"></i><i class="yt-dl-ring"></i><span class="yt-dl-a">${DL}<b>Download all (.zip)</b><em>${TOTAL}</em></span><span class="yt-dl-b">${CHECK}<b>Downloaded</b><em>${TOTAL}</em></span></span><span class="yt-saved">${FOLDER}Saved to <code>~/Music/superbot</code></span></div>
     </div></div>`);
     const card = wrap.firstElementChild;
     const rows = [...card.querySelectorAll('.yt-row')], more = card.querySelector('.yt-more'), foot = card.querySelector('.yt-foot');
     const count = chip.querySelector('.yt-count'), label = chip.querySelector('.ch-tool-t'), spin = chip.firstElementChild;
-    const dl = card.querySelector('.yt-dl'), dlFill = dl.querySelector('.yt-dl-fill'), dlLab = dl.querySelector('.yt-dl-a b'), dlOk = dl.querySelector('.yt-dl-b svg');
+    const dl = card.querySelector('.yt-dl'), dlFill = dl.querySelector('.yt-dl-fill'), dlRing = dl.querySelector('.yt-dl-ring'), dlLab = dl.querySelector('.yt-dl-a b'), dlOk = dl.querySelector('.yt-dl-b svg');
     const vis = say.firstElementChild, hid = say.lastElementChild;
     let shown = -1;
     const fade = (n, p, dy) => { n.style.opacity = p.toFixed(3); n.style.transform = p >= 1 ? '' : `translateY(${((1 - p) * dy).toFixed(2)}px)`; };
@@ -64,7 +64,6 @@ export default {
     return {
       nodes: [say, chip, wrap],
       marks: [[T.r, say], [T.chip, chip], [T.card, wrap]],
-      cams: [[T.card - 0.05, 1.0, () => x.F.el(card, 1.32, 0.88)]],
       render(t) {
         const n = streamCount(SAY, T.r + 0.05, 90, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }
@@ -98,7 +97,10 @@ export default {
         fade(foot, outCubic(seg(t, T.foot + 0.08, T.foot + 0.5)), 8);
 
         // Download all: press, fill, Downloaded
-        dl.style.transform = `scale(${(1 - 0.07 * press(t, T.press)).toFixed(4)})`;
+        dl.style.transform = `scale(${(1 - 0.1 * press(t, T.press)).toFixed(4)})`;
+        const rg = seg(t, T.press, T.press + 0.5); // the click ripple
+        dlRing.style.opacity = (rg > 0 && rg < 1 ? 0.7 * (1 - rg) : 0).toFixed(3);
+        dlRing.style.transform = `translate(-50%, -50%) scale(${lerp(0.4, 2.6, outCubic(rg)).toFixed(3)})`;
         dlLab.textContent = t >= T.dl[0] ? 'Downloading…' : 'Download all (.zip)';
         dlFill.style.transform = `scaleX(${inOutCubic(seg(t, T.dl[0], T.dl[1])).toFixed(4)})`;
         dl.classList.toggle('is-done', t >= T.got);

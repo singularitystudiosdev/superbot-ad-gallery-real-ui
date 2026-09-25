@@ -22,7 +22,6 @@ export default {
     return {
       nodes: [say, card],
       marks: [[T.r, say], [T.card, card]],
-      cams: [[T.w0 - 0.1, 0.8, () => x.F.el(card, 1.4, 0.8)]],
       render(t) {
         const n = streamCount(SAY, T.r + 0.06, 70, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }

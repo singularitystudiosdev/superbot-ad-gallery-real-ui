@@ -186,10 +186,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=6`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js`)).default;
+    const m = (await import(`./scenes/${id}.js?v=6`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

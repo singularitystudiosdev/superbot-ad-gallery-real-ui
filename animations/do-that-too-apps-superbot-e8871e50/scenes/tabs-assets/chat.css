@@ -1,6 +1,5 @@
 /* The hub's four-request chat (chat.js + beats/*.js). Every moving value is written from lt, so nothing here
    transitions. Ported card styles (GitHub card + sheet, DoorDash order, mp3 card, tool chips) live in ports.css. */
-#s-tabs .qc-cam { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform; }
 #s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
 #s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
 #s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
@@ -168,3 +167,4 @@
 #s-tabs .sbsite .hub .yt-dl.is-done .yt-dl-b { display: inline-flex; align-items: center; gap: 7px; }
 #s-tabs .sbsite .hub .yt-dl-a { display: inline-flex; align-items: center; gap: 7px; }
 #s-tabs .sbsite .hub .yt-dl-b svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .yt-dl-ring { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); opacity: 0; pointer-events: none; }

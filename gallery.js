@@ -28,19 +28,46 @@ function renderCopy() {
   b.textContent = n ? `⧉ copy ${n} edit${n === 1 ? '' : 's'}` : '⧉ copy';
   b.classList.toggle('has', n > 0);
 }
-async function copyEdits() {
-  const b = $('capCopy'), n = Object.keys(EDITS).length;
-  const flash = (msg) => { b.dataset.flash = '1'; b.textContent = msg; setTimeout(() => { delete b.dataset.flash; renderCopy(); }, 1600); };
-  if (!n) return flash('no edits yet: click a caption and type');
-  const text = 'Rename these ad gallery captions (superbot-ad-gallery-real-ui, {id: new caption}):\n```json\n' + JSON.stringify(EDITS, null, 2) + '\n```';
+async function copyText(text) {
   try { await navigator.clipboard.writeText(text); }
   catch (err) { // clipboard API refused (no focus / http): the textarea fallback
     console.error(err);
     const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
     document.execCommand('copy'); ta.remove();
   }
+}
+async function copyEdits() {
+  const b = $('capCopy'), n = Object.keys(EDITS).length;
+  const flash = (msg) => { b.dataset.flash = '1'; b.textContent = msg; setTimeout(() => { delete b.dataset.flash; renderCopy(); }, 1600); };
+  if (!n) return flash('no edits yet: click a caption and type');
+  await copyText('Rename these ad gallery captions (superbot-ad-gallery-real-ui, {id: new caption}):\n```json\n' + JSON.stringify(EDITS, null, 2) + '\n```');
   flash(`✓ copied ${n} edit${n === 1 ? '' : 's'}`);
 }
+
+// ---- permalinks: <gallery>/#<id> opens that ad in the viewer; the hash follows the open ad ----
+const permalink = (it) => `${location.origin}${location.pathname}#${encodeURIComponent(it.id)}`;
+const directLink = (it) => new URL(it.type === 'image' ? srcFor(it, it.src) : it.src, location.href).href;
+function flashLabel(el, msg, back) {
+  el.textContent = msg;
+  clearTimeout(el._flash);
+  el._flash = setTimeout(() => { el.textContent = back; }, 1400);
+}
+function setHash(it) {
+  const url = it ? `#${encodeURIComponent(it.id)}` : location.pathname + location.search;
+  if (it ? location.hash !== url : location.hash) history.replaceState(null, '', url);
+}
+function openFromHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) { if (!$('lb').hidden) close(); return; }
+  const it = ITEMS.find((i) => i.id === id);
+  if (!it) return;
+  if (!filtered().includes(it)) { // a link must open even when the filters would hide the ad
+    filter = 'All'; typeFilter = 'all';
+    renderTypePicker(); renderChips(); renderGrid();
+  }
+  open(it);
+}
+addEventListener('hashchange', openFromHash);
 
 // ---- aspect ratio (the animations read ?ar= through assets/ar.js) ----
 const RATIOS = [['4x5', '4:5', 4 / 5], ['16x9', '16:9', 16 / 9], ['4x3', '4:3', 4 / 3], ['1x1', '1:1', 1]];
@@ -277,12 +304,14 @@ function renderGrid() {
     // the tile is a container: the thumbnail and the badge open the lightbox, the caption is editable
     const t = document.createElement('div');
     t.className = 'tile' + (it.type === 'animation' ? ' anim' : '');
+    t.id = `ad-${it.id}`;
     const s = sizeOf(it);
     const wh = s ? ` width="${s.w}" height="${s.h}"` : '';
     const title = titleOf(it);
     t.innerHTML =
       `<button type="button" class="open" aria-label="${it.type === 'animation' ? 'play' : 'zoom'}: ${esc(title)}"><img src="${srcFor(it, it.thumb)}" alt="${esc(title)}" loading="lazy"${wh}></button>` +
       `<span class="meta"><button type="button" class="badge">${it.type === 'animation' ? '▶ play' : '⤢ zoom'}</button>` +
+      `<a class="plink" href="#${encodeURIComponent(it.id)}" title="copy this ad's permalink">🔗 link</a>` +
       `<span class="g">${it.group}</span><br><span class="t${EDITS[it.id] ? ' edited' : ''}" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="caption for ${esc(it.id)}" title="click to rename"></span></span>`;
     const cap = t.querySelector('.t');
     cap.textContent = title;
@@ -296,6 +325,11 @@ function renderGrid() {
     else im.onload = () => im.classList.add('loaded');
     t.querySelector('.open').onclick = (e) => open(it, e);
     t.querySelector('.badge').onclick = (e) => open(it, e);
+    const pl = t.querySelector('.plink');
+    pl.onclick = (e) => { // copy, don't navigate; right-click / middle-click still get the real #link
+      e.preventDefault();
+      copyText(permalink(it)).then(() => flashLabel(pl, '✓ copied', '🔗 link'));
+    };
     grid.appendChild(t);
   }
 }
@@ -350,6 +384,10 @@ function renderStage() {
     sizeFrame();
   }
   renderDl();
+  setHash(it);
+  $('lbLink').textContent = '🔗 copy link';
+  $('lbLink').href = `#${encodeURIComponent(it.id)}`;
+  $('lbOpen').href = directLink(it);
   $('lbTitle').textContent = titleOf(it);
   const arLabel = RATIOS.find(x => x[0] === (it.type === 'image' ? arOf(it) : ar))[1];
   $('lbPos').textContent = `${openIdx + 1} / ${list.length} · ${it.group}${it.type === 'animation' || it.ars ? ` · ${arLabel}` : ''}`;
@@ -373,6 +411,7 @@ function close() {
   $('lbDl').hidden = true;
   $('lbStage').innerHTML = ''; // kills the iframe rAF + audio
   document.body.style.overflow = '';
+  setHash(null);
 }
 
 function step(d) {
@@ -382,6 +421,11 @@ function step(d) {
 }
 
 $('lbClose').onclick = close;
+$('lbLink').onclick = (e) => {
+  e.preventDefault();
+  const it = filtered()[openIdx];
+  if (it) copyText(permalink(it)).then(() => flashLabel($('lbLink'), '✓ link copied', '🔗 copy link'));
+};
 $('lbPrev').onclick = () => step(-1);
 $('lbNext').onclick = () => step(1);
 $('lb').addEventListener('click', (e) => { if (e.target === $('lb')) close(); });
@@ -399,7 +443,7 @@ renderSoon();
 
 fetch('manifest.json')
   .then(r => r.json())
-  .then(data => { ITEMS = data; renderAr(); renderTypePicker(); renderChips(); renderGrid(); })
+  .then(data => { ITEMS = data; renderAr(); renderTypePicker(); renderChips(); renderGrid(); openFromHash(); })
   .catch(err => {
     console.error(err);
     document.getElementById('empty').hidden = false;

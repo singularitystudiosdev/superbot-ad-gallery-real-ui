@@ -73,18 +73,13 @@ export default {
     const hs = [...hands.children];
     const streams = [[say, SAY, T.r + 0.05], [fin, FIN, T.fin + 0.05]].map(([n, s, a]) => ({ vis: n.firstElementChild, hid: n.lastElementChild, s, a, shown: -1 }));
     const rise = (n, a, dy = 8, d = 0.4) => { const p = outCubic(seg(t0, a, a + d)); n.style.opacity = p.toFixed(3); n.style.transform = p >= 1 ? 'none' : `translateY(${((1 - p) * dy).toFixed(2)}px)`; return p; };
-    // the panel grows as rows land (no empty reserved space); rem = layout px still to grow, for the camera
-    const grow = (n, p, h, mt = 0) => { n.style.height = `${(h * p).toFixed(2)}px`; n.style.marginTop = `${(mt * p).toFixed(2)}px`; rem += (h + mt) * (1 - p); };
-    let t0 = 0, rem = 0;
+    // the panel grows as rows land (no empty reserved space)
+    const grow = (n, p, h, mt = 0) => { n.style.height = `${(h * p).toFixed(2)}px`; n.style.marginTop = `${(mt * p).toFixed(2)}px`; };
+    let t0 = 0;
 
     return {
       nodes: [say, card, panel, fin, hands],
       marks: [[T.r, say], [T.card, card], [T.panel, panel], [T.fin, fin], [T.hand, hands]],
-      cams: [
-        [T.card - 0.05, 0.5, () => x.F.el(card, 1.5, 0.7)],
-        [T.panel - 0.05, 0.7, () => x.F.el(panel, 1.42, 0.84, () => rem)],
-        [T.fin - 0.1, 0.55, x.F.thread],
-      ],
       render(t) {
         t0 = t;
         streams.forEach((s) => { const n = streamCount(s.s, s.a, 80, t); if (n !== s.shown) { s.vis.textContent = s.s.slice(0, n); s.hid.textContent = s.s.slice(n); s.shown = n; } });
@@ -103,7 +98,6 @@ export default {
         const th = seg(t, T.think[1] - 0.15, T.think[1] + 0.15);
         thA.style.opacity = (1 - th).toFixed(3); thB.style.opacity = th.toFixed(3);
         thA.style.setProperty('--sh', `${(100 - ((t - T.think[0]) * 150) % 200).toFixed(1)}%`);
-        rem = 0;
         // the to-do box grows with its header and rows (29 + 4 x 22 + 7 bottom pad)
         const p0 = rise(todosEl, T.todos, 8);
         let ch = 29 * p0, pl = 0;
@@ -121,7 +115,6 @@ export default {
         });
         ch += 7 * pl;
         todosEl.style.height = `${ch.toFixed(2)}px`;
-        rem += 124 - ch;
         cnt.textContent = `${done} of 4 done`;
         sts.forEach((n, i) => {
           const a = T.task[STEP_TASK[i]][0] + (i === 2 ? 0.32 : 0.1);

@@ -1,5 +1,5 @@
 // DoorDash beat: the do-that-too 'dash' scene's order, inside the hub. Three tool chips land (open, pick, check out),
-// the order card rises, the camera pushes onto it, and the gradient order pill resolves "Placing order..." into a big
+// the order card rises, and the gradient order pill resolves "Placing order..." into a big
 // "Ordered!" with a shine, a drawn check and the ETA. Card photo: img/burger.jpg = "Cheeseburger.jpg" by Renee Comet,
 // National Cancer Institute (NCI Visuals Online 2652), public domain. "Main Street Burger Co." is made up.
 import { lerp, seg, outCubic, outBack, streamCount } from '../../../lib.js';
@@ -61,7 +61,6 @@ export default {
     return {
       nodes: [say, ...rows, card],
       marks: [[T.r, say], ...rows.map((r, i) => [T.chipIn[i], r]), [T.card, card]],
-      cams: [[T.card - 0.05, 0.85, () => x.F.el(card, 1.42, 0.86)]],
       render(t) {
         const n = streamCount(SAY, T.r + 0.05, 90, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }

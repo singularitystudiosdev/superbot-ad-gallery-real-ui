@@ -5,7 +5,7 @@
 // WAAPI, no CSS animation, no timers; every position below is math on lt.
 import { SYMBOLS } from './tabs-assets/icons.js';
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, CHAT_END } from './tabs-assets/chat.js';
+import { mountChat, renderChat, CHAT_END } from './tabs-assets/chat.js?v=6';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
 

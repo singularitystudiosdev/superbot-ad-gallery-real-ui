@@ -215,3 +215,10 @@ body.lb-open .soon-pick { right: 268px; }
   .cap-copy { top: 108px; right: 24px; }
   .lb-dl { right: 224px; }
 }
+
+/* ---- permalinks: every tile and the viewer carry a copyable #<id> link ---- */
+.tile .plink { float: right; margin-right: 8px; font-size: 10px; line-height: 1.4; padding: 1px 6px;
+  color: var(--dim); border: 1px solid #ffffff22; text-decoration: none; font-family: var(--mono); }
+.tile .plink:hover, .tile .plink:focus-visible { color: var(--acc); border-color: var(--acc); outline: none; }
+.lb-caption .lb-link { color: var(--dim); text-decoration: none; font-size: 11.5px; border-bottom: 1px dashed transparent; }
+.lb-caption .lb-link:hover, .lb-caption .lb-link:focus-visible { color: var(--acc); border-bottom-color: var(--acc); outline: none; }

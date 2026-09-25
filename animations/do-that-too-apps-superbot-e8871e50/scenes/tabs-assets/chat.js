@@ -1,14 +1,14 @@
 // The four-request chat the hub plays once the main frame has landed. Each ask is typed into the composer and sent,
 // superbot routes it (its routing chip, the rail selection and the composer's platform chip all follow the app), and
-// the routed app answers with its own beat (./beats/*.js). A camera wrapper around the .sbsite frames every moment
-// with eased moves (the dash / yt / code scenes' language): composer close-up while typing, the thread after send,
-// then a push onto each result. renderChat(c, t) is a pure function of the tabs scene's local time.
-import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, path, placeCursor } from '../../lib.js';
+// the routed app answers with its own beat (./beats/*.js). The whole window stays in frame (no camera moves); the
+// thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of
+// the tabs scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
+import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import gemini from './beats/gemini.js';
-import cursor from './beats/cursor.js';
-import doordash from './beats/doordash.js';
-import mp3 from './beats/mp3.js';
+import gemini from './beats/gemini.js?v=6';
+import cursor from './beats/cursor.js?v=6';
+import doordash from './beats/doordash.js?v=6';
+import mp3 from './beats/mp3.js?v=6';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -48,19 +48,16 @@ export const BEATS = (() => {
   });
 })();
 const LAST = BEATS[BEATS.length - 1];
-export const CHAT_END = LAST.T.end + 1.1; // a last pull-back to the whole window
+export const CHAT_END = LAST.T.end + 0.3;
 
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
 
 export function mountChat(hub) {
-  const site = hub.closest('.sbsite');
-  const cam = document.createElement('div');
-  cam.className = 'qc-cam';
-  site.parentNode.insertBefore(cam, site);
-  cam.appendChild(site);
+  // the pointer lives in the scene section, in its px (the same space placeCursor writes)
+  const root = hub.closest('.sbsite').parentNode;
   const pointer = makeCursor();
-  cam.parentNode.appendChild(pointer);
+  root.appendChild(pointer);
 
   const sbSrc = hub.querySelector('.rail-item.sb img').src;
   const tile = (app, cls = '') => `<span class="qc-tile qc-t-${app} ${cls}"><img src="${app === 'superbot' ? sbSrc : APPS[app].logo}" alt=""/></span>`;
@@ -71,34 +68,8 @@ export function mountChat(hub) {
   feed.appendChild(inner);
   const add = (html) => { const n = el(html); inner.appendChild(n); return n; };
 
-  // camera framings, all measured with the camera off (renderChat clears it first), in the section's px
-  const box = (n) => boxIn(n, cam);
-  const view = () => ({ W: cam.offsetWidth || 1920, H: cam.offsetHeight || 1080 });
-  const frame = (cx, cy, s) => { const { W, H } = view(); return { s, tx: clamp(W / 2 - s * cx, W - s * W, 0), ty: clamp(H / 2 - s * cy, H - s * H, 0) }; };
-  const composer = hub.querySelector('.composer') || hub.querySelector('.rc');
-  const F = {
-    full: () => ({ s: 1, tx: 0, ty: 0 }),
-    comp: () => { const { W, H } = view(); const b = box(composer), s = Math.min(1.3, (0.84 * W) / b.w); return frame(b.cx, b.y + b.h - H / s / 2 + 22, s); },
-    thread: () => { const { W, H } = view(); const b = box(composer), s = Math.min(1.16, (0.9 * W) / (b.w * 1.25)); return frame(b.cx, b.y + b.h - H / s / 2 + 18, s); },
-    // push onto an element: centred on the chat column (so the whole column, bubbles included, stays in frame)
-    // unless `own`; `extra` = layout px the element will still grow by, so the framing is its final size
-    el: (n, max = 1.65, fill = 0.82, extra = 0, own = false) => {
-      const { W, H } = view();
-      const b = box(n), col = column();
-      const ex = (typeof extra === 'function' ? extra() : extra) * (b.h / (n.offsetHeight || 1));
-      const h = b.h + ex, w = own ? b.w : Math.max(b.w, col.w);
-      const s = clamp(Math.min((fill * W) / w, (fill * H) / h), 1, max);
-      return frame(own || b.w > col.w ? b.cx : col.cx, b.y + h / 2, s);
-    },
-  };
-  // the thread column: from the replies' left edge to the right edge of the longest (right-aligned) user bubble
-  let colRefs = null;
-  const column = () => {
-    if (!colRefs) return box(composer);
-    const l = box(colRefs[0]), r = box(colRefs[1]);
-    return { w: r.x + r.w - l.x, cx: (l.x + r.x + r.w) / 2 };
-  };
-  const ctx = { hub, cam, box, F, tile, OK, esc, el, brand, img, sbSrc };
+  const box = (n) => boxIn(n, root);
+  const ctx = { hub, box, tile, OK, esc, el, brand, img, sbSrc };
 
   const sbAvatar = `<span class="avatar sb"><img src="${sbSrc}" alt=""/></span>`;
   const beats = BEATS.map((k) => {
@@ -112,14 +83,8 @@ export function mountChat(hub) {
     return { k, u, w, r, who: main.firstElementChild, inst, sw: w.querySelector('.qc-sw'), spin: w.querySelector('.qc-spin'), ok: w.querySelector('.qc-st .qc-ok') };
   });
 
-  colRefs = [beats[0].r.querySelector('.m-main'), beats[3].u.querySelector('.m-text')];
   // scroll marks: after each time, the feed's fold glides to that element's bottom
   const marks = beats.flatMap((b) => [[b.k.send, b.u], [b.k.sw, b.w], [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
-  // camera keys [t0, dur, framing]: close-up on the composer while each ask is typed, the thread after send, then the beat's own pushes
-  const cams = [
-    ...beats.flatMap((b) => [[b.k.s - 0.35, 0.6, F.comp], [b.k.send - 0.02, 0.5, F.thread], ...b.inst.cams]),
-    [LAST.T.end, 0.95, F.full],
-  ].sort((x, y) => x[0] - y[0]);
 
   // DoorDash is not on the rail yet: superbot connects it, so its tile grows into the rail at that beat
   const rail = hub.querySelector('.rail');
@@ -142,7 +107,7 @@ export function mountChat(hub) {
   const railItems = { superbot: hub.querySelector('.rail-item.sb'), gemini: rail.querySelector('.rail-item[data-app="gemini"]'), cursor: rail.querySelector('.rail-item[data-app="cursor"]'), doordash: dd };
   const ph = hub.querySelector('.rc-ph');
   return {
-    hub, cam, pointer, feed, inner, beats, marks, cams, dd, railItems, plat, cat, pImg, pLabel, ctx,
+    hub, pointer, feed, inner, beats, marks, dd, railItems, plat, cat, pImg, pLabel,
     ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: null,
   };
 }
@@ -222,25 +187,6 @@ function renderScroll(c, t) {
   c.inner.style.transform = `translateY(${(viewH - 8 - y).toFixed(2)}px)`;
 }
 
-function renderCamera(c, t) {
-  c.cam.style.transform = 'none';
-  let i = -1;
-  while (i + 1 < c.cams.length && t >= c.cams[i + 1][0]) i++;
-  let v;
-  if (i < 0 || t < CHAT_T0 - 0.5) v = c.ctx.F.full();
-  else {
-    const [t0, d, to] = c.cams[i];
-    const f = inOutCubic(seg(t, t0, t0 + d));
-    const B = to();
-    if (f >= 1) v = B;
-    else {
-      const A = (i ? c.cams[i - 1][2] : c.ctx.F.full)();
-      v = { s: lerp(A.s, B.s, f), tx: lerp(A.tx, B.tx, f), ty: lerp(A.ty, B.ty, f) };
-    }
-  }
-  return v;
-}
-
 export function renderChat(c, t) {
   if (!c) return;
   renderComposer(c, t);
@@ -253,13 +199,9 @@ export function renderChat(c, t) {
     b.inst.render(t);
   });
   renderScroll(c, t);
-  // camera: measured with the transform cleared, so every framing is history-free
-  const v = renderCamera(c, t);
-  // the pointer rides in screen space: beats hand back targets in camera-free px
-  const toScr = (p) => ({ x: v.tx + p.x * v.s, y: v.ty + p.y * v.s });
+  // the pointer: beats hand back targets in the section's px (x.box), the same space placeCursor writes
+  const toScr = (p) => p;
   const pt = c.beats.map((b) => b.inst.pointer && b.inst.pointer(t, toScr)).find(Boolean);
   if (pt) placeCursor(c.pointer, pt.x, pt.y, pt.p, pt.v); else c.pointer.style.opacity = '0';
-  c.cam.style.transform = v.s === 1 && !v.tx && !v.ty ? 'none' : `translate(${v.tx.toFixed(2)}px, ${v.ty.toFixed(2)}px) scale(${v.s.toFixed(4)})`;
 }
 
-export { path };

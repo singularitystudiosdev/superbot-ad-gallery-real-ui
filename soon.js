@@ -12,7 +12,7 @@ window.Soon = (() => {
     { id: 'comment-waitlist', label: 'comment for waitlist', lines: ['comment for waitlist'] },
     { id: 'first-100', label: 'first 100 comments get waitlisted', lines: ['first 100 comments get waitlisted'] },
   ];
-  const CARD_MS = 1800; // how long the card holds before the ad starts
+  const CARD_MS = 1260; // how long the card holds before the ad starts
   const IMAGE_HOLD_MS = 5000; // a static ad exports as card + this long on the poster
   const FONT = '"SF Pro Display", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif';
   const KEY = 'gallery.soon.v1';

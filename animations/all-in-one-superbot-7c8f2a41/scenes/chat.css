@@ -1,0 +1,71 @@
+/* chat.css: the one scene. The window itself is shell.css + assets/hub-real.css; this file adds only what the
+   conversation needs: the tool-handoff row (a brand logo + "switching to <tool>"), the generated-meme card,
+   the script card, the DoorDash order card and the download foot. Every animated property is written per
+   frame by scenes/chat.js; nothing here animates on its own. */
+
+/* ---------- the handoff row: superbot announcing which tool it just picked up ---------- */
+.aio-switch { position: relative; display: flex; align-items: center; gap: 10px; width: fit-content;
+  margin: 1px 0 9px; padding: 6px 14px 6px 7px; border-radius: 12px; overflow: hidden;
+  background: #131316; --glow: 0;
+  box-shadow: inset 0 0 0 1px rgba(120, 132, 255, calc(.20 + .55 * var(--glow))), 0 0 calc(26px * var(--glow)) rgba(110, 92, 246, calc(.34 * var(--glow))); }
+.aio-switch::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: calc(.9 * var(--glow));
+  background: linear-gradient(100deg, rgb(255 255 255 / 0) 30%, rgb(255 255 255 / .10) 50%, rgb(255 255 255 / 0) 70%); }
+.aio-sw-logo { width: 30px; height: 30px; flex: none; border-radius: 9px; display: grid; place-items: center; overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .10); }
+.aio-sw-logo img { width: 68%; height: 68%; object-fit: contain; display: block; }
+.aio-sw-logo.aio-sw-gemini { background: linear-gradient(145deg, #4796e3 0%, #9177c7 52%, #d96570 100%); }
+.aio-sw-logo.aio-sw-gemini img { width: 60%; height: 60%; filter: brightness(0) invert(1); }
+.aio-sw-logo.aio-sw-cursor { background: #17171a; }
+.aio-sw-logo.aio-sw-cursor img { width: 76%; height: 76%; filter: brightness(1.45) saturate(1.08); }
+.aio-sw-logo.aio-sw-doordash { background: #ffffff; }
+.aio-sw-logo.aio-sw-doordash img { width: 66%; height: 66%; }
+.aio-sw-logo.aio-sw-superbot { background: radial-gradient(120% 120% at 30% 20%, #2a2c52 0%, #141420 70%); }
+.aio-sw-logo .sbx-markhost { transform: scale(.62); }
+.aio-sw-t { font-size: 11.5px; line-height: 16px; color: #c7c7cc; white-space: nowrap; }
+.aio-sw-t b { font-weight: 600; color: #fff; }
+.aio-sw-t i { font-style: normal; color: #8e8e93; }
+
+/* the "n/100" counter on the download chip */
+.aio-count { margin-left: 7px; padding: 0 6px; height: 15px; display: inline-flex; align-items: center; border-radius: 4px;
+  background: #1f1f22; color: #c7c7cc; font: 600 9.5px/15px var(--font-mono); }
+
+/* ---------- the generated meme (beat 1) ---------- */
+.aio-media { position: relative; margin: 2px 0 8px; width: 400px; max-width: 100%; border-radius: 12px; overflow: hidden;
+  border: 1px solid #2a2a2d; background: #0b0b0c; }
+.aio-media img { display: block; width: 100%; height: auto; max-height: 470px; object-fit: cover; object-position: 50% 46%; }
+.aio-media-cap { display: flex; align-items: center; gap: 7px; padding: 5px 9px; border-top: 1px solid #1e1e21;
+  font: 9.5px/14px var(--font-mono); color: #8e8e93; }
+.aio-media-cap b { font-family: var(--ui); font-weight: 600; color: #c7c7cc; }
+.aio-media-cap .sbx-badge { margin-left: auto; }
+
+/* ---------- the script superbot wrote (beat 2) ---------- */
+.aio-code { margin: 2px 0 8px; border: 1px solid #2a2a2d; border-radius: 10px; background: #0b0b0c; overflow: hidden; }
+.aio-code-h { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 10px; border-bottom: 1px solid #1e1e21;
+  color: #8e8e93; font: 10px/1 var(--ui); }
+.aio-code-h b { font-weight: 600; color: #c7c7cc; }
+.aio-code-h svg { width: 12px; height: 12px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.aio-code-h .sbx-badge { margin-left: auto; }
+.aio-code pre { margin: 0; padding: 8px 10px; font: 9.5px/15px var(--font-mono); color: #c7c7cc; white-space: pre; overflow: hidden; }
+.aio-code .k { color: #c084fc; } .aio-code .s { color: #6ee7a8; } .aio-code .c { color: #5c5f68; }
+
+/* ---------- the DoorDash order (beat 3) ---------- */
+.aio-order-row { font-size: 11px; }
+.aio-order-row .sbx-badge.aio-ordered { background: #0f2419; color: #3ddc84; }
+.aio-order-foot { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-top: 1px solid #1a1a1c;
+  font: 10px/14px var(--font-mono); color: #8e8e93; }
+.aio-order-foot b { font-family: var(--ui); font-weight: 600; color: #f2f2f7; }
+.aio-order-foot em { margin-left: auto; font-style: normal; }
+
+/* ---------- the 100-file download (beat 4) ---------- */
+.aio-files { display: grid; grid-template-columns: 1fr 1fr; }
+.aio-files .sbx-file:nth-child(-n+2) { border-top: 0; }
+.aio-files .sbx-file:nth-child(odd) { border-right: 1px solid #1a1a1c; }
+.aio-files .sbx-file { min-height: 30px; }
+.aio-num { width: 16px; flex: none; font: 9px/1 var(--font-mono); color: #6a6a70; }
+.aio-dl { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-top: 1px solid #1a1a1c; font-size: 10.5px; }
+.aio-dl svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.aio-dl b { font-weight: 600; color: #f2f2f7; }
+.aio-dl .aio-dl-btn { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 7px;
+  background: linear-gradient(135deg, #5d91ec, #866cf6); color: #fff; font-weight: 600; }
+.aio-dl em { margin-left: auto; font-style: normal; color: #8e8e93; font: 9.5px/1 var(--font-mono); }
+.aio-dl code { font: 9.5px/1 var(--font-mono); color: #c7c7cc; background: #1a1a1c; padding: 2px 5px; border-radius: 5px; }

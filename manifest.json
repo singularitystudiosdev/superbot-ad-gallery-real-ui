@@ -64,6 +64,14 @@
     "thumb": "assets/shots/do-that-too-superbot-9b4bf902.png"
   },
   {
+    "id": "all-in-one-superbot-7c8f2a41",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "four errands · one chat",
+    "src": "animations/all-in-one-superbot-7c8f2a41/",
+    "thumb": "assets/shots/all-in-one-superbot-7c8f2a41.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

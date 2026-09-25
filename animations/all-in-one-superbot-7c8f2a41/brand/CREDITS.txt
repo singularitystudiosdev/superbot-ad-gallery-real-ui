@@ -1,0 +1,28 @@
+brand/ CREDITS: every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the tool superbot hands the
+errand to) and unaltered except for the colour noted. Fetched 2026-09-24.
+
+GOOGLE GEMINI (handoff row: 'switching to gemini')
+  gemini-logo.svg    the Gemini sparkle, from simple-icons v13 (icons/googlegemini.svg,
+                     https://cdn.jsdelivr.net/npm/simple-icons@13/icons/googlegemini.svg), which ships CC0 1.0.
+                     Rendered white on the Gemini blue -> violet -> rose gradient in scenes/chat.css. Trademarks of Google LLC.
+
+CURSOR (handoff row: 'switching to cursor')
+  cursor-logo.svg    General Logos/Cube/SVG/CUBE_25D.svg (the 2.5D cube), copied unmodified from the official brand kit zip
+                     https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/brand/cursor-brand-assets.zip,
+                     linked from https://cursor.com/brand. Trademarks of Anysphere, Inc.
+                     (cursor-wordmark.svg is carried over unmodified from ../do-that-too but is not used here.)
+
+DOORDASH (handoff row: 'connecting to doordash')
+  doordash-logo.svg  the dash logomark, the inline <svg viewBox="0 0 99.5 56.5"> from the www.doordash.com header.
+                     Paths verbatim; the site paints it with a CSS variable, so the fill was set to DoorDash Red #FF3008.
+                     Trademarks of DoorDash, Inc. (doordash-wordmark.svg is carried over but not used here.)
+
+MEME IMAGE (beat 1: the meme superbot 'generated')
+  img/muse-meme.png  supplied by the client for this spot (the '40 unread notifications from MUSE' meme).
+                     Not a superbot asset; rights sit with its author. Included because the ad's first errand is
+                     'make me a muse meme' and the brief specified this exact image as the result.
+
+SUPERBOT
+  The mascot on the end card, in the chat sidebar, in the 'switching to superbot' row and in the composer is
+  ../../assets/sb-mark-live.{css,js} (first party).

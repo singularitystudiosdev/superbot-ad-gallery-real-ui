@@ -51,7 +51,12 @@ const phoneClock = (u) => {
 const U_SETTLED = PH_TAB.findIndex((v) => v >= AD_SETTLED) * PH_DT;   // scene-seconds from launch to the settled sheet
 B.pullA = Math.round((B.launch + U_SETTLED + 0.15) * 100) / 100;      // pull back to the chat+phone framing
 B.pullB = Math.round((B.pullA + 1.05) * 100) / 100;
-B.dur = Math.round((B.pullB + 0.5) * 100) / 100;
+B.camTA = Math.round((B.pullB - 0.25) * 100) / 100;               // ease toward the top-right Publish button
+B.camTB = Math.round((B.pullB + 0.7) * 100) / 100;
+B.pub = Math.round((B.pullB + 0.8) * 100) / 100;                  // pointer presses Publish
+B.dur = Math.round((B.pub + 2.15) * 100) / 100;                   // popover + domain, then ~1s settled hold
+const HOST = 'appling.superbot.sh';
+const LOCK = '<svg class="lucide" viewBox="0 0 24 24"><rect x="4.5" y="11" width="15" height="10" rx="2.2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/></svg>';
 const AD_DUR = 9.8;
 const PH_W = 432, PH_H = 880;          // phone design box (incl. side buttons), screen is 390x844 inside
 
@@ -133,10 +138,26 @@ export default {
     cEl.classList.add('bp-cursor');
     refs.win.appendChild(cEl);
 
+    // Publish button: two stacked groups (rocket + Publish / check + Published!) for the Ordered!-style press
+    const pub = refs.publish;
+    const rk = pub.querySelector('.pub-ic svg');
+    pub.classList.add('bp-pub');
+    pub.innerHTML = `<span class="bp-pg bp-pg-a"><span class="bp-pic">${rk ? rk.outerHTML : ''}</span><span class="bp-pl">Publish</span></span>` +
+      `<span class="bp-pg bp-pg-b"><svg class="lucide bp-ck" viewBox="0 0 24 24"><path class="bp-ck-p" pathLength="23" d="M4.5 12.5l5 5L19.5 7"/></svg><span class="bp-pl">Published!</span></span><i class="pub-shine"></i>`;
+    // the live address popover that grows out under the button
+    const pop = document.createElement('div');
+    pop.className = 'bp-pop';
+    pop.innerHTML = `<i class="bp-pop-caret"></i><div class="bp-pop-top"><i class="bp-pop-dot"><b></b></i><span>Live on the web</span></div>` +
+      `<div class="bp-pop-url">${LOCK}<span class="bp-pop-host"></span></div>`;
+    refs.win.appendChild(pop);
+
     S = {
       refs, phone, iframe, cEl, dot, ub, wUser, wReply, replyP, chips, wFin, finP, wCard,
       cover: q('.bp-cover'), icon: q('.bp-icon'), dim: q('.bp-dim'), pie: q('.bp-pie'), pieRing: q('.bp-pie-ring'), pieFill: q('.bp-pie-fill'),
       caption: q('.bp-caption'), l1: q('.bp-label .l1'), l2: q('.bp-label .l2'), off: q('.bp-off'),
+      pub, gA: pub.querySelector('.bp-pg-a'), gB: pub.querySelector('.bp-pg-b'), pic: pub.querySelector('.bp-pic'),
+      ck: pub.querySelector('.bp-ck'), ckP: pub.querySelector('.bp-ck-p'), shine: pub.querySelector('.pub-shine'),
+      pop, popHost: pop.querySelector('.bp-pop-host'), popDot: pop.querySelector('.bp-pop-dot'),
       layoutW: -1, geo: null, ready: false, lastPT: NaN, last: {},
     };
     iframe.addEventListener('load', () => { S.lastPT = NaN; });
@@ -172,7 +193,14 @@ export default {
       refs.composer.classList.remove('bp-empty');
       refs.composer.classList.toggle('bp-focus', t < B.sentAt + 0.8);
     }
-    if (G.cur) {
+    if (G.cur && t >= B.camTA - 0.05) {
+      const pk = G.cur.pub;
+      const pt = path(t, [
+        { t: B.camTA, x: pk.x0, y: pk.y0 },
+        { t: B.pub - 0.14, x: pk.x, y: pk.y },
+      ]);
+      placeCursor(S.cEl, pt.x, pt.y, press(t, B.pub), seg(t, B.camTA, B.camTA + 0.25) * (1 - seg(t, B.pub + 0.45, B.pub + 0.8)));
+    } else if (G.cur) {
       const pt = path(t, [
         { t: 0, x: G.cur.rest.x, y: G.cur.rest.y },
         { t: B.sendAt - 0.4, x: G.cur.rest.x, y: G.cur.rest.y },
@@ -206,24 +234,33 @@ export default {
 
     // ---------------- preview head ----------------
     const live = t >= B.launch;
-    setText(refs.previewState, 'ps', live ? 'iPhone 16 · Live' : t >= B.building ? 'Building' : 'Ready');
+    setText(refs.previewState, 'ps', t >= B.pub + 0.6 ? HOST + ' · Live' : live ? 'iPhone 16 · Live' : t >= B.building ? 'Building' : 'Ready');
     S.dot.className = 'bp-live' + (live ? ' on' : t >= B.building ? ' busy' : '');
 
     // ---------------- the phone ----------------
     renderPhone(t);
 
+    // ---------------- Publish press + live address ----------------
+    renderPublish(t);
+
     // ---------------- camera ----------------
     // two framings: F = chat + phone (~1.3x, slow eased creep), P = the phone filling ~88% of the frame
     // (eased hold drift). The push/pull blend between them in log-zoom; every move eases in and out.
+    // a third framing T = the top-right Publish button + its popover (~1.7x) takes over after the pull-back.
     const sm = (x) => x * x * (3 - 2 * x);
-    const zF = G.z0 * (0.975 + 0.05 * sm(seg(t, 0, B.pushB)) + 0.025 * sm(seg(t, B.pullA, B.dur)));
+    const zF = G.z0 * (0.975 + 0.05 * sm(seg(t, 0, B.pushB)) + 0.025 * sm(seg(t, B.pullA, B.camTB)));
+    const zT = G.zT * (1 + 0.02 * sm(seg(t, B.camTB, B.dur)));
     const zP = G.S * (1 + 0.03 * sm(seg(t, B.pushB, B.pullA)));
+    const wT = inOutCubic(seg(t, B.camTA, B.camTB));
+    const zB = Math.exp(lerp(Math.log(zF), Math.log(zT), wT));
+    const ccx = (c, zz, span) => clamp(c, span / (2 * zz), span - span / (2 * zz));   // keep the window covering the frame
+    const bcx = lerp(ccx(G.fx, zF, W), ccx(G.tcx, G.zT, W), wT), bcy = lerp(ccx(G.fy, zF, H), ccx(G.tcy, G.zT, H), wT);
     const inF = inOutCubic(seg(t, B.pushA, B.pushB));
     const outF = inOutCubic(seg(t, B.pullA, B.pullB));
     const f01 = inF * (1 - outF);
-    const z = Math.exp(lerp(Math.log(zF), Math.log(zP), f01));
-    const wv = Math.abs(zP - zF) > 1e-6 ? clamp((z - zF) / (zP - zF)) : f01;   // focus follows the zoom
-    const fcx = lerp(G.fx, G.cx, wv), fcy = lerp(G.fy, G.cy, wv);
+    const z = Math.exp(lerp(Math.log(zB), Math.log(zP), f01));
+    const wv = Math.abs(zP - zB) > 1e-6 ? clamp((z - zB) / (zP - zB)) : f01;   // focus follows the zoom
+    const fcx = lerp(bcx, G.cx, wv), fcy = lerp(bcy, G.cy, wv);
     let tx = W / 2 - z * fcx, ty = H / 2 - z * fcy;
     tx = clamp(tx, W - z * W, 0); ty = clamp(ty, H - z * H, 0);
     const capV = (1 - clamp(f01 * 3)).toFixed(3);
@@ -285,7 +322,26 @@ function layout(W, H) {
   const L = Math.min(fb.x, cbr.x) - m, T = Math.min(fb.y, pr.y) - m * 0.5;
   const R = Math.max(pr.x + pr.w, fb.x + fb.w) + m * 2.5, Bo = Math.max(cbr.y + cbr.h, pr.y + pr.h) + m * 0.5;
   const z0 = clamp(Math.min(W / (R - L), (H * 1.06) / (Bo - T), 1.35), 1, 1.35);
-  S.geo = { cx: pr.cx, cy: pr.cy, S: targetH / pr.h, cur, z0, fx: (L + R) / 2, fy: (T + Bo) / 2 };
+  // Publish button: widths of both states (groups are absolutely stacked inside), height from its Preview sibling
+  const pub = S.pub, csb = getComputedStyle(pub);
+  pub.style.transform = 'none';
+  const padX = parseFloat(csb.paddingLeft) + parseFloat(csb.paddingRight);
+  const prevBtn = pub.parentNode.querySelector('.preview-badge');
+  S.pubW = [S.gA.offsetWidth + padX, S.gB.offsetWidth + padX];
+  pub.style.height = (prevBtn ? prevBtn.offsetHeight : 26) + 'px';
+  pub.style.width = S.pubW[0].toFixed(2) + 'px';
+  const pb = boxIn(pub, refs.win);                                  // .sbx layout px
+  cur.pub = { x0: pb.cx - 190, y0: pb.cy + 170, x: pb.x + pb.w * 0.84, y: pb.cy + 5 };
+  S.pop.style.right = (refs.win.offsetWidth - (pb.x + pb.w)).toFixed(2) + 'px';
+  S.pop.style.top = (pb.y + pb.h + 11).toFixed(2) + 'px';
+  S.pop.style.setProperty('--caret-r', (pb.w * 0.5 - 6).toFixed(1) + 'px');
+  // top-right framing: button + popover big, phone partly visible
+  const pbs = boxIn(pub, refs.root);
+  const zT = clamp(Math.min(1.72, W / (320 * scaleWin)), 1.2, 1.72);
+  const fw = W / zT, fh = H / zT;
+  const right = pbs.x + pbs.w + 26 * scaleWin, top = pbs.y - 22 * scaleWin;
+  S.geo = { cx: pr.cx, cy: pr.cy, S: targetH / pr.h, cur, z0, fx: (L + R) / 2, fy: (T + Bo) / 2,
+    zT, tcx: right - fw / 2, tcy: top + fh / 2 };
   S.layoutW = W;
   refs.root.style.transform = prev;
   S.last.cam = prev;
@@ -322,4 +378,43 @@ function renderPhone(t) {
   const lab = seg(t, B.pieB, B.pieB + 0.14);
   S.l1.style.opacity = (pop > 0 ? 1 - lab : 0).toFixed(3);
   S.l2.style.opacity = lab.toFixed(3);
+}
+
+// the Ordered!-style press, scaled to the Publish pill: dip ~5%, shine sweep, rocket rotates out,
+// check draws and pops, "Published!" slides in; then the live-address popover grows out underneath
+function renderPublish(t) {
+  const P = B.pub;
+  const k = (v) => v.toFixed(4);
+  const dip = press(t, P);
+  const bump = Math.sin(Math.PI * seg(t, P + 0.12, P + 0.5));
+  S.pub.style.transform = `scale(${k(1 - 0.05 * dip + 0.03 * bump)})`;
+  const wg = outCubic(seg(t, P + 0.04, P + 0.4));
+  S.pub.style.width = (S.pubW ? lerp(S.pubW[0], S.pubW[1], wg) : 0).toFixed(2) + 'px';
+  const sh = seg(t, P + 0.02, P + 0.5);
+  S.shine.style.opacity = sh > 0 && sh < 1 ? '1' : '0';
+  S.shine.style.transform = `translateX(${(-160 + 520 * outCubic(sh)).toFixed(1)}%) skewX(-20deg)`;
+  const ro = seg(t, P + 0.04, P + 0.3), roE = outCubic(ro);
+  S.gA.style.opacity = k(1 - roE);
+  S.gA.style.transform = `translate(-50%, calc(-50% - ${(6 * roE).toFixed(2)}px))`;
+  S.pic.style.transform = `rotate(${(-40 * ro).toFixed(2)}deg) scale(${k(1 - 0.6 * ro)})`;
+  const gi = outCubic(seg(t, P + 0.14, P + 0.4));
+  S.gB.style.opacity = k(gi);
+  S.gB.style.transform = `translate(-50%, calc(-50% + ${((1 - gi) * 6).toFixed(2)}px))`;
+  const ck = seg(t, P + 0.16, P + 0.42);
+  S.ckP.style.strokeDashoffset = (23 * (1 - outCubic(ck))).toFixed(2);
+  const cp = seg(t, P + 0.14, P + 0.4);
+  S.ck.style.transform = `scale(${k(cp <= 0 ? 0.55 : lerp(0.55, 1, outBack(cp)))})`;
+
+  // popover
+  const gp = seg(t, P + 0.5, P + 0.85);
+  S.pop.style.visibility = gp > 0 ? 'visible' : 'hidden';
+  S.pop.style.opacity = k(clamp(gp * 2.2));
+  S.pop.style.transform = `translateY(${(-(1 - outCubic(gp)) * 6).toFixed(2)}px) scale(${k(lerp(0.86, 1, gp <= 0 ? 0 : outBack(gp)))})`;
+  const hs = typed(HOST, P + 0.68, 45, t);
+  setHTML(S.popHost, 'host', esc(hs.text) + (hs.n > 0 && !hs.done ? '<i class="rc-caret"></i>' : ''));
+  const live = hs.done;
+  S.popDot.classList.toggle('on', live);
+  const ph = live ? ((t - (P + 1.1)) % 1.4 + 1.4) % 1.4 / 1.4 : 0;
+  S.popDot.firstChild.style.transform = `scale(${k(1 + 1.6 * ph)})`;
+  S.popDot.firstChild.style.opacity = live ? k(0.55 * (1 - ph)) : '0';
 }

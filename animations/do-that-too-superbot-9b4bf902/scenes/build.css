@@ -98,3 +98,29 @@
 
 .bld .bp-caption { position: absolute; left: -100px; right: -100px; top: 904px; text-align: center; color: #8e8e93;
   font: 500 26px/1 Inter, system-ui, sans-serif; letter-spacing: .01em; white-space: nowrap; }
+
+/* ---------- Publish press (the dash "Ordered!" effect, scaled to the header pill) ---------- */
+.bld .sbpub button.project-badge.pub-cta.bp-pub { display: inline-block; flex: none; padding: 0 16px 0 13px; transform-origin: 50% 50%; vertical-align: middle; }
+.bld .bp-pub .bp-pg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center;
+  gap: 7px; white-space: nowrap; z-index: 2; line-height: 1; }
+.bld .bp-pub .bp-pg-b { opacity: 0; font-weight: 800; letter-spacing: .01em; }
+.bld .bp-pub .bp-pic { position: relative; width: 14px; height: 14px; flex: none; display: inline-block; transform-origin: 50% 50%; }
+.bld .bp-pub .bp-pic svg { position: absolute; inset: 0; width: 14px; height: 14px; stroke-width: 2.2; }
+.bld .bp-pub .bp-ck { width: 14px; height: 14px; flex: none; stroke-width: 2.8; transform-origin: 50% 50%; transform: scale(.55); }
+.bld .bp-pub .bp-ck-p { stroke-dasharray: 23; stroke-dashoffset: 23; }
+
+/* ---------- live address popover under the Publish button ---------- */
+.bld .bp-pop { position: absolute; z-index: 40; visibility: hidden; opacity: 0; transform-origin: calc(100% - var(--caret-r, 40px)) 0;
+  padding: 9px 13px 10px 12px; border-radius: 12px; background: linear-gradient(180deg, #17191d 0%, #111316 100%);
+  border: 1px solid rgba(255, 255, 255, .1);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .55), 0 0 0 1px rgba(0, 0, 0, .5), 0 0 22px rgba(110, 124, 242, .16), inset 0 1px 0 rgba(255, 255, 255, .06);
+  font-family: Inter, system-ui, sans-serif; color: #e9ebf0; white-space: nowrap; }
+.bld .bp-pop-caret { position: absolute; top: -5px; right: var(--caret-r, 40px); width: 9px; height: 9px; transform: rotate(45deg);
+  background: #17191d; border-left: 1px solid rgba(255, 255, 255, .1); border-top: 1px solid rgba(255, 255, 255, .1); }
+.bld .bp-pop-top { display: flex; align-items: center; gap: 6px; font-size: 9.5px; font-weight: 600; color: #9aa0ab; letter-spacing: .02em; margin-bottom: 5px; }
+.bld .bp-pop-dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: #3a3d44; flex: none; }
+.bld .bp-pop-dot b { position: absolute; inset: 0; border-radius: 50%; background: #30d158; opacity: 0; }
+.bld .bp-pop-dot.on { background: #30d158; box-shadow: 0 0 8px rgba(48, 209, 88, .55); }
+.bld .bp-pop-url { display: flex; align-items: center; gap: 7px; min-width: 178px; font-size: 14px; font-weight: 650; color: #fff; letter-spacing: .005em; }
+.bld .bp-pop-url .lucide { width: 13px; height: 13px; flex: none; fill: none; stroke: #30d158; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+.bld .bp-pop-url .rc-caret { display: inline-block; width: 1.5px; height: 14px; margin-left: 1px; vertical-align: -2px; background: #fff; }

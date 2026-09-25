@@ -24,6 +24,14 @@
     "thumb": "assets/shots/tabs-chaos-superbot-6f50ea56.png"
   },
   {
+    "id": "context-carries-superbot-12d6385c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "CONTEXT CARRIES",
+    "src": "animations/context-carries-superbot-12d6385c/",
+    "thumb": "assets/shots/context-carries-superbot-12d6385c.png"
+  },
+  {
     "id": "youtube-refusal-superbot-7f2c9a41",
     "type": "animation",
     "group": "Ad spots",

@@ -67,6 +67,7 @@ const more = [
   ['free-beta-flash-v04-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v04.html', 'FREE BETA SUPERBOT FLASH · v4 strobe beats', 'Ad spots'],
   ['free-beta-flash-box-ticker-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/box-ticker.html', 'FREE BETA SUPERBOT FLASH · box logo ticker', 'Ad spots'],
     ['tabs-chaos-superbot-6f50ea56', 'tabs-chaos-superbot-6f50ea56/', 'KILL THE TABS', 'Ad spots'],
+  ['context-carries-superbot-12d6385c', 'context-carries-superbot-12d6385c/', 'CONTEXT CARRIES', 'Ad spots'],
   ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
   ['waffles-delivery-superbot-87a583a1', 'waffles-delivery-superbot-87a583a1/', 'order me waffles pls', 'Ad spots'],
   ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],

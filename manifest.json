@@ -80,6 +80,14 @@
     "thumb": "assets/shots/agent-switch-superbot-4207ac22.png"
   },
   {
+    "id": "context-switch-superbot-c93ff0a4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Claude out of usage · one tap to ChatGPT · rules · refusal",
+    "src": "animations/context-switch-superbot-c93ff0a4/",
+    "thumb": "assets/shots/context-switch-superbot-c93ff0a4.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

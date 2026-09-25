@@ -1,0 +1,107 @@
+/* scene 'tabs': tabs-chaos's Chrome (macOS, dark, full bleed, zoom 1.25) + sphere-intro's tiles and flip.
+   Every selector scoped under :is(#s-tabs,.hbx). No transitions or keyframes: tabs.js sets every moving value from lt. */
+@import url("tabs-assets/hub.css"); /* tabs-chaos's Superbot hub stylesheets, scoped under :is(#s-tabs,.hbx) .sbsite (generated) */
+:is(#s-tabs,.hbx) { background: #000; }
+:is(#s-tabs,.hbx) .tbs-root {
+  --ch-frame: #202124; --ch-tool: #35363a; --ch-text: #e8eaed; --ch-text-2: #bdc1c6; --ch-omni: #202124; --ch-sep: rgba(255,255,255,.22);
+  position: absolute; inset: 0; overflow: hidden; background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+:is(#s-tabs,.hbx) .tbs-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- the camera: scales about the stage centre ---------- */
+:is(#s-tabs,.hbx) .cam { position: absolute; inset: 0; transform-origin: 0 0; }
+:is(#s-tabs,.hbx) .browser {
+  position: absolute; left: 0; top: 0; width: 1536px; height: 864px; transform: scale(1.25); transform-origin: 0 0;
+  background: var(--ch-frame); color: var(--ch-text); display: grid; grid-template-rows: 40px 40px minmax(0, 1fr); overflow: hidden;
+}
+
+/* ---------- the tab strip (tabs laid out absolutely by tabs.js) ---------- */
+:is(#s-tabs,.hbx) .strip { position: relative; height: 40px; }
+:is(#s-tabs,.hbx) .strip .lights { position: absolute; left: 13px; top: 14px; display: flex; gap: 8px; }
+:is(#s-tabs,.hbx) .strip .lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.2); }
+:is(#s-tabs,.hbx) .strip .lights i:nth-child(2) { background: #febc2e; }
+:is(#s-tabs,.hbx) .strip .lights i:nth-child(3) { background: #28c840; }
+:is(#s-tabs,.hbx) .strip .tabsearch { position: absolute; right: 12px; top: 8px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+:is(#s-tabs,.hbx) .strip svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+:is(#s-tabs,.hbx) .strip .tabsearch svg { width: 14px; height: 14px; }
+:is(#s-tabs,.hbx) .tab { position: absolute; left: 0; top: 6px; height: 34px; border-radius: 8px 8px 0 0; color: var(--ch-text-2); font-size: 12px; white-space: nowrap; }
+:is(#s-tabs,.hbx) .tab .in { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
+:is(#s-tabs,.hbx) .tab.on { background: var(--ch-tool); color: var(--ch-text); z-index: 2; }
+:is(#s-tabs,.hbx) .tab.on::before, :is(#s-tabs,.hbx) .tab.on::after { content: ""; position: absolute; bottom: 0; width: 8px; height: 8px; background: radial-gradient(circle at 0 0, transparent 8px, var(--ch-tool) 8.5px); }
+:is(#s-tabs,.hbx) .tab.on::before { left: -8px; transform: scaleX(-1); }
+:is(#s-tabs,.hbx) .tab.on::after { right: -8px; }
+:is(#s-tabs,.hbx) .tab .fav { position: absolute; left: 0; top: 9px; width: 16px; height: 16px; }
+:is(#s-tabs,.hbx) .tab .fav .tl { transform: scale(.25); transform-origin: 0 0; }
+:is(#s-tabs,.hbx) .tab .tt { position: absolute; left: 0; top: 0; line-height: 34px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 14px), transparent); }
+:is(#s-tabs,.hbx) .tab .x { position: absolute; right: 8px; top: 9px; width: 16px; height: 16px; border-radius: 50%; display: grid; place-items: center; }
+:is(#s-tabs,.hbx) .tab .x svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+:is(#s-tabs,.hbx) .tab .sep { position: absolute; right: -1px; top: 9px; width: 1px; height: 16px; background: var(--ch-sep); }
+:is(#s-tabs,.hbx) .newtab { position: absolute; left: 0; top: 7px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+:is(#s-tabs,.hbx) .newtab svg { width: 16px; height: 16px; }
+
+/* ---------- toolbar ---------- */
+:is(#s-tabs,.hbx) .toolbar { display: flex; align-items: center; gap: 4px; padding: 0 8px 0 6px; background: var(--ch-tool); min-width: 0; }
+:is(#s-tabs,.hbx) .tb { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+:is(#s-tabs,.hbx) .tb.dim { color: #7a7d81; }
+:is(#s-tabs,.hbx) .tb svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+:is(#s-tabs,.hbx) .tb.profile { width: 26px; height: 26px; margin: 0 4px; background: #8ab4f8; color: #202124; font: 600 13px/26px -apple-system, system-ui, sans-serif; text-align: center; display: block; }
+:is(#s-tabs,.hbx) .omni { flex: 1; min-width: 0; height: 32px; margin: 0 4px; border-radius: 16px; background: var(--ch-omni); display: flex; align-items: center; gap: 10px; padding: 0 12px 0 10px; color: var(--ch-text); font-size: 14px; }
+:is(#s-tabs,.hbx) .omni .site { width: 20px; height: 20px; display: grid; place-items: center; color: var(--ch-text-2); }
+:is(#s-tabs,.hbx) .omni .site svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+:is(#s-tabs,.hbx) .omni .url { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+:is(#s-tabs,.hbx) .omni .url b { font-weight: 400; color: var(--ch-text); }
+:is(#s-tabs,.hbx) .omni .star { width: 20px; height: 20px; color: var(--ch-text-2); }
+:is(#s-tabs,.hbx) .omni .star svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+
+/* ---------- the pages (one per tab, stacked in opening order) ---------- */
+:is(#s-tabs,.hbx) .pane { position: relative; overflow: hidden; background: #202124; }
+:is(#s-tabs,.hbx) .pg { position: absolute; inset: 0; background: var(--p-bg); color: var(--p-fg); }
+:is(#s-tabs,.hbx) .pg .side { position: absolute; left: 0; top: 0; bottom: 0; width: var(--p-side); background: var(--p-side-bg); padding: 14px 10px; display: grid; align-content: start; gap: 2px; color: var(--p-muted); font-size: 13.5px; box-sizing: border-box; }
+:is(#s-tabs,.hbx) .pg .side .r { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; white-space: nowrap; overflow: hidden; }
+:is(#s-tabs,.hbx) .pg .side .r.on { background: rgba(255,255,255,.08); color: var(--p-fg); }
+:is(#s-tabs,.hbx) .pg .side .r i { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid currentColor; opacity: .7; box-sizing: border-box; }
+:is(#s-tabs,.hbx) .pg .side .cap { margin: 14px 10px 4px; font-size: 12px; }
+:is(#s-tabs,.hbx) .pg .side .c { padding: 6px 10px; border-radius: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: .85; }
+:is(#s-tabs,.hbx) .pg .mid { position: absolute; left: var(--p-side); right: 0; top: 0; bottom: 0; display: grid; place-items: center; align-content: center; gap: 28px; padding: 0 24px 40px; }
+:is(#s-tabs,.hbx) .browser.narrow .pg .side { display: none; }
+:is(#s-tabs,.hbx) .browser.narrow .pg .mid, :is(#s-tabs,.hbx) .browser.narrow .pg .foot { left: 0; }
+:is(#s-tabs,.hbx) .pg .greet { display: flex; align-items: center; gap: 14px; font-size: var(--p-gs); font-weight: var(--p-gw); letter-spacing: -.02em; color: var(--p-fg); font-family: var(--p-gfont); text-align: center; white-space: nowrap; }
+:is(#s-tabs,.hbx) .pg .greet.grad span { background: var(--p-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+:is(#s-tabs,.hbx) .pg .greet .mk { position: relative; flex: none; width: 40px; height: 40px; }
+:is(#s-tabs,.hbx) .pg .greet .mk .tl { transform: scale(.625); transform-origin: 0 0; }
+:is(#s-tabs,.hbx) .pg .comp { width: min(760px, 88%); min-height: 54px; border-radius: var(--p-cr); background: var(--p-comp); border: 1px solid var(--p-cb); display: flex; align-items: center; gap: 10px; padding: 0 8px 0 18px; color: var(--p-muted); font-size: 15px; box-sizing: border-box; }
+:is(#s-tabs,.hbx) .pg .comp .ph { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+:is(#s-tabs,.hbx) .pg .comp .go { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--p-acc); }
+:is(#s-tabs,.hbx) .pg .comp .go.sq { border-radius: 8px; }
+:is(#s-tabs,.hbx) .pg .foot { position: absolute; left: var(--p-side); right: 0; bottom: 14px; text-align: center; font-size: 12px; color: var(--p-muted); }
+:is(#s-tabs,.hbx) .pg .btn { padding: 12px 22px; border-radius: 10px; background: #fff; color: #000; font-size: 15px; font-weight: 600; }
+
+/* the tab counter (tabs-chaos #tabcount) */
+:is(#s-tabs,.hbx) .tabcount { position: absolute; right: 48px; top: 96px; padding: 8px 14px; border-radius: 10px; background: rgba(32,33,36,.96); color: var(--ch-text); font: 500 13px/18px -apple-system, system-ui, sans-serif; box-shadow: 0 6px 20px rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.08); opacity: 0; z-index: 50; }
+:is(#s-tabs,.hbx) .tabcount b { color: #f28b82; font-variant-numeric: tabular-nums; }
+
+/* ---------- a tile: the rail's tile rules (brand ground, glyph at 57%, bleed art, logo at 60%) ---------- */
+:is(#s-tabs,.hbx) .tl { position: absolute; left: 0; top: 0; width: 64px; height: 64px; border-radius: 19px; display: grid; place-items: center; overflow: hidden; box-sizing: border-box; }
+:is(#s-tabs,.hbx) .tl.hair { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.16); }
+:is(#s-tabs,.hbx) .tl svg { width: 37px; height: 37px; fill: currentColor; }
+:is(#s-tabs,.hbx) .tl.bleed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+:is(#s-tabs,.hbx) .tl.logo img { width: 60%; height: 60%; object-fit: contain; display: block; }
+:is(#s-tabs,.hbx) .tl b { font: 800 32px/1 "SF Pro Rounded", -apple-system, system-ui, sans-serif; letter-spacing: -.02em; }
+
+/* ---------- the sphere, the glow, the mark ---------- */
+:is(#s-tabs,.hbx) .orb { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+:is(#s-tabs,.hbx) .orb .tl { transform-origin: 0 0; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+:is(#s-tabs,.hbx) .orb .tl.hair { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.16), 0 6px 18px rgba(0,0,0,.35); }
+:is(#s-tabs,.hbx) .glow {
+  position: absolute; left: 50%; top: 540px; width: 820px; height: 820px; border-radius: 50%; opacity: 0; z-index: 4; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(106,31,216,.42), rgba(43,107,255,.18) 45%, rgba(192,38,211,.06) 70%, transparent 100%);
+}
+:is(#s-tabs,.hbx) .mark { position: absolute; left: 810px; top: 390px; width: 300px; height: 300px; z-index: 6; visibility: hidden; transform-origin: 50% 50%; user-select: none; }
+
+/* ---------- the Superbot window (tabs-chaos's site stage + #hub; rules in tabs-assets/hub.css) ---------- */
+:is(#s-tabs,.hbx) .sbsite { position: absolute; left: 0; top: 0; width: 1205px; height: 753.125px; transform-origin: 0 0; z-index: 3; visibility: hidden; }
+:is(#s-tabs,.hbx) .sbsite .stage { width: 100%; height: 100%; aspect-ratio: auto; background-color: transparent; border-color: transparent; }
+:is(#s-tabs,.hbx) .sbsite .stage-bar { opacity: 0; }
+:is(#s-tabs,.hbx) .sbsite .body { grid-template-columns: minmax(0, 1fr); } /* the site's margin column is closed ("perched"), as in the ad's end state */
+:is(#s-tabs,.hbx) .sbsite .rail-item.sb.sel::before { opacity: var(--sel-a, 0); } /* the selection pill fades in with the sidebar */

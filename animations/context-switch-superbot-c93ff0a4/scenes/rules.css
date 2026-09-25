@@ -1,0 +1,35 @@
+/* rules.css: the rules card superbot answers with, in the hub's own card idiom (#181818 surface, #262626 line) */
+:is(#z,.hbx) .sbsite .rl-card { width: 560px; box-sizing: border-box; padding: 12px 12px 10px; border-radius: 14px; background: #141416; box-shadow: inset 0 0 0 1px #262626, 0 12px 30px rgba(0,0,0,.25); color: #ececec; font-size: 11px; }
+:is(#z,.hbx) .sbsite .rl-h { display: flex; align-items: center; gap: 8px; padding: 0 2px 9px; }
+:is(#z,.hbx) .sbsite .rl-h .vz-tile { width: 20px; height: 20px; border-radius: 6px; }
+:is(#z,.hbx) .sbsite .rl-h .vz-tile .vz-ic { width: 12px; height: 12px; }
+:is(#z,.hbx) .sbsite .rl-h b { font-size: 12px; font-weight: 650; }
+:is(#z,.hbx) .sbsite .rl-sub { color: #9a9a9a; }
+:is(#z,.hbx) .sbsite .rl-tok { margin-left: auto; padding: 3px 9px; border-radius: 999px; background: #1f1f22; color: #cfcfcf; font-size: 10.5px; }
+:is(#z,.hbx) .sbsite .rl-tok .n { font-variant-numeric: tabular-nums; color: #fff; font-weight: 650; }
+:is(#z,.hbx) .sbsite .rl-meter { height: 4px; margin: 0 2px 8px; border-radius: 999px; background: #232326; overflow: hidden; }
+:is(#z,.hbx) .sbsite .rl-meter i { display: block; height: 100%; border-radius: 999px; background: var(--storm-x); transform-origin: 0 50%; }
+:is(#z,.hbx) .sbsite .rl-rows { display: flex; flex-direction: column; }
+:is(#z,.hbx) .sbsite .rl-row { box-sizing: border-box; height: 30px; overflow: hidden; display: flex; align-items: center; gap: 9px; padding: 0 8px; border-radius: 8px; }
+:is(#z,.hbx) .sbsite .rl-row:nth-child(odd) { background: rgba(255,255,255,.025); }
+:is(#z,.hbx) .sbsite .rl-box { flex: none; width: 14px; height: 14px; border-radius: 4px; background: var(--storm-action); display: grid; place-items: center; }
+:is(#z,.hbx) .sbsite .rl-box svg { width: 10px; height: 10px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+:is(#z,.hbx) .sbsite .rl-doc { flex: none; width: 13px; height: 13px; fill: none; stroke: #9a9a9a; stroke-width: 1.8; stroke-linejoin: round; }
+:is(#z,.hbx) .sbsite .rl-n { position: relative; font: 500 11px/1 var(--mono); color: #ececec; }
+:is(#z,.hbx) .sbsite .rl-strike { position: absolute; left: -2px; right: -2px; top: 50%; height: 1.5px; margin-top: -.5px; background: #ececec; border-radius: 1px; transform-origin: 0 50%; transform: scaleX(0); }
+:is(#z,.hbx) .sbsite .rl-why { padding: 2px 7px; border-radius: 999px; background: rgba(217,184,107,.1); color: #d9b86b; font-size: 9.5px; font-weight: 550; white-space: nowrap; }
+:is(#z,.hbx) .sbsite .rl-sz { margin-left: auto; font: 500 10.5px/1 var(--mono); color: #9a9a9a; }
+:is(#z,.hbx) .sbsite .rl-more { display: flex; align-items: center; gap: 8px; padding: 8px 10px 2px; color: #9a9a9a; font-size: 10.5px; }
+:is(#z,.hbx) .sbsite .rl-more svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+:is(#z,.hbx) .sbsite .rl-foot { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 10px 2px 0; border-top: 1px solid #232326; }
+:is(#z,.hbx) .sbsite .rl-save { color: #9a9a9a; font-size: 10.5px; }
+:is(#z,.hbx) .sbsite .rl-save b { color: #ececec; font-weight: 600; }
+:is(#z,.hbx) .sbsite .rl-opt { margin-left: auto; position: relative; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 14px 0 11px; border-radius: 9px; background: var(--storm-action); color: #fff; font-size: 11.5px; font-weight: 700; box-shadow: 0 6px 18px rgba(106,31,216,.35), inset 0 1px 0 rgba(255,255,255,.18); transform-origin: 50% 50%; }
+:is(#z,.hbx) .sbsite .rl-opt .ic-spark { font-size: 11px; line-height: 1; }
+:is(#z,.hbx) .sbsite .rl-opt .ic-spin, :is(#z,.hbx) .sbsite .rl-opt .ic-ok { display: none; width: 12px; height: 12px; }
+:is(#z,.hbx) .sbsite .rl-opt .ic-spin { border-radius: 50%; border: 1.8px solid rgba(255,255,255,.35); border-top-color: #fff; box-sizing: border-box; }
+:is(#z,.hbx) .sbsite .rl-opt .ic-ok svg { width: 12px; height: 12px; fill: none; stroke: #3ddc97; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; display: block; }
+:is(#z,.hbx) .sbsite .rl-opt.busy .ic-spark, :is(#z,.hbx) .sbsite .rl-opt.done .ic-spark { display: none; }
+:is(#z,.hbx) .sbsite .rl-opt.busy .ic-spin { display: block; }
+:is(#z,.hbx) .sbsite .rl-opt.done .ic-ok { display: block; }
+:is(#z,.hbx) .sbsite .rl-opt.done { background: #1f1f22; box-shadow: inset 0 0 0 1px #2e2e31; color: #ececec; }

@@ -1,0 +1,13 @@
+/* claude.css: Claude's empty-state greeting and the thinking marks that sit inside a reply's slot */
+:is(#z,.hbx) .sbsite .vz-greet { position: absolute; left: 0; right: 0; top: 34%; display: flex; align-items: center; justify-content: center; gap: 12px; color: #f5f4ef; }
+:is(#z,.hbx) .sbsite .vz-greet .vz-spark { width: 30px; height: 30px; }
+:is(#z,.hbx) .sbsite .vz-greet .vz-spark .vz-ic { width: 30px; height: 30px; }
+:is(#z,.hbx) .sbsite .vz-greet h2 { margin: 0; font: 400 31px/1.1 ui-serif, "New York", "Iowan Old Style", Georgia, serif; letter-spacing: -.01em; }
+:is(#z,.hbx) .sbsite .vz-m.is-a .vz-b { position: relative; min-height: 22px; }
+:is(#z,.hbx) .sbsite .vz-think { position: absolute; left: 0; top: 0; opacity: 0; transform-origin: 50% 50%; }
+:is(#z,.hbx) .sbsite .vz-think.vz-dot { position: relative; display: inline-block; vertical-align: middle; margin: 0 0 0 3px; }
+:is(#z,.hbx) .sbsite .vz-think.vz-spark { width: 20px; height: 20px; top: 1px; }
+:is(#z,.hbx) .sbsite .vz-think.vz-spark .vz-ic { width: 20px; height: 20px; }
+:is(#z,.hbx) .sbsite .vz-m.is-a .w { opacity: 0; }
+:is(#z,.hbx) .sbsite .vz.v-gpt .vz-m[data-m="a1"] .w { opacity: 1; }
+:is(#z,.hbx) .sbsite .vz-row { box-sizing: border-box; }

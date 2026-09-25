@@ -99,9 +99,5 @@
 }
 #s-tabs .mark { position: absolute; left: 810px; top: 390px; width: 300px; height: 300px; z-index: 6; visibility: hidden; transform-origin: 50% 50%; user-select: none; }
 
-/* ---------- the Superbot window (tabs-chaos's site stage + #hub; rules in tabs-assets/hub.css) ---------- */
-#s-tabs .sbsite { position: absolute; left: 0; top: 0; width: 1205px; height: 753.125px; transform-origin: 0 0; z-index: 3; visibility: hidden; }
-#s-tabs .sbsite .stage { width: 100%; height: 100%; aspect-ratio: auto; background-color: transparent; border-color: transparent; }
-#s-tabs .sbsite .stage-bar { opacity: 0; }
-#s-tabs .sbsite .body { grid-template-columns: minmax(0, 1fr); } /* the site's margin column is closed ("perched"), as in the ad's end state */
-#s-tabs .sbsite .rail-item.sb.sel::before { opacity: var(--sel-a, 0); } /* the selection pill fades in with the sidebar */
+/* ---------- the Superbot window: the renderer's real frames at its 1200x750 viewport (tabs-assets/hub.css) ---------- */
+#s-tabs .sbsite { position: absolute; left: 0; top: 0; width: 1200px; height: 750px; transform-origin: 0 0; z-index: 3; visibility: hidden; }

@@ -5,7 +5,7 @@
 // WAAPI, no CSS animation, no timers; every position below is math on lt.
 import { SYMBOLS } from './tabs-assets/icons.js';
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, CHAT_END, CHAT_WINDOWS } from './tabs-assets/chat.js?v=7';
+import { mountChat, renderChat, CHAT_END, CHAT_WINDOWS } from './tabs-assets/chat.js?v=8';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
 
@@ -135,7 +135,7 @@ const T = {
   glide: 6.70, glideDur: 0.64,             // 4: the whole column glides home as one; the window grounds fade in (520ms)
   rest: 0.38,                              // on landing: sidebar, chat lane, selection pill fade in
   msg: 7.62, msgDur: 0.90,                 // the reply streams in, word by word
-  dur: CHAT_END + 0.2,                     // then the hub plays the Claude -> ChatGPT -> superbot chat (tabs-assets/chat.js)
+  dur: CHAT_END + 0.2,                     // then the hub plays the Claude -> usage limit -> Continue in Superbot chat (tabs-assets/chat.js)
 };
 const LAND = T.glide + T.glideDur;
 const openAt = (k) => (k === 0 ? -1 : k < PRE ? -3 + k * 0.5 : T.open0 + (T.open1 - T.open0) * Math.pow((k - PRE) / (N - 1 - PRE), T.openPow));
@@ -193,15 +193,14 @@ function page(app) {
 // with offsetLeft/Top, which transforms never touch; converted to stage px by the site's own scale)
 function siteGeo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
-  const DW = 1205, k = Math.min(1.43402, (W - 48) / DW);
-  const DH = Math.min(1080 / k, DW * 1.25);
+  const DW = 1200, DH = 750, k = Math.min(1.43402, (W - 48) / DW, 1040 / DH);
   const L = (W - DW * k) / 2, Tp = (1080 - DH * k) / 2;
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';
   el.site.style.transform = `translate(${L.toFixed(3)}px,${Tp.toFixed(3)}px) scale(${k.toFixed(5)})`;
   if (!el.sb.offsetWidth) return null; // not laid out (scene hidden): measure on a later frame
   const off = (n) => { let x = 0, y = 0; while (n && n !== el.site) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; } return { x, y }; };
-  const s = off(el.sb), lastEl = el.drops[el.drops.length - 1], l = off(lastEl);
+  const s = off(el.sb.closest('[data-drop]') || el.sb), lastEl = el.drops[el.drops.length - 1], l = off(lastEl);
   const slotDx = s.x + el.sb.offsetWidth / 2, slotDy = s.y + el.sb.offsetHeight / 2;
   const span = l.y + lastEl.offsetHeight / 2 - slotDy;
   el.geo = { W, k, L, T: Tp, slotDx, slotDy, span, slotX: L + k * slotDx, slotY: Tp + k * slotDy };
@@ -241,10 +240,10 @@ export default {
       <div class="tabcount"><b>3</b> tabs open</div>
     </div>
   </div>
-  <div class="sbsite"><div class="stage"><div class="stage-bar"><i></i><i></i><i></i><span>superbot</span><em class="led"></em></div><div class="body"><div class="arena">${hubMarkup(asset)}</div></div></div></div>
+  <div class="sbsite">${hubMarkup(asset)}</div>
   <div class="glow"></div>
   <div class="orb">${ORDER.map((id) => tile(APPS[id].ic)).join('')}</div>
-  <img class="mark" src="${asset('tile.svg')}" alt="" draggable="false"/>
+  <img class="mark" src="${asset('real/superbot-app-icon-y3N9pe0j.png')}" alt="" draggable="false"/>
 </div>`;
     const q = (s) => section.querySelector(s);
     const qa = (s) => [...section.querySelectorAll(s)];
@@ -253,16 +252,20 @@ export default {
       count: q('.tabcount'), countN: q('.tabcount b'),
       tabs: qa('.strip .tab'), pages: qa('.pane .pg'), orb: qa('.orb .tl'), glow: q('.glow'), mark: q('.mark'),
     };
-    // the hub (tabs-chaos's #hub, verbatim): the rail, its superbot slot, the dropping icons, the rest of the window
-    const hub = q('.sbsite .hub');
-    el.site = q('.sbsite'); el.stage = q('.sbsite .stage'); el.bar = q('.sbsite .stage-bar'); el.hub = hub;
-    el.rail = hub.querySelector('.rail'); el.sb = hub.querySelector('.rail-item.sb');
-    el.drops = [...el.rail.children].filter((n) => n !== el.sb);
-    el.rest = [...hub.querySelectorAll('.inner')].filter((n) => n !== el.rail);
-    el.msg = hub.querySelector('[data-k="h-bot"]');
-    const txt = hub.querySelector('[data-k="h-text"]');
-    txt.innerHTML = txt.textContent.trim().split(/\s+/).map((w) => `<span class="w">${esc(w)}</span>`).join(' ');
-    el.words = [...txt.querySelectorAll('.w')];
+    // the hub: the renderer's real Superbot front (tabs-assets/hub-markup.js, frame s0-home) lands first; its rail
+    // stands under the mark, the rail's own tiles drop, then the rest of the window fades in
+    const hub = q('.sbsite .win');
+    const home = hub.querySelector('.rh[data-state="s0-home"]');
+    el.site = q('.sbsite'); el.hub = hub; el.home = home; el.lights = hub.querySelector('.lights');
+    el.rail = home.querySelector('[data-k="rail"]'); el.sb = home.querySelector('[data-k="sb"]');
+    el.drops = [...el.rail.querySelectorAll('[data-drop]')].filter((n) => !n.contains(el.sb));
+    // everything in the window that is not the rail: the siblings along the rail's path up to the frame
+    el.rest = [];
+    for (let n = el.rail; n && n.parentElement && n !== home; n = n.parentElement) [...n.parentElement.children].forEach((m) => { if (m !== n) el.rest.push(m); });
+    // the rail's opaque ancestors (the renderer's body, #root and hub grid, all rgb(13,13,13)): the grounds that
+    // fade in around the gliding column
+    // (read on the first rendered frame, once real.css is certainly applied)
+    el.grounds = null;
     el.geo = null;
     el.tabParts = el.tabs.map((t) => ({ fav: t.querySelector('.fav'), tt: t.querySelector('.tt'), x: t.querySelector('.x'), sep: t.querySelector('.sep') }));
     el.last = { url: '', count: '', W: 0, act: -1 };
@@ -431,38 +434,36 @@ export default {
     }
     el.site.style.visibility = 'visible';
     const rx = (cx - G.L) / G.k - G.slotDx, ry = (colY - G.T) / G.k - G.slotDy; // design px: slot under the column head
-    el.rail.style.transform = `translate(${(rx * (1 - pGl)).toFixed(3)}px,${(ry * (1 - pGl)).toFixed(3)}px)`;
+    el.rail.style.transform = pGl >= 1 ? '' : `translate(${(rx * (1 - pGl)).toFixed(3)}px,${(ry * (1 - pGl)).toFixed(3)}px)`;
     el.drops.forEach((n, i) => {
       const e = DROP(seg(t, T.drop + i * T.dropGap, T.drop + i * T.dropGap + T.dropDur));
-      n.style.opacity = clamp01(e).toFixed(3);
-      n.style.transform = e >= 1 ? 'none' : `translateY(${(-34 * (1 - e)).toFixed(3)}px)`;
+      n.style.opacity = e >= 1 ? '' : clamp01(e).toFixed(3);
+      n.style.transform = e >= 1 ? '' : `translateY(${(-34 * (1 - e)).toFixed(3)}px)`;
     });
     // the window's grounds grow in around the gliding column (tabs-chaos: a 520ms ease-out transition; eased in
     // and out here, so the large dark ground starts from rest with the glide instead of stepping on)
     const a = inOutCubic(seg(t, T.glide, T.glide + 0.56));
     const A = a.toFixed(3);
-    el.stage.style.backgroundColor = `rgba(13,13,13,${A})`;
-    el.stage.style.borderColor = `rgba(38,38,38,${A})`;
-    el.bar.style.opacity = A;
-    el.hub.style.opacity = '1';
-    el.hub.style.backgroundColor = `rgba(13,13,13,${A})`;
-    el.hub.style.borderColor = `rgba(38,38,38,${A})`;
-    el.hub.style.boxShadow = 'none';
-    el.rail.style.opacity = '1';
-    el.rail.style.backgroundColor = `rgba(0,0,0,${A})`;
-    el.rail.style.borderRightColor = `rgba(38,38,38,${A})`;
-    // landed: the slot draws the same tile.svg at the same pixel, so it takes over in the same frame
-    el.sb.style.opacity = t >= LAND ? '1' : '0';
+    // the window's grounds (the renderer's body rgb(13,13,13); the rail's rgb(18,18,19) with its rgb(30,30,33)
+    // hairline, styles.json rail) grow in around the gliding column; cleared once landed so the real frame shows as is
+    const landed = a >= 1;
+    el.rail.style.backgroundColor = '';
+    if (!el.grounds && getComputedStyle(el.rail).backgroundColor !== 'rgba(0, 0, 0, 0)') { // real.css applied
+      el.grounds = [];
+      for (let n = el.rail.parentElement; n && n !== el.home; n = n.parentElement) {
+        n.style.backgroundColor = '';
+        const m = /rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)/.exec(getComputedStyle(n).backgroundColor);
+        if (m && (m[4] === undefined || +m[4] > 0)) el.grounds.push({ n, rgb: `${m[1]},${m[2]},${m[3]}` });
+      }
+    }
+    (el.grounds || []).forEach(({ n, rgb }) => { n.style.backgroundColor = landed ? '' : `rgba(${rgb},${A})`; });
+    el.rail.style.backgroundColor = landed ? '' : `rgba(18,18,19,${A})`;
+    el.rail.style.borderRightColor = landed ? '' : `rgba(30,30,33,${A})`;
+    el.lights.style.opacity = A;
+    // landed: the slot draws the same app icon at the same pixel, so it takes over in the same frame
+    el.sb.style.opacity = t >= LAND ? '' : '0';
     const r = cssEaseOut(seg(t, LAND, LAND + T.rest));
-    el.sb.style.setProperty('--sel-a', r.toFixed(3));
-    el.rest.forEach((n) => { n.style.opacity = r.toFixed(3); });
-    // the reply streams in, a word at a time (laid out in full from the start, so nothing reflows)
-    el.msg.style.opacity = '1';
-    const nw = el.words.length;
-    el.words.forEach((w, i) => {
-      const s = T.msg + (T.msgDur * i) / nw;
-      w.style.opacity = seg(t, s, s + 0.1).toFixed(3);
-    });
+    el.rest.forEach((n) => { n.style.opacity = r >= 1 ? '' : r.toFixed(3); });
     renderChat(el.chat, t);
   },
 };

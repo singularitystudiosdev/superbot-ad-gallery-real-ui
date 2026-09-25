@@ -14,8 +14,8 @@ const dip = document.getElementById('dip');
 
 // ---------- the sequence (CONTRACT.txt) ----------
 // agent-switch: the do-that-too cold open up to the landed hub, then the hub's chat (scenes/tabs-assets/chat.js):
-// Claude runs out of usage, one press moves the same thread to ChatGPT; the "Context carries" card; superbot trims
-// ChatGPT's rules. A scene entry may name a WINDOW (an index into the module's `windows`, [from, to] in scene
+// Claude runs out of usage, the rescue toast's "Continue in Superbot" carries the chat to Superbot; the "Context carries"
+// card; Superbot answers the carried prompt. A scene entry may name a WINDOW (an index into the module's `windows`, [from, to] in scene
 // time): both windows play the one mounted scene, so the hub keeps its state across the card between them.
 // The mascot card closes the spot (no superbot.gg end screen on this one).
 const SEQUENCE = [
@@ -192,7 +192,7 @@ const sceneIds = [...new Set(SEQUENCE.filter(([k]) => k === 'scene').map(([, id]
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=7`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=8`, import.meta.url).href;
   document.head.appendChild(css);
   try {
     const m = (await import(`./scenes/${id}.js?v=7`)).default;

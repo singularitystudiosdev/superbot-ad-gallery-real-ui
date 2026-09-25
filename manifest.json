@@ -96,54 +96,6 @@
     "thumb": "assets/shots/who-are-you-superbot-4a7e2c19.png"
   },
   {
-    "id": "free-tokens-still-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · still",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/free-tokens-still.html",
-    "thumb": "assets/shots/free-tokens-still-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "free-tokens-type-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · typed",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/free-tokens-type.html",
-    "thumb": "assets/shots/free-tokens-type-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "free-tokens-slam-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · slam",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/free-tokens-slam.html",
-    "thumb": "assets/shots/free-tokens-slam-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "comments-still-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FIRST 100 COMMENTS = EARLY ACCESS · still",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/comments-still.html",
-    "thumb": "assets/shots/comments-still-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "comments-counter-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FIRST 100 COMMENTS = EARLY ACCESS · counter",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/comments-counter.html",
-    "thumb": "assets/shots/comments-counter-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "comments-beats-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FIRST 100 COMMENTS = EARLY ACCESS · beats",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/comments-beats.html",
-    "thumb": "assets/shots/comments-beats-superbot-d7bc1ed7.png"
-  },
-  {
     "id": "ready-100-flash-superbot-d7bc1ed7",
     "type": "animation",
     "group": "Ad spots",
@@ -166,14 +118,6 @@
     "title": "DON'T BLINK. · the codes hide in its blink",
     "src": "animations/mascot-codes-superbot-d7bc1ed7/dont-blink.html",
     "thumb": "assets/shots/dont-blink-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "wait-for-it-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "WAIT FOR IT... · then comment AGAIN",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/wait-for-it.html",
-    "thumb": "assets/shots/wait-for-it-superbot-d7bc1ed7.png"
   },
   {
     "id": "five-flashes-superbot-d7bc1ed7",
@@ -240,116 +184,12 @@
     "thumb": "assets/shots/drop-timer-superbot-d7bc1ed7.png"
   },
   {
-    "id": "comment-superbot-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "COMMENT 'SUPERBOT' · reply bot",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/comment-superbot.html",
-    "thumb": "assets/shots/comment-superbot-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "like-meter-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "LIKES UNLOCK CODES · like meter",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/like-meter.html",
-    "thumb": "assets/shots/like-meter-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "tag-a-friend-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "TAG A FRIEND · two for one",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/tag-a-friend.html",
-    "thumb": "assets/shots/tag-a-friend-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "not-a-robot-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "I'M NOT A ROBOT · captcha confession",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/not-a-robot.html",
-    "thumb": "assets/shots/not-a-robot-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "find-happy-one-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FIND THE HAPPY ONE · crowd puzzle",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/find-happy-one.html",
-    "thumb": "assets/shots/find-happy-one-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "like-if-you-saw-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "LIKE IF YOU SAW IT · one frame",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/like-if-you-saw.html",
-    "thumb": "assets/shots/like-if-you-saw-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "token-odometer-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · 1,000,000 odometer",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/token-odometer.html",
-    "thumb": "assets/shots/token-odometer-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "hypno-rings-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · hypno rings",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/hypno-rings.html",
-    "thumb": "assets/shots/hypno-rings-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "ready-set-go-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "READY SET GO · FREE TOKENS start lights",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/ready-set-go.html",
-    "thumb": "assets/shots/ready-set-go-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "scratch-card-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · scratch card",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/scratch-card.html",
-    "thumb": "assets/shots/scratch-card-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "early-door-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "EARLY ACCESS · FIRST 100 COMMENTS doors",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/early-door.html",
-    "thumb": "assets/shots/early-door-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "tokens-stack-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · TOKENS avalanche",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/tokens-stack.html",
-    "thumb": "assets/shots/tokens-stack-superbot-d7bc1ed7.png"
-  },
-  {
     "id": "matrix-rain-superbot-d7bc1ed7",
     "type": "animation",
     "group": "Ad spots",
     "title": "CATCH ONE · code rain",
     "src": "animations/mascot-codes-superbot-d7bc1ed7/matrix-rain.html",
     "thumb": "assets/shots/matrix-rain-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "ticker-tokens-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE TOKENS · ticker",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/ticker-tokens.html",
-    "thumb": "assets/shots/ticker-tokens-superbot-d7bc1ed7.png"
   },
   {
     "id": "code-silhouette-superbot-d7bc1ed7",
@@ -390,14 +230,6 @@
     "title": "8 HOURS · DVD bounce, hidden code flashes",
     "src": "animations/mascot-codes-superbot-d7bc1ed7/dvd-bounce-8h.html",
     "thumb": "assets/shots/dvd-bounce-8h-superbot-d7bc1ed7.png"
-  },
-  {
-    "id": "comments-release-superbot-d7bc1ed7",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FIRST 100 COMMENTS = EARLY ACCESS ON RELEASE · cards",
-    "src": "animations/mascot-codes-superbot-d7bc1ed7/comments-release.html",
-    "thumb": "assets/shots/comments-release-superbot-d7bc1ed7.png"
   },
   {
     "id": "stop-burning-tokens",

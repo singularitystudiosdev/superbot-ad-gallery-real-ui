@@ -63,6 +63,15 @@ function renderDl() {
     return;
   }
   const label = RATIOS.find(x => x[0] === ar)[1];
+  if (it.download) { // a file too big for Pages lives on a GitHub release (one ratio); no same-origin probe
+    a.href = it.download;
+    a.removeAttribute('download');
+    a.textContent = `⤓ download ${it.downloadLabel || label}`;
+    a.title = '';
+    a.classList.remove('no-render');
+    a.hidden = false;
+    return;
+  }
   const href = `assets/video/${it.id}.${ar}.mp4`;
   a.href = href;
   a.download = `${it.id}-${label.replace(':', 'x')}.mp4`;

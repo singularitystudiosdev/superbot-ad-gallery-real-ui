@@ -14,25 +14,26 @@
 <style>
   .mover { position: absolute; left: 0; top: 0; will-change: transform; }
   .squash { transform-origin: 50% 50%; }
-  .ha { position: absolute; left: 0; top: 0; font-size: 58px; font-weight: 900; letter-spacing: 0.02em; white-space: nowrap; }
   .flash { position: absolute; inset: 0; pointer-events: none; }
+  .intro { text-align: center; line-height: 0.95; transform-origin: 50% 50%; white-space: nowrap; }
   .cluster { position: absolute; font-size: 40px; line-height: 1.25; color: #fff; white-space: nowrap; }
   .wall { position: absolute; inset: 0; display: grid; align-content: center; justify-content: center; gap: 14px 30px; color: #fff; }
 </style>
 </head>
 <body>
 <script>
-/* 8 hours of black. The mark drifts like the old DVD logo, and every time it meets an edge it squashes,
-   smiles (the invite page's own happy state) and a little HA pops off the wall. Hidden in the 8 hours:
-   code flashes, 3 frames each (0.1 s), in seeded random places, the first at exactly 1.2 s.
+/* 8 hours of black. The mark drifts like the old DVD logo, and every time it meets an edge it squashes
+   and smiles (the invite page's own happy state). Hidden in the 8 hours:
+   code flashes, 3 frames each (0.1 s), in seeded random places. It opens on a 0.7 s "CODE = FREE TOKENS :P"
+   card, then the bounce starts; the first flash lands 1.2 s after that (1.9 s in).
 
    The bounce closes on PERIOD (each axis makes a whole number of round trips in it), so the recorder
    (render-long.mjs) renders one period of 2 s segments once and re-renders only the segments holding a
-   flash. ?noflash renders the bare bounce for those base segments. */
+   flash. ?noflash renders the bare bounce for those base segments (no card, no flashes). */
 var HOURS = 8, LOOP = HOURS * 3600, PERIOD = 60, FPS = 30, SEG = 60, SIZE = 230, SPEED = 300;
-var FIRST_FLASH = 36, FLASH_FRAMES = 3, LAUGH = 0.75;
+var INTRO = 0.7, FIRST_FLASH = 57, PLAN_START = 36, FLASH_FRAMES = 3, LAUGH = 0.75;
 var NOFLASH = new URLSearchParams(location.search).has('noflash');
-var mark, mover, squash, pops = [], flashLayer, flashes, hits, blinks, shownFlash = -1;
+var mark, mover, squash, intro, flashLayer, flashes, hits, blinks, shownFlash = -1;
 var W, Rx, Ry, vx, vy, x0, y0;
 
 function gcd(a, b) { return b ? gcd(b, a % b) : a; }
@@ -54,13 +55,14 @@ function periodHits() {
 
 // Seeded over the whole 8 h: gaps of 20 s to 4 min, never straddling a 2 s segment edge.
 function flashPlan() {
-  var rand = SB.rng(20260924), out = [], f = FIRST_FLASH;
+  var rand = SB.rng(20260924), out = [], f = PLAN_START;
   while (f + FLASH_FRAMES < LOOP * FPS) {
     if (f % SEG > SEG - FLASH_FRAMES) f += SEG - (f % SEG) + 1;
     var wall = out.length > 0 && rand() < 0.14;
     out.push({ f: f, wall: wall, n: 1 + Math.floor(rand() * 6), fx: rand(), fy: rand(), seed: 1 + Math.floor(rand() * 1e9) });
     f += Math.round((20 + rand() * 220) * FPS);
   }
+  out[0].f = FIRST_FLASH; // 1.2 s after the card hands over; the rest keep their seeded frames
   return out;
 }
 
@@ -122,8 +124,13 @@ SB.ad({
         return false;
       }
     });
-    pops = [0, 1, 2].map(function () { return SB.el('div', 'ha', frame); });
     flashLayer = SB.el('div', 'flash', frame);
+    var introWrap = SB.el('div', 'mc-center', frame);
+    intro = SB.el('div', 'mc-type intro', introWrap);
+    intro.style.fontSize = '170px';
+    intro.innerHTML = ctx.narrow ? 'CODE =<br>FREE<br>TOKENS :P' : 'CODE = FREE TOKENS :P';
+    SB.fit(intro, ctx.w * 0.86, 1080 * 0.7);
+    intro = introWrap;
     flashes = flashPlan();
     shownFlash = -2;
     window.__long = { period: PERIOD, seg: SEG, fps: FPS, loop: LOOP, flashes: flashes.map(function (f) { return f.f; }) };
@@ -132,6 +139,9 @@ SB.ad({
     var base = Math.floor(t / PERIOD) * PERIOD, p = t - base;
     var here = pos(t);
     mover.style.transform = 'translate(' + here.x.toFixed(2) + 'px, ' + here.y.toFixed(2) + 'px)';
+    var carding = !NOFLASH && t < INTRO;
+    intro.style.visibility = carding ? 'visible' : 'hidden';
+    mover.style.visibility = carding ? 'hidden' : 'visible';
 
     // Smile windows for this period and the tail of the last one (the kit syncs the happy bob to them).
     var happy = [], recent = [];
@@ -140,7 +150,7 @@ SB.ad({
       hits.forEach(function (h, i) {
         var at = b + h.t;
         happy.push([at, LAUGH]);
-        if (t >= at && t < at + 0.8) recent.push({ h: h, at: at, n: i });
+        if (t >= at && t < at + 0.8) recent.push({ h: h, at: at });
       });
     });
     mark.happy = happy;
@@ -152,19 +162,6 @@ SB.ad({
     });
     squash.style.transform = 'scale(' + sx.toFixed(4) + ', ' + sy.toFixed(4) + ')';
 
-    pops.forEach(function (el, i) {
-      var r = recent[recent.length - 1 - i];
-      if (!r) { el.style.opacity = '0'; return; }
-      var at = pos(r.at), age = t - r.at, q = SB.easeOut(SB.seg(age, 0, 0.8));
-      var words = ['HA', 'HA!', 'HAHA', 'HA HA', 'HEHE'];
-      el.textContent = words[r.n % words.length];
-      // Off the wall it hit, into the frame, drifting up.
-      var ox = r.h.axis === 'x' ? (r.h.far ? -120 - 60 * q : SIZE + 20 + 60 * q) : SIZE * 0.35;
-      var oy = r.h.axis === 'y' ? (r.h.far ? -70 - 40 * q : SIZE + 10 + 40 * q) : -10 - 60 * q;
-      var tilt = (r.n % 2 ? 1 : -1) * 8;
-      el.style.transform = 'translate(' + (at.x + ox).toFixed(1) + 'px, ' + (at.y + oy).toFixed(1) + 'px) rotate(' + tilt + 'deg) scale(' + SB.lerp(0.6, 1, SB.backOut(SB.seg(age, 0, 0.25))).toFixed(3) + ')';
-      el.style.opacity = String(1 - SB.seg(age, 0.45, 0.8));
-    });
 
     var idx = NOFLASH ? -1 : activeFlash(Math.round(t * FPS));
     if (idx !== shownFlash) { drawFlash(idx, ctx); shownFlash = idx; }

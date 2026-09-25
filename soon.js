@@ -5,16 +5,15 @@
 // exactly what gets posted. gallery.js owns the top-right control; this file owns the card.
 window.Soon = (() => {
   const VARIANTS = [
-    { id: 'coming-soon', label: 'COMING SOON', lines: ['COMING', 'SOON'], hot: 1 },
-    { id: 'soon-x3', label: 'SOON SOON SOON', lines: ['SOON', 'SOON', 'SOON'], hot: 1 },
-    { id: 'coming-soon-dot', label: 'coming soon.', lines: ['coming soon.'], hot: -1 },
-    { id: 'soon', label: 'soon', lines: ['soon'], hot: 0 },
-    { id: 'comment-waitlist', label: 'comment for waitlist', lines: ['comment', 'for waitlist'], hot: 1 },
-    { id: 'first-100', label: 'first 100 comments get waitlisted', lines: ['first 100', 'comments get', 'waitlisted'], hot: 0 },
+    { id: 'coming-soon', label: 'COMING SOON', lines: ['COMING SOON'] },
+    { id: 'soon-x3', label: 'SOON SOON SOON', lines: ['SOON', 'SOON', 'SOON'] },
+    { id: 'coming-soon-dot', label: 'coming soon.', lines: ['coming soon.'] },
+    { id: 'soon', label: 'soon', lines: ['soon'] },
+    { id: 'comment-waitlist', label: 'comment for waitlist', lines: ['comment for waitlist'] },
+    { id: 'first-100', label: 'first 100 comments get waitlisted', lines: ['first 100 comments get waitlisted'] },
   ];
   const CARD_MS = 1800; // how long the card holds before the ad starts
   const IMAGE_HOLD_MS = 5000; // a static ad exports as card + this long on the poster
-  const STORM = ['#00e5c3', '#2b6bff', '#6a1fd8', '#c026d3', '#ff3d9a']; // the ads' --storm gradient
   const FONT = '"SF Pro Display", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif';
   const KEY = 'gallery.soon.v1';
 
@@ -33,21 +32,15 @@ window.Soon = (() => {
   const easeOut = (x) => 1 - Math.pow(1 - Math.min(Math.max(x, 0), 1), 4);
 
   function setFont(ctx, px) {
-    ctx.font = `900 ${px}px ${FONT}`;
-    if ('letterSpacing' in ctx) ctx.letterSpacing = `${(-0.045 * px).toFixed(2)}px`; // the ads' tight tracking
+    ctx.font = `700 ${px}px ${FONT}`;
+    if ('letterSpacing' in ctx) ctx.letterSpacing = `${(-0.02 * px).toFixed(2)}px`;
   }
 
-  // one size for the whole stack: the widest line fills 84% of the width, the stack at most 70% of the height
+  // small, caption-sized: 5% of the short side, shrunk only if the widest line would pass 80% of the width
   function fontPx(ctx, lines, w, h) {
     setFont(ctx, 100);
     const widest = Math.max(...lines.map(l => ctx.measureText(l).width));
-    return Math.min((w * 0.84 * 100) / widest, (h * 0.7) / (lines.length * 0.92));
-  }
-
-  function storm(ctx, x0, width) {
-    const g = ctx.createLinearGradient(x0, 0, x0 + width, 0);
-    STORM.forEach((c, i) => g.addColorStop(i / (STORM.length - 1), c));
-    return g;
+    return Math.min(Math.min(w, h) * 0.05, (w * 0.8 * 100) / widest);
   }
 
   // t in ms since the card started; each line rises into place 110 ms after the one above it
@@ -55,7 +48,7 @@ window.Soon = (() => {
     ctx.globalAlpha = 1;
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, w, h);
-    const px = fontPx(ctx, v.lines, w, h), lh = px * 0.92;
+    const px = fontPx(ctx, v.lines, w, h), lh = px * 1.15;
     setFont(ctx, px);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -63,9 +56,8 @@ window.Soon = (() => {
     v.lines.forEach((line, i) => {
       const k = easeOut((t - i * 110) / 340);
       if (k <= 0) return;
-      const width = ctx.measureText(line).width;
       ctx.globalAlpha = k;
-      ctx.fillStyle = i === v.hot ? storm(ctx, w / 2 - width / 2, width) : '#fff';
+      ctx.fillStyle = '#fff';
       ctx.fillText(line, w / 2, top + i * lh + (1 - k) * px * 0.35);
     });
     ctx.globalAlpha = 1;

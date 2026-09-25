@@ -7,9 +7,9 @@ const SAY = 'Here’s your Muse meme.';
 export default {
   times(r) {
     const T = { r };
-    T.card = r + 0.3;
-    T.w0 = r + 0.4; T.w1 = T.w0 + 1.6;
-    T.end = T.w1 + 1.15;
+    T.card = r + 0.22;
+    T.w0 = r + 0.3; T.w1 = T.w0 + 1.2;
+    T.end = T.w1 + 0.85;
     return T;
   },
   build(k, x) {
@@ -22,7 +22,7 @@ export default {
     return {
       nodes: [say, card],
       marks: [[T.r, say], [T.card, card]],
-      cams: [[T.w0 - 0.1, 0.95, () => x.F.el(card, 1.55, 0.8)]],
+      cams: [[T.w0 - 0.1, 0.8, () => x.F.el(card, 1.4, 0.8)]],
       render(t) {
         const n = streamCount(SAY, T.r + 0.06, 70, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }

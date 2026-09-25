@@ -19,12 +19,12 @@ const STAR = '<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 
 export default {
   times(r) {
     const T = { r };
-    T.chipIn = [r + 0.3, r + 0.72, r + 1.14];
-    T.card = r + 1.6;
-    T.placed = T.card + 1.7;
-    T.chipDone = [r + 0.82, r + 1.62, T.placed];
-    T.eta = T.placed + 0.45;
-    T.end = T.eta + 1.6;
+    T.chipIn = [r + 0.25, r + 0.55, r + 0.85];
+    T.card = r + 1.2;
+    T.placed = T.card + 1.3;
+    T.chipDone = [r + 0.6, r + 1.15, T.placed];
+    T.eta = T.placed + 0.4;
+    T.end = T.eta + 1.1;
     return T;
   },
   build(k, x) {
@@ -61,7 +61,7 @@ export default {
     return {
       nodes: [say, ...rows, card],
       marks: [[T.r, say], ...rows.map((r, i) => [T.chipIn[i], r]), [T.card, card]],
-      cams: [[T.card - 0.05, 1.05, () => x.F.el(card, 1.6, 0.86)]],
+      cams: [[T.card - 0.05, 0.85, () => x.F.el(card, 1.42, 0.86)]],
       render(t) {
         const n = streamCount(SAY, T.r + 0.05, 90, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }

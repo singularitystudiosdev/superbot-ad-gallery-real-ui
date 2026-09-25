@@ -14,7 +14,7 @@ const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
 const bump = (p) => Math.sin(Math.PI * clamp(p));
 
-export const CHAT_T0 = 8.9; // the welcome reply has finished streaming (tabs T.msg + T.msgDur = 8.52)
+export const CHAT_T0 = 7.75; // the hub has landed (tabs T.msg = 7.62); its welcome line is hidden (chat.css)
 
 const APPS = {
   gemini: { name: 'Gemini', logo: brand('gemini-logo.svg'), sub: 'in superbot' },
@@ -36,19 +36,19 @@ export const BEATS = (() => {
   let s = CHAT_T0;
   return ASKS.map((a) => {
     const k = { ...a, s };
-    k.typeEnd = s + Math.min(1.05, 0.2 + a.ask.length * 0.016);
-    k.send = k.typeEnd + 0.2;
-    k.sw = k.send + 0.45;     // superbot's routing chip lands
-    k.swap = k.sw + 0.28;     // rail + platform chip move to the app
-    k.done = k.sw + 0.85;     // the chip resolves
-    k.reply = k.done + 0.1;   // the app answers
+    k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
+    k.send = k.typeEnd + 0.15;
+    k.sw = k.send + 0.35;     // superbot's routing chip lands
+    k.swap = k.sw + 0.22;     // rail + platform chip move to the app
+    k.done = k.sw + 0.65;     // the chip resolves
+    k.reply = k.done + 0.08;  // the app answers
     k.T = MODS[a.app].times(k.reply);
     s = k.T.end;
     return k;
   });
 })();
 const LAST = BEATS[BEATS.length - 1];
-export const CHAT_END = LAST.T.end + 1.35; // a last pull-back to the whole window
+export const CHAT_END = LAST.T.end + 1.1; // a last pull-back to the whole window
 
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
@@ -78,8 +78,8 @@ export function mountChat(hub) {
   const composer = hub.querySelector('.composer') || hub.querySelector('.rc');
   const F = {
     full: () => ({ s: 1, tx: 0, ty: 0 }),
-    comp: () => { const { W, H } = view(); const b = box(composer), s = Math.min(1.42, (0.84 * W) / b.w); return frame(b.cx, b.y + b.h - H / s / 2 + 22, s); },
-    thread: () => { const { W, H } = view(); const b = box(composer), s = Math.min(1.3, (0.9 * W) / (b.w * 1.25)); return frame(b.cx, b.y + b.h - H / s / 2 + 18, s); },
+    comp: () => { const { W, H } = view(); const b = box(composer), s = Math.min(1.3, (0.84 * W) / b.w); return frame(b.cx, b.y + b.h - H / s / 2 + 22, s); },
+    thread: () => { const { W, H } = view(); const b = box(composer), s = Math.min(1.16, (0.9 * W) / (b.w * 1.25)); return frame(b.cx, b.y + b.h - H / s / 2 + 18, s); },
     // push onto an element: centred on the chat column (so the whole column, bubbles included, stays in frame)
     // unless `own`; `extra` = layout px the element will still grow by, so the framing is its final size
     el: (n, max = 1.65, fill = 0.82, extra = 0, own = false) => {
@@ -117,8 +117,8 @@ export function mountChat(hub) {
   const marks = beats.flatMap((b) => [[b.k.send, b.u], [b.k.sw, b.w], [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
   // camera keys [t0, dur, framing]: close-up on the composer while each ask is typed, the thread after send, then the beat's own pushes
   const cams = [
-    ...beats.flatMap((b) => [[b.k.s - 0.4, 0.7, F.comp], [b.k.send - 0.02, 0.62, F.thread], ...b.inst.cams]),
-    [LAST.T.end, 1.1, F.full],
+    ...beats.flatMap((b) => [[b.k.s - 0.35, 0.6, F.comp], [b.k.send - 0.02, 0.5, F.thread], ...b.inst.cams]),
+    [LAST.T.end, 0.95, F.full],
   ].sort((x, y) => x[0] - y[0]);
 
   // DoorDash is not on the rail yet: superbot connects it, so its tile grows into the rail at that beat
@@ -212,15 +212,14 @@ function renderScroll(c, t) {
   const bottom = (n) => { const b = boxIn(n, c.inner); return b.y + b.h; };
   const cs = getComputedStyle(c.feed);
   const viewH = c.feed.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-  const first = c.beats[0].u;
-  const prev = first.previousElementSibling;
-  let y = prev ? bottom(prev) : 0;
+  // bottom-anchored like a live chat: the newest landed line sits just above the composer, so the thread grows
+  // up out of it (the shift is negative while the thread is shorter than the feed)
+  let y = 0;
   for (const [a, n] of c.marks) {
     if (t <= a) break;
-    y = lerp(y, bottom(n), inOutCubic(seg(t, a, a + 0.5)));
+    y = lerp(y, bottom(n), inOutCubic(seg(t, a, a + 0.45)));
   }
-  const scroll = Math.max(0, y + 8 - viewH);
-  c.inner.style.transform = scroll > 0 ? `translateY(${(-scroll).toFixed(2)}px)` : 'none';
+  c.inner.style.transform = `translateY(${(viewH - 8 - y).toFixed(2)}px)`;
 }
 
 function renderCamera(c, t) {

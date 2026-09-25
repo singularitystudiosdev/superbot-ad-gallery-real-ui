@@ -156,3 +156,15 @@
 #s-tabs .sbsite .hub .ca-todos-h { height: 29px; margin: 0; }
 #s-tabs .sbsite .hub .ca-bd { row-gap: 9px; }
 #s-tabs .sbsite .hub .ca-rv { margin-top: 0; }
+
+/* the hub's own welcome line and date divider are not part of this spot: the chat starts on an empty thread */
+#s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
+
+/* Download all: pressed by the pointer, fills, resolves to Downloaded (mp3.js) */
+#s-tabs .sbsite .hub .yt-dl { position: relative; overflow: hidden; isolation: isolate; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .yt-dl-fill { position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, #34c78a, #2aa876); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .yt-dl .yt-dl-b { display: none; }
+#s-tabs .sbsite .hub .yt-dl.is-done .yt-dl-a { display: none; }
+#s-tabs .sbsite .hub .yt-dl.is-done .yt-dl-b { display: inline-flex; align-items: center; gap: 7px; }
+#s-tabs .sbsite .hub .yt-dl-a { display: inline-flex; align-items: center; gap: 7px; }
+#s-tabs .sbsite .hub .yt-dl-b svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }

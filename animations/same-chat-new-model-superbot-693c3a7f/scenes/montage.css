@@ -1,0 +1,91 @@
+/* montage.css: the old way. hubkit's window frame, with the hub's own rail and thread replaced by this scene's
+   app (a plain competitor app: no history, so it needs a sign in). Plus the headline that lands before the
+   window. Every moving value is written from montage.js per frame; nothing here animates on its own.
+   Scoped :is(#z,.hbx).mg so it outranks hub.css / hubkit.css whatever order the links land in. */
+:is(#z,.hbx).mg .sbsite, :is(#z,.hbx).mg .sbsite * { transition: none !important; animation: none !important; }
+:is(#z,.hbx).mg .sbsite .body { display: block; }
+:is(#z,.hbx).mg .sbsite .arena { display: none; }
+:is(#z,.hbx).mg .sbsite .stage-bar { background: #141416; }
+:is(#z,.hbx).mg .sbsite .stage-bar i:nth-child(1) { background: #ff5f57; }
+:is(#z,.hbx).mg .sbsite .stage-bar i:nth-child(2) { background: #febc2e; }
+:is(#z,.hbx).mg .sbsite .stage-bar i:nth-child(3) { background: #28c840; }
+
+/* ---------- the headline that lands before the window ---------- */
+:is(#z,.hbx).mg .mg-headline { position: absolute; inset: 0; z-index: 40; background: #000; display: grid;
+  align-content: center; justify-items: center; gap: 20px; text-align: center; }
+:is(#z,.hbx).mg .mg-headline h1 { margin: 0; font: 700 96px/1.04 var(--ui); letter-spacing: -.025em; color: #fff; }
+:is(#z,.hbx).mg .mg-headline h1 b { font-weight: 700; color: transparent; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text;
+  background-image: linear-gradient(100deg, var(--storm-1) 0%, var(--storm-2) 40%, var(--storm-3) 72%, var(--storm-4) 100%); }
+:is(#z,.hbx).mg .mg-headline p { margin: 0; font: 500 27px/1.2 var(--ui); color: #9a9a9a; }
+
+/* ---------- the app ---------- */
+:is(#z,.hbx).mg .mg-app { position: absolute; inset: 0; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  background: #212121; color: #ececec; font: 12px/16px var(--ui); }
+:is(#z,.hbx).mg .mg-side { background: #181818; border-right: 1px solid #2c2c2c; padding: 12px 10px; display: flex; flex-direction: column; gap: 3px; }
+:is(#z,.hbx).mg .mg-brand { display: flex; align-items: center; gap: 8px; padding: 2px 6px 12px; font-size: 12.5px; }
+:is(#z,.hbx).mg .mg-brand b { font-weight: 650; letter-spacing: -.01em; }
+:is(#z,.hbx).mg .mg-logo, :is(#z,.hbx).mg .mg-mark { flex: none; width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; background: #2f2f2f; color: #b9b9bd; }
+:is(#z,.hbx).mg .mg-logo svg, :is(#z,.hbx).mg .mg-mark svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linejoin: round; }
+:is(#z,.hbx).mg .mg-new { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; font-weight: 550; color: #e5e5ea; }
+:is(#z,.hbx).mg .mg-new svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+:is(#z,.hbx).mg .mg-lab { padding: 12px 8px 4px; font-size: 9.5px; color: #8e8e93; font-weight: 600; }
+:is(#z,.hbx).mg .mg-none { padding: 4px 8px; font-size: 11px; color: #6f6f74; }
+:is(#z,.hbx).mg .mg-foot { margin-top: auto; display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 10px;
+  background: #1f1f1f; color: #9a9a9f; font-size: 11px; }
+:is(#z,.hbx).mg .mg-av { flex: none; width: 20px; height: 20px; border-radius: 50%; background: #333; color: #d1d1d6;
+  display: grid; place-items: center; font: 700 10px/1 var(--ui); }
+
+:is(#z,.hbx).mg .mg-main { position: relative; background: #212121; min-width: 0; overflow: hidden; }
+:is(#z,.hbx).mg .mg-head { position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center;
+  padding: 0 16px; font-size: 12.5px; font-weight: 600; }
+:is(#z,.hbx).mg .mg-feed { position: absolute; left: 0; right: 0; top: 44px; bottom: 130px; overflow: hidden; }
+:is(#z,.hbx).mg .mg-col { position: absolute; left: 50%; bottom: 10px; width: 580px; margin-left: -290px; display: flex; flex-direction: column; row-gap: 16px; }
+:is(#z,.hbx).mg .mg-m { display: flex; justify-content: flex-end; }
+:is(#z,.hbx).mg .mg-b { max-width: 460px; padding: 9px 14px; border-radius: 18px; background: #2f2f2f; color: #f1f1f1; font-size: 12.5px; line-height: 1.45; }
+
+:is(#z,.hbx).mg .mg-empty { position: absolute; left: 0; right: 0; top: 44px; bottom: 130px; display: grid;
+  align-content: center; justify-items: center; gap: 10px; text-align: center; }
+:is(#z,.hbx).mg .mg-empty .mg-mark { width: 46px; height: 46px; border-radius: 15px; }
+:is(#z,.hbx).mg .mg-empty .mg-mark svg { width: 24px; height: 24px; }
+:is(#z,.hbx).mg .mg-empty b { font-size: 14px; font-weight: 600; }
+:is(#z,.hbx).mg .mg-empty span { font-size: 11.5px; color: #8e8e93; }
+
+/* the narration line: the one thing the new app cannot carry over */
+:is(#z,.hbx).mg .mg-note { position: absolute; left: 0; right: 0; top: 56px; text-align: center; font-size: 12.5px; color: #8e8e93; opacity: 0; }
+
+/* the sign-in wall: before it clears there is no chat to return to */
+:is(#z,.hbx).mg .mg-wall { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center;
+  background: rgba(24,24,24,.86); backdrop-filter: saturate(120%) brightness(.9); }
+:is(#z,.hbx).mg .mg-card { width: 350px; padding: 24px 22px 20px; border-radius: 16px; background: #2a2a2c; text-align: center;
+  box-shadow: inset 0 0 0 1px #38383c, 0 18px 44px rgba(0,0,0,.5); display: grid; justify-items: stretch; gap: 10px; }
+:is(#z,.hbx).mg .mg-card b { font-size: 16px; font-weight: 650; }
+:is(#z,.hbx).mg .mg-card > span { font-size: 11.5px; color: #9a9a9f; }
+:is(#z,.hbx).mg .mg-btn { display: flex; align-items: center; justify-content: center; gap: 9px; height: 36px; border-radius: 10px;
+  font-size: 12.5px; font-weight: 550; }
+:is(#z,.hbx).mg .mg-google { margin-top: 8px; background: #fff; color: #1f1f1f; }
+:is(#z,.hbx).mg .mg-g { width: 16px; height: 16px; }
+:is(#z,.hbx).mg .mg-ghost { background: #333336; color: #ececec; }
+
+:is(#z,.hbx).mg .mg-comp { position: absolute; left: 50%; bottom: 16px; width: 620px; margin-left: -310px; }
+:is(#z,.hbx).mg .mg-box { position: relative; min-height: 100px; padding: 15px 56px 15px 16px; border-radius: 20px;
+  background: #2b2b2d; box-shadow: inset 0 0 0 1px #3a3a3e; font-size: 13.5px; line-height: 1.5; color: #8e8e93; }
+:is(#z,.hbx).mg .mg-box.on { background: #303032; box-shadow: inset 0 0 0 1px #454549; }
+:is(#z,.hbx).mg .mg-draft { display: inline; color: #f1f1f1; }
+:is(#z,.hbx).mg .mg-caret { display: inline-block; width: 1.5px; height: 15px; margin-left: 1px; vertical-align: -2px; background: #f1f1f1; }
+:is(#z,.hbx).mg .mg-send { position: absolute; right: 12px; bottom: 12px; width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center; background: #4a4a4e; color: #9a9a9f; }
+:is(#z,.hbx).mg .mg-send.on { background: #ececec; color: #232325; }
+:is(#z,.hbx).mg .mg-send svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* narrow frames: the window shrinks to 68% of this design, so the copy steps up with it */
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-headline h1, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-headline h1 { font-size: 76px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-headline p, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-headline p { font-size: 23px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-card b, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-card b { font-size: 19px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-card > span, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-card > span { font-size: 14px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-btn, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-btn { font-size: 15px; height: 42px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-box, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-box { font-size: 16px; min-height: 118px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-b, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-b { font-size: 15px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-note, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-note { font-size: 15px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-empty b, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-empty b { font-size: 17px; }
+html[data-ar="1x1"] :is(#z,.hbx).mg .mg-empty span, html[data-ar="4x5"] :is(#z,.hbx).mg .mg-empty span { font-size: 14px; }

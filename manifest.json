@@ -88,6 +88,38 @@
     "thumb": "assets/shots/context-switch-superbot-c93ff0a4.png"
   },
   {
+    "id": "new-number-one-superbot-693c3a7f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "A NEW #1 EVERY WEEK",
+    "src": "animations/new-number-one-superbot-693c3a7f/",
+    "thumb": "assets/shots/new-number-one-superbot-693c3a7f.png"
+  },
+  {
+    "id": "subscriptions-stack-superbot-693c3a7f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "STOP PAYING FOR EVERY NEW #1",
+    "src": "animations/subscriptions-stack-superbot-693c3a7f/",
+    "thumb": "assets/shots/subscriptions-stack-superbot-693c3a7f.png"
+  },
+  {
+    "id": "super-picks-superbot-693c3a7f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "NEVER PICK A MODEL AGAIN",
+    "src": "animations/super-picks-superbot-693c3a7f/",
+    "thumb": "assets/shots/super-picks-superbot-693c3a7f.png"
+  },
+  {
+    "id": "same-chat-new-model-superbot-693c3a7f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "NEW MODEL. SAME CHAT",
+    "src": "animations/same-chat-new-model-superbot-693c3a7f/",
+    "thumb": "assets/shots/same-chat-new-model-superbot-693c3a7f.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

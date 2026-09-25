@@ -1,0 +1,33 @@
+/* hop.css: the hub scene's sheet. It is the landed-window frame the intro scene left behind (the native hub's
+   own stylesheet, the stage/rail box and the site placement), plus the greeting and thinking marks a story
+   scene uses. Every rule is scoped to :is(#s-hop,.hbx) so it can only ever touch this scene (mountHub gives
+   the section .hbx) and never the tabs intro. No transitions or keyframes: hop.js writes every value from lt. */
+@import url("tabs-assets/hub.css"); /* tabs-chaos's Superbot hub, verbatim, scoped under :is(#s-tabs,.hbx) .sbsite */
+:is(#s-hop,.hbx) { background: #000; }
+:is(#s-hop,.hbx) .tbs-root {
+  --ch-frame: #202124; --ch-tool: #35363a; --ch-text: #e8eaed; --ch-text-2: #bdc1c6; --ch-omni: #202124; --ch-sep: rgba(255,255,255,.22);
+  position: absolute; inset: 0; overflow: hidden; background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+:is(#s-hop,.hbx) .tbs-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* the landed window: the site box the intro glided home, closed margin column, rail pill faded in with the sidebar */
+:is(#s-hop,.hbx) .sbsite { position: absolute; left: 0; top: 0; width: 1205px; height: 753.125px; transform-origin: 0 0; z-index: 3; visibility: hidden; }
+:is(#s-hop,.hbx) .sbsite .stage { width: 100%; height: 100%; aspect-ratio: auto; background-color: transparent; border-color: transparent; }
+:is(#s-hop,.hbx) .sbsite .stage-bar { opacity: 0; }
+:is(#s-hop,.hbx) .sbsite .body { grid-template-columns: minmax(0, 1fr); } /* the site's margin column is closed ("perched") */
+:is(#s-hop,.hbx) .sbsite .rail-item.sb.sel::before { opacity: var(--sel-a, 0); }
+
+/* the empty-state greeting and the thinking marks that sit inside a reply's slot */
+:is(#s-hop,.hbx) .sbsite .vz-greet { position: absolute; left: 0; right: 0; top: 34%; display: flex; align-items: center; justify-content: center; gap: 12px; color: #f5f4ef; }
+:is(#s-hop,.hbx) .sbsite .vz-greet .vz-spark { width: 30px; height: 30px; }
+:is(#s-hop,.hbx) .sbsite .vz-greet .vz-spark .vz-ic { width: 30px; height: 30px; }
+:is(#s-hop,.hbx) .sbsite .vz-greet h2 { margin: 0; font: 400 31px/1.1 ui-serif, "New York", "Iowan Old Style", Georgia, serif; letter-spacing: -.01em; }
+:is(#s-hop,.hbx) .sbsite .vz-m.is-a .vz-b { position: relative; min-height: 22px; }
+:is(#s-hop,.hbx) .sbsite .vz-think { position: absolute; left: 0; top: 0; opacity: 0; transform-origin: 50% 50%; }
+:is(#s-hop,.hbx) .sbsite .vz-think.vz-dot { position: relative; display: inline-block; vertical-align: middle; margin: 0 0 0 3px; }
+:is(#s-hop,.hbx) .sbsite .vz-think.vz-spark { width: 20px; height: 20px; top: 1px; }
+:is(#s-hop,.hbx) .sbsite .vz-think.vz-spark .vz-ic { width: 20px; height: 20px; }
+:is(#s-hop,.hbx) .sbsite .vz-m.is-a .w { opacity: 0; }
+:is(#s-hop,.hbx) .sbsite .vz-m.shown .w { opacity: 1; } /* a carried turn is already on screen when the view opens */
+:is(#s-hop,.hbx) .sbsite .vz-row { box-sizing: border-box; }

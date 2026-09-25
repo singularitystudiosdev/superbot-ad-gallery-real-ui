@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: the best agent for every task</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="publish-ui.css">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="cards.css">
+<link rel="stylesheet" href="scenes/hubkit.css">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment (cards, scenes, end) in order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js"></script>
+</body>
+</html>

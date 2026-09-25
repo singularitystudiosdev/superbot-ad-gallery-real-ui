@@ -75,6 +75,12 @@ const more = [
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
   ['agent-switch-superbot-4207ac22', 'agent-switch-superbot-4207ac22/', 'Context carries from agent to agent', 'Ad spots'],
   ['context-switch-superbot-c93ff0a4', 'context-switch-superbot-c93ff0a4/', 'Claude out of usage · one tap to ChatGPT · rules · refusal', 'Ad spots'],
+  // the no-switch family (2026-09-25): four spots forked from context-switch-superbot-c93ff0a4, all
+  // built on the real superbot hub UI, each keeping the same thread while a new model joins the rail.
+  ['new-number-one-superbot-693c3a7f', 'new-number-one-superbot-693c3a7f/', 'A NEW #1 EVERY WEEK', 'Ad spots'],
+  ['subscriptions-stack-superbot-693c3a7f', 'subscriptions-stack-superbot-693c3a7f/', 'STOP PAYING FOR EVERY NEW #1', 'Ad spots'],
+  ['super-picks-superbot-693c3a7f', 'super-picks-superbot-693c3a7f/', 'NEVER PICK A MODEL AGAIN', 'Ad spots'],
+  ['same-chat-new-model-superbot-693c3a7f', 'same-chat-new-model-superbot-693c3a7f/', 'NEW MODEL. SAME CHAT', 'Ad spots'],
   ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
   ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],

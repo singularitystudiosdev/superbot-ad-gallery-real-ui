@@ -1,0 +1,69 @@
+/* slam.css: scene 'slam'. A black news-desk frame: the NEW #1 badge, the week counter, the headline (brand tile +
+   model name + "is the new #1.") and the leaderboard strip that flips. Every moving value is written from slam.js
+   per frame (no transitions, no keyframes), so ?t=<s> freezes the exact frame. */
+#s-slam { position: absolute; inset: 0; background: #000; overflow: hidden; color: #fff; font-family: var(--ui); }
+#s-slam .tbs-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* a soft storm wash behind everything, breathing slowly */
+#s-slam .sl-glow { position: absolute; left: 50%; top: 46%; width: 1560px; height: 1160px; margin: -580px 0 0 -780px; border-radius: 50%; opacity: .2;
+  background: radial-gradient(closest-side, rgba(43,107,255,.34), rgba(192,38,211,.18) 54%, rgba(0,0,0,0) 100%); }
+
+/* ---------- the desk: badge + week counter ---------- */
+#s-slam .sl-top { position: absolute; left: 0; right: 0; top: 54px; display: flex; align-items: center; justify-content: center; gap: 18px; }
+#s-slam .sl-badge { display: inline-flex; align-items: center; gap: 11px; height: 48px; padding: 0 22px; border-radius: 999px;
+  background: rgba(255,255,255,.045); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16);
+  font: 700 21px/1 var(--ui); letter-spacing: .12em; }
+#s-slam .sl-live { width: 13px; height: 13px; border-radius: 50%; background: var(--storm-4); transform-origin: 50% 50%;
+  box-shadow: 0 0 16px rgba(255,61,154,.75); }
+#s-slam .sl-wk { font: 600 18px/1 var(--font-mono); color: var(--muted); letter-spacing: .14em; transform-origin: 50% 55%; }
+
+/* ---------- the headline ---------- */
+#s-slam .sl-weeks { position: absolute; inset: 0; }
+#s-slam .sl-week { position: absolute; left: 0; right: 0; top: 50%; margin-top: -186px; text-align: center; visibility: hidden; will-change: transform, opacity, filter; }
+#s-slam .sl-row { display: flex; align-items: center; justify-content: center; gap: 32px; }
+#s-slam .sl-ic { width: 104px; height: 104px; border-radius: 30px; display: grid; place-items: center; flex: none; overflow: hidden; }
+#s-slam .sl-ic .vz-ic { width: 60px; height: 60px; }
+#s-slam .sl-ic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#s-slam .sl-ic.c-openai { background: #000; color: #fff; box-shadow: inset 0 0 0 2px rgba(255,255,255,.16); }
+#s-slam .sl-ic.c-claude { background: #d97757; color: #fff; }
+#s-slam .sl-ic.c-gemini { background: #fff; color: #1f1f1f; }
+#s-slam .sl-ic.c-grok { background: #000; box-shadow: inset 0 0 0 2px rgba(255,255,255,.16); }
+#s-slam .sl-name { margin: 0; font-size: 132px; font-weight: 800; letter-spacing: -.035em; line-height: 1; }
+#s-slam .sl-sub { margin: 24px 0 0; font-size: 56px; font-weight: 600; letter-spacing: -.02em; color: var(--muted); }
+#s-slam .sl-sub em { font-style: normal; color: #fff; }
+
+/* ---------- the leaderboard strip (the ranking flips every week) ---------- */
+#s-slam .sl-rank { position: absolute; left: 50%; bottom: 116px; width: 1090px; height: 74px; margin-left: -545px; transform-origin: 50% 100%; }
+#s-slam .sl-chip { position: absolute; left: 0; top: 0; width: 262px; height: 74px; border-radius: 20px; display: flex; align-items: center; gap: 12px; padding: 0 16px;
+  background: rgba(255,255,255,.035); box-shadow: inset 0 0 0 1px rgba(255,255,255,.09); color: var(--muted); will-change: transform; }
+#s-slam .sl-chip.on { background: rgba(255,255,255,.09); box-shadow: inset 0 0 0 1px rgba(255,255,255,.28), 0 12px 34px rgba(0,0,0,.55); color: #fff; }
+#s-slam .sl-ct { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; flex: none; overflow: hidden; }
+#s-slam .sl-ct .vz-ic { width: 20px; height: 20px; }
+#s-slam .sl-ct img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#s-slam .sl-ct.c-openai { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+#s-slam .sl-ct.c-claude { background: #d97757; color: #fff; }
+#s-slam .sl-ct.c-gemini { background: #fff; color: #1f1f1f; }
+#s-slam .sl-ct.c-grok { background: #000; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+#s-slam .sl-chip b { font-size: 18px; font-weight: 650; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-slam .sl-chip em { margin-left: auto; font-style: normal; font: 700 15px/1 var(--font-mono); color: var(--muted); }
+#s-slam .sl-chip.on em { color: #fff; }
+
+/* the impact: a light streak across the headline's line, and a short white wash */
+#s-slam .sl-streak { position: absolute; left: 0; top: 268px; width: 620px; height: 3px; border-radius: 3px; opacity: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0), #fff 42%, #fff 58%, rgba(255,255,255,0)); box-shadow: 0 0 28px rgba(255,255,255,.55); }
+#s-slam .sl-flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+
+/* ---------- narrow frames ---------- */
+html[data-ar="4x3"] #s-slam .sl-name { font-size: 112px; }
+html[data-ar="4x3"] #s-slam .sl-rank { transform: scale(.86); }
+html[data-ar="1x1"] #s-slam .sl-name { font-size: 96px; }
+html[data-ar="1x1"] #s-slam .sl-ic { width: 88px; height: 88px; border-radius: 26px; }
+html[data-ar="1x1"] #s-slam .sl-ic .vz-ic { width: 52px; height: 52px; }
+html[data-ar="1x1"] #s-slam .sl-sub { font-size: 44px; }
+html[data-ar="1x1"] #s-slam .sl-rank { transform: scale(.74); }
+html[data-ar="4x5"] #s-slam .sl-top { top: 38px; }
+html[data-ar="4x5"] #s-slam .sl-week { margin-top: -150px; }
+html[data-ar="4x5"] #s-slam .sl-ic { width: 82px; height: 82px; border-radius: 24px; }
+html[data-ar="4x5"] #s-slam .sl-ic .vz-ic { width: 48px; height: 48px; }
+html[data-ar="4x5"] #s-slam .sl-name { font-size: 78px; }
+html[data-ar="4x5"] #s-slam .sl-sub { font-size: 38px; margin-top: 16px; }
+html[data-ar="4x5"] #s-slam .sl-rank { transform: scale(.62); bottom: 92px; }

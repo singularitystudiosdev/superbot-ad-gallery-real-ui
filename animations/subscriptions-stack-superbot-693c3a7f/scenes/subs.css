@@ -1,0 +1,44 @@
+/* subs.css: the subscriptions statement. subs.js writes every moving value per frame: nothing here animates
+   on its own (no transitions, no keyframes). --s is the frame scale, so one table serves every ratio. */
+#s-subs { background: #000; }
+.subs-root { --s: 1; position: absolute; inset: 0; overflow: hidden; background: #000; color: #fff;
+  font-family: var(--ui); display: flex; align-items: center; justify-content: center; }
+
+/* the storm glow that lifts under the newest row (opacity is driven per frame) */
+.subs-glow { position: absolute; left: 50%; top: 50%; width: 1280px; height: 680px; margin: -340px 0 0 -640px;
+  border-radius: 50%; opacity: 0; filter: blur(8px);
+  background: radial-gradient(closest-side, rgba(43,107,255,.32), rgba(106,31,216,.12) 62%, rgba(0,0,0,0) 100%); }
+
+.subs-panel { position: relative; width: calc(1020px * var(--s)); max-width: calc(var(--ar-w, 1920px) - 120px); }
+.subs-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 0 4px calc(16px * var(--s)); }
+.subs-lab { font-size: calc(21px * var(--s)); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #7c7f88; }
+.subs-count { font: 600 calc(20px * var(--s))/1 var(--font-mono); letter-spacing: .02em; color: #7c7f88; }
+
+/* one row = one subscription: brand tile, plan, monthly price, and the NEW slot the newest plan lands in */
+.subs-row { display: grid; grid-template-columns: calc(62px * var(--s)) minmax(0, 1fr) auto calc(70px * var(--s));
+  align-items: center; gap: calc(20px * var(--s)); height: calc(114px * var(--s)); border-top: 1px solid #17171a; }
+.subs-list .subs-row:last-child { border-bottom: 1px solid #17171a; }
+.sr-ic { width: calc(58px * var(--s)); height: calc(58px * var(--s)); border-radius: calc(16px * var(--s));
+  display: grid; place-items: center; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+.sr-glyph { width: 56%; height: 56%; display: block; }
+.sr-ic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sr-name { min-width: 0; font-size: calc(37px * var(--s)); font-weight: 650; letter-spacing: -.015em; line-height: 1.1; }
+.sr-name small { display: block; margin-top: calc(4px * var(--s)); font-size: calc(17px * var(--s)); font-weight: 500;
+  letter-spacing: 0; color: #868994; }
+.sr-price { font: 620 calc(31px * var(--s))/1 var(--font-mono); letter-spacing: -.01em; white-space: nowrap; text-align: right; }
+.sr-price small { font-size: calc(16px * var(--s)); color: #868994; margin-left: 3px; }
+.sr-new { justify-self: end; font: 800 calc(13px * var(--s))/1 var(--ui); letter-spacing: .14em; color: #0d0d0d;
+  background: #fff; border-radius: 999px; padding: calc(6px * var(--s)) calc(10px * var(--s)); opacity: 0; }
+
+/* the running total, aligned to the same price column as the rows */
+.subs-total { display: grid; grid-template-columns: calc(62px * var(--s)) minmax(0, 1fr) auto calc(70px * var(--s));
+  gap: calc(20px * var(--s)); align-items: baseline; margin-top: calc(22px * var(--s)); padding-top: calc(24px * var(--s));
+  border-top: 1px solid #262626; }
+.subs-total .tl { grid-column: 2; font-size: calc(23px * var(--s)); font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: #868994; }
+.subs-total .sum { grid-column: 3; text-align: right; font: 700 calc(62px * var(--s))/1 var(--font-mono); letter-spacing: -.03em; }
+.subs-total .sum small { font-size: calc(24px * var(--s)); color: #868994; margin-left: 2px; }
+
+/* narrow frames: the same table, smaller (the stage is always 1080 high, so this is the only lever) */
+html[data-ar="1x1"] .subs-root { --s: .84; }
+html[data-ar="4x5"] .subs-root { --s: .72; }

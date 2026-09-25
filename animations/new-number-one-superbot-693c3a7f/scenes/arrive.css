@@ -1,0 +1,32 @@
+/* arrive.css: scene 'arrive'. The real hub (hubkit.css + the hub's own stylesheets) plus what this ad adds: the
+   brand ground and NEW dot for the agent that joins the rail mid-story, the palette of the view it opens, and the
+   frame rules the retired 'tabs' scene used to carry (its stylesheet is gone; the hub markup still needs them). */
+@import url("tabs-assets/hub.css"); /* tabs-chaos's Superbot hub stylesheets, scoped under :is(#s-tabs,.hbx) .sbsite */
+
+#s-arrive { background: #000; }
+:is(#s-arrive,.hbx) .tbs-root {
+  --ch-frame: #202124; --ch-tool: #35363a; --ch-text: #e8eaed; --ch-text-2: #bdc1c6; --ch-omni: #202124; --ch-sep: rgba(255,255,255,.22);
+  position: absolute; inset: 0; overflow: hidden; background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+:is(#s-arrive,.hbx) .tbs-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+:is(#s-arrive,.hbx) .sbsite { position: absolute; left: 0; top: 0; width: 1205px; height: 753.125px; transform-origin: 0 0; z-index: 3; visibility: hidden; }
+:is(#s-arrive,.hbx) .sbsite .stage { width: 100%; height: 100%; aspect-ratio: auto; background-color: transparent; border-color: transparent; }
+:is(#s-arrive,.hbx) .sbsite .body { grid-template-columns: minmax(0, 1fr); } /* the site's margin column stays closed, as in the ad's landed hub */
+
+/* ---------- the agent that joins the rail: its real brand ground and a NEW dot ---------- */
+#s-arrive .sbsite .rail-item[data-app="windsurf"] { background: var(--brand-windsurf); color: var(--brand-windsurf-ink); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+#s-arrive .sbsite .rail-item[data-app="windsurf"] svg { width: 26px; height: 26px; }
+#s-arrive .sbsite .rail .rail-item .dot.is-new { background: linear-gradient(135deg, var(--storm-1), var(--storm-3)); }
+
+/* ---------- Windsurf's view: its own ground under the shared thread ---------- */
+#s-arrive .sbsite .vz.v-windsurf { --vz-side: #0b0f0e; --vz-main: #0d100f; --vz-fg: #eaf3f0; --vz-mut: #93a7a2; --vz-line: #1f2b28; --vz-ubg: #17211f; --vz-row: #1b2523; --vz-comp: #141c1a; --vz-ring: rgba(88,229,187,.42); }
+#s-arrive .sbsite .vz-plat.k-windsurf .vz-ic { color: #58e5bb; }
+#s-arrive .sbsite .vz-tile.t-windsurf { background: var(--brand-windsurf); color: var(--brand-windsurf-ink); }
+#s-arrive .sbsite .vz-carry .vz-tile.t-sb { background: #000; }
+#s-arrive .sbsite .vz-carry .vz-tile.t-sb .rc-cat { width: 11px; height: 11px; }
+
+/* replies are laid out in full and streamed word by word (streamWords), so they start invisible */
+#s-arrive .sbsite .vz-m.is-a .w { opacity: 0; }
+/* the turn carried in from superbot is already there: its words stay visible */
+#s-arrive .sbsite .vz.v-windsurf .vz-m[data-m="a1"] .w { opacity: 1; }

@@ -1,0 +1,20 @@
+/* picks.css: the scene's stylesheet. It imports the hub scene's own CSS first (tabs.css -> the real hub,
+   tabs-assets/hub.css, scoped under :is(#s-tabs,.hbx)), which is what positions .sbsite (absolute, 1205x753,
+   transform-origin 0 0) and lays out .hub / .rail / .chats / .main that hubkit.js mounts.
+   Then the composer's routing line (its top row, above the prompt) and the lit SUPER chip.
+   The picker itself is hubkit.css's own .vz-pick (the hub's agent switcher), reused as superbot's choice.
+   Every moving part is written per frame by picks.js; nothing here animates on its own. */
+@import url("tabs.css");
+:is(#z,.hbx) .sbsite .vz-comp .rt { display: inline-flex; align-items: center; gap: 7px; padding: 0 2px 9px;
+  font-size: 11.5px; line-height: 1.35; color: color-mix(in srgb, var(--vz-fg) 74%, transparent); white-space: nowrap; }
+:is(#z,.hbx) .sbsite .vz-comp .rt b { font-weight: 600; color: var(--vz-fg); }
+:is(#z,.hbx) .sbsite .vz-comp .rt .vz-tile { width: 16px; height: 16px; border-radius: 5px; }
+:is(#z,.hbx) .sbsite .vz-comp .rt .vz-tile .vz-ic { width: 10px; height: 10px; }
+:is(#z,.hbx) .sbsite .vz-comp .rt .vz-tile img { width: 100%; height: 100%; display: block; }
+:is(#z,.hbx) .sbsite .vz-comp .rt .vz-tile.t-claude { background: #d97757; color: #fff; }
+:is(#z,.hbx) .sbsite .vz-comp .rt .vz-tile.t-gpt { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+:is(#z,.hbx) .sbsite .vz-comp .rt .vz-tile.t-gemini { background: #fff; color: #1f1f1f; }
+
+/* the SUPER chip, lit while superbot is the one choosing: the hub's own .rc-super pill in the storm gradient */
+:is(#z,.hbx) .sbsite .rc-super.vz-lit { background: linear-gradient(135deg, #5d91ec, #866cf6); color: #fff !important; }
+:is(#z,.hbx) .sbsite .rc-super.vz-lit::after { background: #fff; }

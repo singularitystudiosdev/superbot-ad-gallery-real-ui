@@ -37,3 +37,11 @@ SUPERBOT
 
 gemini-logo.svg: Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg, Google trademark, used nominatively.
 img/muse-meme.png: user-supplied Muse meme (The Social Network still edit).
+scenes/dash-assets CREDITS (scene 'dash')
+
+burger.jpg   "Cheeseburger.jpg" by Renee Comet (photographer), released by the National Cancer Institute
+             (NCI Visuals Online, image id 2652). Licence: Public domain (US federal government work).
+             Source: https://commons.wikimedia.org/wiki/File:Cheeseburger.jpg (960px Commons thumbnail, unmodified).
+             Fetched 2026-09-24. Used as the order card photo and item thumbnail.
+
+The restaurant name "Main Street Burger Co." is made up for the spot. DoorDash marks: see ../../brand/CREDITS.txt.

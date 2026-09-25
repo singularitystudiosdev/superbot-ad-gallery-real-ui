@@ -21,7 +21,7 @@ const SEQUENCE = [
   ['end', 'end'],
 ];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape)
-const FALLBACK_DUR = { tabs: 34 };
+const FALLBACK_DUR = { tabs: 50 };
 const SCENE_FADE = 0.3;
 const END_DUR = 4.4, DIP = 0.35;
 

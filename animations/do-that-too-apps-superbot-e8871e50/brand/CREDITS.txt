@@ -34,3 +34,6 @@ SMILING FACE WITH HORNS U+1F608 (cards: 'cant')
 
 SUPERBOT
   The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+gemini-logo.svg: Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg, Google trademark, used nominatively.
+img/muse-meme.png: user-supplied Muse meme (The Social Network still edit).

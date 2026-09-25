@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>preview: OLED 65, today</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #05070a; }
+  body { padding: 24px 0 64px; }
+  .dev-note {
+    font: 12px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+    color: #7d8899; letter-spacing: .02em;
+    max-width: 1560px; margin: 0 auto 16px; padding: 0 24px;
+  }
+  .dev-root { width: 100%; max-width: 1560px; min-width: 720px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<p class="dev-note">preview.html: site.css + data.js + site.js only. The kit (engine.js / kit.css) is not loaded here. In devtools add .is-active to a .op-lens-btn to light a store column, or .is-hover to .op-cell--win to open the 90 day tooltip. The lens bar sticks to the top here.</p>
+<div class="site site-tv-price-gpt dev-root"></div>
+<script type="module">
+  import * as data from './data.js';
+  import build from './site.js';
+  const root = document.querySelector('.site-tv-price-gpt');
+  build(root, { data, cfg: { slug: 'tv-price-gpt' } });
+</script>
+</body>
+</html>

@@ -1,0 +1,685 @@
+/* "Your 10 dresses" lookbook. Every rule is scoped under .site-dresses. */
+
+.site-dresses {
+  --dr-paper: #f6f1e8;
+  --dr-ink: #1a1714;
+  --dr-mute: #6f6455;
+  --dr-line: #ddd2c2;
+  --dr-rust: #a8432b;
+  --dr-gold: #b0862f;
+  --dr-serif: Georgia, 'Iowan Old Style', 'Times New Roman', Times, serif;
+  --dr-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--dr-paper);
+  color: var(--dr-ink);
+  font-family: var(--dr-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+.site-dresses *,
+.site-dresses *::before,
+.site-dresses *::after {
+  box-sizing: border-box;
+}
+
+.site-dresses img {
+  max-width: 100%;
+}
+
+.site-dresses .lb-wrap {
+  padding: 0 clamp(16px, 3.4vw, 52px);
+  position: relative;
+}
+
+/* ---------- masthead ---------- */
+
+.site-dresses .lb-head {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.04fr .96fr;
+  gap: clamp(18px, 3.4vw, 56px);
+  align-items: start;
+  padding: clamp(26px, 4vw, 58px) 0 0;
+  border-bottom: 2px solid var(--dr-ink);
+}
+
+.site-dresses .lb-head-r {
+  margin-top: 22px;
+  padding-left: clamp(16px, 2.4vw, 38px);
+  border-left: 1px solid var(--dr-line);
+}
+
+.site-dresses .lb-stamp {
+  position: absolute;
+  top: clamp(26px, 4vw, 58px);
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.site-dresses .lb-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--dr-ink);
+  font-family: var(--dr-serif);
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+
+.site-dresses .lb-stamp-text {
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--dr-mute);
+}
+
+.site-dresses .lb-kicker {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--dr-mute);
+}
+
+.site-dresses .lb-slash {
+  margin: 0 9px;
+  color: #c3b6a3;
+}
+
+.site-dresses .lb-title {
+  margin: 12px 0 0;
+  font-family: var(--dr-serif);
+  font-weight: 400;
+  font-size: clamp(46px, 7vw, 104px);
+  line-height: .9;
+  letter-spacing: -.03em;
+}
+
+.site-dresses .lb-title em {
+  font-style: italic;
+  color: var(--dr-rust);
+}
+
+.site-dresses .lb-lede {
+  margin: 0;
+  max-width: 58ch;
+  font-size: 13px;
+  line-height: 1.62;
+  color: #4d453b;
+}
+
+.site-dresses .lb-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(14px, 2.6vw, 42px);
+  margin: 26px 0 0;
+}
+
+.site-dresses .lb-stat dt {
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dr-mute);
+}
+
+.site-dresses .lb-stat dd {
+  margin: 3px 0 0;
+  font-family: var(--dr-serif);
+  font-size: clamp(22px, 2.2vw, 30px);
+}
+
+.site-dresses .lb-filters {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  margin-top: 30px;
+  border-top: 1px solid var(--dr-line);
+}
+
+.site-dresses .lb-filter {
+  padding: 10px 16px 9px;
+  border-right: 1px solid var(--dr-line);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dr-mute);
+}
+
+.site-dresses .lb-filter.is-on {
+  background: var(--dr-ink);
+  color: var(--dr-paper);
+}
+
+/* ---------- the ten looks ---------- */
+
+.site-dresses .looks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-dresses .look {
+  position: relative;
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: clamp(14px, 3vw, 54px);
+  padding: clamp(26px, 4vw, 58px) 0;
+  border-bottom: 1px solid var(--dr-line);
+}
+
+.site-dresses .look:nth-child(even) {
+  grid-template-columns: 1.1fr .9fr;
+}
+
+.site-dresses .look:nth-child(even) .look-shot {
+  order: 2;
+}
+
+.site-dresses .look-shot {
+  position: relative;
+  margin: 0;
+}
+
+/* width/height attributes in the markup are a pre-layout hint; the box itself is fixed here so the
+   card does not resize while the photo decodes. */
+.site-dresses .look-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: #e8dfd0;
+}
+
+.site-dresses .look-flag {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 6px 10px;
+  background: var(--dr-paper);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.site-dresses .look-badge {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 9px;
+  background: var(--dr-rust);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.site-dresses .look-body {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 2px;
+}
+
+.site-dresses .look-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.site-dresses .look-no {
+  font-family: var(--dr-serif);
+  font-style: italic;
+  font-size: clamp(56px, 6.6vw, 112px);
+  line-height: .74;
+  letter-spacing: -.045em;
+  color: #cdbda6;
+}
+
+.site-dresses .look-count {
+  padding-top: 8px;
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: #b3a795;
+}
+
+.site-dresses .look-brand {
+  margin: 6px 0 0;
+  font-size: 10px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--dr-mute);
+}
+
+.site-dresses .look-name {
+  margin: 0;
+  font-family: var(--dr-serif);
+  font-weight: 400;
+  font-size: clamp(21px, 2.1vw, 33px);
+  line-height: 1.12;
+  letter-spacing: -.01em;
+  max-width: 26ch;
+}
+
+.site-dresses .look-rate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--dr-mute);
+}
+
+.site-dresses .stars {
+  position: relative;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 2.5px;
+  color: #d9cebc;
+}
+
+.site-dresses .stars-on {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-style: normal;
+  color: var(--dr-gold);
+}
+
+.site-dresses .look-score {
+  font-weight: 700;
+  color: #3a332b;
+}
+
+.site-dresses .look-rev {
+  text-decoration: underline;
+}
+
+.site-dresses .badge-prime {
+  padding: 3px 7px 4px;
+  border-radius: 2px;
+  background: #0f2748;
+  color: var(--dr-paper);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.site-dresses .look-price {
+  margin: 2px 0 0;
+  font-family: var(--dr-serif);
+  font-size: clamp(23px, 2.4vw, 33px);
+}
+
+.site-dresses .look-line {
+  margin: 0;
+  max-width: 50ch;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--dr-mute);
+}
+
+/* The strip always reserves its own box and only its paint is toggled, so revealing it never moves
+   the heart below it: the click target keeps one rect across the hover and the press. */
+.site-dresses .look-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding: 10px 0 12px;
+  border-top: 1px solid var(--dr-line);
+  border-bottom: 1px solid var(--dr-line);
+  visibility: hidden;
+}
+
+.site-dresses .look.is-hover .look-quick,
+.site-dresses .look:has(.heart.is-hover) .look-quick {
+  visibility: visible;
+}
+
+.site-dresses .quick {
+  font-size: 11.5px;
+  color: #4d453b;
+}
+
+.site-dresses .quick b {
+  margin-right: 6px;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--dr-ink);
+}
+
+.site-dresses .look.is-hover .look-img,
+.site-dresses .look:has(.heart.is-hover) .look-img {
+  outline: 2px solid var(--dr-ink);
+  outline-offset: 5px;
+}
+
+.site-dresses .look.is-hover .look-name,
+.site-dresses .look:has(.heart.is-hover) .look-name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.site-dresses .look-why {
+  margin: 4px 0 0;
+  max-width: 44ch;
+  padding-left: 13px;
+  border-left: 2px solid var(--dr-rust);
+  font-family: var(--dr-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #3a332b;
+}
+
+.site-dresses .look-pick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 2.6vw, 44px);
+  margin-top: 14px;
+  padding-top: 8px;
+}
+
+.site-dresses .pick-label {
+  margin: 0 0 9px;
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dr-mute);
+}
+
+.site-dresses .swatches {
+  display: flex;
+  gap: 10px;
+}
+
+.site-dresses .swatch {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--sw);
+  box-shadow: inset 0 0 0 1px rgba(26, 23, 20, .22);
+}
+
+.site-dresses .swatch.is-on {
+  box-shadow: 0 0 0 2px var(--dr-paper), 0 0 0 3.5px var(--dr-ink);
+}
+
+.site-dresses .swatch-name {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.site-dresses .sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.site-dresses .size {
+  min-width: 32px;
+  padding: 6px 8px;
+  text-align: center;
+  border: 1px solid #cfc3b0;
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: #4d453b;
+}
+
+.site-dresses .size.is-on {
+  background: var(--dr-ink);
+  border-color: var(--dr-ink);
+  color: var(--dr-paper);
+}
+
+.site-dresses .size.is-out {
+  color: #b8ab99;
+  text-decoration: line-through;
+}
+
+.site-dresses .look-act {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--dr-line);
+}
+
+.site-dresses .heart {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border: 1px solid #cfc3b0;
+  background: transparent;
+  font-family: var(--dr-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dr-ink);
+  cursor: pointer;
+}
+
+.site-dresses .heart-ic {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--dr-ink);
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+}
+
+.site-dresses .hw-done {
+  display: none;
+}
+
+.site-dresses .heart.is-active {
+  background: var(--dr-rust);
+  border-color: var(--dr-rust);
+  color: #fff;
+}
+
+.site-dresses .heart.is-active .heart-ic {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.site-dresses .heart.is-active .hw-add {
+  display: none;
+}
+
+.site-dresses .heart.is-active .hw-done {
+  display: inline;
+}
+
+.site-dresses .look-cta {
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--dr-ink);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.site-dresses .look-seller {
+  margin: 0;
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #8d8272;
+}
+
+.site-dresses .look-slash {
+  margin: 0 8px;
+  color: #c3b6a3;
+}
+
+.site-dresses .look:has(.heart.is-active) .look-no {
+  color: var(--dr-rust);
+}
+
+.site-dresses .look:has(.heart.is-active) .look-badge {
+  background: var(--dr-ink);
+}
+
+/* ---------- sticky shortlist tray ---------- */
+
+.site-dresses .tray {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  margin-top: -1px;
+  border-top: 2px solid var(--dr-ink);
+  background: var(--dr-paper);
+}
+
+.site-dresses .tray-in {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 28px);
+  padding: 12px 0 14px;
+}
+
+.site-dresses .tray-title {
+  margin: 0;
+  font-family: var(--dr-serif);
+  font-size: 20px;
+  font-style: italic;
+}
+
+.site-dresses .tray-empty {
+  margin: 0;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #8d8272;
+}
+
+.site-dresses .tray-slots {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 6px;
+  min-height: 46px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-dresses .slot {
+  position: relative;
+  width: 31px;
+  height: 46px;
+  opacity: 0;
+}
+
+.site-dresses .slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.site-dresses .slot-no {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1px 0;
+  background: rgba(26, 23, 20, .74);
+  color: var(--dr-paper);
+  font-size: 8.5px;
+  letter-spacing: .08em;
+  text-align: center;
+}
+
+.site-dresses .tray-open {
+  display: none;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.site-dresses .tray-saved {
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dr-mute);
+}
+
+.site-dresses .tray-cta {
+  padding: 11px 16px;
+  background: var(--dr-ink);
+  color: var(--dr-paper);
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* The tray fills from the hearts the kit marks .is-active. Pure CSS, no clock, no listeners. */
+.site-dresses:has(.heart.is-active) .tray-empty {
+  display: none;
+}
+
+.site-dresses:has(.heart.is-active) .tray-open {
+  display: flex;
+}
+
+.site-dresses:has(.look:nth-child(1) .heart.is-active) .slot:nth-child(1),
+.site-dresses:has(.look:nth-child(2) .heart.is-active) .slot:nth-child(2),
+.site-dresses:has(.look:nth-child(3) .heart.is-active) .slot:nth-child(3),
+.site-dresses:has(.look:nth-child(4) .heart.is-active) .slot:nth-child(4),
+.site-dresses:has(.look:nth-child(5) .heart.is-active) .slot:nth-child(5),
+.site-dresses:has(.look:nth-child(6) .heart.is-active) .slot:nth-child(6),
+.site-dresses:has(.look:nth-child(7) .heart.is-active) .slot:nth-child(7),
+.site-dresses:has(.look:nth-child(8) .heart.is-active) .slot:nth-child(8),
+.site-dresses:has(.look:nth-child(9) .heart.is-active) .slot:nth-child(9),
+.site-dresses:has(.look:nth-child(10) .heart.is-active) .slot:nth-child(10) {
+  opacity: 1;
+}
+
+@media (max-width: 1360px) {
+  /* the corner stamp would otherwise sit under the lede on narrower stages */
+  .site-dresses .lb-stamp {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-dresses .look,
+  .site-dresses .look:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .site-dresses .look:nth-child(even) .look-shot {
+    order: 0;
+  }
+
+  .site-dresses .lb-head {
+    grid-template-columns: 1fr;
+  }
+
+  .site-dresses .lb-head-r {
+    margin-top: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .site-dresses .lb-stamp {
+    display: none;
+  }
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inbox, handled - preview</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #f2f3f6; }
+  #preview-root { width: 100%; }
+</style>
+</head>
+<body>
+<div id="preview-root" class="site site-gmail-manage"></div>
+<script type="module">
+  import cfg from './ad.js';
+  import * as data from './data.js';
+  import * as site from './site.js';
+
+  const root = document.getElementById('preview-root');
+  site.default(root, { data, cfg });
+  if (site.render) site.render(root, 0.62);
+
+  // dev page only: mirror the kit's click plan by hand so Send can be inspected.
+  root.addEventListener('click', (event) => {
+    const send = event.target.closest('.iw-send');
+    if (send) send.classList.add('is-active');
+  });
+  // dev page only: mirror the kit's hover plan on the first drafted reply.
+  const first = root.querySelector('.iw-mails .iw-mail:nth-child(1) .iw-reply');
+  if (first) first.classList.add('is-hover');
+</script>
+</body>
+</html>

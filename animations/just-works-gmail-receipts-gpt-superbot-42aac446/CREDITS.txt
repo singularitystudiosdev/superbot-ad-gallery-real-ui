@@ -1,0 +1,25 @@
+brand/gmail.svg | https://api.iconify.design/simple-icons/gmail.svg | Simple Icons | CC0 1.0 Universal
+brand/netflix.svg | https://api.iconify.design/simple-icons/netflix.svg | Simple Icons | CC0 1.0 Universal
+brand/spotify.svg | https://api.iconify.design/simple-icons/spotify.svg | Simple Icons | CC0 1.0 Universal
+brand/adobecreativecloud.svg | https://api.iconify.design/simple-icons/adobecreativecloud.svg | Simple Icons | CC0 1.0 Universal
+brand/apple.svg | https://api.iconify.design/simple-icons/apple.svg | Simple Icons | CC0 1.0 Universal
+brand/notion.svg | https://api.iconify.design/simple-icons/notion.svg | Simple Icons | CC0 1.0 Universal
+brand/1password.svg | https://api.iconify.design/simple-icons/1password.svg | Simple Icons | CC0 1.0 Universal
+brand/hulu.svg | https://api.iconify.design/simple-icons/hulu.svg | Simple Icons | CC0 1.0 Universal
+brand/audible.svg | https://api.iconify.design/simple-icons/audible.svg | Simple Icons | CC0 1.0 Universal
+brand/dropbox.svg | https://api.iconify.design/simple-icons/dropbox.svg | Simple Icons | CC0 1.0 Universal
+brand/strava.svg | https://api.iconify.design/simple-icons/strava.svg | Simple Icons | CC0 1.0 Universal
+img/groceries.jpg | https://www.flickr.com/photos/58575431@N00/218410335 | qmnonic | CC BY 2.0 (crop 760px, re-encoded)
+img/coffee.jpg | https://www.flickr.com/photos/55229469@N07/19384965881 | Forsaken Fotos | CC BY 2.0 (crop 760px, re-encoded)
+img/shoes.jpg | https://www.flickr.com/photos/64015205@N00/46324600 | timtak | CC BY 2.0 (crop 760px, re-encoded)
+img/headphones.jpg | https://www.flickr.com/photos/156466858@N02/50304927228 | bradjavernick | CC BY 2.0 (crop 760px, re-encoded)
+img/books.jpg | https://www.flickr.com/photos/12508217@N08/8395557674 | Sam Howzit | CC BY 2.0 (crop 760px, re-encoded)
+img/plant.jpg | https://wordpress.org/photos/photo/84368db7ce/ | Alina Kakshapati | CC0 1.0 (crop 760px, re-encoded)
+img/dogfood.jpg | https://www.flickr.com/photos/28510393@N07/3401057082 | EraPhernalia Vintage | CC BY-SA 2.0 (crop 760px, re-encoded)
+img/ride.jpg | https://www.flickr.com/photos/41605671@N08/4090395947 | JOnasIsMyMiddleName | CC BY 2.0 (crop 760px, re-encoded)
+img/glasses.jpg | https://www.flickr.com/photos/147592390@N06/40656616463 | John Beans | CC BY 2.0 (crop 760px, re-encoded)
+img/hotel.jpg | https://www.flickr.com/photos/23842402@N07/2450179178 | mrkathika | CC BY-SA 2.0 (crop 760px, re-encoded)
+img/cake.jpg | https://www.flickr.com/photos/35832040@N07/12110350903 | pulaw | CC BY 2.0 (crop 760px, re-encoded)
+img/bicycle.jpg | https://www.flickr.com/photos/55608722@N06/12396753253 | Dusty J | CC BY 2.0 (crop 760px, re-encoded)
+img/tools.jpg | https://www.flickr.com/photos/30329962@N08/9210334054 | Mark Turnauckas | CC BY 2.0 (crop 760px, re-encoded)
+img/flowers.jpg | https://www.flickr.com/photos/61107193@N03/8959547126 | Stefan Rudiger | CC BY 2.0 (crop 760px, re-encoded)

@@ -1,0 +1,141 @@
+/* scene 'hub': the Superbot hub window (hub-assets/hub.css: the real superbot hub, scoped), the chat thread
+   (hub-assets/chat.css) and its cards (hub-assets/ports.css), plus this scene's own thread pieces: the
+   aggregation card, the build card with its live site thumbnail, and the pointer.
+   Every value that moves is written from hub.js per frame; nothing here transitions or animates. */
+@import url("hub-assets/hub.css");
+@import url("hub-assets/chat.css");
+@import url("hub-assets/ports.css");
+
+.s-hub { background: #000; }
+.s-hub .hub-root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+.s-hub .hub-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* the window: laid out at a design width, scaled to the frame (hub.js geo()). The arena takes the whole
+   window: the tabs scene kept a 21% column for its terminal log, this spot has no log. */
+.s-hub .sbsite { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.s-hub .hub-root .sbsite .body { grid-template-columns: minmax(0, 1fr); }
+/* the window is laid out at the width/height hub.js computes, so the hub's 16:10 aspect-ratio must not
+   shrink it: a 4:5 frame would otherwise hold a squat letterboxed window (found in the 4x5 shots) */
+.s-hub .hub-root .sbsite .stage { aspect-ratio: auto; height: 100%; }
+.s-hub .sbsite .stage-bar .led.on { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+.s-hub .hub-root .sbsite .hub { --hub-bubble: 520px; --hub-reply: 700px; --hub-reply-inset: 0px; --hub-column: 740px; }
+
+/* the pointer (style.css .cursor, scoped: this scene owns its own cursor element) */
+.s-hub .cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 30; pointer-events: none;
+  fill: #fff; stroke: #000; stroke-width: 1.3; stroke-linejoin: round; filter: drop-shadow(0 3px 6px rgb(0 0 0 / .5)); transform-origin: 17px 11px; }
+
+/* ---------- aspect ratios ----------
+   16:9 keeps the whole window (rail + chats + thread). Narrower frames narrow the design width to keep the
+   hub's 11px body type at >= 15 stage px, so the sidebar gives way: at 4:3 it slims, at 1:1 and 4:5 it goes
+   (exactly what assets/ar.css does to the hub on those ratios) and the thread keeps the width. */
+.s-hub .hub-root.ar-mid .sbsite .hub { grid-template-columns: 58px 168px minmax(0, 1fr); }
+.s-hub .hub-root.ar-narrow .sbsite .hub { grid-template-columns: 56px minmax(0, 1fr); }
+.s-hub .hub-root.ar-narrow .sbsite .hub .chats { display: none; }
+.s-hub .hub-root.ar-narrow .sbsite .hub .rc-super,
+.s-hub .hub-root.ar-narrow .sbsite .hub .rc-computer { display: none; }
+.s-hub .hub-root.ar-mid .sbsite .hub .chat-head .search { max-width: 46%; }
+
+/* ---------- the ask, superbot's reply ---------- */
+.s-hub .sbsite .hub .msg .m-text { word-break: break-word; }
+.s-hub .sbsite .hub .hb-bot .m-main { display: grid; justify-items: stretch; gap: 0; }
+.s-hub .sbsite .hub .hb-chip { justify-self: start; }
+
+/* a source logo always sits on its own white chip: platform SVGs paint currentColor, which is black inside
+   an <img> and disappeared against the hub's dark ground (seen on the live ads, 2026-09-25) */
+.s-hub .sbsite .hub .hb-logo { flex: none; display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 4px; background: #fff; color: #111; overflow: hidden; }
+.s-hub .sbsite .hub .hb-logo img { display: block; width: 11px; height: 11px; object-fit: contain; }
+.s-hub .sbsite .hub .hb-favs { display: inline-flex; align-items: center; margin-right: 1px; }
+/* the stack overlaps the chip's white padding only. At -5px it lapped 2.5px into every 11px logo and left
+   the glyphs as half-drawn slivers: the "Opening 7 marketplaces" chip read as a row of clipped marks. */
+.s-hub .sbsite .hub .hb-favs .hb-logo { margin-left: -2px; box-shadow: 0 0 0 1.5px #141416; }
+.s-hub .sbsite .hub .hb-favs .hb-logo:first-child { margin-left: 0; }
+/* a mark that is almost all light (Amazon's wordmark, Walmart's, Best Buy's tag, Google Calendar's white page)
+   would be white on the white chip and vanish. hub.js measures each logo once, after it decodes, and moves
+   those marks to this dark chip, where they keep their own brand colours and read. The class is only ever
+   ADDED, never removed, and never touched per frame, so a frame is a pure function of t once the gate opens. */
+.s-hub .sbsite .hub .hb-logo--light { background: #1d1d1f; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16); }
+/* in the overlapping favicon stack the ring is what keeps one chip off the next: an inset ring would be covered
+   by the chip drawn over it, so a light chip gets the same outer ring as a white one, in its own grey */
+.s-hub .sbsite .hub .hb-favs .hb-logo--light { box-shadow: 0 0 0 1.5px #2c2c31; }
+
+/* ---------- the aggregation card ---------- */
+.s-hub .sbsite .hub .hb-agg { width: 100%; margin-top: 5px; border-radius: 12px; background: #0e0e10; box-shadow: inset 0 0 0 1px #26262a; overflow: hidden; }
+/* row heights are tight on purpose: the whole aggregation card (up to 7 sources + 5 listings) has to fit
+   the feed, or its total sits behind the composer. hub.js measures the real feed and marks the card
+   .hb-tight when even this is too tall (1920 leaves a 494px feed for a 444px card), then drops preview
+   rows from the end if that is still not enough. */
+.s-hub .sbsite .hub .hb-agg-h { display: flex; align-items: center; gap: 7px; height: 28px; padding: 0 11px; border-bottom: 1px solid #1b1b1e; font-size: 11px; color: #a1a1a6; }
+.s-hub .sbsite .hub .hb-agg-h b { font-weight: 600; color: #ececec; }
+.s-hub .sbsite .hub .hb-agg-h em { margin-left: auto; font: 600 9px/1 var(--font-mono); font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: #34d399; }
+.s-hub .sbsite .hub .hb-live { width: 7px; height: 7px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px rgba(52, 211, 153, .75); flex: none; }
+.s-hub .sbsite .hub .hb-src-rows { padding: 3px 0 4px; }
+.s-hub .sbsite .hub .hb-src { display: flex; align-items: center; gap: 8px; height: 24px; padding: 0 11px; font-size: 11px; color: #d6d6dd; }
+.s-hub .sbsite .hub .hb-src-n { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-hub .sbsite .hub .hb-src-bar { flex: none; width: 76px; height: 3px; border-radius: 2px; background: #232326; overflow: hidden; }
+.s-hub .sbsite .hub .hb-src-bar > i { display: block; width: 0; height: 100%; border-radius: 2px; background: linear-gradient(90deg, #5b8dff, #8b5cf6); }
+.s-hub .sbsite .hub .hb-src-c { flex: none; width: 36px; text-align: right; font: 600 11px/1 var(--font-mono); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+.s-hub .sbsite .hub .hb-agg-f { display: flex; align-items: baseline; gap: 6px; padding: 5px 11px 7px; border-top: 1px solid #1b1b1e; background: #0b0b0c; }
+.s-hub .sbsite .hub .hb-agg-fn { font: 700 19px/1 var(--ui); letter-spacing: -.01em; color: #fff; font-variant-numeric: tabular-nums; }
+.s-hub .sbsite .hub .hb-agg-fl { font-size: 10.5px; color: #8e8e93; }
+/* the listings grow the card as they land (hub.js drives this height from lt): a reserved, still empty
+   block of preview rows read as a gap inside the card while the counts were still ticking */
+.s-hub .sbsite .hub .hb-prevs { height: 0; padding: 3px 0 5px; border-top: 1px solid #1b1b1e; overflow: hidden; }
+.s-hub .sbsite .hub .hb-prev { display: flex; align-items: center; gap: 9px; padding: 4px 11px; }
+.s-hub .sbsite .hub .hb-prev + .hb-prev { border-top: 1px solid #151517; }
+.s-hub .sbsite .hub .hb-prev-img { flex: none; width: 44px; height: 32px; border-radius: 6px; object-fit: cover; background: #1a1a1d; }
+.s-hub .sbsite .hub .hb-prev-s { width: 15px; height: 15px; }
+.s-hub .sbsite .hub .hb-prev-s img { width: 10px; height: 10px; }
+/* */
+.s-hub .sbsite .hub .hb-prev-t { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.s-hub .sbsite .hub .hb-prev-t b { font-weight: 600; font-size: 11px; color: #f2f2f7; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-hub .sbsite .hub .hb-prev-t small { font-size: 9.5px; color: #8e8e93; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-hub .sbsite .hub .hb-prev-p { flex: none; font: 600 11.5px/1 var(--font-mono); color: #fff; font-variant-numeric: tabular-nums; }
+/* the feed on a short frame (1920 leaves 502 design px) is smaller than the card with 7 sources and 5
+   listings: the rows hold all the listings at a tighter pitch, and hub.js drops rows from the end only if
+   even this does not fit. Type sizes are untouched: the row is text-tall, only the image gives. */
+.s-hub .sbsite .hub .hb-agg.hb-tight .hb-prev { padding: 2px 11px; }
+.s-hub .sbsite .hub .hb-agg.hb-tight .hb-prev-img { width: 38px; height: 26px; border-radius: 5px; }
+.s-hub .sbsite .hub .hb-prev-s { flex: none; width: 15px; height: 15px; }
+.s-hub .sbsite .hub .hb-prev-s img { width: 10px; height: 10px; }
+
+/* ---------- the build card + its live thumbnail ---------- */
+.s-hub .sbsite .hub .hb-build { width: 100%; margin-top: 9px; border-radius: 12px; background: #0b0b0c; box-shadow: inset 0 0 0 1px #26262a; overflow: hidden; }
+.s-hub .sbsite .hub .hb-build-h { display: flex; align-items: center; gap: 9px; height: 38px; padding: 0 11px; border-bottom: 1px solid #1b1b1e; }
+.s-hub .sbsite .hub .hb-file-ic { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: #1c1c1e; color: #c7c7cc; }
+.s-hub .sbsite .hub .hb-file-ic svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.s-hub .sbsite .hub .hb-file-ic img { width: 14px; height: 14px; object-fit: contain; }
+.s-hub .sbsite .hub .hb-build-fav { width: 22px; height: 22px; border-radius: 7px; }
+.s-hub .sbsite .hub .hb-build-fav img { width: 14px; height: 14px; }
+.s-hub .sbsite .hub .hb-build-t { min-width: 0; display: grid; gap: 1px; }
+.s-hub .sbsite .hub .hb-build-t b { font-weight: 600; font-size: 11.5px; color: #f2f2f7; }
+.s-hub .sbsite .hub .hb-build-t small { font: 9.5px/1 var(--font-mono); color: #8e8e93; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-hub .sbsite .hub .hb-app { margin-left: auto; flex: none; padding: 0 6px; border-radius: 5px; background: #1c1c1e; color: #8e8e93; font: 600 9px/16px var(--ui); letter-spacing: .08em; }
+.s-hub .sbsite .hub .hb-lines { display: grid; gap: 4px; padding: 7px 11px 5px; }
+.s-hub .sbsite .hub .hb-line { display: flex; align-items: center; gap: 7px; font: 10.5px/15px var(--font-mono); color: #8e8e93; }
+.s-hub .sbsite .hub .hb-line code { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-hub .sbsite .hub .hb-line i { flex: none; width: 5px; height: 5px; border-radius: 50%; background: #3a3a3f; }
+.s-hub .sbsite .hub .hb-line.hb-ok code { color: #c7c7cc; }
+.s-hub .sbsite .hub .hb-line.hb-ok i { background: #34c759; box-shadow: 0 0 6px rgba(52, 199, 89, .7); }
+/* the card's own height (header + lines + thumb + button) has to clear the composer, and at 1920 the feed
+   is only ~420 design px while the card is ~473: this aspect-ratio is the shape when the card has room,
+   and hub.js overrides the height from the live feed height when it does not (fitCards) */
+.s-hub .sbsite .hub .hb-thumb { position: relative; aspect-ratio: 2.12; overflow: hidden; background: #0b0b0c; border-top: 1px solid #1b1b1e; border-bottom: 1px solid #1b1b1e; }
+.s-hub .sbsite .hub .hb-thumb-in { position: absolute; left: 0; top: 0; width: 1280px; transform-origin: 0 0; }
+/* the skeleton lives INSIDE .hb-thumb-in (hub.js moves it there at mount), so its slabs are laid out in the
+   page's own 1280px space and inherit the page's scale. As an overlay on .hb-thumb they came out
+   (thumb width / 1280) too big: bars ran past the content edges and the header bar past the header.
+   inset:0 covers the whole page; .hb-thumb's own overflow:hidden still crops it to the card viewport. */
+.s-hub .sbsite .hub .hb-skel { position: absolute; inset: 0; pointer-events: none; }
+.s-hub .sbsite .hub .hb-skb { position: absolute; overflow: hidden; background: rgba(255, 255, 255, .025); }
+.s-hub .sbsite .hub .hb-bar { position: absolute; left: 16px; height: 13px; border-radius: 4px; background: rgba(255, 255, 255, .09); }
+.s-hub .sbsite .hub .hb-bar.t { top: 16px; width: 44%; height: 16px; background: rgba(255, 255, 255, .14); }
+/* the site's own page decides: hub.js measures the page background at mount and marks a light one, so the
+   skeleton reads as a faint wireframe on cream instead of dark slabs (seen on gift-dad-gpt) */
+.s-hub .sbsite .hub .hb-skel.hb-sk-light .hb-skb { background: rgba(0, 0, 0, .025); }
+.s-hub .sbsite .hub .hb-skel.hb-sk-light .hb-bar { background: rgba(0, 0, 0, .09); }
+.s-hub .sbsite .hub .hb-skel.hb-sk-light .hb-bar.t { background: rgba(0, 0, 0, .14); }
+.s-hub .sbsite .hub .hb-shine { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, 0) 62%); opacity: 0; }
+.s-hub .sbsite .hub .hb-build-f { display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 11px; }
+.s-hub .sbsite .hub .hb-open { display: inline-flex; align-items: center; gap: 7px; height: 26px; padding: 0 12px; border-radius: 999px; background: #e7e7ea; color: #0d0d0d; font: 600 11px/1 var(--ui); white-space: nowrap; transform-origin: 50% 50%; }
+.s-hub .sbsite .hub .hb-open svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.s-hub .sbsite .hub .hb-url { margin-left: auto; font: 10px/1 var(--font-mono); color: #6f6f75; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

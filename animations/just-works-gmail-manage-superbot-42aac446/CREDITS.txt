@@ -1,0 +1,20 @@
+# Asset credits, one line per file: file, source URL, author, license.
+# No photographs in this spot: every thread is a private mailbox, so the only
+# imagery is the sender marks. Company senders use the public brand logo;
+# people, clinics, schools, utilities and banks use a generated monogram
+# (a circle with the sender initials) so no real person or company is invented.
+
+brand/gmail.svg, https://api.iconify.design/logos/google-gmail.svg, Google LLC, Gmail brand logo (Iconify logos set, brand terms apply)
+brand/googlecalendar.svg, https://api.iconify.design/logos/google-calendar.svg, Google LLC, Google Calendar brand logo (Iconify logos set, brand terms apply)
+brand/notion.svg, https://api.iconify.design/logos/notion-icon.svg, Notion Labs Inc, Notion brand logo (Iconify logos set, brand terms apply)
+brand/figma.svg, https://api.iconify.design/logos/figma.svg, Figma Inc, Figma brand logo (Iconify logos set, brand terms apply)
+brand/av-maya.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-dana.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-ava.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-priya.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-tom.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-harbor.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-lincoln.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-lakeview.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-baypower.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)
+brand/av-northline.svg, generated in this folder, superbot ad series, monogram mark (not a photo, no third party source)

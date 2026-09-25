@@ -1,0 +1,10 @@
+brand/amazon.svg | https://api.iconify.design/simple-icons/amazon.svg | Simple Icons | CC0 1.0 Universal
+img/hero.jpg | https://commons.wikimedia.org/wiki/File:Sunset_fishing_at_Rough_River_Lake.jpg | LouisvilleUSACE / Michal McAbee | CC BY 2.0 (crop 1600x720, re-encoded)
+img/reel.jpg | https://commons.wikimedia.org/wiki/File:A_3000_sized_spinning_reel.jpg | JaredMcKenzie | CC0 1.0 Universal (crop 720x540, re-encoded)
+img/crankbaits.jpg | https://commons.wikimedia.org/wiki/File:Verschiedene_Wobbler.jpg | Danndorfer1914 | CC0 1.0 Universal (crop 720x540, re-encoded)
+img/spoons.jpg | https://commons.wikimedia.org/wiki/File:Spoon-bait_2008_G1.jpg | George Chernilevsky | Public domain (crop 720x540, re-encoded)
+img/knife.jpg | https://commons.wikimedia.org/wiki/File:Schrade_Uncle_Henry_Fillet_Knife_168UH.jpg | Ermell | CC BY-SA 4.0 (crop 720x540, re-encoded)
+img/net.jpg | https://commons.wikimedia.org/wiki/File:Landing_net_2.jpg | Huangdan2060 | CC BY 3.0 (crop 720x540, re-encoded)
+img/hat.jpg | https://commons.wikimedia.org/wiki/File:Black_Barbour_bucket_hat.jpg | W.carter | CC BY-SA 4.0 (crop 720x540, re-encoded)
+img/multitool.jpg | https://commons.wikimedia.org/wiki/File:Gerber_suspension_pliers.jpg | Fluzwup at English Wikipedia | Public domain (crop 720x540, re-encoded)
+img/boxes.jpg | https://commons.wikimedia.org/wiki/File:AssortedFlyBoxes.jpg | Mike Cline | Public domain (crop 720x540, re-encoded)

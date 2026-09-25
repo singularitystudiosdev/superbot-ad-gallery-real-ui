@@ -1,0 +1,31 @@
+img/jk-01.webp | https://commons.wikimedia.org/wiki/File:70s_Schott_613.jpg | Crippe at English Wikipedia | Public domain
+img/jk-02.webp | https://commons.wikimedia.org/wiki/File:Black_leather_biker_jacket.jpg | The original uploader was Jtdirl at English Wikipedia. | Public domain
+img/jk-03.webp | https://commons.wikimedia.org/wiki/File:Black_worn_leather_jacket.jpg | W.carter | CC0
+img/jk-04.webp | https://commons.wikimedia.org/wiki/File:Lewis_Leathers_Bronx_Aviakit_Jacket.jpg | Timken Bearing | CC BY-SA 3.0
+img/jk-05.webp | https://commons.wikimedia.org/wiki/File:Leather_Jacket_(51011162080).jpg | ajay_suresh | CC BY 2.0
+img/jk-06.webp | https://commons.wikimedia.org/wiki/File:A-2_leather_flight_jacket,_Army_Air_Corps,_World_War_II,_owned_by_Lt._Col._W._C._Dale_-_Oregon_Air_and_Space_Museum_-_Eugene,_Oregon_-_DSC09892.jpg | Daderot | CC0
+img/jk-07.webp | https://commons.wikimedia.org/wiki/File:Brown_leather_jacket.jpg | Whistle toe llll | CC BY-SA 4.0
+img/jk-08.webp | https://commons.wikimedia.org/wiki/File:Tan_leather_jacket.jpg | Dr. Blofeld (Blofeld of SPECTRE) | CC BY-SA 3.0
+img/jk-09.webp | https://commons.wikimedia.org/wiki/File:Wested_Leather_%22Indiana_Jones%22_Jacket.jpg | puuikibeach | CC BY 2.0
+img/jk-10.webp | https://commons.wikimedia.org/wiki/File:Suede_Bomber_Jacket_(51011161975).jpg | ajay_suresh | CC BY 2.0
+img/jk-11.webp | https://commons.wikimedia.org/wiki/File:Suede_jacket.jpg | Ірина Бучнєва | CC0
+img/jk-12.webp | https://commons.wikimedia.org/wiki/File:Suede_jacket_on_a_chair.jpg | Ірина Бучнєва | CC0
+img/jk-13.webp | https://commons.wikimedia.org/wiki/File:Black_worn_leather_jacket_detail_1.jpg | W.carter | CC0
+img/jk-14.webp | https://commons.wikimedia.org/wiki/File:Black_worn_leather_jacket_detail_2.jpg | W.carter | CC0
+img/jk-15.webp | https://commons.wikimedia.org/wiki/File:Leather_Jacket_-_Macro_(49851863931).jpg | Ajay Suresh from New York, NY, USA | CC BY 2.0
+img/jk-16.webp | https://commons.wikimedia.org/wiki/File:Suede_Jacket_Adler.jpg | Andrew Magill from Boulder, USA | CC BY 2.0
+img/jk-18.webp | https://commons.wikimedia.org/wiki/File:Punks_SP.jpg | Hudrodrigues | CC BY-SA 4.0
+img/jk-19.webp | https://commons.wikimedia.org/wiki/File:Blonde_girl_with_a_black_leather_jacket.jpg | Wikichristianmadison (talk) (Uploads) | CC BY-SA 3.0
+img/jk-20.webp | https://commons.wikimedia.org/wiki/File:Stylish_woman_adjusting_her_leather_jacket_against_a_vintage_brick_wall_in_a_trendy_urban_location.jpg | Shixart1985 | CC BY 2.0
+
+Platform logos are the official marks, fetched per platform (not redrawn), scaled to 64x64 and wrapped as
+self contained SVG image files under brand/:
+brand/ebay.svg | https://www.ebay.com/apple-touch-icon.png | eBay Inc | official apple touch icon
+brand/depop.svg | https://www.google.com/s2/favicons?domain=depop.com&sz=128 | Depop | official favicon
+brand/vinted.svg | https://www.google.com/s2/favicons?domain=vinted.com&sz=128 | Vinted | official favicon
+brand/grailed.svg | https://www.google.com/s2/favicons?domain=grailed.com&sz=128 | Grailed | official favicon
+brand/poshmark.svg | https://www.google.com/s2/favicons?domain=poshmark.com&sz=128 | Poshmark | official favicon
+brand/mercari.svg | https://www.google.com/s2/favicons?domain=mercari.com&sz=128 | Mercari | official favicon
+
+Fonts: none downloaded. The board uses system faces (Impact / Arial Narrow for the display type, Georgia for
+the reading copy, the platform monospace stack for numbers), so no font files are shipped.

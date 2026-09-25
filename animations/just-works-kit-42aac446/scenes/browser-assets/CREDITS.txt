@@ -1,0 +1,9 @@
+scenes/browser-assets/ credits. One line per asset: file, source URL, author, license/role.
+
+google-gmail.svg      https://api.iconify.design/logos/google-gmail.svg      Google LLC, via the Iconify "logos" set (https://github.com/gilbarbara/logos, collection license CC0-1.0)      platform mark, shown as that tab's favicon; the mark itself stays Google's
+google-calendar.svg   https://api.iconify.design/logos/google-calendar.svg   Google LLC, via the Iconify "logos" set (CC0-1.0)                                                          platform mark, shown as that tab's favicon
+youtube-icon.svg      https://api.iconify.design/logos/youtube-icon.svg      YouTube LLC / Google, via the Iconify "logos" set (CC0-1.0)                                                platform mark, shown as that tab's favicon
+mark.svg              drawn for this kit, no source URL                       this kit                                                                                                  default tab favicon, used only when an ad gives no cfg.build.favicon
+
+The three marks remain the property of their owners and are used here only to label the sites shown in the tab strip.
+The desktop wallpaper is a CSS gradient in scenes/browser.css, not a photo, so it needs no credit and no attribution. No listing or product photos live in this folder: each ad sources its own into its own img/ with its own CREDITS.txt.

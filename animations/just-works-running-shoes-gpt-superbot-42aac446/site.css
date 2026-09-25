@@ -1,0 +1,704 @@
+/* site.css - superbot.app/p/runners, the "size 10, in stock" drop board.
+   Every rule is scoped under .site-running-shoes-gpt. The root is its own size container, so sizing
+   is in cqw (percent of the page width) with px fallbacks: the board reads the same at 800 px wide
+   and at 1600 px wide. Kit states: .is-hover on a drop, .is-active on its Add button. No :hover,
+   no transitions, no animations, no font CDNs (the woff2 files sit in ./fonts/). */
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/barlow-condensed-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/barlow-condensed-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/barlow-condensed-700.woff2') format('woff2');
+}
+
+.site-running-shoes-gpt {
+  --ink: #0a0b0d;
+  --ink-2: #14161a;
+  --ink-3: #1d2026;
+  --paper: #f3f2ec;
+  --dim: #8f949d;
+  --line: #262a31;
+  --acid: #cbff3d;
+  --hot: #ff4b22;
+  --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --disp: 'Barlow Condensed', 'Arial Narrow', Helvetica, sans-serif;
+
+  container-type: inline-size;
+  display: block;
+  width: 100%;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.45;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0;
+}
+
+.site-running-shoes-gpt *,
+.site-running-shoes-gpt *::before,
+.site-running-shoes-gpt *::after { box-sizing: border-box; }
+.site-running-shoes-gpt h1,
+.site-running-shoes-gpt h2,
+.site-running-shoes-gpt h3,
+.site-running-shoes-gpt p,
+.site-running-shoes-gpt figure,
+.site-running-shoes-gpt ul,
+.site-running-shoes-gpt ol,
+.site-running-shoes-gpt li { margin: 0; padding: 0; }
+.site-running-shoes-gpt ul,
+.site-running-shoes-gpt ol { list-style: none; }
+.site-running-shoes-gpt img { display: block; max-width: 100%; height: auto; }
+.site-running-shoes-gpt b,
+.site-running-shoes-gpt strong { font-weight: 600; }
+.site-running-shoes-gpt q { quotes: '\201C' '\201D'; }
+
+/* ============ the board ============ */
+
+.site-running-shoes-gpt .rs-board { background: var(--ink); overflow: hidden; }
+
+/* ============ masthead ============ */
+
+.site-running-shoes-gpt .rs-mast {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  align-items: baseline;
+  gap: 1.6cqw;
+  padding: 1.15cqw 2.6cqw;
+  background: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.site-running-shoes-gpt .rs-mast__mark {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(19px, 1.75cqw, 30px);
+  letter-spacing: .02em;
+}
+.site-running-shoes-gpt .rs-mast__tag {
+  font-size: clamp(9.5px, .78cqw, 13px);
+  color: var(--dim);
+  text-transform: lowercase;
+}
+.site-running-shoes-gpt .rs-mast__mid {
+  margin-left: auto;
+  font-size: clamp(9.5px, .78cqw, 13px);
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+.site-running-shoes-gpt .rs-mast__chip {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(13px, 1.15cqw, 20px);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: .32cqw .8cqw;
+  background: var(--acid);
+  color: #101208;
+}
+
+/* ============ hero ============ */
+
+.site-running-shoes-gpt .rs-hero { position: relative; border-bottom: 1px solid var(--line); }
+.site-running-shoes-gpt .rs-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  opacity: .44;
+}
+.site-running-shoes-gpt .rs-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 11, 13, .58) 0%, rgba(10, 11, 13, .86) 52%, var(--ink) 100%),
+    linear-gradient(90deg, rgba(10, 11, 13, .95) 4%, rgba(10, 11, 13, .42) 60%, rgba(10, 11, 13, .58) 100%);
+}
+.site-running-shoes-gpt .rs-hero__box {
+  position: relative;
+  z-index: 2;
+  padding: 4.2cqw 3.6cqw 2.8cqw;
+  max-width: 1280px;
+}
+.site-running-shoes-gpt .rs-kicker {
+  display: flex;
+  align-items: center;
+  gap: .6cqw;
+  font-size: clamp(9.5px, .8cqw, 13px);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--dim);
+}
+.site-running-shoes-gpt .rs-kicker__dot { width: .5cqw; height: .5cqw; min-width: 6px; min-height: 6px; background: var(--acid); }
+.site-running-shoes-gpt .rs-h1 {
+  margin-top: 1.6cqw;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(56px, 9.2cqw, 148px);
+  line-height: .84;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+}
+.site-running-shoes-gpt .rs-dek {
+  margin-top: 1.6cqw;
+  max-width: 60ch;
+  font-size: clamp(12.5px, 1.06cqw, 17px);
+  line-height: 1.5;
+  color: #d8d9d3;
+}
+.site-running-shoes-gpt .rs-ask {
+  margin-top: 1.4cqw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .8cqw;
+  font-size: clamp(12px, 1cqw, 16px);
+}
+.site-running-shoes-gpt .rs-ask__k {
+  font-size: .76em;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--acid);
+}
+.site-running-shoes-gpt .rs-ask__q { color: var(--paper); font-style: normal; }
+.site-running-shoes-gpt .rs-crit { display: flex; flex-wrap: wrap; gap: .5cqw; margin-top: 1.6cqw; }
+.site-running-shoes-gpt .rs-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .5cqw;
+  padding: .42cqw .8cqw;
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  font-size: clamp(10.5px, .86cqw, 14px);
+}
+.site-running-shoes-gpt .rs-chip__k { color: var(--dim); text-transform: uppercase; letter-spacing: .1em; font-size: .82em; }
+.site-running-shoes-gpt .rs-chip__v { font-weight: 600; }
+.site-running-shoes-gpt .rs-stats {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2.2cqw;
+  border-top: 1px solid var(--line);
+  padding-top: 1cqw;
+}
+.site-running-shoes-gpt .rs-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: .2cqw;
+  padding-right: 2.6cqw;
+  margin-right: 2.6cqw;
+  border-right: 1px solid var(--line);
+}
+.site-running-shoes-gpt .rs-stat:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.site-running-shoes-gpt .rs-stat__v {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(24px, 2.9cqw, 46px);
+  line-height: 1;
+}
+.site-running-shoes-gpt .rs-stat__k { font-size: clamp(9.5px, .78cqw, 13px); color: var(--dim); }
+
+/* ============ the drops ============ */
+
+.site-running-shoes-gpt .rs-drops { padding: 3.4cqw 0 0; }
+.site-running-shoes-gpt .rs-drops__head,
+.site-running-shoes-gpt .rs-sheet__head,
+.site-running-shoes-gpt .rs-ladder__head,
+.site-running-shoes-gpt .rs-stock__head { padding: 0 3.6cqw; max-width: 1120px; }
+.site-running-shoes-gpt .rs-h2 {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(30px, 3.5cqw, 58px);
+  line-height: .95;
+  text-transform: uppercase;
+  letter-spacing: .005em;
+}
+.site-running-shoes-gpt .rs-drops__p,
+.site-running-shoes-gpt .rs-sheet__p,
+.site-running-shoes-gpt .rs-ladder__p,
+.site-running-shoes-gpt .rs-stock__p {
+  margin-top: .8cqw;
+  font-size: clamp(12px, .98cqw, 16px);
+  color: #c3c6bd;
+  max-width: 68ch;
+}
+
+.site-running-shoes-gpt .rs-drop { margin-top: 2.6cqw; }
+.site-running-shoes-gpt .rs-drop__panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.02fr .98fr;
+  min-height: 23cqw;
+  background: var(--panel);
+  color: var(--ink);
+  overflow: hidden;
+}
+.site-running-shoes-gpt .rs-drop__no {
+  position: absolute;
+  right: 51.6%;
+  bottom: -2cqw;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(104px, 15cqw, 250px);
+  line-height: .72;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+  opacity: .2;
+  pointer-events: none;
+}
+.site-running-shoes-gpt .rs-drop__col {
+  position: relative;
+  z-index: 2;
+  padding: 2.4cqw 1.4cqw 2.4cqw 3.6cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.site-running-shoes-gpt .rs-drop__cw {
+  font-size: clamp(10px, .82cqw, 13px);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  opacity: .72;
+}
+.site-running-shoes-gpt .rs-drop__name {
+  margin-top: .5cqw;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(28px, 3.3cqw, 56px);
+  line-height: .92;
+  text-transform: uppercase;
+}
+.site-running-shoes-gpt .rs-drop__sub {
+  margin-top: .5cqw;
+  font-size: clamp(11.5px, .92cqw, 15px);
+  max-width: 30ch;
+  opacity: .86;
+}
+.site-running-shoes-gpt .rs-drop__price {
+  margin-top: 1.2cqw;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(40px, 4.6cqw, 76px);
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: .5cqw;
+}
+.site-running-shoes-gpt .rs-drop__cur { font-size: .5em; }
+.site-running-shoes-gpt .rs-drop__was { font-size: .3em; font-weight: 500; opacity: .6; text-decoration: line-through; }
+.site-running-shoes-gpt .rs-drop__badge {
+  margin-top: .7cqw;
+  display: inline-block;
+  padding: .34cqw .7cqw;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: clamp(10px, .82cqw, 13px);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-weight: 600;
+}
+.site-running-shoes-gpt .rs-drop__tags { display: flex; flex-wrap: wrap; align-items: center; gap: .5cqw; }
+.site-running-shoes-gpt .rs-drop__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .45cqw;
+  padding: .38cqw .75cqw;
+  background: var(--acid);
+  color: #101208;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(12px, 1.02cqw, 17px);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  border: 1px solid #101208;
+}
+.site-running-shoes-gpt .rs-drop__tag i {
+  font-style: normal;
+  width: .55cqw;
+  height: .55cqw;
+  min-width: 7px;
+  min-height: 7px;
+  background: #101208;
+}
+.site-running-shoes-gpt .rs-drop__verdict {
+  margin-top: 1cqw;
+  font-size: clamp(12px, .96cqw, 16px);
+  line-height: 1.45;
+  max-width: 40ch;
+  opacity: .9;
+}
+.site-running-shoes-gpt .rs-drop__fig { position: relative; overflow: hidden; background: rgba(255, 255, 255, .22); }
+.site-running-shoes-gpt .rs-drop__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 52%;
+  filter: saturate(1.06) contrast(1.03);
+}
+.site-running-shoes-gpt .rs-drop__cap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: .5cqw .8cqw;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(11px, .95cqw, 16px);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* ---------- the rail under each drop ---------- */
+
+.site-running-shoes-gpt .rs-drop__rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 1.4cqw 2.4cqw 1.6cqw 3.6cqw;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+.site-running-shoes-gpt .rs-spec {
+  display: flex;
+  flex-direction: column;
+  gap: .3cqw;
+  padding-right: 2.2cqw;
+  margin-right: 2.2cqw;
+  margin-bottom: 1cqw;
+  border-right: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+.site-running-shoes-gpt .rs-k {
+  font-size: clamp(9px, .74cqw, 12px);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--dim);
+}
+.site-running-shoes-gpt .rs-v {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(18px, 1.85cqw, 32px);
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .2cqw;
+}
+.site-running-shoes-gpt .rs-v--low { color: var(--hot); }
+.site-running-shoes-gpt .rs-spec__n {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(9px, .72cqw, 12px);
+  color: var(--dim);
+  letter-spacing: .04em;
+}
+
+.site-running-shoes-gpt .rs-cush {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: .35cqw 1cqw;
+  padding-right: 2.2cqw;
+  margin-right: 2.2cqw;
+  margin-bottom: 1cqw;
+  border-right: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+.site-running-shoes-gpt .rs-cush__k {
+  grid-column: 1;
+  font-size: clamp(9px, .74cqw, 12px);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--dim);
+}
+.site-running-shoes-gpt .rs-cush__v {
+  grid-column: 2;
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(14px, 1.35cqw, 24px);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.site-running-shoes-gpt .rs-cush__m { grid-column: 1; display: flex; gap: .22cqw; }
+.site-running-shoes-gpt .rs-cush__n { grid-column: 2; font-size: clamp(10px, .78cqw, 13px); color: var(--dim); }
+.site-running-shoes-gpt .rs-notch {
+  display: block;
+  width: 1.5cqw;
+  height: .62cqw;
+  min-width: 9px;
+  min-height: 6px;
+  background: var(--ink-3);
+  border: 1px solid #31353d;
+}
+.site-running-shoes-gpt .rs-notch--on { background: var(--acid); border-color: var(--acid); }
+
+.site-running-shoes-gpt .rs-runrow {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6cqw;
+  padding: 1cqw 0;
+  border-top: 1px solid var(--line);
+}
+.site-running-shoes-gpt .rs-runrow__k {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(9px, .74cqw, 12px);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--dim);
+  margin-right: .6cqw;
+}
+.site-running-shoes-gpt .rs-runrow__u { letter-spacing: .04em; text-transform: none; opacity: .7; }
+.site-running-shoes-gpt .rs-runrow__sizes { display: flex; gap: .3cqw; }
+.site-running-shoes-gpt .rs-sz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.1cqw;
+  padding: .3cqw .2cqw;
+  border: 1px solid var(--line);
+  background: var(--ink);
+}
+.site-running-shoes-gpt .rs-sz__sz {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(12px, 1.2cqw, 21px);
+  line-height: 1;
+}
+.site-running-shoes-gpt .rs-sz__n { font-size: clamp(8.5px, .7cqw, 11px); color: var(--dim); font-variant-numeric: tabular-nums; }
+.site-running-shoes-gpt .rs-sz--mine { background: var(--acid); border-color: var(--acid); color: #101208; }
+.site-running-shoes-gpt .rs-sz--mine .rs-sz__n { color: #101208; font-weight: 700; }
+.site-running-shoes-gpt .rs-sz--out { opacity: .38; }
+.site-running-shoes-gpt .rs-sz--out .rs-sz__sz { text-decoration: line-through; }
+.site-running-shoes-gpt .rs-runrow__mine {
+  margin-left: auto;
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(13px, 1.15cqw, 20px);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--acid);
+}
+
+.site-running-shoes-gpt .rs-add {
+  appearance: none;
+  border: 1px solid var(--acid);
+  background: transparent;
+  color: var(--acid);
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(17px, 1.75cqw, 30px);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: .7cqw 1.6cqw;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: baseline;
+  gap: .8cqw;
+  cursor: pointer;
+}
+.site-running-shoes-gpt .rs-add__p { font-size: .68em; opacity: .75; }
+.site-running-shoes-gpt .rs-add__b { display: none; }
+/* the kit puts .is-active on the button once the click in ad.js lands */
+.site-running-shoes-gpt .rs-add.is-active { background: var(--acid); color: #101208; border-color: var(--acid); }
+.site-running-shoes-gpt .rs-add.is-active .rs-add__a { display: none; }
+.site-running-shoes-gpt .rs-add.is-active .rs-add__b { display: inline; }
+.site-running-shoes-gpt .rs-add.is-active .rs-add__p { display: none; }
+
+/* hover: the kit puts .is-hover on the drop (devtools, preview.html) or on the Add button itself, which is
+   the only part of the card that fits under the sticky mast at 16:9 and so is what the plan in ad.js rests
+   the cursor on. Both carriers paint the same acid fill on the button. */
+.site-running-shoes-gpt .rs-drop.is-hover .rs-drop__panel { box-shadow: inset 0 0 0 3px var(--ink); }
+.site-running-shoes-gpt .rs-drop.is-hover .rs-drop__fig { box-shadow: inset 0 0 0 6px var(--acid); }
+.site-running-shoes-gpt .rs-drop.is-hover .rs-drop__img { filter: saturate(1.24) contrast(1.07) brightness(1.03); object-position: 50% 47%; }
+.site-running-shoes-gpt .rs-drop.is-hover .rs-drop__no { opacity: .44; }
+.site-running-shoes-gpt .rs-drop.is-hover .rs-drop__tag { background: var(--ink); color: var(--paper); }
+.site-running-shoes-gpt .rs-drop.is-hover .rs-add,
+.site-running-shoes-gpt .rs-add.is-hover { background: var(--acid); color: #101208; }
+.site-running-shoes-gpt .rs-drop.is-hover .rs-drop__rail { background: var(--ink-3); }
+
+/* ============ shortlist sheet ============ */
+
+.site-running-shoes-gpt .rs-sheet { padding: 4.4cqw 0 0; }
+.site-running-shoes-gpt .rs-sheet__list { margin-top: 1.6cqw; border-top: 1px solid var(--line); }
+.site-running-shoes-gpt .rs-srow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4cqw;
+  padding: 1.1cqw 3.6cqw;
+  border-bottom: 1px solid var(--line);
+}
+.site-running-shoes-gpt .rs-srow__rank {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(17px, 1.7cqw, 30px);
+  color: var(--dim);
+  width: 3cqw;
+}
+.site-running-shoes-gpt .rs-srow__swatch { width: 2.6cqw; height: 2.6cqw; min-width: 16px; min-height: 16px; background: var(--panel); }
+.site-running-shoes-gpt .rs-srow__name { display: flex; flex-direction: column; flex: 1 1 12cqw; }
+.site-running-shoes-gpt .rs-srow__nm { font-family: var(--disp); font-weight: 600; font-size: clamp(16px, 1.65cqw, 28px); text-transform: uppercase; line-height: 1.1; }
+.site-running-shoes-gpt .rs-srow__cw { font-size: clamp(10px, .8cqw, 13px); color: var(--dim); }
+.site-running-shoes-gpt .rs-srow__nums { display: flex; flex-wrap: wrap; gap: 1.5cqw; flex: 2 1 24cqw; }
+.site-running-shoes-gpt .rs-srow__num { display: flex; flex-direction: column; }
+.site-running-shoes-gpt .rs-srow__num b { font-family: var(--disp); font-weight: 600; font-size: clamp(15px, 1.5cqw, 26px); line-height: 1.05; }
+.site-running-shoes-gpt .rs-srow__num i { font-style: normal; font-size: clamp(9px, .72cqw, 12px); color: var(--dim); text-transform: uppercase; letter-spacing: .1em; }
+.site-running-shoes-gpt .rs-srow__stk {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(13px, 1.2cqw, 22px);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: .3cqw .7cqw;
+  border: 1px solid var(--acid);
+  color: var(--acid);
+}
+.site-running-shoes-gpt .rs-srow__stk--low { border-color: var(--hot); color: var(--hot); }
+.site-running-shoes-gpt .rs-sheet__foot { padding: 1.2cqw 3.6cqw 0; font-size: clamp(10.5px, .86cqw, 14px); color: var(--dim); }
+
+/* ============ stack and drop ladder ============ */
+
+.site-running-shoes-gpt .rs-ladder { padding: 4.4cqw 0 0; }
+.site-running-shoes-gpt .rs-ladder__list { margin-top: 1.6cqw; border-top: 1px solid var(--line); }
+.site-running-shoes-gpt .rs-lrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4cqw;
+  padding: 1cqw 3.6cqw;
+  border-bottom: 1px solid var(--line);
+}
+.site-running-shoes-gpt .rs-lrow__l {
+  flex: 1 1 14cqw;
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(15px, 1.5cqw, 26px);
+  text-transform: uppercase;
+  border-left: .55cqw solid var(--panel);
+  padding-left: .9cqw;
+}
+.site-running-shoes-gpt .rs-lrow__bars { flex: 3 1 30cqw; display: flex; flex-direction: column; gap: .4cqw; }
+.site-running-shoes-gpt .rs-lbar { display: flex; align-items: center; gap: .7cqw; }
+.site-running-shoes-gpt .rs-lbar__track { flex: 1; height: 1.2cqw; min-height: 11px; background: var(--ink-3); }
+.site-running-shoes-gpt .rs-lbar__fill { display: block; height: 100%; }
+.site-running-shoes-gpt .rs-lbar__fill--stack { background: var(--acid); }
+.site-running-shoes-gpt .rs-lbar__fill--drop { background: var(--hot); }
+.site-running-shoes-gpt .rs-lbar__n {
+  flex: 0 0 8.6cqw;
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(11px, .92cqw, 16px);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: left;
+}
+.site-running-shoes-gpt .rs-lrow__ride {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(13px, 1.2cqw, 22px);
+  text-transform: uppercase;
+  color: var(--dim);
+  flex: 0 0 9cqw;
+}
+.site-running-shoes-gpt .rs-scale { display: flex; flex-wrap: wrap; gap: 1.6cqw; padding: 1.4cqw 3.6cqw 0; }
+.site-running-shoes-gpt .rs-scale__i { display: flex; align-items: baseline; gap: .5cqw; font-size: clamp(10.5px, .84cqw, 14px); }
+.site-running-shoes-gpt .rs-scale__s { font-family: var(--disp); font-weight: 700; font-size: 1.6em; color: var(--acid); }
+.site-running-shoes-gpt .rs-scale__i b { font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+.site-running-shoes-gpt .rs-scale__i i { font-style: normal; color: var(--dim); }
+
+/* ============ what is left in a size 10 ============ */
+
+.site-running-shoes-gpt .rs-stock { padding: 4.4cqw 0 0; }
+.site-running-shoes-gpt .rs-stock__list { margin-top: 1.6cqw; border-top: 1px solid var(--line); }
+.site-running-shoes-gpt .rs-stkrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2cqw;
+  padding: .9cqw 3.6cqw;
+  border-bottom: 1px solid var(--line);
+}
+.site-running-shoes-gpt .rs-stkrow__l { flex: 1 1 16cqw; font-family: var(--disp); font-weight: 600; font-size: clamp(15px, 1.45cqw, 25px); text-transform: uppercase; }
+.site-running-shoes-gpt .rs-stkrow__bar { flex: 3 1 26cqw; height: 1.1cqw; min-height: 10px; background: var(--ink-3); }
+.site-running-shoes-gpt .rs-stkrow__fill { display: block; height: 100%; background: var(--acid); }
+.site-running-shoes-gpt .rs-stkrow--low .rs-stkrow__fill { background: var(--hot); }
+.site-running-shoes-gpt .rs-stkrow__n { font-family: var(--disp); font-weight: 600; font-size: clamp(13px, 1.2cqw, 22px); }
+.site-running-shoes-gpt .rs-stkrow__flag {
+  font-size: clamp(9px, .72cqw, 12px);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--hot);
+  border: 1px solid var(--hot);
+  padding: .15cqw .5cqw;
+}
+
+/* ============ footer ============ */
+
+.site-running-shoes-gpt .rs-foot {
+  margin-top: 4.4cqw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 2.4cqw;
+  padding: 2.6cqw 3.6cqw 4cqw;
+  background: var(--ink-2);
+  border-top: 1px solid var(--line);
+}
+.site-running-shoes-gpt .rs-foot__h {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(16px, 1.5cqw, 26px);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .8cqw;
+}
+.site-running-shoes-gpt .rs-foot__p { font-size: clamp(11px, .88cqw, 15px); color: #b9bcb4; margin-top: .7cqw; }
+.site-running-shoes-gpt .rs-foot__made { color: var(--paper); }
+.site-running-shoes-gpt .rs-foot__mark { font-family: var(--disp); font-weight: 700; letter-spacing: .04em; }
+.site-running-shoes-gpt .rs-rejlist,
+.site-running-shoes-gpt .rs-notes { display: flex; flex-direction: column; gap: .5cqw; }
+.site-running-shoes-gpt .rs-rej {
+  display: flex;
+  justify-content: space-between;
+  gap: 1cqw;
+  padding-bottom: .45cqw;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(11px, .88cqw, 15px);
+}
+.site-running-shoes-gpt .rs-rej__k { color: var(--paper); }
+.site-running-shoes-gpt .rs-rej__n { font-family: var(--disp); font-weight: 600; color: var(--dim); }
+.site-running-shoes-gpt .rs-note { border-left: .5cqw solid var(--panel); padding-left: .9cqw; }
+.site-running-shoes-gpt .rs-note__l {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: clamp(13px, 1.15cqw, 21px);
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.site-running-shoes-gpt .rs-note__list { display: flex; flex-direction: column; gap: .2cqw; margin-top: .3cqw; }
+.site-running-shoes-gpt .rs-note__list li { font-size: clamp(10.5px, .82cqw, 13px); color: var(--dim); }

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>preview: Standing desks, compared</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #E9EBE6; }
+  body { padding: 24px 0 64px; }
+  .dev-note {
+    font: 12px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+    color: #5C635C; letter-spacing: .02em;
+    max-width: 1600px; margin: 0 auto 16px; padding: 0 24px;
+  }
+  .dev-root { width: 100%; max-width: 1600px; min-width: 720px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<p class="dev-note">preview.html: site.css + data.js + site.js only. The kit (engine.js / kit.css) is not loaded here. Add .is-active to a .dw-cmp element or .is-hover to .dw-winner in devtools to see the click and hover states.</p>
+<div class="site site-standing-desk-gpt dev-root"></div>
+<script type="module">
+  import * as data from './data.js';
+  import build from './site.js';
+  const root = document.querySelector('.site-standing-desk-gpt');
+  build(root, { data, cfg: { slug: 'standing-desk-gpt' } });
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+CREDITS for just-works-f-series-superbot-42aac446
+Every photo below is a sourced photo of a real Ford F-Series truck, cropped to 4:3 (640x480),
+re-encoded to JPEG at quality 5. No product art was drawn.
+
+img/f250lar17.jpg | https://commons.wikimedia.org/wiki/File:%2717_Ford_F_250_Super_Duty_Crew_Cab.jpg | Bull-Doser | Public domain
+img/f250xlt17.jpg | https://commons.wikimedia.org/wiki/File:Ford_F-250_Super_Duty_Extended_Cab.JPG | Bull-Doser | Public domain
+img/f350drw19.jpg | https://commons.wikimedia.org/wiki/File:%2705-%2707_Ford_F-350_Super_Duty_Crew_Cab.JPG | Bull-Doser | Public domain
+img/f350plat20.jpg | https://commons.wikimedia.org/wiki/File:Ford_F-350_Platinum_1_(32546900892).jpg | Zytonits | CC BY-SA 2.0
+img/king20.jpg | https://commons.wikimedia.org/wiki/File:%2708_Ford_F-150_Crew_Cab_(Montreal).jpg | Bull-Doser | Public domain
+img/lariat21.jpg | https://commons.wikimedia.org/wiki/File:2004-2007_Ford_F-150_Lariat_SuperCrew.jpg | IFCAR | Public domain
+img/light23.jpg | https://commons.wikimedia.org/wiki/File:2022_Ford_F-150_Lightning_Lariat_in_Atlas_Blue_Metallic,_Front_Right,_08-06-2022.jpg | Elise240SX | CC BY-SA 4.0
+img/plat18.jpg | https://commons.wikimedia.org/wiki/File:2010_Ford_F-150_Platinum_--_07-10-2010.jpg | IFCAR | Public domain
+img/raptor21.jpg | https://commons.wikimedia.org/wiki/File:2013_Ford_F-150_Raptor_SVT_Roush.jpg | Calreyn88 | CC BY-SA 4.0
+img/raptor22.jpg | https://commons.wikimedia.org/wiki/File:2010_Ford_F-150_Raptor_-_Front_View.jpg | Mbajoras | CC BY-SA 3.0
+img/tremor22.jpg | https://commons.wikimedia.org/wiki/File:Ford_F150_Tremor_(12488448923).jpg | artistmac | CC BY-SA 2.0
+img/xl16.jpg | https://commons.wikimedia.org/wiki/File:%2704-%2706_Ford_F-150_Regular_Cab_(Les_chauds_vendredis_%2710).jpg | Bull-Doser | Public domain
+img/xlt15.jpg | https://commons.wikimedia.org/wiki/File:Ford_F-150_Crew_Cab_Bauval.jpg | Bull-Doser | Public domain
+img/xlt19.jpg | https://commons.wikimedia.org/wiki/File:Ford_F-150_XLT_Extended_Cab.jpg | Bull-Doser | Public domain
+img/xlt21.jpg | https://commons.wikimedia.org/wiki/File:Ford_F-150_(fourteenth_generation)_Rutesheimer_Autoschau_2025_DSC_9217.jpg | Alexander Migl | CC BY-SA 4.0
+img/us-map.png | https://commons.wikimedia.org/wiki/File:Blank_US_Map_48states.svg | Wikimedia Commons | Public domain (rasterized to 1400x866, no territories or insets)
+
+Platform logos are the official marks, fetched per platform (not redrawn), resized to 64x64 and
+wrapped as self contained SVG image files under brand/:
+brand/facebook.svg | https://www.google.com/s2/favicons?domain=facebook.com&sz=128 | Facebook | official favicon
+brand/craigslist.svg | https://www.google.com/s2/favicons?domain=craigslist.org&sz=128 | craigslist | official favicon
+brand/ebay.svg | https://www.ebay.com/apple-touch-icon.png | eBay Inc | official apple touch icon
+brand/cargurus.svg | https://www.cargurus.com/apple-touch-icon.png | CarGurus | official apple touch icon
+brand/autotrader.svg | https://www.google.com/s2/favicons?domain=autotrader.com&sz=128 | Autotrader | official favicon
+brand/carsdotcom.svg | https://www.google.com/s2/favicons?domain=cars.com&sz=128 | Cars.com | official favicon
+brand/offerup.svg | https://www.google.com/s2/favicons?domain=offerup.com&sz=128 | OfferUp | official favicon
+brand/app.svg | https://api.iconify.design/simple-icons/ford.svg?color=%23ff9a2e | Simple Icons | CC0 1.0 (the app tab icon)
+
+Fonts: none downloaded. The board uses the system sans stack, so no font files are shipped.

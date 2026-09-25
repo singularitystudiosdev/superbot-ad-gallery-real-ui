@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 spend - preview</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #f6f3ec; }
+  #preview-root { width: 100%; }
+</style>
+</head>
+<body>
+<div id="preview-root" class="site site-gmail-receipts-gpt"></div>
+<script type="module">
+  import * as data from './data.js';
+  import * as site from './site.js';
+
+  const root = document.getElementById('preview-root');
+  const draw = () => site.default(root, { data, site });
+  draw();
+
+  // dev page only: mirrors the kit's hover plan on the September bar
+  const sep = root.querySelector('.sp-chart .sp-bars .sp-bar:nth-child(9)');
+  if (sep) sep.classList.add('is-hover');
+
+  // dev page only: mirrors the kit's click on the Spotify Cancel button
+  const sp = document.createElement('style');
+  sp.textContent = '';
+  document.head.appendChild(sp);
+  const cancel = root.querySelector('.sp-sublist .sp-sub:nth-child(2) .sp-cancel');
+  if (cancel) cancel.classList.add('is-active');
+
+  // dev page only: re-draw button, proves build() is idempotent on the same root
+  const bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:99;display:flex;gap:8px;font:600 12px/1 -apple-system,system-ui,sans-serif';
+  const again = document.createElement('button');
+  again.textContent = 'build() again';
+  again.style.cssText = 'padding:9px 12px;border-radius:8px;border:1px solid #cfc8b6;background:#fffdf8;color:#171a14;cursor:pointer';
+  again.onclick = () => {
+    draw();
+    const s2 = root.querySelector('.sp-chart .sp-bars .sp-bar:nth-child(9)');
+    if (s2) s2.classList.add('is-hover');
+    const c2 = root.querySelector('.sp-sublist .sp-sub:nth-child(2) .sp-cancel');
+    if (c2) c2.classList.add('is-active');
+  };
+  bar.appendChild(again);
+  document.body.appendChild(bar);
+</script>
+</body>
+</html>

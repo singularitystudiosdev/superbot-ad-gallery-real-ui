@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>preview: Size 10, in stock</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #08090A; }
+  body { padding: 22px 0 60px; }
+  .dev-note {
+    font: 12px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+    color: #8F949D; letter-spacing: .02em;
+    max-width: 1600px; margin: 0 auto 14px; padding: 0 22px;
+  }
+  .dev-root { width: 100%; max-width: 1600px; min-width: 720px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<p class="dev-note">preview.html: site.css + data.js + site.js only. The kit (engine.js / kit.css) is not loaded here. Add .is-hover to a .rs-drop (or to a .rs-add, the button-only hover the ad plan uses) and .is-active to a .rs-add in devtools to see the hover and click states.</p>
+<div class="site site-running-shoes-gpt dev-root"></div>
+<script type="module">
+  import * as data from './data.js';
+  import build from './site.js';
+  const root = document.querySelector('.site-running-shoes-gpt');
+  build(root, { data, cfg: { slug: 'running-shoes-gpt' } });
+</script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+/* site.css - "2026 spend", superbot.app/p/spend.
+   Every rule is scoped under .site-gmail-receipts-gpt. No font CDNs at runtime, no animations,
+   no transitions, no :hover (the kit sets .is-hover / .is-active and the styles below read them). */
+
+.site-gmail-receipts-gpt {
+  --paper: #f6f3ec;
+  --card: #fffdf8;
+  --ink: #171a14;
+  --ink-2: #5d6253;
+  --ink-3: #8b8f7e;
+  --rule: #ded8c8;
+  --rule-2: #eae5d8;
+  --green: #1f6b4a;
+  --amber: #a3541c;
+  --blue: #2f5d8a;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 15px/1.5 var(--sans);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+}
+
+.site-gmail-receipts-gpt *,
+.site-gmail-receipts-gpt *::before,
+.site-gmail-receipts-gpt *::after { box-sizing: border-box; }
+
+.site-gmail-receipts-gpt .sp-page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 36px 40px;
+}
+
+.site-gmail-receipts-gpt h2 {
+  font: 600 13px/1.2 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--ink);
+}
+
+/* ---------- top bar ---------- */
+
+.site-gmail-receipts-gpt .sp-top {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-gmail-receipts-gpt .sp-brand { display: flex; align-items: center; gap: 11px; flex: 0 0 auto; }
+
+.site-gmail-receipts-gpt .sp-mark {
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  background: var(--ink);
+  border-radius: 9px;
+}
+
+.site-gmail-receipts-gpt .sp-mark img { width: 17px; height: 17px; display: block; filter: invert(1); }
+
+.site-gmail-receipts-gpt .sp-word { font: 600 19px/1 var(--sans); letter-spacing: -0.015em; }
+
+.site-gmail-receipts-gpt .sp-under {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--ink-3);
+  padding-left: 11px;
+  border-left: 1px solid var(--rule);
+}
+
+.site-gmail-receipts-gpt .sp-q {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 8px 8px 8px 14px;
+  font: 500 12.5px/1 var(--mono);
+  color: var(--ink-2);
+}
+
+.site-gmail-receipts-gpt .sp-q-k {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+  color: var(--ink-3);
+}
+
+.site-gmail-receipts-gpt .sp-q-t { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.site-gmail-receipts-gpt .sp-q-c {
+  background: var(--ink);
+  color: #f7f5ef;
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.site-gmail-receipts-gpt .sp-read { flex: 0 0 auto; text-align: right; display: flex; flex-direction: column; gap: 3px; }
+.site-gmail-receipts-gpt .sp-read-t { font: 600 12.5px/1 var(--mono); display: flex; align-items: center; gap: 7px; justify-content: flex-end; }
+.site-gmail-receipts-gpt .sp-read-s { font-size: 11.5px; color: var(--ink-3); }
+
+.site-gmail-receipts-gpt .sp-live {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(31, 107, 74, 0.14);
+}
+
+/* ---------- hero ---------- */
+
+.site-gmail-receipts-gpt .sp-hero {
+  margin: 26px 0 34px;
+  background: var(--ink);
+  color: #f4f1e8;
+  border-radius: 16px;
+  padding: 30px 32px 26px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.55fr);
+  gap: 30px;
+}
+
+.site-gmail-receipts-gpt .sp-hero-main { display: flex; flex-direction: column; gap: 6px; }
+
+.site-gmail-receipts-gpt .sp-hero-k {
+  font: 600 11.5px/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a9a795;
+}
+
+.site-gmail-receipts-gpt .sp-total {
+  font: 400 74px/1 var(--serif);
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.site-gmail-receipts-gpt .sp-hero-sub { font-size: 13px; color: #b6b4a4; max-width: 30ch; }
+
+.site-gmail-receipts-gpt .sp-hero-delta {
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: #b6b4a4;
+  padding-top: 10px;
+  border-top: 1px solid rgba(244, 241, 232, 0.16);
+}
+
+.site-gmail-receipts-gpt .sp-down { color: #7fd0a4; font-weight: 600; }
+
+.site-gmail-receipts-gpt .sp-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(244, 241, 232, 0.16);
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.site-gmail-receipts-gpt .sp-stat {
+  background: #1e221a;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.site-gmail-receipts-gpt .sp-stat-n { font: 600 22px/1.1 var(--mono); letter-spacing: -0.02em; }
+.site-gmail-receipts-gpt .sp-stat-k { font-size: 11.5px; color: #b6b4a4; }
+.site-gmail-receipts-gpt .sp-stat-s { font-size: 11px; color: #85836f; }
+
+/* ---------- section head ---------- */
+
+.site-gmail-receipts-gpt .sp-sec-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 16px;
+}
+
+.site-gmail-receipts-gpt .sp-sec-n { font-size: 12.5px; color: var(--ink-3); text-align: right; }
+
+/* ---------- bar chart ---------- */
+
+.site-gmail-receipts-gpt .sp-chart { margin-bottom: 36px; }
+
+.site-gmail-receipts-gpt .sp-chartbody { display: flex; gap: 14px; }
+
+.site-gmail-receipts-gpt .sp-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 22px;
+  font: 500 11px/1 var(--mono);
+  color: var(--ink-3);
+  text-align: right;
+  min-width: 58px;
+}
+
+.site-gmail-receipts-gpt .sp-bars {
+  flex: 1 1 auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 10px;
+  height: 226px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-gmail-receipts-gpt .sp-bar {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 24px;
+}
+
+.site-gmail-receipts-gpt .sp-bar-col { position: absolute; inset: 0 0 24px; display: flex; align-items: flex-end; }
+
+.site-gmail-receipts-gpt .sp-bar-col i {
+  display: block;
+  width: 100%;
+  background: #cbbf9f;
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 0 0 1px rgba(23, 26, 20, 0.08);
+}
+
+.site-gmail-receipts-gpt .sp-bar-m {
+  position: absolute;
+  bottom: 0;
+  font: 600 11px/1 var(--mono);
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+
+.site-gmail-receipts-gpt .sp-bar-empty .sp-bar-col i { background: #e7e2d4; box-shadow: none; }
+.site-gmail-receipts-gpt .sp-bar-empty .sp-bar-m { color: var(--ink-3); opacity: 0.6; }
+
+.site-gmail-receipts-gpt .sp-tip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100% - 44px);
+  width: 158px;
+  background: var(--ink);
+  color: #f4f1e8;
+  border-radius: 9px;
+  padding: 9px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font: 500 11.5px/1.35 var(--mono);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.site-gmail-receipts-gpt .sp-tip b { font-size: 15px; font-weight: 600; }
+.site-gmail-receipts-gpt .sp-tip em { font-style: normal; color: #b6b4a4; }
+.site-gmail-receipts-gpt .sp-tip::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; left: 50%;
+  width: 10px; height: 10px;
+  background: var(--ink);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* the kit's hover plan lands here */
+.site-gmail-receipts-gpt .sp-bar.is-hover .sp-tip { opacity: 1; }
+.site-gmail-receipts-gpt .sp-bar.is-hover .sp-bar-col i { background: var(--ink); box-shadow: none; }
+.site-gmail-receipts-gpt .sp-bar.is-hover .sp-bar-m { color: var(--ink); }
+
+/* ---------- categories ---------- */
+
+.site-gmail-receipts-gpt .sp-split { margin-bottom: 36px; }
+
+.site-gmail-receipts-gpt .sp-cats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 34px;
+}
+
+.site-gmail-receipts-gpt .sp-cat {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr) 96px 40px;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.site-gmail-receipts-gpt .sp-cat-k { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; }
+.site-gmail-receipts-gpt .sp-cat-k i { width: 9px; height: 9px; border-radius: 2px; flex: 0 0 auto; }
+
+.site-gmail-receipts-gpt .sp-cat-track { height: 7px; background: #e9e4d6; border-radius: 4px; overflow: hidden; }
+.site-gmail-receipts-gpt .sp-cat-track i { display: block; height: 100%; border-radius: 4px; }
+
+.site-gmail-receipts-gpt .sp-cat-v { font: 500 13px/1 var(--mono); text-align: right; }
+.site-gmail-receipts-gpt .sp-cat-p { font: 500 11.5px/1 var(--mono); color: var(--ink-3); text-align: right; }
+
+/* ---------- subscriptions ---------- */
+
+.site-gmail-receipts-gpt .sp-subs { margin-bottom: 36px; }
+
+.site-gmail-receipts-gpt .sp-subs-tot { text-align: right; display: flex; flex-direction: column; gap: 2px; align-items: flex-end; }
+.site-gmail-receipts-gpt .sp-subs-tot b { font: 600 14px/1.2 var(--mono); }
+.site-gmail-receipts-gpt .sp-subs-tot em { font-style: normal; font-size: 11.5px; color: var(--ink-3); }
+.site-gmail-receipts-gpt .sp-tot-b { display: none; }
+.site-gmail-receipts-gpt .sp-subs:has(.sp-cancel.is-active) .sp-tot-a { display: none; }
+.site-gmail-receipts-gpt .sp-subs:has(.sp-cancel.is-active) .sp-tot-b { display: block; color: var(--green); }
+
+.site-gmail-receipts-gpt .sp-sublist {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.site-gmail-receipts-gpt .sp-sub {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 84px 92px;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.site-gmail-receipts-gpt .sp-sub:last-child { border-bottom: 0; }
+
+.site-gmail-receipts-gpt .sp-sub-l {
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  background: #f0ece0;
+  border-radius: 8px;
+}
+
+.site-gmail-receipts-gpt .sp-sub-l img { width: 15px; height: 15px; display: block; filter: grayscale(0.15); }
+
+.site-gmail-receipts-gpt .sp-sub-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.site-gmail-receipts-gpt .sp-sub-t b { font-size: 14px; font-weight: 600; }
+.site-gmail-receipts-gpt .sp-sub-t small { font-size: 11.5px; color: var(--ink-3); }
+.site-gmail-receipts-gpt .sp-sub-a { font: 600 14px/1 var(--mono); text-align: right; }
+
+.site-gmail-receipts-gpt .sp-cancel {
+  font: 600 12px/1 var(--sans);
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: default;
+}
+.site-gmail-receipts-gpt .sp-cancel-b { display: none; }
+.site-gmail-receipts-gpt .sp-cancel.is-hover { background: #efeadd; border-color: var(--ink-2); }
+
+.site-gmail-receipts-gpt .sp-cancel.is-active {
+  background: var(--green);
+  border-color: var(--green);
+  color: #f6f3ec;
+}
+.site-gmail-receipts-gpt .sp-cancel.is-active .sp-cancel-a { display: none; }
+.site-gmail-receipts-gpt .sp-cancel.is-active .sp-cancel-b { display: inline; }
+
+.site-gmail-receipts-gpt .sp-sub:has(.sp-cancel.is-active) { background: #f2efe4; }
+.site-gmail-receipts-gpt .sp-sub:has(.sp-cancel.is-active) .sp-sub-t b,
+.site-gmail-receipts-gpt .sp-sub:has(.sp-cancel.is-active) .sp-sub-a { text-decoration: line-through; color: var(--ink-3); }
+
+.site-gmail-receipts-gpt .sp-folded {
+  display: flex;
+  align-items: center;
+  gap: 8px 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+.site-gmail-receipts-gpt .sp-folded-k { font-weight: 600; color: var(--ink-2); }
+
+.site-gmail-receipts-gpt .sp-fold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eee9da;
+  border: 1px solid var(--rule-2);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.site-gmail-receipts-gpt .sp-fold img { width: 11px; height: 11px; display: block; opacity: 0.75; }
+
+/* ---------- merchants ---------- */
+
+.site-gmail-receipts-gpt .sp-mer { margin-bottom: 36px; }
+.site-gmail-receipts-gpt .sp-merlist { list-style: none; margin: 0; padding: 0; }
+
+.site-gmail-receipts-gpt .sp-mer-row {
+  display: grid;
+  grid-template-columns: 26px 30px minmax(0, 244px) minmax(60px, 1fr) 96px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.site-gmail-receipts-gpt .sp-mer-i { font: 500 11px/1 var(--mono); color: var(--ink-3); }
+.site-gmail-receipts-gpt .sp-mer-mon {
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border-radius: 7px;
+  background: #e6e1d1;
+  color: var(--ink-2);
+  font: 600 11px/1 var(--sans);
+  letter-spacing: 0.02em;
+}
+.site-gmail-receipts-gpt .sp-mer-n { display: flex; align-items: baseline; gap: 8px; min-width: 0; white-space: nowrap; }
+.site-gmail-receipts-gpt .sp-mer-n b { font-size: 13.5px; font-weight: 600; white-space: nowrap; }
+.site-gmail-receipts-gpt .sp-mer-n small { font-size: 11.5px; color: var(--ink-3); white-space: nowrap; }
+.site-gmail-receipts-gpt .sp-mer-track { height: 7px; background: #e9e4d6; border-radius: 4px; overflow: hidden; }
+.site-gmail-receipts-gpt .sp-mer-track i { display: block; height: 100%; background: var(--ink); border-radius: 4px; opacity: 0.78; }
+.site-gmail-receipts-gpt .sp-mer-v { font: 600 13.5px/1 var(--mono); text-align: right; }
+
+/* ---------- receipts ---------- */
+
+.site-gmail-receipts-gpt .sp-receipts { margin-bottom: 26px; }
+
+.site-gmail-receipts-gpt .sp-rows {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+}
+
+.site-gmail-receipts-gpt .sp-row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 72px 84px 82px;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.site-gmail-receipts-gpt .sp-row:last-child { border-bottom: 0; }
+
+.site-gmail-receipts-gpt .sp-row-img {
+  width: 40px; height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #e9e4d6;
+  display: block;
+}
+
+.site-gmail-receipts-gpt .sp-row-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.site-gmail-receipts-gpt .sp-row-s {
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.site-gmail-receipts-gpt .sp-row-m { font-size: 11.5px; color: var(--ink-3); }
+.site-gmail-receipts-gpt .sp-row-d { font: 500 12px/1 var(--mono); color: var(--ink-2); text-align: right; }
+.site-gmail-receipts-gpt .sp-row-a { font: 600 13.5px/1 var(--mono); text-align: right; }
+.site-gmail-receipts-gpt .sp-row-open {
+  font: 600 11.5px/1 var(--sans);
+  color: var(--ink-2);
+  text-align: right;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  justify-self: end;
+}
+
+.site-gmail-receipts-gpt .sp-rows-foot { margin-top: 10px; font-size: 11.5px; color: var(--ink-3); }
+
+/* ---------- footer ---------- */
+
+.site-gmail-receipts-gpt .sp-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-family: var(--mono);
+}
+
+/* ---------- narrow viewports (the kit's 1x1 and 4x5 frames) ---------- */
+
+.site-gmail-receipts-gpt .sp-page { container-type: inline-size; }
+
+@container (max-width: 1000px) {
+  .site-gmail-receipts-gpt .sp-hero { grid-template-columns: minmax(0, 1fr); }
+  .site-gmail-receipts-gpt .sp-cats { grid-template-columns: minmax(0, 1fr); }
+  .site-gmail-receipts-gpt .sp-chartbody .sp-bars { gap: 6px; }
+}
+
+@container (max-width: 760px) {
+  .site-gmail-receipts-gpt .sp-top { flex-wrap: wrap; }
+  .site-gmail-receipts-gpt .sp-under,
+  .site-gmail-receipts-gpt .sp-read { display: none; }
+  .site-gmail-receipts-gpt .sp-hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .site-gmail-receipts-gpt .sp-row { grid-template-columns: 40px minmax(0, 1fr) 84px; }
+  .site-gmail-receipts-gpt .sp-row-d,
+  .site-gmail-receipts-gpt .sp-row-open { display: none; }
+  .site-gmail-receipts-gpt .sp-mer-row { grid-template-columns: 26px 30px minmax(0, 1fr) 90px; }
+  .site-gmail-receipts-gpt .sp-mer-track { display: none; }
+}

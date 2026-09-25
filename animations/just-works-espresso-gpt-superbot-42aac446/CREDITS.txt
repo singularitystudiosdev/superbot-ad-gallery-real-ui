@@ -1,0 +1,8 @@
+img/hero.jpg | https://commons.wikimedia.org/wiki/File:Pulling_a_triple_espresso_shot_with_a_naked_portafilter.jpg | massage-techniques | CC BY-SA 2.0 (crop 1200x675, re-encoded)
+img/m1.jpg | https://commons.wikimedia.org/wiki/File:Close-up_of_espresso_machine_with_two_brown_coffee_cups.jpg | Chevanon Photography | CC0 1.0 (crop 640x360, re-encoded)
+img/m2.jpg | https://commons.wikimedia.org/wiki/File:Coffee_station_set_up_on_a_wooden_counter_in_a_modern_kitchen_showing_coffee_machines_and_organized_jars.jpg | Shixart1985 | CC BY 2.0 (crop 640x360, re-encoded)
+img/m3.jpg | https://commons.wikimedia.org/wiki/File:Person_making_coffee_with_an_espresso_machine_in_a_kitchen_setting.jpg | Shixart1985 | CC BY 2.0 (crop 640x360, re-encoded)
+img/m4.jpg | https://commons.wikimedia.org/wiki/File:Espresso_making_on_Faema_espresso_machine_in_Brno,_Brno-City_District.jpg | Frettie | CC BY-SA 3.0 (crop 640x360, re-encoded)
+img/m5.jpg | https://commons.wikimedia.org/wiki/File:Espresso_machine_1.jpg | Herr Andrax (Wikimedia Commons) | CC BY-SA 3.0 (crop 640x360, re-encoded)
+img/m6.jpg | https://stocksnap.io/photo/espresso-machine-T2BR0Q91BM | Freestocks.org | CC0 1.0 (crop 640x360, re-encoded)
+brand/amazon.svg | https://api.iconify.design/thesvg-color:amazon.svg | TheSVG (Iconify) | CC0 1.0 Universal (wordmark recolored to #ffffff for the dark hub card and the Chrome tab, smile left #f90)

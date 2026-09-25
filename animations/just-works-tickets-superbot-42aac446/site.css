@@ -1,0 +1,329 @@
+/* site.css - the generated frontend's own stylesheet. Every rule is scoped under .site-tickets.
+   Dark arena-night palette, white-on-dark ticket inventory. No transitions, no keyframes: the only
+   things that move are written per frame by the kit (scroll, cursor, .is-hover, .is-active) or by
+   site.js render(). */
+
+.site-tickets {
+  --tix-bg: #070b12;
+  --tix-bg2: #0a1018;
+  --tix-panel: #0e1622;
+  --tix-panel2: #131e2d;
+  --tix-line: #1e2c3d;
+  --tix-line2: #2b3d52;
+  --tix-fg: #e8eef7;
+  --tix-fg2: #bac9db;
+  --tix-mut: #7f93a8;
+  --tix-amber: #ffc046;
+  --tix-mint: #34d6a4;
+  --tix-coral: #ff6b6b;
+  --tix-blue: #5aa9ff;
+  --tix-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  position: relative;
+  /* the page is a container so the .tix-tip offset below can be sized from the page's own width: the kit's
+     cursor is a fixed 64 px at every aspect ratio while the page under it is 1440 / 900 / 800 px wide, so
+     one page-space offset cannot clear the pointer in every frame. Nothing else in this file queries it. */
+  container-type: inline-size;
+  width: 100%;
+  min-height: 100%;
+  background: var(--tix-bg);
+  color: var(--tix-fg);
+  font-family: var(--ui);
+  font-size: 14px;
+  line-height: 1.45;
+  padding-bottom: 64px;
+  overflow-x: hidden;
+}
+.site-tickets * { box-sizing: border-box; }
+.site-tickets img { display: block; max-width: 100%; }
+.site-tickets em { font-style: normal; }
+
+/* ---------- header ---------- */
+
+.site-tickets .tix-top {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  padding: 13px 28px 12px;
+  background: #070b12; /* fully opaque: nothing scrolls through it */
+  border-bottom: 1px solid var(--tix-line);
+}
+.site-tickets .tix-brand { display: flex; align-items: center; gap: 10px; flex: none; }
+.site-tickets .tix-mark {
+  width: 26px; height: 18px; border-radius: 4px;
+  background: linear-gradient(135deg, var(--tix-amber), #ff7a45);
+  box-shadow: inset 0 0 0 2px #070b12, inset 0 0 0 3px rgba(255, 192, 70, .55);
+  position: relative;
+}
+.site-tickets .tix-mark::before {
+  content: ""; position: absolute; left: 50%; top: 4px; bottom: 4px; width: 1px;
+  background: rgba(7, 11, 18, .6);
+}
+.site-tickets .tix-wordmark { font-size: 18px; font-weight: 700; letter-spacing: -.015em; white-space: nowrap; }
+.site-tickets .tix-wordmark em { color: var(--tix-amber); }
+.site-tickets .tix-when { display: flex; flex-direction: column; flex: none; }
+.site-tickets .tix-when__d { font-size: 13px; font-weight: 620; color: var(--tix-fg); }
+.site-tickets .tix-when__v { font-size: 11.5px; color: var(--tix-mut); }
+.site-tickets .tix-query {
+  display: flex; align-items: center; gap: 10px; flex: 1 1 320px; min-width: 268px;
+  height: 38px; padding: 0 12px; border-radius: 10px;
+  background: var(--tix-panel); box-shadow: inset 0 0 0 1px var(--tix-line2);
+}
+.site-tickets .tix-query__k { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--tix-mut); flex: none; }
+.site-tickets .tix-query__t { font-size: 13px; color: var(--tix-fg2); flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.site-tickets .tix-query__e { font-size: 12px; color: var(--tix-blue); flex: none; font-weight: 600; }
+.site-tickets .tix-live { display: flex; align-items: center; gap: 8px; flex: none; }
+.site-tickets .tix-live__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--tix-mint); box-shadow: 0 0 0 3px rgba(52, 214, 164, .16); }
+.site-tickets .tix-live__t { font-size: 12.5px; color: var(--tix-fg2); font-weight: 600; }
+.site-tickets .tix-live__s { font-size: 11.5px; color: var(--tix-mut); }
+.site-tickets .tix-scan {
+  position: absolute; left: 0; bottom: -1px; height: 2px;
+  background: linear-gradient(90deg, var(--tix-mint), var(--tix-amber), var(--tix-coral));
+}
+
+/* ---------- summary ---------- */
+
+.site-tickets .tix-summary {
+  display: flex; flex-wrap: wrap; gap: 1px;
+  background: var(--tix-line);
+  border-bottom: 1px solid var(--tix-line);
+}
+.site-tickets .tix-stat {
+  flex: 1 1 220px; min-width: 220px;
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 18px 24px 16px;
+  background: var(--tix-bg);
+}
+.site-tickets .tix-stat__n { font-family: var(--tix-mono); font-size: 26px; font-weight: 600; letter-spacing: -.02em; }
+.site-tickets .tix-stat--good .tix-stat__n { color: var(--tix-mint); }
+.site-tickets .tix-stat__k { font-size: 12.5px; color: var(--tix-fg2); font-weight: 600; }
+.site-tickets .tix-stat__s { font-size: 11.5px; color: var(--tix-mut); }
+.site-tickets .tix-pile { display: flex; gap: 5px; margin-top: 4px; }
+.site-tickets .tix-pile__l {
+  width: 22px; height: 22px; padding: 3px; border-radius: 6px;
+  background: #f2f5f9; object-fit: contain;
+}
+
+/* ---------- headings ---------- */
+
+.site-tickets .tix-h2 { margin: 0; font-size: 22px; font-weight: 680; letter-spacing: -.02em; }
+.site-tickets .tix-dek { margin: 6px 0 0; font-size: 13px; color: var(--tix-mut); max-width: 62ch; }
+
+/* ---------- the bowl ---------- */
+
+.site-tickets .tix-map { padding: 34px 28px 26px; border-bottom: 1px solid var(--tix-line); }
+.site-tickets .tix-map__grid { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 20px; }
+.site-tickets .tix-stage { flex: 1 1 520px; min-width: 320px; position: relative; }
+.site-tickets .tix-bowl { display: block; width: 100%; height: auto; overflow: visible; }
+.site-tickets .tix-floor { fill: #0b1521; stroke: var(--tix-line2); stroke-width: 1.5; }
+.site-tickets .tix-floor__t { fill: var(--tix-fg2); font-size: 15px; font-weight: 700; letter-spacing: .22em; }
+.site-tickets .tix-floor__s { fill: var(--tix-mut); font-size: 12px; letter-spacing: .04em; }
+.site-tickets .tix-floor__mid { stroke: var(--tix-line2); stroke-width: 1.5; stroke-dasharray: 5 5; }
+
+.site-tickets .tix-sec__fill { fill-opacity: .82; }
+.site-tickets .tix-sec__edge { fill: none; stroke: #070b12; stroke-width: 2; }
+.site-tickets .tix-sec__no { fill: #06121c; font-family: var(--tix-mono); font-weight: 700; letter-spacing: -.02em; }
+.site-tickets .tix-sec--over .tix-sec__fill { fill-opacity: .34; }
+.site-tickets .tix-sec--over .tix-sec__no { fill: #7b8b9c; }
+
+/* the pointer targets: html wedges clipped to the same shape, one per section */
+.site-tickets .tix-hot { position: absolute; inset: 0; pointer-events: none; }
+.site-tickets .tix-hb { position: absolute; pointer-events: none; }
+.site-tickets .tix-hb__w {
+  display: block; width: 100%; height: 100%; pointer-events: auto;
+  background: transparent; border: 0; cursor: pointer;
+}
+/* the hovered section lights its own svg wedge: site.js mirrors the hotspot's .is-hover onto the matching
+   <g class="tix-sec"> as .is-lit, so the highlight is the real wedge, not a polygon over it */
+.site-tickets .tix-sec.is-lit .tix-sec__fill { fill-opacity: 1; filter: brightness(1.45) drop-shadow(0 0 6px rgba(255, 255, 255, .5)); }
+.site-tickets .tix-sec.is-lit .tix-sec__edge { stroke: #fff; stroke-width: 2.5; }
+.site-tickets .tix-sec.is-lit .tix-sec__no { fill: #04101a; }
+/* while one section is being read, the rest of the bowl drops back */
+.site-tickets .tix-stage:has(.tix-hb__w.is-hover) .tix-sec:not(.is-lit) { opacity: .26; }
+.site-tickets .tix-stage:has(.tix-hb__w.is-hover) .tix-floor__s,
+.site-tickets .tix-stage:has(.tix-hb__w.is-hover) .tix-mark { opacity: .3; }
+.site-tickets .tix-tip {
+  position: absolute; transform: translate(-50%, -50%); opacity: 0; pointer-events: none; z-index: 4;
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  padding: 8px 13px; border-radius: 9px; background: rgba(5, 10, 17, .94);
+  box-shadow: inset 0 0 0 1px var(--tix-amber), 0 12px 30px -14px #000; white-space: nowrap;
+  /* the tip is anchored at the hovered hotspot, which is also where the kit puts the pointer: with no
+     offset the cursor's arrow lands on the first line of the tip and hides it. margin-top drops the tip
+     clear of the arrow, so the read order is lit wedge, then pointer, then its label. Pure CSS on an
+     already class-driven element (.is-hover), so the tip stays a pure function of the clock. */
+  margin-top: 40px;
+}
+.site-tickets .tix-hb:has(.tix-hb__w.is-hover) .tix-tip { opacity: 1; }
+.site-tickets .tix-tip__k { font-size: 12.5px; font-weight: 650; }
+.site-tickets .tix-tip__p { font-family: var(--tix-mono); font-size: 15px; font-weight: 700; color: var(--tix-amber); }
+.site-tickets .tix-tip__n { font-size: 11px; color: var(--tix-mut); }
+
+/* At 900 px (1:1) and 800 px (4:5) the page shrinks under an unscaled 64 px cursor, so the 40 px offset
+   above is worth too little stage px to clear the arrow: 4:5 needs ~48 page px and 1:1 ~39. 56 px clears
+   both, and 1040 keeps this off the 1440 px 16:9 frame (whose :hover shot is unchanged) and off the hub
+   build card, which mounts the same page at 1280 px. */
+@container (max-width: 1040px) {
+  .site-tickets .tix-tip { margin-top: 56px; }
+}
+
+.site-tickets .tix-mark__pulse { fill: none; stroke: var(--tix-amber); stroke-width: 2; opacity: .3; }
+.site-tickets .tix-mark__dot { fill: var(--tix-amber); stroke: #070b12; stroke-width: 2; }
+
+.site-tickets .tix-scale { margin-top: 10px; }
+.site-tickets .tix-scale__k { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--tix-mut); }
+.site-tickets .tix-scale__bar {
+  position: relative; display: block; height: 8px; margin: 7px 0 5px; border-radius: 4px;
+  background: linear-gradient(90deg, #34d6a4 0%, #ffc046 56%, #55657a 59%, #33404f 100%);
+}
+.site-tickets .tix-scale__limit i { width: 2px; height: 16px; background: #fff; box-shadow: 0 0 0 1px #070b12; }
+.site-tickets .tix-scale__l { display: flex; justify-content: space-between; font-family: var(--tix-mono); font-size: 11px; color: var(--tix-mut); }
+.site-tickets .tix-scale { position: relative; }
+.site-tickets .tix-scale__limit { position: absolute; top: -22px; display: flex; flex-direction: column; align-items: center; transform: translateX(-50%); font-size: 10.5px; color: var(--tix-fg2); white-space: nowrap; }
+
+.site-tickets .tix-map__side { flex: 1 1 300px; min-width: 260px; display: flex; flex-direction: column; gap: 12px; }
+.site-tickets .tix-mapkey { list-style: none; display: flex; flex-wrap: wrap; gap: 16px; margin: 0; padding: 0 0 12px; border-bottom: 1px solid var(--tix-line); }
+.site-tickets .tix-mapkey__tier { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--tix-fg2); }
+.site-tickets .tix-mapkey__tier--over i { width: 12px; height: 12px; border-radius: 3px; background: #33404f; display: inline-block; }
+.site-tickets .tix-rings { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.site-tickets .tix-rings__r { display: grid; grid-template-columns: 96px 60px 1fr; align-items: baseline; gap: 8px; font-size: 12px; }
+.site-tickets .tix-rings__k { color: var(--tix-fg2); }
+.site-tickets .tix-rings__v { font-family: var(--tix-mono); font-size: 14px; color: var(--tix-amber); }
+.site-tickets .tix-rings__n { font-size: 11px; color: var(--tix-mut); }
+.site-tickets .tix-mstat { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 10px; background: var(--tix-panel); box-shadow: inset 0 0 0 1px var(--tix-line); }
+.site-tickets .tix-mstat__k { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--tix-mut); }
+.site-tickets .tix-mstat__v { font-size: 13.5px; font-weight: 620; }
+.site-tickets .tix-mstat__n { font-family: var(--tix-mono); font-size: 12px; color: var(--tix-amber); }
+.site-tickets .tix-map__fine { margin: 0; font-size: 11.5px; color: var(--tix-mut); }
+.site-tickets .tix-map__note { margin: 16px 0 0; font-size: 12px; color: var(--tix-mut); }
+
+/* ---------- the best pair ---------- */
+
+.site-tickets .tix-best {
+  display: flex; flex-wrap: wrap; gap: 28px;
+  margin: 26px 28px;
+  padding: 22px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #16233a 0%, #0d1521 58%);
+  box-shadow: inset 0 0 0 1px var(--tix-line2), 0 18px 50px -30px #000;
+}
+.site-tickets .tix-best__shot { flex: 1 1 320px; min-width: 280px; position: relative; border-radius: 12px; overflow: hidden; }
+.site-tickets .tix-best__shot img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; }
+.site-tickets .tix-best__cap {
+  position: absolute; left: 10px; bottom: 10px; padding: 5px 9px; border-radius: 7px;
+  background: rgba(5, 10, 17, .86); font-size: 11px; color: var(--tix-fg2);
+}
+.site-tickets .tix-best__body { flex: 1 1 420px; min-width: 300px; display: flex; flex-direction: column; gap: 10px; }
+.site-tickets .tix-best__kick { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--tix-amber); font-weight: 700; }
+.site-tickets .tix-best__why { margin: 0; font-size: 13.5px; color: var(--tix-fg2); max-width: 64ch; }
+.site-tickets .tix-math {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+  padding: 12px 14px; border-radius: 10px; background: rgba(5, 10, 17, .62);
+  box-shadow: inset 0 0 0 1px var(--tix-line);
+}
+.site-tickets .tix-math__part { display: flex; align-items: baseline; gap: 5px; font-size: 12px; color: var(--tix-mut); }
+.site-tickets .tix-math__part b { font-family: var(--tix-mono); font-size: 15px; color: var(--tix-fg); }
+.site-tickets .tix-math__plus, .site-tickets .tix-math__eq { color: var(--tix-mut); font-size: 14px; }
+.site-tickets .tix-math__part--all b { color: var(--tix-amber); font-size: 19px; }
+.site-tickets .tix-math__pair { font-family: var(--tix-mono); font-size: 12px; color: var(--tix-fg2); margin-left: auto; }
+.site-tickets .tix-best__cta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.site-tickets .tix-go {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--tix-amber), #ff8a3d);
+  color: #17120a; font-size: 14.5px; font-weight: 750; letter-spacing: .01em;
+  box-shadow: 0 10px 26px -14px rgba(255, 160, 60, .9), inset 0 0 0 1px rgba(255, 255, 255, .18);
+  cursor: pointer;
+}
+.site-tickets .tix-go__done { display: none; }
+.site-tickets .tix-go.is-active { background: linear-gradient(135deg, #2bd6a2, #1aa87c); color: #04140e; }
+.site-tickets .tix-go.is-active .tix-go__label { display: none; }
+.site-tickets .tix-go.is-active .tix-go__done { display: inline; }
+.site-tickets .tix-goodnote {
+  display: none; font-size: 12px; color: var(--tix-mint); font-weight: 620;
+}
+.site-tickets .tix-go.is-active ~ .tix-goodnote { display: inline; }
+.site-tickets .tix-go__note { font-size: 11.5px; color: var(--tix-mut); flex: 1 1 220px; }
+
+/* ---------- the pair list ---------- */
+
+.site-tickets .tix-list { padding: 30px 28px 10px; border-top: 1px solid var(--tix-line); }
+.site-tickets .tix-lhead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; }
+.site-tickets .tix-sort { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.site-tickets .tix-sort__k { color: var(--tix-mut); }
+.site-tickets .tix-sort__o { padding: 6px 11px; border-radius: 999px; background: var(--tix-panel); color: var(--tix-fg2); box-shadow: inset 0 0 0 1px var(--tix-line); }
+.site-tickets .tix-sort__o--on { background: var(--tix-fg); color: #0a0f16; font-weight: 650; box-shadow: none; }
+.site-tickets .tix-rows { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.site-tickets .tix-row {
+  display: flex; flex-wrap: wrap; align-items: stretch; gap: 18px;
+  padding: 12px; border-radius: 14px;
+  background: var(--tix-panel);
+  box-shadow: inset 0 0 0 1px var(--tix-line);
+}
+.site-tickets .tix-row--best { background: linear-gradient(120deg, #17243a, #0e1622 62%); box-shadow: inset 0 0 0 1px var(--tix-amber); }
+/* the thumbnail box is a ratio, not a fixed pixel pair, and the photo fills it: the image never sits in a
+   box it was not made for, so it cannot be squashed when the page reflows at a narrower stage width */
+.site-tickets .tix-row__shot { position: relative; flex: none; width: 168px; aspect-ratio: 168 / 118; border-radius: 10px; overflow: hidden; }
+.site-tickets .tix-row__shot img { width: 100%; height: 100%; object-fit: cover; }
+.site-tickets .tix-row__plat {
+  position: absolute; left: 7px; bottom: 7px; display: flex; align-items: center; gap: 5px;
+  padding: 3px 8px 3px 3px; border-radius: 7px;
+  background: rgba(5, 10, 17, .88); font-size: 11px; color: var(--tix-fg2);
+}
+.site-tickets .tix-row__main { flex: 1 1 280px; min-width: 240px; display: flex; flex-direction: column; gap: 4px; }
+.site-tickets .tix-row__h { margin: 2px 0 0; font-size: 15.5px; font-weight: 660; letter-spacing: -.01em; }
+.site-tickets .tix-row__meta { margin: 0; font-size: 12px; color: var(--tix-fg2); }
+.site-tickets .tix-row__note { margin: 0; font-size: 12px; color: var(--tix-mut); }
+.site-tickets .tix-deal {
+  align-self: flex-start; margin-top: 4px; padding: 3px 9px; border-radius: 6px;
+  background: rgba(255, 192, 70, .14); color: var(--tix-amber);
+  font-size: 11px; font-weight: 650; letter-spacing: .03em; text-transform: uppercase;
+}
+.site-tickets .tix-row__price { flex: none; width: 268px; display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+.site-tickets .tix-row__each { font-family: var(--tix-mono); font-size: 24px; font-weight: 650; letter-spacing: -.02em; display: flex; align-items: baseline; gap: 6px; }
+.site-tickets .tix-row__each i { font-family: var(--ui); font-size: 11px; font-style: normal; color: var(--tix-mut); letter-spacing: 0; }
+.site-tickets .tix-row__pair { font-size: 12px; color: var(--tix-fg2); }
+.site-tickets .tix-fee { display: flex; flex-direction: column; gap: 4px; }
+.site-tickets .tix-fee__bar { display: flex; height: 7px; border-radius: 4px; overflow: hidden; background: #050a11; }
+.site-tickets .tix-fee__base { background: #3b6ea8; }
+.site-tickets .tix-fee__svc { background: var(--tix-amber); }
+.site-tickets .tix-fee__fac { background: var(--tix-coral); }
+.site-tickets .tix-fee__key { font-size: 10.5px; color: var(--tix-mut); font-family: var(--tix-mono); white-space: nowrap; }
+.site-tickets .tix-row__go {
+  flex: none; align-self: center; padding: 10px 16px; border-radius: 9px;
+  background: var(--tix-panel2); box-shadow: inset 0 0 0 1px var(--tix-line2);
+  color: var(--tix-fg); font-size: 12.5px; font-weight: 640; white-space: nowrap;
+}
+.site-tickets .tix-row--best .tix-row__go { background: var(--tix-amber); color: #17120a; box-shadow: none; }
+
+.site-tickets .tix-more {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+  margin-top: 14px; padding: 14px 16px; border-radius: 12px;
+  background: var(--tix-panel); box-shadow: inset 0 0 0 1px var(--tix-line);
+}
+.site-tickets .tix-more__t { font-size: 13px; font-weight: 620; }
+.site-tickets .tix-more__s { font-size: 12px; color: var(--tix-mut); flex: 1 1 240px; }
+.site-tickets .tix-more__b { padding: 9px 16px; border-radius: 8px; background: var(--tix-fg); color: #0a0f16; font-size: 12.5px; font-weight: 650; }
+
+/* ---------- footer ---------- */
+
+.site-tickets .tix-foot {
+  display: flex; flex-wrap: wrap; gap: 30px;
+  margin: 30px 28px 0; padding-top: 22px; border-top: 1px solid var(--tix-line);
+}
+.site-tickets .tix-foot__col { flex: 1 1 360px; min-width: 280px; }
+.site-tickets .tix-foot__h { margin: 0 0 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--tix-mut); }
+.site-tickets .tix-foot__p { margin: 0 0 8px; font-size: 12.5px; color: var(--tix-fg2); max-width: 64ch; }
+.site-tickets .tix-srcs { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.site-tickets .tix-srcrow { display: grid; grid-template-columns: 26px 108px 54px 1fr; align-items: center; gap: 10px; font-size: 12px; }
+.site-tickets .tix-srcrow__n { font-weight: 620; }
+.site-tickets .tix-srcrow__c { font-family: var(--tix-mono); color: var(--tix-amber); }
+.site-tickets .tix-srcrow__p { color: var(--tix-mut); font-size: 11.5px; }
+.site-tickets .tix-chip {
+  width: 26px; height: 26px; border-radius: 7px; background: #f2f5f9; display: inline-grid; place-items: center;
+}
+.site-tickets .tix-chip img { width: 17px; height: 17px; object-fit: contain; }
+.site-tickets .tix-foot__mark { margin: 14px 0 0; font-size: 12px; color: var(--tix-mut); }
+.site-tickets .tix-foot__sb { color: var(--tix-fg); font-weight: 700; }

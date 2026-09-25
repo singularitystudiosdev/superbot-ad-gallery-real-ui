@@ -1,0 +1,708 @@
+/* site.css - F-Series Finder. Every rule is scoped under .site-f-series.
+   Dark slate board, one signal color (#ff9a2e). No transitions, no animations:
+   the kit toggles .is-hover on a card and .is-active on a chip, nothing else moves. */
+
+.site-f-series {
+  --ffx-bg: #0d1218;
+  --ffx-panel: #141b23;
+  --ffx-panel-2: #1a222c;
+  --ffx-bar: #0f151d;
+  --ffx-line: rgba(255, 255, 255, 0.075);
+  --ffx-line-2: rgba(255, 255, 255, 0.14);
+  --ffx-ink: #e9eef4;
+  --ffx-dim: #8794a4;
+  --ffx-dim-2: #66717f;
+  --ffx-signal: #ff9a2e;
+  --ffx-signal-soft: rgba(255, 154, 46, 0.12);
+
+  display: block;
+  position: relative;
+  min-width: 0;
+  background: var(--ffx-bg);
+  color: var(--ffx-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+  letter-spacing: 0;
+}
+
+.site-f-series *,
+.site-f-series *::before,
+.site-f-series *::after { box-sizing: border-box; }
+
+.site-f-series p,
+.site-f-series h1,
+.site-f-series h2,
+.site-f-series h3,
+.site-f-series ul,
+.site-f-series li,
+.site-f-series figure { margin: 0; padding: 0; }
+
+.site-f-series ul { list-style: none; }
+.site-f-series img { display: block; max-width: 100%; }
+.site-f-series b, .site-f-series em, .site-f-series i { font-style: normal; }
+.site-f-series .ffx-price,
+.site-f-series .ffx-stat__n,
+.site-f-series .ffx-mstat__n,
+.site-f-series .ffx-vs,
+.site-f-series .ffx-srcrow__n { font-variant-numeric: tabular-nums; }
+
+/* ---------- 1. top bar ---------- */
+
+.site-f-series .ffx-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 26px;
+  height: 66px;
+  background: var(--ffx-bar);
+  border-bottom: 1px solid var(--ffx-line);
+}
+
+.site-f-series .ffx-brand { display: flex; align-items: center; gap: 11px; flex: 0 0 auto; }
+
+.site-f-series .ffx-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--ffx-signal);
+  color: #1a1004;
+  font-size: 17px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.02em;
+}
+
+.site-f-series .ffx-wordmark {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+.site-f-series .ffx-wordmark em { color: var(--ffx-dim); font-weight: 500; }
+
+.site-f-series .ffx-tagline {
+  font-size: 11px;
+  color: var(--ffx-dim-2);
+  border-left: 1px solid var(--ffx-line-2);
+  padding-left: 11px;
+  white-space: nowrap;
+}
+
+.site-f-series .ffx-query {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--ffx-line);
+  border-radius: 9px;
+}
+
+.site-f-series .ffx-query__glyph {
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--ffx-dim-2);
+  border-radius: 50%;
+  position: relative;
+  flex: 0 0 auto;
+}
+.site-f-series .ffx-query__glyph::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  bottom: -3px;
+  width: 6px;
+  height: 2px;
+  background: var(--ffx-dim-2);
+  transform: rotate(45deg);
+}
+
+.site-f-series .ffx-query__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 12.5px;
+  color: #b9c4d0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-f-series .ffx-query__edit {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ffx-signal);
+  border: 1px solid rgba(255, 154, 46, 0.4);
+  border-radius: 6px;
+  padding: 3px 9px;
+}
+
+.site-f-series .ffx-live { flex: 0 0 auto; text-align: right; }
+.site-f-series .ffx-live__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ffx-signal);
+  margin-right: 6px;
+  vertical-align: 1px;
+}
+.site-f-series .ffx-live__text { font-size: 12px; font-weight: 600; }
+.site-f-series .ffx-live__sub {
+  display: block;
+  font-size: 10.5px;
+  color: var(--ffx-dim-2);
+  letter-spacing: 0.02em;
+}
+
+.site-f-series .ffx-scanline {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 154, 46, 0.25), var(--ffx-signal));
+}
+
+/* ---------- 2. sticky filter bar ---------- */
+
+.site-f-series .ffx-filters {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 11px 26px;
+  background: #10161f;
+  border-bottom: 1px solid var(--ffx-line);
+}
+
+.site-f-series .ffx-chiprow { display: flex; gap: 7px; flex: 0 0 auto; }
+
+.site-f-series .ffx-chip {
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #c3ccd7;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--ffx-line-2);
+  border-radius: 999px;
+  padding: 6px 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.site-f-series .ffx-chip--all { color: var(--ffx-dim); }
+.site-f-series .ffx-chip.is-active {
+  background: var(--ffx-signal);
+  border-color: var(--ffx-signal);
+  color: #1a1004;
+}
+
+.site-f-series .ffx-setter { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; }
+.site-f-series .ffx-setter__k {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ffx-dim-2);
+}
+.site-f-series .ffx-setter__v { font-size: 12px; font-weight: 600; }
+
+.site-f-series .ffx-track {
+  position: relative;
+  width: 104px;
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.09);
+}
+.site-f-series .ffx-track--half { width: 84px; }
+.site-f-series .ffx-track__fill {
+  position: absolute;
+  left: 12%;
+  right: 14%;
+  top: 0;
+  bottom: 0;
+  background: var(--ffx-signal);
+  border-radius: 3px;
+  opacity: 0.75;
+}
+.site-f-series .ffx-track__fill--half { left: 0; right: 38%; }
+.site-f-series .ffx-track__knob {
+  position: absolute;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e9eef4;
+  border: 3px solid #2a3542;
+}
+.site-f-series .ffx-track__knob--a { left: 9%; }
+.site-f-series .ffx-track__knob--b { right: 11%; }
+.site-f-series .ffx-track__knob--mid { right: 35%; }
+
+.site-f-series .ffx-settermore { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-f-series .ffx-criterion {
+  font-size: 11px;
+  color: var(--ffx-dim);
+  border: 1px dashed var(--ffx-line-2);
+  border-radius: 5px;
+  padding: 4px 9px;
+  white-space: nowrap;
+}
+.site-f-series .ffx-reset { font-size: 11.5px; color: var(--ffx-dim); text-decoration: underline; white-space: nowrap; }
+
+/* The chip-click note is the last child of the sticky filter bar. It is given its own full-width line at
+   EVERY width, not just under a media query: the bar is a wrapping flex row, and a nowrap note that is
+   allowed to shrink would spill its text out of its box and over the Max miles value on a narrow root.
+   flex-basis 100% also means the note can never share a row with a setter, so the narrow-width collision
+   cannot come back. It only becomes a box at all once a chip is .is-active. */
+.site-f-series .ffx-note {
+  display: none;
+  flex: 1 0 100%;
+  margin: 2px 0 0;
+  font-size: 11.5px;
+  color: var(--ffx-signal);
+  white-space: nowrap;
+}
+
+.site-f-series .ffx-filters:has(.ffx-chip--f250.is-active) .ffx-note--f250 { display: inline; }
+
+/* the chip click re-filters the board. :has() unsupported -> the chip still lights up
+   and the grid is simply left as it is. */
+.site-f-series .ffx-filters:has(.ffx-chip--f150.is-active) ~ .ffx-listings .ffx-card:not(.ffx-card--f150),
+.site-f-series .ffx-filters:has(.ffx-chip--f250.is-active) ~ .ffx-listings .ffx-card:not(.ffx-card--f250),
+.site-f-series .ffx-filters:has(.ffx-chip--f350.is-active) ~ .ffx-listings .ffx-card:not(.ffx-card--f350),
+.site-f-series .ffx-filters:has(.ffx-chip--raptor.is-active) ~ .ffx-listings .ffx-card:not(.ffx-card--raptor),
+.site-f-series .ffx-filters:has(.ffx-chip--lightning.is-active) ~ .ffx-listings .ffx-card:not(.ffx-card--lightning) {
+  opacity: 0.16;
+  filter: saturate(0.3);
+}
+
+.site-f-series .ffx-filters:has(.ffx-chip--f150.is-active) ~ .ffx-listings .ffx-card--f150,
+.site-f-series .ffx-filters:has(.ffx-chip--f250.is-active) ~ .ffx-listings .ffx-card--f250,
+.site-f-series .ffx-filters:has(.ffx-chip--f350.is-active) ~ .ffx-listings .ffx-card--f350,
+.site-f-series .ffx-filters:has(.ffx-chip--raptor.is-active) ~ .ffx-listings .ffx-card--raptor,
+.site-f-series .ffx-filters:has(.ffx-chip--lightning.is-active) ~ .ffx-listings .ffx-card--lightning {
+  opacity: 1;
+  filter: none;
+}
+
+.site-f-series .ffx-filters:has(.ffx-chip--f150.is-active) ~ .ffx-listings .ffx-note--f150,
+.site-f-series .ffx-filters:has(.ffx-chip--f250.is-active) ~ .ffx-listings .ffx-note--f250,
+.site-f-series .ffx-filters:has(.ffx-chip--f350.is-active) ~ .ffx-listings .ffx-note--f350,
+.site-f-series .ffx-filters:has(.ffx-chip--raptor.is-active) ~ .ffx-listings .ffx-note--raptor,
+.site-f-series .ffx-filters:has(.ffx-chip--lightning.is-active) ~ .ffx-listings .ffx-note--lightning {
+  display: block;
+}
+
+/* ---------- 3. summary strip ---------- */
+
+.site-f-series .ffx-summary {
+  display: grid;
+  grid-template-columns: 1.05fr 1.35fr 1fr 1fr;
+  gap: 1px;
+  background: var(--ffx-line);
+  border-bottom: 1px solid var(--ffx-line);
+}
+
+.site-f-series .ffx-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 18px 22px 20px;
+  background: #10161e;
+}
+.site-f-series .ffx-stat__n {
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.site-f-series .ffx-stat--median .ffx-stat__n { color: var(--ffx-signal); }
+.site-f-series .ffx-stat__k {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ffx-dim);
+}
+.site-f-series .ffx-stat__sub { font-size: 11.5px; color: var(--ffx-dim-2); }
+
+.site-f-series .ffx-spark { display: flex; align-items: flex-end; gap: 3px; height: 26px; margin-top: 7px; }
+.site-f-series .ffx-spark__bar { flex: 1 1 auto; background: rgba(255, 154, 46, 0.42); border-radius: 2px 2px 0 0; }
+
+.site-f-series .ffx-srcpile { display: flex; align-items: center; gap: 4px; margin-top: 8px; }
+.site-f-series .ffx-srcpile__logo {
+  width: 17px;
+  height: 17px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  object-fit: contain;
+}
+
+/* ---------- 4. listings ---------- */
+
+.site-f-series .ffx-listings { padding: 24px 26px 8px; }
+
+.site-f-series .ffx-lhead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ffx-line);
+}
+.site-f-series .ffx-h2 { font-size: 19px; font-weight: 650; letter-spacing: -0.015em; }
+.site-f-series .ffx-dek { font-size: 12px; color: var(--ffx-dim); margin-top: 5px; }
+.site-f-series .ffx-sortrow { display: flex; align-items: center; gap: 14px; flex: 0 0 auto; }
+.site-f-series .ffx-sortrow__k {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ffx-dim-2);
+}
+.site-f-series .ffx-sorttab { font-size: 12.5px; color: var(--ffx-dim); }
+.site-f-series .ffx-sorttab.is-active { color: var(--ffx-ink); font-weight: 650; border-bottom: 2px solid var(--ffx-signal); }
+
+.site-f-series .ffx-notes { padding: 10px 0 0; }
+
+.site-f-series .ffx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(336px, 1fr));
+  gap: 14px;
+  padding-top: 16px;
+}
+
+.site-f-series .ffx-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ffx-panel);
+  border: 1px solid var(--ffx-line);
+  border-radius: 11px;
+  overflow: hidden;
+}
+.site-f-series .ffx-card.is-hover {
+  border-color: rgba(255, 154, 46, 0.55);
+  background: var(--ffx-panel-2);
+  outline: 3px solid var(--ffx-signal-soft);
+  outline-offset: -1px;
+}
+
+.site-f-series .ffx-shot { position: relative; background: #0a0e13; }
+.site-f-series .ffx-photo { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+
+.site-f-series .ffx-plate {
+  position: absolute;
+  left: 9px;
+  bottom: 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #eef3f8;
+  background: rgba(9, 13, 18, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 3px 8px 3px 5px;
+}
+.site-f-series .ffx-plate__logo { width: 15px; height: 15px; border-radius: 3px; object-fit: contain; }
+
+.site-f-series .ffx-when {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: #d7dfe8;
+  background: rgba(9, 13, 18, 0.78);
+  border-radius: 5px;
+  padding: 2px 7px;
+}
+.site-f-series .ffx-stock {
+  position: absolute;
+  left: 9px;
+  top: 9px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: #9aa6b4;
+  background: rgba(9, 13, 18, 0.7);
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+.site-f-series .ffx-body { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px 14px; }
+.site-f-series .ffx-name { font-size: 14.5px; font-weight: 650; letter-spacing: -0.01em; }
+.site-f-series .ffx-spec { font-size: 12px; color: #a7b3c1; }
+.site-f-series .ffx-facts { font-size: 11.5px; color: var(--ffx-dim); display: flex; align-items: center; gap: 7px; }
+.site-f-series .ffx-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ffx-dim-2); }
+
+.site-f-series .ffx-pricerow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 2px;
+}
+.site-f-series .ffx-price { font-size: 21px; font-weight: 700; letter-spacing: -0.025em; }
+.site-f-series .ffx-deal {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-radius: 5px;
+  padding: 3px 8px;
+  border: 1px solid transparent;
+}
+.site-f-series .ffx-deal--great { background: var(--ffx-signal); color: #1a1004; }
+.site-f-series .ffx-deal--good { color: var(--ffx-signal); border-color: rgba(255, 154, 46, 0.5); }
+.site-f-series .ffx-deal--fair { color: var(--ffx-dim); border-color: var(--ffx-line-2); }
+
+.site-f-series .ffx-vs { display: block; }
+.site-f-series .ffx-vs__top { display: flex; align-items: baseline; justify-content: space-between; font-size: 11.5px; }
+.site-f-series .ffx-vs__market { color: var(--ffx-dim); }
+.site-f-series .ffx-vs__delta { color: var(--ffx-signal); font-weight: 600; }
+.site-f-series .ffx-vs__delta--over { color: var(--ffx-dim-2); font-weight: 500; }
+
+.site-f-series .ffx-vs__bar {
+  position: relative;
+  display: block;
+  height: 7px;
+  margin: 6px 0 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+.site-f-series .ffx-vs__zone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 82%;
+  background: var(--ffx-signal-soft);
+}
+.site-f-series .ffx-vs__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255, 154, 46, 0.55), var(--ffx-signal));
+  border-radius: 4px;
+}
+.site-f-series .ffx-vs__pin {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  background: #e9eef4;
+  opacity: 0.85;
+}
+.site-f-series .ffx-vs__scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--ffx-dim-2);
+  letter-spacing: 0.02em;
+}
+
+.site-f-series .ffx-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  opacity: 0.55;
+}
+.site-f-series .ffx-act {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #b6c1cd;
+  border: 1px solid var(--ffx-line-2);
+  border-radius: 6px;
+  padding: 5px 11px;
+}
+.site-f-series .ffx-act--go { flex: 1 1 auto; text-align: center; color: #1a1004; background: rgba(255, 154, 46, 0.5); border-color: transparent; }
+.site-f-series .ffx-card.is-hover .ffx-actions { opacity: 1; }
+.site-f-series .ffx-card.is-hover .ffx-act { border-color: rgba(255, 154, 46, 0.5); color: var(--ffx-signal); }
+.site-f-series .ffx-card.is-hover .ffx-act--go { background: var(--ffx-signal); color: #1a1004; }
+
+.site-f-series .ffx-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 20px 0 6px;
+  padding: 14px;
+  border: 1px dashed var(--ffx-line-2);
+  border-radius: 10px;
+}
+.site-f-series .ffx-more__text { font-size: 12.5px; color: var(--ffx-dim); }
+.site-f-series .ffx-more__btn {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1a1004;
+  background: var(--ffx-signal);
+  border-radius: 6px;
+  padding: 6px 13px;
+}
+
+/* ---------- 5. map strip ---------- */
+
+.site-f-series .ffx-map { padding: 26px 26px 30px; background: #0b1016; border-top: 1px solid var(--ffx-line); }
+.site-f-series .ffx-map__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.site-f-series .ffx-map__head .ffx-dek { margin-top: 5px; }
+
+.site-f-series .ffx-map__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 268px;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.site-f-series .ffx-map__plate {
+  position: relative;
+  aspect-ratio: 1400 / 866;
+  border: 1px solid var(--ffx-line);
+  border-radius: 12px;
+  background: #0e1620;
+  overflow: hidden;
+}
+.site-f-series .ffx-map__us {
+  position: absolute;
+  inset: 0;
+  background-image: url("./img/us-map.png");
+  background-size: cover;
+  background-position: 50% 0;
+  opacity: 0.17;
+}
+
+.site-f-series .ffx-pin { position: absolute; }
+.site-f-series .ffx-pin__dot {
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ffx-signal);
+  box-shadow: 0 0 0 3px rgba(255, 154, 46, 0.16), 0 0 0 1px rgba(10, 14, 19, 0.9);
+}
+.site-f-series .ffx-pin__card {
+  position: absolute;
+  left: 9px;
+  top: -9px;
+  display: block;
+  width: 84px;
+  font-size: 9.5px;
+  line-height: 1.25;
+  color: #c8d2dd;
+  background: rgba(11, 16, 22, 0.86);
+  border: 1px solid var(--ffx-line-2);
+  border-radius: 5px;
+  padding: 3px 5px;
+  white-space: nowrap;
+}
+.site-f-series .ffx-pin__card b { display: block; color: var(--ffx-ink); font-size: 11px; font-weight: 700; letter-spacing: -0.01em; }
+.site-f-series .ffx-pin__n { display: block; color: var(--ffx-dim-2); }
+.site-f-series .ffx-pin--left .ffx-pin__card { left: auto; right: 9px; }
+
+.site-f-series .ffx-map__key {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  font-size: 10px;
+  color: var(--ffx-dim-2);
+  letter-spacing: 0.03em;
+}
+
+.site-f-series .ffx-map__side { display: flex; flex-direction: column; gap: 10px; }
+.site-f-series .ffx-mstat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  background: var(--ffx-panel);
+  border: 1px solid var(--ffx-line);
+  border-radius: 10px;
+}
+.site-f-series .ffx-mstat__k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ffx-dim-2); }
+.site-f-series .ffx-mstat__v { font-size: 13.5px; font-weight: 650; }
+.site-f-series .ffx-mstat__n { font-size: 12px; color: var(--ffx-signal); }
+.site-f-series .ffx-map__fine { font-size: 11px; color: var(--ffx-dim-2); padding: 2px 2px 0; }
+
+/* ---------- 6. footer ---------- */
+
+.site-f-series .ffx-foot {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1.2fr;
+  gap: 30px;
+  padding: 26px 26px 34px;
+  border-top: 1px solid var(--ffx-line);
+  background: #0a0e13;
+}
+.site-f-series .ffx-foot__h {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ffx-dim);
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--ffx-line);
+  margin-bottom: 11px;
+}
+.site-f-series .ffx-foot__p { font-size: 12px; color: #9ca8b6; margin-bottom: 8px; }
+.site-f-series .ffx-foot__sum { font-size: 11.5px; color: var(--ffx-dim-2); margin-top: 10px; }
+.site-f-series .ffx-foot__mark { font-size: 12px; color: var(--ffx-dim); margin-top: 12px; }
+.site-f-series .ffx-foot__sb { color: var(--ffx-signal); font-weight: 700; }
+
+.site-f-series .ffx-srcpile-list { display: flex; flex-direction: column; gap: 1px; }
+.site-f-series .ffx-srcrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.site-f-series .ffx-srcrow__logo { width: 18px; height: 18px; border-radius: 4px; object-fit: contain; background: rgba(255, 255, 255, 0.05); }
+.site-f-series .ffx-srcrow__name { font-size: 12.5px; color: #c3ccd7; flex: 1 1 auto; }
+.site-f-series .ffx-srcrow__n { font-size: 12.5px; font-weight: 650; color: var(--ffx-dim); }
+
+.site-f-series .ffx-fnotes { display: flex; flex-direction: column; gap: 8px; }
+.site-f-series .ffx-fnote { font-size: 11.5px; color: #93a0ae; }
+.site-f-series .ffx-fnote b { color: #cfd8e2; font-weight: 650; }
+
+/* ---------- narrow: 720 to 1100 ---------- */
+
+.site-f-series .ffx-filters { flex-wrap: wrap; }
+.site-f-series .ffx-settermore { margin-left: 0; }
+
+@media (max-width: 1200px) {
+  .site-f-series .ffx-summary { grid-template-columns: 1fr 1fr; }
+  .site-f-series .ffx-map__grid { grid-template-columns: 1fr; }
+  .site-f-series .ffx-foot { grid-template-columns: 1fr 1fr; }
+}
+
+/* 1080, not 900: the kit draws this page 900 px wide inside a 1080 px viewport at 1x1, and the browser
+   scene, the hub build-card thumbnail and preview.html all size the page from the window, so the viewport
+   width is the only width signal a media query can see. At 4x5 the viewport is 864 and at 16x9 it is 1920,
+   so this threshold fires in exactly the same frames as the old 900 px one did there. */
+@media (max-width: 1080px) {
+  .site-f-series .ffx-top { height: auto; padding: 12px 18px; flex-wrap: wrap; gap: 12px; }
+  .site-f-series .ffx-tagline { display: none; }
+  .site-f-series .ffx-live { display: none; }
+  .site-f-series .ffx-filters { padding: 10px 18px; gap: 14px; }
+  .site-f-series .ffx-settermore { display: none; }
+  /* the chip-click note already takes its own full-width line from the base rule, at every width. */
+  .site-f-series .ffx-listings { padding: 20px 18px 8px; }
+  .site-f-series .ffx-grid { grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); }
+  .site-f-series .ffx-map { padding: 20px 18px 24px; }
+  .site-f-series .ffx-foot { grid-template-columns: 1fr; gap: 22px; padding: 22px 18px 28px; }
+  .site-f-series .ffx-lhead { flex-direction: column; align-items: flex-start; }
+}

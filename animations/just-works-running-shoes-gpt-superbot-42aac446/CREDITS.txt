@@ -1,0 +1,17 @@
+brand/amazon.svg | https://api.iconify.design/simple-icons/amazon.svg | Simple Icons | CC0 1.0 Universal
+fonts/barlow-condensed-500.woff2 | https://fonts.google.com/specimen/Barlow+Condensed | Jeremy Tribby | SIL Open Font License 1.1
+fonts/barlow-condensed-600.woff2 | https://fonts.google.com/specimen/Barlow+Condensed | Jeremy Tribby | SIL Open Font License 1.1
+fonts/barlow-condensed-700.woff2 | https://fonts.google.com/specimen/Barlow+Condensed | Jeremy Tribby | SIL Open Font License 1.1
+img/tempo-hero.jpg | https://www.flickr.com/photos/64015205@N00/46324600 | timtak | CC BY 2.0 (re-encoded, 1023x516)
+img/tempo.jpg | https://www.flickr.com/photos/64015205@N00/46324600 | timtak | CC BY 2.0 (crop 480x360, re-encoded)
+img/mile-hero.jpg | https://www.flickr.com/photos/110255976@N07/14496208425 | blacklerphotos | CC BY 2.0 (re-encoded, 1024x683)
+img/mile.jpg | https://www.flickr.com/photos/110255976@N07/14496208425 | blacklerphotos | CC BY 2.0 (crop 480x360, re-encoded)
+img/cadence-hero.jpg | https://www.flickr.com/photos/44124362019@N01/3785437076 | yoppy | CC BY 2.0 (re-encoded, 1024x683)
+img/cadence.jpg | https://www.flickr.com/photos/44124362019@N01/3785437076 | yoppy | CC BY 2.0 (crop 480x360, re-encoded)
+img/drift-hero.jpg | https://www.flickr.com/photos/38712296@N07/6926200497 | zigazou76 | CC BY 2.0 (re-encoded, 1024x1024)
+img/drift.jpg | https://www.flickr.com/photos/38712296@N07/6926200497 | zigazou76 | CC BY 2.0 (crop 480x360, re-encoded)
+img/interval-hero.jpg | https://stocksnap.io/photo/sneakers-shoes-U20YIXFQBC | Kristin Hardwick | CC0 1.0 Universal (re-encoded, 960x640)
+img/interval.jpg | https://stocksnap.io/photo/sneakers-shoes-U20YIXFQBC | Kristin Hardwick | CC0 1.0 Universal (crop 480x360, re-encoded)
+img/loop-hero.jpg | https://www.flickr.com/photos/63051956@N00/3769610224 | minorissues | CC BY 2.0 (re-encoded, 1024x768)
+img/loop.jpg | https://www.flickr.com/photos/63051956@N00/3769610224 | minorissues | CC BY 2.0 (crop 480x360, re-encoded)
+img/cover.jpg | https://www.flickr.com/photos/64015205@N00/46324600 | timtak | CC BY 2.0 (crop 1600x620, upscaled, re-encoded)

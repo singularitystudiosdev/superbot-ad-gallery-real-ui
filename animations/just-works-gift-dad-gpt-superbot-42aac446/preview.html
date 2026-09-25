@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>preview: Fishing gifts for dad, under $50</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #e3dac6; }
+  body { padding: 24px 0 64px; }
+  .dev-note {
+    font: 12px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+    color: #5d6153; letter-spacing: .02em;
+    max-width: 1600px; margin: 0 auto 16px; padding: 0 24px;
+  }
+  .dev-root { width: 100%; max-width: 1600px; min-width: 720px; margin: 0 auto; }
+  .dev-toggle { font: 11px/1.4 ui-monospace, Menlo, monospace; }
+</style>
+</head>
+<body>
+<p class="dev-note">preview.html: site.css + data.js + site.js only. The kit (engine.js / kit.css) is not loaded here. Add .is-active to the .gd-wrap switch to see the wrapped state, or .is-hover to a .gd-gift row for the hover state. The budget meter is driven by the kit's browser scene through render(root, p).</p>
+<div class="site site-gift-dad-gpt dev-root"></div>
+<script type="module">
+  import * as data from './data.js';
+  import build, { render } from './site.js';
+  const root = document.querySelector('.site-gift-dad-gpt');
+  build(root, { data, cfg: { slug: 'gift-dad-gpt' } });
+  render(root, 0);
+  addEventListener('keydown', (e) => {
+    if (e.key === 'w') root.querySelector('.gd-wrap').classList.toggle('is-active');
+    if (e.key === 'h') root.querySelector('.gd-gift:nth-child(4)').classList.toggle('is-hover');
+    if (e.key === 'm') render(root, Math.min(1, ((root.__p = (root.__p || 0) + 0.08))));
+  });
+</script>
+</body>
+</html>

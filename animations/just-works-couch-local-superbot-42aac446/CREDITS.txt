@@ -1,0 +1,29 @@
+CREDITS for just-works-couch-local-superbot-42aac446
+Every photo below is a sourced photo of a real mid-century sofa, or a real 1960s interior, cropped to 4:3
+(800x600) and re-encoded to JPEG at quality 72. No product art was drawn. All ten carry the same license:
+Creative Commons Attribution 2.0, which allows commercial use with attribution.
+
+img/couch-olive.jpg | https://www.flickr.com/photos/19568916@N07/4882661799 | lacasavictoria | CC BY 2.0
+img/couch-rust.jpg | https://www.flickr.com/photos/19568916@N07/5087188692 | lacasavictoria | CC BY 2.0
+img/couch-cream.jpg | https://www.flickr.com/photos/19568916@N07/4927425366 | lacasavictoria | CC BY 2.0
+img/couch-caramel.jpg | https://www.flickr.com/photos/36910487@N07/4773013249 | TheLivingRoominKenmore | CC BY 2.0
+img/couch-rose.jpg | https://www.flickr.com/photos/19568916@N07/5959899614 | lacasavictoria | CC BY 2.0
+img/couch-teal.jpg | https://www.flickr.com/photos/93887713@N00/8616787255 | Paris on Ponce & Le Maison Rouge | CC BY 2.0
+img/couch-ivory.jpg | https://www.flickr.com/photos/19568916@N07/6077909372 | lacasavictoria | CC BY 2.0
+img/couch-black-leather.jpg | https://www.flickr.com/photos/19568916@N07/5881551601 | lacasavictoria | CC BY 2.0
+img/couch-velvet-rose.jpg | https://www.flickr.com/photos/36910487@N07/4326503377 | TheLivingRoominKenmore | CC BY 2.0
+img/room-1960s.jpg | https://www.flickr.com/photos/28761247@N04/8504836399 | 1950sUnlimited | CC BY 2.0
+
+Photos were found through the Openverse image index (api.openverse.org), then fetched from the original
+Flickr file and cropped here. The furniture, prices, sellers, streets and distances are invented.
+
+Platform logos under brand/ are the platforms' own marks, not redrawn:
+brand/facebook.svg, brand/craigslist.svg, brand/ebay.svg, brand/offerup.svg
+  copied unchanged from animations/just-works-f-series-superbot-42aac446/brand/, which documents them as
+  fetched from each platform's own icon URL (Facebook and craigslist and OfferUp favicons, eBay apple
+  touch icon), resized to 64x64 and wrapped as self-contained SVG image files there.
+brand/nextdoor.svg | https://api.iconify.design/simple-icons/nextdoor.svg?height=64&color=%238ED500 | Simple Icons | CC0 1.0
+brand/app.svg | https://api.iconify.design/mdi/sofa.svg?height=48&color=%23c4623f | Pictogrammers (MDI) | Apache 2.0 (the browser tab icon)
+
+Fonts: none downloaded. The page uses Georgia (system) for names and the system sans stack for data,
+so no font files are shipped.

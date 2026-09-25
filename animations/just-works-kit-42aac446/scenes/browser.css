@@ -1,0 +1,112 @@
+/* scene 'browser': a macOS desktop and the user's own Chrome, dark, drawn at design px and scaled by
+   browser.js to fill the stage. Every selector is scoped under .s-browser. Nothing animates in CSS:
+   the window's transform, the chrome's opacity, the scroll position, the scrollbar and the cursor are
+   all written from render(lt) each frame. */
+.s-browser {
+  --ch-frame: #202124;
+  --ch-tool: #35363a;
+  --ch-text: #e8eaed;
+  --ch-text-2: #bdc1c6;
+  --ch-omni: #202124;
+  --ch-sep: rgba(255, 255, 255, .22);
+  position: absolute; inset: 0; overflow: hidden; background: #0d0d0d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--ch-text);
+  user-select: none;
+}
+
+/* ---------- the wallpaper (a macOS-like gradient: no drawn product art, no photo to credit) ---------- */
+.s-browser .bw-wall {
+  position: absolute; inset: 0; opacity: 0; z-index: 0;
+  background:
+    radial-gradient(58% 42% at 18% 10%, rgba(255, 122, 178, .30), transparent 70%),
+    radial-gradient(54% 46% at 83% 18%, rgba(122, 108, 255, .34), transparent 72%),
+    radial-gradient(72% 58% at 48% 112%, rgba(64, 196, 224, .22), transparent 70%),
+    linear-gradient(152deg, #2a1c47 0%, #1a1732 40%, #111b2e 72%, #0a1120 100%);
+}
+
+/* ---------- the macOS menu bar (stage px: it never scales with the window) ---------- */
+.s-browser .bw-menu {
+  position: absolute; left: 0; right: 0; top: 0; height: 28px; z-index: 5; opacity: 0;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 14px;
+  color: #fff; font-size: 13.5px; font-weight: 500; letter-spacing: -.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+.s-browser .bw-m-l, .s-browser .bw-m-r { display: flex; align-items: center; gap: 19px; }
+.s-browser .bw-menu b { font-weight: 700; }
+.s-browser .bw-menu svg { display: block; }
+.s-browser .bw-apple svg { width: 15px; height: 15px; fill: currentColor; stroke: none; }
+.s-browser .bw-wifi svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
+.s-browser .bw-sb svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.s-browser .bw-batt { width: 25px; height: 12px; border: 1.5px solid rgba(255, 255, 255, .8); border-radius: 3.5px; position: relative; }
+.s-browser .bw-batt::after { content: ""; position: absolute; right: -4px; top: 3px; width: 2px; height: 5px; border-radius: 0 1px 1px 0; background: rgba(255, 255, 255, .8); }
+.s-browser .bw-batt i { position: absolute; left: 1.5px; top: 1.5px; bottom: 1.5px; width: 62%; border-radius: 1.5px; background: #fff; }
+.s-browser .bw-clock { font-variant-numeric: tabular-nums; }
+
+/* ---------- the Chrome window (design px; transformed by browser.js every frame) ---------- */
+.s-browser .bw-win {
+  position: absolute; left: 0; top: 0; z-index: 3; transform-origin: 0 0;
+  display: flex; flex-direction: column; overflow: hidden;
+  /* browser.js animates this from 0 (the hub's build-card thumbnail, an unrounded clip) to Chrome's
+     10 design px: the morph's first frame is the published rect corner for corner, not a rounded one. */
+  border-radius: 0;
+  background: transparent;
+  will-change: transform, width, height, border-radius;
+}
+
+/* ---------- tab strip ---------- */
+.s-browser .bw-strip { flex: none; height: 40px; background: var(--ch-frame); position: relative; display: flex; align-items: flex-end; padding-left: 78px; opacity: 0; }
+.s-browser .bw-lights { position: absolute; left: 13px; top: 14px; display: flex; gap: 8px; }
+.s-browser .bw-lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .2); }
+.s-browser .bw-lights i:nth-child(2) { background: #febc2e; }
+.s-browser .bw-lights i:nth-child(3) { background: #28c840; }
+.s-browser .bw-tabs { flex: 1 1 auto; min-width: 0; display: flex; align-items: flex-end; height: 40px; }
+.s-browser .bw-tab {
+  position: relative; flex: 1 1 0; min-width: 0; max-width: 240px; height: 34px;
+  display: flex; align-items: center; gap: 8px; padding: 0 8px 0 10px;
+  border-radius: 8px 8px 0 0; color: var(--ch-text-2); font-size: 12px; white-space: nowrap;
+}
+.s-browser .bw-tab .bw-sep { position: absolute; right: 0; top: 9px; width: 1px; height: 16px; background: var(--ch-sep); }
+.s-browser .bw-tab.on { background: var(--ch-tool); color: var(--ch-text); z-index: 2; }
+.s-browser .bw-tab.on .bw-sep { display: none; }
+.s-browser .bw-tab.on::before, .s-browser .bw-tab.on::after { content: ""; position: absolute; bottom: 0; width: 8px; height: 8px; background: radial-gradient(circle at 0 0, transparent 8px, var(--ch-tool) 8.5px); }
+.s-browser .bw-tab.on::before { left: -8px; transform: scaleX(-1); }
+.s-browser .bw-tab.on::after { right: -8px; }
+.s-browser .bw-fav { flex: none; width: 16px; height: 16px; display: grid; place-items: center; }
+.s-browser .bw-fav img { width: 16px; height: 16px; display: block; }
+.s-browser .bw-tab-t { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.s-browser .bw-x { flex: none; width: 16px; height: 16px; border-radius: 50%; display: grid; place-items: center; opacity: 0; }
+.s-browser .bw-tab.on .bw-x { opacity: .8; }
+.s-browser .bw-x svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.s-browser .bw-newtab { flex: none; width: 28px; height: 28px; margin: 0 4px 3px 6px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+.s-browser .bw-newtab svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+/* ---------- toolbar + omnibox ---------- */
+.s-browser .bw-toolbar { flex: none; height: 40px; display: flex; align-items: center; gap: 4px; padding: 0 8px 0 6px; background: var(--ch-tool); opacity: 0; }
+.s-browser .bw-tb { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--ch-text); }
+.s-browser .bw-tb.dim { color: #7a7d81; }
+.s-browser .bw-tb svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.s-browser .bw-tb.bw-profile { width: 26px; height: 26px; margin: 0 4px; border-radius: 50%; background: #8ab4f8; color: #202124; font: 600 13px/26px -apple-system, system-ui, sans-serif; text-align: center; display: block; }
+.s-browser .bw-omni { flex: 1 1 auto; min-width: 0; height: 32px; margin: 0 4px; border-radius: 16px; background: var(--ch-omni); display: flex; align-items: center; gap: 10px; padding: 0 12px 0 11px; color: var(--ch-text); font-size: 14px; }
+.s-browser .bw-omni .bw-lock { flex: none; width: 18px; height: 18px; color: var(--ch-text-2); }
+.s-browser .bw-omni .bw-lock svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.s-browser .bw-omni .bw-url { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; }
+.s-browser .bw-omni .bw-url b { font-weight: 400; color: #fff; }
+.s-browser .bw-star { flex: none; width: 18px; height: 18px; color: var(--ch-text-2); }
+.s-browser .bw-star svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+
+/* ---------- the viewport: the site's scroller (browser.js sets scrollTop) + the overlay scrollbar ---------- */
+.s-browser .bw-view { flex: 1 1 auto; min-height: 0; position: relative; overflow: hidden; background: #202124; }
+/* a sibling of the scroller inside .bw-win, so it stays in the window while the page scrolls under it:
+   top 83 = the 80 design px of tab strip + toolbar, + 3, so the track covers the page area minus 3 px a
+   side; browser.js drives its opacity and its thumb from the scroll plan every frame. */
+.s-browser .bw-sbar { position: absolute; right: 2px; top: 83px; bottom: 3px; width: 9px; z-index: 6; opacity: 0; pointer-events: none; }
+.s-browser .bw-sbar i { display: block; width: 100%; height: 40px; border-radius: 5px; background: rgba(255, 255, 255, .40); }
+
+/* ---------- the pointer (shell.makeCursor), placed in stage px by lib.placeCursor ---------- */
+.s-browser .cursor {
+  position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 40; pointer-events: none;
+  fill: #fff; stroke: #000; stroke-width: 1.3; stroke-linejoin: round;
+  filter: drop-shadow(0 3px 6px rgb(0 0 0 / .5)); transform-origin: 17px 11px;
+}

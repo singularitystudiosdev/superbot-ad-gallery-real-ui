@@ -1,0 +1,8 @@
+brand/amazon.svg | https://api.iconify.design/simple-icons/amazon.svg | Simple Icons | CC0 1.0 Universal
+img/hero-halden.jpg | https://www.flickr.com/photos/24311648@N00/19548044600/ | mastermaq | CC BY-SA 2.0 (crop 1000x667, re-encoded)
+img/halden.jpg | https://www.flickr.com/photos/24311648@N00/19548044600/ | mastermaq | CC BY-SA 2.0 (crop 480x360, re-encoded)
+img/corva.jpg | https://www.flickr.com/photos/49243838@N00/49517006647/ | Ted Mielczarek | CC0 1.0 Universal (crop 480x360, re-encoded)
+img/orin.jpg | https://www.flickr.com/photos/87553953@N00/6094908180/ | auxesis | CC BY-SA 2.0 (crop 480x360, re-encoded)
+img/arbor.jpg | https://www.flickr.com/photos/38869431@N00/8682730703/ | juhansonin | CC BY 2.0 (crop 480x360, re-encoded)
+img/tessel.jpg | https://www.flickr.com/photos/25186605@N04/3197502527/ | Jeremy Levine Design | CC BY 2.0 (crop 480x360, re-encoded)
+img/norel.jpg | https://www.flickr.com/photos/27157988@N05/5619585646/ | aarontraffas | CC BY 2.0 (crop 480x360, re-encoded)

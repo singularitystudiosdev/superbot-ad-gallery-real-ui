@@ -1,0 +1,15 @@
+Sourced photos for the "Your 10 dresses" lookbook. One line per image: file, source page, author, license.
+Author names are not carried by the Pexels search endpoint used here; each photo page lists its photographer.
+
+img/look-01.webp  https://www.pexels.com/photo/17153151/  Pexels contributor 17153151  Pexels License (free to use, attribution not required)
+img/look-02.webp  https://www.pexels.com/photo/8053686/   Pexels contributor 8053686   Pexels License (free to use, attribution not required)
+img/look-03.webp  https://www.pexels.com/photo/7414584/   Pexels contributor 7414584   Pexels License (free to use, attribution not required)
+img/look-04.webp  https://www.pexels.com/photo/23484031/  Pexels contributor 23484031  Pexels License (free to use, attribution not required)
+img/look-05.webp  https://www.pexels.com/photo/5450671/   Pexels contributor 5450671   Pexels License (free to use, attribution not required)
+img/look-06.webp  https://www.pexels.com/photo/1144850/   Pexels contributor 1144850   Pexels License (free to use, attribution not required)
+img/look-07.webp  https://www.pexels.com/photo/37034357/  Pexels contributor 37034357  Pexels License (free to use, attribution not required)
+img/look-08.webp  https://www.pexels.com/photo/37428941/  Pexels contributor 37428941  Pexels License (free to use, attribution not required)
+img/look-09.webp  https://www.pexels.com/photo/1997387/   Pexels contributor 1997387   Pexels License (free to use, attribution not required)
+img/look-10.webp  https://www.pexels.com/photo/2682514/   Pexels contributor 2682514   Pexels License (free to use, attribution not required)
+
+brand/amazon.svg  https://api.iconify.design/simple-icons/amazon.svg  Simple Icons (CC0 1.0 Universal)  used for the Amazon source mark and the build card favicon

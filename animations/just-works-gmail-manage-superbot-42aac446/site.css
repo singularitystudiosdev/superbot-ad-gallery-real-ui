@@ -1,0 +1,271 @@
+/* site.css - "Inbox, handled". Every rule is scoped under .site-gmail-manage.
+   No CSS animations or transitions: the kit drives hover/click by toggling
+   .is-hover / .is-active, and the scan line reads the --iw-p custom property. */
+
+.site-gmail-manage {
+  --ink: #12151c;
+  --ink-2: #3b434f;
+  --mut: #78808e;
+  --faint: #98a0ae;
+  --line: #e6e8ee;
+  --line-2: #eef0f5;
+  --bg: #f2f3f6;
+  --surf: #ffffff;
+  --accent: #2f5fe0;
+  --accent-soft: #eef3ff;
+  --good: #16794f;
+  --bill: #96590f;
+
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-gmail-manage *,
+.site-gmail-manage *::before,
+.site-gmail-manage *::after { box-sizing: border-box; }
+
+.site-gmail-manage .iw-app { display: flex; align-items: stretch; background: var(--bg); }
+
+/* ---------- left rail ---------- */
+.site-gmail-manage .iw-rail {
+  flex: 0 0 218px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px 14px 22px;
+  background: #fbfbfd;
+  border-right: 1px solid var(--line);
+}
+
+.site-gmail-manage .iw-brand { display: flex; align-items: center; gap: 8px; }
+.site-gmail-manage .iw-brand-mark { width: 20px; height: 16px; }
+.site-gmail-manage .iw-brand-name { font-size: 14px; font-weight: 620; letter-spacing: -0.01em; }
+.site-gmail-manage .iw-brand-badge {
+  margin-left: auto; font-size: 11px; font-weight: 650; color: #6b7484;
+  background: #eceef4; border-radius: 999px; padding: 2px 8px;
+}
+
+.site-gmail-manage .iw-nav { display: flex; flex-direction: column; gap: 1px; }
+.site-gmail-manage .iw-nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 9px; border-radius: 8px; font-size: 13px; color: var(--ink-2);
+}
+.site-gmail-manage .iw-nav-item.is-on { background: #eaeef8; color: #1d3163; font-weight: 620; }
+.site-gmail-manage .iw-nav-count { margin-left: auto; font-size: 11px; color: var(--faint); font-weight: 600; }
+.site-gmail-manage .iw-nav-item.is-on .iw-nav-count { color: var(--accent); }
+
+.site-gmail-manage .iw-rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+.site-gmail-manage .iw-cal { display: flex; align-items: center; gap: 7px; }
+.site-gmail-manage .iw-cal-mark { width: 16px; height: 16px; }
+.site-gmail-manage .iw-cal-text { font-size: 11.5px; color: var(--mut); }
+.site-gmail-manage .iw-scan { height: 3px; border-radius: 999px; background: #e7eaf2; overflow: hidden; }
+.site-gmail-manage .iw-scan-bar {
+  display: block; height: 100%; border-radius: 999px; background: var(--accent);
+  width: calc(var(--iw-p, 0) * 100%);
+}
+.site-gmail-manage .iw-rail-note { margin: 4px 0 0; font-size: 11px; line-height: 1.4; color: var(--faint); }
+
+/* ---------- main ---------- */
+.site-gmail-manage .iw-main { flex: 1 1 auto; min-width: 0; padding: 22px 26px 30px; }
+
+.site-gmail-manage .iw-bar { display: flex; align-items: flex-start; gap: 20px; }
+.site-gmail-manage .iw-bar-left { min-width: 0; }
+.site-gmail-manage .iw-title { margin: 0; font-size: 24px; font-weight: 640; letter-spacing: -0.022em; }
+.site-gmail-manage .iw-sub { margin: 5px 0 0; font-size: 12.5px; color: var(--mut); max-width: 620px; }
+.site-gmail-manage .iw-bar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.site-gmail-manage .iw-pill {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-size: 11.5px; font-weight: 600; color: #3a4a76;
+  background: #eef1f8; border-radius: 999px; padding: 5px 10px;
+}
+.site-gmail-manage .iw-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--good); }
+.site-gmail-manage .iw-btn {
+  font: inherit; font-size: 12px; font-weight: 600; color: var(--ink-2); white-space: nowrap;
+  background: var(--surf); border: 1px solid #d9dce4; border-radius: 8px; padding: 6px 12px; cursor: pointer;
+}
+
+/* ---------- KPI row ---------- */
+.site-gmail-manage .iw-kpis {
+  display: grid; grid-template-columns: 2.3fr 1fr 1fr 1fr; gap: 14px; margin: 20px 0 28px;
+}
+.site-gmail-manage .iw-kpi {
+  display: flex; flex-direction: column; gap: 5px;
+  background: var(--surf); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px;
+  box-shadow: 0 1px 2px rgba(16, 20, 30, 0.04);
+}
+.site-gmail-manage .iw-kpi--lead {
+  gap: 7px; padding: 18px 18px 16px;
+  background: #f7f9ff; border-color: #d7e1f7;
+  box-shadow: inset 4px 0 0 var(--accent), 0 2px 8px rgba(31, 50, 90, 0.07);
+}
+.site-gmail-manage .iw-kpi-label {
+  font-size: 10.5px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: #7b8291;
+}
+.site-gmail-manage .iw-kpi-run { display: flex; align-items: baseline; gap: 8px; }
+.site-gmail-manage .iw-kpi-num { font-size: 22px; font-weight: 640; letter-spacing: -0.015em; }
+.site-gmail-manage .iw-kpi-run .iw-kpi-num--was {
+  font-size: 17px; font-weight: 560; color: #9aa1af;
+  text-decoration: line-through; text-decoration-color: #d7dbe4;
+}
+.site-gmail-manage .iw-kpi-arrow { font-size: 15px; color: #b3b9c5; }
+.site-gmail-manage .iw-kpi-foot { font-size: 11.5px; color: #868d9b; }
+
+/* the lead tile is the hero: 2,431 unread becomes 12, readable at ad size */
+.site-gmail-manage .iw-kpi--lead .iw-kpi-label { font-size: 11px; color: #5c6b92; }
+.site-gmail-manage .iw-kpi--lead .iw-kpi-run { gap: 12px; }
+.site-gmail-manage .iw-kpi--lead .iw-kpi-num {
+  font-size: 36px; font-weight: 660; letter-spacing: -0.032em; color: #0f1a37;
+}
+.site-gmail-manage .iw-kpi--lead .iw-kpi-run .iw-kpi-num--was {
+  font-size: 26px; font-weight: 560; color: #8f9ab3;
+  text-decoration: line-through; text-decoration-color: #c3cde4; text-decoration-thickness: 2px;
+}
+.site-gmail-manage .iw-kpi--lead .iw-kpi-arrow { font-size: 24px; color: #7f8cad; }
+.site-gmail-manage .iw-kpi--lead .iw-kpi-foot { font-size: 12.5px; font-weight: 550; color: #6f7a94; }
+
+/* ---------- lanes ---------- */
+.site-gmail-manage .iw-lanes { display: flex; flex-direction: column; gap: 30px; }
+.site-gmail-manage .iw-lane-head { margin-bottom: 12px; }
+.site-gmail-manage .iw-lane-headline { display: flex; align-items: baseline; gap: 8px; }
+.site-gmail-manage .iw-lane-title { margin: 0; font-size: 16px; font-weight: 640; letter-spacing: -0.012em; }
+.site-gmail-manage .iw-lane-count {
+  font-size: 11.5px; font-weight: 650; color: #5d6779; background: #e8ebf2; border-radius: 999px; padding: 2px 8px;
+}
+.site-gmail-manage .iw-lane-sub { margin: 4px 0 0; font-size: 12.5px; color: var(--mut); max-width: 660px; }
+
+/* ---------- needs you ---------- */
+.site-gmail-manage .iw-mails { display: flex; flex-direction: column; gap: 10px; }
+.site-gmail-manage .iw-mail {
+  display: flex; gap: 12px;
+  background: var(--surf); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px;
+}
+.site-gmail-manage .iw-mail:has(.iw-reply.is-hover) {
+  border-color: #c6d2ec; box-shadow: 0 6px 18px rgba(31, 50, 90, 0.08);
+}
+.site-gmail-manage .iw-av {
+  width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; object-fit: cover; background: #f1f3f8;
+}
+.site-gmail-manage .iw-mail-body { flex: 1 1 auto; min-width: 0; }
+.site-gmail-manage .iw-mail-top { display: flex; align-items: baseline; gap: 8px; }
+.site-gmail-manage .iw-from { font-size: 13px; font-weight: 620; color: #1b2029; }
+.site-gmail-manage .iw-time { font-size: 11.5px; color: var(--faint); }
+.site-gmail-manage .iw-tag {
+  margin-left: auto; font-size: 11px; font-weight: 620; color: #3a5fa8; white-space: nowrap;
+  background: var(--accent-soft); border: 1px solid #dde5f6; border-radius: 999px; padding: 2px 8px;
+}
+.site-gmail-manage .iw-subject { margin: 3px 0 2px; font-size: 14.5px; font-weight: 620; letter-spacing: -0.005em; }
+.site-gmail-manage .iw-snippet { margin: 0 0 10px; font-size: 12.5px; color: var(--mut); }
+
+.site-gmail-manage .iw-reply {
+  border-left: 2px solid #dfe4ee; background: #f8f9fc; border-radius: 0 10px 10px 0; padding: 10px 12px;
+}
+.site-gmail-manage .iw-reply.is-hover { border-left-color: var(--accent); background: #f2f6ff; }
+.site-gmail-manage .iw-reply.is-hover .iw-reply-text { color: #1b2434; }
+.site-gmail-manage .iw-reply-head { display: flex; align-items: baseline; gap: 8px; }
+.site-gmail-manage .iw-reply-label {
+  font-size: 10.5px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: #5b6b8f;
+}
+.site-gmail-manage .iw-reply-to { font-size: 11.5px; color: var(--faint); }
+.site-gmail-manage .iw-reply-text { margin: 6px 0 10px; font-size: 13.5px; line-height: 1.5; color: #38404e; }
+.site-gmail-manage .iw-reply-actions { display: flex; align-items: center; gap: 9px; }
+
+.site-gmail-manage .iw-send {
+  font: inherit; font-size: 12.5px; font-weight: 620; color: #fff; background: var(--accent);
+  border: 0; border-radius: 8px; padding: 7px 15px; cursor: pointer;
+}
+.site-gmail-manage .iw-reply.is-hover .iw-send { background: #2450c8; box-shadow: 0 4px 12px rgba(47, 95, 224, 0.28); }
+.site-gmail-manage .iw-send-done { display: none; }
+.site-gmail-manage .iw-tag-done { display: none; }
+.site-gmail-manage .iw-reply.is-hover .iw-send.is-active,
+.site-gmail-manage .iw-send.is-active { background: var(--good); box-shadow: none; }
+.site-gmail-manage .iw-mail:has(.iw-send.is-active) .iw-tag {
+  color: var(--good); background: #edf7f1; border-color: #d4ebdd;
+}
+.site-gmail-manage .iw-mail:has(.iw-send.is-active) .iw-tag-idle { display: none; }
+.site-gmail-manage .iw-mail:has(.iw-send.is-active) .iw-tag-done { display: inline; }
+.site-gmail-manage .iw-send.is-active { background: var(--good); }
+.site-gmail-manage .iw-send.is-active .iw-send-idle { display: none; }
+.site-gmail-manage .iw-send.is-active .iw-send-done { display: inline; }
+.site-gmail-manage .iw-sent-note { font-size: 11.5px; font-weight: 620; color: var(--good); opacity: 0; }
+.site-gmail-manage .iw-send.is-active + .iw-sent-note { opacity: 1; }
+.site-gmail-manage .iw-reply:has(.iw-send.is-active) { border-left-color: var(--good); background: #f1f8f4; }
+.site-gmail-manage .iw-reply-hint { font-size: 11.5px; color: #a3a9b6; }
+
+/* ---------- bills due ---------- */
+.site-gmail-manage .iw-bills {
+  background: var(--surf); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+}
+.site-gmail-manage .iw-bill {
+  display: grid; grid-template-columns: 34px minmax(0, 1fr) auto minmax(84px, auto) auto;
+  align-items: center; gap: 14px; padding: 12px 15px; border-top: 1px solid var(--line-2);
+}
+.site-gmail-manage .iw-bill:first-child { border-top: 0; }
+.site-gmail-manage .iw-bill-main { min-width: 0; }
+.site-gmail-manage .iw-bill-name { margin: 0; font-size: 13.5px; font-weight: 620; }
+.site-gmail-manage .iw-bill-note { margin: 2px 0 0; font-size: 12px; color: #858c9a; }
+.site-gmail-manage .iw-bill-due {
+  font-size: 12px; color: #6c7381; background: #f3f4f8; border-radius: 6px; padding: 3px 8px; white-space: nowrap;
+}
+.site-gmail-manage .iw-bill-amt { font-size: 14px; font-weight: 650; text-align: right; }
+.site-gmail-manage .iw-pay {
+  font: inherit; font-size: 12px; font-weight: 620; color: var(--bill); background: #fdf7ef;
+  border: 1px solid #e6d8c6; border-radius: 8px; padding: 6px 12px; cursor: pointer;
+}
+.site-gmail-manage .iw-bill-total {
+  display: flex; align-items: baseline; gap: 10px; padding: 12px 15px; background: #f7f8fb; border-top: 1px solid var(--line);
+}
+.site-gmail-manage .iw-bill-total-label {
+  font-size: 11px; font-weight: 650; letter-spacing: 0.07em; text-transform: uppercase; color: #7b8291;
+}
+.site-gmail-manage .iw-bill-total-amt { font-size: 15px; font-weight: 660; }
+.site-gmail-manage .iw-bill-total-note { margin-left: auto; font-size: 11.5px; color: var(--faint); }
+
+/* ---------- handled ---------- */
+.site-gmail-manage .iw-handled { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.site-gmail-manage .iw-hcard {
+  display: flex; flex-direction: column; gap: 3px;
+  background: var(--surf); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+}
+.site-gmail-manage .iw-hcount { font-size: 26px; font-weight: 660; letter-spacing: -0.022em; }
+.site-gmail-manage .iw-hlabel { font-size: 12.5px; font-weight: 620; color: #2a3140; }
+.site-gmail-manage .iw-hnote { margin: 2px 0 0; font-size: 11.5px; color: #868d9b; }
+
+/* ---------- unsubscribed ---------- */
+.site-gmail-manage .iw-unsub { display: flex; flex-wrap: wrap; gap: 6px; }
+.site-gmail-manage .iw-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #4a5160; background: var(--surf); border: 1px solid #e4e7ee; border-radius: 999px; padding: 5px 10px;
+}
+.site-gmail-manage .iw-chip-x { font-style: normal; font-size: 13px; line-height: 1; color: #a9b0bd; }
+.site-gmail-manage .iw-unsub-foot { margin: 10px 0 0; font-size: 11.5px; color: #8a92a0; }
+
+/* ---------- footer ---------- */
+.site-gmail-manage .iw-foot {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  margin-top: 28px; padding-top: 14px; border-top: 1px solid #e3e6ec; font-size: 11.5px; color: var(--faint);
+}
+.site-gmail-manage .iw-foot-url { font-weight: 620; color: #6b7280; }
+
+/* ---------- narrow ----------------------------------------------------
+   The kit mounts this page in a chat card and in the Chrome viewport, and the
+   root width swings 720..1600px, so the rail drops out on small viewports. */
+@media (max-width: 1180px) {
+  .site-gmail-manage .iw-kpis { grid-template-columns: 1fr 1fr; }
+}
+/* 1080, not 1024: the kit draws this page 900 px wide inside a 1080 px viewport at 1x1, and the browser
+   scene, the hub build-card thumbnail and preview.html all size the page from the window, so the viewport
+   width is the only width signal a media query can see. At 4x5 the viewport is 864 and at 16x9 it is 1920,
+   so this threshold fires in exactly the same frames as the old 1024 px one did there. */
+@media (max-width: 1080px) {
+  .site-gmail-manage .iw-rail { display: none; }
+  .site-gmail-manage .iw-main { padding: 18px 18px 26px; }
+  .site-gmail-manage .iw-handled { grid-template-columns: 1fr 1fr; }
+  .site-gmail-manage .iw-bill-total-note { display: none; }
+}
+@media (max-width: 620px) {
+  .site-gmail-manage .iw-kpis { grid-template-columns: 1fr; }
+  .site-gmail-manage .iw-handled { grid-template-columns: 1fr; }
+}

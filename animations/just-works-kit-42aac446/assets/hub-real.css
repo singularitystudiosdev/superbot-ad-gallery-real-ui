@@ -1,0 +1,76 @@
+/* The hub window mock, brought in line with the shipped desktop app
+   (apps/desktop/src/renderer/src/hub): the sidebar's Chat/Code switch and
+   New chat button over the Earlier list, a title + search header, a thread
+   with the user's turn as a grey pill and the answer as plain text, and the
+   real composer card (draft on top; + | chat/build ... SUPER | superbot v |
+   computer | mic | send). Loaded after each ad's own styles. */
+
+/* sidebar */
+.hub .side-head { gap: 6px; font-size: 12.5px; font-weight: 700; }
+.hub .side-head img { width: 15px; height: 15px; }
+.hub .side-head .ic, .hub .side-head .side-ic { margin-left: 0; width: 20px; height: 20px; border-radius: 6px; background: none; border: 1px solid #3a3a3c; display: grid; place-items: center; color: #d1d1d6; }
+.hub .side-head .ic:first-of-type, .hub .side-head .side-ic:first-of-type { margin-left: auto; }
+.hub .side-head .ic svg, .hub .side-head .side-ic svg { width: 11px; height: 11px; }
+.rh-seg { flex: none; display: grid; grid-template-columns: 1fr 1fr; margin: 2px 10px 8px; padding: 2px; height: 31px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2e2e31; font: 700 10.5px/27px var(--ui); color: #9a9aa0; }
+.rh-seg span { display: flex; align-items: center; justify-content: center; gap: 5px; border-radius: 999px; }
+.rh-seg span:first-child { background: linear-gradient(90deg, #5ec6f2, #8b6cf6 70%, #a26cf6); color: #fff; }
+.rh-seg svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rh-new { flex: none; display: flex; align-items: center; justify-content: center; gap: 4px; margin: 0 10px 8px; height: 30px; border-radius: 8px; background: #e5e5ea; color: #000; font: 600 11px/1 var(--ui); }
+.rh-new svg { width: 12px; height: 12px; }
+.hub .cap-row { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 10.5px; padding: 4px 12px 4px; color: #a1a1a6; align-items: center; }
+.hub .cap-row .rh-pm { display: flex; gap: 10px; color: #a1a1a6; font: 400 13px/1 var(--ui); }
+.hub .row.chat { min-height: 30px; gap: 8px; color: #c7c7cc; font-size: 11.5px; }
+.hub .row.chat em { font-family: var(--mono); color: #8e8e93; }
+.hub .row.on { background: #1c1c1e; box-shadow: none; color: #f2f2f7; }
+.hub .row.chat svg, .hub .row.chat .sp { flex: none; }
+
+/* header: the thread title and the search field (no extra action button) */
+.hub .chat-head { gap: 10px; font-size: 12.5px; font-weight: 600; }
+.hub .chat-head .search { flex: 1; max-width: 62%; margin-left: 4px; gap: 6px; padding: 0 9px; border-radius: 8px; border: 0; background: #1c1c1e; color: #8e8e93; font-size: 10.5px; line-height: 24px; }
+.hub .chat-head .search::before { content: ''; width: 11px; height: 11px; flex: none; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4-4'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4-4'/%3E%3C/svg%3E") center / contain no-repeat; }
+.hub .chat-head .search kbd { margin-left: auto; }
+.hub .chat-head .ask { display: none; }
+.hub .chat-head .pt, .hub .chat-head .ptoggle { margin-left: auto; width: 24px; height: 24px; border-radius: 7px; background: none; border: 1px solid #3a3a3c; }
+
+/* thread: no channel banner, no avatars or name rows */
+.hub .welcome, .hub .date-div { display: none !important; }
+.hub .msg:has(.avatar.sb) > .avatar, .hub .msg:has(.avatar.sb) .m-head,
+.hub .f-a > .avatar, .hub .f-a .m-head { display: none; }
+.hub .msg:not(:has(.avatar.sb)) { flex-direction: row-reverse; }
+.hub .msg:not(:has(.avatar.sb)) > .avatar, .hub .msg:not(:has(.avatar.sb)) .m-head { display: none; }
+.hub .msg:not(:has(.avatar.sb)) .m-main { flex: 0 1 auto; max-width: 82%; }
+.hub .msg:not(:has(.avatar.sb)) .m-text { padding: 6px 14px; border-radius: 16px; background: #1f1f22; color: #f2f2f7; }
+.hub .f-q .bub { border: 0; background: #1f1f22; color: #f2f2f7; border-radius: 16px; }
+
+/* the composer card */
+.hub .composer .pill, .hub .composer .crow { display: block; height: auto; min-height: 0; padding: 0; border: 0; background: none; }
+.rc { display: flex; flex-direction: column; min-height: 88px; padding: 11px 9px 8px 11px; border-radius: 14px; background: #1a1a1c; box-shadow: inset 0 0 0 1px #2c4596; color: #8e8e93; font: 11.5px/1.4 var(--ui); }
+.hub .composer .ring .rc { background: none; box-shadow: none; }
+.rc-ph { flex: 1; min-height: 38px; padding: 0 2px; white-space: nowrap; overflow: hidden; }
+.rc-row { display: flex; align-items: center; gap: 7px; }
+.rc-row > span { flex: none; display: inline-flex; align-items: center; justify-content: center; color: #9499a8; }
+.rc-row svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rc-plus svg { width: 14px; height: 14px; }
+.rc-plus { color: #a1a5b3 !important; margin-left: 2px; }
+.rc-seg { margin-left: 4px; height: 26px; padding: 2px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2e2e31; }
+.rc-seg > span { display: inline-grid; place-items: center; width: 29px; height: 22px; border-radius: 999px; }
+.rc-seg > span:first-child { background: linear-gradient(90deg, #5d91ec, #866cf6); color: #fff; }
+.rc-seg svg { width: 11px; height: 11px; }
+.rc-super { margin-left: auto; height: 21px; padding: 0 9px; gap: 6px; border-radius: 999px; background: #272729; color: #868a98 !important; font: 700 8.5px/1 var(--ui); letter-spacing: .14em; }
+.rc-super::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #5d606f; }
+.rc-plat { gap: 5px; margin: 0 3px 0 5px; font-size: 10.5px; color: #a8acb9 !important; }
+.rc-plat .rc-cat { width: 12px; height: 12px; }
+.rc-plat .rc-chev { width: 9px; height: 9px; }
+.rc-computer { margin: 0 4px; }
+.rc-computer svg { width: 12px; height: 12px; }
+.rc-mic { width: 24px; height: 24px; border-radius: 50%; background: #1f1f21; box-shadow: inset 0 0 0 1px #2e2e31; }
+.rc-mic svg { width: 11px; height: 11px; }
+.rc-send { width: 25px; height: 25px; border-radius: 50%; background: #2c2c2e; color: #5d606f !important; }
+.rc-send svg { width: 12px; height: 12px; stroke-width: 2.2; }
+
+/* User turns sit flush right at the feed's inner edge; replies sit flush left, 10px in (under the header title), capped at --hub-reply so they never span the pane. */
+.hub { --hub-bubble: 445px; --hub-reply: 471px; --hub-reply-inset: 10px; --hub-column: 590px; }
+.hub .feed > .msg, .hub .feed-in > * { box-sizing: border-box; width: 100%; max-width: none; margin-inline: 0; }
+.hub .msg:not(:has(.avatar.sb)) .m-main, .hub .f-q .bub { max-width: var(--hub-bubble); }
+.hub .msg:has(.avatar.sb) .m-main, .hub .f-a .m-main, .hub .f-think { box-sizing: border-box; max-width: var(--hub-reply); margin-left: var(--hub-reply-inset); }
+.hub .composer { align-self: center; box-sizing: border-box; width: calc(100% - 24px); max-width: var(--hub-column); margin-inline: auto; }

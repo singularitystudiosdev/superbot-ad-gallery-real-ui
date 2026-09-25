@@ -1,0 +1,15 @@
+Seat photos (img/). One line per file: file, source URL, author, license.
+img/seat-tele2.jpg | https://www.flickr.com/photos/45457437@N00/9710502838 | David Jones | CC BY 2.0 (via Openverse)
+img/seat-fordfield.jpg | https://www.flickr.com/photos/96223849@N00/2378060184 | Dave Hogg | CC BY 2.0 (via Openverse)
+img/seat-soccercity.jpg | https://www.flickr.com/photos/28125001@N04/4294833299 | Shine 2010 | CC BY 2.0 (via Openverse)
+img/seat-superbowl.jpg | https://www.flickr.com/photos/44124348109@N01/24876933126 | jurvetson | CC BY 2.0 (via Openverse)
+img/seat-empty.jpg | https://www.flickr.com/photos/73207064@N00/174328073 | chrismetcalfTV | CC BY 2.0 (via Openverse)
+img/seat-olympic.webp | https://www.flickr.com/photos/125167502@N02/46944595855 | markus spiske | CC0 1.0 (via Openverse)
+
+Platform logos (brand/).
+brand/stubhub.svg | https://api.iconify.design/simple-icons/stubhub.svg | Simple Icons | CC0 1.0
+brand/seatgeek.svg | https://api.iconify.design/simple-icons/seatgeek.svg | Simple Icons | CC0 1.0
+brand/ticketmaster.svg | https://api.iconify.design/simple-icons/ticketmaster.svg | Simple Icons | CC0 1.0
+brand/vividseats.svg | https://api.iconify.design/arcticons/vivid-seats.svg | Arcticons | CC BY-SA 4.0
+brand/gametime.svg | https://commons.wikimedia.org/wiki/File:Gametime_logo.svg (chevron mark, cropped from the official wordmark: no icon set carries a Gametime icon) | Gametime | public domain (simple text wordmark)
+brand/app.svg | drawn for this spot (ticket stub icon) | superbot ad series | n/a

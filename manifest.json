@@ -24,28 +24,12 @@
     "thumb": "assets/shots/tabs-chaos-superbot-6f50ea56.png"
   },
   {
-    "id": "context-carries-superbot-12d6385c",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "CONTEXT CARRIES",
-    "src": "animations/context-carries-superbot-12d6385c/",
-    "thumb": "assets/shots/context-carries-superbot-12d6385c.png"
-  },
-  {
     "id": "youtube-refusal-superbot-7f2c9a41",
     "type": "animation",
     "group": "Ad spots",
     "title": "WE DON'T REFUSE",
     "src": "animations/youtube-refusal-superbot-7f2c9a41/",
     "thumb": "assets/shots/youtube-refusal-superbot-7f2c9a41.png"
-  },
-  {
-    "id": "waffles-delivery-superbot-87a583a1",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "order me waffles pls",
-    "src": "animations/waffles-delivery-superbot-87a583a1/",
-    "thumb": "assets/shots/waffles-delivery-superbot-87a583a1.png"
   },
   {
     "id": "waffles-website-superbot-87a583a1",
@@ -120,28 +104,12 @@
     "thumb": "assets/shots/just-works-gmail-receipts-gpt-superbot-42aac446.png"
   },
   {
-    "id": "just-works-leather-jacket-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Vintage leather jacket, size M",
-    "src": "animations/just-works-leather-jacket-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-leather-jacket-superbot-42aac446.png"
-  },
-  {
     "id": "just-works-standing-desk-gpt-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",
     "title": "Standing desks, compared",
     "src": "animations/just-works-standing-desk-gpt-superbot-42aac446/",
     "thumb": "assets/shots/just-works-standing-desk-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-tv-price-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "OLED 65, today",
-    "src": "animations/just-works-tv-price-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-tv-price-gpt-superbot-42aac446.png"
   },
   {
     "id": "deny-cascade-superbot-440813d4",

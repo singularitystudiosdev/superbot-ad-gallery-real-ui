@@ -159,12 +159,11 @@
 /* the hub's own welcome line and date divider are not part of this spot: the chat starts on an empty thread */
 #s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
 
-/* Download all: pressed by the pointer, fills, resolves to Downloaded (mp3.js) */
-#s-tabs .sbsite .hub .yt-dl { position: relative; overflow: hidden; isolation: isolate; transform-origin: 50% 50%; }
-#s-tabs .sbsite .hub .yt-dl-fill { position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, #34c78a, #2aa876); transform-origin: 0 50%; transform: scaleX(0); }
-#s-tabs .sbsite .hub .yt-dl .yt-dl-b { display: none; }
-#s-tabs .sbsite .hub .yt-dl.is-done .yt-dl-a { display: none; }
-#s-tabs .sbsite .hub .yt-dl.is-done .yt-dl-b { display: inline-flex; align-items: center; gap: 7px; }
-#s-tabs .sbsite .hub .yt-dl-a { display: inline-flex; align-items: center; gap: 7px; }
-#s-tabs .sbsite .hub .yt-dl-b svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+/* Download all: the DoorDash "Ordered!" pill (ports.css .dd-btn), pressed by the pointer (mp3.js) */
 #s-tabs .sbsite .hub .yt-dl-ring { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255,255,255,.85); opacity: 0; pointer-events: none; }
+#s-tabs .sbsite .hub .yt-dl.dd-btn { display: block; flex: none; width: 250px; height: 40px; margin: 0; padding: 0; border-radius: 999px; gap: 0;
+  background: linear-gradient(90deg, #5ec8e6 0%, #6e7cf2 52%, #a86ef0 100%);
+  box-shadow: 0 0 14px rgba(110,124,242,.45), 0 0 30px rgba(168,110,240,.22), inset 0 1px 0 rgba(255,255,255,.22); }
+#s-tabs .sbsite .hub .yt-dl .dd-grp-a svg { width: 13px; height: 13px; stroke-width: 2.3; }
+#s-tabs .sbsite .hub .yt-dl .dd-check { width: 18px; height: 18px; stroke-width: 2.9; }
+#s-tabs .sbsite .hub .yt-lab-a { display: inline-block; min-width: 118px; }

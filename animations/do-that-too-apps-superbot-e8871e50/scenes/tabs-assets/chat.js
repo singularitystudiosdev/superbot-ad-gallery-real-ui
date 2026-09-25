@@ -5,10 +5,10 @@
 // the tabs scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import gemini from './beats/gemini.js?v=6';
-import cursor from './beats/cursor.js?v=6';
-import doordash from './beats/doordash.js?v=6';
-import mp3 from './beats/mp3.js?v=6';
+import gemini from './beats/gemini.js?v=7';
+import cursor from './beats/cursor.js?v=7';
+import doordash from './beats/doordash.js?v=7';
+import mp3 from './beats/mp3.js?v=7';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;

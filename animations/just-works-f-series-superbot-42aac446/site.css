@@ -174,9 +174,15 @@
 
 /* ---------- 2. sticky filter bar ---------- */
 
+/* Sticky 1 design px above the scrollport's top edge, not at 0. The kit's browser viewport sits at a
+   fractional stage offset, so a sticky bar pinned at top:0 leaves the device pixel row that holds the
+   viewport's top edge unpainted by its own background: the page content behind it (the first row of the
+   listing photos) bleeds through as a 1 px line of colour across the top of the bar. Pinning at -1 px
+   puts the bar's box above the scrollport edge, so that row is covered. The clipped 1 px is bar padding,
+   and the rule has no effect while the bar is still in flow at the top of the page. */
 .site-f-series .ffx-filters {
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 6;
   display: flex;
   align-items: center;

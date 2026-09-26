@@ -1,0 +1,17 @@
+img CREDITS (island-world-every-model-superbot)
+
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+Added for island-world-every-model-superbot (2026-09-26):
+
+island/island-8s.mp4   an 8s, 1280w, no-audio trim (source 13.0-21.0s) of the three.js island by Dan Greenheck,
+                        https://x.com/dangreenheck/status/2102878170089169235
+island/poster.jpg      the trimmed clip's first frame (13.0s)
+island/art-1.jpg       still at 7.2s, 4:5 crop, sky and clouds ("Skybox")
+island/art-2.jpg       still at 13.6s, 4:5 crop, grass and dirt path
+island/art-3.jpg       still at 16.4s, 4:5 crop, village huts and palm
+island/art-4.jpg       still at 24.2s, 4:5 crop, beach market hut
+                        footage and stills from the video by Dan Greenheck (@dangreenheck),
+                        https://x.com/dangreenheck/status/2102878170089169235

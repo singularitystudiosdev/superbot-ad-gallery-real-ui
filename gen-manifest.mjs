@@ -86,6 +86,10 @@ const more = [
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],
   ['mmorpg-every-model-v5-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=5', 'I want to make a MMO RPG: Opus 5.5 plans, DeepSeek codes, Gemini art, GitHub', 'Ad spots'],
+  // build me an interactive 3D island world (2026-09-26): three routings of one page (?v=1..3), ends on the island clip.
+  ['island-world-every-model-v1-superbot-00836f02', 'island-world-every-model-superbot-00836f02/?v=1', '3D island world: DeepSeek plans, Opus terrain, Codex water, Gemini textures, GitHub', 'Ad spots'],
+  ['island-world-every-model-v2-superbot-00836f02', 'island-world-every-model-superbot-00836f02/?v=2', '3D island world: Opus plans, Gemini textures, Codex terrain, Opus water', 'Ad spots'],
+  ['island-world-every-model-v3-superbot-00836f02', 'island-world-every-model-superbot-00836f02/?v=3', '3D island world: Gemini textures first, DeepSeek layout, Opus controls, Codex water', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

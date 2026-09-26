@@ -152,6 +152,30 @@
     "thumb": "assets/shots/mmorpg-every-model-v5-superbot-d231c019.png"
   },
   {
+    "id": "island-world-every-model-v1-superbot-00836f02",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "3D island world: DeepSeek plans, Opus terrain, Codex water, Gemini textures, GitHub",
+    "src": "animations/island-world-every-model-superbot-00836f02/?v=1",
+    "thumb": "assets/shots/island-world-every-model-v1-superbot-00836f02.png"
+  },
+  {
+    "id": "island-world-every-model-v2-superbot-00836f02",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "3D island world: Opus plans, Gemini textures, Codex terrain, Opus water",
+    "src": "animations/island-world-every-model-superbot-00836f02/?v=2",
+    "thumb": "assets/shots/island-world-every-model-v2-superbot-00836f02.png"
+  },
+  {
+    "id": "island-world-every-model-v3-superbot-00836f02",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "3D island world: Gemini textures first, DeepSeek layout, Opus controls, Codex water",
+    "src": "animations/island-world-every-model-superbot-00836f02/?v=3",
+    "thumb": "assets/shots/island-world-every-model-v3-superbot-00836f02.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

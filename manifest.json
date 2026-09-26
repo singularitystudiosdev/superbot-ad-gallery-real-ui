@@ -176,6 +176,30 @@
     "thumb": "assets/shots/island-world-every-model-v3-superbot-00836f02.png"
   },
   {
+    "id": "fantasy90s-every-model-v1-superbot-042670d1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 90s fantasy 3D game: DeepSeek plans, Opus 5.5 codes, Gemini textures, Lyria music, GitHub",
+    "src": "animations/fantasy90s-every-model-superbot-042670d1/?v=1",
+    "thumb": "assets/shots/fantasy90s-every-model-v1-superbot-042670d1.png"
+  },
+  {
+    "id": "fantasy90s-every-model-v2-superbot-042670d1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 90s fantasy 3D game: Opus 5.5 plans, Gemini textures, Codex shaders, Opus world, Lyria music",
+    "src": "animations/fantasy90s-every-model-superbot-042670d1/?v=2",
+    "thumb": "assets/shots/fantasy90s-every-model-v2-superbot-042670d1.png"
+  },
+  {
+    "id": "fantasy90s-every-model-v3-superbot-042670d1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 90s fantasy 3D game: Gemini textures first, DeepSeek lore, Lyria music, Codex engine, GitHub",
+    "src": "animations/fantasy90s-every-model-superbot-042670d1/?v=3",
+    "thumb": "assets/shots/fantasy90s-every-model-v3-superbot-042670d1.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

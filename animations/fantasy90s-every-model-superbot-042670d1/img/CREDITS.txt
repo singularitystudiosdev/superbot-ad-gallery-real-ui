@@ -1,0 +1,21 @@
+img CREDITS (it-does-what-you-ask)
+
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
+
+Added for fantasy90s-every-model-superbot (2026-09-26), forked from mmorpg-every-model-superbot-d231c019:
+
+f90/duskhold-13s.mp4   an 8s, no-audio trim (source 13.0-21.0s) cropped to 1080x1350 at y=150 (HUD and buttons out of frame), scaled to 720x900,
+                        of the video by Denis Shiryaev (@literallydenis), "Opus 5.5 is insanely good with threejs",
+                        https://x.com/literallydenis/status/2103088660887318850
+f90/poster.jpg         the trimmed clip's first frame (source 13.0s)
+f90/art-1.jpg          still at 14.5s, cropped to the torch
+f90/art-2.jpg          still at 13.0s, cropped to the sword hand
+f90/art-3.jpg          still at 14.5s, cropped to the castle keep
+f90/art-4.jpg          still at 16.0s, cropped to the storm clouds
+                        footage and stills from the video by @literallydenis (link above)
+
+The game name "Duskhold", its repo, commits, file names and track titles are made up for the spot.

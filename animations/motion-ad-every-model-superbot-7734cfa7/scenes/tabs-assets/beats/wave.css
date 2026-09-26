@@ -1,0 +1,50 @@
+/* Wave beat (beats/wave.js): the Suno audio card — waveform, 8-bar/4-beat grid, red cue markers, playhead.
+   Nothing here transitions: every opacity/transform/left is written from t in render, so ?t= freezes a frame.
+   Every selector is scoped under #s-tabs .sbsite .hub and every class the beat owns is prefixed .wave- (the
+   generation chip reuses the shared .dd-chiprow/.ch-tool/.spin markup from chat.css). */
+
+/* the generation chip, styled like art.css .art-gen so it reads the same even before chat.css lands */
+#s-tabs .sbsite .hub .wave-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .wave-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .wave-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .wave-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .wave-gen .ch-tool-t { color: #ececec; }
+
+/* the audio card */
+#s-tabs .sbsite .hub .wave-card { box-sizing: border-box; width: 470px; max-width: 100%; margin-top: 2px; border-radius: 12px;
+  background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 12px 26px rgba(0, 0, 0, .42); overflow: hidden; opacity: 0; }
+#s-tabs .sbsite .hub .wave-hd { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 11px; border-bottom: 1px solid #212126; }
+#s-tabs .sbsite .hub .wave-ic { flex: none; width: 14px; height: 14px; fill: none; stroke: #8e8e93; stroke-width: 2; stroke-linecap: round; }
+#s-tabs .sbsite .hub .wave-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 600 11.5px/1 var(--font-mono, ui-monospace, monospace); color: #e5e5ea; }
+#s-tabs .sbsite .hub .wave-meta { flex: none; margin-left: auto; font: 10px/1 var(--font-mono, ui-monospace, monospace);
+  color: #8e8e93; font-variant-numeric: tabular-nums; }
+
+/* the lane: the waveform over the beat grid, with the cues and the playhead absolutely on top of both */
+#s-tabs .sbsite .hub .wave-lane { position: relative; margin: 10px 12px 0; padding-top: 14px; }
+#s-tabs .sbsite .hub .wave-wave { display: flex; align-items: center; gap: 1px; height: 64px; margin: 0 2.5%; }
+#s-tabs .sbsite .hub .wave-bar { flex: 1 1 0; min-width: 0; height: 100%; border-radius: 1.5px;
+  background: linear-gradient(180deg, #8aa8ff, #3f6ce0); transform: scaleY(0); transform-origin: 50% 50%; opacity: 0; }
+#s-tabs .sbsite .hub .wave-grid { display: flex; align-items: flex-start; gap: 2px; height: 12px; margin: 6px 2.5% 0; }
+#s-tabs .sbsite .hub .wave-tick { flex: 1 1 0; min-width: 0; height: 4px; border-radius: 1px; background: #2c2c31; }
+#s-tabs .sbsite .hub .wave-tick.on { height: 10px; background: #4d4d57; } /* a bar tick every 4 beats */
+#s-tabs .sbsite .hub .wave-cue { position: absolute; top: 14px; width: 1.5px; height: 64px; background: #ff453a; opacity: 0; }
+#s-tabs .sbsite .hub .wave-cue b { position: absolute; left: 50%; top: -12px; transform: translateX(-50%);
+  font: 600 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #ff6b62; white-space: nowrap; }
+#s-tabs .sbsite .hub .wave-cue.lit { background: #ff6b62; box-shadow: 0 0 8px rgba(255, 69, 58, .5); }
+#s-tabs .sbsite .hub .wave-head { position: absolute; top: 14px; width: 1.5px; height: 82px; background: #ececf1; opacity: 0;
+  box-shadow: 0 0 10px rgba(236, 236, 241, .45); }
+#s-tabs .sbsite .hub .wave-head::before { content: ""; position: absolute; left: 50%; top: -4px; width: 7px; height: 5px;
+  margin-left: -3.5px; border-radius: 1.5px; background: #ececf1; }
+
+/* the transport row under the lane */
+#s-tabs .sbsite .hub .wave-ft { display: flex; align-items: center; gap: 8px; height: 32px; margin-top: 2px; padding: 0 11px;
+  border-top: 1px solid #212126; background: #16161a; }
+#s-tabs .sbsite .hub .wave-play { flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 50%; background: #26262c; }
+#s-tabs .sbsite .hub .wave-play svg { width: 8px; height: 8px; fill: #e5e5ea; }
+#s-tabs .sbsite .hub .wave-t { font: 10px/1 var(--font-mono, ui-monospace, monospace); color: #8e8e93; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .wave-badge { flex: none; margin-left: auto; display: inline-flex; align-items: center; height: 18px;
+  padding: 0 8px; border-radius: 999px; background: #1f1f23; font: 600 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #b8b8bf; }

@@ -28,7 +28,7 @@ export default {
   build(k, x) {
     const T = k.T;
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
-    const gen = x.el(`<div class="dd-chiprow art-genrow"><span class="ch-tool art-gen">${x.tile('gemini')}<span class="ch-tool-t">Creating 4 images</span></span></div>`);
+    const gen = x.el(`<div class="dd-chiprow art-genrow"><span class="ch-tool art-gen">${x.tile(k.app)}<span class="ch-tool-t">Creating 4 images</span></span></div>`);
     const grid = x.el(`<div class="art-grid">${SHOTS.map(([src, name]) => `<div class="art-tile">
       <img class="art-shot" src="${x.img(src)}" alt="${x.esc(name)} style frame"/>
       <i class="art-band" aria-hidden="true"></i>

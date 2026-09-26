@@ -7,9 +7,15 @@
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import plan from './beats/plan.js?v=1';
-import code from './beats/code.js?v=1';
-import art from './beats/art.js?v=1';
-import play from './beats/play.js?v=1';
+import art from './beats/art.js?v=2';
+import play from './beats/play.js?v=2';
+import wave from './beats/wave.js?v=1';
+import diff from './beats/diff.js?v=1';
+import term from './beats/term.js?v=1';
+import preview from './beats/preview.js?v=1';
+import parallel from './beats/parallel.js?v=1';
+import assets from './beats/assets.js?v=1';
+import git from './beats/git.js?v=2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -27,6 +33,8 @@ const APPS = {
   opus: { name: 'Claude Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
   github: { name: 'GitHub', logo: brand('github-logo.svg'), sub: 'connected' },
   cursor: { name: 'Cursor', logo: brand('cursor-logo.svg'), sub: 'connected' },
+  suno: { name: 'Suno', logo: brand('suno-logo.svg'), sub: 'connected' },
+  nanobanana: { name: 'Nano Banana', logo: brand('banana-1f34c.svg'), sub: 'in superbot' },
   superbot: { name: 'Superbot', logo: null, sub: '' }, // drawn as its mark in CSS (SB_MARK, chat.css .sbm), not an image
 };
 
@@ -38,40 +46,49 @@ const CHIP = {
   gemini: 'Switching to Gemini',
   github: 'Connecting to GitHub',
   cursor: 'Switching to Cursor',
+  suno: 'Switching to Suno',
+  nanobanana: 'Switching to Nano Banana',
   superbot: 'Switched to Superbot',
 };
 
 // one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options
-// (opts.lead holds the routing chip back that many seconds, so each variant cuts on its own rhythm)
+// (opts.lead holds the routing chip back that many seconds and opts.hold lets the finished beat breathe that long
+// before the next request, so each variant cuts on its own rhythm)
 const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, CHIP[app]]] });
+// superbot answering itself after routing to two models at once: both chips land, then one card runs both lanes
+const both = (a, b, mod, opts = {}) => ({ app: 'superbot', mod, opts: { lanes: opts.lanes, ...opts }, chips: [[a, CHIP[a]], [b, `Adding ${APPS[b].name} in parallel`]] });
 // only the first request is asked; the rest are superbot carrying the build forward on its own
 const variant = (steps) => steps.map((s, i) => (i === 0 ? { ...s, ask: ASK } : s));
 
-// the three published routings, one ad each (?v=1..3): every one ends on the same finished 15-second spot, but each
-// hands the work to its own set of models, in its own order, with its own number of switches and its own cut rhythm
+// the three published routings, one ad each (?v=1..3). Every one builds the same 15-second spot and ends on it
+// playing, but each is its own shape: a different opener, a different number of switches, different artifacts
+// (waveform, diff, terminal, image grid, parallel lanes, asset audit, live preview, repo push) and its own pace.
 export const VARIANTS = {
-  // 3 switches, fast cuts: Opus writes the shot list, Cursor animates it, superbot renders
+  // 3 switches, slow and wide: Suno lays the music bed first, Cursor snaps the cuts to its beat grid, superbot
+  // renders in a terminal and plays the spot
   '1': variant([
-    step('opus', plan, { kind: 'script' }),
-    step('cursor', code, { set: 'scene' }),
+    step('suno', wave, { kind: 'bed', lead: 0.5, hold: 0.6 }),
+    step('cursor', diff, { set: 'sync', lead: 0.7, hold: 0.5 }),
+    step('superbot', play, { intro: 'term', lead: 0.6 }),
+  ]),
+  // 5 switches, fast: Nano Banana paints the style frames, Codex and Suno work side by side and trade the beat grid
+  // and the cut list, DeepSeek audits the assets and bounces one fix back, superbot ships it
+  '2': variant([
+    step('nanobanana', art),
+    both('codex', 'suno', parallel),
+    step('deepseek', assets),
     step('superbot', play),
   ]),
-  // 5 switches, unhurried cuts: style frames first, then the script, the scene, the beat timing, the render
-  '2': variant([
-    step('gemini', art, { lead: 0.35 }),
-    step('deepseek', plan, { kind: 'script', lead: 0.5 }),
-    step('codex', code, { set: 'scene', lead: 0.45 }),
-    step('opus', code, { set: 'timing', lead: 0.5 }),
-    step('superbot', play, { lead: 0.4 }),
-  ]),
-  // 6 switches, uneven cuts: Codex scripts, DeepSeek scores, Gemini frames, Opus animates, Cursor times, Opus renders
+  // 7 switches, uneven: Codex writes the animation with a live preview first, then the script, the hits, a fix, the
+  // repo, a terminal render and the finished spot, each handed to a different model on its own beat
   '3': variant([
-    step('codex', plan, { kind: 'script' }),
-    step('deepseek', plan, { kind: 'sound', lead: 0.6 }),
-    step('gemini', art),
-    step('opus', code, { set: 'scene', lead: 0.3 }),
-    step('cursor', code, { set: 'timing' }),
-    step('opus', play, { lead: 0.7 }),
+    step('codex', preview, { lead: 0.2 }),
+    step('deepseek', plan, { kind: 'script', lead: 0.8 }),
+    step('suno', wave, { kind: 'sfx', lead: 0.1 }),
+    step('cursor', diff, { set: 'fix', lead: 0.5, hold: 0.3 }),
+    step('github', git),
+    step('opus', term, { lead: 0.9 }),
+    step('superbot', play, { lead: 0.2 }),
   ]),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
@@ -95,8 +112,8 @@ function timeBeats(asks) {
     k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + 0.65 }; at = c.done + 0.12; return c; });
     k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
-    k.T = a.mod.times(k.reply);
-    s = k.T.end;
+    k.T = a.mod.times(k.reply, a.opts || {});
+    s = k.T.end + ((a.opts && a.opts.hold) || 0);
     return { k };
   });
 }

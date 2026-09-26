@@ -1,0 +1,52 @@
+/* Preview beat (beats/preview.js): the editor with the live preview beside it. Nothing here transitions: opacity,
+   width and left are written from t in render, so ?t= freezes a frame. Every selector is scoped under
+   #s-tabs .sbsite .hub and every class the beat owns is prefixed .pv-. */
+
+/* the card: 560px, split into the editor (left) and the preview column (right) */
+#s-tabs .sbsite .hub .pv-card { display: flex; align-items: stretch; box-sizing: border-box; width: 560px; max-width: 100%;
+  margin-top: 2px; border-radius: 10px; overflow: hidden; background: #0d0d10;
+  box-shadow: 0 0 0 1px #26262b, 0 14px 30px rgba(0, 0, 0, .45); opacity: 0; }
+
+/* the editor: the open file's tab, the gutter, the source typing in */
+#s-tabs .sbsite .hub .pv-ed { flex: 1; min-width: 0; display: flex; flex-direction: column; border-right: 1px solid #202027; }
+#s-tabs .sbsite .hub .pv-tabs { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 9px;
+  background: #141418; border-bottom: 1px solid #202027; font: 10px/1 var(--font-mono, ui-monospace, monospace); }
+#s-tabs .sbsite .hub .pv-tab { display: inline-flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden;
+  white-space: nowrap; text-overflow: ellipsis; font-weight: 600; color: #cfcfd6; }
+#s-tabs .sbsite .hub .pv-tab::before { content: ""; flex: none; width: 7px; height: 9px; border-radius: 1.5px; background: #5b8dff; }
+#s-tabs .sbsite .hub .pv-live { flex: none; margin-left: auto; padding: 0 6px; border-radius: 999px; background: #0f2419;
+  color: #3ddc84; font: 700 8.5px/14px var(--font-mono, ui-monospace, monospace); letter-spacing: .08em; }
+#s-tabs .sbsite .hub .pv-ed-bd { display: flex; gap: 9px; padding: 8px 9px 10px; }
+#s-tabs .sbsite .hub .pv-gut { display: grid; flex: none; font: 9.5px/14px var(--font-mono, ui-monospace, monospace); color: #45454d; text-align: right; }
+#s-tabs .sbsite .hub .pv-gut i { font-style: normal; height: 14px; }
+#s-tabs .sbsite .hub .pv-src { flex: 1; min-width: 0; margin: 0; overflow: hidden;
+  font: 9.5px/14px var(--font-mono, ui-monospace, monospace); white-space: pre; color: #d7d7de; }
+#s-tabs .sbsite .hub .pv-ln { height: 14px; white-space: pre; }
+#s-tabs .sbsite .hub .pv-caret { display: inline-block; width: 1.5px; height: 11px; vertical-align: -1px; background: #d7d7de; opacity: 0; }
+
+/* the syntax palette: the same one code.css uses, on this beat's own class names */
+#s-tabs .sbsite .hub .pv-k { color: #c58af9; }
+#s-tabs .sbsite .hub .pv-t { color: #7fbcff; }
+#s-tabs .sbsite .hub .pv-f { color: #82aaff; }
+#s-tabs .sbsite .hub .pv-s { color: #9ccc65; }
+#s-tabs .sbsite .hub .pv-n { color: #f6a06a; }
+#s-tabs .sbsite .hub .pv-c { color: #5f5f68; font-style: italic; }
+#s-tabs .sbsite .hub .pv-p { color: #8b8b93; }
+#s-tabs .sbsite .hub .pv-x { color: #d7d7de; }
+
+/* the preview column: a 16:9 pane running the file, with its label, timecode and scrub bar */
+#s-tabs .sbsite .hub .pv-side { flex: none; width: 214px; padding: 9px; display: flex; flex-direction: column; }
+#s-tabs .sbsite .hub .pv-prev { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 7px; overflow: hidden;
+  background: #000; box-shadow: inset 0 0 0 1px #232327; }
+#s-tabs .sbsite .hub .pv-frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+#s-tabs .sbsite .hub .pv-badge { position: absolute; left: 6px; top: 6px; display: inline-flex; align-items: center; height: 16px;
+  padding: 0 7px; border-radius: 999px; background: rgba(12, 12, 14, .78); color: #e5e5ea;
+  font: 600 9px/1 var(--font-mono, ui-monospace, monospace); white-space: nowrap; }
+#s-tabs .sbsite .hub .pv-tc { position: absolute; right: 6px; bottom: 14px; display: inline-flex; align-items: baseline; gap: 4px;
+  font: 600 9px/1 var(--font-mono, ui-monospace, monospace); color: #e5e5ea; text-shadow: 0 1px 2px rgba(0, 0, 0, .7); }
+#s-tabs .sbsite .hub .pv-tcn { font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .pv-tct { font-style: normal; font-weight: 500; color: #9a9aa2; }
+#s-tabs .sbsite .hub .pv-scrub { position: absolute; left: 6px; right: 6px; bottom: 6px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .25); }
+#s-tabs .sbsite .hub .pv-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 2px; background: #5b8dff; }
+#s-tabs .sbsite .hub .pv-knob { position: absolute; top: 50%; left: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .5); }

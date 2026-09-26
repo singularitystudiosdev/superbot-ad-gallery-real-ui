@@ -64,3 +64,7 @@ mmorpg-every-model-superbot (fetched 2026-09-26):
   github-logo.svg           GitHub mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg
                             (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of GitHub, Inc.
                             Both are used nominatively, to name the model/app superbot routes to.
+
+motion-ad-every-model-superbot (fetched 2026-09-26):
+suno-logo.svg: Suno mark from Simple Icons (CC0 1.0) via api.iconify.design/simple-icons/suno.svg, Suno trademark, used nominatively.
+banana-1f34c.svg: Twemoji U+1F34C banana (CC-BY 4.0, Copyright Twitter, Inc and other contributors) via api.iconify.design/twemoji/banana.svg, standing in for Google's Nano Banana (Gemini 2.5 Flash Image), which Google brands with the banana emoji.

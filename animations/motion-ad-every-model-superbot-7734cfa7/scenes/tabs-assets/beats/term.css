@@ -1,0 +1,37 @@
+/* Term beat (beats/term.js): the local render, in a terminal window. Nothing here transitions: opacity and
+   transform are written from t in render, so ?t= freezes a frame. Every selector is scoped under
+   #s-tabs .sbsite .hub and every class the beat owns is prefixed .term-. */
+
+/* the window: a 480px terminal card, dark like the rest of the thread */
+#s-tabs .sbsite .hub .term-win { box-sizing: border-box; width: 480px; max-width: 100%; margin-top: 2px; border-radius: 10px;
+  overflow: hidden; background: #0d0d10; box-shadow: inset 0 0 0 1px #2a2a2e, 0 14px 30px rgba(0, 0, 0, .45);
+  font: 11px/16px var(--font-mono, ui-monospace, monospace); opacity: 0; }
+#s-tabs .sbsite .hub .term-win.term-done { box-shadow: inset 0 0 0 1px #24503a, 0 14px 30px rgba(0, 0, 0, .45); }
+
+/* the title bar: three traffic lights, "zsh  motion-ad" centered */
+#s-tabs .sbsite .hub .term-top { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 10px;
+  background: #141418; border-bottom: 1px solid #202027; }
+#s-tabs .sbsite .hub .term-top::after { content: ""; flex: none; width: 40px; }
+#s-tabs .sbsite .hub .term-dots { flex: none; display: inline-flex; gap: 5px; }
+#s-tabs .sbsite .hub .term-dots i { width: 8px; height: 8px; border-radius: 50%; }
+#s-tabs .sbsite .hub .term-dots i:nth-child(1) { background: #ff5f57; }
+#s-tabs .sbsite .hub .term-dots i:nth-child(2) { background: #febc2e; }
+#s-tabs .sbsite .hub .term-dots i:nth-child(3) { background: #28c840; }
+#s-tabs .sbsite .hub .term-title { flex: 1; min-width: 0; text-align: center; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; font-weight: 600; color: #cfcfd6; }
+
+/* the prompt line: the $, the command typing in, and a solid block caret */
+#s-tabs .sbsite .hub .term-body { padding: 9px 10px 11px; }
+#s-tabs .sbsite .hub .term-cmd { display: flex; align-items: baseline; gap: 6px; white-space: pre; color: #e5e5ea; }
+#s-tabs .sbsite .hub .term-ps1 { flex: none; color: #3ddc84; font-weight: 600; }
+#s-tabs .sbsite .hub .term-ctyped { white-space: pre; color: #e5e5ea; }
+#s-tabs .sbsite .hub .term-caret { display: inline-block; flex: none; width: 6px; height: 12px; background: #e5e5ea; opacity: 0; }
+
+/* the render's output: one dim line at a time, the last one green */
+#s-tabs .sbsite .hub .term-out { display: grid; gap: 2px; margin-top: 7px; color: #9a9aa2; }
+#s-tabs .sbsite .hub .term-line { display: flex; align-items: baseline; white-space: pre; opacity: 0; }
+#s-tabs .sbsite .hub .term-prog { margin-left: 7px; color: #7fbcff; }
+#s-tabs .sbsite .hub .term-count { margin-left: 8px; color: #8e8e93; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .term-line.term-fin { color: #3ddc84; font-weight: 600; }
+#s-tabs .sbsite .hub .term-fin .term-meta { margin-left: 8px; color: #2f8f57; font-weight: 600; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .term-win.term-done .term-count { color: #3ddc84; }

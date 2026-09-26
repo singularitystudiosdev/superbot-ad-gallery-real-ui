@@ -14,7 +14,7 @@ const dip = document.getElementById('dip');
 
 // ---------- the sequence (CONTRACT.txt) ----------
 // every-model-one-chat: the hub cropped to its thread, opening on the empty state, then the three-request chat
-// (scenes/tabs-assets/chat.js: Gemini, DeepSeek V4 Flash, DoorDash; ?route= picks the burger routing) and the end card
+// (scenes/tabs-assets/chat.js: Gemini, DeepSeek V4 Flash, DoorDash; ?route= picks the burger routing, one ad each) and the end card
 const SEQUENCE = [
   ['scene', 'tabs'],
   ['end', 'end'],
@@ -188,7 +188,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=10`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=11`)).default;
+    const m = (await import(`./scenes/${id}.js?v=12`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {
@@ -286,8 +286,7 @@ let paused = freeze, offset = hasT ? parseFloat(q.get('t')) || 0 : 0, t0 = perfo
 const clockNow = () => (paused ? offset : offset + (performance.now() - t0) / 1000);
 function setTime(t) { offset = t; t0 = performance.now(); }
 function restart() { setTime(0); paused = false; }
-function seek(t) { setTime(t); paused = false; lastT = NaN; }
-window.__V7 = { CYCLE, SPEED: 1, restart, seek, T };
+window.__V7 = { CYCLE, SPEED: 1, restart, T };
 addEventListener('keydown', (e) => {
   if (e.key === ' ') { e.preventDefault(); if (paused) { paused = false; t0 = performance.now(); } else { offset = clockNow(); paused = true; } }
   else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { offset = Math.max(0, clockNow() + (e.key === 'ArrowRight' ? 0.25 : -0.25)); paused = true; }

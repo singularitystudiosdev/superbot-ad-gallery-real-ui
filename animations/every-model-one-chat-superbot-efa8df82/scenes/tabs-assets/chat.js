@@ -1,8 +1,7 @@
 // The three-request chat, one model per request. Each ask is typed into the composer and sent, superbot routes it
 // (its routing chips and the composer's platform chip follow the model), and the routed model answers with its own
-// beat (./beats/*.js). The burger ask has three routings (ROUTES); all three are built, one shows. ?route= picks the
-// first, and the page's variant selector (route-pick.js) swaps it in place through a 'sb-route' event. The thread is
-// bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's
+// beat (./beats/*.js). The burger ask has three routings (ROUTES), one per published ad: ?route= picks it (the
+// gallery lists each as its own spot). The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
@@ -26,9 +25,9 @@ const APPS = {
 
 // the burger ask's routing variants: which chips land, in order, and who answers
 export const ROUTES = {
-  doordash: { label: 'Connecting to DoorDash', chips: [['doordash', 'Connecting to DoorDash']], who: 'doordash' },
-  superbot: { label: 'Switched to Superbot', chips: [['superbot', 'Switched to Superbot']], who: 'superbot' },
-  combo: { label: 'Superbot + DoorDash', chips: [['superbot', 'Switched to Superbot'], ['doordash', 'Connected to DoorDash']], who: 'doordash' },
+  doordash: { chips: [['doordash', 'Connecting to DoorDash']], who: 'doordash' },
+  superbot: { chips: [['superbot', 'Switched to Superbot']], who: 'superbot' },
+  combo: { chips: [['superbot', 'Switched to Superbot'], ['doordash', 'Connected to DoorDash']], who: 'doordash' },
 };
 export const ROUTE = (() => { const r = new URLSearchParams(location.search).get('route'); return ROUTES[r] ? r : 'doordash'; })();
 
@@ -61,11 +60,8 @@ function timeBeats(asks) {
     return { k };
   });
 }
-const PLANS = Object.fromEntries(Object.keys(ROUTES).map((r) => [r, timeBeats([...BASE, burger(r)])]));
-export const BEATS = PLANS[ROUTE];
-export const BURGER_AT = BEATS[BASE.length].k.s; // the burger ask starts typing (the same in every routing)
-// the scene is as long as the longest routing, so a swap never moves the end card
-export const CHAT_END = Math.max(...Object.values(PLANS).map((p) => p[p.length - 1].k.T.end)) + 0.3;
+export const BEATS = timeBeats([...BASE, burger(ROUTE)]);
+export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.3;
 
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -101,16 +97,11 @@ export function mountChat(hub) {
     const main = r.querySelector('.m-main');
     const inst = k.mod.build(k, ctx);
     inst.nodes.forEach((n) => main.appendChild(n));
-    return { k, u, sws, r, who: main.firstElementChild, inst, nodes: [u, ...sws.map((s) => s.w), r].filter(Boolean) };
+    return { k, u, sws, r, who: main.firstElementChild, inst };
   };
-  const base = PLANS[ROUTE].slice(0, BASE.length).map(build);
-  // one copy of the burger exchange per routing; only the active one is in the thread
-  const routes = Object.fromEntries(Object.entries(PLANS).map(([name, plan]) => {
-    const beats = [...base, build(plan[BASE.length])];
-    // scroll marks: after each time, the feed's fold glides to that element's bottom
-    const scroll = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
-    return [name, { beats, scroll, own: beats[BASE.length] }];
-  }));
+  const beats = BEATS.map(build);
+  // scroll marks: after each time, the feed's fold glides to that element's bottom
+  const scroll = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
 
   // the composer's platform chip names the model, then follows the routed app
   const plat = hub.querySelector('.rc-plat');
@@ -125,20 +116,10 @@ export function mountChat(hub) {
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
 
   const ph = hub.querySelector('.rc-ph');
-  const c = {
-    hub, pointer, feed, inner, routes, route: null, beats: null, scroll: null, plat, pIcon, pImg, pMark, pLabel,
+  return {
+    hub, pointer, feed, inner, beats, scroll, plat, pIcon, pImg, pMark, pLabel,
     ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'codex',
   };
-  setRoute(c, ROUTE);
-  addEventListener('sb-route', (e) => { if (ROUTES[e.detail]) setRoute(c, e.detail); });
-  return c;
-}
-
-function setRoute(c, name) {
-  c.route = name;
-  ({ beats: c.beats, scroll: c.scroll } = c.routes[name]);
-  for (const [r, { own }] of Object.entries(c.routes)) own.nodes.forEach((n) => { n.style.display = r === name ? '' : 'none'; });
-  c.lastApp = null; // repaint the platform chip
 }
 
 function appear(n, t, a, dy = 10) {

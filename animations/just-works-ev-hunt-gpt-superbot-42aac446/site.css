@@ -1,0 +1,861 @@
+/* site.css - superbot.app/p/model-y-hunt, "Car Hunt".
+   The page Superbot hands back: a read-only hunt across Tesla's new and used inventory, Carvana, CarMax and
+   a saved CarGurus search plus the Tesla account, 1,561 listings filtered to 13 Model Y Long Range matches
+   under $40,000 within 200 miles of 78704, read in the Chrome beat. Two states come from the kit and nowhere
+   else: .is-hover (the filter counters, the drops tile, the best buy row and the difference-to-pay line) and
+   .is-active on the Your Tesla tab. The tab's .is-active swaps the VIN log panel for the Tesla account panel
+   through :has() + sibling rules below, so no JS runs on the click. site.js render(p) sets .is-s1 .. .is-s6
+   (the five sources and the ranking step landing), .is-m1/.is-m2 (the filter) plus the counters, the filter
+   bar, the status examples, the eight rows, the price history bars and the account figures; every frame is a
+   pure function of the plan. No CSS animations, no transitions: the kit draws every move. Semantic colours:
+   mint the best buy and the money saved, amber a logged drop, blue a listing checked, violet the Tesla
+   account, slate a listing set aside. */
+
+.site-ev-hunt {
+  --ev-bg: #07090e;
+  --ev-bg2: #0b0f16;
+  --ev-panel: #101623;
+  --ev-panel2: #18202f;
+  --ev-line: rgba(214, 226, 245, 0.08);
+  --ev-line2: rgba(214, 226, 245, 0.16);
+  --ev-ink: #eef2f8;
+  --ev-dim: #9aa6ba;
+  --ev-dim2: #667286;
+  --ev-mint: #6ff2b0;
+  --ev-mint-soft: rgba(111, 242, 176, 0.13);
+  --ev-amber: #ffb547;
+  --ev-amber-soft: rgba(255, 181, 71, 0.14);
+  --ev-blue: #5eb4ff;
+  --ev-blue-soft: rgba(94, 180, 255, 0.14);
+  --ev-violet: #b69cff;
+  --ev-violet-soft: rgba(182, 156, 255, 0.15);
+
+  container: ev / inline-size;
+  width: 100%;
+  min-width: 0;
+  background: var(--ev-bg);
+  color: var(--ev-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-ev-hunt *,
+.site-ev-hunt *::before,
+.site-ev-hunt *::after { box-sizing: border-box; }
+
+.site-ev-hunt p,
+.site-ev-hunt h1,
+.site-ev-hunt h2,
+.site-ev-hunt h3,
+.site-ev-hunt ul,
+.site-ev-hunt ol,
+.site-ev-hunt li { margin: 0; padding: 0; }
+
+.site-ev-hunt ul,
+.site-ev-hunt ol { list-style: none; }
+.site-ev-hunt img { display: block; max-width: 100%; }
+.site-ev-hunt b,
+.site-ev-hunt em,
+.site-ev-hunt i { font-style: normal; }
+.site-ev-hunt b { font-weight: 650; }
+.site-ev-hunt small { font-size: inherit; }
+.site-ev-hunt s { text-decoration: line-through; }
+
+.site-ev-hunt .ev-ico { width: 14px; height: 14px; flex: none; }
+
+.site-ev-hunt .ev-clock,
+.site-ev-hunt .ev-synccount,
+.site-ev-hunt .ev-mk b,
+.site-ev-hunt .ev-stats b,
+.site-ev-hunt .ev-huntfacts b,
+.site-ev-hunt .ev-budgetrow b,
+.site-ev-hunt .ev-acc-v b,
+.site-ev-hunt .ev-flagn,
+.site-ev-hunt .ev-flagex b,
+.site-ev-hunt .ev-flagex span,
+.site-ev-hunt .ev-miles,
+.site-ev-hunt .ev-price b,
+.site-ev-hunt .ev-price s,
+.site-ev-hunt .ev-days,
+.site-ev-hunt .ev-lprice,
+.site-ev-hunt .ev-ldelta,
+.site-ev-hunt .ev-tv b,
+.site-ev-hunt .ev-prow b,
+.site-ev-hunt .ev-logfoot b { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it) ---------- */
+.site-ev-hunt .ev-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--ev-bg);
+  border-bottom: 1px solid var(--ev-line);
+}
+.site-ev-hunt .ev-topin {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding: 0 28px;
+}
+.site-ev-hunt .ev-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
+.site-ev-hunt .ev-brandico { width: 22px; height: 22px; border-radius: 6px; }
+.site-ev-hunt .ev-by { color: var(--ev-dim2); font-size: 12px; }
+
+.site-ev-hunt .ev-tabs { display: flex; gap: 4px; margin-left: 12px; }
+.site-ev-hunt .ev-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: var(--ev-dim);
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-ev-hunt .ev-tab i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--ev-panel2);
+  color: var(--ev-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+.site-ev-hunt .ev-tab--1,
+.site-ev-hunt .ev-top:has(.ev-tab--2.is-active) .ev-tab--2 {
+  background: var(--ev-mint-soft);
+  color: #b7f6d6;
+  box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32);
+}
+.site-ev-hunt .ev-tab--1 i,
+.site-ev-hunt .ev-top:has(.ev-tab--2.is-active) .ev-tab--2 i { background: var(--ev-mint); color: #05231a; }
+.site-ev-hunt .ev-top:has(.ev-tab--2.is-active) .ev-tab--1 {
+  background: none;
+  color: var(--ev-dim);
+  box-shadow: none;
+}
+.site-ev-hunt .ev-top:has(.ev-tab--2.is-active) .ev-tab--1 i { background: var(--ev-panel2); color: var(--ev-dim); }
+.site-ev-hunt .ev-tab--2.is-hover { color: var(--ev-ink); background: var(--ev-panel2); }
+
+.site-ev-hunt .ev-status { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-ev-hunt .ev-logs,
+.site-ev-hunt .ev-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--ev-line2);
+  color: var(--ev-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.site-ev-hunt .ev-logs img { width: 16px; height: 16px; border-radius: 4px; }
+.site-ev-hunt .ev-logs img + img { margin-left: -4px; box-shadow: 0 0 0 1.5px var(--ev-bg); }
+.site-ev-hunt .ev-logs .ev-ico { width: 12px; height: 12px; margin-left: 2px; }
+.site-ev-hunt .ev-logs { flex: none; }
+.site-ev-hunt .ev-live { flex: none; color: var(--ev-ink); font-weight: 560; min-width: 116px; }
+.site-ev-hunt .ev-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ev-mint);
+  box-shadow: 0 0 0 3px var(--ev-mint-soft);
+}
+.site-ev-hunt .ev-syncbar { height: 2px; }
+.site-ev-hunt .ev-syncfill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #41bdf5, var(--ev-blue), var(--ev-mint));
+}
+
+/* ---------- hero ---------- */
+.site-ev-hunt .ev-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ev-line);
+}
+/* the Model Y photo: the scrim darkens the left so the text column holds steady over it */
+.site-ev-hunt .ev-herobg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+  opacity: 0.8;
+}
+.site-ev-hunt .ev-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 9, 14, 0.97) 0%, rgba(7, 9, 14, 0.9) 48%, rgba(7, 9, 14, 0.42) 100%),
+    linear-gradient(0deg, rgba(7, 9, 14, 1) 0%, rgba(7, 9, 14, 0) 40%);
+}
+.site-ev-hunt .ev-heroin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 336px);
+  gap: 34px;
+  align-items: start;
+  padding: 34px 28px 30px;
+}
+.site-ev-hunt .ev-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ev-mint);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.site-ev-hunt .ev-hero h1 {
+  margin-top: 12px;
+  max-width: 660px;
+  font-size: 32px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.site-ev-hunt .ev-dek { margin-top: 12px; max-width: 600px; color: var(--ev-dim); font-size: 13.5px; line-height: 1.55; text-wrap: pretty; }
+
+/* the sync card: five sources tick in, the ranking step closes it, then 1,561 listings narrow to 13 matches */
+.site-ev-hunt .ev-sync {
+  margin-top: 18px;
+  max-width: 660px;
+  padding: 13px 15px 12px;
+  border-radius: 14px;
+  background: rgba(16, 22, 35, 0.9);
+  border: 1px solid var(--ev-line2);
+}
+.site-ev-hunt .ev-synchead { position: relative; height: 20px; }
+.site-ev-hunt .ev-syncnow,
+.site-ev-hunt .ev-stamp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-ev-hunt .ev-syncnow { color: var(--ev-ink); }
+.site-ev-hunt .ev-syncnow .ev-ico { color: var(--ev-blue); }
+.site-ev-hunt .ev-synccount { margin-left: auto; color: var(--ev-dim); font-weight: 600; }
+.site-ev-hunt .ev-stamp { color: var(--ev-mint); opacity: 0; overflow: hidden; }
+.site-ev-hunt .ev-hero.is-s6 .ev-syncnow { opacity: 0; }
+.site-ev-hunt .ev-hero.is-s6 .ev-stamp { opacity: 1; }
+
+.site-ev-hunt .ev-ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-top: 11px; }
+.site-ev-hunt .ev-tick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 9px;
+  background: var(--ev-bg2);
+  border: 1px solid var(--ev-line);
+  color: var(--ev-dim2);
+  font-size: 12px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+/* the source marks are wordmarks on their own tile: 24 px is the floor at which they still read, and every
+   place one appears it is printed beside its source's name (see site.js), never as the only label */
+.site-ev-hunt .ev-tick img { width: 24px; height: 24px; border-radius: 6px; opacity: 0.45; flex: none; }
+.site-ev-hunt .ev-tickico {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--ev-panel2);
+  opacity: 0.45;
+}
+.site-ev-hunt .ev-tickico .ev-ico { width: 14px; height: 14px; }
+.site-ev-hunt .ev-tick span { overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-tick > b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.site-ev-hunt .ev-tickok {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ev-panel2);
+  color: transparent;
+}
+.site-ev-hunt .ev-tickok .ev-ico { width: 11px; height: 11px; stroke-width: 3; }
+.site-ev-hunt .ev-hero.is-s1 .ev-tick--s1,
+.site-ev-hunt .ev-hero.is-s2 .ev-tick--s2,
+.site-ev-hunt .ev-hero.is-s3 .ev-tick--s3,
+.site-ev-hunt .ev-hero.is-s4 .ev-tick--s4,
+.site-ev-hunt .ev-hero.is-s5 .ev-tick--s5,
+.site-ev-hunt .ev-hero.is-s6 .ev-tick--s6 {
+  color: var(--ev-ink);
+  border-color: rgba(111, 242, 176, 0.3);
+  background: var(--ev-mint-soft);
+}
+/* the sixth tick (the shortlist being ranked) takes the whole row under the five sources */
+.site-ev-hunt .ev-tick--final { grid-column: 1 / -1; }
+.site-ev-hunt .ev-hero.is-s1 .ev-tick--s1 img,
+.site-ev-hunt .ev-hero.is-s2 .ev-tick--s2 img,
+.site-ev-hunt .ev-hero.is-s3 .ev-tick--s3 img,
+.site-ev-hunt .ev-hero.is-s4 .ev-tick--s4 img,
+.site-ev-hunt .ev-hero.is-s5 .ev-tick--s5 img,
+.site-ev-hunt .ev-hero.is-s6 .ev-tick--s6 .ev-tickico { opacity: 1; }
+.site-ev-hunt .ev-hero.is-s6 .ev-tick--s6 .ev-tickico { background: var(--ev-mint); color: #05231a; }
+.site-ev-hunt .ev-hero.is-s1 .ev-tick--s1 .ev-tickok,
+.site-ev-hunt .ev-hero.is-s2 .ev-tick--s2 .ev-tickok,
+.site-ev-hunt .ev-hero.is-s3 .ev-tick--s3 .ev-tickok,
+.site-ev-hunt .ev-hero.is-s4 .ev-tick--s4 .ev-tickok,
+.site-ev-hunt .ev-hero.is-s5 .ev-tick--s5 .ev-tickok,
+.site-ev-hunt .ev-hero.is-s6 .ev-tick--s6 .ev-tickok { background: var(--ev-mint); color: #05231a; }
+
+/* the filter: the amber band of set-aside listings dims, the mint sliver of matches takes its place */
+.site-ev-hunt .ev-merge { margin-top: 11px; opacity: 0.45; border-radius: 10px; }
+/* the cursor rests on the filter counters while the listings narrow (ad.js hover, engine toggles is-hover) */
+.site-ev-hunt .ev-merge.is-hover,
+.site-ev-hunt .ev-merge:has(.ev-mbar.is-hover) { background: rgba(111, 242, 176, 0.06); box-shadow: 0 0 0 7px rgba(111, 242, 176, 0.06); }
+.site-ev-hunt .ev-merge.is-hover .ev-mk--match b,
+.site-ev-hunt .ev-merge:has(.ev-mbar.is-hover) .ev-mk--match b { color: var(--ev-mint); }
+.site-ev-hunt .ev-hero.is-m1 .ev-merge { opacity: 1; }
+.site-ev-hunt .ev-mbar {
+  display: flex;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--ev-panel2);
+  overflow: hidden;
+}
+.site-ev-hunt .ev-mun { display: block; min-width: 3px; width: 0; background: linear-gradient(90deg, #37d492, var(--ev-mint)); }
+.site-ev-hunt .ev-mdup {
+  display: block;
+  width: 100%;
+  background: repeating-linear-gradient(-45deg, rgba(255, 181, 71, 0.85) 0 4px, rgba(255, 181, 71, 0.32) 4px 8px);
+}
+.site-ev-hunt .ev-mbar.is-filtered .ev-mdup { opacity: 0.3; }
+.site-ev-hunt .ev-mbar.is-filtered { box-shadow: 0 0 0 1px rgba(111, 242, 176, 0.4); }
+.site-ev-hunt .ev-mrow { display: flex; gap: 16px; margin-top: 9px; color: var(--ev-dim); font-size: 11.5px; }
+.site-ev-hunt .ev-mk { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.site-ev-hunt .ev-mk b { font-size: 15px; color: var(--ev-ink); }
+.site-ev-hunt .ev-mk--cut b { color: var(--ev-dim2); }
+.site-ev-hunt .ev-mk--match { margin-left: auto; }
+.site-ev-hunt .ev-mk--match b { color: var(--ev-mint); }
+
+.site-ev-hunt .ev-stats { display: flex; gap: 9px; margin-top: 14px; max-width: 660px; }
+.site-ev-hunt .ev-stats li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 11px;
+  background: rgba(16, 22, 35, 0.78);
+  border: 1px solid var(--ev-line);
+}
+.site-ev-hunt .ev-stats b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-ev-hunt .ev-stats span { display: block; color: var(--ev-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-stat--iv b { color: var(--ev-amber); }
+.site-ev-hunt .ev-stat--ok b { color: var(--ev-mint); }
+
+/* the hunt card on the right of the hero */
+.site-ev-hunt .ev-hunt {
+  padding: 16px 17px 15px;
+  border-radius: 16px;
+  background: rgba(16, 22, 35, 0.9);
+  border: 1px solid var(--ev-line2);
+}
+.site-ev-hunt .ev-huntk {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ev-dim);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.site-ev-hunt .ev-huntk .ev-ico { width: 12px; height: 12px; color: var(--ev-mint); }
+.site-ev-hunt .ev-hunt h2 { margin-top: 7px; font-size: 19px; line-height: 1.2; letter-spacing: -0.02em; }
+.site-ev-hunt .ev-huntday { display: flex; align-items: center; gap: 6px; margin-top: 5px; color: var(--ev-dim); font-size: 12px; }
+.site-ev-hunt .ev-huntday .ev-ico { width: 12px; height: 12px; }
+.site-ev-hunt .ev-huntfacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin-top: 13px; }
+.site-ev-hunt .ev-huntfacts li {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--ev-bg2);
+  border: 1px solid var(--ev-line);
+}
+.site-ev-hunt .ev-huntfacts small { display: block; color: var(--ev-dim2); font-size: 11px; }
+.site-ev-hunt .ev-huntfacts b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-ev-hunt .ev-budget { margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--ev-line); }
+.site-ev-hunt .ev-budgeth { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+.site-ev-hunt .ev-budgeth .ev-ico { color: var(--ev-mint); }
+.site-ev-hunt .ev-budgetrow { display: flex; gap: 12px; margin-top: 9px; color: var(--ev-dim); font-size: 11px; }
+.site-ev-hunt .ev-budgetrow span { display: flex; flex-direction: column; min-width: 0; }
+.site-ev-hunt .ev-budgetrow b { font-size: 16px; color: var(--ev-mint); letter-spacing: -0.02em; }
+.site-ev-hunt .ev-budgetrow .ev-br--trade b { color: var(--ev-blue); }
+.site-ev-hunt .ev-budgetrow .ev-br--diff b { color: var(--ev-amber); }
+.site-ev-hunt .ev-budgetbar {
+  height: 6px;
+  margin-top: 10px;
+  border-radius: 99px;
+  background: var(--ev-blue-soft);
+  box-shadow: inset 0 0 0 1px rgba(94, 180, 255, 0.25);
+  overflow: hidden;
+}
+.site-ev-hunt .ev-budgetbar i { display: block; height: 100%; background: var(--ev-mint); border-radius: 99px; }
+.site-ev-hunt .ev-budgetn { display: flex; align-items: center; gap: 6px; margin-top: 10px; color: var(--ev-dim); font-size: 11.5px; }
+.site-ev-hunt .ev-budgetn .ev-ico { width: 12px; height: 12px; color: var(--ev-mint); }
+
+/* ---------- the five sources ---------- */
+.site-ev-hunt .ev-accs { padding: 20px 28px 4px; }
+.site-ev-hunt .ev-acclist { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.site-ev-hunt .ev-acc {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  column-gap: 10px;
+  row-gap: 8px;
+  align-items: center;
+  padding: 12px 12px 11px;
+  border-radius: 13px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-line);
+}
+.site-ev-hunt .ev-acc > img { width: 30px; height: 30px; border-radius: 8px; }
+.site-ev-hunt .ev-acc-t { min-width: 0; padding-right: 20px; }
+.site-ev-hunt .ev-acc-t b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-acc-t small { display: block; color: var(--ev-dim2); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-acc-v { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 7px; min-width: 0; }
+.site-ev-hunt .ev-acc-v b { font-size: 21px; letter-spacing: -0.02em; }
+.site-ev-hunt .ev-acc-v small { color: var(--ev-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-acc-v em { color: var(--ev-mint); font-weight: 600; }
+.site-ev-hunt .ev-acc-ok {
+  position: absolute;
+  top: 12px;
+  right: 11px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ev-mint);
+  color: #05231a;
+}
+.site-ev-hunt .ev-acc-ok .ev-ico { width: 11px; height: 11px; stroke-width: 3; }
+
+/* ---------- section heads ---------- */
+.site-ev-hunt .ev-sech { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; min-width: 0; }
+.site-ev-hunt .ev-sech h2 { font-size: 17px; letter-spacing: -0.02em; white-space: nowrap; }
+.site-ev-hunt .ev-sech span { color: var(--ev-dim); font-size: 12.5px; min-width: 0; }
+
+/* ---------- the four outcome tiles ---------- */
+.site-ev-hunt .ev-flags { padding: 24px 28px 8px; }
+.site-ev-hunt .ev-flaglist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.site-ev-hunt .ev-flag {
+  --k: var(--ev-blue);
+  --ks: var(--ev-blue-soft);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px 14px 12px;
+  border-radius: 14px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-line);
+  box-shadow: inset 0 2px 0 var(--k);
+}
+.site-ev-hunt .ev-flag--matches { --k: var(--ev-mint); --ks: var(--ev-mint-soft); }
+.site-ev-hunt .ev-flag--drops { --k: var(--ev-amber); --ks: var(--ev-amber-soft); }
+.site-ev-hunt .ev-flag--saves { --k: var(--ev-violet); --ks: var(--ev-violet-soft); }
+.site-ev-hunt .ev-flag.is-hover,
+.site-ev-hunt .ev-flag:has(.ev-flagi.is-hover) {
+  border-color: var(--k);
+  background: linear-gradient(180deg, var(--ks), var(--ev-panel) 70%);
+}
+.site-ev-hunt .ev-flagh { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-ev-hunt .ev-flagi {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--ks);
+  color: var(--k);
+}
+.site-ev-hunt .ev-flagi .ev-ico { width: 17px; height: 17px; }
+.site-ev-hunt .ev-flagt { min-width: 0; }
+.site-ev-hunt .ev-flagt b { display: block; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-flagt small { display: block; color: var(--ev-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the counter never shrinks or wraps: at 27 px a five-figure count and a $ figure are wider than the label
+   beside them wants to allow, and a wrapped counter ("1,5 / 61") is a clipped number, so the label truncates
+   instead (see .ev-flagt above) */
+.site-ev-hunt .ev-flagn { flex: none; margin-left: auto; min-width: 1.4em; font-size: 24px; line-height: 1; letter-spacing: -0.03em; color: var(--k); text-align: right; white-space: nowrap; }
+.site-ev-hunt .ev-flagex { margin-top: 12px; display: grid; gap: 5px; }
+.site-ev-hunt .ev-flagex li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: var(--ev-bg2);
+  font-size: 12px;
+}
+.site-ev-hunt .ev-flagex span { min-width: 0; color: var(--ev-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-flagex b { margin-left: auto; flex: none; color: var(--k); font-size: 11.5px; }
+.site-ev-hunt .ev-flagmore { margin-top: 9px; color: var(--ev-dim2); font-size: 11.5px; }
+
+/* ---------- the ranked table ---------- */
+.site-ev-hunt .ev-rank { padding: 22px 28px 8px; }
+.site-ev-hunt .ev-table {
+  border-radius: 14px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-line);
+  overflow: hidden;
+}
+.site-ev-hunt .ev-thead,
+.site-ev-hunt .ev-row {
+  display: grid;
+  grid-template-columns: 30px 118px 52px minmax(0, 1.5fr) 62px 152px 52px 46px minmax(0, 1.1fr) 96px;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 16px;
+}
+.site-ev-hunt .ev-thead {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: var(--ev-bg2);
+  color: var(--ev-dim2);
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.site-ev-hunt .ev-row { border-top: 1px solid var(--ev-line); position: relative; will-change: opacity, transform; }
+.site-ev-hunt .ev-row--best { background: rgba(111, 242, 176, 0.05); box-shadow: inset 3px 0 0 var(--ev-mint); }
+.site-ev-hunt .ev-row.is-hover,
+.site-ev-hunt .ev-row--best:has(.ev-pin.is-hover) { background: linear-gradient(90deg, rgba(111, 242, 176, 0.16), rgba(111, 242, 176, 0.03)); }
+/* the cursor's anchor in the best buy row: an empty 1 px box in the gap right of the Best buy badge, so beat
+   3's pointer rests on the flag and covers no figure (ad.js hover, engine toggles is-hover on it) */
+.site-ev-hunt .ev-pin { display: inline-block; width: 1px; height: 20px; margin-left: 6px; vertical-align: -4px; }
+.site-ev-hunt .ev-rankc { color: var(--ev-dim2); font-size: 13px; font-weight: 650; }
+.site-ev-hunt .ev-row--best .ev-rankc b { color: var(--ev-mint); }
+.site-ev-hunt .ev-thumb { width: 52px; height: 34px; border-radius: 7px; overflow: hidden; background: var(--ev-panel2); }
+.site-ev-hunt .ev-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.site-ev-hunt .ev-car { min-width: 0; }
+.site-ev-hunt .ev-car b { display: inline; font-size: 13px; white-space: nowrap; }
+.site-ev-hunt .ev-car small { display: block; color: var(--ev-dim2); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-best {
+  display: inline-flex;
+  align-items: center;
+  height: 19px;
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--ev-mint);
+  color: #05231a;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  vertical-align: 1px;
+}
+.site-ev-hunt .ev-miles,
+.site-ev-hunt .ev-days { color: var(--ev-ink); font-size: 13px; }
+.site-ev-hunt .ev-price { display: flex; flex-direction: column; gap: 2px; }
+.site-ev-hunt .ev-price b { font-size: 15px; letter-spacing: -0.02em; }
+.site-ev-hunt .ev-row--best .ev-price b { color: var(--ev-mint); }
+.site-ev-hunt .ev-price s { color: var(--ev-dim2); font-size: 11.5px; }
+.site-ev-hunt .ev-drop {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--ev-amber-soft);
+  color: var(--ev-amber);
+  font-size: 10.5px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.site-ev-hunt .ev-drop--flat { background: var(--ev-panel2); color: var(--ev-dim2); }
+.site-ev-hunt .ev-fsd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--ev-panel2);
+  color: var(--ev-dim2);
+  font-size: 10.5px;
+  font-weight: 650;
+}
+.site-ev-hunt .ev-fsd--yes { background: var(--ev-mint-soft); color: var(--ev-mint); box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.3); }
+.site-ev-hunt .ev-store { min-width: 0; }
+.site-ev-hunt .ev-store b { display: block; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-store small { display: block; color: var(--ev-dim2); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-vin {
+  color: var(--ev-dim2);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.site-ev-hunt .ev-tfoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-top: 1px solid var(--ev-line);
+  background: var(--ev-bg2);
+  color: var(--ev-dim);
+  font-size: 12px;
+}
+.site-ev-hunt .ev-tfoot .ev-ico { color: var(--ev-mint); }
+
+/* ---------- a source tag ---------- */
+.site-ev-hunt .ev-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 28px;
+  padding: 0 8px 0 3px;
+  border-radius: 8px;
+  background: var(--ev-panel2);
+  color: var(--ev-dim);
+  font-size: 11px;
+  font-weight: 560;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.site-ev-hunt .ev-tag img { width: 24px; height: 24px; border-radius: 6px; flex: none; }
+
+/* ---------- panels: the VIN log, swapped for Your Tesla by the tab click ---------- */
+.site-ev-hunt .ev-panels { padding: 22px 28px 8px; }
+.site-ev-hunt .ev-panel--2 { display: none; }
+.site-ev-hunt .ev-top:has(.ev-tab--2.is-active) ~ .ev-panels .ev-panel--1 { display: none; }
+.site-ev-hunt .ev-top:has(.ev-tab--2.is-active) ~ .ev-panels .ev-panel--2 { display: block; }
+
+/* tab 1: the price history of the best buy */
+.site-ev-hunt .ev-loghead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 14px 14px 0 0;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-line);
+  border-bottom: 0;
+}
+.site-ev-hunt .ev-lh { min-width: 0; }
+.site-ev-hunt .ev-lh small { display: block; color: var(--ev-dim2); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; }
+.site-ev-hunt .ev-lh b { display: block; font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+.site-ev-hunt .ev-lh--now { color: var(--ev-mint); }
+.site-ev-hunt .ev-log {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 18px 16px 6px;
+  border-radius: 0 0 14px 14px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-line);
+  border-top: 0;
+}
+.site-ev-hunt .ev-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding-right: 14px;
+  will-change: opacity;
+}
+.site-ev-hunt .ev-step + .ev-step::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 46px;
+  width: 1px;
+  height: 120px;
+  background: linear-gradient(180deg, var(--ev-line2), transparent);
+}
+.site-ev-hunt .ev-when { color: var(--ev-dim); font-size: 11.5px; font-weight: 600; }
+.site-ev-hunt .ev-lprice { margin-top: 3px; font-size: 22px; letter-spacing: -0.025em; }
+.site-ev-hunt .ev-barn {
+  display: block;
+  width: 100%;
+  height: 92px;
+  margin-top: 9px;
+  border-bottom: 1px solid var(--ev-line2);
+  position: relative;
+}
+.site-ev-hunt .ev-barn i {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 26px;
+  height: 0;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, var(--ev-amber), rgba(255, 181, 71, 0.35));
+}
+.site-ev-hunt .ev-step--first .ev-barn i { background: linear-gradient(180deg, var(--ev-blue), rgba(94, 180, 255, 0.3)); }
+.site-ev-hunt .ev-step--last .ev-barn i { background: linear-gradient(180deg, var(--ev-mint), rgba(111, 242, 176, 0.35)); }
+.site-ev-hunt .ev-ldelta {
+  display: inline-flex;
+  align-items: center;
+  height: 19px;
+  margin-top: 9px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--ev-amber-soft);
+  color: var(--ev-amber);
+  font-size: 11px;
+  font-weight: 650;
+}
+.site-ev-hunt .ev-step--last .ev-ldelta { background: var(--ev-mint-soft); color: var(--ev-mint); }
+.site-ev-hunt .ev-ldelta--flat { background: var(--ev-panel2); color: var(--ev-dim2); }
+.site-ev-hunt .ev-lnote { margin-top: 7px; color: var(--ev-dim2); font-size: 11px; }
+.site-ev-hunt .ev-logfoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: var(--ev-bg2);
+  border: 1px solid var(--ev-line);
+  color: var(--ev-dim);
+  font-size: 12px;
+}
+.site-ev-hunt .ev-logfoot .ev-ico { color: var(--ev-amber); }
+.site-ev-hunt .ev-logfoot b { margin-left: auto; flex: none; color: var(--ev-mint); font-size: 14px; }
+
+/* tab 2: the Tesla account */
+.site-ev-hunt .ev-tgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+}
+.site-ev-hunt .ev-tcard,
+.site-ev-hunt .ev-pay {
+  min-width: 0;
+  padding: 15px 16px 14px;
+  border-radius: 14px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-line);
+}
+.site-ev-hunt .ev-pay { background: linear-gradient(180deg, var(--ev-violet-soft), var(--ev-panel) 60%); border-color: rgba(182, 156, 255, 0.3); }
+.site-ev-hunt .ev-tk { display: flex; align-items: center; gap: 7px; color: var(--ev-dim); font-size: 11.5px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+.site-ev-hunt .ev-tk .ev-ico { width: 13px; height: 13px; color: var(--ev-violet); }
+.site-ev-hunt .ev-tcard h3 { margin-top: 8px; font-size: 15px; letter-spacing: -0.02em; }
+.site-ev-hunt .ev-tmeta { margin-top: 4px; color: var(--ev-dim2); font-size: 11.5px; }
+.site-ev-hunt .ev-tv { display: flex; align-items: baseline; gap: 9px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--ev-line); }
+.site-ev-hunt .ev-tv b { font-size: 26px; letter-spacing: -0.03em; color: var(--ev-violet); }
+.site-ev-hunt .ev-tv small { color: var(--ev-dim); font-size: 11.5px; }
+.site-ev-hunt .ev-prow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: rgba(7, 9, 14, 0.45);
+  font-size: 12.5px;
+}
+.site-ev-hunt .ev-prow span { min-width: 0; color: var(--ev-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-ev-hunt .ev-prow b { margin-left: auto; flex: none; font-size: 14px; }
+.site-ev-hunt .ev-prow--diff { background: var(--ev-mint-soft); box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32); }
+.site-ev-hunt .ev-prow--diff span { color: #b7f6d6; font-weight: 600; }
+.site-ev-hunt .ev-prow--diff b { color: var(--ev-mint); font-size: 19px; letter-spacing: -0.02em; }
+.site-ev-hunt .ev-diff.is-hover { background: var(--ev-mint); box-shadow: 0 0 0 4px rgba(111, 242, 176, 0.22); }
+.site-ev-hunt .ev-diff.is-hover span,
+.site-ev-hunt .ev-diff.is-hover b { color: #05231a; }
+.site-ev-hunt .ev-pnote { margin-top: 10px; color: var(--ev-dim); font-size: 11.5px; }
+.site-ev-hunt .ev-pfoot { display: flex; align-items: center; gap: 6px; margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--ev-line); color: var(--ev-dim2); font-size: 11px; }
+.site-ev-hunt .ev-pfoot .ev-ico { width: 12px; height: 12px; color: var(--ev-mint); }
+
+/* ---------- footer ---------- */
+.site-ev-hunt .ev-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--ev-line);
+  color: var(--ev-dim2);
+  font-size: 11.5px;
+}
+.site-ev-hunt .ev-foot span { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+.site-ev-hunt .ev-foot span:last-child { margin-left: auto; flex: none; }
+.site-ev-hunt .ev-foot .ev-ico { width: 12px; height: 12px; color: var(--ev-mint); }
+
+/* ---------- narrower frames (1:1 and 9:16 browser windows) ---------- */
+@container ev (max-width: 1180px) {
+  .site-ev-hunt .ev-heroin { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .site-ev-hunt .ev-hunt { max-width: 660px; }
+  .site-ev-hunt .ev-huntfacts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .site-ev-hunt .ev-by { display: none; }
+  .site-ev-hunt .ev-flaglist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-ev-hunt .ev-acclist { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .site-ev-hunt .ev-sech { flex-wrap: wrap; row-gap: 2px; }
+  .site-ev-hunt .ev-thead,
+  .site-ev-hunt .ev-row { grid-template-columns: 30px 52px 46px minmax(0, 1.5fr) 58px 140px 46px 40px minmax(0, 1fr); }
+  .site-ev-hunt .ev-thead > span:nth-child(2),
+  .site-ev-hunt .ev-row > .ev-tag,
+  .site-ev-hunt .ev-thead > span:last-child,
+  .site-ev-hunt .ev-row > .ev-vin { display: none; }
+  .site-ev-hunt .ev-loghead { grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); }
+  .site-ev-hunt .ev-lh:nth-child(5),
+  .site-ev-hunt .ev-lh:nth-child(6) { display: none; }
+  .site-ev-hunt .ev-tgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-ev-hunt .ev-pay { grid-column: 1 / -1; }
+}
+@container ev (max-width: 900px) {
+  .site-ev-hunt .ev-topin { padding: 0 18px; gap: 12px; }
+  .site-ev-hunt .ev-logs { display: none; }
+  .site-ev-hunt .ev-heroin { padding: 26px 18px 24px; }
+  .site-ev-hunt .ev-hero h1 { font-size: 27px; }
+  .site-ev-hunt .ev-ticks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-ev-hunt .ev-accs,
+  .site-ev-hunt .ev-flags,
+  .site-ev-hunt .ev-rank,
+  .site-ev-hunt .ev-panels { padding-left: 18px; padding-right: 18px; }
+  .site-ev-hunt .ev-acclist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-ev-hunt .ev-tgrid,
+  .site-ev-hunt .ev-flaglist,
+  .site-ev-hunt .ev-log { grid-template-columns: minmax(0, 1fr); }
+  .site-ev-hunt .ev-thead { display: none; }
+  .site-ev-hunt .ev-row { grid-template-columns: 26px 46px minmax(0, 1fr) 120px; row-gap: 8px; }
+  .site-ev-hunt .ev-row > .ev-miles,
+  .site-ev-hunt .ev-row > .ev-days { display: none; }
+  .site-ev-hunt .ev-foot { flex-direction: column; align-items: flex-start; padding-left: 18px; padding-right: 18px; }
+  .site-ev-hunt .ev-foot span:last-child { margin-left: 0; }
+}
+@container ev (max-width: 620px) {
+  .site-ev-hunt .ev-tab { padding: 0 9px; }
+  .site-ev-hunt .ev-tab .ev-ico { display: none; }
+  .site-ev-hunt .ev-live { min-width: 0; }
+  .site-ev-hunt .ev-hero h1 { font-size: 24px; }
+  .site-ev-hunt .ev-mrow { gap: 10px; font-size: 11px; flex-wrap: wrap; }
+  .site-ev-hunt .ev-mk--match { margin-left: 0; }
+  .site-ev-hunt .ev-stats { flex-wrap: wrap; }
+  .site-ev-hunt .ev-stats li { flex: 1 1 40%; }
+  .site-ev-hunt .ev-acclist { grid-template-columns: minmax(0, 1fr); }
+  .site-ev-hunt .ev-row { grid-template-columns: 26px minmax(0, 1fr) 110px; }
+  .site-ev-hunt .ev-row > .ev-thumb { display: none; }
+  .site-ev-hunt .ev-row > .ev-fsd { display: none; }
+}

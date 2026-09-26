@@ -320,6 +320,22 @@
     "thumb": "assets/shots/just-works-watchlist-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-ev-hunt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Tesla + Carvana + CarMax + CarGurus, one Model Y shortlist",
+    "src": "animations/just-works-ev-hunt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-ev-hunt-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-ev-hunt-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Tesla + Carvana + CarMax + CarGurus, ChatGPT vs Superbot",
+    "src": "animations/just-works-ev-hunt-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-ev-hunt-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

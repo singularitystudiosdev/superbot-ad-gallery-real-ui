@@ -1,0 +1,55 @@
+Tesla Model Y hunt spot, variant A with the ChatGPT refusal (Tesla store inventory, a Carvana listing, a CarMax
+listing and a saved CarGurus search, scanned for a Model Y Long Range under $40k within 200 miles of ZIP 78704
+and ranked in one shortlist), asset credits.
+The shopper, the search radius, the listings, their VINs, mileages, prices, price drops, FSD status, days on lot and
+distances are invented for the spot and live in data.js; the shops named (Tesla stores, Carvana, CarMax, CarGurus,
+Tesla account) are real businesses and the Tesla model names and paint names are Tesla's own names for real products.
+No VIN, price or listing shown is a real vehicle. The page reads only: it never orders, reserves, cancels, messages
+or changes anything at Tesla, Carvana, CarMax or CarGurus, and it never touches the Tesla account. All figures
+printed on the page, the hub and the steps are derived from data.js.
+
+img/hero.jpg
+  "Tesla Model Y RWD Stealth Grey.jpg" (a Stealth Grey Tesla Model Y, three-quarter front view on a city street),
+  Wikimedia Commons, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), by Ethan Llamas, 2025
+  https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_RWD_Stealth_Grey.jpg
+  Real photograph, downscaled to 1600 px wide from the 4290 x 2412 Commons original, otherwise unchanged.
+  No people, no products shown by name, no drawn art.
+
+img/cars/*.jpg
+  Real photographs of a Tesla Model Y, used only to show the paint colour the page prints beside each listing,
+  stored at 480 px wide, centre-cropped to 4:3. Each photograph is CC BY-SA 4.0
+  (https://creativecommons.org/licenses/by-sa/4.0); the car is Tesla's. Colours are
+  matched to Tesla's paint names (Pearl White Multi-Coat, Solid Black, Deep Blue Metallic, Ultra Red, Midnight
+  Silver Metallic).
+    white.jpg  "Tesla Model Y Dual Motor Pearl White Multi-Coat (1).jpg", by Damian B Oh, 2022
+               https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_Dual_Motor_Pearl_White_Multi-Coat_(1).jpg
+    black.jpg  "Tesla Model Y Dual Motor Solid Black (1).jpg", by Damian B Oh, 2022
+               https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_Dual_Motor_Solid_Black_(1).jpg
+    blue.jpg   "Tesla Model Y Dual Motor Deep Blue Metallic (1).jpg", by Damian B Oh, 2022
+               https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_Dual_Motor_Deep_Blue_Metallic_(1).jpg
+    red.jpg    "2025 Tesla Model Y Long Range AWD in Ultra Red, front right.jpg", by Ethan Llamas, 2024
+               https://commons.wikimedia.org/wiki/File:2025_Tesla_Model_Y_Long_Range_AWD_in_Ultra_Red,_front_right.jpg
+    gray.jpg   "2025 Tesla Model Y RWD in Midnight Silver Metallic, front right.jpg", by Ethan Llamas, 2024
+               https://commons.wikimedia.org/wiki/File:2025_Tesla_Model_Y_RWD_in_Midnight_Silver_Metallic,_front_right.jpg
+  Each was downloaded from Wikimedia Commons and downscaled to 480 px wide, centre-cropped to 480 x 360 (4:3),
+  and metadata-stripped. No other change; no retouching, recolouring or compositing.
+
+Source marks, set on the same rounded 64 px tiles the watchlist spot uses. Trademarks of their owners, used only
+to name the store or shop each listing came from.
+  brand/tesla.svg    simple-icons:tesla (CC0), via the Iconify API (api.iconify.design/simple-icons/tesla.svg),
+                     the mark in Tesla red #E82127 on the tile's own dark #171A20
+  brand/carvana.svg  the Carvana app icon, carvana.com/apple-touch-icon-152x152.png (114 x 114 PNG, the site's own
+                     touch icon), embedded as a base64 <image> inside the SVG and clipped to the same rounded tile:
+                     simple-icons (Iconify) and Wikimedia Commons ship no Carvana mark, so the brand's own icon is used
+  brand/cargurus.svg the CarGurus app icon, cargurus.com/apple-touch-icon-precomposed.png (72 x 72 PNG, the site's
+                     own touch icon), embedded as a base64 <image> inside the SVG and clipped to the same rounded tile:
+                     simple-icons (Iconify) and Wikimedia Commons ship no CarGurus mark, so the brand's own icon is used
+  brand/carmax.svg   "CarMax New Logo.svg" (the CARMAX wordmark, public domain simple text logo), Wikimedia Commons,
+                     https://commons.wikimedia.org/wiki/File:CarMax_New_Logo.svg
+                     Scaled to 52 px wide and centred on a white tile; the mark's own navy #053361 is unchanged.
+  brand/app.svg      mdi:filmstrip-box (Apache 2.0), tinted gold, the app favicon, copied byte-identical from the
+  brand/title.svg    mdi:movie-open-outline (Apache 2.0), the row glyph, copied byte-identical from the
+                     just-works-watchlist-superbot-42aac446 spot's brand/ folder.
+
+No logo was drawn for this spot: every mark above is the owner's own file, placed on a tile. The app and title
+tiles are the page's own slate and ink and carry no trademark.

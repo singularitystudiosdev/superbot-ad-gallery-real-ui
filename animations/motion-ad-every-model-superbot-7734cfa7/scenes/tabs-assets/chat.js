@@ -64,13 +64,13 @@ export const VARIANTS = {
     step('opus', code, { set: 'timing', lead: 0.5 }),
     step('superbot', play, { lead: 0.4 }),
   ]),
-  // 6 switches, uneven cuts: Codex scripts, DeepSeek scores, Gemini frames, Cursor animates, Opus times and renders
+  // 6 switches, uneven cuts: Codex scripts, DeepSeek scores, Gemini frames, Opus animates, Cursor times, Opus renders
   '3': variant([
     step('codex', plan, { kind: 'script' }),
     step('deepseek', plan, { kind: 'sound', lead: 0.6 }),
     step('gemini', art),
-    step('cursor', code, { set: 'scene', lead: 0.3 }),
-    step('opus', code, { set: 'timing' }),
+    step('opus', code, { set: 'scene', lead: 0.3 }),
+    step('cursor', code, { set: 'timing' }),
     step('opus', play, { lead: 0.7 }),
   ]),
 };

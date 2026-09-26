@@ -176,6 +176,30 @@
     "thumb": "assets/shots/island-world-every-model-v3-superbot-00836f02.png"
   },
   {
+    "id": "motion-ad-every-model-v1-superbot-7734cfa7",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 15-second motion graphics ad: DeepSeek scripts, Gemini frames, Opus 5.5 animates",
+    "src": "animations/motion-ad-every-model-superbot-7734cfa7/?v=1",
+    "thumb": "assets/shots/motion-ad-every-model-v1-superbot-7734cfa7.png"
+  },
+  {
+    "id": "motion-ad-every-model-v2-superbot-7734cfa7",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 15-second motion graphics ad: Opus 5.5 scripts, Gemini frames, Codex animates, DeepSeek scores",
+    "src": "animations/motion-ad-every-model-superbot-7734cfa7/?v=2",
+    "thumb": "assets/shots/motion-ad-every-model-v2-superbot-7734cfa7.png"
+  },
+  {
+    "id": "motion-ad-every-model-v3-superbot-7734cfa7",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 15-second motion graphics ad: Gemini frames first, DeepSeek scripts, Opus 5.5 animates, Codex times",
+    "src": "animations/motion-ad-every-model-superbot-7734cfa7/?v=3",
+    "thumb": "assets/shots/motion-ad-every-model-v3-superbot-7734cfa7.png"
+  },
+  {
     "id": "fantasy90s-every-model-v1-superbot-042670d1",
     "type": "animation",
     "group": "Ad spots",

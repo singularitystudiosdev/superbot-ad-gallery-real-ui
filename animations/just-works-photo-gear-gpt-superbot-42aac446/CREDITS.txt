@@ -1,0 +1,104 @@
+Photo gear spot, variant A with the ChatGPT refusal (a photo gear shortlist whose prices, conditions and
+stock are read from a B&H Photo Video, Adorama, MPB, KEH Camera and eBay shelf, against a gear set read
+from an Adobe Lightroom catalog), asset credits.
+The bodies, lenses, listings, prices, conditions, shutter counts, stock states, graded prices and
+shortlist notes shown on the page are invented for the spot and live in data.js; the apps and shops
+named (Adobe Lightroom, B&H Photo Video, Adorama, MPB, KEH Camera and eBay) are real businesses, and
+the camera and lens names are their owners' own names for real products. No listing, price, grade or
+stock figure shown is a real one.
+The page reads only: it never buys, bids, makes an offer or adds an item to a cart at B&H, Adorama,
+MPB, KEH or eBay, and it never writes to, imports into or grades an Adobe Lightroom catalog. All
+figures printed on the page, the hub and the steps are derived from data.js.
+
+img/hero.jpg
+  "Fujifilm X-T5 with Fujinon XF 35mm F2 R WR" (a Fujifilm X-T5 body in black with a Fujinon XF
+  35mm F2 R WR prime fitted, lit against a dark studio background), Wikimedia Commons, CC BY 2.0
+  (https://creativecommons.org/licenses/by/2.0), by Henry Söderlund, 2022
+  https://commons.wikimedia.org/wiki/File:Fujifilm_X-T5_with_Fujinon_XF_35mm_F2_R_WR_-_by_Henry_S%C3%B6derlund_(52536299126).jpg
+  Real photograph, downscaled to 1600 px wide from the 8206 x 5470 Commons original, otherwise
+  unchanged. No people in frame, no drawn art.
+
+img/gear/x100vi.jpg
+  "Fujifilm-X-100V.jpg" (a Fujifilm X100V compact camera in black, three quarter view on a grey
+  studio background), Wikimedia Commons, CC0
+  (http://creativecommons.org/publicdomain/zero/1.0/deed.en), by Aps1729, 2024
+  https://commons.wikimedia.org/wiki/File:Fujifilm-X-100V.jpg
+  Real photograph, downscaled to 480 px wide and centre cropped to 480 x 360 (4:3), metadata
+  stripped. Wikimedia Commons carries no photograph of the X100VI under a CC BY, CC BY-SA or CC0
+  licence with usable framing, so this row uses the X100V, the previous model in the same X100 line
+  that the page's x100vi row names.
+
+img/gear/xt5.jpg
+  "Fujifilm-X-T5.jpg" (a Fujifilm X-T5 body in silver with a Fujinon XF 35mm F2 R WR fitted, front
+  view on a grey studio background), Wikimedia Commons, CC0
+  (http://creativecommons.org/publicdomain/zero/1.0/deed.en), by Aps1729, 2024
+  https://commons.wikimedia.org/wiki/File:Fujifilm-X-T5.jpg
+  Real photograph, downscaled to 480 px wide and centre cropped to 480 x 360 (4:3), metadata
+  stripped.
+
+img/gear/xf56.jpg
+  "Fujifilm Fujinon XF 56mm F1.2 R APD" (the Fujinon XF 56mm F1.2 R APD prime standing on a dark
+  studio surface, marked 56 APD on the barrel), Wikimedia Commons, CC BY 2.0
+  (https://creativecommons.org/licenses/by/2.0), by Henry Söderlund, 2015
+  https://commons.wikimedia.org/wiki/File:Fujifilm_Fujinon_XF_56mm_F1.2_R_APD_-_by_Henry_S%C3%B6derlund_(16331743211).jpg
+  Real photograph, downscaled and centre cropped to 480 x 360 (4:3), metadata stripped. The page's
+  xf56 row names the XF 56mm f/1.2; the Commons photograph available under a free licence is the APD
+  version of that same lens.
+
+img/gear/xf16.jpg
+  "Fujinon XF 16mm F1.4 R WR.JPG" (the Fujinon XF 16mm f/1.4 R WR prime with its petal hood beside
+  it, on a wooden table), Wikimedia Commons, CC BY-SA 4.0
+  (https://creativecommons.org/licenses/by-sa/4.0), by Dennis Bratland, 2015
+  https://commons.wikimedia.org/wiki/File:Fujinon_XF_16mm_F1.4_R_WR.JPG
+  Real photograph, downscaled and centre cropped to 480 x 360 (4:3), metadata stripped.
+
+img/gear/xf23.jpg
+  "Fujifilm Fujinon XF 23mm F1.4 R LM WR" (the Fujinon XF 23mm f/1.4 R LM WR prime standing with
+  its hood fitted on a dark studio surface), Wikimedia Commons, CC BY 2.0
+  (https://creativecommons.org/licenses/by/2.0), by Henry Söderlund, 2022
+  https://commons.wikimedia.org/wiki/File:Fujifilm_Fujinon_XF_23mm_F1.4_R_LM_WR_(52367929102).jpg
+  Real photograph, downscaled and centre cropped to 480 x 360 (4:3), metadata stripped.
+
+  Wikimedia Commons carries no photograph of a Fujinon XF 50-140mm f/2.8 under a CC BY, CC BY-SA or
+  CC0 licence, so img/gear/xf50140.jpg is not shipped and the page's xf50140 row has no photograph.
+
+Source marks, set on the same rounded 64 px tiles the ev-hunt spot uses. Trademarks of their owners,
+used only to name the app, service or shop each row came from.
+  brand/lightroom.svg  simple-icons:adobelightroom (CC0, simple-icons contributors), via the Iconify
+                       API (api.iconify.design/simple-icons/adobelightroom.svg), the mark in Adobe
+                       Lightroom blue #31A8FF on the tile's own slate #101828; it names Adobe
+                       Lightroom.
+  brand/bh.svg         the B&H Photo Video mark, bhphotovideo.com's own site icon (128 x 128 PNG,
+                       the site's own artwork), embedded as a base64 <image> inside the SVG and
+                       clipped to the same rounded tile. bhphotovideo.com serves its icon behind a
+                       browser check, so the site's own icon file was retrieved through the Google
+                       favicon service (google.com/s2/favicons?domain=bhphotovideo.com) rather than
+                       from the host directly. simple-icons (Iconify) and Wikimedia Commons ship no
+                       B&H mark, so the brand's own icon is used.
+  brand/adorama.svg    the Adorama mark, adorama.com/apple-touch-icon.png (120 x 120 PNG, the site's
+                       own touch icon and its own artwork), embedded as a base64 <image> inside the
+                       SVG and clipped to the same rounded tile.
+  brand/mpb.svg        the MPB mark, mpb.com's own favicon (512 x 512 PNG with a transparent ground,
+                       the site's own artwork), embedded as a base64 <image> inside the SVG and
+                       clipped to the same rounded tile. mpb.com serves its icon behind a browser
+                       check, so the site's own icon file was retrieved through the DuckDuckGo icon
+                       service (icons.duckduckgo.com/ip3/mpb.com.ico) rather than from the host
+                       directly.
+  brand/keh.svg        the KEH Camera mark, keh.com's own favicon (128 x 128 PNG, white KEH on the
+                       brand's own orange, the site's own artwork), embedded as a base64 <image>
+                       inside the SVG and clipped to the same rounded tile. keh.com serves its icon
+                       behind a browser check, so the site's own icon file was retrieved through the
+                       Google favicon service (google.com/s2/favicons?domain=keh.com) rather than
+                       from the host directly.
+  brand/ebay.svg       simple-icons:ebay (CC0, simple-icons contributors), via the Iconify API
+                       (api.iconify.design/simple-icons/ebay.svg), the mark in eBay red #E53238 on
+                       the tile's own slate #101828.
+  brand/app.svg        mdi:camera-iris (Apache 2.0, Pictogrammers), via the Iconify API
+                       (api.iconify.design/mdi/camera-iris.svg), tinted amber #f3c26b on the page's
+                       slate tile #101828, the app favicon
+  brand/title.svg      mdi:camera (Apache 2.0, Pictogrammers), via the Iconify API
+                       (api.iconify.design/mdi/camera.svg), tinted #9fb0c9 on the #171d2a tile, the
+                       row glyph, matching the ev-hunt spot's brand/title.svg
+
+No logo was drawn for this spot: every mark above is the owner's own file, placed on a tile. The app
+and title tiles are the page's own slate and ink and carry no trademark.

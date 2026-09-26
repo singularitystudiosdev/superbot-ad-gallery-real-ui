@@ -64,3 +64,13 @@ mmorpg-every-model-superbot (fetched 2026-09-26):
   github-logo.svg           GitHub mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg
                             (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of GitHub, Inc.
                             Both are used nominatively, to name the model/app superbot routes to.
+
+ISLAND WORLD ROUTING (island-world-every-model-superbot, added 2026-09-26)
+  deepmind-logo.svg         Google DeepMind mark, https://api.iconify.design/simple-icons/deepmind.svg (simple-icons,
+                            CC0 1.0), fill #fff. Shown for Veo 3: https://deepmind.google/models/veo/ uses the Google
+                            DeepMind icon as its page icon. Trademark of Google LLC.
+  elevenlabs-logo.svg       ElevenLabs mark, https://api.iconify.design/simple-icons/elevenlabs.svg (simple-icons,
+                            CC0 1.0), fill #fff. Trademark of ElevenLabs.
+  meshy-logo.png            Meshy app icon, https://www.meshy.ai/icon3.png (the site's own 512px icon), downscaled to
+                            96px, otherwise unaltered. Trademark of Meshy.
+                            All three used nominatively, to name the app superbot routes to.

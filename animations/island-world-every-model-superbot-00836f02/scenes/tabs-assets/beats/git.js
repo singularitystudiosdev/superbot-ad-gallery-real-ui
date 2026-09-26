@@ -10,8 +10,8 @@ const REPO = 'palm-isle';
 const BRANCH = 'main';
 // short shas are made up; the messages are the project's first three commits
 const COMMITS = [
-  ['4f2a9c1', 'World spec'],
-  ['b73e0d8', 'Terrain, foliage, village'],
+  ['4f2a9c1', 'Island terrain and ocean'],
+  ['b73e0d8', 'Village, palms and textures'],
   ['a1c94e2', 'Water shader and controls'],
 ];
 const BOOK = '<svg class="git-book" viewBox="0 0 24 24"><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>';
@@ -28,7 +28,7 @@ export default {
     T.commit = COMMITS.map((_, i) => r + 1.7 + i * 0.25);
     T.pushed = T.chipDone[2];
     T.main = T.commit[COMMITS.length - 1] + 0.12;
-    T.end = r + 3.0;
+    T.end = T.main + 0.5;     // the branch check has drawn; the next beat starts straight away
     return T;
   },
   build(k, x) {

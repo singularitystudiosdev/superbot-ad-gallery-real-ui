@@ -1,0 +1,20 @@
+/* build beat: a coding step shown as its result card (file names or test suites, checks, a footer). No code text.
+   Every selector is scoped under #s-tabs .sbsite .hub and every class is prefixed build-. */
+#s-tabs .sbsite .hub .build-card { width: 360px; max-width: 100%; margin-top: 2px; border-radius: 10px; overflow: hidden; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite .hub .build-hd { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 11px; background: #141416; font: 600 12px/1 var(--ui, system-ui); color: #ececf1; }
+#s-tabs .sbsite .hub .build-n { margin-left: auto; font: 500 10.5px/1 var(--font-mono, ui-monospace, monospace); color: #8e8e93; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .build-bar { display: block; height: 2px; background: #202024; }
+#s-tabs .sbsite .hub .build-bar i { display: block; height: 100%; background: #5b8dff; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .build-rows { display: grid; gap: 4px; padding: 8px 8px 6px; }
+#s-tabs .sbsite .hub .build-row { display: flex; align-items: center; gap: 9px; height: 26px; padding: 0 9px; border-radius: 7px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; opacity: 0; }
+#s-tabs .sbsite .hub .build-row.on { box-shadow: inset 0 0 0 1px #24503a; }
+#s-tabs .sbsite .hub .build-st { position: relative; flex: none; display: grid; place-items: center; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .build-st .spin { position: absolute; inset: 1px; width: auto; height: auto; }
+#s-tabs .sbsite .hub .build-st .qc-ok { position: absolute; inset: 0; width: 14px; height: 14px; fill: none; stroke: #3ddc84; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+#s-tabs .sbsite .hub .build-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 11px/1 var(--font-mono, ui-monospace, monospace); color: #9a9aa2; }
+#s-tabs .sbsite .hub .build-row.on .build-name { color: #e5e5ea; }
+#s-tabs .sbsite .hub .build-tests .build-name { font: 500 12px/1 var(--ui, system-ui); }
+#s-tabs .sbsite .hub .build-tag { flex: none; padding: 0 7px; border-radius: 999px; background: #1f1f23; font: 600 10px/17px var(--font-mono, ui-monospace, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .build-row.on .build-tag { background: #0f2419; color: #3ddc84; }
+#s-tabs .sbsite .hub .build-ft { display: flex; align-items: center; gap: 8px; padding: 9px 11px 10px; border-top: 1px solid #1d1d21; font: 600 12px/1.3 var(--ui, system-ui); color: #ececf1; opacity: 0; }
+#s-tabs .sbsite .hub .build-ft .qc-ok { flex: none; width: 16px; height: 16px; padding: 3px; box-sizing: border-box; border-radius: 50%; background: #34c759; fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }

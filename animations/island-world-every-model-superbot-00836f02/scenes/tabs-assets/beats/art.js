@@ -1,17 +1,22 @@
-// Art beat: Gemini makes the island's skybox and texture looks. Its line streams, the 2x2 grid lands, and each
-// image resolves out of a blur under its own sweeping band, staggered 0.18s apart, each stamping its caption as it
-// comes into focus. The "Creating 4 images" chip fades away as the last one resolves.
+// Art beat: Gemini generates images for the island. Its line streams, the 2x2 grid lands, and each image resolves
+// out of a blur under its own sweeping band, staggered 0.18s apart, each stamping its caption as it comes into
+// focus. The "Creating 4 images" chip fades away as the last one resolves. k.opts.set picks the grid: 'terrain'
+// (terrain and skybox, the v1 opener) or 'textures' (default).
 // Pure function of t: every moving value is written from t, so ?t= freezes any frame.
 import { lerp, seg, outCubic, streamCount } from '../../../lib.js';
 
-const SAY = 'Made the skybox and textures.';
 // [source, caption]: stills from the island clip, in the order Gemini paints them
-const SHOTS = [
-  ['island/art-1.jpg', 'Skybox'],
-  ['island/art-2.jpg', 'Grass and path'],
-  ['island/art-3.jpg', 'Village'],
-  ['island/art-4.jpg', 'Beach hut'],
-];
+const SETS = {
+  terrain: {
+    say: 'Generated the terrain and the skybox.',
+    shots: [['island/art-1.jpg', 'Skybox'], ['island/art-2.jpg', 'Terrain'], ['island/art-4.jpg', 'Shoreline'], ['island/art-3.jpg', 'Village']],
+  },
+  textures: {
+    say: 'Made the textures.',
+    shots: [['island/art-2.jpg', 'Grass'], ['island/art-4.jpg', 'Sand and thatch'], ['island/art-3.jpg', 'Village walls'], ['island/art-1.jpg', 'Sky']],
+  },
+};
+const N = 4;
 const PAINT = 1.0;   // seconds one portrait takes to resolve out of the blur
 const STAGGER = 0.18; // gap between one portrait starting and the next
 
@@ -20,17 +25,18 @@ export default {
     const T = { r };
     T.label = r + 0.28;                                            // "Creating 4 images" chip lands
     T.grid = r + 0.34;                                             // the grid itself rises in
-    T.tile = SHOTS.map((_, i) => T.grid + i * STAGGER);            // each portrait starts resolving
+    T.tile = Array.from({ length: N }, (_, i) => T.grid + i * STAGGER); // each image starts resolving
     T.paint = T.tile.map((a) => a + PAINT);                        // ...and is fully sharp here
-    T.end = r + 2.8;
+    T.end = T.paint[N - 1] + 0.42;                                 // the last caption is in; straight on
     return T;
   },
   build(k, x) {
     const T = k.T;
+    const { say: SAY, shots: SHOTS } = SETS[(k.opts || {}).set] || SETS.textures;
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
     const gen = x.el(`<div class="dd-chiprow art-genrow"><span class="ch-tool art-gen">${x.tile('gemini')}<span class="ch-tool-t">Creating 4 images</span></span></div>`);
     const grid = x.el(`<div class="art-grid">${SHOTS.map(([src, name]) => `<div class="art-tile">
-      <img class="art-shot" src="${x.img(src)}" alt="${x.esc(name)} concept art"/>
+      <img class="art-shot" src="${x.img(src)}" alt="${x.esc(name)}"/>
       <i class="art-band" aria-hidden="true"></i>
       <span class="art-cap">${x.esc(name)}</span>
     </div>`).join('')}</div>`);
@@ -47,7 +53,7 @@ export default {
 
         // the "Creating 4 images" chip: lands with the ask, then fades out as the last portrait finishes
         const li = outCubic(seg(t, T.label, T.label + 0.3));
-        const out = seg(t, T.paint[SHOTS.length - 1] - 0.08, T.paint[SHOTS.length - 1] + 0.3);
+        const out = seg(t, T.paint[N - 1] - 0.08, T.paint[N - 1] + 0.3);
         gen.style.opacity = (li * (1 - out)).toFixed(3);
         gen.style.transform = `translateY(${((1 - li) * 6).toFixed(2)}px)`;
 

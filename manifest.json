@@ -155,7 +155,7 @@
     "id": "island-world-every-model-v1-superbot-00836f02",
     "type": "animation",
     "group": "Ad spots",
-    "title": "3D island world: Codex terrain, Gemini textures, Opus controls (4 fast switches)",
+    "title": "3D island world: Gemini images the terrain and sky, Claude Opus 5.5 builds it, Superbot runs it (3 switches)",
     "src": "animations/island-world-every-model-superbot-00836f02/?v=1",
     "thumb": "assets/shots/island-world-every-model-v1-superbot-00836f02.png"
   },
@@ -163,7 +163,7 @@
     "id": "island-world-every-model-v2-superbot-00836f02",
     "type": "animation",
     "group": "Ad spots",
-    "title": "3D island world: Opus, Codex, Gemini, Codex, Opus, GitHub relay (7 switches)",
+    "title": "3D island world: Claude Opus 5.5 builds, Meshy props, Gemini textures, GitHub, Superbot (5 switches)",
     "src": "animations/island-world-every-model-superbot-00836f02/?v=2",
     "thumb": "assets/shots/island-world-every-model-v2-superbot-00836f02.png"
   },
@@ -171,7 +171,7 @@
     "id": "island-world-every-model-v3-superbot-00836f02",
     "type": "animation",
     "group": "Ad spots",
-    "title": "3D island world: DeepSeek spec, Gemini textures, Codex water and launch (5 slow switches)",
+    "title": "3D island world: Veo flythrough, Opus water, ElevenLabs sound, Opus controls, DeepSeek tests, GitHub (7 switches)",
     "src": "animations/island-world-every-model-superbot-00836f02/?v=3",
     "thumb": "assets/shots/island-world-every-model-v3-superbot-00836f02.png"
   },

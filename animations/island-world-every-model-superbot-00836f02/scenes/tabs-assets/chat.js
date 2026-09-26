@@ -1,15 +1,18 @@
 // The island chat, one model per request. The ask is typed into the composer and sent, superbot routes it
 // (its routing chips and the composer's platform chip follow the model), and the routed model answers with its own
-// beat (./beats/plan.js, code.js, git.js, art.js, play.js). ?v= picks a VARIANTS entry: the order the models are
-// routed in, one ad per variant, all sharing the same ask and the same hub. The thread is bottom-anchored so every
-// message rises out of the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on the beat
-// imports busts GitHub Pages' 10-minute module cache on republish.
+// beat (./beats/art.js, build.js, video.js, assets.js, audio.js, git.js, play.js). ?v= picks a VARIANTS entry: one
+// ad per variant, all sharing the same ask and the same hub. One model works at a time, and each beat starts the
+// moment the previous one lands. Coding is shown only as result cards (build.js), never as code. The thread is
+// bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's
+// local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import plan from './beats/plan.js?v=1';
-import code from './beats/code.js?v=1';
-import git from './beats/git.js?v=1';
-import art from './beats/art.js?v=1';
+import build from './beats/build.js?v=1';
+import video from './beats/video.js?v=2';
+import assets from './beats/assets.js?v=2';
+import audio from './beats/audio.js?v=1';
+import git from './beats/git.js?v=2';
+import art from './beats/art.js?v=2';
 import play from './beats/play.js?v=1';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
@@ -22,59 +25,64 @@ export const CHAT_T0 = 1.6; // the empty state has settled; the first ask starts
 export const ASK = 'build me an interactive 3D island world';
 
 const APPS = {
-  codex: { name: 'GPT-5 Codex', logo: brand('openai-logo.svg'), sub: '' },
   gemini: { name: 'Gemini', logo: brand('gemini-logo.svg'), sub: 'in superbot' },
   deepseek: { name: 'DeepSeek V4 Flash', logo: brand('deepseek-logo.svg'), sub: 'in superbot' },
   opus: { name: 'Claude Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
+  veo: { name: 'Veo 3', logo: brand('deepmind-logo.svg'), sub: 'in superbot' },
+  meshy: { name: 'Meshy', logo: brand('meshy-logo.png'), sub: 'connected' },
+  elevenlabs: { name: 'ElevenLabs', logo: brand('elevenlabs-logo.svg'), sub: 'connected' },
   github: { name: 'GitHub', logo: brand('github-logo.svg'), sub: 'connected' },
   superbot: { name: 'Superbot', logo: null, sub: '' }, // drawn as its mark in CSS (SB_MARK, chat.css .sbm), not an image
 };
+const START_APP = 'superbot'; // the composer's platform chip before the first switch
 
 // the routing chip superbot lands when it sends a request to an app
 const CHIP = {
   deepseek: 'Switching to DeepSeek V4 Flash',
   opus: 'Switching to Claude Opus 5.5',
-  codex: 'Switching to GPT-5 Codex',
   gemini: 'Switching to Gemini',
+  veo: 'Switching to Veo 3',
+  meshy: 'Connecting to Meshy',
+  elevenlabs: 'Connecting to ElevenLabs',
   github: 'Connecting to GitHub',
   superbot: 'Switched to Superbot',
 };
 
-// one request: the app that answers, its beat module, the chip that routes to it, the beat's own options, and an
-// optional hold (seconds the thread rests on this beat before the next cut; defaults to the variant's pace.hold)
-const step = (app, mod, opts = {}, hold) => ({ app, mod, opts, hold, chips: [[app, CHIP[app]]] });
-// only the first request is asked; the rest are superbot carrying the build forward on its own. pace sets when the
-// cuts land: lead (gap before superbot's next chip), dwell (chip land to resolve), hold (rest after each beat)
+// one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options
+const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, CHIP[app]]] });
+// only the first request is asked; the rest are superbot carrying the build forward on its own. pace sets the rhythm
+// of the cuts: lead (from one beat landing to the next chip), dwell (chip land to resolve). There is no rest after a
+// beat: the next chip lands as soon as the previous beat has finished.
 const variant = (pace, steps) => steps.map((s, i) => ({ ...s, pace, ...(i === 0 ? { ask: ASK } : {}) }));
 
-// the three published routings, one ad each (?v=1..3), each its own model set, order, switch count and cut rhythm.
-// Every one still ends on the island clip: Codex for terrain and GLSL water, Opus for layout and controls, Gemini
-// for the skybox and textures, DeepSeek for the fast world spec.
+// the three published storyboards, one ad each (?v=1..3). Each opens on a different model and beat, has its own
+// switch count and card types, and cuts at its own rhythm; all build the same island and end on the island clip.
+// Coding is Claude Opus 5.5, shown only as result cards.
 export const VARIANTS = {
-  // sprint: 4 switches, snappy cuts, no planner and no GitHub
-  '1': variant({ lead: 0.12, dwell: 0.4, hold: 0 }, [
-    step('codex', code, { set: 'terrain' }),
-    step('gemini', art),
-    step('opus', code, { set: 'controls' }),
+  // 3 switches, quick cuts: Gemini images the terrain and sky, Opus builds it, Superbot runs it
+  '1': variant({ lead: 0.04, dwell: 0.34 }, [
+    step('gemini', art, { set: 'terrain' }),
+    step('opus', build, { set: 'world' }),
     step('superbot', play),
   ]),
-  // relay: 7 switches, Codex and Opus each hand off and come back, uneven holds
-  '2': variant({ lead: 0.2, dwell: 0.6, hold: 0 }, [
-    step('opus', plan, { kind: 'layout' }, 0.2),
-    step('codex', code, { set: 'terrain' }),
-    step('gemini', art, {}, 0.5),
-    step('codex', code, { set: 'water' }),
-    step('opus', code, { set: 'controls' }, 0.3),
+  // 5 switches, even cuts: Opus builds the terrain and water, Meshy makes the props, Gemini the textures, GitHub, run
+  '2': variant({ lead: 0.06, dwell: 0.52 }, [
+    step('opus', build, { set: 'core' }),
+    step('meshy', assets),
+    step('gemini', art, { set: 'textures' }),
     step('github', git),
     step('superbot', play),
   ]),
-  // deliberate: 5 slow switches, no Opus, Codex writes the water then launches the world
-  '3': variant({ lead: 0.45, dwell: 1.0, hold: 0.6 }, [
-    step('deepseek', plan, { kind: 'spec' }),
-    step('gemini', art),
-    step('codex', code, { set: 'water' }),
+  // 7 switches, longer chips: Veo renders a flythrough, Opus the water, ElevenLabs the sound, Opus the controls,
+  // DeepSeek runs the tests, GitHub, run
+  '3': variant({ lead: 0.08, dwell: 0.74 }, [
+    step('veo', video),
+    step('opus', build, { set: 'water' }),
+    step('elevenlabs', audio),
+    step('opus', build, { set: 'controls' }),
+    step('deepseek', build, { set: 'tests' }),
     step('github', git),
-    step('codex', play),
+    step('superbot', play),
   ]),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
@@ -88,7 +96,7 @@ function timeBeats(asks) {
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
       k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.35;   // superbot's first routing chip lands
+      k.sw = k.send + 0.2;    // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
       k.sw = s + a.pace.lead; // superbot carries on without being asked
@@ -99,8 +107,8 @@ function timeBeats(asks) {
     k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + dwell * 0.34, done: at + dwell }; at = c.done + 0.12; return c; });
     k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
-    k.T = a.mod.times(k.reply);
-    s = k.T.end + (a.hold ?? a.pace.hold);
+    k.T = a.mod.times(k.reply, a.opts);
+    s = k.T.end;
     return { k };
   });
 }
@@ -152,17 +160,18 @@ export function mountChat(hub) {
   const cat = plat.querySelector('.rc-cat');
   const pIcon = el('<span class="qc-pi"></span>');
   cat.replaceWith(pIcon);
-  const pImg = el(`<img alt="" src="${APPS.codex.logo}" data-app="codex"/>`);
+  const pImg = el(`<img alt="" src="${APPS.opus.logo}" data-app="${START_APP}"/>`);
   const pMark = el(`<span class="qc-pi-sb">${SB_MARK}</span>`);
   pIcon.append(pImg, pMark);
+  pImg.style.display = 'none'; pMark.style.display = 'block'; // START_APP is the superbot mark
   const label = [...plat.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
-  const pLabel = el(`<span>${APPS.codex.name}</span>`);
+  const pLabel = el(`<span>${APPS[START_APP].name}</span>`);
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
 
   const ph = hub.querySelector('.rc-ph');
   return {
     hub, pointer, feed, inner, beats, scroll, plat, pIcon, pImg, pMark, pLabel,
-    ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'codex',
+    ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: START_APP,
   };
 }
 
@@ -186,7 +195,7 @@ function renderComposer(c, t) {
 }
 
 function renderRouting(c, t) {
-  let app = 'codex', swap = -1;
+  let app = START_APP, swap = -1;
   c.beats.forEach(({ k }) => k.chips.forEach((ch) => { if (t >= ch.swap) { app = ch.app; swap = ch.swap; } }));
   // platform chip: dips out, swaps, comes back
   if (app !== c.lastApp) {

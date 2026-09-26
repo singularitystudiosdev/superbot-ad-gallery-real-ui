@@ -40,6 +40,11 @@
 /* GitHub: its near-black tile, mark painted white */
 #s-tabs .sbsite .hub .qc-t-github { background: #0d1117; }
 #s-tabs .sbsite .hub .qc-t-github img { filter: brightness(0) invert(1); }
+/* Veo 3 (the Google DeepMind mark), ElevenLabs, and Meshy (its app icon fills the tile edge to edge) */
+#s-tabs .sbsite .hub .qc-t-veo { background: #0b57d0; }
+#s-tabs .sbsite .hub .qc-t-elevenlabs { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-elevenlabs img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-t-meshy img, #s-tabs .sbsite .hub .qc-who .qc-t-meshy img { width: 100%; height: 100%; }
 /* superbot's tile: its mark, static. The silhouette is the mask geometry of assets/sb-mark-live.html (eyes cut out)
    used as a CSS mask, three layers deep like the live mark (storm-0 up-left, storm-3 down-right, fg on top), so
    it needs no SVG mask ids and draws the same in every browser */

@@ -1,0 +1,27 @@
+Backlog spot (Steam + Epic + GOG, one backlog), asset credits. The user, the three library sizes, every
+playtime and today's wishlist prices in data.js are invented for the spot. HowLongToBeat main-story hours
+and Steam review percentages are rounded approximations of the public figures. The page buys nothing:
+it is a read-only view of the libraries.
+
+img/hero.jpg
+  "Dual monitor setup in a gaming room with keyboard and mouse in focus.jpg" by Shixart1985,
+  Wikimedia Commons, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/)
+  https://commons.wikimedia.org/wiki/File:Dual_monitor_setup_in_a_gaming_room_with_keyboard_and_mouse_in_focus.jpg
+  Attribution owed on publish: "Photo: Shixart1985, CC BY 2.0".
+
+img/<game>.jpg
+  Steam store header capsules (460x215), from the Steam CDN (shared.cloudflare.steamstatic.com,
+  store_item_assets/steam/apps/<appid>/header.jpg). Copyright their publishers; used only to identify the
+  games in the library view. appids: short-hike 1055540, edith-finch 501300, inside 304430, gris 683320,
+  firewatch 383870, celeste 504230, portal-2 620, obra-dinn 653530, control 870780, outer-wilds 753640,
+  hades 1145360, disco-elysium 632470, hollow-knight 367520, subnautica 264710, witcher-3 292030,
+  clair-obscur 1903340, balatro 2379780, hades-2 1145350, silksong 1030300, pentiment 1205520,
+  dave-the-diver 1868140.
+
+Store marks, via the Iconify API (api.iconify.design), set on rounded 64 px tiles. Trademarks of their
+owners, used only to name the stores the page reads from.
+  brand/steam.svg  simple-icons:steam (CC0)
+  brand/epic.svg   simple-icons:epicgames (CC0)
+  brand/gog.svg    simple-icons:gogdotcom (CC0)
+  brand/hltb.svg   mdi:timer-outline (Apache 2.0), stands in for HowLongToBeat
+  brand/app.svg    mdi:gamepad-variant (Apache 2.0), tinted mint

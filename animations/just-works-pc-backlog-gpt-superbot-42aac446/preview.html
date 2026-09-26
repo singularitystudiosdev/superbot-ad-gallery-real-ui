@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Backlog - preview</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #080b10; }
+  #preview-root { width: 100%; }
+</style>
+</head>
+<body>
+<div id="preview-root" class="site site-pc-backlog"></div>
+<script type="module">
+  import cfg from './ad.js';
+  import * as data from './data.js';
+  import * as site from './site.js';
+
+  const root = document.getElementById('preview-root');
+  const draw = () => site.default(root, { data, cfg });
+  draw();
+  if (site.render) site.render(root, 0.35);
+
+  // dev page only: mirrors the kit's click plan so the On sale panel can be inspected.
+  root.addEventListener('click', (event) => {
+    const tab = event.target.closest('.bl-tab--2');
+    if (tab) tab.classList.add('is-active');
+  });
+  // dev page only: mirrors the kit's hover plan on the first backlog row.
+  const over = root.querySelector('.bl-brow--1');
+  if (over) over.classList.add('is-hover');
+
+  // dev page only: re-draw button, proves build() is idempotent on the same root.
+  const bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:99;display:flex;gap:8px;font:600 12px/1 -apple-system,system-ui,sans-serif';
+  const again = document.createElement('button');
+  again.textContent = 'build() again';
+  again.style.cssText = 'padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#121824;color:#eef2f8;cursor:pointer';
+  again.onclick = () => { draw(); if (site.render) site.render(root, 0.35); };
+  bar.appendChild(again);
+  document.body.appendChild(bar);
+</script>
+</body>
+</html>

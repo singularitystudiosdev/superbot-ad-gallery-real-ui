@@ -222,3 +222,36 @@ body.lb-open .soon-pick { right: 268px; }
 .tile .plink:hover, .tile .plink:focus-visible { color: var(--acc); border-color: var(--acc); outline: none; }
 .lb-caption .lb-link { color: var(--dim); text-decoration: none; font-size: 11.5px; border-bottom: 1px dashed transparent; }
 .lb-caption .lb-link:hover, .lb-caption .lb-link:focus-visible { color: var(--acc); border-bottom-color: var(--acc); outline: none; }
+
+/* ---- mark for deletion: the ✕ a tile shows top-left marks the ad and copies the marked list;
+   nothing is deleted from the page; the marked ids come back in chat as one paste ---- */
+.tile .mark {
+  position: absolute; top: 8px; left: 8px; z-index: 2;
+  font-family: var(--mono); font-size: 12px; line-height: 1;
+  padding: 5px 8px; cursor: pointer; border-radius: 0;
+  color: var(--dim); background: rgba(5, 8, 5, .72); border: 1px solid var(--line);
+  transition: color .12s, border-color .12s, background .12s;
+}
+.tile .mark:hover, .tile .mark:focus-visible { color: var(--amber); border-color: var(--amber); outline: none; }
+.tile .mark.on { color: var(--bg); background: var(--amber); border-color: var(--amber); }
+.tile.marked { border-color: var(--amber); box-shadow: 0 0 24px -6px #ffb34755; }
+.tile.marked::before, .tile.marked::after { opacity: 1; }
+.tile.marked::before { border-top-color: var(--amber); border-left-color: var(--amber); }
+.tile.marked::after { border-top-color: var(--amber); border-right-color: var(--amber); }
+
+.mark-bar {
+  position: fixed; left: 24px; bottom: 20px; z-index: 11;
+  display: flex; gap: 2px; padding: 3px;
+  background: var(--panel); border: 1px solid var(--amber);
+}
+.mark-bar[hidden] { display: none; }
+body.lb-open .mark-bar { display: none; }
+.mark-bar button {
+  font-family: var(--mono); font-size: 12px; line-height: 1;
+  border: none; border-radius: 0; padding: 9px 10px; cursor: pointer;
+  background: none; color: var(--amber); white-space: nowrap;
+}
+.mark-bar #markCopy:hover { background: var(--amber); color: var(--bg); }
+.mark-bar #markClear { color: var(--dim); border-left: 1px solid var(--line); }
+.mark-bar #markClear:hover { color: var(--fg); }
+@media (max-width: 640px) { .mark-bar { left: 16px; right: 16px; bottom: 12px; } }

@@ -44,6 +44,48 @@ async function copyEdits() {
   flash(`✓ copied ${n} edit${n === 1 ? '' : 's'}`);
 }
 
+// ---- mark for deletion: the ✕ a tile carries top-left NEVER deletes. It toggles the ad into a
+// marked set and copies the WHOLE set to the clipboard, so five clicks arrive in chat as one
+// paste. Keyed by id, like the caption edits; the deletion itself is applied to manifest.json.
+const MARKED_KEY = 'gallery.marked.v1';
+let MARKED = [];
+try { const v = JSON.parse(localStorage.getItem(MARKED_KEY) || '[]'); if (Array.isArray(v)) MARKED = v; } catch { MARKED = []; }
+function markPayload() {
+  const map = {};
+  for (const id of MARKED) {
+    const it = ITEMS.find((i) => i.id === id);
+    map[id] = it ? titleOf(it) : id;
+  }
+  return 'Delete these ad gallery items (superbot-ad-gallery-real-ui, {id: title}):\n```json\n' + JSON.stringify(map, null, 2) + '\n```';
+}
+function saveMarked() { localStorage.setItem(MARKED_KEY, JSON.stringify(MARKED)); }
+function renderMarkBar() {
+  const n = MARKED.length;
+  $('markBar').hidden = n === 0;
+  $('markCopy').textContent = `✕ ${n} marked · copy list`;
+}
+async function toggleMark(it, btn) {
+  const i = MARKED.indexOf(it.id);
+  const nowMarked = i === -1;
+  if (nowMarked) MARKED.push(it.id); else MARKED.splice(i, 1);
+  saveMarked();
+  btn.classList.toggle('on', nowMarked);
+  btn.setAttribute('aria-pressed', String(nowMarked));
+  const tile = btn.closest('.tile');
+  if (tile) tile.classList.toggle('marked', nowMarked);
+  renderMarkBar();
+  if (!MARKED.length) { flashLabel(btn, '✕ cleared', '✕'); return; } // nothing marked: leave the clipboard be
+  await copyText(markPayload()); // every click rewrites the clipboard with the whole list
+  flashLabel(btn, `✓ ${MARKED.length}`, '✕');
+}
+function clearMarked() {
+  MARKED = [];
+  saveMarked();
+  renderMarkBar();
+  renderGrid(); // repaint so no tile is left showing a mark
+  copyText('Delete these ad gallery items (superbot-ad-gallery-real-ui): none, the marked list is empty.');
+}
+
 // ---- permalinks: <gallery>/#<id> opens that ad in the viewer; the hash follows the open ad ----
 const permalink = (it) => `${location.origin}${location.pathname}#${encodeURIComponent(it.id)}`;
 const directLink = (it) => new URL(it.type === 'image' ? srcFor(it, it.src) : it.src, location.href).href;
@@ -302,13 +344,15 @@ function renderGrid() {
   $('count').textContent = `${list.length} items`;
   for (const it of list) {
     // the tile is a container: the thumbnail and the badge open the lightbox, the caption is editable
+    const marked = MARKED.includes(it.id);
     const t = document.createElement('div');
-    t.className = 'tile' + (it.type === 'animation' ? ' anim' : '');
+    t.className = 'tile' + (it.type === 'animation' ? ' anim' : '') + (marked ? ' marked' : '');
     t.id = `ad-${it.id}`;
     const s = sizeOf(it);
     const wh = s ? ` width="${s.w}" height="${s.h}"` : '';
     const title = titleOf(it);
     t.innerHTML =
+      `<button type="button" class="mark${marked ? ' on' : ''}" aria-pressed="${marked}" title="mark for deletion: copies the marked list to your clipboard, deletes nothing" aria-label="mark ${esc(it.id)} for deletion">✕</button>` +
       `<button type="button" class="open" aria-label="${it.type === 'animation' ? 'play' : 'zoom'}: ${esc(title)}"><img src="${srcFor(it, it.thumb)}" alt="${esc(title)}" loading="lazy"${wh}></button>` +
       `<span class="meta"><button type="button" class="badge">${it.type === 'animation' ? '▶ play' : '⤢ zoom'}</button>` +
       `<a class="plink" href="#${encodeURIComponent(it.id)}" title="copy this ad's permalink">🔗 link</a>` +
@@ -325,6 +369,7 @@ function renderGrid() {
     else im.onload = () => im.classList.add('loaded');
     t.querySelector('.open').onclick = (e) => open(it, e);
     t.querySelector('.badge').onclick = (e) => open(it, e);
+    t.querySelector('.mark').onclick = (e) => { e.preventDefault(); e.stopPropagation(); toggleMark(it, e.currentTarget); };
     const pl = t.querySelector('.plink');
     pl.onclick = (e) => { // copy, don't navigate; right-click / middle-click still get the real #link
       e.preventDefault();
@@ -438,7 +483,13 @@ document.addEventListener('keydown', (e) => {
 
 // ---- boot ----
 $('capCopy').onclick = copyEdits;
+$('markCopy').onclick = () => {
+  if (!MARKED.length) return;
+  copyText(markPayload()).then(() => flashLabel($('markCopy'), '✓ copied', `✕ ${MARKED.length} marked · copy list`));
+};
+$('markClear').onclick = clearMarked;
 renderCopy();
+renderMarkBar();
 renderSoon();
 
 fetch('manifest.json')

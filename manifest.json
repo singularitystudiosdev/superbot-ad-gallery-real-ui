@@ -192,6 +192,22 @@
     "thumb": "assets/shots/just-works-pc-backlog-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-marathon-build-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Strava + Garmin + Nike Run Club, one training log",
+    "src": "animations/just-works-marathon-build-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-marathon-build-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-marathon-build-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Strava + Garmin + Nike Run Club, ChatGPT vs Superbot",
+    "src": "animations/just-works-marathon-build-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-marathon-build-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

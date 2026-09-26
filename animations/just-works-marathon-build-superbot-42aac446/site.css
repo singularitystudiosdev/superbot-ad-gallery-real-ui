@@ -1,0 +1,723 @@
+/* site.css - superbot.app/p/marathon-build, "Training log".
+   The page Superbot hands back: a read-only sync of a Strava log, a Garmin Connect log and a Nike Run Club
+   log, merged into one run log, with the miles on every pair of shoes and the 8 week block that ends the
+   day before the Chicago Marathon, read in the Chrome beat. Two states come from the kit and nowhere else:
+   .is-hover on the Nike Pegasus 41 row (the pair already past 400 mi) and .is-active on the Shoes tab. The
+   tab's .is-active swaps the runs panel for the shoes panel through :has() + sibling rules below, so no JS
+   runs on the click. site.js render(p) sets .is-s1 .. .is-s4 (the three logs and the gear step landing),
+   .is-m1/.is-m2 (the merge of the duplicate runs) plus the counters, the merge bar and the block bars;
+   every frame is a pure function of the plan. No CSS animations, no transitions: the kit draws every move. */
+
+.site-marathon-build {
+  --mb-bg: #07090e;
+  --mb-bg2: #0b0f16;
+  --mb-panel: #101623;
+  --mb-panel2: #18202f;
+  --mb-line: rgba(214, 226, 245, 0.08);
+  --mb-line2: rgba(214, 226, 245, 0.16);
+  --mb-ink: #eef2f8;
+  --mb-dim: #9aa6ba;
+  --mb-dim2: #667286;
+  --mb-mint: #6ff2b0;
+  --mb-mint-soft: rgba(111, 242, 176, 0.13);
+  --mb-strava: #fc4c02;
+  --mb-strava-soft: rgba(252, 76, 2, 0.14);
+  --mb-garmin: #35a7e0;
+  --mb-garmin-soft: rgba(53, 167, 224, 0.14);
+  --mb-nike: #e8eaee;
+  --mb-nike-soft: rgba(232, 234, 238, 0.12);
+  --mb-amber: #ffb547;
+  --mb-amber-soft: rgba(255, 181, 71, 0.14);
+  --mb-red: #ff6060;
+  --mb-red-soft: rgba(255, 96, 96, 0.14);
+
+  container: mb / inline-size;
+  width: 100%;
+  min-width: 0;
+  background: var(--mb-bg);
+  color: var(--mb-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-marathon-build *,
+.site-marathon-build *::before,
+.site-marathon-build *::after { box-sizing: border-box; }
+
+.site-marathon-build p,
+.site-marathon-build h1,
+.site-marathon-build h2,
+.site-marathon-build h3,
+.site-marathon-build ul,
+.site-marathon-build ol,
+.site-marathon-build li { margin: 0; padding: 0; }
+
+.site-marathon-build ul,
+.site-marathon-build ol { list-style: none; }
+.site-marathon-build img { display: block; max-width: 100%; }
+.site-marathon-build b,
+.site-marathon-build em,
+.site-marathon-build i { font-style: normal; }
+.site-marathon-build b { font-weight: 650; }
+.site-marathon-build small { font-size: inherit; }
+
+.site-marathon-build .mb-ico { width: 14px; height: 14px; flex: none; }
+
+.site-marathon-build .mb-clock,
+.site-marathon-build .mb-synccount,
+.site-marathon-build .mb-mk b,
+.site-marathon-build .mb-stats b,
+.site-marathon-build .mb-racefacts b,
+.site-marathon-build .mb-taperrow b,
+.site-marathon-build .mb-acc-v b,
+.site-marathon-build .mb-wmi,
+.site-marathon-build .mb-bstats b,
+.site-marathon-build .mb-rnum,
+.site-marathon-build .mb-emi { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it) ---------- */
+.site-marathon-build .mb-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--mb-bg);
+  border-bottom: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-topin {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding: 0 28px;
+}
+.site-marathon-build .mb-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
+.site-marathon-build .mb-brandico { width: 22px; height: 22px; border-radius: 6px; }
+.site-marathon-build .mb-by { color: var(--mb-dim2); font-size: 12px; }
+
+.site-marathon-build .mb-tabs { display: flex; gap: 4px; margin-left: 12px; }
+.site-marathon-build .mb-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: var(--mb-dim);
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-marathon-build .mb-tab i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--mb-panel2);
+  color: var(--mb-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+.site-marathon-build .mb-tab--1,
+.site-marathon-build .mb-top:has(.mb-tab--2.is-active) .mb-tab--2 {
+  background: var(--mb-mint-soft);
+  color: #b7f6d6;
+  box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32);
+}
+.site-marathon-build .mb-tab--1 i,
+.site-marathon-build .mb-top:has(.mb-tab--2.is-active) .mb-tab--2 i { background: var(--mb-mint); color: #05231a; }
+.site-marathon-build .mb-top:has(.mb-tab--2.is-active) .mb-tab--1 {
+  background: none;
+  color: var(--mb-dim);
+  box-shadow: none;
+}
+.site-marathon-build .mb-top:has(.mb-tab--2.is-active) .mb-tab--1 i { background: var(--mb-panel2); color: var(--mb-dim); }
+.site-marathon-build .mb-tab--2.is-hover { color: var(--mb-ink); background: var(--mb-panel2); }
+
+.site-marathon-build .mb-status { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-marathon-build .mb-logs,
+.site-marathon-build .mb-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--mb-line2);
+  color: var(--mb-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.site-marathon-build .mb-logs img { width: 16px; height: 16px; border-radius: 4px; }
+.site-marathon-build .mb-logs img + img { margin-left: -4px; box-shadow: 0 0 0 1.5px var(--mb-bg); }
+.site-marathon-build .mb-logs .mb-ico { width: 12px; height: 12px; margin-left: 2px; }
+.site-marathon-build .mb-live { color: var(--mb-ink); font-weight: 560; min-width: 116px; }
+.site-marathon-build .mb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mb-mint);
+  box-shadow: 0 0 0 3px var(--mb-mint-soft);
+}
+.site-marathon-build .mb-syncbar { height: 2px; }
+.site-marathon-build .mb-syncfill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--mb-strava), var(--mb-garmin), var(--mb-mint));
+}
+
+/* ---------- hero ---------- */
+.site-marathon-build .mb-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-herobg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% 42%;
+  opacity: 0.6;
+}
+.site-marathon-build .mb-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 9, 14, 0.97) 0%, rgba(7, 9, 14, 0.88) 52%, rgba(7, 9, 14, 0.52) 100%),
+    linear-gradient(0deg, rgba(7, 9, 14, 1) 0%, rgba(7, 9, 14, 0) 40%);
+}
+.site-marathon-build .mb-heroin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 336px);
+  gap: 34px;
+  align-items: start;
+  padding: 36px 28px 32px;
+}
+.site-marathon-build .mb-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--mb-mint);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.site-marathon-build .mb-hero h1 {
+  margin-top: 12px;
+  max-width: 640px;
+  font-size: 33px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.site-marathon-build .mb-dek { margin-top: 12px; max-width: 585px; color: var(--mb-dim); font-size: 13.5px; line-height: 1.55; text-wrap: pretty; }
+
+/* the sync card: three logs tick in, then the duplicate copies collapse from 591 to 388 */
+.site-marathon-build .mb-sync {
+  margin-top: 20px;
+  max-width: 640px;
+  padding: 13px 15px 12px;
+  border-radius: 14px;
+  background: rgba(16, 22, 35, 0.88);
+  border: 1px solid var(--mb-line2);
+}
+.site-marathon-build .mb-synchead { position: relative; height: 20px; }
+.site-marathon-build .mb-syncnow,
+.site-marathon-build .mb-stamp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.site-marathon-build .mb-syncnow { color: var(--mb-ink); }
+.site-marathon-build .mb-syncnow .mb-ico { color: var(--mb-garmin); }
+.site-marathon-build .mb-synccount { margin-left: auto; color: var(--mb-dim); font-weight: 600; }
+.site-marathon-build .mb-stamp { color: var(--mb-mint); opacity: 0; }
+.site-marathon-build .mb-hero.is-s4 .mb-syncnow { opacity: 0; }
+.site-marathon-build .mb-hero.is-s4 .mb-stamp { opacity: 1; }
+
+.site-marathon-build .mb-ticks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin-top: 11px; }
+.site-marathon-build .mb-tick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 9px;
+  background: var(--mb-bg2);
+  border: 1px solid var(--mb-line);
+  color: var(--mb-dim2);
+  font-size: 12px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-marathon-build .mb-tick img { width: 20px; height: 20px; border-radius: 5px; opacity: 0.45; }
+.site-marathon-build .mb-tick span { overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-tick > b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.site-marathon-build .mb-tickok {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--mb-panel2);
+  color: transparent;
+}
+.site-marathon-build .mb-tickok .mb-ico { width: 11px; height: 11px; stroke-width: 3; }
+.site-marathon-build .mb-hero.is-s1 .mb-tick--s1,
+.site-marathon-build .mb-hero.is-s2 .mb-tick--s2,
+.site-marathon-build .mb-hero.is-s3 .mb-tick--s3,
+.site-marathon-build .mb-hero.is-s4 .mb-tick--s4 {
+  color: var(--mb-ink);
+  border-color: rgba(111, 242, 176, 0.3);
+  background: var(--mb-mint-soft);
+}
+.site-marathon-build .mb-hero.is-s1 .mb-tick--s1 img,
+.site-marathon-build .mb-hero.is-s2 .mb-tick--s2 img,
+.site-marathon-build .mb-hero.is-s3 .mb-tick--s3 img,
+.site-marathon-build .mb-hero.is-s4 .mb-tick--s4 img { opacity: 1; }
+.site-marathon-build .mb-hero.is-s1 .mb-tick--s1 .mb-tickok,
+.site-marathon-build .mb-hero.is-s2 .mb-tick--s2 .mb-tickok,
+.site-marathon-build .mb-hero.is-s3 .mb-tick--s3 .mb-tickok,
+.site-marathon-build .mb-hero.is-s4 .mb-tick--s4 .mb-tickok { background: var(--mb-mint); color: #05231a; }
+
+/* the merge beat: the amber band of duplicates goes, the mint band of unique runs takes the bar */
+.site-marathon-build .mb-merge { margin-top: 11px; opacity: 0.45; border-radius: 10px; }
+/* the cursor rests on the merge counters while the duplicates collapse (ad.js hover, engine toggles is-hover) */
+.site-marathon-build .mb-merge.is-hover { background: rgba(111, 242, 176, 0.06); box-shadow: 0 0 0 7px rgba(111, 242, 176, 0.06); }
+.site-marathon-build .mb-merge.is-hover .mb-mk--dup b { color: #ffc56b; }
+.site-marathon-build .mb-hero.is-m1 .mb-merge { opacity: 1; }
+.site-marathon-build .mb-mbar {
+  display: flex;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--mb-panel2);
+  overflow: hidden;
+}
+.site-marathon-build .mb-mun { display: block; width: 65.65%; background: linear-gradient(90deg, #37d492, var(--mb-mint)); }
+.site-marathon-build .mb-mdup {
+  display: block;
+  width: 34.35%;
+  background: repeating-linear-gradient(-45deg, rgba(255, 181, 71, 0.85) 0 4px, rgba(255, 181, 71, 0.32) 4px 8px);
+}
+.site-marathon-build .mb-mrow { display: flex; gap: 16px; margin-top: 9px; color: var(--mb-dim); font-size: 11.5px; }
+.site-marathon-build .mb-mk { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.site-marathon-build .mb-mk b { font-size: 15px; color: var(--mb-ink); }
+.site-marathon-build .mb-mk--dup b { color: var(--mb-amber); }
+.site-marathon-build .mb-mk--uniq { margin-left: auto; }
+.site-marathon-build .mb-mk--uniq b { color: var(--mb-mint); }
+.site-marathon-build .mb-mbar.is-merged { box-shadow: 0 0 0 1px rgba(111, 242, 176, 0.4); }
+
+.site-marathon-build .mb-stats { display: flex; gap: 9px; margin-top: 14px; max-width: 640px; }
+.site-marathon-build .mb-stats li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 11px;
+  background: rgba(16, 22, 35, 0.74);
+  border: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-stats b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-marathon-build .mb-stats span { display: block; color: var(--mb-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-stat--flag b { color: var(--mb-red); }
+.site-marathon-build .mb-stat--race b { color: var(--mb-mint); }
+
+/* the race card: the marathon the block was built for */
+.site-marathon-build .mb-race {
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  background: rgba(16, 22, 35, 0.94);
+  border: 1px solid var(--mb-line2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+.site-marathon-build .mb-racek { display: flex; align-items: center; gap: 6px; color: var(--mb-mint); font-size: 11.5px; font-weight: 600; }
+.site-marathon-build .mb-race h2 { margin-top: 7px; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+.site-marathon-build .mb-raceday { display: flex; align-items: center; gap: 7px; margin-top: 6px; color: var(--mb-dim); font-size: 12.5px; }
+.site-marathon-build .mb-raceday .mb-ico { color: var(--mb-amber); }
+.site-marathon-build .mb-racefacts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin-top: 13px; }
+.site-marathon-build .mb-racefacts li {
+  padding: 7px 8px;
+  border-radius: 9px;
+  background: var(--mb-bg2);
+  border: 1px solid var(--mb-line);
+  min-width: 0;
+}
+.site-marathon-build .mb-racefacts small { display: block; color: var(--mb-dim2); font-size: 10.5px; white-space: nowrap; }
+.site-marathon-build .mb-racefacts b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-taper { margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--mb-line); }
+.site-marathon-build .mb-taperh { display: flex; align-items: center; gap: 7px; color: var(--mb-dim); font-size: 12px; font-weight: 600; }
+.site-marathon-build .mb-taperh .mb-ico { color: var(--mb-mint); }
+.site-marathon-build .mb-taperrow { display: flex; gap: 8px; margin-top: 9px; }
+.site-marathon-build .mb-taperrow span { flex: 1 1 0; min-width: 0; color: var(--mb-dim2); font-size: 10.5px; }
+.site-marathon-build .mb-taperrow b { display: block; color: var(--mb-ink); font-size: 13.5px; }
+.site-marathon-build .mb-taperbar { height: 6px; margin-top: 9px; border-radius: 99px; background: var(--mb-panel2); overflow: hidden; }
+.site-marathon-build .mb-taperbar i { display: block; height: 100%; background: linear-gradient(90deg, var(--mb-amber), var(--mb-mint)); }
+.site-marathon-build .mb-tapern { display: flex; align-items: center; gap: 6px; margin-top: 8px; color: var(--mb-dim); font-size: 11.5px; }
+.site-marathon-build .mb-tapern .mb-ico { color: var(--mb-amber); }
+
+/* ---------- the three logs ---------- */
+.site-marathon-build .mb-accs { padding: 22px 28px 0; }
+.site-marathon-build .mb-acclist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.site-marathon-build .mb-acc {
+  position: relative;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 10px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--mb-panel);
+  border: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-acc img { width: 38px; height: 38px; border-radius: 10px; }
+.site-marathon-build .mb-acc-t { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.site-marathon-build .mb-acc-t small { color: var(--mb-dim); font-size: 11.5px; }
+.site-marathon-build .mb-acc-t b { font-size: 14px; white-space: nowrap; }
+.site-marathon-build .mb-acc-v { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.site-marathon-build .mb-acc-v b { font-size: 19px; letter-spacing: -0.02em; }
+.site-marathon-build .mb-acc-v small { color: var(--mb-dim); font-size: 11.5px; text-align: right; }
+.site-marathon-build .mb-acc-ok {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--mb-mint);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.site-marathon-build .mb-acc-ok .mb-ico { width: 12px; height: 12px; }
+
+/* ---------- section heads ---------- */
+.site-marathon-build .mb-sech {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.site-marathon-build .mb-sech h2 { font-size: 17.5px; font-weight: 680; letter-spacing: -0.015em; white-space: nowrap; }
+.site-marathon-build .mb-sech span { color: var(--mb-dim); font-size: 12px; text-align: right; }
+
+/* ---------- the 8 week block ---------- */
+.site-marathon-build .mb-block { padding: 30px 28px 6px; }
+.site-marathon-build .mb-chart {
+  padding: 16px 18px 12px;
+  border-radius: 16px;
+  background: var(--mb-panel);
+  border: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-chartin { position: relative; }
+.site-marathon-build .mb-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.site-marathon-build .mb-longline {
+  fill: none;
+  stroke: var(--mb-mint);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+.site-marathon-build .mb-wcols { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0; align-items: end; }
+.site-marathon-build .mb-wcol { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.site-marathon-build .mb-wmi { margin-bottom: 5px; color: var(--mb-dim); font-size: 11px; font-weight: 600; }
+.site-marathon-build .mb-wbar {
+  display: block;
+  width: calc(100% - 22px);
+  height: 0;
+  border-radius: 8px 8px 3px 3px;
+  background: linear-gradient(180deg, rgba(111, 242, 176, 0.85), rgba(111, 242, 176, 0.22));
+  box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.28);
+}
+.site-marathon-build .mb-wcol--6 .mb-wbar { background: linear-gradient(180deg, #9dffcb, rgba(111, 242, 176, 0.35)); }
+/* the cursor rests on the peak week during the block hold */
+.site-marathon-build .mb-wcol.is-hover .mb-wbar { box-shadow: inset 0 0 0 1px rgba(157, 255, 203, 0.9), 0 0 22px rgba(111, 242, 176, 0.35); }
+.site-marathon-build .mb-wcol.is-hover .mb-wmi { color: var(--mb-mint); }
+.site-marathon-build .mb-wcol--4 .mb-wbar { background: linear-gradient(180deg, rgba(255, 181, 71, 0.8), rgba(255, 181, 71, 0.2)); }
+.site-marathon-build .mb-wcol--8 .mb-wbar { background: linear-gradient(180deg, rgba(53, 167, 224, 0.85), rgba(53, 167, 224, 0.22)); }
+.site-marathon-build .mb-wdot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: var(--mb-mint);
+  box-shadow: 0 0 0 2px rgba(7, 9, 14, 0.9);
+  opacity: 0;
+}
+.site-marathon-build .mb-wlabs { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0; margin-top: 10px; }
+.site-marathon-build .mb-wlab { text-align: center; min-width: 0; }
+.site-marathon-build .mb-wlab b { display: block; font-size: 12px; }
+.site-marathon-build .mb-wlab small { display: block; color: var(--mb-dim); font-size: 11px; }
+.site-marathon-build .mb-wlab em { display: block; color: var(--mb-dim2); font-size: 10.5px; }
+.site-marathon-build .mb-legend { display: flex; gap: 16px; margin-top: 12px; color: var(--mb-dim2); font-size: 11px; }
+.site-marathon-build .mb-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.site-marathon-build .mb-legend i { display: block; width: 16px; border-radius: 2px; }
+.site-marathon-build .mb-k-wk { height: 7px; background: linear-gradient(180deg, rgba(111, 242, 176, 0.85), rgba(111, 242, 176, 0.3)); }
+.site-marathon-build .mb-k-long { height: 3px; background: var(--mb-mint); }
+.site-marathon-build .mb-k-taper { height: 7px; background: rgba(53, 167, 224, 0.7); }
+
+.site-marathon-build .mb-bstats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+.site-marathon-build .mb-bstats li {
+  padding: 11px 12px;
+  border-radius: 12px;
+  background: var(--mb-panel);
+  border: 1px solid var(--mb-line);
+  min-width: 0;
+}
+.site-marathon-build .mb-bstats b { display: block; font-size: 19px; letter-spacing: -0.02em; }
+.site-marathon-build .mb-bstats span { display: block; color: var(--mb-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.site-marathon-build .mb-note {
+  display: flex;
+  gap: 9px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--mb-bg2);
+  border: 1px dashed var(--mb-line2);
+  color: var(--mb-dim);
+  font-size: 12.5px;
+}
+.site-marathon-build .mb-note .mb-ico { margin-top: 2px; color: var(--mb-garmin); }
+
+/* ---------- runs that arrived twice ---------- */
+.site-marathon-build .mb-drift { padding: 28px 28px 6px; }
+.site-marathon-build .mb-mlist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.site-marathon-build .mb-m {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 26px;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  background: var(--mb-panel);
+  border: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-mname { display: flex; flex-direction: column; min-width: 0; }
+.site-marathon-build .mb-mname b { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-mname small { color: var(--mb-dim); font-size: 11.5px; white-space: nowrap; }
+.site-marathon-build .mb-mtags { display: flex; gap: 5px; }
+.site-marathon-build .mb-mok { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--mb-mint-soft); color: var(--mb-mint); }
+.site-marathon-build .mb-mok .mb-ico { width: 14px; height: 14px; }
+
+/* log tags: a log's mark plus its short name; a run that came in twice carries the merged outline */
+.site-marathon-build .mb-ltag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 7px 0 3px;
+  border-radius: 6px;
+  background: var(--mb-panel2);
+  color: var(--mb-dim);
+  font-size: 11px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-marathon-build .mb-ltag img { width: 16px; height: 16px; border-radius: 4px; }
+.site-marathon-build .mb-ltag--merged { box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.4); color: var(--mb-ink); }
+
+/* ---------- panels: the run log by default, the shoes once the tab is active ---------- */
+.site-marathon-build .mb-panels { padding: 26px 28px 20px; }
+.site-marathon-build .mb-panel--2 { display: none; }
+.site-marathon-build .mb-top:has(.mb-tab--2.is-active) ~ .mb-panels .mb-panel--1 { display: none; }
+.site-marathon-build .mb-top:has(.mb-tab--2.is-active) ~ .mb-panels .mb-panel--2 { display: block; }
+
+.site-marathon-build .mb-table {
+  border-radius: 14px;
+  background: var(--mb-panel);
+  border: 1px solid var(--mb-line);
+  overflow: hidden;
+}
+.site-marathon-build .mb-rrow,
+.site-marathon-build .mb-erow {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-rrow { grid-template-columns: 84px minmax(0, 2fr) 76px 76px 70px minmax(0, 1fr) 148px; }
+.site-marathon-build .mb-erow { grid-template-columns: minmax(0, 1.6fr) 78px 72px minmax(0, 1.4fr) 84px 96px; }
+.site-marathon-build .mb-rrow--h,
+.site-marathon-build .mb-erow--h {
+  height: 36px;
+  background: var(--mb-bg2);
+  color: var(--mb-dim2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.site-marathon-build .mb-rrow--h span:nth-child(n + 3),
+.site-marathon-build .mb-erow--h span:nth-child(n + 2):not(:nth-child(5)) { text-align: right; }
+.site-marathon-build .mb-erow--h span:nth-child(5) { text-align: right; }
+.site-marathon-build .mb-rdate { color: var(--mb-dim); font-size: 12px; }
+.site-marathon-build .mb-rname { display: flex; flex-direction: column; min-width: 0; }
+.site-marathon-build .mb-rname b { font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-rname small { color: var(--mb-dim2); font-size: 11px; white-space: nowrap; }
+.site-marathon-build .mb-rnum { text-align: right; color: var(--mb-dim); }
+.site-marathon-build .mb-rtags { display: flex; gap: 5px; min-width: 0; overflow: hidden; }
+.site-marathon-build .mb-rshoe { display: flex; align-items: center; gap: 8px; color: var(--mb-dim); font-size: 11.5px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-rshoe img { width: 20px; height: 20px; border-radius: 5px; flex: none; }
+.site-marathon-build .mb-rshoe em { color: var(--mb-dim2); }
+.site-marathon-build .mb-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  background: var(--mb-bg2);
+  color: var(--mb-dim);
+  font-size: 12px;
+}
+
+/* shoes: the mileage bar, the 400 mi line, and the red Replace flag past it */
+.site-marathon-build .mb-erow { position: relative; }
+.site-marathon-build .mb-erow:not(.mb-erow--h) { height: auto; min-height: 62px; padding: 10px 16px; }
+.site-marathon-build .mb-ename { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-marathon-build .mb-ename img { width: 30px; height: 30px; border-radius: 9px; flex: none; }
+.site-marathon-build .mb-ename > span { display: flex; flex-direction: column; min-width: 0; }
+.site-marathon-build .mb-ename b { font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-ename small { color: var(--mb-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-marathon-build .mb-esince,
+.site-marathon-build .mb-elast { color: var(--mb-dim); font-size: 12px; }
+.site-marathon-build .mb-emi { text-align: right; font-size: 14px; font-weight: 650; }
+.site-marathon-build .mb-etrack { position: relative; display: block; height: 12px; border-radius: 99px; background: var(--mb-panel2); }
+.site-marathon-build .mb-efill { position: absolute; inset: 0 auto 0 0; display: block; border-radius: 99px; background: linear-gradient(90deg, #2fbf85, var(--mb-mint)); }
+.site-marathon-build .mb-erow--past .mb-efill { background: linear-gradient(90deg, #d3453f, var(--mb-red)); }
+.site-marathon-build .mb-elim { position: absolute; top: -3px; bottom: -3px; width: 2px; background: rgba(255, 181, 71, 0.9); }
+.site-marathon-build .mb-elabel { position: absolute; top: -14px; margin-left: 4px; color: var(--mb-amber); font-size: 10px; }
+.site-marathon-build .mb-echip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: 7px;
+  font-size: 11.5px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.site-marathon-build .mb-echip .mb-ico { width: 12px; height: 12px; }
+.site-marathon-build .mb-echip--ok { background: var(--mb-mint-soft); color: var(--mb-mint); }
+.site-marathon-build .mb-echip--bad { background: var(--mb-red-soft); color: var(--mb-red); box-shadow: inset 0 0 0 1px rgba(255, 96, 96, 0.4); }
+.site-marathon-build .mb-erow-note {
+  display: none;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 7px;
+  margin-top: 2px;
+  color: var(--mb-red);
+  font-size: 11.5px;
+}
+.site-marathon-build .mb-erow-note .mb-ico { width: 13px; height: 13px; }
+.site-marathon-build .mb-erow.is-hover { background: var(--mb-red-soft); box-shadow: inset 3px 0 0 var(--mb-red); }
+.site-marathon-build .mb-erow.is-hover .mb-erow-note { display: flex; }
+.site-marathon-build .mb-erow.is-hover .mb-echip--bad { background: var(--mb-red); color: #2a0606; }
+.site-marathon-build .mb-erow--h.is-hover { background: var(--mb-bg2); box-shadow: none; }
+.site-marathon-build .mb-shoesum {
+  display: flex;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--mb-red-soft);
+  border: 1px solid rgba(255, 96, 96, 0.28);
+  color: #ffc9c9;
+  font-size: 12.5px;
+}
+.site-marathon-build .mb-shoesum .mb-ico { margin-top: 2px; color: var(--mb-red); }
+
+/* ---------- keeps watching ---------- */
+.site-marathon-build .mb-watch { padding: 12px 28px 26px; }
+.site-marathon-build .mb-wlist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.site-marathon-build .mb-w {
+  display: flex;
+  gap: 11px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--mb-panel);
+  border: 1px solid var(--mb-line);
+}
+.site-marathon-build .mb-wi {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--mb-mint-soft);
+  color: var(--mb-mint);
+}
+.site-marathon-build .mb-wt { display: flex; flex-direction: column; min-width: 0; }
+.site-marathon-build .mb-wt small { color: var(--mb-dim2); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.site-marathon-build .mb-wt b { margin-top: 2px; font-size: 13.5px; }
+.site-marathon-build .mb-wt em { margin-top: 2px; color: var(--mb-dim); font-size: 12px; }
+
+.site-marathon-build .mb-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--mb-line);
+  color: var(--mb-dim2);
+  font-size: 12px;
+}
+.site-marathon-build .mb-foot span:first-child { display: inline-flex; align-items: center; gap: 7px; }
+
+/* ---------- narrow frames (the 1:1 and 4:5 cuts lay the page out near 800 px) ---------- */
+@container mb (max-width: 1000px) {
+  .site-marathon-build .mb-topin { gap: 12px; padding: 0 20px; }
+  .site-marathon-build .mb-by,
+  .site-marathon-build .mb-logs { display: none; }
+  .site-marathon-build .mb-tabs { margin-left: 4px; }
+  .site-marathon-build .mb-heroin { grid-template-columns: minmax(0, 1fr) 268px; gap: 18px; padding: 26px 20px 24px; }
+  .site-marathon-build .mb-hero h1 { font-size: 25px; }
+  .site-marathon-build .mb-dek { font-size: 13px; }
+  .site-marathon-build .mb-ticks { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .site-marathon-build .mb-tick { overflow: hidden; }
+  .site-marathon-build .mb-mrow { gap: 10px; font-size: 11px; }
+  .site-marathon-build .mb-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-marathon-build .mb-stats b { font-size: 15px; }
+  .site-marathon-build .mb-race { padding: 13px 13px 12px; }
+  .site-marathon-build .mb-race h2 { font-size: 17px; }
+  .site-marathon-build .mb-racefacts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-marathon-build .mb-taperrow { flex-direction: column; gap: 5px; }
+  .site-marathon-build .mb-accs { padding: 18px 20px 0; }
+  .site-marathon-build .mb-acc-v { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .site-marathon-build .mb-acc-v b { font-size: 17px; }
+  .site-marathon-build .mb-acc-v small { text-align: left; }
+  .site-marathon-build .mb-block { padding: 26px 20px 6px; }
+  .site-marathon-build .mb-wcols,
+  .site-marathon-build .mb-wlabs { gap: 7px; }
+  .site-marathon-build .mb-wlab em { display: none; }
+  .site-marathon-build .mb-bstats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .site-marathon-build .mb-bstats b { font-size: 17px; }
+  .site-marathon-build .mb-drift { padding: 24px 20px 6px; }
+  .site-marathon-build .mb-mlist { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .site-marathon-build .mb-mtags .mb-ltag { padding: 0 3px; font-size: 0; gap: 0; }
+  .site-marathon-build .mb-panels { padding: 22px 20px 16px; }
+  .site-marathon-build .mb-rrow { grid-template-columns: 64px minmax(0, 2fr) 62px 62px 56px 82px 118px; gap: 8px; padding: 0 12px; }
+  .site-marathon-build .mb-erow { grid-template-columns: minmax(0, 1.5fr) 66px 60px minmax(0, 1.2fr) 70px 84px; gap: 8px; padding: 0 12px; }
+  .site-marathon-build .mb-rtags .mb-ltag { padding: 0 3px; font-size: 0; gap: 0; }
+  .site-marathon-build .mb-rshoe img { display: none; }
+  .site-marathon-build .mb-sech { flex-direction: column; gap: 3px; }
+  .site-marathon-build .mb-sech span { text-align: left; }
+  .site-marathon-build .mb-sech h2 { white-space: normal; }
+  .site-marathon-build .mb-watch { padding: 10px 20px 22px; }
+  .site-marathon-build .mb-wlist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-marathon-build .mb-foot { padding: 14px 20px 18px; }
+}

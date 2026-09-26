@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Training log - preview</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #07090e; }
+  #preview-root { width: 100%; }
+</style>
+</head>
+<body>
+<div id="preview-root" class="site site-marathon-build"></div>
+<script type="module">
+  import cfg from './ad.js';
+  import * as data from './data.js';
+  import * as site from './site.js';
+
+  const root = document.getElementById('preview-root');
+  // the final frame of the browser scene (p = 1): merge finished, 8 week bars drawn, as the ad holds it
+  const draw = () => site.default(root, { data, cfg });
+  draw();
+  if (site.render) site.render(root, 1);
+
+  // dev page only: mirrors the kit's click plan so the shoes panel can be inspected.
+  root.addEventListener('click', (event) => {
+    const tab = event.target.closest('.mb-tab--2');
+    if (tab) tab.classList.add('is-active');
+  });
+  // dev page only: mirrors the kit's hover plan on the flagged Nike Pegasus 41 row.
+  const flags = root.querySelector('.mb-erow--pegasus');
+  if (flags) flags.classList.add('is-hover');
+
+  // dev page only: the merge beat and the block bars, so those two frames can be inspected without the ad.
+  const merge = document.createElement('div');
+  merge.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:99;display:flex;gap:8px;font:600 12px/1 -apple-system,system-ui,sans-serif';
+  for (const [label, p] of [['sync', 0.08], ['merged', 1]]) {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.style.cssText = 'padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#121824;color:#eef2f8;cursor:pointer';
+    b.onclick = () => site.render(root, p);
+    merge.appendChild(b);
+  }
+  document.body.appendChild(merge);
+
+  // dev page only: re-draw button, proves build() is idempotent on the same root.
+  const bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:99;display:flex;gap:8px;font:600 12px/1 -apple-system,system-ui,sans-serif';
+  const again = document.createElement('button');
+  again.textContent = 'build() again';
+  again.style.cssText = 'padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#121824;color:#eef2f8;cursor:pointer';
+  again.onclick = () => { draw(); if (site.render) site.render(root, 1); };
+  bar.appendChild(again);
+  document.body.appendChild(bar);
+</script>
+</body>
+</html>

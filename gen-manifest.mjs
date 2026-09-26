@@ -92,6 +92,8 @@ const more = [
   ['just-works-portfolio-overview-gpt-superbot-42aac446', 'just-works-portfolio-overview-gpt-superbot-42aac446/', 'Schwab + Robinhood, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-pc-backlog-superbot-42aac446', 'just-works-pc-backlog-superbot-42aac446/', 'Steam + Epic + GOG, one backlog', 'Ad spots'],
   ['just-works-pc-backlog-gpt-superbot-42aac446', 'just-works-pc-backlog-gpt-superbot-42aac446/', 'Steam + Epic + GOG, ChatGPT vs Superbot', 'Ad spots'],
+  ['just-works-marathon-build-superbot-42aac446', 'just-works-marathon-build-superbot-42aac446/', 'Strava + Garmin + Nike Run Club, one training log', 'Ad spots'],
+  ['just-works-marathon-build-gpt-superbot-42aac446', 'just-works-marathon-build-gpt-superbot-42aac446/', 'Strava + Garmin + Nike Run Club, ChatGPT vs Superbot', 'Ad spots'],
       ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
   ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],

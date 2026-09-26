@@ -1,0 +1,25 @@
+Marathon build spot (Strava + Garmin Connect + Nike Run Club, one training log), asset credits. The user,
+the run log, the shoe mileages and the 8 week training block in data.js are invented for the spot. The race
+is a real one on its published date (Chicago Marathon, Sun Oct 11 2026) and the start time is the published
+one; the goal time, bib and corral are the runner's own. The page reads only: it never posts, edits or
+deletes anything in Strava, Garmin Connect or Nike Run Club.
+
+img/hero.jpg
+  "Runners in a race, Vieux-Limoilou.jpg" by Wilfredor, Wikimedia Commons, CC0 1.0 (public domain
+  dedication, https://creativecommons.org/publicdomain/zero/1.0/)
+  https://commons.wikimedia.org/wiki/File:Runners_in_a_race,_Vieux-Limoilou.jpg
+  Cropped to 1600 x 1068 from the 4317 x 2951 original. CC0 owes no attribution; credited anyway.
+
+Log marks and the app icon, via the Iconify API (api.iconify.design), set on rounded 64 px tiles.
+Trademarks of their owners, used only to name the logs the page reads from.
+  brand/strava.svg  simple-icons:strava (CC0)
+  brand/garmin.svg  simple-icons:garmin (CC0)
+  brand/nike.svg    simple-icons:nike (CC0)
+  brand/shoe.svg    mdi:shoe-sneaker (Apache 2.0), stands in for a pair of shoes
+  brand/run.svg     mdi:run-fast (Apache 2.0), the row glyph for a run in the log
+  brand/app.svg     mdi:run (Apache 2.0), tinted mint, the app favicon
+
+Inline interface glyphs in site.js (check, lock, refresh, calendar, map pin, trend, clock, activity, list,
+footprints, merge, info, alert, trophy, flame) are lucide paths fetched from the same Iconify API.
+No shoe product photos are used: the shoes in the log are named by model, and the row glyph is the drawn
+shoe mark above.

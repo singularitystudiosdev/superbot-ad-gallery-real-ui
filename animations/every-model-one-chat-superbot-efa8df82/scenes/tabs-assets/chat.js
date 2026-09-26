@@ -1,4 +1,4 @@
-// The five-request chat, one model per request. Each ask is typed into the composer and sent, superbot routes it
+// The four-request chat, one model per request. Each ask is typed into the composer and sent, superbot routes it
 // (its routing chip and the composer's platform chip follow the model), and the routed model answers with its own
 // beat (./beats/*.js). An ask with no text is superbot continuing on its own. The thread is bottom-anchored so
 // every message rises out of the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on
@@ -7,8 +7,7 @@ import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCurso
 import { makeCursor } from '../../shell.js';
 import gemini from './beats/gemini.js?v=1';
 import scrape from './beats/scrape.js?v=2';
-import post from './beats/post.js?v=1';
-import xpost from './beats/xpost.js?v=1';
+import xpost from './beats/xpost.js?v=2';
 import doordash from './beats/doordash.js?v=1';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
@@ -21,7 +20,6 @@ const APPS = {
   codex: { name: 'GPT-5 Codex', logo: brand('openai-logo.svg'), sub: '' },
   gemini: { name: 'Gemini', logo: brand('gemini-logo.svg'), sub: 'in superbot' },
   deepseek: { name: 'DeepSeek V4 Flash', logo: brand('deepseek-logo.svg'), sub: 'in superbot' },
-  opus: { name: 'Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
   grok: { name: 'Grok', logo: brand('grok.png'), sub: 'in superbot' },
   doordash: { name: 'DoorDash', logo: brand('doordash-logo.svg'), sub: 'in superbot' },
 };
@@ -29,7 +27,6 @@ const APPS = {
 const ASKS = [
   { app: 'gemini', mod: gemini, verb: 'Switching to', ask: 'make me a muse meme' },
   { app: 'deepseek', mod: scrape, verb: 'Switching to', ask: 'Scrape reddit and look for more' },
-  { app: 'opus', mod: post, verb: 'Switching to', ask: 'Make it post them and optimize for likes' },
   { app: 'grok', mod: xpost, verb: 'Switching to', ask: 'Ok great, now post to X as well' },
   { app: 'doordash', mod: doordash, verb: 'Connecting to', ask: 'Winning, order me a burger.' },
 ];

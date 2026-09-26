@@ -13,8 +13,8 @@ const stage = document.getElementById('stage');
 const dip = document.getElementById('dip');
 
 // ---------- the sequence (CONTRACT.txt) ----------
-// every-model-one-chat: the hub cropped to its thread, opening on the empty state, then the five-request chat
-// (scenes/tabs-assets/chat.js: Gemini, DeepSeek V4 Flash, Opus 5.5, Grok, DoorDash) and the end card
+// every-model-one-chat: the hub cropped to its thread, opening on the empty state, then the four-request chat
+// (scenes/tabs-assets/chat.js: Gemini, DeepSeek V4 Flash, Grok, DoorDash) and the end card
 const SEQUENCE = [
   ['scene', 'tabs'],
   ['end', 'end'],

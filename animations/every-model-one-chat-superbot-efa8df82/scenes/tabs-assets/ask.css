@@ -30,20 +30,10 @@
 #s-tabs .sbsite.ask .hub .qc-pi img[data-app="codex"] { border-radius: 50%; }
 
 /* ---- model tiles ---- */
-#s-tabs .sbsite.ask .hub .qc-t-deepseek, #s-tabs .sbsite.ask .hub .qc-t-opus { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite.ask .hub .qc-t-deepseek { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
 #s-tabs .sbsite.ask .hub .qc-t-grok { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
 #s-tabs .sbsite.ask .hub .qc-tile.qc-t-grok img, #s-tabs .sbsite.ask .hub .qc-who .qc-t-grok img { width: 100%; height: 100%; }
 #s-tabs .sbsite.ask .hub .qc-pi img[data-app="grok"] { border-radius: 3px; }
-
-/* ---- memes (thumbnails in the Opus rows) ---- */
-#s-tabs .sbsite.ask .hub .mm { display: flex; flex-direction: column; background: #fff; }
-#s-tabs .sbsite.ask .hub .mm-cap { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 5px 7px; font: 700 9.5px/1.2 "Helvetica Neue", Arial, sans-serif; color: #111; text-align: center; }
-#s-tabs .sbsite.ask .hub .mm-pic { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: #000; }
-#s-tabs .sbsite.ask .hub .mm-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
-#s-tabs .sbsite.ask .hub .mm-sm { height: 100%; }
-#s-tabs .sbsite.ask .hub .mm-sm .mm-cap { display: none; }
-#s-tabs .sbsite.ask .hub .mm-sm .mm-pic { aspect-ratio: auto; height: 100%; }
-#s-tabs .sbsite.ask .hub .mm-raw .mm-pic img { object-position: 50% 0; }
 
 /* ---- DeepSeek scrape: one pill per subreddit, counting its posts, lit once swept ---- */
 #s-tabs .sbsite.ask .hub .sc-subs { display: flex; flex-wrap: wrap; gap: 6px; max-width: 620px; margin: 0 0 10px; opacity: 0; }
@@ -52,27 +42,6 @@
 #s-tabs .sbsite.ask .hub .sc-sub b { padding: 3px 6px; border-radius: 999px; background: #1a282d; font: 600 9.5px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: #82959b; }
 #s-tabs .sbsite.ask .hub .sc-sub.on { box-shadow: inset 0 0 0 1px rgba(255,69,0,.55); color: #f2f4f5; }
 #s-tabs .sbsite.ask .hub .sc-sub.on b { background: rgba(255,69,0,.16); color: #ff8a5c; }
-
-
-/* ---- Reddit batch post ---- */
-#s-tabs .sbsite.ask .hub .rb-list { width: 480px; display: grid; gap: 6px; opacity: 0; }
-#s-tabs .sbsite.ask .hub .rb-row { display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 6px; border-radius: 12px; background: #0b1416; box-shadow: inset 0 0 0 1px #22303a; opacity: 0; }
-#s-tabs .sbsite.ask .hub .rb-thumb { flex: none; width: 40px; height: 40px; border-radius: 8px; overflow: hidden; }
-#s-tabs .sbsite.ask .hub .rb-meta { flex: 1; min-width: 0; }
-#s-tabs .sbsite.ask .hub .rb-meta b { display: block; font: 600 11px/1.35 var(--ui); color: #f2f4f5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#s-tabs .sbsite.ask .hub .rb-meta small { display: flex; align-items: center; gap: 4px; font-size: 9.5px; color: #82959b; }
-#s-tabs .sbsite.ask .hub .rb-meta small img { width: 12px; height: 12px; }
-#s-tabs .sbsite.ask .hub .rb-st { flex: none; display: grid; place-items: center; width: 46px; }
-#s-tabs .sbsite.ask .hub .rb-spin { display: block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #3a4a52; border-top-color: #ff4500; box-sizing: border-box; }
-#s-tabs .sbsite.ask .hub .rb-st em { display: none; padding: 4px 8px; border-radius: 999px; background: rgba(61,220,132,.13); font: 700 9.5px/1 var(--ui); font-style: normal; color: #3ddc84; }
-#s-tabs .sbsite.ask .hub .rb-st.on .rb-spin { display: none; }
-#s-tabs .sbsite.ask .hub .rb-st.on em { display: inline-block; }
-#s-tabs .sbsite.ask .hub .rb-sum { margin-top: 8px; opacity: 0; }
-
-/* ---- Opus posting: each live row collects upvotes ---- */
-#s-tabs .sbsite.ask .hub .po-list { width: 560px; }
-#s-tabs .sbsite.ask .hub .po-up { flex: none; display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; width: 56px; font: 700 11px/1 var(--ui); font-variant-numeric: tabular-nums; color: #ff8a5c; opacity: 0; }
-#s-tabs .sbsite.ask .hub .po-up svg { width: 12px; height: 12px; fill: #ff4500; }
 
 /* ---- Grok on X: the lead post as X's dark card ---- */
 #s-tabs .sbsite.ask .hub .xp-card { width: 420px; padding: 12px 14px 10px; border-radius: 16px; background: #000; box-shadow: 0 0 0 1px #2f3336, 0 12px 30px rgba(0,0,0,.5); color: #e7e9ea; opacity: 0; }
@@ -83,14 +52,13 @@
 #s-tabs .sbsite.ask .hub .xp-id small { font: 400 10.5px/1 var(--ui); color: #71767b; }
 #s-tabs .sbsite.ask .hub .xp-logo { margin-left: auto; width: 16px; height: 16px; display: block; }
 #s-tabs .sbsite.ask .hub .xp-text { margin: 9px 0; font: 400 12.5px/1.4 var(--ui); }
-#s-tabs .sbsite.ask .hub .xp-media { height: 190px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px #2f3336; }
+#s-tabs .sbsite.ask .hub .xp-media { height: 160px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px #2f3336; }
 #s-tabs .sbsite.ask .hub .xp-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 #s-tabs .sbsite.ask .hub .xp-acts { display: flex; justify-content: space-between; margin-top: 9px; padding-right: 24px; }
 #s-tabs .sbsite.ask .hub .xp-act { display: inline-flex; align-items: center; gap: 5px; font: 500 10.5px/1 var(--ui); font-variant-numeric: tabular-nums; color: #71767b; }
 #s-tabs .sbsite.ask .hub .xp-act svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 #s-tabs .sbsite.ask .hub .xp-like.on { color: #f91880; }
 #s-tabs .sbsite.ask .hub .xp-like.on svg { fill: #f91880; stroke: #f91880; }
-
 
 /* ---- the end card: the line, then the mascot to its right ---- */
 #s-end .lock.ask-end { gap: 56px; }

@@ -424,6 +424,22 @@
     "thumb": "assets/shots/just-works-live-shows-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-mech-keys-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "NovelKeys + CannonKeys + KBDfans + Drop + Keychron, one group-buy overview",
+    "src": "animations/just-works-mech-keys-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-mech-keys-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-mech-keys-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "NovelKeys + CannonKeys + KBDfans + Drop + Keychron, ChatGPT vs Superbot",
+    "src": "animations/just-works-mech-keys-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-mech-keys-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "just-works-photo-gear-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",

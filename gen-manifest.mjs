@@ -121,6 +121,8 @@ const more = [
   ['just-works-study-streak-gpt-superbot-42aac446', 'just-works-study-streak-gpt-superbot-42aac446/', 'Duolingo + Anki + WaniKani + italki, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-live-shows-superbot-42aac446', 'just-works-live-shows-superbot-42aac446/', 'Spotify + Ticketmaster + AXS + Dice, one concert overview', 'Ad spots'],
   ['just-works-live-shows-gpt-superbot-42aac446', 'just-works-live-shows-gpt-superbot-42aac446/', 'Spotify + Ticketmaster + AXS + Dice, ChatGPT vs Superbot', 'Ad spots'],
+  ['just-works-mech-keys-superbot-42aac446', 'just-works-mech-keys-superbot-42aac446/', 'NovelKeys + CannonKeys + KBDfans + Drop + Keychron, one group-buy overview', 'Ad spots'],
+  ['just-works-mech-keys-gpt-superbot-42aac446', 'just-works-mech-keys-gpt-superbot-42aac446/', 'NovelKeys + CannonKeys + KBDfans + Drop + Keychron, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-photo-gear-superbot-42aac446', 'just-works-photo-gear-superbot-42aac446/', 'Lightroom + B&H + MPB + KEH, one camera gear check', 'Ad spots'],
   ['just-works-photo-gear-gpt-superbot-42aac446', 'just-works-photo-gear-gpt-superbot-42aac446/', 'Lightroom + B&H + MPB + KEH, ChatGPT vs Superbot', 'Ad spots'],
       ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],

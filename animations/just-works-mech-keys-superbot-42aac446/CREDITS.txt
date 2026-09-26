@@ -1,0 +1,74 @@
+Mech keys spot (Gmail and the NovelKeys, CannonKeys, KBDfans, Drop and Keychron accounts read against
+each vendor's live order page and latest fulfillment update, and r/mechmarket searched for wishlist
+matches, into one group buy and preorder overview), asset credits.
+Riley, a keyboard hobbyist, the group buys and preorders, the order dates, the production stages, the
+latest fulfillment updates, the estimated ship dates, the delays and the r/mechmarket listings are
+invented for the spot and live in data.js; the vendors and the services named (Gmail, NovelKeys,
+CannonKeys, KBDfans, Drop, Keychron and r/mechmarket on Reddit) are real, and no group buy listed is a
+real campaign. All figures printed on the page, the hub and the steps are derived from data.js.
+The page reads only: it never buys an item, never joins a group buy or a preorder, never changes or
+cancels an order, an address or a shipping option, and never posts, comments or sends a private
+message on r/mechmarket. Nothing is bought, no group buy is joined and no order is changed.
+
+img/hero.jpg
+  "Keychron K8 Non-Backlight Wireless Mechanical Keyboard with Cherry Profile Double - Shot PBT Full
+  Set Keycaps - Camel.jpg" (a Keychron K8 with cream Cherry profile double shot PBT keycaps, shot from
+  above on a dark desaturated green desk), Wikimedia Commons, CC BY 2.0
+  (https://creativecommons.org/licenses/by/2.0), by Triple-green, 2023
+  https://commons.wikimedia.org/wiki/File:Keychron_K8_Non-Backlight_Wireless_Mechanical_Keyboard_with_Cherry_Profile_Double_-_Shot_PBT_Full_Set_Keycaps_-_Camel.jpg
+  Real photograph, centre cropped to 4:3 and downscaled to 1600 x 1200 from the 7366 x 4920 Commons
+  original, otherwise unchanged. No identifiable faces in frame, no drawn art.
+
+Source marks, set on the same rounded 64 px tiles the live-shows, meal-plan and print-farm spots use.
+Trademarks of their owners, used only to name the inbox, the vendor or the service each row came from.
+  brand/gmail.svg       simple-icons:gmail (CC0, simple-icons contributors), via the Iconify API
+                        (api.iconify.design/simple-icons/gmail.svg), the Gmail mark in Gmail red
+                        #EA4335 on the tile's own slate #101828; it names the inbox the order and
+                        fulfillment mail was read from
+  brand/novelkeys.svg   the NovelKeys mark, novelkeys.com's own favicon
+                        (novelkeys.com/cdn/shop/files/Compact_Logo_32x32.png, fetched at Shopify's
+                        180 x 180 rendition of that same file, the site's own icon and its own
+                        artwork), embedded as a base64 PNG <image> inside the SVG and clipped to the
+                        same rounded tile: the black "NK_" wordmark on the icon's own white ground.
+                        simple-icons (Iconify) and Wikimedia Commons ship no NovelKeys mark
+  brand/cannonkeys.svg  the CannonKeys mark, cannonkeys.com's own favicon and apple touch icon
+                        (cannonkeys.com/cdn/shop/files/favicon.png, 32 x 32, the site's own icon and
+                        its own artwork), embedded as a base64 PNG <image> inside the SVG and clipped
+                        to the same rounded tile: the mark's own black artwork on a white ground, so
+                        a mark drawn for a light page still carries on the tile. simple-icons
+                        (Iconify) ships no CannonKeys mark
+  brand/kbdfans.svg     the KBDfans mark, kbdfans.com's own favicon
+                        (kbdfans.com/cdn/shop/files/logo_adb01c82-3317-4f63-8388-37bd5db7217c.png,
+                        180 x 180, the site's own icon and its own artwork), embedded as a base64 PNG
+                        <image> inside the SVG and clipped to the same rounded tile: the mark's own
+                        dark artwork on a white ground. simple-icons (Iconify) ships no KBDfans mark
+  brand/drop.svg        the Drop mark, drop.com's own favicon
+                        (assets.corsair.com/image/upload/drop-logo-small-white-black-bg.png, 47 x 47,
+                        the file drop.com's own <link rel="icon"> points at, the site's own artwork),
+                        embedded as a base64 PNG <image> inside the SVG and clipped to the same
+                        rounded tile: the white "D" on Drop's own black. simple-icons (Iconify) ships
+                        no Drop mark, its drop.svg lookup 404s
+  brand/keychron.svg    the Keychron mark, keychron.com's own favicon and apple touch icon
+                        (keychron.com/cdn/shop/files/Keychron-logo_cd411b38-300d-493c-b3ef-918c81b20742.png,
+                        180 x 180, the site's own icon and its own artwork), embedded as a base64 PNG
+                        <image> inside the SVG and clipped to the same rounded tile: the mark's own
+                        dark artwork on a white ground. simple-icons (Iconify) ships no Keychron mark
+  brand/mechmarket.svg  simple-icons:reddit (CC0, simple-icons contributors), via the Iconify API
+                        (api.iconify.design/simple-icons/reddit.svg), the Reddit mark in Reddit orange
+                        #FF4500 on the tile's own slate #101828; it names r/mechmarket, the subreddit
+                        the wishlist listings were read from
+  brand/app.svg         mdi:keyboard-variant (Apache 2.0, Pictogrammers), via the Iconify API
+                        (api.iconify.design/mdi/keyboard-variant.svg), tinted the spot accent
+                        #ffb547 on the page's slate tile #101828, the app favicon
+  brand/title.svg       mdi:keyboard (Apache 2.0, Pictogrammers), via the Iconify API
+                        (api.iconify.design/mdi/keyboard.svg), tinted #9fb0c9 on the #171d2a tile, the
+                        row glyph, matching the live-shows spot's brand/title.svg
+
+The CannonKeys, KBDfans and Keychron icons are drawn dark on transparent, so each is flattened onto
+white before it is embedded: their artwork is untouched, only the ground under it is made opaque. The
+NovelKeys and Drop icons carry their own background already (white for NovelKeys, black for Drop), and
+those two are embedded exactly as the site serves them. Vendors who ship a wide wordmark as their
+favicon would not survive the square crop, so only square site icons are used here.
+
+No logo was drawn for this spot: every mark above is the owner's own file, placed on a tile. The app and
+title tiles are the page's own slate and ink and carry no trademark.

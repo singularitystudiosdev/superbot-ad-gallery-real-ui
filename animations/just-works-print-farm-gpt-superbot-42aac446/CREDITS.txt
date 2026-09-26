@@ -1,0 +1,72 @@
+3D print farm spot, variant A with the ChatGPT refusal (a Bambu Handy printer list, a Prusa Connect
+queue and an OctoPrint server read into one queue board, a Polymaker, Prusament, Bambu Lab store and
+Amazon filament shelf, and a MakerWorld and Printables model shortlist), asset credits.
+The printers, queues, jobs, spools, models, designers, print times, layer counts, filament weights,
+temperatures, progress percentages and prices are invented for the spot and live in data.js; the
+services and shops named (Bambu Handy, Prusa Connect, OctoPrint, MakerWorld, Printables, the Bambu
+Lab store, Polymaker, Prusament and Amazon) are real businesses, and the printer and filament names
+are their owners' own names for real products. No printer, job, spool or model shown is a real one.
+The page reads only: it never starts, pauses or cancels a print, never loads or unloads a spool,
+never edits a queue or a store, and never buys anything at the Bambu Lab store, Polymaker, Prusament
+or Amazon, and it never writes to the Bambu Handy, Prusa Connect or OctoPrint accounts. All figures
+printed on the page, the hub and the steps are derived from data.js.
+
+img/hero.jpg
+  "3D printer at 35c3 01.jpg" (a desktop FDM 3D printer mid-print, its nozzle laying blue filament
+  onto a part on the bed), Wikimedia Commons, CC BY-SA 4.0
+  (https://creativecommons.org/licenses/by-sa/4.0), by Leonhard Lenz, 2018
+  https://commons.wikimedia.org/wiki/File:3D_printer_at_35c3_01.jpg
+  Real photograph, downscaled to 1600 px wide from the 5184 x 3888 Commons original, otherwise
+  unchanged. No people in frame, no drawn art.
+
+img/printers/x1c.jpg
+  "Bambu Lab X1 Carbon with AMS module.jpg" (a Bambu Lab X1 Carbon desktop FDM printer with its AMS
+  module on top), Wikimedia Commons, CC BY-SA 4.0
+  (https://creativecommons.org/licenses/by-sa/4.0), by Benlisquare, 2023
+  https://commons.wikimedia.org/wiki/File:Bambu_Lab_X1_Carbon_with_AMS_module.jpg
+  Real photograph, downscaled to 480 px wide and centre-cropped to 480 x 360 (4:3), metadata
+  stripped. Used only to show the machine the page lists.
+  Wikimedia Commons carries no photograph of a Bambu Lab P1S, a Prusa MK4S, a Prusa CORE One or a
+  Creality Ender 3 V3 under a CC BY, CC BY-SA or CC0 licence, so img/printers/p1s.jpg, mk4s.jpg,
+  coreone.jpg and ender3v3.jpg are not shipped.
+
+Source marks, set on the same rounded 64 px tiles the ev-hunt spot uses. Trademarks of their owners,
+used only to name the app, service or shop each row came from.
+  brand/bambu.svg      simple-icons:bambulab (CC0, simple-icons contributors), via the Iconify API
+                       (api.iconify.design/simple-icons/bambulab.svg), the mark in Bambu Lab green
+                       #00AE42 on the tile's own slate #101828; it names Bambu Handy and the Bambu
+                       Lab store, which are the same brand's app and shop
+  brand/prusa.svg      the Prusa Research mark, prusa3d.com/apple-touch-icon.png (60 x 60 PNG, the
+                       site's own touch icon and its own artwork), embedded as a base64 <image>
+                       inside the SVG and clipped to the same rounded tile; it names Prusa Connect.
+                       simple-icons (Iconify) and Wikimedia Commons ship no Prusa Research mark, so
+                       the brand's own icon is used
+  brand/prusament.svg  the Prusament mark, prusament.com/wp-content/themes/prusament/images/favicon/
+                       apple-touch-icon.png (180 x 180 PNG, the site's own touch icon and its own
+                       artwork), embedded as a base64 <image> inside the SVG and clipped to the same
+                       rounded tile. This is the brand's own Prusament spool mark, not the Prusa mark
+                       placed on an orange tile
+  brand/octoprint.svg  simple-icons:octoprint (CC0, simple-icons contributors), via the Iconify API
+                       (api.iconify.design/simple-icons/octoprint.svg), the mark in OctoPrint green
+                       #13C100 on the tile's own slate #101828
+  brand/makerworld.svg the MakerWorld mark, makerworld.com/favicon_new.png (400 x 400 PNG, the
+                       site's own icon and its own artwork), embedded as a base64 <image> inside the
+                       SVG and clipped to the same rounded tile
+  brand/printables.svg simple-icons:printables (CC0, simple-icons contributors), via the Iconify API
+                       (api.iconify.design/simple-icons/printables.svg), the mark in Printables
+                       orange #FA6831 on the tile's own slate #101828
+  brand/polymaker.svg  the Polymaker mark, polymaker.com/wp-content/uploads/polymaker-icon.png
+                       (100 x 100 PNG, the site's own icon and its own artwork), embedded as a
+                       base64 <image> inside the SVG and clipped to the same rounded tile
+  brand/amazon.svg     simple-icons:amazon (CC0, simple-icons contributors), via the Iconify API
+                       (api.iconify.design/simple-icons/amazon.svg), the mark in Amazon orange
+                       #FF9900 on the tile's own slate #101828
+  brand/app.svg        mdi:printer-3d-nozzle (Apache 2.0, Pictogrammers), via the Iconify API
+                       (api.iconify.design/mdi/printer-3d-nozzle.svg), tinted amber #f3c26b on the
+                       page's slate tile #101828, the app favicon
+  brand/title.svg      mdi:printer-3d (Apache 2.0, Pictogrammers), via the Iconify API
+                       (api.iconify.design/mdi/printer-3d.svg), tinted #9fb0c9 on the #171d2a tile,
+                       the row glyph, matching the ev-hunt spot's brand/title.svg
+
+No logo was drawn for this spot: every mark above is the owner's own file, placed on a tile. The app
+and title tiles are the page's own slate and ink and carry no trademark.

@@ -336,6 +336,22 @@
     "thumb": "assets/shots/just-works-ev-hunt-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-print-farm-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Bambu + Prusa + OctoPrint, one print farm check",
+    "src": "animations/just-works-print-farm-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-print-farm-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-print-farm-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Bambu + Prusa + OctoPrint, ChatGPT vs Superbot",
+    "src": "animations/just-works-print-farm-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-print-farm-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

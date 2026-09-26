@@ -1,0 +1,874 @@
+/* site.css - superbot.app/p/print-farm, "Print Farm".
+   The page Superbot hands back: a read-only check of a five-printer home farm across Bambu Handy, Prusa
+   Connect and OctoPrint, the saved MakerWorld and Printables queues and four filament stores, read in the
+   Chrome beat. Two states come from the kit and nowhere else: .is-hover (the match bar, the spools short
+   tile's icon chip, the pin by the next printer to finish and the cheapest total line) and .is-active on the
+   Restock tab. The tab's .is-active swaps the Runs out first panel for the Restock panel through :has() +
+   sibling rules below, so no JS runs on the click. site.js render(p) sets .is-s1 .. .is-s10 (the nine
+   sources and the queue match landing), .is-m1/.is-m2 (the match) plus the counters, the match bar, the
+   status examples, the five printer cards and their bars, the runs out bars and the restock total; every
+   frame is a pure function of the plan. No CSS animations, no transitions: the kit draws every move.
+   Semantic colours: blue a printer printing, violet the next to finish, coral a spool short, amber a spool
+   running low, mint the cheapest restock and anything done. Filament swatches carry the real spool colour. */
+
+.site-print-farm {
+  --pf-bg: #08090c;
+  --pf-bg2: #0d0f14;
+  --pf-panel: #13161d;
+  --pf-panel2: #1b1f28;
+  --pf-line: rgba(226, 230, 240, 0.08);
+  --pf-line2: rgba(226, 230, 240, 0.16);
+  --pf-ink: #f1f3f7;
+  --pf-dim: #a0a7b5;
+  --pf-dim2: #697182;
+  --pf-mint: #6ff2b0;
+  --pf-mint-soft: rgba(111, 242, 176, 0.13);
+  --pf-blue: #5eb4ff;
+  --pf-blue-soft: rgba(94, 180, 255, 0.14);
+  --pf-violet: #b69cff;
+  --pf-violet-soft: rgba(182, 156, 255, 0.15);
+  --pf-coral: #ff7a6b;
+  --pf-coral-soft: rgba(255, 122, 107, 0.14);
+  --pf-amber: #ffb547;
+  --pf-amber-soft: rgba(255, 181, 71, 0.14);
+
+  container: pf / inline-size;
+  width: 100%;
+  min-width: 0;
+  background: var(--pf-bg);
+  color: var(--pf-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-print-farm *,
+.site-print-farm *::before,
+.site-print-farm *::after { box-sizing: border-box; }
+
+.site-print-farm p,
+.site-print-farm h1,
+.site-print-farm h2,
+.site-print-farm h3,
+.site-print-farm ul,
+.site-print-farm ol,
+.site-print-farm li { margin: 0; padding: 0; }
+
+.site-print-farm ul,
+.site-print-farm ol { list-style: none; }
+.site-print-farm img { display: block; max-width: 100%; }
+.site-print-farm b,
+.site-print-farm em,
+.site-print-farm i,
+.site-print-farm u { font-style: normal; text-decoration: none; }
+.site-print-farm b { font-weight: 650; }
+.site-print-farm small { font-size: inherit; }
+
+.site-print-farm .pf-ico { width: 14px; height: 14px; flex: none; }
+
+.site-print-farm .pf-clock,
+.site-print-farm .pf-synccount,
+.site-print-farm .pf-tick > b,
+.site-print-farm .pf-mk b,
+.site-print-farm .pf-heronums b,
+.site-print-farm .pf-fcfacts b,
+.site-print-farm .pf-nexteta,
+.site-print-farm .pf-acc-v b,
+.site-print-farm .pf-statn,
+.site-print-farm .pf-statex b,
+.site-print-farm .pf-jobm,
+.site-print-farm .pf-sg b,
+.site-print-farm .pf-sv,
+.site-print-farm .pf-outs,
+.site-print-farm .pf-outbar small,
+.site-print-farm .pf-offp,
+.site-print-farm .pf-total b,
+.site-print-farm .pf-outfoot b { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it) ---------- */
+.site-print-farm .pf-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--pf-bg);
+  border-bottom: 1px solid var(--pf-line);
+}
+.site-print-farm .pf-topin {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding: 0 28px;
+}
+.site-print-farm .pf-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
+.site-print-farm .pf-brandico { width: 22px; height: 22px; border-radius: 6px; }
+.site-print-farm .pf-by { color: var(--pf-dim2); font-size: 12px; }
+
+.site-print-farm .pf-tabs { display: flex; gap: 4px; margin-left: 12px; }
+.site-print-farm .pf-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: var(--pf-dim);
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-print-farm .pf-tab i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--pf-panel2);
+  color: var(--pf-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+.site-print-farm .pf-tab--1,
+.site-print-farm .pf-top:has(.pf-tab--2.is-active) .pf-tab--2 {
+  background: var(--pf-mint-soft);
+  color: #b7f6d6;
+  box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32);
+}
+.site-print-farm .pf-tab--1 i,
+.site-print-farm .pf-top:has(.pf-tab--2.is-active) .pf-tab--2 i { background: var(--pf-mint); color: #05231a; }
+.site-print-farm .pf-top:has(.pf-tab--2.is-active) .pf-tab--1 {
+  background: none;
+  color: var(--pf-dim);
+  box-shadow: none;
+}
+.site-print-farm .pf-top:has(.pf-tab--2.is-active) .pf-tab--1 i { background: var(--pf-panel2); color: var(--pf-dim); }
+.site-print-farm .pf-tab--2.is-hover { color: var(--pf-ink); background: var(--pf-panel2); }
+
+.site-print-farm .pf-status { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-print-farm .pf-logs,
+.site-print-farm .pf-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: none;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--pf-line2);
+  color: var(--pf-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.site-print-farm .pf-logs .pf-ico { width: 12px; height: 12px; margin-left: 2px; color: var(--pf-mint); }
+.site-print-farm .pf-live { color: var(--pf-ink); font-weight: 560; min-width: 116px; }
+.site-print-farm .pf-dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--pf-mint);
+  box-shadow: 0 0 0 3px var(--pf-mint-soft);
+}
+.site-print-farm .pf-syncbar { height: 2px; }
+.site-print-farm .pf-syncfill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #41bdf5, var(--pf-blue), var(--pf-mint));
+}
+
+/* ---------- hero ---------- */
+.site-print-farm .pf-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--pf-line);
+}
+/* the farm photo: the scrim darkens the left so the text column holds steady over it */
+.site-print-farm .pf-herobg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 50%;
+  opacity: 0.78;
+}
+.site-print-farm .pf-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(8, 9, 12, 0.97) 0%, rgba(8, 9, 12, 0.9) 50%, rgba(8, 9, 12, 0.45) 100%),
+    linear-gradient(0deg, rgba(8, 9, 12, 1) 0%, rgba(8, 9, 12, 0) 40%);
+}
+.site-print-farm .pf-heroin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 336px);
+  gap: 34px;
+  align-items: start;
+  padding: 34px 28px 30px;
+}
+.site-print-farm .pf-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--pf-mint);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.site-print-farm .pf-hero h1 {
+  margin-top: 12px;
+  max-width: 680px;
+  font-size: 32px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.site-print-farm .pf-dek { margin-top: 12px; max-width: 640px; color: var(--pf-dim); font-size: 13.5px; line-height: 1.55; text-wrap: pretty; }
+
+/* the sync card: nine sources tick in, the queue match closes it, then the queue's grams split into what the
+   spools cover and what is short */
+.site-print-farm .pf-sync {
+  margin-top: 18px;
+  max-width: 700px;
+  padding: 13px 15px 12px;
+  border-radius: 14px;
+  background: rgba(19, 22, 29, 0.9);
+  border: 1px solid var(--pf-line2);
+}
+.site-print-farm .pf-synchead { position: relative; height: 20px; }
+.site-print-farm .pf-syncnow,
+.site-print-farm .pf-stamp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-print-farm .pf-syncnow { color: var(--pf-ink); }
+.site-print-farm .pf-syncnow .pf-ico { color: var(--pf-blue); }
+.site-print-farm .pf-synccount { margin-left: auto; color: var(--pf-dim); font-weight: 600; }
+.site-print-farm .pf-stamp { color: var(--pf-mint); opacity: 0; overflow: hidden; }
+.site-print-farm .pf-hero.is-s10 .pf-syncnow { opacity: 0; }
+.site-print-farm .pf-hero.is-s10 .pf-stamp { opacity: 1; }
+
+.site-print-farm .pf-ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-top: 11px; }
+.site-print-farm .pf-tick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 5px 8px;
+  border-radius: 9px;
+  background: var(--pf-bg2);
+  border: 1px solid var(--pf-line);
+  color: var(--pf-dim2);
+  font-size: 12px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+/* the source marks sit on their own tile: 22 px is the floor at which they still read, and every place one
+   appears it is printed beside its source's name (see site.js), never as the only label */
+.site-print-farm .pf-tick img { width: 22px; height: 22px; border-radius: 6px; opacity: 0.45; flex: none; }
+.site-print-farm .pf-tickico {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--pf-panel2);
+  opacity: 0.45;
+}
+.site-print-farm .pf-tickico .pf-ico { width: 14px; height: 14px; }
+.site-print-farm .pf-tick span { overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-tick > b { margin-left: auto; }
+.site-print-farm .pf-tickok {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--pf-panel2);
+  color: transparent;
+}
+.site-print-farm .pf-tickok .pf-ico { width: 11px; height: 11px; stroke-width: 3; }
+.site-print-farm .pf-hero.is-s1 .pf-tick--s1,
+.site-print-farm .pf-hero.is-s2 .pf-tick--s2,
+.site-print-farm .pf-hero.is-s3 .pf-tick--s3,
+.site-print-farm .pf-hero.is-s4 .pf-tick--s4,
+.site-print-farm .pf-hero.is-s5 .pf-tick--s5,
+.site-print-farm .pf-hero.is-s6 .pf-tick--s6,
+.site-print-farm .pf-hero.is-s7 .pf-tick--s7,
+.site-print-farm .pf-hero.is-s8 .pf-tick--s8,
+.site-print-farm .pf-hero.is-s9 .pf-tick--s9,
+.site-print-farm .pf-hero.is-s10 .pf-tick--s10 {
+  color: var(--pf-ink);
+  border-color: rgba(111, 242, 176, 0.3);
+  background: var(--pf-mint-soft);
+}
+/* the tenth tick (the queue matched against the spools) takes the whole row under the nine sources */
+.site-print-farm .pf-tick--final { grid-column: 1 / -1; }
+.site-print-farm .pf-hero.is-s1 .pf-tick--s1 img,
+.site-print-farm .pf-hero.is-s2 .pf-tick--s2 img,
+.site-print-farm .pf-hero.is-s3 .pf-tick--s3 img,
+.site-print-farm .pf-hero.is-s4 .pf-tick--s4 img,
+.site-print-farm .pf-hero.is-s5 .pf-tick--s5 img,
+.site-print-farm .pf-hero.is-s6 .pf-tick--s6 img,
+.site-print-farm .pf-hero.is-s7 .pf-tick--s7 img,
+.site-print-farm .pf-hero.is-s8 .pf-tick--s8 img,
+.site-print-farm .pf-hero.is-s9 .pf-tick--s9 img,
+.site-print-farm .pf-hero.is-s10 .pf-tick--s10 .pf-tickico { opacity: 1; }
+.site-print-farm .pf-hero.is-s10 .pf-tick--s10 .pf-tickico { background: var(--pf-mint); color: #05231a; }
+.site-print-farm .pf-hero.is-s1 .pf-tick--s1 .pf-tickok,
+.site-print-farm .pf-hero.is-s2 .pf-tick--s2 .pf-tickok,
+.site-print-farm .pf-hero.is-s3 .pf-tick--s3 .pf-tickok,
+.site-print-farm .pf-hero.is-s4 .pf-tick--s4 .pf-tickok,
+.site-print-farm .pf-hero.is-s5 .pf-tick--s5 .pf-tickok,
+.site-print-farm .pf-hero.is-s6 .pf-tick--s6 .pf-tickok,
+.site-print-farm .pf-hero.is-s7 .pf-tick--s7 .pf-tickok,
+.site-print-farm .pf-hero.is-s8 .pf-tick--s8 .pf-tickok,
+.site-print-farm .pf-hero.is-s9 .pf-tick--s9 .pf-tickok,
+.site-print-farm .pf-hero.is-s10 .pf-tick--s10 .pf-tickok { background: var(--pf-mint); color: #05231a; }
+
+/* the match: the mint share the spools cover grows from the left, the coral hatched shortfall beside it */
+.site-print-farm .pf-merge { margin-top: 12px; padding-bottom: 6px; opacity: 0.45; border-radius: 10px; }
+/* the cursor rests on the match bar while the queue is matched (ad.js hover, engine toggles is-hover) */
+.site-print-farm .pf-merge.is-hover,
+.site-print-farm .pf-merge:has(.pf-mbar.is-hover) { background: rgba(255, 122, 107, 0.06); box-shadow: 0 0 0 7px rgba(255, 122, 107, 0.06); }
+.site-print-farm .pf-merge:has(.pf-mbar.is-hover) .pf-mk--cols b { color: var(--pf-coral); }
+.site-print-farm .pf-hero.is-m1 .pf-merge { opacity: 1; }
+.site-print-farm .pf-mbar {
+  display: flex;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--pf-panel2);
+  overflow: hidden;
+}
+.site-print-farm .pf-mhave { display: block; width: 0; background: linear-gradient(90deg, #37d492, var(--pf-mint)); }
+.site-print-farm .pf-mshort {
+  display: block;
+  width: 0;
+  background: repeating-linear-gradient(-45deg, rgba(255, 122, 107, 0.95) 0 4px, rgba(255, 122, 107, 0.4) 4px 8px);
+}
+.site-print-farm .pf-mbar.is-matched { box-shadow: 0 0 0 1px rgba(255, 122, 107, 0.4); }
+.site-print-farm .pf-mrow { display: flex; gap: 16px; margin-bottom: 9px; color: var(--pf-dim); font-size: 11.5px; }
+.site-print-farm .pf-mk { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.site-print-farm .pf-mk b { font-size: 15px; color: var(--pf-ink); }
+.site-print-farm .pf-mk--have b { color: var(--pf-mint); }
+.site-print-farm .pf-mk--short b { color: var(--pf-coral); }
+.site-print-farm .pf-mk--cols { margin-left: auto; }
+.site-print-farm .pf-mk--cols b { color: var(--pf-ink); }
+
+.site-print-farm .pf-heronums { display: flex; gap: 9px; margin-top: 14px; max-width: 700px; }
+.site-print-farm .pf-heronums li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 11px;
+  background: rgba(19, 22, 29, 0.78);
+  border: 1px solid var(--pf-line);
+}
+.site-print-farm .pf-heronums b { display: block; font-size: 17px; letter-spacing: -0.02em; white-space: nowrap; }
+.site-print-farm .pf-heronums span { display: block; color: var(--pf-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-hn--short b { color: var(--pf-amber); }
+.site-print-farm .pf-hn--ok b { color: var(--pf-mint); }
+
+/* the farm card on the right of the hero */
+.site-print-farm .pf-farmcard {
+  padding: 16px 17px 15px;
+  border-radius: 16px;
+  background: rgba(19, 22, 29, 0.9);
+  border: 1px solid var(--pf-line2);
+}
+.site-print-farm .pf-fck {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--pf-dim);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.site-print-farm .pf-fck .pf-ico { width: 12px; height: 12px; color: var(--pf-mint); }
+.site-print-farm .pf-farmcard h2 { margin-top: 7px; font-size: 19px; line-height: 1.2; letter-spacing: -0.02em; }
+.site-print-farm .pf-fcday { display: flex; align-items: center; gap: 6px; margin-top: 5px; color: var(--pf-dim); font-size: 12px; }
+.site-print-farm .pf-fcday .pf-ico { width: 12px; height: 12px; }
+.site-print-farm .pf-fcfacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin-top: 13px; }
+.site-print-farm .pf-fcfacts li {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--pf-bg2);
+  border: 1px solid var(--pf-line);
+}
+.site-print-farm .pf-fcfacts small { display: block; color: var(--pf-dim2); font-size: 11px; }
+.site-print-farm .pf-fcfacts b { display: block; font-size: 17px; letter-spacing: -0.02em; white-space: nowrap; }
+.site-print-farm .pf-next { margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--pf-line); }
+.site-print-farm .pf-nexth { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+.site-print-farm .pf-nexth .pf-ico { color: var(--pf-violet); }
+.site-print-farm .pf-nextrow { display: flex; align-items: flex-end; gap: 10px; margin-top: 9px; }
+.site-print-farm .pf-nextrow span { display: flex; flex-direction: column; min-width: 0; }
+.site-print-farm .pf-nextrow span b { font-size: 14px; }
+.site-print-farm .pf-nextrow small { color: var(--pf-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-nexteta { margin-left: auto; flex: none; font-size: 19px; letter-spacing: -0.02em; color: var(--pf-violet); }
+.site-print-farm .pf-nextbar {
+  height: 6px;
+  margin-top: 10px;
+  border-radius: 99px;
+  background: var(--pf-violet-soft);
+  box-shadow: inset 0 0 0 1px rgba(182, 156, 255, 0.25);
+  overflow: hidden;
+}
+.site-print-farm .pf-nextbar i { display: block; height: 100%; background: var(--pf-violet); border-radius: 99px; }
+.site-print-farm .pf-nextn { display: flex; align-items: center; gap: 6px; margin-top: 9px; color: var(--pf-dim); font-size: 11.5px; }
+.site-print-farm .pf-nextn--ro { margin-top: 5px; color: var(--pf-dim2); }
+.site-print-farm .pf-nextn .pf-ico { width: 12px; height: 12px; color: var(--pf-mint); }
+
+/* ---------- the nine sources ---------- */
+.site-print-farm .pf-accs { padding: 20px 28px 4px; }
+.site-print-farm .pf-acclist { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 8px; }
+.site-print-farm .pf-acc {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  column-gap: 8px;
+  row-gap: 7px;
+  align-items: center;
+  padding: 10px 10px 9px;
+  border-radius: 12px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  box-shadow: inset 0 2px 0 var(--k, var(--pf-blue));
+}
+.site-print-farm .pf-acc--queue { --k: var(--pf-violet); }
+.site-print-farm .pf-acc--store { --k: var(--pf-mint); }
+.site-print-farm .pf-acc > img { width: 26px; height: 26px; border-radius: 7px; }
+.site-print-farm .pf-acc-t { min-width: 0; }
+.site-print-farm .pf-acc-t b { display: block; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-acc-t small { display: block; color: var(--pf-dim2); font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-acc-v { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+.site-print-farm .pf-acc-v b { font-size: 18px; letter-spacing: -0.02em; }
+.site-print-farm .pf-acc-v small { color: var(--pf-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- section heads ---------- */
+.site-print-farm .pf-sech { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; min-width: 0; }
+.site-print-farm .pf-sech h2 { font-size: 17px; letter-spacing: -0.02em; white-space: nowrap; }
+.site-print-farm .pf-sech span { color: var(--pf-dim); font-size: 12.5px; min-width: 0; }
+
+/* ---------- the four answer tiles ---------- */
+.site-print-farm .pf-stats { padding: 24px 28px 8px; }
+.site-print-farm .pf-statlist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.site-print-farm .pf-stat {
+  --k: var(--pf-blue);
+  --ks: var(--pf-blue-soft);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px 14px 12px;
+  border-radius: 14px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  box-shadow: inset 0 2px 0 var(--k);
+}
+.site-print-farm .pf-stat--next { --k: var(--pf-violet); --ks: var(--pf-violet-soft); }
+.site-print-farm .pf-stat--short { --k: var(--pf-coral); --ks: var(--pf-coral-soft); }
+.site-print-farm .pf-stat--restock { --k: var(--pf-mint); --ks: var(--pf-mint-soft); }
+.site-print-farm .pf-stat.is-hover,
+.site-print-farm .pf-stat:has(.pf-stati.is-hover) {
+  border-color: var(--k);
+  background: linear-gradient(180deg, var(--ks), var(--pf-panel) 70%);
+}
+.site-print-farm .pf-stath { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-print-farm .pf-stati {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--ks);
+  color: var(--k);
+}
+.site-print-farm .pf-stati .pf-ico { width: 17px; height: 17px; }
+.site-print-farm .pf-statt { min-width: 0; }
+.site-print-farm .pf-statt b { display: block; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-statt small { display: block; color: var(--pf-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the counter never shrinks or wraps: a wrapped counter is a clipped number, so the label truncates instead */
+.site-print-farm .pf-statn { flex: none; margin-left: auto; min-width: 1.4em; font-size: 24px; line-height: 1; letter-spacing: -0.03em; color: var(--k); text-align: right; white-space: nowrap; }
+.site-print-farm .pf-statex { margin-top: 12px; display: grid; gap: 5px; }
+.site-print-farm .pf-statex li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: var(--pf-bg2);
+  font-size: 12px;
+}
+.site-print-farm .pf-statex span { min-width: 0; color: var(--pf-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-statex b { margin-left: auto; flex: none; color: var(--k); font-size: 11.5px; }
+.site-print-farm .pf-statmore { margin-top: 9px; color: var(--pf-dim2); font-size: 11.5px; }
+
+/* ---------- a source tag: the site's mark beside its short name ---------- */
+.site-print-farm .pf-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--pf-dim);
+  font-size: 11.5px;
+  font-weight: 560;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.site-print-farm .pf-tag img { width: 22px; height: 22px; border-radius: 6px; flex: none; }
+
+/* ---------- the farm: five printer cards ---------- */
+.site-print-farm .pf-farm { padding: 22px 28px 8px; }
+.site-print-farm .pf-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; align-items: start; }
+.site-print-farm .pf-card {
+  --k: var(--pf-blue);
+  --ks: var(--pf-blue-soft);
+  grid-column: span 2;
+  min-width: 0;
+  padding: 13px 14px 12px;
+  border-radius: 14px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+}
+.site-print-farm .pf-card--ams { grid-column: span 3; }
+.site-print-farm .pf-card--next { --k: var(--pf-violet); --ks: var(--pf-violet-soft); border-color: rgba(182, 156, 255, 0.4); }
+.site-print-farm .pf-card--ender { --k: var(--pf-mint); --ks: var(--pf-mint-soft); }
+.site-print-farm .pf-card--next:has(.pf-pin.is-hover) { background: linear-gradient(180deg, var(--pf-violet-soft), var(--pf-panel) 60%); border-color: var(--pf-violet); }
+.site-print-farm .pf-ch { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-print-farm .pf-thumb {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--pf-panel2);
+}
+.site-print-farm .pf-thumb img { width: 30px; height: 30px; border-radius: 7px; }
+.site-print-farm .pf-thumb--photo img { width: 100%; height: 100%; border-radius: 0; object-fit: cover; }
+.site-print-farm .pf-cn { display: flex; flex-direction: column; min-width: 0; }
+.site-print-farm .pf-cn b { font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-cn small { color: var(--pf-dim2); font-size: 11px; }
+.site-print-farm .pf-ch .pf-tag { flex: none; }
+.site-print-farm .pf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  margin-left: auto;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-print-farm .pf-chip--run { background: var(--pf-blue-soft); color: #bfe0ff; }
+.site-print-farm .pf-chip--run .pf-dot { background: var(--pf-blue); box-shadow: 0 0 0 3px var(--pf-blue-soft); width: 6px; height: 6px; }
+.site-print-farm .pf-chip--done { background: var(--pf-mint-soft); color: #b7f6d6; }
+.site-print-farm .pf-chip--done .pf-ico { width: 12px; height: 12px; }
+.site-print-farm .pf-nextb {
+  flex: none;
+  margin-left: auto;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 99px;
+  background: var(--pf-violet);
+  color: #170c33;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 22px;
+  white-space: nowrap;
+}
+/* the empty 1 px anchor right of the Next to finish badge: beat 3's pointer rests on it and covers no figure
+   (ad.js hover, engine toggles is-hover on it) */
+.site-print-farm .pf-pin { display: inline-block; flex: none; width: 1px; height: 20px; margin-left: -4px; }
+
+.site-print-farm .pf-job { margin-top: 11px; }
+.site-print-farm .pf-jobt { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-print-farm .pf-jobt b { min-width: 0; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-jobt .pf-tag { margin-left: auto; flex: none; }
+.site-print-farm .pf-prog {
+  height: 7px;
+  margin-top: 8px;
+  border-radius: 99px;
+  background: var(--ks);
+  overflow: hidden;
+}
+.site-print-farm .pf-prog i { display: block; width: 0; height: 100%; border-radius: 99px; background: var(--k); }
+.site-print-farm .pf-jobm { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-top: 7px; color: var(--pf-dim); font-size: 11.5px; }
+.site-print-farm .pf-jobm span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.site-print-farm .pf-jobm .pf-ico { width: 12px; height: 12px; color: var(--pf-dim2); }
+.site-print-farm .pf-jp { color: var(--k); font-weight: 700; font-size: 13px; }
+.site-print-farm .pf-eta { color: var(--pf-ink); font-weight: 560; }
+.site-print-farm .pf-eta .pf-ico { color: var(--k); }
+
+.site-print-farm .pf-unit { display: flex; align-items: center; gap: 8px; margin-top: 11px; padding-top: 9px; border-top: 1px solid var(--pf-line); }
+.site-print-farm .pf-unitk { display: inline-flex; align-items: center; gap: 6px; color: var(--pf-dim); font-size: 11px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
+.site-print-farm .pf-unitk .pf-ico { width: 12px; height: 12px; }
+.site-print-farm .pf-unitk--r { margin-left: auto; color: var(--pf-dim2); font-weight: 500; letter-spacing: 0; text-transform: none; }
+.site-print-farm .pf-spools { display: grid; gap: 5px; margin-top: 7px; }
+.site-print-farm .pf-spool {
+  display: grid;
+  grid-template-columns: 22px 20px minmax(0, 1fr) minmax(110px, 0.9fr) 86px;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 5px 8px;
+  border-radius: 8px;
+  background: var(--pf-bg2);
+  border: 1px solid transparent;
+}
+/* a single-spool card stacks the gram bar under the name so the colour name never truncates */
+.site-print-farm .pf-card:not(.pf-card--ams) .pf-spool { grid-template-columns: 22px minmax(0, 1fr) auto; row-gap: 5px; }
+.site-print-farm .pf-card:not(.pf-card--ams) .pf-sw { grid-row: 1 / span 2; }
+.site-print-farm .pf-card:not(.pf-card--ams) .pf-sg { grid-column: 2 / -1; grid-row: 2; }
+.site-print-farm .pf-card:not(.pf-card--ams) .pf-sl { display: none; }
+.site-print-farm .pf-spool--short { border-color: rgba(255, 122, 107, 0.35); background: linear-gradient(90deg, var(--pf-coral-soft), var(--pf-bg2) 70%); }
+.site-print-farm .pf-spool--low { border-color: rgba(255, 181, 71, 0.3); }
+/* a spool, drawn: the filament colour as a ring around the hub */
+.site-print-farm .pf-sw {
+  display: block;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--pf-bg2) 0 3px, #2a2f3a 3.5px 5.5px, var(--c) 6px 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+.site-print-farm .pf-sl { color: var(--pf-dim); font-size: 11px; font-weight: 700; }
+.site-print-farm .pf-sn { display: flex; flex-direction: column; min-width: 0; }
+.site-print-farm .pf-sn b { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-sn small { color: var(--pf-dim2); font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-sg { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.site-print-farm .pf-sgbar {
+  position: relative;
+  flex: 1 1 auto;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--pf-panel2);
+}
+.site-print-farm .pf-sgbar > i { display: block; width: 0; height: 100%; border-radius: 99px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34); }
+/* the tick where the queue's need sits on the same 1 kg scale */
+.site-print-farm .pf-sgbar > u { position: absolute; top: -3px; width: 2px; height: 12px; margin-left: -1px; border-radius: 1px; background: var(--pf-ink); opacity: 0.7; }
+.site-print-farm .pf-spool--short .pf-sgbar > u { background: var(--pf-coral); opacity: 1; }
+.site-print-farm .pf-sg b { flex: none; min-width: 42px; font-size: 11.5px; text-align: right; }
+.site-print-farm .pf-sv { color: var(--pf-dim); font-size: 11px; font-weight: 600; text-align: right; white-space: nowrap; }
+.site-print-farm .pf-sv--short { color: var(--pf-coral); }
+.site-print-farm .pf-sv--low { color: var(--pf-amber); }
+.site-print-farm .pf-sv--idle { color: var(--pf-dim2); font-weight: 500; }
+
+/* ---------- panels: Runs out first, swapped for Restock by the tab click ---------- */
+.site-print-farm .pf-panels { padding: 22px 28px 8px; }
+.site-print-farm .pf-panel {
+  border-radius: 14px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  overflow: hidden;
+}
+.site-print-farm .pf-panel--2 { display: none; }
+.site-print-farm .pf-top:has(.pf-tab--2.is-active) ~ .pf-panels .pf-panel--1 { display: none; }
+.site-print-farm .pf-top:has(.pf-tab--2.is-active) ~ .pf-panels .pf-panel--2 { display: block; }
+
+/* tab 1: every colour the queue empties */
+.site-print-farm .pf-outhead,
+.site-print-farm .pf-out {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1.5fr) minmax(0, 1.45fr) 110px minmax(0, 0.95fr);
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+}
+.site-print-farm .pf-outhead { height: 36px; color: var(--pf-dim2); font-size: 11px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; border-bottom: 1px solid var(--pf-line); }
+.site-print-farm .pf-outhead span:nth-child(4) { text-align: right; }
+.site-print-farm .pf-out { min-height: 58px; border-bottom: 1px solid var(--pf-line); }
+.site-print-farm .pf-outr b {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--pf-coral-soft);
+  color: var(--pf-coral);
+  font-size: 12px;
+}
+.site-print-farm .pf-out--low .pf-outr b { background: var(--pf-amber-soft); color: var(--pf-amber); }
+.site-print-farm .pf-outc { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-print-farm .pf-outc .pf-sw { width: 26px; height: 26px; background: radial-gradient(circle, var(--pf-bg2) 0 3.5px, #2a2f3a 4px 6.5px, var(--c) 7px 100%); }
+.site-print-farm .pf-outc > span:not(.pf-sw) { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; }
+.site-print-farm .pf-outc b { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-outc small { color: var(--pf-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-outbar { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.site-print-farm .pf-ob { display: flex; height: 10px; border-radius: 99px; background: var(--pf-panel2); overflow: hidden; }
+.site-print-farm .pf-obh { display: block; width: 0; height: 100%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34); }
+.site-print-farm .pf-obs {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: repeating-linear-gradient(-45deg, rgba(255, 122, 107, 0.95) 0 4px, rgba(255, 122, 107, 0.35) 4px 8px);
+}
+.site-print-farm .pf-outbar small { color: var(--pf-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-outs { color: var(--pf-coral); font-size: 17px; letter-spacing: -0.02em; text-align: right; white-space: nowrap; }
+.site-print-farm .pf-outs--low { color: var(--pf-amber); font-size: 13px; }
+.site-print-farm .pf-outd { color: var(--pf-ink); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-out--low .pf-outd { color: var(--pf-dim); }
+.site-print-farm .pf-outfoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  color: var(--pf-dim);
+  font-size: 12px;
+}
+.site-print-farm .pf-outfoot .pf-ico { color: var(--pf-coral); }
+.site-print-farm .pf-outfoot b { margin-left: auto; color: var(--pf-coral); font-size: 15px; }
+
+/* tab 2: every store that lists each colour, the cheapest in-stock one flagged */
+.site-print-farm .pf-rslist { display: grid; }
+.site-print-farm .pf-rs {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.8fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--pf-line);
+}
+.site-print-farm .pf-rs .pf-outc small { color: var(--pf-coral); font-weight: 600; }
+.site-print-farm .pf-rs--low .pf-outc small { color: var(--pf-amber); }
+.site-print-farm .pf-offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; min-width: 0; }
+.site-print-farm .pf-offer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: var(--pf-bg2);
+  border: 1px solid var(--pf-line);
+}
+.site-print-farm .pf-offer img { width: 24px; height: 24px; border-radius: 6px; flex: none; }
+.site-print-farm .pf-offt { display: flex; flex-direction: column; min-width: 0; }
+.site-print-farm .pf-offt b { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-offt small { color: var(--pf-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-offp { margin-left: auto; flex: none; font-size: 14px; }
+.site-print-farm .pf-offer--best { background: var(--pf-mint-soft); border-color: rgba(111, 242, 176, 0.4); }
+.site-print-farm .pf-offer--best .pf-offp { color: var(--pf-mint); }
+.site-print-farm .pf-offer--out { opacity: 0.55; }
+.site-print-farm .pf-offer--out .pf-offp { color: var(--pf-dim2); text-decoration: line-through; }
+.site-print-farm .pf-cheap {
+  flex: none;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 99px;
+  background: var(--pf-mint);
+  color: #05231a;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.site-print-farm .pf-sum { padding: 12px 16px 14px; }
+.site-print-farm .pf-total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background: var(--pf-mint-soft);
+  box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32);
+}
+.site-print-farm .pf-total span { display: inline-flex; align-items: center; gap: 8px; min-width: 0; color: #b7f6d6; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-print-farm .pf-total b { margin-left: auto; flex: none; min-width: 5.5em; color: var(--pf-mint); font-size: 20px; letter-spacing: -0.02em; text-align: right; white-space: nowrap; }
+.site-print-farm .pf-total.is-hover { background: var(--pf-mint); box-shadow: 0 0 0 4px rgba(111, 242, 176, 0.22); }
+.site-print-farm .pf-total.is-hover span,
+.site-print-farm .pf-total.is-hover b { color: #05231a; }
+.site-print-farm .pf-sumn { display: flex; align-items: center; gap: 6px; margin-top: 10px; color: var(--pf-dim2); font-size: 11.5px; }
+.site-print-farm .pf-sumn .pf-ico { width: 12px; height: 12px; color: var(--pf-mint); }
+
+/* ---------- footer ---------- */
+.site-print-farm .pf-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--pf-line);
+  color: var(--pf-dim2);
+  font-size: 11.5px;
+}
+.site-print-farm .pf-foot span { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+.site-print-farm .pf-foot span:last-child { margin-left: auto; flex: none; }
+.site-print-farm .pf-foot .pf-ico { width: 12px; height: 12px; color: var(--pf-mint); }
+
+/* ---------- narrower frames (1:1 and 9:16 browser windows) ---------- */
+@container pf (max-width: 1180px) {
+  .site-print-farm .pf-heroin { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .site-print-farm .pf-farmcard { max-width: 700px; }
+  .site-print-farm .pf-fcfacts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .site-print-farm .pf-by { display: none; }
+  .site-print-farm .pf-statlist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-print-farm .pf-acclist { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .site-print-farm .pf-sech { flex-wrap: wrap; row-gap: 2px; }
+  .site-print-farm .pf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-print-farm .pf-card,
+  .site-print-farm .pf-card--ams { grid-column: span 1; }
+  .site-print-farm .pf-card--ender { grid-column: 1 / -1; }
+  /* the next printer to finish leads the stacked grid, so beat 3's pin lands on screen at every ratio */
+  .site-print-farm .pf-card--next { order: -1; }
+  .site-print-farm .pf-outhead,
+  .site-print-farm .pf-out { grid-template-columns: 30px minmax(0, 1.2fr) minmax(0, 1.4fr) 96px; }
+  .site-print-farm .pf-outhead span:last-child,
+  .site-print-farm .pf-outd { display: none; }
+}
+@container pf (max-width: 900px) {
+  .site-print-farm .pf-topin { padding: 0 18px; gap: 12px; }
+  .site-print-farm .pf-logs { display: none; }
+  .site-print-farm .pf-heroin { padding: 26px 18px 24px; }
+  .site-print-farm .pf-hero h1 { font-size: 27px; }
+  .site-print-farm .pf-ticks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-print-farm .pf-accs,
+  .site-print-farm .pf-stats,
+  .site-print-farm .pf-farm,
+  .site-print-farm .pf-panels { padding-left: 18px; padding-right: 18px; }
+  .site-print-farm .pf-acclist { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .site-print-farm .pf-statlist,
+  .site-print-farm .pf-grid { grid-template-columns: minmax(0, 1fr); }
+  .site-print-farm .pf-card--ender { grid-column: auto; }
+  .site-print-farm .pf-rs { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .site-print-farm .pf-outhead { display: none; }
+  .site-print-farm .pf-out { grid-template-columns: 26px minmax(0, 1fr) 90px; row-gap: 6px; padding-top: 8px; padding-bottom: 8px; }
+  .site-print-farm .pf-outbar { grid-column: 2 / -1; grid-row: 2; }
+  .site-print-farm .pf-foot { flex-direction: column; align-items: flex-start; padding-left: 18px; padding-right: 18px; }
+  .site-print-farm .pf-foot span:last-child { margin-left: 0; }
+}
+@container pf (max-width: 620px) {
+  .site-print-farm .pf-tab { padding: 0 9px; }
+  .site-print-farm .pf-tab .pf-ico { display: none; }
+  .site-print-farm .pf-live { min-width: 0; }
+  .site-print-farm .pf-hero h1 { font-size: 24px; }
+  .site-print-farm .pf-mrow { gap: 10px; font-size: 11px; flex-wrap: wrap; }
+  .site-print-farm .pf-mk--cols { margin-left: 0; }
+  .site-print-farm .pf-heronums { flex-wrap: wrap; }
+  .site-print-farm .pf-heronums li { flex: 1 1 40%; }
+  .site-print-farm .pf-fcfacts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-print-farm .pf-acclist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-print-farm .pf-ch .pf-tag { display: none; }
+  .site-print-farm .pf-spool,
+  .site-print-farm .pf-card:not(.pf-card--ams) .pf-spool { grid-template-columns: 22px minmax(0, 1fr) 76px; }
+  .site-print-farm .pf-sl,
+  .site-print-farm .pf-sg { display: none; }
+  .site-print-farm .pf-offers { grid-template-columns: minmax(0, 1fr); }
+}

@@ -1,0 +1,18 @@
+Portfolio Overview spot (Schwab + Robinhood, one overview), asset credits. The user, the three accounts,
+every share count, price, high and stop level in data.js are invented for the spot. The page places no
+orders: it is a read-only overview.
+
+img/nyse-sign.jpg
+  "Sign of the New York Stock Exchange, Broad Street.jpg" by Billie Grace Ward, Wikimedia Commons, CC0 1.0
+  https://commons.wikimedia.org/wiki/File:Sign_of_the_New_York_Stock_Exchange,_Broad_Street.jpg
+
+Ticker and broker marks, via the Iconify API (api.iconify.design), set on rounded 64 px tiles. Trademarks
+of their owners, used only to name the companies and brokers the page reads from.
+  img/nvda.svg     simple-icons:nvidia (CC0)
+  img/tsla.svg     simple-icons:tesla (CC0)
+  img/aapl.svg     mdi:apple (Apache 2.0)
+  img/msft.svg     logos:microsoft-icon (CC0)
+  img/amzn.svg     fa7-brands:amazon (CC BY 4.0, Font Awesome)
+  brand/robinhood.svg  simple-icons:robinhood (CC0)
+  brand/schwab.svg     thesvg-color:charles-schwab
+  brand/app.svg    mdi:chart-line (Apache 2.0), tinted mint

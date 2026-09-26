@@ -160,6 +160,22 @@
     "thumb": "assets/shots/just-works-campsite-watch-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-portfolio-overview-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Schwab + Robinhood, one overview",
+    "src": "animations/just-works-portfolio-overview-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-portfolio-overview-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-portfolio-overview-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Schwab + Robinhood, ChatGPT vs Superbot",
+    "src": "animations/just-works-portfolio-overview-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-portfolio-overview-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

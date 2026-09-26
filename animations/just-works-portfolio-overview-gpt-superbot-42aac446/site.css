@@ -1,0 +1,644 @@
+/* site.css - superbot.app/p/portfolio-overview, "Portfolio Overview".
+   The page the Superbot hands back: a read-only sync of two Schwab accounts and a Robinhood account, put
+   on one page against a 60 / 30 / 10 target with a 7% trailing-stop line under every stock, read in the
+   Chrome beat. Two states come from the kit and nowhere else: .is-hover on the stocks drift row and
+   .is-active on the Stop levels tab. The tab's .is-active swaps the holdings panel for the stop-levels
+   panel through :has() + sibling rules below, so no JS runs on the click. site.js render(p) sets
+   .is-s1 .. .is-s4 on the hero, the sync count and the ring; every frame is a pure function of the plan.
+   No CSS animations, no transitions: the kit draws every move. */
+
+.site-portfolio-overview {
+  --po-bg: #090c12;
+  --po-bg2: #0d1119;
+  --po-panel: #121824;
+  --po-panel2: #1a2130;
+  --po-line: rgba(210, 222, 245, 0.08);
+  --po-line2: rgba(210, 222, 245, 0.15);
+  --po-ink: #eef2f8;
+  --po-dim: #9aa5b8;
+  --po-dim2: #667186;
+  --po-stocks: #8f86ff;
+  --po-bonds: #45a8ff;
+  --po-cash: #3fd9a0;
+  --po-green: #3fd9a0;
+  --po-green-soft: rgba(63, 217, 160, 0.14);
+  --po-amber: #ffb547;
+  --po-amber-soft: rgba(255, 181, 71, 0.14);
+  --po-red: #ff6b6b;
+  --po-red-soft: rgba(255, 107, 107, 0.13);
+  --po-violet-soft: rgba(143, 134, 255, 0.14);
+
+  container: po / inline-size;
+  width: 100%;
+  min-width: 0;
+  background: var(--po-bg);
+  color: var(--po-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-portfolio-overview *,
+.site-portfolio-overview *::before,
+.site-portfolio-overview *::after { box-sizing: border-box; }
+
+.site-portfolio-overview p,
+.site-portfolio-overview h1,
+.site-portfolio-overview h2,
+.site-portfolio-overview ul,
+.site-portfolio-overview ol,
+.site-portfolio-overview li { margin: 0; padding: 0; }
+
+.site-portfolio-overview ul,
+.site-portfolio-overview ol { list-style: none; }
+.site-portfolio-overview img { display: block; max-width: 100%; }
+.site-portfolio-overview b, .site-portfolio-overview em, .site-portfolio-overview i { font-style: normal; }
+.site-portfolio-overview b { font-weight: 650; }
+.site-portfolio-overview small { font-size: inherit; }
+
+.site-portfolio-overview .po-ico { width: 14px; height: 14px; flex: none; }
+
+.site-portfolio-overview .po-clock,
+.site-portfolio-overview .po-synccount,
+.site-portfolio-overview .po-stats b,
+.site-portfolio-overview .po-ringnow,
+.site-portfolio-overview .po-legnow,
+.site-portfolio-overview .po-legdrift,
+.site-portfolio-overview .po-allocfoot b,
+.site-portfolio-overview .po-acct-v b,
+.site-portfolio-overview .po-rnow b,
+.site-portfolio-overview .po-rgap b,
+.site-portfolio-overview .po-hnum,
+.site-portfolio-overview .po-hw b,
+.site-portfolio-overview .po-scush b { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it) ---------- */
+.site-portfolio-overview .po-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--po-bg);
+  border-bottom: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-topin {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding: 0 28px;
+}
+.site-portfolio-overview .po-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
+.site-portfolio-overview .po-brandico { width: 22px; height: 22px; border-radius: 6px; }
+.site-portfolio-overview .po-by { color: var(--po-dim2); font-size: 12px; }
+
+.site-portfolio-overview .po-tabs { display: flex; gap: 4px; margin-left: 12px; }
+.site-portfolio-overview .po-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: var(--po-dim);
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-portfolio-overview .po-tab i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--po-panel2);
+  color: var(--po-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+.site-portfolio-overview .po-tab--1,
+.site-portfolio-overview .po-top:has(.po-tab--2.is-active) .po-tab--2 {
+  background: var(--po-violet-soft);
+  color: #c4bfff;
+  box-shadow: inset 0 0 0 1px rgba(143, 134, 255, 0.32);
+}
+.site-portfolio-overview .po-tab--1 i,
+.site-portfolio-overview .po-top:has(.po-tab--2.is-active) .po-tab--2 i { background: var(--po-stocks); color: #0c0a24; }
+.site-portfolio-overview .po-top:has(.po-tab--2.is-active) .po-tab--1 {
+  background: none;
+  color: var(--po-dim);
+  box-shadow: none;
+}
+.site-portfolio-overview .po-top:has(.po-tab--2.is-active) .po-tab--1 i { background: var(--po-panel2); color: var(--po-dim); }
+.site-portfolio-overview .po-tab--2.is-hover { color: var(--po-ink); background: var(--po-panel2); }
+
+.site-portfolio-overview .po-status { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-portfolio-overview .po-acct,
+.site-portfolio-overview .po-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--po-line2);
+  color: var(--po-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.site-portfolio-overview .po-acct img { width: 16px; height: 16px; border-radius: 4px; }
+.site-portfolio-overview .po-acct img + img { margin-left: -4px; box-shadow: 0 0 0 1.5px var(--po-bg); }
+.site-portfolio-overview .po-acct .po-ico { width: 12px; height: 12px; margin-left: 2px; }
+.site-portfolio-overview .po-live { color: var(--po-ink); font-weight: 560; min-width: 120px; }
+.site-portfolio-overview .po-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--po-green);
+  box-shadow: 0 0 0 3px var(--po-green-soft);
+}
+.site-portfolio-overview .po-syncbar { height: 2px; }
+.site-portfolio-overview .po-syncfill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--po-stocks), var(--po-bonds), var(--po-cash));
+}
+
+/* ---------- hero ---------- */
+.site-portfolio-overview .po-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-herobg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 35%;
+  opacity: 0.5;
+}
+.site-portfolio-overview .po-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(9, 12, 18, 0.97) 0%, rgba(9, 12, 18, 0.86) 50%, rgba(9, 12, 18, 0.55) 100%),
+    linear-gradient(0deg, rgba(9, 12, 18, 1) 0%, rgba(9, 12, 18, 0) 42%);
+}
+.site-portfolio-overview .po-heroin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  gap: 40px;
+  align-items: center;
+  padding: 40px 28px;
+}
+.site-portfolio-overview .po-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--po-green);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.site-portfolio-overview .po-hero h1 {
+  margin-top: 12px;
+  max-width: 640px;
+  font-size: 34px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.site-portfolio-overview .po-dek { margin-top: 12px; max-width: 580px; color: var(--po-dim); font-size: 14px; line-height: 1.55; }
+
+/* the sync card: four ticks light as the brokers are read, then the stamp replaces the running line */
+.site-portfolio-overview .po-sync {
+  margin-top: 22px;
+  max-width: 640px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(18, 24, 36, 0.85);
+  border: 1px solid var(--po-line2);
+}
+.site-portfolio-overview .po-synchead { position: relative; height: 20px; }
+.site-portfolio-overview .po-syncnow,
+.site-portfolio-overview .po-stamp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.site-portfolio-overview .po-syncnow { color: var(--po-ink); }
+.site-portfolio-overview .po-syncnow .po-ico { color: var(--po-bonds); }
+.site-portfolio-overview .po-synccount { margin-left: auto; color: var(--po-dim); font-weight: 600; }
+.site-portfolio-overview .po-stamp { color: var(--po-green); opacity: 0; }
+.site-portfolio-overview .po-hero.is-s4 .po-syncnow { opacity: 0; }
+.site-portfolio-overview .po-hero.is-s4 .po-stamp { opacity: 1; }
+
+.site-portfolio-overview .po-ticks { display: flex; flex-wrap: nowrap; gap: 8px; margin-top: 12px; }
+.site-portfolio-overview .po-tick {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 9px;
+  border-radius: 9px;
+  background: var(--po-bg2);
+  border: 1px solid var(--po-line);
+  color: var(--po-dim2);
+  font-size: 12px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-portfolio-overview .po-tick span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--po-panel2);
+}
+.site-portfolio-overview .po-tick .po-ico { width: 12px; height: 12px; }
+.site-portfolio-overview .po-hero.is-s1 .po-tick--s1,
+.site-portfolio-overview .po-hero.is-s2 .po-tick--s2,
+.site-portfolio-overview .po-hero.is-s3 .po-tick--s3,
+.site-portfolio-overview .po-hero.is-s4 .po-tick--s4 {
+  color: var(--po-ink);
+  border-color: rgba(63, 217, 160, 0.3);
+  background: var(--po-green-soft);
+}
+.site-portfolio-overview .po-hero.is-s1 .po-tick--s1 span,
+.site-portfolio-overview .po-hero.is-s2 .po-tick--s2 span,
+.site-portfolio-overview .po-hero.is-s3 .po-tick--s3 span,
+.site-portfolio-overview .po-hero.is-s4 .po-tick--s4 span { background: var(--po-green); color: #04140d; }
+
+.site-portfolio-overview .po-stats { display: flex; gap: 10px; margin-top: 16px; max-width: 600px; }
+.site-portfolio-overview .po-stats li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: rgba(18, 24, 36, 0.7);
+  border: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-stats b { display: block; font-size: 18px; letter-spacing: -0.02em; }
+.site-portfolio-overview .po-stats span { display: block; color: var(--po-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-portfolio-overview .po-stat--over b { color: var(--po-amber); }
+.site-portfolio-overview .po-stat--hot b { color: var(--po-red); }
+
+/* the allocation card: outer ring = now, inner ring = the 60/30/10 target */
+.site-portfolio-overview .po-alloc {
+  padding: 18px 18px 14px;
+  border-radius: 18px;
+  background: rgba(18, 24, 36, 0.92);
+  border: 1px solid var(--po-line2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+.site-portfolio-overview .po-alloch { display: flex; align-items: center; gap: 7px; color: var(--po-dim); font-size: 12px; font-weight: 600; }
+.site-portfolio-overview .po-ringwrap { display: flex; flex-direction: column; align-items: center; margin-top: 10px; }
+.site-portfolio-overview .po-ring { position: relative; width: 176px; height: 176px; }
+.site-portfolio-overview .po-ring svg { width: 100%; height: 100%; display: block; }
+.site-portfolio-overview .po-ringtrack { fill: none; stroke: var(--po-panel2); stroke-width: 11; }
+.site-portfolio-overview .po-arc { fill: none; stroke-width: 11; }
+.site-portfolio-overview .po-tarc { fill: none; stroke-width: 4; opacity: 0.55; }
+.site-portfolio-overview .po-arc--stocks, .site-portfolio-overview .po-tarc--stocks { stroke: var(--po-stocks); }
+.site-portfolio-overview .po-arc--bonds, .site-portfolio-overview .po-tarc--bonds { stroke: var(--po-bonds); }
+.site-portfolio-overview .po-arc--cash, .site-portfolio-overview .po-tarc--cash { stroke: var(--po-cash); }
+.site-portfolio-overview .po-ringtext {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.site-portfolio-overview .po-ringnow { font-size: 26px; letter-spacing: -0.03em; }
+.site-portfolio-overview .po-ringtext small { color: var(--po-dim); font-size: 11px; }
+.site-portfolio-overview .po-ringkey { display: flex; gap: 14px; margin-top: 8px; color: var(--po-dim2); font-size: 11px; }
+.site-portfolio-overview .po-ringkey span { display: inline-flex; align-items: center; gap: 6px; }
+.site-portfolio-overview .po-ringkey i { display: block; width: 14px; border-radius: 2px; background: var(--po-dim); }
+.site-portfolio-overview .po-k-now { height: 5px; }
+.site-portfolio-overview .po-k-tgt { height: 2px; opacity: 0.6; }
+
+.site-portfolio-overview .po-legend { margin-top: 12px; border-top: 1px solid var(--po-line); }
+.site-portfolio-overview .po-leg {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) 54px 66px 44px;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  border-bottom: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-leg > i { width: 10px; height: 10px; border-radius: 3px; }
+.site-portfolio-overview .po-leg--stocks > i { background: var(--po-stocks); }
+.site-portfolio-overview .po-leg--bonds > i { background: var(--po-bonds); }
+.site-portfolio-overview .po-leg--cash > i { background: var(--po-cash); }
+.site-portfolio-overview .po-leg span { font-weight: 560; }
+.site-portfolio-overview .po-legnow { text-align: right; font-size: 14px; }
+.site-portfolio-overview .po-leg small { color: var(--po-dim2); font-size: 11.5px; text-align: right; white-space: nowrap; }
+.site-portfolio-overview .po-legdrift {
+  justify-self: end;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 650;
+}
+.site-portfolio-overview .po-legdrift--over { background: var(--po-amber-soft); color: var(--po-amber); }
+.site-portfolio-overview .po-legdrift--under { background: rgba(69, 168, 255, 0.13); color: var(--po-bonds); }
+.site-portfolio-overview .po-allocfoot { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; color: var(--po-dim); }
+.site-portfolio-overview .po-allocfoot b { color: var(--po-ink); font-size: 16px; }
+
+/* ---------- accounts ---------- */
+.site-portfolio-overview .po-accts { padding: 22px 28px 0; }
+.site-portfolio-overview .po-acclist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.site-portfolio-overview .po-acc {
+  position: relative;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 10px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--po-panel);
+  border: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-acc img { width: 38px; height: 38px; border-radius: 10px; }
+.site-portfolio-overview .po-acct-t { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.site-portfolio-overview .po-acct-t small { color: var(--po-dim); font-size: 11.5px; }
+.site-portfolio-overview .po-acct-t b { font-size: 14px; white-space: nowrap; }
+.site-portfolio-overview .po-acct-v { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.site-portfolio-overview .po-acct-v b { font-size: 20px; letter-spacing: -0.02em; }
+.site-portfolio-overview .po-acct-v small { color: var(--po-dim); font-size: 12px; white-space: nowrap; }
+.site-portfolio-overview .po-acct-ok {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--po-green);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.site-portfolio-overview .po-acct-ok .po-ico { width: 12px; height: 12px; }
+
+/* ---------- section heads ---------- */
+.site-portfolio-overview .po-sech {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.site-portfolio-overview .po-sech h2 { font-size: 18px; font-weight: 680; letter-spacing: -0.015em; white-space: nowrap; }
+.site-portfolio-overview .po-sech span { color: var(--po-dim); font-size: 12px; text-align: right; }
+
+/* ---------- drift rows (the hover lands on the stocks row) ---------- */
+.site-portfolio-overview .po-drift { padding: 30px 28px 6px; }
+.site-portfolio-overview .po-rows {
+  border-radius: 14px;
+  background: var(--po-panel);
+  border: 1px solid var(--po-line);
+  overflow: hidden;
+}
+.site-portfolio-overview .po-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 64px 84px 112px;
+  align-items: center;
+  gap: 18px;
+  height: 64px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-row:last-child { border-bottom: 0; }
+.site-portfolio-overview .po-row.is-hover { background: rgba(255, 181, 71, 0.07); box-shadow: inset 3px 0 0 var(--po-amber); }
+.site-portfolio-overview .po-rlabel { display: grid; grid-template-columns: 10px auto; column-gap: 9px; align-items: center; }
+.site-portfolio-overview .po-rlabel i { width: 10px; height: 10px; border-radius: 3px; grid-row: 1 / span 2; }
+.site-portfolio-overview .po-row--stocks .po-rlabel i { background: var(--po-stocks); }
+.site-portfolio-overview .po-row--bonds .po-rlabel i { background: var(--po-bonds); }
+.site-portfolio-overview .po-row--cash .po-rlabel i { background: var(--po-cash); }
+.site-portfolio-overview .po-rlabel b { font-size: 14px; }
+.site-portfolio-overview .po-rlabel small { color: var(--po-dim); font-size: 12px; }
+.site-portfolio-overview .po-rbar {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--po-panel2);
+}
+.site-portfolio-overview .po-rfill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; }
+.site-portfolio-overview .po-row--stocks .po-rfill { background: var(--po-stocks); }
+.site-portfolio-overview .po-row--bonds .po-rfill { background: var(--po-bonds); }
+.site-portfolio-overview .po-row--cash .po-rfill { background: var(--po-cash); }
+.site-portfolio-overview .po-rtgt {
+  position: absolute;
+  top: -7px;
+  bottom: -7px;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: var(--po-ink);
+}
+.site-portfolio-overview .po-rtgt em {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--po-dim);
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-portfolio-overview .po-rnow { display: flex; flex-direction: column; align-items: flex-end; }
+.site-portfolio-overview .po-rnow b { font-size: 16px; }
+.site-portfolio-overview .po-rnow small,
+.site-portfolio-overview .po-rgap small { color: var(--po-dim2); font-size: 11px; }
+.site-portfolio-overview .po-rdrift {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 26px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 650;
+}
+.site-portfolio-overview .po-rdrift .po-ico { width: 12px; height: 12px; stroke-width: 2.6; }
+.site-portfolio-overview .po-rdrift--over { background: var(--po-amber-soft); color: var(--po-amber); }
+.site-portfolio-overview .po-rdrift--under { background: rgba(69, 168, 255, 0.13); color: var(--po-bonds); }
+.site-portfolio-overview .po-rgap { display: flex; flex-direction: column; align-items: flex-end; }
+.site-portfolio-overview .po-rgap b { font-size: 15px; }
+.site-portfolio-overview .po-note {
+  display: flex;
+  gap: 9px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--po-bg2);
+  border: 1px dashed var(--po-line2);
+  color: var(--po-dim);
+  font-size: 12.5px;
+}
+.site-portfolio-overview .po-note .po-ico { margin-top: 2px; color: var(--po-bonds); }
+
+/* ---------- panels: holdings by default, stop levels once the tab is active ---------- */
+.site-portfolio-overview .po-panels { padding: 28px 28px 20px; }
+.site-portfolio-overview .po-panel--2 { display: none; }
+.site-portfolio-overview .po-top:has(.po-tab--2.is-active) ~ .po-panels .po-panel--1 { display: none; }
+.site-portfolio-overview .po-top:has(.po-tab--2.is-active) ~ .po-panels .po-panel--2 { display: block; }
+
+.site-portfolio-overview .po-table {
+  border-radius: 14px;
+  background: var(--po-panel);
+  border: 1px solid var(--po-line);
+  overflow: hidden;
+}
+.site-portfolio-overview .po-hrow,
+.site-portfolio-overview .po-srow {
+  display: grid;
+  align-items: center;
+  gap: 14px;
+  height: 50px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-hrow:last-child,
+.site-portfolio-overview .po-srow:last-child { border-bottom: 0; }
+.site-portfolio-overview .po-hrow { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr) 70px 90px 110px 130px; }
+.site-portfolio-overview .po-srow { grid-template-columns: minmax(0, 1.6fr) 120px 130px 110px minmax(160px, 1fr); }
+.site-portfolio-overview .po-hrow--h,
+.site-portfolio-overview .po-srow--h {
+  height: 36px;
+  background: var(--po-bg2);
+  color: var(--po-dim2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.site-portfolio-overview .po-hrow--h span:nth-child(n + 3),
+.site-portfolio-overview .po-srow--h span:nth-child(n + 2) { text-align: right; }
+.site-portfolio-overview .po-hname { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-portfolio-overview .po-hname > span { display: flex; flex-direction: column; min-width: 0; }
+.site-portfolio-overview .po-hname b { font-size: 13.5px; }
+.site-portfolio-overview .po-hname small { color: var(--po-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-portfolio-overview .po-tmark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+.site-portfolio-overview .po-tmark--stocks { background: var(--po-violet-soft); color: #c4bfff; }
+.site-portfolio-overview .po-tmark--bonds { background: rgba(69, 168, 255, 0.15); color: #9fd0ff; }
+.site-portfolio-overview .po-tmark--cash { background: var(--po-green-soft); color: #9ff0cf; }
+.site-portfolio-overview .po-haccts { display: flex; gap: 5px; flex-wrap: nowrap; min-width: 0; overflow: hidden; }
+.site-portfolio-overview .po-atag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 7px 0 3px;
+  border-radius: 6px;
+  background: var(--po-panel2);
+  color: var(--po-dim);
+  font-size: 11px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-portfolio-overview .po-atag img { width: 16px; height: 16px; border-radius: 4px; }
+.site-portfolio-overview .po-hnum { text-align: right; color: var(--po-dim); }
+.site-portfolio-overview .po-hval { color: var(--po-ink); font-weight: 600; }
+.site-portfolio-overview .po-hw { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.site-portfolio-overview .po-hw b { width: 44px; text-align: right; font-weight: 600; }
+.site-portfolio-overview .po-hwbar { display: block; max-width: 70px; height: 5px; border-radius: 99px; }
+.site-portfolio-overview .po-hwbar--stocks { background: var(--po-stocks); }
+.site-portfolio-overview .po-hwbar--bonds { background: var(--po-bonds); }
+.site-portfolio-overview .po-hwbar--cash { background: var(--po-cash); }
+
+.site-portfolio-overview .po-sline { color: var(--po-ink); font-weight: 650; }
+.site-portfolio-overview .po-scush { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.site-portfolio-overview .po-scbar { display: block; flex: 1 1 auto; max-width: 140px; height: 6px; border-radius: 99px; background: var(--po-panel2); overflow: hidden; }
+.site-portfolio-overview .po-scbar i { display: block; height: 100%; border-radius: 99px; background: var(--po-green); }
+.site-portfolio-overview .po-scush b { width: 44px; text-align: right; color: var(--po-green); }
+.site-portfolio-overview .po-srow--hot { background: var(--po-red-soft); box-shadow: inset 3px 0 0 var(--po-red); }
+.site-portfolio-overview .po-srow--hot .po-scbar i { background: var(--po-red); }
+.site-portfolio-overview .po-srow--hot .po-scush b,
+.site-portfolio-overview .po-srow--hot .po-sline { color: var(--po-red); }
+
+/* ---------- keeps watching ---------- */
+.site-portfolio-overview .po-watch { padding: 12px 28px 28px; }
+.site-portfolio-overview .po-wlist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.site-portfolio-overview .po-w {
+  display: flex;
+  gap: 11px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--po-panel);
+  border: 1px solid var(--po-line);
+}
+.site-portfolio-overview .po-wi {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--po-violet-soft);
+  color: #c4bfff;
+}
+.site-portfolio-overview .po-wt { display: flex; flex-direction: column; min-width: 0; }
+.site-portfolio-overview .po-wt small { color: var(--po-dim2); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.site-portfolio-overview .po-wt b { margin-top: 2px; font-size: 13.5px; }
+.site-portfolio-overview .po-wt em { margin-top: 2px; color: var(--po-dim); font-size: 12px; }
+
+.site-portfolio-overview .po-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--po-line);
+  color: var(--po-dim2);
+  font-size: 12px;
+}
+.site-portfolio-overview .po-foot span:first-child { display: inline-flex; align-items: center; gap: 7px; }
+
+/* ---------- narrow frames (the 9:16 and 1:1 cuts lay the page out near 800 px) ---------- */
+@container po (max-width: 1000px) {
+  .site-portfolio-overview .po-topin { gap: 12px; padding: 0 20px; }
+  .site-portfolio-overview .po-by,
+  .site-portfolio-overview .po-acct { display: none; }
+  .site-portfolio-overview .po-tabs { margin-left: 4px; }
+  .site-portfolio-overview .po-heroin { grid-template-columns: minmax(0, 1fr) 270px; gap: 20px; padding: 28px 20px; }
+  .site-portfolio-overview .po-hero h1 { font-size: 26px; }
+  .site-portfolio-overview .po-dek { font-size: 13px; }
+  .site-portfolio-overview .po-ticks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-portfolio-overview .po-tick { min-width: 0; overflow: hidden; }
+  .site-portfolio-overview .po-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-portfolio-overview .po-stats b { font-size: 16px; }
+  .site-portfolio-overview .po-alloc { padding: 14px 14px 10px; }
+  .site-portfolio-overview .po-ring { width: 150px; height: 150px; }
+  .site-portfolio-overview .po-leg { grid-template-columns: 10px minmax(0, 1fr) 48px 74px; gap: 6px; }
+  .site-portfolio-overview .po-legdrift { display: none; }
+  .site-portfolio-overview .po-accts { padding: 18px 20px 0; }
+  .site-portfolio-overview .po-acct-v { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .site-portfolio-overview .po-acct-v b { font-size: 18px; }
+  .site-portfolio-overview .po-drift { padding: 26px 20px 6px; }
+  .site-portfolio-overview .po-row { grid-template-columns: 110px minmax(0, 1fr) 56px 76px 92px; gap: 12px; padding: 0 14px; }
+  .site-portfolio-overview .po-panels { padding: 24px 20px 16px; }
+  .site-portfolio-overview .po-hrow { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr) 50px 80px 100px 90px; gap: 10px; padding: 0 14px; }
+  .site-portfolio-overview .po-srow { grid-template-columns: minmax(0, 1.3fr) 100px 110px 84px minmax(120px, 1fr); gap: 10px; padding: 0 14px; }
+  .site-portfolio-overview .po-hwbar { display: none; }
+  .site-portfolio-overview .po-sech { flex-direction: column; gap: 3px; }
+  .site-portfolio-overview .po-sech span { text-align: left; }
+  .site-portfolio-overview .po-watch { padding: 10px 20px 24px; }
+  .site-portfolio-overview .po-wlist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-portfolio-overview .po-foot { padding: 14px 20px 18px; }
+}

@@ -88,6 +88,8 @@ const more = [
   ['just-works-wantlist-watch-gpt-superbot-42aac446', 'just-works-wantlist-watch-gpt-superbot-42aac446/', 'Discogs wantlist, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-campsite-watch-superbot-42aac446', 'just-works-campsite-watch-superbot-42aac446/', 'Upper Pines, Jul 3 to 6', 'Ad spots'],
   ['just-works-campsite-watch-gpt-superbot-42aac446', 'just-works-campsite-watch-gpt-superbot-42aac446/', 'Upper Pines, ChatGPT vs Superbot', 'Ad spots'],
+  ['just-works-portfolio-overview-superbot-42aac446', 'just-works-portfolio-overview-superbot-42aac446/', 'Schwab + Robinhood, one overview', 'Ad spots'],
+  ['just-works-portfolio-overview-gpt-superbot-42aac446', 'just-works-portfolio-overview-gpt-superbot-42aac446/', 'Schwab + Robinhood, ChatGPT vs Superbot', 'Ad spots'],
       ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
   ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],

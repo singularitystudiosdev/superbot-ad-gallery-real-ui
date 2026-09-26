@@ -1,0 +1,53 @@
+Reading list spot, variant A with the ChatGPT refusal (Libby with two library cards, the Goodreads
+want-to-read shelf, the Kindle and Audible libraries, and the live availability, hold queue and estimated
+wait of 48 want-to-read titles at Seattle Public Library and King County Library System), asset credits.
+The reader, the two library cards, the hold positions, the queue figures, the loans and the due dates are
+invented for the spot and live in data.js. The titles and authors are real books; the shelves, the holds, the
+waits and the due dates are not, and nothing here is what any library system actually reports. Any
+resemblance to a real reader's shelf is unintended. The page reads only: it never borrows, places a hold,
+joins a waitlist, renews, returns or rates anything on Libby, Goodreads, Kindle or Audible, and it does not
+touch either library account. All figures printed on the page are derived from data.js.
+
+img/hero.jpg
+  "Abbotsford House Library (248527955).jpeg" (the library inside Abbotsford House, Melrose, Scotland),
+  Wikimedia Commons, CC0 1.0 (public domain dedication, no attribution required)
+  https://commons.wikimedia.org/wiki/File:Abbotsford_House_Library_(248527955).jpeg
+  Real photograph by Michael D Beckwith, downscaled to 1600 px wide from the Commons original. No people, no
+  products shown by name, no drawn art.
+
+img/covers/*.jpg
+  Real book covers from the Open Library covers API (covers.openlibrary.org), fetched by ISBN and stored at
+  the API's large size (the API is the source; -L is used instead of -M so the cover still reads at card
+  size). Each file below is the cover of the title the page prints alongside it. Covers are used only to name
+  the title the library holds.
+    intermezzo.jpg                  Intermezzo, Sally Rooney                      ISBN 0374602638
+    james.jpg                       James, Percival Everett                       ISBN 0593862732
+    the-god-of-the-woods.jpg        The God of the Woods, Liz Moore               ISBN 9780008663834
+    project-hail-mary.jpg           Project Hail Mary, Andy Weir                  ISBN 9781529157468
+    the-women.jpg                   The Women, Kristin Hannah                     ISBN 1250317967
+    onyx-storm.jpg                  Onyx Storm, Rebecca Yarros                    Open Library cover id 15232777
+    remarkably-bright-creatures.jpg Remarkably Bright Creatures, Shelby Van Pelt   ISBN 9780063204164
+    the-ministry-of-time.jpg        The Ministry of Time, Kaliane Bradley         ISBN 1399726374
+    sandwich.jpg                    Sandwich, Catherine Newman                    ISBN 9791387595159
+  Also fetched and shipped, held as spares for other titles on the shelf and not shown in this cut:
+    orbital.jpg (0802163629), demon-copperhead.jpg (9780571376490), tomorrow-and-tomorrow-and-tomorrow.jpg
+    (9781784744649), all-fours.jpg (9780593190289), north-woods.jpg (9780593597033).
+
+Service marks and the app icon, via the Iconify API (api.iconify.design), set on rounded 64 px tiles.
+Trademarks of their owners, used only to name the services the shelf is read from.
+  brand/goodreads.svg   simple-icons:goodreads (CC0) on Goodreads brown #372213
+  brand/audible.svg     simple-icons:audible (CC0) on Audible orange #F8991C
+  brand/kindle.svg      simple-icons:amazon (CC0) on Amazon ink #232F3E, the mark for the Kindle library:
+                        the Kindle store is Amazon's, and no separate Kindle mark ships in an open icon set
+  brand/libby.svg       mdi:book-open-variant (Apache 2.0) on a neutral slate tile, the mark for Libby and
+                        for both library cards (Seattle Public Library and King County Library System):
+                        Libby ships no mark in an open icon set, so it is named in text and gets this neutral
+                        book glyph, not a logo
+  brand/book.svg        mdi:book-open-page-variant-outline (Apache 2.0), the row glyph for a title
+  brand/app.svg         mdi:bookmark-outline (Apache 2.0), tinted mint, the app favicon
+
+The shelf, book and app tiles are the page's own slate and ink, not brand colours, and carry no trademark.
+
+Inline interface glyphs in site.js (list, lock, check, refresh, map pin, sparkles, calendar check, calendar
+days, hourglass, link, external link, clock, merge, shield check, circle check, bookmark, book open, library,
+headphones) are lucide paths (ISC) fetched from the same Iconify API.

@@ -288,6 +288,22 @@
     "thumb": "assets/shots/just-works-job-hunt-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-reading-list-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Libby + Goodreads + Kindle + Audible, one reading overview",
+    "src": "animations/just-works-reading-list-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-reading-list-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-reading-list-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Libby + Goodreads + Kindle + Audible, ChatGPT vs Superbot",
+    "src": "animations/just-works-reading-list-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-reading-list-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

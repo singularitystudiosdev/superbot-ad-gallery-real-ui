@@ -2,10 +2,10 @@
 // are hidden, ask.css), laid out at DW design px and scaled to the frame width. It opens on the empty state
 // ("Good evening. Where do we go?" over a centred composer) with the camera pushed in; the first send drops the
 // composer to the bottom, lifts the greeting away and eases the camera out while the five-request chat plays
-// (tabs-assets/chat.js, ?v=1..5 picks the routing). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
+// (tabs-assets/chat.js, ?v=1..3 picks the routing). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=9';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=10';
 import { lerp, seg, outCubic, inOutCubic } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;

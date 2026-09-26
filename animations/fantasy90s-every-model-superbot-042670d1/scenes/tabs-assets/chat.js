@@ -45,37 +45,43 @@ const CHIP = {
 
 // one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options
 const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, CHIP[app]]] });
-// only the first request is asked; the rest are superbot carrying the build forward on its own
-const variant = (steps) => steps.map((s, i) => (i === 0 ? { ...s, ask: ASK } : s));
+// only the first request is asked; the rest are superbot carrying the build forward on its own. pace sets where the
+// cuts land: hold is the pause after a beat before the next switch (one number, or one per step), chip is how long a
+// routing chip spins before it resolves
+const variant = (steps, pace = {}) => steps.map((s, i) => ({
+  ...s,
+  ...(i === 0 ? { ask: ASK } : {}),
+  hold: Array.isArray(pace.hold) ? pace.hold[i] || 0 : pace.hold || 0,
+  chipDur: pace.chip || 0.65,
+}));
 
-// the three published routings, one ad each (?v=1..3); every one builds the same 90s fantasy game, Duskhold, with
-// each part of the job sent to the model suited to it: design doc or lore, three.js engine and retro shaders,
-// pixel textures and sprites, the MIDI-style soundtrack, the repo, and the playable build
+// the three published routings, one ad each (?v=1..3). Every one builds the same 90s fantasy game, Duskhold, but
+// each routes differently: a different cast of models, a different order, a different number of switches and a
+// different rhythm (v1 four slow switches, v2 seven rapid ones, v3 six with uneven pauses)
 export const VARIANTS = {
   '1': variant([
-    step('deepseek', plan, { kind: 'gdd' }),
+    step('gemini', art),
     step('opus', code, { set: 'engine' }),
-    step('gemini', art),
     step('lyria', music),
-    step('github', git),
     step('superbot', play),
-  ]),
+  ], { hold: 0.7, chip: 0.8 }),
   '2': variant([
-    step('opus', plan, { kind: 'gdd' }),
-    step('gemini', art),
+    step('deepseek', plan, { kind: 'lore' }),
     step('codex', code, { set: 'retro' }),
     step('opus', code, { set: 'world' }),
-    step('lyria', music),
-    step('opus', play),
-  ]),
-  '3': variant([
     step('gemini', art),
-    step('deepseek', plan, { kind: 'lore' }),
+    step('opus', music),
+    step('github', git),
+    step('superbot', play),
+  ], { hold: 0, chip: 0.45 }),
+  '3': variant([
+    step('opus', plan, { kind: 'gdd' }),
+    step('deepseek', code, { set: 'engine' }),
     step('lyria', music),
-    step('codex', code, { set: 'engine' }),
+    step('gemini', art),
     step('github', git),
     step('opus', play),
-  ]),
+  ], { hold: [0.25, 0, 0.9, 0.1, 0.5], chip: 0.6 }),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
 export const VARIANT = VARIANTS[VARIANT_KEY];
@@ -95,11 +101,11 @@ function timeBeats(asks) {
     }
     // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
     let at = k.sw;
-    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + 0.65 }; at = c.done + 0.12; return c; });
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + Math.max(0.3, a.chipDur) }; at = c.done + 0.12; return c; });
     k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
     k.T = a.mod.times(k.reply);
-    s = k.T.end;
+    s = k.T.end + a.hold;     // the variant's pause before the next switch
     return { k };
   });
 }

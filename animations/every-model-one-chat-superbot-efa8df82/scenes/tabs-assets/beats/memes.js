@@ -1,4 +1,4 @@
-// The five Muse memes the scrape turns up (beats/scrape.js makes them, beats/post.js and beats/xpost.js post them).
+// The five Muse memes the scrape turns up (beats/post.js and beats/xpost.js post them).
 // The stills are frames of the official trailer (img/tsn-*.jpg, see img/CREDITS.txt); the captions are set over
 // them here.
 export const MEMES = [

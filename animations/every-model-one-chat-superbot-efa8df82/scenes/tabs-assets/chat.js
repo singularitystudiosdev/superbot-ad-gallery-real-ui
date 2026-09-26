@@ -6,7 +6,7 @@
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import gemini from './beats/gemini.js?v=1';
-import scrape from './beats/scrape.js?v=1';
+import scrape from './beats/scrape.js?v=2';
 import post from './beats/post.js?v=1';
 import xpost from './beats/xpost.js?v=1';
 import doordash from './beats/doordash.js?v=1';

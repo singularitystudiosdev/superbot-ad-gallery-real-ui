@@ -155,7 +155,7 @@
     "id": "island-world-every-model-v1-superbot-00836f02",
     "type": "animation",
     "group": "Ad spots",
-    "title": "3D island world: DeepSeek plans, Opus terrain, Codex water, Gemini textures, GitHub",
+    "title": "3D island world: Codex terrain, Gemini textures, Opus controls (4 fast switches)",
     "src": "animations/island-world-every-model-superbot-00836f02/?v=1",
     "thumb": "assets/shots/island-world-every-model-v1-superbot-00836f02.png"
   },
@@ -163,7 +163,7 @@
     "id": "island-world-every-model-v2-superbot-00836f02",
     "type": "animation",
     "group": "Ad spots",
-    "title": "3D island world: Opus plans, Gemini textures, Codex terrain, Opus water",
+    "title": "3D island world: Opus, Codex, Gemini, Codex, Opus, GitHub relay (7 switches)",
     "src": "animations/island-world-every-model-superbot-00836f02/?v=2",
     "thumb": "assets/shots/island-world-every-model-v2-superbot-00836f02.png"
   },
@@ -171,7 +171,7 @@
     "id": "island-world-every-model-v3-superbot-00836f02",
     "type": "animation",
     "group": "Ad spots",
-    "title": "3D island world: Gemini textures first, DeepSeek layout, Opus controls, Codex water",
+    "title": "3D island world: DeepSeek spec, Gemini textures, Codex water and launch (5 slow switches)",
     "src": "animations/island-world-every-model-superbot-00836f02/?v=3",
     "thumb": "assets/shots/island-world-every-model-v3-superbot-00836f02.png"
   },

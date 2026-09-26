@@ -14,7 +14,7 @@ const dip = document.getElementById('dip');
 
 // ---------- the sequence (CONTRACT.txt) ----------
 // island-world-every-model-superbot: the hub cropped to its thread, opening on the empty state, then the island chat
-// (scenes/tabs-assets/chat.js: DeepSeek V4 Flash, Claude Opus 5.5, GPT-5 Codex, Gemini, GitHub, Superbot; ?v=1..3
+// (scenes/tabs-assets/chat.js: GPT-5 Codex, Gemini, Claude Opus 5.5, DeepSeek V4 Flash, GitHub, Superbot; ?v=1..3
 // picks the routing, one ad each) and the end card
 const SEQUENCE = [
   ['scene', 'tabs'],
@@ -189,7 +189,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=11`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=13`)).default;
+    const m = (await import(`./scenes/${id}.js?v=14`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

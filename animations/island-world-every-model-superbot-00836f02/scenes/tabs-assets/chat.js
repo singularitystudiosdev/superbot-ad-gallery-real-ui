@@ -40,39 +40,41 @@ const CHIP = {
   superbot: 'Switched to Superbot',
 };
 
-// one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options
-const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, CHIP[app]]] });
-// only the first request is asked; the rest are superbot carrying the build forward on its own
-const variant = (steps) => steps.map((s, i) => (i === 0 ? { ...s, ask: ASK } : s));
+// one request: the app that answers, its beat module, the chip that routes to it, the beat's own options, and an
+// optional hold (seconds the thread rests on this beat before the next cut; defaults to the variant's pace.hold)
+const step = (app, mod, opts = {}, hold) => ({ app, mod, opts, hold, chips: [[app, CHIP[app]]] });
+// only the first request is asked; the rest are superbot carrying the build forward on its own. pace sets when the
+// cuts land: lead (gap before superbot's next chip), dwell (chip land to resolve), hold (rest after each beat)
+const variant = (pace, steps) => steps.map((s, i) => ({ ...s, pace, ...(i === 0 ? { ask: ASK } : {}) }));
 
-// the three published routings, one ad each (?v=1..3). Each job goes to the model that suits it: a fast planner for
-// the world spec, Opus for terrain and gameplay code, Codex for the GLSL water, Gemini for the skybox and textures.
+// the three published routings, one ad each (?v=1..3), each its own model set, order, switch count and cut rhythm.
+// Every one still ends on the island clip: Codex for terrain and GLSL water, Opus for layout and controls, Gemini
+// for the skybox and textures, DeepSeek for the fast world spec.
 export const VARIANTS = {
-  // the full pipeline: plan, terrain, water shader, textures, push, play
-  '1': variant([
-    step('deepseek', plan, { kind: 'spec' }),
-    step('opus', code, { set: 'terrain' }),
-    step('codex', code, { set: 'water' }),
-    step('gemini', art),
-    step('github', git),
-    step('superbot', play),
-  ]),
-  // art first, no GitHub: the quicker cut
-  '2': variant([
-    step('opus', plan, { kind: 'spec' }),
-    step('gemini', art),
+  // sprint: 4 switches, snappy cuts, no planner and no GitHub
+  '1': variant({ lead: 0.12, dwell: 0.4, hold: 0 }, [
     step('codex', code, { set: 'terrain' }),
-    step('opus', code, { set: 'water' }),
-    step('opus', play),
-  ]),
-  // textures lead, then the island layout, the interaction code and the water
-  '3': variant([
     step('gemini', art),
-    step('deepseek', plan, { kind: 'layout' }),
     step('opus', code, { set: 'controls' }),
+    step('superbot', play),
+  ]),
+  // relay: 7 switches, Codex and Opus each hand off and come back, uneven holds
+  '2': variant({ lead: 0.2, dwell: 0.6, hold: 0 }, [
+    step('opus', plan, { kind: 'layout' }, 0.2),
+    step('codex', code, { set: 'terrain' }),
+    step('gemini', art, {}, 0.5),
     step('codex', code, { set: 'water' }),
+    step('opus', code, { set: 'controls' }, 0.3),
     step('github', git),
     step('superbot', play),
+  ]),
+  // deliberate: 5 slow switches, no Opus, Codex writes the water then launches the world
+  '3': variant({ lead: 0.45, dwell: 1.0, hold: 0.6 }, [
+    step('deepseek', plan, { kind: 'spec' }),
+    step('gemini', art),
+    step('codex', code, { set: 'water' }),
+    step('github', git),
+    step('codex', play),
   ]),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
@@ -89,15 +91,16 @@ function timeBeats(asks) {
       k.sw = k.send + 0.35;   // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
-      k.sw = s + 0.2;         // superbot carries on without being asked
+      k.sw = s + a.pace.lead; // superbot carries on without being asked
     }
     // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
+    const dwell = a.pace.dwell;
     let at = k.sw;
-    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + 0.65 }; at = c.done + 0.12; return c; });
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + dwell * 0.34, done: at + dwell }; at = c.done + 0.12; return c; });
     k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
     k.T = a.mod.times(k.reply);
-    s = k.T.end;
+    s = k.T.end + (a.hold ?? a.pace.hold);
     return { k };
   });
 }

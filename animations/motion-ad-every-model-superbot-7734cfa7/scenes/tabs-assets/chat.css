@@ -18,7 +18,8 @@
 #s-tabs .sbsite .hub .qc-pi img[data-app="codex"],
 #s-tabs .sbsite .hub .qc-pi img[data-app="deepseek"],
 #s-tabs .sbsite .hub .qc-pi img[data-app="opus"],
-#s-tabs .sbsite .hub .qc-pi img[data-app="github"] { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi img[data-app="github"],
+#s-tabs .sbsite .hub .qc-pi img[data-app="cursor"] { width: 12px; height: 12px; }
 
 /* rail: DoorDash's tile grows in when superbot connects it */
 #s-tabs .sbsite .rail-item.qc-rail-dd { background: #ff3008; overflow: visible; }

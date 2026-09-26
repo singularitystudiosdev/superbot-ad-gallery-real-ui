@@ -26,6 +26,7 @@ const APPS = {
   deepseek: { name: 'DeepSeek V4 Flash', logo: brand('deepseek-logo.svg'), sub: 'in superbot' },
   opus: { name: 'Claude Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
   github: { name: 'GitHub', logo: brand('github-logo.svg'), sub: 'connected' },
+  cursor: { name: 'Cursor', logo: brand('cursor-logo.svg'), sub: 'connected' },
   superbot: { name: 'Superbot', logo: null, sub: '' }, // drawn as its mark in CSS (SB_MARK, chat.css .sbm), not an image
 };
 
@@ -36,36 +37,41 @@ const CHIP = {
   codex: 'Switching to GPT-5 Codex',
   gemini: 'Switching to Gemini',
   github: 'Connecting to GitHub',
+  cursor: 'Switching to Cursor',
   superbot: 'Switched to Superbot',
 };
 
 // one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options
+// (opts.lead holds the routing chip back that many seconds, so each variant cuts on its own rhythm)
 const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, CHIP[app]]] });
 // only the first request is asked; the rest are superbot carrying the build forward on its own
 const variant = (steps) => steps.map((s, i) => (i === 0 ? { ...s, ask: ASK } : s));
 
-// the three published routings, one ad each (?v=1..3): every one builds the same 15-second spot (shot list, style
-// frames, animation code, render) but hands the stages to different models in a different order
+// the three published routings, one ad each (?v=1..3): every one ends on the same finished 15-second spot, but each
+// hands the work to its own set of models, in its own order, with its own number of switches and its own cut rhythm
 export const VARIANTS = {
+  // 3 switches, fast cuts: Opus writes the shot list, Cursor animates it, superbot renders
   '1': variant([
-    step('deepseek', plan, { kind: 'script' }),
-    step('gemini', art),
-    step('opus', code, { set: 'scene' }),
-    step('superbot', play),
-  ]),
-  '2': variant([
     step('opus', plan, { kind: 'script' }),
-    step('gemini', art),
-    step('codex', code, { set: 'scene' }),
-    step('deepseek', plan, { kind: 'sound' }),
+    step('cursor', code, { set: 'scene' }),
     step('superbot', play),
   ]),
+  // 5 switches, unhurried cuts: style frames first, then the script, the scene, the beat timing, the render
+  '2': variant([
+    step('gemini', art, { lead: 0.35 }),
+    step('deepseek', plan, { kind: 'script', lead: 0.5 }),
+    step('codex', code, { set: 'scene', lead: 0.45 }),
+    step('opus', code, { set: 'timing', lead: 0.5 }),
+    step('superbot', play, { lead: 0.4 }),
+  ]),
+  // 6 switches, uneven cuts: Codex scripts, DeepSeek scores, Gemini frames, Cursor animates, Opus times and renders
   '3': variant([
+    step('codex', plan, { kind: 'script' }),
+    step('deepseek', plan, { kind: 'sound', lead: 0.6 }),
     step('gemini', art),
-    step('deepseek', plan, { kind: 'script' }),
-    step('opus', code, { set: 'scene' }),
-    step('codex', code, { set: 'timing' }),
-    step('opus', play),
+    step('cursor', code, { set: 'scene', lead: 0.3 }),
+    step('opus', code, { set: 'timing' }),
+    step('opus', play, { lead: 0.7 }),
   ]),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
@@ -79,10 +85,10 @@ function timeBeats(asks) {
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
       k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.35;   // superbot's first routing chip lands
+      k.sw = k.send + 0.35 + ((a.opts && a.opts.lead) || 0);   // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
-      k.sw = s + 0.2;         // superbot carries on without being asked
+      k.sw = s + 0.2 + ((a.opts && a.opts.lead) || 0);         // superbot carries on without being asked
     }
     // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
     let at = k.sw;

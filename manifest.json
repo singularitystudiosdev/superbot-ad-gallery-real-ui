@@ -392,6 +392,22 @@
     "thumb": "assets/shots/just-works-meal-plan-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-study-streak-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Duolingo + Anki + WaniKani + italki, one morning study plan",
+    "src": "animations/just-works-study-streak-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-study-streak-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-study-streak-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Duolingo + Anki + WaniKani + italki, ChatGPT vs Superbot",
+    "src": "animations/just-works-study-streak-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-study-streak-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "just-works-photo-gear-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",

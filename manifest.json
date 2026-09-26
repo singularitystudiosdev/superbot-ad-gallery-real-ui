@@ -64,6 +64,14 @@
     "thumb": "assets/shots/it-does-what-you-ask-superbot-da5f6b38.png"
   },
   {
+    "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "From WSB to Wings in One Ask",
+    "src": "animations/wsb-to-wings-switcher-superbot-cbe85cdb/",
+    "thumb": "assets/shots/wsb-to-wings-switcher-superbot-cbe85cdb.png"
+  },
+  {
     "id": "agent-switch-superbot-4207ac22",
     "type": "animation",
     "group": "Ad spots",

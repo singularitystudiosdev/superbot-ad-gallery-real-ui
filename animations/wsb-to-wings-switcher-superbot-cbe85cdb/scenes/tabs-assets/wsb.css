@@ -1,0 +1,197 @@
+/* WSB to wings: the platform cards (beats/*.js) in each platform's own palette, plus the new app tiles.
+   Every moving value is written from lt by the beats, so nothing here transitions. */
+#s-tabs .sbsite.ask .hub { --num: tabular-nums; }
+
+/* app tiles (routing chip, reply header, composer chip) */
+#s-tabs .sbsite.ask .hub .qc-t-tradingview, #s-tabs .sbsite.ask .hub .qc-t-polymarket { background: transparent; }
+#s-tabs .sbsite.ask .hub .qc-tile.qc-t-tradingview img, #s-tabs .sbsite.ask .hub .qc-tile.qc-t-polymarket img { width: 100%; height: 100%; }
+#s-tabs .sbsite.ask .hub .qc-t-robinhood { background: #000; box-shadow: inset 0 0 0 1px #2c2c30; }
+#s-tabs .sbsite.ask .hub .qc-t-robinhood img { width: 13px; height: 13px; }
+#s-tabs .sbsite.ask .hub .qc-t-sheets { background: #fff; }
+#s-tabs .sbsite.ask .hub .qc-t-sheets img { width: 11px; height: 15px; }
+#s-tabs .sbsite.ask .hub .qc-who .qc-t-robinhood img { width: 11px; height: 11px; }
+#s-tabs .sbsite.ask .hub .qc-who .qc-t-sheets img { width: 9px; height: 12px; }
+#s-tabs .sbsite.ask .hub .qc-who .qc-t-tradingview img, #s-tabs .sbsite.ask .hub .qc-who .qc-t-polymarket img { width: 100%; height: 100%; }
+#s-tabs .sbsite.ask .hub .qc-pi img[data-app="tradingview"], #s-tabs .sbsite.ask .hub .qc-pi img[data-app="polymarket"] { border-radius: 3px; }
+
+/* ---------- Reddit: most mentioned today ---------- */
+#s-tabs .sbsite.ask .hub .wh-card { width: 390px; padding: 11px 12px 6px; border-radius: 14px; background: #0b1416; box-shadow: 0 0 0 1px #2a3236, 0 12px 30px rgba(0,0,0,.45); color: #f2f4f5; opacity: 0; }
+#s-tabs .sbsite.ask .hub .wh-head { display: flex; align-items: center; gap: 8px; padding-bottom: 9px; border-bottom: 1px solid #1d2a2f; }
+#s-tabs .sbsite.ask .hub .wh-head img { width: 24px; height: 24px; }
+#s-tabs .sbsite.ask .hub .wh-sub { display: grid; gap: 3px; flex: 1; }
+#s-tabs .sbsite.ask .hub .wh-sub b { font: 700 12px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .wh-sub small { font: 400 9.5px/1 var(--ui); color: #82959b; }
+#s-tabs .sbsite.ask .hub .wh-head em { font: 600 9.5px/1 var(--ui); font-style: normal; color: #ff4500; background: rgba(255,69,0,.12); padding: 5px 8px; border-radius: 999px; }
+#s-tabs .sbsite.ask .hub .wh-rows { display: grid; }
+#s-tabs .sbsite.ask .hub .wh-row { display: grid; grid-template-columns: 16px 40px 30px 1fr 94px; align-items: center; gap: 6px; height: 29px; border-bottom: 1px solid #16232a; font: 10.5px/1 var(--ui); opacity: 0; }
+#s-tabs .sbsite.ask .hub .wh-row:last-child { border-bottom: 0; }
+#s-tabs .sbsite.ask .hub .wh-rank { color: #82959b; font-weight: 600; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .wh-tk { font: 800 12px/1 var(--ui); letter-spacing: .01em; }
+#s-tabs .sbsite.ask .hub .wh-tag { justify-self: start; font: 700 8.5px/1 var(--ui); font-style: normal; color: #fff; background: #ff4500; padding: 3px 5px; border-radius: 4px; opacity: 0; }
+#s-tabs .sbsite.ask .hub .wh-row:not(:first-child) .wh-tk { grid-column: 2 / span 2; }
+#s-tabs .sbsite.ask .hub .wh-track { height: 8px; border-radius: 99px; background: #16232a; overflow: hidden; }
+#s-tabs .sbsite.ask .hub .wh-track i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #ff4500, #ff7a33); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite.ask .hub .wh-row:not(:first-child) .wh-track i { background: #ff4500; opacity: .62; }
+#s-tabs .sbsite.ask .hub .wh-n { justify-self: end; color: #82959b; font-size: 9.5px; }
+#s-tabs .sbsite.ask .hub .wh-n b { color: #f2f4f5; font: 700 11px/1 var(--ui); font-variant-numeric: tabular-nums; margin-right: 2px; }
+
+/* ---------- TradingView: GME daily ---------- */
+#s-tabs .sbsite.ask .hub .tv-card { width: 430px; padding: 10px 10px 8px; border-radius: 12px; background: #131722; box-shadow: 0 0 0 1px #2a2e39, 0 12px 30px rgba(0,0,0,.45); color: #d1d4dc; opacity: 0; }
+#s-tabs .sbsite.ask .hub .tv-top { display: flex; align-items: center; gap: 8px; }
+#s-tabs .sbsite.ask .hub .tv-top img { width: 22px; height: 22px; }
+#s-tabs .sbsite.ask .hub .tv-sym { display: grid; gap: 3px; flex: 1; }
+#s-tabs .sbsite.ask .hub .tv-sym b { font: 700 12.5px/1 var(--ui); color: #fff; }
+#s-tabs .sbsite.ask .hub .tv-sym small, #s-tabs .sbsite.ask .hub .tv-px small { font: 400 9.5px/1 var(--ui); color: #787b86; }
+#s-tabs .sbsite.ask .hub .tv-px { display: grid; gap: 3px; justify-items: end; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .tv-px b { font: 700 14px/1 var(--ui); color: #fff; }
+#s-tabs .sbsite.ask .hub .tv-px small { color: #089981; font-weight: 600; }
+#s-tabs .sbsite.ask .hub .tv-legend { display: flex; align-items: center; justify-content: space-between; height: 22px; margin: 7px 0 2px; font: 500 9.5px/1 var(--ui); color: #787b86; }
+#s-tabs .sbsite.ask .hub .tv-ma-l { display: inline-flex; align-items: center; gap: 5px; opacity: 0; }
+#s-tabs .sbsite.ask .hub .tv-ma-l i { width: 12px; height: 2px; border-radius: 2px; background: #2962ff; }
+#s-tabs .sbsite.ask .hub .tv-ma-l b { color: #5b8cff; font-weight: 600; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .tv-ins { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 8px 0 6px; border-radius: 999px; background: rgba(34,197,94,.14); color: #34d17a; font-weight: 700; opacity: 0; }
+#s-tabs .sbsite.ask .hub .tv-ins svg { width: 11px; height: 11px; fill: #22c55e; stroke: #22c55e; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+#s-tabs .sbsite.ask .hub .tv-chart { display: block; width: 100%; height: auto; overflow: visible; }
+#s-tabs .sbsite.ask .hub .tv-grid line { stroke: #1e222d; stroke-width: 1; }
+#s-tabs .sbsite.ask .hub .tv-grid .tv-axis { stroke: #2a2e39; }
+#s-tabs .sbsite.ask .hub .tv-grid text { fill: #787b86; font: 500 7.5px var(--ui); text-anchor: end; }
+#s-tabs .sbsite.ask .hub .tv-candles g { opacity: 0; }
+#s-tabs .sbsite.ask .hub .tv-up line { stroke: #089981; stroke-width: .9; }
+#s-tabs .sbsite.ask .hub .tv-up rect { fill: #089981; }
+#s-tabs .sbsite.ask .hub .tv-dn line { stroke: #f23645; stroke-width: .9; }
+#s-tabs .sbsite.ask .hub .tv-dn rect { fill: #f23645; }
+#s-tabs .sbsite.ask .hub .tv-ma { fill: none; stroke: #2962ff; stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+#s-tabs .sbsite.ask .hub .tv-fl-in { opacity: 0; }
+#s-tabs .sbsite.ask .hub .tv-fl-pole { stroke: #22c55e; stroke-width: 1.4; stroke-linecap: round; }
+#s-tabs .sbsite.ask .hub .tv-fl-cloth { fill: #22c55e; }
+#s-tabs .sbsite.ask .hub .tv-last { opacity: 0; }
+#s-tabs .sbsite.ask .hub .tv-last line { stroke: #089981; stroke-width: .8; stroke-dasharray: 2 2; opacity: .8; }
+#s-tabs .sbsite.ask .hub .tv-last rect { fill: #089981; }
+#s-tabs .sbsite.ask .hub .tv-last text { fill: #fff; font: 700 8px var(--ui); text-anchor: middle; }
+#s-tabs .sbsite.ask .hub .tv-tf { display: flex; gap: 2px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #2a2e39; font: 600 9px/1 var(--ui); color: #787b86; }
+#s-tabs .sbsite.ask .hub .tv-tf span { padding: 4px 6px; border-radius: 4px; }
+#s-tabs .sbsite.ask .hub .tv-tf span.on { background: #2a2e39; color: #fff; }
+
+/* ---------- Polymarket: Fed decision in October? ---------- */
+#s-tabs .sbsite.ask .hub .pm-card { width: 410px; padding: 12px 12px 6px; border-radius: 14px; background: #1e2833; box-shadow: 0 0 0 1px #2e3b4a, 0 12px 30px rgba(0,0,0,.45); color: #fff; opacity: 0; }
+#s-tabs .sbsite.ask .hub .pm-head { display: flex; align-items: center; gap: 10px; }
+#s-tabs .sbsite.ask .hub .pm-head img { width: 34px; height: 34px; border-radius: 8px; }
+#s-tabs .sbsite.ask .hub .pm-t { display: grid; gap: 5px; }
+#s-tabs .sbsite.ask .hub .pm-t b { font: 700 14px/1.1 var(--ui); }
+#s-tabs .sbsite.ask .hub .pm-t small { font: 500 9.5px/1 var(--ui); color: #899cb2; }
+#s-tabs .sbsite.ask .hub .pm-cols, #s-tabs .sbsite.ask .hub .pm-row { display: grid; grid-template-columns: 1fr 64px 128px; align-items: center; gap: 8px; }
+#s-tabs .sbsite.ask .hub .pm-cols { margin: 11px 0 2px; padding-bottom: 6px; border-bottom: 1px solid #2e3b4a; font: 600 8.5px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; color: #899cb2; }
+#s-tabs .sbsite.ask .hub .pm-cols span:nth-child(2) { text-align: center; }
+#s-tabs .sbsite.ask .hub .pm-row { height: 44px; border-bottom: 1px solid #28333f; opacity: 0; }
+#s-tabs .sbsite.ask .hub .pm-row:last-child { border-bottom: 0; }
+#s-tabs .sbsite.ask .hub .pm-o { display: grid; gap: 4px; }
+#s-tabs .sbsite.ask .hub .pm-o b { font: 700 12.5px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .pm-o small { font: 500 9px/1 var(--ui); color: #899cb2; }
+#s-tabs .sbsite.ask .hub .pm-bar { height: 4px; border-radius: 99px; background: #28333f; overflow: hidden; }
+#s-tabs .sbsite.ask .hub .pm-bar i { display: block; height: 100%; background: #2e5cff; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite.ask .hub .pm-p { text-align: center; font: 800 20px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .pm-p b { font: inherit; }
+#s-tabs .sbsite.ask .hub .pm-row.lead .pm-p { color: #fff; text-shadow: 0 0 18px rgba(46,92,255,.55); }
+#s-tabs .sbsite.ask .hub .pm-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+#s-tabs .sbsite.ask .hub .pm-btns i { display: grid; place-items: center; height: 26px; border-radius: 7px; font: 700 10px/1 var(--ui); font-style: normal; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .pm-yes { background: rgba(39,174,96,.18); color: #3fd07a; }
+#s-tabs .sbsite.ask .hub .pm-no { background: rgba(235,87,87,.16); color: #f07070; }
+
+/* ---------- Robinhood: the order ticket ---------- */
+#s-tabs .sbsite.ask .hub .rh-card { width: 370px; padding: 12px 14px 12px; border-radius: 14px; background: #000; box-shadow: 0 0 0 1px #262626, 0 12px 30px rgba(0,0,0,.5); color: #fff; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rh-card.is-filled { box-shadow: 0 0 0 1px rgba(0,200,5,.55), 0 12px 34px rgba(0,200,5,.18); }
+#s-tabs .sbsite.ask .hub .rh-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+#s-tabs .sbsite.ask .hub .rh-head img { width: 16px; height: 16px; }
+#s-tabs .sbsite.ask .hub .rh-head b { flex: 1; font: 700 16px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .rh-mkt { font: 600 9px/1 var(--ui); color: #00c805; }
+#s-tabs .sbsite.ask .hub .rh-f { display: flex; align-items: center; justify-content: space-between; height: 30px; border-bottom: 1px solid #1c1c1c; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rh-fl { display: grid; gap: 3px; font: 500 11px/1 var(--ui); color: #fff; }
+#s-tabs .sbsite.ask .hub .rh-fl small { font-size: 8.5px; color: #8e8e8e; }
+#s-tabs .sbsite.ask .hub .rh-fv { display: inline-flex; align-items: center; font: 700 12px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .rh-fv b { font: inherit; }
+#s-tabs .sbsite.ask .hub .rh-caret { width: 1.5px; height: 13px; margin-left: 2px; background: #00c805; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rh-zone { position: relative; height: 50px; margin-top: 10px; }
+#s-tabs .sbsite.ask .hub .rh-submit { position: absolute; inset: 4px 0; display: grid; place-items: center; border-radius: 999px; background: #00c805; color: #000; font: 700 13px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .rh-conf { position: absolute; inset: 0; display: flex; align-items: center; gap: 9px; padding: 0 10px; border-radius: 12px; background: #0b1a0c; box-shadow: inset 0 0 0 1px rgba(0,200,5,.35); opacity: 0; }
+#s-tabs .sbsite.ask .hub .rh-ok { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #00c805; }
+#s-tabs .sbsite.ask .hub .rh-ok svg { width: 14px; height: 14px; fill: none; stroke: #000; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite.ask .hub .rh-ct { display: grid; gap: 4px; flex: 1; }
+#s-tabs .sbsite.ask .hub .rh-ct b { font: 700 12px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .rh-ct small { font: 500 9px/1 var(--ui); color: #8e8e8e; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .rh-filled { font: 800 10px/1 var(--ui); font-style: normal; color: #000; background: #00c805; padding: 5px 9px; border-radius: 999px; opacity: 0; }
+
+/* ---------- Google Sheets: YOLO LOG ---------- */
+#s-tabs .sbsite.ask .hub .gs-card { width: 560px; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px #dadce0, 0 12px 30px rgba(0,0,0,.45); color: #202124; font-family: Arial, var(--ui); opacity: 0; }
+#s-tabs .sbsite.ask .hub .gs-top { display: flex; align-items: center; gap: 8px; padding: 8px 10px 6px; background: #f9fbfd; }
+#s-tabs .sbsite.ask .hub .gs-top img { width: 15px; height: 21px; }
+#s-tabs .sbsite.ask .hub .gs-doc { display: grid; gap: 4px; flex: 1; }
+#s-tabs .sbsite.ask .hub .gs-doc b { font: 400 12.5px/1 var(--ui); color: #1f1f1f; }
+#s-tabs .sbsite.ask .hub .gs-doc small { font: 400 8.5px/1 var(--ui); color: #444746; word-spacing: 3px; }
+#s-tabs .sbsite.ask .hub .gs-share { font: 600 9.5px/1 var(--ui); color: #001d35; background: #c2e7ff; padding: 7px 12px; border-radius: 999px; }
+#s-tabs .sbsite.ask .hub .gs-fx { display: flex; align-items: center; gap: 8px; height: 22px; padding: 0 10px; border-top: 1px solid #e1e3e1; border-bottom: 1px solid #e1e3e1; font: 400 10px/1 Arial, var(--ui); }
+#s-tabs .sbsite.ask .hub .gs-ref { width: 34px; color: #444746; }
+#s-tabs .sbsite.ask .hub .gs-fx i { font-style: italic; color: #80868b; padding-right: 8px; border-right: 1px solid #e1e3e1; }
+#s-tabs .sbsite.ask .hub .gs-fv { color: #202124; }
+#s-tabs .sbsite.ask .hub .gs-grid { --gs-n: 22px; display: grid; }
+#s-tabs .sbsite.ask .hub .gs-r { position: relative; display: grid; grid-template-columns: var(--gs-n) var(--cols); height: 20px; border-bottom: 1px solid #e2e3e3; font: 400 9.5px/1 Arial, var(--ui); }
+#s-tabs .sbsite.ask .hub .gs-n, #s-tabs .sbsite.ask .hub .gs-hd .gs-c { display: grid; place-items: center; background: #f8f9fa; color: #5f6368; font-size: 8.5px; }
+#s-tabs .sbsite.ask .hub .gs-n { border-right: 1px solid #c7c7c7; }
+#s-tabs .sbsite.ask .hub .gs-hd { height: 17px; }
+#s-tabs .sbsite.ask .hub .gs-c { display: flex; align-items: center; padding: 0 5px; border-right: 1px solid #e2e3e3; white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .gs-c i { font-style: normal; }
+#s-tabs .sbsite.ask .hub .gs-h .gs-c { font-weight: 700; background: #e6f4ea; color: #0d652d; }
+#s-tabs .sbsite.ask .hub .gs-st i { padding: 2px 6px; border-radius: 999px; font-size: 8.5px; font-weight: 700; }
+#s-tabs .sbsite.ask .hub .gs-st-closed i { background: #e8eaed; color: #3c4043; }
+#s-tabs .sbsite.ask .hub .gs-st-open i { background: #d3e3fd; color: #0842a0; }
+#s-tabs .sbsite.ask .hub .gs-new .gs-st-filled i { background: rgba(212,237,188,var(--chip, 0)); color: #0f5223; }
+#s-tabs .sbsite.ask .hub .gs-new .gs-c { transform-origin: 30% 50%; }
+#s-tabs .sbsite.ask .hub .gs-card.is-logged .gs-new { background: #f1f8f3; }
+#s-tabs .sbsite.ask .hub .gs-sel { position: absolute; top: -1px; bottom: -1px; border: 2px solid #1a73e8; border-radius: 1px; pointer-events: none; opacity: 0; box-sizing: border-box; }
+#s-tabs .sbsite.ask .hub .gs-sel::after { content: ""; position: absolute; right: -3.5px; bottom: -3.5px; width: 5px; height: 5px; background: #1a73e8; border: 1px solid #fff; border-radius: 1px; }
+#s-tabs .sbsite.ask .hub .gs-tabs { display: flex; align-items: center; gap: 4px; height: 26px; padding: 0 8px; background: #f9fbfd; border-top: 1px solid #e1e3e1; font: 500 9.5px/1 var(--ui); color: #444746; }
+#s-tabs .sbsite.ask .hub .gs-tabs span { padding: 5px 9px; border-radius: 5px; }
+#s-tabs .sbsite.ask .hub .gs-tabs .gs-plus { font-size: 13px; color: #5f6368; padding: 3px 7px; }
+#s-tabs .sbsite.ask .hub .gs-tabs .on { background: #e1f3e8; color: #0f9d58; font-weight: 700; box-shadow: inset 0 -2px 0 #0f9d58; }
+
+/* ---------- Robinhood: how's it doing ---------- */
+#s-tabs .sbsite.ask .hub .rp-card { width: 390px; padding: 12px 14px 12px; border-radius: 14px; background: #000; box-shadow: 0 0 0 1px #262626, 0 12px 30px rgba(0,0,0,.5); color: #fff; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rp-head { display: flex; align-items: center; justify-content: space-between; }
+#s-tabs .sbsite.ask .hub .rp-tk { display: inline-flex; align-items: baseline; gap: 6px; }
+#s-tabs .sbsite.ask .hub .rp-tk img { width: 14px; height: 14px; align-self: center; }
+#s-tabs .sbsite.ask .hub .rp-tk b { font: 700 13px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .rp-tk small { font: 500 9.5px/1 var(--ui); color: #8e8e8e; }
+#s-tabs .sbsite.ask .hub .rp-badge { font: 800 9.5px/1 var(--ui); font-style: normal; color: #000; background: #00c805; padding: 5px 9px; border-radius: 999px; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rp-val { display: grid; gap: 5px; margin: 9px 0 4px; }
+#s-tabs .sbsite.ask .hub .rp-val b { font: 700 28px/1 var(--ui); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .rp-chg { font: 700 11px/1 var(--ui); color: #00c805; font-variant-numeric: tabular-nums; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rp-chg small { color: #8e8e8e; font-weight: 500; margin-left: 3px; }
+#s-tabs .sbsite.ask .hub .rp-chart { display: block; width: 100%; height: 70px; }
+#s-tabs .sbsite.ask .hub .rp-base { stroke: #333; stroke-width: 1; stroke-dasharray: 2 3; vector-effect: non-scaling-stroke; }
+#s-tabs .sbsite.ask .hub .rp-line { fill: none; stroke: #00c805; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; vector-effect: non-scaling-stroke; }
+#s-tabs .sbsite.ask .hub .rp-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 10px; }
+#s-tabs .sbsite.ask .hub .rp-tile { display: grid; gap: 6px; padding: 8px 9px; border-radius: 10px; background: #111; box-shadow: inset 0 0 0 1px #222; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rp-tile small { font: 500 8.5px/1.1 var(--ui); color: #8e8e8e; }
+#s-tabs .sbsite.ask .hub .rp-tile b { font: 800 15px/1 var(--ui); color: #00c805; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .rp-tile:nth-child(2) b { color: #fff; }
+#s-tabs .sbsite.ask .hub .rp-tile.win { background: #0b1a0c; box-shadow: inset 0 0 0 1px rgba(0,200,5,.45); }
+
+/* ---------- Reddit: the gain post ---------- */
+#s-tabs .sbsite.ask .hub .rg-post .rd-title { margin: 6px 0 8px; font-size: 13.5px; }
+#s-tabs .sbsite.ask .hub .rg-flair { display: inline-block; margin-top: 8px; padding: 3px 8px; border-radius: 999px; background: #1f9d55; color: #fff; font: 700 9.5px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .rg-media { display: grid; place-items: center; height: 168px; margin-bottom: 8px; border-radius: 10px; background: radial-gradient(120% 90% at 50% 20%, #0f2a14, #050806 70%); }
+#s-tabs .sbsite.ask .hub .rg-shot { width: 214px; padding: 10px 12px; border-radius: 10px; background: #000; box-shadow: 0 0 0 1px #2a2a2a, 0 10px 24px rgba(0,0,0,.6); color: #fff; }
+#s-tabs .sbsite.ask .hub .rg-s-top { display: flex; align-items: baseline; gap: 5px; }
+#s-tabs .sbsite.ask .hub .rg-s-top img { width: 11px; height: 11px; align-self: center; }
+#s-tabs .sbsite.ask .hub .rg-s-top b { font: 700 11px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .rg-s-top small { font: 400 8px/1 var(--ui); color: #8e8e8e; }
+#s-tabs .sbsite.ask .hub .rg-s-val { margin-top: 7px; font: 700 20px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .rg-s-chg { margin-top: 4px; font: 700 9.5px/1 var(--ui); color: #00c805; }
+#s-tabs .sbsite.ask .hub .rg-shot svg { display: block; width: 100%; height: 38px; margin: 6px 0 4px; }
+#s-tabs .sbsite.ask .hub .rg-shot svg path { fill: none; stroke: #00c805; stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+#s-tabs .sbsite.ask .hub .rg-s-row { display: flex; justify-content: space-between; padding-top: 5px; border-top: 1px solid #1c1c1c; font: 500 8px/1 var(--ui); color: #8e8e8e; }
+#s-tabs .sbsite.ask .hub .ch-tool { position: relative; }
+#s-tabs .sbsite.ask .hub .rg-flash { position: absolute; inset: -3px; border-radius: 999px; background: #fff; opacity: 0; pointer-events: none; }
+
+/* ---------- DoorDash: the wings ---------- */
+#s-tabs .sbsite.ask .hub .dd-wings .dd-photo { height: 96px; background: #1a1a1a; }
+#s-tabs .sbsite.ask .hub .dd-wings .dd-photo img { object-position: 50% 58%; }

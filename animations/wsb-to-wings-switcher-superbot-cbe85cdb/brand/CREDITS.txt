@@ -1,0 +1,19 @@
+brand/ CREDITS: every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the product the ad shows superbot
+switching to) and unaltered except for colour / an app-icon backing square as noted. Fetched 2026-09-25.
+
+reddit-logo.svg          Reddit's Snoo mark, carried over from it-does-what-you-ask-superbot-da5f6b38. Reddit, Inc.
+tradingview-icon.svg     TradingView mark, path from Simple Icons (CC0, https://simpleicons.org, icons/tradingview.svg),
+                         set white on a #2962FF rounded square (TradingView blue). TradingView, Inc.
+polymarket-icon.svg      Polymarket mark, the path of https://polymarket.com/icons/safari-pinned-tab.svg, set white on a
+                         #2E5CFF rounded square (Polymarket blue). Polymarket.
+robinhood-logo.svg       Robinhood feather, path from Simple Icons (CC0, icons/robinhood.svg), fill #00C805.
+                         Robinhood Markets, Inc.
+google-sheets-logo.svg   Google Sheets logo, https://commons.wikimedia.org/wiki/File:Google_Sheets_2020_Logo.svg
+                         (public domain, simple geometry), unaltered. Google LLC.
+doordash-logo.svg        DoorDash dash mark, carried over from it-does-what-you-ask (inline svg from www.doordash.com,
+                         fill #FF3008). DoorDash, Inc.
+openai-logo.svg          The composer's model chip before the first switch, carried over from the reference ad.
+cursor-*, lovable-*, doordash-wordmark.svg, imp-1f608.svg
+                         Referenced only by the text-card table timeline.js keeps from the reference engine; no card in
+                         this spot's SEQUENCE uses them. See it-does-what-you-ask-superbot-da5f6b38/brand/CREDITS.txt.

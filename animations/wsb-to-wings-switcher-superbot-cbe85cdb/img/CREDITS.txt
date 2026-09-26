@@ -1,0 +1,9 @@
+img CREDITS (wsb-to-wings-switcher)
+
+wings.jpg   "Boneless chicken wings" by stu_spivack, Wikimedia Commons,
+            https://commons.wikimedia.org/wiki/File:Boneless_chicken_wings.jpg
+            License: CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0/). 960px thumbnail, unaltered;
+            cropped by CSS (object-fit) in the DoorDash card. Fetched 2026-09-25.
+
+The Reddit handle, subreddit counts, prices, market volumes, the trade sheet rows, "Northside Wing House" and every
+number shown in the spot are made up. No real accounts, trades or orders are involved.

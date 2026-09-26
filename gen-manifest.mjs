@@ -112,6 +112,8 @@ const more = [
   ['just-works-ev-hunt-gpt-superbot-42aac446', 'just-works-ev-hunt-gpt-superbot-42aac446/', 'Tesla + Carvana + CarMax + CarGurus, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-print-farm-superbot-42aac446', 'just-works-print-farm-superbot-42aac446/', 'Bambu + Prusa + OctoPrint, one print farm check', 'Ad spots'],
   ['just-works-print-farm-gpt-superbot-42aac446', 'just-works-print-farm-gpt-superbot-42aac446/', 'Bambu + Prusa + OctoPrint, ChatGPT vs Superbot', 'Ad spots'],
+  ['just-works-meal-plan-superbot-42aac446', 'just-works-meal-plan-superbot-42aac446/', 'Mealie + NYT Cooking + Kroger, one week of dinners', 'Ad spots'],
+  ['just-works-meal-plan-gpt-superbot-42aac446', 'just-works-meal-plan-gpt-superbot-42aac446/', 'Mealie + NYT Cooking + Kroger, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-photo-gear-superbot-42aac446', 'just-works-photo-gear-superbot-42aac446/', 'Lightroom + B&H + MPB + KEH, one camera gear check', 'Ad spots'],
   ['just-works-photo-gear-gpt-superbot-42aac446', 'just-works-photo-gear-gpt-superbot-42aac446/', 'Lightroom + B&H + MPB + KEH, ChatGPT vs Superbot', 'Ad spots'],
       ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],

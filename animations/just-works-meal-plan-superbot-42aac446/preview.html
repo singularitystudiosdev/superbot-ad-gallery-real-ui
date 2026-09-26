@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meal Plan - preview</title>
+<link rel="stylesheet" href="./site.css">
+<style>
+  html, body { margin: 0; background: #08090c; }
+  #preview-root { width: 100%; }
+</style>
+</head>
+<body>
+<div id="preview-root" class="site site-meal-plan"></div>
+<script type="module">
+  import cfg from './ad.js';
+  import * as data from './data.js';
+  import * as site from './site.js';
+
+  const root = document.getElementById('preview-root');
+  // the final frame of the browser scene (p = 1): the ingredients matched, the four counters, the seven
+  // dinner cards and the sale bars drawn, as the ad holds it. ?p=0.2 draws any other frame of the plan,
+  // ?tab=2 opens the Grocery list panel as the click leaves it.
+  const q = new URLSearchParams(location.search);
+  const p0 = q.has('p') ? Math.max(0, Math.min(1, Number(q.get('p')) || 0)) : 1;
+  const draw = () => site.default(root, { data, cfg });
+  draw();
+  if (site.render) site.render(root, p0);
+  if (q.get('tab') === '2') root.querySelector('.mp-tab--2').classList.add('is-active');
+  // dev page only: ?to=<selector> scrolls that block to the top, so any beat's frame can be shot without
+  // the ad driving it.
+  if (q.has('to')) {
+    const to = root.querySelector(q.get('to'));
+    if (to) to.scrollIntoView();
+  }
+
+  // dev page only: mirrors the kit's click plan so the Grocery list panel can be inspected.
+  root.addEventListener('click', (event) => {
+    const tab = event.target.closest('.mp-tab--2');
+    if (tab) tab.classList.add('is-active');
+  });
+  // dev page only: mirrors the kit's hover plan on the week total line the spot ends on.
+  const total = root.querySelector('.mp-total');
+  if (total) total.classList.add('is-hover');
+
+  // dev page only: the read and the match beat, so those frames can be inspected without the ad.
+  const merge = document.createElement('div');
+  merge.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:99;display:flex;gap:8px;font:600 12px/1 -apple-system,system-ui,sans-serif';
+  for (const [label, p] of [['reading', 0.1], ['matching', 0.22], ['done', 1]]) {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.style.cssText = 'padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#13161d;color:#eef2f8;cursor:pointer';
+    b.onclick = () => site.render(root, p);
+    merge.appendChild(b);
+  }
+  document.body.appendChild(merge);
+
+  // dev page only: re-draw button, proves build() is idempotent on the same root.
+  const bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:99;display:flex;gap:8px;font:600 12px/1 -apple-system,system-ui,sans-serif';
+  const again = document.createElement('button');
+  again.textContent = 'build() again';
+  again.style.cssText = 'padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#13161d;color:#eef2f8;cursor:pointer';
+  again.onclick = () => { draw(); if (site.render) site.render(root, 1); };
+  bar.appendChild(again);
+  document.body.appendChild(bar);
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+Watchlist spot, variant A with the ChatGPT refusal (the Letterboxd, IMDb and Trakt watchlists read and
+folded into one list of 214 distinct titles, each title checked on Netflix, Max, Prime Video, Hulu and
+Disney+: 1,070 checks), asset credits.
+The viewer, the three watchlists, the list overlap, the per-service counts, the leaving dates and the rent
+prices are invented for the spot and live in data.js. The titles are real films and series and the plan
+prices are the US list prices of those plans; which service carries which title, and when it leaves, is not
+what any service actually reports. Any resemblance to a real viewer's watchlist is unintended. The page
+reads only: it never adds, removes, rates or marks anything on Letterboxd, IMDb or Trakt, and it never
+cancels, pauses or changes any subscription. All figures printed on the page, the hub and the steps are
+derived from data.js.
+
+img/hero.jpg
+  "Dedicated home theater.jpg" (a dedicated home cinema room: screen, projector, recliners),
+  Wikimedia Commons, CC BY 2.0 (https://creativecommons.org/licenses/by/2.0), by Geoff Sloan, 2010
+  https://commons.wikimedia.org/wiki/File:Dedicated_home_theater.jpg
+  Real photograph, downscaled to 1600 px wide from the 2808 x 1872 Commons original, otherwise unchanged.
+  The screen is blank; no people, no products shown by name, no drawn art.
+
+img/posters/*.jpg
+  Real theatrical and series posters, used only to name the title the page prints beside each one, stored
+  at 300 px wide. Posters are copyright their distributors and studios.
+  From English Wikipedia (the lead image of each title's article, hosted at upload.wikimedia.org/wikipedia/en):
+    past-lives.jpg            Past Lives (2023)             Past_Lives_film_poster.png
+    the-zone-of-interest.jpg  The Zone of Interest (2023)   The_Zone_of_Interest_film_poster.jpg
+    anora.jpg                 Anora (2024)                  Anora_(2024_film)_poster.jpg
+    the-holdovers.jpg         The Holdovers (2023)          Holdovers_film_poster.jpg
+    challengers.jpg           Challengers (2024)            Challengers_2024_poster.jpeg
+    aftersun.jpg              Aftersun (2022)               Aftersun.jpg
+    dune-part-two.jpg         Dune: Part Two (2024)         Dune_Part_Two_poster.jpeg
+    perfect-days.jpg          Perfect Days (2023)           Perfect_Days_poster.jpg (264 px original)
+  From TMDB (The Movie Database, image.tmdb.org), because the Wikipedia article has no poster image:
+    severance.jpg             Severance (2022, series)      TMDB tv/95396, /t/p/w342/pPHpeI2X1qEd1CS1SeyrdhZ4qnT.jpg
+  This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+Service marks and the app icon, via the Iconify API (api.iconify.design), set on rounded 64 px tiles.
+Trademarks of their owners, used only to name the lists and services the watchlist is read from.
+  brand/letterboxd.svg   simple-icons:letterboxd (CC0) on Letterboxd slate #202830
+  brand/imdb.svg         simple-icons:imdb (CC0), black, on IMDb yellow #F5C518
+  brand/trakt.svg        simple-icons:trakt (CC0) on Trakt red #ED1C24
+  brand/netflix.svg      simple-icons:netflix (CC0), Netflix red #E50914, on black
+  brand/max.svg          simple-icons:max (CC0) on Max blue #002BE7
+  brand/primevideo.svg   simple-icons:primevideo (CC0) on Prime Video blue #00A8E1
+  brand/hulu.svg         simple-icons:hulu (CC0), ink, on Hulu green #1CE783
+  brand/disneyplus.svg   mdi:television-play (Apache 2.0) on a neutral slate tile, the mark for Disney+:
+                         no Disney+ mark ships in simple-icons (api.iconify.design/simple-icons/disneyplus.svg
+                         answers 404), so Disney+ is named in text and gets this neutral TV glyph, not a logo
+  brand/title.svg        mdi:movie-open-outline (Apache 2.0), the row glyph for the rent or buy and the not on
+                         your plans groups
+  brand/app.svg          mdi:filmstrip-box (Apache 2.0), tinted gold, the app favicon
+
+The Disney+, title and app tiles are the page's own slate and ink, not brand colours, and carry no trademark.
+
+Inline interface glyphs in site.js (lock, check, refresh, calendar days, hourglass, merge, shield check,
+circle check, play, ticket, wallet, film, tv, list video) are lucide paths (ISC) fetched from the same
+Iconify API.

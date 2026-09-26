@@ -304,6 +304,22 @@
     "thumb": "assets/shots/just-works-reading-list-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-watchlist-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Letterboxd + IMDb + Trakt, one watchlist",
+    "src": "animations/just-works-watchlist-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-watchlist-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-watchlist-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Letterboxd + IMDb + Trakt, ChatGPT vs Superbot",
+    "src": "animations/just-works-watchlist-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-watchlist-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

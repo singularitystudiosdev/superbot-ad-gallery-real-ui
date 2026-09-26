@@ -1,0 +1,11 @@
+img CREDITS (it-does-what-you-ask)
+
+tsn-1.jpg .. tsn-5.jpg   Stills from "THE SOCIAL NETWORK - Official Trailer [2010] (HD)", Sony Pictures
+                         Entertainment, https://www.youtube.com/watch?v=lB95KLmpLR4 (frames at 0:56, 1:46, 2:11,
+                         1:34, 1:21; letterbox cropped, 960px wide). Fetched 2026-09-25. Used as the pulled clips and
+                         as the backgrounds of the five memes; the captions are set over them in beats/memes.js.
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.

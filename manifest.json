@@ -64,6 +64,14 @@
     "thumb": "assets/shots/it-does-what-you-ask-superbot-da5f6b38.png"
   },
   {
+    "id": "every-model-one-chat-superbot-efa8df82",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Gemini, DeepSeek, Opus, Grok, DoorDash",
+    "src": "animations/every-model-one-chat-superbot-efa8df82/",
+    "thumb": "assets/shots/every-model-one-chat-superbot-efa8df82.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

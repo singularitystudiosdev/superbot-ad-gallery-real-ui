@@ -255,3 +255,8 @@ body.lb-open .mark-bar { display: none; }
 .mark-bar #markClear { color: var(--dim); border-left: 1px solid var(--line); }
 .mark-bar #markClear:hover { color: var(--fg); }
 @media (max-width: 640px) { .mark-bar { left: 16px; right: 16px; bottom: 12px; } }
+/* touch floor: 44x44 on a coarse pointer (Apple HIG / M3 48dp), 24x24 minimum otherwise (WCAG 2.2 SC 2.5.8) */
+@media (pointer: coarse) {
+  .tile .mark { min-width: 44px; min-height: 44px; }
+  .mark-bar button { min-height: 44px; }
+}

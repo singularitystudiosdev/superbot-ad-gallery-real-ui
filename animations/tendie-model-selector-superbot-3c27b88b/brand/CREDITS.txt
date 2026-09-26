@@ -1,0 +1,55 @@
+brand/ CREDITS: every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the product the copy
+refers to, in a comparison card) and unaltered except for cropping / colour as noted. Fetched 2026-09-24.
+
+LOVABLE (cards: 'lovable')
+  lovable-logo.svg          the gradient heart logomark, byte-for-byte copy of https://lovable.dev/favicon.svg
+                            (the same mark as https://lovable.dev/icon.svg, 180x180, blurred radial gradients).
+  lovable-wordmark.svg      the "Lovable" wordmark: the two wordmark <path>s copied verbatim out of the lockup SVG
+                            served inline on the official Lovable Brand Hub, https://lovablebrand.lovable.app/brand/logo
+                            (linked as "Lovable Brand Hub" from https://lovable.dev/brand). Only the viewBox was cropped
+                            to the wordmark (the lockup's small logomark path dropped). Fill #FCFBF8 is Lovable's own
+                            creme white from that file.
+  lovable-lockup-source.svg the untouched lockup SVG from the Brand Hub, kept as the source of record.
+  Usage: Lovable brand hub offers these for press use; trademarks of Lovable Labs Incorporated.
+
+CURSOR (cards: 'cursor')
+  cursor-wordmark.svg       General Logos/Wordmark/SVG/WORDMARK_DARK.svg (fill #edecec, for dark backgrounds)
+  cursor-logo.svg           General Logos/Cube/SVG/CUBE_25D.svg (the 2.5D cube)
+  cursor-cube-2d.svg        General Logos/Cube/SVG/CUBE_2D_DARK.svg (flat cube, spare)
+  All three copied unmodified from the official brand kit zip
+  https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/brand/cursor-brand-assets.zip,
+  linked from https://cursor.com/brand. Trademarks of Anysphere, Inc.
+
+DOORDASH (cards: 'dash')
+  doordash-logo.svg         the dash logomark, the inline <svg viewBox="0 0 99.5 56.5"> from the www.doordash.com header.
+  doordash-wordmark.svg     the DOORDASH wordmark, the inline <svg viewBox="0 0 361.1 42"> from the same header.
+  Paths verbatim; the site paints them with a CSS variable (white on their red bar), so the fill was set to
+  DoorDash Red #FF3008 (DoorDash's brand red). Trademarks of DoorDash, Inc.
+
+SMILING FACE WITH HORNS U+1F608 (cards: 'cant')
+  imp-1f608.svg             Twemoji, https://raw.githubusercontent.com/jdecked/twemoji/main/assets/svg/1f608.svg
+  Licence: CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/), Copyright Twitter, Inc and other contributors
+  (graphics licence: https://github.com/jdecked/twemoji/blob/main/LICENSE-GRAPHICS). Attribution: this file.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+gemini-logo.svg: Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg, Google trademark, used nominatively.
+img/muse-meme.png: user-supplied Muse meme (The Social Network still edit).
+scenes/dash-assets CREDITS (scene 'dash')
+
+burger.jpg   "Cheeseburger.jpg" by Renee Comet (photographer), released by the National Cancer Institute
+             (NCI Visuals Online, image id 2652). Licence: Public domain (US federal government work).
+             Source: https://commons.wikimedia.org/wiki/File:Cheeseburger.jpg (960px Commons thumbnail, unmodified).
+             Fetched 2026-09-24. Used as the order card photo and item thumbnail.
+
+The restaurant name "Main Street Burger Co." is made up for the spot. DoorDash marks: see ../../brand/CREDITS.txt.
+
+Added for it-does-what-you-ask (2026-09-25):
+
+reddit-logo.svg   Reddit icon (Snoo in the orange circle), "Reddit_Logo_Icon.svg" from Wikipedia (en).
+                  Source: https://upload.wikimedia.org/wikipedia/en/b/bd/Reddit_Logo_Icon.svg (fetched 2026-09-25).
+                  Trademark of Reddit, Inc., used nominatively to name the app superbot routes to.
+openai-logo.svg   OpenAI mark (round badge), copied from animations/who-are-you-superbot-268c902c/assets/openai.svg.
+                  Trademark of OpenAI, used nominatively for the "GPT-5 Codex" model chip.

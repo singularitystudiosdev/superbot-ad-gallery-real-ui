@@ -72,6 +72,14 @@
     "thumb": "assets/shots/wsb-to-wings-switcher-superbot-cbe85cdb.png"
   },
   {
+    "id": "tendie-model-selector-superbot-3c27b88b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "The Right Model for Every Tendie",
+    "src": "animations/tendie-model-selector-superbot-3c27b88b/",
+    "thumb": "assets/shots/tendie-model-selector-superbot-3c27b88b.png"
+  },
+  {
     "id": "agent-switch-superbot-4207ac22",
     "type": "animation",
     "group": "Ad spots",

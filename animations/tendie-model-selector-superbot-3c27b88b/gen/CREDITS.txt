@@ -1,0 +1,9 @@
+gen/ : generated for this spot on 2026-09-25 with the models the ad names (no hand-drawn art).
+
+logo-nano-banana.png        Nano Banana (gemini-2.5-flash-image, Gemini API), 1:1, trimmed to 511x512.
+share-thumb-1200x630.jpg    Nano Banana (gemini-2.5-flash-image, Gemini API), 16:9, cropped to 1200x630.
+meme-gpt-image.jpg          GPT Image 1.5 (openai/gpt-image-1.5 on Replicate), 1:1, 640px.
+veo/f001..f072.jpg          Veo 3.1 Fast (veo-3.1-fast-generate-preview, Gemini API), 6 s 16:9 720p clip,
+                            extracted at 12 fps and scaled to 640x360 so the timeline can seek frame-exact.
+
+brand/claude-logo.svg and brand/google-logo.svg: Iconify "logos" set (logos:claude-icon, logos:google-icon).

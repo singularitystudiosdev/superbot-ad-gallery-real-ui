@@ -1,0 +1,660 @@
+/* site.css - superbot.app/p/campsite-watch, "Site Watch".
+   The page the Superbot hands back: a week-long Recreation.gov cancellation watch on Upper Pines that
+   ended in a 42-second checkout, read in the Chrome beat. Two states come from the kit and nowhere else:
+   .is-hover on the booked log row and .is-active on the Reservation tab. The tab's .is-active swaps the
+   checkout panel for the reservation panel through :has() + sibling rules below, so no JS runs on the
+   click. site.js render(p) sets .is-cart / .is-details / .is-out on the hero and the hold digits; every
+   frame is a pure function of the plan. No CSS animations, no transitions: the kit draws every move. */
+
+.site-campsite-watch {
+  --cw-bg: #0b100d;
+  --cw-bg2: #0f1511;
+  --cw-panel: #141c17;
+  --cw-panel2: #1b251f;
+  --cw-line: rgba(220, 240, 225, 0.08);
+  --cw-line2: rgba(220, 240, 225, 0.15);
+  --cw-ink: #eef3ee;
+  --cw-dim: #9dac9f;
+  --cw-dim2: #6d7b70;
+  --cw-sun: #ff9f45;
+  --cw-sun-soft: rgba(255, 159, 69, 0.15);
+  --cw-green: #4fd88f;
+  --cw-green-soft: rgba(79, 216, 143, 0.14);
+  --cw-red: #ff6b5e;
+  --cw-red-soft: rgba(255, 107, 94, 0.13);
+
+  width: 100%;
+  min-width: 0;
+  background: var(--cw-bg);
+  color: var(--cw-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-campsite-watch *,
+.site-campsite-watch *::before,
+.site-campsite-watch *::after { box-sizing: border-box; }
+
+.site-campsite-watch p,
+.site-campsite-watch h1,
+.site-campsite-watch h2,
+.site-campsite-watch ul,
+.site-campsite-watch ol,
+.site-campsite-watch li,
+.site-campsite-watch dl,
+.site-campsite-watch dt,
+.site-campsite-watch dd { margin: 0; padding: 0; }
+
+.site-campsite-watch ul,
+.site-campsite-watch ol { list-style: none; }
+.site-campsite-watch img { display: block; max-width: 100%; }
+.site-campsite-watch b, .site-campsite-watch em, .site-campsite-watch i { font-style: normal; }
+.site-campsite-watch b { font-weight: 650; }
+.site-campsite-watch small { font-size: inherit; }
+
+.site-campsite-watch .cw-ico { width: 14px; height: 14px; flex: none; }
+
+.site-campsite-watch .cw-clock,
+.site-campsite-watch .cw-holdleft,
+.site-campsite-watch .cw-stats b,
+.site-campsite-watch .cw-resrows b,
+.site-campsite-watch .cw-rtime,
+.site-campsite-watch .cw-step time,
+.site-campsite-watch .cw-stepleft,
+.site-campsite-watch .cw-day b,
+.site-campsite-watch .cw-confno b { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it) ---------- */
+.site-campsite-watch .cw-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: rgba(11, 16, 13, 0.93);
+  border-bottom: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-topin {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding: 0 28px;
+}
+.site-campsite-watch .cw-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.site-campsite-watch .cw-brandico { width: 20px; height: 20px; color: var(--cw-green); }
+.site-campsite-watch .cw-by { color: var(--cw-dim2); font-size: 12px; }
+
+.site-campsite-watch .cw-tabs { display: flex; gap: 4px; margin-left: 12px; }
+.site-campsite-watch .cw-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: var(--cw-dim);
+  font-weight: 560;
+}
+.site-campsite-watch .cw-tab i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--cw-panel2);
+  color: var(--cw-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+.site-campsite-watch .cw-tab--1,
+.site-campsite-watch .cw-top:has(.cw-tab--2.is-active) .cw-tab--2 {
+  background: var(--cw-green-soft);
+  color: var(--cw-green);
+  box-shadow: inset 0 0 0 1px rgba(79, 216, 143, 0.3);
+}
+.site-campsite-watch .cw-top:has(.cw-tab--2.is-active) .cw-tab--1 {
+  background: none;
+  color: var(--cw-dim);
+  box-shadow: none;
+}
+.site-campsite-watch .cw-top:has(.cw-tab--2.is-active) .cw-tab--2 i { background: var(--cw-green); color: #06140d; }
+
+.site-campsite-watch .cw-status { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-campsite-watch .cw-acct,
+.site-campsite-watch .cw-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--cw-line2);
+  color: var(--cw-dim);
+  font-size: 12px;
+}
+.site-campsite-watch .cw-acct img { width: 16px; height: 16px; border-radius: 4px; }
+.site-campsite-watch .cw-live { color: var(--cw-ink); font-weight: 560; min-width: 118px; }
+.site-campsite-watch .cw-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cw-green);
+  box-shadow: 0 0 0 3px var(--cw-green-soft);
+}
+.site-campsite-watch .cw-watchbar { height: 2px; background: transparent; }
+.site-campsite-watch .cw-watchfill { display: block; width: 0; height: 100%; background: var(--cw-green); }
+
+/* ---------- hero ---------- */
+.site-campsite-watch .cw-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-herobg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  opacity: 0.55;
+}
+.site-campsite-watch .cw-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(11, 16, 13, 0.97) 0%, rgba(11, 16, 13, 0.86) 48%, rgba(11, 16, 13, 0.5) 100%),
+    linear-gradient(0deg, rgba(11, 16, 13, 1) 0%, rgba(11, 16, 13, 0) 40%);
+}
+.site-campsite-watch .cw-heroin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 44px;
+  align-items: center;
+  padding: 40px 28px 40px;
+}
+.site-campsite-watch .cw-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--cw-green);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.site-campsite-watch .cw-hero h1 {
+  margin-top: 12px;
+  max-width: 600px;
+  font-size: 42px;
+  line-height: 1.05;
+  font-weight: 760;
+  letter-spacing: -0.035em;
+}
+.site-campsite-watch .cw-dek {
+  margin-top: 14px;
+  max-width: 560px;
+  color: var(--cw-dim);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* the cart hold: the ring is the seconds left in the current minute, the digits the whole hold */
+.site-campsite-watch .cw-hold {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 660px;
+  margin-top: 22px;
+  padding: 16px 20px 16px 16px;
+  border-radius: 18px;
+  background: rgba(20, 28, 23, 0.9);
+  border: 1px solid rgba(255, 159, 69, 0.4);
+  box-shadow: 0 0 0 4px var(--cw-sun-soft), 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+.site-campsite-watch .cw-hero.is-out .cw-hold {
+  border-color: rgba(79, 216, 143, 0.5);
+  box-shadow: 0 0 0 4px var(--cw-green-soft), 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+.site-campsite-watch .cw-ring { position: relative; width: 132px; height: 132px; flex: none; }
+.site-campsite-watch .cw-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.site-campsite-watch .cw-ringtrack { fill: none; stroke: rgba(255, 159, 69, 0.14); stroke-width: 9; }
+.site-campsite-watch .cw-ringarc { fill: none; stroke: var(--cw-sun); stroke-width: 9; stroke-linecap: round; }
+.site-campsite-watch .cw-hero.is-out .cw-ringtrack { stroke: rgba(79, 216, 143, 0.14); }
+.site-campsite-watch .cw-hero.is-out .cw-ringarc { stroke: var(--cw-green); }
+.site-campsite-watch .cw-ringtext {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.site-campsite-watch .cw-holdleft { font-size: 34px; font-weight: 760; letter-spacing: -0.03em; line-height: 1; color: var(--cw-sun); }
+.site-campsite-watch .cw-hero.is-out .cw-holdleft { color: var(--cw-green); }
+.site-campsite-watch .cw-ringtext small { margin-top: 4px; color: var(--cw-dim); font-size: 11px; }
+.site-campsite-watch .cw-holdbody { display: flex; flex-direction: column; gap: 10px; min-width: 0; flex: 1; }
+.site-campsite-watch .cw-holdk {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--cw-dim);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.site-campsite-watch .cw-holdstate { font-size: 17px; font-weight: 680; letter-spacing: -0.015em; }
+.site-campsite-watch .cw-stamp { display: none; }
+.site-campsite-watch .cw-hero.is-out .cw-holdnow { display: none; }
+.site-campsite-watch .cw-hero.is-out .cw-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--cw-green);
+  color: #06140d;
+  font-weight: 750;
+}
+.site-campsite-watch .cw-stamp .cw-ico { width: 16px; height: 16px; stroke-width: 3; }
+.site-campsite-watch .cw-ticks { display: flex; gap: 8px; }
+.site-campsite-watch .cw-tick {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 7px 10px 7px 7px;
+  border-radius: 10px;
+  background: var(--cw-panel2);
+  border: 1px solid var(--cw-line);
+  color: var(--cw-dim2);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-campsite-watch .cw-tick span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(220, 240, 225, 0.06);
+}
+.site-campsite-watch .cw-tick .cw-ico { width: 11px; height: 11px; }
+.site-campsite-watch .cw-tick--signed,
+.site-campsite-watch .cw-hero.is-cart .cw-tick--cart,
+.site-campsite-watch .cw-hero.is-details .cw-tick--details,
+.site-campsite-watch .cw-hero.is-out .cw-tick--paid {
+  color: var(--cw-ink);
+  border-color: rgba(79, 216, 143, 0.35);
+}
+.site-campsite-watch .cw-tick--signed span,
+.site-campsite-watch .cw-hero.is-cart .cw-tick--cart span,
+.site-campsite-watch .cw-hero.is-details .cw-tick--details span,
+.site-campsite-watch .cw-hero.is-out .cw-tick--paid span { background: var(--cw-green-soft); color: var(--cw-green); }
+
+.site-campsite-watch .cw-stats { display: flex; gap: 10px; margin-top: 14px; }
+.site-campsite-watch .cw-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 108px;
+  padding: 10px 13px;
+  border-radius: 12px;
+  background: rgba(20, 28, 23, 0.82);
+  border: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-stats b { font-size: 19px; font-weight: 720; letter-spacing: -0.02em; }
+.site-campsite-watch .cw-stats span { color: var(--cw-dim); font-size: 12px; }
+.site-campsite-watch .cw-stat--hot { border-color: rgba(79, 216, 143, 0.35) !important; }
+.site-campsite-watch .cw-stat--hot b { color: var(--cw-green); }
+
+/* the reservation card */
+.site-campsite-watch .cw-res {
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--cw-panel);
+  border: 1px solid var(--cw-line2);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+.site-campsite-watch .cw-resart { position: relative; height: 170px; }
+.site-campsite-watch .cw-resart img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+.site-campsite-watch .cw-resbadge {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.site-campsite-watch .cw-resbadge--cart { background: var(--cw-sun); color: #1f1003; }
+.site-campsite-watch .cw-resbadge--ok { display: none; background: var(--cw-green); color: #06140d; }
+.site-campsite-watch .cw-hero.is-out .cw-resbadge--cart { display: none; }
+.site-campsite-watch .cw-hero.is-out .cw-resbadge--ok { display: inline-flex; }
+.site-campsite-watch .cw-resbadge .cw-ico { width: 13px; height: 13px; stroke-width: 2.6; }
+.site-campsite-watch .cw-resbody { padding: 15px 18px 14px; }
+.site-campsite-watch .cw-respark { color: var(--cw-dim); font-size: 12px; }
+.site-campsite-watch .cw-res h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 1px;
+  font-size: 22px;
+  font-weight: 740;
+  letter-spacing: -0.02em;
+}
+.site-campsite-watch .cw-res h2 span { color: var(--cw-green); font-size: 15px; font-weight: 700; letter-spacing: 0; }
+.site-campsite-watch .cw-resrows { margin-top: 10px; border-top: 1px solid var(--cw-line); }
+.site-campsite-watch .cw-resrows div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  border-bottom: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-resrows div:last-child { border-bottom: 0; }
+.site-campsite-watch .cw-resrows dt { color: var(--cw-dim); }
+.site-campsite-watch .cw-resrows dd { display: flex; flex-direction: column; align-items: flex-end; }
+.site-campsite-watch .cw-resrows dd b { font-size: 14px; }
+.site-campsite-watch .cw-resrows small { color: var(--cw-dim); font-size: 11px; }
+
+.site-campsite-watch .cw-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex: none;
+}
+.site-campsite-watch .cw-mark .cw-ico { width: 12px; height: 12px; stroke-width: 3; }
+.site-campsite-watch .cw-mark.is-ok { background: rgba(6, 20, 13, 0.25); color: #06140d; }
+.site-campsite-watch .cw-mark.is-no { background: var(--cw-red-soft); color: var(--cw-red); }
+
+/* ---------- section headers ---------- */
+.site-campsite-watch .cw-sech {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.site-campsite-watch .cw-sech h2 { font-size: 22px; font-weight: 720; letter-spacing: -0.025em; }
+.site-campsite-watch .cw-sech span { color: var(--cw-dim); }
+
+/* ---------- what counts + the log ---------- */
+.site-campsite-watch .cw-rules { padding: 36px 28px 20px; }
+.site-campsite-watch .cw-rulelist {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.site-campsite-watch .cw-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  background: var(--cw-panel);
+  border: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-rulei {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--cw-green-soft);
+  color: var(--cw-green);
+}
+.site-campsite-watch .cw-rulei .cw-ico { width: 18px; height: 18px; }
+.site-campsite-watch .cw-rulet { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.site-campsite-watch .cw-rulet small { color: var(--cw-dim2); font-size: 11px; font-weight: 650; letter-spacing: 0.05em; text-transform: uppercase; }
+.site-campsite-watch .cw-rulet b { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-campsite-watch .cw-rulet em { color: var(--cw-dim); font-size: 12px; }
+
+.site-campsite-watch .cw-log {
+  margin-top: 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--cw-panel);
+  border: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-loghead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-loghead p { font-weight: 650; font-size: 14px; }
+.site-campsite-watch .cw-loghead span { display: inline-flex; align-items: center; gap: 6px; color: var(--cw-dim); font-size: 12px; }
+.site-campsite-watch .cw-row {
+  display: grid;
+  grid-template-columns: 130px 90px 110px 130px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  height: 50px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-row:last-child { border-bottom: 0; }
+.site-campsite-watch .cw-row--h {
+  height: 34px;
+  color: var(--cw-dim2);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--cw-bg2);
+}
+.site-campsite-watch .cw-row > span { display: flex; align-items: center; gap: 8px; min-width: 0; white-space: nowrap; }
+.site-campsite-watch .cw-rtime { color: var(--cw-dim); }
+.site-campsite-watch .cw-rtime b { color: var(--cw-ink); font-weight: 560; }
+.site-campsite-watch .cw-rsite { font-weight: 650; }
+.site-campsite-watch .cw-rkind,
+.site-campsite-watch .cw-rnights { color: var(--cw-dim); }
+.site-campsite-watch .cw-rresult { color: var(--cw-dim); }
+.site-campsite-watch .cw-row--booked { background: rgba(79, 216, 143, 0.06); box-shadow: inset 3px 0 0 var(--cw-green); }
+.site-campsite-watch .cw-row--booked .cw-rnights,
+.site-campsite-watch .cw-row--booked .cw-rkind { color: var(--cw-ink); }
+.site-campsite-watch .cw-row--booked .cw-rresult {
+  justify-self: start;
+  height: 28px;
+  padding: 0 12px 0 5px;
+  border-radius: 999px;
+  background: var(--cw-green);
+  color: #06140d;
+  font-weight: 700;
+}
+.site-campsite-watch .cw-row--booked.is-hover {
+  background: rgba(79, 216, 143, 0.14);
+  box-shadow: inset 3px 0 0 var(--cw-green), inset 0 0 0 1px rgba(79, 216, 143, 0.45);
+}
+
+/* ---------- panels (checkout by default, the reservation once the tab is clicked) ---------- */
+.site-campsite-watch .cw-panels { padding: 28px 28px 20px; }
+.site-campsite-watch .cw-panel--2 { display: none; }
+.site-campsite-watch .cw-top:has(.cw-tab--2.is-active) ~ .cw-panels .cw-panel--1 { display: none; }
+.site-campsite-watch .cw-top:has(.cw-tab--2.is-active) ~ .cw-panels .cw-panel--2 { display: block; }
+
+.site-campsite-watch .cw-steps {
+  border-radius: 16px;
+  background: var(--cw-panel);
+  border: 1px solid var(--cw-line);
+  padding: 6px 0;
+}
+.site-campsite-watch .cw-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 18px;
+}
+.site-campsite-watch .cw-stepi {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cw-green-soft);
+  color: var(--cw-green);
+}
+.site-campsite-watch .cw-stept { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.site-campsite-watch .cw-stept b { font-size: 14px; }
+.site-campsite-watch .cw-stept small { color: var(--cw-dim); }
+.site-campsite-watch .cw-stepleft { color: var(--cw-sun); font-weight: 650; min-width: 80px; text-align: right; }
+.site-campsite-watch .cw-step--hold .cw-stepi { background: var(--cw-sun-soft); color: var(--cw-sun); }
+.site-campsite-watch .cw-step time { color: var(--cw-dim); min-width: 64px; text-align: right; }
+
+.site-campsite-watch .cw-conf {
+  position: relative;
+  height: 150px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-conf img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.site-campsite-watch .cw-conf::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11, 16, 13, 0.95) 0%, rgba(11, 16, 13, 0.6) 55%, rgba(11, 16, 13, 0.15) 100%);
+}
+.site-campsite-watch .cw-confin { position: absolute; z-index: 1; left: 24px; bottom: 20px; }
+.site-campsite-watch .cw-confin p { color: var(--cw-green); font-size: 12px; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; }
+.site-campsite-watch .cw-confin h2 { margin-top: 4px; font-size: 30px; font-weight: 760; letter-spacing: -0.03em; }
+.site-campsite-watch .cw-confno { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; color: var(--cw-dim); }
+.site-campsite-watch .cw-confno b { color: var(--cw-ink); }
+.site-campsite-watch .cw-confok {
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: var(--cw-green);
+  color: #06140d;
+  font-weight: 750;
+}
+.site-campsite-watch .cw-confok .cw-ico { stroke-width: 3; }
+
+.site-campsite-watch .cw-resgrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+.site-campsite-watch .cw-cal,
+.site-campsite-watch .cw-site {
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--cw-panel);
+  border: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-calh { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 650; }
+.site-campsite-watch .cw-calh .cw-ico { color: var(--cw-green); }
+.site-campsite-watch .cw-days { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+.site-campsite-watch .cw-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 8px 0 7px;
+  border-radius: 10px;
+  background: var(--cw-panel2);
+  border: 1px solid var(--cw-line);
+  color: var(--cw-dim2);
+}
+.site-campsite-watch .cw-day small { font-size: 11px; }
+.site-campsite-watch .cw-day b { font-size: 18px; font-weight: 700; }
+.site-campsite-watch .cw-day em { height: 14px; font-size: 9px; font-weight: 650; text-align: center; line-height: 1.2; }
+.site-campsite-watch .cw-day.is-in { background: var(--cw-green-soft); border-color: rgba(79, 216, 143, 0.45); color: var(--cw-ink); }
+.site-campsite-watch .cw-day.is-in em { color: var(--cw-green); }
+.site-campsite-watch .cw-day.is-edge { border-color: rgba(79, 216, 143, 0.45); color: var(--cw-ink); }
+.site-campsite-watch .cw-day.is-edge em { color: var(--cw-green); font-size: 8px; }
+.site-campsite-watch .cw-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; margin-top: 12px; }
+.site-campsite-watch .cw-facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-facts dt { color: var(--cw-dim); }
+.site-campsite-watch .cw-facts dd { font-weight: 600; text-align: right; }
+.site-campsite-watch .cw-sitetype { margin-top: 4px; color: var(--cw-dim); }
+.site-campsite-watch .cw-sitebox { display: flex; gap: 12px; margin-top: 12px; }
+.site-campsite-watch .cw-sitebox img { width: 104px; height: 104px; flex: none; border-radius: 12px; object-fit: cover; }
+.site-campsite-watch .cw-amen { display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+.site-campsite-watch .cw-amen li { display: flex; align-items: center; gap: 7px; }
+.site-campsite-watch .cw-amen .cw-ico { color: var(--cw-green); stroke-width: 3; width: 12px; height: 12px; }
+.site-campsite-watch .cw-notes { margin-top: 12px; border-top: 1px solid var(--cw-line); }
+.site-campsite-watch .cw-notes li {
+  display: grid;
+  grid-template-columns: 18px 96px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 6px;
+  padding: 8px 0 0;
+}
+.site-campsite-watch .cw-notes span { color: var(--cw-sun); align-self: center; }
+.site-campsite-watch .cw-notes small { color: var(--cw-dim); font-size: 12px; }
+
+/* ---------- the backups, still watched ---------- */
+.site-campsite-watch .cw-watch { padding: 28px 28px 36px; }
+.site-campsite-watch .cw-backs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.site-campsite-watch .cw-back {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--cw-panel);
+  border: 1px solid var(--cw-line);
+}
+.site-campsite-watch .cw-backart { position: relative; height: 130px; }
+.site-campsite-watch .cw-backart img { width: 100%; height: 100%; object-fit: cover; }
+.site-campsite-watch .cw-backart span {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: rgba(11, 16, 13, 0.82);
+  color: var(--cw-sun);
+  font-size: 11px;
+  font-weight: 700;
+}
+.site-campsite-watch .cw-backart .cw-ico { width: 12px; height: 12px; }
+.site-campsite-watch .cw-backbody { display: flex; flex-direction: column; padding: 12px 14px 13px; }
+.site-campsite-watch .cw-backbody b { font-size: 15px; }
+.site-campsite-watch .cw-backbody small { color: var(--cw-dim); font-size: 12px; }
+.site-campsite-watch .cw-backbody p { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.site-campsite-watch .cw-backbody p span { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.site-campsite-watch .cw-backbody p .cw-ico { color: var(--cw-green); }
+.site-campsite-watch .cw-backbody em { color: var(--cw-dim2); font-size: 12px; }
+
+/* ---------- footer ---------- */
+.site-campsite-watch .cw-foot {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 28px 26px;
+  border-top: 1px solid var(--cw-line);
+  color: var(--cw-dim2);
+  font-size: 12px;
+}
+.site-campsite-watch .cw-foot span { display: inline-flex; align-items: center; gap: 7px; }

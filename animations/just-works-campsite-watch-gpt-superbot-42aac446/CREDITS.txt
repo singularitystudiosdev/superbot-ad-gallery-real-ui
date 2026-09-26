@@ -1,0 +1,48 @@
+Site Watch spot (Upper Pines, Jul 3 to 6), asset credits. Every photo is a real photograph from Wikimedia
+Commons, scaled for the page. The user, the account, the other openings, the card, the plate and the
+confirmation number in data.js are invented for the spot.
+
+Facts the page states, checked on the live sites:
+  Upper Pines Campground, Yosemite National Park, is Recreation.gov campground 232447
+    https://www.recreation.gov/camping/campgrounds/232447
+  $36 per night: https://www.thedyrt.com/camping/california/california-upper-pines
+  $8 online reservation fee per camping reservation: https://www.recreation.gov/rules-reservation-policies
+  A carted site is held for 15 minutes:
+    https://www.recreation.gov/articles/list/tips-for-making-campsite-reservations-at-popular-locations/281
+  Elevation 4,000 ft, picnic table, fire ring and food storage locker at each site, park entry not
+  included in the reservation: the campground page above.
+
+img/hero.jpg
+  "Tunnel View, Yosemite Valley, Yosemite NP - Diliff.jpg" by Diliff, Wikimedia Commons, CC BY-SA 3.0
+  https://commons.wikimedia.org/wiki/File:Tunnel_View,_Yosemite_Valley,_Yosemite_NP_-_Diliff.jpg
+img/pines.jpg
+  "Yosemite - Upper Pines Campground - panoramio.jpg" by Andrew Burnham, Wikimedia Commons, CC BY-SA 3.0
+  https://commons.wikimedia.org/wiki/File:Yosemite_-_Upper_Pines_Campground_-_panoramio.jpg
+img/halfdome.jpg
+  "Yosemite Half Dome from Valley 2013.jpg" by Tuxyso, Wikimedia Commons, CC BY-SA 3.0
+  https://commons.wikimedia.org/wiki/File:Yosemite_Half_Dome_from_Valley_2013.jpg
+img/merced.jpg
+  "Yosemite Valley May 2011 001.jpg" by King of Hearts, Wikimedia Commons, CC BY-SA 4.0
+  https://commons.wikimedia.org/wiki/File:Yosemite_Valley_May_2011_001.jpg
+img/camp.jpg
+  "Yosemite Camp Four-5 cropped.jpg" by Almonroth, Wikimedia Commons, CC BY-SA 3.0
+  (tents at Camp 4 in Yosemite Valley, used as the reservation banner)
+  https://commons.wikimedia.org/wiki/File:Yosemite_Camp_Four-5_cropped.jpg
+img/meadow.jpg
+  "Yosemite meadows 2004-09-04.jpg" by Jon Sullivan, Wikimedia Commons, public domain
+  https://commons.wikimedia.org/wiki/File:Yosemite_meadows_2004-09-04.jpg
+img/locker.jpg
+  "Bear-resistant container 3.jpg" by Mx. Granger, Wikimedia Commons, CC0 1.0
+  https://commons.wikimedia.org/wiki/File:Bear-resistant_container_3.jpg
+img/tuolumne.jpg
+  "Tuolumne Meadows - Lembert Dome - 10.JPG" by Jarek Tuszynski, Wikimedia Commons, CC BY 4.0
+  https://commons.wikimedia.org/wiki/File:Tuolumne_Meadows_-_Lembert_Dome_-_10.JPG
+
+CC BY and CC BY-SA photos: attribution owed as above; the scaled copies here are shared under the same
+licence as their originals.
+
+brand/recgov.svg
+  Recreation.gov site icon (www.recreation.gov/shared/favicons/icon_192x192.png), scaled to 64 px and
+  wrapped as an inline PNG. Mark of Recreation.gov, used to name the service the spot reads from.
+brand/app.svg
+  "mdi:tent" from Material Design Icons via the Iconify API, Apache 2.0, tinted green.

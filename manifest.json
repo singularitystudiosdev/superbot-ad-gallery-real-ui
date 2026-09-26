@@ -144,6 +144,22 @@
     "thumb": "assets/shots/just-works-wantlist-watch-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-campsite-watch-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Upper Pines, Jul 3 to 6",
+    "src": "animations/just-works-campsite-watch-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-campsite-watch-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-campsite-watch-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Upper Pines, ChatGPT vs Superbot",
+    "src": "animations/just-works-campsite-watch-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-campsite-watch-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

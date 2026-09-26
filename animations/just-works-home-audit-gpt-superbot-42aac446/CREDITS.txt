@@ -1,0 +1,41 @@
+Home audit spot (Home Assistant, Google Home, Amazon Alexa, SmartThings and Philips Hue, one
+household read across all five), asset credits. The household, the 5 accounts, the 214 device
+entries pulled, the 87 duplicate entries merged into 127 unique devices, the 9 rooms and every
+count shown (6 offline, 9 on low battery under 20 percent, 11 behind on firmware, 4 automations
+that have not fired in 7 or more days) are invented for the spot and live in data.js. The page
+reads only: it never pairs, renames, reconfigures, turns off or deletes anything in Home
+Assistant, Google Home, Alexa, SmartThings or Philips Hue, and the audit makes no change to any
+account. All figures printed on the page are derived from data.js.
+
+img/hero.jpg
+  "Modern living room with stylish furniture and a view of the outdoors in a cozy apartment
+  setting" by Shixart1985, Wikimedia Commons, CC BY 2.0
+  (https://creativecommons.org/licenses/by/2.0)
+  https://commons.wikimedia.org/wiki/File:Modern_living_room_with_stylish_furniture_and_a_view_of_the_outdoors_in_a_cozy_apartment_setting.jpg
+  Downscaled and cropped to 1600 x 1068 from the 7360 x 4912 original (own work, 2022). The
+  original is already 3:2, so the crop is a resize with the frame unchanged; EXIF is stripped.
+  A real photograph of a real room: no people, no products, drawn art.
+
+Service marks and the app icon, via the Iconify API (api.iconify.design), set on rounded 64 px
+tiles. Trademarks of their owners, used only to name the services the audit reads from.
+  brand/homeassistant.svg  simple-icons:homeassistant (CC0)
+  brand/googlehome.svg     simple-icons:googlehome (CC0)
+  brand/alexa.svg          simple-icons:amazonalexa (CC0), Amazon Alexa
+  brand/smartthings.svg    simple-icons:smartthings (CC0)
+  brand/hue.svg            simple-icons:philipshue (CC0), Philips Hue
+  brand/device.svg         mdi:lightbulb-on-outline (Apache 2.0), the row glyph for a device in
+                           the audit, on a neutral slate tile
+  brand/app.svg            mdi:home-automation (Apache 2.0), tinted mint, the app favicon
+
+Tile fills are each brand's own published colour from the simple-icons set. Home Assistant,
+Alexa and SmartThings have bright cyan fills, where a white glyph would not carry, so those
+three draw their glyph in the page ink #0B1220; Google Home and Philips Hue keep the white
+glyph. The tile fill is unchanged either way. The device and app tiles are the page's own slate
+and ink, not brand colours, and carry no trademark.
+
+Inline interface glyphs in site.js (check, lock, refresh, search, filter, clock, calendar,
+activity, list, grid, merge, info, alert, bulb, plug, wifi, battery, thermometer, sparkles) are
+lucide paths fetched from the same Iconify API. This list starts from the same interface set the
+other spots use and may be extended when the page itself is built. No brand product photos are
+used: devices are named by model and room, and the row glyph for a device is the drawn mark
+above.

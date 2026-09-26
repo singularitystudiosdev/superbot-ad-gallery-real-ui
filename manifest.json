@@ -208,6 +208,22 @@
     "thumb": "assets/shots/just-works-marathon-build-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-home-audit-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Home Assistant + Google Home + Alexa + SmartThings + Hue, one home inventory",
+    "src": "animations/just-works-home-audit-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-home-audit-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-home-audit-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Home Assistant + Google Home + Alexa + SmartThings + Hue, ChatGPT vs Superbot",
+    "src": "animations/just-works-home-audit-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-home-audit-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

@@ -248,6 +248,30 @@
     "thumb": "assets/shots/future-video-every-model-v3-superbot-fef7368f.png"
   },
   {
+    "id": "dark-souls-every-model-v1-superbot-80e24d9f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make Dark Souls: ElevenLabs voices the boss, Opus 5.5 builds it, Superbot plays (3 switches)",
+    "src": "animations/dark-souls-every-model-superbot-80e24d9f/?v=1",
+    "thumb": "assets/shots/dark-souls-every-model-v1-superbot-80e24d9f.png"
+  },
+  {
+    "id": "dark-souls-every-model-v2-superbot-80e24d9f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make Dark Souls: Gemini paints the Gatewarden, Opus 5.5 builds the fight, Gemini textures the fog gate, GitHub, Superbot renders and plays (5 switches)",
+    "src": "animations/dark-souls-every-model-superbot-80e24d9f/?v=2",
+    "thumb": "assets/shots/dark-souls-every-model-v2-superbot-80e24d9f.png"
+  },
+  {
+    "id": "dark-souls-every-model-v3-superbot-80e24d9f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make Dark Souls: Opus 5.5 builds combat, DeepSeek assets, ElevenLabs score, Gemini art, Opus 5.5 live preview, GitHub, Superbot plays (7 switches)",
+    "src": "animations/dark-souls-every-model-superbot-80e24d9f/?v=3",
+    "thumb": "assets/shots/dark-souls-every-model-v3-superbot-80e24d9f.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

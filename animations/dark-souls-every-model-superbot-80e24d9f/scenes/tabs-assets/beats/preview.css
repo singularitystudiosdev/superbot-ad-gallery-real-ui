@@ -1,0 +1,48 @@
+/* Preview beat (beats/preview.js): Cursor's live preview window. Same window language as play.css (10px radius,
+   inset 1px edge, 30px #17171a bar) so the preview and the game window read as the same product, with a browser URL
+   in the bar and the game's HUD drawn over the running frame. Nothing here transitions: opacity, transform and the
+   stamina bar's width are written from t in render, so ?t= freezes a frame. Every selector is scoped under the hub
+   and every class the beat owns is prefixed .pvw-. */
+
+#s-tabs .sbsite .hub .pvw-win { box-sizing: border-box; width: 100%; max-width: 430px; border-radius: 10px;
+  background: #0d0d10; box-shadow: inset 0 0 0 1px #2c2c31, 0 18px 44px rgba(0, 0, 0, .5); overflow: hidden;
+  opacity: 0; transform-origin: 50% 50%; }
+
+/* the browser bar: Cursor's tile, the dev server's url centered (the ::after keeps it centered against the tile) */
+#s-tabs .sbsite .hub .pvw-bar { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 11px;
+  background: #17171a; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .pvw-bar .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .pvw-bar .qc-tile img { width: 11px; height: 11px; }
+#s-tabs .sbsite .hub .pvw-bar::after { content: ""; flex: none; width: 18px; }
+#s-tabs .sbsite .hub .pvw-url { flex: 1; min-width: 0; text-align: center; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; font: 500 11px/1 var(--font-mono); color: #b9b9c0; }
+
+/* the viewport: the game frame, 16:9 */
+#s-tabs .sbsite .hub .pvw-screen { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+#s-tabs .sbsite .hub .pvw-shot { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* the game HUD over the frame: a thin HP bar and the stamina bar under it, top left like the clip's */
+#s-tabs .sbsite .hub .pvw-hud { position: absolute; left: 8px; top: 8px; display: grid; gap: 3px; width: 44%; opacity: 0; }
+#s-tabs .sbsite .hub .pvw-gauge { display: block; height: 5px; border-radius: 2px; overflow: hidden;
+  background: rgba(0, 0, 0, .55); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .75), 0 1px 2px rgba(0, 0, 0, .5); }
+#s-tabs .sbsite .hub .pvw-gauge i { display: block; height: 100%; border-radius: 2px; width: 100%; }
+#s-tabs .sbsite .hub .pvw-hp i { background: linear-gradient(180deg, #d8433c, #8f1f1b); }
+#s-tabs .sbsite .hub .pvw-st { width: 86%; }
+#s-tabs .sbsite .hub .pvw-st i { background: linear-gradient(180deg, #8ec25a, #3f7d20); }
+
+/* LIVE: a small dim pill top right, its dot breathing from t */
+#s-tabs .sbsite .hub .pvw-live { position: absolute; right: 8px; top: 8px; display: inline-flex; align-items: center;
+  gap: 5px; height: 18px; padding: 0 7px; border-radius: 999px; background: rgba(12, 12, 14, .62); opacity: 0;
+  font: 600 9px/1 var(--ui); letter-spacing: .07em; color: #ff8177; }
+#s-tabs .sbsite .hub .pvw-dot { width: 5px; height: 5px; border-radius: 50%; background: #ff453a;
+  box-shadow: 0 0 6px rgba(255, 69, 58, .85); }
+
+/* the hot reload toasts, bottom right, newest at the bottom. Both sit on the corner and the older one is lifted out
+   (from t) as the newer arrives, so an unseen toast never reserves a slot in the corner */
+#s-tabs .sbsite .hub .pvw-toasts { position: absolute; right: 8px; bottom: 8px; pointer-events: none; }
+#s-tabs .sbsite .hub .pvw-toast { position: absolute; right: 0; bottom: 0; display: inline-flex; align-items: center;
+  gap: 6px; height: 24px; padding: 0 10px;
+  border-radius: 7px; background: rgba(12, 12, 14, .86); opacity: 0; white-space: nowrap;
+  box-shadow: inset 0 0 0 1px #2a2a2e, 0 6px 16px rgba(0, 0, 0, .45);
+  font: 500 10.5px/1 var(--font-mono); color: #e5e5ea; }
+#s-tabs .sbsite .hub .pvw-toast i { flex: none; width: 5px; height: 5px; border-radius: 50%; background: #34d399; }

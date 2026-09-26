@@ -74,6 +74,7 @@ const more = [
   ['it-does-what-you-ask-superbot-da5f6b38', 'it-does-what-you-ask-superbot-da5f6b38/', 'IT DOES WHAT YOU ASK · meme to Reddit to burger', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
+  ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],
   ['agent-switch-superbot-4207ac22', 'agent-switch-superbot-4207ac22/', 'Context carries from agent to agent', 'Ad spots'],
     // the no-switch family (2026-09-25): forked from the context-switch spot, built on the real superbot
   // hub UI, each keeping the same thread while a new model joins the rail. One member still listed.

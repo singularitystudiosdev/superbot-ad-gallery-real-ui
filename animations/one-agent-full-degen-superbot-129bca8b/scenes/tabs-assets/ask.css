@@ -1,0 +1,139 @@
+/* it-does-what-you-ask: the crop, the empty state and the cards the new beats add. Everything is scoped under the
+   cropped hub (#s-tabs .sbsite.ask) so the generated hub stylesheets stay untouched. */
+
+/* ---- the crop: the hub fills the design box; rail, sidebar, chat header and window chrome are hidden ---- */
+#s-tabs .ask-root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+#s-tabs .sbsite.ask { visibility: visible; transform-origin: 0 0; }
+#s-tabs .sbsite.ask .stage { grid-template-rows: minmax(0, 1fr); border: 0; border-radius: 0; box-shadow: none; background: #000; }
+#s-tabs .sbsite.ask .stage-bar { display: none; }
+#s-tabs .sbsite.ask .body { grid-row: 1; grid-template-columns: minmax(0, 1fr); }
+#s-tabs .sbsite.ask .hub { --hub-column: 640px; inset: 0; border: 0; border-radius: 0; opacity: 1; grid-template-columns: minmax(0, 1fr); background: #0a0a0b; }
+#s-tabs .sbsite.ask .hub .inner { opacity: 1; }
+#s-tabs .sbsite.ask .hub > .rail, #s-tabs .sbsite.ask .hub > .chats, #s-tabs .sbsite.ask .hub .chat-head { display: none; }
+#s-tabs .sbsite.ask .hub .main { background: #0a0a0b; }
+#s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 760px) / 2)) 4px; }
+#s-tabs .sbsite.ask .hub .composer { position: relative; z-index: 3; width: min(760px, calc(100% - 48px)); margin: 6px auto 16px; will-change: transform; }
+
+/* ---- the empty state (the real app's home: mark + greeting over the composer) ---- */
+#s-tabs .sbsite.ask .ask-hero { position: absolute; left: 50%; top: 30%; z-index: 2; display: flex; align-items: center; gap: .47em; font-size: min(34px, calc(var(--dw, 960px) * .042)); white-space: nowrap; pointer-events: none; opacity: 0; }
+#s-tabs .sbsite.ask .ask-cat { width: 1.18em; height: 1.18em; display: block; }
+#s-tabs .sbsite.ask .ask-hero h1 { margin: 0; font: 400 1em/1.1 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; letter-spacing: -.01em; color: #ececec; }
+
+/* the composer as the empty state shows it: a blue focus ring, SUPER as an off switch, the model chip */
+#s-tabs .sbsite.ask .composer .pill { border-color: #2f5fd6; background: #1b1b1e; }
+#s-tabs .sbsite.ask .hub .rc-seg { display: none; }
+#s-tabs .sbsite.ask .hub .rc-super { display: inline-flex; align-items: center; gap: 6px; margin-left: 4px; height: 22px; padding: 0 4px 0 9px; border-radius: 999px; background: #26262a; font: 700 8.5px/1 var(--ui); letter-spacing: .08em; color: #c7c7cc !important; }
+#s-tabs .sbsite.ask .hub .rc-super::after { display: none; }
+#s-tabs .sbsite.ask .hub .ask-tg { display: inline-flex; align-items: center; gap: 3px; height: 14px; padding: 0 5px 0 2px; border-radius: 999px; background: #3f3f44; font: 700 6.5px/1 var(--ui); font-style: normal; letter-spacing: .04em; color: #e5e5ea; }
+#s-tabs .sbsite.ask .hub .ask-tg b { width: 10px; height: 10px; border-radius: 50%; background: #d6d6db; }
+#s-tabs .sbsite.ask .hub .rc-plat { margin-left: auto; transform-origin: 50% 50%; }
+#s-tabs .sbsite.ask .hub .qc-pi img[data-app="codex"] { border-radius: 50%; }
+#s-tabs .sbsite.ask .hub .qc-pi img[data-app="youtube"] { object-fit: contain; }
+
+/* ---- app tiles for the new apps ---- */
+#s-tabs .sbsite.ask .hub .qc-t-reddit { background: transparent; }
+#s-tabs .sbsite.ask .hub .qc-tile.qc-t-reddit img, #s-tabs .sbsite.ask .hub .qc-who .qc-t-reddit img { width: 100%; height: 100%; }
+#s-tabs .sbsite.ask .hub .qc-t-youtube { background: #fff; }
+#s-tabs .sbsite.ask .hub .qc-t-codex { background: transparent; }
+
+/* ---- memes (Gemini x5) ---- */
+#s-tabs .sbsite.ask .hub .mm-genl { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 8px; padding: 3px 10px 3px 4px; border-radius: 999px; background: #141416; box-shadow: inset 0 0 0 1px #2e2e31; font: 500 10.5px/16px var(--ui); color: #a1a1a6; opacity: 0; }
+#s-tabs .sbsite.ask .hub .mm-genl .qc-tile { width: 18px; height: 18px; border-radius: 999px; }
+#s-tabs .sbsite.ask .hub .mm-genl .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite.ask .hub .mm-n { font: 600 10px/16px var(--font-mono); color: #e5e5ea; }
+#s-tabs .sbsite.ask .hub .mm-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; width: min(620px, 100%); opacity: 0; }
+#s-tabs .sbsite.ask .hub .mm-cell { position: relative; border-radius: 10px; overflow: hidden; background: #111; box-shadow: 0 0 0 1px #2a2a2e, 0 10px 24px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite.ask .hub .mm-cell .qc-gen { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(150,130,255,.38), transparent); pointer-events: none; }
+#s-tabs .sbsite.ask .hub .mm { display: flex; flex-direction: column; background: #fff; }
+#s-tabs .sbsite.ask .hub .mm-cap { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 5px 7px; font: 700 9.5px/1.2 "Helvetica Neue", Arial, sans-serif; color: #111; text-align: center; }
+#s-tabs .sbsite.ask .hub .mm-pic { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: #000; }
+#s-tabs .sbsite.ask .hub .mm-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite.ask .hub .mm-cell > .mm { height: 100%; }
+#s-tabs .sbsite.ask .hub .mm-cell .mm-pic { flex: 1 1 auto; }
+#s-tabs .sbsite.ask .hub .mm-sm { height: 100%; }
+#s-tabs .sbsite.ask .hub .mm-sm .mm-cap { display: none; }
+#s-tabs .sbsite.ask .hub .mm-sm .mm-pic { aspect-ratio: auto; height: 100%; }
+#s-tabs .sbsite.ask .hub .mm-raw .mm-pic img { object-position: 50% 0; }
+
+/* ---- Reddit post ---- */
+#s-tabs .sbsite.ask .hub .rd-post { width: 380px; padding: 10px 12px 9px; border-radius: 14px; background: #0b1416; box-shadow: 0 0 0 1px #2a3236, 0 12px 30px rgba(0,0,0,.45); color: #f2f4f5; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rd-head { display: flex; align-items: center; gap: 6px; font: 700 10.5px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .rd-head span { color: #82959b; font-weight: 400; }
+#s-tabs .sbsite.ask .hub .rd-sub { width: 18px; height: 18px; display: block; }
+#s-tabs .sbsite.ask .hub .rd-by { margin-left: auto; color: #82959b; font-style: normal; font-weight: 500; }
+#s-tabs .sbsite.ask .hub .rd-title { margin: 8px 0; font: 700 14px/1.25 var(--ui); }
+#s-tabs .sbsite.ask .hub .rd-media { position: relative; height: 210px; border-radius: 10px; overflow: hidden; background: #000; display: grid; place-items: center; }
+#s-tabs .sbsite.ask .hub .rd-media::before { content: ''; position: absolute; inset: -20px; background: var(--bg) center / cover; filter: blur(16px) brightness(.45); }
+#s-tabs .sbsite.ask .hub .rd-media img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+#s-tabs .sbsite.ask .hub .rd-acts { display: flex; gap: 8px; margin-top: 8px; }
+#s-tabs .sbsite.ask .hub .rd-pill { display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px; border-radius: 999px; background: #1a282d; font: 600 10.5px/1 var(--ui); font-variant-numeric: tabular-nums; color: #f2f4f5; }
+#s-tabs .sbsite.ask .hub .rd-pill svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+#s-tabs .sbsite.ask .hub .rd-vote { padding: 0 7px; }
+#s-tabs .sbsite.ask .hub .rd-vote.on { background: #d93a00; }
+#s-tabs .sbsite.ask .hub .rd-vote.on svg:first-child { fill: #fff; }
+
+/* ---- YouTube clip pull ---- */
+#s-tabs .sbsite.ask .hub .yt-card { width: 520px; border-radius: 14px; overflow: hidden; background: #0f0f0f; box-shadow: 0 0 0 1px #2a2a2e, 0 12px 30px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite.ask .hub .yt-player { position: relative; aspect-ratio: 1280 / 536; background: #000; overflow: hidden; }
+#s-tabs .sbsite.ask .hub .yt-player > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite.ask .hub .yt-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 46px; height: 32px; border-radius: 10px; background: #ff0033; display: grid; place-items: center; }
+#s-tabs .sbsite.ask .hub .yt-play svg { width: 16px; height: 16px; fill: #fff; }
+#s-tabs .sbsite.ask .hub .yt-bar { position: absolute; left: 10px; right: 10px; bottom: 9px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); }
+#s-tabs .sbsite.ask .hub .yt-prog { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 2px; background: #ff0033; }
+#s-tabs .sbsite.ask .hub .yt-mark { position: absolute; bottom: -3px; width: 3px; height: 9px; border-radius: 1px; background: #ffd400; transform-origin: 50% 100%; opacity: 0; }
+#s-tabs .sbsite.ask .hub .yt-dot { position: absolute; top: 50%; left: 0; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #ff0033; }
+#s-tabs .sbsite.ask .hub .yt-time { position: absolute; left: 10px; bottom: 17px; font: 600 9.5px/1 var(--font-mono); color: #fff; text-shadow: 0 1px 2px #000; }
+#s-tabs .sbsite.ask .hub .yt-meta { display: flex; align-items: center; gap: 8px; padding: 8px 10px 4px; }
+#s-tabs .sbsite.ask .hub .yt-meta img { flex: none; width: 22px; height: 22px; display: block; }
+#s-tabs .sbsite.ask .hub .yt-meta b { display: block; font: 600 10.5px/1.3 var(--ui); color: #f1f1f1; }
+#s-tabs .sbsite.ask .hub .yt-meta small { display: block; font-size: 9.5px; color: #aaa; }
+#s-tabs .sbsite.ask .hub .yt-clips { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; padding: 6px 10px 10px; }
+#s-tabs .sbsite.ask .hub .yt-clip { position: relative; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px #333; opacity: 0; }
+#s-tabs .sbsite.ask .hub .yt-clip img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite.ask .hub .yt-clip em { position: absolute; right: 3px; bottom: 3px; padding: 1px 4px; border-radius: 3px; background: rgba(0,0,0,.8); font: 600 8px/1.2 var(--font-mono); font-style: normal; color: #fff; }
+
+/* ---- Reddit batch post ---- */
+#s-tabs .sbsite.ask .hub .rb-list { width: 480px; display: grid; gap: 6px; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rb-row { display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 6px; border-radius: 12px; background: #0b1416; box-shadow: inset 0 0 0 1px #22303a; opacity: 0; }
+#s-tabs .sbsite.ask .hub .rb-thumb { flex: none; width: 40px; height: 40px; border-radius: 8px; overflow: hidden; }
+#s-tabs .sbsite.ask .hub .rb-meta { flex: 1; min-width: 0; }
+#s-tabs .sbsite.ask .hub .rb-meta b { display: block; font: 600 11px/1.35 var(--ui); color: #f2f4f5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite.ask .hub .rb-meta small { display: flex; align-items: center; gap: 4px; font-size: 9.5px; color: #82959b; }
+#s-tabs .sbsite.ask .hub .rb-meta small img { width: 12px; height: 12px; }
+#s-tabs .sbsite.ask .hub .rb-st { flex: none; display: grid; place-items: center; width: 46px; }
+#s-tabs .sbsite.ask .hub .rb-spin { display: block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #3a4a52; border-top-color: #ff4500; box-sizing: border-box; }
+#s-tabs .sbsite.ask .hub .rb-st em { display: none; padding: 4px 8px; border-radius: 999px; background: rgba(61,220,132,.13); font: 700 9.5px/1 var(--ui); font-style: normal; color: #3ddc84; }
+#s-tabs .sbsite.ask .hub .rb-st.on .rb-spin { display: none; }
+#s-tabs .sbsite.ask .hub .rb-st.on em { display: inline-block; }
+#s-tabs .sbsite.ask .hub .rb-sum { margin-top: 8px; opacity: 0; }
+
+/* ---- Reddit report ---- */
+#s-tabs .sbsite.ask .hub .st-card { width: 520px; padding: 12px; border-radius: 14px; background: #0b1416; box-shadow: 0 0 0 1px #2a3236, 0 12px 30px rgba(0,0,0,.45); color: #f2f4f5; opacity: 0; }
+#s-tabs .sbsite.ask .hub .st-head { display: flex; align-items: center; gap: 7px; font: 700 12px/1 var(--ui); }
+#s-tabs .sbsite.ask .hub .st-head img { width: 20px; height: 20px; display: block; }
+#s-tabs .sbsite.ask .hub .st-head span { color: #82959b; font-weight: 400; font-size: 10px; }
+#s-tabs .sbsite.ask .hub .st-badge { margin-left: auto; padding: 5px 9px; border-radius: 999px; background: linear-gradient(90deg, #ff4500, #ff8a00); font: 700 9.5px/1 var(--ui); font-style: normal; color: #fff; opacity: 0; }
+#s-tabs .sbsite.ask .hub .st-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+#s-tabs .sbsite.ask .hub .st-kpi { display: grid; gap: 3px; padding: 10px; border-radius: 10px; background: #132227; }
+#s-tabs .sbsite.ask .hub .st-kpi b { font: 800 22px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .st-kpi small { font-size: 10px; color: #82959b; }
+#s-tabs .sbsite.ask .hub .st-kpi i { font: 700 9.5px/1 var(--ui); font-style: normal; color: #3ddc84; }
+#s-tabs .sbsite.ask .hub .st-rows { display: grid; gap: 8px; }
+#s-tabs .sbsite.ask .hub .st-row { display: flex; align-items: center; gap: 10px; opacity: 0; }
+#s-tabs .sbsite.ask .hub .st-th { flex: none; width: 34px; height: 34px; border-radius: 6px; overflow: hidden; }
+#s-tabs .sbsite.ask .hub .st-mid { flex: 1; min-width: 0; display: grid; gap: 5px; }
+#s-tabs .sbsite.ask .hub .st-mid b { font: 600 10.5px/1.2 var(--ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite.ask .hub .st-track { height: 6px; border-radius: 3px; background: #1d2f35; overflow: hidden; }
+#s-tabs .sbsite.ask .hub .st-track i { display: block; width: 0; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #ff4500, #ff8a00); }
+#s-tabs .sbsite.ask .hub .st-v { flex: none; display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; width: 60px; font: 700 11px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite.ask .hub .st-v svg { width: 12px; height: 12px; fill: #ff4500; }
+
+/* ---- the end card: the line, then the mascot to its right ---- */
+#s-end .lock.ask-end { gap: 56px; }
+#s-end .ask-end .words h1 { font-size: 112px; letter-spacing: -.02em; white-space: nowrap; }
+#s-end .ask-end .words h1 br { display: none; }
+html[data-ar="1x1"] #s-end .lock.ask-end, html[data-ar="4x5"] #s-end .lock.ask-end, html[data-ar="9x16"] #s-end .lock.ask-end { flex-direction: row; gap: 32px; text-align: left; }
+html[data-ar="1x1"] #s-end .ask-end .words h1, html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 96px; }
+html[data-ar="9x16"] #s-end .ask-end .words h1 { font-size: 64px; }
+html[data-ar="1x1"] #s-end .ask-end .words h1 br, html[data-ar="4x5"] #s-end .ask-end .words h1 br, html[data-ar="9x16"] #s-end .ask-end .words h1 br { display: inline; }
+html[data-ar="9x16"] #s-end .ask-end .face { width: 150px; height: 150px; }

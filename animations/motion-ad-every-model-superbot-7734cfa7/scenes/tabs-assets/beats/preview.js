@@ -1,131 +1,60 @@
-// Preview beat: the animation written in an editor with a live preview beside it. Codex types the head of
-// src/scenes/KineticType.tsx line by line under a syntax colourer, and the 16:9 pane on the right runs that file:
-// the style frames cut as the code types, the scrub bar and the timecode walk 0:00 -> 0:15 with it.
+// Preview beat: the animation comes back as a result card, not as text. The header names what was built and the
+// spinner beside it hands over to a green check, the big 16:9 pane plays the spot (the style frames cut as the
+// playhead walks it, the scrub bar and timecode run 0:00 -> 0:15), the five scene files tick in underneath and the
+// footer carries the render meta.
 // Pure function of t: every moving value is written from t, so ?t= freezes a frame.
-import { clamp, lerp, seg, outCubic, streamCount } from '../../../lib.js';
+import { lerp, seg, outCubic, outBack, streamCount } from '../../../lib.js';
 
-const SAY = 'Writing the animation in Remotion, live preview on.';
-const PATH = 'src/scenes/KineticType.tsx';
+const SAY = 'On it. Live preview is running.';
+const BUILT = 'Built the animation';
 const FPS = 60;
-const SPAN = 15; // the spot is 15 seconds long: the timecode walks the whole 0:00 -> 0:15
-
-// the head of the component, one array entry per line (the editor types this top-down)
-const SRC = [
-  "import { Easing, interpolate } from 'remotion';",
-  '',
-  'export const KineticType = ({ frame }) => {',
-  '  const x = interpolate(frame, [0, 30], [0, 140], {',
-  '    easing: Easing.out(Easing.cubic),',
-  '  });',
-  '  return <h1 style={{ left: x }}>EVERY FRAME</h1>;',
-];
-
+const SPAN = 15;   // the spot is 15 seconds long: the timecode walks the whole 0:00 -> 0:15
+// the five files the spot is built from: the scene list ticking in under the pane, one chip each
+const SCENES = ['KineticType.tsx', 'DotField.tsx', 'WireCube.tsx', 'TypeRing.tsx', 'Logo.tsx'];
+const FOOT = `${SCENES.length} scenes · ${FPS} fps`;
 const SHOTS = ['mg/frame-1.jpg', 'mg/frame-2.jpg', 'mg/frame-3.jpg', 'mg/frame-4.jpg'];
-
-// the tokenizer is code.js's, copied (not imported) so this beat owns its own colourer; the class letter maps to
-// .pv-<letter> in preview.css
-const KEYWORDS = new Set(['import', 'from', 'export', 'class', 'const', 'new', 'readonly', 'return', 'this', 'as', 'let', 'function', 'extends', 'interface', 'type', 'enum', 'if', 'else']);
-const TYPES = new Set(['Easing', 'interpolate', 'Composition', 'Spot', 'Root', 'string', 'number', 'void', 'boolean', 'Map', 'Float32Array', 'Props', 'React']);
-const TOKEN = /(\/\/.*$)|('[^']*'|"[^"]*"|`[^`]*`)|([A-Za-z_$][\w$]*)|(\d[\w.]*)|(\s+)|([^\s\w])/g;
-
-/** one source line -> [css class letter, text] runs, merged so the DOM stays small */
-function colorLine(line) {
-  const raw = [];
-  let m;
-  TOKEN.lastIndex = 0;
-  while ((m = TOKEN.exec(line))) {
-    if (m[1]) raw.push(['c', m[1]]);
-    else if (m[2]) raw.push(['s', m[2]]);
-    else if (m[3]) {
-      const w = m[3];
-      if (KEYWORDS.has(w)) raw.push(['k', w]);
-      else if (TYPES.has(w) || /^[A-Z]/.test(w)) raw.push(['t', w]);
-      else raw.push(['x', w]);
-    } else if (m[4]) raw.push(['n', m[4]]);
-    else raw.push(['p', m[5] || m[6]]);
-  }
-  for (let i = 0; i < raw.length - 1; i++) {
-    if (raw[i][0] === 'x' && raw[i + 1][1].trim().charAt(0) === '(') raw[i][0] = 'f';
-  }
-  const out = [];
-  raw.forEach(([c, text]) => {
-    const last = out[out.length - 1];
-    if (last && last[0] === c) last[1] += text;
-    else out.push([c, text]);
-  });
-  return out;
-}
+const CHECK = '<svg class="pv-ck" viewBox="0 0 24 24"><path class="pv-ck-p" d="M4.5 12.5l5 5L19.5 7"/></svg>';
 
 export default {
   times(r) {
     const T = { r };
-    T.card = r + 0.28;  // the split card lands
-    T.code0 = r + 0.5;  // the file starts typing ...
-    T.code1 = r + 2.5;  // ... and its last character lands; the preview follows the typing
-    T.end = r + 3.3;
+    T.card = r + 0.26;   // the result card lands
+    T.play = r + 0.40;   // the preview starts playing ...
+    T.span = r + 2.52;   // ... and its playhead reaches the end of the 0:15 spot
+    T.file = SCENES.map((_, i) => r + 0.85 + i * 0.34); // the scene files tick in, one after another
+    T.done = r + 2.5;    // the header's spinner becomes the green check
+    T.end = r + 2.8;
     return T;
   },
   build(k, x) {
     const T = k.T;
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
     const card = x.el(`<div class="pv-card">
-      <div class="pv-ed">
-        <div class="pv-tabs"><span class="pv-tab">${x.esc(PATH)}</span><span class="pv-live">LIVE</span></div>
-        <div class="pv-ed-bd">
-          <div class="pv-gut">${SRC.map((_, i) => `<i>${i + 1}</i>`).join('')}</div>
-          <pre class="pv-src"></pre>
-        </div>
+      <div class="pv-head">
+        <span class="pv-ttl">${x.tile(k.app)}<b>${x.esc(BUILT)}</b></span>
+        <span class="pv-st"><i class="pv-spin"></i>${CHECK}</span>
       </div>
-      <div class="pv-side">
-        <div class="pv-prev">
-          ${SHOTS.map((src, i) => `<img class="pv-frame" src="${x.img(src)}" alt="style frame ${i + 1}"/>`).join('')}
-          <span class="pv-badge">Preview · ${FPS} fps</span>
-          <span class="pv-tc"><b class="pv-tcn">0:00</b><em class="pv-tct">/ 0:${SPAN}</em></span>
-          <div class="pv-scrub"><i class="pv-fill"></i><i class="pv-knob"></i></div>
-        </div>
+      <div class="pv-prev">
+        ${SHOTS.map((src, i) => `<img class="pv-frame" src="${x.img(src)}" alt="preview frame ${i + 1}"/>`).join('')}
+        <span class="pv-badge">Preview · ${FPS} fps</span>
+        <span class="pv-live"><i class="pv-dot"></i>LIVE</span>
+        <span class="pv-tc"><b class="pv-tcn">0:00</b><em class="pv-tct">/ 0:${SPAN}</em></span>
+        <div class="pv-scrub"><i class="pv-fill"></i><i class="pv-knob"></i></div>
       </div>
+      <div class="pv-files">${SCENES.map((n) => `<span class="pv-file"><i class="pv-tick"></i><span>${x.esc(n)}</span></span>`).join('')}</div>
+      <div class="pv-foot">${x.esc(FOOT)}</div>
     </div>`);
-    const src = card.querySelector('.pv-src');
-    const caret = x.el('<i class="pv-caret"></i>');
-    const code = SRC.map((text) => {
-      const node = x.el('<div class="pv-ln"></div>');
-      const spans = colorLine(text).map(([c, t]) => { const s = x.el(`<span class="pv-${c}"></span>`); s.textContent = t; node.appendChild(s); return { s, t }; });
-      src.appendChild(node);
-      return { text, node, spans };
-    });
-    const CODE = SRC.join('\n');
-    const cps = CODE.length / Math.max(0.2, T.code1 - T.code0);
     const frames = [...card.querySelectorAll('.pv-frame')];
+    const spin = card.querySelector('.pv-spin');
+    const ck = card.querySelector('.pv-ck');
+    const ckp = card.querySelector('.pv-ck-p');
+    const live = card.querySelector('.pv-dot');
     const tcn = card.querySelector('.pv-tcn');
     const fill = card.querySelector('.pv-fill');
     const knob = card.querySelector('.pv-knob');
+    const chips = [...card.querySelectorAll('.pv-file')];
     const vis = say.firstElementChild, hid = say.lastElementChild;
-    let shown = -1, shownCode = -1;
-
-    // reveal the first n characters of the file, caret after the last one revealed
-    const paint = (n) => {
-      let acc = 0, placed = false;
-      code.forEach((L) => {
-        const start = acc, len = L.text.length;
-        let used = 0;
-        L.spans.forEach(({ s, t }) => {
-          const take = clamp(n - (start + used), 0, t.length);
-          if (s.textContent.length !== take) s.textContent = t.slice(0, take);
-          used += t.length;
-        });
-        if (!placed && n <= start + len) {
-          let c0 = 0, done = false;
-          for (const { s, t } of L.spans) {
-            if (n < c0 + t.length) { L.node.insertBefore(caret, n === c0 ? s : s.nextSibling); done = true; break; }
-            c0 += t.length;
-          }
-          if (!done) L.node.appendChild(caret);
-          placed = true;
-        }
-        acc = start + len + 1;
-      });
-      if (!placed && code.length) code[code.length - 1].node.appendChild(caret);
-    };
+    let shown = -1, lastTc = '';
 
     return {
       nodes: [say, card],
@@ -138,26 +67,46 @@ export default {
         card.style.opacity = ci.toFixed(3);
         card.style.transform = ci >= 1 ? '' : `translateY(${((1 - ci) * 16).toFixed(2)}px) scale(${lerp(0.97, 1, ci).toFixed(4)})`;
 
-        // the editor types the file in under a caret
-        const cn = streamCount(CODE, T.code0, cps, t);
-        if (cn !== shownCode) { paint(cn); shownCode = cn; }
-        caret.style.opacity = t >= T.code0 && t <= T.code1 + 0.4 ? '1' : '0';
+        // the header: the spinner turns while the build is coming back, then the green check draws over it
+        const d = outCubic(seg(t, T.done, T.done + 0.22));
+        spin.style.opacity = (1 - d).toFixed(3);
+        spin.style.transform = d >= 1 ? '' : `rotate(${(((t - T.card) * 450) % 360).toFixed(1)}deg)`;
+        ck.style.opacity = seg(t, T.done - 0.04, T.done + 0.02).toFixed(3);
+        ckp.style.strokeDashoffset = (23 * (1 - d)).toFixed(2);
 
-        // the preview follows the typing: the style frames cut on each quarter of the file, the timecode and the
+        // the pane plays the spot: the style frames cut on each quarter of the playback and the timecode and the
         // scrub bar walk 0:00 -> 0:15 across it
-        const p = seg(t, T.code0, T.code1);
+        const p = seg(t, T.play, T.span);
         frames.forEach((img, i) => {
-          const a = i / SHOTS.length, b = (i + 1) / SHOTS.length, d = 0.04;
-          const o = i === 0 ? 1 - seg(p, b - d, b + d)
-            : i === frames.length - 1 ? seg(p, a - d, a + d)
-              : seg(p, a - d, a + d) * (1 - seg(p, b - d, b + d));
+          const a = i / SHOTS.length, b = (i + 1) / SHOTS.length, e = 0.04;
+          const o = i === 0 ? 1 - seg(p, b - e, b + e)
+            : i === frames.length - 1 ? seg(p, a - e, a + e)
+              : seg(p, a - e, a + e) * (1 - seg(p, b - e, b + e));
           img.style.opacity = o.toFixed(3);
         });
         const tc = `0:${String(Math.round(SPAN * p)).padStart(2, '0')}`;
-        if (tcn.textContent !== tc) tcn.textContent = tc;
+        if (tc !== lastTc) { tcn.textContent = tc; lastTc = tc; }
         const w = `${(p * 100).toFixed(1)}%`;
         fill.style.width = w;
         knob.style.left = w;
+        // the LIVE lamp breathes off t
+        live.style.opacity = (0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * 7))).toFixed(3);
+
+        // the scene files tick in under the pane, each popping in and taking its tick
+        chips.forEach((chip, i) => {
+          const a = T.file[i];
+          const q = seg(t, a, a + 0.3);
+          if (q <= 0) {
+            chip.style.opacity = '0';
+            chip.style.transform = 'translateY(7px) scale(0.86)';
+            chip.classList.remove('pv-on');
+            return;
+          }
+          const e = outBack(q);
+          chip.style.opacity = outCubic(q).toFixed(3);
+          chip.style.transform = q >= 1 ? '' : `translateY(${((1 - e) * 7).toFixed(2)}px) scale(${lerp(0.86, 1, e).toFixed(4)})`;
+          chip.classList.toggle('pv-on', q >= 1);
+        });
       },
     };
   },

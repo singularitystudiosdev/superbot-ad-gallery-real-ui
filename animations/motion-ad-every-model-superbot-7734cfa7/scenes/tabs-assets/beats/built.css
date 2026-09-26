@@ -1,0 +1,41 @@
+/* Built beat (beats/built.js): the coding result card — title with a green check, a progress bar, the file rows, a
+   footer stat. No code, no diff, no terminal: a build is only shown as a result. Nothing here transitions:
+   opacity/transform are written from t in render, so ?t= freezes a frame. Every selector is scoped under the hub and
+   every class the beat owns is prefixed .bt- (the green check reuses chat.js x.OK's .qc-ok). */
+
+#s-tabs .sbsite .hub .bt-card { opacity: 0; box-sizing: border-box; width: 440px; max-width: 100%;
+  border-radius: 12px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .35);
+  overflow: hidden; color: #f2f2f7; font: 12.5px/17px var(--ui); transform-origin: 50% 0; }
+
+/* header: the result mark, the title, and the check that lights when the build lands */
+#s-tabs .sbsite .hub .bt-hd { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .bt-ic { flex: none; width: 15px; height: 15px; fill: none; stroke: #8e8e93; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .bt-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 600 12.5px/17px var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .bt-hd .bt-tk { flex: none; margin-left: auto; display: grid; place-items: center; width: 16px; height: 16px;
+  opacity: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .bt-hd .bt-tk .qc-ok { width: 16px; height: 16px; }
+
+/* the progress bar that fills as the build runs */
+#s-tabs .sbsite .hub .bt-bar { height: 4px; margin: 10px 11px 0; border-radius: 999px; background: #1d1d21; overflow: hidden; }
+#s-tabs .sbsite .hub .bt-fill { display: block; width: 100%; height: 100%; border-radius: inherit; transform: scaleX(0);
+  transform-origin: 0 50%; background: linear-gradient(90deg, rgba(52, 199, 89, .45), #34c759); }
+
+/* the file rows: name on the left, the green check it clears with on the right */
+#s-tabs .sbsite .hub .bt-rows { display: grid; gap: 1px; padding: 9px 11px 8px; }
+#s-tabs .sbsite .hub .bt-row { opacity: 0; display: flex; align-items: center; gap: 7px; min-height: 17px;
+  font: 11.5px/16px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .bt-nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 11px/16px var(--font-mono); color: #d6d6dd; }
+#s-tabs .sbsite .hub .bt-row .bt-tk { flex: none; display: grid; place-items: center; width: 14px; height: 14px;
+  margin-left: auto; opacity: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .bt-row .bt-tk .qc-ok { width: 14px; height: 14px; }
+
+/* footer stat: the summary line the card ends on */
+#s-tabs .sbsite .hub .bt-ft { opacity: 0; display: flex; align-items: center; gap: 6px; padding: 8px 11px;
+  border-top: 1px solid #232327; background: #101012; }
+#s-tabs .sbsite .hub .bt-fic { flex: none; width: 12px; height: 12px; fill: none; stroke: #34c759; stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .bt-stat { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 600 11px/16px var(--ui); color: #9d9da4; }

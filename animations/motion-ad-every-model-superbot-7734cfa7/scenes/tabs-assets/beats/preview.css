@@ -1,52 +1,54 @@
-/* Preview beat (beats/preview.js): the editor with the live preview beside it. Nothing here transitions: opacity,
-   width and left are written from t in render, so ?t= freezes a frame. Every selector is scoped under
-   #s-tabs .sbsite .hub and every class the beat owns is prefixed .pv-. */
+/* Preview beat (beats/preview.js): the finished animation as a result card — the header with its app tile and the
+   spinner that becomes a green check, the 16:9 live preview pane, the scene files ticking in under it and the render
+   footer. Nothing here transitions: opacity, transform, width and left are written from t in render, so ?t= freezes a
+   frame. Every selector is scoped under #s-tabs .sbsite .hub and every class the beat owns is prefixed .pv-. */
 
-/* the card: 560px, split into the editor (left) and the preview column (right) */
-#s-tabs .sbsite .hub .pv-card { display: flex; align-items: stretch; box-sizing: border-box; width: 560px; max-width: 100%;
-  margin-top: 2px; border-radius: 10px; overflow: hidden; background: #0d0d10;
+/* the card: 460px, one column — header, preview pane, scene files, footer */
+#s-tabs .sbsite .hub .pv-card { display: flex; flex-direction: column; gap: 9px; box-sizing: border-box; width: 460px;
+  max-width: 100%; margin-top: 2px; padding: 9px 9px 0; border-radius: 10px; overflow: hidden; background: #0d0d10;
   box-shadow: 0 0 0 1px #26262b, 0 14px 30px rgba(0, 0, 0, .45); opacity: 0; }
 
-/* the editor: the open file's tab, the gutter, the source typing in */
-#s-tabs .sbsite .hub .pv-ed { flex: 1; min-width: 0; display: flex; flex-direction: column; border-right: 1px solid #202027; }
-#s-tabs .sbsite .hub .pv-tabs { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 9px;
-  background: #141418; border-bottom: 1px solid #202027; font: 10px/1 var(--font-mono, ui-monospace, monospace); }
-#s-tabs .sbsite .hub .pv-tab { display: inline-flex; align-items: center; gap: 6px; min-width: 0; overflow: hidden;
-  white-space: nowrap; text-overflow: ellipsis; font-weight: 600; color: #cfcfd6; }
-#s-tabs .sbsite .hub .pv-tab::before { content: ""; flex: none; width: 7px; height: 9px; border-radius: 1.5px; background: #5b8dff; }
-#s-tabs .sbsite .hub .pv-live { flex: none; margin-left: auto; padding: 0 6px; border-radius: 999px; background: #0f2419;
-  color: #3ddc84; font: 700 8.5px/14px var(--font-mono, ui-monospace, monospace); letter-spacing: .08em; }
-#s-tabs .sbsite .hub .pv-ed-bd { display: flex; gap: 9px; padding: 8px 9px 10px; }
-#s-tabs .sbsite .hub .pv-gut { display: grid; flex: none; font: 9.5px/14px var(--font-mono, ui-monospace, monospace); color: #45454d; text-align: right; }
-#s-tabs .sbsite .hub .pv-gut i { font-style: normal; height: 14px; }
-#s-tabs .sbsite .hub .pv-src { flex: 1; min-width: 0; margin: 0; overflow: hidden;
-  font: 9.5px/14px var(--font-mono, ui-monospace, monospace); white-space: pre; color: #d7d7de; }
-#s-tabs .sbsite .hub .pv-ln { height: 14px; white-space: pre; }
-#s-tabs .sbsite .hub .pv-caret { display: inline-block; width: 1.5px; height: 11px; vertical-align: -1px; background: #d7d7de; opacity: 0; }
+/* the header: the answering app's tile, what it built, and the status spinner / green check at the far end */
+#s-tabs .sbsite .hub .pv-head { display: flex; align-items: center; gap: 8px; height: 20px; }
+#s-tabs .sbsite .hub .pv-ttl { display: inline-flex; align-items: center; gap: 7px; min-width: 0;
+  font: 600 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .pv-ttl .qc-tile { flex: none; width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .pv-ttl .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .pv-st { position: relative; flex: none; width: 15px; height: 15px; margin-left: auto; }
+#s-tabs .sbsite .hub .pv-spin { position: absolute; inset: 1px; box-sizing: border-box; border-radius: 50%;
+  border: 2px solid #3a3a3f; border-top-color: #5b8dff; }
+#s-tabs .sbsite .hub .pv-ck { position: absolute; inset: 0; width: 15px; height: 15px; fill: none; stroke: #34d399;
+  stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+#s-tabs .sbsite .hub .pv-ck-p { fill: none; stroke: #34d399; stroke-dasharray: 23 23; stroke-dashoffset: 23; }
 
-/* the syntax palette: the same one code.css uses, on this beat's own class names */
-#s-tabs .sbsite .hub .pv-k { color: #c58af9; }
-#s-tabs .sbsite .hub .pv-t { color: #7fbcff; }
-#s-tabs .sbsite .hub .pv-f { color: #82aaff; }
-#s-tabs .sbsite .hub .pv-s { color: #9ccc65; }
-#s-tabs .sbsite .hub .pv-n { color: #f6a06a; }
-#s-tabs .sbsite .hub .pv-c { color: #5f5f68; font-style: italic; }
-#s-tabs .sbsite .hub .pv-p { color: #8b8b93; }
-#s-tabs .sbsite .hub .pv-x { color: #d7d7de; }
-
-/* the preview column: a 16:9 pane running the file, with its label, timecode and scrub bar */
-#s-tabs .sbsite .hub .pv-side { flex: none; width: 214px; padding: 9px; display: flex; flex-direction: column; }
-#s-tabs .sbsite .hub .pv-prev { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 7px; overflow: hidden;
+/* the live preview pane: a 16:9 frame running the spot, with its badge, LIVE lamp, timecode and scrub bar */
+#s-tabs .sbsite .hub .pv-prev { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden;
   background: #000; box-shadow: inset 0 0 0 1px #232327; }
 #s-tabs .sbsite .hub .pv-frame { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
-#s-tabs .sbsite .hub .pv-badge { position: absolute; left: 6px; top: 6px; display: inline-flex; align-items: center; height: 16px;
+#s-tabs .sbsite .hub .pv-badge { position: absolute; left: 7px; top: 7px; display: inline-flex; align-items: center; height: 16px;
   padding: 0 7px; border-radius: 999px; background: rgba(12, 12, 14, .78); color: #e5e5ea;
   font: 600 9px/1 var(--font-mono, ui-monospace, monospace); white-space: nowrap; }
-#s-tabs .sbsite .hub .pv-tc { position: absolute; right: 6px; bottom: 14px; display: inline-flex; align-items: baseline; gap: 4px;
+#s-tabs .sbsite .hub .pv-live { position: absolute; right: 7px; top: 7px; display: inline-flex; align-items: center; gap: 5px;
+  height: 16px; padding: 0 8px; border-radius: 999px; background: #0f2419; color: #3ddc84;
+  font: 700 8.5px/1 var(--font-mono, ui-monospace, monospace); letter-spacing: .08em; }
+#s-tabs .sbsite .hub .pv-dot { width: 5px; height: 5px; border-radius: 50%; background: #3ddc84; opacity: .35; }
+#s-tabs .sbsite .hub .pv-tc { position: absolute; right: 7px; bottom: 15px; display: inline-flex; align-items: baseline; gap: 4px;
   font: 600 9px/1 var(--font-mono, ui-monospace, monospace); color: #e5e5ea; text-shadow: 0 1px 2px rgba(0, 0, 0, .7); }
 #s-tabs .sbsite .hub .pv-tcn { font-variant-numeric: tabular-nums; }
 #s-tabs .sbsite .hub .pv-tct { font-style: normal; font-weight: 500; color: #9a9aa2; }
-#s-tabs .sbsite .hub .pv-scrub { position: absolute; left: 6px; right: 6px; bottom: 6px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .25); }
+#s-tabs .sbsite .hub .pv-scrub { position: absolute; left: 7px; right: 7px; bottom: 7px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .25); }
 #s-tabs .sbsite .hub .pv-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 2px; background: #5b8dff; }
 #s-tabs .sbsite .hub .pv-knob { position: absolute; top: 50%; left: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%;
   background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .5); }
+
+/* the scene files ticking in under the pane: one small chip per file, its tick going green once it lands */
+#s-tabs .sbsite .hub .pv-files { display: flex; flex-wrap: wrap; gap: 6px; }
+#s-tabs .sbsite .hub .pv-file { display: inline-flex; align-items: center; gap: 6px; height: 21px; padding: 0 9px;
+  border-radius: 999px; background: #141418; box-shadow: inset 0 0 0 1px #26262b; opacity: 0;
+  font: 500 10.5px/1 var(--font-mono, ui-monospace, monospace); color: #b9b9c2; white-space: nowrap; }
+#s-tabs .sbsite .hub .pv-tick { flex: none; width: 5px; height: 5px; border-radius: 50%; background: #3a3a3f; }
+#s-tabs .sbsite .hub .pv-file.pv-on .pv-tick { background: #34d399; }
+
+/* the footer strip: the render meta along the bottom edge of the card */
+#s-tabs .sbsite .hub .pv-foot { display: flex; align-items: center; height: 26px; margin: 0 -9px; padding: 0 12px;
+  border-top: 1px solid #202027; background: #101014; font: 500 10px/1 var(--font-mono, ui-monospace, monospace); color: #8e8e93; }

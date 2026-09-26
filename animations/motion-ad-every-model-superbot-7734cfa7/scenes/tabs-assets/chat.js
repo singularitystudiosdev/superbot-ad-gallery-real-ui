@@ -8,13 +8,11 @@ import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCurso
 import { makeCursor } from '../../shell.js';
 import plan from './beats/plan.js?v=1';
 import art from './beats/art.js?v=2';
-import play from './beats/play.js?v=2';
+import play from './beats/play.js?v=3';
 import wave from './beats/wave.js?v=1';
-import diff from './beats/diff.js?v=1';
-import term from './beats/term.js?v=1';
-import preview from './beats/preview.js?v=1';
-import parallel from './beats/parallel.js?v=1';
-import assets from './beats/assets.js?v=1';
+import built from './beats/built.js?v=1';
+import preview from './beats/preview.js?v=2';
+import assets from './beats/assets.js?v=2';
 import git from './beats/git.js?v=2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
@@ -52,43 +50,41 @@ const CHIP = {
 };
 
 // one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options
-// (opts.lead holds the routing chip back that many seconds and opts.hold lets the finished beat breathe that long
-// before the next request, so each variant cuts on its own rhythm)
 const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, CHIP[app]]] });
-// superbot answering itself after routing to two models at once: both chips land, then one card runs both lanes
-const both = (a, b, mod, opts = {}) => ({ app: 'superbot', mod, opts: { lanes: opts.lanes, ...opts }, chips: [[a, CHIP[a]], [b, `Adding ${APPS[b].name} in parallel`]] });
-// only the first request is asked; the rest are superbot carrying the build forward on its own
-const variant = (steps) => steps.map((s, i) => (i === 0 ? { ...s, ask: ASK } : s));
+// only the first request is asked; the rest are superbot carrying the build forward on its own. chip is how long a
+// routing chip takes to land and resolve: each variant switches at its own speed, and nothing idles between beats
+const variant = (chip, steps) => steps.map((s, i) => ({ ...s, chip, ...(i === 0 ? { ask: ASK } : {}) }));
 
 // the three published routings, one ad each (?v=1..3). Every one builds the same 15-second spot and ends on it
-// playing, but each is its own shape: a different opener, a different number of switches, different artifacts
-// (waveform, diff, terminal, image grid, parallel lanes, asset audit, live preview, repo push) and its own pace.
+// playing, strictly one model at a time, but each is its own shape: a different opener, a different number of
+// switches, different cards (waveform, image grid, build results, asset audit, live preview, repo push) and its own
+// switch speed. Claude Opus 5.5 does the coding, shown only as result cards, never as code.
 export const VARIANTS = {
-  // 3 switches, slow and wide: Suno lays the music bed first, Cursor snaps the cuts to its beat grid, superbot
-  // renders in a terminal and plays the spot
-  '1': variant([
-    step('suno', wave, { kind: 'bed', lead: 0.5, hold: 0.6 }),
-    step('cursor', diff, { set: 'sync', lead: 0.7, hold: 0.5 }),
-    step('superbot', play, { intro: 'term', lead: 0.6 }),
+  // 3 switches, unhurried chips: Suno lays the music bed, Opus syncs the cuts to it, superbot renders and plays it
+  '1': variant(0.65, [
+    step('suno', wave, { kind: 'bed' }),
+    step('opus', built, { kind: 'sync' }),
+    step('superbot', play, { intro: 'render' }),
   ]),
-  // 5 switches, fast: Nano Banana paints the style frames, Codex and Suno work side by side and trade the beat grid
-  // and the cut list, DeepSeek audits the assets and bounces one fix back, superbot ships it
-  '2': variant([
+  // 5 switches, quick chips: Nano Banana paints the style frames, Opus builds the scenes, Suno scores the hits,
+  // DeepSeek audits the assets, superbot ships it
+  '2': variant(0.45, [
     step('nanobanana', art),
-    both('codex', 'suno', parallel),
+    step('opus', built, { kind: 'scene' }),
+    step('suno', wave, { kind: 'sfx' }),
     step('deepseek', assets),
     step('superbot', play),
   ]),
-  // 7 switches, uneven: Codex writes the animation with a live preview first, then the script, the hits, a fix, the
-  // repo, a terminal render and the finished spot, each handed to a different model on its own beat
-  '3': variant([
-    step('codex', preview, { lead: 0.2 }),
-    step('deepseek', plan, { kind: 'script', lead: 0.8 }),
-    step('suno', wave, { kind: 'sfx', lead: 0.1 }),
-    step('cursor', diff, { set: 'fix', lead: 0.5, hold: 0.3 }),
+  // 7 switches: Opus builds the animation with a live preview first, then the script, the music, a timing fix, the
+  // repo, the render and the finished spot
+  '3': variant(0.55, [
+    step('opus', preview),
+    step('deepseek', plan, { kind: 'script' }),
+    step('suno', wave, { kind: 'bed' }),
+    step('opus', built, { kind: 'fix' }),
     step('github', git),
-    step('opus', term, { lead: 0.9 }),
-    step('superbot', play, { lead: 0.2 }),
+    step('opus', built, { kind: 'render' }),
+    step('superbot', play),
   ]),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
@@ -102,18 +98,18 @@ function timeBeats(asks) {
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
       k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.35 + ((a.opts && a.opts.lead) || 0);   // superbot's first routing chip lands
+      k.sw = k.send + 0.2;    // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
-      k.sw = s + 0.2 + ((a.opts && a.opts.lead) || 0);         // superbot carries on without being asked
+      k.sw = s + 0.04;        // the next switch starts the moment the last beat finishes
     }
     // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
     let at = k.sw;
-    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + 0.65 }; at = c.done + 0.12; return c; });
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + a.chip * 0.34, done: at + a.chip }; at = c.done + 0.12; return c; });
     k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
     k.T = a.mod.times(k.reply, a.opts || {});
-    s = k.T.end + ((a.opts && a.opts.hold) || 0);
+    s = k.T.end;
     return { k };
   });
 }
@@ -165,17 +161,17 @@ export function mountChat(hub) {
   const cat = plat.querySelector('.rc-cat');
   const pIcon = el('<span class="qc-pi"></span>');
   cat.replaceWith(pIcon);
-  const pImg = el(`<img alt="" src="${APPS.codex.logo}" data-app="codex"/>`);
+  const pImg = el(`<img alt="" src="${APPS.opus.logo}" data-app="opus"/>`);
   const pMark = el(`<span class="qc-pi-sb">${SB_MARK}</span>`);
   pIcon.append(pImg, pMark);
   const label = [...plat.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
-  const pLabel = el(`<span>${APPS.codex.name}</span>`);
+  const pLabel = el(`<span>${APPS.opus.name}</span>`);
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
 
   const ph = hub.querySelector('.rc-ph');
   return {
     hub, pointer, feed, inner, beats, scroll, plat, pIcon, pImg, pMark, pLabel,
-    ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'codex',
+    ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'opus',
   };
 }
 
@@ -199,7 +195,7 @@ function renderComposer(c, t) {
 }
 
 function renderRouting(c, t) {
-  let app = 'codex', swap = -1;
+  let app = 'opus', swap = -1;
   c.beats.forEach(({ k }) => k.chips.forEach((ch) => { if (t >= ch.swap) { app = ch.app; swap = ch.swap; } }));
   // platform chip: dips out, swaps, comes back
   if (app !== c.lastApp) {

@@ -1,7 +1,7 @@
 // Assets beat: the routed auditor (DeepSeek, by the variant that routes it) walks the spot's asset list row by row.
 // Every file lands with its icon, name and size and stamps a green check as it clears; the one file that is late —
-// scenes/WireCube.tsx, a scene in an asset folder — lands an amber "cut 2 frames late", a pill hands it back to Codex,
-// and the row flips to green "fixed". opts.back / opts.say override the hand-back app and the streamed line.
+// scenes/WireCube.tsx, a scene in an asset folder — lands an amber "cut 2 frames late", and the auditing model fixes it
+// itself: the row flips to green "fixed" (no hand-back, one model works at a time). opts.say overrides the streamed line.
 // Pure function of t: every moving value is written from t, so ?t= freezes any frame.
 import { lerp, seg, outCubic, outBack, streamCount } from '../../../lib.js';
 
@@ -39,17 +39,14 @@ export default {
     T.row = FILES.map((_, i) => r + 0.44 + i * 0.135);   // twelve rows, the last landing at r+1.93
     T.check = T.row.map((a) => a + 0.18);                // each row's check lands just behind it
     T.warn = T.row[LATE] + 0.2;                          // the flagged row notes what is wrong
-    T.back = r + 2.15;                                   // the hand-back pill lands under the card
-    T.fix = r + 2.6;                                     // ... and the row comes back green "fixed"
-    T.end = r + 3.25;
+    T.fix = r + 2.3;                                     // the flagged row comes back green "fixed"
+    T.end = r + 2.6;
     return T;
   },
   build(k, x) {
     const T = k.T;
     const opts = k.opts || {};
-    const back = opts.back || 'codex';
-    const backName = { codex: 'Codex', suno: 'Suno', opus: 'Opus', gemini: 'Gemini', deepseek: 'DeepSeek', cursor: 'Cursor', nanobanana: 'Nano Banana' }[back] || back;
-    const sayText = opts.say || `Checked every asset. One fix sent back to ${backName}.`;
+    const sayText = opts.say || 'Checked every asset and fixed one late cut.';
 
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(sayText)}</span></div>`);
     const rowsHtml = FILES.map(([p, size, kind], i) => `<div class="as-row">
@@ -64,20 +61,18 @@ export default {
       <div class="as-hd"><i class="as-lic-w">${LIST}</i><span class="as-path"><b>motion-ad</b><i>/</i><b>assets</b></span><span class="as-count">${FILES.length} files</span></div>
       <div class="as-rows">${rowsHtml}</div>
     </div>`);
-    const backRow = x.el(`<div class="dd-chiprow as-backrow"><span class="as-back"><span class="spin"></span><span class="as-bt">sent back to</span>${x.tile(back)}<b>${x.esc(backName)}</b></span></div>`);
 
     const vis = say.firstElementChild, hid = say.lastElementChild;
     const rows = [...card.querySelectorAll('.as-row')];
     const ticks = rows.map((r) => r.querySelector('.as-tick'));
     const late = rows[LATE];
     const warn = late.querySelector('.as-warn'), fix = late.querySelector('.as-fix');
-    const spin = backRow.querySelector('.spin');
     let shown = -1;
     const rise = (n, p, dy) => { const e = outCubic(p); n.style.opacity = e.toFixed(3); n.style.transform = p >= 1 ? '' : `translateY(${((1 - e) * dy).toFixed(2)}px)`; };
 
     return {
-      nodes: [say, card, backRow],
-      marks: [[T.r, say], [T.card, card], [T.row[0], card], [T.back, backRow]],
+      nodes: [say, card],
+      marks: [[T.r, say], [T.card, card], [T.row[0], card]],
       render(t) {
         const n = streamCount(sayText, T.r + 0.06, 82, t);
         if (n !== shown) { vis.textContent = sayText.slice(0, n); hid.textContent = sayText.slice(n); shown = n; }
@@ -96,7 +91,7 @@ export default {
           ticks[i].style.transform = `scale(${outBack(cp).toFixed(3)})`;
         });
 
-        // the late row: amber warning, then the hand-back, then it flips green "fixed"
+        // the late row: amber warning, then it flips green "fixed"
         const wp = seg(t, T.warn, T.warn + 0.24);
         warn.style.opacity = (outCubic(wp) * (1 - seg(t, T.fix - 0.12, T.fix + 0.06))).toFixed(3);
         warn.style.transform = wp >= 1 ? '' : `scale(${outBack(wp).toFixed(3)})`;
@@ -104,13 +99,6 @@ export default {
         fix.style.opacity = outCubic(fp).toFixed(3);
         fix.style.transform = `scale(${outBack(fp).toFixed(3)})`;
 
-        // the hand-back pill: lands while the warning is up, then resolves and clears once the row is fixed
-        const bp = seg(t, T.back, T.back + 0.3), be = outCubic(bp);
-        backRow.style.opacity = (be * (1 - seg(t, T.fix + 0.3, T.fix + 0.55))).toFixed(3);
-        backRow.style.transform = bp >= 1 ? '' : `translateY(${((1 - be) * 8).toFixed(2)}px)`;
-        const bd = t >= T.fix;
-        spin.classList.toggle('done', bd);
-        spin.style.transform = bd ? '' : `rotate(${(((t - T.back) * 420) % 360).toFixed(1)}deg)`;
       },
     };
   },

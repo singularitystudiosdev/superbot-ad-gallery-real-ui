@@ -272,6 +272,22 @@
     "thumb": "assets/shots/just-works-trip-wallet-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-job-hunt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "LinkedIn + Indeed + Gmail + 40 job boards, one job pipeline",
+    "src": "animations/just-works-job-hunt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-job-hunt-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-job-hunt-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "LinkedIn + Indeed + Gmail + 40 job boards, ChatGPT vs Superbot",
+    "src": "animations/just-works-job-hunt-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-job-hunt-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

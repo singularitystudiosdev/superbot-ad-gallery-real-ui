@@ -1,0 +1,34 @@
+Job hunt spot, variant A with the ChatGPT refusal (LinkedIn, Indeed and Gmail plus the Greenhouse, Lever and Ashby boards of 40
+target companies, one senior backend engineer's search read across all of them), asset credits.
+The person, the 52 applications, the 83 recruiter emails, the 40 target companies and every
+company and role shown (Lumen Pay, Parcelwise, Quayside Data, Kestrel AI and the rest), their
+board URLs, dates, statuses and next steps are invented for the spot and live in data.js. Any
+resemblance to a real employer is unintended. The page reads only: it never applies, withdraws,
+messages, replies, accepts an invite or edits a profile on LinkedIn, Indeed, Gmail or any board.
+All figures printed on the page are derived from data.js.
+
+img/hero.jpg
+  "Home-office-336377.jpg" (laptop and coffee on a desk, low light), Wikimedia Commons, CC0 1.0
+  (Pixabay upload, public domain dedication, no attribution required)
+  https://commons.wikimedia.org/wiki/File:Home-office-336377.jpg
+  Downscaled to 1600 px wide from the Commons original. A real photograph: no people, no
+  products shown by name, no drawn art.
+
+Service marks and the app icon, via the Iconify API (api.iconify.design), set on rounded 64 px
+tiles. Trademarks of their owners, used only to name the services the search reads from.
+  brand/linkedin.svg    mdi:linkedin (Apache 2.0) on LinkedIn blue #0A66C2
+  brand/indeed.svg      simple-icons:indeed (CC0) on Indeed blue #003A9B
+  brand/gmail.svg       simple-icons:gmail (CC0) on Gmail red #EA4335
+  brand/greenhouse.svg  simple-icons:greenhouse (CC0) on Greenhouse green #24A47F
+  brand/board.svg       mdi:briefcase-search (Apache 2.0) on a neutral slate tile, the mark for the
+                        Lever and Ashby boards: neither ships a mark in an open icon set, so they
+                        are named in text and get this neutral job-board glyph, not a logo
+  brand/role.svg        mdi:briefcase-outline (Apache 2.0), the row glyph for an application
+  brand/app.svg         mdi:briefcase-check (Apache 2.0), tinted mint, the app favicon
+
+The board, role and app tiles are the page's own slate and ink, not brand colours, and carry no
+trademark.
+
+Inline interface glyphs in site.js (list, lock, check, refresh, map pin, building, briefcase,
+sparkles, calendar, message, circle x, hourglass, send, link, external link, clock, merge,
+shield, circle check) are lucide paths (ISC) fetched from the same Iconify API.

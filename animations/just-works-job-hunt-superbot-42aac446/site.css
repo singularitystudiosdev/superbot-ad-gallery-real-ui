@@ -1,0 +1,837 @@
+/* site.css - superbot.app/p/job-pipeline, "Job pipeline".
+   The page Superbot hands back: a read-only sync of LinkedIn, Indeed, Gmail and the Greenhouse, Lever and
+   Ashby boards of 40 target companies, every recruiter email threaded onto the application it answers, every
+   application given a status and a next step, and the new senior backend roles on those boards, read in the
+   Chrome beat. Two states come from the kit and nowhere else: .is-hover (the merge counters, the Interview
+   invites tile, the Lumen Pay card, the "Senior Backend Engineer, Ledger" row) and .is-active on the New roles
+   tab. The tab's .is-active swaps the pipeline for the new roles panel through :has() + sibling rules below,
+   so no JS runs on the click. site.js render(p) sets .is-s1 .. .is-s7 (the six sources and the pipeline step
+   landing), .is-m1/.is-m2 (the threading and filtering) plus the counters, the merge bar, the status examples
+   and the company cards; every frame is a pure function of the plan. No CSS animations, no transitions: the
+   kit draws every move. Semantic colours: violet interview, blue recruiter replied, red rejected, amber no
+   reply yet, mint new roles and ok. */
+
+.site-job-hunt {
+  --hm-bg: #07090e;
+  --hm-bg2: #0b0f16;
+  --hm-panel: #101623;
+  --hm-panel2: #18202f;
+  --hm-line: rgba(214, 226, 245, 0.08);
+  --hm-line2: rgba(214, 226, 245, 0.16);
+  --hm-ink: #eef2f8;
+  --hm-dim: #9aa6ba;
+  --hm-dim2: #667286;
+  --hm-mint: #6ff2b0;
+  --hm-mint-soft: rgba(111, 242, 176, 0.13);
+  --hm-red: #ff6b6b;
+  --hm-red-soft: rgba(255, 107, 107, 0.14);
+  --hm-amber: #ffb547;
+  --hm-amber-soft: rgba(255, 181, 71, 0.14);
+  --hm-blue: #5eb4ff;
+  --hm-blue-soft: rgba(94, 180, 255, 0.14);
+  --hm-violet: #b69cff;
+  --hm-violet-soft: rgba(182, 156, 255, 0.15);
+
+  container: hm / inline-size;
+  width: 100%;
+  min-width: 0;
+  background: var(--hm-bg);
+  color: var(--hm-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-job-hunt *,
+.site-job-hunt *::before,
+.site-job-hunt *::after { box-sizing: border-box; }
+
+.site-job-hunt p,
+.site-job-hunt h1,
+.site-job-hunt h2,
+.site-job-hunt h3,
+.site-job-hunt ul,
+.site-job-hunt ol,
+.site-job-hunt li { margin: 0; padding: 0; }
+
+.site-job-hunt ul,
+.site-job-hunt ol { list-style: none; }
+.site-job-hunt img { display: block; max-width: 100%; }
+.site-job-hunt b,
+.site-job-hunt em,
+.site-job-hunt i { font-style: normal; }
+.site-job-hunt b { font-weight: 650; }
+.site-job-hunt small { font-size: inherit; }
+
+.site-job-hunt .jh-ico { width: 14px; height: 14px; flex: none; }
+
+.site-job-hunt .jh-clock,
+.site-job-hunt .jh-synccount,
+.site-job-hunt .jh-mk b,
+.site-job-hunt .jh-stats b,
+.site-job-hunt .jh-homefacts b,
+.site-job-hunt .jh-healthrow b,
+.site-job-hunt .jh-acc-v b,
+.site-job-hunt .jh-flagn,
+.site-job-hunt .jh-flagex b,
+.site-job-hunt .jh-roomn b,
+.site-job-hunt .jh-chip b,
+.site-job-hunt .jh-dbat,
+.site-job-hunt .jh-alast,
+.site-job-hunt .jh-adays { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it) ---------- */
+.site-job-hunt .jh-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--hm-bg);
+  border-bottom: 1px solid var(--hm-line);
+}
+.site-job-hunt .jh-topin {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding: 0 28px;
+}
+.site-job-hunt .jh-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
+.site-job-hunt .jh-brandico { width: 22px; height: 22px; border-radius: 6px; }
+.site-job-hunt .jh-by { color: var(--hm-dim2); font-size: 12px; }
+
+.site-job-hunt .jh-tabs { display: flex; gap: 4px; margin-left: 12px; }
+.site-job-hunt .jh-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: var(--hm-dim);
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-job-hunt .jh-tab i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--hm-panel2);
+  color: var(--hm-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+.site-job-hunt .jh-tab--1,
+.site-job-hunt .jh-top:has(.jh-tab--2.is-active) .jh-tab--2 {
+  background: var(--hm-mint-soft);
+  color: #b7f6d6;
+  box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32);
+}
+.site-job-hunt .jh-tab--1 i,
+.site-job-hunt .jh-top:has(.jh-tab--2.is-active) .jh-tab--2 i { background: var(--hm-mint); color: #05231a; }
+.site-job-hunt .jh-top:has(.jh-tab--2.is-active) .jh-tab--1 {
+  background: none;
+  color: var(--hm-dim);
+  box-shadow: none;
+}
+.site-job-hunt .jh-top:has(.jh-tab--2.is-active) .jh-tab--1 i { background: var(--hm-panel2); color: var(--hm-dim); }
+.site-job-hunt .jh-tab--2.is-hover { color: var(--hm-ink); background: var(--hm-panel2); }
+
+.site-job-hunt .jh-status { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-job-hunt .jh-logs,
+.site-job-hunt .jh-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--hm-line2);
+  color: var(--hm-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.site-job-hunt .jh-logs img { width: 16px; height: 16px; border-radius: 4px; }
+.site-job-hunt .jh-logs img + img { margin-left: -4px; box-shadow: 0 0 0 1.5px var(--hm-bg); }
+.site-job-hunt .jh-logs .jh-ico { width: 12px; height: 12px; margin-left: 2px; }
+.site-job-hunt .jh-logs { flex: none; }
+.site-job-hunt .jh-live { flex: none; color: var(--hm-ink); font-weight: 560; min-width: 116px; }
+.site-job-hunt .jh-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hm-mint);
+  box-shadow: 0 0 0 3px var(--hm-mint-soft);
+}
+.site-job-hunt .jh-syncbar { height: 2px; }
+.site-job-hunt .jh-syncfill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #41bdf5, var(--hm-blue), var(--hm-mint));
+}
+
+/* ---------- hero ---------- */
+.site-job-hunt .jh-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--hm-line);
+}
+/* the desk photo is darkest on the left, the scrim still holds the text column steady */
+.site-job-hunt .jh-herobg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 45%;
+  opacity: 0.55;
+}
+.site-job-hunt .jh-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 9, 14, 0.98) 0%, rgba(7, 9, 14, 0.92) 55%, rgba(7, 9, 14, 0.6) 100%),
+    linear-gradient(0deg, rgba(7, 9, 14, 1) 0%, rgba(7, 9, 14, 0) 40%);
+}
+.site-job-hunt .jh-heroin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 336px);
+  gap: 34px;
+  align-items: start;
+  padding: 34px 28px 30px;
+}
+.site-job-hunt .jh-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--hm-mint);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.site-job-hunt .jh-hero h1 {
+  margin-top: 12px;
+  max-width: 660px;
+  font-size: 32px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.site-job-hunt .jh-dek { margin-top: 12px; max-width: 600px; color: var(--hm-dim); font-size: 13.5px; line-height: 1.55; text-wrap: pretty; }
+
+/* the sync card: five apps tick in, the rooms step closes it, then the duplicates collapse from 214 to 127 */
+.site-job-hunt .jh-sync {
+  margin-top: 18px;
+  max-width: 660px;
+  padding: 13px 15px 12px;
+  border-radius: 14px;
+  background: rgba(16, 22, 35, 0.9);
+  border: 1px solid var(--hm-line2);
+}
+.site-job-hunt .jh-synchead { position: relative; height: 20px; }
+.site-job-hunt .jh-syncnow,
+.site-job-hunt .jh-stamp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-job-hunt .jh-syncnow { color: var(--hm-ink); }
+.site-job-hunt .jh-syncnow .jh-ico { color: var(--hm-blue); }
+.site-job-hunt .jh-synccount { margin-left: auto; color: var(--hm-dim); font-weight: 600; }
+.site-job-hunt .jh-stamp { color: var(--hm-mint); opacity: 0; overflow: hidden; }
+.site-job-hunt .jh-hero.is-s7 .jh-syncnow { opacity: 0; }
+.site-job-hunt .jh-hero.is-s7 .jh-stamp { opacity: 1; }
+
+.site-job-hunt .jh-ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-top: 11px; }
+.site-job-hunt .jh-tick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 9px;
+  background: var(--hm-bg2);
+  border: 1px solid var(--hm-line);
+  color: var(--hm-dim2);
+  font-size: 12px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-job-hunt .jh-tick img { width: 20px; height: 20px; border-radius: 5px; opacity: 0.45; flex: none; }
+.site-job-hunt .jh-tickico {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--hm-panel2);
+  opacity: 0.45;
+}
+.site-job-hunt .jh-tickico .jh-ico { width: 12px; height: 12px; }
+.site-job-hunt .jh-tick span { overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-tick > b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.site-job-hunt .jh-tickok {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--hm-panel2);
+  color: transparent;
+}
+.site-job-hunt .jh-tickok .jh-ico { width: 11px; height: 11px; stroke-width: 3; }
+.site-job-hunt .jh-hero.is-s1 .jh-tick--s1,
+.site-job-hunt .jh-hero.is-s2 .jh-tick--s2,
+.site-job-hunt .jh-hero.is-s3 .jh-tick--s3,
+.site-job-hunt .jh-hero.is-s4 .jh-tick--s4,
+.site-job-hunt .jh-hero.is-s5 .jh-tick--s5,
+.site-job-hunt .jh-hero.is-s6 .jh-tick--s6,
+.site-job-hunt .jh-hero.is-s7 .jh-tick--s7 {
+  color: var(--hm-ink);
+  border-color: rgba(111, 242, 176, 0.3);
+  background: var(--hm-mint-soft);
+}
+/* the seventh tick (the pipeline being built) takes the whole row under the six sources */
+.site-job-hunt .jh-tick--rooms { grid-column: 1 / -1; }
+.site-job-hunt .jh-hero.is-s1 .jh-tick--s1 img,
+.site-job-hunt .jh-hero.is-s2 .jh-tick--s2 img,
+.site-job-hunt .jh-hero.is-s3 .jh-tick--s3 img,
+.site-job-hunt .jh-hero.is-s4 .jh-tick--s4 img,
+.site-job-hunt .jh-hero.is-s5 .jh-tick--s5 img,
+.site-job-hunt .jh-hero.is-s6 .jh-tick--s6 img,
+.site-job-hunt .jh-hero.is-s7 .jh-tick--s7 .jh-tickico { opacity: 1; }
+.site-job-hunt .jh-hero.is-s7 .jh-tick--s7 .jh-tickico { background: var(--hm-mint); color: #05231a; }
+.site-job-hunt .jh-hero.is-s1 .jh-tick--s1 .jh-tickok,
+.site-job-hunt .jh-hero.is-s2 .jh-tick--s2 .jh-tickok,
+.site-job-hunt .jh-hero.is-s3 .jh-tick--s3 .jh-tickok,
+.site-job-hunt .jh-hero.is-s4 .jh-tick--s4 .jh-tickok,
+.site-job-hunt .jh-hero.is-s5 .jh-tick--s5 .jh-tickok,
+.site-job-hunt .jh-hero.is-s6 .jh-tick--s6 .jh-tickok,
+.site-job-hunt .jh-hero.is-s7 .jh-tick--s7 .jh-tickok { background: var(--hm-mint); color: #05231a; }
+
+/* the merge beat: the amber band of duplicate listings goes, the mint band of unique devices takes the bar */
+.site-job-hunt .jh-merge { margin-top: 11px; opacity: 0.45; border-radius: 10px; }
+/* the cursor rests on the merge counters while the duplicates collapse (ad.js hover, engine toggles is-hover) */
+.site-job-hunt .jh-merge.is-hover { background: rgba(111, 242, 176, 0.06); box-shadow: 0 0 0 7px rgba(111, 242, 176, 0.06); }
+.site-job-hunt .jh-merge.is-hover .jh-mk--dup b { color: #ffc56b; }
+.site-job-hunt .jh-hero.is-m1 .jh-merge { opacity: 1; }
+.site-job-hunt .jh-mbar {
+  display: flex;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--hm-panel2);
+  overflow: hidden;
+}
+.site-job-hunt .jh-mun { display: block; width: 59.35%; background: linear-gradient(90deg, #37d492, var(--hm-mint)); }
+.site-job-hunt .jh-mdup {
+  display: block;
+  width: 40.65%;
+  background: repeating-linear-gradient(-45deg, rgba(255, 181, 71, 0.85) 0 4px, rgba(255, 181, 71, 0.32) 4px 8px);
+}
+.site-job-hunt .jh-mrow { display: flex; gap: 16px; margin-top: 9px; color: var(--hm-dim); font-size: 11.5px; }
+.site-job-hunt .jh-mk { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.site-job-hunt .jh-mk b { font-size: 15px; color: var(--hm-ink); }
+.site-job-hunt .jh-mk--dup b { color: var(--hm-amber); }
+.site-job-hunt .jh-mk--uniq { margin-left: auto; }
+.site-job-hunt .jh-mk--uniq b { color: var(--hm-mint); }
+.site-job-hunt .jh-mbar.is-merged { box-shadow: 0 0 0 1px rgba(111, 242, 176, 0.4); }
+
+.site-job-hunt .jh-stats { display: flex; gap: 9px; margin-top: 14px; max-width: 660px; }
+.site-job-hunt .jh-stats li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 11px;
+  background: rgba(16, 22, 35, 0.78);
+  border: 1px solid var(--hm-line);
+}
+.site-job-hunt .jh-stats b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-job-hunt .jh-stats span { display: block; color: var(--hm-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-stat--iv b { color: var(--hm-violet); }
+.site-job-hunt .jh-stat--ok b { color: var(--hm-mint); }
+
+/* the home card on the right of the hero */
+.site-job-hunt .jh-home {
+  padding: 16px 17px 15px;
+  border-radius: 16px;
+  background: rgba(16, 22, 35, 0.9);
+  border: 1px solid var(--hm-line2);
+}
+.site-job-hunt .jh-homek {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--hm-dim);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.site-job-hunt .jh-homek .jh-ico { width: 12px; height: 12px; color: var(--hm-mint); }
+.site-job-hunt .jh-home h2 { margin-top: 7px; font-size: 19px; line-height: 1.2; letter-spacing: -0.02em; }
+.site-job-hunt .jh-homeday { display: flex; align-items: center; gap: 6px; margin-top: 5px; color: var(--hm-dim); font-size: 12px; }
+.site-job-hunt .jh-homeday .jh-ico { width: 12px; height: 12px; }
+.site-job-hunt .jh-homefacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin-top: 13px; }
+.site-job-hunt .jh-homefacts li {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--hm-bg2);
+  border: 1px solid var(--hm-line);
+}
+.site-job-hunt .jh-homefacts small { display: block; color: var(--hm-dim2); font-size: 11px; }
+.site-job-hunt .jh-homefacts b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-job-hunt .jh-health { margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--hm-line); }
+.site-job-hunt .jh-healthh { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+.site-job-hunt .jh-healthh .jh-ico { color: var(--hm-mint); }
+.site-job-hunt .jh-healthrow { display: flex; gap: 12px; margin-top: 9px; color: var(--hm-dim); font-size: 11px; }
+.site-job-hunt .jh-healthrow span { display: flex; flex-direction: column; min-width: 0; }
+.site-job-hunt .jh-healthrow b { font-size: 16px; color: var(--hm-mint); letter-spacing: -0.02em; }
+.site-job-hunt .jh-healthrow .jh-hr--bad b { color: var(--hm-amber); }
+.site-job-hunt .jh-healthrow .jh-hr--interview b { color: var(--hm-violet); }
+.site-job-hunt .jh-healthbar {
+  height: 6px;
+  margin-top: 10px;
+  border-radius: 99px;
+  background: var(--hm-amber-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 181, 71, 0.25);
+  overflow: hidden;
+}
+.site-job-hunt .jh-healthbar i { display: block; height: 100%; background: var(--hm-mint); border-radius: 99px; }
+.site-job-hunt .jh-healthn { display: flex; align-items: center; gap: 6px; margin-top: 10px; color: var(--hm-dim); font-size: 11.5px; }
+.site-job-hunt .jh-healthn .jh-ico { width: 12px; height: 12px; color: var(--hm-mint); }
+
+/* ---------- the five apps ---------- */
+.site-job-hunt .jh-accs { padding: 20px 28px 4px; }
+.site-job-hunt .jh-acclist { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.site-job-hunt .jh-acc {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  column-gap: 10px;
+  row-gap: 8px;
+  align-items: center;
+  padding: 12px 12px 11px;
+  border-radius: 13px;
+  background: var(--hm-panel);
+  border: 1px solid var(--hm-line);
+}
+.site-job-hunt .jh-acc > img { width: 30px; height: 30px; border-radius: 8px; }
+.site-job-hunt .jh-acc-t { min-width: 0; padding-right: 20px; }
+.site-job-hunt .jh-acc-t b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-acc-t small { display: block; color: var(--hm-dim2); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-acc-v { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 7px; min-width: 0; }
+.site-job-hunt .jh-acc-v b { font-size: 21px; letter-spacing: -0.02em; }
+.site-job-hunt .jh-acc-v small { color: var(--hm-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-acc-v em { color: var(--hm-mint); font-weight: 600; }
+.site-job-hunt .jh-acc-n {
+  grid-column: 1 / -1;
+  padding-top: 7px;
+  border-top: 1px solid var(--hm-line);
+  color: var(--hm-dim2);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.site-job-hunt .jh-acc-ok {
+  position: absolute;
+  top: 12px;
+  right: 11px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--hm-mint);
+  color: #05231a;
+}
+.site-job-hunt .jh-acc-ok .jh-ico { width: 11px; height: 11px; stroke-width: 3; }
+
+/* ---------- section heads ---------- */
+.site-job-hunt .jh-sech { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; min-width: 0; }
+.site-job-hunt .jh-sech h2 { font-size: 17px; letter-spacing: -0.02em; white-space: nowrap; }
+.site-job-hunt .jh-sech span { color: var(--hm-dim); font-size: 12.5px; min-width: 0; }
+
+/* ---------- the four flags ---------- */
+.site-job-hunt .jh-flags { padding: 24px 28px 8px; }
+.site-job-hunt .jh-flaglist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.site-job-hunt .jh-flag {
+  --k: var(--hm-red);
+  --ks: var(--hm-red-soft);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px 14px 12px;
+  border-radius: 14px;
+  background: var(--hm-panel);
+  border: 1px solid var(--hm-line);
+  box-shadow: inset 0 2px 0 var(--k);
+}
+.site-job-hunt .jh-flag--waiting { --k: var(--hm-amber); --ks: var(--hm-amber-soft); }
+.site-job-hunt .jh-flag--replied { --k: var(--hm-blue); --ks: var(--hm-blue-soft); }
+.site-job-hunt .jh-flag--interview { --k: var(--hm-violet); --ks: var(--hm-violet-soft); }
+.site-job-hunt .jh-flag.is-hover {
+  border-color: var(--k);
+  background: linear-gradient(180deg, var(--ks), var(--hm-panel) 70%);
+}
+.site-job-hunt .jh-flagh { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-job-hunt .jh-flagi {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--ks);
+  color: var(--k);
+}
+.site-job-hunt .jh-flagi .jh-ico { width: 17px; height: 17px; }
+.site-job-hunt .jh-flagt { min-width: 0; }
+.site-job-hunt .jh-flagt b { display: block; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-flagt small { display: block; color: var(--hm-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-flagn { margin-left: auto; min-width: 1.4em; font-size: 30px; line-height: 1; letter-spacing: -0.03em; color: var(--k); text-align: right; }
+.site-job-hunt .jh-flagex { margin-top: 12px; display: grid; gap: 5px; }
+.site-job-hunt .jh-flagex li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: var(--hm-bg2);
+  font-size: 12px;
+}
+.site-job-hunt .jh-flagex span { min-width: 0; color: var(--hm-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-flagex b { margin-left: auto; flex: none; color: var(--k); font-size: 11.5px; }
+.site-job-hunt .jh-flagmore { margin-top: 9px; color: var(--hm-dim2); font-size: 11.5px; }
+
+/* ---------- rooms ---------- */
+.site-job-hunt .jh-rooms { padding: 22px 28px 8px; }
+.site-job-hunt .jh-roomlist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.site-job-hunt .jh-room {
+  min-width: 0;
+  padding: 12px 13px 11px;
+  border-radius: 13px;
+  background: var(--hm-panel);
+  border: 1px solid var(--hm-line);
+}
+.site-job-hunt .jh-room.is-hover {
+  border-color: rgba(182, 156, 255, 0.55);
+  background: linear-gradient(180deg, var(--hm-violet-soft), var(--hm-panel) 75%);
+  box-shadow: 0 0 0 4px rgba(182, 156, 255, 0.08);
+}
+.site-job-hunt .jh-roomh { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-job-hunt .jh-roomi {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--hm-panel2);
+  color: var(--hm-mint);
+}
+.site-job-hunt .jh-roomi .jh-ico { width: 16px; height: 16px; }
+.site-job-hunt .jh-roomt { min-width: 0; }
+.site-job-hunt .jh-roomt b { display: block; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-roomt small { display: block; color: var(--hm-dim2); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-roomn { margin-left: auto; flex: none; text-align: right; }
+.site-job-hunt .jh-roomn b { display: block; font-size: 20px; line-height: 1.05; letter-spacing: -0.02em; }
+.site-job-hunt .jh-roomn small { display: block; color: var(--hm-dim2); font-size: 10.5px; }
+.site-job-hunt .jh-roomf {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--hm-line);
+  min-width: 0;
+}
+.site-job-hunt .jh-roomapps { display: flex; flex: none; order: 2; margin-left: auto; align-self: flex-start; padding-top: 2px; }
+.site-job-hunt .jh-roomapps img { width: 17px; height: 17px; border-radius: 4px; }
+.site-job-hunt .jh-roomapps img + img { margin-left: -4px; box-shadow: 0 0 0 1.5px var(--hm-panel); }
+.site-job-hunt .jh-chips { display: flex; flex-wrap: wrap; gap: 5px; min-width: 0; }
+.site-job-hunt .jh-chip {
+  --k: var(--hm-red);
+  --ks: var(--hm-red-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  height: 21px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--ks);
+  color: var(--k);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-job-hunt .jh-chip i { width: 6px; height: 6px; border-radius: 50%; background: var(--k); }
+.site-job-hunt .jh-chip em { font-weight: 500; }
+.site-job-hunt .jh-chip--waiting { --k: var(--hm-amber); --ks: var(--hm-amber-soft); }
+.site-job-hunt .jh-chip--replied { --k: var(--hm-blue); --ks: var(--hm-blue-soft); }
+.site-job-hunt .jh-chip--interview { --k: var(--hm-violet); --ks: var(--hm-violet-soft); }
+.site-job-hunt .jh-chip--ok { --k: var(--hm-mint); --ks: var(--hm-mint-soft); }
+.site-job-hunt .jh-chip--ok .jh-ico { width: 11px; height: 11px; stroke-width: 2.4; }
+.site-job-hunt .jh-chip--open { --k: var(--hm-dim); --ks: var(--hm-panel2); }
+.site-job-hunt .jh-chip--open b { color: var(--hm-ink); }
+
+/* ---------- panels: the pipeline, swapped for the new roles by the tab click ---------- */
+.site-job-hunt .jh-panels { padding: 22px 28px 8px; }
+.site-job-hunt .jh-panel--2 { display: none; }
+.site-job-hunt .jh-top:has(.jh-tab--2.is-active) ~ .jh-panels .jh-panel--1 { display: none; }
+.site-job-hunt .jh-top:has(.jh-tab--2.is-active) ~ .jh-panels .jh-panel--2 { display: block; }
+
+.site-job-hunt .jh-table {
+  border-radius: 14px;
+  background: var(--hm-panel);
+  border: 1px solid var(--hm-line);
+  overflow: hidden;
+}
+.site-job-hunt .jh-drow,
+.site-job-hunt .jh-arow {
+  display: grid;
+  align-items: center;
+  column-gap: 14px;
+  min-height: 46px;
+  padding: 7px 16px;
+  border-top: 1px solid var(--hm-line);
+}
+.site-job-hunt .jh-drow { grid-template-columns: minmax(0, 1.95fr) 52px minmax(0, 1.25fr) minmax(0, 1.2fr) minmax(0, 1.25fr); }
+.site-job-hunt .jh-arow { grid-template-columns: minmax(0, 1.75fr) minmax(0, 0.85fr) 92px minmax(0, 1.45fr) minmax(0, 1.05fr); }
+.site-job-hunt .jh-drow--h,
+.site-job-hunt .jh-arow--h {
+  min-height: 34px;
+  border-top: 0;
+  background: var(--hm-bg2);
+  color: var(--hm-dim2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.site-job-hunt .jh-dname { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-job-hunt .jh-dname img { width: 26px; height: 26px; border-radius: 7px; flex: none; }
+.site-job-hunt .jh-dname > span,
+.site-job-hunt .jh-aname { min-width: 0; }
+.site-job-hunt .jh-dname b,
+.site-job-hunt .jh-aname b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-dname small,
+.site-job-hunt .jh-aname small { display: block; color: var(--hm-dim2); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-droom,
+.site-job-hunt .jh-alast { color: var(--hm-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-rtags { display: flex; gap: 4px; min-width: 0; overflow: hidden; }
+.site-job-hunt .jh-ltag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  height: 22px;
+  padding: 0 7px 0 4px;
+  border-radius: 7px;
+  background: var(--hm-panel2);
+  color: var(--hm-dim);
+  font-size: 11px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-job-hunt .jh-ltag img { width: 15px; height: 15px; border-radius: 4px; }
+.site-job-hunt .jh-drow--merged .jh-rtags .jh-ltag:first-child { color: var(--hm-ink); box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.3); }
+.site-job-hunt .jh-dbat { color: var(--hm-dim); white-space: nowrap; }
+.site-job-hunt .jh-drow > .jh-droom { color: var(--hm-ink); font-size: 12.5px; }
+.site-job-hunt .jh-echip {
+  --k: var(--hm-mint);
+  --ks: var(--hm-mint-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: var(--ks);
+  color: var(--k);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.site-job-hunt .jh-echip .jh-ico { width: 12px; height: 12px; }
+.site-job-hunt .jh-echip--rejected { --k: var(--hm-red); --ks: var(--hm-red-soft); }
+.site-job-hunt .jh-echip--waiting { --k: var(--hm-amber); --ks: var(--hm-amber-soft); }
+.site-job-hunt .jh-echip--replied { --k: var(--hm-blue); --ks: var(--hm-blue-soft); }
+.site-job-hunt .jh-echip--interview { --k: var(--hm-violet); --ks: var(--hm-violet-soft); }
+.site-job-hunt .jh-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-top: 1px solid var(--hm-line);
+  background: var(--hm-bg2);
+  color: var(--hm-dim);
+  font-size: 12px;
+}
+.site-job-hunt .jh-more .jh-ico { color: var(--hm-mint); }
+
+/* the new roles: posted date, the board link and a next step; the row at a company you interview with
+   carries why it matters */
+.site-job-hunt .jh-arow--hot { background: rgba(182, 156, 255, 0.035); }
+.site-job-hunt .jh-arow--hot .jh-aname b { color: var(--hm-ink); }
+.site-job-hunt .jh-alast em { margin-left: 4px; color: var(--hm-dim2); font-style: normal; font-size: 11px; }
+.site-job-hunt .jh-alink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--hm-blue);
+  font: 500 11.5px/1 ui-monospace, 'SF Mono', Menlo, monospace;
+}
+.site-job-hunt .jh-alink .jh-ico { flex: none; width: 12px; height: 12px; }
+.site-job-hunt .jh-alink span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-job-hunt .jh-anext {
+  justify-self: start;
+  max-width: 100%;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--hm-mint-soft);
+  color: var(--hm-mint);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.site-job-hunt .jh-arow-note {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+  color: #cdbfff;
+  font-size: 11.5px;
+}
+.site-job-hunt .jh-arow-note .jh-ico { width: 12px; height: 12px; }
+.site-job-hunt .jh-arow.is-hover {
+  background: linear-gradient(90deg, rgba(182, 156, 255, 0.16), rgba(182, 156, 255, 0.05));
+  box-shadow: inset 3px 0 0 var(--hm-violet);
+}
+.site-job-hunt .jh-autosum {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--hm-violet-soft);
+  border: 1px solid rgba(182, 156, 255, 0.28);
+  color: #ddd3ff;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.site-job-hunt .jh-autosum .jh-ico { margin-top: 2px; color: var(--hm-violet); }
+
+/* ---------- keeps watching ---------- */
+.site-job-hunt .jh-watch { padding: 22px 28px 8px; }
+.site-job-hunt .jh-wlist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.site-job-hunt .jh-w {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px 13px;
+  border-radius: 13px;
+  background: var(--hm-panel);
+  border: 1px solid var(--hm-line);
+}
+.site-job-hunt .jh-wi {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--hm-mint-soft);
+  color: var(--hm-mint);
+}
+.site-job-hunt .jh-wt { min-width: 0; }
+.site-job-hunt .jh-wt small { display: block; color: var(--hm-dim2); font-size: 11px; }
+.site-job-hunt .jh-wt b { display: block; font-size: 13.5px; }
+.site-job-hunt .jh-wt em { display: block; color: var(--hm-dim); font-size: 11.5px; line-height: 1.35; }
+
+.site-job-hunt .jh-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--hm-line);
+  color: var(--hm-dim2);
+  font-size: 12px;
+}
+.site-job-hunt .jh-foot span { display: inline-flex; align-items: center; gap: 7px; }
+
+/* ---------- narrower frames (1:1 and 9:16 browser windows) ---------- */
+@container hm (max-width: 1080px) {
+  .site-job-hunt .jh-heroin { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .site-job-hunt .jh-home { max-width: 660px; }
+  .site-job-hunt .jh-homefacts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .site-job-hunt .jh-by { display: none; }
+  .site-job-hunt .jh-rtags .jh-ltag { padding: 0 4px; font-size: 0; gap: 0; }
+  .site-job-hunt .jh-acclist { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .site-job-hunt .jh-flaglist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-job-hunt .jh-wlist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-job-hunt .jh-sech { flex-wrap: wrap; row-gap: 2px; }
+}
+@container hm (max-width: 860px) {
+  .site-job-hunt .jh-topin { padding: 0 18px; gap: 12px; }
+  .site-job-hunt .jh-by,
+  .site-job-hunt .jh-logs { display: none; }
+  .site-job-hunt .jh-heroin { padding: 26px 18px 24px; }
+  .site-job-hunt .jh-hero h1 { font-size: 27px; }
+  .site-job-hunt .jh-ticks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-job-hunt .jh-accs,
+  .site-job-hunt .jh-flags,
+  .site-job-hunt .jh-rooms,
+  .site-job-hunt .jh-panels,
+  .site-job-hunt .jh-watch { padding-left: 18px; padding-right: 18px; }
+  .site-job-hunt .jh-acclist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-job-hunt .jh-roomlist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-job-hunt .jh-drow { grid-template-columns: minmax(0, 1.8fr) 52px minmax(0, 1.2fr) minmax(0, 1.1fr); }
+  .site-job-hunt .jh-drow > .jh-rtags,
+  .site-job-hunt .jh-drow--h > span:nth-child(3) { display: none; }
+  .site-job-hunt .jh-arow { grid-template-columns: minmax(0, 1.7fr) 92px minmax(0, 1.3fr) minmax(0, 1fr); }
+  .site-job-hunt .jh-arow > .jh-aapp,
+  .site-job-hunt .jh-arow--h > span:nth-child(2) { display: none; }
+  .site-job-hunt .jh-foot { flex-direction: column; padding-left: 18px; padding-right: 18px; }
+}
+@container hm (max-width: 600px) {
+  .site-job-hunt .jh-tab { padding: 0 9px; }
+  .site-job-hunt .jh-tab .jh-ico { display: none; }
+  .site-job-hunt .jh-live { min-width: 0; }
+  .site-job-hunt .jh-hero h1 { font-size: 24px; }
+  .site-job-hunt .jh-mrow { gap: 10px; font-size: 11px; }
+  .site-job-hunt .jh-stats { flex-wrap: wrap; }
+  .site-job-hunt .jh-stats li { flex: 1 1 40%; }
+  .site-job-hunt .jh-flaglist,
+  .site-job-hunt .jh-wlist { grid-template-columns: minmax(0, 1fr); }
+  .site-job-hunt .jh-roomlist { grid-template-columns: minmax(0, 1fr); }
+  .site-job-hunt .jh-drow { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
+  .site-job-hunt .jh-drow > .jh-dbat,
+  .site-job-hunt .jh-drow > .jh-droom,
+  .site-job-hunt .jh-drow--h > span:nth-child(2),
+  .site-job-hunt .jh-drow--h > span:nth-child(5) { display: none; }
+  .site-job-hunt .jh-arow { grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); }
+  .site-job-hunt .jh-arow > .jh-alast,
+  .site-job-hunt .jh-arow > .jh-alink,
+  .site-job-hunt .jh-arow--h > span:nth-child(3),
+  .site-job-hunt .jh-arow--h > span:nth-child(4) { display: none; }
+}

@@ -58,7 +58,7 @@ body.freeze .hint { display: none; }
 .rec-hud .rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: wr-rec-blink 1s steps(2) infinite; }
 body.freeze .rec-btn { display: none; }
 
-/* the variant selector (route-pick.js): which routing the burger ask takes. Stacked in the top-left corner, in the
+/* the variant selector (route-pick.js): which routing the burger ask takes, jumping to just before that ask. Stacked in the top-left corner, in the
    empty margin beside the thread, so it never covers a message; the recorder captures the stage only */
 .route-pick { position: fixed; top: 18px; left: 18px; z-index: 40; display: flex; flex-direction: column; gap: 2px; padding: 3px;
   border-radius: 16px; background: var(--card); border: 1px solid var(--line); font: 700 12px/1 var(--font-mono); letter-spacing: .02em; }

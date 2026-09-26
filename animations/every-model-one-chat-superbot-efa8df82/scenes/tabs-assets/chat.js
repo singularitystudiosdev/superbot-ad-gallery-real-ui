@@ -23,7 +23,7 @@ const APPS = {
   deepseek: { name: 'DeepSeek V4 Flash', logo: brand('deepseek-logo.svg'), sub: 'in superbot' },
   opus: { name: 'Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
   grok: { name: 'Grok', logo: brand('grok.png'), sub: 'in superbot' },
-  doordash: { name: 'DoorDash', logo: brand('doordash-logo.svg'), sub: 'connected' },
+  doordash: { name: 'DoorDash', logo: brand('doordash-logo.svg'), sub: 'in superbot' },
 };
 
 const ASKS = [

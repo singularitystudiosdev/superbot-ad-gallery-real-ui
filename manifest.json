@@ -56,6 +56,14 @@
     "thumb": "assets/shots/do-that-too-apps-superbot-e8871e50.png"
   },
   {
+    "id": "it-does-what-you-ask-superbot-da5f6b38",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "IT DOES WHAT YOU ASK · meme to Reddit to burger",
+    "src": "animations/it-does-what-you-ask-superbot-da5f6b38/",
+    "thumb": "assets/shots/it-does-what-you-ask-superbot-da5f6b38.png"
+  },
+  {
     "id": "agent-switch-superbot-4207ac22",
     "type": "animation",
     "group": "Ad spots",

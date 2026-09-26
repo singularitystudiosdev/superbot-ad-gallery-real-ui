@@ -203,7 +203,7 @@
     "id": "fantasy90s-every-model-v1-superbot-042670d1",
     "type": "animation",
     "group": "Ad spots",
-    "title": "make a 90s fantasy 3D game: Gemini textures, Opus 5.5 engine, Lyria music (4 slow switches)",
+    "title": "make a 90s fantasy 3D game: Meshy meshes first, then Opus 5.5 and Gemini in parallel (3 requests)",
     "src": "animations/fantasy90s-every-model-superbot-042670d1/?v=1",
     "thumb": "assets/shots/fantasy90s-every-model-v1-superbot-042670d1.png"
   },
@@ -211,7 +211,7 @@
     "id": "fantasy90s-every-model-v2-superbot-042670d1",
     "type": "animation",
     "group": "Ad spots",
-    "title": "make a 90s fantasy 3D game: DeepSeek lore, Codex shaders, Opus world, Gemini, Opus music, GitHub (7 fast switches)",
+    "title": "make a 90s fantasy 3D game: Codex in the terminal, Opus 5.5 reviews and hands it back, Gemini (5 requests)",
     "src": "animations/fantasy90s-every-model-superbot-042670d1/?v=2",
     "thumb": "assets/shots/fantasy90s-every-model-v2-superbot-042670d1.png"
   },
@@ -219,7 +219,7 @@
     "id": "fantasy90s-every-model-v3-superbot-042670d1",
     "type": "animation",
     "group": "Ad spots",
-    "title": "make a 90s fantasy 3D game: Opus 5.5 plans, DeepSeek engine, Lyria, Gemini, GitHub (6 switches)",
+    "title": "make a 90s fantasy 3D game: Lyria chiptune first, Meshy, Gemini, Opus 5.5, Codex live preview, GitHub (7 requests)",
     "src": "animations/fantasy90s-every-model-superbot-042670d1/?v=3",
     "thumb": "assets/shots/fantasy90s-every-model-v3-superbot-042670d1.png"
   },

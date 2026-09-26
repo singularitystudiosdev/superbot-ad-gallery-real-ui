@@ -95,9 +95,9 @@ const more = [
   ['motion-ad-every-model-v2-superbot-7734cfa7', 'motion-ad-every-model-superbot-7734cfa7/?v=2', 'make a 15-second motion graphics ad: Gemini frames, DeepSeek scripts, Codex animates, Opus 5.5 times (5 switches)', 'Ad spots'],
   ['motion-ad-every-model-v3-superbot-7734cfa7', 'motion-ad-every-model-superbot-7734cfa7/?v=3', 'make a 15-second motion graphics ad: Codex scripts, DeepSeek scores, Gemini frames, Opus 5.5, Cursor, Opus 5.5 (6 switches)', 'Ad spots'],
   // make a 90s fantasy 3D game (2026-09-26): three routings of one page (?v=1..3) through plan, code, art, music, git, play.
-  ['fantasy90s-every-model-v1-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=1', 'make a 90s fantasy 3D game: Gemini textures, Opus 5.5 engine, Lyria music (4 slow switches)', 'Ad spots'],
-  ['fantasy90s-every-model-v2-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=2', 'make a 90s fantasy 3D game: DeepSeek lore, Codex shaders, Opus world, Gemini, Opus music, GitHub (7 fast switches)', 'Ad spots'],
-  ['fantasy90s-every-model-v3-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=3', 'make a 90s fantasy 3D game: Opus 5.5 plans, DeepSeek engine, Lyria, Gemini, GitHub (6 switches)', 'Ad spots'],
+  ['fantasy90s-every-model-v1-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=1', 'make a 90s fantasy 3D game: Meshy meshes first, then Opus 5.5 and Gemini in parallel (3 requests)', 'Ad spots'],
+  ['fantasy90s-every-model-v2-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=2', 'make a 90s fantasy 3D game: Codex in the terminal, Opus 5.5 reviews and hands it back, Gemini (5 requests)', 'Ad spots'],
+  ['fantasy90s-every-model-v3-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=3', 'make a 90s fantasy 3D game: Lyria chiptune first, Meshy, Gemini, Opus 5.5, Codex live preview, GitHub (7 requests)', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

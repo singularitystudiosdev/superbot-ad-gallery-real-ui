@@ -64,3 +64,7 @@ mmorpg-every-model-superbot (fetched 2026-09-26):
   github-logo.svg           GitHub mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg
                             (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of GitHub, Inc.
                             Both are used nominatively, to name the model/app superbot routes to.
+
+MESHY (chat tile for the Meshy 3D asset beat)
+  meshy-icon.png            the Meshy app icon, https://www.meshy.ai/apple-icon.png (180x180), scaled to 96x96.
+                            Fetched 2026-09-26. Trademark of Meshy (Taichi Graphics).

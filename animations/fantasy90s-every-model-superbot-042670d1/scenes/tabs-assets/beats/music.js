@@ -1,10 +1,10 @@
-// Music beat: Lyria scores Duskhold in 90s MIDI style. Its line streams, the "Composing 3 tracks" chip lands and
-// spins, the soundtrack card rises, and each track row lands and fills its waveform left to right as it is
+// Music beat: Lyria composes Duskhold's chiptune soundtrack. Its line streams, the "Composing 3 tracks" chip lands
+// and spins, the soundtrack card rises, and each track row lands and fills its waveform left to right as it is
 // generated, staggered, stamping its length once it is done. The chip resolves to "Composed 3 tracks".
 // Pure function of t: every moving value is written from t, so ?t= freezes any frame.
 import { lerp, seg, outCubic, streamCount } from '../../../lib.js';
 
-const SAY = 'Scored the soundtrack, 90s MIDI style.';
+const SAY = 'Composing the chiptune soundtrack first, so the world has a mood.';
 // [title, length]: the three loops, in the order they are composed
 const TRACKS = [
   ['Village at Dusk', '1:48'],
@@ -40,7 +40,7 @@ export default {
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
     const chip = x.el('<div class="dd-chiprow" style="opacity:0"><div class="ch-tool"><span class="spin"></span><span class="ch-tool-t">Composing 3 tracks</span></div></div>');
     const card = x.el(`<div class="mus-card">
-      <div class="mus-hd"><i class="mus-ic">${NOTE}</i><b>Duskhold: soundtrack</b><small>MIDI, 3 loops</small></div>
+      <div class="mus-hd"><i class="mus-ic">${NOTE}</i><b>Duskhold: soundtrack</b><small>chiptune, 3 loops</small></div>
       ${TRACKS.map(([title, len], i) => `<div class="mus-row">
         <span class="mus-btn">${PLAY}</span>
         <span class="mus-main"><span class="mus-title">${x.esc(title)}</span>

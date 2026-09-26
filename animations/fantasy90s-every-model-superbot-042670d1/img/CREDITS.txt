@@ -19,3 +19,12 @@ f90/art-4.jpg          still at 16.0s, cropped to the storm clouds
                         footage and stills from the video by @literallydenis (link above)
 
 The game name "Duskhold", its repo, commits, file names and track titles are made up for the spot.
+
+Added for the structural rework (2026-09-26), same source video (@literallydenis, link above):
+
+f90/mesh-knight.jpg    still at 13.0s, cropped to the sword hand and gauntlet (the knight's first-person arms)
+f90/mesh-keep.jpg      still at 14.5s, cropped to the castle keep
+f90/mesh-house.jpg     still at 18.0s, cropped to the village houses
+f90/mesh-torch.jpg     still at 14.5s, cropped to the torch
+f90/prev-9.0.jpg, prev-10.5.jpg, prev-12.0.jpg
+                        stills at 9.0s, 10.5s and 12.0s, cropped to 1080x810 at y=260, for the hot-reload preview

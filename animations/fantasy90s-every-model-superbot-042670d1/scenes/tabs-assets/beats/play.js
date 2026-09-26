@@ -26,7 +26,8 @@ export default {
   },
   build(k, x) {
     const T = k.T;
-    const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
+    const SAYS = (k.opts && k.opts.say) || SAY; // a variant can give the finale its own line
+    const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAYS)}</span></div>`);
     const rows = CHIPS.map(([run]) => x.el(`<div class="dd-chiprow" style="opacity:0"><div class="ch-tool"><span class="spin"></span><span class="ch-tool-t">${x.esc(run)}</span></div></div>`));
     const card = x.el(`<div class="play-win">
       <div class="play-bar"><span class="play-dots"><i></i><i></i><i></i></span><b class="play-title">Duskhold</b></div>
@@ -46,8 +47,8 @@ export default {
       // the last two marks put the card in view as it lands and then settle it once it has finished growing
       marks: [[T.r, say], [T.chipIn[0], rows[0]], [T.chipIn[1], rows[1]], [T.v0, card], [T.v0 + 0.55, card]],
       render(t) {
-        const n = streamCount(SAY, T.r + 0.05, 80, t);
-        if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }
+        const n = streamCount(SAYS,T.r + 0.05, 80, t);
+        if (n !== shown) { vis.textContent = SAYS.slice(0, n); hid.textContent = SAYS.slice(n); shown = n; }
 
         // the two tool chips: land, spin, then resolve to what they did
         chipEls.forEach((c, i) => {

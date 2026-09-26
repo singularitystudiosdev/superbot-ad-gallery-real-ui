@@ -1,17 +1,22 @@
-// The one-ask chat, one model per request. The ask is typed into the composer and sent, superbot routes it
-// (its routing chips and the composer's platform chip follow the model), and the routed model answers with its own
-// beat (./beats/plan.js, code.js, git.js, art.js, music.js, play.js). ?v= picks a VARIANTS entry: the order the
-// models are routed in, one ad per variant, all sharing the same ask and the same hub. The thread is bottom-anchored
-// so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on
-// the beat imports busts GitHub Pages' 10-minute module cache on republish.
+// The one-ask chat. The ask is typed into the composer and sent, superbot routes it (its routing chips and the
+// composer's platform chip follow the model), and the routed model answers with its own beat, each beat a different
+// artifact: assets.js (mesh list), terminal.js (shell run), diff.js (code review), parallel.js (two models at once),
+// art.js (image grid), music.js (waveforms), code.js (editor), preview.js (hot-reload window), git.js (repo card),
+// play.js (the game). ?v= picks a VARIANTS entry, and the three are built to differ in structure, not just order.
+// The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of
+// the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import plan from './beats/plan.js?v=1';
+import assets from './beats/assets.js?v=1';
+import terminal from './beats/terminal.js?v=1';
+import diff from './beats/diff.js?v=1';
+import parallel from './beats/parallel.js?v=1';
+import preview from './beats/preview.js?v=1';
 import code from './beats/code.js?v=1';
 import git from './beats/git.js?v=1';
 import art from './beats/art.js?v=1';
-import music from './beats/music.js?v=1';
-import play from './beats/play.js?v=1';
+import music from './beats/music.js?v=2';
+import play from './beats/play.js?v=2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -26,6 +31,7 @@ const APPS = {
   codex: { name: 'GPT-5 Codex', logo: brand('openai-logo.svg'), sub: '' },
   gemini: { name: 'Gemini', logo: brand('gemini-logo.svg'), sub: 'in superbot' },
   lyria: { name: 'Lyria 2', logo: brand('gemini-logo.svg'), sub: 'in superbot' }, // Google's music model, Gemini mark
+  meshy: { name: 'Meshy', logo: brand('meshy-icon.png'), sub: 'in superbot' },    // text/image to 3D mesh model
   deepseek: { name: 'DeepSeek V4 Flash', logo: brand('deepseek-logo.svg'), sub: 'in superbot' },
   opus: { name: 'Claude Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
   github: { name: 'GitHub', logo: brand('github-logo.svg'), sub: 'connected' },
@@ -39,12 +45,19 @@ const CHIP = {
   codex: 'Switching to GPT-5 Codex',
   gemini: 'Switching to Gemini',
   lyria: 'Switching to Lyria 2',
+  meshy: 'Switching to Meshy',
   github: 'Connecting to GitHub',
   superbot: 'Switched to Superbot',
 };
 
-// one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options
-const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, CHIP[app]]] });
+// one request: the app that answers, its beat module, the chip that routes to it (opts.chip relabels it, for a
+// hand-back), and the beat's own options
+const step = (app, mod, opts = {}) => ({ app, mod, opts, chips: [[app, opts.chip || CHIP[app]]] });
+// one request answered by several models at once: a chip per model, and the reply signed by all of them
+const together = (apps, mod, opts = {}) => ({
+  app: apps[apps.length - 1], who: apps, mod, opts,
+  chips: apps.map((a, i) => [a, i === 0 ? CHIP[a] : `Running ${APPS[a].name} in parallel`]),
+});
 // only the first request is asked; the rest are superbot carrying the build forward on its own. pace sets where the
 // cuts land: hold is the pause after a beat before the next switch (one number, or one per step), chip is how long a
 // routing chip spins before it resolves
@@ -55,33 +68,36 @@ const variant = (steps, pace = {}) => steps.map((s, i) => ({
   chipDur: pace.chip || 0.65,
 }));
 
-// the three published routings, one ad each (?v=1..3). Every one builds the same 90s fantasy game, Duskhold, but
-// each routes differently: a different cast of models, a different order, a different number of switches and a
-// different rhythm (v1 four slow switches, v2 seven rapid ones, v3 six with uneven pauses)
+// the three published routings, one ad each (?v=1..3). Every one builds the same 90s fantasy game, Duskhold, and
+// ends on the same clip, but they are built differently, not reordered:
+//   v1  3 requests, slow. Opens on Meshy's mesh list, then Opus and Gemini work IN PARALLEL (two lanes), then play.
+//   v2  5 requests, uneven. Opens on Codex in a terminal, Opus reviews the diff and HANDS IT BACK, Codex applies it
+//       and runs the tests, Gemini paints, Codex launches.
+//   v3  7 requests, rapid. Opens on Lyria's chiptune waveforms, then Meshy meshes, Gemini textures, Opus code,
+//       Codex's hot-reloading preview, GitHub, Opus launches.
+// No variant opens on Claude Opus 5.5, and none uses a plan card.
 export const VARIANTS = {
   '1': variant([
-    step('gemini', art),
-    step('opus', code, { set: 'engine' }),
-    step('lyria', music),
-    step('superbot', play),
-  ], { hold: 0.7, chip: 0.8 }),
+    step('meshy', assets),
+    together(['opus', 'gemini'], parallel),
+    step('superbot', play, { say: 'Merged and built. Duskhold is live, light your torch.' }),
+  ], { hold: [1.0, 0.8], chip: 0.9 }),
   '2': variant([
-    step('deepseek', plan, { kind: 'lore' }),
-    step('codex', code, { set: 'retro' }),
-    step('opus', code, { set: 'world' }),
+    step('codex', terminal, { set: 'engine' }),
+    step('opus', diff, { chip: 'Sending to Claude Opus 5.5 for review' }),
+    step('codex', terminal, { set: 'fix', chip: 'Handing back to GPT-5 Codex' }),
     step('gemini', art),
-    step('opus', music),
-    step('github', git),
-    step('superbot', play),
-  ], { hold: 0, chip: 0.45 }),
+    step('codex', play, { say: 'Textures are in. Duskhold is running.', chip: 'Back to GPT-5 Codex' }),
+  ], { hold: [0.15, 0, 0.55, 0.3], chip: 0.6 }),
   '3': variant([
-    step('opus', plan, { kind: 'gdd' }),
-    step('deepseek', code, { set: 'engine' }),
     step('lyria', music),
+    step('meshy', assets),
     step('gemini', art),
+    step('opus', code, { set: 'world' }),
+    step('codex', preview),
     step('github', git),
     step('opus', play),
-  ], { hold: [0.25, 0, 0.9, 0.1, 0.5], chip: 0.6 }),
+  ], { hold: 0, chip: 0.4 }),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
 export const VARIANT = VARIANTS[VARIANT_KEY];
@@ -104,7 +120,7 @@ function timeBeats(asks) {
     k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + Math.max(0.3, a.chipDur) }; at = c.done + 0.12; return c; });
     k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
-    k.T = a.mod.times(k.reply);
+    k.T = a.mod.times(k.reply, a.opts);
     s = k.T.end + a.hold;     // the variant's pause before the next switch
     return { k };
   });
@@ -142,7 +158,12 @@ export function mountChat(hub) {
       const w = add(`<div class="msg qc-m">${sbAvatar}<div class="m-main"><span class="qc-sw">${tile(c.app)}<span class="qc-swl">${esc(c.label)}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div></div>`);
       return { c, w, sw: w.querySelector('.qc-sw'), spin: w.querySelector('.qc-spin'), ok: w.querySelector('.qc-st .qc-ok') };
     });
-    const r = add(`<div class="msg qc-m qc-r">${sbAvatar}<div class="m-main"><div class="qc-who">${tile(k.app)}<b>${a.name}</b>${a.sub ? `<small>${a.sub}</small>` : ''}</div></div></div>`);
+    // a parallel request is signed by every model on it: stacked tiles, names joined, "in parallel"
+    const who = k.who || [k.app];
+    const sign = who.length > 1
+      ? `<span class="qc-duo">${who.map((w) => tile(w)).join('')}</span><b>${who.map((w) => APPS[w].name).join(' + ')}</b><small>in parallel</small>`
+      : `${tile(k.app)}<b>${a.name}</b>${a.sub ? `<small>${a.sub}</small>` : ''}`;
+    const r = add(`<div class="msg qc-m qc-r">${sbAvatar}<div class="m-main"><div class="qc-who">${sign}</div></div></div>`);
     const main = r.querySelector('.m-main');
     const inst = k.mod.build(k, ctx);
     inst.nodes.forEach((n) => main.appendChild(n));

@@ -14,8 +14,8 @@ const dip = document.getElementById('dip');
 
 // ---------- the sequence (CONTRACT.txt) ----------
 // fantasy90s-every-model-superbot: the hub cropped to its thread, opening on the empty state, then the one-ask chat
-// "make a 90s fantasy 3D game" (scenes/tabs-assets/chat.js: DeepSeek V4 Flash, Claude Opus 5.5, GPT-5 Codex, Gemini,
-// Lyria 2, GitHub, Superbot; ?v=1..3 picks the routing, one ad each) and the end card
+// "make a 90s fantasy 3D game" (scenes/tabs-assets/chat.js: Meshy, Claude Opus 5.5, GPT-5 Codex, Gemini, Lyria 2,
+// GitHub, Superbot; ?v=1..3 picks one of three structurally different routings, one ad each) and the end card
 const SEQUENCE = [
   ['scene', 'tabs'],
   ['end', 'end'],
@@ -189,7 +189,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=11`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=14`)).default;
+    const m = (await import(`./scenes/${id}.js?v=15`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

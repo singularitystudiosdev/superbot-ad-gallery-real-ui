@@ -1,0 +1,25 @@
+Wantlist Watch spot, asset credits. Every photo is a real photograph from Wikimedia Commons, cropped and
+scaled for the page. Artists, record titles, sellers and order numbers in data.js are invented for the spot.
+
+img/hero.jpg, img/bins.jpg
+  "Vinyl collection at a record store (Unsplash).jpg", Wikimedia Commons, CC0 1.0 (Unsplash upload)
+  https://commons.wikimedia.org/wiki/File:Vinyl_collection_at_a_record_store_(Unsplash).jpg
+img/deck.jpg
+  "Audio-Technica turntable playing coloured vinyl.jpg", Wikimedia Commons, CC BY 2.0
+  https://commons.wikimedia.org/wiki/File:Audio-Technica_turntable_playing_coloured_vinyl.jpg
+  Photo by M. Johnson (flickr.com/photos/186095195@N02/49312259573), CC BY 2.0. Attribution owed.
+img/shelf.jpg, img/spines.jpg
+  "Vinyl + Grado Headphones (Unsplash).jpg", Wikimedia Commons, CC0 1.0 (Unsplash upload)
+  https://commons.wikimedia.org/wiki/File:Vinyl_%2B_Grado_Headphones_(Unsplash).jpg
+img/stack.jpg
+  "Vintage vinyl records (Unsplash).jpg", Wikimedia Commons, CC0 1.0 (Unsplash upload)
+  https://commons.wikimedia.org/wiki/File:Vintage_vinyl_records_(Unsplash).jpg
+img/shop.jpg
+  "Vinyl Store.jpg", Wikimedia Commons, CC0 1.0
+  https://commons.wikimedia.org/wiki/File:Vinyl_Store.jpg
+
+brand/discogs.svg
+  Discogs site icon (discogs.com favicon), wrapped as an inline PNG. Trademark of Discogs, used to name
+  the service the spot reads from.
+brand/app.svg
+  "mdi:album" from Material Design Icons via the Iconify API, Apache 2.0, tinted amber.

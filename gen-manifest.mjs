@@ -84,6 +84,8 @@ const more = [
       ['just-works-standing-desk-gpt-superbot-42aac446', 'just-works-standing-desk-gpt-superbot-42aac446/', 'Standing desks, compared', 'Ad spots'],
   ['just-works-waiver-night-superbot-42aac446', 'just-works-waiver-night-superbot-42aac446/', 'Waiver night, three leagues', 'Ad spots'],
   ['just-works-waiver-night-gpt-superbot-42aac446', 'just-works-waiver-night-gpt-superbot-42aac446/', 'Waiver night, ChatGPT vs Superbot', 'Ad spots'],
+  ['just-works-wantlist-watch-superbot-42aac446', 'just-works-wantlist-watch-superbot-42aac446/', 'Discogs wantlist, overnight', 'Ad spots'],
+  ['just-works-wantlist-watch-gpt-superbot-42aac446', 'just-works-wantlist-watch-gpt-superbot-42aac446/', 'Discogs wantlist, ChatGPT vs Superbot', 'Ad spots'],
       ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
   ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],

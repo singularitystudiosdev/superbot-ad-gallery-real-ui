@@ -128,6 +128,22 @@
     "thumb": "assets/shots/just-works-waiver-night-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-wantlist-watch-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Discogs wantlist, overnight",
+    "src": "animations/just-works-wantlist-watch-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-wantlist-watch-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-wantlist-watch-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Discogs wantlist, ChatGPT vs Superbot",
+    "src": "animations/just-works-wantlist-watch-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-wantlist-watch-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "deny-cascade-superbot-440813d4",
     "type": "animation",
     "group": "Ad spots",

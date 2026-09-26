@@ -408,6 +408,22 @@
     "thumb": "assets/shots/just-works-study-streak-gpt-superbot-42aac446.png"
   },
   {
+    "id": "just-works-live-shows-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Spotify + Ticketmaster + AXS + Dice, one concert overview",
+    "src": "animations/just-works-live-shows-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-live-shows-superbot-42aac446.png"
+  },
+  {
+    "id": "just-works-live-shows-gpt-superbot-42aac446",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Spotify + Ticketmaster + AXS + Dice, ChatGPT vs Superbot",
+    "src": "animations/just-works-live-shows-gpt-superbot-42aac446/",
+    "thumb": "assets/shots/just-works-live-shows-gpt-superbot-42aac446.png"
+  },
+  {
     "id": "just-works-photo-gear-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",

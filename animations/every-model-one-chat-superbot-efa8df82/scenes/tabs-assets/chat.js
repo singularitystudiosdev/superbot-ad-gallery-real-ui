@@ -1,10 +1,11 @@
 // The three-request chat, one model per request. Each ask is typed into the composer and sent, superbot routes it
 // (its routing chips and the composer's platform chip follow the model), and the routed model answers with its own
-// beat (./beats/*.js). The burger ask has three routings, picked by ?route= (the page's variant selector). An ask with no text is superbot continuing on its own. The thread is bottom-anchored so
-// every message rises out of the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on
-// the beat imports busts GitHub Pages' 10-minute module cache on republish.
+// beat (./beats/*.js). The burger ask has three routings (ROUTES); all three are built, one shows. ?route= picks the
+// first, and the page's variant selector (route-pick.js) swaps it in place through a 'sb-route' event. The thread is
+// bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's
+// local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
-import { makeCursor } from '../../shell.js';
+import { makeCursor, makeMark } from '../../shell.js';
 import gemini from './beats/gemini.js?v=1';
 import scrape from './beats/scrape.js?v=2';
 import doordash from './beats/doordash.js?v=1';
@@ -19,7 +20,7 @@ const APPS = {
   codex: { name: 'GPT-5 Codex', logo: brand('openai-logo.svg'), sub: '' },
   gemini: { name: 'Gemini', logo: brand('gemini-logo.svg'), sub: 'in superbot' },
   deepseek: { name: 'DeepSeek V4 Flash', logo: brand('deepseek-logo.svg'), sub: 'in superbot' },
-  superbot: { name: 'Superbot', logo: null, sub: '' }, // logo is the hub's own mark, set at mount
+  superbot: { name: 'Superbot', logo: null, sub: '' }, // drawn as the live mark (shell.js makeMark), not an image
   doordash: { name: 'DoorDash', logo: brand('doordash-logo.svg'), sub: 'in superbot' },
 };
 
@@ -31,16 +32,16 @@ export const ROUTES = {
 };
 export const ROUTE = (() => { const r = new URLSearchParams(location.search).get('route'); return ROUTES[r] ? r : 'doordash'; })();
 
-const ASKS = [
+const BASE = [
   { app: 'gemini', mod: gemini, chips: [['gemini', 'Switching to Gemini']], ask: 'make me a muse meme' },
   { app: 'deepseek', mod: scrape, chips: [['deepseek', 'Switching to DeepSeek V4 Flash']], ask: 'Scrape reddit and look for more' },
-  { app: ROUTES[ROUTE].who, mod: doordash, chips: ROUTES[ROUTE].chips, ask: 'Winning, order me a burger.' },
 ];
+const burger = (r) => ({ app: ROUTES[r].who, mod: doordash, chips: ROUTES[r].chips, ask: 'Winning, order me a burger.' });
 
 // every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply
-export const BEATS = (() => {
+function timeBeats(asks) {
   let s = CHAT_T0;
-  return ASKS.map((a) => {
+  return asks.map((a) => {
     const k = { ...a, s };
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
@@ -59,9 +60,12 @@ export const BEATS = (() => {
     s = k.T.end;
     return { k };
   });
-})();
-const LAST = BEATS[BEATS.length - 1].k;
-export const CHAT_END = LAST.T.end + 0.3;
+}
+const PLANS = Object.fromEntries(Object.keys(ROUTES).map((r) => [r, timeBeats([...BASE, burger(r)])]));
+export const BEATS = PLANS[ROUTE];
+export const BURGER_AT = BEATS[BASE.length].k.s; // the burger ask starts typing (the same in every routing)
+// the scene is as long as the longest routing, so a swap never moves the end card
+export const CHAT_END = Math.max(...Object.values(PLANS).map((p) => p[p.length - 1].k.T.end)) + 0.3;
 
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
@@ -73,7 +77,10 @@ export function mountChat(hub) {
   root.appendChild(pointer);
 
   const sbSrc = hub.querySelector('.rail-item.sb img').src;
-  const tile = (app, cls = '') => `<span class="qc-tile qc-t-${app} ${cls}"><img src="${app === 'superbot' ? sbSrc : APPS[app].logo}" alt=""/></span>`;
+  const tile = (app, cls = '') => `<span class="qc-tile qc-t-${app} ${cls}">${app === 'superbot' ? '<i class="qc-mark"></i>' : `<img src="${APPS[app].logo}" alt=""/>`}</span>`;
+  // superbot's tiles hold the live mark; each placeholder gets its own copy, rendered per frame
+  const marks = [];
+  const fillMarks = (n, size) => n.querySelectorAll('i.qc-mark').forEach((ph) => { const m = makeMark(size); ph.replaceWith(m.el); marks.push(m); });
   const feed = hub.querySelector('.feed');
   const inner = document.createElement('div');
   inner.className = 'feed-in';
@@ -82,26 +89,32 @@ export function mountChat(hub) {
   const add = (html) => { const n = el(html); inner.appendChild(n); return n; };
 
   const box = (n) => boxIn(n, root);
-  APPS.superbot.logo = sbSrc;
   const ctx = { hub, box, tile, OK, esc, el, brand, img, sbSrc };
 
   const sbAvatar = `<span class="avatar sb"><img src="${sbSrc}" alt=""/></span>`;
-  const beats = BEATS.map(({ k }) => {
+  const build = ({ k }) => {
     const a = APPS[k.app];
     const u = k.ask ? add(`<div class="msg qc-u"><span class="avatar">S</span><div class="m-main"><div class="m-head"><span class="m-name">sam</span></div><div class="m-text">${esc(k.ask)}</div></div></div>`) : null;
     const sws = k.chips.map((c) => {
       const w = add(`<div class="msg qc-m">${sbAvatar}<div class="m-main"><span class="qc-sw">${tile(c.app)}<span class="qc-swl">${esc(c.label)}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div></div>`);
+      fillMarks(w, 17);
       return { c, w, sw: w.querySelector('.qc-sw'), spin: w.querySelector('.qc-spin'), ok: w.querySelector('.qc-st .qc-ok') };
     });
     const r = add(`<div class="msg qc-m qc-r">${sbAvatar}<div class="m-main"><div class="qc-who">${tile(k.app)}<b>${a.name}</b>${a.sub ? `<small>${a.sub}</small>` : ''}</div></div></div>`);
+    fillMarks(r, 14);
     const main = r.querySelector('.m-main');
     const inst = k.mod.build(k, ctx);
     inst.nodes.forEach((n) => main.appendChild(n));
-    return { k, u, sws, r, who: main.firstElementChild, inst };
-  });
-
-  // scroll marks: after each time, the feed's fold glides to that element's bottom
-  const marks = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
+    return { k, u, sws, r, who: main.firstElementChild, inst, nodes: [u, ...sws.map((s) => s.w), r].filter(Boolean) };
+  };
+  const base = PLANS[ROUTE].slice(0, BASE.length).map(build);
+  // one copy of the burger exchange per routing; only the active one is in the thread
+  const routes = Object.fromEntries(Object.entries(PLANS).map(([name, plan]) => {
+    const beats = [...base, build(plan[BASE.length])];
+    // scroll marks: after each time, the feed's fold glides to that element's bottom
+    const scroll = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
+    return [name, { beats, scroll, own: beats[BASE.length] }];
+  }));
 
   // the composer's platform chip names the model, then follows the routed app
   const plat = hub.querySelector('.rc-plat');
@@ -109,16 +122,29 @@ export function mountChat(hub) {
   const pIcon = el('<span class="qc-pi"></span>');
   cat.replaceWith(pIcon);
   const pImg = el(`<img alt="" src="${APPS.codex.logo}" data-app="codex"/>`);
-  pIcon.appendChild(pImg);
+  const pMark = makeMark(12);
+  marks.push(pMark);
+  pMark.el.style.display = 'none';
+  pIcon.append(pImg, pMark.el);
   const label = [...plat.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
   const pLabel = el(`<span>${APPS.codex.name}</span>`);
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
 
   const ph = hub.querySelector('.rc-ph');
-  return {
-    hub, pointer, feed, inner, beats, marks, plat, pImg, pLabel,
+  const c = {
+    hub, pointer, feed, inner, routes, route: null, beats: null, scroll: null, plat, pIcon, pImg, pMark, pLabel, marks,
     ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'codex',
   };
+  setRoute(c, ROUTE);
+  addEventListener('sb-route', (e) => { if (ROUTES[e.detail]) setRoute(c, e.detail); });
+  return c;
+}
+
+function setRoute(c, name) {
+  c.route = name;
+  ({ beats: c.beats, scroll: c.scroll } = c.routes[name]);
+  for (const [r, { own }] of Object.entries(c.routes)) own.nodes.forEach((n) => { n.style.display = r === name ? '' : 'none'; });
+  c.lastApp = null; // repaint the platform chip
 }
 
 function appear(n, t, a, dy = 10) {
@@ -145,7 +171,10 @@ function renderRouting(c, t) {
   c.beats.forEach(({ k }) => k.chips.forEach((ch) => { if (t >= ch.swap) { app = ch.app; swap = ch.swap; } }));
   // platform chip: dips out, swaps, comes back
   if (app !== c.lastApp) {
-    c.pImg.src = APPS[app].logo;
+    const isMark = app === 'superbot';
+    c.pImg.style.display = isMark ? 'none' : '';
+    c.pMark.el.style.display = isMark ? '' : 'none';
+    if (!isMark) c.pImg.src = APPS[app].logo;
     c.pImg.dataset.app = app;
     c.pLabel.textContent = APPS[app].name;
     c.lastApp = app;
@@ -175,7 +204,7 @@ function renderScroll(c, t) {
   // bottom-anchored like a live chat: the newest landed line sits just above the composer, so the thread grows
   // up out of it (the shift is negative while the thread is shorter than the feed)
   let y = 0;
-  for (const [a, n] of c.marks) {
+  for (const [a, n] of c.scroll) {
     if (t <= a) break;
     y = lerp(y, bottom(n), inOutCubic(seg(t, a, a + 0.45)));
   }
@@ -192,6 +221,7 @@ export function renderChat(c, t) {
     appear(b.r, t, b.k.reply);
     b.inst.render(t);
   });
+  c.marks.forEach((m) => m.render(t));
   renderScroll(c, t);
   // the pointer: beats hand back targets in the section's px (x.box), the same space placeCursor writes
   const toScr = (p) => p;

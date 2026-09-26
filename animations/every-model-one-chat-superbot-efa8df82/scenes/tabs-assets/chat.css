@@ -26,7 +26,7 @@
 #s-tabs .sbsite .hub .qc-t-cursor img { width: 16px; height: 16px; }
 #s-tabs .sbsite .hub .qc-t-doordash { background: #ff3008; }
 #s-tabs .sbsite .hub .qc-t-doordash img { width: 15px; height: 9px; filter: brightness(0) invert(1); }
-#s-tabs .sbsite .hub .qc-t-superbot { background: transparent; }
+#s-tabs .sbsite .hub .qc-t-superbot { background: #0b0b0c; box-shadow: inset 0 0 0 1px #2a2a2e; }
 #s-tabs .sbsite .hub .qc-t-superbot img { width: 100%; height: 100%; }
 
 /* superbot's routing chip: "Switching to X", shimmering until it resolves to a check */

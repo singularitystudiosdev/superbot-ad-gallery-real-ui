@@ -185,10 +185,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=9`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=10`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=9`)).default;
+    const m = (await import(`./scenes/${id}.js?v=10`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {
@@ -286,7 +286,8 @@ let paused = freeze, offset = hasT ? parseFloat(q.get('t')) || 0 : 0, t0 = perfo
 const clockNow = () => (paused ? offset : offset + (performance.now() - t0) / 1000);
 function setTime(t) { offset = t; t0 = performance.now(); }
 function restart() { setTime(0); paused = false; }
-window.__V7 = { CYCLE, SPEED: 1, restart, T };
+function seek(t) { setTime(t); paused = false; lastT = NaN; }
+window.__V7 = { CYCLE, SPEED: 1, restart, seek, T };
 addEventListener('keydown', (e) => {
   if (e.key === ' ') { e.preventDefault(); if (paused) { paused = false; t0 = performance.now(); } else { offset = clockNow(); paused = true; } }
   else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { offset = Math.max(0, clockNow() + (e.key === 'ArrowRight' ? 0.25 : -0.25)); paused = true; }

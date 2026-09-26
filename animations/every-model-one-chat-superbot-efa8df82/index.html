@@ -7,13 +7,13 @@
 <script src="../../assets/ar.js"></script>
 <link rel="stylesheet" href="../../assets/ar.css">
 <link rel="stylesheet" href="../../assets/sb-mark-live.css">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 <link rel="stylesheet" href="publish-ui.css">
 <link rel="stylesheet" href="../../assets/hub-real.css">
 <link rel="stylesheet" href="shell.css">
 <link rel="stylesheet" href="cards.css">
 <link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=8">
-<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=8">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=9">
 <link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=3">
 <!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
 <link rel="modulepreload" href="lib.js">
@@ -27,16 +27,16 @@
 
 <div class="hint" id="hint">space pause · ←/→ step · R restart</div>
 <nav class="route-pick" aria-label="Burger ask routing variant">
-  <a data-route="doordash">Connecting to DoorDash</a>
-  <a data-route="superbot">Switched to Superbot</a>
-  <a data-route="combo">Superbot + DoorDash</a>
+  <button type="button" data-route="doordash">Connecting to DoorDash</button>
+  <button type="button" data-route="superbot">Switched to Superbot</button>
+  <button type="button" data-route="combo">Superbot + DoorDash</button>
 </nav>
-<script type="module" src="route-pick.js?v=3"></script>
+<script type="module" src="route-pick.js?v=4"></script>
 <button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
 <div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
 
 <script src="../../assets/sb-mark-live.js"></script>
 <script src="recorder.js"></script>
-<script type="module" src="timeline.js?v=9"></script>
+<script type="module" src="timeline.js?v=10"></script>
 </body>
 </html>

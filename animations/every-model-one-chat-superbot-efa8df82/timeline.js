@@ -188,7 +188,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=10`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=10`)).default;
+    const m = (await import(`./scenes/${id}.js?v=11`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

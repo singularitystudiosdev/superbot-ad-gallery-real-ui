@@ -1,0 +1,48 @@
+Trip wallet spot (Gmail, United Airlines, Delta, Marriott and Airbnb, one traveller's trips
+gathered from five accounts), asset credits. The traveller, the 5 accounts, the 25 records pulled
+(14 Gmail confirmation emails, 3 United flights, 3 Delta flights, 3 Marriott stays, 2 Airbnb
+stays), the 14 duplicate confirmations merged into 11 bookings across 3 trips (Lisbon, Chicago,
+Maui), the 7 loyalty balances, and every balance and expiry date shown are invented for the spot
+and live in data.js. The page reads only: it never books, changes, cancels or redeems anything in
+Gmail, United Airlines, Delta, Marriott or Airbnb, and it makes no change to any account. All
+figures printed on the page are derived from data.js.
+
+img/hero.jpg
+  "Evening light at 25,000 ft" by Mike McBey, Wikimedia Commons, CC BY 2.0
+  (https://creativecommons.org/licenses/by/2.0)
+  https://commons.wikimedia.org/wiki/File:Evening_light_at_25,000_ft_(Explored)_-_Flickr_-_M_McBey.jpg
+  Downscaled to 1600 x 1068 from the 6000 x 4000 original. The original is already 3:2, so the
+  change is a resize with the frame unchanged; EXIF is stripped. A real photograph of an airliner
+  wing over evening cloud and a pink sky: no people, no faces, no airline name or logo.
+
+Service marks and the app icon, via the Iconify API (api.iconify.design), set on rounded 64 px
+tiles. Trademarks of their owners, used only to name the accounts the wallet gathers from.
+  brand/gmail.svg     simple-icons:gmail (CC0), Gmail
+  brand/united.svg    simple-icons:unitedairlines (CC0), United Airlines
+  brand/delta.svg     the Delta widget triangle, taken from "Delta logo.svg" on Wikimedia Commons
+                      (the simple geometric mark, public domain), Delta. The simple-icons:delta
+                      wordmark is not used: at the 20 to 28 px the page draws its marks it reads as
+                      an illegible dash
+  brand/marriott.svg  simple-icons:marriott (CC0), Marriott
+  brand/airbnb.svg    simple-icons:airbnb (CC0), Airbnb
+  brand/american.svg  simple-icons:americanairlines (CC0), American Airlines, for the AAdvantage
+                      balance the spot finds in the Gmail statements
+  brand/plane.svg     mdi:airplane (Apache 2.0), the row glyph for a flight, on a neutral slate tile
+  brand/hotel.svg     mdi:bed-outline (Apache 2.0), the row glyph for a stay, on a neutral slate tile
+  brand/ticket.svg    mdi:ticket-outline (Apache 2.0), the row glyph for other bookings, on a
+                      neutral slate tile
+  brand/app.svg       mdi:airplane-takeoff (Apache 2.0), tinted mint, the app favicon
+
+Tile fills are each brand's own published colour: Gmail #EA4335, United Airlines #002244, Delta
+#003366, Marriott #A70023, Airbnb #FF5A5F, American Airlines #0078D2. Every one of those six fills
+is dark or saturated enough that a white glyph carries on it, so five of the six carry a white
+glyph; Delta's tile is the one exception, drawn as the widget triangle in Delta red #E31837 on the
+Delta navy, both of them Delta's own published colours. The plane, hotel and ticket tiles are the
+page's own slate #171d2a with a soft slate glyph #c3ccdb, and the app tile is ink #101828 with mint
+#7cf2b0. Those four carry no trademark.
+
+Inline interface glyphs in site.js (check, lock, refresh, search, clock, calendar, plane, bed,
+ticket, wallet, alert, info, sparkles, map-pin, armchair, arrow-right) are lucide paths fetched
+from the same Iconify API. This list starts from the same interface set the other spots use and may
+be extended when the page itself is built. No brand product photos are used: bookings are named by
+type and amount, and the row glyph for a booking is the drawn mark above.

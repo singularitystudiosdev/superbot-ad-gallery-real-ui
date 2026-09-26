@@ -1,0 +1,983 @@
+/* site.css - superbot.app/p/trip-wallet, "Trips".
+   The page Superbot hands back: a read-only sync of Gmail, United MileagePlus, Delta SkyMiles, Marriott
+   Bonvoy and Airbnb, the duplicate confirmations merged into one booking each, three trips on a timeline,
+   the one live flight and seven loyalty balances with their expiry dates, read in the Chrome beat.
+   Two states come from the kit and nowhere else: .is-hover (the merge counters, the live gate block, the
+   Maui points stay, the Marriott Free Night Award row) and .is-active on the Miles & points tab. The tab's
+   .is-active swaps the booking list for the wallet table through :has() plus sibling rules below, so no JS
+   runs on the click. site.js render(p) sets .is-s1 .. .is-s6 (the five accounts and the trips step landing),
+   .is-m1/.is-m2 (the merge of the duplicate confirmations) plus the counters, the merge bar, the live
+   fields and the timeline rows; every frame is a pure function of the plan. No CSS animations, no
+   transitions: the kit draws every move. Accents: mint for confirmed and ok, blue for the live flight,
+   amber for anything expiring, with each airline's own blue-red marks left to the brand SVGs. */
+
+.site-trip-wallet {
+  --tw-bg: #07090e;
+  --tw-bg2: #0b0f16;
+  --tw-panel: #101623;
+  --tw-panel2: #18202f;
+  --tw-line: rgba(214, 226, 245, 0.08);
+  --tw-line2: rgba(214, 226, 245, 0.16);
+  --tw-ink: #eef2f8;
+  --tw-dim: #9aa6ba;
+  --tw-dim2: #667286;
+  --tw-mint: #6ff2b0;
+  --tw-mint-soft: rgba(111, 242, 176, 0.13);
+  --tw-amber: #ffb547;
+  --tw-amber-soft: rgba(255, 181, 71, 0.14);
+  --tw-blue: #5eb4ff;
+  --tw-blue-soft: rgba(94, 180, 255, 0.14);
+  --tw-rose: #ff8fa3;
+  --tw-rose-soft: rgba(255, 143, 163, 0.14);
+
+  container: tw / inline-size;
+  width: 100%;
+  min-width: 0;
+  background: var(--tw-bg);
+  color: var(--tw-ink);
+  font: 400 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+  overflow-wrap: break-word;
+}
+
+.site-trip-wallet *,
+.site-trip-wallet *::before,
+.site-trip-wallet *::after { box-sizing: border-box; }
+
+.site-trip-wallet p,
+.site-trip-wallet h1,
+.site-trip-wallet h2,
+.site-trip-wallet h3,
+.site-trip-wallet ul,
+.site-trip-wallet ol,
+.site-trip-wallet li { margin: 0; padding: 0; }
+
+.site-trip-wallet ul,
+.site-trip-wallet ol { list-style: none; }
+.site-trip-wallet img { display: block; max-width: 100%; }
+.site-trip-wallet b,
+.site-trip-wallet em,
+.site-trip-wallet i { font-style: normal; }
+.site-trip-wallet b { font-weight: 650; }
+.site-trip-wallet small { font-size: inherit; }
+
+.site-trip-wallet .tw-ico { width: 14px; height: 14px; flex: none; }
+
+.site-trip-wallet .tw-clock,
+.site-trip-wallet .tw-synccount,
+.site-trip-wallet .tw-mk b,
+.site-trip-wallet .tw-stats b,
+.site-trip-wallet .tw-fact b,
+.site-trip-wallet .tw-fact em,
+.site-trip-wallet .tw-nextrow em,
+.site-trip-wallet .tw-conf,
+.site-trip-wallet .tw-bconf,
+.site-trip-wallet .tw-seat,
+.site-trip-wallet .tw-tripm b,
+.site-trip-wallet .tw-wbal b,
+.site-trip-wallet .tw-wdate,
+.site-trip-wallet .tw-echip,
+.site-trip-wallet .tw-lcell b { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar (sticky: the kit scrolls the page under it) ---------- */
+.site-trip-wallet .tw-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--tw-bg);
+  border-bottom: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-topin {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 52px;
+  padding: 0 28px;
+}
+.site-trip-wallet .tw-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; white-space: nowrap; }
+.site-trip-wallet .tw-brandico { width: 22px; height: 22px; border-radius: 6px; }
+.site-trip-wallet .tw-by { color: var(--tw-dim2); font-size: 12px; }
+
+.site-trip-wallet .tw-tabs { display: flex; gap: 4px; margin-left: 12px; }
+.site-trip-wallet .tw-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 8px;
+  color: var(--tw-dim);
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-tab i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--tw-panel2);
+  color: var(--tw-dim);
+  font-size: 11px;
+  font-weight: 600;
+}
+.site-trip-wallet .tw-tab--1,
+.site-trip-wallet .tw-top:has(.tw-tab--2.is-active) .tw-tab--2 {
+  background: var(--tw-mint-soft);
+  color: #b7f6d6;
+  box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32);
+}
+.site-trip-wallet .tw-tab--1 i,
+.site-trip-wallet .tw-top:has(.tw-tab--2.is-active) .tw-tab--2 i { background: var(--tw-mint); color: #05231a; }
+.site-trip-wallet .tw-top:has(.tw-tab--2.is-active) .tw-tab--1 {
+  background: none;
+  color: var(--tw-dim);
+  box-shadow: none;
+}
+.site-trip-wallet .tw-top:has(.tw-tab--2.is-active) .tw-tab--1 i { background: var(--tw-panel2); color: var(--tw-dim); }
+.site-trip-wallet .tw-tab--2.is-hover { color: var(--tw-ink); background: var(--tw-panel2); }
+
+.site-trip-wallet .tw-status { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.site-trip-wallet .tw-logs,
+.site-trip-wallet .tw-synced {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--tw-line2);
+  color: var(--tw-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-logs img { width: 16px; height: 16px; border-radius: 4px; }
+.site-trip-wallet .tw-logs img + img { margin-left: -4px; box-shadow: 0 0 0 1.5px var(--tw-bg); }
+.site-trip-wallet .tw-logs .tw-ico { width: 12px; height: 12px; margin-left: 2px; }
+.site-trip-wallet .tw-logs { flex: none; }
+.site-trip-wallet .tw-synced { flex: none; color: var(--tw-ink); font-weight: 560; min-width: 122px; }
+.site-trip-wallet .tw-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tw-mint);
+  box-shadow: 0 0 0 3px var(--tw-mint-soft);
+}
+.site-trip-wallet .tw-syncbar { height: 2px; }
+.site-trip-wallet .tw-syncfill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #41bdf5, var(--tw-blue), var(--tw-mint));
+}
+
+/* ---------- hero ---------- */
+.site-trip-wallet .tw-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--tw-line);
+}
+/* the golden-hour wing photo is bright at the top, so the scrim stays deep under the text column and lifts
+   across the middle and top right, where the cloud and the wing read; the bottom blends into the page */
+.site-trip-wallet .tw-herobg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 22%;
+  opacity: 0.78;
+}
+.site-trip-wallet .tw-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 9, 14, 0.96) 0%, rgba(7, 9, 14, 0.88) 48%, rgba(7, 9, 14, 0.4) 100%),
+    linear-gradient(180deg, rgba(7, 9, 14, 0.34) 0%, rgba(7, 9, 14, 0.04) 34%, rgba(7, 9, 14, 0.55) 78%, rgba(7, 9, 14, 0.95) 100%);
+}
+.site-trip-wallet .tw-heroin {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 336px);
+  gap: 34px;
+  align-items: start;
+  padding: 34px 28px 30px;
+}
+.site-trip-wallet .tw-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--tw-mint);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.site-trip-wallet .tw-hero h1 {
+  margin-top: 12px;
+  max-width: 660px;
+  font-size: 32px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.site-trip-wallet .tw-dek { margin-top: 12px; max-width: 620px; color: var(--tw-dim); font-size: 13.5px; line-height: 1.55; text-wrap: pretty; }
+.site-trip-wallet .tw-herodate { display: flex; align-items: center; gap: 7px; margin-top: 14px; color: var(--tw-dim2); font-size: 11.5px; }
+.site-trip-wallet .tw-herodate .tw-ico { width: 12px; height: 12px; }
+
+/* the sync card: five accounts tick in, the trips step closes it, then the duplicates collapse 25 -> 11 */
+.site-trip-wallet .tw-sync {
+  margin-top: 18px;
+  max-width: 660px;
+  padding: 13px 15px 12px;
+  border-radius: 14px;
+  background: rgba(16, 22, 35, 0.9);
+  border: 1px solid var(--tw-line2);
+}
+.site-trip-wallet .tw-synchead { position: relative; height: 20px; }
+.site-trip-wallet .tw-syncnow,
+.site-trip-wallet .tw-stamp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-syncnow { color: var(--tw-ink); }
+.site-trip-wallet .tw-syncnow .tw-ico { color: var(--tw-blue); }
+.site-trip-wallet .tw-synccount { margin-left: auto; padding-left: 10px; color: var(--tw-dim); font-weight: 600; }
+.site-trip-wallet .tw-stamp { color: var(--tw-mint); opacity: 0; overflow: hidden; }
+.site-trip-wallet .tw-hero.is-s6 .tw-syncnow { opacity: 0; }
+.site-trip-wallet .tw-hero.is-s6 .tw-stamp { opacity: 1; }
+
+.site-trip-wallet .tw-ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-top: 11px; }
+.site-trip-wallet .tw-tick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: 9px;
+  background: var(--tw-bg2);
+  border: 1px solid var(--tw-line);
+  color: var(--tw-dim2);
+  font-size: 12px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-tick img { width: 20px; height: 20px; border-radius: 5px; opacity: 0.45; flex: none; }
+.site-trip-wallet .tw-tickico {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--tw-panel2);
+  opacity: 0.45;
+}
+.site-trip-wallet .tw-tickico .tw-ico { width: 12px; height: 12px; }
+.site-trip-wallet .tw-tick span { overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-tick > b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.site-trip-wallet .tw-tickok {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--tw-panel2);
+  color: transparent;
+}
+.site-trip-wallet .tw-tickok .tw-ico { width: 11px; height: 11px; stroke-width: 3; }
+.site-trip-wallet .tw-hero.is-s1 .tw-tick--s1,
+.site-trip-wallet .tw-hero.is-s2 .tw-tick--s2,
+.site-trip-wallet .tw-hero.is-s3 .tw-tick--s3,
+.site-trip-wallet .tw-hero.is-s4 .tw-tick--s4,
+.site-trip-wallet .tw-hero.is-s5 .tw-tick--s5,
+.site-trip-wallet .tw-hero.is-s6 .tw-tick--s6 {
+  color: var(--tw-ink);
+  border-color: rgba(111, 242, 176, 0.3);
+  background: var(--tw-mint-soft);
+}
+.site-trip-wallet .tw-hero.is-s1 .tw-tick--s1 img,
+.site-trip-wallet .tw-hero.is-s2 .tw-tick--s2 img,
+.site-trip-wallet .tw-hero.is-s3 .tw-tick--s3 img,
+.site-trip-wallet .tw-hero.is-s4 .tw-tick--s4 img,
+.site-trip-wallet .tw-hero.is-s5 .tw-tick--s5 img,
+.site-trip-wallet .tw-hero.is-s6 .tw-tick--s6 .tw-tickico { opacity: 1; }
+.site-trip-wallet .tw-hero.is-s6 .tw-tick--s6 .tw-tickico { background: var(--tw-mint); color: #05231a; }
+.site-trip-wallet .tw-hero.is-s1 .tw-tick--s1 .tw-tickok,
+.site-trip-wallet .tw-hero.is-s2 .tw-tick--s2 .tw-tickok,
+.site-trip-wallet .tw-hero.is-s3 .tw-tick--s3 .tw-tickok,
+.site-trip-wallet .tw-hero.is-s4 .tw-tick--s4 .tw-tickok,
+.site-trip-wallet .tw-hero.is-s5 .tw-tick--s5 .tw-tickok,
+.site-trip-wallet .tw-hero.is-s6 .tw-tick--s6 .tw-tickok { background: var(--tw-mint); color: #05231a; }
+
+/* the merge beat: the amber band of duplicate confirmations goes, the mint band of bookings takes the bar */
+.site-trip-wallet .tw-merge { margin-top: 11px; opacity: 0.45; border-radius: 10px; }
+/* the cursor rests on the merge counters while the duplicates collapse (ad.js hover, engine toggles is-hover) */
+.site-trip-wallet .tw-merge.is-hover,
+.site-trip-wallet .tw-merge:has(.tw-pad--merge.is-hover) { background: rgba(111, 242, 176, 0.06); box-shadow: 0 0 0 7px rgba(111, 242, 176, 0.06); }
+.site-trip-wallet .tw-merge.is-hover .tw-mk--dup b,
+.site-trip-wallet .tw-merge:has(.tw-pad--merge.is-hover) .tw-mk--dup b { color: #ffc56b; }
+.site-trip-wallet .tw-hero.is-m1 .tw-merge { opacity: 1; }
+.site-trip-wallet .tw-mbar {
+  display: flex;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--tw-panel2);
+  overflow: hidden;
+}
+.site-trip-wallet .tw-mun { display: block; width: 44%; background: linear-gradient(90deg, #37d492, var(--tw-mint)); }
+.site-trip-wallet .tw-mdup {
+  display: block;
+  width: 56%;
+  background: repeating-linear-gradient(-45deg, rgba(255, 181, 71, 0.85) 0 4px, rgba(255, 181, 71, 0.32) 4px 8px);
+}
+.site-trip-wallet .tw-mrow { display: flex; gap: 16px; margin-top: 9px; color: var(--tw-dim); font-size: 11.5px; }
+.site-trip-wallet .tw-mk { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.site-trip-wallet .tw-mk b { font-size: 15px; color: var(--tw-ink); }
+.site-trip-wallet .tw-mk--dup b { color: var(--tw-amber); }
+.site-trip-wallet .tw-mk--uniq { margin-left: auto; }
+.site-trip-wallet .tw-mk--uniq b { color: var(--tw-mint); }
+.site-trip-wallet .tw-mbar.is-merged { box-shadow: 0 0 0 1px rgba(111, 242, 176, 0.4); }
+
+.site-trip-wallet .tw-stats { display: flex; gap: 9px; margin-top: 14px; max-width: 660px; }
+.site-trip-wallet .tw-stats li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 11px;
+  background: rgba(16, 22, 35, 0.78);
+  border: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-stats b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-trip-wallet .tw-stats span { display: block; color: var(--tw-dim); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-stat--flag b { color: var(--tw-amber); }
+.site-trip-wallet .tw-stat--ok b { color: var(--tw-mint); }
+
+/* the card on the right of the hero: the shape of the whole trip set */
+.site-trip-wallet .tw-trips {
+  padding: 16px 17px 15px;
+  border-radius: 16px;
+  background: rgba(16, 22, 35, 0.9);
+  border: 1px solid var(--tw-line2);
+}
+.site-trip-wallet .tw-tripk {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--tw-dim);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.site-trip-wallet .tw-tripk .tw-ico { width: 12px; height: 12px; color: var(--tw-mint); }
+.site-trip-wallet .tw-trips h2 { margin-top: 7px; font-size: 19px; line-height: 1.2; letter-spacing: -0.02em; }
+.site-trip-wallet .tw-tripday { display: flex; align-items: center; gap: 6px; margin-top: 5px; color: var(--tw-dim); font-size: 12px; }
+.site-trip-wallet .tw-tripday .tw-ico { width: 12px; height: 12px; }
+.site-trip-wallet .tw-tripfacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin-top: 13px; }
+.site-trip-wallet .tw-fact {
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--tw-bg2);
+  border: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-fact small { display: block; color: var(--tw-dim2); font-size: 11px; }
+.site-trip-wallet .tw-fact b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-trip-wallet .tw-fact em { display: block; color: var(--tw-dim2); font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-fact--expiring b { color: var(--tw-amber); }
+.site-trip-wallet .tw-trips .tw-next { margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--tw-line); }
+.site-trip-wallet .tw-nexth { display: flex; align-items: center; gap: 7px; font-weight: 600; }
+.site-trip-wallet .tw-nexth .tw-ico { color: var(--tw-blue); }
+.site-trip-wallet .tw-nextrow { display: flex; align-items: baseline; gap: 8px; margin-top: 9px; min-width: 0; }
+.site-trip-wallet .tw-nextrow b { font-size: 15px; }
+.site-trip-wallet .tw-nextrow span { color: var(--tw-dim); font-size: 12px; }
+.site-trip-wallet .tw-nextrow em { margin-left: auto; padding: 2px 8px; border-radius: 999px; background: var(--tw-blue-soft); color: #bfe1ff; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.site-trip-wallet .tw-nextn { display: flex; align-items: center; gap: 6px; margin-top: 11px; color: var(--tw-dim); font-size: 11.5px; }
+.site-trip-wallet .tw-nextn .tw-ico { width: 12px; height: 12px; color: var(--tw-mint); }
+
+/* ---------- section heads ---------- */
+.site-trip-wallet .tw-sech { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; min-width: 0; }
+.site-trip-wallet .tw-sech h2 { font-size: 17px; letter-spacing: -0.02em; white-space: nowrap; }
+.site-trip-wallet .tw-sech span { color: var(--tw-dim); font-size: 12.5px; min-width: 0; }
+
+/* ---------- the next-up live flight ---------- */
+.site-trip-wallet .tw-live { padding: 24px 28px 8px; }
+/* the boarding pass and the seat card sit side by side and share their height */
+.site-trip-wallet .tw-livecards { display: grid; grid-template-columns: minmax(0, 1.34fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.site-trip-wallet .tw-livecard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 16px 18px 14px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(26, 48, 76, 0.55), var(--tw-panel) 58%);
+  border: 1px solid var(--tw-line2);
+  box-shadow: inset 0 2px 0 var(--tw-blue);
+}
+.site-trip-wallet .tw-liveh { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-trip-wallet .tw-livepill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--tw-mint-soft);
+  color: #b7f6d6;
+  font-size: 11.5px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-pdot {
+  position: relative;
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tw-mint);
+  box-shadow: 0 0 0 3px var(--tw-mint-soft);
+}
+/* the halo the kit's pulse grows: render(p) sets its scale and opacity, never a CSS animation */
+.site-trip-wallet .tw-phalo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--tw-mint);
+  opacity: 0;
+}
+.site-trip-wallet .tw-livek { color: var(--tw-dim); font-size: 12px; white-space: nowrap; }
+.site-trip-wallet .tw-livec { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; color: var(--tw-dim); font-size: 12px; font-weight: 600; }
+.site-trip-wallet .tw-livec img { width: 20px; height: 20px; border-radius: 5px; }
+
+.site-trip-wallet .tw-liverow { display: grid; grid-template-columns: 132px minmax(0, 1fr) 132px; align-items: center; gap: 12px; margin-top: 14px; }
+.site-trip-wallet .tw-apt b { display: block; font-size: 30px; line-height: 1; letter-spacing: -0.03em; }
+.site-trip-wallet .tw-apt span { display: block; color: var(--tw-dim); font-size: 12px; }
+.site-trip-wallet .tw-apt em { display: block; margin-top: 3px; color: var(--tw-ink); font-size: 12.5px; font-weight: 600; }
+.site-trip-wallet .tw-apt--r { text-align: right; }
+.site-trip-wallet .tw-arc { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.site-trip-wallet .tw-arcbar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 22px;
+  border-top: 1.5px dashed rgba(94, 180, 255, 0.55);
+  border-radius: 50% / 100% 100% 0 0;
+  border-bottom: 0;
+}
+.site-trip-wallet .tw-arcbar::before,
+.site-trip-wallet .tw-arcbar::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tw-blue);
+}
+.site-trip-wallet .tw-arcbar::before { left: 0; }
+.site-trip-wallet .tw-arcbar::after { right: 0; background: var(--tw-bg); box-shadow: inset 0 0 0 1.5px var(--tw-blue); }
+.site-trip-wallet .tw-arcico {
+  position: absolute;
+  top: -8px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--tw-blue-soft);
+  color: var(--tw-blue);
+}
+.site-trip-wallet .tw-arcico .tw-ico { width: 13px; height: 13px; }
+.site-trip-wallet .tw-arcl { color: var(--tw-dim); font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+
+.site-trip-wallet .tw-livefoot {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  margin-top: auto;
+  padding-top: 13px;
+  border-top: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-live-gate {
+  display: flex;
+  gap: 22px;
+  padding: 8px 12px;
+  border-radius: 11px;
+  background: rgba(24, 32, 47, 0.6);
+  border: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-live-gate.is-hover,
+.site-trip-wallet .tw-livecard:has(.tw-pad--live.is-hover) .tw-live-gate {
+  border-color: rgba(94, 180, 255, 0.6);
+  background: rgba(94, 180, 255, 0.12);
+  box-shadow: 0 0 0 4px rgba(94, 180, 255, 0.12);
+}
+.site-trip-wallet .tw-live-pax { display: flex; gap: 22px; margin-left: auto; }
+.site-trip-wallet .tw-lcell { min-width: 0; }
+.site-trip-wallet .tw-lcell small { display: block; color: var(--tw-dim2); font-size: 10.5px; letter-spacing: 0.03em; text-transform: uppercase; }
+.site-trip-wallet .tw-lcell b { display: block; font-size: 16px; letter-spacing: -0.02em; }
+.site-trip-wallet .tw-lcell em { display: block; color: var(--tw-dim2); font-size: 10.5px; white-space: nowrap; }
+.site-trip-wallet .tw-lcell--mono b { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; letter-spacing: 0.02em; }
+.site-trip-wallet .tw-livenote {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 11px;
+  color: var(--tw-dim2);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+.site-trip-wallet .tw-livenote .tw-ico { margin-top: 2px; width: 12px; height: 12px; color: var(--tw-blue); }
+
+/* ---------- the seat card beside the boarding pass ---------- */
+.site-trip-wallet .tw-seatcard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 16px 17px 14px;
+  border-radius: 16px;
+  background: var(--tw-panel);
+  border: 1px solid var(--tw-line2);
+  box-shadow: inset 0 2px 0 rgba(111, 242, 176, 0.5);
+}
+.site-trip-wallet .tw-seath { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-trip-wallet .tw-seatico {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--tw-mint-soft);
+  color: var(--tw-mint);
+}
+.site-trip-wallet .tw-seatico .tw-ico { width: 15px; height: 15px; }
+.site-trip-wallet .tw-seatt { min-width: 0; }
+.site-trip-wallet .tw-seatt b { display: block; font-size: 13.5px; white-space: nowrap; }
+.site-trip-wallet .tw-seatt small { display: block; color: var(--tw-dim2); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-seatband {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  margin-left: auto;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--tw-mint-soft);
+  color: #9becbf;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-map { display: grid; gap: 4px; margin-top: 12px; }
+.site-trip-wallet .tw-maprow { display: flex; align-items: center; gap: 4px; }
+.site-trip-wallet .tw-maprow b { width: 18px; flex: none; color: var(--tw-dim2); font-size: 10px; text-align: right; }
+.site-trip-wallet .tw-maprow i {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 18px;
+  border-radius: 5px;
+  background: var(--tw-bg2);
+  border: 1px solid var(--tw-line);
+  color: var(--tw-dim2);
+  font-size: 9px;
+}
+.site-trip-wallet .tw-aisle { width: 12px; flex: none; }
+.site-trip-wallet .tw-maprow--h i { background: none; border-color: transparent; font-weight: 600; }
+.site-trip-wallet .tw-maprow--here { background: linear-gradient(90deg, rgba(111, 242, 176, 0.08), rgba(111, 242, 176, 0)); border-radius: 7px; }
+.site-trip-wallet .tw-maprow .tw-cell--mine {
+  background: var(--tw-mint);
+  border-color: var(--tw-mint);
+  color: #05231a;
+  font-size: 10px;
+  font-weight: 700;
+  box-shadow: 0 0 0 3px rgba(111, 242, 176, 0.18);
+}
+.site-trip-wallet .tw-seatnote { display: flex; align-items: center; gap: 7px; margin-top: 10px; color: var(--tw-dim); font-size: 11.5px; }
+.site-trip-wallet .tw-seatnote .tw-ico { width: 12px; height: 12px; color: var(--tw-mint); }
+.site-trip-wallet .tw-n72 { margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--tw-line); }
+.site-trip-wallet .tw-n72h { display: flex; align-items: center; gap: 7px; color: var(--tw-dim); font-size: 11.5px; font-weight: 600; }
+.site-trip-wallet .tw-n72h .tw-ico { width: 12px; height: 12px; color: var(--tw-blue); }
+.site-trip-wallet .tw-n72l { display: grid; gap: 6px; margin-top: 9px; }
+.site-trip-wallet .tw-n72l li { display: flex; gap: 8px; min-width: 0; font-size: 11.5px; }
+.site-trip-wallet .tw-n72w { flex: none; color: var(--tw-dim2); }
+.site-trip-wallet .tw-n72a { min-width: 0; color: var(--tw-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- the trip timeline ---------- */
+.site-trip-wallet .tw-timeline { padding: 24px 28px 8px; }
+.site-trip-wallet .tw-trip { margin-top: 14px; }
+.site-trip-wallet .tw-triph { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 0 2px 9px; }
+.site-trip-wallet .tw-tripn {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--tw-mint-soft);
+  color: var(--tw-mint);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.site-trip-wallet .tw-tript { min-width: 0; }
+.site-trip-wallet .tw-tript b { display: block; font-size: 15px; letter-spacing: -0.02em; }
+.site-trip-wallet .tw-tript small { display: block; color: var(--tw-dim2); font-size: 11.5px; }
+.site-trip-wallet .tw-tripm { margin-left: auto; flex: none; text-align: right; }
+.site-trip-wallet .tw-tripm b { display: block; font-size: 16px; line-height: 1.05; }
+.site-trip-wallet .tw-tripm small { display: block; color: var(--tw-dim2); font-size: 10.5px; }
+.site-trip-wallet .tw-tripapps { display: flex; flex: none; }
+.site-trip-wallet .tw-tripapps img { width: 18px; height: 18px; border-radius: 5px; }
+.site-trip-wallet .tw-tripapps img + img { margin-left: -4px; box-shadow: 0 0 0 1.5px var(--tw-bg); }
+
+.site-trip-wallet .tw-rows { position: relative; display: grid; gap: 8px; padding-left: 18px; }
+.site-trip-wallet .tw-rows::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(111, 242, 176, 0.45), rgba(214, 226, 245, 0.12));
+}
+.site-trip-wallet .tw-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1.9fr) 92px 76px 92px minmax(0, 0.9fr);
+  align-items: center;
+  column-gap: 12px;
+  min-height: 52px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 12px;
+  background: var(--tw-panel);
+  border: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-row::before {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--tw-bg);
+  box-shadow: inset 0 0 0 1.5px rgba(214, 226, 245, 0.28);
+}
+.site-trip-wallet .tw-row--flight::before { box-shadow: inset 0 0 0 1.5px rgba(94, 180, 255, 0.6); }
+.site-trip-wallet .tw-row.is-hover,
+.site-trip-wallet .tw-row:has(.tw-pad--row.is-hover) {
+  border-color: rgba(255, 181, 71, 0.5);
+  background: linear-gradient(90deg, var(--tw-amber-soft), var(--tw-panel) 72%);
+  box-shadow: 0 0 0 4px rgba(255, 181, 71, 0.07);
+}
+.site-trip-wallet .tw-glyph {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--tw-panel2);
+  border: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-glyph img { width: 18px; height: 18px; }
+.site-trip-wallet .tw-row--flight .tw-glyph { background: var(--tw-blue-soft); border-color: rgba(94, 180, 255, 0.25); }
+.site-trip-wallet .tw-row--stay .tw-glyph { background: var(--tw-mint-soft); border-color: rgba(111, 242, 176, 0.22); }
+.site-trip-wallet .tw-rt { min-width: 0; }
+.site-trip-wallet .tw-rt b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-rt small { display: block; color: var(--tw-dim); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-conf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 7px;
+  background: var(--tw-bg2);
+  border: 1px dashed rgba(214, 226, 245, 0.22);
+  color: #cfd9e8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.site-trip-wallet .tw-seat { color: var(--tw-dim); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-srcs { display: flex; gap: 4px; min-width: 0; overflow: hidden; }
+.site-trip-wallet .tw-ltag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  height: 22px;
+  padding: 0 7px 0 4px;
+  border-radius: 7px;
+  background: var(--tw-panel2);
+  color: var(--tw-dim);
+  font-size: 11px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-ltag img { width: 15px; height: 15px; border-radius: 4px; }
+.site-trip-wallet .tw-row .tw-ltag { height: 20px; font-size: 10.5px; }
+.site-trip-wallet .tw-row .tw-ltag img { width: 14px; height: 14px; }
+.site-trip-wallet .tw-row:not(.tw-row--flight) .tw-conf { border-style: solid; border-color: var(--tw-line2); }
+
+.site-trip-wallet .tw-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.site-trip-wallet .tw-pill--live { background: var(--tw-mint-soft); color: #b7f6d6; box-shadow: inset 0 0 0 1px rgba(111, 242, 176, 0.32); }
+.site-trip-wallet .tw-pill--ok { background: var(--tw-mint-soft); color: #9becbf; }
+.site-trip-wallet .tw-pill--plan { background: var(--tw-blue-soft); color: #bfe1ff; }
+.site-trip-wallet .tw-pill--pts { background: var(--tw-amber-soft); color: #ffd39a; }
+.site-trip-wallet .tw-tripnote {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 9px;
+  padding-left: 18px;
+  color: var(--tw-dim2);
+  font-size: 11.5px;
+}
+.site-trip-wallet .tw-tripnote .tw-ico { width: 12px; height: 12px; }
+
+/* ---------- panels: the booking list, swapped for the wallet by the tab click ---------- */
+.site-trip-wallet .tw-panels { padding: 22px 28px 8px; }
+.site-trip-wallet .tw-panel--2 { display: none; }
+.site-trip-wallet .tw-top:has(.tw-tab--2.is-active) ~ .tw-panels .tw-panel--1 { display: none; }
+.site-trip-wallet .tw-top:has(.tw-tab--2.is-active) ~ .tw-panels .tw-panel--2 { display: block; }
+
+.site-trip-wallet .tw-table {
+  border-radius: 14px;
+  background: var(--tw-panel);
+  border: 1px solid var(--tw-line);
+  overflow: hidden;
+}
+.site-trip-wallet .tw-brow,
+.site-trip-wallet .tw-wrow {
+  display: grid;
+  align-items: center;
+  column-gap: 14px;
+  min-height: 46px;
+  padding: 7px 16px;
+  border-top: 1px solid var(--tw-line);
+}
+.site-trip-wallet .tw-brow { grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.5fr) 104px 96px minmax(0, 1.1fr) 96px; }
+.site-trip-wallet .tw-wrow { grid-template-columns: minmax(0, 1.8fr) minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1.1fr); }
+.site-trip-wallet .tw-brow--h,
+.site-trip-wallet .tw-wrow--h {
+  min-height: 34px;
+  border-top: 0;
+  background: var(--tw-bg2);
+  color: var(--tw-dim2);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-bname,
+.site-trip-wallet .tw-wprog { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.site-trip-wallet .tw-bname img { width: 26px; height: 26px; border-radius: 7px; flex: none; }
+.site-trip-wallet .tw-bname > span,
+.site-trip-wallet .tw-wprog > span { min-width: 0; }
+.site-trip-wallet .tw-bname b,
+.site-trip-wallet .tw-wprog b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-bname small,
+.site-trip-wallet .tw-wprog small { display: block; color: var(--tw-dim2); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-bwhen { color: var(--tw-dim); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-bconf {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: #cfd9e8;
+  font-size: 11.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.site-trip-wallet .tw-bseat { color: var(--tw-dim); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-bstat { display: flex; justify-content: flex-start; }
+.site-trip-wallet .tw-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-top: 1px solid var(--tw-line);
+  background: var(--tw-bg2);
+  color: var(--tw-dim);
+  font-size: 12px;
+}
+.site-trip-wallet .tw-more .tw-ico { color: var(--tw-mint); }
+
+/* the wallet panel */
+.site-trip-wallet .tw-wsum { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.site-trip-wallet .tw-wsumk {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--tw-panel);
+  border: 1px solid var(--tw-line);
+  color: var(--tw-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-wsumk b { font-size: 15px; color: var(--tw-ink); }
+.site-trip-wallet .tw-wsumk--flag { border-color: rgba(255, 181, 71, 0.35); color: #ffd39a; }
+.site-trip-wallet .tw-wsumk--flag b { color: var(--tw-amber); }
+.site-trip-wallet .tw-wsumk--ok b { color: var(--tw-mint); }
+.site-trip-wallet .tw-wsumk--muted { margin-left: auto; gap: 7px; color: var(--tw-dim2); background: none; border-color: transparent; }
+.site-trip-wallet .tw-wsumk--muted .tw-ico { width: 12px; height: 12px; }
+.site-trip-wallet .tw-wprog img { width: 28px; height: 28px; border-radius: 8px; flex: none; }
+.site-trip-wallet .tw-wbal { text-align: right; min-width: 0; }
+.site-trip-wallet .tw-wbal b { display: block; font-size: 17px; letter-spacing: -0.02em; }
+.site-trip-wallet .tw-wstat { color: var(--tw-dim); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-trip-wallet .tw-wexp { display: flex; justify-content: flex-end; }
+.site-trip-wallet .tw-wdate { color: var(--tw-dim); font-size: 12px; white-space: nowrap; }
+.site-trip-wallet .tw-echip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--tw-amber-soft);
+  color: #ffd39a;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-trip-wallet .tw-echip .tw-ico { width: 12px; height: 12px; color: var(--tw-amber); }
+.site-trip-wallet .tw-wrow--flag { background: linear-gradient(90deg, rgba(255, 181, 71, 0.07), rgba(255, 181, 71, 0) 46%); }
+.site-trip-wallet .tw-wrow--flag .tw-wbal b { color: #ffd39a; }
+.site-trip-wallet .tw-wrow.is-hover,
+.site-trip-wallet .tw-wrow:has(.tw-pad--wrow.is-hover) {
+  background: linear-gradient(90deg, rgba(255, 181, 71, 0.18), rgba(255, 181, 71, 0.04));
+  box-shadow: inset 3px 0 0 var(--tw-amber);
+}
+.site-trip-wallet .tw-walletnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--tw-amber-soft);
+  border: 1px solid rgba(255, 181, 71, 0.28);
+  color: #ffe0b0;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.site-trip-wallet .tw-walletnote .tw-ico { margin-top: 2px; color: var(--tw-amber); }
+
+.site-trip-wallet .tw-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid var(--tw-line);
+  color: var(--tw-dim2);
+  font-size: 12px;
+}
+.site-trip-wallet .tw-foot span { display: inline-flex; align-items: center; gap: 7px; }
+/* the hero photo is CC BY 2.0, credited here and nowhere else */
+.site-trip-wallet .tw-foot .tw-credit { color: var(--tw-dim2); font-size: 11px; }
+
+/* ---------- the hover pads: the kit drives the cursor to a plan selector's centre, so every hover beat
+   targets an empty span placed in the gap beside its values and the highlight lands on the real element
+   through :has(). No hovered number, code or label is ever under the arrow. ---------- */
+.site-trip-wallet .tw-pad { position: absolute; pointer-events: none; }
+.site-trip-wallet .tw-merge,
+.site-trip-wallet .tw-wrow { position: relative; }
+.site-trip-wallet .tw-pad--merge { left: 54%; top: 0; bottom: 0; width: 12%; }
+.site-trip-wallet .tw-pad--live { left: 53%; top: 0; bottom: 0; width: 10%; }
+.site-trip-wallet .tw-pad--row { left: 30%; top: 0; bottom: 0; width: 10%; }
+.site-trip-wallet .tw-pad--wrow { left: 26%; top: 0; bottom: 0; width: 10%; }
+
+/* ---------- narrower frames (1:1 and 9:16 browser windows) ---------- */
+@container tw (max-width: 1080px) {
+  .site-trip-wallet .tw-heroin { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .site-trip-wallet .tw-livecards { grid-template-columns: minmax(0, 1fr); }
+  .site-trip-wallet .tw-trips { max-width: 660px; }
+  .site-trip-wallet .tw-tripfacts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .site-trip-wallet .tw-by { display: none; }
+  .site-trip-wallet .tw-row { grid-template-columns: 34px minmax(0, 1.7fr) 96px 84px minmax(0, 0.9fr); }
+  .site-trip-wallet .tw-row .tw-conf { display: none; }
+  .site-trip-wallet .tw-brow { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.3fr) 96px 90px minmax(0, 1fr); }
+  .site-trip-wallet .tw-brow > .tw-bseat,
+  .site-trip-wallet .tw-brow--h > span:nth-child(4) { display: none; }
+  .site-trip-wallet .tw-sech { flex-wrap: wrap; row-gap: 2px; }
+  .site-trip-wallet .tw-wsum { flex-wrap: wrap; }
+}
+@container tw (max-width: 860px) {
+  .site-trip-wallet .tw-topin { padding: 0 18px; gap: 12px; }
+  .site-trip-wallet .tw-by,
+  .site-trip-wallet .tw-logs { display: none; }
+  .site-trip-wallet .tw-heroin { padding: 26px 18px 24px; }
+  .site-trip-wallet .tw-hero h1 { font-size: 27px; }
+  .site-trip-wallet .tw-ticks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-trip-wallet .tw-live,
+  .site-trip-wallet .tw-timeline,
+  .site-trip-wallet .tw-panels { padding-left: 18px; padding-right: 18px; }
+  .site-trip-wallet .tw-liverow { grid-template-columns: 104px minmax(0, 1fr) 104px; }
+  .site-trip-wallet .tw-apt b { font-size: 24px; }
+  .site-trip-wallet .tw-livefoot { flex-wrap: wrap; }
+  .site-trip-wallet .tw-live-pax { margin-left: 0; }
+  .site-trip-wallet .tw-row { grid-template-columns: 34px minmax(0, 1.8fr) 90px minmax(0, 0.9fr); }
+  .site-trip-wallet .tw-row > .tw-seat,
+  .site-trip-wallet .tw-row > .tw-srcs { display: none; }
+  .site-trip-wallet .tw-brow { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr) 92px minmax(0, 1fr); }
+  .site-trip-wallet .tw-brow > .tw-bwhen,
+  .site-trip-wallet .tw-brow--h > span:nth-child(2) { display: none; }
+  .site-trip-wallet .tw-foot { flex-direction: column; padding-left: 18px; padding-right: 18px; }
+}
+@container tw (max-width: 600px) {
+  .site-trip-wallet .tw-tab { padding: 0 9px; }
+  .site-trip-wallet .tw-tab .tw-ico { display: none; }
+  .site-trip-wallet .tw-live { min-width: 0; }
+  .site-trip-wallet .tw-hero h1 { font-size: 24px; }
+  .site-trip-wallet .tw-mrow { gap: 10px; font-size: 11px; }
+  .site-trip-wallet .tw-stats { flex-wrap: wrap; }
+  .site-trip-wallet .tw-stats li { flex: 1 1 40%; }
+  .site-trip-wallet .tw-tripfacts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-trip-wallet .tw-liverow { grid-template-columns: 84px minmax(0, 1fr) 84px; }
+  .site-trip-wallet .tw-apt b { font-size: 20px; }
+  .site-trip-wallet .tw-live-gate { gap: 14px; }
+  .site-trip-wallet .tw-row { grid-template-columns: 34px minmax(0, 1fr) 88px; }
+  .site-trip-wallet .tw-row > .tw-pill { display: none; }
+  .site-trip-wallet .tw-brow { grid-template-columns: minmax(0, 1fr) 88px; }
+  .site-trip-wallet .tw-brow > .tw-bconf,
+  .site-trip-wallet .tw-brow > .tw-srcs,
+  .site-trip-wallet .tw-brow--h > span:nth-child(3),
+  .site-trip-wallet .tw-brow--h > span:nth-child(5) { display: none; }
+  .site-trip-wallet .tw-wrow { grid-template-columns: minmax(0, 1.4fr) 90px minmax(0, 1fr); }
+  .site-trip-wallet .tw-wrow > .tw-wstat,
+  .site-trip-wallet .tw-wrow--h > span:nth-child(3) { display: none; }
+  .site-trip-wallet .tw-wsumk--muted { display: none; }
+}

@@ -75,6 +75,11 @@ const more = [
   ['every-model-one-chat-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/', 'EVERY MODEL. ONE CHAT. · Connecting to DoorDash', 'Ad spots'],
   ['every-model-one-chat-sb-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/?route=superbot', 'EVERY MODEL. ONE CHAT. · Switched to Superbot', 'Ad spots'],
   ['every-model-one-chat-sb-combo-efa8df82', 'every-model-one-chat-superbot-efa8df82/?route=combo', 'EVERY MODEL. ONE CHAT. · Superbot, then DoorDash', 'Ad spots'],
+  // I want to make minecraft (2026-09-26): Opus 5.5 codes, GitHub, DeepSeek V4 Flash scrapes decals, Gemini makes them,
+  // Opus 5.5 ships the game; three cuts of one page (?cut=).
+  ['make-minecraft-every-model-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/', 'I WANT TO MAKE MINECRAFT · every model, one chat', 'Ad spots'],
+  ['make-minecraft-every-model-steps-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/?cut=steps', 'I WANT TO MAKE MINECRAFT · you ask, it switches', 'Ad spots'],
+  ['make-minecraft-every-model-zoom-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/?cut=zoom', 'I WANT TO MAKE MINECRAFT · into the game', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

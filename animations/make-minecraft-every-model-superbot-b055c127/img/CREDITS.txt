@@ -1,0 +1,9 @@
+img / gen CREDITS (make-minecraft-every-model)
+
+gen/clip.mp4, gen/clip-poster.jpg   6.2 s cut from 0:13 of the gameplay video posted by @kepochnik on X
+                                     (https://x.com/kepochnik/status/2103502454750920925), used as the game the chat
+                                     "ships". Credit the creator wherever the spot is published.
+gen/decal/*.png, gen/ref/*.jpg      Crops of frames from that same clip (0:13, 0:14, 0:16, 0:19): refs are the crops,
+                                     decals are the crops box-downsampled to 16x16 and scaled back up nearest-neighbour.
+
+The repo name, commit hash, line counts, texture sites' counts and the @sam handle shown in the spot are made up.

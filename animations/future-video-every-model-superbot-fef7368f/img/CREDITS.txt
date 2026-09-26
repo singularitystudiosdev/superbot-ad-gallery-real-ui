@@ -1,0 +1,7 @@
+img CREDITS (future-video-every-model-superbot, 2026-09-26)
+
+future/steep-8s.mp4   an 8s, 1280w, no-audio trim (source 12.5-20.5s, the "THE STEEP PART" title shot) of the
+                      animated short posted by @andrewjiang, https://x.com/andrewjiang/status/2102987981695132140
+future/poster.jpg     the trimmed clip's first frame
+future/still-<s>.jpg  single frames of the same video at <s> seconds, bottom 14% (subtitle band) cropped, 640w
+                      footage and stills from the video by @andrewjiang, used as the ad's "generated" film

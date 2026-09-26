@@ -1,0 +1,71 @@
+/* Term beat (beats/term.js): GPT-5 Codex building the film in a zsh window. Nothing here transitions or animates:
+   opacity/transform are written from t in render, so ?t= freezes a frame. Every selector is scoped under the hub and
+   every class the beat owns is prefixed .term-.
+   Geometry the beat relies on: .term-win is 520px, .term-body pads 12px a side and is 161px tall (8px top padding +
+   9 lines of 17px), so a log row is 496px wide; the file column is 132px and the duration column 46px right-aligned,
+   the same grid the progress line reuses so "Rendering frames" sits under the file names. */
+
+#s-tabs .sbsite .hub .term-win { opacity: 0; box-sizing: border-box; width: 520px; max-width: 100%;
+  border-radius: 10px; background: #0f0f11; box-shadow: inset 0 0 0 1px #2a2a2e, 0 18px 44px rgba(0, 0, 0, .5);
+  overflow: hidden; transform-origin: 50% 0; color: #ececec; }
+
+/* the title bar: three traffic lights and the shell the command runs in */
+#s-tabs .sbsite .hub .term-bar { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 11px;
+  background: #17171a; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .term-dots { flex: none; display: inline-flex; gap: 6px; }
+#s-tabs .sbsite .hub .term-dots i { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25); }
+#s-tabs .sbsite .hub .term-dots i:nth-child(1) { background: #ff5f57; }
+#s-tabs .sbsite .hub .term-dots i:nth-child(2) { background: #febc2e; }
+#s-tabs .sbsite .hub .term-dots i:nth-child(3) { background: #28c840; }
+#s-tabs .sbsite .hub .term-title { flex: 1; min-width: 0; text-align: center; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; font: 600 12px/1 var(--ui); letter-spacing: .01em; color: #8e8e93; }
+/* the spacer is exactly as wide as the three dots, so the shell name sits on the window's centre line */
+#s-tabs .sbsite .hub .term-pad { flex: none; width: 42px; }
+
+/* the log well: a fixed 9 lines, clipped, with a faint top shade so the window reads as glass */
+#s-tabs .sbsite .hub .term-body { position: relative; box-sizing: border-box; height: 161px; padding: 8px 12px 0;
+  overflow: hidden; background: radial-gradient(130% 96% at 0 0, rgba(255, 255, 255, .03), transparent 62%);
+  font: 400 11px/17px var(--font-mono); color: #ececec; }
+#s-tabs .sbsite .hub .term-scroll { transform-origin: 50% 0; }
+
+/* one line of output */
+#s-tabs .sbsite .hub .term-l { display: flex; align-items: center; height: 17px; opacity: 0; white-space: nowrap; }
+
+/* the command: a muted $ prompt, the command typed into it, the solid caret on its end */
+#s-tabs .sbsite .hub .term-p { flex: none; margin-right: 6px; color: #8e8e93; }
+#s-tabs .sbsite .hub .term-c { flex: none; color: #f2f2f7; }
+
+/* the status cell of a log line: a spinner while it works, a green check once it lands. The spinner is turned
+   from t in render (no CSS animation), the same way the routing chips spin. */
+#s-tabs .sbsite .hub .term-st { flex: none; width: 14px; display: flex; align-items: center; color: #8e8e93; }
+#s-tabs .sbsite .hub .term-sp { flex: none; box-sizing: border-box; width: 9px; height: 9px; border-radius: 50%;
+  border: 1.5px solid #34343a; border-top-color: #8e8e93; }
+#s-tabs .sbsite .hub .term-ck { display: none; font-style: normal; color: #30d158; }
+#s-tabs .sbsite .hub .term-log.term-done .term-st { color: #30d158; }
+#s-tabs .sbsite .hub .term-log.term-done .term-sp { display: none; }
+#s-tabs .sbsite .hub .term-log.term-done .term-ck { display: inline-block; }
+
+/* the log columns: the file bright, what made it and how long it took muted */
+#s-tabs .sbsite .hub .term-g { flex: none; width: 14px; }
+#s-tabs .sbsite .hub .term-f { flex: none; width: 132px; overflow: hidden; color: #ececec; }
+#s-tabs .sbsite .hub .term-m { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; color: #8e8e93; }
+#s-tabs .sbsite .hub .term-d { flex: none; width: 46px; text-align: right; color: #8e8e93; font-variant-numeric: tabular-nums; }
+
+/* the frame counter: label, bar, count. The label sits in the file column so the line lands on the log's grid. */
+#s-tabs .sbsite .hub .term-pl { flex: none; width: 132px; color: #ececec; }
+#s-tabs .sbsite .hub .term-pbar { flex: none; display: inline-flex; }
+#s-tabs .sbsite .hub .term-br { color: #5f5f66; }
+#s-tabs .sbsite .hub .term-bf { font-style: normal; color: #f2f2f7; }
+#s-tabs .sbsite .hub .term-be { font-style: normal; color: #45454b; }
+#s-tabs .sbsite .hub .term-pct { margin-left: auto; color: #8e8e93; font-variant-numeric: tabular-nums; }
+
+/* the finished render: the shell's "wrote" line in bright white, with the check that closes the run */
+#s-tabs .sbsite .hub .term-fin .term-ck { display: inline-block; flex: none; width: 14px; }
+#s-tabs .sbsite .hub .term-ft { flex: none; color: #ffffff; font-weight: 600; }
+#s-tabs .sbsite .hub .term-x { margin-left: 12px; flex: none; color: #8e8e93; }
+
+/* the cursor: a solid block whose visibility is written from t (blink(t)), never a CSS animation */
+#s-tabs .sbsite .hub .term-cur { flex: none; width: 7px; height: 13px; border-radius: 1px; background: #ececec;
+  opacity: 0; }
+#s-tabs .sbsite .hub .term-cur-in { margin-left: 2px; }
+#s-tabs .sbsite .hub .term-tail { height: 17px; }

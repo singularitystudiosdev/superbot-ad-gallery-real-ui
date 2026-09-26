@@ -224,6 +224,30 @@
     "thumb": "assets/shots/fantasy90s-every-model-v3-superbot-042670d1.png"
   },
   {
+    "id": "future-video-every-model-v1-superbot-fef7368f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make an animated video about the future: Veo 3 renders shot 1, Codex builds the film in a terminal (3 switches)",
+    "src": "animations/future-video-every-model-superbot-fef7368f/?v=1",
+    "thumb": "assets/shots/future-video-every-model-v1-superbot-fef7368f.png"
+  },
+  {
+    "id": "future-video-every-model-v2-superbot-fef7368f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make an animated video about the future: ElevenLabs voice first, DeepSeek cues, Kling renders, back to DeepSeek (5 switches)",
+    "src": "animations/future-video-every-model-superbot-fef7368f/?v=2",
+    "thumb": "assets/shots/future-video-every-model-v2-superbot-fef7368f.png"
+  },
+  {
+    "id": "future-video-every-model-v3-superbot-fef7368f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make an animated video about the future: Nano Banana storyboard, Veo 3 + Kling in parallel, Suno, ElevenLabs, Opus 5.5 cut (7 switches)",
+    "src": "animations/future-video-every-model-superbot-fef7368f/?v=3",
+    "thumb": "assets/shots/future-video-every-model-v3-superbot-fef7368f.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

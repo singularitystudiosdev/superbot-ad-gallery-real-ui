@@ -57,6 +57,3 @@ openai-logo.svg   OpenAI mark (round badge), copied from animations/who-are-you-
 every-model-one-chat additions (fetched 2026-09-26):
   deepseek-logo.svg         DeepSeek whale mark, icons/deepseek-color.svg from @lobehub/icons-static-svg (unpkg), unmodified.
                             Trademark of Hangzhou DeepSeek Artificial Intelligence Co., Ltd.
-  grok.png                  Grok app mark, carried over from icons-chaos-superbot-e51c7a3d/assets/grok.png. Trademark of xAI.
-  x-logo.svg                X logo, icons/x.svg from simple-icons (unpkg, CC0 collection); fill set to #fff for the dark card.
-                            Trademark of X Corp.

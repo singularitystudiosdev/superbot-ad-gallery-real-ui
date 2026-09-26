@@ -1,13 +1,12 @@
-// The four-request chat, one model per request. Each ask is typed into the composer and sent, superbot routes it
-// (its routing chip and the composer's platform chip follow the model), and the routed model answers with its own
-// beat (./beats/*.js). An ask with no text is superbot continuing on its own. The thread is bottom-anchored so
+// The three-request chat, one model per request. Each ask is typed into the composer and sent, superbot routes it
+// (its routing chips and the composer's platform chip follow the model), and the routed model answers with its own
+// beat (./beats/*.js). The burger ask has three routings, picked by ?route= (the page's variant selector). An ask with no text is superbot continuing on its own. The thread is bottom-anchored so
 // every message rises out of the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on
 // the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import gemini from './beats/gemini.js?v=1';
 import scrape from './beats/scrape.js?v=2';
-import xpost from './beats/xpost.js?v=2';
 import doordash from './beats/doordash.js?v=1';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
@@ -20,15 +19,22 @@ const APPS = {
   codex: { name: 'GPT-5 Codex', logo: brand('openai-logo.svg'), sub: '' },
   gemini: { name: 'Gemini', logo: brand('gemini-logo.svg'), sub: 'in superbot' },
   deepseek: { name: 'DeepSeek V4 Flash', logo: brand('deepseek-logo.svg'), sub: 'in superbot' },
-  grok: { name: 'Grok', logo: brand('grok.png'), sub: 'in superbot' },
+  superbot: { name: 'Superbot', logo: null, sub: '' }, // logo is the hub's own mark, set at mount
   doordash: { name: 'DoorDash', logo: brand('doordash-logo.svg'), sub: 'in superbot' },
 };
 
+// the burger ask's routing variants: which chips land, in order, and who answers
+export const ROUTES = {
+  doordash: { label: 'Connecting to DoorDash', chips: [['doordash', 'Connecting to DoorDash']], who: 'doordash' },
+  superbot: { label: 'Switched to Superbot', chips: [['superbot', 'Switched to Superbot']], who: 'superbot' },
+  combo: { label: 'Superbot + DoorDash', chips: [['superbot', 'Switched to Superbot'], ['doordash', 'Connected to DoorDash']], who: 'doordash' },
+};
+export const ROUTE = (() => { const r = new URLSearchParams(location.search).get('route'); return ROUTES[r] ? r : 'doordash'; })();
+
 const ASKS = [
-  { app: 'gemini', mod: gemini, verb: 'Switching to', ask: 'make me a muse meme' },
-  { app: 'deepseek', mod: scrape, verb: 'Switching to', ask: 'Scrape reddit and look for more' },
-  { app: 'grok', mod: xpost, verb: 'Switching to', ask: 'Ok great, now post to X as well' },
-  { app: 'doordash', mod: doordash, verb: 'Connecting to', ask: 'Winning, order me a burger.' },
+  { app: 'gemini', mod: gemini, chips: [['gemini', 'Switching to Gemini']], ask: 'make me a muse meme' },
+  { app: 'deepseek', mod: scrape, chips: [['deepseek', 'Switching to DeepSeek V4 Flash']], ask: 'Scrape reddit and look for more' },
+  { app: ROUTES[ROUTE].who, mod: doordash, chips: ROUTES[ROUTE].chips, ask: 'Winning, order me a burger.' },
 ];
 
 // every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply
@@ -39,13 +45,15 @@ export const BEATS = (() => {
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
       k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.35;   // superbot's routing chip lands
+      k.sw = k.send + 0.35;   // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
       k.sw = s + 0.2;         // superbot carries on without being asked
     }
-    k.swap = k.sw + 0.22;     // the platform chip moves to the app
-    k.done = k.sw + 0.65;     // the chip resolves
+    // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
+    let at = k.sw;
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + 0.65 }; at = c.done + 0.12; return c; });
+    k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
     k.T = a.mod.times(k.reply);
     s = k.T.end;
@@ -74,22 +82,26 @@ export function mountChat(hub) {
   const add = (html) => { const n = el(html); inner.appendChild(n); return n; };
 
   const box = (n) => boxIn(n, root);
+  APPS.superbot.logo = sbSrc;
   const ctx = { hub, box, tile, OK, esc, el, brand, img, sbSrc };
 
   const sbAvatar = `<span class="avatar sb"><img src="${sbSrc}" alt=""/></span>`;
   const beats = BEATS.map(({ k }) => {
     const a = APPS[k.app];
     const u = k.ask ? add(`<div class="msg qc-u"><span class="avatar">S</span><div class="m-main"><div class="m-head"><span class="m-name">sam</span></div><div class="m-text">${esc(k.ask)}</div></div></div>`) : null;
-    const w = add(`<div class="msg qc-m">${sbAvatar}<div class="m-main"><span class="qc-sw">${tile(k.app)}<span class="qc-swl">${k.verb} ${a.name}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div></div>`);
+    const sws = k.chips.map((c) => {
+      const w = add(`<div class="msg qc-m">${sbAvatar}<div class="m-main"><span class="qc-sw">${tile(c.app)}<span class="qc-swl">${esc(c.label)}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div></div>`);
+      return { c, w, sw: w.querySelector('.qc-sw'), spin: w.querySelector('.qc-spin'), ok: w.querySelector('.qc-st .qc-ok') };
+    });
     const r = add(`<div class="msg qc-m qc-r">${sbAvatar}<div class="m-main"><div class="qc-who">${tile(k.app)}<b>${a.name}</b>${a.sub ? `<small>${a.sub}</small>` : ''}</div></div></div>`);
     const main = r.querySelector('.m-main');
     const inst = k.mod.build(k, ctx);
     inst.nodes.forEach((n) => main.appendChild(n));
-    return { k, u, w, r, who: main.firstElementChild, inst, sw: w.querySelector('.qc-sw'), spin: w.querySelector('.qc-spin'), ok: w.querySelector('.qc-st .qc-ok') };
+    return { k, u, sws, r, who: main.firstElementChild, inst };
   });
 
   // scroll marks: after each time, the feed's fold glides to that element's bottom
-  const marks = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), [b.k.sw, b.w], [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
+  const marks = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
 
   // the composer's platform chip names the model, then follows the routed app
   const plat = hub.querySelector('.rc-plat');
@@ -130,7 +142,7 @@ function renderComposer(c, t) {
 
 function renderRouting(c, t) {
   let app = 'codex', swap = -1;
-  c.beats.forEach(({ k }) => { if (t >= k.swap) { app = k.app; swap = k.swap; } });
+  c.beats.forEach(({ k }) => k.chips.forEach((ch) => { if (t >= ch.swap) { app = ch.app; swap = ch.swap; } }));
   // platform chip: dips out, swaps, comes back
   if (app !== c.lastApp) {
     c.pImg.src = APPS[app].logo;
@@ -143,17 +155,17 @@ function renderRouting(c, t) {
   c.plat.style.transform = pop === 1 ? 'none' : `scale(${pop.toFixed(4)})`;
 }
 
-function renderSwitch(b, t) {
-  const { k } = b;
-  b.sw.classList.toggle('qc-done', t >= k.done);
-  b.sw.style.setProperty('--sh', `${(100 - ((t - k.sw) * 140) % 200).toFixed(1)}%`);
-  b.spin.style.opacity = (1 - seg(t, k.done - 0.08, k.done + 0.06)).toFixed(3);
-  b.spin.style.transform = `rotate(${((t - k.sw) * 420).toFixed(1)}deg)`;
+function renderSwitch(s, t) {
+  const k = s.c;
+  s.sw.classList.toggle('qc-done', t >= k.done);
+  s.sw.style.setProperty('--sh', `${(100 - ((t - k.sw) * 140) % 200).toFixed(1)}%`);
+  s.spin.style.opacity = (1 - seg(t, k.done - 0.08, k.done + 0.06)).toFixed(3);
+  s.spin.style.transform = `rotate(${((t - k.sw) * 420).toFixed(1)}deg)`;
   const o = seg(t, k.done, k.done + 0.3);
-  b.ok.style.opacity = o.toFixed(3);
-  b.ok.style.transform = `scale(${lerp(0.3, 1, outBack(o)).toFixed(4)})`;
+  s.ok.style.opacity = o.toFixed(3);
+  s.ok.style.transform = `scale(${lerp(0.3, 1, outBack(o)).toFixed(4)})`;
   const tp = outBack(seg(t, k.sw + 0.05, k.sw + 0.45));
-  b.sw.firstElementChild.style.transform = `scale(${lerp(0.5, 1, tp).toFixed(4)}) rotate(${((1 - tp) * -25).toFixed(2)}deg)`;
+  s.sw.firstElementChild.style.transform = `scale(${lerp(0.5, 1, tp).toFixed(4)}) rotate(${((1 - tp) * -25).toFixed(2)}deg)`;
 }
 
 function renderScroll(c, t) {
@@ -176,9 +188,8 @@ export function renderChat(c, t) {
   renderRouting(c, t);
   c.beats.forEach((b) => {
     if (b.u) appear(b.u, t, b.k.send);
-    appear(b.w, t, b.k.sw);
+    b.sws.forEach((s) => { appear(s.w, t, s.c.sw); renderSwitch(s, t); });
     appear(b.r, t, b.k.reply);
-    renderSwitch(b, t);
     b.inst.render(t);
   });
   renderScroll(c, t);

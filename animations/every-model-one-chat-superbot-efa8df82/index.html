@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="cards.css">
 <link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=8">
 <link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=8">
-<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=2">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=3">
 <!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
 <link rel="modulepreload" href="lib.js">
 <link rel="modulepreload" href="shell.js">
@@ -26,11 +26,17 @@
 </div>
 
 <div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<nav class="route-pick" aria-label="Burger ask routing variant">
+  <a data-route="doordash">Connecting to DoorDash</a>
+  <a data-route="superbot">Switched to Superbot</a>
+  <a data-route="combo">Superbot + DoorDash</a>
+</nav>
+<script src="route-pick.js?v=1"></script>
 <button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
 <div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
 
 <script src="../../assets/sb-mark-live.js"></script>
 <script src="recorder.js"></script>
-<script type="module" src="timeline.js?v=8"></script>
+<script type="module" src="timeline.js?v=9"></script>
 </body>
 </html>

@@ -31,9 +31,6 @@
 
 /* ---- model tiles ---- */
 #s-tabs .sbsite.ask .hub .qc-t-deepseek { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
-#s-tabs .sbsite.ask .hub .qc-t-grok { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
-#s-tabs .sbsite.ask .hub .qc-tile.qc-t-grok img, #s-tabs .sbsite.ask .hub .qc-who .qc-t-grok img { width: 100%; height: 100%; }
-#s-tabs .sbsite.ask .hub .qc-pi img[data-app="grok"] { border-radius: 3px; }
 
 /* ---- DeepSeek scrape: one pill per subreddit, counting its posts, lit once swept ---- */
 #s-tabs .sbsite.ask .hub .sc-subs { display: flex; flex-wrap: wrap; gap: 6px; max-width: 620px; margin: 0 0 10px; opacity: 0; }
@@ -42,23 +39,6 @@
 #s-tabs .sbsite.ask .hub .sc-sub b { padding: 3px 6px; border-radius: 999px; background: #1a282d; font: 600 9.5px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: #82959b; }
 #s-tabs .sbsite.ask .hub .sc-sub.on { box-shadow: inset 0 0 0 1px rgba(255,69,0,.55); color: #f2f4f5; }
 #s-tabs .sbsite.ask .hub .sc-sub.on b { background: rgba(255,69,0,.16); color: #ff8a5c; }
-
-/* ---- Grok on X: the lead post as X's dark card ---- */
-#s-tabs .sbsite.ask .hub .xp-card { width: 420px; padding: 12px 14px 10px; border-radius: 16px; background: #000; box-shadow: 0 0 0 1px #2f3336, 0 12px 30px rgba(0,0,0,.5); color: #e7e9ea; opacity: 0; }
-#s-tabs .sbsite.ask .hub .xp-head { display: flex; align-items: center; gap: 9px; }
-#s-tabs .sbsite.ask .hub .xp-av { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #3a3a3f; font: 700 13px/1 var(--ui); color: #fff; }
-#s-tabs .sbsite.ask .hub .xp-id { display: grid; gap: 4px; }
-#s-tabs .sbsite.ask .hub .xp-id b { font: 700 12px/1 var(--ui); }
-#s-tabs .sbsite.ask .hub .xp-id small { font: 400 10.5px/1 var(--ui); color: #71767b; }
-#s-tabs .sbsite.ask .hub .xp-logo { margin-left: auto; width: 16px; height: 16px; display: block; }
-#s-tabs .sbsite.ask .hub .xp-text { margin: 9px 0; font: 400 12.5px/1.4 var(--ui); }
-#s-tabs .sbsite.ask .hub .xp-media { height: 160px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px #2f3336; }
-#s-tabs .sbsite.ask .hub .xp-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-#s-tabs .sbsite.ask .hub .xp-acts { display: flex; justify-content: space-between; margin-top: 9px; padding-right: 24px; }
-#s-tabs .sbsite.ask .hub .xp-act { display: inline-flex; align-items: center; gap: 5px; font: 500 10.5px/1 var(--ui); font-variant-numeric: tabular-nums; color: #71767b; }
-#s-tabs .sbsite.ask .hub .xp-act svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-#s-tabs .sbsite.ask .hub .xp-like.on { color: #f91880; }
-#s-tabs .sbsite.ask .hub .xp-like.on svg { fill: #f91880; stroke: #f91880; }
 
 /* ---- the end card: the line, then the mascot to its right ---- */
 #s-end .lock.ask-end { gap: 56px; }

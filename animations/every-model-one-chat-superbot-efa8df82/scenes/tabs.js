@@ -1,11 +1,11 @@
 // every-model-one-chat (forked from it-does-what-you-ask): the real superbot hub, cropped to its thread and composer (rail, sidebar and chat header
 // are hidden, ask.css), laid out at DW design px and scaled to the frame width. It opens on the empty state
 // ("Good evening. Where do we go?" over a centred composer) with the camera pushed in; the first send drops the
-// composer to the bottom, lifts the greeting away and eases the camera out while the four-request chat plays
+// composer to the bottom, lifts the greeting away and eases the camera out while the three-request chat plays
 // (tabs-assets/chat.js). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=4';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=5';
 import { lerp, seg, outCubic, inOutCubic } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
@@ -19,7 +19,7 @@ function geo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
   // pulled back far enough that every sent ask stays in frame through its whole answer (the DoorDash order is
   // the tallest), so the thread lays out wider than the reference's 960
-  const DW = Math.max(560, Math.min(1400, W / 1.37));
+  const DW = Math.max(560, Math.min(1480, W / 1.3));
   const k = W / DW, DH = H / k;
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';

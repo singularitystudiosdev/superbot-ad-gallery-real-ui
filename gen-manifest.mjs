@@ -100,6 +100,9 @@ const more = [
   ['inkwave-every-model-v1-superbot-f1a86d6f', 'inkwave-every-model-superbot-f1a86d6f/?v=1', 'make a Splatoon game: Opus 5.5 scripts it, DeepSeek scrapes, Meshy 5 models, HY-Motion animates, ElevenLabs + Suno sound, Nano Banana art, Opus codes, Vercel ships (9 steps)', 'Ad spots'],
   // make a Splatoon-style ink game (2026-09-26): the fantasy90s v3 routing reskinned to an ink shooter, ends on 13s of @JaydenDavisNC's Opus 5.5 build.
   ['splatoon-every-model-v3-superbot-7cf3d4da', 'splatoon-every-model-superbot-7cf3d4da/', 'make a Splatoon-style ink game: Lyria, Meshy, Gemini, Opus 5.5, DeepSeek, GitHub, then the real Opus 5.5 build plays (7 requests; clip @JaydenDavisNC)', 'Ad spots'],
+  // make a k-pop music video about p(doom) (2026-09-27): the fantasy90s v3 routing rethemed to an M/V, ends on 10s of @donaldjewkes' one-prompt Opus 5.5 M/V.
+  ['pdoom-mv-every-model-v3-superbot-abba733b', 'pdoom-mv-every-model-superbot-abba733b/', 'make a k-pop music video about p(doom): Lyria, ElevenLabs, Gemini, Opus 5.5, DeepSeek, GitHub, then the real Opus 5.5 M/V plays (7 requests; clip @donaldjewkes)', 'Ad spots',
+    { desc: "Ends on the 0:19 to 0:29 hook of the M/V 'Upping My P(doom)' by Donald Jewkes (@donaldjewkes), made with one prompt in Claude Opus 5.5." }],
   // make a Splatoon-style ink game (2026-09-26): one ask routed to seven models on one page (v3, the default cut):
   // Lyria scores the match, Meshy models the props, Gemini draws the ink decals, DeepSeek scrapes CC0 prop
   // libraries, GitHub pushes Inkwave, Opus 5.5 codes the game and plays it.

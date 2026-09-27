@@ -200,6 +200,15 @@
     "thumb": "assets/shots/splatoon-every-model-v3-superbot-7cf3d4da.png"
   },
   {
+    "id": "pdoom-mv-every-model-v3-superbot-abba733b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a k-pop music video about p(doom): Lyria, ElevenLabs, Gemini, Opus 5.5, DeepSeek, GitHub, then the real Opus 5.5 M/V plays (7 requests; clip @donaldjewkes)",
+    "src": "animations/pdoom-mv-every-model-superbot-abba733b/",
+    "thumb": "assets/shots/pdoom-mv-every-model-v3-superbot-abba733b.png",
+    "desc": "Ends on the 0:19 to 0:29 hook of the M/V 'Upping My P(doom)' by Donald Jewkes (@donaldjewkes), made with one prompt in Claude Opus 5.5."
+  },
+  {
     "id": "inkwave-every-model-superbot-3f9d27b4",
     "type": "animation",
     "group": "Ad spots",

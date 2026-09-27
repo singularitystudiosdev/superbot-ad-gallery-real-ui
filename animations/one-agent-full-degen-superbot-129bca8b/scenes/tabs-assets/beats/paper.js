@@ -1,10 +1,10 @@
 // 4. Paper trading: superbot opens a $10,000 paper account and switches auto-trade ON for two weeks.
 import { seg, outCubic, outBack, lerp } from '../../../lib.js';
-import { stdTimes, workBeat, counter, fmt } from './wk.js?v=1';
+import { stdTimes, workBeat, counter, fmt } from './wk.js?v=2';
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 1.8, 0.9);
+    const T = stdTimes(r, 2, 1.6, 0.12);
     T.count = [T.body + 0.15, T.body + 1.05];
     T.flip = T.body + 0.9;
     T.live = T.flip + 0.3;

@@ -1,14 +1,14 @@
 // 3. The alert: a weekday 9:25 AM text with the top WSB ticker and its sentiment. The switch flips on, the card
 // reads Active, and a preview of the text lands.
 import { seg, outCubic, outBack, lerp } from '../../../lib.js';
-import { stdTimes, workBeat } from './wk.js?v=1';
+import { stdTimes, workBeat } from './wk.js?v=2';
 
 const DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const BELL = '<svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>';
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 1.8, 0.9);
+    const T = stdTimes(r, 2, 1.8, 0.33);
     T.days = [T.body + 0.2, T.body + 0.75];
     T.flip = T.body + 0.8;
     T.active = T.flip + 0.25;

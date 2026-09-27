@@ -1,6 +1,6 @@
 // 1. "What's WSB buzzing about today?": superbot reads r/wallstreetbets and ranks the top 5 tickers by mentions.
 import { seg, outCubic, lerp } from '../../../lib.js';
-import { stdTimes, workBeat, counter, fmt } from './wk.js?v=1';
+import { stdTimes, workBeat, counter, fmt } from './wk.js?v=2';
 
 const TOP = [
   { s: 'GME', n: 'GameStop', v: 1912 },
@@ -12,7 +12,7 @@ const TOP = [
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 1.7, 0.9);
+    const T = stdTimes(r, 2, 1.7, 0.33);
     T.rows = TOP.map((_, i) => [T.body + 0.15 + i * 0.13, T.body + 1.15 + i * 0.13]);
     T.hot = T.body + 1.1;
     return T;

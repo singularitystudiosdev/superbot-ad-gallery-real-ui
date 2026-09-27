@@ -1,7 +1,7 @@
 // 2. The backtest: superbot pulls 90 days of prices, writes backtest.py, runs it, and draws the equity curve
 // against SPY. Strategy +14.2% vs SPY +6.1%, 58% win rate, max drawdown -9.8%.
 import { seg } from '../../../lib.js';
-import { stdTimes, workBeat, counter, equityChart, pct, STRAT, SPY, XL } from './wk.js?v=1';
+import { stdTimes, workBeat, counter, equityChart, pct, STRAT, SPY, XL } from './wk.js?v=2';
 
 const KPI = [
   { l: 'Strategy', v: 14.2, f: (v) => pct(v), c: 'up' },
@@ -12,7 +12,7 @@ const KPI = [
 
 export default {
   times(r) {
-    const T = stdTimes(r, 3, 2.9, 1.1);
+    const T = stdTimes(r, 3, 2.9, 0.57);
     T.kpi = [T.body + 0.2, T.body + 1.3];
     T.draw = [T.body + 0.35, T.body + 2.45];
     T.tags = [T.draw[1] - 0.05, T.draw[1] + 0.9];

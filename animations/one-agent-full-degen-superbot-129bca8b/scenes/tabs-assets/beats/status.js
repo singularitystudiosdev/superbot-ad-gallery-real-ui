@@ -1,7 +1,7 @@
 // 5. "How's it doing?": Day 12, $10,642 (+6.4%), 7 wins 5 losses, best trade GME +8.4%. The balance sparkline and
 // one dot per trade (green win, red loss) in the order they closed.
 import { seg, outCubic, outBack, lerp } from '../../../lib.js';
-import { stdTimes, workBeat, counter, equityChart, fmt } from './wk.js?v=1';
+import { stdTimes, workBeat, counter, equityChart, fmt } from './wk.js?v=2';
 
 // daily closing balance, day 0 to day 12, and each day's trade (series.mjs)
 const BAL = [10000, 10190, 10068, 10913, 10684, 10834, 10660, 10756, 10993, 10729, 10847, 10522, 10642];
@@ -9,7 +9,7 @@ const SEQ = [1.9, -1.2, 8.4, -2.1, 1.4, -1.6, 0.9, 2.2, -2.4, 1.1, -3.0, 1.1];
 
 export default {
   times(r) {
-    const T = stdTimes(r, 1, 2.2, 0.9);
+    const T = stdTimes(r, 1, 2.2, 0.33);
     T.count = [T.body + 0.15, T.body + 1.2];
     T.draw = [T.body + 0.25, T.body + 1.6];
     T.dots = T.body + 0.6;

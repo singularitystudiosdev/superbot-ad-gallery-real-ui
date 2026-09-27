@@ -2,13 +2,13 @@
 // 34 min. Photo: Wikimedia Commons, "Beef Ribeye Steak & Shrimps with Potato Fries" by Ceeseven, CC BY-SA 4.0
 // (img/CREDITS.txt).
 import { seg, outCubic, outBack, lerp } from '../../../lib.js';
-import { stdTimes, workBeat } from './wk.js?v=1';
+import { stdTimes, workBeat } from './wk.js?v=2';
 
 const STAGES = ['Placed', 'Preparing', 'On the way'];
 
 export default {
   times(r) {
-    const T = stdTimes(r, 3, 1.7, 1.2);
+    const T = stdTimes(r, 3, 1.7, 0.83);
     T.photo = T.body + 0.1;
     T.eta = T.body + 0.6;
     T.stages = STAGES.map((_, i) => T.body + 0.8 + i * 0.3);

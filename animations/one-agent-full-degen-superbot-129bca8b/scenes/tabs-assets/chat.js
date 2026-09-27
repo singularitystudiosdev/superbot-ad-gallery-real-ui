@@ -4,13 +4,13 @@
 // of the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on the beat imports busts
 // GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, inOutCubic, esc, boxIn } from '../../lib.js';
-import wsb from './beats/wsb.js?v=1';
-import backtest from './beats/backtest.js?v=1';
-import alert from './beats/alert.js?v=1';
-import paper from './beats/paper.js?v=1';
-import status from './beats/status.js?v=1';
-import dd from './beats/dd.js?v=1';
-import dinner from './beats/dinner.js?v=1';
+import wsb from './beats/wsb.js?v=2';
+import backtest from './beats/backtest.js?v=2';
+import alert from './beats/alert.js?v=2';
+import paper from './beats/paper.js?v=2';
+import status from './beats/status.js?v=2';
+import dd from './beats/dd.js?v=2';
+import dinner from './beats/dinner.js?v=2';
 
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
 const bump = (p) => Math.sin(Math.PI * clamp(p));
@@ -32,9 +32,9 @@ export const BEATS = (() => {
   let s = CHAT_T0;
   return ASKS.map((a) => {
     const k = { ...a, s };
-    k.typeEnd = s + Math.min(0.9, 0.2 + a.ask.length * 0.01);
-    k.send = k.typeEnd + 0.15;
-    k.reply = k.send + 0.3; // superbot answers in place
+    k.typeEnd = s + Math.min(0.55, 0.15 + a.ask.length * 0.006);
+    k.send = k.typeEnd + 0.1;
+    k.reply = k.send + 0.22; // superbot answers in place
     k.T = a.mod.times(k.reply);
     s = k.T.end;
     return { k };

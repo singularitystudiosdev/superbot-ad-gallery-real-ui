@@ -1,12 +1,12 @@
 // 6. The DD post: a draft for r/wallstreetbets, flair DD, the backtest's equity curve attached. Drafted, not posted.
 import { seg, outCubic } from '../../../lib.js';
-import { stdTimes, workBeat, equityChart, STRAT, SPY, XL } from './wk.js?v=1';
+import { stdTimes, workBeat, equityChart, STRAT, SPY, XL } from './wk.js?v=2';
 
 const TITLE = 'I let an agent YOLO for me for 12 days. Here are the tendies.';
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 2.2, 1.0);
+    const T = stdTimes(r, 2, 2.2, 0.33);
     T.title = [T.body + 0.1, T.body + 0.9];
     T.draw = [T.body + 0.5, T.body + 1.7];
     return T;

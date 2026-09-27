@@ -4,12 +4,10 @@ Still on disk in img/, unchanged from the previous game version:
 muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
 burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
                          ../brand/CREDITS.txt (public domain, NCI).
-img/f90/                 The fantasy90s build's assets, kept on disk unchanged; the publish step drops them.
-                         Their attributions are in this file's history (video by Denis Shiryaev, @literallydenis).
 
 The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
 
-Added for inkwave-every-model-superbot (2026-09-26). Source post: Jayden Davis (@JaydenDavisNC),
+Added for splatoon-every-model-superbot-3081f5d2 (2026-09-26). Source post: Jayden Davis (@JaydenDavisNC),
 "Splatoon Game made by Opus 5.5", https://x.com/JaydenDavisNC/status/2103357848961036304
 (game: Inkwave, https://inkwave-six.vercel.app/). All video-derived files below come from that post's
 1080p mp4 (video.twimg.com/amplify_video/2103357145110474752/vid/avc1/1920x1080/ffgYcFZtkGjMQrUv.mp4).

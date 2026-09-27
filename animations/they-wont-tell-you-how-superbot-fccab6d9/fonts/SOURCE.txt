@@ -1,0 +1,6 @@
+anton-latin-400.woff2
+  Font: Anton Regular (latin subset), Copyright 2020 The Anton Project Authors (https://github.com/googlefonts/AntonFont.git)
+  Licence: SIL Open Font License 1.1 (OFL.txt in this folder)
+  Fetched: https://cdn.jsdelivr.net/npm/@fontsource/anton@5/files/anton-latin-400-normal.woff2 (@fontsource/anton 5.3.0, OFL-1.1)
+  Licence text: https://raw.githubusercontent.com/google/fonts/main/ofl/anton/OFL.txt
+  Used by: scenes/wont.js + scenes/wont.css (the THEY WONT TELL YOU HOW word column)

@@ -1,0 +1,116 @@
+/* Opus step (beats/opus-lapse.js): Opus cuts the Pocketsflow launch video as a Remotion project, told as a sped-up
+   agent run in the coding panel's grammar, ported from the Minecraft ad's mc-code.css
+   (make-minecraft-every-model-superbot-b055c127): tool rows, file-edit cards with green TSX hunks and line numbers,
+   collapsed Edited rows, a terminal block running the render with live frame counters and the review bar, then the
+   chips under the card. Sized for this thread column (~470px): a fixed 344px card with a bottom-anchored transcript viewport.
+   Item heights are multiples of --u (1px) so the JS can stack them exactly. No animation or transition: the JS writes
+   every moving value from t. Palette: Cursor Dark's syntax colours on the hub's #141416 card. */
+#s-tabs .sbsite .hub .ocx { --mono: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace); position: relative; width: 100%; height: 344px; margin-top: 2px; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); font: 12px/1.3 var(--ui); color: #d6d6dd; opacity: 0; box-sizing: border-box; animation: none; transition: none; }
+#s-tabs .sbsite .hub .ocx.ocx-done { box-shadow: 0 0 0 1px rgba(79,197,127,.55), 0 0 22px rgba(79,197,127,.12), 0 14px 36px rgba(0,0,0,.45); }
+#s-tabs .sbsite .hub .ocx svg { flex: none; }
+
+/* header: repo, branch, the replayed clock */
+#s-tabs .sbsite .hub .ocx-hd { display: flex; align-items: center; gap: 9px; flex: none; height: 36px; padding: 0 12px; border-bottom: 1px solid #232326; background: #18181b; }
+#s-tabs .sbsite .hub .ocx-repo { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
+#s-tabs .sbsite .hub .ocx-repo b { font: 600 13px/1 var(--ui); color: #ededf0; }
+#s-tabs .sbsite .hub .ocx-hd svg { width: 14px; height: 14px; fill: #8b8b93; }
+#s-tabs .sbsite .hub .ocx-br { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 7px 0 5px; border-radius: 6px; background: #222226; font: 11px/1 var(--mono); color: #a1a1aa; }
+#s-tabs .sbsite .hub .ocx-br svg { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .ocx-state { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font: 500 12px/1 var(--ui); font-style: normal; color: #9d9da6; white-space: nowrap; }
+#s-tabs .sbsite .hub .ocx-clk { font: 500 12px/1 var(--mono); font-variant-numeric: tabular-nums; color: #c9c9cf; }
+#s-tabs .sbsite .hub .ocx-spin { display: block; flex: none; width: 11px; height: 11px; border-radius: 50%; border: 1.6px solid #3a3a40; border-top-color: #c9c9cf; box-sizing: border-box; }
+#s-tabs .sbsite .hub .ocx-tk { fill: none; stroke: #4fc57f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .ocx-state .ocx-tk { display: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .ocx-state.ok .ocx-spin { display: none; }
+#s-tabs .sbsite .hub .ocx-state.ok .ocx-tk { display: block; }
+#s-tabs .sbsite .hub .ocx-state.ok .ocx-clk { color: #4fc57f; }
+
+/* the transcript viewport: the stack is bottom-anchored, so it grows upward once it overflows */
+#s-tabs .sbsite .hub .ocx-vp { --u: 1px; position: relative; flex: 1; min-height: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .ocx-vp::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 26px; background: linear-gradient(#141416, rgba(20,20,22,0)); pointer-events: none; }
+#s-tabs .sbsite .hub .ocx-stk { position: absolute; left: 0; right: 0; bottom: 0; min-height: 100%; display: flex; flex-direction: column; padding: 10px 12px 4px; box-sizing: border-box; }
+#s-tabs .sbsite .hub .ocx-sp { flex: 1; }
+#s-tabs .sbsite .hub .ocx-it { flex: none; height: 0; overflow: hidden; opacity: 0; }
+
+/* tool rows: the verb dimmer, its argument lighter */
+#s-tabs .sbsite .hub .ocx-row { height: calc(var(--u) * 22); display: flex; align-items: center; gap: .35em; padding-left: 2px; font: 500 calc(var(--u) * 13)/1 var(--ui); color: #b4b4bc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .ocx-row span { color: #7c7c85; }
+
+/* file icon badge and the +N -0 stats */
+#s-tabs .sbsite .hub .ocx-fi { flex: none; display: inline-block; width: calc(var(--u) * 20); font: 800 calc(var(--u) * 8)/1 var(--ui); letter-spacing: -.03em; text-align: center; color: #6cb6ff; }
+#s-tabs .sbsite .hub .ocx-add { color: #4fc57f; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ocx-del { color: #f0616d; margin-left: .45em; }
+
+/* collapsed edit row: a thin bordered pill */
+#s-tabs .sbsite .hub .ocx-ed { height: calc(var(--u) * 28); box-sizing: border-box; display: flex; align-items: center; gap: calc(var(--u) * 7); padding: 0 calc(var(--u) * 10) 0 calc(var(--u) * 8); border-radius: calc(var(--u) * 7); border: 1px solid #2a2a2f; background: #19191c; font: 500 calc(var(--u) * 12.5)/1 var(--ui); color: #e2e2e6; white-space: nowrap; overflow: hidden; }
+#s-tabs .sbsite .hub .ocx-ed s, #s-tabs .sbsite .hub .ocx-ch s { text-decoration: none; color: #6f6f78; font-weight: 400; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+#s-tabs .sbsite .hub .ocx-ed em, #s-tabs .sbsite .hub .ocx-ch em { margin-left: auto; padding-left: 8px; font: 500 calc(var(--u) * 12)/1 var(--mono); font-style: normal; white-space: nowrap; }
+
+/* file-edit card and terminal block share the frame: a header row and a 7-line body */
+#s-tabs .sbsite .hub .ocx-card, #s-tabs .sbsite .hub .ocx-term { height: calc(var(--u) * 163); box-sizing: border-box; display: flex; flex-direction: column; border-radius: calc(var(--u) * 8); border: 1px solid #2a2a2f; background: #17171a; overflow: hidden; }
+#s-tabs .sbsite .hub .ocx-ch { flex: none; height: calc(var(--u) * 32); box-sizing: border-box; display: flex; align-items: center; gap: calc(var(--u) * 7); padding: 0 calc(var(--u) * 10) 0 calc(var(--u) * 8); border-bottom: 1px solid #25252a; background: #1b1b1f; font: 500 calc(var(--u) * 12.5)/1 var(--ui); color: #e2e2e6; white-space: nowrap; }
+#s-tabs .sbsite .hub .ocx-ch b { font-weight: 600; }
+#s-tabs .sbsite .hub .ocx-bd { position: relative; flex: 1; min-height: 0; overflow: hidden; padding: calc(var(--u) * 6) 0; box-sizing: border-box; }
+#s-tabs .sbsite .hub .ocx-l { display: flex; height: calc(var(--u) * 17); align-items: center; font: calc(var(--u) * 11)/calc(var(--u) * 17) var(--mono); white-space: pre; }
+#s-tabs .sbsite .hub .ocx-l code { font: inherit; color: #d6d6dd; background: none; padding: 0; overflow: hidden; text-overflow: clip; }
+#s-tabs .sbsite .hub .ocx-l i { font-style: normal; }
+/* added lines: green wash, green gutter bar, line numbers */
+#s-tabs .sbsite .hub .ocx-card .ocx-l { background: rgba(63,185,80,.11); box-shadow: inset 2px 0 0 #3fb950; }
+#s-tabs .sbsite .hub .ocx-card .ocx-l u { flex: none; width: calc(var(--u) * 30); padding-right: calc(var(--u) * 10); box-sizing: border-box; text-align: right; text-decoration: none; color: #5b6b60; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ocx-l .k { color: #82d2ce; }
+#s-tabs .sbsite .hub .ocx-l .s { color: #e394dc; }
+#s-tabs .sbsite .hub .ocx-l .n { color: #ebc88d; }
+#s-tabs .sbsite .hub .ocx-l .f { color: #efb080; }
+#s-tabs .sbsite .hub .ocx-l .t { color: #87c3ff; }
+#s-tabs .sbsite .hub .ocx-l .p { color: #aaa0fa; }
+#s-tabs .sbsite .hub .ocx-l .c { color: #6d6d75; font-style: italic; }
+
+/* terminal block */
+#s-tabs .sbsite .hub .ocx-term { background: #111113; }
+#s-tabs .sbsite .hub .ocx-ico { width: 15px; height: 15px; fill: none; stroke: #9d9da6; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .ocx-tv { font-weight: 500 !important; color: #9d9da6; }
+#s-tabs .sbsite .hub .ocx-cmd { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 500 calc(var(--u) * 12)/1 var(--mono); color: #e2e2e6; }
+/* the render run's counters: the filled run of the bar green, the rest dim */
+#s-tabs .sbsite .hub .ocx-l .ocx-pb0 { color: #34343a; }
+#s-tabs .sbsite .hub .ocx-l .ocx-pv { color: #e2e2e6; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ocx-tst { display: inline-flex; align-items: center; gap: 6px; color: #4fc57f; }
+#s-tabs .sbsite .hub .ocx-tst.ok .ocx-spin { display: none; }
+#s-tabs .sbsite .hub .ocx-term .ocx-l { padding-left: calc(var(--u) * 12); }
+#s-tabs .sbsite .hub .ocx-l .dl { color: #f0616d; }
+#s-tabs .sbsite .hub .ocx-l .cmd { color: #ebc88d; }
+#s-tabs .sbsite .hub .ocx-l .ok { color: #4fc57f; }
+#s-tabs .sbsite .hub .ocx-l .dim { color: #7c7c85; }
+
+/* the review bar: changed files and lines, then Undo all / Accept all / Review, live at done */
+#s-tabs .sbsite .hub .ocx-ft { display: flex; align-items: center; gap: 8px; flex: none; height: 44px; padding: 0 9px 0 8px; border-top: 1px solid #232326; background: #18181b; white-space: nowrap; box-sizing: border-box; }
+#s-tabs .sbsite .hub .ocx-sum { display: inline-flex; align-items: center; gap: 6px; min-width: 0; font: 500 12.5px/1 var(--ui); color: #b4b4bc; }
+#s-tabs .sbsite .hub .ocx-sum .ocx-add, #s-tabs .sbsite .hub .ocx-sum .ocx-del { font: 500 12px/1 var(--mono); }
+#s-tabs .sbsite .hub .ocx-sum .ocx-del { margin-left: 0; }
+#s-tabs .sbsite .hub .ocx-chev { width: 13px; height: 13px; fill: none; stroke: #7c7c85; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .ocx-nf { font-weight: 600; color: #e2e2e6; }
+#s-tabs .sbsite .hub .ocx-btns { display: inline-flex; gap: 5px; margin-left: auto; opacity: .4; }
+#s-tabs .sbsite .hub .ocx-ft.on .ocx-btns { opacity: 1; }
+#s-tabs .sbsite .hub .ocx-b { display: inline-flex; align-items: center; height: 26px; padding: 0 9px; border-radius: 7px; border: 1px solid #323238; font: 500 12px/1 var(--ui); font-style: normal; color: #d6d6dd; box-sizing: border-box; }
+#s-tabs .sbsite .hub .ocx-b.ocx-pri { border-color: #ececf1; background: #ececf1; color: #141416; font-weight: 600; }
+
+/* the chips under the card: models' output wired in, the build, the push */
+#s-tabs .sbsite .hub .ocx-rows { display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: none; margin-top: 10px; opacity: 0; box-sizing: border-box; }
+#s-tabs .sbsite .hub .ocx-l1 .ocx-chip { flex: 1 1 auto; }
+#s-tabs .sbsite .hub .ocx-l1 .ocx-ok { margin-left: auto; }
+#s-tabs .sbsite .hub .ocx-line { display: flex; gap: 6px; min-width: 0; }
+#s-tabs .sbsite .hub .ocx-chip { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 9px 0 5px; border-radius: 10px; background: #141416; box-shadow: 0 0 0 1px #2a2a2e; font: 500 12px/1 var(--ui); color: #b4b4bc; white-space: nowrap; opacity: 0; box-sizing: border-box; min-width: 0; }
+#s-tabs .sbsite .hub .ocx-chip.ocx-wide { flex: 1; }
+#s-tabs .sbsite .hub .ocx-chip b { font-weight: 600; color: #ececf1; }
+#s-tabs .sbsite .hub .ocx-chip code { font: 500 11.5px/1 var(--mono); color: #e2e2e6; background: none; padding: 0; }
+#s-tabs .sbsite .hub .ocx-chip .qc-tile { width: 20px; height: 20px; border-radius: 6px; }
+#s-tabs .sbsite .hub .ocx-chip .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .ocx-cl { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+#s-tabs .sbsite .hub .ocx-si { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: #202024; }
+#s-tabs .sbsite .hub .ocx-si svg { width: 12px; height: 12px; fill: #a1a1aa; }
+#s-tabs .sbsite .hub .ocx-si .ocx-ico { width: 13px; height: 13px; fill: none; stroke: #a1a1aa; }
+#s-tabs .sbsite .hub .ocx-ok { display: grid; place-items: center; flex: none; opacity: 0; }
+#s-tabs .sbsite .hub .ocx-ok .ocx-tk, #s-tabs .sbsite .hub .ocx-okw .ocx-tk { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .ocx-wide .ocx-ok { margin-left: auto; }
+#s-tabs .sbsite .hub .ocx-run { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; color: #8b8b8b; }
+#s-tabs .sbsite .hub .ocx-okw { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; font-weight: 600; font-size: 11.5px; color: #4fc57f; opacity: 0; }
+#s-tabs .sbsite .hub .ocx-dim { color: #7c7c85; }

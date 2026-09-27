@@ -148,6 +148,12 @@ const more = [
   // the embedded video @achxvi's Opus 5.5 Pocketsflow launch film) pushes in, "THEY / WONT / TELL / YOU / HOW" lands one
   // word at a time, then the how: the v4 steps rethemed to Pocketsflow, ending on Superbot playing the real clip.
   ['pocketsflow-untold-every-model-superbot-673c104b', 'pocketsflow-untold-every-model-superbot-673c104b/', 'THEY WONT TELL YOU HOW: "I made this in 1 prompt", then the how. DeepSeek V4 Flash, Meshy 5, MiniMax Hailuo 02, ElevenLabs, Opus 5.5 timelapse, Superbot renders the Pocketsflow launch film (clip @achxvi)', 'Ad spots'],
+  // THEY WONT TELL YOU HOW, the Superbot cut (2026-09-27): a second fork of the dark-souls v4 routing. A fictional
+  // X post (@julesbuilds, "I made this in 1 prompt", the embedded video @achxvi's Opus 5.5 Pocketsflow launch film)
+  // pushes in, the word column lands one word at a time, then one chat takes "make a launch video for Pocketsflow":
+  // DeepSeek V4 Flash, Meshy 5, MiniMax Hailuo 02, ElevenLabs, Opus 5.5 in Remotion, Superbot plays the real clip
+  // (animations/they-wont-tell-you-how-superbot-fccab6d9/CREDITS.txt).
+  ['they-wont-tell-you-how-superbot-fccab6d9', 'they-wont-tell-you-how-superbot-fccab6d9/', 'THEY WONT TELL YOU HOW: a “I made this in 1 prompt” post, then make a launch video for Pocketsflow: DeepSeek V4 Flash researches, Meshy 5 models the mascot, MiniMax Hailuo 02 animates, ElevenLabs scores, Opus 5.5 cuts it in Remotion, Superbot plays (video @achxvi)', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

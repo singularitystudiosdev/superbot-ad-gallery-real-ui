@@ -1,0 +1,14 @@
+Pocketsflow media (img/pf/). Nothing here is hand-drawn or generated: every file is cut with ffmpeg from one source.
+
+Source: @achxvi, "Opus 5.5 did this in 15 minutes. This is INSANE", Pocketsflow promo video (15.06s, 1280x720),
+        https://x.com/achxvi/status/2103918792845963545
+        (c) @achxvi / Pocketsflow. Used as the subject of this ad (the post it answers); not relicensed.
+
+pf-launch.mp4         source 5.5s to 15.0s (9.5s), 1280x720, 30fps, no audio, h264 high, keyframe every 15 frames,
+                      faststart. The store builds on the phone, Apple Pay checkout, $9/month subscriptions, upsell,
+                      taxes, payouts, "Handled.", "You create. We handle the flow.", then the Pocketsflow end card
+                      ("The payment infrastructure that you deserve.") from clip time ~8.25s. Played by the finale
+                      window in scenes/tabs-assets/beats/play.js.
+pf-launch-poster.jpg  first frame of pf-launch.mp4, the video poster.
+mascot-ref.jpg        the halftone mascot's face at source 0.4s, cropped 480x480 at (670,120) and scaled to 360x360.
+                      The reference still in the Hailuo composer (scenes/tabs-assets/beats/hailuo.js).

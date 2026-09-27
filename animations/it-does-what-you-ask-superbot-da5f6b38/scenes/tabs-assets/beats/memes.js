@@ -1,33 +1,34 @@
-// Gemini, five at once: superbot carries the clips straight on to Gemini, which makes five captioned memes. Each tile
-// resolves out of a blur under its own sweeping band, a beat after the one before. The stills are frames of the
-// official trailer (img/tsn-*.jpg, see img/CREDITS.txt); the captions are set over them here.
+// Gemini, a batch at once: superbot carries straight on to Gemini, which makes more Muse memes. Each tile resolves
+// out of a blur under its own sweeping band, a beat after the one before. The images are real Muse memes posted to
+// Reddit (img/muse-*.jpg, see img/CREDITS.txt); their text is in the image, so they carry no caption strip.
 import { lerp, seg, outCubic, streamCount } from '../../../lib.js';
 
 export const MEMES = [
-  { img: 'tsn-1.jpg', cap: 'me texting Muse at 3am', title: 'me texting Muse at 3am' },
-  { img: 'tsn-2.jpg', cap: 'A million users isn’t cool. You know what’s cool? Muse.', title: 'You know what’s cool? Muse.' },
-  { img: 'tsn-3.jpg', cap: '40 unread from Muse. mid deposition.', title: '40 unread from Muse, mid deposition' },
-  { img: 'tsn-4.jpg', cap: 'the group chat finding out I have Muse', title: 'the group chat finding out I have Muse' },
-  { img: 'tsn-5.jpg', cap: '“You built what?” “Muse.”', title: '“You built what?” “Muse.”' },
+  { img: 'muse-rocketbench.jpg', cap: '', title: 'Muse Spark 1.3 vs GPT-6 Astra on RocketLeagueBench' },
+  { img: 'muse-openweights-wait.jpg', cap: '', title: 'New western open-weight SOTA dropped' },
+  { img: 'muse-filesystem.jpg', cap: '', title: 'I asked Meta’s Muse for its filesystem' },
 ];
+// the first meme (beats/gemini.js), the one posted on its own in beats/reddit.js
+export const HERO = { img: 'muse-weights.png', title: 'Hey, Meta. Where’s those Muse Spark weights?' };
 
-export const memeHTML = (x, m, cls = '') => `<span class="mm ${cls}"><span class="mm-cap">${x.esc(m.cap)}</span><span class="mm-pic"><img src="${x.img(m.img)}" alt=""/></span></span>`;
+export const memeHTML = (x, m, cls = '') => `<span class="mm ${cls}">${m.cap ? `<span class="mm-cap">${x.esc(m.cap)}</span>` : ''}<span class="mm-pic"><img src="${x.img(m.img)}" alt=""/></span></span>`;
 
-const SAY = 'Made 5 more from the clips.';
+const N = MEMES.length;
+const SAY = `Made ${N} more.`;
 
 export default {
   times(r) {
     const T = { r };
-    T.grid = r + 0.25;
-    T.w = MEMES.map((_, i) => [r + 0.4 + i * 0.28, r + 1.25 + i * 0.28]);
-    T.end = T.w[MEMES.length - 1][1] + 1.0;
+    T.grid = r + 0.2;
+    T.w = MEMES.map((_, i) => [r + 0.3 + i * 0.2, r + 1.0 + i * 0.2]);
+    T.end = T.w[MEMES.length - 1][1] + 0.55;
     return T;
   },
   build(k, x) {
     const T = k.T;
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
-    const grid = x.el(`<div class="mm-grid">${MEMES.map((m) => `<span class="mm-cell">${memeHTML(x, m)}<i class="qc-gen"></i></span>`).join('')}</div>`);
-    const genl = x.el(`<div class="mm-genl">${x.tile('gemini')}<span>Creating 5 images</span><b class="mm-n">0/5</b></div>`);
+    const grid = x.el(`<div class="mm-grid" style="--n:${N}">${MEMES.map((m) => `<span class="mm-cell">${memeHTML(x, m, 'mm-fit')}<i class="qc-gen"></i></span>`).join('')}</div>`);
+    const genl = x.el(`<div class="mm-genl">${x.tile('gemini')}<span>Creating ${N} images</span><b class="mm-n">0/${N}</b></div>`);
     const cells = [...grid.children].map((c) => ({ c, mm: c.querySelector('.mm'), gen: c.querySelector('.qc-gen') }));
     const vis = say.firstElementChild, hid = say.lastElementChild, n5 = genl.querySelector('.mm-n'), glab = genl.querySelector('span:not(.qc-tile)');
     let shown = -1;
@@ -39,7 +40,7 @@ export default {
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }
         const gi = outCubic(seg(t, T.grid - 0.1, T.grid + 0.35));
         genl.style.opacity = gi.toFixed(3);
-        const gl = t >= T.w[4][1] ? 'Created 5 images' : 'Creating 5 images';
+        const gl = t >= T.w[N - 1][1] ? `Created ${N} images` : `Creating ${N} images`;
         if (glab.textContent !== gl) glab.textContent = gl;
         grid.style.opacity = gi.toFixed(3);
         let done = 0;
@@ -55,7 +56,7 @@ export default {
           gen.style.opacity = (p >= 1 ? 0 : 1 - seg(p, 0.8, 1)).toFixed(3);
           if (t >= b) done++;
         });
-        const lab = `${done}/5`;
+        const lab = `${done}/${N}`;
         if (n5.textContent !== lab) n5.textContent = lab;
       },
     };

@@ -2,6 +2,7 @@
 // layout (subreddit row, title, the image over its blurred backdrop, vote and comment pills) and the first votes
 // and comments tick in. "u/sam" is made up.
 import { lerp, seg, outCubic, outBack, streamCount } from '../../../lib.js';
+import { HERO } from './memes.js?v=2';
 
 const SAY = 'Posted it to r/memes.';
 export const ICON = {
@@ -15,21 +16,21 @@ export const fmt = (n) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e4 ? (n
 export default {
   times(r) {
     const T = { r };
-    T.chip = r + 0.25;
-    T.chipDone = r + 0.85;
-    T.card = r + 0.7;
-    T.votes = [T.card + 0.5, T.card + 2.0];
-    T.end = T.card + 2.3;
+    T.chip = r + 0.18;
+    T.chipDone = r + 0.65;
+    T.card = r + 0.5;
+    T.votes = [T.card + 0.35, T.card + 1.35];
+    T.end = T.card + 1.55;
     return T;
   },
   build(k, x) {
     const T = k.T;
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
     const row = x.el('<div class="dd-chiprow"><div class="ch-tool"><span class="spin"></span><span class="ch-tool-t">Posting to r/memes</span></div></div>');
-    const meme = x.img('muse-meme.png');
+    const meme = x.img(HERO.img);
     const card = x.el(`<div class="rd-post">
       <div class="rd-head"><img class="rd-sub" src="${x.brand('reddit-logo.svg')}" alt=""/><b>r/memes</b><span>• just now</span><em class="rd-by">u/sam</em></div>
-      <div class="rd-title">Muse really said check your messages</div>
+      <div class="rd-title">${x.esc(HERO.title)}</div>
       <div class="rd-media" style="--bg:url('${meme}')"><img src="${meme}" alt="Muse meme"/></div>
       <div class="rd-acts"><span class="rd-pill rd-vote">${ICON.up}<b class="rd-n">1</b>${ICON.down}</span><span class="rd-pill">${ICON.comment}<b class="rd-c">0</b></span><span class="rd-pill">${ICON.share}Share</span></div>
     </div>`);

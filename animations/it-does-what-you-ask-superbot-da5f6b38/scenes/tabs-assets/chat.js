@@ -5,19 +5,19 @@
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import gemini from './beats/gemini.js?v=1';
-import reddit from './beats/reddit.js?v=1';
-import youtube from './beats/youtube.js?v=1';
-import memes from './beats/memes.js?v=1';
-import redditBatch from './beats/reddit-batch.js?v=1';
-import stats from './beats/stats.js?v=1';
-import doordash from './beats/doordash.js?v=1';
+import gemini from './beats/gemini.js?v=2';
+import reddit from './beats/reddit.js?v=2';
+import youtube from './beats/youtube.js?v=2';
+import memes from './beats/memes.js?v=2';
+import redditBatch from './beats/reddit-batch.js?v=2';
+import stats from './beats/stats.js?v=2';
+import doordash from './beats/doordash.js?v=2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
 const bump = (p) => Math.sin(Math.PI * clamp(p));
 
-export const CHAT_T0 = 1.6; // the empty state has settled; the first ask starts typing
+export const CHAT_T0 = 0.75; // the empty state has settled; the first ask starts typing
 
 const APPS = {
   codex: { name: 'GPT-5 Codex', logo: brand('openai-logo.svg'), sub: '' },
@@ -43,16 +43,16 @@ export const BEATS = (() => {
   return ASKS.map((a) => {
     const k = { ...a, s };
     if (a.ask) {
-      k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
-      k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.35;   // superbot's routing chip lands
+      k.typeEnd = s + Math.min(0.55, 0.1 + a.ask.length * 0.009);
+      k.send = k.typeEnd + 0.05;
+      k.sw = k.send + 0.18;   // superbot's routing chip lands
     } else {
       k.typeEnd = k.send = s;
-      k.sw = s + 0.2;         // superbot carries on without being asked
+      k.sw = s + 0.1;         // superbot carries on without being asked
     }
-    k.swap = k.sw + 0.22;     // the platform chip moves to the app
-    k.done = k.sw + 0.65;     // the chip resolves
-    k.reply = k.done + 0.08;  // the app answers
+    k.swap = k.sw + 0.15;     // the platform chip moves to the app
+    k.done = k.sw + 0.42;     // the chip resolves
+    k.reply = k.done + 0.04;  // the app answers
     k.T = a.mod.times(k.reply);
     s = k.T.end;
     return { k };

@@ -19,11 +19,11 @@ const PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg>';
 export default {
   times(r) {
     const T = { r };
-    T.chip = r + 0.2;
-    T.card = r + 0.45;
-    T.hit = CLIPS.map((_, i) => T.card + 0.6 + i * 0.42);
-    T.chipDone = T.hit[CLIPS.length - 1] + 0.35;
-    T.end = T.chipDone + 0.8;
+    T.chip = r + 0.15;
+    T.card = r + 0.35;
+    T.hit = CLIPS.map((_, i) => T.card + 0.45 + i * 0.32);
+    T.chipDone = T.hit[CLIPS.length - 1] + 0.25;
+    T.end = T.chipDone + 0.45;
     return T;
   },
   build(k, x) {

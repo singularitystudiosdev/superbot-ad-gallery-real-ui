@@ -41,7 +41,7 @@
 #s-tabs .sbsite.ask .hub .mm-genl .qc-tile { width: 18px; height: 18px; border-radius: 999px; }
 #s-tabs .sbsite.ask .hub .mm-genl .qc-tile img { width: 12px; height: 12px; }
 #s-tabs .sbsite.ask .hub .mm-n { font: 600 10px/16px var(--font-mono); color: #e5e5ea; }
-#s-tabs .sbsite.ask .hub .mm-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; width: min(620px, 100%); opacity: 0; }
+#s-tabs .sbsite.ask .hub .mm-grid { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: 8px; width: min(620px, 100%); opacity: 0; }
 #s-tabs .sbsite.ask .hub .mm-cell { position: relative; border-radius: 10px; overflow: hidden; background: #111; box-shadow: 0 0 0 1px #2a2a2e, 0 10px 24px rgba(0,0,0,.45); opacity: 0; }
 #s-tabs .sbsite.ask .hub .mm-cell .qc-gen { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(150,130,255,.38), transparent); pointer-events: none; }
 #s-tabs .sbsite.ask .hub .mm { display: flex; flex-direction: column; background: #fff; }
@@ -54,6 +54,8 @@
 #s-tabs .sbsite.ask .hub .mm-sm .mm-cap { display: none; }
 #s-tabs .sbsite.ask .hub .mm-sm .mm-pic { aspect-ratio: auto; height: 100%; }
 #s-tabs .sbsite.ask .hub .mm-raw .mm-pic img { object-position: 50% 0; }
+#s-tabs .sbsite.ask .hub .mm-fit { background: #000; }
+#s-tabs .sbsite.ask .hub .mm-fit .mm-pic img { object-fit: contain; }
 
 /* ---- Reddit post ---- */
 #s-tabs .sbsite.ask .hub .rd-post { width: 380px; padding: 10px 12px 9px; border-radius: 14px; background: #0b1416; box-shadow: 0 0 0 1px #2a3236, 0 12px 30px rgba(0,0,0,.45); color: #f2f4f5; opacity: 0; }

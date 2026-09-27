@@ -5,7 +5,7 @@
 // (tabs-assets/chat.js). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=1';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=2';
 import { lerp, seg, outCubic, inOutCubic } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
@@ -14,10 +14,12 @@ const FIRST = BEATS[0].k;
 
 let el = null;
 
-// the design box: a thread-wide hub, scaled so it fills the frame width (narrow ratios keep a readable column)
+// the design box: a thread-wide hub, scaled so it fills the frame width (narrow ratios keep a readable column).
+// 4:3-ish frames get a narrower box, so the thread is drawn larger instead of leaving the extra height empty
 function geo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
-  const DW = Math.max(560, Math.min(960, W / 2));
+  const ar = W / H;
+  const DW = ar > 1.2 && ar < 1.6 ? Math.max(560, W / 2.4) : Math.max(560, Math.min(960, W / 2));
   const k = W / DW, DH = H / k;
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';

@@ -1,7 +1,7 @@
 // Reddit, the report: how the six posts are doing. Three KPI tiles count up (upvotes, comments, views), a "#1 on
 // r/memes today" badge pops, and the top three posts' bars grow to their upvotes. The numbers are made up.
 import { lerp, seg, outCubic, outBack, streamCount } from '../../../lib.js';
-import { MEMES, memeHTML } from './memes.js?v=1';
+import { MEMES, HERO, memeHTML } from './memes.js?v=2';
 import { fmt, ICON } from './reddit.js?v=1';
 
 const SAY = 'They’re doing amazing. Your Muse memes are blowing up.';
@@ -11,19 +11,19 @@ const KPIS = [
   { v: 2100000, l: 'views', d: '+540%' },
 ];
 const TOP = [
-  { m: MEMES[1], v: 31800 },
-  { m: MEMES[0], v: 22400 },
-  { m: { img: '', cap: '', title: 'Muse really said check your messages' }, v: 14900, src: 'muse-meme.png' },
+  { m: { img: '', cap: '', title: HERO.title }, v: 31800, src: HERO.img },
+  { m: MEMES[1], v: 22400 },
+  { m: MEMES[0], v: 14900 },
 ];
 
 export default {
   times(r) {
     const T = { r };
-    T.card = r + 0.35;
-    T.count = [T.card + 0.35, T.card + 1.6];
-    T.badge = T.card + 1.1;
-    T.bars = TOP.map((_, i) => [T.card + 0.7 + i * 0.18, T.card + 1.7 + i * 0.18]);
-    T.end = T.card + 3.0;
+    T.card = r + 0.25;
+    T.count = [T.card + 0.3, T.card + 1.3];
+    T.badge = T.card + 0.9;
+    T.bars = TOP.map((_, i) => [T.card + 0.55 + i * 0.15, T.card + 1.35 + i * 0.15]);
+    T.end = T.card + 2.1;
     return T;
   },
   build(k, x) {
@@ -31,7 +31,7 @@ export default {
     const say = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SAY)}</span></div>`);
     const thumb = (p) => (p.src ? `<span class="mm mm-sm mm-raw"><span class="mm-pic"><img src="${x.img(p.src)}" alt=""/></span></span>` : memeHTML(x, p.m, 'mm-sm'));
     const card = x.el(`<div class="st-card">
-      <div class="st-head"><img src="${x.brand('reddit-logo.svg')}" alt=""/><b>Your Muse posts</b><span>6 posts • r/memes • last 3 hours</span><em class="st-badge">#1 on r/memes today</em></div>
+      <div class="st-head"><img src="${x.brand('reddit-logo.svg')}" alt=""/><b>Your Muse posts</b><span>${MEMES.length + 1} posts • r/memes • last 3 hours</span><em class="st-badge">#1 on r/memes today</em></div>
       <div class="st-kpis">${KPIS.map((q) => `<span class="st-kpi"><b>0</b><small>${q.l}</small><i>${q.d}</i></span>`).join('')}</div>
       <div class="st-rows">${TOP.map((p) => `<div class="st-row"><span class="st-th">${thumb(p)}</span><span class="st-mid"><b>${x.esc(p.m.title)}</b><span class="st-track"><i></i></span></span><span class="st-v">${ICON.up}<b>0</b></span></div>`).join('')}</div>
     </div>`);

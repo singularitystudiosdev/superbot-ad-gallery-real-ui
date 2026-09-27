@@ -2,10 +2,23 @@ img CREDITS (it-does-what-you-ask)
 
 tsn-1.jpg .. tsn-5.jpg   Stills from "THE SOCIAL NETWORK - Official Trailer [2010] (HD)", Sony Pictures
                          Entertainment, https://www.youtube.com/watch?v=lB95KLmpLR4 (frames at 0:56, 1:46, 2:11,
-                         1:34, 1:21; letterbox cropped, 960px wide). Fetched 2026-09-25. Used as the pulled clips and
-                         as the backgrounds of the five memes; the captions are set over them in beats/memes.js.
-muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+                         1:34, 1:21; letterbox cropped, 960px wide). Fetched 2026-09-25. Used as the pulled clips
+                         in beats/youtube.js.
+
+Real Muse (Meta Muse Spark) memes, as posted to Reddit. Fetched 2026-09-26; scores as of that date.
+muse-weights.png         "Hey, Meta. Where's those Muse Spark weights?", u/RishiFurfox, r/LocalLLaMA, 537 upvotes,
+                         2026-09-16. https://www.reddit.com/r/LocalLLaMA/comments/1whqm2c/ (i.redd.it/9ka4k65h6uph1.png)
+                         The first meme (beats/gemini.js), the single post (beats/reddit.js) and the top stats row.
+muse-rocketbench.jpg     "Meta's Muse Spark 1.3 Max vs GPT-6 Astra on RocketLeagueBench", u/stealthispost,
+                         r/accelerate, 148 upvotes; originally posted on X by @LLMJunky
+                         (https://x.com/LLMJunky/status/2096262579815342093). Video thumbnail, 640px.
+                         https://www.reddit.com/r/accelerate/comments/1w8x0ha/
+muse-openweights-wait.jpg "Today made me realize just how bad things have gotten without Meta", u/ForsookComparison,
+                         r/LocalLLaMA, 322 upvotes, 2026-06-04. https://www.reddit.com/r/LocalLLaMA/comments/1twqvmp/
+                         (i.redd.it/eyny8512aa5h1.jpeg, resized to 800px)
+muse-filesystem.jpg      "Meta Muse appears to be excited to give away its system data", u/sn2006gy, r/LocalLLaMA,
+                         249 upvotes (link preview card, 640px). https://www.reddit.com/r/LocalLLaMA/comments/1wpbeb7/
 burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
                          ../brand/CREDITS.txt (public domain, NCI).
 
-The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
+The Reddit handle "u/sam", the subreddit and the post stats shown in the spot are made up.

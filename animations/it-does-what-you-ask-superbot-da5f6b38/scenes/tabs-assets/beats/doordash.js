@@ -19,10 +19,10 @@ const STAR = '<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 
 export default {
   times(r) {
     const T = { r };
-    T.chipIn = [r + 0.25, r + 0.55, r + 0.85];
-    T.card = r + 1.2;
-    T.placed = T.card + 1.3;
-    T.chipDone = [r + 0.6, r + 1.15, T.placed];
+    T.chipIn = [r + 0.2, r + 0.42, r + 0.64];
+    T.card = r + 0.9;
+    T.placed = T.card + 1.1;
+    T.chipDone = [r + 0.5, r + 0.85, T.placed];
     T.eta = T.placed + 0.4;
     T.end = T.eta + 1.1;
     return T;

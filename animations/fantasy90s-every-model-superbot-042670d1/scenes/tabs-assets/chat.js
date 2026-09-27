@@ -131,19 +131,6 @@ function timeBeats(asks) {
 export const BEATS = timeBeats(VARIANT);
 export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.2;
 
-// the camera punch (scenes/tabs.js) that emphasises every model switch: it eases in over the chip's own
-// resolve (PUNCH_IN), holds while the app answers, then glides back out from PUNCH_HOLD after the reply
-// until PUNCH_OUT later. A product of two clamped easings, so it is a pure, continuous function of t.
-export const PUNCH_IN = 0.32, PUNCH_HOLD = 0.15, PUNCH_OUT = 0.85;
-export function switchPunch(c, t) {
-  let amt = 0;
-  for (const p of c.punch) {
-    const a = inOutCubic(seg(t, p.sw, p.sw + PUNCH_IN)) * (1 - inOutCubic(seg(t, p.out, p.out + PUNCH_OUT)));
-    if (a > amt) amt = a;
-  }
-  return amt;
-}
-
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
@@ -189,20 +176,6 @@ export function mountChat(hub) {
   // scroll marks: after each time, the feed's fold glides to that element's bottom
   const scroll = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
 
-  // one camera punch per routing chip, released PUNCH_HOLD after the app answers (scenes/tabs.js reads both)
-  const punch = beats.flatMap((b) => b.sws.map((s) => ({ sw: s.c.sw, out: b.k.reply + PUNCH_HOLD })));
-  // the routing chip's column centre in the site's layout px, where the camera leans at each switch. Read
-  // through offsetParent, so the camera transform and the thread's scroll do not move it: a constant for
-  // one layout, which is what keeps the punch a pure function of t. refocus() reruns when the frame resizes.
-  const site = hub.closest('.sbsite');
-  const focusX = () => {
-    const chip = beats[0].sws[0] && beats[0].sws[0].sw;
-    if (!chip || !site) return null;
-    let x = 0, n = chip;
-    while (n && n !== site) { x += n.offsetLeft; n = n.offsetParent; }
-    return n === site ? x + chip.offsetWidth / 2 : null;
-  };
-
   // the composer's platform chip names the model, then follows the routed app
   const plat = hub.querySelector('.rc-plat');
   const cat = plat.querySelector('.rc-cat');
@@ -217,11 +190,10 @@ export function mountChat(hub) {
 
   const ph = hub.querySelector('.rc-ph');
   const chat = {
-    hub, pointer, feed, inner, beats, scroll, punch, focus: null, refocus() { chat.focus = focusX(); },
+    hub, pointer, feed, inner, beats, scroll,
     plat, pIcon, pImg, pMark, pLabel,
     ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'codex',
   };
-  chat.refocus();
   return chat;
 }
 

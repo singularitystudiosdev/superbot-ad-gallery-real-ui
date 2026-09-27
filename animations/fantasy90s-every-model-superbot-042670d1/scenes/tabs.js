@@ -5,29 +5,25 @@
 // (tabs-assets/chat.js, ?v=1..3 picks the routing). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, switchPunch, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=13';
-import { clamp, lerp, seg, outCubic, inOutCubic } from '../lib.js';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=14';
+import { lerp, seg, outCubic, inOutCubic } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
 const H = 1080;
 const FIRST = BEATS[0].k;
-// the camera punch at each model switch: +20% zoom, leaning PUNCH_LEAN of the way to the routing chip column
-const PUNCH_AMP = 0.2, PUNCH_LEAN = 0.4;
 
 let el = null;
 
 // the design box: a thread-wide hub, scaled so it fills the frame width (narrow ratios keep a readable column)
 function geo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
-  // pulled back far enough that every sent ask stays in frame through its whole answer (the DoorDash order is
-  // the tallest), so the thread lays out wider than the reference's 960
-  const DW = Math.max(560, Math.min(1480, W / 1.3));
+  // framed like one-agent-full-degen: the thread column fills the frame instead of floating in empty sides
+  const DW = Math.max(560, Math.min(960, W / 2));
   const k = W / DW, DH = H / k;
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';
   el.site.style.setProperty('--dw', DW + 'px');
   el.geo = { W, DW, DH, k, lift: null };
-  if (el.chat) el.chat.refocus();  // the chip column moved with the design box
   return el.geo;
 }
 
@@ -80,18 +76,8 @@ export default {
     // camera: pushed in on the empty state, easing out once the thread starts
     // (a narrow column already fills the frame, so it pushes in less)
     const z0 = g.DW < 700 ? 1.08 : 1.2, z1 = g.DW < 700 ? 1.04 : 1.1;
-    const zBase = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
-    // on every model switch the camera punches in and glides back out (chat.js switchPunch). The pivot is a
-    // blend of the frame centre and the routing chip's column, clamped to the visible window, and slides down
-    // to the live bottom edge as the punch rises — so the newest message stays put and nothing is ever shown
-    // past the design box, while the older turns ride up and fade off the top (.ask-edge).
-    const punch = switchPunch(el.chat, t);
-    const z = zBase * (1 + PUNCH_AMP * punch);
-    const s = g.k * z, halfW = (W / 2) / s, halfH = (H / 2) / s;
-    const fx = el.chat.focus == null ? g.DW / 2 : el.chat.focus;
-    const px = clamp(lerp(g.DW / 2, fx, punch * PUNCH_LEAN), halfW, g.DW - halfW);
-    const py = clamp(lerp(g.DH / 2, g.DH - halfH, punch), halfH, g.DH - halfH);
-    el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${(H / 2).toFixed(2)}px) scale(${s.toFixed(5)}) translate(${(-px).toFixed(2)}px,${(-py).toFixed(2)}px)`;
+    const z = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
+    el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${(g.k * z).toFixed(5)}) translate(${(-g.DW / 2).toFixed(2)}px,${(-g.DH / 2).toFixed(2)}px)`;
 
     // empty state -> thread: the composer glides down to the bottom and the greeting lifts away
     const drop = inOutCubic(seg(t, FIRST.send - 0.08, FIRST.send + 0.42));

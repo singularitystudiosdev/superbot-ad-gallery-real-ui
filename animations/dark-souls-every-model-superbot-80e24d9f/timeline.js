@@ -167,7 +167,7 @@ function measureCaps() {
 
 // ---------- the end card (waffles-website drawEnd) ----------
 function buildEnd(sec) {
-  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>EVERY MODEL.<br> ONE CHAT.</h1></div></div><div class="face"></div></div>';
+  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1></div></div><div class="face"></div></div>';
   const mark = shell.makeMark(220);
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
@@ -191,7 +191,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=11`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=15`)).default;
+    const m = (await import(`./scenes/${id}.js?v=16`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

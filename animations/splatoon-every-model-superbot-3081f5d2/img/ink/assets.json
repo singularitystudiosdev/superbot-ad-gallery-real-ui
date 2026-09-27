@@ -1,0 +1,29 @@
+{
+  "clip": {
+    "file": "inkwave-8s.mp4",
+    "src_start_s": 50.5,
+    "src_end_s": 58.5
+  },
+  "mesh": [
+    { "file": "mesh-1.jpg", "file_glb": "inkling_runner.glb",  "label": "inkling ink-cap and tank backpack", "tris": 8412 },
+    { "file": "mesh-2.jpg", "file_glb": "ink_blaster.glb",     "label": "ink blaster firing a stream", "tris": 5237 },
+    { "file": "mesh-3.jpg", "file_glb": "arena_light_tower.glb","label": "harbour lighthouse arena tower", "tris": 12760 },
+    { "file": "mesh-4.jpg", "file_glb": "ink_arena_floor.glb", "label": "ink-covered arena floor", "tris": 6388 }
+  ],
+  "decal": [
+    { "file": "decal-1.png", "w": 256, "h": 256, "kind": "sprite", "label": "spiky ink star burst" },
+    { "file": "decal-2.png", "w": 256, "h": 256, "kind": "sprite", "label": "round ink blob splat" },
+    { "file": "decal-3.png", "w": 256, "h": 256, "kind": "sprite", "label": "tall dripped ink splat" },
+    { "file": "decal-4.png", "w": 256, "h": 256, "kind": "sprite", "label": "soft round paint splat" },
+    { "file": "decal-5.png", "w": 256, "h": 256, "kind": "sprite", "label": "long drip-streaked ink splat" },
+    { "file": "decal-6.png", "w": 256, "h": 256, "kind": "sprite", "label": "dense speckled spray splat" }
+  ],
+  "find": [
+    { "file": "find-1.png", "name": "paint target",        "dims": "128x128" },
+    { "file": "find-2.png", "name": "splatter rifle",      "dims": "142x319" },
+    { "file": "find-3.png", "name": "arena crate",         "dims": "70x70" },
+    { "file": "find-4.png", "name": "blue ink hit splat",  "dims": "30x30" },
+    { "file": "find-5.png", "name": "paint bomb",          "dims": "70x70" },
+    { "file": "find-6.png", "name": "bounce pad",          "dims": "70x70" }
+  ]
+}

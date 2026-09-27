@@ -1,0 +1,30 @@
+/* Scrape beat (beats/scrape.js): DeepSeek's asset sweep. The chip's page counter, then one card: four site rows
+   crawling (bar, page count, CC0 hits) over a strip of the decals it kept, each on a transparency swatch. Nothing here
+   transitions: every moving value is written from t in render, so ?t= freezes a frame. Every selector is scoped under
+   the hub and prefixed .sc-. */
+#s-tabs .sbsite .hub .ch-tool .sc-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.sc-done .sc-count { background: #0f2419; color: #3ddc84; }
+
+#s-tabs .sbsite .hub .sc-card { box-sizing: border-box; width: 440px; max-width: 100%; margin: 2px 0 0; padding: 9px 11px 10px; border-radius: 10px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* the site rows: name, crawl bar, page count, hit count */
+#s-tabs .sbsite .hub .sc-sites { display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .sc-row { display: grid; grid-template-columns: 112px 1fr 62px 58px; align-items: center; column-gap: 9px; height: 17px; opacity: 0; font: 500 10.5px/17px var(--font-mono, ui-monospace, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .sc-site { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #c3c3ca; }
+#s-tabs .sbsite .hub .sc-bar { height: 4px; border-radius: 999px; overflow: hidden; background: #1f1f23; }
+#s-tabs .sbsite .hub .sc-bar i { display: block; height: 100%; border-radius: 999px; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #4d6bfe, #7c8cff); }
+#s-tabs .sbsite .hub .sc-pg { text-align: right; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-hit { text-align: right; color: #63636a; }
+#s-tabs .sbsite .hub .sc-row.on .sc-hit { color: #3ddc84; font-weight: 600; }
+
+/* the kept strip: a label, then six swatches in one row */
+#s-tabs .sbsite .hub .sc-kept { display: flex; align-items: baseline; justify-content: space-between; margin: 10px 0 6px; padding-top: 8px; box-shadow: inset 0 1px 0 #202027; opacity: 0; font: 600 11px/1 var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .sc-kept small { font: 500 10px/1 var(--font-mono, ui-monospace, monospace); color: #63636a; }
+#s-tabs .sbsite .hub .sc-finds { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+#s-tabs .sbsite .hub .sc-find { display: grid; gap: 4px; opacity: 0; transform-origin: 50% 60%; }
+#s-tabs .sbsite .hub .sc-sw { aspect-ratio: 1 / 1; border-radius: 7px; display: flex; align-items: center; justify-content: center;
+  background: repeating-conic-gradient(#26262c 0 25%, #1a1a1f 0 50%) 0 0 / 10px 10px; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .sc-sw img { width: 62%; height: 62%; object-fit: contain; image-rendering: pixelated; }
+#s-tabs .sbsite .hub .sc-cap { display: grid; gap: 1px; text-align: center; font: 500 9.5px/1.15 var(--font-mono, ui-monospace, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .sc-cap b { font-weight: 600; color: #e5e5ea; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-cap small { font-size: 9px; color: #63636a; }

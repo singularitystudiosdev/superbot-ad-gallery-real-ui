@@ -29,6 +29,12 @@ zoom the full-size image or watch the animation play live. Static — no build, 
   the icon placed per frame from an Apple Vision face track (`.tmp/whoareyou/facetrack.swift`,
   `composite.swift`).
 
+- **make a Splatoon game** — one ask in one thread ("make a Splatoon game"), then superbot carries the build
+  forward: Lyria 2 scores the match, Meshy builds the meshes, Gemini paints the arena, Claude Opus 5.5 codes the
+  ink sim, DeepSeek V4 Flash scrapes decal libraries, GitHub takes the repo, and Opus 5.5 launches the game; the
+  spot ends on @JaydenDavisNC's Opus 5.5 Splatoon capture (https://x.com/JaydenDavisNC/status/2103357848961036304).
+  `animations/splatoon-every-model-superbot-3081f5d2/` (7 requests, `?v=3`).
+
 Static image ads (`assets/ads/`):
 
 - **stop burning tokens** · the three-word poster with the superbot icon. Rendered at every

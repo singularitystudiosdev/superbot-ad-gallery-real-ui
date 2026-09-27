@@ -96,6 +96,9 @@ const more = [
   // Lyria scores the match, Meshy models the props, Gemini draws the ink decals, DeepSeek scrapes CC0 prop
   // libraries, GitHub pushes Inkwave, Opus 5.5 codes the game and plays it.
   ['inkwave-every-model-superbot-3f9d27b4', 'inkwave-every-model-superbot-3f9d27b4/', 'make a Splatoon game: Lyria track, Meshy props, Gemini ink decals, Opus 5.5 codes Inkwave, DeepSeek scrapes props, GitHub (7 requests)', 'Ad spots'],
+  // make a Splatoon game (2026-09-26): seven requests in one thread, ending on the Inkwave launch. The closing clip
+  // is @JaydenDavisNC's Opus 5.5 Splatoon capture (game: Inkwave) — https://x.com/JaydenDavisNC/status/2103357848961036304
+  ['splatoon-every-model-v3-superbot-3081f5d2', 'splatoon-every-model-superbot-3081f5d2/?v=3', 'Superbot: make a Splatoon game, every model — Lyria 2 scores it, Meshy builds the meshes, Gemini paints the arena, Opus 5.5 codes the ink sim, DeepSeek V4 Flash scrapes decals, GitHub takes the repo, Opus 5.5 launches Inkwave; ends on @JaydenDavisNC’s Opus 5.5 Splatoon clip (7 requests)', 'Ad spots'],
   // make an animated video about the future (2026-09-26): three structurally different pipelines for one film (?v=1..3), ends on The Steep Part clip.
   // make Dark Souls (2026-09-26): three structurally different routings of one page (?v=1..3), coding always Opus 5.5 as result cards, ends on 13s of @The_Alex's Opus 5.5 Dark Souls clip.
   ['dark-souls-every-model-v1-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=1', 'make Dark Souls: ElevenLabs voices the boss, Opus 5.5 builds it, Superbot plays (3 switches)', 'Ad spots'],

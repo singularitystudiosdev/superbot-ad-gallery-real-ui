@@ -1,0 +1,150 @@
+{
+  "source": {
+    "post": "https://x.com/IterIntellectus/status/2103212539895017864",
+    "author": "@IterIntellectus",
+    "text": "holy shit i asked claude to make a video on western civiization",
+    "video": "https://video.twimg.com/amplify_video/2103211525095702528/vid/avc1/1920x1080/q0KsmKcmecu8019Y.mp4",
+    "dims": "1920x1080",
+    "duration_s": 136.433,
+    "fps": 30,
+    "frames": 4093,
+    "audio": "AAC stereo 44.1kHz, music only (no narration), 136.487s",
+    "note": "post text is quoted verbatim (sic: civiization). Constant 30fps (frames 0 to 4092, t = frame/30); every time below is source seconds. Both clips below carry the source music resampled to 48kHz with one shared gain of -1.10 dB"
+  },
+  "film": {
+    "title": "PROMETHEUS",
+    "hud": "PROMETHEVS II",
+    "note": "the top right HUD line spells it with a Roman V, PROMETHEVS II (read off the frames); chapter tags read like XVII · KARDASHEV, see chapters.json hud"
+  },
+  "clip": {
+    "file": "clip-window.mp4",
+    "poster": "poster.jpg",
+    "src_start_s": 1.333333,
+    "src_end_s": 6.766667,
+    "dims": "960x540",
+    "fps": 30,
+    "frames": 163,
+    "duration_s": 5.433333,
+    "audio": {
+      "codec": "aac",
+      "bitrate": "192k",
+      "sample_rate": 48000,
+      "channels": 2,
+      "gain_db": -1.1,
+      "gain_note": "one gain for both files: window then montage as played measured -12.82 LUFS, set to -14.00 LUFS",
+      "lufs": -16.09,
+      "true_peak_dbtp": -2.67,
+      "fade_in_ms": 5
+    },
+    "label": "opening: PROMETHEUS gold title over the flame, STOLE FIRE., then WE NEVER GAVE IT BACK. (from the first clean title frame, source frame 40)"
+  },
+  "montage": {
+    "file": "clip-montage.mp4",
+    "poster": "montage-poster.jpg",
+    "dims": "1920x1080",
+    "fps": 30,
+    "frames": 679,
+    "duration_s": 22.633333,
+    "audio": {
+      "codec": "aac",
+      "bitrate": "192k",
+      "sample_rate": 48000,
+      "channels": 2,
+      "gain_db": -1.1,
+      "gain_note": "one gain for both files: window then montage as played measured -12.82 LUFS, set to -14.00 LUFS",
+      "lufs": -13.58,
+      "true_peak_dbtp": -1.56,
+      "crossfade_ms": 60,
+      "crossfade": "equal-power (qsin) crossfade pre-lapped into the 60 ms before each cut, so the incoming hit lands on the cut; total audio length equals video length; natural tail"
+    },
+    "lufs": -13.58,
+    "cuts": [
+      { "src_start_s": 6.766667, "src_end_s": 8.466667, "out_start_s": 0.0, "out_end_s": 1.7, "frames": 51, "label": "WE NEVER GAVE IT BACK. held over the flame, the fire erupts through BACK. into a white flash (continues clip-window seamlessly)" },
+      { "src_start_s": 8.733333, "src_end_s": 10.933333, "out_start_s": 1.7, "out_end_s": 3.9, "frames": 66, "label": "parchment crowd counter from 20 to 6,000, WE INVENTED DEMOCRACY. slams in red" },
+      { "src_start_s": 24.566667, "src_end_s": 25.666667, "out_start_s": 3.9, "out_end_s": 5.0, "frames": 33, "label": "SPQR slams in red over the line-art Colosseum" },
+      { "src_start_s": 58.066667, "src_end_s": 59.466667, "out_start_s": 5.0, "out_end_s": 6.4, "frames": 42, "label": "1492 numerals burst in red over the caravel, THE MAP WAS BLANK." },
+      { "src_start_s": 68.966667, "src_end_s": 70.066667, "out_start_s": 6.4, "out_end_s": 7.5, "frames": 33, "label": "night register, glowing organ pipes, BEETHOVEN. in gold" },
+      { "src_start_s": 76.266667, "src_end_s": 77.533333, "out_start_s": 7.5, "out_end_s": 8.766667, "frames": 38, "label": "the source's own rapid cuts: 1844 TELEGRAPH., 1876 TELEPHONE., 1879 LIGHT. bulb" },
+      { "src_start_s": 96.466667, "src_end_s": 97.666667, "out_start_s": 8.766667, "out_end_s": 9.966667, "frames": 36, "label": "lunar module on the Moon, ONE SMALL STEP. in gold, flag planted" },
+      { "src_start_s": 106.066667, "src_end_s": 107.166667, "out_start_s": 9.966667, "out_end_s": 11.066667, "frames": 33, "label": "transistor counter chart, EXPO- then NENTIAL. in gold" },
+      { "src_start_s": 120.066667, "src_end_s": 121.666667, "out_start_s": 11.066667, "out_end_s": 12.666667, "frames": 48, "label": "hyperspace burst into TYPE, then III. in gold beside the spiral galaxy" },
+      { "src_start_s": 126.466667, "src_end_s": 136.433333, "out_start_s": 12.666667, "out_end_s": 22.633333, "frames": 299, "label": "hyperspace into THE FIRE IS STILL BURNING., the Freude, schoner Gotterfunken medallion ring around the flame, ACCELERATE. fading to the source's final frame 4092" }
+    ]
+  },
+  "title": { "file": "title.jpg", "w": 1776, "h": 240, "label": "PROMETHEUS gold title over the opening flame" },
+  "flame": [
+    { "file": "flame-1.png", "w": 189, "h": 256, "src_s": 1.967, "label": "opening flame under the PROMETHEUS title, luma keyed" },
+    { "file": "flame-2.png", "w": 171, "h": 256, "src_s": 128.0, "label": "THE FIRE IS STILL BURNING flame, luma keyed" }
+  ],
+  "ring": {
+    "file": "ring.png",
+    "w": 1280,
+    "h": 608,
+    "src_s": 130.5,
+    "label": "medallion ring round the flame from the Freude, schoner Gotterfunken frame, flame included, luma keyed"
+  },
+  "mesh_note": "the .glb names and triangle counts are made up for the spot; the post ships no such files. The thumbnails are real crops",
+  "mesh": [
+    { "file": "mesh-1.jpg", "file_glb": "colosseum.glb", "label": "Colosseum under the SPQR stamp", "tris": 48216 },
+    { "file": "mesh-2.jpg", "file_glb": "pantheon_dome.glb", "label": "Pantheon dome cutaway, STILL STANDING", "tris": 21904 },
+    { "file": "mesh-3.jpg", "file_glb": "saturn_v.glb", "label": "Saturn V and launch tower on the pad", "tris": 15360 },
+    { "file": "mesh-4.jpg", "file_glb": "lunar_module.glb", "label": "Apollo Lunar Module on the surface", "tris": 11872 }
+  ],
+  "art": [
+    { "file": "art-1.jpg", "w": 512, "h": 512, "name": "Rose window", "label": "Notre-Dame rose window, red and blue lancets ringed by gold rosettes" },
+    { "file": "art-2.jpg", "w": 512, "h": 512, "name": "Vitruvian man", "label": "Da Vinci's Vitruvian man in circle and square with red proportion rulers" },
+    { "file": "art-3.jpg", "w": 512, "h": 512, "name": "1492 caravel", "label": "three-masted caravel with red cross sails over the red 1492 numerals" },
+    { "file": "art-4.jpg", "w": 512, "h": 512, "name": "JWST mirror", "label": "James Webb gold hexagon mirror with struts and secondary mirror, tight crop" }
+  ],
+  "decal": [
+    { "file": "decal-1.png", "w": 256, "h": 256, "kind": "plate", "label": "Euclid I.1, red equilateral triangle on AB between two construction circles" },
+    { "file": "decal-2.png", "w": 256, "h": 256, "kind": "plate", "label": "Archimedes lever on its fulcrum lifting the globe" },
+    { "file": "decal-3.png", "w": 256, "h": 256, "kind": "plate", "label": "Arch of Constantine inscribed ROMA AETERNA" },
+    { "file": "decal-4.png", "w": 256, "h": 256, "kind": "plate", "label": "Gutenberg printed page, IN PRINCIPIO ERAT VERBVM" },
+    { "file": "decal-5.png", "w": 256, "h": 256, "kind": "plate", "label": "quill pen on parchment before the first word is written" },
+    { "file": "decal-6.png", "w": 256, "h": 256, "kind": "plate", "label": "Watt beam engine, governor, cylinder, beam and flywheel" }
+  ],
+  "find": [
+    { "file": "find-1.png", "name": "lit candle", "dims": "76x544", "src_s": 38.0, "keyed": false, "alpha": "opaque" },
+    { "file": "find-2.png", "name": "penicillin petri dish", "dims": "349x349", "src_s": 82.0, "keyed": false, "alpha": "disk matte" },
+    { "file": "find-3.png", "name": "DNA double helix", "dims": "276x378", "src_s": 85.4, "keyed": false, "alpha": "opaque" },
+    { "file": "find-4.png", "name": "lunar boot print", "dims": "172x406", "src_s": 100.4, "keyed": true, "alpha": "luma key" },
+    { "file": "find-5.png", "name": "1971 chip die", "dims": "440x333", "src_s": 104.8, "keyed": true, "alpha": "luma key" },
+    { "file": "find-6.png", "name": "iPhone", "dims": "216x416", "src_s": 109.6, "keyed": true, "alpha": "luma key" }
+  ],
+  "peaks": { "file": "peaks.json", "window_ms": 50, "count": 2730 },
+  "chapters": {
+    "file": "chapters.json",
+    "count": 19,
+    "tagged": 17,
+    "eras": 100,
+    "span_s": [0.0, 136.433],
+    "label": "every chapter tag the clip HUD shows (17), plus the untagged prologue and finale, with frame exact cuts, register, tempo and every settled ANNO year / K pair"
+  },
+  "theme": {
+    "file": "theme.css",
+    "vars": {
+      "--pm-parchment": "#d0bc9d",
+      "--pm-parchment-2": "#8c7b66",
+      "--pm-ink": "#100c07",
+      "--pm-red": "#9e3315",
+      "--pm-gold": "#e0ce61",
+      "--pm-gold-hi": "#fff99a",
+      "--pm-night": "#07090f",
+      "--pm-line": "#5f6067",
+      "--pm-line-parchment": "#837057",
+      "--pm-hud-red": "#d83b1d",
+      "--pm-hud-gold": "#f6c764",
+      "--pm-hud-text-night": "#c7c6c1",
+      "--pm-hud-label-night": "#5e5e61",
+      "--pm-hud-text-parchment": "#3a2c1d"
+    },
+    "fonts": {
+      "display": "'Cinzel', 'Trajan Pro', serif",
+      "serif": "'Cormorant Garamond', Garamond, serif",
+      "mono": "'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace"
+    },
+    "hud_tracking": "0.28em",
+    "label": "colour, type and HUD spacing tokens sampled from real clip frames; custom properties on :root only"
+  }
+}

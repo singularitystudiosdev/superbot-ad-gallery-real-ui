@@ -1,0 +1,57 @@
+/* code beat: the writing chip's line counter, and the editor card (file tabs, progress bar, the typing pane that
+   scrolls with the caret, and the status strip). Syntax colours are the editor's own; the chrome and every accent
+   wear the film's HUD: the focused tab is struck in HUD red, a written file settles in HUD gold, the progress bar
+   burns red to gold, and Build OK closes in gold (tokens from img/prometheus/theme.css). Every selector is scoped
+   under #s-tabs .sbsite .hub and every class is prefixed code-. Nothing here transitions: every moving value is
+   written from t in render, so ?t= freezes a frame. */
+#s-tabs .sbsite .hub .ch-tool .code-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.code-done .code-count { background: rgba(246, 199, 100, .14); color: var(--pm-hud-gold); }
+
+/* the editor card */
+#s-tabs .sbsite .hub .code-ed { box-sizing: border-box; width: 468px; max-width: 100%; margin: 2px 0 0; border-radius: 10px; overflow: hidden; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* the file tabs: dim until focused (a red strike and dot), a gold dot and count once written */
+#s-tabs .sbsite .hub .code-tabs { display: flex; height: 26px; background: #141418; box-shadow: inset 0 -1px 0 #202027; }
+#s-tabs .sbsite .hub .code-tab { display: flex; align-items: center; gap: 6px; padding: 0 11px; font: 500 10.5px/1 var(--font-mono, ui-monospace, monospace); color: #6a6a72; box-shadow: inset -1px 0 0 #202027; }
+#s-tabs .sbsite .hub .code-td { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #33333a; }
+#s-tabs .sbsite .hub .code-tl { font-weight: 600; color: #4e4e56; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .code-tab.code-act { background: #0d0d10; color: #e5e5ea; box-shadow: inset -1px 0 0 #202027, inset 0 2px 0 var(--pm-hud-red); }
+#s-tabs .sbsite .hub .code-tab.code-act .code-td { background: var(--pm-hud-red); }
+#s-tabs .sbsite .hub .code-tab.code-on .code-td { background: var(--pm-hud-gold); }
+#s-tabs .sbsite .hub .code-tab.code-on .code-tl { color: var(--pm-hud-gold); }
+
+/* the progress bar under the tabs */
+#s-tabs .sbsite .hub .code-bar { position: relative; height: 2px; overflow: hidden; background: #1a1a1f; }
+#s-tabs .sbsite .hub .code-bar-f { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--pm-hud-red), var(--pm-hud-gold)); }
+
+/* the pane: nine 15px lines tall; the scroller inside slides up to keep the caret in view. The card is 468 wide (the
+   thread column is 471) and the source sets at 10px so the longest chapter row (68 characters, IV and XIV) clears the
+   pane's right edge with room to spare at every ratio. */
+#s-tabs .sbsite .hub .code-view { position: relative; height: 135px; margin: 6px 0 5px; overflow: hidden; }
+#s-tabs .sbsite .hub .code-pane { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .code-scr { display: flex; gap: 9px; padding: 0 8px; will-change: transform; }
+#s-tabs .sbsite .hub .code-gut { display: grid; flex: none; min-width: 14px; font: 10px/15px var(--font-mono, ui-monospace, monospace); color: #45454d; text-align: right; }
+#s-tabs .sbsite .hub .code-gut i { font-style: normal; height: 15px; }
+#s-tabs .sbsite .hub .code-src { flex: 1; min-width: 0; margin: 0; font: 10px/15px var(--font-mono, ui-monospace, monospace); white-space: pre; color: #d7d7de; }
+#s-tabs .sbsite .hub .code-ln { height: 15px; white-space: pre; overflow: hidden; }
+#s-tabs .sbsite .hub .code-caret { display: inline-block; width: 1.5px; height: 12px; vertical-align: -2px; background: var(--pm-gold-hi); opacity: 0; }
+#s-tabs .sbsite .hub .code-k { color: #c58af9; }
+#s-tabs .sbsite .hub .code-t { color: #7fbcff; }
+#s-tabs .sbsite .hub .code-f { color: #82aaff; }
+#s-tabs .sbsite .hub .code-s { color: #9ccc65; }
+#s-tabs .sbsite .hub .code-n { color: #f6a06a; }
+#s-tabs .sbsite .hub .code-c { color: #5f5f68; font-style: italic; }
+#s-tabs .sbsite .hub .code-p { color: #8b8b93; }
+#s-tabs .sbsite .hub .code-x { color: #d7d7de; }
+
+/* the status strip: the current tool step (a hollow dot, then a gold tick once checked) and the caret position */
+#s-tabs .sbsite .hub .code-status { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 22px; padding: 0 10px; background: #141418; box-shadow: inset 0 1px 0 #202027; font: 500 10.5px/22px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .code-st { display: flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .code-st .code-sd { flex: none; box-sizing: border-box; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid #4a4a52; }
+#s-tabs .sbsite .hub .code-st .qc-ok { display: none; flex: none; width: 13px; height: 13px; margin-left: -2px; }
+#s-tabs .sbsite .hub .code-st.code-on { color: #e5e5ea; }
+#s-tabs .sbsite .hub .code-st.code-on .code-sd { display: none; }
+#s-tabs .sbsite .hub .code-st.code-on .qc-ok { display: block; }
+#s-tabs .sbsite .hub .code-st.code-on .qc-ok { stroke: var(--pm-hud-gold); }
+#s-tabs .sbsite .hub .code-st.code-ok { color: var(--pm-hud-gold); }
+#s-tabs .sbsite .hub .code-pos { flex: none; font: 500 10px/22px var(--font-mono, ui-monospace, monospace); color: #6a6a72; white-space: pre; font-variant-numeric: tabular-nums; }

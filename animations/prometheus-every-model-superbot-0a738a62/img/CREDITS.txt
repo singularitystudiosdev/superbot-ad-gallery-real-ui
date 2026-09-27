@@ -1,0 +1,134 @@
+img CREDITS (PROMETHEUS II)
+
+Everything in img/ is under prometheus/. (Provenance: the spot was rethemed from
+mariokart-every-model-superbot-7aec3197; that template's footage folder and its carried-over muse-meme.png and
+burger.jpg were deleted with the retheme, so their entries are gone from this file.)
+
+Added for prometheus-every-model-superbot-0a738a62 (2026-09-27). Source post: @IterIntellectus,
+"holy shit i asked claude to make a video on western civiization" (sic),
+https://x.com/IterIntellectus/status/2103212539895017864 (film: PROMETHEUS, HUD: PROMETHEVS II).
+Every file in prometheus/ is a crop, trim or rectification of real frames of that post's 1080p mp4
+(https://video.twimg.com/amplify_video/2103211525095702528/vid/avc1/1920x1080/q0KsmKcmecu8019Y.mp4,
+1920x1080, 136.4s, 30fps, AAC stereo music), or data read or sampled from it (peaks, chapters, theme tokens).
+Nothing was drawn, painted or generated. Crops are given as w x h @ (x,y) in source pixels; timestamps are
+source seconds.
+
+prometheus/clip-window.mp4     source 1.333-6.767s (PROMETHEUS gold title over the flame, STOLE FIRE., WE NEVER GAVE
+                               IT BACK.; starts on the first clean title frame, after the 0-1.1s icon flicker and
+                               flash), full frame scaled to 960x540, 30fps CFR, h264 crf 18 yuv420p, -g 12, faststart,
+                               AAC 192k 48kHz stereo, gain -1.10 dB, -16.09 LUFS (163 frames, 5.433s)
+prometheus/poster.jpg          that clip's first frame (source 1.333s), 960x540
+prometheus/clip-montage.mp4    the finale montage, full frame 1920x1080 (no crop, no scale), 30fps CFR, h264 crf 18
+                               yuv420p, -g 12, faststart, AAC 192k 48kHz stereo, 679 frames, 22.633s, ten segments
+                               (nine hard cuts) in order, the first segment picking up at the exact source frame and
+                               sample where clip-window ends:
+                                 source   6.767-  8.467s  ->  out  0.000- 1.700s  WE NEVER GAVE IT BACK. (fire to white)
+                                 source   8.733- 10.933s  ->  out  1.700- 3.900s  WE INVENTED DEMOCRACY.
+                                 source  24.567- 25.667s  ->  out  3.900- 5.000s  SPQR
+                                 source  58.067- 59.467s  ->  out  5.000- 6.400s  THE MAP 1492 WAS BLANK.
+                                 source  68.967- 70.067s  ->  out  6.400- 7.500s  BEETHOVEN.
+                                 source  76.267- 77.533s  ->  out  7.500- 8.767s  TELEGRAPH 1844, TELEPHONE, LIGHT
+                                 source  96.467- 97.667s  ->  out  8.767- 9.967s  ONE SMALL STEP.
+                                 source 106.067-107.167s  ->  out  9.967-11.067s  EXPONENTIAL.
+                                 source 120.067-121.667s  ->  out 11.067-12.667s  KARDASHEV TYPE III.
+                                 source 126.467-136.433s  ->  out 12.667-22.633s  THE FIRE IS STILL BURNING. to ACCELERATE.
+                               audio: each segment's own source audio, 60ms equal-power crossfade pre-lapped before
+                               every cut (the incoming hit lands on the cut), natural tail, audio length equals video
+                               length. One gain for both files: window then montage as played measured -12.82 LUFS,
+                               gain -1.10 dB -> -14.00 LUFS; clip-window -16.09 LUFS, clip-montage -13.58 LUFS, true
+                               peak -1.56 dBTP, no limiter needed
+prometheus/montage-poster.jpg  the montage's first frame (source 6.767s), 1920x1080
+
+prometheus/title.jpg           1.967s, 1776x240 @ (59,333): the PROMETHEUS gold title over the opening flame, unscaled
+                               (frame 59, the sharpest clean frame before STOLE FIRE cuts in at 2.2s)
+prometheus/flame-1.png         1.967s, 280x380 @ (820,600) -> 189x256 lanczos: the opening flame under the title
+prometheus/flame-2.png         128.0s, 300x450 @ (810,530) -> 171x256 lanczos: the THE FIRE IS STILL BURNING flame
+prometheus/ring.png            130.5s, 1600x760 @ (160,236) -> 1280x608 lanczos: the medallion ring round the flame
+                               from the Freude, schoner Gotterfunken frame, flame included (it overlaps the front
+                               medallions); crop starts below the caption
+  those three                  luma keyed after the resize: alpha = max(R,G,B)/255 x smoothstep(Rec.709 luma, lo, hi),
+                               colour = RGB x 255/max(R,G,B) (unpremultiplied off black, so edges keep their colour),
+                               straight alpha RGBA png. lo/hi: flame-1 90/150, flame-2 75/130, ring 50/100 (drops the
+                               dial lines and background, keeps the dimmer back medallions). The top 20px (flames) and
+                               24px (ring) of alpha ramp in linearly where the spark column runs on up out of the crop
+
+prometheus/mesh-1.jpg          25.0s, 805x805 @ (912,130) -> 200x200 lanczos: the Colosseum under the SPQR stamp (the
+                               stamp is 1106px wide, wider than the frame is tall, so the square keeps QR and the
+                               right half of the amphitheatre)
+prometheus/mesh-2.jpg          32.0s, 780x780 @ (935,166) -> 200x200 lanczos: the Pantheon dome cutaway, STILL
+                               STANDING
+prometheus/mesh-3.jpg          92.0s, 860x860 @ (760,118) -> 200x200 lanczos: Saturn V and its launch tower on the pad
+                               at T minus 7 (the pad's bottom edge is trimmed where the HUD timeline crosses it)
+prometheus/mesh-4.jpg          96.433s, 715x715 @ (865,124) -> 200x200 lanczos: the Lunar Module just down on the
+                               surface under ONE (the frame before SMALL fades in over its left footpad)
+
+prometheus/art-1.jpg           40.6s, 800x800 @ (962,119) -> 512x512 lanczos: Notre-Dame rose window, red and blue
+                               lancets ringed by gold rosettes
+prometheus/art-2.jpg           53.8s, 790x790 @ (1038,124) -> 512x512 lanczos: Da Vinci's Vitruvian man in circle and
+                               square with red proportion rulers
+prometheus/art-3.jpg           59.3s, 736x736 @ (628,248) -> 512x512 lanczos: three-masted caravel with red cross
+                               sails over the red 1492 numerals
+prometheus/art-4.jpg           103.8s, 516x516 @ (1208,354) -> 512x512 lanczos: James Webb gold hexagon mirror with
+                               struts and secondary mirror, tight crop
+
+prometheus/decal-1.png         17.0s, 640x640 @ (944,313) -> 256x256 lanczos: Euclid I.1, red equilateral triangle on
+                               AB between two construction circles
+prometheus/decal-2.png         18.9s, 1110x555 @ (740,388) -> 240x120 lanczos, centred on 256x256 transparent:
+                               Archimedes lever on its fulcrum lifting the globe
+prometheus/decal-3.png         34.3s, 1320x985 @ (300,0) -> 240x179 lanczos, centred on 256x256 transparent: Arch of
+                               Constantine inscribed ROMA AETERNA
+prometheus/decal-4.png         49.53s, 825x655 @ (965,135) -> 240x191 lanczos, centred on 256x256 transparent:
+                               Gutenberg printed page, IN PRINCIPIO ERAT VERBVM
+prometheus/decal-5.png         74.1s, 500x500 @ (144,182) -> 256x256 lanczos: quill pen on parchment before the first
+                               word is written
+prometheus/decal-6.png         72.45s, 1230x753 @ (690,190) -> 240x147 lanczos, centred on 256x256 transparent: Watt
+                               beam engine, governor, cylinder, beam and flywheel
+
+prometheus/find-1.png          38.0s, 76x544 @ (930,436): lit candle with rising sparks, the monks kept the fire
+prometheus/find-2.png          82.0s, 698x698 @ (1024,292) -> 349x349 lanczos, disk matte on the fitted dish rim: 1928
+                               penicillin petri dish, green mould colony and its clear ring among the bacteria
+prometheus/find-3.png          85.4s, 552x756 @ (1030,148) -> 276x378 lanczos: DNA double helix with red and gold base
+                               pairs, dash marks and orbit arcs behind
+prometheus/find-4.png          100.4s, 344x812 @ (1288,133) -> 172x406 lanczos, soft luma key, straight alpha: Apollo
+                               boot print, ridged sole inside its white and gold rim
+prometheus/find-5.png          104.8s, 880x666 @ (950,340) -> 440x333 lanczos, soft luma key, straight alpha: 1971
+                               chip die, gold outlined blocks lit by orange signal sparks
+prometheus/find-6.png          109.6s, 432x832 @ (1278,125) -> 216x416 lanczos, soft luma key, straight alpha: iPhone
+                               home screen tiled with every era's icons
+  all finds                    saved as RGBA png; 1 unscaled, 2 to 6 downscaled 1/2 (premultiplied lanczos); 1 and 3
+                               opaque, 2 disk matte, 4 to 6 keyed off near-black (silhouette opaque, glow band soft)
+
+prometheus/peaks.json          whole-clip audio envelope of the source track (136.487s, 44.1kHz stereo pooled), 2730
+                               windows of 50ms: linear peak (max abs) and rms, 0..1, 3 decimals, source level before
+                               gain
+prometheus/chapters.json       read off HUD frames: all 4093 frames of the clip (0 to 4092). Chapter tag cuts found by
+                               correlation of the top left tag and checked by eye at n-1, n, n+1; ANNO year and K
+                               value read per frame by glyph template OCR of the bottom corners; II · ROMA 21.9 to
+                               24.0 s (red banner ground) read by eye; register from the tag text polarity; tempo and
+                               frame counter from the top right sub line
+prometheus/theme.css           colours sampled at t / rect (per channel median, BT.709 limited to full RGB):
+                                 --pm-parchment          #d0bc9d  17.000s, 200x160 @ (560,620): open paper below WE DEMANDED PROOF.
+                                 --pm-parchment-2        #8c7b66  17.000s, 80x200 @ (10,300): left edge vignette of the same card
+                                 --pm-ink                #100c07  92.000s, 220x38 @ (200,492): top bar of the countdown numeral 7
+                                 --pm-red                #9e3315  58.500s, 34x220 @ (368,420): stem of the red 1 in THE MAP 1492
+                                 --pm-gold               #e0ce61  66.000s, 30x40 @ (390,420): right leg of the A in BACH.
+                                 --pm-gold-hi            #fff99a  2.500s, 30x80 @ (655,420): M of the PROMETHEUS title beside the flame
+                                 --pm-night              #07090f  128.000s, 360x400 @ (40,300): empty night field, finale
+                                 --pm-line               #5f6067  110.000s, 40x2 @ (1270,1012): unfilled timeline track, night
+                                 --pm-line-parchment     #837057  50.000s, 40x2 @ (1270,1012): unfilled timeline track, parchment
+                                 --pm-hud-red            #d83b1d  50.000s, 300x2 @ (700,1012): timeline progress fill, parchment
+                                 --pm-hud-gold           #f6c764  110.000s, 300x2 @ (700,1012): timeline progress fill, night
+                                 --pm-hud-text-night     #c7c6c1  110.000s, 140x22 @ (96,976): AD 2007 readout glyph pixels
+                                 --pm-hud-label-night    #5e5e61  110.000s, 64x14 @ (96,946): ANNO label glyph pixels
+                                 --pm-hud-text-parchment #3a2c1d  50.000s, 140x22 @ (96,976): AD 1455 readout glyph pixels
+                               mono face picked by per glyph correlation of the HUD digits against IBM Plex Mono and
+                               JetBrains Mono renders (Plex 0.964 vs JetBrains 0.921); --pm-hud-tracking fitted by
+                               pixel exact render match of XVII · KARDASHEV and PROMETHEVS II (IBM Plex Mono SemiBold
+                               17 px, 4.75 px = 0.28em)
+
+prometheus/assets.json         manifest of the above (source, film, labels, dims, source times, cut list, audio
+                               levels, keying, chapter and token summaries). The .glb names and triangle counts it
+                               lists for the mesh beat are made up for the spot; the post ships no such files.
+
+The film title, HUD strings and chapter names (PROMETHEUS, PROMETHEVS II, XVII · KARDASHEV and the rest) are
+the ones shown in the video. Footage, stills and music are from the video by @IterIntellectus (link above).

@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+/*
+  PROMETHEUS retheme tokens, sampled from the post clip (post-1080.mp4, 1920x1080, 30 fps).
+  Every colour is the per channel median of the named rect (x0-x1, y0-y1, source pixels) in the frame at the
+  named time, decoded as BT.709 limited range to full range RGB (the stream is untagged HD H.264, which browsers
+  show as BT.709). MAD = median absolute deviation per channel, a measure of how clean the patch is.
+
+  Mono face: IBM Plex Mono, not JetBrains Mono. Per glyph correlation of the HUD digits and caps (averaged over
+  hundreds of frames) against renders: Plex Mono Bold 0.964, SemiBold 0.957, JetBrains Mono Bold 0.921. The HUD 3 has
+  a round top (JetBrains 3 is flat topped: 0.840 vs Plex 0.982), the HUD 4 matches Plex (0.961 vs 0.835), and the
+  HUD 0 and 1 are wider than its +, as in Plex and unlike JetBrains. So the import loads IBM Plex Mono.
+*/
+:root {
+  /* paper: 17.000 s, rect 560-760, 620-780 (open paper below WE DEMANDED PROOF., left of the Euclid circles), MAD 5 */
+  --pm-parchment: #d0bc9d;
+  /* darker mottled paper / vignette: 17.000 s, rect 10-90, 300-500 (left edge vignette of the same card), MAD 4 */
+  --pm-parchment-2: #8c7b66;
+  /* black type: 92.000 s, rect 200-420, 492-530 (top bar of the countdown numeral 7), MAD 1;
+     the thin display caps agree (14.000 s WE ASKED, eroded glyph interior median #180f07) */
+  --pm-ink: #100c07;
+  /* Roman red accent: 58.500 s, rect 368-402, 420-640 (stem of the red 1 in THE MAP 1492), MAD 1;
+     cross check 17.000 s PROOF. eroded glyph interior median #a02e11 */
+  --pm-red: #9e3315;
+  /* night gold type: 66.000 s, rect 390-420, 420-460 (right leg of the A in BACH.), MAD 2;
+     whole word medians BACH. #ead162, 600,000,000 (99.000 s) #e3d475 */
+  --pm-gold: #e0ce61;
+  /* gold highlight / glow core: 2.500 s, rect 655-685, 420-500 (M of the PROMETHEUS title beside the flame), MAD 0/1/8 */
+  --pm-gold-hi: #fff99a;
+  /* near black ground: 128.000 s, rect 40-400, 300-700 (empty night field of a finale frame, no HUD), MAD 1 */
+  --pm-night: #07090f;
+  /* HUD hairline / timeline track and ticks, night register: 110.000 s, rect 1270-1310, 1012-1014 (unfilled track), MAD 1 */
+  --pm-line: #5f6067;
+
+  /* extra HUD tokens, same method */
+  /* hairline on parchment: 50.000 s, rect 1270-1310, 1012-1014 (unfilled track), MAD 2 */
+  --pm-line-parchment: #837057;
+  /* timeline progress fill and marker, parchment: 50.000 s, rect 700-1000, 1012-1014, MAD 2 */
+  --pm-hud-red: #d83b1d;
+  /* timeline progress fill and marker, night: 110.000 s, rect 700-1000, 1012-1014, MAD 2/2/3 */
+  --pm-hud-gold: #f6c764;
+  /* HUD readout glyphs, night: 110.000 s, median of glyph pixels (R+G+B > 450) in rect 96-236, 976-998 (AD 2007) */
+  --pm-hud-text-night: #c7c6c1;
+  /* HUD small label, night: 110.000 s, median of glyph pixels (R+G+B > 200) in rect 96-160, 946-960 (ANNO) */
+  --pm-hud-label-night: #5e5e61;
+  /* HUD readout glyphs, parchment: 50.000 s, median of glyph pixels (R+G+B < 330) in rect 96-236, 976-998 (AD 1455) */
+  --pm-hud-text-parchment: #3a2c1d;
+
+  --pm-font-display: 'Cinzel', 'Trajan Pro', serif;
+  --pm-font-serif: 'Cormorant Garamond', Garamond, serif;
+  --pm-font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* letter spacing of the tiny spaced mono caps (chapter tag, PROMETHEVS II): fitted by pixel exact render match of
+     IBM Plex Mono SemiBold at 17 px against XVII · KARDASHEV and PROMETHEVS II (NCC 0.966 / 0.972): 4.75 px = 0.28em,
+     character pitch 14.95 px */
+  --pm-hud-tracking: 0.28em;
+  /* the smaller ANNO / KARDASHEV labels: 12.5 to 13 px, 5.25 to 5.5 px tracking = 0.40em to 0.44em (NCC 0.967 / 0.959) */
+  --pm-hud-tracking-label: 0.42em;
+  /* the big year and K readouts: character pitch 20.35 px at about 30.8 px Plex Mono = 0.06em */
+  --pm-hud-tracking-readout: 0.06em;
+  /* weights that match: tags and labels SemiBold, readouts Bold */
+  --pm-hud-weight: 600;
+  --pm-hud-weight-readout: 700;
+  /* HUD font sizes as unitless ratios of the frame height (tag 17 px, label 12.75 px, readout 30.8 px at 1080);
+     use as calc(var(--pm-hud-size-tag) * <frame height>) */
+  --pm-hud-size-tag: 0.01574;
+  --pm-hud-size-label: 0.01181;
+  --pm-hud-size-readout: 0.02852;
+}

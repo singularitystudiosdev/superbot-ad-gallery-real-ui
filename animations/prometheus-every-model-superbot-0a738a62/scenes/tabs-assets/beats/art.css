@@ -1,0 +1,72 @@
+/* Art beat (beats/art.js), chapter III · PLATES: Gemini's four plates of the PROMETHEUS film (real 512x512 crops of
+   the clip's rose window, Vitruvian man, 1492 caravel and JWST mirror) as a 2x2 sheet. Each plate sits on its own
+   register's ground (parchment, or the night field for the JWST plate) inside the HUD's L shaped corner brackets, and
+   carries the clip's caption: the HUD chapter tag in the tracked mono, the headline in Cinzel caps with the accent
+   word in Roman red (gold with a glow at night), and the ANNO year in the HUD mono. Colours and faces are
+   img/prometheus/theme.css tokens. Nothing here transitions: opacity/filter/transform are written from t in render,
+   so ?t= freezes a frame. Every selector is scoped under the hub and prefixed .art-. The "Creating 4 plates" chip
+   reuses the shared .dd-chiprow/.ch-tool tool-chip markup from chat.css; the pill look is repeated on .art-gen so the
+   chip reads the same even before that sheet lands. */
+
+/* the sheet: two plates a row, 6px apart, 300px wide */
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; width: 300px;
+  max-width: 100%; margin-top: 2px; opacity: 0; transform-origin: 50% 0; }
+/* the plate: a square of parchment (or night) under a parchment track hairline */
+#s-tabs .sbsite .hub .art-tile { position: relative; aspect-ratio: 1 / 1; border-radius: 4px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; background: var(--pm-parchment);
+  box-shadow: 0 0 0 1px var(--pm-line-parchment), 0 6px 16px rgba(0, 0, 0, .4); }
+#s-tabs .sbsite .hub .art-tile.art-night { background: var(--pm-night); box-shadow: 0 0 0 1px var(--pm-line), 0 6px 16px rgba(0, 0, 0, .4); }
+#s-tabs .sbsite .hub .art-shot { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0;
+  will-change: filter, transform; }
+/* the HUD's corner brackets, drawn over the plate in the register's hairline colour */
+#s-tabs .sbsite .hub .art-tile::after { content: ""; position: absolute; inset: 4px; z-index: 3; pointer-events: none;
+  --art-br: color-mix(in srgb, var(--pm-hud-text-parchment) 70%, transparent);
+  background:
+    linear-gradient(var(--art-br), var(--art-br)) 0 0 / 7px 1px no-repeat,
+    linear-gradient(var(--art-br), var(--art-br)) 0 0 / 1px 7px no-repeat,
+    linear-gradient(var(--art-br), var(--art-br)) 100% 0 / 7px 1px no-repeat,
+    linear-gradient(var(--art-br), var(--art-br)) 100% 0 / 1px 7px no-repeat,
+    linear-gradient(var(--art-br), var(--art-br)) 0 100% / 7px 1px no-repeat,
+    linear-gradient(var(--art-br), var(--art-br)) 0 100% / 1px 7px no-repeat,
+    linear-gradient(var(--art-br), var(--art-br)) 100% 100% / 7px 1px no-repeat,
+    linear-gradient(var(--art-br), var(--art-br)) 100% 100% / 1px 7px no-repeat; }
+#s-tabs .sbsite .hub .art-night::after { --art-br: var(--pm-hud-text-night); opacity: .55; }
+
+/* the sweeping band: the gold flare the film's cuts bloom with, passing over a plate while it resolves */
+#s-tabs .sbsite .hub .art-band { position: absolute; inset: 0; z-index: 1; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(100deg, transparent 26%, color-mix(in srgb, var(--pm-gold) 38%, transparent) 42%, color-mix(in srgb, var(--pm-gold-hi) 72%, transparent) 50%,
+    color-mix(in srgb, var(--pm-hud-red) 26%, transparent) 57%, transparent 74%); }
+
+/* the ANNO year, top right, as the HUD reads it over that frame */
+#s-tabs .sbsite .hub .art-tag { position: absolute; right: 7px; top: 7px; z-index: 2; opacity: 0; display: flex;
+  flex-direction: column; align-items: flex-end; gap: 1px; padding: 3px 4px 2px; border-radius: 2px;
+  background: color-mix(in srgb, var(--pm-parchment) 86%, transparent); font: var(--pm-hud-weight-readout) 8.5px/1 var(--pm-font-mono);
+  letter-spacing: var(--pm-hud-tracking-readout); color: var(--pm-hud-text-parchment); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .art-tag small { font: var(--pm-hud-weight) 4px/1 var(--pm-font-mono);
+  letter-spacing: var(--pm-hud-tracking-label); margin-right: calc(-1 * var(--pm-hud-tracking-label)); color: var(--pm-line-parchment); }
+#s-tabs .sbsite .hub .art-night .art-tag { background: color-mix(in srgb, var(--pm-night) 80%, transparent); color: var(--pm-hud-text-night); }
+#s-tabs .sbsite .hub .art-night .art-tag small { color: var(--pm-hud-label-night); }
+
+/* the caption: the HUD chapter tag over the clip's headline, on a scrim of the plate's own ground */
+#s-tabs .sbsite .hub .art-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; opacity: 0;
+  display: flex; flex-direction: column; gap: 3px; padding: 16px 8px 7px;
+  background: linear-gradient(to top, var(--pm-parchment) 58%, color-mix(in srgb, var(--pm-parchment) 82%, transparent) 76%, color-mix(in srgb, var(--pm-parchment) 0%, transparent)); }
+#s-tabs .sbsite .hub .art-cap small { display: block; overflow: hidden; white-space: nowrap;
+  font: var(--pm-hud-weight) 4.6px/1 var(--pm-font-mono); letter-spacing: var(--pm-hud-tracking); color: var(--pm-hud-text-parchment); }
+#s-tabs .sbsite .hub .art-cap b { display: block; font: 700 9.4px/1.12 var(--pm-font-display); letter-spacing: .02em;
+  color: var(--pm-ink); }
+#s-tabs .sbsite .hub .art-cap .art-l { display: block; white-space: nowrap; }
+#s-tabs .sbsite .hub .art-cap em { font-style: normal; color: var(--pm-red); }
+#s-tabs .sbsite .hub .art-night .art-cap { background: linear-gradient(to top, var(--pm-night) 58%, color-mix(in srgb, var(--pm-night) 80%, transparent) 76%, color-mix(in srgb, var(--pm-night) 0%, transparent)); }
+#s-tabs .sbsite .hub .art-night .art-cap small { color: var(--pm-hud-text-night); opacity: .8; }
+#s-tabs .sbsite .hub .art-night .art-cap b { color: var(--pm-hud-text-night); text-shadow: 0 0 6px color-mix(in srgb, var(--pm-gold-hi) 28%, transparent); }
+#s-tabs .sbsite .hub .art-night .art-cap em { color: var(--pm-gold); text-shadow: 0 0 6px color-mix(in srgb, var(--pm-gold) 55%, transparent); }
+
+/* the "Creating 4 plates" chip (inside the shared .dd-chiprow/.ch-tool markup) */
+#s-tabs .sbsite .hub .art-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .art-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .art-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .art-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .art-gen .ch-tool-t { color: #ececec; }

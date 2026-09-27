@@ -110,6 +110,10 @@ const more = [
   // make a Mario Kart game (2026-09-27): the splatoon 3081f5d2 routing rethemed to a kart racer, each model switch an
   // item-box roll; ends on @bridgemindai's Opus 5.5 Mario Kart clip (game: Turbo Kart Rally, Palm Cove Circuit).
   ['mariokart-every-model-v3-superbot-7aec3197', 'mariokart-every-model-superbot-7aec3197/?v=3', 'Superbot: make a Mario Kart game, every model: Lyria 2 scores it, Meshy builds the karts, Gemini paints the roster, Opus 5.5 codes the drift physics, DeepSeek V4 Flash scrapes trackside boards, GitHub takes the repo, Opus 5.5 launches Turbo Kart Rally; each switch is an item-box roll; ends on @bridgemindai’s Opus 5.5 Mario Kart clip (7 requests)', 'Ad spots'],
+  // make a video on western civilization (2026-09-27): the mariokart 7aec3197 routing rethemed to Prometheus and the
+  // fire, each model switch a fire pass; ends on @IterIntellectus's Claude-made western civilization film
+  // (https://x.com/IterIntellectus/status/2103212539895017864; animations/prometheus-every-model-superbot-0a738a62/img/prometheus/assets.json).
+  ['prometheus-every-model-v3-superbot-0a738a62', 'prometheus-every-model-superbot-0a738a62/?v=3', 'Superbot: make a video on western civilization, every model: Lyria 2 scores it, Meshy raises the monuments, Gemini paints the plates, Opus 5.5 codes the chapters, DeepSeek V4 Flash sweeps the archive, GitHub takes the repo, Opus 5.5 renders Prometheus II; each switch passes the fire; ends on @IterIntellectus’s Claude-made western civilization film (7 requests)', 'Ad spots'],
   // make a Splatoon game (2026-09-26): the whole ink build in one chat, one model per step. Opus 5.5 writes the
   // brief, DeepSeek V4 Flash scrapes the ink refs, Meshy 5 models the arena, HY-Motion animates the cast,
   // ElevenLabs and Suno score it, Gemini paints the ink, Opus 5.5 codes Inkwave, GitHub ships it, and the last

@@ -1,0 +1,908 @@
+{
+ "source": "post-1080.mp4 = https://video.twimg.com/amplify_video/2103211525095702528/vid/avc1/1920x1080/q0KsmKcmecu8019Y.mp4 (1920x1080, 30 fps CFR, frames 0 to 4092, 136.433 s); every time here is frame/30",
+ "hud": {
+  "top_left_format": "<ROMAN> · <NAME>",
+  "top_left_example": "XVII · KARDASHEV",
+  "top_right": "PROMETHEVS II",
+  "top_right_sub": "♩ = <BPM>   <FRAME>",
+  "top_right_sub_example": "♩ = 150   02910",
+  "top_right_sub_desc": "quarter note (U+2669), space, =, space, tempo, three spaces, then the clip frame number at 30 fps zero padded to 5 digits (02910 is frame 2910, 97.000 s; it ticks every frame). Tempo is 110 for I to III, 128 for IV to VI, 140 for VII to XIII, 150 for XIV to XVII, stepping on the exact chapter cut frame (1179, 1966, 2738). Dimmer than the title line.",
+  "bottom_left_label": "ANNO",
+  "bottom_left_formats": [
+   "508 BC",
+   "AD 1969",
+   "1800 → 2023",
+   "NEXT",
+   "+1,000 YRS",
+   "+100,000 YRS",
+   "∞"
+  ],
+  "bottom_right_label": "KARDASHEV",
+  "bottom_right_format": "K 0.681",
+  "counters": "the ANNO year and the K value are rolling counters: each new value counts in from the previous one with an ease-out over about 8 to 10 frames (0.27 to 0.33 s), then holds. eras[].t_s is the frame the settled value lands. Two long linear counts: AD 1971 to AD 2024 over 105.667 to 107.033 s (K 0.690 to 0.705), and K 0.760 to 2.000 over 118.500 to 119.733 s then 2.000 to 3.000 over 120.133 to 121.300 s.",
+  "labels_register": {
+   "parchment": {
+    "text": "#3a2c1d",
+    "track": "#837057"
+   },
+   "night": {
+    "text": "#c7c6c1",
+    "label": "#5e5e61",
+    "track": "#5f6067"
+   }
+  },
+  "timeline": {
+   "desc": "one thin horizontal track (2 px core, y 1012 to 1013 at 1920x1080) from x 610 to about x 1320 across the lower middle, with 2 px wide ticks (y 1005 to 1020) under small mono labels 500 BC, 0, 500, 1000, 1500, 2000 and ∞ at the end. Tick x: 500 BC 633.5, 0 754.5, 500 875, 1000 996, 1500 1116.5, 2000 1237.5 (0.2413 px per year). A thicker progress fill runs from the track start to the current ANNO year and a small downward triangle marker (y 998 to 1005) sits above the track at the year. Fill and marker are red on the parchment register and gold on the night register; the unfilled track is a warm grey on parchment and a cool grey on night. A second short bar under KARDASHEV (x 1563 to 1824, ticks at K 0, 1, 2, 3, 87 px per K unit) fills gold with K and reaches the end at K 3.000.",
+   "marker_parchment": "#d83b1d",
+   "marker_night": "#f6c764",
+   "track_parchment": "#837057",
+   "track_night": "#5f6067",
+   "ticks_x_1080": {
+    "500 BC": 633.5,
+    "0": 754.5,
+    "500": 875,
+    "1000": 996,
+    "1500": 1116.5,
+    "2000": 1237.5
+   },
+   "px_per_year_1080": 0.2413,
+   "k_bar_1080": {
+    "x0": 1563,
+    "x1": 1824,
+    "ticks_x": [
+     1563.5,
+     1650,
+     1737,
+     1823.5
+    ]
+   }
+  },
+  "geometry_1080": {
+   "corner_brackets": "2 px L shaped hairlines at (55,55), (1864,55), (55,1024), (1864,1024), arms about 25 px, colour of the track",
+   "top_left_tag": "left x 97, cap height 74 to 85, IBM Plex Mono SemiBold 17 px, tracking 0.28em",
+   "top_right_title": "right aligned to about x 1817, cap height 74 to 87, same face and tracking as the tag",
+   "top_right_sub": "right aligned to about x 1819, cap height 104 to 112, about 10.7 px, tracking about 0.41em",
+   "bottom_left": "ANNO label x 96, cap height 949 to 957, about 12.75 px, tracking 0.40em to 0.44em; readout x 96, cap height 977 to 998, IBM Plex Mono Bold about 30.8 px, character pitch 20.35 px (tracking 0.06em)",
+   "bottom_right": "KARDASHEV label right aligned to about x 1818, cap height 949 to 957; K readout right aligned to about x 1822, same size and pitch as the year"
+  },
+  "type": "IBM Plex Mono (not JetBrains Mono): per glyph correlation of the averaged HUD digits and caps against renders is 0.964 for Plex Mono Bold and 0.957 for SemiBold vs 0.921 for JetBrains Mono Bold; the decisive glyphs are 3 (0.982 vs 0.840, JetBrains has a flat topped 3) and 4 (0.961 vs 0.835), and the HUD 0 and 1 are wider than its +, as in Plex and unlike JetBrains."
+ },
+ "chapters": [
+  {
+   "n": 0,
+   "roman": null,
+   "name": null,
+   "tag": null,
+   "start_s": 0.0,
+   "end_s": 8.733,
+   "start_frame": 0,
+   "end_frame": 262,
+   "register": "night",
+   "bpm": null,
+   "eras": [],
+   "hud": "no chapter HUD. 0.000-1.100 s: gold plate flip-through with a top-right counter \"01 / 16\" rising to \"12 / 16\" (tiny gold mono, same row as the later PROMETHEVS II) and gold era captions inside the plates (432 BC Parthenon, AD 1163 rose window, AD 1886 Liberty); 1.1-1.5 s RGB streak transition; then PROMETHEUS / STOLE FIRE. / WE NEVER GAVE IT BACK. title cards; black from about 8.2 s. The full HUD (tag, PROMETHEVS II, ANNO, KARDASHEV, timeline) switches on together at frame 262."
+  },
+  {
+   "n": 1,
+   "roman": "I",
+   "name": "HELLAS",
+   "tag": "I · HELLAS",
+   "start_s": 8.733,
+   "end_s": 21.833,
+   "start_frame": 262,
+   "end_frame": 655,
+   "register": "parchment",
+   "bpm": 110,
+   "eras": [
+    {
+     "t_s": 9.067,
+     "year": "508 BC",
+     "k": "K 0.470"
+    },
+    {
+     "t_s": 11.267,
+     "year": "432 BC",
+     "k": "K 0.470"
+    },
+    {
+     "t_s": 13.4,
+     "year": "387 BC",
+     "k": "K 0.470"
+    },
+    {
+     "t_s": 15.633,
+     "year": "300 BC",
+     "k": "K 0.470"
+    },
+    {
+     "t_s": 17.767,
+     "year": "250 BC",
+     "k": "K 0.470"
+    },
+    {
+     "t_s": 19.833,
+     "year": "240 BC",
+     "k": "K 0.470"
+    },
+    {
+     "t_s": 21.1,
+     "year": "100 BC",
+     "k": "K 0.470"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "roman": "II",
+   "name": "ROMA",
+   "tag": "II · ROMA",
+   "start_s": 21.833,
+   "end_s": 34.933,
+   "start_frame": 655,
+   "end_frame": 1048,
+   "register": "parchment",
+   "bpm": 110,
+   "eras": [
+    {
+     "t_s": 22.133,
+     "year": "47 BC",
+     "k": "K 0.480"
+    },
+    {
+     "t_s": 24.367,
+     "year": "AD 80",
+     "k": "K 0.480"
+    },
+    {
+     "t_s": 26.467,
+     "year": "AD 109",
+     "k": "K 0.480"
+    },
+    {
+     "t_s": 28.567,
+     "year": "AD 117",
+     "k": "K 0.480"
+    },
+    {
+     "t_s": 30.733,
+     "year": "AD 126",
+     "k": "K 0.480"
+    },
+    {
+     "t_s": 33.133,
+     "year": "AD 315",
+     "k": "K 0.480"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "roman": "III",
+   "name": "TENEBRAE",
+   "tag": "III · TENEBRAE",
+   "start_s": 34.933,
+   "end_s": 39.3,
+   "start_frame": 1048,
+   "end_frame": 1179,
+   "register": "night",
+   "bpm": 110,
+   "eras": [
+    {
+     "t_s": 35.3,
+     "year": "AD 476",
+     "k": "K 0.470"
+    },
+    {
+     "t_s": 37.533,
+     "year": "AD 800",
+     "k": "K 0.475"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "roman": "IV",
+   "name": "CATHEDRALIS",
+   "tag": "IV · CATHEDRALIS",
+   "start_s": 39.3,
+   "end_s": 46.8,
+   "start_frame": 1179,
+   "end_frame": 1404,
+   "register": "parchment",
+   "bpm": 128,
+   "eras": [
+    {
+     "t_s": 39.733,
+     "year": "AD 1163",
+     "k": "K 0.490"
+    },
+    {
+     "t_s": 41.433,
+     "year": "AD 1194",
+     "k": "K 0.495"
+    },
+    {
+     "t_s": 43.267,
+     "year": "AD 1215",
+     "k": "K 0.500"
+    },
+    {
+     "t_s": 45.167,
+     "year": "AD 1218",
+     "k": "K 0.510"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "roman": "V",
+   "name": "RINASCITA",
+   "tag": "V · RINASCITA",
+   "start_s": 46.8,
+   "end_s": 58.033,
+   "start_frame": 1404,
+   "end_frame": 1741,
+   "register": "parchment",
+   "bpm": 128,
+   "eras": [
+    {
+     "t_s": 47.2,
+     "year": "AD 1436",
+     "k": "K 0.520"
+    },
+    {
+     "t_s": 48.9,
+     "year": "AD 1455",
+     "k": "K 0.520"
+    },
+    {
+     "t_s": 50.8,
+     "year": "AD 1480",
+     "k": "K 0.520"
+    },
+    {
+     "t_s": 52.6,
+     "year": "AD 1490",
+     "k": "K 0.525"
+    },
+    {
+     "t_s": 54.533,
+     "year": "AD 1512",
+     "k": "K 0.530"
+    },
+    {
+     "t_s": 55.567,
+     "year": "AD 1600",
+     "k": "K 0.530"
+    },
+    {
+     "t_s": 56.367,
+     "year": "AD 1610",
+     "k": "K 0.530"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "roman": "VI",
+   "name": "MARE INCOGNITVM",
+   "tag": "VI · MARE INCOGNITVM",
+   "start_s": 58.033,
+   "end_s": 65.533,
+   "start_frame": 1741,
+   "end_frame": 1966,
+   "register": "parchment",
+   "bpm": 128,
+   "eras": [
+    {
+     "t_s": 58.4,
+     "year": "AD 1492",
+     "k": "K 0.540"
+    },
+    {
+     "t_s": 60.1,
+     "year": "AD 1498",
+     "k": "K 0.545"
+    },
+    {
+     "t_s": 62.033,
+     "year": "AD 1522",
+     "k": "K 0.550"
+    },
+    {
+     "t_s": 64.0,
+     "year": "AD 1607",
+     "k": "K 0.570"
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "roman": "VII",
+   "name": "MVSICA",
+   "tag": "VII · MVSICA",
+   "start_s": 65.533,
+   "end_s": 70.667,
+   "start_frame": 1966,
+   "end_frame": 2120,
+   "register": "night",
+   "bpm": 140,
+   "eras": [
+    {
+     "t_s": 65.867,
+     "year": "AD 1685",
+     "k": "K 0.550"
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "roman": "VIII",
+   "name": "LVX",
+   "tag": "VIII · LVX",
+   "start_s": 70.667,
+   "end_s": 75.833,
+   "start_frame": 2120,
+   "end_frame": 2275,
+   "register": "parchment",
+   "bpm": 140,
+   "eras": [
+    {
+     "t_s": 70.667,
+     "year": "AD 1685",
+     "k": "K 0.550"
+    },
+    {
+     "t_s": 70.933,
+     "year": "AD 1687",
+     "k": "K 0.560"
+    },
+    {
+     "t_s": 72.733,
+     "year": "AD 1769",
+     "k": "K 0.580"
+    },
+    {
+     "t_s": 74.367,
+     "year": "AD 1776",
+     "k": "K 0.590"
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "roman": "IX",
+   "name": "VAPOR",
+   "tag": "IX · VAPOR",
+   "start_s": 75.833,
+   "end_s": 80.967,
+   "start_frame": 2275,
+   "end_frame": 2429,
+   "register": "parchment",
+   "bpm": 140,
+   "eras": [
+    {
+     "t_s": 76.133,
+     "year": "AD 1830",
+     "k": "K 0.600"
+    },
+    {
+     "t_s": 76.467,
+     "year": "AD 1844",
+     "k": "K 0.605"
+    },
+    {
+     "t_s": 76.967,
+     "year": "AD 1876",
+     "k": "K 0.610"
+    },
+    {
+     "t_s": 77.3,
+     "year": "AD 1879",
+     "k": "K 0.615"
+    },
+    {
+     "t_s": 77.733,
+     "year": "AD 1886",
+     "k": "K 0.620"
+    },
+    {
+     "t_s": 78.167,
+     "year": "AD 1895",
+     "k": "K 0.625"
+    },
+    {
+     "t_s": 78.6,
+     "year": "AD 1903",
+     "k": "K 0.630"
+    },
+    {
+     "t_s": 79.1,
+     "year": "AD 1913",
+     "k": "K 0.640"
+    },
+    {
+     "t_s": 79.567,
+     "year": "AD 1859",
+     "k": "K 0.642"
+    },
+    {
+     "t_s": 79.833,
+     "year": "AD 1865",
+     "k": "K 0.644"
+    },
+    {
+     "t_s": 80.4,
+     "year": "AD 1905",
+     "k": "K 0.646"
+    },
+    {
+     "t_s": 80.767,
+     "year": "AD 1926",
+     "k": "K 0.648"
+    }
+   ],
+   "register_spans": [
+    {
+     "t_s": 75.833,
+     "end_s": 76.267,
+     "register": "parchment"
+    },
+    {
+     "t_s": 76.267,
+     "end_s": 76.667,
+     "register": "night"
+    },
+    {
+     "t_s": 76.667,
+     "end_s": 77.1,
+     "register": "parchment"
+    },
+    {
+     "t_s": 77.1,
+     "end_s": 77.533,
+     "register": "night"
+    },
+    {
+     "t_s": 77.533,
+     "end_s": 77.967,
+     "register": "parchment"
+    },
+    {
+     "t_s": 77.967,
+     "end_s": 78.4,
+     "register": "night"
+    },
+    {
+     "t_s": 78.4,
+     "end_s": 78.833,
+     "register": "parchment"
+    },
+    {
+     "t_s": 78.833,
+     "end_s": 79.267,
+     "register": "night"
+    },
+    {
+     "t_s": 79.267,
+     "end_s": 80.967,
+     "register": "parchment"
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "roman": "X",
+   "name": "VITA",
+   "tag": "X · VITA",
+   "start_s": 80.967,
+   "end_s": 86.1,
+   "start_frame": 2429,
+   "end_frame": 2583,
+   "register": "parchment",
+   "bpm": 140,
+   "eras": [
+    {
+     "t_s": 81.333,
+     "year": "AD 1796",
+     "k": "K 0.650"
+    },
+    {
+     "t_s": 82.2,
+     "year": "AD 1928",
+     "k": "K 0.652"
+    },
+    {
+     "t_s": 82.8,
+     "year": "1800 → 2023",
+     "k": "K 0.654"
+    },
+    {
+     "t_s": 84.5,
+     "year": "AD 1953",
+     "k": "K 0.656"
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "roman": "XI",
+   "name": "LIBERTAS",
+   "tag": "XI · LIBERTAS",
+   "start_s": 86.1,
+   "end_s": 87.833,
+   "start_frame": 2583,
+   "end_frame": 2635,
+   "register": "night",
+   "bpm": 140,
+   "eras": [
+    {
+     "t_s": 86.433,
+     "year": "AD 1886",
+     "k": "K 0.658"
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "roman": "XII",
+   "name": "MAGNA OPERA",
+   "tag": "XII · MAGNA OPERA",
+   "start_s": 87.833,
+   "end_s": 89.533,
+   "start_frame": 2635,
+   "end_frame": 2686,
+   "register": "parchment",
+   "bpm": 140,
+   "eras": [
+    {
+     "t_s": 87.933,
+     "year": "AD 1883",
+     "k": "K 0.660"
+    },
+    {
+     "t_s": 88.4,
+     "year": "AD 1889",
+     "k": "K 0.660"
+    },
+    {
+     "t_s": 88.967,
+     "year": "AD 1936",
+     "k": "K 0.660"
+    },
+    {
+     "t_s": 89.167,
+     "year": "AD 1937",
+     "k": "K 0.660"
+    }
+   ],
+   "register_spans": [
+    {
+     "t_s": 87.833,
+     "end_s": 88.267,
+     "register": "parchment"
+    },
+    {
+     "t_s": 88.267,
+     "end_s": 88.667,
+     "register": "night"
+    },
+    {
+     "t_s": 88.667,
+     "end_s": 89.1,
+     "register": "parchment"
+    },
+    {
+     "t_s": 89.1,
+     "end_s": 89.533,
+     "register": "night"
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "roman": "XIII",
+   "name": "ATOMVS",
+   "tag": "XIII · ATOMVS",
+   "start_s": 89.533,
+   "end_s": 91.267,
+   "start_frame": 2686,
+   "end_frame": 2738,
+   "register": "night",
+   "bpm": 140,
+   "eras": [
+    {
+     "t_s": 89.7,
+     "year": "AD 1942",
+     "k": "K 0.660"
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "roman": "XIV",
+   "name": "T-MINUS",
+   "tag": "XIV · T-MINUS",
+   "start_s": 91.267,
+   "end_s": 94.467,
+   "start_frame": 2738,
+   "end_frame": 2834,
+   "register": "parchment",
+   "bpm": 150,
+   "eras": [
+    {
+     "t_s": 91.567,
+     "year": "AD 1969",
+     "k": "K 0.680"
+    }
+   ]
+  },
+  {
+   "n": 15,
+   "roman": "XV",
+   "name": "COSMOS",
+   "tag": "XV · COSMOS",
+   "start_s": 94.467,
+   "end_s": 104.067,
+   "start_frame": 2834,
+   "end_frame": 3122,
+   "register": "night",
+   "bpm": 150,
+   "eras": [
+    {
+     "t_s": 94.467,
+     "year": "AD 1969",
+     "k": "K 0.680"
+    },
+    {
+     "t_s": 96.1,
+     "year": "AD 1969",
+     "k": "K 0.681"
+    },
+    {
+     "t_s": 97.7,
+     "year": "AD 1969",
+     "k": "K 0.682"
+    },
+    {
+     "t_s": 99.367,
+     "year": "AD 1972",
+     "k": "K 0.684"
+    },
+    {
+     "t_s": 101.067,
+     "year": "AD 1977",
+     "k": "K 0.690"
+    },
+    {
+     "t_s": 102.833,
+     "year": "AD 2022",
+     "k": "K 0.729"
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "roman": "XVI",
+   "name": "SILICON",
+   "tag": "XVI · SILICON",
+   "start_s": 104.067,
+   "end_s": 115.267,
+   "start_frame": 3122,
+   "end_frame": 3458,
+   "register": "night",
+   "bpm": 150,
+   "eras": [
+    {
+     "t_s": 104.433,
+     "year": "AD 1971",
+     "k": "K 0.690"
+    },
+    {
+     "t_s": 107.033,
+     "year": "AD 2024",
+     "k": "K 0.705"
+    },
+    {
+     "t_s": 107.533,
+     "year": "AD 1989",
+     "k": "K 0.705"
+    },
+    {
+     "t_s": 109.1,
+     "year": "AD 2007",
+     "k": "K 0.712"
+    },
+    {
+     "t_s": 110.667,
+     "year": "AD 2015",
+     "k": "K 0.718"
+    },
+    {
+     "t_s": 112.267,
+     "year": "AD 2017",
+     "k": "K 0.724"
+    },
+    {
+     "t_s": 113.867,
+     "year": "AD 2024",
+     "k": "K 0.729"
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "roman": "XVII",
+   "name": "KARDASHEV",
+   "tag": "XVII · KARDASHEV",
+   "start_s": 115.267,
+   "end_s": 126.267,
+   "start_frame": 3458,
+   "end_frame": 3788,
+   "register": "night",
+   "bpm": 150,
+   "eras": [
+    {
+     "t_s": 115.267,
+     "year": "AD 2024",
+     "k": "K 0.729"
+    },
+    {
+     "t_s": 117.2,
+     "year": "NEXT",
+     "k": "K 0.760"
+    },
+    {
+     "t_s": 119.733,
+     "year": "+1,000 YRS",
+     "k": "K 2.000"
+    },
+    {
+     "t_s": 121.3,
+     "year": "+100,000 YRS",
+     "k": "K 3.000"
+    },
+    {
+     "t_s": 121.667,
+     "year": "508 BC",
+     "k": "K 0.471"
+    },
+    {
+     "t_s": 121.867,
+     "year": "432 BC",
+     "k": "K 0.472"
+    },
+    {
+     "t_s": 122.067,
+     "year": "300 BC",
+     "k": "K 0.473"
+    },
+    {
+     "t_s": 122.267,
+     "year": "100 BC",
+     "k": "K 0.475"
+    },
+    {
+     "t_s": 122.467,
+     "year": "AD 80",
+     "k": "K 0.477"
+    },
+    {
+     "t_s": 122.667,
+     "year": "AD 126",
+     "k": "K 0.477"
+    },
+    {
+     "t_s": 122.867,
+     "year": "AD 1163",
+     "k": "K 0.504"
+    },
+    {
+     "t_s": 123.067,
+     "year": "AD 1436",
+     "k": "K 0.519"
+    },
+    {
+     "t_s": 123.267,
+     "year": "AD 1455",
+     "k": "K 0.522"
+    },
+    {
+     "t_s": 123.367,
+     "year": "AD 1490",
+     "k": "K 0.536"
+    },
+    {
+     "t_s": 123.467,
+     "year": "AD 1492",
+     "k": "K 0.537"
+    },
+    {
+     "t_s": 123.567,
+     "year": "AD 1610",
+     "k": "K 0.556"
+    },
+    {
+     "t_s": 123.667,
+     "year": "AD 1687",
+     "k": "K 0.568"
+    },
+    {
+     "t_s": 123.767,
+     "year": "AD 1769",
+     "k": "K 0.591"
+    },
+    {
+     "t_s": 123.867,
+     "year": "AD 1776",
+     "k": "K 0.593"
+    },
+    {
+     "t_s": 123.967,
+     "year": "AD 1879",
+     "k": "K 0.632"
+    },
+    {
+     "t_s": 124.067,
+     "year": "AD 1903",
+     "k": "K 0.641"
+    },
+    {
+     "t_s": 124.167,
+     "year": "AD 1905",
+     "k": "K 0.642"
+    },
+    {
+     "t_s": 124.267,
+     "year": "AD 1953",
+     "k": "K 0.668"
+    },
+    {
+     "t_s": 124.367,
+     "year": "AD 1969",
+     "k": "K 0.680"
+    },
+    {
+     "t_s": 124.467,
+     "year": "AD 1971",
+     "k": "K 0.682"
+    },
+    {
+     "t_s": 124.567,
+     "year": "AD 2017",
+     "k": "K 0.723"
+    },
+    {
+     "t_s": 124.667,
+     "year": "AD 2024",
+     "k": "K 0.729"
+    },
+    {
+     "t_s": 124.767,
+     "year": "+100,000 YRS",
+     "k": "K 3.000"
+    },
+    {
+     "t_s": 124.867,
+     "year": "∞",
+     "k": "K 3.000"
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "roman": null,
+   "name": null,
+   "tag": null,
+   "start_s": 126.267,
+   "end_s": 136.433,
+   "start_frame": 3788,
+   "end_frame": 4093,
+   "register": "night",
+   "bpm": null,
+   "eras": [],
+   "hud": "no HUD at all (tag, top-right, ANNO, KARDASHEV and timeline all off from frame 3788). 126.267-126.467 s black, 126.467-126.667 s white-gold flash, then the finale cards (THE FIRE IS STILL BURNING, medallion ring, ACCELERATE) on the night register to the last frame."
+  }
+ ],
+ "notes": "Read off every frame of the clip (4093 frames, 0 to 4092) with a per frame glyph template OCR of the ANNO and K readouts (self test exact on 29 labelled frames, recognition scores 0.9 and up on settled values) and frame exact tag cut detection by correlation, every cut checked by eye at frames n-1, n, n+1. start_s and end_s are frame/30 (end_s = next chapter start_s; frame fields are the first frame of the chapter and the first frame of the next). register is the majority text polarity of the HUD tag over the chapter (dark ink on paper = parchment, light type on black = night); register_spans lists the alternation where a chapter flips. Black frames with no HUD: 65.300 to 65.533 s (end of VI), 94.367 to 94.467 s (end of XIV), 126.267 to 126.467 s. II · ROMA 21.9 to 24.0 s sits on a red and gold banner ground where OCR fails; 47 BC and K 0.480 there were read by eye (roll from 100 BC lands at 22.133 s). XVII 121.667 to 124.867 s is a rapid recap that replays the earlier eras about 3 to 6 frames each before ∞ and K 3.000. Differences from the retheme spec chapter table: at AD 1163 the HUD reads K 0.490 (39.733 s), not 0.500 (K 0.500 is AD 1215 at 43.267 s); at AD 1492 it reads K 0.540 (58.400 s), not 0.550 (K 0.550 is AD 1522 at 62.033 s and AD 1685 at 65.867 s). 508 BC K 0.470, AD 80 K 0.480, AD 1769 K 0.580, AD 1969 K 0.681 and AD 2024 K 0.729 match. T-MINUS is spelled with a U and a hyphen as shown; the other names use V for U (MVSICA, ATOMVS, INCOGNITVM, PROMETHEVS)."
+}

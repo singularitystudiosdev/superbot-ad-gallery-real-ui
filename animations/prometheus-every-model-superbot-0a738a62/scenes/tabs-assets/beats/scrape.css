@@ -1,0 +1,82 @@
+/* Scrape beat (beats/scrape.js), chapter V · ARCHIVE: DeepSeek's archive sweep for the PROMETHEUS film. The chip's
+   record counter, then one parchment card inside the HUD's corner brackets: two archive rows crawling (each a copy of
+   the HUD timeline, its Roman red fill under the red marker, a record count, then the PD / CC hit count) over two
+   strips of what it kept: six line-art plates (landscape swatches, as the plates are) and six artifacts (square), each
+   a real crop of the clip on a parchment transparency swatch, labelled with what it is and the clip's year in the HUD
+   mono, then the fact the sweep checked for each artifact. Colours and faces are img/prometheus/theme.css tokens.
+   Nothing here transitions: every moving value is written from t in render, so ?t= freezes a frame. Every selector
+   is scoped under the hub and prefixed .sc-. */
+#s-tabs .sbsite .hub .ch-tool .sc-count { margin-left: 2px; padding: 0 7px; border-radius: 999px;
+  background: color-mix(in srgb, var(--pm-parchment) 14%, transparent); color: var(--pm-parchment);
+  font: var(--pm-hud-weight) 10px/16px var(--pm-font-mono); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.sc-done .sc-count { background: var(--pm-parchment); color: var(--pm-red); font-weight: var(--pm-hud-weight-readout); }
+
+#s-tabs .sbsite .hub .sc-card { position: relative; box-sizing: border-box; width: 440px; max-width: 100%; margin: 2px 0 0;
+  padding: 9px 11px 8px; border-radius: 6px; opacity: 0; color: var(--pm-ink);
+  background: radial-gradient(125% 115% at 45% 30%, var(--pm-parchment) 48%, color-mix(in srgb, var(--pm-parchment) 62%, var(--pm-parchment-2))),
+    var(--pm-parchment);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pm-line-parchment) 55%, transparent), 0 12px 26px rgba(0, 0, 0, .45); }
+/* the HUD's L shaped corner brackets, in the parchment track brown */
+#s-tabs .sbsite .hub .sc-card::before { content: ""; position: absolute; inset: 4px; pointer-events: none;
+  background:
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 0 0 / 9px 1px no-repeat,
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 0 0 / 1px 9px no-repeat,
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 100% 0 / 9px 1px no-repeat,
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 100% 0 / 1px 9px no-repeat,
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 0 100% / 9px 1px no-repeat,
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 0 100% / 1px 9px no-repeat,
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 100% 100% / 9px 1px no-repeat,
+    linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 100% 100% / 1px 9px no-repeat; }
+
+/* the archive rows: name, crawl timeline, record count, hit count */
+#s-tabs .sbsite .hub .sc-sites { display: grid; gap: 4px; padding: 0 2px; }
+#s-tabs .sbsite .hub .sc-row { display: grid; grid-template-columns: 128px 1fr 68px 50px; align-items: center; column-gap: 9px;
+  height: 17px; opacity: 0; font: 500 10px/17px var(--pm-font-mono); color: var(--pm-hud-text-parchment); }
+#s-tabs .sbsite .hub .sc-site { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: var(--pm-hud-weight); color: var(--pm-ink); }
+/* a copy of the HUD timeline: parchment hairline track, Roman red fill, the red marker riding its head */
+#s-tabs .sbsite .hub .sc-bar { position: relative; height: 6px;
+  background: linear-gradient(var(--pm-line-parchment), var(--pm-line-parchment)) 0 100% / 100% 1px no-repeat; }
+#s-tabs .sbsite .hub .sc-bar i { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; transform-origin: 0 50%;
+  transform: scaleX(0); background: var(--pm-hud-red); }
+#s-tabs .sbsite .hub .sc-bar s { position: absolute; bottom: 2px; left: 0; width: 0; height: 0; margin-left: -3px;
+  border: 3px solid transparent; border-top: 4px solid var(--pm-hud-red); border-bottom: 0; }
+#s-tabs .sbsite .hub .sc-pg { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-hit { text-align: right; white-space: nowrap; color: var(--pm-line-parchment); }
+#s-tabs .sbsite .hub .sc-row.on .sc-hit { color: var(--pm-red); font-weight: var(--pm-hud-weight-readout); letter-spacing: .04em; }
+
+/* the kept strips: a Cinzel label over the parchment hairline, then six swatches in one row (plates, then artifacts) */
+#s-tabs .sbsite .hub .sc-kept { display: flex; align-items: baseline; justify-content: space-between; margin: 7px 2px 5px;
+  padding-top: 6px; box-shadow: inset 0 1px 0 color-mix(in srgb, var(--pm-line-parchment) 60%, transparent); opacity: 0;
+  font: 700 11px/1 var(--pm-font-display); letter-spacing: .06em; color: var(--pm-ink); }
+#s-tabs .sbsite .hub .sc-kept-f { margin-top: 6px; padding-top: 6px; }
+#s-tabs .sbsite .hub .sc-kept small { font: var(--pm-hud-weight) 8.5px/1 var(--pm-font-mono); letter-spacing: .06em;
+  color: var(--pm-hud-text-parchment); opacity: .75; }
+#s-tabs .sbsite .hub .sc-finds { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+#s-tabs .sbsite .hub .sc-find { display: grid; gap: 3px; opacity: 0; transform-origin: 50% 60%; min-width: 0; }
+/* the swatch: a transparency checker in two parchment tones, under the parchment track hairline */
+#s-tabs .sbsite .hub .sc-sw { aspect-ratio: 1 / 1; border-radius: 3px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  background: repeating-conic-gradient(color-mix(in srgb, var(--pm-line-parchment) 20%, transparent) 0 25%, transparent 0 50%) 0 0 / 10px 10px,
+    color-mix(in srgb, var(--pm-parchment) 84%, var(--pm-parchment-2));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pm-line-parchment) 65%, transparent); }
+/* the plates are landscape (the lever, the arch, the page, the engine), so their swatches are 4:3 */
+#s-tabs .sbsite .hub .sc-d .sc-sw { aspect-ratio: 4 / 3; }
+/* clip crops: scaled smooth, never pixelated; cut-outs sit inside the swatch (the tall candle stays whole, contained),
+   the full parchment quill square fills it */
+#s-tabs .sbsite .hub .sc-sw img { width: 86%; height: 86%; object-fit: contain; }
+#s-tabs .sbsite .hub .sc-sw.sc-fill img { width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .sc-cap { display: grid; gap: 1px; text-align: center; font: 500 9px/1.08 var(--pm-font-mono); color: var(--pm-hud-text-parchment); }
+#s-tabs .sbsite .hub .sc-cap b { font-weight: var(--pm-hud-weight); color: var(--pm-ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-cap small { font: var(--pm-hud-weight-readout) 8.5px/1.05 var(--pm-font-mono); letter-spacing: var(--pm-hud-tracking-readout);
+  color: var(--pm-hud-text-parchment); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* the checked facts, one per artifact under the parchment hairline: two columns, each fact in the mono, its status
+   reading checking, then a Roman red CHECKED */
+#s-tabs .sbsite .hub .sc-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px 16px; margin: 7px 2px 0;
+  padding-top: 5px; opacity: 0; box-shadow: inset 0 1px 0 color-mix(in srgb, var(--pm-line-parchment) 60%, transparent); }
+#s-tabs .sbsite .hub .sc-fx { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; min-width: 0;
+  height: 12px; opacity: 0; box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--pm-line-parchment) 28%, transparent); }
+#s-tabs .sbsite .hub .sc-fx code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 500 8.5px/12px var(--pm-font-mono); color: var(--pm-ink); }
+#s-tabs .sbsite .hub .sc-fx em { flex: none; font: var(--pm-hud-weight) 6.5px/12px var(--pm-font-mono); font-style: normal;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--pm-line-parchment); }
+#s-tabs .sbsite .hub .sc-fx.on em { font-weight: var(--pm-hud-weight-readout); color: var(--pm-red); }

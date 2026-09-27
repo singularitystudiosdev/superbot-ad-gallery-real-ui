@@ -1,7 +1,7 @@
 // Act 5, the landing: @kepochnik's BlockHaven gameplay, full frame. The chat scene ends pushed into the Play card
 // (its 16:9 screen covering the frame at 1.01x, the clip's first frame in it, object-fit cover), so this scene opens on
 // exactly that framing (the clip at cover width, S0) and settles in COVER_OUT to the whole game frame at full height,
-// uncropped, with a blurred copy of the same frame filling the side bands, and the creator credit comes up.
+// uncropped, with a blurred copy of the same frame filling the side bands.
 // Source: kep.mp4 8.4 s to 14.467 s (gen/clip.mp4, 1162x840): the player chops an oak log and the block breaks at
 // 5.7 s; the scene holds 0.3 s past the break and the timeline fades it.
 // render(lt) is a pure function of local time: want = clamp(lt, 0, CLIP_END); a frozen frame pauses and seeks to it,
@@ -36,10 +36,9 @@ export default {
   mount(section) {
     section.innerHTML = `
 <canvas class="cl-bands" width="48" height="35"></canvas>
-<div class="cl-frame"><video class="cl-vid" muted playsinline preload="auto" poster="${g('clip-poster.jpg')}" src="${g('clip.mp4')}"></video></div>
-<div class="cl-credit"><b>BlockHaven</b><span>by @kepochnik</span></div>`;
+<div class="cl-frame"><video class="cl-vid" muted playsinline preload="auto" poster="${g('clip-poster.jpg')}" src="${g('clip.mp4')}"></video></div>`;
     const q = (s) => section.querySelector(s);
-    el = { sec: section, bands: q('.cl-bands'), frame: q('.cl-frame'), vid: q('.cl-vid'), credit: q('.cl-credit') };
+    el = { sec: section, bands: q('.cl-bands'), frame: q('.cl-frame'), vid: q('.cl-vid') };
     el.ctx = el.bands.getContext('2d');
     el.vid.muted = true;
     el.vid.defaultMuted = true;
@@ -61,8 +60,6 @@ export default {
     el.frame.style.width = G.fw.toFixed(1) + 'px';
     el.frame.style.transform = `translate(${(W / 2).toFixed(1)}px, ${H / 2}px) scale(${sc.toFixed(4)}) translate(${(-G.fw / 2).toFixed(1)}px, ${-H / 2}px)`;
     el.bands.style.opacity = (0.9 * f).toFixed(3);
-    el.credit.style.opacity = seg(t, 0.5, 0.8).toFixed(3);
-    el.credit.style.transform = `translateY(${(10 * (1 - seg(t, 0.5, 0.8))).toFixed(1)}px)`;
 
     const want = clamp(t, 0, CLIP.END);
     const vid = el.vid;

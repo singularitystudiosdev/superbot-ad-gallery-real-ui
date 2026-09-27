@@ -8,7 +8,7 @@
 //   intro   0 to 2.7   tight on the post, a crosshair comes on, ten hits crack it, it shatters, the particles fall
 //   cards   2.7 to 6.1 "Everyone credits Opus 5.5." / "The secret?" / "It's not just Opus 5.5."
 //   tabs    the hub: one ask, six hand-offs, each opening on its routing chip; ends pushed into the Play card
-//   clip    @kepochnik's BlockHaven gameplay at full frame, with the creator credit
+//   clip    @kepochnik's BlockHaven gameplay at full frame (credited in img/CREDITS.txt)
 //   end     "Every model. One chat." over "It's not just Opus 5.5."
 // The engine: the whole spot is a pure function of t. ?t=<s> freezes a frame, ?t=<s>&play=1 plays on from there,
 // space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock. Scene modules (scenes/<id>.js) are mounted
@@ -186,10 +186,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=3`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=4`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const ns = await import(`./scenes/${id}.js?v=3`);
+    const ns = await import(`./scenes/${id}.js?v=4`);
     const m = ns.default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;

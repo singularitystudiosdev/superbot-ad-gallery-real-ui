@@ -35,8 +35,6 @@ const ads = [
   // phone-cleaner "Optimize Storage" before/after bars, re-drawn for an agent's
   // context window; 2026-09-16)
   ['context-full-poster', 'superbot can fix it!'],
-  ['context-slow-poster', 'superbot can fix it!'],
-  ['context-costly-poster', 'superbot can fix it!'],
 ];
 
 const anims = [
@@ -64,12 +62,8 @@ const items = anims.map(([id, src, title, desc]) => ({
 // Second sweep — ad spots, site variants, hero FX and related pages.
 // [name, pagePath, title, group]
 const more = [
-  ['free-beta-flash-v04-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/v04.html', 'FREE BETA SUPERBOT FLASH · v4 strobe beats', 'Ad spots'],
-  ['free-beta-flash-box-ticker-superbot-ea5050ae', 'free-beta-flash-superbot-ea5050ae/box-ticker.html', 'FREE BETA SUPERBOT FLASH · box logo ticker', 'Ad spots'],
-    ['tabs-chaos-superbot-6f50ea56', 'tabs-chaos-superbot-6f50ea56/', 'KILL THE TABS', 'Ad spots'],
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
-  ['do-that-too-superbot-9b4bf902', 'do-that-too-superbot-9b4bf902/', 'I can do that too!', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
   ['it-does-what-you-ask-superbot-da5f6b38', 'it-does-what-you-ask-superbot-da5f6b38/', 'IT DOES WHAT YOU ASK · meme to Reddit to burger', 'Ad spots'],
   ['every-model-one-chat-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/', 'EVERY MODEL. ONE CHAT. · Connecting to DoorDash', 'Ad spots'],
@@ -109,30 +103,15 @@ const more = [
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],
-  ['agent-switch-superbot-4207ac22', 'agent-switch-superbot-4207ac22/', 'Context carries from agent to agent', 'Ad spots'],
     // the no-switch family (2026-09-25): forked from the context-switch spot, built on the real superbot
   // hub UI, each keeping the same thread while a new model joins the rail. One member still listed.
     ['same-chat-new-model-superbot-693c3a7f', 'same-chat-new-model-superbot-693c3a7f/', 'NEW MODEL. SAME CHAT', 'Ad spots'],
   // the "Superbot just works" family (2026-09-25): built on one kit (animations/just-works-kit-42aac446).
   // superbot aggregates a real ask across platforms and hands back a finished frontend in Chrome.
-    ['just-works-f-series-superbot-42aac446', 'just-works-f-series-superbot-42aac446/', 'Used F-Series, every platform', 'Ad spots'],
-  ['just-works-gift-dad-gpt-superbot-42aac446', 'just-works-gift-dad-gpt-superbot-42aac446/', 'Fishing gifts for dad, under $50', 'Ad spots'],
-  ['just-works-gmail-manage-superbot-42aac446', 'just-works-gmail-manage-superbot-42aac446/', 'Inbox, handled', 'Ad spots'],
-  ['just-works-gmail-receipts-gpt-superbot-42aac446', 'just-works-gmail-receipts-gpt-superbot-42aac446/', 'What I spent this year', 'Ad spots'],
-      ['just-works-standing-desk-gpt-superbot-42aac446', 'just-works-standing-desk-gpt-superbot-42aac446/', 'Standing desks, compared', 'Ad spots'],
-  ['just-works-waiver-night-superbot-42aac446', 'just-works-waiver-night-superbot-42aac446/', 'Waiver night, three leagues', 'Ad spots'],
   ['just-works-waiver-night-gpt-superbot-42aac446', 'just-works-waiver-night-gpt-superbot-42aac446/', 'Waiver night, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-wantlist-watch-superbot-42aac446', 'just-works-wantlist-watch-superbot-42aac446/', 'Discogs wantlist, overnight', 'Ad spots'],
-  ['just-works-wantlist-watch-gpt-superbot-42aac446', 'just-works-wantlist-watch-gpt-superbot-42aac446/', 'Discogs wantlist, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-campsite-watch-superbot-42aac446', 'just-works-campsite-watch-superbot-42aac446/', 'Upper Pines, Jul 3 to 6', 'Ad spots'],
-  ['just-works-campsite-watch-gpt-superbot-42aac446', 'just-works-campsite-watch-gpt-superbot-42aac446/', 'Upper Pines, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-portfolio-overview-superbot-42aac446', 'just-works-portfolio-overview-superbot-42aac446/', 'Schwab + Robinhood, one overview', 'Ad spots'],
-  ['just-works-portfolio-overview-gpt-superbot-42aac446', 'just-works-portfolio-overview-gpt-superbot-42aac446/', 'Schwab + Robinhood, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-pc-backlog-superbot-42aac446', 'just-works-pc-backlog-superbot-42aac446/', 'Steam + Epic + GOG, one backlog', 'Ad spots'],
-  ['just-works-pc-backlog-gpt-superbot-42aac446', 'just-works-pc-backlog-gpt-superbot-42aac446/', 'Steam + Epic + GOG, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-marathon-build-superbot-42aac446', 'just-works-marathon-build-superbot-42aac446/', 'Strava + Garmin + Nike Run Club, one training log', 'Ad spots'],
-  ['just-works-marathon-build-gpt-superbot-42aac446', 'just-works-marathon-build-gpt-superbot-42aac446/', 'Strava + Garmin + Nike Run Club, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-home-audit-superbot-42aac446', 'just-works-home-audit-superbot-42aac446/', 'Home Assistant + Google Home + Alexa + SmartThings + Hue, one home inventory', 'Ad spots'],
   ['just-works-home-audit-gpt-superbot-42aac446', 'just-works-home-audit-gpt-superbot-42aac446/', 'Home Assistant + Google Home + Alexa + SmartThings + Hue, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-trip-wallet-superbot-42aac446', 'just-works-trip-wallet-superbot-42aac446/', 'Gmail + United + Delta + Marriott + Airbnb, one trip timeline', 'Ad spots'],
   ['just-works-trip-wallet-gpt-superbot-42aac446', 'just-works-trip-wallet-gpt-superbot-42aac446/', 'Gmail + United + Delta + Marriott + Airbnb, ChatGPT vs Superbot', 'Ad spots'],
@@ -144,18 +123,8 @@ const more = [
   ['just-works-watchlist-gpt-superbot-42aac446', 'just-works-watchlist-gpt-superbot-42aac446/', 'Letterboxd + IMDb + Trakt, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-ev-hunt-superbot-42aac446', 'just-works-ev-hunt-superbot-42aac446/', 'Tesla + Carvana + CarMax + CarGurus, one Model Y shortlist', 'Ad spots'],
   ['just-works-ev-hunt-gpt-superbot-42aac446', 'just-works-ev-hunt-gpt-superbot-42aac446/', 'Tesla + Carvana + CarMax + CarGurus, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-print-farm-superbot-42aac446', 'just-works-print-farm-superbot-42aac446/', 'Bambu + Prusa + OctoPrint, one print farm check', 'Ad spots'],
-  ['just-works-print-farm-gpt-superbot-42aac446', 'just-works-print-farm-gpt-superbot-42aac446/', 'Bambu + Prusa + OctoPrint, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-meal-plan-superbot-42aac446', 'just-works-meal-plan-superbot-42aac446/', 'Mealie + NYT Cooking + Kroger, one week of dinners', 'Ad spots'],
-  ['just-works-meal-plan-gpt-superbot-42aac446', 'just-works-meal-plan-gpt-superbot-42aac446/', 'Mealie + NYT Cooking + Kroger, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-study-streak-superbot-42aac446', 'just-works-study-streak-superbot-42aac446/', 'Duolingo + Anki + WaniKani + italki, one morning study plan', 'Ad spots'],
-  ['just-works-study-streak-gpt-superbot-42aac446', 'just-works-study-streak-gpt-superbot-42aac446/', 'Duolingo + Anki + WaniKani + italki, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-live-shows-superbot-42aac446', 'just-works-live-shows-superbot-42aac446/', 'Spotify + Ticketmaster + AXS + Dice, one concert overview', 'Ad spots'],
-  ['just-works-live-shows-gpt-superbot-42aac446', 'just-works-live-shows-gpt-superbot-42aac446/', 'Spotify + Ticketmaster + AXS + Dice, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-mech-keys-superbot-42aac446', 'just-works-mech-keys-superbot-42aac446/', 'NovelKeys + CannonKeys + KBDfans + Drop + Keychron, one group-buy overview', 'Ad spots'],
-  ['just-works-mech-keys-gpt-superbot-42aac446', 'just-works-mech-keys-gpt-superbot-42aac446/', 'NovelKeys + CannonKeys + KBDfans + Drop + Keychron, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-photo-gear-superbot-42aac446', 'just-works-photo-gear-superbot-42aac446/', 'Lightroom + B&H + MPB + KEH, one camera gear check', 'Ad spots'],
-  ['just-works-photo-gear-gpt-superbot-42aac446', 'just-works-photo-gear-gpt-superbot-42aac446/', 'Lightroom + B&H + MPB + KEH, ChatGPT vs Superbot', 'Ad spots'],
       ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],
   ['agents-slower-superbot-7bf1a6c6', 'agents-slower-superbot-7bf1a6c6/', 'agents getting slower overtime?', 'Ad spots'],
   ['favorite-color', 'favorite-color/', 'favorite color · the chat pitch', 'Ad spots'],

@@ -1,4 +1,0 @@
-/* agent-switch: the hub's chat (tabs-assets/chat.js) draws only the renderer's own frames (real.css); nothing here
-   styles app UI. The only rule: a word of the streaming Superbot answer that has not arrived yet. */
-#s-tabs .sbsite .rh .as-w { transition: none; }
-#s-tabs .sbsite .rh .as-w.as-hid { opacity: 0; }

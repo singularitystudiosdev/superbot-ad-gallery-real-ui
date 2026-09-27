@@ -1,29 +1,5 @@
 [
   {
-    "id": "free-beta-flash-v04-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · v4 strobe beats",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/v04.html",
-    "thumb": "assets/shots/free-beta-flash-v04-superbot-ea5050ae.png"
-  },
-  {
-    "id": "free-beta-flash-box-ticker-superbot-ea5050ae",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "FREE BETA SUPERBOT FLASH · box logo ticker",
-    "src": "animations/free-beta-flash-superbot-ea5050ae/box-ticker.html",
-    "thumb": "assets/shots/free-beta-flash-box-ticker-superbot-ea5050ae.png"
-  },
-  {
-    "id": "tabs-chaos-superbot-6f50ea56",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "KILL THE TABS",
-    "src": "animations/tabs-chaos-superbot-6f50ea56/",
-    "thumb": "assets/shots/tabs-chaos-superbot-6f50ea56.png"
-  },
-  {
     "id": "youtube-refusal-superbot-7f2c9a41",
     "type": "animation",
     "group": "Ad spots",
@@ -38,14 +14,6 @@
     "title": "1 click publish",
     "src": "animations/waffles-website-superbot-87a583a1/",
     "thumb": "assets/shots/waffles-website-superbot-87a583a1.png"
-  },
-  {
-    "id": "do-that-too-superbot-9b4bf902",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "I can do that too!",
-    "src": "animations/do-that-too-superbot-9b4bf902/",
-    "thumb": "assets/shots/do-that-too-superbot-9b4bf902.png"
   },
   {
     "id": "do-that-too-apps-superbot-e8871e50",
@@ -296,68 +264,12 @@
     "thumb": "assets/shots/one-agent-full-degen-superbot-129bca8b.png"
   },
   {
-    "id": "agent-switch-superbot-4207ac22",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Context carries from agent to agent",
-    "src": "animations/agent-switch-superbot-4207ac22/",
-    "thumb": "assets/shots/agent-switch-superbot-4207ac22.png"
-  },
-  {
     "id": "same-chat-new-model-superbot-693c3a7f",
     "type": "animation",
     "group": "Ad spots",
     "title": "NEW MODEL. SAME CHAT",
     "src": "animations/same-chat-new-model-superbot-693c3a7f/",
     "thumb": "assets/shots/same-chat-new-model-superbot-693c3a7f.png"
-  },
-  {
-    "id": "just-works-f-series-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Used F-Series, every platform",
-    "src": "animations/just-works-f-series-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-f-series-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-gift-dad-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Fishing gifts for dad, under $50",
-    "src": "animations/just-works-gift-dad-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-gift-dad-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-gmail-manage-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Inbox, handled",
-    "src": "animations/just-works-gmail-manage-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-gmail-manage-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-gmail-receipts-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "What I spent this year",
-    "src": "animations/just-works-gmail-receipts-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-gmail-receipts-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-standing-desk-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Standing desks, compared",
-    "src": "animations/just-works-standing-desk-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-standing-desk-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-waiver-night-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Waiver night, three leagues",
-    "src": "animations/just-works-waiver-night-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-waiver-night-superbot-42aac446.png"
   },
   {
     "id": "just-works-waiver-night-gpt-superbot-42aac446",
@@ -368,52 +280,12 @@
     "thumb": "assets/shots/just-works-waiver-night-gpt-superbot-42aac446.png"
   },
   {
-    "id": "just-works-wantlist-watch-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Discogs wantlist, overnight",
-    "src": "animations/just-works-wantlist-watch-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-wantlist-watch-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-wantlist-watch-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Discogs wantlist, ChatGPT vs Superbot",
-    "src": "animations/just-works-wantlist-watch-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-wantlist-watch-gpt-superbot-42aac446.png"
-  },
-  {
     "id": "just-works-campsite-watch-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",
     "title": "Upper Pines, Jul 3 to 6",
     "src": "animations/just-works-campsite-watch-superbot-42aac446/",
     "thumb": "assets/shots/just-works-campsite-watch-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-campsite-watch-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Upper Pines, ChatGPT vs Superbot",
-    "src": "animations/just-works-campsite-watch-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-campsite-watch-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-portfolio-overview-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Schwab + Robinhood, one overview",
-    "src": "animations/just-works-portfolio-overview-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-portfolio-overview-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-portfolio-overview-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Schwab + Robinhood, ChatGPT vs Superbot",
-    "src": "animations/just-works-portfolio-overview-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-portfolio-overview-gpt-superbot-42aac446.png"
   },
   {
     "id": "just-works-pc-backlog-superbot-42aac446",
@@ -424,36 +296,12 @@
     "thumb": "assets/shots/just-works-pc-backlog-superbot-42aac446.png"
   },
   {
-    "id": "just-works-pc-backlog-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Steam + Epic + GOG, ChatGPT vs Superbot",
-    "src": "animations/just-works-pc-backlog-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-pc-backlog-gpt-superbot-42aac446.png"
-  },
-  {
     "id": "just-works-marathon-build-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",
     "title": "Strava + Garmin + Nike Run Club, one training log",
     "src": "animations/just-works-marathon-build-superbot-42aac446/",
     "thumb": "assets/shots/just-works-marathon-build-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-marathon-build-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Strava + Garmin + Nike Run Club, ChatGPT vs Superbot",
-    "src": "animations/just-works-marathon-build-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-marathon-build-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-home-audit-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Home Assistant + Google Home + Alexa + SmartThings + Hue, one home inventory",
-    "src": "animations/just-works-home-audit-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-home-audit-superbot-42aac446.png"
   },
   {
     "id": "just-works-home-audit-gpt-superbot-42aac446",
@@ -544,70 +392,6 @@
     "thumb": "assets/shots/just-works-ev-hunt-gpt-superbot-42aac446.png"
   },
   {
-    "id": "just-works-print-farm-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Bambu + Prusa + OctoPrint, one print farm check",
-    "src": "animations/just-works-print-farm-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-print-farm-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-print-farm-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Bambu + Prusa + OctoPrint, ChatGPT vs Superbot",
-    "src": "animations/just-works-print-farm-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-print-farm-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-meal-plan-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Mealie + NYT Cooking + Kroger, one week of dinners",
-    "src": "animations/just-works-meal-plan-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-meal-plan-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-meal-plan-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Mealie + NYT Cooking + Kroger, ChatGPT vs Superbot",
-    "src": "animations/just-works-meal-plan-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-meal-plan-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-study-streak-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Duolingo + Anki + WaniKani + italki, one morning study plan",
-    "src": "animations/just-works-study-streak-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-study-streak-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-study-streak-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Duolingo + Anki + WaniKani + italki, ChatGPT vs Superbot",
-    "src": "animations/just-works-study-streak-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-study-streak-gpt-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-live-shows-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Spotify + Ticketmaster + AXS + Dice, one concert overview",
-    "src": "animations/just-works-live-shows-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-live-shows-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-live-shows-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Spotify + Ticketmaster + AXS + Dice, ChatGPT vs Superbot",
-    "src": "animations/just-works-live-shows-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-live-shows-gpt-superbot-42aac446.png"
-  },
-  {
     "id": "just-works-mech-keys-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",
@@ -616,28 +400,12 @@
     "thumb": "assets/shots/just-works-mech-keys-superbot-42aac446.png"
   },
   {
-    "id": "just-works-mech-keys-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "NovelKeys + CannonKeys + KBDfans + Drop + Keychron, ChatGPT vs Superbot",
-    "src": "animations/just-works-mech-keys-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-mech-keys-gpt-superbot-42aac446.png"
-  },
-  {
     "id": "just-works-photo-gear-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",
     "title": "Lightroom + B&H + MPB + KEH, one camera gear check",
     "src": "animations/just-works-photo-gear-superbot-42aac446/",
     "thumb": "assets/shots/just-works-photo-gear-superbot-42aac446.png"
-  },
-  {
-    "id": "just-works-photo-gear-gpt-superbot-42aac446",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "Lightroom + B&H + MPB + KEH, ChatGPT vs Superbot",
-    "src": "animations/just-works-photo-gear-gpt-superbot-42aac446/",
-    "thumb": "assets/shots/just-works-photo-gear-gpt-superbot-42aac446.png"
   },
   {
     "id": "deny-cascade-superbot-440813d4",
@@ -856,69 +624,5 @@
     },
     "src": "assets/ads/context-full-poster.{ar}.png",
     "thumb": "assets/ads/context-full-poster.{ar}.png"
-  },
-  {
-    "id": "context-slow-poster",
-    "type": "image",
-    "group": "Ad spots",
-    "title": "superbot can fix it!",
-    "ars": [
-      "4x5",
-      "16x9",
-      "4x3",
-      "1x1"
-    ],
-    "sizes": {
-      "4x5": {
-        "w": 864,
-        "h": 1080
-      },
-      "16x9": {
-        "w": 1920,
-        "h": 1080
-      },
-      "4x3": {
-        "w": 1440,
-        "h": 1080
-      },
-      "1x1": {
-        "w": 1080,
-        "h": 1080
-      }
-    },
-    "src": "assets/ads/context-slow-poster.{ar}.png",
-    "thumb": "assets/ads/context-slow-poster.{ar}.png"
-  },
-  {
-    "id": "context-costly-poster",
-    "type": "image",
-    "group": "Ad spots",
-    "title": "superbot can fix it!",
-    "ars": [
-      "4x5",
-      "16x9",
-      "4x3",
-      "1x1"
-    ],
-    "sizes": {
-      "4x5": {
-        "w": 864,
-        "h": 1080
-      },
-      "16x9": {
-        "w": 1920,
-        "h": 1080
-      },
-      "4x3": {
-        "w": 1440,
-        "h": 1080
-      },
-      "1x1": {
-        "w": 1080,
-        "h": 1080
-      }
-    },
-    "src": "assets/ads/context-costly-poster.{ar}.png",
-    "thumb": "assets/ads/context-costly-poster.{ar}.png"
   }
 ]

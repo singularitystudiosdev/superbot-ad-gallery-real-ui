@@ -1,11 +1,11 @@
-/* Opus 5.5 beat (beats/opus-lapse.js): the two-panel build card. The top half is the chat card sheet v4 already used
-   (#141416 with an inset 1px #2a2a2e); the bottom half is GitHub dark (#0d1117 / #30363d / #21262d), so the card reads
-   as "the agent then worked the repo". Total height is 30 (header) + 24 (stats) + 20 + 162 (files) + 18 + 98 (github)
-   = 352 design px for the whole beat, inside the ~380 the v4 reply column can show above the composer. The github
-   panel's 98 starts as the commit stream alone; the PR (20), checks (18) and merge (18) rows start at height 0 and
-   open under it as their heights are written from t, each taking its height out of the stream (98 -> 42), so the card
-   never grows. Width fills the reply column. Nothing here transitions and nothing animates on its own: opacity/transform are all written from t in render,
-   so ?t= freezes an exact frame. Every selector is scoped under the hub and prefixed .olap-. */
+/* Opus 5.5 beat (beats/opus-lapse.js): the worktrees card. The card sheet is the one v4 already used (#141416 with an
+   inset 1px #2a2a2e); the worktrees panel is a shade darker (#101012) and the GitHub finish strip underneath it is
+   GitHub dark (#0d1117 / #30363d / #21262d), so the card reads as "the agent fanned the repo out, worked it, then
+   landed it on GitHub". Height while the lanes work is 30 (header) + 24 (stats) + 18 + 4x44 (worktrees) = 248 design
+   px; each lane collapses 44 -> 18 as it merges, and the 46px GitHub strip opens in the space it freed, so the card
+   never grows past 248. Width fills the reply column. Nothing here transitions and nothing animates on its own:
+   every opacity/transform/height is written from t in render, so ?t= freezes an exact frame. Every selector is scoped
+   under the hub and prefixed .olap-. */
 
 #s-tabs .sbsite .hub .olap { opacity: 0; margin-top: 4px; box-sizing: border-box; width: 100%;
   border-radius: 12px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .38);
@@ -49,50 +49,59 @@
 #s-tabs .sbsite .hub .olap-clk { margin-left: auto; }
 #s-tabs .sbsite .hub .olap-clk b { color: #f0a2a8; }
 
-/* the files panel: a caption, then the list of files being written, scrolling fast under a fixed viewport */
-#s-tabs .sbsite .hub .olap-edit { background: #101012; }
-#s-tabs .sbsite .hub .olap-eh { display: flex; align-items: center; height: 20px; box-sizing: border-box; padding: 0 10px;
-  font: 700 8px/1 var(--ui); letter-spacing: .1em; text-transform: uppercase; color: #6e6e75; }
-#s-tabs .sbsite .hub .olap-ve { margin-left: auto; font: 500 9px/1 var(--font-mono, ui-monospace, monospace);
-  letter-spacing: 0; text-transform: none; color: #8b8b93; font-variant-numeric: tabular-nums; }
-#s-tabs .sbsite .hub .olap-el { position: relative; height: 162px; box-sizing: border-box; overflow: hidden;
-  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0, #000 12%, #000 100%);
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0, #000 12%, #000 100%); }
-#s-tabs .sbsite .hub .olap-ec { will-change: transform; }
+/* the worktrees panel: a caption, then four lanes running at once */
+#s-tabs .sbsite .hub .olap-wt { background: #101012; }
+#s-tabs .sbsite .hub .olap-wh { display: flex; align-items: center; gap: 5px; height: 18px; box-sizing: border-box;
+  padding: 0 10px; font: 700 8px/1 var(--ui); letter-spacing: .1em; text-transform: uppercase; color: #6e6e75; }
+#s-tabs .sbsite .hub .olap-wh .olap-bic { width: 9px; height: 9px; stroke: #6e6e75; }
+#s-tabs .sbsite .hub .olap-vw { margin-left: auto; font: 500 9px/1 var(--font-mono, ui-monospace, monospace);
+  letter-spacing: 0; text-transform: none; color: #8b8b93; }
+#s-tabs .sbsite .hub .olap-ws { }
+#s-tabs .sbsite .hub .olap-lane { position: relative; height: 44px; box-sizing: border-box; overflow: hidden; }
+#s-tabs .sbsite .hub .olap-lane + .olap-lane .olap-work { box-shadow: inset 0 1px 0 #1b1b1f; }
+#s-tabs .sbsite .hub .olap-work { position: absolute; left: 0; right: 0; top: 0; height: 44px; box-sizing: border-box;
+  display: flex; align-items: flex-start; gap: 7px; padding: 6px 10px 0; }
+#s-tabs .sbsite .hub .olap-bp { flex: none; display: inline-flex; align-items: center; gap: 4px; height: 15px;
+  padding: 0 6px; border-radius: 5px; background: #161b22; box-shadow: inset 0 0 0 1px #30363d; color: #c9d1d9;
+  font: 600 9px/1 var(--font-mono, ui-monospace, monospace); white-space: nowrap; }
+#s-tabs .sbsite .hub .olap-bic { width: 9px; height: 9px; fill: none; stroke: #8b949e; stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .olap-tk { position: relative; flex: 1 1 auto; min-width: 0; height: 15px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0, #000 9%, #000 88%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0, #000 9%, #000 88%, rgba(0, 0, 0, 0) 100%); }
+#s-tabs .sbsite .hub .olap-tks { display: flex; width: max-content; will-change: transform; }
+#s-tabs .sbsite .hub .olap-ti { flex: none; width: 196px; box-sizing: border-box; display: inline-flex;
+  align-items: baseline; gap: 6px; padding-right: 12px; white-space: nowrap; }
+#s-tabs .sbsite .hub .olap-ti b { flex: none; max-width: 104px; overflow: hidden; text-overflow: ellipsis;
+  font: 500 9px/15px var(--font-mono, ui-monospace, monospace); color: #7d8590; }
+#s-tabs .sbsite .hub .olap-ti em { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-style: normal;
+  font: 500 9.5px/15px var(--ui); color: #6a7078; }
+#s-tabs .sbsite .hub .olap-ti.is-now b { color: #e6edf3; }
+#s-tabs .sbsite .hub .olap-ti.is-now em { color: #c9d1d9; }
+#s-tabs .sbsite .hub .olap-ld { flex: none; width: 34px; text-align: right; font: 600 9.5px/15px var(--font-mono, ui-monospace, monospace);
+  color: #3fb950; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .olap-pb { position: absolute; left: 10px; right: 10px; bottom: 7px; height: 3px; border-radius: 2px;
+  background: #1c1c20; overflow: hidden; }
+#s-tabs .sbsite .hub .olap-pf { display: block; height: 100%; border-radius: 2px; transform-origin: 0 50%;
+  background: linear-gradient(90deg, #3fb950, #58a6ff); }
+#s-tabs .sbsite .hub .olap-pf.is-merged { background: linear-gradient(90deg, #8957e5, #a371f7); }
+/* the merge line a lane collapses into once its branch is in main */
+#s-tabs .sbsite .hub .olap-ml { position: absolute; left: 0; right: 0; top: 0; height: 18px; box-sizing: border-box;
+  display: flex; align-items: center; gap: 5px; padding: 0 10px; opacity: 0; white-space: nowrap;
+  box-shadow: inset 2px 0 0 #8957e5; }
+#s-tabs .sbsite .hub .olap-ml.is-in { background: rgba(137, 87, 229, .07); }
+#s-tabs .sbsite .hub .olap-ml b { font: 600 9.5px/15px var(--font-mono, ui-monospace, monospace); color: #c9d1d9; }
+#s-tabs .sbsite .hub .olap-ml i { font-style: normal; color: #6e7681; font: 500 9.5px/1 var(--font-mono, ui-monospace, monospace); }
+#s-tabs .sbsite .hub .olap-ml span { font: 500 9.5px/15px var(--font-mono, ui-monospace, monospace); color: #8b949e; }
+#s-tabs .sbsite .hub .olap-ml .olap-ghic { width: 10px; height: 10px; color: #a371f7; }
+#s-tabs .sbsite .hub .olap-ml u { margin-left: auto; text-decoration: none; height: 13px; padding: 0 6px; border-radius: 999px;
+  background: rgba(137, 87, 229, .15); box-shadow: inset 0 0 0 1px #8957e5; color: #a371f7;
+  font: 700 8px/13px var(--ui); }
 
-/* one file row: the M or A badge, the path, the task it completes, the diff-stat bar and the +added -removed count */
-#s-tabs .sbsite .hub .olap-er { display: flex; align-items: center; gap: 6px; height: 15px; box-sizing: border-box;
-  padding: 0 10px; opacity: 0; white-space: nowrap; }
-#s-tabs .sbsite .hub .olap-ek { flex: none; width: 12px; height: 12px; border-radius: 3px; display: grid; place-items: center;
-  font: 700 8.5px/1 var(--font-mono, ui-monospace, monospace); }
-#s-tabs .sbsite .hub .olap-ek.is-m { color: #d29922; background: rgba(210, 153, 34, .16); }
-#s-tabs .sbsite .hub .olap-ek.is-a { color: #3fb950; background: rgba(63, 185, 80, .16); }
-#s-tabs .sbsite .hub .olap-ep { flex: none; max-width: 172px; overflow: hidden; text-overflow: ellipsis;
-  font: 500 9.5px/15px var(--font-mono, ui-monospace, monospace); color: #c9d1d9; }
-#s-tabs .sbsite .hub .olap-et { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
-  font: 500 10px/15px var(--ui); color: #8b949e; }
-#s-tabs .sbsite .hub .olap-er.is-done .olap-ep { color: #7d8590; }
-#s-tabs .sbsite .hub .olap-er.is-done .olap-et { color: #6a7078; }
-#s-tabs .sbsite .hub .olap-er.is-now { background: rgba(56, 139, 253, .10);
-  box-shadow: inset 2px 0 0 #58a6ff; }
-#s-tabs .sbsite .hub .olap-er.is-now .olap-ep { color: #e6edf3; }
-#s-tabs .sbsite .hub .olap-er.is-now .olap-et { color: #c9d1d9; }
-#s-tabs .sbsite .hub .olap-ed { flex: none; width: 34px; display: inline-flex; align-items: center; }
-#s-tabs .sbsite .hub .olap-edb { transform-origin: 0 50%; width: 34px; height: 8px; display: inline-flex; gap: 1px; }
-#s-tabs .sbsite .hub .olap-edb b { flex: 1; border-radius: 1px; }
-#s-tabs .sbsite .hub .olap-edb b.is-a { background: #3fb950; }
-#s-tabs .sbsite .hub .olap-edb b.is-d { background: #f85149; }
-#s-tabs .sbsite .hub .olap-ex { flex: none; width: 40px; display: inline-flex; justify-content: flex-end; gap: 3px;
-  font: 600 9px/1 var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
-#s-tabs .sbsite .hub .olap-ex b { color: #3fb950; }
-#s-tabs .sbsite .hub .olap-ex i { font-style: normal; color: #f85149; }
-#s-tabs .sbsite .hub .olap-sw { position: absolute; left: 0; right: 0; top: 0; height: 1px; opacity: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .85), rgba(255, 255, 255, 0)); }
-
-/* the GitHub panel: GitHub dark, so the repo work is unmistakable next to the file edit above it */
-#s-tabs .sbsite .hub .olap-gh { background: #0d1117; box-shadow: inset 0 1px 0 #30363d; color: #c9d1d9;
-  font: 10.5px/14px var(--ui); }
-#s-tabs .sbsite .hub .olap-ghd { display: flex; align-items: center; gap: 6px; height: 18px; box-sizing: border-box;
+/* the GitHub finish strip: the push, PR #1, its checks and the merge, opened in the space the merged lanes freed */
+#s-tabs .sbsite .hub .olap-fin { box-sizing: border-box; overflow: hidden; background: #0d1117; color: #c9d1d9;
+  box-shadow: inset 0 1px 0 #30363d; font: 10.5px/14px var(--ui); }
+#s-tabs .sbsite .hub .olap-fa { display: flex; align-items: center; gap: 6px; height: 22px; box-sizing: border-box;
   padding: 0 10px; border-bottom: 1px solid #21262d; }
 #s-tabs .sbsite .hub .olap-ghl { flex: none; display: grid; place-items: center; width: 14px; height: 14px; }
 #s-tabs .sbsite .hub .olap-ghl img { width: 12px; height: 12px; display: block; }
@@ -104,50 +113,28 @@
 #s-tabs .sbsite .hub .olap-ghb { flex: none; display: inline-flex; align-items: center; gap: 4px; height: 15px;
   padding: 0 6px; border-radius: 5px; background: #161b22; box-shadow: inset 0 0 0 1px #30363d; color: #c9d1d9;
   font: 600 9px/1 var(--font-mono, ui-monospace, monospace); white-space: nowrap; }
-#s-tabs .sbsite .hub .olap-bic { width: 9px; height: 9px; fill: none; stroke: #8b949e; stroke-width: 2.4;
-  stroke-linecap: round; stroke-linejoin: round; }
 #s-tabs .sbsite .hub .olap-ghp { position: relative; margin-left: auto; display: inline-flex; align-items: center; gap: 4px;
   color: #8b949e; font: 600 9.5px/1 var(--ui); white-space: nowrap; }
 #s-tabs .sbsite .hub .olap-ghp.is-pushed { color: #3fb950; }
 #s-tabs .sbsite .hub .olap-gsp { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid #2a3340;
   border-top-color: #58a6ff; box-sizing: border-box; }
 #s-tabs .sbsite .hub .olap-ghp .qc-ok { width: 10px; height: 10px; opacity: 0; stroke: #3fb950; }
-
-/* the commit stream: newest first, sliding down one row per commit */
-#s-tabs .sbsite .hub .olap-cc { position: relative; height: 98px; box-sizing: border-box; overflow: hidden;
-  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 72%, rgba(0, 0, 0, 0) 100%);
-  mask-image: linear-gradient(180deg, #000 0, #000 72%, rgba(0, 0, 0, 0) 100%); }
-#s-tabs .sbsite .hub .olap-ccl { will-change: transform; }
-#s-tabs .sbsite .hub .olap-cr { display: flex; align-items: center; gap: 8px; height: 14px; box-sizing: border-box;
-  padding: 0 10px; white-space: nowrap; }
-#s-tabs .sbsite .hub .olap-cr.is-new { background: #161b22; }
-#s-tabs .sbsite .hub .olap-cs { flex: none; font: 500 9px/1 var(--font-mono, ui-monospace, monospace); color: #8b949e; }
-#s-tabs .sbsite .hub .olap-cm { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 500 10px/14px var(--ui);
-  color: #c9d1d9; }
-
-/* the pull request, its CI checks, and the merge */
-#s-tabs .sbsite .hub .olap-pr { display: flex; align-items: center; gap: 6px; height: 0; box-sizing: border-box;
-  padding: 0 10px; opacity: 0; overflow: hidden; box-shadow: inset 0 1px 0 #21262d; }
+#s-tabs .sbsite .hub .olap-fb { display: flex; align-items: center; gap: 6px; height: 24px; box-sizing: border-box;
+  padding: 0 10px; overflow: hidden; }
 #s-tabs .sbsite .hub .olap-ghic { flex: none; width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2;
   stroke-linecap: round; stroke-linejoin: round; }
-#s-tabs .sbsite .hub .olap-pr .olap-ghic { color: #8b949e; }
+#s-tabs .sbsite .hub .olap-fb > .olap-ghic { color: #8b949e; }
 #s-tabs .sbsite .hub .olap-prt { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis;
-  font: 500 10.5px/1 var(--ui); color: #c9d1d9; }
-#s-tabs .sbsite .hub .olap-pst { flex: none; height: 14px; padding: 0 7px; border-radius: 999px; background: rgba(35, 134, 54, .15);
-  box-shadow: inset 0 0 0 1px #238636; color: #3fb950; font: 700 8.5px/14px var(--ui); }
-#s-tabs .sbsite .hub .olap-ci { display: flex; align-items: center; gap: 6px; height: 0; box-sizing: border-box;
-  padding: 0 10px; overflow: hidden; }
-#s-tabs .sbsite .hub .olap-ch { position: relative; display: inline-flex; align-items: center; gap: 4px; height: 14px;
-  padding: 0 6px; border-radius: 5px; background: #161b22; box-shadow: inset 0 0 0 1px #30363d; color: #8b949e;
-  font: 600 8.5px/1 var(--font-mono, ui-monospace, monospace); opacity: 0; white-space: nowrap; }
+  white-space: nowrap; font: 500 10px/1 var(--ui); color: #c9d1d9; }
+#s-tabs .sbsite .hub .olap-ch { position: relative; flex: none; display: inline-flex; align-items: center; gap: 4px;
+  height: 14px; padding: 0 6px; border-radius: 5px; background: #161b22; box-shadow: inset 0 0 0 1px #30363d;
+  color: #8b949e; font: 600 8.5px/1 var(--font-mono, ui-monospace, monospace); opacity: 0; white-space: nowrap; }
 #s-tabs .sbsite .hub .olap-ch.is-ok { color: #3fb950; box-shadow: inset 0 0 0 1px #238636; }
 #s-tabs .sbsite .hub .olap-csp { width: 9px; height: 9px; border-radius: 50%; border: 1.4px solid #3a3a42;
   border-top-color: #d29922; box-sizing: border-box; }
 #s-tabs .sbsite .hub .olap-ch .qc-ok { position: absolute; left: 6px; top: 3px; width: 9px; height: 9px; opacity: 0;
   stroke: #3fb950; }
-#s-tabs .sbsite .hub .olap-mg { display: flex; align-items: center; height: 0; box-sizing: border-box; padding: 0 10px;
-  opacity: 0; overflow: hidden; }
-#s-tabs .sbsite .hub .olap-mgb { display: inline-flex; align-items: center; gap: 5px; height: 15px; padding: 0 8px;
-  border-radius: 999px; background: rgba(137, 87, 229, .15); box-shadow: inset 0 0 0 1px #8957e5; color: #a371f7;
-  font: 700 9.5px/1 var(--ui); }
+#s-tabs .sbsite .hub .olap-mgb { flex: none; display: inline-flex; align-items: center; gap: 5px; height: 15px;
+  padding: 0 8px; border-radius: 999px; background: rgba(137, 87, 229, .15); box-shadow: inset 0 0 0 1px #8957e5;
+  color: #a371f7; font: 700 9.5px/1 var(--ui); opacity: 0; }
 #s-tabs .sbsite .hub .olap-mgb .olap-ghic { width: 10px; height: 10px; }

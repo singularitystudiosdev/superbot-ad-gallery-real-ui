@@ -1,0 +1,56 @@
+/* Hud beat (beats/hud.js): the editor card Cursor wires Inkwave's in match HUD in. A file bar, the real gameplay
+   frame (img/ink/hud.jpg) with Cursor style selection boxes over the real HUD elements, and a diff gutter whose
+   +lines count climbs. In the last 0.9s the frame crossfades to img/ink/splatted-juno.jpg and the RespawnCard box
+   lands on the SPLATTED BY Juno card. No transitions: opacity, box-shadow and the tags are written from t in
+   render, so ?t= freezes a frame. Scoped under the hub, every class prefixed .hd-.
+   Size budget: card 428px wide (hub.css --hub-reply is 471px) and 282px tall, so the who line, the say line and the
+   tool chip still sit above it in the feed at the end of the beat. */
+#s-tabs .sbsite .hub .hd-card { opacity: 0; box-sizing: border-box; width: 428px; max-width: 100%; margin-top: 2px;
+  border: 1px solid #26262b; border-radius: 10px; overflow: hidden; background: #101013; transform-origin: 50% 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .35); user-select: none; }
+
+/* the file bar: Cursor's mark, the file being edited, and how many components are wired */
+#s-tabs .sbsite .hub .hd-bar { display: flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px;
+  background: #121216; border-bottom: 1px solid #1f1f24; }
+#s-tabs .sbsite .hub .hd-app { flex: none; display: flex; }
+#s-tabs .sbsite .hub .hd-app img { width: 11px; height: 11px; display: block; }
+#s-tabs .sbsite .hub .hd-file { font: 700 10px/1 var(--font-mono, ui-monospace, monospace); color: #dcdce2; }
+#s-tabs .sbsite .hub .hd-wire { margin-left: auto; font: 600 9px/1 var(--font-mono, ui-monospace, monospace);
+  color: #6f6f77; font-variant-numeric: tabular-nums; }
+
+/* the frame: the real 1280x720 capture, the splatted frame stacked over it, and the selection overlay */
+#s-tabs .sbsite .hub .hd-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+  background: #0c0c0f; }
+#s-tabs .sbsite .hub .hd-plate { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  display: block; pointer-events: none; }
+#s-tabs .sbsite .hub .hd-death { opacity: 0; }
+#s-tabs .sbsite .hub .hd-over { position: absolute; inset: 0; }
+
+/* one Cursor selection box: a hairline, two corner ticks and its component tag */
+#s-tabs .sbsite .hub .hd-sel { position: absolute; box-sizing: border-box; opacity: 0; pointer-events: none;
+  border: 1px solid rgba(91, 141, 255, .85); border-radius: 2px; }
+#s-tabs .sbsite .hub .hd-sel::before, #s-tabs .sbsite .hub .hd-sel::after { content: ""; position: absolute;
+  width: 5px; height: 5px; border: 1.5px solid #7fb0ff; }
+#s-tabs .sbsite .hub .hd-sel::before { left: -2px; top: -2px; border-right: 0; border-bottom: 0; }
+#s-tabs .sbsite .hub .hd-sel::after { right: -2px; bottom: -2px; border-left: 0; border-top: 0; }
+#s-tabs .sbsite .hub .hd-tag { position: absolute; left: 0; top: 0; white-space: nowrap; padding: 1px 4px;
+  border-radius: 3px; background: #223050; color: #b9d4ff; font: 700 8.5px/12px var(--font-mono, ui-monospace, monospace);
+  box-shadow: inset 0 0 0 1px rgba(127, 176, 255, .5), 0 2px 6px rgba(0, 0, 0, .5); }
+#s-tabs .sbsite .hub .hd-sub { margin-left: 3px; color: #8fb0e0; font-weight: 600; }
+/* the live value a component carries while it is being wired (the timer, the points counter) */
+#s-tabs .sbsite .hub .hd-live { margin-left: 4px; font-style: normal; color: #b6ff2e; font-variant-numeric: tabular-nums; }
+/* where the tag hangs: outside the box on a side, above it, or inside a corner */
+#s-tabs .sbsite .hub .lab-left .hd-tag { left: auto; right: calc(100% + 4px); }
+#s-tabs .sbsite .hub .lab-right .hd-tag { left: calc(100% + 4px); }
+#s-tabs .sbsite .hub .lab-above .hd-tag { top: auto; bottom: calc(100% + 4px); }
+#s-tabs .sbsite .hub .lab-below .hd-tag { top: calc(100% + 4px); }
+#s-tabs .sbsite .hub .lab-in-bl .hd-tag { top: auto; bottom: 0; }
+
+/* the diff gutter: the file, one cell per few added lines, and the +count */
+#s-tabs .sbsite .hub .hd-gutter { display: flex; align-items: center; gap: 8px; height: 18px; padding: 0 8px;
+  background: #0f0f12; border-top: 1px solid #1f1f24; font: 600 9px/1 var(--font-mono, ui-monospace, monospace); }
+#s-tabs .sbsite .hub .hd-gname { flex: none; color: #6f6f77; }
+#s-tabs .sbsite .hub .hd-gcells { flex: 1; display: flex; gap: 2px; height: 6px; min-width: 0; }
+#s-tabs .sbsite .hub .hd-gcells i { flex: 1; border-radius: 1px; background: #b6ff2e; opacity: 0; }
+#s-tabs .sbsite .hub .hd-gplus { flex: none; color: #b6ff2e; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .hd-gplus b { font-weight: 700; color: #b6ff2e; }

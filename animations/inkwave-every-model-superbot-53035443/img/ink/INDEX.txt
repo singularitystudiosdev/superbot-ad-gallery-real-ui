@@ -1,0 +1,135 @@
+img/ink/INDEX.txt
+Inkwave gameplay capture, source /tmp/xad-media-53035443/inkwave.mp4 (1280x720, 60 fps, 147.8 s, 8863 frames).
+Every jpg below is a frame or a crop of THAT video. Nothing here is drawn, traced or synthesised.
+"second" is the source second, cut with an exact frame seek (frame = second * 60), so the number is the frame the
+pixels actually come from. Every crop was measured on that frame and then opened again and checked by eye against its
+name before it was kept. Crop rectangles are quoted as x,y,w,h in source pixels.
+
+WHAT THE CAPTURE ACTUALLY CONTAINS (this replaces the earlier timing note, which had the two full frames the wrong way
+round). The file is one sped up session with two matches plus pauses:
+  0 s a PAUSED menu, 1 to 49 s the first match (the player quits at 49 s), 50 to 86 s a second match opening and a
+  second PAUSED menu at 86 s, 87 to 136 s that match to full time, 134 s JUDGING, 138 s the VICTORY splash, 142 to
+  147 s the VICTORY results screen with the scoreboard. So gameplay with the in match HUD is EARLY in the file and the
+  VICTORY screen is at the END of it: hud.jpg is the gameplay frame and victory.jpg is the results frame.
+A Windows desktop is in shot for the whole capture. The results screen at 142 s is clean; by 147 s the desktop's own
+app windows (File Explorer, OBS) and the taskbar sit over it, so results-final.jpg has that overlay across the middle.
+
+FULL FRAMES (native 1280x720)
+hud.jpg              10 s  live gameplay, third person: the team icon strip top centre, the Ink Storm cloud gauge at
+                           READY! with the F key badge, the 476p points counter, the TAB MAP minimap bottom left and
+                           the "Special ready! Press F" prompt.
+victory.jpg         142 s  the VICTORY screen: VICTORY! banner, "Tidewater Plaza - Turf War", the four Lime players on
+                           the podium, Lime 48.2% against 35.2% Magenta, the full results table, Lv 4, +0 XP,
+                           "2,140 XP to next level", MIN BONUS +1,200, TURF +1,022, REMATCH / MAIN MENU.
+results-final.jpg   147 s  the same results screen at the last frame of the capture: Lime 48.2% / 35.2% Magenta, Lv 5,
+                           +2,422 XP, LEVEL UP!, "2,268 XP to next level". The desktop's own app windows and taskbar
+                           are over the middle of it.
+bridge.jpg           19 s  live gameplay looking out over the plaza to the sea, the suspension bridge left and right.
+superjump.jpg        96 s  the super jump: the SUPER JUMP / Hold TAB prompt panel with the player's launch trail
+                           standing on a quay.
+judging.jpg         134 s  the JUDGING screen mid count: "JUDGING..." over the turf bar at Lime 41.5% / Magenta 18.7%.
+countdown.jpg       126 s  the last ten seconds: the match clock at 0:04 with the big "4" across the screen, two orange
+                           traffic cones on the ground ahead.
+double-splat.jpg     32 s  the DOUBLE SPLAT! banner over the magenta death screen that shows SPLATTED BY Loop.
+killfeed.jpg         16 s  live gameplay with two kill feed lines at the right edge ("Kelp was splatted by Loop",
+                           "Kelp splatted Loop"), the timer at 1:52, the bridge and a palm behind the plaza.
+splatted-juno.jpg    37 s  the SPLATTED BY Juno card: Juno, GLINT CHARGER, the respawn ring counting 4, Hold TAB hint.
+splatted-squiddo.jpg132 s  the SPLATTED BY Squiddo card: Squiddo, SWELL ROLLER, the respawn ring counting 5, with two
+                           orange traffic cones on the floor to the left.
+splatted-loop.jpg   114 s  the SPLATTED BY Loop card: Loop with the looped-splat icon, the respawn ring counting 3.
+paused.jpg           86 s  the Paused menu: Resume, Settings, How to Play, Quit Match, with the match panel beside it.
+posters.jpg           2 s  the shop row off the plaza with its boards and signs: the small poster board on its post,
+                           the yellow COOL sign and the blue arrow board, all behind the pink and lime floor.
+timer.jpg           104 s  live in match HUD on the quayside with the match clock reading 0:26.
+poster.jpg        9.0 s  NOT cut here: it is the first frame of inkwave-montage.mp4, the 576x720 crop at x352 of the
+                           9.0 s frame scaled to 720x900 (live painting with the in match HUD).
+
+CHARACTERS (crops of victory.jpg at 142 s, the VICTORY podium, left to right in scoreboard order)
+The capture never labels the podium figures by name. The four Lime figures stand left to right in the order the VICTORY
+scoreboard lists the Lime team, so the filenames follow that order only. Treat the mapping as an ordering convention,
+not a verified identity.
+ch-kelp.jpg     430,80,200,200    podium figure 1, left, on the first pedestal, holding a roller out to the side.
+ch-coral.jpg    580,75,200,205    podium figure 2, both arms up.
+ch-clawd.jpg    675,80,200,200    podium figure 3, gloves and visor, a weapon slung on the back.
+ch-bubbles.jpg  815,85,200,195    podium figure 4, right, on the last pedestal, hands on hips.
+Magenta players: Loop and Squiddo appear in their SPLATTED BY cards (splatted-loop.jpg, splatted-squiddo.jpg) and as
+scoreboard rows in victory.jpg; Juno appears in the splatted-juno.jpg card; Suki appears only as a scoreboard row.
+No ch-loop, ch-suki, ch-squiddo or ch-juno close up exists in the capture.
+
+HUD CROPS (crop of hud.jpg at 10 s)
+hud-team-icons.jpg        348,14,592,84    the eight team icons in one strip with the timer pill between them: four
+                                           Lime at the head, four Magenta behind, the timer reading 1:58.
+timer-pill.jpg            584,18,118,66    the timer pill alone, reading 1:58.
+hud-special-gauge.jpg    1135,25,135,140   the Ink Storm gauge full: the rain cloud icon with its ring, and the READY!
+                                           pill with the F key badge under it.
+hud-points.jpg           1170,160,100,38   the points counter, reading 476p.
+hud-minimap.jpg            22,484,122,210  the TAB MAP minimap panel, whole: the TAB MAP tag over the phone shaped
+                                           map plate with the ink coverage painted on it.
+hud-special-ready-line.jpg545,644,205,56   the "Special ready! Press F" prompt line on its own.
+
+PROPS (the frame each crop was measured on is the second in its name)
+prop-cone.jpg       2 s   185,362,112,92    two orange traffic cones on the inked floor.
+prop-palm.jpg       2 s   730,148,130,112   a palm tree over the sea wall, fronds and trunk.
+prop-crates.jpg    16 s   880,268,180,120   the wooden crate and pallet stack beside the wall.
+prop-bridge.jpg    16 s   910,45,240,125    the harbour suspension bridge: its span, suspender cables and water.
+prop-pier.jpg     104 s   150,90,520,380    the quayside pier: the boardwalk edge over the sea with its lamp post and
+                                            striped barrier.
+No crop exists for a ramp: no frame in the capture isolates a launch ramp, so prop-ramp.jpg does not exist and
+mapkit.js keeps superjump.jpg for its launch_ramp tile. No skate poster is isolated either, so there is no
+posters-crop.jpg; posters.jpg is the frame where the plaza's boards and signs are on screen.
+
+SPLAT CARDS AND WEAPON ICONS
+splat-card-juno.jpg   37 s  430,500,400,175  the whole SPLATTED BY Juno group: the weapon icon circle, SPLATTED BY
+                                             Juno, GLINT CHARGER, the respawn ring at 4 and the RESPAWN label.
+wpn-glint-charger.jpg 37 s  442,503,92,92    the Glint Charger weapon icon circle out of that card, RECUT so the whole
+                                             badge is inside the square and centred (frame badge centre 488,548.5, outline
+                                             included outer diameter 87.5), which is what roster.js cover fills its
+                                             thumbnail with.
+wpn-swell-roller.jpg 132 s  389,503,92,92    the Swell Roller weapon icon circle out of the Squiddo card, same recut: frame
+                                             badge centre 434.5,548.5, outline included outer diameter 87.5, whole round
+                                             badge centred with 2 px of ink either side.
+
+RESULTS CROPS (crop of victory.jpg at 142 s)
+res-banner.jpg         38,28,455,130    the VICTORY! banner with the "Tidewater Plaza - Turf War" line under it.
+res-team-lime.jpg      55,400,577,30    the LIME header row with the WIN badge and the TURF column head.
+res-team-magenta.jpg  663,400,577,30    the MAGENTA header row and the TURF column head.
+res-rows-lime.jpg      55,430,577,150   the four Lime scoreboard rows: Kelp, Coral, Clawd YOU, Bubbles.
+res-rows-magenta.jpg  663,430,577,150   the four Magenta scoreboard rows: Loop, Squiddo, Juno, Suki.
+res-xp-level.jpg       40,585,630,80    Lv 4 badge, +0 XP, the empty XP bar and "2,140 XP to next level".
+res-buttons.jpg       718,585,520,105   REMATCH and MAIN MENU with the Enter / Skip - Select / Move key hints.
+
+FINAL SCORE FIELDS, read off victory.jpg (142 s, first row = turf points, then splats, then deaths)
+turf per cent: Lime 48.2%, Magenta 35.2%. LIME WIN.
+level: Lv 4. XP: +0 in this frame, with "2,140 XP to next level" beside it; MIN BONUS +1,200, TURF +1,022.
+  (results-final.jpg at 147 s has the tally finished: Lv 5, +2,422 XP, "2,268 XP to next level".)
+turf points per player: Lime Kelp 1,777p, Coral 1,003p, Clawd (YOU) 1,022p, Bubbles 767p.
+                        Magenta Loop 1,371p, Squiddo 1,222p, Juno 862p, Suki 658p.
+splats / deaths:        Lime Kelp 10/6, Coral 2/8, Clawd 5/4, Bubbles 8/5.
+                        Magenta Loop 10/6, Squiddo 3/7, Juno 7/6, Suki 3/6.
+Other confirmed text: VICTORY!, LIME WINS!, LIME WIN, JUDGING, TIME'S UP!, DOUBLE SPLAT!, Tidewater Plaza - Turf War,
+REMATCH, MAIN MENU, YOUR MEDALS - SURVIVOR Splatted 4x, Kelp, Coral, Clawd (YOU), Bubbles, Loop, Squiddo, Juno, Suki,
+READY! F, 476p, TAB MAP, "Special ready! Press F", "SUPER JUMP Hold TAB", "Hold TAB to plan a Super Jump",
+"Kelp was splatted by Loop", "Kelp splatted Loop", GLINT CHARGER, SWELL ROLLER, RESPAWN, PAUSED, Resume, Settings,
+How to Play, Quit Match.
+NOT FOUND in this capture, so no file is named for them: an Ink Storm cloud raining (the gauge reaches READY! but the
+special is never fired), a squid swim form close up, a Super Jump marker beside the beam, a launch ramp, an isolated
+skate poster.
+
+CLIP
+inkwave-montage.mp4   8.600 s, 720x900, h264, no audio, +faststart. Five hard cuts of the source, each a 576x720 crop
+                      scaled to 720x900, the crop x chosen per cut so the action and its key text sit inside 4:5:
+                        cut 1    9.0 to  10.4 s  x352  live painting with the in match HUD, "Special ready! Press F"
+                        cut 2   30.9 to  32.2 s  x352  DOUBLE SPLAT! over the SPLATTED BY Loop card
+                        cut 3  125.7 to 127.0 s  x352  the last seconds: the clock at 0:04 and the big countdown numeral
+                        cut 4  136.3 to 137.4 s  x185  JUDGING: the settled 48.2% readout, LIME WINS!, the filled turf bar
+                        cut 5  138.0 to 141.5 s  x0    the VICTORY! splash into the results screen, Lime 48.2%, Lv 4
+                      Built with /tmp/inkwave-build-montage.sh:
+                      ffmpeg -i inkwave.mp4 -filter_complex
+                        "[0:v]trim=start=9.0:end=10.4,setpts=PTS-STARTPTS,crop=576:720:352:0,scale=720:900,setsar=1[v0];
+                         [0:v]trim=start=30.9:end=32.2,setpts=PTS-STARTPTS,crop=576:720:352:0,scale=720:900,setsar=1[v1];
+                         [0:v]trim=start=125.7:end=127.0,setpts=PTS-STARTPTS,crop=576:720:352:0,scale=720:900,setsar=1[v2];
+                         [0:v]trim=start=136.3:end=137.4,setpts=PTS-STARTPTS,crop=576:720:185:0,scale=720:900,setsar=1[v3];
+                         [0:v]trim=start=138.0:end=141.5,setpts=PTS-STARTPTS,crop=576:720:0:0,scale=720:900,setsar=1[v4];
+                         [v0][v1][v2][v3][v4]concat=n=5:v=1:a=0,format=yuv420p[out]"
+                        -map "[out]" -an -c:v libx264 -preset veryfast -crf 20 -movflags +faststart inkwave-montage.mp4
+                      The clip ends on the VICTORY results screen; poster.jpg is its first frame.

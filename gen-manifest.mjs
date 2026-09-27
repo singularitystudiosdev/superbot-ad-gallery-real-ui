@@ -90,6 +90,8 @@ const more = [
   ['fantasy90s-every-model-v1-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=1', 'make a 90s fantasy 3D game: Meshy meshes first, then Opus 5.5 and Gemini in parallel (3 requests)', 'Ad spots'],
   ['fantasy90s-every-model-v2-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=2', 'make a 90s fantasy 3D game: Codex in the terminal, Opus 5.5 reviews and hands it back, Gemini (5 requests)', 'Ad spots'],
   ['fantasy90s-every-model-v3-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=3', 'make a 90s fantasy 3D game: Lyria chiptune first, Meshy, Gemini decals, Opus 5.5, DeepSeek scrapes decals, GitHub (7 requests)', 'Ad spots'],
+  // make a Splatoon-style ink game (2026-09-26): nine requests in one thread on the fantasy90s shell, ends on an 8.6s five-cut montage of @JaydenDavisNC's Opus 5.5 Inkwave build (VICTORY!).
+  ['inkwave-every-model-superbot-53035443', 'inkwave-every-model-superbot-53035443/', 'make a Splatoon-style ink game: Nano Banana Pro squad, Meshy map kit, Opus 5.5 + Codex in parallel, DeepSeek bots, ElevenLabs SFX, Cursor HUD, Opus match flow, Vercel deploy (9 requests)', 'Ad spots'],
   // make a Splatoon game (2026-09-26): the one-ask nine-step ink build forked from fantasy90s v3's grammar. Opus 5.5
   // writes the script, then superbot carries it: DeepSeek V4 Flash scrapes the ink refs, Meshy 5 models the plaza and
   // Juno, HY-Motion 1.0 animates juno.glb, ElevenLabs and Suno v5 score it in parallel, Nano Banana paints the art,

@@ -176,6 +176,14 @@
     "thumb": "assets/shots/fantasy90s-every-model-v3-superbot-042670d1.png"
   },
   {
+    "id": "inkwave-every-model-superbot-53035443",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a Splatoon-style ink game: Nano Banana Pro squad, Meshy map kit, Opus 5.5 + Codex in parallel, DeepSeek bots, ElevenLabs SFX, Cursor HUD, Opus match flow, Vercel deploy (9 requests)",
+    "src": "animations/inkwave-every-model-superbot-53035443/",
+    "thumb": "assets/shots/inkwave-every-model-superbot-53035443.png"
+  },
+  {
     "id": "inkwave-every-model-v1-superbot-f1a86d6f",
     "type": "animation",
     "group": "Ad spots",

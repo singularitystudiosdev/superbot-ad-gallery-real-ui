@@ -1,0 +1,77 @@
+/* Inklanes beat (beats/inklanes.js): the two model lanes with their code panes, and the turf mask under them. No
+   transitions: opacity, transforms, the typed characters, the splat scales in the SVG and the coverage counters are
+   all written from t in render, so ?t= freezes a frame. Scoped under the hub, every class prefixed .ik-. */
+
+/* the card sits inside the hub's reply column (--hub-reply, 471px), so the two lanes and the mask all fit it */
+#s-tabs .sbsite .hub .ik-card { opacity: 0; box-sizing: border-box; width: 464px; max-width: 100%; margin-top: 2px;
+  padding: 9px 11px 9px; border-radius: 10px; background: #141417; transform-origin: 50% 0;
+  box-shadow: inset 0 0 0 1px #2a2a2e, 0 8px 20px rgba(0, 0, 0, .35); }
+
+/* the two lanes, side by side */
+#s-tabs .sbsite .hub .ik-lanes { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 8px; }
+#s-tabs .sbsite .hub .ik-lane { box-sizing: border-box; padding: 8px 8px 7px; border-radius: 9px; background: #0e0e11;
+  box-shadow: inset 0 0 0 1px #26262b; }
+#s-tabs .sbsite .hub .ik-lane.ik-landed { box-shadow: inset 0 0 0 1px #24503a; }
+#s-tabs .sbsite .hub .ik-lane.lime { --ik-team: #b6ff2e; }
+#s-tabs .sbsite .hub .ik-lane.magenta { --ik-team: #ff3d9a; }
+
+#s-tabs .sbsite .hub .ik-hd { display: flex; align-items: center; gap: 7px; font: 600 11.5px/1 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .ik-hd b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .sbsite .hub .ik-hd .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .ik-hd .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .ik-st { margin-left: auto; display: inline-grid; place-items: center; }
+#s-tabs .sbsite .hub .ik-file { margin: 5px 0 7px; font: 600 9.5px/1 var(--font-mono); letter-spacing: .01em;
+  color: var(--ik-team); opacity: .85; }
+
+/* the code pane: fixed 13px rows, so a lane's height never moves while its characters land */
+#s-tabs .sbsite .hub .ik-code { padding: 6px 7px; border-radius: 6px; background: #08080b;
+  box-shadow: inset 0 0 0 1px #202027; overflow: hidden; }
+#s-tabs .sbsite .hub .ik-ln { height: 13px; font: 500 9.5px/13px var(--font-mono); color: #8e8e93; white-space: pre;
+  overflow: hidden; }
+#s-tabs .sbsite .hub .ik-car { display: inline-block; width: 1.5px; height: 9px; margin-left: 1px; vertical-align: -1px;
+  background: #5d91ec; opacity: 0; }
+
+/* syntax colour: the two lanes type in the same editor chrome, only the ink differs */
+#s-tabs .sbsite .hub .ik-c { color: #565660; }
+#s-tabs .sbsite .hub .ik-k { color: #c08bff; }
+#s-tabs .sbsite .hub .ik-v { color: #e5e5ea; }
+#s-tabs .sbsite .hub .ik-f { color: #5d91ec; }
+#s-tabs .sbsite .hub .ik-t { color: #4ec9b0; }
+#s-tabs .sbsite .hub .ik-s { color: #b6ff2e; }
+#s-tabs .sbsite .hub .ik-n { color: #ff9f68; }
+#s-tabs .sbsite .hub .ik-p { color: #8e8e93; }
+
+/* the lane's own test line, landing when that lane stops typing */
+#s-tabs .sbsite .hub .ik-tst { opacity: 0; display: flex; align-items: center; gap: 6px; margin-top: 7px;
+  font: 600 9.5px/1 var(--font-mono); color: #86c99a; }
+#s-tabs .sbsite .hub .ik-tst .qc-ok { flex: none; width: 11px; height: 11px; }
+
+/* the turf mask under both lanes: the wide strip the two lanes are inking while they type */
+#s-tabs .sbsite .hub .ik-mask { opacity: 0; margin-top: 9px; padding-top: 8px; box-shadow: inset 0 1px 0 #222226; }
+#s-tabs .sbsite .hub .ik-mhd { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
+#s-tabs .sbsite .hub .ik-live { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #b6ff2e;
+  box-shadow: 0 0 6px rgba(182, 255, 46, .55); }
+#s-tabs .sbsite .hub .ik-mtag { font: 600 10.5px/1 var(--ui); letter-spacing: .04em; color: #8e8e93; }
+#s-tabs .sbsite .hub .ik-mc { display: inline-flex; align-items: baseline; gap: 4px; margin-left: auto; }
+#s-tabs .sbsite .hub .ik-mc + .ik-mc { margin-left: 12px; }
+#s-tabs .sbsite .hub .ik-mc i { font: 700 9px/1 var(--ui); font-style: normal; letter-spacing: .06em; }
+#s-tabs .sbsite .hub .ik-mc b { font: 700 11px/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ik-mc.lime i, #s-tabs .sbsite .hub .ik-mc.lime b { color: #b6ff2e; }
+#s-tabs .sbsite .hub .ik-mc.magenta i, #s-tabs .sbsite .hub .ik-mc.magenta b { color: #ff3d9a; }
+
+/* the mask itself: splats are circles with drips, their scale and opacity written from t */
+#s-tabs .sbsite .hub .ik-svg { display: block; width: 100%; height: auto; border-radius: 6px; }
+#s-tabs .sbsite .hub .ik-ink { fill-opacity: .92; }
+#s-tabs .sbsite .hub .ik-spl.lime .ik-ink { fill: #b6ff2e; }
+#s-tabs .sbsite .hub .ik-spl.magenta .ik-ink { fill: #ff3d9a; }
+#s-tabs .sbsite .hub .ik-spl .ik-ring { fill: none; stroke-width: 1.6; }
+#s-tabs .sbsite .hub .ik-spl.lime .ik-ring { stroke: #dcff8f; }
+#s-tabs .sbsite .hub .ik-spl.magenta .ik-ring { stroke: #ff86c6; }
+#s-tabs .sbsite .hub .ik-drip { fill-opacity: .8; }
+#s-tabs .sbsite .hub .ik-spl.lime .ik-drip { fill: #93d81f; }
+#s-tabs .sbsite .hub .ik-spl.magenta .ik-drip { fill: #d42c86; }
+
+/* how much of the mask the two lanes have covered so far */
+#s-tabs .sbsite .hub .ik-cov { height: 3px; margin-top: 6px; border-radius: 3px; background: #1f1f23; overflow: hidden; }
+#s-tabs .sbsite .hub .ik-cov-f { display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, #b6ff2e, #ff3d9a); }

@@ -1,0 +1,68 @@
+img CREDITS (it-does-what-you-ask)
+
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
+
+Added for fantasy90s-every-model-superbot (2026-09-26), forked from mmorpg-every-model-superbot-d231c019:
+
+f90/duskhold-13s.mp4   an 8s, no-audio trim (source 13.0-21.0s) cropped to 1080x1350 at y=150 (HUD and buttons out of frame), scaled to 720x900,
+                        of the video by Denis Shiryaev (@literallydenis), "Opus 5.5 is insanely good with threejs",
+                        https://x.com/literallydenis/status/2103088660887318850
+f90/poster.jpg         the trimmed clip's first frame (source 13.0s)
+f90/art-1.jpg          still at 14.5s, cropped to the torch
+f90/art-2.jpg          still at 13.0s, cropped to the sword hand
+f90/art-3.jpg          still at 14.5s, cropped to the castle keep
+f90/art-4.jpg          still at 16.0s, cropped to the storm clouds
+                        footage and stills from the video by @literallydenis (link above)
+
+The game name "Duskhold", its repo, commits, file names and track titles are made up for the spot.
+
+Added for the structural rework (2026-09-26), same source video (@literallydenis, link above):
+
+f90/mesh-knight.jpg    still at 13.0s, cropped to the sword hand and gauntlet (the knight's first-person arms)
+f90/mesh-keep.jpg      still at 14.5s, cropped to the castle keep
+f90/mesh-house.jpg     still at 18.0s, cropped to the village houses
+f90/mesh-torch.jpg     still at 14.5s, cropped to the torch
+f90/prev-9.0.jpg, prev-10.5.jpg, prev-12.0.jpg
+                        stills at 9.0s, 10.5s and 12.0s, cropped to 1080x810 at y=260, for the hot-reload preview
+
+Added for the Gemini decal beat (2026-09-26). These are real CC0 90s-style pixel-art game assets, downloaded and
+cropped out of the source sprite sheets; they replace the video-frame crops the art beat used to show (art-1..4.jpg
+above are still on disk and still used by the parallel beat). None were redrawn.
+
+f90/decal-torch.png         lit wall torch, 16x16, a transparent sprite
+f90/decal-sword.png         sword, 10x21, a transparent sprite
+f90/decal-banner.png        heraldic wall banner, 16x16, a transparent sprite
+f90/decal-chest.png         loot chest, 16x16, a transparent sprite
+f90/decal-bricks.png        seamless stone brick wall, 16x16, tiles
+f90/decal-cracks.png        seamless cracked flagstone floor tile, 16x16, tiles
+
+  decal-torch.png          "Roguelike/RPG pack (1,700+ tiles)" by Kenney Vleugels for Kenney, with help by
+                           Lynn Evers - CC0 1.0 (http://creativecommons.org/publicdomain/zero/1.0/) -
+                           https://opengameart.org/content/roguelikerpg-pack-1700-tiles
+  decal-sword.png, decal-banner.png, decal-chest.png, decal-bricks.png, decal-cracks.png
+                           "16x16 DungeonTileset II" v1.3 by Robert (0x72) - CC0 1.0 -
+                           https://0x72.itch.io/dungeontileset-ii
+                           tilesheet copied from the DungeonRush mirror of the v1.3 sheet:
+                           https://github.com/yujqiao/DungeonRush -> res/drawable/0x72_DungeonTilesetII_v1_3.png
+
+Attribution owed for these six: none. Both packs are CC0 1.0, which requires no credit; the credit above is given
+by choice. If the spot ever needs a credit line, it is: "Decals: Kenney (kenney.nl) and 0x72 (0x72.itch.io), CC0".
+
+Added for the DeepSeek scrape beat (2026-09-26), which replaced the Codex hot-reload preview in v3. Six more real CC0
+sprites cropped (and trimmed to their pixels) out of the same 0x72 v1.3 sheet as above; none were redrawn.
+
+f90/find-potion.png         flask_big_red, 16x16 cell, a transparent sprite
+f90/find-skull.png          skull, 16x16 cell, a transparent sprite
+f90/find-crate.png          crate, 16x22, a transparent sprite
+f90/find-axe.png            weapon_axe, 9x21, a transparent sprite
+f90/find-staff.png          weapon_red_magic_staff, 8x30, a transparent sprite
+f90/find-door.png           doors_leaf_closed, 32x32, a transparent sprite
+
+  all six                  "16x16 DungeonTileset II" v1.3 by Robert (0x72) - CC0 1.0 - https://0x72.itch.io/dungeontileset-ii
+                           (sheet from the DungeonRush mirror, res/drawable/0x72_DungeonTilesetII_v1_3.png)
+
+Attribution owed: none (CC0 1.0).

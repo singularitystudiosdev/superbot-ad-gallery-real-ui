@@ -1,0 +1,34 @@
+img CREDITS (it-does-what-you-ask)
+
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
+
+Added for splatoon-every-model-superbot (2026-09-26), forked from the every-model game spot (042670d1) in this gallery:
+
+Source video: "Splatoon Game made by Opus 5.5 gameplay video" by Jayden Davis (@JaydenDavisNC), made with
+Claude Opus 5.5, https://x.com/JaydenDavisNC/status/2103357848961036304 (3840x2160, 60fps, 148s).
+
+ink/inkturf-58s.mp4   an 8s, no-audio trim (source 58.5-66.5s: a super-jump landing, a lime push over magenta
+                      turf, a "DOUBLE SPLAT!"), center-cropped from 3840x2160 to 1728x2160 at x=1056 (4:5),
+                      scaled to 720x900, 30fps, H.264 CRF 25, faststart
+ink/poster.jpg        the trimmed clip's first frame (source 58.5s)
+ink/mesh-inkling.jpg  still at 34.0s, cropped to the player's inkling
+ink/mesh-spawn.jpg    still at 22.0s, cropped to the spawn ring and jump beam
+ink/mesh-wall.jpg     still at 14.0s, cropped to the inked wall and posters
+ink/mesh-podium.jpg   still at 141.0s, cropped to the victory podium
+ink/art-timesup.jpg   still at 130.0s, cropped to the TIME'S UP splat
+ink/art-plaza.jpg     still at 22.0s, cropped to the plaza, bridge and bay
+ink/art-squad.jpg     still at 141.0s, cropped to two of the lime squad on the podium
+ink/art-emblem.jpg    still at 14.0s, cropped to the squid emblem on the lime wall
+ink/art-kraken.jpg    still at 70.0s, cropped to the inked Kraken container
+ink/art-turf.jpg      still at 64.0s, cropped to the player pushing lime over magenta
+
+ink/find-splat01.png, find-splat02.png, find-splat11.png, find-splat20.png, find-splat28.png, find-splat34.png
+                      "Splat Pack" 1.0 by Kenney (www.kenney.nl) - CC0 1.0 - https://kenney.nl/assets/splat-pack
+                      (PNG/Default (256px)/splat01, 02, 11, 20, 28, 34), scaled to 96x96 and tinted to the
+                      two team inks (lime #8cf01e for 01, 11, 28; magenta #e21ccf for 02, 20, 34)
+
+The game name "Inkturf", its repo, commits, file names, mesh names and track titles are made up for the spot.

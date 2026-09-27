@@ -176,6 +176,14 @@
     "thumb": "assets/shots/fantasy90s-every-model-v3-superbot-042670d1.png"
   },
   {
+    "id": "splatoon-every-model-v3-superbot-7cf3d4da",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a Splatoon-style ink game: Lyria, Meshy, Gemini, Opus 5.5, DeepSeek, GitHub, then the real Opus 5.5 build plays (7 requests; clip @JaydenDavisNC)",
+    "src": "animations/splatoon-every-model-superbot-7cf3d4da/",
+    "thumb": "assets/shots/splatoon-every-model-v3-superbot-7cf3d4da.png"
+  },
+  {
     "id": "dark-souls-every-model-v1-superbot-80e24d9f",
     "type": "animation",
     "group": "Ad spots",

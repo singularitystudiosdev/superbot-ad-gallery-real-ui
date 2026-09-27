@@ -75,8 +75,6 @@ const more = [
   ['make-minecraft-every-model-steps-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/?cut=steps', 'I WANT TO MAKE MINECRAFT · you ask, it switches', 'Ad spots'],
   ['make-minecraft-every-model-zoom-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/?cut=zoom', 'I WANT TO MAKE MINECRAFT · into the game', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
-  ['mmorpg-every-model-v1-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=1', 'I want to make a MMO RPG: DeepSeek plans, Opus 5.5 codes, GitHub, Gemini art', 'Ad spots'],
-  ['mmorpg-every-model-v2-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=2', 'I want to make a MMO RPG: Opus 5.5 plans, Gemini art, Codex codes, GitHub', 'Ad spots'],
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],
   ['mmorpg-every-model-v5-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=5', 'I want to make a MMO RPG: Opus 5.5 plans, DeepSeek codes, Gemini art, GitHub', 'Ad spots'],
@@ -93,9 +91,6 @@ const more = [
   ['fantasy90s-every-model-v2-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=2', 'make a 90s fantasy 3D game: Codex in the terminal, Opus 5.5 reviews and hands it back, Gemini (5 requests)', 'Ad spots'],
   ['fantasy90s-every-model-v3-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=3', 'make a 90s fantasy 3D game: Lyria chiptune first, Meshy, Gemini, Opus 5.5, Codex live preview, GitHub (7 requests)', 'Ad spots'],
   // make an animated video about the future (2026-09-26): three structurally different pipelines for one film (?v=1..3), ends on The Steep Part clip.
-  ['future-video-every-model-v1-superbot-fef7368f', 'future-video-every-model-superbot-fef7368f/?v=1', 'make an animated video about the future: Veo 3 renders shot 1, Codex builds the film in a terminal (3 switches)', 'Ad spots'],
-  ['future-video-every-model-v2-superbot-fef7368f', 'future-video-every-model-superbot-fef7368f/?v=2', 'make an animated video about the future: ElevenLabs voice first, DeepSeek cues, Kling renders, back to DeepSeek (5 switches)', 'Ad spots'],
-  ['future-video-every-model-v3-superbot-fef7368f', 'future-video-every-model-superbot-fef7368f/?v=3', 'make an animated video about the future: Nano Banana storyboard, Veo 3 + Kling in parallel, Suno, ElevenLabs, Opus 5.5 cut (7 switches)', 'Ad spots'],
   // make Dark Souls (2026-09-26): three structurally different routings of one page (?v=1..3), coding always Opus 5.5 as result cards, ends on 13s of @The_Alex's Opus 5.5 Dark Souls clip.
   ['dark-souls-every-model-v1-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=1', 'make Dark Souls: ElevenLabs voices the boss, Opus 5.5 builds it, Superbot plays (3 switches)', 'Ad spots'],
   ['dark-souls-every-model-v2-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=2', 'make Dark Souls: Gemini paints the Gatewarden, Opus 5.5 builds the fight, Gemini textures the fog gate, GitHub, Superbot renders and plays (5 switches)', 'Ad spots'],
@@ -119,7 +114,6 @@ const more = [
   ['just-works-job-hunt-gpt-superbot-42aac446', 'just-works-job-hunt-gpt-superbot-42aac446/', 'LinkedIn + Indeed + Gmail + 40 job boards, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-reading-list-superbot-42aac446', 'just-works-reading-list-superbot-42aac446/', 'Libby + Goodreads + Kindle + Audible, one reading overview', 'Ad spots'],
   ['just-works-reading-list-gpt-superbot-42aac446', 'just-works-reading-list-gpt-superbot-42aac446/', 'Libby + Goodreads + Kindle + Audible, ChatGPT vs Superbot', 'Ad spots'],
-  ['just-works-watchlist-superbot-42aac446', 'just-works-watchlist-superbot-42aac446/', 'Letterboxd + IMDb + Trakt, one watchlist', 'Ad spots'],
   ['just-works-watchlist-gpt-superbot-42aac446', 'just-works-watchlist-gpt-superbot-42aac446/', 'Letterboxd + IMDb + Trakt, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-ev-hunt-superbot-42aac446', 'just-works-ev-hunt-superbot-42aac446/', 'Tesla + Carvana + CarMax + CarGurus, one Model Y shortlist', 'Ad spots'],
   ['just-works-ev-hunt-gpt-superbot-42aac446', 'just-works-ev-hunt-gpt-superbot-42aac446/', 'Tesla + Carvana + CarMax + CarGurus, ChatGPT vs Superbot', 'Ad spots'],

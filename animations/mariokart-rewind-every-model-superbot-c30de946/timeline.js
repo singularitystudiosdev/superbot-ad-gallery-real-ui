@@ -15,13 +15,14 @@ const dip = document.getElementById('dip');
 // ---------- the sequence ----------
 // mariokart-rewind-every-model-superbot: a cold open on the real @bridgemindai post ("Claude Opus 5.5 just ONE SHOT
 // a Mario Kart game."), its video rewinding VHS-style back to the TURBO KART RALLY title screen and a CRT power-off
-// (scenes/intro.js), then the card "One prompt. Every model.", then the hub cropped to its thread, opening on the
-// empty state, and the one-ask chat "make a Mario Kart game" (scenes/tabs-assets/chat.js: Lyria 2, Meshy, Gemini,
-// Claude Opus 5.5, DeepSeek V4 Flash, GitHub, Superbot; ?v=3 picks the routing), then the payoff: the Turbo Kart Rally
+// (scenes/intro.js), then the cards "ITS A LIE" and "ITS NOT JUST OPUS 5.5", then the hub cropped to its thread,
+// opening on the empty state, and the one-ask chat "make a Mario Kart game" (scenes/tabs-assets/chat.js: Opus plans,
+// Gemini, Meshy, DeepSeek V4 Flash, Opus, Lyria 2, GitHub, Opus launches), then the payoff: the Turbo Kart Rally
 // window the chat launched grows to full frame and plays the post's real clip (scenes/clip.js), and the end card
 const SEQUENCE = [
   ['scene', 'intro'],
-  ['card', 'prompt'],
+  ['card', 'lie'],
+  ['card', 'notjust'],
   ['scene', 'tabs'],
   ['scene', 'clip'],
   ['end', 'end'],
@@ -36,7 +37,8 @@ const END_DUR = 4.4, DIP = 0.35;
 // or { html } for styled words. The last part and the logo are kept on one line (never orphan the logo).
 // (only the cards in SEQUENCE belong here: every card here feeds the shared timing factor K below)
 const CARDS = {
-  prompt: { dur: 2.4, parts: ['One', 'prompt.', { g: 'Every' }, { g: 'model.' }] },
+  lie: { dur: 2.1, parts: ['ITS', 'A', 'LIE'] },
+  notjust: { dur: 2.4, parts: ['ITS', 'NOT', 'JUST', 'OPUS', '5.5'] },
 };
 // card motion (seconds, local): words rise 18px + unblur 8px, outQuint .55s, staggered .06s
 // The design timings are scaled by one factor K shared by every card, chosen so the busiest card still has

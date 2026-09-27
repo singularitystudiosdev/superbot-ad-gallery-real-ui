@@ -51,3 +51,18 @@ f90/decal-cracks.png        seamless cracked flagstone floor tile, 16x16, tiles
 
 Attribution owed for these six: none. Both packs are CC0 1.0, which requires no credit; the credit above is given
 by choice. If the spot ever needs a credit line, it is: "Decals: Kenney (kenney.nl) and 0x72 (0x72.itch.io), CC0".
+
+Added for the DeepSeek scrape beat (2026-09-26), which replaced the Codex hot-reload preview in v3. Six more real CC0
+sprites cropped (and trimmed to their pixels) out of the same 0x72 v1.3 sheet as above; none were redrawn.
+
+f90/find-potion.png         flask_big_red, 16x16 cell, a transparent sprite
+f90/find-skull.png          skull, 16x16 cell, a transparent sprite
+f90/find-crate.png          crate, 16x22, a transparent sprite
+f90/find-axe.png            weapon_axe, 9x21, a transparent sprite
+f90/find-staff.png          weapon_red_magic_staff, 8x30, a transparent sprite
+f90/find-door.png           doors_leaf_closed, 32x32, a transparent sprite
+
+  all six                  "16x16 DungeonTileset II" v1.3 by Robert (0x72) - CC0 1.0 - https://0x72.itch.io/dungeontileset-ii
+                           (sheet from the DungeonRush mirror, res/drawable/0x72_DungeonTilesetII_v1_3.png)
+
+Attribution owed: none (CC0 1.0).

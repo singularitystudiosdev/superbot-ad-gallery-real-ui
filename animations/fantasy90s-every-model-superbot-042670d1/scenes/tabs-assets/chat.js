@@ -1,7 +1,7 @@
 // The one-ask chat. The ask is typed into the composer and sent, superbot routes it (its routing chips and the
 // composer's platform chip follow the model), and the routed model answers with its own beat, each beat a different
 // artifact: assets.js (mesh list), terminal.js (shell run), diff.js (code review), parallel.js (two models at once),
-// art.js (image grid), music.js (waveforms), code.js (editor), preview.js (hot-reload window), git.js (repo card),
+// art.js (image grid), music.js (waveforms), code.js (editor), preview.js (hot-reload window), scrape.js (asset sweep), git.js (repo card),
 // play.js (the game). ?v= picks a VARIANTS entry, and the three are built to differ in structure, not just order.
 // The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of
 // the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
@@ -17,6 +17,7 @@ import git from './beats/git.js?v=2';
 import art from './beats/art.js?v=2';
 import music from './beats/music.js?v=3';
 import play from './beats/play.js?v=2';
+import scrape from './beats/scrape.js?v=1';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -74,7 +75,7 @@ const variant = (steps, pace = {}) => steps.map((s, i) => ({
 //   v2  5 requests, uneven. Opens on Codex in a terminal, Opus reviews the diff and HANDS IT BACK, Codex applies it
 //       and runs the tests, Gemini paints, Codex launches.
 //   v3  7 requests, rapid. Opens on Lyria's chiptune waveforms, then Meshy meshes, Gemini textures, Opus code,
-//       Codex's hot-reloading preview, GitHub, Opus launches.
+//       DeepSeek scraping open asset libraries for decals, GitHub, Opus launches.
 // No variant opens on Claude Opus 5.5, and none uses a plan card.
 export const VARIANTS = {
   '1': variant([
@@ -94,7 +95,7 @@ export const VARIANTS = {
     step('meshy', assets),
     step('gemini', art),
     step('opus', code, { set: 'world' }),
-    step('codex', preview),
+    step('deepseek', scrape),
     step('github', git),
     step('opus', play),
   ], { hold: 0, chip: 0.18 }),

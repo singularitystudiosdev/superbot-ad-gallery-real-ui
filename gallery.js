@@ -54,11 +54,21 @@ function markPayload() {
   const map = {};
   for (const id of MARKED) {
     const it = ITEMS.find((i) => i.id === id);
-    map[id] = it ? titleOf(it) : id;
+    if (it) map[id] = titleOf(it); // a mark whose ad is already gone is never proposed for deletion again
   }
   return 'Delete these ad gallery items (superbot-ad-gallery-real-ui, {id: title}):\n```json\n' + JSON.stringify(map, null, 2) + '\n```';
 }
 function saveMarked() { localStorage.setItem(MARKED_KEY, JSON.stringify(MARKED)); }
+// a marked ad that the manifest no longer carries has already been deleted: drop the mark, or the
+// next payload would keep naming it (and the count would keep counting it)
+function pruneMarks() {
+  const known = new Set(ITEMS.map((i) => i.id));
+  const kept = MARKED.filter((id) => known.has(id));
+  if (kept.length === MARKED.length) return;
+  console.info(`gallery: dropped ${MARKED.length - kept.length} mark(s) for ads that are no longer in the gallery`);
+  MARKED = kept;
+  saveMarked();
+}
 function renderMarkBar() {
   const n = MARKED.length;
   $('markBar').hidden = n === 0;
@@ -494,7 +504,7 @@ renderSoon();
 
 fetch('manifest.json')
   .then(r => r.json())
-  .then(data => { ITEMS = data; renderAr(); renderTypePicker(); renderChips(); renderGrid(); openFromHash(); })
+  .then(data => { ITEMS = data; pruneMarks(); renderMarkBar(); renderAr(); renderTypePicker(); renderChips(); renderGrid(); openFromHash(); })
   .catch(err => {
     console.error(err);
     document.getElementById('empty').hidden = false;

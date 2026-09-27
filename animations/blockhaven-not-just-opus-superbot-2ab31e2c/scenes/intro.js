@@ -1,37 +1,33 @@
 // Acts 1 and 2, the hook: Noah Wachnik's real X post ("Opus 5.5, The Minecraft Test.", Sep 22 2026, his own video of
 // the result playing in it) in dark mode, then the viewer mines it like a Minecraft block.
-//   0.0 to 3.4  the post, its video playing, the camera pushing in slowly on the whole post
-//   2.2         the HUD comes on: a white crosshair at frame centre (the stage hotbar fades in with it, hotbar.js)
-//   3.4 to 4.5  ten hits: Minecraft's destroy_stage_0..9 cracks spreading over the post's video from the
+//   0.0 to 2.3  the post tight in frame (0.90 to 0.95 of its height), its video playing at 1x, the camera pushing in
+//   0.5         the HUD comes on: a white crosshair at frame centre
+//   1.2 to 2.3  ten hits: Minecraft's destroy_stage_0..9 cracks spreading over the post's video from the
 //               crosshair, a jolt on each hit
-//   4.5         the post shatters into square particles coloured from the post itself (the video's own frame under
-//               the media, the post's dark-mode palette elsewhere), falling under gravity; the frame is black
-//   4.58 on     the dropped item (hotbar.js drop) bobs where the post was and is pulled into hotbar slot 1
+//   2.3 to 2.7  the post shatters into square particles coloured from the post itself (the video's own frame under
+//               the media, the post's dark-mode palette elsewhere), falling under gravity and gone by the hard cut
 // The post is laid out at X's own px (600px column, 15px/20px text; ported from pocketsflow-untold's tweet.js) and the
 // camera scales it. render(lt) is a pure function of local time: camera, cracks, particles and the clip's frame all
-// come from lt. The clip is a real <video> played at CLIP_RATE (3.6 s of footage over the 4.5 s the post is up):
-// want = min(lt * CLIP_RATE, CLIP_END); a frozen frame (?t= puts body.freeze) pauses and seeks to want, a playing
-// frame plays and only re-seeks past DRIFT_TOL.
-import { clamp, lerp, seg, inOutCubic, outCubic } from '../lib.js';
+// come from lt. The clip is a real <video> played at 1x from its first frame (the post is up for 2.3 s of its 3.6 s):
+// want = min(lt, CLIP_END); a frozen frame (?t= puts body.freeze) pauses and seeks to want, a playing frame plays and
+// only re-seeks past DRIFT_TOL.
+import { clamp, seg, inOutCubic, outCubic } from '../lib.js';
 
 const H = 1080;
 const g = (f) => new URL('../gen/' + f, import.meta.url).href;
 const im = (f) => new URL('../img/' + f, import.meta.url).href;
 
 export const INTRO = {
-  DUR: 5.2,
-  HUD: 2.2,          // crosshair (and hotbar) on
-  MINE: 3.4,         // first hit
+  DUR: 2.7,          // hard cut to the first text card
+  HUD: 0.5,          // crosshair on
+  MINE: 1.2,         // first hit
   HIT: 0.11,         // one crack stage per hit
-  SHATTER: 4.5,      // 3.4 + 10 * 0.11
-  DROP: 4.58,        // the dropped item pops out
-  PICK: 4.95,        // pickup starts
-  LAND: 5.3,         // the item lands in slot 1 (inside the first text card)
+  SHATTER: 2.3,      // 1.2 + 10 * 0.11
 };
-const CLIP_RATE = 0.8, CLIP_END = 3.55;
+const CLIP_END = 3.55;            // the footage's last frame (gen/noah.mp4 is 3.6 s)
 const SEED_TOL = 0.04, DRIFT_TOL = 0.25;
-const FIT0 = 0.72, FIT1 = 0.78;   // the post's height as a share of the frame, at the open and the end of the push
-const CY = 470;                   // the post's centre line: its bottom rule ends ~75px above the hotbar's top (966)
+const FIT0 = 0.90, FIT1 = 0.95;   // the post's height as a share of the frame, at the open and the end of the push
+const CY = H / 2;                 // the post's centre line: the frame's
 const N_PART = 60;
 const CRACK_TILES = 5;            // crack texture repeats across the video's width (one texel ~10 frame px)
 
@@ -201,7 +197,7 @@ export default {
       }
       el.lastStage = stage;
     }
-    el.col.style.visibility = gone ? 'hidden' : 'visible'; // the post and its timeline column rules go together
+    el.col.style.visibility = gone ? 'hidden' : 'visible';
 
     // crosshair
     el.xhair.style.opacity = seg(t, INTRO.HUD, INTRO.HUD + 0.15).toFixed(3);
@@ -210,15 +206,15 @@ export default {
     const pt = t - INTRO.SHATTER;
     if (gone && !el.cols) el.cols = paint(gm);
     el.parts.forEach((n, i) => {
-      if (!gone || pt > 0.75) { n.style.visibility = 'hidden'; return; }
+      if (!gone || pt > 0.4) { n.style.visibility = 'hidden'; return; }
       const c = el.cols[i];
       const x0 = gm.post.x + c.u * gm.post.w, y0 = gm.post.y + c.v * gm.post.h;
       const cx = gm.post.x + gm.post.w / 2, cy = gm.post.y + gm.post.h / 2;
-      const vx = (x0 - cx) * (1.1 + hash(i, 4) * 1.2) + (hash(i, 5) - 0.5) * 160;
-      const vy = (y0 - cy) * (0.8 + hash(i, 6) * 0.8) - 380 - hash(i, 9) * 260;
-      const x = x0 + vx * pt, y = y0 + vy * pt + 0.5 * 2600 * pt * pt;
-      const life = 0.45 + hash(i, 10) * 0.3;
-      const k = 1 - outCubic(seg(pt, life * 0.55, life));
+      const vx = (x0 - cx) * (1.5 + hash(i, 4) * 1.5) + (hash(i, 5) - 0.5) * 220;
+      const vy = (y0 - cy) * (1.1 + hash(i, 6) * 1.0) - 520 - hash(i, 9) * 340;
+      const x = x0 + vx * pt, y = y0 + vy * pt + 0.5 * 4400 * pt * pt;
+      const life = 0.26 + hash(i, 10) * 0.1; // every chip gone by 0.36 s, before the hard cut at 2.7
+      const k = 1 - outCubic(seg(pt, life * 0.5, life));
       const sz = (14 + hash(i, 11) * 16) * k;
       n.style.visibility = k > 0.01 ? 'visible' : 'hidden';
       n.style.background = c.c;
@@ -227,11 +223,11 @@ export default {
     });
 
     // the clip follows t
-    const want = clamp(t * CLIP_RATE, 0, CLIP_END);
+    const want = clamp(t, 0, CLIP_END);
     const vid = el.vid;
     const live = lt >= 0 && lt < INTRO.SHATTER && !document.body.classList.contains('freeze');
     if (live) {
-      vid.playbackRate = CLIP_RATE;
+      vid.playbackRate = 1;
       if (vid.paused) {
         const p = vid.play();
         if (p && p.catch) p.catch((e) => { if (e.name !== 'AbortError') console.error('intro.js: video.play() rejected', e); });

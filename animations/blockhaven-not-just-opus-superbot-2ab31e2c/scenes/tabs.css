@@ -105,7 +105,3 @@
 #s-tabs .sbsite .stage-bar { opacity: 0; }
 #s-tabs .sbsite .body { grid-template-columns: minmax(0, 1fr); } /* the site's margin column is closed ("perched"), as in the ad's end state */
 #s-tabs .sbsite .rail-item.sb.sel::before { opacity: var(--sel-a, 0); } /* the selection pill fades in with the sidebar */
-
-/* blockhaven-not-just-opus: the strip along the bottom of the frame the docked stage hotbar sits in (tabs.js HB_STRIP),
-   in the hub's own background so it reads as the app's bottom margin */
-#s-tabs .tb-strip { position: absolute; left: 0; right: 0; bottom: 0; background: #0a0a0b; z-index: 3; pointer-events: none; }

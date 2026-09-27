@@ -1,10 +1,9 @@
 // Act 5, the landing: @kepochnik's BlockHaven gameplay, full frame. The chat scene ends pushed into the Play card
 // (its 16:9 screen covering the frame at 1.01x, the clip's first frame in it, object-fit cover), so this scene opens on
 // exactly that framing (the clip at cover width, S0) and settles in COVER_OUT to the whole game frame at full height,
-// uncropped, with a blurred copy of the same frame filling the side bands. The in-game hotbar comes up into the spot
-// the ad's hotbar holds (timeline.js schedules the ad hotbar onto it and out). Source: kep.mp4 8.4 s to 14.467 s
-// (gen/clip.mp4, 1162x840): the player chops an oak log and the block breaks at 5.7 s; the scene holds 0.3 s past the
-// break and the timeline fades it.
+// uncropped, with a blurred copy of the same frame filling the side bands, and the creator credit comes up.
+// Source: kep.mp4 8.4 s to 14.467 s (gen/clip.mp4, 1162x840): the player chops an oak log and the block breaks at
+// 5.7 s; the scene holds 0.3 s past the break and the timeline fades it.
 // render(lt) is a pure function of local time: want = clamp(lt, 0, CLIP_END); a frozen frame pauses and seeks to it,
 // a playing frame plays and only re-seeks past DRIFT_TOL.
 import { clamp, lerp, seg, inOutCubic } from '../lib.js';
@@ -12,13 +11,11 @@ import { clamp, lerp, seg, inOutCubic } from '../lib.js';
 const g = (f) => new URL('../gen/' + f, import.meta.url).href;
 const H = 1080;
 const VW = 1162, VH = 840;          // the clip's own frame
-export const CLIP = {
+const CLIP = {
   DUR: 6.3,
   BREAK: 5.7,                       // the log block breaks (source 14.100 s)
   END: 6.03,                        // never seek onto the very last frame (6.066 s long)
   COVER_OUT: [0.0, 0.55],           // cover -> full-height settle
-  // the in-game hotbar in the clip's own px (bottom centre, cut by the frame's bottom edge); 182 GUI units wide
-  HOTBAR: { cx: 572, top: 798, w: 414 },
 };
 const SEED_TOL = 0.04, DRIFT_TOL = 0.25;
 
@@ -29,13 +26,7 @@ export function clipGeo(W) {
   const s = H / VH;                          // full height
   const fw = VW * s;
   const s0 = (W * 1.01) / fw;                // the Play card's 16:9 screen covering the frame at 1.01x
-  return { s, fw, x0: (W - fw) / 2, s0 };
-}
-
-// where the in-game hotbar sits on the stage once the clip has settled: {cx, top, u} in stage px
-export function gameHotbar(W) {
-  const { s, x0 } = clipGeo(W);
-  return { cx: x0 + CLIP.HOTBAR.cx * s, top: CLIP.HOTBAR.top * s, u: (CLIP.HOTBAR.w / 182) * s };
+  return { s, fw, s0 };
 }
 
 export default {

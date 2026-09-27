@@ -4,20 +4,18 @@
 // and refusals", 1,985 authors, what they want: stable model performance): superbot does not bet the job on one model;
 // each part of it goes to the model that does that part best, in one chat. The spot opens on the most-shared proof of
 // one model (Noah Wachnik's "Opus 5.5, The Minecraft Test." post), mines it like a Minecraft block, and shows the
-// same game being made by six models in turn, with a Minecraft hotbar holding them.
-//   intro   0 to 5.2   the post, the HUD comes on, ten hits crack it, it shatters, its dropped item flies to slot 1
-//   cards   5.2 to 8.6 "Everyone credits Opus 5.5." / "The secret?" (slots 2 to 6 fill) / "It's not just Opus 5.5."
-//   tabs    the hub: one ask, six hand-offs, each hopping the hotbar's selection; ends pushed into the Play card
-//   clip    @kepochnik's BlockHaven gameplay at full frame, the ad hotbar handing over to the in-game one
-//   end     "Every model. One chat." over "It's not just Opus 5.5.", the hotbar back under it
+// same game being made by six models in turn, each hand-off named by its routing chip in the thread.
+//   intro   0 to 2.7   tight on the post, a crosshair comes on, ten hits crack it, it shatters, the particles fall
+//   cards   2.7 to 6.1 "Everyone credits Opus 5.5." / "The secret?" / "It's not just Opus 5.5."
+//   tabs    the hub: one ask, six hand-offs, each opening on its routing chip; ends pushed into the Play card
+//   clip    @kepochnik's BlockHaven gameplay at full frame, with the creator credit
+//   end     "Every model. One chat." over "It's not just Opus 5.5."
 // The engine: the whole spot is a pure function of t. ?t=<s> freezes a frame, ?t=<s>&play=1 plays on from there,
 // space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock. Scene modules (scenes/<id>.js) are mounted
-// once and rendered only while active; black text cards and the end card are drawn here; the stage hotbar
-// (hotbar.js) runs over all of them on a schedule written from the segment table (hotbarSchedule).
+// once and rendered only while active; black text cards and the end card are drawn here.
 import * as lib from './lib.js';
 import * as shell from './shell.js';
 import { CFG } from './scenes/tabs-assets/cuts.js?v=6';
-import { mountHotbar, renderHotbar, APP_SLOT, NAMES, SLOTS } from './hotbar.js?v=2';
 
 const { clamp, lerp, seg, outCubic, outQuint, inOutCubic, outBack } = lib;
 const H = 1080;
@@ -36,7 +34,7 @@ const SEQUENCE = [
   ['end', 'end'],
 ];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape)
-const FALLBACK_DUR = { intro: 5.2, tabs: 17, clip: 6.3 };
+const FALLBACK_DUR = { intro: 2.7, tabs: 17, clip: 6.3 };
 const SCENE_FADE = 0.3;
 const END_DUR = 3.5, DIP = 0.35;
 // joins played as straight cuts (no fade on either side): the shatter's black into the first card, card to card, and
@@ -185,15 +183,14 @@ function renderEnd(e, lt, t) {
 
 // ---------- load the scene modules (a broken module must not take the spot down) ----------
 const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
-const MODS = {}, NS = {};
+const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=1`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=3`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const ns = await import(`./scenes/${id}.js?v=1`);
+    const ns = await import(`./scenes/${id}.js?v=3`);
     const m = ns.default;
-    NS[id] = ns;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {
@@ -249,66 +246,6 @@ for (const s of SEGS) {
 measureCaps();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureCaps);
 
-// ---------- the stage hotbar's schedule (hotbar.js), from the segment table and the scenes' own constants ----------
-//   intro: off until the HUD comes on (INTRO.HUD), full size at the bottom; the dropped item lands in slot 1
-//   cards: slot 1's name holds through "Everyone credits Opus 5.5."; slots 2 to 6 pop in on "The secret?"; the
-//          selection sweeps the six on "It's not just Opus 5.5." and lands on Superbot
-//   tabs:  docked small in the strip tabs.js keeps free (HB_STRIP); every routing hand-off (ROUTES) hops the
-//          selection to that model's slot and shows its name
-//   clip:  it moves onto the in-game hotbar (clip.js gameHotbar) as the clip settles, selects slot 1 like the game
-//          does, and fades out, leaving the game's own hotbar in its place
-//   end:   back under the end card, Superbot selected
-function hotbarSchedule() {
-  const Wd = W();
-  const S_ = (id) => SEGS.find((x) => x.id === id);
-  const intro = S_('intro'), c2 = S_('secret'), c3 = S_('notjust'), tabs = S_('tabs'), clip = S_('clip'), end = S_('end');
-  const I = (NS.intro && NS.intro.INTRO) || { HUD: 2.2, DROP: 4.58, PICK: 4.95, LAND: 5.3 };
-  const strip = (NS.tabs && NS.tabs.HB_STRIP) || 108;
-  const routes = (NS.tabs && NS.tabs.ROUTES) || [];
-  const game = NS.clip && NS.clip.gameHotbar ? NS.clip.gameHotbar(Wd) : { cx: Wd / 2, top: 1026, u: 2.92 };
-  const settle = (NS.clip && NS.clip.CLIP && NS.clip.CLIP.COVER_OUT[1]) || 0.55;
-  const DOCK_U = 2.6;
-  const FULL = { cx: Wd / 2, by: H - 26, u: 4 };
-  const DOCK = { cx: Wd / 2, by: H - Math.max(6, (strip - 22 * DOCK_U - 40) / 2), u: DOCK_U };
-  const GAME = { cx: game.cx, by: game.top + 22 * game.u, u: game.u };
-  const END = { cx: Wd / 2, by: H - 44, u: 3.2 };
-  const sweep = [1, 2, 3, 4, 5].map((slot, i) => ({ t: c3.t0 + 0.18 + i * 0.11, slot }));
-  const last = sweep[sweep.length - 1].t;
-  const key = (app) => SLOTS[APP_SLOT[app]];
-  return {
-    pos: [
-      { t: 0, ...FULL },
-      { t: tabs.t0 - 0.05, dur: 0.5, ...DOCK },
-      { t: clip.t0, dur: settle, ...GAME },
-      { t: end.t0, dur: 0, ...END },
-    ],
-    op: [
-      { t: 0, v: 0 },
-      { t: intro.t0 + I.HUD, dur: 0.25, v: 1 },
-      { t: clip.t0 + 0.28, dur: 0.36, v: 0 },
-      { t: end.t0 + 0.7, dur: 0.35, v: 1 },
-    ],
-    sel: [
-      { t: 0, slot: 0 },
-      ...sweep,
-      ...routes.map((r) => ({ t: tabs.t0 + r.at, slot: APP_SLOT[r.app] })),
-      { t: clip.t0 + 0.04, slot: 0 },
-      { t: end.t0 + 0.95, slot: 5 },
-    ],
-    tip: [
-      { t: intro.t0 + I.LAND, text: NAMES.claude, hold: 1.05 },
-      { t: last + 0.02, text: NAMES.superbot, hold: 0.45 },
-      ...routes.map((r) => ({ t: tabs.t0 + r.at, text: NAMES[key(r.app)], hold: 1.3 })),
-      { t: end.t0 + 0.95, text: NAMES.superbot, hold: 10 },
-    ],
-    fill: [intro.t0 + I.LAND, ...[0, 1, 2, 3, 4].map((i) => c2.t0 + 0.08 + i * 0.075)],
-    drop: { t0: intro.t0 + I.DROP, tPick: intro.t0 + I.PICK, tLand: intro.t0 + I.LAND, x: Wd / 2, y: 500 },
-  };
-}
-const HB = mountHotbar(stage, dip);
-let HBS = hotbarSchedule();
-window.__AD.hotbar = HBS;
-
 // ---------- draw one frame ----------
 let active = null;
 function render(t) {
@@ -335,7 +272,6 @@ function render(t) {
       try { cur.mod.render(lt, ctx); } catch (err) { report(cur, 'render', err); }
     }
   }
-  renderHotbar(HB, t, HBS);
   // the dip at the loop: the end card goes to black over its last DIP seconds
   dip.style.opacity = seg(t, CYCLE - DIP, CYCLE).toFixed(3);
 }
@@ -348,7 +284,7 @@ function fit() {
   stage.style.transform = `translate(-50%, -50%) scale(${k})`;
 }
 addEventListener('resize', fit); fit();
-addEventListener('archange', () => { fit(); measureCaps(); HBS = hotbarSchedule(); window.__AD.hotbar = HBS; lastT = NaN; });
+addEventListener('archange', () => { fit(); measureCaps(); lastT = NaN; });
 
 // ---------- the clock (waffles-website) ----------
 const q = new URLSearchParams(location.search);

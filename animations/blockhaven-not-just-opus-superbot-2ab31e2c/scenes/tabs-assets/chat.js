@@ -1,10 +1,9 @@
 // "make me minecraft. call it BlockHaven": one ask, six hand-offs. Superbot switches to DeepSeek V4 Flash to scrape
 // block and sound references, to Gemini for the block textures, to Meshy 5 for the voxel models, to ElevenLabs for
 // the sounds, to Claude Opus 5.5 for the engine, and comes back to Superbot to ship it with a Play card
-// (./beats/*.js). Its routing chips, the composer's platform chip and the stage hotbar (../hotbar.js reads ROUTES)
-// follow the model. ./cuts.js holds the copy and pacing. The thread is bottom-anchored so every message rises out of
-// the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on the beat imports busts GitHub
-// Pages' 10-minute module cache on republish.
+// (./beats/*.js). Its routing chips and the composer's platform chip follow the model. ./cuts.js holds the copy and
+// pacing. The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure
+// function of the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import { CFG } from './cuts.js?v=6';
@@ -30,7 +29,7 @@ export const APPS = {
   eleven: { name: 'ElevenLabs', logo: brand('elevenlabs-logo.svg'), sub: 'in superbot' },
 };
 
-// the hand-off order is fixed: every step opens with its own routing chip, and the stage hotbar selects that slot
+// the hand-off order is fixed: every step opens with its own routing chip
 const STEPS = [
   { app: 'deepseek', mod: decalScrape, chips: [['deepseek', 'Switching to DeepSeek V4 Flash']] },
   { app: 'gemini', mod: decalGen, chips: [['gemini', 'Switching to Gemini']] },
@@ -69,8 +68,6 @@ function timeBeats(asks) {
 }
 export const BEATS = timeBeats(STEPS.map((st, i) => ({ ...st, ask: CFG.asks[i] })));
 export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.1;
-// every routing hand-off in scene-local time: the stage hotbar hops its selection to that app's slot at `at`
-export const ROUTES = BEATS.flatMap(({ k }) => k.chips.map((c) => ({ app: c.app, at: c.swap })));
 
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';

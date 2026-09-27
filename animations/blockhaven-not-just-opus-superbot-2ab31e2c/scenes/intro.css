@@ -8,10 +8,8 @@
   font-family: "TwitterChirp", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: #e7e9ea; font-size: 15px; line-height: 20px; -webkit-font-smoothing: antialiased; }
 
-/* the timeline column: its side rules run far past the post so they leave the frame at every zoom */
+/* the post's column: X's timeline width, with no side rules (the post alone fills the frame) */
 #s-intro .tw-col { position: relative; width: 600px; }
-#s-intro .tw-col::before { content: ''; position: absolute; left: 0; right: 0; top: -4000px; bottom: -4000px;
-  border-left: 1px solid #2f3336; border-right: 1px solid #2f3336; pointer-events: none; }
 
 #s-intro .tw-post { position: relative; display: flex; padding: 12px 16px 4px; background: #000;
   border-top: 1px solid #2f3336; border-bottom: 1px solid #2f3336; }

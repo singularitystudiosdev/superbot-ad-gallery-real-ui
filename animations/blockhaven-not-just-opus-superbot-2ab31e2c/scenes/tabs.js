@@ -5,22 +5,17 @@
 // spans the frame width at every ratio (no switch zoom-ins) while the chat plays (tabs-assets/chat.js). render(lt)
 // is a pure function of local time. The scene keeps the id "tabs" so the hub's generated stylesheets (scoped under
 // #s-tabs) apply unchanged.
-// This fork keeps a strip of HB_STRIP px free along the bottom of the frame for the stage hotbar (../hotbar.js, docked
-// there by timeline.js): the hub is laid out HB_STRIP px shorter and framed above it, so the hotbar never covers the
-// thread or the composer. The finale is the Play card (beats/sb-ship.js): the camera pushes into its 16:9 screen until
-// it covers the whole frame (1% overscan), the strip fading as it goes, and the scene ends as the push lands; the
-// clip scene opens on the same framing (clip.js clipGeo s0).
+// The hub fills the whole frame height. The finale is the Play card (beats/sb-ship.js): the camera pushes into its
+// 16:9 screen until it covers the whole frame (1% overscan), and the scene ends as the push lands; the clip scene
+// opens on the same framing (clip.js clipGeo s0).
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=16';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=17';
 import { CFG } from './tabs-assets/cuts.js?v=6';
-// the routing hand-offs in scene time, for the stage hotbar (timeline.js hotbarSchedule)
-export { ROUTES } from './tabs-assets/chat.js?v=16';
 import { clamp, lerp, seg, outCubic, inOutCubic, boxIn } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
 const H = 1080;
 const FIRST = BEATS[0].k;
-export const HB_STRIP = 108; // frame px kept free at the bottom for the docked hotbar
 
 let el = null;
 
@@ -39,7 +34,7 @@ const PLAY_ROOM = 96; // thread height kept free around the Play card's 16:9 scr
 function geo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
   const DW = Math.max(MIN_DW, (W * MIN_DH) / H);
-  const k = W / DW, DHf = H / k, DH = (H - HB_STRIP) / k; // DHf: the whole frame; DH: the hub, above the strip
+  const k = W / DW, DH = H / k;
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';
   el.site.style.setProperty('--dw', DW + 'px');
@@ -47,7 +42,7 @@ function geo(W) {
   const cs = getComputedStyle(el.feed);
   const viewH = el.feed.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
   const colW = el.feed.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 10;
-  const geom = { W, DW, DH, DHf, k, lift: null };
+  const geom = { W, DW, DH, k, lift: null };
   if (!(viewH > 0 && colW > 0)) return geom; // not laid out yet (scene hidden): measure again next frame
   el.site.style.setProperty('--game-h', Math.min(colW / GAME_AR, viewH - GAME_ROOM).toFixed(1) + 'px');
   // the Play card: the widest 16:9 screen the thread shows whole
@@ -100,11 +95,7 @@ export default {
     // the composer as the empty state shows it: SUPER is a switch (off), the platform chip names the model
     const sup = hub.querySelector('.rc-super');
     sup.innerHTML = 'SUPER<i class="ask-tg"><b></b>OFF</i>';
-    const strip = document.createElement('div');
-    strip.className = 'tb-strip';
-    strip.style.height = HB_STRIP + 'px';
-    section.appendChild(strip);
-    el = { site: q('.sbsite'), hub, main, hero, strip, composer: hub.querySelector('.composer'), feed: hub.querySelector('.feed'), geo: null };
+    el = { site: q('.sbsite'), hub, main, hero, composer: hub.querySelector('.composer'), feed: hub.querySelector('.feed'), geo: null };
     el.chat = mountChat(hub);
   },
 
@@ -130,17 +121,15 @@ export default {
     const empty = shot(g, lerp(1.05, 1.02, inOutCubic(seg(t, 0, CHAT_T0))), g.DW / 2, g.DH / 2);
     let c = mix(empty, shot(g, 1, g.DW / 2, g.DH), inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.5)));
 
-    // the finale: the camera pushes into the Play card's screen until it covers the whole frame, strip included
-    // (1% overscan so no card edge shows); the hub's frame centre moves from above the strip to the frame centre
+    // the finale: the camera pushes into the Play card's screen until it covers the whole frame
+    // (1% overscan so no card edge shows)
     const f = el.chat.focus;
     const zf = f ? inOutCubic(seg(t, f.a, f.b)) : 0;
     if (zf > 0) {
       const b = boxIn(f.el, el.site);
-      const Z = CFG.zoom ? Math.max(g.DW / b.w, g.DHf / b.h) * 1.01 : 1.04;
+      const Z = CFG.zoom ? Math.max(g.DW / b.w, g.DH / b.h) * 1.01 : 1.04;
       c = mix(c, shot(g, Z, b.cx, b.cy), zf);
     }
-    const cy = lerp((H - HB_STRIP) / 2, H / 2, zf);
-    el.strip.style.opacity = (1 - zf).toFixed(3);
-    el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${cy.toFixed(2)}px) scale(${(g.k * c.Z).toFixed(5)}) translate(${(-c.x).toFixed(2)}px,${(-c.y).toFixed(2)}px)`;
+    el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${(H / 2).toFixed(2)}px) scale(${(g.k * c.Z).toFixed(5)}) translate(${(-c.x).toFixed(2)}px,${(-c.y).toFixed(2)}px)`;
   },
 };

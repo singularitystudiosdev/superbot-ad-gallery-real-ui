@@ -176,10 +176,10 @@ const more = [
   // (animations/its-a-lie-every-model-superbot-54829cd7/CREDITS.txt).
   ['its-a-lie-every-model-superbot-54829cd7', 'its-a-lie-every-model-superbot-54829cd7/', 'ITS A LIE: "I made this in one prompt", then the models behind BlockHaven', 'Ad spots'],
   // IT'S NOT JUST OPUS 5.5 (2026-09-27): a fork of make-minecraft b055c127 with the pocketsflow-untold X post, where the
-  // viewer mines @noahwachnik's Opus 5.5 Minecraft post like a block, its Claude drop fills a Minecraft model hotbar, and
-  // one chat routes "make me minecraft. call it BlockHaven" through six models before @kepochnik's clip plays
+  // viewer mines @noahwachnik's Opus 5.5 Minecraft post like a block, then one chat routes "make me minecraft. call it
+  // BlockHaven" through six models before @kepochnik's clip plays
   // (animations/blockhaven-not-just-opus-superbot-2ab31e2c/img/CREDITS.txt).
-  ['blockhaven-not-just-opus-superbot-2ab31e2c', 'blockhaven-not-just-opus-superbot-2ab31e2c/', 'IT\'S NOT JUST OPUS 5.5: mine @noahwachnik\'s post, fill the model hotbar, one chat builds BlockHaven. DeepSeek V4 Flash, Gemini, Meshy 5, ElevenLabs, Opus 5.5, Superbot plays it (clip @kepochnik)', 'Ad spots'],
+  ['blockhaven-not-just-opus-superbot-2ab31e2c', 'blockhaven-not-just-opus-superbot-2ab31e2c/', 'IT\'S NOT JUST OPUS 5.5: mine @noahwachnik\'s post, then one chat builds BlockHaven. DeepSeek V4 Flash, Gemini, Meshy 5, ElevenLabs, Opus 5.5, Superbot plays it (clip @kepochnik)', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

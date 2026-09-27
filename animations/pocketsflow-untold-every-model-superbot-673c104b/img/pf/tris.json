@@ -1,0 +1,18 @@
+{
+  "mascot": {
+    "tris": 2318,
+    "meshes": 3
+  },
+  "laptop": {
+    "tris": 864,
+    "meshes": 2
+  },
+  "ebooks": {
+    "tris": 1196,
+    "meshes": 4
+  },
+  "apps": {
+    "tris": 708,
+    "meshes": 3
+  }
+}

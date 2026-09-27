@@ -31,7 +31,7 @@ const SEQUENCE = [
   ['end', 'end'],
 ];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape)
-const FALLBACK_DUR = { tweet: 4.2, lie: 3.5, tabs: 13.4, reveal: 6.0 };
+const FALLBACK_DUR = { tweet: 2.94, lie: 3.5, tabs: 13.4, reveal: 6.0 };
 // joins cut straight from one scene's last frame to the next scene's first: key = '<from>><to>'
 const HARD_CUTS = new Set(['tweet>lie', 'lie>tabs', 'tabs>reveal']);
 const SCENE_FADE = 0.3;
@@ -60,10 +60,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=2`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=3`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=2`)).default;
+    const m = (await import(`./scenes/${id}.js?v=3`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

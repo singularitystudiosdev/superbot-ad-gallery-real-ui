@@ -12,7 +12,14 @@
 import { clamp, lerp, seg, inOutCubic, outCubic, rand } from '../lib.js';
 
 const H = 1080;
+// DUR is the beat as authored: the push-in window, the count ramp and the closing glitch are all timed against it.
+// RATE is the cut: the act plays 30% shorter, with every move inside it 30% faster (render reads lt / RATE as authored
+// time, so the motion is unchanged, only quicker), and the clip is sped to match so the pill still counts what is on
+// screen. OUT is what the timeline gives the scene.
 const DUR = 4.2;
+const RATE = 0.7;
+const OUT = +(DUR * RATE).toFixed(4);
+const PLAY = 1 / RATE;
 const bh = (f) => new URL('../img/bh/' + f, import.meta.url).href;
 const img = (f) => new URL('../img/' + f, import.meta.url).href;
 const CLIP = 'noah.mp4', POSTER = 'noah-poster.jpg';
@@ -88,7 +95,7 @@ function measure() {
 
 export default {
   id: 'tweet',
-  dur: DUR,
+  dur: OUT,
 
   mount(section) {
     section.innerHTML = `${GLITCH}
@@ -129,6 +136,7 @@ export default {
     // the muted content attribute does not set the muted IDL property, and an unmuted video cannot start on its own
     el.vid.muted = true;
     el.vid.defaultMuted = true;
+    el.vid.playbackRate = PLAY;   // the clip runs with the act, so want() stays one seek-free playthrough
     // the timeline only renders the active scene: once it moves on, park the clip instead of decoding it off screen
     new MutationObserver(() => { if (!section.classList.contains('on') && !el.vid.paused) el.vid.pause(); })
       .observe(section, { attributes: true, attributeFilter: ['class'] });
@@ -136,7 +144,7 @@ export default {
 
   render(lt, ctx) {
     if (!el) return;
-    const t = clamp(lt, 0, DUR);
+    const t = clamp(lt * PLAY, 0, DUR);   // authored time
     const W = (ctx && ctx.W) || 1920;
     const g = measure();
     if (!g.post.h || !g.media.w) return;
@@ -166,6 +174,7 @@ export default {
     const vid = el.vid;
     const live = lt >= 0 && t < fz && !document.body.classList.contains('freeze');
     if (live) {
+      if (vid.playbackRate !== PLAY) vid.playbackRate = PLAY;
       if (vid.paused) {
         const p = vid.play();
         if (p && p.catch) p.catch((e) => { if (e && e.name !== 'AbortError') console.error('tweet.js: video.play() rejected', e); });
@@ -180,7 +189,7 @@ export default {
     const on = t >= fz;
     if (on !== el.fxOn) { el.fx.style.filter = on ? 'url(#tw-glitch)' : 'none'; el.fxOn = on; }
     if (on) {
-      const k = Math.floor((t - fz) / (2 * FRAME));
+      const k = Math.floor((lt - fz * RATE) / (2 * FRAME));   // stepped on the wall clock, so the flicker keeps its rate
       const amp = lerp(0.35, 1, seg(t, fz, DUR));
       const r = rand(k * 13 + 5), r2 = rand(k * 29 + 11);
       el.turb.setAttribute('seed', String(1 + (k % 9)));

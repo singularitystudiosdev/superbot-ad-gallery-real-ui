@@ -2,7 +2,7 @@
 // are hidden, ask.css), laid out at DW design px and scaled to the frame width. It opens on the empty state
 // ("Good evening. Where do we go?" over a centred composer) with the camera pushed in; the first send drops the
 // composer to the bottom, lifts the greeting away and eases the camera out while the seven-request chat plays
-// (tabs-assets/chat.js); at every "Switching to …" the camera pushes onto the chip so it reads on a small screen. render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
+// (tabs-assets/chat.js). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
 import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=1';
@@ -22,13 +22,12 @@ function geo(W) {
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';
   el.site.style.setProperty('--dw', DW + 'px');
-  el.geo = { W, DW, DH, k, lift: null, compW: 0, swL: 0 };
+  el.geo = { W, DW, DH, k, lift: null, compW: 0 };
   return el.geo;
 }
 
 // how far the composer sits above its resting place in the empty state: just under the greeting, as a group
 // centred in the frame. Also measures, once, the composer's width (the intro push-in must keep it in frame)
-// and the left edge of the "Switching to …" chips (every chip shares it; the switch camera frames it)
 function lift(g) {
   if (g.lift !== null) return g.lift;
   const main = el.main.getBoundingClientRect();
@@ -39,40 +38,17 @@ function lift(g) {
   const groupTop = (g.DH - (heroH + 34 + compH)) / 2;
   el.hero.style.top = groupTop.toFixed(2) + 'px';
   g.compW = comp.width / s;
-  g.swL = (el.chat.beats[0].sw.getBoundingClientRect().left - main.left) / s;
-  const asks = el.chat.beats.filter((b) => b.u).map((b) => b.u.querySelector('.m-main').getBoundingClientRect().left);
-  g.askL = asks.length ? (Math.min(...asks) - main.left) / s : g.DW;
   g.lift = (comp.top - main.top) / s - (groupTop + heroH + 34);
   return g.lift;
 }
 
-// the switch camera: how far it is pushed onto the "Switching to …" chip. Eases in as the chip lands, holds
-// through the spinner and the tick, and eases back out once the app's reply is on screen
-const SWITCH_Z = 1.75, SWITCH_ZMAX = 2.4;
-function switchPush(t) {
-  let e = 0;
-  for (const { k } of BEATS) {
-    const inP = inOutCubic(seg(t, k.sw - 0.25, k.sw + 0.35));
-    const outP = inOutCubic(seg(t, k.reply + 0.3, k.reply + 0.95));
-    e = Math.max(e, inP * (1 - outP));
-  }
-  return e;
-}
-
-// the camera for time t: a zoom and the design-px point it centres. The empty state pushes in only as far as
-// keeps the composer inside the frame (4:3 and square leave almost no room); each switch pushes onto the chip,
-// framed from its left edge down to the bottom of the frame and tight enough that the frame's right edge stops
-// short of the leftmost ask bubble (right-aligned, wider asks reach further left), so no bubble is cut mid-word
+// the camera for time t: a zoom about the frame centre. The empty state pushes in only as far as keeps the
+// composer inside the frame (4:3 and square leave almost no room), easing out once the thread starts
 function camera(g, t) {
   const fit = g.DW / (g.compW + 56);
   const z0 = Math.max(1, Math.min(1.2, fit)), z1 = lerp(1, z0, 0.5);
-  const zI = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
-  const e = switchPush(t);
-  if (e <= 0) return { z: zI, x: g.DW / 2, y: g.DH / 2 };
-  const left = Math.max(0, g.swL - 28);
-  const zs = Math.min(SWITCH_ZMAX, Math.max(SWITCH_Z, g.DW / (g.askL - 16 - left)));
-  const vw = g.DW / zs, vh = g.DH / zs;
-  return { z: lerp(zI, zs, e), x: lerp(g.DW / 2, Math.min(g.DW - vw, left) + vw / 2, e), y: lerp(g.DH / 2, g.DH - vh / 2, e) };
+  const z = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
+  return { z, x: g.DW / 2, y: g.DH / 2 };
 }
 
 export default {

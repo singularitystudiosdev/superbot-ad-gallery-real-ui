@@ -29,12 +29,11 @@ REFERENCE POSTS (named or modelled, no media taken unless listed above)
     all-code film). Not shown.
 
 OPENER POST (scenes/tweet.js, notes in img/tweet/CREDITS.txt)
-  Every account in the feed ("Nico" @nicoships_, Mara Voss, Kai Reyes, Lena Hart, Theo Brandt, Jules Park) is
-  FICTIONAL; no real person's words are quoted. Avatars and the two desk photos are Unsplash photos under the
-  Unsplash License (https://unsplash.com/license), each photographer and photo URL listed in img/tweet/CREDITS.txt.
-  The hero post shows X's own re-share line "From anabology" over @anabology's footage.
-  X interface (logo, verified badge, nav and action icons): vector paths from X's own web client, drawn inline in
-    scenes/tweet.js to mock the X home timeline.
+  The opener frames one post's line "I made this in 1 prompt" and its video card for 3s. The post is FICTIONAL
+  (no author row is shown; no real person's words are quoted). Its video is @anabology's film (img/esc/tweet-clip.mp4,
+  as above), under X's own re-share line "From anabology". No photos: the opener uses no stock images.
+  X interface (mute icon): X's own web client vector path, drawn inline in scenes/tweet.js; the dark post look
+    follows x.com. The yellow highlighter on "1 prompt" is the ad's own emphasis.
 
 TYPE
   Anton Regular, (c) 2020 The Anton Project Authors, SIL OFL 1.1, via @fontsource/anton 5.3.0, fonts/anton-latin-400.woff2

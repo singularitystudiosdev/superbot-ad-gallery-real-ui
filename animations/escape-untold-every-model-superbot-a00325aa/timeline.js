@@ -2,8 +2,8 @@
 // dark-souls-every-model-superbot (v4). The whole spot is a pure function of t, like
 // ../waffles-website-superbot-87a583a1/timeline.js: ?t=<s> freezes a frame, ?t=<s>&play=1 plays on from there,
 // space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock.
-// It lays SEQUENCE end to end: the X doomscroll opener (scenes/tweet.js), the black THEY / WONT / TELL / YOU / HOW
-// word column (scenes/wont.js), the real superbot hub whose model switches build the "18 MONTHS TO ESCAPE" film
+// It lays SEQUENCE end to end: the tight X post opener (scenes/tweet.js: text + video, 1 prompt highlighted), the
+// black THEY / WONT / TELL / YOU / HOW column revealed plainly word by word (scenes/wont.js), the real superbot hub whose model switches build the "18 MONTHS TO ESCAPE" film
 // (scenes/tabs.js), then the superbot end card. Scene modules are mounted once and rendered only while active;
 // black text cards (drawn here) are still supported by the engine but this spot uses none.
 import * as lib from './lib.js';
@@ -16,8 +16,8 @@ const stage = document.getElementById('stage');
 const dip = document.getElementById('dip');
 
 // ---------- the sequence ----------
-// escape-untold-every-model-superbot: the X feed decelerating onto the "1 prompt" post, the black word column, then
-// the hub cropped to its thread, opening on the empty state and playing the "18 months to escape" chat
+// escape-untold-every-model-superbot: the tight X post opener (text + video, 1 prompt highlighted), the plain
+// word-by-word black column, then the hub cropped to its thread, opening on the empty state and playing the "18 months to escape" chat
 // (scenes/tabs-assets/chat.js: DeepSeek, Midjourney v7, MiniMax Hailuo 02, ElevenLabs, Claude Opus 5.5, GitHub,
 // then Superbot plays the film with its sound) and the end card. Hard cuts between the three scenes.
 const SEQUENCE = [
@@ -27,7 +27,7 @@ const SEQUENCE = [
   ['end', 'end'],
 ];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape): the modules' own durs
-const FALLBACK_DUR = { tweet: 6.5, wont: 3.13, tabs: 56.11 };
+const FALLBACK_DUR = { tweet: 3.0, wont: 2.85, tabs: 56.11 };
 // a scene module may export numbers fadeIn / fadeOut (seconds) to override this; 0 is a hard cut
 const SCENE_FADE = 0.3;
 const fadeOf = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : SCENE_FADE);
@@ -175,10 +175,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=13`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=14`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=22`)).default;
+    const m = (await import(`./scenes/${id}.js?v=23`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

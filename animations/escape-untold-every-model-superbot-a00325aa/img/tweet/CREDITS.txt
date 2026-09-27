@@ -1,38 +1,16 @@
-img/tweet CREDITS (escape-untold-every-model-superbot, Act 1: the X doomscroll opener, scenes/tweet.js)
+img/tweet CREDITS (escape-untold-every-model-superbot, Act 1: the 3s opener post, scenes/tweet.js)
 
-Every account in the feed is FICTIONAL. The people pictured are stock models, not the account holders, and no real
-person's words are quoted. All photos are from Unsplash under the Unsplash License
-(https://unsplash.com/license: free for commercial use, attribution not required, given here anyway),
-each confirmed on unsplash.com's "Free" license filter; cropped square and scaled to 240x240 (avatars).
+The opener frames one X post tight: its line "I made this in 1 prompt" and its video card, nothing else (no
+author row, no avatar, no feed). The post is FICTIONAL (its author, "Nico" @nicoships_, is named only in the
+code; no real person's words are quoted). This folder therefore holds no images any more: the Unsplash avatars
+and desk photos the earlier doomscroll version used were removed with the feed.
 
-avatar-nico.jpg   hero post "Nico" (@nicoships_). "a man smiling for the camera" by The Connected Narrative
-                  (@theconnectednarrative), https://unsplash.com/photos/a-man-smiling-for-the-camera-N8lRH2uxih4
-                  (CDN photo-1651684215020-f7a5b6610f23), 560x560 crop at (320,40) of the 1200w render
-avatar-mara.jpg   filler "Mara Voss" (@maravoss). "woman in red cardigan smiling" by Clay Elliot (@ibidsy),
-                  https://unsplash.com/photos/woman-in-red-cardigan-smiling-mpDV4xaFP8c (photo-1627161683077-e34782c24d81)
-avatar-kai.jpg    filler "Kai Reyes" (@kaireyes_dev). "man wearing white V-neck shirt" by Joseph Gonzalez
-                  (@miracletwentyone), https://unsplash.com/photos/man-wearing-white-v-neck-shirt-iFgRcqHznqg
-                  (photo-1507003211169-0a1dd7228f2d)
-avatar-lena.jpg   filler "Lena Hart" (@lenahart_ui). "woman in white crew neck shirt smiling" by Jake Nackos
-                  (@jakenackos), https://unsplash.com/photos/woman-in-white-crew-neck-shirt-smiling-IF9TK5Uy-KI
-                  (photo-1580489944761-15a19d654956)
-avatar-theo.jpg   filler "Theo Brandt" (@theobrandt). "man in gray crew neck shirt" by Zoran Borojevic
-                  (@fresh_studio), https://unsplash.com/photos/man-in-gray-crew-neck-shirt-f5xiGmFwXIU
-                  (photo-1589279715734-6631a314dfa2)
-avatar-jules.jpg  filler "Jules Park" (@julesbuilds, also the signed-in account in the nav). A 450x450 crop of
-                  "Young man with glasses smiling warmly" by Vitaly Gariev, scaled to 200x200,
-                  https://unsplash.com/photos/young-man-with-glasses-smiling-warmly-iys2A5qhF5o
-feed-desk-1.jpg   Kai's post image, 1036x648 (16:10 centre crop). "a desk with a computer, keyboard, mouse and
-                  light" by Shahram Anhari on Unsplash (photo-1697642438130-0158bc651cc3), found on
-                  https://unsplash.com/s/photos/desk-setup-code?license=free
-feed-desk-2.jpg   Theo's post image, 1036x1036 (square crop). "desktop turned on near window" by Max Andrey on
-                  Unsplash (photo-1575318633968-0383e7d07ca0), same free-filtered search
+The post's video is img/esc/tweet-clip.mp4 + tweet-poster.jpg: footage from the "18 MONTHS TO ESCAPE" film
+posted by @anabology, https://x.com/anabology/status/2103534482930491441 (see img/esc/CREDITS.txt), starting on
+its first frame (the "18 MONTHS TO ESCAPE THE PERMANENT UNDERCLASS" title card); the post shows X's own re-share
+attribution line "From anabology".
 
-The hero post's video is img/esc/tweet-clip.mp4 + tweet-poster.jpg: footage from the "18 MONTHS TO ESCAPE" film
-posted by @anabology, https://x.com/anabology/status/2103534482930491441 (see img/esc/CREDITS.txt); the post shows
-X's own re-share attribution line "From anabology".
-
-X interface: the X logo, the verified badge and the icons (home, explore, notifications, messages, bookmarks,
-profile, more, reply, repost, like, views, bookmark, share, mute, search) are vector paths from X's own web client,
-drawn as inline SVG in scenes/tweet.js to mock the X home timeline. Layout, colours and copy ("For you",
-"Following", "What's happening", "Subscribe to Premium") follow x.com's dark theme.
+X interface: the mute icon is the vector path from X's own web client, drawn as inline SVG in scenes/tweet.js.
+The look (black ground, #E7E9EA text, the 16px-radius media card with its 1px #2F3336 rule, the time-left pill)
+follows x.com's dark theme, seen zoomed in. The yellow highlighter on "1 prompt" is the ad's own emphasis, not
+part of X.

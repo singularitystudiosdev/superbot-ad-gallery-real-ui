@@ -1,7 +1,7 @@
 /* escape-untold-every-model-superbot: the black "THEY WONT TELL YOU HOW" word column (scenes/wont.js).
-   Stark white Anton caps on pure black; no glow, no gradient, no blur. Every size and position is set per frame
-   width by wont.js; nothing here animates (no transition, no animation): the hit frame is a class toggle
-   (.hit = white slab with the word knocked out in black; #s-wont.wont-inv = HOW's whole-frame invert). */
+   Plain white Anton caps on pure black; no glow, no gradient, no blur. Every size and position is set per frame
+   width by wont.js, and each word is only ever hidden or fully visible: nothing here animates (no transition, no
+   animation, no transform). */
 @font-face {
   font-family: 'Wont Anton';
   src: url('../fonts/anton-latin-400.woff2') format('woff2');
@@ -11,25 +11,14 @@
 }
 
 #s-wont { background: #000; }
-#s-wont .wont-col { position: absolute; inset: 0; will-change: transform; }
-#s-wont .wont-line {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 0;
-  visibility: hidden;
-  background: transparent;
-  transform-origin: 50% 50%;
-  transition: none;
-  animation: none;
-}
+#s-wont .wont-col { position: absolute; inset: 0; }
 #s-wont .wont-w {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   margin: 0;
+  visibility: hidden;
   font-family: 'Wont Anton', 'Anton', Impact, 'Arial Narrow', sans-serif;
   font-weight: 400;
   font-size: 200px;
@@ -40,17 +29,11 @@
   text-transform: uppercase;
   white-space: nowrap;
   color: #fff;
+  opacity: 1;
+  transform: none;
   transition: none;
   animation: none;
   text-shadow: none;
   filter: none;
   -webkit-font-smoothing: antialiased;
 }
-
-/* the one-frame hit: a hard white slab, the word knocked out in black */
-#s-wont .wont-line.hit { background: #fff; }
-#s-wont .wont-line.hit .wont-w { color: #000; }
-
-/* HOW's hit frame: the whole frame inverts */
-#s-wont.wont-inv { background: #fff; }
-#s-wont.wont-inv .wont-w { color: #000; }

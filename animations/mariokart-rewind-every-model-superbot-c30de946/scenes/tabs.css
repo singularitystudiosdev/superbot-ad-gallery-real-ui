@@ -153,3 +153,36 @@
 #s-tabs .kh-t-github { background: #0d1117; }
 #s-tabs .kh-t-opus img, #s-tabs .kh-t-github img { filter: brightness(0) invert(1); }
 #s-tabs .kh-ck { flex: none; width: 17px; height: 17px; fill: none; stroke: #4ade80; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+
+/* ---------- the HUD as a top band (tabs.js: frames under 1700 wide, where the side margins cannot hold it) ----------
+   The thread's feed is masked above the band (tabs.js bandMask sets --kh-cut / --kh-fade in the feed's px), so no
+   message ever sits under the HUD. Left: one line, 1 PROMPT · MODELS n · clock. Right: the plan as 7 model tiles
+   and n/7 (placed and scaled by tabs.js, it lifts off the plan card like the corner panel). --kh-b is the band scale. */
+#s-tabs .kh-bl, #s-tabs .kh-strip { display: none; }
+#s-tabs .kh.band .kh-l, #s-tabs .kh.band .kh-plan { display: none; }
+#s-tabs .kh.band .kh-bl, #s-tabs .kh.band .kh-strip { display: flex; }
+#s-tabs .ask-root.kh-banded .sbsite .hub .main > .feed {
+  -webkit-mask-image: linear-gradient(180deg, transparent var(--kh-cut, 0px), #000 calc(var(--kh-cut, 0px) + var(--kh-fade, 0px)));
+  mask-image: linear-gradient(180deg, transparent var(--kh-cut, 0px), #000 calc(var(--kh-cut, 0px) + var(--kh-fade, 0px))); }
+#s-tabs .kh-bl { position: absolute; left: calc(28px * var(--kh-b, 1)); top: calc(12px * var(--kh-b, 1)); align-items: baseline; gap: 10px;
+  transform: scale(var(--kh-b, 1)); transform-origin: 0 0; white-space: nowrap;
+  font-style: italic; font-weight: 900; line-height: 1; -webkit-text-stroke: 7px #1b1e3f; paint-order: stroke fill; text-shadow: 0 3px 0 rgba(12, 14, 40, .55); }
+#s-tabs .kh-bl b { display: inline-block; font-size: 52px; font-weight: 900; font-variant-numeric: tabular-nums; transform-origin: 50% 60%; }
+#s-tabs .kh-bl small { font-size: 24px; letter-spacing: .02em; }
+#s-tabs .kh-bl i { font-style: normal; font-size: 30px; color: #9aa0cc; margin: 0 2px; }
+#s-tabs .kh-bl .kh-b1 { color: #ffd23f; }
+#s-tabs .kh-bl .kh-bm { color: #7fd0ff; }
+#s-tabs .kh-bt { font-size: 32px; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+#s-tabs .kh-strip { position: absolute; left: 0; top: 0; align-items: center; gap: 8px; padding: 8px 14px 8px 8px; opacity: 0; transform-origin: 0 0;
+  border-radius: 999px; background: rgba(22, 24, 48, .9); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 10px 28px rgba(0, 0, 0, .45);
+  white-space: nowrap; font-style: italic; font-weight: 900; line-height: 1; }
+#s-tabs .kh-st { position: relative; flex: none; display: grid; place-items: center; width: 42px; height: 42px; }
+#s-tabs .kh-st .kh-tile { width: 42px; height: 42px; border-radius: 12px; }
+#s-tabs .kh-st .kh-tile img { width: 24px; height: 24px; }
+#s-tabs .kh-st .kh-t-meshy img { width: 100%; height: 100%; }
+#s-tabs .kh-st.on .kh-tile { box-shadow: 0 0 0 3px #ffb02a, 0 0 16px rgba(255, 154, 31, .65); }
+#s-tabs .kh-st.ok .kh-tile { opacity: .5; }
+#s-tabs .kh-st .kh-ck { position: absolute; right: -5px; bottom: -5px; width: 21px; height: 21px; padding: 3px; box-sizing: border-box; border-radius: 50%;
+  background: #173424; box-shadow: 0 0 0 2px rgba(22, 24, 48, .95); stroke-width: 3.6; }
+#s-tabs .kh-strip em { margin-left: 6px; font-size: 20px; color: #b9bdd8; font-variant-numeric: tabular-nums; }
+#s-tabs .kh-strip em b { font-size: 28px; color: #fff; }

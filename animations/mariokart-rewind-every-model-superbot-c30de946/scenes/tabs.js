@@ -20,12 +20,24 @@ const FIRST = BEATS[0].k;
 // first model counts (the Opus plan chip resolves), so MODELS never shows a zero; the clock has been running since the
 // first send and runs until the finale's build chip resolves (and reads the same time), and the HUD fades out as the
 // finale's game window grows in. Every value is written from t.
+// That corner layout needs the 16:9 frame's side margins (the thread column spans x 320..1600 at W 1920). A narrower
+// frame (4:3, 1:1, 4:5) has no margin to hold it, so the HUD becomes a BAND across the top of the chat instead: the
+// thread's top edge is pushed down by the band's height (the feed is masked above it, so the bottom-anchored thread
+// never scrolls under the HUD), the left block becomes one line (1 PROMPT · MODELS n · clock, same numeral punch) and
+// the plan becomes a strip of 7 model tiles (current lit, finished checked, n/7) that lifts off the plan card into
+// the band. Both layouts keep clear of the page's own Record button (top right, outside the stage; see style.css
+// .rec-btn): the corner panel sits below it, the band strip stops REC_R short of the right edge.
 const LAST = BEATS[BEATS.length - 1].k;
 const HUD_IN = MODEL_UP.length ? MODEL_UP[0].t : RACE_T0; // the first model joins the build
 const HUD_OUT = LAST.T.v0 !== undefined ? LAST.T.v0 : LAST.T.end - 1;
 const LIFT0 = PLAN_K.T.done + 0.2;  // the plan card has finished: the pinned copy lifts off it...
-const LIFT1 = LIFT0 + 0.8;          // ...and has settled in the corner
-const PANEL_W = 292, PANEL_R = 18, PANEL_T = 20; // the pinned panel's frame-px box at scale 1
+const LIFT1 = LIFT0 + 0.8;          // ...and has settled in the corner (or the band)
+// the pinned panel's frame-px box at scale 1. PANEL_T clears the Record button: it is fixed 18px from the top of the
+// page and ~34px tall, so in the gallery lightbox (the stage at 0.6..0.67 of its size) it covers stage y 0..~85
+const PANEL_W = 292, PANEL_R = 18, PANEL_T = 100;
+const BAND_W = 1700;                // below this frame width the HUD is the top band
+const BAND_H = 84, BAND_FADE = 36;  // the band's height and the thread's fade under it, frame px at band scale 1
+const REC_R = 200;                  // the band strip ends this far from the right edge (the Record button's box)
 const CK = '<svg class="kh-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
 const bumpP = (p) => Math.sin(Math.PI * clamp(p));
@@ -42,16 +54,39 @@ function mountHud(root) {
 <div class="kh-plan">
   <div class="kh-ph"><span>BUILD PLAN</span><em><b>0</b>/${PLAN.length}</em></div>
   <ol class="kh-rows">${PLAN.map((p) => `<li><span class="kh-tile kh-t-${p.app}"><img src="${APPS[p.app].logo}" alt=""/></span><b>${esc(p.short)}</b>${CK}</li>`).join('')}</ol>
-</div>`;
+</div>
+<div class="kh-bl"><b class="kh-b1">1</b><small>PROMPT</small><i>·</i><small>MODELS</small><b class="kh-bm">0</b><i>·</i><span class="kh-bt">0:00.00</span></div>
+<div class="kh-strip">${PLAN.map((p) => `<span class="kh-st"><span class="kh-tile kh-t-${p.app}"><img src="${APPS[p.app].logo}" alt=""/></span>${CK}</span>`).join('')}<em><b>0</b>/${PLAN.length}</em></div>`;
   root.appendChild(hud);
   const rows = [...hud.querySelectorAll('.kh-rows li')];
+  const tiles = [...hud.querySelectorAll('.kh-st')];
   return {
-    hud, root, card: null,
+    hud, root, card: null, band: null,
     models: hud.querySelector('.kh-md b'), time: hud.querySelector('.kh-time'),
     panel: hud.querySelector('.kh-plan'), count: hud.querySelector('.kh-ph em b'),
     rows, checks: rows.map((r) => r.querySelector('.kh-ck')),
+    bl: hud.querySelector('.kh-bl'), bModels: hud.querySelector('.kh-bm'), bTime: hud.querySelector('.kh-bt'),
+    strip: hud.querySelector('.kh-strip'), sCount: hud.querySelector('.kh-strip em b'),
+    tiles, tChecks: tiles.map((r) => r.querySelector('.kh-ck')),
     lastModels: '0', lastTime: '', lastCount: '0',
   };
+}
+
+// the band's scale at frame width W: 1 at 4:3 (1440), ~0.81 at 1:1, 0.7 at 4:5 (864, where the stats, the strip and
+// REC_R just fit side by side)
+const bandScale = (W) => clamp(0.7 + (W - 864) / (1440 - 864) * 0.3, 0.7, 1);
+
+// the thread's top edge in band mode: the feed is masked above the band's bottom (with a short fade, so a message
+// leaving through the top dissolves under the band instead of being sliced by it). Measured in the feed's own px,
+// so the camera and the design scale are already in it. Off (no mask) in the corner layout.
+function bandMask(feed, root, W) {
+  if (!feed) return;
+  if (W >= BAND_W) { if (feed.style.getPropertyValue('--kh-cut')) { feed.style.removeProperty('--kh-cut'); feed.style.removeProperty('--kh-fade'); } return; }
+  const sb = bandScale(W);
+  const fb = boxIn(feed, root);
+  const k = feed.offsetHeight ? fb.h / feed.offsetHeight : 1;
+  feed.style.setProperty('--kh-cut', `${Math.max(0, (BAND_H * sb - fb.y) / k).toFixed(2)}px`);
+  feed.style.setProperty('--kh-fade', `${(BAND_FADE * sb / k).toFixed(2)}px`);
 }
 
 function renderHud(h, t, W) {
@@ -60,25 +95,42 @@ function renderHud(h, t, W) {
   const v = vin * (1 - vout);
   h.hud.style.opacity = v.toFixed(3);
   h.hud.style.visibility = v <= 0 ? 'hidden' : 'visible';
-  const s = W >= 1700 ? 1 : clamp(W / 1920, 0.6, 1);
-  h.hud.style.setProperty('--kh-s', s.toFixed(3));
-  h.hud.style.setProperty('--kh-y', `${((1 - vin) * -14 + vout * -14).toFixed(2)}px`);
+  const band = W < BAND_W;
+  if (band !== h.band) { h.hud.classList.toggle('band', band); h.root.classList.toggle('kh-banded', band); h.band = band; }
+  const s = band ? bandScale(W) : 1;
+  h.hud.style.setProperty(band ? '--kh-b' : '--kh-s', s.toFixed(3));
+  // the drift in and out (the band sits a few px from the frame's top, so it drifts less and never leaves the frame)
+  const dy = band ? -5 : -14;
+  h.hud.style.setProperty('--kh-y', `${((1 - vin) * dy + vout * dy).toFixed(2)}px`);
 
   // MODELS n: the numeral punches up as each new model joins the build
   let n = 0, up = -1;
   MODEL_UP.forEach((m) => { if (t >= m.t) { n = m.n; up = m.t; } });
   const ns = String(n);
-  if (ns !== h.lastModels) { h.models.textContent = ns; h.lastModels = ns; }
+  if (ns !== h.lastModels) { h.models.textContent = ns; h.bModels.textContent = ns; h.lastModels = ns; }
   const kick = up >= 0 ? bumpP(seg(t, up, up + 0.36)) : 0;
-  h.models.style.transform = kick > 0 ? `scale(${(1 + 0.3 * kick).toFixed(4)})` : 'none';
+  const kt = kick > 0 ? `scale(${(1 + 0.3 * kick).toFixed(4)})` : 'none';
+  h.models.style.transform = kt; h.bModels.style.transform = kt;
   const txt = raceTime(t); // chat.js: frozen from the moment the finale's build chip reads the same time
-  if (txt !== h.lastTime) { h.time.textContent = txt; h.lastTime = txt; }
+  if (txt !== h.lastTime) { h.time.textContent = txt; h.bTime.textContent = txt; h.lastTime = txt; }
 
-  // the pinned plan: before the lift it is hidden; during it, it flies from the chat's plan card (measured in this
-  // root's px, so the camera and the thread's scroll are already in the box) to the corner, shrinking as it goes
-  if (t < LIFT0) { h.panel.style.opacity = '0'; return renderRows(h, t); }
+  // the pinned plan (the corner panel, or the band's tile strip): before the lift it is hidden; during it, it flies
+  // from the chat's plan card (measured in this root's px, so the camera and the thread's scroll are already in the
+  // box) to its place, shrinking as it goes
+  const pin = band ? h.strip : h.panel;
+  (band ? h.panel : h.strip).style.opacity = '0';
+  if (t < LIFT0) { pin.style.opacity = '0'; return renderRows(h, t); }
   const rw = h.root.offsetWidth || W;
-  const x1 = rw - PANEL_R - PANEL_W * s, y1 = PANEL_T * s;
+  const pw = pin.offsetWidth || PANEL_W, ph = pin.offsetHeight || PANEL_W;
+  let x1, y1;
+  if (band) {
+    // right of the one-line stats, ending REC_R short of the frame's right edge, centred on the band's line
+    const statsR = (28 + h.bl.offsetWidth) * s;
+    x1 = Math.max(statsR + 24 * s, rw - REC_R - pw * s);
+    y1 = 40 * s - (ph * s) / 2;
+  } else {
+    x1 = rw - PANEL_R - PANEL_W * s; y1 = PANEL_T * s;
+  }
   let x = x1, y = y1, sc = s;
   const p = inOutCubic(seg(t, LIFT0, LIFT1));
   if (p < 1) {
@@ -86,34 +138,39 @@ function renderHud(h, t, W) {
     const cb = h.card ? boxIn(h.card, h.root) : null;
     if (cb && cb.w > 0) {
       // start as the largest copy that fits inside the card, centred on it, so it reads as lifting off the card
-      const ph = h.panel.offsetHeight || PANEL_W;
-      const sc0 = Math.min(cb.w / PANEL_W, cb.h / ph);
-      const x0 = cb.x + (cb.w - PANEL_W * sc0) / 2, y0 = cb.y + (cb.h - ph * sc0) / 2;
+      const sc0 = Math.min(cb.w / pw, cb.h / ph);
+      const x0 = cb.x + (cb.w - pw * sc0) / 2, y0 = cb.y + (cb.h - ph * sc0) / 2;
       x = lerp(x0, x1, p); y = lerp(y0, y1, p); sc = sc0 * Math.pow(s / sc0, p);
     }
   }
-  h.panel.style.opacity = outCubic(seg(t, LIFT0, LIFT0 + 0.22)).toFixed(3);
-  h.panel.style.transform = `translate(${x.toFixed(2)}px,${y.toFixed(2)}px) scale(${sc.toFixed(4)})`;
+  pin.style.opacity = outCubic(seg(t, LIFT0, LIFT0 + 0.22)).toFixed(3);
+  pin.style.transform = `translate(${x.toFixed(2)}px,${y.toFixed(2)}px) scale(${sc.toFixed(4)})`;
   renderRows(h, t);
 }
 
-// the plan rows: current lit, finished checked and dimmed, n/7 counting the finished parts
+// the plan rows (and the band's tiles): current lit, finished checked and dimmed, n/7 counting the finished parts
 function renderRows(h, t) {
   let fin = 0;
   PLAN_STEPS.forEach((st, i) => {
-    const row = h.rows[i];
+    const row = h.rows[i], tile = h.tiles[i];
     const done = t >= st.done, cur = !done && t >= st.sw;
     if (done) fin++;
     row.classList.toggle('on', cur);
     row.classList.toggle('ok', done);
+    tile.classList.toggle('on', cur);
+    tile.classList.toggle('ok', done);
     const rp = cur ? outBack(seg(t, st.sw, st.sw + 0.3)) : 1;
     row.style.transform = rp >= 1 ? 'none' : `translateX(${((1 - rp) * -14).toFixed(2)}px)`;
+    tile.style.transform = cur ? `scale(${lerp(0.8, 1.1, rp).toFixed(4)})` : 'none';
     const cp = seg(t, st.done, st.done + 0.3);
+    const ct = cp >= 1 ? 'none' : `scale(${lerp(0.3, 1, outBack(cp)).toFixed(4)})`;
     h.checks[i].style.opacity = cp.toFixed(3);
-    h.checks[i].style.transform = cp >= 1 ? 'none' : `scale(${lerp(0.3, 1, outBack(cp)).toFixed(4)})`;
+    h.checks[i].style.transform = ct;
+    h.tChecks[i].style.opacity = cp.toFixed(3);
+    h.tChecks[i].style.transform = ct;
   });
   const cs = String(fin);
-  if (cs !== h.lastCount) { h.count.textContent = cs; h.lastCount = cs; }
+  if (cs !== h.lastCount) { h.count.textContent = cs; h.sCount.textContent = cs; h.lastCount = cs; }
 }
 
 let el = null;
@@ -193,6 +250,7 @@ export default {
     el.hero.style.transform = `translate(-50%, ${((1 - heroIn) * 10 - heroOut * 40).toFixed(2)}px)`;
 
     renderChat(el.chat, t);
+    bandMask(el.chat && el.chat.feed, el.hud.root, W);
     renderHud(el.hud, t, W);
   },
 };

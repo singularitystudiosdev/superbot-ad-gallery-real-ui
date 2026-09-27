@@ -176,7 +176,7 @@ function renderEnd(e, lt, t) {
 const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 // cache-bust per scene: bump only the scene whose files changed
-const SCENE_V = { intro: { css: 'c30d4', js: 'c30d4' }, clip: { css: 'c30d1', js: 'c30d1' } };
+const SCENE_V = { intro: { css: 'c30d4', js: 'c30d4' }, tabs: { css: 'c30d2', js: 'c30d2' }, clip: { css: 'c30d1', js: 'c30d1' } };
 await Promise.all(sceneIds.map(async (id) => {
   const sv = SCENE_V[id] || { css: 'c30d1', js: 'c30d1' };
   const css = document.createElement('link');

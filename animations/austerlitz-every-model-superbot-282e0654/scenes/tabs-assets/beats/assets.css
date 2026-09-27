@@ -1,0 +1,74 @@
+/* Assets beat (beats/assets.js): Meshy's sheet of the soldiers of AUSTERLITZ, in the film's own grammar. The film's
+   night for a ground with its night ice at one corner and the torch's glow at the other, a hairline frame, the title
+   in Cormorant SC at the title card's tracking, labels in Cormorant SC caps, and every tile set like the film's lower
+   third: a hairline rule, the soldier's name in Cormorant SC, then the caps lines and an EB Garamond italic scene line.
+   The only pictures on the sheet are the soldiers' own frame crops from the film (img/az/beats/assets/*.jpg, see its
+   CREDITS.txt); everything else is hairlines, type and the army colour swatches (img/az/theme.css tokens). Nothing
+   here transitions: opacity/transform/filter are written from t in render, so ?t= freezes a frame. Scoped under the
+   hub, every class prefixed .as-. */
+
+#s-tabs .sbsite .hub .as-card { opacity: 0; position: relative; box-sizing: border-box; width: 480px; max-width: 100%;
+  margin-top: 2px; padding: 10px 12px 11px; border-radius: 4px; transform-origin: 50% 0; color: var(--az-ink);
+  background:
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--az-night-ice) 90%, transparent), transparent 62%),
+    radial-gradient(70% 90% at 0% 100%, color-mix(in srgb, var(--az-torch) 12%, transparent), transparent 60%),
+    var(--az-night);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--az-hairline) 34%, transparent), 0 8px 22px rgba(0, 0, 0, .5); }
+
+/* header: the lower third rule, the film's title in Cormorant SC at the title tracking, THREE ARMIES in the caps
+   label, and the running tally on the right, over a hairline */
+#s-tabs .sbsite .hub .as-hd { position: relative; display: flex; align-items: baseline; gap: 9px; margin-bottom: 7px;
+  padding: 6px 1px 7px; box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--az-hairline) 30%, transparent); }
+#s-tabs .sbsite .hub .as-hd .as-rule { position: absolute; left: 1px; top: 0; width: 26px; height: 1.5px; }
+#s-tabs .sbsite .hub .as-hd b { font: var(--az-weight-caps) 16px/1 var(--az-font-caps); letter-spacing: var(--az-track-title);
+  text-transform: uppercase; color: var(--az-ink); white-space: nowrap; }
+#s-tabs .sbsite .hub .as-hd small { font: var(--az-weight-caps) 9px/1 var(--az-font-caps); letter-spacing: var(--az-track-label);
+  text-transform: uppercase; color: var(--az-ink-sub); white-space: nowrap; }
+#s-tabs .sbsite .hub .as-hd .as-sum { margin-left: auto; color: var(--az-torch); font-variant-numeric: tabular-nums; }
+
+/* the lower third rule, torch, drawn in from the left */
+#s-tabs .sbsite .hub .as-rule { display: block; background: var(--az-torch); transform-origin: 0 50%; }
+
+/* the tiles: four columns, film order reading across, the frame above its lower third */
+#s-tabs .sbsite .hub .as-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+#s-tabs .sbsite .hub .as-tile { opacity: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 4px 4px 6px;
+  border-radius: 3px; background: color-mix(in srgb, var(--az-ink) 2.5%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--az-hairline) 18%, transparent); }
+#s-tabs .sbsite .hub .as-tile.as-ready { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--az-fire) 46%, transparent); }
+
+/* the frame: the soldier's crop from the film (16:9) on a turntable, a night-ice clay tint over it until the mesh
+   resolves, and the stamp across its foot */
+#s-tabs .sbsite .hub .as-th { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+  border-radius: 2px; background: var(--az-letterbox);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--az-hairline) 26%, transparent); }
+#s-tabs .sbsite .hub .as-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .as-clay { position: absolute; inset: 0; background: var(--az-night-ice); mix-blend-mode: color; }
+#s-tabs .sbsite .hub .as-st { position: absolute; left: 0; right: 0; bottom: 0; padding: 3px 0 3px var(--az-track-label);
+  font: var(--az-weight-caps) 9px/1 var(--az-font-caps); letter-spacing: var(--az-track-label); text-transform: uppercase;
+  text-align: center; white-space: nowrap; color: var(--az-ink-sub); background: color-mix(in srgb, var(--az-letterbox) 70%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--az-hairline) 26%, transparent); transform-origin: 50% 100%; }
+#s-tabs .sbsite .hub .as-ready .as-st { color: var(--az-fire); background: color-mix(in srgb, var(--az-letterbox) 82%, transparent);
+  box-shadow: inset 0 1px 0 var(--az-fire); }
+
+/* the tile's lower third: rule, name, file with its army swatch, frame count, and the source time with its scene */
+#s-tabs .sbsite .hub .as-tx { display: grid; justify-items: start; min-width: 0; padding: 0 2px; }
+#s-tabs .sbsite .hub .as-tx .as-rule { width: 17px; height: 1.5px; margin-bottom: 5px; }
+#s-tabs .sbsite .hub .as-nm { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: var(--az-weight-caps) 13px/1 var(--az-font-caps); letter-spacing: .03em; color: var(--az-ink); }
+#s-tabs .sbsite .hub .as-file { display: flex; align-items: center; gap: 4px; margin-top: 4px; max-width: 100%; overflow: hidden;
+  white-space: nowrap; font: var(--az-weight-caps) 9px/1 var(--az-font-caps); letter-spacing: .01em; color: var(--az-torch); }
+/* the army colour of the coat the sprite wears (theme.css army tokens), ringed so the dark Russian green still reads */
+#s-tabs .sbsite .hub .as-army { flex: 0 0 auto; width: 5px; height: 5px; border-radius: 1px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--az-hairline) 55%, transparent); }
+#s-tabs .sbsite .hub .as-army.as-a-fr { background: var(--az-french-blue); }
+#s-tabs .sbsite .hub .as-army.as-a-ru { background: var(--az-russian-green); }
+#s-tabs .sbsite .hub .as-army.as-a-au { background: var(--az-austrian-white); }
+#s-tabs .sbsite .hub .as-army.as-a-gd { background: var(--az-guard-white); box-shadow: 0 0 0 1px var(--az-guard-red); }
+#s-tabs .sbsite .hub .as-frm { margin-top: 5px; white-space: nowrap; font: var(--az-weight-caps) 9px/1 var(--az-font-caps);
+  letter-spacing: var(--az-track-label); text-transform: uppercase; color: var(--az-ink-sub); }
+#s-tabs .sbsite .hub .as-frm em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--az-ink); }
+#s-tabs .sbsite .hub .as-sc { display: flex; align-items: baseline; gap: 5px; margin-top: 5px; max-width: 100%; min-width: 0; }
+#s-tabs .sbsite .hub .as-sc small { flex: 0 0 auto; font: var(--az-weight-caps) 9px/1 var(--az-font-caps);
+  letter-spacing: var(--az-track-label); font-variant-numeric: tabular-nums; color: var(--az-fire); }
+#s-tabs .sbsite .hub .as-sc em { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: italic 400 10.5px/1 var(--az-font-serif); color: var(--az-ink-sub); }

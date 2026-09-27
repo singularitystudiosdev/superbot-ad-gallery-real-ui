@@ -1,0 +1,84 @@
+/* scrape beat, THE HILLS: the chip's tile and sourced counts, and the sheet, set in the Austerlitz film's own grammar.
+   The night ground cooled toward the frost blue of the fog (night-ice); the lower-third hairline drawn in over the head;
+   the kicker, the sources and the tally words in Cormorant SC; the README's own words in EB Garamond italic; the host
+   that was read in mono, fog pale. Left, the 7 x 7 Terrarium tiles (one sprite, img/az/beats/scrape/, the raw encoded
+   PNGs as the script fetched them), the fetch box of tools/fetch_terrain.py drawn over them in a hairline, the tiles
+   outside it dimmed toward the night. Right, the claims: the lookup hairline under each runs from night ice to fire,
+   then the verdict stamps behind a lamp dot: VERIFIED in torch, IN RANGE in fire, EXAGGERATED in the allied map red
+   lifted for the dark ground. Every colour is an --az-* token from img/az/theme.css or a mix of one with white/black
+   for contrast. Every selector is scoped under #s-tabs .sbsite .hub and every class is prefixed sc-. Nothing here
+   transitions: every moving value is written from t in render, so ?t= freezes a frame. */
+#s-tabs .sbsite .hub .sc-card {
+  --sc-ground: color-mix(in oklab, var(--az-night) 88%, var(--az-night-ice));
+  --sc-chrome: color-mix(in oklab, var(--az-night-ice) 86%, var(--az-ink));
+  --sc-well: color-mix(in oklab, var(--az-night-ice) 94%, var(--az-ink));
+  --sc-rule: color-mix(in oklab, var(--az-night-ice) 78%, var(--az-ink));
+  --sc-ink: color-mix(in oklab, var(--az-ink) 92%, #000000);
+  --sc-label: var(--az-ink-sub);
+  --sc-dim: color-mix(in oklab, var(--az-ink) 56%, var(--az-night));
+  --sc-fog: color-mix(in oklab, var(--az-smoke) 70%, #ffffff);
+  --sc-fire: color-mix(in oklab, var(--az-fire) 88%, #ffffff);
+  --sc-red: color-mix(in oklab, var(--az-map-allied) 58%, #ffd9c9);
+}
+
+/* the chip's count pill: tiles, then sourced claims, then the verified total in torch */
+#s-tabs .sbsite .hub .ch-tool .sc-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.sc-done .sc-count { background: color-mix(in srgb, var(--az-torch) 16%, transparent); color: var(--az-torch); }
+
+/* the sheet */
+#s-tabs .sbsite .hub .sc-card { box-sizing: border-box; width: 468px; max-width: 100%; margin: 2px 0 0; border-radius: 10px; overflow: hidden; background: var(--sc-ground); box-shadow: 0 0 0 1px var(--sc-rule), 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* the head: the lower-third hairline, the kicker, the tile set in the serif, the counts */
+#s-tabs .sbsite .hub .sc-head { position: relative; display: flex; align-items: baseline; gap: 10px; padding: 11px 14px 6px; background: var(--sc-chrome); box-shadow: inset 0 -1px 0 var(--sc-rule); }
+#s-tabs .sbsite .hub .sc-rule { position: absolute; left: 14px; top: 5px; width: 30px; height: 1px; background: var(--az-hairline); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .sc-kicker { font: var(--az-weight-caps) 11px/1 var(--az-font-caps); letter-spacing: var(--az-track-label); color: var(--sc-label); }
+#s-tabs .sbsite .hub .sc-title { font: 400 13px/1 var(--az-font-serif); color: var(--sc-ink); }
+#s-tabs .sbsite .hub .sc-n { margin-left: auto; font: var(--az-weight-caps) 10px/1 var(--az-font-caps); letter-spacing: var(--az-track-label); color: var(--sc-dim); white-space: nowrap; }
+
+/* the body: the tiles at the left, the claims at the right */
+#s-tabs .sbsite .hub .sc-body { display: grid; grid-template-columns: 133px minmax(0, 1fr); column-gap: 12px; padding: 9px 0 6px 14px; }
+
+/* the tiles: 7 x 7 cells of one sprite, then the fetch box (fetch_terrain.py's bbox in tile coordinates: x 4474.42 to
+   4480.57, y 2805.84 to 2811.23 of the 4474..4480 by 2805..2811 grid) with the night laid over everything outside it */
+#s-tabs .sbsite .hub .sc-map { display: flex; flex-direction: column; gap: 6px; }
+#s-tabs .sbsite .hub .sc-tiles { position: relative; width: 133px; height: 133px; overflow: hidden; border-radius: 2px; background: var(--sc-well); box-shadow: 0 0 0 1px var(--sc-rule); }
+#s-tabs .sbsite .hub .sc-t { position: absolute; width: 19px; height: 19px; background-image: url('../../../img/az/beats/scrape/terrarium-z13-mosaic.png'); background-size: 133px 133px; background-repeat: no-repeat; opacity: 0; }
+/* the grade: the tiles keep their encoded pixels (the file is unaltered); the sheet lays the film's warm print grade over
+   them so the raw red and green sit in the night palette, the 256 m contour still the edge between the two */
+#s-tabs .sbsite .hub .sc-tiles { filter: sepia(.55) saturate(.7) brightness(.82) contrast(1.05); }
+#s-tabs .sbsite .hub .sc-box { position: absolute; left: 6.07%; top: 12.01%; width: 87.77%; height: 77.01%; box-sizing: border-box; border: 1px solid var(--az-ink); box-shadow: 0 0 0 200px color-mix(in srgb, var(--az-night) 58%, transparent); opacity: 0; }
+#s-tabs .sbsite .hub .sc-mcap { display: flex; flex-direction: column; gap: 3px; font: var(--az-weight-caps) 10px/1 var(--az-font-caps); letter-spacing: 0.06em; color: var(--sc-label); white-space: nowrap; opacity: 0; }
+
+/* a claim: the README's words over the source and host, the verdict at the right, the lookup hairline under it */
+#s-tabs .sbsite .hub .sc-rows { min-width: 0; }
+#s-tabs .sbsite .hub .sc-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 82px; grid-template-rows: auto auto; column-gap: 8px; padding: 2px 14px 3px 0; opacity: 0; }
+#s-tabs .sbsite .hub .sc-row + .sc-row { box-shadow: inset 0 1px 0 color-mix(in oklab, var(--sc-rule) 70%, var(--az-night)); }
+#s-tabs .sbsite .hub .sc-claim { grid-column: 1; grid-row: 1; overflow: hidden; white-space: nowrap; font: italic 400 12px/13.5px var(--az-font-serif); color: var(--sc-ink); }
+#s-tabs .sbsite .hub .sc-src { grid-column: 1 / 3; grid-row: 2; display: flex; align-items: baseline; gap: 7px; min-width: 0; }
+#s-tabs .sbsite .hub .sc-caps { flex: none; white-space: nowrap; font: var(--az-weight-caps) 10px/11px var(--az-font-caps); letter-spacing: 0.06em; color: var(--sc-label); }
+#s-tabs .sbsite .hub .sc-src code { flex: none; font: 500 9px/11px var(--font-mono, ui-monospace, monospace); color: var(--sc-fog); opacity: .8; }
+
+/* the verdict: "looking up" in dim mono until it stamps, then letterspaced caps behind a lamp dot */
+#s-tabs .sbsite .hub .sc-stamp { grid-column: 2; grid-row: 1; align-self: center; justify-self: end; display: flex; align-items: center; gap: 5px; transform-origin: 100% 50%; }
+#s-tabs .sbsite .hub .sc-stamp::before { content: ''; flex: none; width: 4px; height: 4px; border-radius: 50%; background: var(--sc-rule); }
+#s-tabs .sbsite .hub .sc-stamp b { font: 500 9px/1 var(--font-mono, ui-monospace, monospace); color: var(--sc-dim); white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-row.on .sc-stamp b { font: var(--az-weight-caps) 10px/1 var(--az-font-caps); letter-spacing: 0.1em; }
+#s-tabs .sbsite .hub .sc-row.on.sc-st-ok .sc-stamp b { color: var(--az-torch); }
+#s-tabs .sbsite .hub .sc-row.on.sc-st-ok .sc-stamp::before { background: var(--az-torch); }
+#s-tabs .sbsite .hub .sc-row.on.sc-st-range .sc-stamp b { color: var(--sc-fire); }
+#s-tabs .sbsite .hub .sc-row.on.sc-st-range .sc-stamp::before { background: var(--az-fire); }
+#s-tabs .sbsite .hub .sc-row.on.sc-st-over .sc-stamp b { color: var(--sc-red); }
+#s-tabs .sbsite .hub .sc-row.on.sc-st-over .sc-stamp::before { background: var(--sc-red); }
+
+/* the lookup hairline: night ice to fire while it reads, dimmed to a thread once the verdict is in */
+#s-tabs .sbsite .hub .sc-look { position: absolute; left: 0; right: 14px; bottom: 0; height: 1px; overflow: hidden; }
+#s-tabs .sbsite .hub .sc-look i { position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in oklab, var(--az-night-ice) 45%, var(--az-fog)), var(--az-fire)); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .sc-row.on .sc-look i { opacity: .28; }
+
+/* the tally: each verdict's count in serif figures, its word in caps */
+#s-tabs .sbsite .hub .sc-tally { display: flex; gap: 16px; padding: 6px 14px 7px; background: var(--sc-chrome); box-shadow: inset 0 1px 0 var(--sc-rule); opacity: 0; }
+#s-tabs .sbsite .hub .sc-tally span { display: flex; align-items: baseline; gap: 5px; font: var(--az-weight-caps) 10px/1 var(--az-font-caps); letter-spacing: var(--az-track-label); color: var(--sc-dim); }
+#s-tabs .sbsite .hub .sc-tally b { font: 400 13px/1 var(--az-font-serif); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-tally .sc-st-ok b { color: var(--az-torch); }
+#s-tabs .sbsite .hub .sc-tally .sc-st-range b { color: var(--sc-fire); }
+#s-tabs .sbsite .hub .sc-tally .sc-st-over b { color: var(--sc-red); }

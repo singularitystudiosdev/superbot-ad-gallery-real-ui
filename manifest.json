@@ -289,6 +289,14 @@
     "thumb": "assets/shots/lastinvention-every-model-v3-superbot-dda6c235.png"
   },
   {
+    "id": "austerlitz-every-model-v3-superbot-282e0654",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Create a 4-5 minute cinematic video about the Battle of Austerlitz (1805), built entirely in code: Lyria 2 writes the score, Meshy casts the soldiers, Gemini paints the look, Opus 5.5 writes the engine, DeepSeek V4 Flash surveys the hills, GitHub sends the dispatch, Opus 5.5 renders Austerlitz; each switch an hour of the film with the sun where it really stood; ends on @WinterArc2125’s Opus 5.5 film (7 requests)",
+    "src": "animations/austerlitz-every-model-superbot-282e0654/?v=3",
+    "thumb": "assets/shots/austerlitz-every-model-v3-superbot-282e0654.png"
+  },
+  {
     "id": "dark-souls-every-model-v1-superbot-80e24d9f",
     "type": "animation",
     "group": "Ad spots",

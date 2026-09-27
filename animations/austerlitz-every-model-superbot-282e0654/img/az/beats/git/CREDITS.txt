@@ -1,0 +1,25 @@
+GitHub beat (scenes/tabs-assets/beats/git.js, git.css): no images. The card draws no film pixels; its marks are
+the brand dir's existing logos (brand/github-logo.svg, brand/claude-logo.svg, painted white as chat.css paints them,
+Claude on its #d97757 tile) and CSS/SVG line icons. Theme accents are img/az/theme.css tokens only
+(--az-fire, --az-torch, --az-night-ice, --az-ink, --az-font-caps, --az-weight-caps, --az-track-label).
+
+Every value on the card is the public repo WinterArc21/Battle-of-Austerlitz-Film at main 86dae32d, read 2026-09-27:
+  commit   gh api repos/WinterArc21/Battle-of-Austerlitz-Film/commits/main
+           sha 86dae32d20f0a0f2395e7dc8938846fd51e355a6 (shown 86dae32), author Claude,
+           subject "Austerlitz, 2 December 1805: a historical film rendered entirely in code" (verbatim),
+           the repo's only commit (1 Commit), one branch (main, the default branch).
+           No CI tick is drawn: the repo has no workflows and no checks.
+  tree     gh api repos/WinterArc21/Battle-of-Austerlitz-Film/git/trees/86dae32d?recursive=1
+           37 blobs, 97,073,160 bytes in all. Root entries (files, summed blob bytes):
+             assets/fonts  5  1,702,624   (assets holds only fonts/, so GitHub lists it as assets/fonts)
+             data          4  5,796,624
+             tools         8     42,198
+             video         2 89,304,736   (austerlitz.mp4 89,298,864 + austerlitz.srt 5,872)
+             web          15    220,406   (web/engine 10 files 150,570; code beat's 13 files 212,844 + index.html 3,158 + main.js 4,404)
+             .gitignore   40   README.md 6,143   package.json 389
+  README   README.md line 3, verbatim ("A five-minute (5:01) historical film ... generated offline."; straight
+           apostrophe as the file has it). Line 1, the h1, is not shown: it carries an em dash.
+  tag      the repo has no tags. `proclamation` is the ad's tag (the dispatch line), borrowed from the Grande
+           Armée's vocabulary as README.md's story table names it: 4:21 Aftermath, "Napoleon's proclamation".
+           "1 Tag" counts the ad's own tag.
+  say      "Connected. Dispatching all 37 files of Austerlitz to GitHub." 37 = the tree's blob count.

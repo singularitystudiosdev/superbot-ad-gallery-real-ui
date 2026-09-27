@@ -1,0 +1,156 @@
+{
+ "speaker": "narrator (Kokoro TTS, the film's own voice)",
+ "attribution": "WinterArc21/Battle-of-Austerlitz-Film video/austerlitz.srt (verbatim; curly quotes kept)",
+ "note": "in/out in FILE seconds. in = measured speech onset; out = speech end + 0.6 s, capped 80 ms before the next cue, at a hard cut, or at file end. The repo SRT splits each narration beat into cues by character count, so only a beat's first cue start is exact; internal boundaries here are measured from the audio. on_screen:true = the film already shows the same words on screen: do not caption those.",
+ "clip-window.mp4": {
+  "duration_s": 6.5,
+  "cues": [
+   {
+    "in": 0.313,
+    "out": 3.793,
+    "text": "Then the sun breaks through. The fog falls away from the heights:",
+    "lines": [
+     "Then the sun breaks through.",
+     "The fog falls away from the heights:"
+    ],
+    "on_screen": false,
+    "speech": [
+     0.313,
+     3.753
+    ],
+    "src_speech": [
+     177.73,
+     181.17
+    ],
+    "srt_index": 37,
+    "srt_src": [
+     177.687,
+     181.702
+    ]
+   },
+   {
+    "in": 3.873,
+    "out": 5.833,
+    "text": "the sun of Austerlitz.",
+    "lines": [
+     "the sun of Austerlitz."
+    ],
+    "on_screen": true,
+    "speech": [
+     3.873,
+     5.233
+    ],
+    "src_speech": [
+     181.29,
+     182.65
+    ],
+    "srt_index": 38,
+    "srt_src": [
+     181.702,
+     183.061
+    ],
+    "on_screen_text": "THE SUN OF AUSTERLITZ / about 9 a.m. (film lower-left caption, fades in 0.750-1.500 s, full to 6.125 s)"
+   }
+  ]
+ },
+ "clip-montage.mp4": {
+  "duration_s": 22.667,
+  "cues": [
+   {
+    "in": 0.545,
+    "out": 4.735,
+    "text": "General Rapp leads the chasseurs and the Mamelukes into the smoke,",
+    "lines": [
+     "General Rapp leads the chasseurs",
+     "and the Mamelukes into the smoke,"
+    ],
+    "on_screen": false,
+    "speech": [
+     0.545,
+     4.49
+    ],
+    "src_speech": [
+     217.545,
+     221.49
+    ],
+    "srt_index": 47,
+    "srt_src": [
+     217.1,
+     221.584
+    ]
+   },
+   {
+    "in": 4.815,
+    "out": 6.75,
+    "text": "and the Russian Guard is broken.",
+    "lines": [
+     "and the Russian Guard is broken."
+    ],
+    "on_screen": false,
+    "speech": [
+     4.815,
+     6.295
+    ],
+    "src_speech": [
+     221.815,
+     223.295
+    ],
+    "srt_index": 48,
+    "srt_src": [
+     221.584,
+     223.758
+    ],
+    "out_note": "capped at the seg1 to seg2 hard cut (6.750 s)"
+   },
+   {
+    "in": 7.033,
+    "out": 8.648,
+    "text": "“It will be enough for you to say,",
+    "lines": [
+     "“It will be enough for you to say,"
+    ],
+    "on_screen": true,
+    "speech": [
+     7.033,
+     8.403
+    ],
+    "src_speech": [
+     285.7,
+     287.07
+    ],
+    "srt_index": 62,
+    "srt_src": [
+     283.722,
+     287.376
+    ],
+    "srt_text": "Napoleon told his army: “It will be enough for you to say,",
+    "partial": "the montage cuts in (src 285.417) after the cue's first words \"Napoleon told his army:\" (spoken src 283.93-285.29, not in the file); text is the verbatim remainder of SRT cue 62",
+    "on_screen_text": "film shows the whole quote centre-low from before the cut to ~14.42 s: “It will be enough for you to say, “I was at the battle of Austerlitz,” for people to answer: “There is a brave man.””"
+   },
+   {
+    "in": 8.728,
+    "out": 13.988,
+    "text": "I was at the battle of Austerlitz, for people to answer: there is a brave man.”",
+    "lines": [
+     "I was at the battle of Austerlitz,",
+     "for people to answer: there is a brave man.”"
+    ],
+    "on_screen": true,
+    "speech": [
+     8.728,
+     13.388
+    ],
+    "src_speech": [
+     287.395,
+     292.055
+    ],
+    "srt_index": 63,
+    "srt_src": [
+     287.376,
+     292.353
+    ],
+    "on_screen_text": "same on-screen quote as the previous cue"
+   }
+  ]
+ }
+}

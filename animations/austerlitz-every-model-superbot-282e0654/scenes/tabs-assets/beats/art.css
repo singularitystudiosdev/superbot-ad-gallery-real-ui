@@ -1,0 +1,58 @@
+/* Art beat (beats/art.js), THE PAINTING: Gemini paints the day's light. Nine real frames of the film, one per
+   web/engine/env.js preset the film uses (img/az/beats/art/art-*.jpg, 480x204 cuts of the 2.35:1 picture band of the
+   master, listed in img/az/beats/art/CREDITS.txt), three a row in film order on a sheet of the film's Moravia night.
+   Each plate is framed the way the film is: a 16:9 black frame with the picture between letterbox bars of 12% each
+   (--az-bar-ratio, the film's own bars); the bars are CSS, the picture is the film. Under each plate a slug names the
+   env.js preset key in the film's caption face (Cormorant SC) and its az / el in the film's serif (EB Garamond).
+   Colours and faces are img/az/theme.css tokens; nothing here transitions: opacity/transform/mask are written from t in
+   render, so ?t= freezes a frame. Every selector is scoped under the hub and prefixed .art-.
+   The "Painting 9 plates" chip reuses the shared .dd-chiprow/.ch-tool tool-chip markup from chat.css; the pill look is
+   repeated on .art-gen so the chip reads the same even before that sheet lands. */
+
+/* the sheet: the film's Moravia night under a torch hairline, as wide as the thread's cards */
+#s-tabs .sbsite .hub .art-sheet { width: 440px; max-width: 100%; margin-top: 2px; padding: 7px 7px 4px;
+  border-radius: 4px; background: var(--az-night); opacity: 0; transform-origin: 50% 0;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--az-torch) 26%, transparent), 0 8px 22px rgba(0, 0, 0, .45); }
+
+/* the header: the file the presets live in and its own first words; what the slug numbers are on the right */
+#s-tabs .sbsite .hub .art-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  padding: 0 1px 5px; margin-bottom: 6px; border-bottom: 1px solid color-mix(in srgb, var(--az-torch) 30%, transparent);
+  font: var(--az-weight-caps) 11px/1 var(--az-font-caps); letter-spacing: var(--az-track-label);
+  color: var(--az-ink-sub); white-space: nowrap; }
+#s-tabs .sbsite .hub .art-units { margin-right: calc(-1 * var(--az-track-label)); color: var(--az-ink); opacity: .78; }
+#s-tabs .sbsite .hub .art-dot { display: inline-block; margin: 0 .42em; color: var(--az-torch); letter-spacing: 0; }
+
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px 6px; }
+#s-tabs .sbsite .hub .art-plate { margin: 0; min-width: 0; }
+
+/* the frame: 16:9 black, the picture band between the film's 12% letterbox bars */
+#s-tabs .sbsite .hub .art-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 1.5px;
+  background: var(--az-letterbox); opacity: 0;
+  box-shadow: 0 0 0 .5px color-mix(in srgb, var(--az-torch) 22%, transparent); }
+#s-tabs .sbsite .hub .art-band { position: absolute; left: 0; right: 0; overflow: hidden;
+  top: calc(var(--az-bar-ratio) * 100%); bottom: calc(var(--az-bar-ratio) * 100%); }
+/* the picture layer takes the slow push-in; the underpainting and the finished frame ride it together */
+#s-tabs .sbsite .hub .art-pic { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
+#s-tabs .sbsite .hub .art-pic img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+/* the underpainting: the same frame as a soft, dim, nearly colourless wash */
+#s-tabs .sbsite .hub .art-wash { filter: blur(2.4px) saturate(.3) brightness(.7) contrast(.9); }
+/* the finished frame: laid over the wash left to right behind a feathered edge (mask written in render) */
+#s-tabs .sbsite .hub .art-shot { opacity: 0; }
+
+/* the slug: the env.js preset key on the left, its az / el on the right */
+#s-tabs .sbsite .hub .art-slug { display: flex; align-items: baseline; justify-content: space-between; gap: 6px;
+  height: 16px; padding: 3px 1px 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .art-key { display: block; opacity: 0;
+  font: var(--az-weight-caps) 11px/1 var(--az-font-caps); letter-spacing: var(--az-track-label); color: var(--az-ink); }
+#s-tabs .sbsite .hub .art-sun { display: block; opacity: 0;
+  font: 400 11px/1 var(--az-font-serif); font-variant-numeric: tabular-nums lining-nums; color: var(--az-ink-sub); }
+#s-tabs .sbsite .hub .art-sun .art-dot { margin: 0 .32em; }
+
+/* the "Painting 9 plates" chip (inside the shared .dd-chiprow/.ch-tool markup) */
+#s-tabs .sbsite .hub .art-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .art-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .art-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .art-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .art-gen .ch-tool-t { color: #ececec; }

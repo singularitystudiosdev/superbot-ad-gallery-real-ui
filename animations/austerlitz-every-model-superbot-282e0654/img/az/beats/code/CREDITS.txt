@@ -1,0 +1,49 @@
+img/az/beats/code/CREDITS.txt
+The code beat: scenes/tabs-assets/beats/code.js + code.css (Claude Opus 5.5, THE ENGINE).
+
+IMAGES
+None. This folder holds no image and the beat draws no picture. The editor card is CSS furniture only (rounded
+card, tab strip, rules, dots, a CSS border triangle for the folder twisty, a gradient progress bar) coloured with
+img/az/theme.css tokens (--az-night, --az-night-ice, --az-ink, --az-ink-sub, --az-fire, --az-torch, --az-sun,
+--az-smoke, --az-fog) and mixes of them with white or black, plus the tick icon the hub already provides (x.OK).
+The explorer header uses the theme's caps face (var(--az-font-caps)); code and numbers use the hub's mono face.
+
+TEXT AND NUMBERS SHOWN
+Source: the public repo WinterArc21/Battle-of-Austerlitz-Film, main at commit 86dae32d
+(https://github.com/WinterArc21/Battle-of-Austerlitz-Film). The repo carries no LICENSE file (GitHub reports no
+license); the three source lines below are quoted as a short, credited excerpt of the film's own engine.
+
+1. Excerpt typed in the pane, verbatim, character for character:
+   web/engine/env.js lines 26 to 28 (the "sunrise" preset of ENV):
+     26:   sunrise: { az: 138, el: 7, sunCol: [4.2, 2.8, 1.6], ambTop: [0.36, 0.40, 0.50], ambBot: [0.17, 0.15, 0.13], fogCol: [0.85, 0.74, 0.62],
+     27:     fog: [4, 28, 0.05, 0.025], fogNoise: 0.7, cloud: [0.55, 0.3, 1.8, 0.45], cloudShadow: 0.45, zenith: [0.2, 0.3, 0.52], horizon: [0.95, 0.78, 0.6],
+     28:     cloudLit: [2.4, 1.6, 1.0], cloudDark: [0.30, 0.28, 0.34], scatter: 1.6, frost: 0.5, exposure: 1.0, bloom: 0.4, threshold: 0.9, sat: 1.05, gain: [1.03, 1.0, 0.95] },
+   The pane soft-wraps each long line at its property boundaries (a continuation row has no line number and a
+   hanging indent drawn by CSS). The characters are the file's; only the wrap is the editor's.
+
+2. Explorer: the file tree of web/ with each blob's size in bytes, from
+   gh api repos/WinterArc21/Battle-of-Austerlitz-Film/git/trees/86dae32d?recursive=1
+     web/engine/army.js       7,170     web/engine/renderer.js  22,100
+     web/engine/env.js        6,055     web/engine/shaders.js   26,428
+     web/engine/europe.js     9,189     web/engine/sprites.js   38,521
+     web/engine/fx.js        10,775     web/engine/terrain.js   13,791
+     web/engine/gl.js         8,403     web/events.js            3,697
+     web/engine/overlay.js    8,138     web/film.js             53,102
+                                        web/script.js            5,475
+   These are all ten .js files in web/engine plus web/events.js, film.js and script.js: 13 files, 212,844 bytes
+   (the chip's "Wrote 13 files" and its byte total).
+
+3. The model's line: "Writing the engine. Sound travels at 343 m/s."
+   "Sound travels at 343 m/s." is README.md line 47 verbatim (bold in the README). The code behind it is
+   tools/mix.py line 275, which delays each gun's sound by dist / 343.0.
+
+4. Status strip:
+   "Writing web/engine/env.js": the path of the open file (item 1).
+   "node tools/render.mjs --fps 24 --chunk 10": tools/render.mjs line 3 usage,
+     "node tools/render.mjs [--fps 24] [--workers 2] [--from s] [--to s] [--chunk 10] [--crf 18]",
+     with its two defaults written out (10 second chunks at 24 fps; render.mjs line 13 sets FPS 24, CHUNK 10).
+   "31 chunks · 2 workers · 24 fps": the tail of render.mjs's own log line 37,
+     `film ${total}s · frames ${f0}-${f1} · ${chunks.length} chunks · ${WORKERS} workers · ${FPS} fps`,
+     for the full film: 7232 frames (the repo master) at 240 frames a chunk (10 s x 24 fps) is 31 chunks;
+     2 workers is the default.
+   "JavaScript  Ln 26, Col 28" and on: the caret's true line and column in env.js as the excerpt types.

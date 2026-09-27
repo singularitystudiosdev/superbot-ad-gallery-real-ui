@@ -1,0 +1,91 @@
+/* code beat: the writing chip's byte counter, and the editor card (an explorer of the film's web/ folder beside the
+   env.js tab, a progress bar, the typing pane that scrolls with the caret, and the status strip), dressed in the
+   film's own light: the winter night of the letterbox cooled toward the pre-dawn ice (night, night-ice), fire for
+   anything being written (the focused tab's strike, the counting row, the caret), torch for anything settled (a
+   written file's size, the render's closing line), and the sun of the sunrise preset for the property names being
+   typed. Syntax: property keys in pale sun, numbers in fire, punctuation in smoke, comments in dim ink.
+   Every colour is an --az-* token from img/az/theme.css or a mix of one with white/black for contrast on the dark
+   ground. Every selector is scoped under #s-tabs .sbsite .hub and every class is prefixed code-. Nothing here
+   transitions: every moving value is written from t in render, so ?t= freezes a frame. */
+#s-tabs .sbsite .hub .code-ed {
+  --code-ground: color-mix(in oklab, var(--az-night) 88%, var(--az-night-ice));
+  --code-chrome: color-mix(in oklab, var(--az-night-ice) 86%, var(--az-ink));
+  --code-well: color-mix(in oklab, var(--az-night-ice) 94%, var(--az-ink));
+  --code-rule: color-mix(in oklab, var(--az-night-ice) 78%, var(--az-ink));
+  --code-sunpale: color-mix(in oklab, var(--az-sun) 82%, #ffffff);
+  --code-fire: color-mix(in oklab, var(--az-fire) 88%, #ffffff);
+  --code-ink: color-mix(in oklab, var(--az-ink) 90%, #000000);
+  --code-dim: color-mix(in oklab, var(--az-ink) 42%, var(--az-night));
+  --code-faint: color-mix(in oklab, var(--az-ink) 26%, var(--az-night));
+  --code-smoke: color-mix(in oklab, var(--az-smoke) 72%, var(--az-night));
+}
+#s-tabs .sbsite .hub .ch-tool .code-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.code-done .code-count { background: color-mix(in srgb, var(--az-torch) 16%, transparent); color: var(--az-torch); }
+
+/* the editor card */
+#s-tabs .sbsite .hub .code-ed { box-sizing: border-box; width: 468px; max-width: 100%; margin: 2px 0 0; border-radius: 10px; overflow: hidden; background: var(--code-ground); box-shadow: 0 0 0 1px var(--code-rule), 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* the header: the explorer's folder name in the film's small caps over the explorer column, then the open tab
+   (dim until focused: a fire strike and dot, a torch dot once the file is written) */
+#s-tabs .sbsite .hub .code-tabs { display: flex; height: 26px; background: var(--code-chrome); box-shadow: inset 0 -1px 0 var(--code-rule); }
+#s-tabs .sbsite .hub .code-xh { box-sizing: border-box; display: flex; align-items: center; flex: none; width: 146px; padding: 0 10px; font: var(--az-weight-caps) 11px/1 var(--az-font-caps); letter-spacing: var(--az-track-label); color: var(--az-ink-sub); background: var(--code-well); box-shadow: inset -1px 0 0 var(--code-rule), inset 0 -1px 0 var(--code-rule); white-space: nowrap; }
+#s-tabs .sbsite .hub .code-tab { display: flex; align-items: center; gap: 6px; padding: 0 11px; font: 500 10.5px/1 var(--font-mono, ui-monospace, monospace); color: var(--code-dim); box-shadow: inset -1px 0 0 var(--code-rule); white-space: nowrap; }
+#s-tabs .sbsite .hub .code-td { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--code-faint); }
+#s-tabs .sbsite .hub .code-tab.code-act { background: var(--code-ground); color: var(--az-ink); box-shadow: inset -1px 0 0 var(--code-rule), inset 0 2px 0 var(--az-fire); }
+#s-tabs .sbsite .hub .code-tab.code-act .code-td { background: var(--az-fire); }
+#s-tabs .sbsite .hub .code-tab.code-on .code-td { background: var(--az-torch); }
+
+/* the progress bar under the header: from the night ice to fire as the bytes land */
+#s-tabs .sbsite .hub .code-bar { position: relative; height: 2px; overflow: hidden; background: var(--code-well); }
+#s-tabs .sbsite .hub .code-bar-f { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, color-mix(in oklab, var(--az-night-ice) 45%, var(--az-fog)), var(--az-fire)); }
+
+/* the body: the explorer (fourteen 11px rows: the engine folder, its ten files, then events, film, script) beside the
+   pane, 154px tall */
+#s-tabs .sbsite .hub .code-body { display: flex; height: 154px; }
+#s-tabs .sbsite .hub .code-tree { box-sizing: border-box; flex: none; width: 146px; padding: 0 0 0 0; background: var(--code-well); box-shadow: inset -1px 0 0 var(--code-rule); font: 10px/11px var(--font-mono, ui-monospace, monospace); overflow: hidden; }
+#s-tabs .sbsite .hub .code-fold,
+#s-tabs .sbsite .hub .code-row { box-sizing: border-box; display: flex; align-items: center; gap: 6px; height: 11px; padding: 0 10px; white-space: nowrap; }
+#s-tabs .sbsite .hub .code-fold { color: var(--code-dim); }
+#s-tabs .sbsite .hub .code-tw { flex: none; width: 0; height: 0; margin-right: -1px; border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 4px solid var(--code-dim); }
+#s-tabs .sbsite .hub .code-row.code-sub { padding-left: 21px; }
+#s-tabs .sbsite .hub .code-rn { min-width: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .code-rb { flex: none; margin-left: auto; font-weight: 400; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .code-row { color: var(--code-faint); }
+#s-tabs .sbsite .hub .code-row.code-go { color: var(--az-ink); }
+#s-tabs .sbsite .hub .code-row.code-go .code-rb { color: var(--code-fire); }
+#s-tabs .sbsite .hub .code-row.code-on { color: var(--code-ink); }
+#s-tabs .sbsite .hub .code-row.code-on .code-rb { color: var(--az-torch); }
+#s-tabs .sbsite .hub .code-row.code-act { color: var(--az-ink); background: var(--code-ground); box-shadow: inset 2px 0 0 var(--az-fire); }
+
+/* the pane: ten 15px rows tall; the scroller inside slides up to keep the caret in view. The pane is 321px wide
+   (468 less the 146px explorer and its rule) and sets at 10px mono: 282px for text after the gutter, and the widest
+   row is 44 characters (265px), so every row clears the right edge. A continuation row of a soft-wrapped line
+   carries no number and hangs 4ch in. */
+#s-tabs .sbsite .hub .code-view { position: relative; flex: 1; min-width: 0; height: 150px; margin: 2px 0; overflow: hidden; }
+#s-tabs .sbsite .hub .code-pane { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .code-scr { display: flex; gap: 9px; padding: 0 8px; will-change: transform; }
+#s-tabs .sbsite .hub .code-gut { display: grid; flex: none; min-width: 14px; font: 10px/15px var(--font-mono, ui-monospace, monospace); color: var(--code-faint); text-align: right; }
+#s-tabs .sbsite .hub .code-gut i { font-style: normal; height: 15px; }
+#s-tabs .sbsite .hub .code-src { flex: 1; min-width: 0; margin: 0; font: 10px/15px var(--font-mono, ui-monospace, monospace); white-space: pre; color: var(--code-ink); }
+#s-tabs .sbsite .hub .code-ln { height: 15px; white-space: pre; overflow: hidden; }
+#s-tabs .sbsite .hub .code-ln.code-wr { padding-left: 4ch; }
+#s-tabs .sbsite .hub .code-caret { display: inline-block; width: 1.5px; height: 12px; vertical-align: -2px; background: var(--code-fire); opacity: 0; }
+#s-tabs .sbsite .hub .code-a { color: var(--code-sunpale); }
+#s-tabs .sbsite .hub .code-k { color: var(--code-fire); }
+#s-tabs .sbsite .hub .code-s { color: var(--az-torch); }
+#s-tabs .sbsite .hub .code-n { color: var(--code-fire); }
+#s-tabs .sbsite .hub .code-c { color: var(--code-dim); font-style: italic; }
+#s-tabs .sbsite .hub .code-p { color: var(--code-smoke); }
+#s-tabs .sbsite .hub .code-x { color: var(--code-ink); }
+
+/* the status strip: the current tool step (a hollow dot, then a torch tick once the render runs) and the caret position */
+#s-tabs .sbsite .hub .code-status { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 22px; padding: 0 10px; background: var(--code-chrome); box-shadow: inset 0 1px 0 var(--code-rule); font: 500 10.5px/22px var(--ui); color: var(--code-dim); }
+#s-tabs .sbsite .hub .code-st { display: flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .code-stt { min-width: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .code-st .code-sd { flex: none; box-sizing: border-box; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--code-dim); }
+#s-tabs .sbsite .hub .code-st .qc-ok { display: none; flex: none; width: 13px; height: 13px; margin-left: -2px; }
+#s-tabs .sbsite .hub .code-st.code-on { color: var(--az-ink); }
+#s-tabs .sbsite .hub .code-st.code-on .code-sd { display: none; }
+#s-tabs .sbsite .hub .code-st.code-on .qc-ok { display: block; stroke: var(--az-torch); }
+#s-tabs .sbsite .hub .code-st.code-ok { color: var(--az-torch); }
+#s-tabs .sbsite .hub .code-pos { flex: none; font: 500 10px/22px var(--font-mono, ui-monospace, monospace); color: var(--code-dim); white-space: pre; font-variant-numeric: tabular-nums; }

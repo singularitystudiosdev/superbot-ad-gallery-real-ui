@@ -1,0 +1,77 @@
+/* Play beat (beats/play.js): the film's player window, austerlitz.mp4, in the film's own register: the letterbox's
+   true black, the title card's parchment rule and subtitle ink for every hairline and label, Cormorant SC for the
+   tracked caps, EB Garamond italic for the subtitle, the captions and the quote (img/az/theme.css --az-* tokens, read
+   off the film's own frames and scene code). Top to bottom: the title bar, the 16:9 screen (the clip's own aspect,
+   960x540, the film's 2.35:1 bars part of its picture) with its closed captions and the render card on it, and the
+   credit footer (the post's author and its line, quoted). Nothing here transitions: opacity, transform, the render
+   readout and the captions are written from t in render, so ?t= freezes a frame. Every selector is scoped to the hub
+   and every class the beat owns is prefixed .play- (the chip rows reuse chat.css .dd-chiprow/.ch-tool/.spin).
+   scenes/clip.css draws the same window at full frame (.clip-win) with these exact colours and proportions times its
+   --u, so the hand-off from this window to that one is one continuous shape. */
+
+#s-tabs .sbsite .hub .play-win { position: relative; opacity: 0; box-sizing: border-box; width: 460px; max-width: 100%;
+  border-radius: 10px; background: var(--az-letterbox, #000); box-shadow: 0 18px 44px rgba(0, 0, 0, .5);
+  overflow: hidden; transform-origin: 50% 50%; }
+/* the hairline edge in the title card's rule ink, drawn over the bar, the screen and the footer */
+#s-tabs .sbsite .hub .play-win::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(216, 201, 168, .34); z-index: 3; }
+
+/* the title bar: three hairline rings where the traffic lights sit, the file name centred in the film's caps */
+#s-tabs .sbsite .hub .play-bar { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 11px;
+  box-sizing: border-box; background: #0b0b0b; border-bottom: 1px solid rgba(216, 201, 168, .2); }
+#s-tabs .sbsite .hub .play-bar::after { content: ""; flex: none; width: 42px; }
+#s-tabs .sbsite .hub .play-dots { flex: none; display: inline-flex; gap: 6px; }
+#s-tabs .sbsite .hub .play-dots i { width: 10px; height: 10px; box-sizing: border-box; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(216, 201, 168, .55); }
+#s-tabs .sbsite .hub .play-dots i:nth-child(1) { background: rgba(216, 201, 168, .5); }
+#s-tabs .sbsite .hub .play-title { flex: 1; min-width: 0; text-align: center; white-space: nowrap;
+  font: var(--az-weight-caps, 500) 11.5px/1 var(--az-font-caps); letter-spacing: .06em; color: var(--az-title-sub, #d8c9a8); }
+
+/* the screen: the clip's own 16:9, filled uncropped */
+#s-tabs .sbsite .hub .play-screen { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+#s-tabs .sbsite .hub .play-vid { display: block; width: 100%; height: 100%; object-fit: cover; background: #000; }
+
+/* closed captions, set the way the film sets its own spoken lines: one line of EB Garamond italic in the bar ink,
+   centred in the bottom letterbox bar (the film's bars are 12% of the picture's height, and its bar text sits
+   centred on y 1025.2 of 1080: the box spans the bar, 87.963% to 100%, nudged 0.95% down), a soft shadow and no box.
+   The bar is black and empty under them (the film prints bar text only in the proclamation, after the last cue), and
+   the film's own caption sits in the picture above it, bottom left, so they never meet. Sized from the screen's
+   height (258.75px here: 3.7% = 9.57px; 40px at 1080 against the film's own 32px bar quotes); clip.css sets the
+   same rule from --vh, so the captions grow with the window. */
+#s-tabs .sbsite .hub .play-cc { position: absolute; left: 0; right: 0; top: 87.963%; height: 12.037%; z-index: 1;
+  display: flex; align-items: center; justify-content: center; transform: translateY(7.9%); pointer-events: none;
+  white-space: nowrap; text-align: center; font: italic var(--az-weight-serif, 400) 9.57px/1.2 var(--az-font-serif);
+  letter-spacing: 0; color: var(--az-bar-ink, #d9cdb4); text-shadow: 0 0 .45em var(--az-quote-shadow, rgba(0, 0, 0, .75)); }
+
+/* the render card, set like the film's opening title card over the dimmed first frame: the bar stamps' tracked caps
+   label, the title in tracked Cormorant SC caps with the title card's warm glow, the title card's hairline rule as
+   the progress track, its italic subtitle, and the frame and chunk counters in the stamps' caps */
+#s-tabs .sbsite .hub .play-rend { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; pointer-events: none; white-space: nowrap;
+  background: radial-gradient(ellipse 72% 82% at 50% 50%, rgba(0, 0, 0, .66), rgba(0, 0, 0, .9));
+  color: var(--az-title, #f3e7cc); }
+#s-tabs .sbsite .hub .play-rend-tag, #s-tabs .sbsite .hub .play-rend-n { font: var(--az-weight-caps, 500) 8px/1 var(--az-font-caps);
+  letter-spacing: var(--az-track-bar, .154em); text-transform: uppercase; color: var(--az-bar-ink, #d9cdb4); }
+#s-tabs .sbsite .hub .play-rend-tag i, #s-tabs .sbsite .hub .play-rend-n i { font-style: normal; padding: 0 .35em; }
+#s-tabs .sbsite .hub .play-rend-title { margin-top: 12px; font: var(--az-weight-caps, 500) 26px/1 var(--az-font-caps);
+  letter-spacing: var(--az-track-title, .2235em); margin-right: calc(-1 * var(--az-track-title, .2235em));
+  color: var(--az-title, #f3e7cc); text-shadow: 0 0 .353em var(--az-title-glow, rgba(255, 170, 80, .45)); }
+#s-tabs .sbsite .hub .play-rend-track { position: relative; width: 58%; height: 1px; margin-top: 9px;
+  background: rgba(216, 201, 168, .16); }
+#s-tabs .sbsite .hub .play-rend-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+  background: var(--az-title-sub, #d8c9a8); }
+#s-tabs .sbsite .hub .play-rend-sub { margin-top: 8px; font: italic var(--az-weight-serif, 400) 11px/1 var(--az-font-serif);
+  color: var(--az-title-sub, #d8c9a8); }
+#s-tabs .sbsite .hub .play-rend-n { margin-top: 13px; font-variant-numeric: tabular-nums lining-nums; }
+#s-tabs .sbsite .hub .play-rend-n b { font-weight: var(--az-weight-caps, 500); color: var(--az-title, #f3e7cc);
+  display: inline-block; text-align: right; }
+#s-tabs .sbsite .hub .play-rend-f { min-width: 4.6ch; }
+#s-tabs .sbsite .hub .play-rend-c { min-width: 1.6ch; }
+
+/* the credit footer: the post's author in the film's caps, its line in the film's italic quote ink, quoted as posted */
+#s-tabs .sbsite .hub .play-foot { display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 12px;
+  box-sizing: border-box; background: #0b0b0b; border-top: 1px solid rgba(216, 201, 168, .2); white-space: nowrap; overflow: hidden; }
+#s-tabs .sbsite .hub .play-src { flex: none; font: var(--az-weight-caps, 500) 11px/1 var(--az-font-caps); letter-spacing: .05em;
+  color: var(--az-title-sub, #d8c9a8); }
+#s-tabs .sbsite .hub .play-q { flex: 1; min-width: 0; font: italic var(--az-weight-serif, 400) 13px/1 var(--az-font-serif);
+  color: var(--az-quote, #f1e8d6); }

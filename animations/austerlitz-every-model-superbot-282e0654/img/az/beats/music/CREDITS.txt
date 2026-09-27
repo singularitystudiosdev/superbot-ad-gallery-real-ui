@@ -1,0 +1,17 @@
+img/az/beats/music: crops cut for the music beat (scenes/tabs-assets/beats/music.js, THE SCORE)
+
+plate-sun-4262.jpg
+  source   /tmp/austerlitz.282e0654/A/austerlitz-master.mp4, the WinterArc21/Battle-of-Austerlitz-Film master
+           (1920 x 1080, 24 fps, 301.333 s)
+  frame    n = 4262 (t = 177.583 s, 2:57.583), selected exactly with ffmpeg select=eq(n\,4262)
+  crop     x 660, y 200, w 700, h 700 (inside the picture band, rows 131..948; clear of the 178.00 caption window)
+  output   216 x 216 JPEG (lanczos), shown at 36 x 36 as the score card's header plate
+  shows    the sun breaking through over the heights, the French column below it; the scene "The sun of Austerlitz",
+           inside the loudest 1.24 s of the film's audio (176.890 to 178.131 s, -10.5 dBFS RMS, rms.282e0654.py),
+           a tenth of a second before the narration "Then the sun breaks through." (video/austerlitz.srt, 2:57.687)
+  command  ffmpeg -i austerlitz-master.mp4 -vf "select=eq(n\,4262)" -frames:v 1 n4262.png
+           ffmpeg -i n4262.png -vf "crop=700:700:660:200,scale=216:216:flags=lanczos" -q:v 3 plate-sun-4262.jpg
+
+Data on the card (not pictures): the waveform bars are per-bar RMS dBFS of the same master's audio, measured by
+/tmp/austerlitz.282e0654/music/rms.282e0654.py (bars.json), over scene spans from the film's own buildTimeline
+(/tmp/austerlitz.282e0654/music/scenes.282e0654.mjs, scenes.json); movement stamps and titles are the README's scene table.

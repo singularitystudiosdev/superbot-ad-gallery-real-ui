@@ -1,0 +1,27 @@
+img/az/beats/art: the art beat's nine plates (scenes/tabs-assets/beats/art.js), one per env.js preset the film uses.
+
+Source for every file: /tmp/austerlitz.282e0654/A/austerlitz-master.mp4, the Battle of Austerlitz film master
+(1920x1080, 24 fps, 7232 frames, video stream start 0), rendered by WinterArc21/Battle-of-Austerlitz-Film @86dae32d.
+Nothing drawn: each file is one film frame, frame-exact (ffmpeg -ss (n-0.5)/24 -frames:v 1; frame n has pts n/24),
+cropped to the 2.35:1 picture band between the film's letterbox bars, crop rect x,y,w,h = 0,131,1920,818 (rows 131..948),
+then scaled lanczos to 480x204, JPEG -q:v 3. The black bars around each plate in the beat are CSS (#000, the film's bars).
+Every t sits outside the film's caption windows and crossfades (Facts settled by A), except art-predawn.jpg, which is the
+title card and carries the film's own title text (film.js:216).
+
+Preset per frame is read from web/film.js at the shot playing at t, with scene starts from web/script.js and
+data timings; the plate's label in the beat is the preset key and its az/el as web/engine/env.js defines it.
+
+file                 t (s)   n     shows                                                         preset, shot's env call (film.js)
+art-night.jpg        20.0    480   soldiers with torches along a dark ridge, NIGHT scene          night 200/30   :135 nightEnv = env('night', {fireLight}) (az/el as preset)
+art-predawn.jpg      39.5    948   title card AUSTERLITZ, 2 December 1805 · The Battle of the      predawn 120/1.5 :213 env('predawn', {exposure, fog}) (az/el as preset)
+                                   Three Emperors, over the hills before dawn
+art-map.jpg          120.0   2880  relief map, red arrows toward the Pratzen Heights (TRAP)      map 290/26     :331 env('map') (az/el as preset)
+art-fogdawn.jpg      158.2   3797  a rider and an infantry column in the dawn fog (FOG f3)       fogDawn 126/3.5 :421 env('fogDawn', {el: 3.5, fog, sunCol}) (az/el as preset)
+art-sunrise.jpg      190.0   4560  columns on a sunlit slope (SUN s2)                            sunrise 138/7  :503 env('sunrise', {el: 8, fog, scatter}) (shot el 8)
+art-midday.jpg       202.8   4867  smoke over the fields, white lines of infantry (CENTRE m1)    midday 185/18  :533 env('midday', {pall: 0.7}) (az/el as preset)
+art-afternoon.jpg    233.0   5592  relief map, blue arrows, Satschan pond (ICE i1)               afternoon 222/7 :590 blendEnv(env('afternoon'), env('map', {az: 222, el: 12}), 0.55) (shot 222/9.75)
+art-sunset.jpg       245.5   5892  soldiers on the frozen ponds under the setting sun (ICE i2)   sunset 232/1.8 :626 env('sunset', {el: 2.8}) (shot el 2.8)
+art-dusk.jpg         254.0   6096  guns on the ice under a red dusk sky (ICE i3)                 dusk 240/0.5   :648 env('dusk', {el: 0.8, exposure: 1.35}) (shot el 0.8)
+
+env.js also defines morning (az 155, el 13); film.js never calls env('morning'), so no frame of the film is lit by it and
+it has no plate.

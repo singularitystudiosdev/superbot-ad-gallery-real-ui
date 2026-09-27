@@ -1,0 +1,437 @@
+img CREDITS (AUSTERLITZ)
+
+Everything in img/ is under az/ (the look kit: stills cut from the film, tokens, manifest), az/beats/ (each build
+beat's own crops and data, merged below from each folder's CREDITS.txt, which stays beside its files) and film/ (the
+finale clips, posters and captions; see film/CREDITS.txt). Each entry records the frame, crop or repo file its
+picture or data came from.
+
+AUSTERLITZ (austerlitz-every-model-superbot-282e0654, added 2026-09-27)
+This spot was forked from lastinvention-every-model-superbot-dda6c235; none of that spot's footage or stills
+are left here. img/az/ is from the film AUSTERLITZ (2 December 1805 · The Battle of the
+Three Emperors) posted by Winter (@WinterArc2125), https://x.com/WinterArc2125/status/2103116235009347650, made in
+code in https://github.com/WinterArc21/Battle-of-Austerlitz-Film (main @ 86dae32d). Source file: the repo master
+video/austerlitz.mp4 (1920x1080, 24 fps, 7232 frames, 301.333 s). The post's 1920x1080 variant
+(https://video.twimg.com/amplify_video/2103113452726140928/vid/avc1/1920x1080/7kwgLDfFWkBBQ35Z.mp4) has the same
+7232 frames: frame n of the post matches frame n of the master at 45 to 48 dB PSNR (27 to 44 dB one frame off), so
+it is a re-encode of the master and every still here is cut from the master. Every file in az/ is a crop and
+lanczos resize of one real frame, or data measured on the frames and read from the repo source. Nothing was drawn,
+painted or generated. Crops are w x h @ (x,y) in 1920x1080 source pixels; times are source seconds (frame = t x
+24). Hour and general plates are 16:9 crops inside the picture band, taken outside the caption windows so no
+caption text is in them; card-* files are the whole frame, letterbox included, as reference stills of the film's
+own captions and cards.
+
+az/plate-hour-1.jpg            14s (frame 336), 1440x810 @ (240,134) -> 480x270 lanczos: Hour 1, the night of 1
+                               December: lines of camp fires and torches on the dark Moravian hills (Moravia
+                               scene, after its caption fades out at 12.5 s)
+az/plate-hour-2.jpg            147s (frame 3528), 1440x810 @ (0,134) -> 480x270 lanczos: Hour 2, Telnitz 7 a.m.: a
+                               French line firing in the morning fog, the Allied columns beyond
+az/plate-hour-3.jpg            167s (frame 4008), 1440x810 @ (0,134) -> 480x270 lanczos: Hour 3, the Zuran hill:
+                               Napoleon on the white horse with an aide, the low sun disc to the right
+az/plate-hour-4.jpg            175s (frame 4200), 1440x810 @ (240,134) -> 480x270 lanczos: Hour 4, the sun of
+                               Austerlitz, about 9 a.m.: the sun disc over the Pratzen, French columns below (same
+                               shot as the caption, before it fades in)
+az/plate-hour-5.jpg            202.5s (frame 4860), 1440x810 @ (240,134) -> 480x270 lanczos: Hour 5, the Pratzen
+                               late morning: musket smoke drifting over the lines on the plateau
+az/plate-hour-6.jpg            209s (frame 5016), 1440x810 @ (0,134) -> 480x270 lanczos: Hour 6, about 1 p.m.: the
+                               Russian Imperial Guard cavalry breaking a French battalion (film.js: the Russian
+                               Guard cavalry breaks a battalion of the 4th Line)
+az/plate-hour-7.jpg            246.5s (frame 5916), 1440x810 @ (440,134) -> 480x270 lanczos: Hour 7, the Satschan
+                               ponds about 4 p.m.: the sun on the horizon, its reflection on the frozen ponds,
+                               troops on the ice
+az/plate-night-column.jpg      22s (frame 528), 1440x810 @ (0,134) -> 960x540 lanczos: Night: a column of torch-
+                               bearers along a ridge (Moravia scene)
+az/plate-night-camp.jpg        27s (frame 648), 1440x810 @ (240,134) -> 960x540 lanczos: Night: torch-bearers by a
+                               camp fire, sparks rising (Moravia scene)
+az/plate-fog-sea.jpg           130s (frame 3120), 1440x810 @ (240,134) -> 960x540 lanczos: Fog dawn: a sea of fog
+                               in the valleys, hills breaking through (before the Dawn caption)
+az/plate-map-campaign.jpg      55s (frame 1320), 1440x810 @ (240,134) -> 960x540 lanczos: Campaign map: blue French
+                               routes converging on Ulm, then on to Vienna, labels ULM · 20 OCTOBER and VIENNA ·
+                               13 NOVEMBER
+az/plate-map-relief.jpg        120s (frame 2880), 1440x810 @ (120,134) -> 960x540 lanczos: Relief map of the
+                               field: red Allied arrows sweeping round the French right, blue French blocks, place
+                               labels
+az/plate-map-counter.jpg       232s (frame 5568), 1440x810 @ (240,134) -> 960x540 lanczos: Relief map: blue French
+                               arrows over the Pratzen, red Allied blocks, the ponds
+az/plate-volley.jpg            146.5s (frame 3516), 1440x810 @ (0,134) -> 960x540 lanczos: Infantry volley: a
+                               French line firing in the fog at Telnitz, smoke rolling forward
+az/plate-columns-slope.jpg     190s (frame 4560), 1440x810 @ (240,134) -> 960x540 lanczos: French columns climbing
+                               the slope of the Pratzen
+az/plate-infantry.jpg          213s (frame 5112), 1440x810 @ (240,134) -> 960x540 lanczos: Infantry: French line
+                               infantry in blue coats advancing (after the Guard shot)
+az/plate-guard-charge.jpg      210s (frame 5040), 1440x810 @ (240,134) -> 960x540 lanczos: Cavalry: the Russian
+                               Imperial Guard cavalry at the charge, about 1 p.m.
+az/plate-cavalry.jpg           220s (frame 5280), 1440x810 @ (240,134) -> 960x540 lanczos: Cavalry: Rapp’s charge,
+                               the chasseurs and Mamelukes of the Imperial Guard at the gallop
+az/plate-zuran.jpg             167s (frame 4008), 1440x810 @ (0,134) -> 960x540 lanczos: The Zuran hill: Napoleon
+                               on the white horse with an aide under the low sun
+az/plate-sun.jpg               175s (frame 4200), 1440x810 @ (240,134) -> 960x540 lanczos: The sun of Austerlitz
+                               over the Pratzen, French columns below
+az/plate-ponds-sunset.jpg      248.5s (frame 5964), 1440x810 @ (440,134) -> 960x540 lanczos: The Satschan ponds at
+                               sunset: sun on the horizon, reflection on the ice, troops crossing
+az/plate-guns-ice.jpg          259.5s (frame 6228), 1440x810 @ (480,134) -> 960x540 lanczos: Dusk: abandoned guns
+                               on the frozen ponds under a red sky, a town silhouette on the horizon
+az/plate-dusk.jpg              262s (frame 6288), 1440x810 @ (240,134) -> 960x540 lanczos: Dusk after the battle:
+                               a dark ridge under a red sky, fires in the valley
+az/plate-aftermath-night.jpg   276s (frame 6624), 1440x810 @ (240,134) -> 960x540 lanczos: Night after the battle:
+                               roads of lights across the dark plain (Pressburg scene, before its quote fades in)
+az/card-moravia.jpg            9s (frame 216), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: Moravia / The
+                               night of 1 December 1805
+az/card-dawn.jpg               136s (frame 3264), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: Dawn / 2
+                               December 1805 · about 7 a.m.
+az/card-telnitz.jpg            142.5s (frame 3420), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: Telnitz /
+                               7 a.m.
+az/card-pratzen-heights.jpg    155s (frame 3720), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: The Pratzen
+                               Heights / 8 a.m.
+az/card-zuran.jpg              162.5s (frame 3900), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: The Zuran
+                               hill / Napoleon’s command post
+az/card-quote-soult-1.jpg      166.083s (frame 3986), 1920x1080 @ (0,0) -> 960x540 lanczos: Quote card (bar text):
+                               “Less than twenty minutes, sire.”
+az/card-quote-soult-2.jpg      168.75s (frame 4050), 1920x1080 @ (0,0) -> 960x540 lanczos: Quote card (bar text):
+                               “Then we will wait another quarter of an hour.”
+az/card-sun.jpg                181.5s (frame 4356), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: The sun of
+                               Austerlitz / about 9 a.m.
+az/card-pratzen.jpg            198.75s (frame 4770), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: The
+                               Pratzen / late morning
+az/card-guard.jpg              206.5s (frame 4956), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: The
+                               Russian Imperial Guard / about 1 p.m.
+az/card-rapp.jpg               217.25s (frame 5214), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: Rapp’s
+                               charge / the cavalry of the Imperial Guard
+az/card-satschan.jpg           241.5s (frame 5796), 1920x1080 @ (0,0) -> 960x540 lanczos: Caption card: The
+                               Satschan ponds / about 4 p.m.
+az/card-title.jpg              40s (frame 960), 1920x1080 @ (0,0) -> 960x540 lanczos: Title card: AUSTERLITZ / 2
+                               December 1805 · The Battle of the Three Emperors
+az/card-map-campaign.jpg       55s (frame 1320), 1920x1080 @ (0,0) -> 960x540 lanczos: Map with labels: campaign
+                               map, ULM · 20 OCTOBER, VIENNA · 13 NOVEMBER
+az/card-map-russians.jpg       62s (frame 1488), 1920x1080 @ (0,0) -> 960x540 lanczos: Map with labels: campaign
+                               map with the red Russian arrows, RUSSIA, AUSTRIA
+az/card-map-pratzen.jpg        100s (frame 2400), 1920x1080 @ (0,0) -> 960x540 lanczos: Map with labels: relief
+                               map of the field, Pratzen Heights label, blue French line
+az/card-map-plan.jpg           115s (frame 2760), 1920x1080 @ (0,0) -> 960x540 lanczos: Map with labels: relief
+                               map, the Allied plan in red arrows round the French right
+az/card-map-counter.jpg        232s (frame 5568), 1920x1080 @ (0,0) -> 960x540 lanczos: Map: relief map, the
+                               French blow in blue arrows through the Pratzen
+az/card-losses.jpg             270s (frame 6480), 1920x1080 @ (0,0) -> 960x540 lanczos: Losses card: THE ALLIES
+                               27,000 killed, wounded or captured · 180 guns; THE FRENCH 9,000 killed, wounded or
+                               captured
+az/card-pressburg.jpg          281.5s (frame 6756), 1920x1080 @ (0,0) -> 960x540 lanczos: Quote card: 6 August
+                               1806 / Francis II lays down the crown of the Holy Roman Empire.; bar: 26 DECEMBER
+                               1805 · TREATY OF PRESSBURG
+az/card-quote-proclamation.jpg 290s (frame 6960), 1920x1080 @ (0,0) -> 960x540 lanczos: Quote card: the
+                               proclamation quote; bar: NAPOLEON · PROCLAMATION TO THE ARMY, 3 DECEMBER 1805
+az/card-end-title.jpg          298s (frame 7152), 1920x1080 @ (0,0) -> 960x540 lanczos: End title: AUSTERLITZ / 2
+                               December 1805 and the credit lines
+az/theme.css                   tokens (--az-*): fonts, tracking, sizes, letterbox and caption geometry
+                               (overlay.js, measured on t 9, 142.5, 206.5, 241.5), text inks (overlay.js /
+                               film.js), and colours measured as region medians on the frames above (each var
+                               names its t and rect), plus the army and map colours set in sprites.js:58 to 65 and
+                               film.js:69. Fonts are the film's own (repo assets/fonts), linked from Google Fonts:
+                               Cormorant SC 500/700 and EB Garamond 400/400 italic/600; overlay.js caption() re-
+                               run with them gives name widths within 0.5 px of the film's hairlines
+                               (168/151/581/409 px).
+az/assets.json                 manifest of the above: every az/ file with source t, frame, rect, size and what it
+                               shows, plus the caption windows, bar texts, geometry, fonts and palette.
+
+Captions, quotes, dates and figures shown in the card stills are the film's own (film.js lines named in
+az/assets.json). Film and stills: Winter (@WinterArc2125), links above.
+
+
+BUILD BEATS (img/az/beats/<beat>/CREDITS.txt, merged verbatim)
+
+
+--- img/az/beats/music/CREDITS.txt ---
+
+img/az/beats/music: crops cut for the music beat (scenes/tabs-assets/beats/music.js, THE SCORE)
+
+plate-sun-4262.jpg
+  source   /tmp/austerlitz.282e0654/A/austerlitz-master.mp4, the WinterArc21/Battle-of-Austerlitz-Film master
+           (1920 x 1080, 24 fps, 301.333 s)
+  frame    n = 4262 (t = 177.583 s, 2:57.583), selected exactly with ffmpeg select=eq(n\,4262)
+  crop     x 660, y 200, w 700, h 700 (inside the picture band, rows 131..948; clear of the 178.00 caption window)
+  output   216 x 216 JPEG (lanczos), shown at 36 x 36 as the score card's header plate
+  shows    the sun breaking through over the heights, the French column below it; the scene "The sun of Austerlitz",
+           inside the loudest 1.24 s of the film's audio (176.890 to 178.131 s, -10.5 dBFS RMS, rms.282e0654.py),
+           a tenth of a second before the narration "Then the sun breaks through." (video/austerlitz.srt, 2:57.687)
+  command  ffmpeg -i austerlitz-master.mp4 -vf "select=eq(n\,4262)" -frames:v 1 n4262.png
+           ffmpeg -i n4262.png -vf "crop=700:700:660:200,scale=216:216:flags=lanczos" -q:v 3 plate-sun-4262.jpg
+
+Data on the card (not pictures): the waveform bars are per-bar RMS dBFS of the same master's audio, measured by
+/tmp/austerlitz.282e0654/music/rms.282e0654.py (bars.json), over scene spans from the film's own buildTimeline
+(/tmp/austerlitz.282e0654/music/scenes.282e0654.mjs, scenes.json); movement stamps and titles are the README's scene table.
+
+
+--- img/az/beats/assets/CREDITS.txt ---
+
+img/az/beats/assets: crops cut for the assets beat (scenes/tabs-assets/beats/assets.js, Meshy, THE SOLDIERS)
+
+Every file here is one real frame of the film AUSTERLITZ (WinterArc21/Battle-of-Austerlitz-Film, main @ 86dae32d),
+cropped and lanczos-resized. Nothing was drawn, painted, graded or generated.
+  source   /tmp/austerlitz.282e0654/A/austerlitz-master.mp4, the repo master video/austerlitz.mp4
+           (1920 x 1080, 24 fps, 7232 frames, 301.333 s)
+  frames   cut with ffmpeg -ss n/24 -i austerlitz-master.mp4 -frames:v 1 (checked pixel-identical to
+           ffmpeg -vf "select=eq(n\,3504)" for n = 3504: zero difference)
+  crops    x, y, w, h in 1920 x 1080 source pixels, all inside the picture band (rows 131..948) and all outside the
+           film's caption windows (Telnitz 139.75-144.58, The Pratzen Heights 152.33-157.42, The Russian Imperial
+           Guard 204.46-208.50, Rapp's charge 215.21-219.42, The Satschan ponds 239.33-243.83), so no caption text
+  output   400 x 225 JPEG (quality 86, lanczos), shown about 100 x 56 in the card's tiles
+  names    each file is named for the sprite the film draws in it, from web/engine/sprites.js @86dae32d
+           (reg() calls, lines 520-594); the scene's formation is in web/film.js @86dae32d
+
+fr_fire.jpg
+  frame    n = 3504 (t = 146.000 s, 2:26)
+  crop     x 20, y 530, w 480, h 270
+  shows    the French line at Telnitz in the fog, blue coats, white breeches, packs and muskets, seen close from
+           behind the ranks. film.js:397-399 "French holding the village edge, firing east", side 'fr', anim 'fire'
+           (sprite fr_fire, 4 frames, sprites.js:528)
+
+au_march.jpg
+  frame    n = 3624 (t = 151.000 s, 2:31)
+  crop     x 1630, y 495, w 240, h 135 (small: upscaled 1.67x, so soft)
+  shows    far off in the Telnitz fog, a column in white coats marching right to left. film.js:393-395 "Russians
+           and Austrians advancing from the east (right), heading west", the column with side 'au', anim 'march',
+           6 files by 10 ranks, no flag (sprite au_march, 8 frames, sprites.js:520; white coat, sprites.js:60).
+           The film has no close shot of Austrian infantry; this is the nearest.
+
+ru_march.jpg
+  frame    n = 3780 (t = 157.500 s, 2:37.5)
+  crop     x 1420, y 440, w 500, h 281
+  shows    a Russian column on the Pratzen Heights at 8 a.m., green coats, white trousers, shakos, the white flag
+           with the yellow saltire, at middle distance. film.js:414-418 "on the Pratzen: column after column marches
+           down into the mist", side 'ru', anim 'march' (sprite ru_march, 8 frames, sprites.js:520). The film has
+           no close shot of Russian line infantry; this is the nearest.
+
+guardru_gallop.jpg
+  frame    n = 5040 (t = 210.000 s, 3:30)
+  crop     x 0, y 250, w 1000, h 562
+  shows    the Russian Imperial Guard cavalry at the gallop, close: white coats, black crested helmets, red
+           shabraques, dark horses, sabres up. film.js:538-545 "the Russian Guard cavalry breaks a battalion of the
+           4th Line", cav 'guardru_gallop' and 'guardru_cut' (8 frames each, sprites.js:560-572)
+
+fr_charge.jpg
+  frame    n = 5088 (t = 212.000 s, 3:32)
+  crop     x 1100, y 488, w 820, h 461
+  shows    men of the 4th Line broken and running, close: blue coats, shakos with red pompons, packs.
+           film.js:538 and 543, side 'fr', anim 'charge' after 3.6 s of the shot (sprite fr_charge, 8 frames,
+           sprites.js:524)
+
+mameluke_gallop.jpg
+  frame    n = 5304 (t = 221.000 s, 3:41)
+  crop     x 250, y 420, w 640, h 360
+  shows    Rapp's charge: Mamelukes of the Guard on grey horses (white turbans, red trousers) among the chasseurs
+           on bays. film.js:555-561 "Rapp's charge: the chasseurs and Mamelukes of the Guard (tracking shot)",
+           cav 'mameluke_gallop' (8 frames, sprites.js:560-572)
+
+chasseur_gallop.jpg
+  frame    n = 5328 (t = 222.000 s, 3:42)
+  crop     x 0, y 450, w 600, h 338
+  shows    Rapp's charge: chasseurs of the Guard at the gallop, green coats, fur colpacks with plumes, bay horses.
+           film.js:555 and 561, cav 'chasseur_gallop' (8 frames, sprites.js:560-572)
+
+gun_ru.jpg
+  frame    n = 6060 (t = 252.500 s, 4:12.5)
+  crop     x 1000, y 440, w 640, h 360
+  shows    guns and dead horses on the broken ice of the Satschan ponds at dusk. film.js:631-634 "afterwards: a few
+           guns and horses on the broken ice; snow begins", side 'ru', kind 'gun' (sprite gun_ru, 2 frames,
+           sprites.js:585) and horse_dead
+
+Data on the card (not pictures): the file names are the sprite names above with .glb; the frame counts are the third
+argument of each reg() call in sprites.js @86dae32d (fr_fire 4, the marches, charge and gallops 8, gun_ru 2; 54 in
+all); each tile's scene line is the source time of its crop (m:ss, floored) and the title of the README scene table
+row that time falls in (README.md @86dae32d: 2:10 Fog, 3:15 The centre, 3:45 The ponds). The army swatches are the
+theme.css army tokens (--az-french-blue, --az-russian-green, --az-austrian-white, --az-guard-white/--az-guard-red).
+
+
+--- img/az/beats/art/CREDITS.txt ---
+
+img/az/beats/art: the art beat's nine plates (scenes/tabs-assets/beats/art.js), one per env.js preset the film uses.
+
+Source for every file: /tmp/austerlitz.282e0654/A/austerlitz-master.mp4, the Battle of Austerlitz film master
+(1920x1080, 24 fps, 7232 frames, video stream start 0), rendered by WinterArc21/Battle-of-Austerlitz-Film @86dae32d.
+Nothing drawn: each file is one film frame, frame-exact (ffmpeg -ss (n-0.5)/24 -frames:v 1; frame n has pts n/24),
+cropped to the 2.35:1 picture band between the film's letterbox bars, crop rect x,y,w,h = 0,131,1920,818 (rows 131..948),
+then scaled lanczos to 480x204, JPEG -q:v 3. The black bars around each plate in the beat are CSS (#000, the film's bars).
+Every t sits outside the film's caption windows and crossfades (Facts settled by A), except art-predawn.jpg, which is the
+title card and carries the film's own title text (film.js:216).
+
+Preset per frame is read from web/film.js at the shot playing at t, with scene starts from web/script.js and
+data timings; the plate's label in the beat is the preset key and its az/el as web/engine/env.js defines it.
+
+file                 t (s)   n     shows                                                         preset, shot's env call (film.js)
+art-night.jpg        20.0    480   soldiers with torches along a dark ridge, NIGHT scene          night 200/30   :135 nightEnv = env('night', {fireLight}) (az/el as preset)
+art-predawn.jpg      39.5    948   title card AUSTERLITZ, 2 December 1805 · The Battle of the      predawn 120/1.5 :213 env('predawn', {exposure, fog}) (az/el as preset)
+                                   Three Emperors, over the hills before dawn
+art-map.jpg          120.0   2880  relief map, red arrows toward the Pratzen Heights (TRAP)      map 290/26     :331 env('map') (az/el as preset)
+art-fogdawn.jpg      158.2   3797  a rider and an infantry column in the dawn fog (FOG f3)       fogDawn 126/3.5 :421 env('fogDawn', {el: 3.5, fog, sunCol}) (az/el as preset)
+art-sunrise.jpg      190.0   4560  columns on a sunlit slope (SUN s2)                            sunrise 138/7  :503 env('sunrise', {el: 8, fog, scatter}) (shot el 8)
+art-midday.jpg       202.8   4867  smoke over the fields, white lines of infantry (CENTRE m1)    midday 185/18  :533 env('midday', {pall: 0.7}) (az/el as preset)
+art-afternoon.jpg    233.0   5592  relief map, blue arrows, Satschan pond (ICE i1)               afternoon 222/7 :590 blendEnv(env('afternoon'), env('map', {az: 222, el: 12}), 0.55) (shot 222/9.75)
+art-sunset.jpg       245.5   5892  soldiers on the frozen ponds under the setting sun (ICE i2)   sunset 232/1.8 :626 env('sunset', {el: 2.8}) (shot el 2.8)
+art-dusk.jpg         254.0   6096  guns on the ice under a red dusk sky (ICE i3)                 dusk 240/0.5   :648 env('dusk', {el: 0.8, exposure: 1.35}) (shot el 0.8)
+
+env.js also defines morning (az 155, el 13); film.js never calls env('morning'), so no frame of the film is lit by it and
+it has no plate.
+
+
+--- img/az/beats/code/CREDITS.txt ---
+
+img/az/beats/code/CREDITS.txt
+The code beat: scenes/tabs-assets/beats/code.js + code.css (Claude Opus 5.5, THE ENGINE).
+
+IMAGES
+None. This folder holds no image and the beat draws no picture. The editor card is CSS furniture only (rounded
+card, tab strip, rules, dots, a CSS border triangle for the folder twisty, a gradient progress bar) coloured with
+img/az/theme.css tokens (--az-night, --az-night-ice, --az-ink, --az-ink-sub, --az-fire, --az-torch, --az-sun,
+--az-smoke, --az-fog) and mixes of them with white or black, plus the tick icon the hub already provides (x.OK).
+The explorer header uses the theme's caps face (var(--az-font-caps)); code and numbers use the hub's mono face.
+
+TEXT AND NUMBERS SHOWN
+Source: the public repo WinterArc21/Battle-of-Austerlitz-Film, main at commit 86dae32d
+(https://github.com/WinterArc21/Battle-of-Austerlitz-Film). The repo carries no LICENSE file (GitHub reports no
+license); the three source lines below are quoted as a short, credited excerpt of the film's own engine.
+
+1. Excerpt typed in the pane, verbatim, character for character:
+   web/engine/env.js lines 26 to 28 (the "sunrise" preset of ENV):
+     26:   sunrise: { az: 138, el: 7, sunCol: [4.2, 2.8, 1.6], ambTop: [0.36, 0.40, 0.50], ambBot: [0.17, 0.15, 0.13], fogCol: [0.85, 0.74, 0.62],
+     27:     fog: [4, 28, 0.05, 0.025], fogNoise: 0.7, cloud: [0.55, 0.3, 1.8, 0.45], cloudShadow: 0.45, zenith: [0.2, 0.3, 0.52], horizon: [0.95, 0.78, 0.6],
+     28:     cloudLit: [2.4, 1.6, 1.0], cloudDark: [0.30, 0.28, 0.34], scatter: 1.6, frost: 0.5, exposure: 1.0, bloom: 0.4, threshold: 0.9, sat: 1.05, gain: [1.03, 1.0, 0.95] },
+   The pane soft-wraps each long line at its property boundaries (a continuation row has no line number and a
+   hanging indent drawn by CSS). The characters are the file's; only the wrap is the editor's.
+
+2. Explorer: the file tree of web/ with each blob's size in bytes, from
+   gh api repos/WinterArc21/Battle-of-Austerlitz-Film/git/trees/86dae32d?recursive=1
+     web/engine/army.js       7,170     web/engine/renderer.js  22,100
+     web/engine/env.js        6,055     web/engine/shaders.js   26,428
+     web/engine/europe.js     9,189     web/engine/sprites.js   38,521
+     web/engine/fx.js        10,775     web/engine/terrain.js   13,791
+     web/engine/gl.js         8,403     web/events.js            3,697
+     web/engine/overlay.js    8,138     web/film.js             53,102
+                                        web/script.js            5,475
+   These are all ten .js files in web/engine plus web/events.js, film.js and script.js: 13 files, 212,844 bytes
+   (the chip's "Wrote 13 files" and its byte total).
+
+3. The model's line: "Writing the engine. Sound travels at 343 m/s."
+   "Sound travels at 343 m/s." is README.md line 47 verbatim (bold in the README). The code behind it is
+   tools/mix.py line 275, which delays each gun's sound by dist / 343.0.
+
+4. Status strip:
+   "Writing web/engine/env.js": the path of the open file (item 1).
+   "node tools/render.mjs --fps 24 --chunk 10": tools/render.mjs line 3 usage,
+     "node tools/render.mjs [--fps 24] [--workers 2] [--from s] [--to s] [--chunk 10] [--crf 18]",
+     with its two defaults written out (10 second chunks at 24 fps; render.mjs line 13 sets FPS 24, CHUNK 10).
+   "31 chunks · 2 workers · 24 fps": the tail of render.mjs's own log line 37,
+     `film ${total}s · frames ${f0}-${f1} · ${chunks.length} chunks · ${WORKERS} workers · ${FPS} fps`,
+     for the full film: 7232 frames (the repo master) at 240 frames a chunk (10 s x 24 fps) is 31 chunks;
+     2 workers is the default.
+   "JavaScript  Ln 26, Col 28" and on: the caret's true line and column in env.js as the excerpt types.
+
+
+--- img/az/beats/scrape/CREDITS.txt ---
+
+img/az/beats/scrape/ : credits for the scrape beat (THE HILLS)
+
+terrarium-z13-mosaic.png (280 x 280 px)
+  The 49 AWS Terrarium elevation tiles that tools/fetch_terrain.py in
+  https://github.com/WinterArc21/Battle-of-Austerlitz-Film fetches for its bbox
+  (LAT 49.060 to 49.215, LON 16.630 to 16.900, zoom 13): x 4474 to 4480, y 2805 to 2811.
+  Downloaded 2026-09-27 from the same URL template the script uses, every tile HTTP 200,
+  256 x 256 RGB each. Laid out 7 x 7 (x across, y down) and resampled nearest-neighbour
+  from 256 to 40 px per tile, so every pixel is an unaltered encoded sample
+  (height = R * 256 + G + B / 256 - 32768 m). No colour change in the file; scrape.css
+  shows it under a CSS grade (sepia .55, saturate .7, brightness .82, contrast 1.05) so the
+  raw red and green sit in the film's night palette.
+  Source: Mapzen/Tilezen Terrarium on the AWS Open Data registry (elevation-tiles-prod),
+  built from SRTM and other public DEMs; terms: https://github.com/tilezen/joerd/blob/master/docs/attribution.md
+  Numbers read off these tiles for the card: the bbox spans 19.66 x 17.14 km
+  (fetch_terrain.py's own formula), 512 samples across = 38.4 m grid, heights inside
+  the bbox 178 to 388 m.
+  Tile URLs:
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4474/2805.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4474/2806.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4474/2807.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4474/2808.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4474/2809.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4474/2810.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4474/2811.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4475/2805.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4475/2806.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4475/2807.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4475/2808.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4475/2809.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4475/2810.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4475/2811.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4476/2805.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4476/2806.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4476/2807.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4476/2808.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4476/2809.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4476/2810.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4476/2811.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4477/2805.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4477/2806.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4477/2807.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4477/2808.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4477/2809.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4477/2810.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4477/2811.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4478/2805.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4478/2806.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4478/2807.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4478/2808.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4478/2809.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4478/2810.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4478/2811.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4479/2805.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4479/2806.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4479/2807.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4479/2808.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4479/2809.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4479/2810.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4479/2811.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4480/2805.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4480/2806.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4480/2807.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4480/2808.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4480/2809.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4480/2810.png
+    https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/4480/2811.png
+
+Fact rows (scenes/tabs-assets/beats/scrape.js), each claim verbatim from the repo README
+(line 25 for the grid, line 65 for the history), each checked against one source, read 2026-09-27:
+  "38 m grid" ............................ the tiles above (s3.amazonaws.com): 19.66 km / 512 = 38.4 m. VERIFIED
+  "about 73,000 French" .................. https://en.wikipedia.org/wiki/Battle_of_Austerlitz infobox strength 65,000 to 75,000. IN RANGE
+  "about 85,000 Russians and Austrians" .. same page: "The Allies had about 85,000 soldiers, seventy percent of them Russian". VERIFIED
+  "about 16,000 killed and wounded" ...... same page, infobox: 15,000 to 16,000 killed or wounded. IN RANGE
+  "11,000 captured, with some 180 guns" .. https://fr.wikipedia.org/wiki/Bataille_d%27Austerlitz, Pertes: "un total de 11 453
+                                           prisonniers de guerre", "180 canons furent perdus". VERIFIED
+  "about 110 km from Vienna in two days" . en.wikipedia.org: "Davout's soldiers had 48 hours to march 110 km". VERIFIED
+  "30th Bulletin claimed 20,000 drowned" . en.wikipedia.org: "Napoleon's account of the catastrophe was exaggerated; on his
+                                           instructions, the lakes were drained a few days after the battle, and the corpses of
+                                           only two or three men, with some 150 horses, were found." EXAGGERATED
+
+
+--- img/az/beats/git/CREDITS.txt ---
+
+GitHub beat (scenes/tabs-assets/beats/git.js, git.css): no images. The card draws no film pixels; its marks are
+the brand dir's existing logos (brand/github-logo.svg, brand/claude-logo.svg, painted white as chat.css paints them,
+Claude on its #d97757 tile) and CSS/SVG line icons. Theme accents are img/az/theme.css tokens only
+(--az-fire, --az-torch, --az-night-ice, --az-ink, --az-font-caps, --az-weight-caps, --az-track-label).
+
+Every value on the card is the public repo WinterArc21/Battle-of-Austerlitz-Film at main 86dae32d, read 2026-09-27:
+  commit   gh api repos/WinterArc21/Battle-of-Austerlitz-Film/commits/main
+           sha 86dae32d20f0a0f2395e7dc8938846fd51e355a6 (shown 86dae32), author Claude,
+           subject "Austerlitz, 2 December 1805: a historical film rendered entirely in code" (verbatim),
+           the repo's only commit (1 Commit), one branch (main, the default branch).
+           No CI tick is drawn: the repo has no workflows and no checks.
+  tree     gh api repos/WinterArc21/Battle-of-Austerlitz-Film/git/trees/86dae32d?recursive=1
+           37 blobs, 97,073,160 bytes in all. Root entries (files, summed blob bytes):
+             assets/fonts  5  1,702,624   (assets holds only fonts/, so GitHub lists it as assets/fonts)
+             data          4  5,796,624
+             tools         8     42,198
+             video         2 89,304,736   (austerlitz.mp4 89,298,864 + austerlitz.srt 5,872)
+             web          15    220,406   (web/engine 10 files 150,570; code beat's 13 files 212,844 + index.html 3,158 + main.js 4,404)
+             .gitignore   40   README.md 6,143   package.json 389
+  README   README.md line 3, verbatim ("A five-minute (5:01) historical film ... generated offline."; straight
+           apostrophe as the file has it). Line 1, the h1, is not shown: it carries an em dash.
+  tag      the repo has no tags. `proclamation` is the ad's tag (the dispatch line), borrowed from the Grande
+           Armée's vocabulary as README.md's story table names it: 4:21 Aftermath, "Napoleon's proclamation".
+           "1 Tag" counts the ad's own tag.
+  say      "Connected. Dispatching all 37 files of Austerlitz to GitHub." 37 = the tree's blob count.

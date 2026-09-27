@@ -1,0 +1,61 @@
+/* Step 3, Meshy 5 (beats/meshy.js): a Meshy-style viewer card with three CSS 3D voxel models on turntables, wireframe
+   first, textured behind a left-to-right sweep. Sizes are the hub's design px (the camera scales the site). */
+#s-tabs .sbsite .hub .qc-t-meshy { background: #f3f3ef; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-meshy img { width: 17px; height: 17px; }
+#s-tabs .sbsite .hub .qc-t-eleven { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-eleven img { width: 12px; height: 12px; }
+
+#s-tabs .sbsite .hub .vx-card { width: min(100%, 470px); margin-top: 10px; border-radius: 14px; overflow: hidden;
+  background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .vx-hd { display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 10px 0 9px;
+  border-bottom: 1px solid #242428; font: 600 11.5px/1 var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .vx-hd .qc-tile { width: 20px; height: 20px; border-radius: 6px; }
+#s-tabs .sbsite .hub .vx-n { color: #8a8a93; font-weight: 500; }
+#s-tabs .sbsite .hub .vx-state { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; height: 20px;
+  padding: 0 8px; border-radius: 999px; background: #232327; color: #c9c9d1; font: 600 9.5px/1 var(--ui); }
+#s-tabs .sbsite .hub .vx-state b { font-weight: 600; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .vx-spin { width: 10px; height: 10px; stroke: #c4f24b; stroke-dasharray: 26 12; }
+#s-tabs .sbsite .hub .vx-ok { display: none; place-items: center; width: 11px; height: 11px; }
+#s-tabs .sbsite .hub .vx-ok svg { width: 11px; height: 11px; }
+
+/* the viewport: a studio floor, three cells, the two copies stacked in register */
+#s-tabs .sbsite .hub .vx-stage { position: relative; height: 150px;
+  background: radial-gradient(120% 90% at 50% 100%, #26272b 0%, #17181b 55%, #111113 100%); }
+#s-tabs .sbsite .hub .vx-layer { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+#s-tabs .sbsite .hub .vx-cell { position: relative; perspective: 520px; display: grid; place-items: center; }
+#s-tabs .sbsite .hub .vx-rot { position: relative; width: 54px; height: 54px; transform-style: preserve-3d; margin-top: -8px; }
+#s-tabs .sbsite .hub .vx-shadow { position: absolute; left: 50%; bottom: 22px; width: 78px; height: 14px; margin-left: -39px;
+  border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)); }
+
+/* cube faces: 16x16 textures at 54px, nearest-neighbour; the side faces a touch darker, like Minecraft's face shading */
+#s-tabs .sbsite .hub .vx-f { position: absolute; left: 0; top: 0; width: 54px; height: 54px; backface-visibility: hidden;
+  background-size: 100% 100%; image-rendering: pixelated; }
+#s-tabs .sbsite .hub .vx-tex .vx-f-left, #s-tabs .sbsite .hub .vx-tex .vx-f-right { filter: brightness(.8); }
+#s-tabs .sbsite .hub .vx-tex .vx-f-front, #s-tabs .sbsite .hub .vx-tex .vx-f-back { filter: brightness(.9); }
+#s-tabs .sbsite .hub .vx-tex .vx-f-bottom { filter: brightness(.55); }
+/* wire faces: the quad's edges and the diagonal that makes its two triangles */
+#s-tabs .sbsite .hub .vx-wire .vx-f { backface-visibility: visible; box-sizing: border-box; border: 1px solid rgba(196, 242, 75, .9);
+  background: linear-gradient(to top right, transparent calc(50% - .6px), rgba(196, 242, 75, .55) 50%, transparent calc(50% + .6px)); }
+
+/* the pickaxe: its sprite extruded in 1px layers (inner layers darker: the item's edge), the wire copy is its voxel grid */
+#s-tabs .sbsite .hub .vx-p { position: absolute; left: 0; top: 0; width: 54px; height: 54px; background-size: 100% 100%;
+  image-rendering: pixelated; }
+#s-tabs .sbsite .hub .vx-p-in { filter: brightness(.62); }
+#s-tabs .sbsite .hub .vx-p-wire { -webkit-mask: var(--m) center / 100% 100% no-repeat; mask: var(--m) center / 100% 100% no-repeat;
+  -webkit-mask-mode: alpha; mask-mode: alpha;
+  background-color: rgba(196, 242, 75, .16);
+  background-image: repeating-linear-gradient(to right, rgba(196, 242, 75, .9) 0 1px, transparent 1px 3.375px),
+    repeating-linear-gradient(to bottom, rgba(196, 242, 75, .9) 0 1px, transparent 1px 3.375px); }
+
+#s-tabs .sbsite .hub .vx-sweep { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; opacity: 0;
+  background: #c4f24b; box-shadow: 0 0 14px 4px rgba(196, 242, 75, .45); }
+#s-tabs .sbsite .hub .vx-tools { position: absolute; left: 9px; top: 9px; display: flex; gap: 4px; }
+#s-tabs .sbsite .hub .vx-pill { height: 17px; padding: 0 7px; border-radius: 999px; display: inline-flex; align-items: center;
+  background: rgba(40, 40, 44, .85); color: #8a8a93; font: 600 8.5px/1 var(--ui); }
+#s-tabs .sbsite .hub .vx-pill.is-on { background: #c4f24b; color: #10110c; }
+
+#s-tabs .sbsite .hub .vx-foot { display: grid; grid-template-columns: repeat(3, 1fr); height: 30px; border-top: 1px solid #242428; }
+#s-tabs .sbsite .hub .vx-lab { display: flex; align-items: center; justify-content: center; gap: 5px; opacity: 0;
+  font: 500 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #c9c9d1; }
+#s-tabs .sbsite .hub .vx-lab em { font: 700 7.5px/1 var(--ui); font-style: normal; letter-spacing: .06em; padding: 3px 4px;
+  border-radius: 4px; background: #2a2a2f; color: #c4f24b; }

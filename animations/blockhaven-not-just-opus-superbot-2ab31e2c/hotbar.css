@@ -1,0 +1,78 @@
+/* The stage hotbar (hotbar.js): a Minecraft HUD hotbar laid out at GUI scale 4 (728x88) and scaled by transform.
+   Minecraft's own geometry: a 182x22 bar, nine 20-unit slots behind a 1-unit rim, 16x16 items, a 24x24 selection
+   frame, and the held item's name centred above the bar in the pixel font with a 1-unit drop shadow.
+   Monocraft (Idrees Hassan, SIL OFL 1.1, fonts/Monocraft-OFL.txt; subset to Basic Latin) stands in for the Minecraft
+   font: it is drawn on Minecraft's own glyph grid, so "5.5" reads as digits, and it matches the in-game item label the
+   clip shows. */
+@font-face {
+  font-family: 'Monocraft';
+  src: url('fonts/monocraft-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+#hotbar {
+  --sb-cat: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%2212%2018%2076%2070%22%3E%3Cmask%20id%3D%22m%22%3E%3Cg%20fill%3D%22white%22%3E%3Crect%20x%3D%2214%22%20y%3D%2232%22%20width%3D%2272%22%20height%3D%2254%22%20rx%3D%2215%22%2F%3E%3Cpath%20d%3D%22M14%2046V28Q14%2020%2021%2021Q28%2024%2036%2032Z%22%2F%3E%3Cpath%20d%3D%22M86%2046V28Q86%2020%2079%2021Q72%2024%2064%2032Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22black%22%3E%3Cellipse%20cx%3D%2235%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3Cellipse%20cx%3D%2265%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3C%2Fg%3E%3C%2Fmask%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20mask%3D%22url(%23m)%22%2F%3E%3C%2Fsvg%3E");
+  position: absolute; left: 0; top: 0; z-index: 40;
+  width: 728px; height: 88px;
+  transform-origin: 0 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+#hotbar .hb-bar {
+  position: absolute; inset: 0;
+  background: rgba(10, 10, 12, .58);
+  /* 1-unit black outline, then the light rim of the vanilla widget texture */
+  box-shadow: 0 0 0 4px #0b0b0b, inset 0 0 0 4px #9a9a9a, inset 0 0 0 8px #3a3a3a;
+  image-rendering: pixelated;
+}
+#hotbar .hb-slot {
+  position: absolute; top: 4px; width: 80px; height: 80px;
+  box-shadow: inset 4px 4px 0 0 rgba(0, 0, 0, .42), inset -4px -4px 0 0 rgba(170, 170, 170, .30), 4px 0 0 0 #5a5a5a;
+}
+#hotbar .hb-slot:nth-child(9) { box-shadow: inset 4px 4px 0 0 rgba(0, 0, 0, .42), inset -4px -4px 0 0 rgba(170, 170, 170, .30); }
+#hotbar .hb-item {
+  position: absolute; top: 12px; width: 64px; height: 64px;
+  display: grid; place-items: center;
+  visibility: hidden;
+  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, .45));
+}
+#hotbar .hb-item img { width: 56px; height: 56px; object-fit: contain; display: block; }
+#hotbar .hb-i-meshy img { width: 60px; height: 60px; border-radius: 10px; }
+#hotbar .hb-mask {
+  width: 56px; height: 56px; display: block;
+  -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat;
+}
+#hotbar .hb-sb { position: relative; width: 60px; height: 60px; border-radius: 12px; background: #0b0b0c; box-shadow: inset 0 0 0 2px #2a2a2e; }
+#hotbar .sbm, #hb-drop .sbm { position: absolute; inset: 14%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#hotbar .sbm-c { background: #00e5c3; transform: translate(-1.5px, -1.5px); }
+#hotbar .sbm-m { background: #c026d3; transform: translate(1.5px, 1.5px); }
+#hotbar .sbm-w { background: #ececec; }
+#hotbar .hb-sel {
+  position: absolute; left: 0; top: -4px; width: 96px; height: 96px;
+  box-sizing: border-box;
+  border: 8px solid #f4f4f4;
+  box-shadow: 0 0 0 4px #0b0b0b, inset 0 0 0 4px rgba(0, 0, 0, .55);
+}
+#hotbar .hb-tip {
+  position: absolute; left: 50%; bottom: 112px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 400 36px/1 'Monocraft', monospace;
+  letter-spacing: 0;
+  color: #fff;
+  text-shadow: 4px 4px 0 #3e3e3e;
+  opacity: 0;
+}
+
+/* the intro's dropped item (stage coordinates, not scaled with the bar) */
+#hb-drop {
+  position: absolute; left: 0; top: 0; z-index: 41;
+  width: 132px; height: 132px;
+  perspective: 600px;
+  pointer-events: none;
+  visibility: hidden;
+}
+#hb-drop .hb-drop-spin { width: 100%; height: 100%; filter: drop-shadow(0 10px 0 rgba(0, 0, 0, .35)); }
+#hb-drop img { width: 100%; height: 100%; object-fit: contain; display: block; }
+

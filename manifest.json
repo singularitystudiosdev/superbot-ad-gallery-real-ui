@@ -224,6 +224,14 @@
     "thumb": "assets/shots/inkwave-every-model-superbot-b7e4c219.png"
   },
   {
+    "id": "liquidglass-every-model-v3-superbot-956467aa",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a Liquid Glass motion reel: Lyria 2 scores it, Meshy builds the glass primitives, Gemini paints the 8 scenes, Opus 5.5 writes the refraction shader, DeepSeek V4 Flash scrapes glyphs, GitHub takes the repo, Opus 5.5 renders; ends on @motion_conquest Opus 5.5 Liquid Glass clip (7 requests)",
+    "src": "animations/liquidglass-every-model-superbot-956467aa/",
+    "thumb": "assets/shots/liquidglass-every-model-v3-superbot-956467aa.png"
+  },
+  {
     "id": "dark-souls-every-model-v1-superbot-80e24d9f",
     "type": "animation",
     "group": "Ad spots",

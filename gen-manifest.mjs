@@ -112,6 +112,9 @@ const more = [
   // ElevenLabs and Suno score it, Gemini paints the ink, Opus 5.5 codes Inkwave, GitHub ships it, and the last
   // step is real gameplay from @JaydenDavisNC's Opus 5.5 Splatoon capture.
   ['inkwave-every-model-superbot-b7e4c219', 'inkwave-every-model-superbot-b7e4c219/', 'Superbot builds Inkwave: every model, one chat', 'Ad spots'],
+  // make a Liquid Glass motion reel (2026-09-26): the splatoon 7cf3d4da routing rethemed to Apple Liquid Glass at 120 BPM,
+  // ends on @motion_conquest's Opus 5.5 Liquid Glass clip (animations/liquidglass-every-model-superbot-956467aa/img/CREDITS.txt).
+  ['liquidglass-every-model-v3-superbot-956467aa', 'liquidglass-every-model-superbot-956467aa/', 'make a Liquid Glass motion reel: Lyria 2 scores it, Meshy builds the glass primitives, Gemini paints the 8 scenes, Opus 5.5 writes the refraction shader, DeepSeek V4 Flash scrapes glyphs, GitHub takes the repo, Opus 5.5 renders; ends on @motion_conquest Opus 5.5 Liquid Glass clip (7 requests)', 'Ad spots'],
   // make an animated video about the future (2026-09-26): three structurally different pipelines for one film (?v=1..3), ends on The Steep Part clip.
   // make Dark Souls (2026-09-26): three structurally different routings of one page (?v=1..3), coding always Opus 5.5 as result cards, ends on 13s of @The_Alex's Opus 5.5 Dark Souls clip.
   ['dark-souls-every-model-v1-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=1', 'make Dark Souls: ElevenLabs voices the boss, Opus 5.5 builds it, Superbot plays (3 switches)', 'Ad spots'],

@@ -1,0 +1,92 @@
+/* Play beat, the finale (beats/play.js): Liquid Glass, the 16s reel from the X post, played whole.
+
+   Two things live here:
+     1. the render card (`.lg-card`) and the empty box it opens over (`.lg-slot`), which sit in the reply, in the
+        hub's dark thread;
+     2. the player window (`.lg-win`) and its internals. It is NOT in the thread: play.js appends it to
+        #s-tabs .ask-root and writes its left/top/width/height in frame px, because it morphs from the reply's
+        slot to the whole 864x1080 frame. Its selector is therefore #s-tabs .lg-*, not #s-tabs .sbsite .hub .lg-*.
+
+   Every themed surface uses the ONE liquid glass recipe: frosted translucent white over the pastel field
+   (#b9b3f2 -> #cfd6f7 -> #9fd0e0), backdrop-filter blur(18px) saturate(160%), a 1px inner hairline
+   rgba(255,255,255,.55), a 135deg specular top-left highlight, a soft 0 10px 30px rgba(60,50,120,.18) shadow,
+   the system font, accent blue #1f7cff. Motion is springy (outBack) and lives entirely in play.js.
+   Nothing here transitions: every opacity, rect and radius is written from t in render, so ?t= freezes a frame. */
+
+/* ---------- the render card the beat adds to the thread ---------- */
+#s-tabs .sbsite .hub .lg-card { position: relative; box-sizing: border-box; width: min(100%, 340px);
+  padding: 11px 13px 12px; border-radius: 18px; color: #1b1830; font-family: var(--ui);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .62) 0%, rgba(255, 255, 255, 0) 46%),
+    linear-gradient(128deg, rgba(185, 179, 242, .94) 0%, rgba(207, 214, 247, .94) 52%, rgba(159, 208, 224, .94) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 10px 30px rgba(60, 50, 120, .18); }
+
+#s-tabs .sbsite .hub .lg-head { display: flex; align-items: center; gap: 7px; }
+#s-tabs .sbsite .hub .lg-ic { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 8px;
+  background: linear-gradient(160deg, #1f7cff, #6fb1ff);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5), 0 2px 7px rgba(31, 124, 255, .35); }
+#s-tabs .sbsite .hub .lg-ic svg { display: block; width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .lg-lab { font: 700 8.5px/1 var(--ui); letter-spacing: .1em; color: rgba(27, 24, 48, .6); }
+#s-tabs .sbsite .hub .lg-tag { margin-left: auto; padding: 3px 7px; border-radius: 999px; background: rgba(255, 255, 255, .52);
+  font: 600 9px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: rgba(27, 24, 48, .7); }
+#s-tabs .sbsite .hub .lg-ttl { margin: 9px 0 2px; font: 600 13.5px/1.25 var(--ui); color: #17142a; }
+#s-tabs .sbsite .hub .lg-meta { font: 500 10.5px/1 var(--ui); color: rgba(27, 24, 48, .64); }
+#s-tabs .sbsite .hub .lg-track { position: relative; height: 4px; margin: 11px 0 0; border-radius: 999px; overflow: hidden;
+  background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45); }
+#s-tabs .sbsite .hub .lg-bar { display: block; width: 0; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, #1f7cff, #7fc0ff); }
+#s-tabs .sbsite .hub .lg-count { margin-top: 6px; text-align: right; font: 600 9.5px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums; color: rgba(27, 24, 48, .58); }
+
+/* the box in the reply the player window opens over: it only holds the opening rect and the scroll room, it
+   paints nothing (play.js measures it with lib boxIn, so its size is in hub px and the camera zoom applies) */
+#s-tabs .sbsite .hub .lg-slot { width: min(100%, 260px); height: 292px; pointer-events: none; }
+
+/* ---------- the player window ---------- */
+#s-tabs .lg-win { position: absolute; z-index: 18; overflow: hidden; background: #000; opacity: 0;
+  font-family: var(--ui); box-shadow: 0 30px 80px rgba(28, 22, 60, .45); }
+
+/* the field: the pastel gradient, with the clip itself blown up and blurred over it, so the band above and below
+   the square clip reads as one pastel field rather than a letterbox. .lg-fill (the poster) holds the field until
+   the video has a frame; .lg-bgc is a BGW px wide canvas play.js redraws from the video's current frame, scaled up
+   (bilinear) and blurred, so the band moves with the clip */
+#s-tabs .lg-field { position: absolute; inset: 0; overflow: hidden;
+  background: linear-gradient(135deg, #b9b3f2 0%, #cfd6f7 52%, #9fd0e0 100%); }
+#s-tabs .lg-fill { position: absolute; left: -12%; top: -12%; width: 124%; height: 124%; object-fit: cover;
+  -webkit-filter: blur(44px) saturate(160%) brightness(1.04); filter: blur(44px) saturate(160%) brightness(1.04); opacity: .66; }
+#s-tabs .lg-bgc { position: absolute; left: -8%; top: -8%; width: 116%; height: 116%; opacity: 0;
+  -webkit-filter: blur(26px) saturate(140%) brightness(1.03); filter: blur(26px) saturate(140%) brightness(1.03); }
+
+/* the glass dissolve: a frosted pane of the ONE glass recipe laid over the whole window as the clip blurs out */
+#s-tabs .lg-frost { position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .6) 0%, rgba(255, 255, 255, 0) 45%), rgba(255, 255, 255, .2);
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 10px 30px rgba(60, 50, 120, .18); }
+
+/* the clip itself: a square, sized and centred from t (min of the window's box), never letterboxed or cropped */
+#s-tabs .lg-vid { position: absolute; display: block; object-fit: cover; background: #0a0a12;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .3); }
+
+/* the window's title bar: glass, and it recedes once the clip has taken the frame so nothing covers it */
+#s-tabs .lg-winbar { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 10px;
+  height: 46px; padding: 0 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .55) 0%, rgba(255, 255, 255, .1) 46%), rgba(255, 255, 255, .12);
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .55); }
+#s-tabs .lg-dots { flex: none; display: inline-flex; gap: 6px; }
+#s-tabs .lg-dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, .62);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .75); }
+#s-tabs .lg-title { position: absolute; left: 0; right: 0; text-align: center; font: 600 13px/1 var(--ui); color: #fff;
+  text-shadow: 0 1px 10px rgba(40, 30, 90, .5); }
+#s-tabs .lg-time { flex: none; margin-left: auto; width: 84px; text-align: right; font: 600 11px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums; color: #fff; opacity: .85; text-shadow: 0 1px 10px rgba(40, 30, 90, .5); }
+
+/* the caption chip: small, and play.js keeps it in a blurred band beside the clip, never over it */
+#s-tabs .lg-cap { position: absolute; display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px;
+  border-radius: 999px; white-space: nowrap; font: 600 10.5px/1 var(--ui); color: #fff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 46%), rgba(255, 255, 255, .18);
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 10px 30px rgba(60, 50, 120, .18);
+  text-shadow: 0 1px 8px rgba(40, 30, 90, .45); }
+#s-tabs .lg-cap .lg-cap-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #1f7cff;
+  box-shadow: 0 0 8px rgba(31, 124, 255, .7); }

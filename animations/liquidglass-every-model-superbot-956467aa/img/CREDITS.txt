@@ -1,0 +1,32 @@
+img CREDITS (it-does-what-you-ask)
+
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
+
+Added for liquidglass-every-model-superbot (2026-09-26), forked from the Splatoon every-model spot (7cf3d4da) in this
+gallery:
+
+Source video: "Liquid Glass" motion reel by vlad (@motion_conquest), made with Claude Opus 5.5,
+https://x.com/motion_conquest/status/2103510103622308152 (1440x1440, 60fps, 16s, 120 BPM, 8 scenes).
+
+lg/liquid-glass-16s.mp4   the whole 16s reel, scaled from 1440x1440 to 864x864, 30fps, H.264, no audio
+lg/poster.jpg             a frame of the reel at 864x864, the clip's poster
+lg/mesh-orb.jpg           200x200 crop of a reel frame: the frosted glass orb
+lg/mesh-capsule.jpg       200x200 crop of a reel frame: the orb stretched into the player capsule
+lg/mesh-lens.jpg          200x200 crop of a reel frame: the refractive lens passing over "Fluid"
+lg/mesh-slab.jpg          200x200 crop of a reel frame: an empty glass slab
+lg/art-player.jpg         400x400 crop of a reel frame: the music player card
+lg/art-fluid.jpg          400x400 crop of a reel frame: "Fluid" under the lens
+lg/art-control.jpg        400x400 crop of a reel frame: the control-center tiles
+lg/art-activity.jpg       400x400 crop of a reel frame: the activity chart
+lg/art-spotlight.jpg      400x400 crop of a reel frame: the spotlight search
+lg/art-notify.jpg         400x400 crop of a reel frame: the notification stack
+
+lg/find-wifi.svg, find-moon.svg, find-flashlight.svg, find-volume-2.svg, find-search.svg, find-heart.svg
+                          Lucide icons (https://lucide.dev), ISC license, fetched from api.iconify.design
+                          (lucide:wifi, moon, flashlight, volume-2, search, heart), stroke painted white
+
+The repo, commits, file names, mesh names and track titles shown in the spot are made up for it.

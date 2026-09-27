@@ -1,0 +1,66 @@
+/* Scrape beat (beats/scrape.js): DeepSeek's icon sweep. The chip's page counter, then one card: three icon-source
+   rows crawling (bar, page count, kept count) over a strip of the ISC Lucide glyphs it kept, each a white stroke on an
+   #1f7cff backing. One glass look, the same as beats/art.css (the Liquid Glass ad rule): frosted translucent white
+   rgba(255,255,255,.14-.22), backdrop-filter blur(18px) saturate(160%), 1px inner hairline rgba(255,255,255,.55), a
+   135deg specular top-left highlight rgba(255,255,255,.6) to transparent 45%, the drop shadow 0 10px 30px
+   rgba(60,50,120,.18), system font, accent blue #1f7cff. Nothing here transitions: every moving value is written from
+   t in render, so ?t= freezes a frame. Every selector is scoped under the hub and prefixed .sc-. */
+
+#s-tabs .sbsite .hub .sc-card {
+  --sc-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, sans-serif;
+  --sc-ink: #201e33; --sc-ink-2: #3a374f; --sc-mute: #5a5773; --sc-accent: #1f7cff;
+  box-sizing: border-box; position: relative; width: 444px; max-width: 100%; margin: 2px 0 0; padding: 10px 12px 11px;
+  border-radius: 16px; overflow: hidden; opacity: 0;
+  background-color: rgba(255, 255, 255, .18); background-repeat: no-repeat;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .6) 0%, rgba(255, 255, 255, 0) 45%),
+    linear-gradient(140deg, rgba(185, 179, 242, .84) 0%, rgba(207, 214, 247, .8) 52%, rgba(159, 208, 224, .84) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 10px 30px rgba(60, 50, 120, .18); }
+
+/* the chip's page counter: a mini glass pill riding the shell's dark .ch-tool chip (the chip itself, its spinner,
+   its tick and the streamed line all stay the shell's, like the code and git beats, so they read on the dark hub) */
+#s-tabs .sbsite .hub .ch-tool .sc-count { margin-left: 2px; padding: 0 8px; border-radius: 999px;
+  background-color: rgba(255, 255, 255, .18); background-repeat: no-repeat;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .6) 0%, rgba(255, 255, 255, 0) 45%),
+    linear-gradient(140deg, rgba(185, 179, 242, .84) 0%, rgba(207, 214, 247, .8) 52%, rgba(159, 208, 224, .84) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 4px 12px rgba(60, 50, 120, .14); color: #1f7cff;
+  font: 600 10px/17px -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, sans-serif;
+  font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.sc-done .sc-count { background-color: rgba(255, 255, 255, .55);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .6) 0%, rgba(255, 255, 255, 0) 45%);
+  box-shadow: inset 0 0 0 1px rgba(31, 124, 255, .4), 0 4px 12px rgba(60, 50, 120, .14); }
+
+/* the source rows: url, crawl bar, page count, kept count */
+#s-tabs .sbsite .hub .sc-sites { position: relative; display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .sc-row { display: grid; grid-template-columns: 168px 1fr 56px 52px; align-items: center;
+  column-gap: 9px; height: 17px; opacity: 0; font: 500 10.5px/17px var(--sc-ui); color: var(--sc-ink-2); }
+#s-tabs .sbsite .hub .sc-site { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--sc-ink); }
+#s-tabs .sbsite .hub .sc-bar { height: 4px; border-radius: 999px; overflow: hidden; background: rgba(255, 255, 255, .42);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4); }
+#s-tabs .sbsite .hub .sc-bar i { display: block; height: 100%; border-radius: 999px; transform-origin: 0 50%;
+  transform: scaleX(0); background: linear-gradient(90deg, rgba(31, 124, 255, .5), #1f7cff); }
+#s-tabs .sbsite .hub .sc-pg { text-align: right; font-variant-numeric: tabular-nums; color: var(--sc-mute); }
+#s-tabs .sbsite .hub .sc-hit { text-align: right; color: var(--sc-mute); }
+#s-tabs .sbsite .hub .sc-row.on .sc-hit { color: var(--sc-accent); font-weight: 650; }
+
+/* the kept strip: a label, then six glyph swatches in one row */
+#s-tabs .sbsite .hub .sc-kept { position: relative; display: flex; align-items: baseline; justify-content: space-between;
+  margin: 10px 0 6px; padding-top: 8px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55); opacity: 0;
+  font: 650 11px/1 var(--sc-ui); color: var(--sc-ink); }
+#s-tabs .sbsite .hub .sc-kept small { font: 500 10px/1 var(--sc-ui); color: var(--sc-mute); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-finds { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; }
+#s-tabs .sbsite .hub .sc-find { display: grid; gap: 4px; opacity: 0; transform-origin: 50% 60%; }
+/* the swatch: a glass card with an accent-blue backing, so a white Lucide stroke reads */
+#s-tabs .sbsite .hub .sc-sw { position: relative; aspect-ratio: 1 / 1; border-radius: 11px; display: flex;
+  align-items: center; justify-content: center; overflow: hidden;
+  background: linear-gradient(135deg, rgba(31, 124, 255, .94), rgba(31, 124, 255, .58));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 10px 30px rgba(60, 50, 120, .18); }
+#s-tabs .sbsite .hub .sc-sw::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .6), transparent 45%); }
+#s-tabs .sbsite .hub .sc-sw img { position: relative; width: 60%; height: 60%; object-fit: contain; }
+#s-tabs .sbsite .hub .sc-cap { display: grid; gap: 1px; text-align: center; font: 500 9px/1.15 var(--sc-ui);
+  color: var(--sc-mute); }
+#s-tabs .sbsite .hub .sc-cap b { font-weight: 650; color: var(--sc-ink); overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-cap small { font-size: 8.5px; color: var(--sc-mute); font-variant-numeric: tabular-nums; }

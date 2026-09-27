@@ -1,0 +1,64 @@
+/* Assets beat (beats/assets.js): Meshy's mesh list, the Liquid Glass reel's four glass primitives. The card is the
+   one Liquid Glass surface (chat rule r1), built exactly like code.css's .code-work: frosted translucent white over
+   the pastel lilac-to-sky gradient (the gradient travels with the card so the panel reads the same over the dark
+   hub), blur(18px) saturate(160%), a 1px inner hairline, the 135deg top-left specular highlight, the soft 60,50,120
+   shadow, the system font and the one accent blue #1f7cff. The generating chip stays chat.css's own chip, like every
+   other beat. Nothing transitions: opacity/transform are written from t in render, so ?t= freezes a frame.
+   Scoped under the hub, every class prefixed .as-. */
+
+#s-tabs .sbsite .hub .as-card { --lg-ink: #232747; --lg-ink-2: rgba(35, 39, 71, .56); --lg-ink-3: rgba(35, 39, 71, .38);
+  --lg-accent: #1f7cff;
+  --lg-grad: linear-gradient(140deg, rgba(185, 179, 242, .84) 0%, rgba(207, 214, 247, .8) 52%, rgba(159, 208, 224, .84) 100%);
+  --lg-spec: linear-gradient(135deg, rgba(255, 255, 255, .6) 0%, rgba(255, 255, 255, 0) 45%);
+  --lg-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
+  --lg-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  position: relative; opacity: 0; box-sizing: border-box; width: 440px; max-width: 100%;
+  margin: 2px 0 0; padding: 10px 12px 3px; border-radius: 14px; overflow: hidden; transform-origin: 50% 0;
+  background-color: rgba(255, 255, 255, .18); background-image: var(--lg-spec), var(--lg-grad); background-repeat: no-repeat;
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 10px 30px rgba(60, 50, 120, .18);
+  color: var(--lg-ink); font: 11px/15px var(--lg-font); }
+
+#s-tabs .sbsite .hub .as-hd { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px;
+  font: 600 12px/1.2 var(--lg-font); color: var(--lg-ink); }
+#s-tabs .sbsite .hub .as-hd small { margin-left: auto; font: 600 10px/1 var(--lg-font); color: var(--lg-ink-2);
+  font-variant-numeric: tabular-nums; }
+
+/* one mesh: thumbnail tile, file over description, triangle count, status pill. Rows are split by a white hairline
+   drawn with an inset shadow, as in code.css */
+#s-tabs .sbsite .hub .as-row { position: relative; opacity: 0; display: flex; align-items: center; gap: 10px;
+  padding: 6px 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55); }
+/* the thumbnail: a glass tile holding the render, with a bevel/specular pass over it until the mesh resolves */
+#s-tabs .sbsite .hub .as-th { position: relative; flex: none; width: 40px; height: 40px; border-radius: 11px;
+  overflow: hidden; background: rgba(255, 255, 255, .3); box-shadow: 0 4px 12px rgba(60, 50, 120, .18); }
+#s-tabs .sbsite .hub .as-th::after { content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit;
+  pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6); }
+#s-tabs .sbsite .hub .as-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* the lens render sits over the word it refracts; zoom so the lens itself fills the tile */
+#s-tabs .sbsite .hub .as-th img.as-zoom { width: 165%; height: 165%; max-width: none; margin: -38% 0 0 -30%; }
+/* the bevel/specular pass: a soft inner bevel (light rim top-left, lilac shade bottom-right), a caustic bloom and
+   faint glass facet bands, the look of a glass shader resolving rather than a hard wireframe */
+#s-tabs .sbsite .hub .as-wire { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 90% at 28% 18%, rgba(255, 255, 255, .7) 0%, rgba(255, 255, 255, 0) 46%),
+    radial-gradient(80% 70% at 78% 86%, rgba(159, 208, 224, .55) 0%, rgba(159, 208, 224, 0) 60%),
+    repeating-linear-gradient(58deg, rgba(255, 255, 255, 0) 0 6px, rgba(255, 255, 255, .26) 7px 8px, rgba(255, 255, 255, 0) 9px 13px),
+    linear-gradient(160deg, rgba(207, 214, 247, .55), rgba(185, 179, 242, .5));
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .85), inset -3px -4px 6px rgba(120, 110, 200, .3); }
+/* the specular sheen crossing the tile once per beat */
+#s-tabs .sbsite .hub .as-sh { position: absolute; top: -2px; bottom: -2px; z-index: 2; width: 52%; left: -58%; opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 34%, rgba(255, 255, 255, .78) 50%,
+    rgba(160, 200, 255, .3) 60%, rgba(255, 255, 255, 0) 100%); }
+#s-tabs .sbsite .hub .as-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+#s-tabs .sbsite .hub .as-file { font: 600 10.5px/1.1 var(--lg-mono); color: var(--lg-ink); }
+#s-tabs .sbsite .hub .as-main small { font: 500 10px/1.1 var(--lg-font); color: var(--lg-ink-2); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .as-tris { flex: none; width: 74px; text-align: right; font: 600 10px/1 var(--lg-mono);
+  color: var(--lg-ink); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .as-tris::after { content: " tris"; font-weight: 500; color: var(--lg-ink-2); }
+#s-tabs .sbsite .hub .as-st { flex: none; width: 64px; height: 19px; border-radius: 999px; display: inline-grid;
+  place-items: center; background: rgba(255, 255, 255, .42); font: 600 9.5px/1 var(--lg-font); color: var(--lg-ink-2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7); }
+#s-tabs .sbsite .hub .as-ready .as-st { background: rgba(255, 255, 255, .72); color: var(--lg-accent);
+  box-shadow: inset 0 0 0 1px rgba(31, 124, 255, .45), 0 2px 6px rgba(31, 124, 255, .16); }

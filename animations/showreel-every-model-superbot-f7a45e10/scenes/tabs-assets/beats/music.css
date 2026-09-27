@@ -1,0 +1,80 @@
+/* Music beat (beats/music.js): Lyria's showreel score card, three cues with waveforms on a 128 BPM beat grid over a
+   timecode ruler, scrubbed by a playhead that drops a keyframe diamond on every hit. Nothing here transitions:
+   opacity/transform/colour/clip/width are written from t in render, so ?t= freezes a frame. Every selector is scoped
+   under the hub and prefixed .mus- (the scoring chip reuses chat.css .dd-chiprow/.ch-tool/.spin).
+   Palette from the post clip, Opus half: ink #0c0b0e, signal orange #fc591f, cobalt #3043fe, paper #f2eee6; the Logo
+   Sting row alone borrows the GPT half's acid lime #c9fb1e (its "HIT THE BEAT." waveform).
+   The layout box is unchanged from the source beat (card 420px, rows 7px padding, title 11.5px, gap 5px, wave 20px) so
+   the thread scroll is identical: the bars use the top 12px of the wave box and the ruler hangs below them from a
+   hairline at 13px, overflowing only into the row's own bottom padding (absolute, so it adds no height). */
+
+#s-tabs .sbsite .hub .mus-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px;
+  padding: 10px 12px 6px; border-radius: 10px; background: #0c0b0e;
+  box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .1), 0 8px 20px rgba(0, 0, 0, .4); transform-origin: 50% 0; }
+
+/* header: note on a cobalt tile, card title, tempo and cue count in mono on the right */
+#s-tabs .sbsite .hub .mus-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  font: 600 12.5px/1.2 var(--ui); color: #f2eee6; }
+#s-tabs .sbsite .hub .mus-hd small { margin-left: auto; font: 500 10px/1 var(--font-mono); letter-spacing: .02em;
+  color: rgba(242, 238, 230, .52); }
+#s-tabs .sbsite .hub .mus-ic { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 6px;
+  background: #3043fe; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16); }
+#s-tabs .sbsite .hub .mus-note { width: 12px; height: 12px; fill: none; stroke: #f2eee6; stroke-width: 2.2;
+  stroke-linecap: round; stroke-linejoin: round; }
+
+/* one cue: play button, title over waveform + ruler, running timecode / length */
+#s-tabs .sbsite .hub .mus-row { opacity: 0; display: flex; align-items: center; gap: 10px; padding: 7px 0;
+  border-top: 1px solid rgba(242, 238, 230, .07); }
+#s-tabs .sbsite .hub .mus-btn { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px;
+  border-radius: 50%; background: #16151a; box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .13); }
+#s-tabs .sbsite .hub .mus-play { width: 12px; height: 12px; fill: rgba(242, 238, 230, .88); margin-left: 2px; }
+#s-tabs .sbsite .hub .mus-live .mus-btn { background: #3043fe; box-shadow: inset 0 0 0 1px #6a6ef7, 0 0 8px rgba(48, 67, 254, .45); }
+#s-tabs .sbsite .hub .mus-live .mus-play { fill: #f2eee6; }
+#s-tabs .sbsite .hub .mus-sting.mus-live .mus-btn { background: #c9fb1e; box-shadow: inset 0 0 0 1px #e6ff94, 0 0 8px rgba(201, 251, 30, .35); }
+#s-tabs .sbsite .hub .mus-sting.mus-live .mus-play { fill: #0a0a08; }
+#s-tabs .sbsite .hub .mus-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+#s-tabs .sbsite .hub .mus-title { font: 600 11.5px/1 var(--ui); color: #f2eee6; white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-wave { position: relative; display: block; height: 20px; }
+#s-tabs .sbsite .hub .mus-len { flex: none; width: 30px; text-align: right; opacity: 0; transform-origin: 100% 50%;
+  font: 500 10.5px/1 var(--font-mono); color: #f2eee6; font-variant-numeric: tabular-nums; }
+
+/* the waveform: one 3px bar per grid step, centred on its beat, vertically centred in the top 12px */
+#s-tabs .sbsite .hub .mus-bars { position: absolute; left: 0; right: 0; top: 0; height: 12px; }
+#s-tabs .sbsite .hub .mus-bars > i { position: absolute; width: 3px; margin-left: -1.5px; border-radius: .5px;
+  background: #f2eee6; opacity: .16; transform: scaleY(.4); transform-origin: 50% 50%; }
+
+/* the timecode ruler: a paper hairline, frame ticks hanging from it (taller on the half second and the second, full
+   height on a labelled second), mono labels set just after their tick; the last label hangs before its tick */
+#s-tabs .sbsite .hub .mus-ruler { position: absolute; left: 0; right: 0; top: 13px; height: 11px; pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(242, 238, 230, .2); }
+#s-tabs .sbsite .hub .mus-tk { position: absolute; top: 1px; width: 1px; height: 2px; margin-left: -.5px;
+  background: rgba(242, 238, 230, .26); }
+#s-tabs .sbsite .hub .mus-tk.mus-md { height: 3px; background: rgba(242, 238, 230, .34); }
+#s-tabs .sbsite .hub .mus-tk.mus-mj { height: 4.5px; background: rgba(242, 238, 230, .5); }
+#s-tabs .sbsite .hub .mus-tk.mus-lt { height: 9px; background: rgba(242, 238, 230, .62); }
+#s-tabs .sbsite .hub .mus-lb { position: absolute; top: 4px; margin-left: 2px; white-space: nowrap;
+  font: 500 6px/1 var(--font-mono); letter-spacing: .03em; color: rgba(242, 238, 230, .4); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .mus-lb.mus-end { margin-left: 0; transform: translateX(calc(-100% - 2px)); }
+
+/* the played stretch of the hairline (lime on the sting) */
+#s-tabs .sbsite .hub .mus-prog { position: absolute; left: 0; top: 13px; width: 0; height: 1px; pointer-events: none;
+  background: rgba(242, 238, 230, .62); }
+#s-tabs .sbsite .hub .mus-sting .mus-prog { background: rgba(201, 251, 30, .8); }
+
+/* keyframe diamonds, centred on the hairline, cut out of the bars by an ink keyline */
+#s-tabs .sbsite .hub .mus-kf { position: absolute; top: 13px; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px;
+  opacity: 0; background: #fc591f; box-shadow: 0 0 0 1px #0c0b0e; pointer-events: none; }
+#s-tabs .sbsite .hub .mus-kf.mus-bg { width: 6px; height: 6px; margin: -3px 0 0 -3px; }
+#s-tabs .sbsite .hub .mus-kf.mus-sm { width: 4px; height: 4px; margin: -2px 0 0 -2px; }
+#s-tabs .sbsite .hub .mus-sting .mus-kf { background: #c9fb1e; }
+
+/* the playhead: a hairline from a downward head in the title gap through the bars and the ruler, trailing a short
+   directional smear over the bars it has just crossed */
+#s-tabs .sbsite .hub .mus-ph { position: absolute; top: -4px; width: 1px; height: 27px; margin-left: -.5px; opacity: 0;
+  pointer-events: none; background: #fc591f; }
+#s-tabs .sbsite .hub .mus-ph::after { content: ''; position: absolute; left: -3px; top: 0; width: 7px; height: 4px;
+  background: inherit; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+#s-tabs .sbsite .hub .mus-ph::before { content: ''; position: absolute; right: 1px; top: 4px; width: 18px; height: 12px;
+  background: linear-gradient(to left, rgba(252, 89, 31, .24), rgba(252, 89, 31, 0)); }
+#s-tabs .sbsite .hub .mus-sting .mus-ph { background: #c9fb1e; }
+#s-tabs .sbsite .hub .mus-sting .mus-ph::before { background: linear-gradient(to left, rgba(201, 251, 30, .22), rgba(201, 251, 30, 0)); }

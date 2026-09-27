@@ -1,0 +1,62 @@
+/* Scrape beat (beats/scrape.js): DeepSeek pulls type and colour references for both looks. The chip's colour count,
+   then one ink card: TYPE, four specimen frames of the post clip (a mask wipe with a signal-orange scan edge, cap-height
+   and baseline guides with keyframe diamonds, a kinetic label and a keyframe diamond that sets), over PALETTE, six
+   slots an eyedropper crosshair fills one by one (ripple, a drop of the colour arcing in, a small mask wipe, the hex in
+   mono). The slots and the empty frames show a transparency checkerboard until they fill. Nothing here transitions:
+   every moving value is written from t in render, so ?t= freezes a frame. Every selector is scoped under the hub and
+   prefixed .sc-. */
+#s-tabs .sbsite .hub .ch-tool .sc-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.sc-done .sc-count { background: rgba(201, 251, 30, .13); color: #c9fb1e; }
+
+#s-tabs .sbsite .hub .sc-card { position: relative; box-sizing: border-box; width: 440px; max-width: 100%; margin: 2px 0 0; padding: 9px 11px 10px; border-radius: 10px; background: #111114; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* section heads: TYPE and PALETTE in spaced mono caps, their source on the right */
+#s-tabs .sbsite .hub .sc-hd { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 6px; opacity: 0; font: 500 8.5px/11px var(--font-mono, ui-monospace, monospace); color: #63636a; }
+#s-tabs .sbsite .hub .sc-hd b { font-weight: 600; letter-spacing: .16em; color: rgba(242, 238, 230, .62); }
+#s-tabs .sbsite .hub .sc-hd.sc-ph { margin-top: 9px; padding-top: 8px; box-shadow: inset 0 1px 0 #202027; }
+
+/* TYPE: four square specimens */
+#s-tabs .sbsite .hub .sc-refs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+#s-tabs .sbsite .hub .sc-ref { display: grid; gap: 4px; min-width: 0; opacity: 0; }
+#s-tabs .sbsite .hub .sc-th { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 6px; overflow: hidden; isolation: isolate;
+  background: repeating-conic-gradient(#141418 0 25%, #1a1a1f 0 50%) 0 0 / 8px 8px; box-shadow: 0 0 0 1px #26262b; }
+#s-tabs .sbsite .hub .sc-th.act { box-shadow: 0 0 0 1.5px rgba(242, 238, 230, .72); }
+#s-tabs .sbsite .hub .sc-th img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; clip-path: inset(0 100% 0 0); }
+/* type guides (cap height, baseline): difference-blended hairlines, so they read on orange, cobalt, black and cream */
+#s-tabs .sbsite .hub .sc-gd { position: absolute; left: 0; right: 0; height: 1px; margin-top: -.5px; opacity: 0; mix-blend-mode: difference; pointer-events: none; }
+#s-tabs .sbsite .hub .sc-gd i { display: block; height: 1px; background: #fff; opacity: .85; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .sc-gd b { position: absolute; left: 3px; top: -2px; width: 5px; height: 5px; background: #fff; transform: rotate(45deg) scale(0); }
+/* the wipe's scan edge: a signal-orange bar with its directional smear trailing left */
+#s-tabs .sbsite .hub .sc-scan { position: absolute; top: 0; bottom: 0; left: 0; width: 3px; opacity: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(252, 89, 31, 0), rgba(252, 89, 31, .55)); box-shadow: inset -2px 0 0 #fc591f; }
+/* the label rises glyph by glyph; each word clips at its own baseline */
+#s-tabs .sbsite .hub .sc-lb { display: block; white-space: nowrap; font: 600 10px/13px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .sc-w { display: inline-block; clip-path: inset(-.6em -.2em 0 -.2em); }
+#s-tabs .sbsite .hub .sc-g { display: inline-block; white-space: pre; }
+#s-tabs .sbsite .hub .sc-mt { display: flex; align-items: center; gap: 5px; opacity: 0; white-space: nowrap; font: 500 8.5px/11px var(--font-mono, ui-monospace, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .sc-mt b { font-weight: 600; color: #c3c3ca; font-variant-numeric: tabular-nums; }
+/* the specimen's keyframe diamond: hollow, then set in signal orange once its sweep is down */
+#s-tabs .sbsite .hub .sc-kd { flex: none; box-sizing: border-box; width: 6px; height: 6px; border: 1.2px solid #5a5a60; transform: rotate(45deg); }
+#s-tabs .sbsite .hub .sc-kd.on { background: #fc591f; border-color: #fc591f; }
+
+/* PALETTE: six slots, each a swatch over its hex */
+#s-tabs .sbsite .hub .sc-pal { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+#s-tabs .sbsite .hub .sc-pc { display: grid; gap: 4px; min-width: 0; opacity: 0; }
+#s-tabs .sbsite .hub .sc-sw { position: relative; display: block; height: 28px; border-radius: 5px; overflow: hidden;
+  background: repeating-conic-gradient(#141418 0 25%, #1a1a1f 0 50%) 0 0 / 8px 8px; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .sc-fill { position: absolute; inset: 0; clip-path: inset(0 100% 0 0); border-radius: 5px; box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .16); }
+#s-tabs .sbsite .hub .sc-fill em { position: absolute; left: 5px; bottom: 4px; font: 600 8px/1 var(--ui); font-style: normal; letter-spacing: .02em; white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-edge { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; margin-left: -1px; opacity: 0; background: #f2eee6; box-shadow: 0 0 0 1px rgba(12, 11, 14, .5); }
+#s-tabs .sbsite .hub .sc-hex { display: block; white-space: nowrap; font: 500 9px/12px var(--font-mono, ui-monospace, monospace); letter-spacing: .02em; color: #d7d7dc; }
+
+/* the eyedropper layer, in the card's px: its trail, the click ripples, the drops and the crosshair on top */
+#s-tabs .sbsite .hub .sc-ov { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+#s-tabs .sbsite .hub .sc-ov > * { position: absolute; left: 0; top: 0; opacity: 0; }
+#s-tabs .sbsite .hub .sc-trail { width: 0; height: 3px; border-radius: 2px; transform-origin: 100% 50%; background: linear-gradient(90deg, rgba(242, 238, 230, 0), rgba(242, 238, 230, .75)); }
+#s-tabs .sbsite .hub .sc-rip { box-sizing: border-box; width: 20px; height: 20px; border-radius: 50%; border: 2px solid; box-shadow: 0 0 0 1px rgba(12, 11, 14, .55), inset 0 0 0 1px rgba(12, 11, 14, .55); }
+#s-tabs .sbsite .hub .sc-drop { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 1.2px rgba(242, 238, 230, .85), 0 2px 5px rgba(0, 0, 0, .5); }
+#s-tabs .sbsite .hub .sc-eye { width: 28px; height: 28px; overflow: visible; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .5)); }
+#s-tabs .sbsite .hub .sc-eye-o { fill: none; stroke: rgba(12, 11, 14, .85); stroke-width: 3.2; stroke-linecap: round; }
+#s-tabs .sbsite .hub .sc-eye-s { fill: none; stroke: #f2eee6; stroke-width: 1.4; stroke-linecap: round; }
+#s-tabs .sbsite .hub .sc-eye-l { fill: none; }
+#s-tabs .sbsite .hub .sc-eye-c { fill: #f2eee6; }

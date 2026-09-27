@@ -1,0 +1,97 @@
+/* Gemini beat (beats/art.js): the showreel's six style frames as a 3x2 contact sheet of 16:9 boards, each revealed by
+   a different named transition (wipe, push, clock wipe, circle wipe, split, slide) with a hairline timeline and keyframe
+   diamonds under it. Nothing here transitions: opacity/transform/clip-path/filter/colour are written from t in render,
+   so ?t= freezes a frame. Every selector is scoped under the hub and prefixed .art- (the painting chip reuses chat.css
+   .dd-chiprow/.ch-tool/.spin).
+   Palette from the post clip: ink #0c0b0e, signal orange #fc591f, cobalt #3043fe, paper #f2eee6 (Opus half); acid lime
+   #c9fb1e (GPT half). Each board's accent (--acc) is orange on the four Opus boards and lime on the two GPT boards.
+   The card is the reply column's 420px: three 124px boards (70px tall) a row, so the sheet is about 212px tall. */
+
+#s-tabs .sbsite .hub .art-sheet { --acc: #fc591f; position: relative; opacity: 0; box-sizing: border-box; width: 420px;
+  max-width: 100%; margin-top: 2px; padding: 10px 12px 9px; border-radius: 10px; background: #0c0b0e;
+  box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .1), 0 8px 20px rgba(0, 0, 0, .4); transform-origin: 50% 0; }
+/* the motion blur filters: laid out (a display:none svg would drop them) but zero sized */
+#s-tabs .sbsite .hub .art-defs { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: hidden; }
+
+/* header: a contact sheet glyph on a cobalt tile, card title, board count and aspect in mono on the right */
+#s-tabs .sbsite .hub .art-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  font: 600 12.5px/1.2 var(--ui); color: #f2eee6; }
+#s-tabs .sbsite .hub .art-hd small { margin-left: auto; font: 500 10px/1 var(--font-mono); letter-spacing: .02em;
+  color: rgba(242, 238, 230, .52); }
+#s-tabs .sbsite .hub .art-ic { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 6px;
+  background: #3043fe; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16); }
+#s-tabs .sbsite .hub .art-glyph { width: 14px; height: 14px; fill: #f2eee6; }
+
+/* the sheet: three boards a row */
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px 8px; }
+#s-tabs .sbsite .hub .art-cell { min-width: 0; }
+#s-tabs .sbsite .hub .art-gpt { --acc: #c9fb1e; }
+
+/* one board window: an empty slot (ink with a title safe rectangle and a centre cross) that masks every layer */
+#s-tabs .sbsite .hub .art-win { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden;
+  border-radius: 4px; background: #141318; isolation: isolate; }
+#s-tabs .sbsite .hub .art-guide { position: absolute; inset: 10%; border: 1px dashed rgba(242, 238, 230, .1);
+  border-radius: 1px; }
+#s-tabs .sbsite .hub .art-guide::before,
+#s-tabs .sbsite .hub .art-guide::after { content: ''; position: absolute; left: 50%; top: 50%; background: rgba(242, 238, 230, .16); }
+#s-tabs .sbsite .hub .art-guide::before { width: 9px; height: 1px; margin: -.5px 0 0 -4.5px; }
+#s-tabs .sbsite .hub .art-guide::after { width: 1px; height: 9px; margin: -4.5px 0 0 -.5px; }
+#s-tabs .sbsite .hub .art-rim { position: absolute; inset: 0; z-index: 4; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .1); }
+
+/* the board itself, on the layer each transition moves or masks */
+#s-tabs .sbsite .hub .art-pic { position: absolute; inset: 0; z-index: 1; visibility: hidden; }
+#s-tabs .sbsite .hub .art-pic img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
+
+/* wipe: the leading edge, a 2px accent bar whose smear (--tr, from its speed) trails back over the uncovered board */
+#s-tabs .sbsite .hub .art-edge { position: absolute; top: 0; bottom: 0; left: 0; z-index: 2; width: 2px; margin-left: -1px;
+  opacity: 0; background: var(--acc); box-shadow: 0 0 6px var(--acc); --tr: 0px; }
+#s-tabs .sbsite .hub .art-edge::before { content: ''; position: absolute; top: 0; bottom: 0; right: 2px; width: var(--tr);
+  background: linear-gradient(to left, rgba(252, 89, 31, .42), rgba(252, 89, 31, 0)); }
+
+/* push: the cobalt slug the board shoves out */
+#s-tabs .sbsite .hub .art-slate { position: absolute; inset: 0; z-index: 1; background: #3043fe; }
+#s-tabs .sbsite .hub .art-slate::before,
+#s-tabs .sbsite .hub .art-slate::after { content: ''; position: absolute; left: 50%; top: 50%; background: rgba(242, 238, 230, .4); }
+#s-tabs .sbsite .hub .art-slate::before { width: 11px; height: 1px; margin: -.5px 0 0 -5.5px; }
+#s-tabs .sbsite .hub .art-slate::after { width: 1px; height: 11px; margin: -5.5px 0 0 -.5px; }
+
+/* clock wipe: the hand from the centre to past the corners, and the conic smear trailing it (background from render) */
+#s-tabs .sbsite .hub .art-hand { position: absolute; left: 50%; bottom: 50%; z-index: 3; width: 1.5px; height: 90px;
+  margin-left: -.75px; opacity: 0; transform-origin: 50% 100%; background: var(--acc); box-shadow: 0 0 4px var(--acc); }
+#s-tabs .sbsite .hub .art-hand::after { content: ''; position: absolute; left: -2px; bottom: -2.75px; width: 5.5px; height: 5.5px;
+  border-radius: 50%; background: var(--acc); }
+#s-tabs .sbsite .hub .art-sweep { position: absolute; inset: 0; z-index: 2; opacity: 0; pointer-events: none; }
+
+/* circle wipe: a keyline ring the size of the board's diagonal, scaled from the centre with the mask's radius */
+#s-tabs .sbsite .hub .art-ring { position: absolute; left: 50%; top: 50%; z-index: 2; width: 114.72%; aspect-ratio: 1;
+  border-radius: 50%; opacity: 0; box-shadow: inset 0 0 0 1.5px var(--acc), 0 0 6px var(--acc); transform: translate(-50%, -50%) scale(0); }
+
+/* split: each half is the full board clipped to its side; the seam lights while they travel */
+#s-tabs .sbsite .hub .art-ha { clip-path: inset(0 50% 0 0); }
+#s-tabs .sbsite .hub .art-hb { clip-path: inset(0 0 0 50%); }
+#s-tabs .sbsite .hub .art-seam { position: absolute; top: 0; bottom: 0; left: 50%; z-index: 2; width: 1px; margin-left: -.5px;
+  opacity: 0; background: var(--acc); box-shadow: 0 0 5px var(--acc); }
+
+/* slide: a bleed of the board's cream ground under it, so its overshoot past the mark never shows the empty slot */
+#s-tabs .sbsite .hub .art-bleed { position: absolute; left: 0; right: 0; top: 100%; height: 30%; background: #eff0e4; }
+
+/* the caption under each board: frame number, transition tag, and a hairline timeline from an in key to an out key */
+#s-tabs .sbsite .hub .art-cap { display: flex; align-items: center; gap: 4px; height: 10px; margin-top: 4px; }
+#s-tabs .sbsite .hub .art-no { flex: none; font: 600 7.5px/1 var(--font-mono); letter-spacing: .04em;
+  color: rgba(242, 238, 230, .36); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .art-fx { flex: none; padding: 1.5px 3px 1px; border-radius: 2px; white-space: nowrap;
+  font: 500 7px/1 var(--font-mono); letter-spacing: .03em; color: rgba(242, 238, 230, .56);
+  box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .16); }
+#s-tabs .sbsite .hub .art-live .art-fx { color: #0c0b0e; background: var(--acc); box-shadow: none; }
+#s-tabs .sbsite .hub .art-landed .art-fx { color: rgba(242, 238, 230, .8); box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .26); }
+#s-tabs .sbsite .hub .art-trk { position: relative; flex: 1; min-width: 16px; height: 10px; }
+#s-tabs .sbsite .hub .art-trk::before { content: ''; position: absolute; left: 3px; right: 4px; top: 4.5px; height: 1px;
+  background: rgba(242, 238, 230, .16); }
+#s-tabs .sbsite .hub .art-kin { position: absolute; left: 3px; top: 5px; width: 4px; height: 4px; margin: -2px 0 0 -2px;
+  transform: rotate(45deg); background: rgba(242, 238, 230, .5); }
+#s-tabs .sbsite .hub .art-prog { position: absolute; left: 3px; top: 4.5px; width: 0; height: 1px; background: var(--acc); }
+#s-tabs .sbsite .hub .art-ph { position: absolute; top: 1px; width: 1px; height: 8px; margin-left: -.5px; opacity: 0;
+  background: var(--acc); }
+#s-tabs .sbsite .hub .art-kf { position: absolute; right: 4px; top: 5px; width: 6px; height: 6px; margin: -3px -3px 0 0;
+  transform: rotate(45deg); background: #0c0b0e; box-shadow: inset 0 0 0 1px rgba(242, 238, 230, .55); }

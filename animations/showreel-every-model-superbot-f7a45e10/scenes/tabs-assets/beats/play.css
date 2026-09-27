@@ -1,0 +1,100 @@
+/* Play beat (beats/play.js): the showreel window, a 16:9 app window (the post clip is 1920x1080) as wide as the
+   composer, and the credit caption under it. Nothing here transitions: opacity, the entrance's mask wipe and panel,
+   the glyph rise, the model tag's wipe, the timecode, the scrub bar and the picture's scale are written from t in
+   render, so ?t= freezes a frame. Every selector is scoped to the hub and every class the beat owns is prefixed .play-
+   (the chip rows reuse chat.css .dd-chiprow/.ch-tool/.spin and chat.js's .qc-tile model tiles).
+   Colours are the clip's own, as a browser shows them (img/sr/CREDITS.txt, 709 column): ink #0c0b0e, signal orange
+   #fc591f, paper #f2eee6 for the Opus half; acid lime #c9fb1e, black #0a0a08 for the GPT 6 Astra Max half. */
+
+/* the break-out: the reply's column (.m-main) is narrower than the composer, but the reply row (.msg) spans exactly
+   the composer's box, so the finale's row becomes an inline-size container and the window takes its full width
+   (100cqw). The window's left edge is the row's left edge, so it lands on the composer's edges at every aspect. The
+   column's track is pinned to its own width, so the say line and the chips above keep wrapping where they did. */
+#s-tabs .sbsite .hub .qc-r:has(> .m-main > .play-win) { container-type: inline-size; }
+#s-tabs .sbsite .hub .qc-r .m-main:has(> .play-win) { grid-template-columns: minmax(0, 1fr); }
+#s-tabs .sbsite .hub .qc-r .m-main > .play-win { opacity: 0; position: relative; box-sizing: border-box; width: 100cqw;
+  max-width: none; margin-top: 2px; border-radius: 10px; background: #0c0b0e;
+  box-shadow: inset 0 0 0 1px #29272d, 0 18px 44px rgba(0, 0, 0, .5); overflow: hidden; }
+
+/* the tool chips carry the model they rendered on, as the reply header's tiles do, a size down */
+#s-tabs .sbsite .hub .play-chiprow .ch-tool .qc-tile { width: 16px; height: 16px; border-radius: 5px; margin: 0 -2px 0 -1px; }
+#s-tabs .sbsite .hub .play-chiprow .ch-tool .qc-tile img { width: 11px; height: 11px; }
+#s-tabs .sbsite .hub .play-chiprow .ch-tool .qc-tile.qc-t-astra img { width: 20px; height: 20px; }
+
+/* the title bar: three traffic lights, the model tag, the file name centred, the timecode on the right. Kept compact
+   so a composer-wide 16:9 window, its scrub bar and its caption fit above the composer in a 16:9 frame */
+#s-tabs .sbsite .hub .play-bar { position: relative; display: flex; align-items: center; gap: 8px; height: 24px;
+  padding: 0 10px; background: #141317; border-bottom: 1px solid #25232a; }
+#s-tabs .sbsite .hub .play-dots { flex: none; display: inline-flex; gap: 6px; }
+#s-tabs .sbsite .hub .play-dots i { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25); }
+#s-tabs .sbsite .hub .play-dots i:nth-child(1) { background: #ff5f57; }
+#s-tabs .sbsite .hub .play-dots i:nth-child(2) { background: #febc2e; }
+#s-tabs .sbsite .hub .play-dots i:nth-child(3) { background: #28c840; }
+
+/* the model tag: two stacked layers in one grid cell (so it holds the wider name's width and never reflows the bar),
+   the orange Opus layer under the lime GPT 6 Astra Max layer, which play.js wipes in from the left at the switch */
+#s-tabs .sbsite .hub .play-tag { position: relative; z-index: 1; flex: none; display: grid; margin-left: 2px;
+  border-radius: 4px; overflow: hidden; opacity: 0; transform-origin: 0 50%; }
+/* each layer isolates (its rotated diamond is a stacking context of its own, which would otherwise paint over the
+   layer above it once that layer's clip-path is gone) */
+#s-tabs .sbsite .hub .play-tag-l { position: relative; isolation: isolate; grid-area: 1 / 1; display: flex; align-items: center; justify-content: center; gap: 5px;
+  height: 16px; padding: 0 7px; font: 700 9.5px/1 var(--ui); letter-spacing: .02em; white-space: nowrap; }
+#s-tabs .sbsite .hub .play-tag-l i { flex: none; width: 5px; height: 5px; background: currentColor; transform: rotate(45deg); }
+#s-tabs .sbsite .hub .play-tag-opus { background: #fc591f; color: #0c0b0e; }
+#s-tabs .sbsite .hub .play-tag-astra { background: #c9fb1e; color: #0a0a08; clip-path: inset(0 100% 0 0); }
+
+/* the file name: its glyphs rise out of a baseline mask (the overflow of .play-ttl; the 2px of top padding leaves
+   room for the overshoot) */
+#s-tabs .sbsite .hub .play-title { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  pointer-events: none; font-weight: 600; }
+#s-tabs .sbsite .hub .play-ttl { display: inline-block; overflow: hidden; padding: 2px 1px 0; white-space: nowrap;
+  font: 600 12px/14px var(--ui); letter-spacing: .01em; color: #f2eee6; }
+#s-tabs .sbsite .hub .play-gl { display: inline-block; white-space: pre; }
+
+/* the timecode: HH:MM:SS:FF of the clip frame, fixed-width digits so it never jitters */
+#s-tabs .sbsite .hub .play-tc { position: relative; z-index: 1; flex: none; margin-left: auto; display: inline-flex;
+  align-items: baseline; white-space: nowrap; opacity: 0; color: #f2eee6;
+  font: 600 10.5px/1 var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .play-tc b { font-weight: 600; }
+#s-tabs .sbsite .hub .play-tc i { font-style: normal; padding: 0 1px; color: #5d5a63; }
+
+/* narrow windows (9:16): the name gives way before it could run into the tag or the timecode */
+@container (max-width: 400px) {
+  #s-tabs .sbsite .hub .play-title { display: none; }
+}
+
+/* the screen: 16:9, clipped, the post clip filling it edge to edge. The scale-in and the push-in scale the picture
+   about its centre inside this clip, so the window's box never moves */
+#s-tabs .sbsite .hub .play-screen { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+#s-tabs .sbsite .hub .play-vid { display: block; width: 100%; height: 100%; object-fit: cover; background: #000;
+  transform-origin: 50% 50%; }
+
+/* the scrub bar along the window's bottom edge: a thin track, the played span (orange up to the switch keyframe,
+   lime after it), the keyframe diamond on the model switch and the playhead */
+#s-tabs .sbsite .hub .play-scrub { position: relative; height: 10px; background: #0c0b0e; border-top: 1px solid #1d1b21; }
+#s-tabs .sbsite .hub .play-rail { position: absolute; left: 10px; right: 10px; top: 0; bottom: 0; }
+#s-tabs .sbsite .hub .play-trk { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px;
+  border-radius: 1px; background: #2a2830; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .play-fill { position: absolute; left: 0; top: 50%; width: 0; height: 2px; margin-top: -1px; }
+#s-tabs .sbsite .hub .play-fill-o { background: #fc591f; }
+#s-tabs .sbsite .hub .play-fill-g { background: #c9fb1e; }
+#s-tabs .sbsite .hub .play-key { position: absolute; top: 50%; width: 6px; height: 6px; opacity: 0; background: #0c0b0e;
+  box-shadow: inset 0 0 0 1.5px #c9fb1e; }
+#s-tabs .sbsite .hub .play-key.lit { background: #c9fb1e; }
+#s-tabs .sbsite .hub .play-head { position: absolute; top: 1px; bottom: 1px; left: 0; width: 2px; margin-left: -1px;
+  border-radius: 1px; opacity: 0; background: #f2eee6; }
+
+/* the entrance panel: the signal-orange band between the mask's trailing front and its leading front (play.js sets
+   left, width and the motion-blurred trailing edge), over everything in the window */
+#s-tabs .sbsite .hub .play-panel { position: absolute; z-index: 2; top: 0; bottom: 0; left: 0; width: 0; display: none;
+  background: #fc591f; pointer-events: none; }
+
+/* the credit: whose clip it is and what it shows, one quiet chip under the window, on its left edge */
+#s-tabs .sbsite .hub .play-cap { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; padding: 4px 10px;
+  border-radius: 999px; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1);
+  font: 500 11px/1.15 var(--ui); color: #a1a1aa; white-space: nowrap; }
+#s-tabs .sbsite .hub .play-cap b { font-weight: 600; color: #f2eee6; }
+#s-tabs .sbsite .hub .play-cap span::before { content: "\00B7"; margin-right: 8px; color: #5a5a62; }
+#s-tabs .sbsite .hub .play-cap em { font-style: normal; font-weight: 600; }
+#s-tabs .sbsite .hub .play-cap .play-o { color: #fc591f; }
+#s-tabs .sbsite .hub .play-cap .play-g { color: #c9fb1e; }

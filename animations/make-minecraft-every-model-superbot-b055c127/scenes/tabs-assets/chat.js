@@ -1,15 +1,15 @@
-// "I want to make minecraft": one ask, five hand-offs, Opus last. Superbot switches to DeepSeek V4 Flash to scrape
-// for block references and sounds, to Gemini to make the decals, connects GitHub and pushes the assets, then switches
-// to Claude Opus 5.5 to write the game and, in the same reply (no second switch), wire the assets in and run it
+// "I want to make minecraft": one ask, five hand-offs, GitHub first and Opus last. Superbot connects GitHub and sets
+// up the repo, switches to DeepSeek V4 Flash to scrape for block references and sounds, to Gemini to make the decals,
+// then to Claude Opus 5.5 to write the game and, in the same reply (no second switch), wire the assets in and run it
 // (./beats/*.js). Its routing chips and the composer's platform chip follow the model.
 // ./cuts.js holds the three published cuts (?cut=): copy, pacing, follow-up asks and the finale. The thread is
 // bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import { CFG } from './cuts.js?v=4';
+import { CFG } from './cuts.js?v=5';
 import opusCode from './beats/opus-code.js?v=4';
-import github from './beats/github.js?v=5';
+import github from './beats/github.js?v=6';
 import decalScrape from './beats/decal-scrape.js?v=4';
 import decalGen from './beats/decal-gen.js?v=3';
 import opusShip from './beats/opus-ship.js?v=5';
@@ -32,9 +32,9 @@ const APPS = {
 // the hand-off order is fixed for every cut; the cut only decides whether sam asks for each step. The ship step has
 // no chips: it is Opus 5.5 carrying on, so (unasked) it continues the code step's reply instead of opening its own
 const STEPS = [
+  { app: 'github', mod: github, chips: [['github', 'Connecting to GitHub']] },
   { app: 'deepseek', mod: decalScrape, chips: [['deepseek', 'Switching to DeepSeek V4 Flash']] },
   { app: 'gemini', mod: decalGen, chips: [['gemini', 'Switching to Gemini']] },
-  { app: 'github', mod: github, chips: [['github', 'Connecting to GitHub']] },
   { app: 'opus', mod: opusCode, chips: [['opus', 'Switching to Opus 5.5']] },
   { app: 'opus', mod: opusShip, chips: [] },
 ];

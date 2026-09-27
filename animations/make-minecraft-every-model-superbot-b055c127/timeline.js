@@ -5,7 +5,7 @@
 // (scenes/<id>.js, mounted once, rendered only while active) and the waffles-website end card.
 import * as lib from './lib.js';
 import * as shell from './shell.js';
-import { CFG } from './scenes/tabs-assets/cuts.js?v=4';
+import { CFG } from './scenes/tabs-assets/cuts.js?v=5';
 
 const { clamp, lerp, seg, outCubic, outQuint, inOutCubic, outBack } = lib;
 const H = 1080;
@@ -189,7 +189,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=10`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=18`)).default;
+    const m = (await import(`./scenes/${id}.js?v=19`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

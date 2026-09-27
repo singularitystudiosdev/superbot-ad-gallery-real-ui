@@ -1,12 +1,13 @@
 // every-model-one-chat (forked from it-does-what-you-ask): the real superbot hub, cropped to its thread and composer (rail, sidebar and chat header
 // are hidden, ask.css), laid out at DW design px and scaled to the frame width. It opens on the empty state
-// ("Good evening. Where do we go?" over a centred composer) with the camera pushed in; the first send drops the
-// composer to the bottom, lifts the greeting away and settles the camera on a follow shot that punches in on every model switch while
-// the chat plays (tabs-assets/chat.js). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
-// generated stylesheets (scoped under #s-tabs) apply unchanged.
+// ("Good evening. Where do we go?" over a centred composer) with a slight camera push; the first send drops the
+// composer to the bottom, lifts the greeting away and settles the camera on the thread at 1:1, so the chat column
+// spans the frame width at every ratio (no switch zoom-ins) while the chat plays (tabs-assets/chat.js). render(lt)
+// is a pure function of local time. The scene keeps the id "tabs" so the hub's generated stylesheets (scoped under
+// #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=10';
-import { CFG } from './tabs-assets/cuts.js?v=2';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=12';
+import { CFG } from './tabs-assets/cuts.js?v=3';
 import { clamp, lerp, seg, outCubic, inOutCubic, boxIn } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
@@ -15,17 +16,32 @@ const FIRST = BEATS[0].k;
 
 let el = null;
 
-// the design box: a thread-wide hub, scaled so it fills the frame width (narrow ratios keep a readable column)
+// the design box: the thread column fills the frame width, so there are no empty side bands at any ratio. The
+// box always has the frame's own aspect ratio (k = W/DW, DH = H/k), which means the camera at Z = 1 shows the
+// whole box: the composer and the thread column (ask.css sizes both off --dw) span the frame edge to edge.
+// DW is derived from the vertical design height the ad needs instead of a fixed zoom: landscape ratios get
+// DH = MIN_DH (16:9 -> 1138 x 640, 4:3 -> 853 x 640, 1:1 -> 640 x 640), which keeps the type readable while the
+// column spans the frame; narrow ratios hit MIN_DW first and only get taller (4:5 -> 560 x 700).
+// Every reply card spans the full column width. Only the game window cannot keep its native aspect at full width
+// on a landscape frame (it would be taller than the thread), so its screen height is capped by the thread's own
+// height (--game-h, measured here once per frame width; ask.css) and the clip covers the wider window.
+const MIN_DW = 560, MIN_DH = 640;
+const GAME_AR = 1162 / 840, GAME_ROOM = 76; // the clip's aspect; thread height kept free above the game screen
 function geo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
-  // pulled back far enough that every sent ask stays in frame through its whole answer (the DoorDash order is
-  // the tallest), so the thread lays out wider than the reference's 960
-  const DW = Math.max(560, Math.min(1480, W / 1.3));
+  const DW = Math.max(MIN_DW, (W * MIN_DH) / H);
   const k = W / DW, DH = H / k;
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';
   el.site.style.setProperty('--dw', DW + 'px');
-  el.geo = { W, DW, DH, k, lift: null };
+  // layout sizes (untransformed design px): the thread's visible height and the reply column's width
+  const cs = getComputedStyle(el.feed);
+  const viewH = el.feed.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const colW = el.feed.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 10;
+  const geom = { W, DW, DH, k, lift: null };
+  if (!(viewH > 0 && colW > 0)) return geom; // not laid out yet (scene hidden): measure again next frame
+  el.site.style.setProperty('--game-h', Math.min(colW / GAME_AR, viewH - GAME_ROOM).toFixed(1) + 'px');
+  el.geo = geom;
   return el.geo;
 }
 
@@ -52,26 +68,10 @@ function shot(g, Z, x, y) {
 }
 // zoom blends in log space so a push in and a pull back read at the same speed
 const mix = (a, b, p) => (p <= 0 ? a : p >= 1 ? b : { Z: Math.exp(lerp(Math.log(a.Z), Math.log(b.Z), p)), x: lerp(a.x, b.x, p), y: lerp(a.y, b.y, p) });
-const outQuart = (p) => 1 - Math.pow(1 - p, 4);
-
-// the thread's resting shot, composer on the bottom edge: the column fills most of the frame width, so 4:3 and
-// 16:9 read at the same type size, but never so tight that a card's height leaves the frame (narrow ratios stay 1)
-const followZ = (g) => clamp(Math.min(g.DW / 800, g.DH / 590), 1, 1.6);
-
-// every model switch is the ad's centre: the camera snaps onto the routing chip as it lands (Gemini-spot punch-in),
-// creeps in while it spins and resolves, then pulls back as the new model answers
-function punch(g, t, base, s) {
-  const k = s.c;
-  const w = outQuart(seg(t, k.sw - 0.04, k.sw + 0.4)) * (1 - inOutCubic(seg(t, k.done + 0.1, k.done + 0.6)));
-  if (w <= 0) return base;
-  const b = boxIn(s.sw, el.site);
-  const Z = clamp(Math.min(0.5 * g.DW / b.w, 0.18 * g.DH / b.h), followZ(g) * 1.7, 3.0) * (1 + 0.05 * seg(t, k.sw + 0.3, k.done + 0.6));
-  return mix(base, shot(g, Z, b.cx, b.cy), w);
-}
 
 export default {
   id: 'tabs',
-  dur: CHAT_END + 0.25,
+  dur: CHAT_END + 0.15,
 
   mount(section) {
     section.innerHTML = `
@@ -88,7 +88,7 @@ export default {
     // the composer as the empty state shows it: SUPER is a switch (off), the platform chip names the model
     const sup = hub.querySelector('.rc-super');
     sup.innerHTML = 'SUPER<i class="ask-tg"><b></b>OFF</i>';
-    el = { site: q('.sbsite'), hub, main, hero, composer: hub.querySelector('.composer'), geo: null };
+    el = { site: q('.sbsite'), hub, main, hero, composer: hub.querySelector('.composer'), feed: hub.querySelector('.feed'), geo: null };
     el.chat = mountChat(hub);
   },
 
@@ -109,20 +109,19 @@ export default {
 
     renderChat(el.chat, t);
 
-    // camera: pushed in on the empty state, settling onto the follow shot once the thread starts
-    const Zf = followZ(g);
-    const Ze = Math.max(1.04, Math.min(Zf * 1.12, g.DW / (el.composer.offsetWidth + 64)));
-    const empty = shot(g, lerp(Ze, Ze * 0.96, inOutCubic(seg(t, 0, CHAT_T0))), g.DW / 2, g.DH / 2);
-    let c = mix(empty, shot(g, Zf, g.DW / 2, g.DH), inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.6)));
-    for (const b of el.chat.beats) for (const s of b.sws) c = punch(g, t, c, s);
+    // camera: a slight push on the empty state, then the thread at 1:1 (the box already fills the frame width,
+    // so no crop and no zoom on a model switch: the routing chips play at full width like everything else)
+    const empty = shot(g, lerp(1.05, 1.02, inOutCubic(seg(t, 0, CHAT_T0))), g.DW / 2, g.DH / 2);
+    let c = mix(empty, shot(g, 1, g.DW / 2, g.DH), inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.5)));
 
-    // the finale frames the running game: the zoom cut dives until its screen fills the frame
+    // the finale frames the running game (already full column width): the zoom cut dives until its screen covers
+    // the whole frame (1% overscan so no card edge shows), the other cuts get a gentle push onto it
     const f = el.chat.focus;
     const zf = f ? inOutCubic(seg(t, f.a, f.b)) : 0;
     if (zf > 0) {
       const b = boxIn(f.el, el.site);
-      const fill = Math.min(g.DW / b.w, g.DH / b.h);
-      c = mix(c, shot(g, CFG.zoom ? fill : Math.max(Zf, fill * 0.86), b.cx, b.cy), zf);
+      const Z = CFG.zoom ? Math.max(g.DW / b.w, g.DH / b.h) * 1.01 : 1.04;
+      c = mix(c, shot(g, Z, b.cx, b.cy), zf);
     }
     el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${(g.k * c.Z).toFixed(5)}) translate(${(-c.x).toFixed(2)}px,${(-c.y).toFixed(2)}px)`;
   },

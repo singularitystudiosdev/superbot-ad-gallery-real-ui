@@ -6,11 +6,11 @@ import { sayer, rise, GH, O_CHECK, O_BRANCH, REPO, TICK } from './kit.js';
 export default {
   times(r, c) {
     const p = c.pace, T = { r };
-    T.card = r + 0.3 * p;
-    T.curIn = T.card + 0.1; T.curAt = T.curIn + 0.45 * p; T.press = T.curAt + 0.08;
-    T.flip = T.press + 0.2;
-    T.row = [T.flip + 0.45 * p, T.flip + 0.8 * p];
-    T.end = T.row[1] + 0.55 * p;
+    T.card = r + 0.25 * p;
+    T.curIn = T.card + 0.08; T.curAt = T.curIn + 0.4 * p; T.press = T.curAt + 0.06;
+    T.flip = T.press + 0.18;
+    T.row = [T.flip + 0.4 * p, T.flip + 0.72 * p];
+    T.end = T.row[1] + 0.45 * p;
     return T;
   },
   build(k, x) {
@@ -39,10 +39,10 @@ export default {
         ok.style.transform = `scale(${lerp(0.6, 1, outBack(seg(t, T.flip + 0.1, T.flip + 0.42))).toFixed(3)})`;
         rows.style.opacity = t >= T.row[0] - 0.05 ? '1' : '0';
         rs.forEach((n, i) => {
-          rise(n, seg(t, T.row[i], T.row[i] + 0.32), 8, 1);
+          rise(n, seg(t, T.row[i], T.row[i] + 0.28), 8, 1);
           const o = n.querySelector('.mc-okp');
-          o.style.opacity = seg(t, T.row[i] + 0.3, T.row[i] + 0.45).toFixed(3);
-          o.style.transform = `scale(${lerp(0.4, 1, outBack(seg(t, T.row[i] + 0.3, T.row[i] + 0.6))).toFixed(3)})`;
+          o.style.opacity = seg(t, T.row[i] + 0.2, T.row[i] + 0.32).toFixed(3);
+          o.style.transform = `scale(${lerp(0.4, 1, outBack(seg(t, T.row[i] + 0.2, T.row[i] + 0.45))).toFixed(3)})`;
         });
       },
       pointer(t, toScr) {

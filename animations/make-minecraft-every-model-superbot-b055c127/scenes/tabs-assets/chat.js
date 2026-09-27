@@ -6,12 +6,12 @@
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import { CFG } from './cuts.js?v=2';
-import opusCode from './beats/opus-code.js?v=2';
-import github from './beats/github.js?v=2';
-import decalScrape from './beats/decal-scrape.js?v=2';
-import decalGen from './beats/decal-gen.js?v=2';
-import opusShip from './beats/opus-ship.js?v=2';
+import { CFG } from './cuts.js?v=3';
+import opusCode from './beats/opus-code.js?v=3';
+import github from './beats/github.js?v=4';
+import decalScrape from './beats/decal-scrape.js?v=3';
+import decalGen from './beats/decal-gen.js?v=3';
+import opusShip from './beats/opus-ship.js?v=4';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -45,23 +45,25 @@ function timeBeats(asks) {
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
       k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.35;   // superbot's first routing chip lands
+      k.sw = k.send + 0.25;   // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
-      k.sw = s + 0.2;         // superbot carries on without being asked
+      k.sw = s + 0.15;        // superbot carries on without being asked
     }
-    // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
+    // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after.
+    // Snappy on purpose: the chip resolves in 0.3s (nothing zooms in on a switch any more, so no room for a slow
+    // spin) and the app answers a heartbeat later, so no beat holds longer than ~0.5s after something lands.
     let at = k.sw;
-    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.3, done: at + 0.8 }; at = c.done + 0.12; return c; });
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.2, done: at + 0.5 }; at = c.done + 0.1; return c; });
     k.done = k.chips[k.chips.length - 1].done;
-    k.reply = k.done + 0.08;  // the app answers
+    k.reply = k.done + 0.04;  // the app answers
     k.T = a.mod.times(k.reply, CFG);
     s = k.T.end;
     return { k };
   });
 }
 export const BEATS = timeBeats(STEPS.map((st, i) => ({ ...st, ask: CFG.asks[i] })));
-export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.15;
+export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.1;
 
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';

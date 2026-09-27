@@ -3,7 +3,25 @@ img / gen CREDITS (make-minecraft-every-model)
 gen/clip.mp4, gen/clip-poster.jpg   6.2 s cut from 0:13 of the gameplay video posted by @kepochnik on X
                                      (https://x.com/kepochnik/status/2103502454750920925), used as the game the chat
                                      "ships". Credit the creator wherever the spot is published.
-gen/decal/*.png, gen/ref/*.jpg      Crops of frames from that same clip (0:13, 0:14, 0:16, 0:19): refs are the crops,
-                                     decals are the crops box-downsampled to 16x16 and scaled back up nearest-neighbour.
+gen/decal/*.png                      Pixel Perfection CE, a 16x16 resource pack by Athemis (a fork of Pixel Perfection
+                                     by XSSheep), https://github.com/Athemis/PixelPerfectionCE, CC BY-SA 4.0
+                                     (https://creativecommons.org/licenses/by-sa/4.0/). Block tiles taken as-is at 16x16
+                                     and scaled to 128x128 nearest-neighbour: grass_block_side.png, dirt.png,
+                                     oak_log_top.png (the rings), oak_log.png (the bark), plus grass_block_top.png and
+                                     oak_leaves.png tinted green exactly as Minecraft tints them (#91BD59 grass,
+                                     #48B518 foliage); the leaves' see-through pixels are filled with their own darkest
+                                     shade, as the game's "fast" graphics renders a leaf block opaque. Source files
+                                     from master @ 28e38ca, assets/minecraft/textures/block/. These files are derived
+                                     from that pack, so CC BY-SA 4.0 travels with them.
+
+gen/ref/*.jpg                        Centre crops of CC0 photo textures at 256x256 (the references the scrape beat
+                                     says it kept):
+                                       grass_top   ambientCG "Grass004"  CC0  https://ambientcg.com/view?id=Grass004
+                                       grass_side  ambientCG "Ground037" CC0  https://ambientcg.com/view?id=Ground037
+                                       dirt        ambientCG "Ground048" CC0  https://ambientcg.com/view?id=Ground048
+                                       oak_log     ambientCG "TreeEnd002" CC0 https://ambientcg.com/view?id=TreeEnd002
+                                       oak_bark    ambientCG "Bark001"   CC0  https://ambientcg.com/view?id=Bark001
+                                       oak_leaves  "Green Leaves Close-up" by Huney Co, CC0 1.0,
+                                                   https://www.flickr.com/photos/134838029@N08/19611904910
 
 The repo name, commit hash, line counts, texture sites' counts and the @sam handle shown in the spot are made up.

@@ -9,18 +9,18 @@ export const CUTS = {
     say: {
       code: 'On it. Writing the engine: terrain, chunks, meshing, physics, the renderer.',
       gh: 'Putting it on your GitHub.',
-      scrape: 'Scraped 6 texture sites for block references.',
+      scrape: 'Scraped 6 texture sites for block references and 4 sound libraries for the SFX.',
       gen: 'Here are your block decals, 16×16.',
       ship: 'Decals are in the atlas and the build is green. Here’s your game.',
     },
   },
   steps: {
     pace: 1.08, zoom: false, end: 'superbot',
-    asks: ['I want to make minecraft', 'push it to my github', 'find some block textures', 'make me the decals', 'put it all together'],
+    asks: ['I want to make minecraft', 'push it to my github', 'find block textures and sounds', 'make me the decals', 'put it all together'],
     say: {
       code: 'Opus 5.5 has the code. Engine first, then the player.',
       gh: 'Connect GitHub and I’ll push it.',
-      scrape: 'DeepSeek went through 6 texture sites.',
+      scrape: 'DeepSeek went through 6 texture sites and 4 sound libraries.',
       gen: 'Gemini made 6 blocks from those references.',
       ship: 'Back to Opus 5.5. Textured, built and running.',
     },
@@ -31,7 +31,7 @@ export const CUTS = {
     say: {
       code: 'Writing the whole thing. Engine, world gen, player, renderer.',
       gh: 'Pushing it to your GitHub.',
-      scrape: 'Scraping texture sites for blocks.',
+      scrape: 'Scraping texture sites and sound libraries.',
       gen: 'Your decals.',
       ship: 'Everything wired up. Hit play.',
     },

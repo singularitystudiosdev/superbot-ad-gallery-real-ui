@@ -7,18 +7,18 @@ import { lerp, seg, outBack, clamp } from '../../../lib.js';
 import { sayer, rise, TICK, TERM, GRID, O_BRANCH } from './kit.js';
 import { gen } from './kit.js';
 
-const CLIP = 4.2;
+const CLIP = 3.5;
 
 export default {
   times(r, c) {
     const p = c.pace, T = { r };
     T.row = [r + 0.3 * p, r + 0.62 * p, r + 1.02 * p];
     T.ok = [T.row[0] + 0.3 * p, T.row[1] + 0.35 * p, T.row[2] + 0.3 * p];
-    T.game = T.row[2] + 0.55 * p;
-    T.p0 = T.game + 0.45;
+    T.game = T.row[2] + 0.45 * p;
+    T.p0 = T.game + 0.35;
     T.p1 = T.p0 + CLIP;
     T.zoom = [T.p0 + 0.5, T.p0 + 1.5];
-    T.end = T.p1 + 0.25;
+    T.end = T.p1 + 0.15;
     return T;
   },
   build(k, x) {
@@ -51,7 +51,8 @@ export default {
       lastVt = clamp(t - T.p0, 0, CLIP); lastAt = performance.now();
       if (t < T.p0 || t >= T.p1) { park(); return; }
       if (v.readyState >= 1 && Math.abs(v.currentTime - lastVt) > 0.25) v.currentTime = lastVt;
-      if (v.paused) v.play().catch((err) => console.error('[make-minecraft] clip play() failed:', err && err.stack ? err.stack : err));
+      // an AbortError only means park() paused the clip (or the page moved on) before play() settled: expected
+      if (v.paused) v.play().catch((err) => { if (!err || err.name !== 'AbortError') console.error('[make-minecraft] clip play() failed:', err && err.stack ? err.stack : err); });
     };
     return {
       nodes: [say.node, rows, game],

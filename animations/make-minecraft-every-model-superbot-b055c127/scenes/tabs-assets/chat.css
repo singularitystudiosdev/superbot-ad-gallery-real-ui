@@ -1,9 +1,12 @@
 /* The hub's four-request chat (chat.js + beats/*.js). Every moving value is written from lt, so nothing here
    transitions. Ported card styles (GitHub card + sheet, DoorDash order, mp3 card, tool chips) live in ports.css. */
-#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
+/* the thread's one track is the column's real width (minmax(0, 1fr)): a fixed-width card can never widen the
+   column past the frame, and full-width reply children resolve against the column itself */
+#s-tabs .sbsite .hub .feed { grid-template-columns: minmax(0, 1fr); }
+#s-tabs .sbsite .hub .feed-in { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; align-content: start; gap: 12px; will-change: transform; }
 #s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
 #s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
-#s-tabs .sbsite .hub .qc-r .m-main { max-width: min(100%, var(--hub-column)); width: 100%; }
+#s-tabs .sbsite .hub .qc-r .m-main { flex: 1 1 auto; min-width: 0; max-width: min(100%, var(--hub-column)); width: auto; }
 #s-tabs .sbsite .hub .qc-r .m-main > * { max-width: 100%; }
 
 /* composer: the ask is typed in, the send button lights while there is text */
@@ -72,8 +75,8 @@
 #s-tabs .sbsite .hub .qc-genl .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
 #s-tabs .sbsite .hub .qc-genl .qc-tile img { width: 13px; height: 13px; }
 
-/* GitHub card + sheet: sizes from ports.css, the hub's app logos */
-#s-tabs .sbsite .hub .cd-gh { width: 430px; }
+/* GitHub card + sheet: the card fills the thread column (ask.css --hub-column), the sheet stays a centred modal */
+#s-tabs .sbsite .hub .cd-gh { width: 100%; }
 #s-tabs .sbsite .hub .cd-gh-btn { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 8px; background: #f0f6fc; color: #0d1117; font: 600 11px/1 var(--ui); white-space: nowrap; }
 #s-tabs .sbsite .hub .cd-gh-btn .gh { width: 13px; height: 13px; fill: currentColor; }
 #s-tabs .sbsite .hub .cd-gh-ok { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 11px; border-radius: 8px; background: rgba(46,160,67,.15); color: #3fb950; font: 600 11px/1 var(--ui); }

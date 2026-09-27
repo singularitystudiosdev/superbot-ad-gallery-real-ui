@@ -5,7 +5,7 @@
 // (scenes/<id>.js, mounted once, rendered only while active) and the waffles-website end card.
 import * as lib from './lib.js';
 import * as shell from './shell.js';
-import { CFG } from './scenes/tabs-assets/cuts.js?v=2';
+import { CFG } from './scenes/tabs-assets/cuts.js?v=3';
 
 const { clamp, lerp, seg, outCubic, outQuint, inOutCubic, outBack } = lib;
 const H = 1080;
@@ -23,7 +23,7 @@ const SEQUENCE = [
 // the durations a scene gets if its module fails to load (so the spot keeps its shape)
 const FALLBACK_DUR = { tabs: 30 };
 const SCENE_FADE = 0.3;
-const END_DUR = 3.2, DIP = 0.35;
+const END_DUR = 3.0, DIP = 0.35;
 
 // ---------- text cards ----------
 // A part is a word string, or { img, cls, alt, after } for a brand wordmark (after = trailing punctuation),
@@ -189,7 +189,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=10`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=13`)).default;
+    const m = (await import(`./scenes/${id}.js?v=16`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

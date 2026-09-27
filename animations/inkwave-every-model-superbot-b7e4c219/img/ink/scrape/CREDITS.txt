@@ -1,0 +1,75 @@
+img/ink/scrape CREDITS (inkwave-every-model-superbot, beat 'scrape' = beats/scrape.js + beats/scrape.css)
+
+WHAT THE BEAT IS. Step 2 of the ad: superbot routes "scrape Inkipedia for weapons and turf rules" to DeepSeek V4, which
+crawls Inkipedia for the weapon numbers and the Turf War rules, then nintendo.com and the kenney.nl / polyhaven.com
+asset libraries for pier material, prints the extracted table and keeps a reference board of eight images. Every number
+the table prints, and every image the board shows, is real and came from the source named beside it. Nothing on the card
+is a placeholder, an invented figure, or a drawing.
+
+THE PAGES THE RUN READ (the five source rows in the beat)
+  splatoonwiki.org (Inkipedia, the Splatoon wiki)  5 pages, fetched 2026-09-26:
+    https://splatoonwiki.org/wiki/Splattershot      -> splattershot.damage 36 (min 18), fire_rate 10 shots/s
+                                                       (a bullet every 6 frames), range 11.56 units (effective),
+                                                       ink_tank 0.92% per shot / 108 shots per tank
+    https://splatoonwiki.org/wiki/Splat_Charger     -> splat_charger.full_charge 160 damage (partial charge 40 to 80,
+                                                       shot distance 10.75 to 25.75 units, 1 second to full charge)
+    https://splatoonwiki.org/wiki/Sploosh-o-matic   -> sploosh.damage 38 (min 19), 12 shots/s (5 frames), effective
+                                                       range 7.17 units, 0.8% ink per shot / 125 shots
+    https://splatoonwiki.org/wiki/Turf_War          -> turf_war 3:00 ("Each team has three minutes to spread ink")
+    https://splatoonwiki.org/wiki/Spawn_point       -> respawn ~4 s ("reappear on their spawn point after about four
+                                                       seconds"); the page is titled Spawn point and Respawn redirects
+                                                       to it
+    ink_tank 100% is the tank itself: the per-shot percentages above are marked against it, and the "108 shots" figure
+    beside it in the table is the Splattershot's own stated count on a full tank.
+  commons.wikimedia.org                            5 file pages, the pier reference photographs (see FILES below)
+  nintendo.com                                     1 page, the Splatoon 3 product page:
+    https://www.nintendo.com/us/store/products/splatoon-3-switch/
+  kenney.nl                                        2 pages, the free asset library browsed for pier and watercraft props:
+    https://kenney.nl/assets
+  polyhaven.com                                    1 page, the CC0 HDRI / texture library browsed for pier material:
+    https://polyhaven.com/
+  Total 14 pages, which is what the beat's "pages scraped" counter counts up to.
+  inkipedia.net was checked first and does NOT resolve (curl: could not resolve host, 2026-09-26); the wiki's live host
+  is splatoonwiki.org, which is what the beat labels its rows with.
+
+FILES. Every webp here is 384x256 (3:2), quality 76, and under the brief's 48 KB ceiling.
+
+  fav-splatoonwiki.webp  Inkipedia's own favicon, 16x16 frame of https://cdn.wikimg.net/en/splatoonwiki/favicon.ico
+                         (linked as rel="icon" from https://splatoonwiki.org/wiki/Splattershot), upscaled to 32x32.
+                         Trademark of the Inkipedia wiki; used nominatively to name the site the run read.
+  fav-nintendo.webp      https://www.nintendo.com/favicon.ico (32x32 frame, 8-bit), resized to 32x32. The Nintendo mark.
+  fav-commons.webp       https://commons.wikimedia.org/favicon.ico (32x32 frame), resized to 32x32. Wikimedia Commons.
+  fav-kenney.webp        https://kenney.nl/favicon.ico (32x32 frame), resized to 32x32. Kenney mark.
+  fav-polyhaven.webp     https://polyhaven.com/favicon-32x32.png, resized to 32x32. Poly Haven mark.
+                         All five are the sites' own published favicons, unaltered apart from the resize, and name the
+                         host whose row they sit on. Each is under 1 KB.
+
+  THE FIVE PIER PHOTOGRAPHS. Downloaded from Wikimedia Commons 2026-09-26, each cropped to the centre 3:2 and encoded
+  to webp (magick -resize 384x256^ -extent 384x256 -quality 76). The licence beside each is the one its own Commons
+  file page declares.
+  pier-01.webp  "Pier and jetty in Slävik harbor 1" by W.carter, CC0 (public domain dedication).
+                https://commons.wikimedia.org/wiki/File:Pier_and_jetty_in_Sl%C3%A4vik_harbor_1.jpg
+  pier-02.webp  "Pier and jetty in Slävik harbor 3" by W.carter, CC0.
+                https://commons.wikimedia.org/wiki/File:Pier_and_jetty_in_Sl%C3%A4vik_harbor_3.jpg
+  pier-03.webp  "Wooden pier in the Red Sea of Soma Bay, Egypt" by dronepicr, CC BY 2.0.
+                https://commons.wikimedia.org/wiki/File:Wooden_pier_in_the_Red_Sea_of_Soma_Bay,_Egypt_(51224132520).jpg
+  pier-04.webp  "Ocean sunset at the pier" by Matthew Maillet (Unsplash via Commons), CC0.
+                https://commons.wikimedia.org/wiki/File:Ocean_sunset_at_the_pier_(Unsplash).jpg
+  pier-05.webp  "Bat Yam boardwalk" by Gilabrand, CC BY-SA 3.0 (share-alike: this derivative stays CC BY-SA 3.0).
+                https://commons.wikimedia.org/wiki/File:Bat_Yam_boardwalk.jpg
+
+  THE THREE GAMEPLAY REFS, tagged "gameplay" on the board. Real frames of the source video, the "Splatoon Game made by
+  Opus 5.5" post by @JaydenDavisNC, https://x.com/JaydenDavisNC/status/2103357848961036304 (source 3840x2160, 60 fps,
+  147.8 s). Video by @JaydenDavisNC. Cropped to 3:2 and resized to 384x256 webp, nothing else changed.
+  game-01.webp  frame-01.jpg of img/ink (source 104 s): the pier boardwalk, KRAKEN sign on the far stall, a squid in
+                the ink. Reference for the pier's own boardwalk and stalls.
+  game-02.webp  frame-08.jpg of img/ink (source 24 s): wide shot of the pier map, bridge, palm and bay. The stage
+                layout reference.
+  game-03.webp  frame-02.jpg of img/ink (source 14 s): squid form swimming through lime ink beside the pier posters.
+
+REGENERATE (from /tmp/wk, the scratch dir used for this beat, or any browser session):
+  magick '<commons 1920px thumb>' -resize 384x256^ -gravity center -extent 384x256 -strip -quality 76 -define webp:method=6 pier-01.webp
+  magick '/path/img/ink/frame-01.jpg' -resize 384x256^ -gravity center -extent 384x256 -strip -quality 76 -define webp:method=6 game-01.webp
+  magick '<host favicon.ico>[0]' -resize 32x32 -background none -gravity center -extent 32x32 fav-<host>.webp
+The wiki text quoted above is CC BY-SA 4.0 (Inkipedia, https://splatoonwiki.org/wiki/Inkipedia:Copyrights); only the
+figures it states are reproduced in the beat.

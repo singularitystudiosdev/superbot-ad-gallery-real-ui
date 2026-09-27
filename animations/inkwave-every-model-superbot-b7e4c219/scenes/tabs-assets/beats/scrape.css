@@ -1,0 +1,94 @@
+/* scrape beat (beats/scrape.js): DeepSeek V4's web scrape, step 2 of the Inkwave routing. Same sheet as the other cards
+   (#121216, inset 1px #2a2a2e, var(--ui) copy, var(--font-mono) for the extracted table and the counters), following
+   the referent chat.deepseek.com search mode: the sources' own favicons on each crawl row, a live "N pages scraped / M
+   tokens read" line, then the table the run extracted and the reference board it kept. Nothing here transitions and
+   nothing animates on its own: opacity / transform / clip-path / color are all written from t in render, so ?t= freezes
+   an exact frame. Every selector is scoped under the hub and prefixed .dss-. */
+
+/* the sheet */
+#s-tabs .sbsite .hub .dss { opacity: 0; margin-top: 4px; box-sizing: border-box; width: 100%; max-width: 440px;
+  border-radius: 12px; background: #121216; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .38);
+  overflow: hidden; color: #f2f2f7; font: 12.5px/17px var(--ui); }
+
+/* header: the scrape mark, the mode name, and the run pill (spinner -> check, like the routing chips) */
+#s-tabs .sbsite .hub .dss-hd { display: flex; align-items: center; gap: 8px; height: 32px; box-sizing: border-box;
+  padding: 0 10px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .dss-gl { flex: none; display: grid; place-items: center; width: 15px; height: 15px; }
+#s-tabs .sbsite .hub .dss-gl svg { width: 15px; height: 15px; fill: none; stroke: #8e8e93; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .dss-hb { font: 600 12.5px/1 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .dss-pill { position: relative; margin-left: auto; flex: none; display: inline-flex; align-items: center;
+  gap: 5px; height: 20px; padding: 0 9px 0 7px; border-radius: 999px; background: #1c1c22;
+  box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 10.5px/1 var(--ui); color: #9a9aa2; }
+#s-tabs .sbsite .hub .dss-pill.is-done { background: #10261b; box-shadow: inset 0 0 0 1px #1d4a33; color: #6ee7a0; }
+#s-tabs .sbsite .hub .dss-spin { width: 9px; height: 9px; border-radius: 50%; border: 1.6px solid #3a3a42;
+  border-top-color: #6a9cff; }
+#s-tabs .sbsite .hub .dss-pill .qc-ok { position: absolute; left: 7px; top: 4px; width: 11px; height: 11px; opacity: 0; }
+
+/* the crawl rows: one per source, each the host's own favicon, the path it reads, a bar that fills with the page, and a
+   check when that source is done */
+#s-tabs .sbsite .hub .dss-srcs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 3px; padding: 8px 10px 2px; }
+#s-tabs .sbsite .hub .dss-s { display: flex; align-items: center; gap: 7px; height: 24px; box-sizing: border-box;
+  padding: 0 7px 0 6px; border-radius: 7px; background: #1a1a1d; box-shadow: inset 0 0 0 1px #232327; opacity: 0; }
+#s-tabs .sbsite .hub .dss-fv { flex: none; display: block; width: 13px; height: 13px; border-radius: 3px; }
+#s-tabs .sbsite .hub .dss-sh { flex: none; font: 600 10.5px/1 var(--ui); color: #d8d8e0; }
+#s-tabs .sbsite .hub .dss-sp { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  font: 10px/13px var(--font-mono, ui-monospace, monospace); color: #74747e; }
+#s-tabs .sbsite .hub .dss-sbar { flex: none; width: 38px; height: 3px; border-radius: 2px; background: #26262c;
+  overflow: hidden; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .dss-sbar b { display: block; width: 100%; height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, #2b6bff, #6a9cff); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .dss-sc { flex: none; display: grid; place-items: center; width: 12px; height: 12px; opacity: 0; }
+#s-tabs .sbsite .hub .dss-sc .qc-ok { width: 12px; height: 12px; stroke: #34d399; }
+
+/* the two live counters: pages scraped and tokens read, both ticked by what has actually landed */
+#s-tabs .sbsite .hub .dss-stat { display: flex; align-items: center; gap: 6px; padding: 9px 11px 0; opacity: 0;
+  font: 11.5px/16px var(--ui); color: #a8a8b0; }
+#s-tabs .sbsite .hub .dss-si { flex: none; display: grid; place-items: center; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .dss-si svg { width: 12px; height: 12px; fill: none; stroke: #8e8e93; stroke-width: 1.7;
+  stroke-linecap: round; }
+#s-tabs .sbsite .hub .dss-pg, #s-tabs .sbsite .hub .dss-tok { color: #f2f2f7; font-weight: 600;
+  font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .dss-sep { color: #45454d; }
+
+/* the extracted table: the field paths and the figures the run read off the pages, revealed left to right row by row */
+#s-tabs .sbsite .hub .dss-tbl { margin: 8px 10px 0; border-radius: 8px; background: #16161a;
+  box-shadow: inset 0 0 0 1px #232327; padding: 4px 0; overflow: hidden; }
+#s-tabs .sbsite .hub .dss-tbl .dss-tr { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px;
+  align-items: center; height: 16px; padding: 0 8px; opacity: 0;
+  font: 10px/16px var(--font-mono, ui-monospace, monospace); }
+#s-tabs .sbsite .hub .dss-tbl .dss-th { height: 14px; color: #6a6a73; text-transform: uppercase;
+  letter-spacing: .07em; font-size: 8.5px; }
+#s-tabs .sbsite .hub .dss-tf { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  color: #8e8e93; }
+#s-tabs .sbsite .hub .dss-tv { position: relative; display: inline-flex; align-items: center; justify-content: flex-end;
+  color: #e8e8ee; white-space: nowrap; }
+#s-tabs .sbsite .hub .dss-tvl { display: block; }
+#s-tabs .sbsite .hub .dss-edge { position: absolute; top: -1px; bottom: -1px; left: 0; width: 1.5px; border-radius: 1px;
+  background: #6a9cff; opacity: 0; }
+
+/* the reference board: a 4x2 board of real sourced images, each stamped with where it came from and its keep */
+#s-tabs .sbsite .hub .dss-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;
+  padding: 9px 10px 0; opacity: 0; transform-origin: 50% 0; }
+#s-tabs .sbsite .hub .dss-t { position: relative; margin: 0; aspect-ratio: 3 / 2; border-radius: 7px; overflow: hidden;
+  background: #101114; box-shadow: inset 0 0 0 1px #26262c; opacity: 0; }
+#s-tabs .sbsite .hub .dss-t.is-pk { box-shadow: inset 0 0 0 1.5px rgba(43, 107, 255, .9); }
+#s-tabs .sbsite .hub .dss-im { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .dss-bdg { position: absolute; left: 4px; bottom: 4px; display: grid; place-items: center;
+  width: 14px; height: 14px; border-radius: 4px; background: rgba(0, 0, 0, .62);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14); }
+#s-tabs .sbsite .hub .dss-bdg img { display: block; width: 9px; height: 9px; border-radius: 2px; }
+#s-tabs .sbsite .hub .dss-tag { position: absolute; left: 4px; bottom: 4px; padding: 1px 4px; border-radius: 3px;
+  background: rgba(0, 0, 0, .62); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
+  font: 600 7.5px/11px var(--font-mono, ui-monospace, monospace); letter-spacing: .05em; text-transform: uppercase;
+  color: #b9b9c2; }
+#s-tabs .sbsite .hub .dss-pk { position: absolute; right: 4px; top: 4px; display: grid; place-items: center;
+  width: 15px; height: 15px; border-radius: 50%; background: #2b6bff; opacity: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .45); }
+#s-tabs .sbsite .hub .dss-pk .qc-ok { width: 10px; height: 10px; stroke: #ffffff; stroke-width: 3; }
+
+/* the footer: the refs counted up, ending on "8 refs kept" */
+#s-tabs .sbsite .hub .dss-foot { padding: 9px 11px 11px; opacity: 0;
+  font: 600 10.5px/14px var(--font-mono, ui-monospace, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .dss-foot b { font-weight: 600; color: #e5e5ea; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .dss.is-done .dss-foot b { color: #6ee7a0; }

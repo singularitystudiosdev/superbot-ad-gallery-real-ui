@@ -1,0 +1,79 @@
+/* Script beat (beats/script.js): Claude Opus 5.5's artifact sheet, the Inkwave game script typing itself out with the
+   handoff block at the end of it. The card is the same sheet as opus-lapse.css / the reference kit's build.css (#141416,
+   inset 1px #2a2a2e) and the pill is that card's Writing / Written pill. Nothing here transitions or animates: opacity,
+   transform, visibility and text are all written from t in render, so ?t=<sec> freezes a frame. Every selector is
+   scoped under the hub and prefixed .gd-. The .qc-tile app marks and the .qc-ok checks are chat.css's own. */
+
+/* ---- the sheet -------------------------------------------------------------------------------------------------- */
+#s-tabs .sbsite .hub .gd { opacity: 0; margin-top: 4px; box-sizing: border-box; width: 100%; max-width: 604px;
+  border-radius: 12px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .35);
+  overflow: hidden; color: #f2f2f7; }
+
+/* header: the document's mark, its name, the plan badge, and the Writing / Written pill */
+#s-tabs .sbsite .hub .gd-hd { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .gd-ic { flex: none; width: 15px; height: 15px; fill: none; stroke: #d97757; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gd-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 500 12px/17px var(--font-mono); color: #ececf1; }
+#s-tabs .sbsite .hub .gd-badge { flex: none; display: inline-flex; align-items: center; height: 17px; padding: 0 6px;
+  border-radius: 5px; background: #1d1d21; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 9.5px/1 var(--ui);
+  letter-spacing: .04em; color: #9a9aa2; }
+#s-tabs .sbsite .hub .gd-pill { position: relative; flex: none; margin-left: auto; display: inline-flex; align-items: center;
+  gap: 6px; height: 22px; padding: 0 9px 0 8px; border-radius: 999px; background: #1d1d21; box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 10.5px/1 var(--ui); color: #b8b8c0; }
+#s-tabs .sbsite .hub .gd-pill.gd-done { background: #10261b; box-shadow: inset 0 0 0 1px #1d4a33; color: #6ee7a0; }
+#s-tabs .sbsite .hub .gd-spin { width: 10px; height: 10px; border-radius: 50%; border: 1.6px solid #3a3a42;
+  border-top-color: #d7d7de; box-sizing: border-box; }
+#s-tabs .sbsite .hub .gd-pill .qc-ok { position: absolute; left: 7px; top: 5px; width: 12px; height: 12px; opacity: 0; }
+#s-tabs .sbsite .hub .gd-pill.gd-done .gd-spin { visibility: hidden; }
+
+/* the document pane: a fixed viewport the script scrolls itself through (the stack's translateY is written from t) */
+#s-tabs .sbsite .hub .gd-vp { position: relative; overflow: hidden; background: #101012; }
+#s-tabs .sbsite .hub .gd-stk { position: relative; padding: 14px 13px 10px; }
+/* lines leaving the top of the pane dissolve instead of being sliced by its edge */
+#s-tabs .sbsite .hub .gd-vp::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14px;
+  pointer-events: none; background: linear-gradient(#101012, rgba(16, 16, 18, 0)); }
+
+/* ---- the script ------------------------------------------------------------------------------------------------- */
+#s-tabs .sbsite .hub .gd-l { font: 11px/16px var(--font-mono); color: #b9b9c4; white-space: normal; }
+#s-tabs .sbsite .hub .gd-h1 { display: flex; align-items: baseline; gap: 6px; font: 600 13.5px/20px var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .gd-h1 .gd-mk { color: #5f5f68; }
+#s-tabs .sbsite .hub .gd-sub { margin: 0 0 3px; font: 500 10.5px/15px var(--font-mono); color: #8e8e93; }
+#s-tabs .sbsite .hub .gd-sec { display: flex; align-items: center; gap: 7px; margin: 9px 0 3px;
+  font: 600 9.5px/14px var(--font-mono); letter-spacing: .11em; color: #a0a0a8; }
+#s-tabs .sbsite .hub .gd-sec .gd-mk { color: #5f5f68; }
+#s-tabs .sbsite .hub .gd-rule { flex: 1; height: 1px; background: #232327; opacity: 0; }
+/* the two inks, so the terms the match is about read in the ink they are about */
+#s-tabs .sbsite .hub .gd-lime { color: #c6f542; font-weight: 600; }
+#s-tabs .sbsite .hub .gd-mag { color: #ff4fa3; font-weight: 600; }
+
+/* the cursor: the write point at the end of the line or job text being streamed. It is placed absolutely inside the
+   (position:relative) stack, never inline: an inline caret would grow the line box it lands in and re-wrap the line,
+   and the document would breathe as it writes. */
+#s-tabs .sbsite .hub .gd-caret { position: absolute; left: 0; top: 0; width: 5px; height: 12px; background: #c6f542;
+  box-shadow: 0 0 6px rgba(198, 245, 66, .45); opacity: 0; pointer-events: none; }
+
+/* ---- the HANDOFF chips ------------------------------------------------------------------------------------------ */
+#s-tabs .sbsite .hub .gd-chip { display: flex; align-items: center; gap: 8px; height: 26px; margin-top: 4px;
+  padding: 0 8px 0 5px; border-radius: 8px; background: #1a1a1d; box-shadow: inset 0 0 0 1px #232327; opacity: 0;
+  box-sizing: border-box; }
+#s-tabs .sbsite .hub .gd-chip .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .gd-chip .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .gd-cn { flex: none; font: 600 11px/1 var(--ui); color: #ececf1; }
+/* line-height 16px, not 1: with overflow hidden a 1em line box cuts the mono face's descender band, which is where
+   the underscore sits ('squid_kid.glb' read as 'squid kid.glb') */
+#s-tabs .sbsite .hub .gd-job { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 500 10.5px/16px var(--font-mono); height: 16px; color: #8e8e93; }
+#s-tabs .sbsite .hub .gd-tk { flex: none; display: grid; place-items: center; width: 14px; height: 14px; opacity: 0; }
+#s-tabs .sbsite .hub .gd-tk .qc-ok { width: 13px; height: 13px; }
+
+/* ---- footer: what landed, and the handoff going live ------------------------------------------------------------ */
+#s-tabs .sbsite .hub .gd-ft { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px;
+  border-top: 1px solid #232327; font: 11.5px/17px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .gd-meta b { font-weight: 600; color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .gd-dot { width: 3px; height: 3px; border-radius: 50%; background: #4a4a50; }
+#s-tabs .sbsite .hub .gd-ready { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; height: 22px;
+  padding: 0 9px 0 7px; border-radius: 999px; background: #1d1d21; box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 10.5px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .gd-ready.on { background: #10261b; box-shadow: inset 0 0 0 1px #1d4a33; color: #6ee7a0; }
+#s-tabs .sbsite .hub .gd-ready .qc-ok { flex: none; width: 12px; height: 12px; opacity: 0; }

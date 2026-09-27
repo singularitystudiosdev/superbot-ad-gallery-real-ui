@@ -1,0 +1,111 @@
+/* Motion beat (beats/motion.js): HY-Motion 1.0, Tencent Hunyuan's text-to-3D motion model, rigs the squid kid and
+   generates four clips. Same sheet as the other cards, #121216 with an inset 1px #2a2a2e. Nothing here transitions
+   and nothing animates on its own: opacity/transform/width are all written from t in render, so ?t= freezes an exact
+   frame. Every selector is scoped under the hub and prefixed .qc-hm- (plus the routing app tile .qc-t-motion, which
+   is the HY-Motion app chip and carries the model's own mark). The card is kept to 390px wide and one transport row
+   tall on purpose: the v4 frame anchors the newest line just above the composer, so a taller card loses its own
+   header off the top of the frame. */
+
+/* the HY-Motion app chip tile: the routing chip and the composer chip both render it as qc-tile qc-t-motion qc-gen
+   (chat.js APPS.motion.logo is still null), so the real Hunyuan mark is swapped in here as the tile's own background
+   instead of the placeholder initial, and the tile is forced back into flow: chat.css's generic .qc-gen makes it
+   absolute, which collapses it inside the routing chip. The mark is a blue disc, so it sits on a light plate. */
+#s-tabs .sbsite .hub .qc-tile.qc-t-motion.qc-gen { position: relative; inset: auto; mix-blend-mode: normal;
+  background: #e9f1ff url("../../../img/ink/motion/hy-motion-logo.png") center / 78% no-repeat;
+  box-shadow: inset 0 0 0 1px #c9d9f2; }
+#s-tabs .sbsite .hub .qc-tile.qc-t-motion.qc-gen b { display: none; }
+
+/* the card */
+#s-tabs .sbsite .hub .qc-hm { opacity: 0; margin-top: 4px; box-sizing: border-box; width: 390px; max-width: 100%;
+  border-radius: 12px; background: #121216; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .38);
+  overflow: hidden; color: #f2f2f7; font: 12.5px/17px var(--ui); }
+
+/* header: the Hunyuan mark, the model, the vendor, the motion badge */
+#s-tabs .sbsite .hub .qc-hm-hd { display: flex; align-items: center; gap: 7px; height: 28px; box-sizing: border-box;
+  padding: 0 9px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .qc-hm-mk { flex: none; width: 16px; height: 16px; border-radius: 5px; overflow: hidden;
+  background: #e9f1ff; display: grid; place-items: center; }
+#s-tabs .sbsite .hub .qc-hm-mk img { display: block; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-hm-hd b { font: 600 12px/1 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .qc-hm-hd small { font: 500 9.5px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-hm-badge { margin-left: auto; flex: none; padding: 1px 6px; border-radius: 999px;
+  background: #1b1b22; box-shadow: inset 0 0 0 1px #2f2f3a; font: 700 9px/13px var(--ui); letter-spacing: .05em;
+  text-transform: uppercase; color: #b9b9c6; }
+
+/* step 1: auto-rig. The still in its viewport with the skeleton over it, beside the list of prompts step 2 will run */
+#s-tabs .sbsite .hub .qc-hm-body { display: flex; gap: 8px; padding: 8px 9px 4px; }
+#s-tabs .sbsite .hub .qc-hm-rig { position: relative; flex: none; width: 96px; height: 96px; border-radius: 9px;
+  overflow: hidden; background: #08080a; box-shadow: inset 0 0 0 1px #2a2a2e; opacity: 0; }
+#s-tabs .sbsite .hub .qc-hm-still { display: block; width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(.72) brightness(.94); }
+#s-tabs .sbsite .hub .qc-hm-skel { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+/* the still and the skeleton are zoomed together (same transform, same origin) so the rig reads on the character */
+#s-tabs .sbsite .hub .qc-hm-still, #s-tabs .sbsite .hub .qc-hm-skel { transform-origin: 55% 70%; }
+#s-tabs .sbsite .hub .qc-hm-joint { fill: #7cf3c0; stroke: #0a0a0c; stroke-width: .9; opacity: 0; }
+#s-tabs .sbsite .hub .qc-hm-bone { fill: none; stroke: #7cf3c0; stroke-width: 1.1; stroke-linecap: round; opacity: 0; }
+#s-tabs .sbsite .hub .qc-hm-rig.is-rigged .qc-hm-joint { fill: #a7f7d4; }
+#s-tabs .sbsite .hub .qc-hm-rtag { position: absolute; left: 4px; top: 4px; padding: 0 4px; border-radius: 4px;
+  background: rgba(8, 8, 10, .74); font: 700 8px/12px var(--ui); letter-spacing: .04em; text-transform: uppercase;
+  color: #c8c8d0; }
+#s-tabs .sbsite .hub .qc-hm-rnum { position: absolute; left: 4px; bottom: 4px; padding: 0 4px; border-radius: 4px;
+  background: rgba(8, 8, 10, .74); font: 600 8.5px/13px var(--font-mono, ui-monospace, monospace); color: #c8c8d0; }
+#s-tabs .sbsite .hub .qc-hm-rig.is-rigged .qc-hm-rnum { color: #6ee7a0; }
+
+/* step 2: the four prompts, each quoted from the script, with its own state and progress */
+#s-tabs .sbsite .hub .qc-hm-right { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .qc-hm-list { display: grid; gap: 3px; opacity: 0; }
+#s-tabs .sbsite .hub .qc-hm-row { position: relative; display: flex; align-items: center; gap: 4px; height: 22px;
+  box-sizing: border-box; padding: 0 5px; border-radius: 6px; background: #17171c;
+  box-shadow: inset 0 0 0 1px #24242a; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-hm-p { flex: 1; min-width: 0; font: 11px/14px var(--ui); color: #e7e7ee;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .qc-hm-p::before { content: "\201C"; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-hm-p::after { content: "\201D"; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-hm-row.is-typing .qc-hm-p::after { color: transparent; }
+#s-tabs .sbsite .hub .qc-hm-src { flex: none; padding: 0 3px; border-radius: 4px; background: #1d1d21;
+  box-shadow: inset 0 0 0 1px #2a2a2e; font: 700 7.5px/11px var(--ui); letter-spacing: .04em; text-transform: uppercase;
+  color: #9a9aa3; }
+#s-tabs .sbsite .hub .qc-hm-st { flex: none; width: 56px; text-align: right; font: 600 9px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-hm-row.is-done .qc-hm-st { color: #6ee7a0; }
+#s-tabs .sbsite .hub .qc-hm-pb { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #232329; }
+#s-tabs .sbsite .hub .qc-hm-pb > i { display: block; width: 100%; height: 100%; transform-origin: 0 50%;
+  transform: scaleX(0); background: linear-gradient(90deg, #4d6bfe, #a855f7); }
+
+/* the transport row: play state, the scrubber over the shared 2.4 s clip, the frame counter, the clip fps, the
+   generate button. One row, because the job row and the scrubber row were two rows of chrome for one job. */
+#s-tabs .sbsite .hub .qc-hm-tp { display: flex; align-items: center; gap: 6px; height: 28px; box-sizing: border-box;
+  padding: 0 9px 4px; }
+#s-tabs .sbsite .hub .qc-hm-play { flex: none; width: 0; height: 0; border-left: 6px solid #6ee7a0;
+  border-top: 4px solid transparent; border-bottom: 4px solid transparent; opacity: .35; }
+#s-tabs .sbsite .hub .qc-hm-tp.is-live .qc-hm-play { opacity: 1; }
+#s-tabs .sbsite .hub .qc-hm-trk { position: relative; flex: 1; min-width: 0; height: 5px; border-radius: 999px;
+  background: #1d1d21; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .qc-hm-fill { position: absolute; inset: 0; border-radius: 999px; transform-origin: 0 50%;
+  transform: scaleX(0); background: linear-gradient(90deg, #4d6bfe, #a855f7); }
+#s-tabs .sbsite .hub .qc-hm-head { position: absolute; top: -2px; left: 0; width: 2px; height: 9px; border-radius: 2px;
+  background: #f2f2f7; transform: translateX(-1px); }
+#s-tabs .sbsite .hub .qc-hm-fc { flex: none; font: 600 9px/1 var(--font-mono, ui-monospace, monospace); color: #9a9aa3; }
+#s-tabs .sbsite .hub .qc-hm-fps { flex: none; font: 700 9px/1 var(--font-mono, ui-monospace, monospace); color: #6ee7a0; }
+#s-tabs .sbsite .hub .qc-hm-go { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 5px;
+  height: 23px; padding: 0 11px; border: 0; border-radius: 8px; color: #fff; cursor: default;
+  background: linear-gradient(90deg, #4d6bfe, #a855f7); font: 600 10.5px/1 var(--ui); }
+#s-tabs .sbsite .hub .qc-hm-go.is-done { background: #14251b; box-shadow: inset 0 0 0 1px #24503a; color: #6ee7a0; }
+#s-tabs .sbsite .hub .qc-hm-spin { flex: none; width: 9px; height: 9px; box-sizing: border-box; border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, .35); border-top-color: #fff; opacity: 0; }
+
+/* the clip library: the four generated motions. Each caption rides on the clip under a scrim, so a tile is the clip
+   and nothing else; the prompt it came from is the same line the list above already carries. */
+#s-tabs .sbsite .hub .qc-hm-libwrap { padding: 0 9px 8px; }
+#s-tabs .sbsite .hub .qc-hm-lib { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; opacity: 0; }
+#s-tabs .sbsite .hub .qc-hm-c { position: relative; margin: 0; border-radius: 8px; overflow: hidden; background: #08080a;
+  box-shadow: inset 0 0 0 1px #2a2a2e; opacity: 0; }
+#s-tabs .sbsite .hub .qc-hm-v { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+#s-tabs .sbsite .hub .qc-hm-cap { position: absolute; left: 0; right: 0; bottom: 0; box-sizing: border-box;
+  padding: 8px 5px 3px; font: 9.5px/12px var(--ui); color: #e7e7ee; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; background: linear-gradient(180deg, rgba(8, 8, 10, 0) 0%, rgba(8, 8, 10, .82) 62%);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .7); }
+#s-tabs .sbsite .hub .qc-hm-dur { position: absolute; right: 4px; top: 4px; padding: 0 4px; border-radius: 4px;
+  background: rgba(8, 8, 10, .7); font: 600 8.5px/12px var(--ui); color: #d8d8e0; letter-spacing: .02em; }
+#s-tabs .sbsite .hub .qc-hm-cbar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #232329; }
+#s-tabs .sbsite .hub .qc-hm-cbar > i { display: block; width: 100%; height: 100%; transform-origin: 0 50%;
+  transform: scaleX(0); background: #7cf3c0; }

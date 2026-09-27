@@ -1,0 +1,25 @@
+img/ink/sound - assets for the sound beat (beats/sound.js: ElevenLabs sound effects and Suno's Turf War track,
+in parallel lanes).
+
+suno.svg
+  The Suno mark, downloaded from Simple Icons (https://cdn.simpleicons.org/suno, simpleicons.org, released CC0).
+  Used as the tile in the beat's Suno lane header and in its "Composing Turf War (Kraken Pier)" chip, because no
+  Suno logo was on disk when this beat was built (chat.js APPS.suno.logo is still null, so the routing chip and the
+  reply header still draw the app initial). Model label: v6, Suno's current model family ("Introducing the v6 family
+  of music models", suno.com/release-notes, 9 September 2026).
+
+turf-war-spectrogram.webp
+  A real spectrogram of the source spot's own audio track, rendered with ffmpeg (showspectrumpic, 40 Hz to 8 kHz,
+  log frequency scale, magma) from 117-141 s of /tmp/inkwave/inkwave.mp4, the @JaydenDavisNC "Splatoon Game made by
+  Opus 5.5" post. It stands in for the finished Suno track inside the ad: the Suno lane reveals it left to right as
+  the track composes. The source audio is very quiet (about -56 dBFS RMS), so it was lifted +45 dB before analysis;
+  the structure in the picture (the build, the two gaps, the loud last section) is really there in the recording.
+
+audio-data.js
+  Measured numbers off the same audio track: ffmpeg decode to 16 kHz mono, then a 5 ms peak envelope (SFX_BARS) and
+  48-bucket band RMS (STEM_BARS). SFX_BARS holds the nine sharpest real transients in the track, each sliced to the
+  length its sound-effect row states, so every waveform the left lane records in is that clip's own envelope and not
+  a drawing. STEM_BARS holds four frequency bands (bass 20-160 Hz, guitar 160-700, vocal 700-2600, air 2600-8000)
+  over 117-141 s, which is where the arrangement builds and then drops. Regenerate:
+    ffmpeg -i inkwave.mp4 -ac 1 -ar 16000 -f s16le mono.pcm   # then a 5 ms peak / 48-bucket RMS reduction
+    ffmpeg -ss 117 -t 24 -i inkwave.mp4 -af "highpass=f=20,lowpass=f=160,volume=50dB" -ac 1 -ar 8000 -f s16le band-bass.pcm

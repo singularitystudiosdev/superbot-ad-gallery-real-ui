@@ -1,0 +1,73 @@
+/* code beat: the writing chip's line counter, and the editor card (file tabs, progress bar, the typing pane that
+   scrolls with the caret, and the status strip), dressed as an edit suite in The Last Invention's own light: a black
+   ground cooled toward the Thames at dusk (teal-night), accents in the pub lamps' tungsten, and brass for anything
+   settled (the lower-third rule, the end-card labels). The focused tab is struck in tungsten, a written file settles
+   in brass, the progress bar runs from river teal to tungsten, and Build OK closes in brass. Syntax: keywords in
+   tungsten, the DSL's calls and the types in pale river teal (so every mark line reads cold verb, warm numbers),
+   frame numbers and seconds in lamp-bright tungsten, the film's own words (strings) in brass, comments in dim
+   end-card brass. Every colour is a --li-* token from
+   img/li/theme.css or a mix of one with white/black for contrast on the dark ground. Every selector is scoped under
+   #s-tabs .sbsite .hub and every class is prefixed code-. Nothing here transitions: every moving value is written
+   from t in render, so ?t= freezes a frame. */
+#s-tabs .sbsite .hub .code-ed {
+  --code-ground: color-mix(in oklab, var(--li-black) 88%, var(--li-teal-night));
+  --code-chrome: color-mix(in oklab, var(--li-black) 78%, var(--li-teal-night));
+  --code-rule: color-mix(in oklab, var(--li-black) 62%, var(--li-teal-night));
+  --code-teal: color-mix(in oklab, var(--li-teal-deep) 42%, #c4e4ee);
+  --code-teal-pale: color-mix(in oklab, var(--li-teal-deep) 24%, #dcf0f4);
+  --code-tungsten: color-mix(in oklab, var(--li-tungsten) 86%, #ffffff);
+  --code-lamp: color-mix(in oklab, var(--li-tungsten) 58%, #ffe6bd);
+  --code-ink: color-mix(in oklab, var(--li-caption) 84%, #000000);
+  --code-dim: color-mix(in oklab, var(--li-brass-label) 58%, #000000);
+}
+#s-tabs .sbsite .hub .ch-tool .code-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.code-done .code-count { background: color-mix(in srgb, var(--li-brass) 16%, transparent); color: var(--li-brass); }
+
+/* the editor card */
+#s-tabs .sbsite .hub .code-ed { box-sizing: border-box; width: 468px; max-width: 100%; margin: 2px 0 0; border-radius: 10px; overflow: hidden; background: var(--code-ground); box-shadow: 0 0 0 1px var(--code-rule), 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* the file tabs: dim until focused (a tungsten strike and dot), a brass dot and count once written */
+#s-tabs .sbsite .hub .code-tabs { display: flex; height: 26px; background: var(--code-chrome); box-shadow: inset 0 -1px 0 var(--code-rule); }
+#s-tabs .sbsite .hub .code-tab { display: flex; align-items: center; gap: 6px; padding: 0 11px; font: 500 10.5px/1 var(--font-mono, ui-monospace, monospace); color: #6b6862; box-shadow: inset -1px 0 0 var(--code-rule); }
+#s-tabs .sbsite .hub .code-td { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #2f3336; }
+#s-tabs .sbsite .hub .code-tl { font-weight: 600; color: #4d4b47; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .code-tab.code-act { background: var(--code-ground); color: var(--li-caption); box-shadow: inset -1px 0 0 var(--code-rule), inset 0 2px 0 var(--li-tungsten); }
+#s-tabs .sbsite .hub .code-tab.code-act .code-td { background: var(--li-tungsten); }
+#s-tabs .sbsite .hub .code-tab.code-on .code-td { background: var(--li-brass); }
+#s-tabs .sbsite .hub .code-tab.code-on .code-tl { color: var(--li-brass); }
+
+/* the progress bar under the tabs */
+#s-tabs .sbsite .hub .code-bar { position: relative; height: 2px; overflow: hidden; background: color-mix(in oklab, var(--li-black) 70%, var(--li-teal-night)); }
+#s-tabs .sbsite .hub .code-bar-f { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, color-mix(in oklab, var(--li-teal-deep) 70%, #9fd0de), var(--li-tungsten)); }
+
+/* the pane: nine 15px lines tall; the scroller inside slides up to keep the caret in view. The card is 468 wide (the
+   thread column is 471) and the source sets at 10px mono so the longest row (68 characters, the destructured export
+   in timeline.ts) clears the pane's right edge at every ratio, as the template's longest row did. */
+#s-tabs .sbsite .hub .code-view { position: relative; height: 135px; margin: 6px 0 5px; overflow: hidden; }
+#s-tabs .sbsite .hub .code-pane { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .code-scr { display: flex; gap: 9px; padding: 0 8px; will-change: transform; }
+#s-tabs .sbsite .hub .code-gut { display: grid; flex: none; min-width: 14px; font: 10px/15px var(--font-mono, ui-monospace, monospace); color: #3f4447; text-align: right; }
+#s-tabs .sbsite .hub .code-gut i { font-style: normal; height: 15px; }
+#s-tabs .sbsite .hub .code-src { flex: 1; min-width: 0; margin: 0; font: 10px/15px var(--font-mono, ui-monospace, monospace); white-space: pre; color: var(--code-ink); }
+#s-tabs .sbsite .hub .code-ln { height: 15px; white-space: pre; overflow: hidden; }
+#s-tabs .sbsite .hub .code-caret { display: inline-block; width: 1.5px; height: 12px; vertical-align: -2px; background: var(--code-lamp); opacity: 0; }
+#s-tabs .sbsite .hub .code-k { color: var(--code-tungsten); }
+#s-tabs .sbsite .hub .code-t { color: var(--code-teal-pale); }
+#s-tabs .sbsite .hub .code-f { color: var(--code-teal); }
+#s-tabs .sbsite .hub .code-s { color: var(--li-brass); }
+#s-tabs .sbsite .hub .code-n { color: var(--code-lamp); }
+#s-tabs .sbsite .hub .code-c { color: var(--code-dim); font-style: italic; }
+#s-tabs .sbsite .hub .code-p { color: #7b7872; }
+#s-tabs .sbsite .hub .code-x { color: var(--code-ink); }
+
+/* the status strip: the current tool step (a hollow dot, then a brass tick once checked) and the caret position */
+#s-tabs .sbsite .hub .code-status { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 22px; padding: 0 10px; background: var(--code-chrome); box-shadow: inset 0 1px 0 var(--code-rule); font: 500 10.5px/22px var(--ui); color: #8e8b85; }
+#s-tabs .sbsite .hub .code-st { display: flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .code-st .code-sd { flex: none; box-sizing: border-box; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid #484b4d; }
+#s-tabs .sbsite .hub .code-st .qc-ok { display: none; flex: none; width: 13px; height: 13px; margin-left: -2px; }
+#s-tabs .sbsite .hub .code-st.code-on { color: var(--li-caption); }
+#s-tabs .sbsite .hub .code-st.code-on .code-sd { display: none; }
+#s-tabs .sbsite .hub .code-st.code-on .qc-ok { display: block; }
+#s-tabs .sbsite .hub .code-st.code-on .qc-ok { stroke: var(--li-brass); }
+#s-tabs .sbsite .hub .code-st.code-ok { color: var(--li-brass); }
+#s-tabs .sbsite .hub .code-pos { flex: none; font: 500 10px/22px var(--font-mono, ui-monospace, monospace); color: #67645e; white-space: pre; font-variant-numeric: tabular-nums; }

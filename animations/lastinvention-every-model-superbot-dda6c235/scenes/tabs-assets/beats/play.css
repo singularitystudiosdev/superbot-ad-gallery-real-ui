@@ -1,0 +1,69 @@
+/* Play beat (beats/play.js): the film's player window, the-last-invention.mp4, in the film's own register: true black
+   cards, the lower third's brass rule, the end card's brass caps labels, Instrument Serif for the title and italics,
+   Inter for the letterspaced caps (img/li/theme.css --li-* tokens, read off the post clip's frames). Top to bottom:
+   the title bar, the 16:9 screen (the clip's own aspect, 960x540) with its closed captions and the render card on it,
+   and the credit footer (the post's author and its line, quoted). Nothing here transitions: opacity, transform, the
+   render readout and the captions are written from t in render, so ?t= freezes a frame. Every selector is scoped to
+   the hub and every class the beat owns is prefixed .play- (the chip rows reuse chat.css .dd-chiprow/.ch-tool/.spin).
+   scenes/clip.css draws the same window at full frame (.clip-win) with these exact colours and proportions times its
+   --u, so the hand-off from this window to that one is one continuous shape. */
+
+#s-tabs .sbsite .hub .play-win { position: relative; opacity: 0; box-sizing: border-box; width: 460px; max-width: 100%;
+  border-radius: 10px; background: var(--li-black, #000001); box-shadow: 0 18px 44px rgba(0, 0, 0, .5);
+  overflow: hidden; transform-origin: 50% 50%; }
+/* the brass hairline edge, drawn over the bar, the screen and the footer */
+#s-tabs .sbsite .hub .play-win::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(189, 169, 143, .34); z-index: 3; }
+
+/* the title bar: three brass hairline rings where the traffic lights sit, the file name centred in brass */
+#s-tabs .sbsite .hub .play-bar { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 11px;
+  box-sizing: border-box; background: #0b0b0b; border-bottom: 1px solid rgba(189, 169, 143, .2); }
+#s-tabs .sbsite .hub .play-bar::after { content: ""; flex: none; width: 42px; }
+#s-tabs .sbsite .hub .play-dots { flex: none; display: inline-flex; gap: 6px; }
+#s-tabs .sbsite .hub .play-dots i { width: 10px; height: 10px; box-sizing: border-box; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(189, 169, 143, .55); }
+#s-tabs .sbsite .hub .play-dots i:nth-child(1) { background: rgba(189, 169, 143, .5); }
+#s-tabs .sbsite .hub .play-title { flex: 1; min-width: 0; text-align: center; white-space: nowrap;
+  font: var(--li-weight-caps, 500) 10.5px/1 var(--li-font-caps); letter-spacing: .06em; color: var(--li-brass, #bda98f); }
+
+/* the screen: the clip's own 16:9, filled uncropped */
+#s-tabs .sbsite .hub .play-screen { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+#s-tabs .sbsite .hub .play-vid { display: block; width: 100%; height: 100%; object-fit: cover; background: #000; }
+
+/* closed captions, broadcast style: white, centred, a soft dark shadow and no box, the last line in the lower tenth
+   of the picture. Sized from the screen's height (258.75px here: 4.4% = 11.4px); clip.css sets the same rule from
+   --vh, so the captions grow with the window. No service branding: a plain sans (Inter) and nothing else. */
+#s-tabs .sbsite .hub .play-cc { position: absolute; left: 10%; right: 10%; bottom: 5.5%; z-index: 1; pointer-events: none;
+  text-align: center; font: 500 11.4px/1.25 var(--li-font-caps); letter-spacing: .005em; color: #fff;
+  text-shadow: 0 0 .32em rgba(0, 0, 0, .7), 0 .05em .14em rgba(0, 0, 0, .85); }
+
+/* the render card, set like the film's opening title card over the dimmed first frame: brass caps label, the title in
+   tracked Instrument Serif caps, its italic subtitle, the lower third's 2px brass rule as the progress track, and the
+   frame and cut counters in the end card's brass caps */
+#s-tabs .sbsite .hub .play-rend { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; pointer-events: none; white-space: nowrap;
+  background: radial-gradient(ellipse 72% 82% at 50% 50%, rgba(0, 0, 1, .66), rgba(0, 0, 1, .9));
+  color: var(--li-caption, #ece8e2); }
+#s-tabs .sbsite .hub .play-rend-tag, #s-tabs .sbsite .hub .play-rend-n { font: var(--li-weight-caps, 500) 7px/1 var(--li-font-caps);
+  letter-spacing: var(--li-track-caps, .25em); text-transform: uppercase; color: var(--li-brass-label, #988e73); }
+#s-tabs .sbsite .hub .play-rend-tag i, #s-tabs .sbsite .hub .play-rend-n i { font-style: normal; padding: 0 .35em; }
+#s-tabs .sbsite .hub .play-rend-title { margin-top: 11px; font: 400 22px/1 var(--li-font-serif);
+  letter-spacing: var(--li-track-title, .10em); margin-right: calc(-1 * var(--li-track-title, .10em)); }
+#s-tabs .sbsite .hub .play-rend-sub { margin-top: 6px; font: italic 400 11px/1 var(--li-font-italic); opacity: .86; }
+#s-tabs .sbsite .hub .play-rend-track { position: relative; width: 58%; height: 2px; margin-top: 15px;
+  background: rgba(236, 232, 226, .16); }
+#s-tabs .sbsite .hub .play-rend-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+  background: var(--li-brass, #bda98f); }
+#s-tabs .sbsite .hub .play-rend-n { margin-top: 10px; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .play-rend-n b { font-weight: 600; color: var(--li-caption, #ece8e2); display: inline-block;
+  text-align: right; }
+#s-tabs .sbsite .hub .play-rend-f { min-width: 5.4ch; }
+#s-tabs .sbsite .hub .play-rend-c { min-width: 2.4ch; }
+
+/* the credit footer: the post's author in brass, its line in the film's italic serif, quoted as posted */
+#s-tabs .sbsite .hub .play-foot { display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 12px;
+  box-sizing: border-box; background: #0b0b0b; border-top: 1px solid rgba(189, 169, 143, .2); white-space: nowrap; overflow: hidden; }
+#s-tabs .sbsite .hub .play-src { flex: none; font: var(--li-weight-caps, 500) 9.5px/1 var(--li-font-caps); letter-spacing: .06em;
+  color: var(--li-brass, #bda98f); }
+#s-tabs .sbsite .hub .play-q { flex: 1; min-width: 0; font: italic 400 13px/1 var(--li-font-italic);
+  color: var(--li-caption, #ece8e2); }

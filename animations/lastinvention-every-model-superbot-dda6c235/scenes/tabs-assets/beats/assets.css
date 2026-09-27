@@ -1,0 +1,67 @@
+/* Assets beat (beats/assets.js): Meshy's prop sheet for THE LAST INVENTION, in the film's own grammar. True black
+   ground with the embankment's teal night at one corner and a lamp's tungsten at the other, a brass hairline frame,
+   the title in Instrument Serif caps at the title card's tracking, labels in Inter 500 caps at 0.25em, and every
+   tile set like the film's lower third: a brass rule, the prop's name in Instrument Serif, then the caps line. The
+   only picture on the sheet is each prop's own frame crop from the film (img/li/prop-*.png); everything else is
+   hairlines and type. Colours, faces and tracking are img/li/theme.css tokens. Nothing here transitions:
+   opacity/transform/filter are written from t in render, so ?t= freezes a frame. Scoped under the hub, every class
+   prefixed .as-. */
+
+#s-tabs .sbsite .hub .as-card { opacity: 0; position: relative; box-sizing: border-box; width: 480px; max-width: 100%;
+  margin-top: 2px; padding: 10px 12px 11px; border-radius: 4px; transform-origin: 50% 0; color: var(--li-caption);
+  background:
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--li-teal-night) 55%, transparent), transparent 62%),
+    radial-gradient(70% 90% at 0% 100%, color-mix(in srgb, var(--li-tungsten) 14%, transparent), transparent 60%),
+    var(--li-black);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--li-brass) 30%, transparent), 0 8px 22px rgba(0, 0, 0, .5); }
+
+/* header: the brass lower third rule, the film's title in Instrument Serif caps, PROPS in the caps label, and the
+   running tally on the right, over a brass hairline */
+#s-tabs .sbsite .hub .as-hd { position: relative; display: flex; align-items: baseline; gap: 9px; margin-bottom: 7px;
+  padding: 6px 1px 7px; box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--li-brass) 26%, transparent); }
+#s-tabs .sbsite .hub .as-hd .as-rule { position: absolute; left: 1px; top: 0; width: 26px; height: 1.5px; }
+#s-tabs .sbsite .hub .as-hd b { font: 400 15px/1 var(--li-font-serif); letter-spacing: var(--li-track-title);
+  text-transform: uppercase; color: var(--li-caption); white-space: nowrap; }
+#s-tabs .sbsite .hub .as-hd small { font: var(--li-weight-caps) 7px/1 var(--li-font-caps); letter-spacing: var(--li-track-caps);
+  text-transform: uppercase; color: var(--li-brass-label); white-space: nowrap; }
+#s-tabs .sbsite .hub .as-hd .as-sum { margin-left: auto; color: var(--li-brass); font-variant-numeric: tabular-nums; }
+
+/* the lower third rule, brass, drawn in from the left */
+#s-tabs .sbsite .hub .as-rule { display: block; background: var(--li-brass); transform-origin: 0 50%; }
+
+/* the prop tiles: two columns, film order reading across */
+#s-tabs .sbsite .hub .as-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+#s-tabs .sbsite .hub .as-tile { opacity: 0; display: flex; align-items: center; gap: 9px; min-width: 0; padding: 5px;
+  border-radius: 3px; background: color-mix(in srgb, var(--li-caption) 2.5%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--li-brass) 16%, transparent); }
+#s-tabs .sbsite .hub .as-tile.as-ready { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--li-tungsten) 42%, transparent); }
+
+/* the frame: the prop's crop from the film on a turntable, a teal clay tint over it until the mesh resolves, and
+   the stamp across its foot */
+#s-tabs .sbsite .hub .as-th { position: relative; flex: 0 0 auto; width: 60px; height: 60px; overflow: hidden;
+  border-radius: 2px; background: var(--li-black);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--li-brass) 24%, transparent); }
+#s-tabs .sbsite .hub .as-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .as-clay { position: absolute; inset: 0; background: var(--li-teal-deep); mix-blend-mode: color; }
+#s-tabs .sbsite .hub .as-st { position: absolute; left: 0; right: 0; bottom: 0; padding: 3px 0 3px var(--li-track-caps);
+  font: var(--li-weight-caps) 5.5px/1 var(--li-font-caps); letter-spacing: var(--li-track-caps); text-transform: uppercase;
+  text-align: center; white-space: nowrap; color: var(--li-brass-label); background: color-mix(in srgb, var(--li-black) 74%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--li-brass) 22%, transparent); transform-origin: 50% 100%; }
+#s-tabs .sbsite .hub .as-ready .as-st { color: var(--li-tungsten); background: color-mix(in srgb, var(--li-black) 84%, transparent);
+  box-shadow: inset 0 1px 0 var(--li-tungsten); }
+
+/* the tile's lower third: rule, name, file, triangles, and the scene it serves at its film timecode */
+#s-tabs .sbsite .hub .as-tx { display: grid; justify-items: start; min-width: 0; }
+#s-tabs .sbsite .hub .as-tx .as-rule { width: 17px; height: 1.5px; margin-bottom: 5px; }
+#s-tabs .sbsite .hub .as-nm { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 400 15px/1 var(--li-font-serif); letter-spacing: var(--li-track-name); color: var(--li-caption); }
+#s-tabs .sbsite .hub .as-file { margin-top: 3px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: var(--li-weight-caps) 8px/1 var(--li-font-caps); letter-spacing: .02em; color: var(--li-brass); }
+#s-tabs .sbsite .hub .as-tris { margin-top: 4px; white-space: nowrap; font: var(--li-weight-caps) 6px/1 var(--li-font-caps);
+  letter-spacing: var(--li-track-caps); text-transform: uppercase; color: var(--li-brass-label); }
+#s-tabs .sbsite .hub .as-tris em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--li-caption); }
+#s-tabs .sbsite .hub .as-sc { display: flex; align-items: baseline; gap: 5px; margin-top: 4px; max-width: 100%; min-width: 0; }
+#s-tabs .sbsite .hub .as-sc small { flex: 0 0 auto; font: var(--li-weight-caps) 6px/1 var(--li-font-caps);
+  letter-spacing: var(--li-track-caps); font-variant-numeric: tabular-nums; color: var(--li-tungsten); }
+#s-tabs .sbsite .hub .as-sc em { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: italic 400 10.5px/1 var(--li-font-italic); color: color-mix(in srgb, var(--li-caption) 82%, transparent); }

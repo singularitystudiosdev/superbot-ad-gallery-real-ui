@@ -1,0 +1,91 @@
+/* Music beat (beats/music.js): Lyria 2's score card for The Last Invention, in the film's own grammar. A true black
+   sheet lit like the film (a tungsten lamp glow top left, teal night bottom right); the header is set like the film's
+   lower thirds: the title in Instrument Serif caps at the title card's tracking, the 34 x 2 brass hairline, the format
+   in Inter 500 caps at 0.25em. Six movements as a cue sheet: start stamp, title (the film's own chapter cards roman,
+   act labels italic), a waveform of the film's real loudness whose width is the act's length, and the length stamp.
+   Bars wait teal and short, and warm to tungsten at their measured height as the play-head passes. The foot is
+   Imogen's promise, timestamped where she says it. The one picture is a real frame crop no other beat shows
+   (img/li/plate-codebreaking-room.jpg, the film at 2:00: the tungsten lamp over the bombe's rotor drums).
+   Colours, faces and tracking are img/li/theme.css tokens. Nothing here transitions: opacity/transform and --w are
+   written from t in render, so ?t= freezes a frame. Every selector is scoped under the hub and prefixed .mus- (the
+   composing chip reuses chat.css .dd-chiprow/.ch-tool/.spin). */
+
+#s-tabs .sbsite .hub .mus-card { opacity: 0; position: relative; box-sizing: border-box; width: 420px; max-width: 100%;
+  margin-top: 2px; padding: 12px 14px 9px; border-radius: 10px; transform-origin: 50% 0; color: var(--li-caption);
+  background:
+    radial-gradient(75% 60% at 10% 0%, rgba(169, 132, 77, .13), transparent 62%),
+    radial-gradient(70% 80% at 100% 100%, rgba(28, 73, 91, .38), transparent 66%),
+    var(--li-black);
+  box-shadow: inset 0 0 0 1px rgba(189, 169, 143, .17), 0 8px 22px rgba(0, 0, 0, .45); }
+
+/* header: the codebreaking room crop, then the title block set like a lower third */
+#s-tabs .sbsite .hub .mus-hd { display: flex; align-items: center; gap: 11px; margin: 0 0 7px; }
+#s-tabs .sbsite .hub .mus-ic { flex: none; position: relative; display: block; width: 36px; height: 36px; overflow: hidden;
+  border-radius: 7px; background: var(--li-black); }
+/* the 960 x 540 plate cropped to its source square (300, 20) 320 px: the lamp and the top drum rows, scaled 36 / 320 */
+#s-tabs .sbsite .hub .mus-ic img { position: absolute; left: -33.75px; top: -2.25px; width: 108px; height: 60.75px;
+  max-width: none; display: block; }
+#s-tabs .sbsite .hub .mus-ic::after { content: ''; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(189, 169, 143, .32); }
+#s-tabs .sbsite .hub .mus-ht { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
+#s-tabs .sbsite .hub .mus-ht b { font: 400 15.5px/1 var(--li-font-serif); text-transform: uppercase;
+  letter-spacing: var(--li-track-title); color: var(--li-caption); white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-rule { display: block; width: var(--li-rule-w-480); height: var(--li-rule-h-480); margin: 5px 0 5px;
+  background: var(--li-brass); }
+#s-tabs .sbsite .hub .mus-ht small { font: var(--li-weight-caps) 7px/1 var(--li-font-caps); text-transform: uppercase;
+  letter-spacing: var(--li-track-caps); color: var(--li-brass-label); white-space: nowrap; }
+
+/* one movement: live marker, start stamp, title, waveform lane, length. The row's top padding is the cue lane the
+   tick labels sit in */
+#s-tabs .sbsite .hub .mus-row { opacity: 0; display: grid; grid-template-columns: 6px 24px 126px minmax(0, 1fr) 24px;
+  align-items: center; column-gap: 7px; padding: 10px 0 4px; border-top: 1px solid rgba(189, 169, 143, .09); }
+#s-tabs .sbsite .hub .mus-go { justify-self: end; width: 0; height: 0; opacity: 0; border-left: 5px solid var(--li-tungsten);
+  border-top: 3.5px solid transparent; border-bottom: 3.5px solid transparent;
+  filter: drop-shadow(0 0 3px rgba(169, 132, 77, .9)); }
+#s-tabs .sbsite .hub .mus-at, #s-tabs .sbsite .hub .mus-len { font: var(--li-weight-caps) 8px/1 var(--li-font-caps);
+  letter-spacing: .08em; font-variant-numeric: tabular-nums; color: var(--li-brass-label); white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-len { opacity: 0; text-align: right; color: var(--li-brass); }
+#s-tabs .sbsite .hub .mus-title { min-width: 0; font: 400 13.5px/1.05 var(--li-font-serif); color: rgba(236, 232, 226, .66);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .mus-act { font-family: var(--li-font-italic); font-style: italic; }
+#s-tabs .sbsite .hub .mus-past .mus-at { color: var(--li-brass); }
+#s-tabs .sbsite .hub .mus-past .mus-title { color: rgba(236, 232, 226, .9); }
+#s-tabs .sbsite .hub .mus-live .mus-go { opacity: 1; }
+#s-tabs .sbsite .hub .mus-live .mus-at { color: var(--li-caption); }
+#s-tabs .sbsite .hub .mus-live .mus-title { color: var(--li-caption); text-shadow: 0 0 9px rgba(169, 132, 77, .6); }
+
+/* the waveform: the film's real loudness, one bar per 1.25 s, the marks through it, and the play-head */
+#s-tabs .sbsite .hub .mus-lane { position: relative; height: 15px; }
+#s-tabs .sbsite .hub .mus-wave { position: relative; display: flex; align-items: center; gap: 1px; height: 100%; }
+#s-tabs .sbsite .hub .mus-wave i { flex: 1; min-width: 0; border-radius: 1px; opacity: .5; transform: scaleY(.3);
+  transform-origin: 50% 50%;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--li-brass) calc(var(--w, 0) * 100%), var(--li-teal-deep)),
+    color-mix(in srgb, var(--li-tungsten) calc(var(--w, 0) * 100%), var(--li-teal-night))); }
+#s-tabs .sbsite .hub .mus-tick { position: absolute; top: -3px; bottom: -3px; width: 1px; margin-left: -.5px;
+  background: rgba(189, 169, 143, .3); text-decoration: none; }
+#s-tabs .sbsite .hub .mus-tick.on { background: var(--li-brass); box-shadow: 0 0 3px rgba(189, 169, 143, .6); }
+#s-tabs .sbsite .hub .mus-fin, #s-tabs .sbsite .hub .mus-fin.on { box-shadow: none;
+  background: repeating-linear-gradient(180deg, rgba(189, 169, 143, .4) 0 2px, transparent 2px 4px); }
+#s-tabs .sbsite .hub .mus-fin.on { background: repeating-linear-gradient(180deg, var(--li-caption) 0 2px, transparent 2px 4px); }
+#s-tabs .sbsite .hub .mus-cue { position: absolute; bottom: calc(100% + 2px); left: 0;
+  font: var(--li-weight-caps) 6.5px/1 var(--li-font-caps); text-transform: uppercase; letter-spacing: var(--li-track-caps);
+  color: var(--li-brass-label); white-space: nowrap; opacity: .6; }
+#s-tabs .sbsite .hub .mus-ac { transform: translateX(calc(-50% + .125em)); }
+#s-tabs .sbsite .hub .mus-ar { left: auto; right: -.25em; }
+#s-tabs .sbsite .hub .mus-tick.on .mus-cue { opacity: 1; color: var(--li-brass); }
+#s-tabs .sbsite .hub .mus-ph { position: absolute; top: -4px; bottom: -4px; width: 1.5px; margin-left: -.75px; opacity: 0;
+  background: var(--li-caption); box-shadow: 0 0 6px 1px rgba(169, 132, 77, .85); text-decoration: none; }
+
+/* the foot: Imogen's promise, stamped where she says it; it lights as the play-head reaches the end title */
+#s-tabs .sbsite .hub .mus-cite { display: flex; align-items: center; gap: 10px; margin-top: 1px; padding: 8px 0 1px;
+  border-top: 1px solid rgba(189, 169, 143, .12); opacity: .32; }
+#s-tabs .sbsite .hub .mus-tc { flex: none; width: 24px; margin-left: 13px; font: var(--li-weight-caps) 8px/1 var(--li-font-caps);
+  letter-spacing: .08em; font-variant-numeric: tabular-nums; color: var(--li-brass-label); }
+#s-tabs .sbsite .hub .mus-q { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+#s-tabs .sbsite .hub .mus-q b { font: italic 400 14px/1.05 var(--li-font-italic); color: var(--li-caption); white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-q small { font: var(--li-weight-caps) 6.5px/1 var(--li-font-caps); text-transform: uppercase;
+  letter-spacing: var(--li-track-caps); color: var(--li-brass-label); white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .mus-cite.on .mus-tc { color: var(--li-brass); }
+#s-tabs .sbsite .hub .mus-cite.on .mus-q b { text-shadow: 0 0 10px rgba(169, 132, 77, .5); }

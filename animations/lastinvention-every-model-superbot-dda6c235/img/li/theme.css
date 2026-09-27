@@ -1,0 +1,59 @@
+/* THE LAST INVENTION theme tokens (--li-*), read off real frames of the post clip
+   (@gavinpurcell, x.com/gavinpurcell/status/2103304514329854102; 854x480 24fps mp4, 315.4s).
+   Fonts are linked from index.html (Google Fonts: Instrument Serif ital 0/1, Inter 400/500/600).
+   Every value below names the source time t (seconds) and rect (x0,y0,x1,y1 in 854x480 source px)
+   it was measured at; see img/li/assets.json for the same data as JSON.
+
+   FONTS (closest Google Fonts match, chosen by pixel correlation of a real text crop against
+   renders of 19 serif / 27 sans candidates, tracking fitted per candidate):
+     serif (title caps, lower-third names, chapter cards, definitions, credits names)
+       Instrument Serif      THE LAST INVENTION    t 314.375 rect 160,38,436,60   corr 0.889 (next: Castoro 0.871, aspect off 58%)
+                             Dr Imogen Ashby       t 20.0    rect 45,392,219,420  corr 0.877 (next: Literata 0.820)
+     italic (dictionary headwords, quote card, credits disclaimer, tools line)
+       Instrument Serif Italic  superintelligence  t 88.0    rect 46,152,291,190  corr 0.816 (next: Source Serif 4 0.651)
+     letterspaced caps labels (NOUN, role lines, place captions, credits labels, attributions)
+       Inter                 NICK BOSTROM, SUPERINTELLIGENCE (2014)  t 88.0 rect 47,322,308,330  corr 0.754, width
+                             matches (aspect 1.04); Karla scored 0.778 but runs 6% narrow. 8px caps at 480p: a soft call.
+     typewriter              the film has none: the typewriter quote card (t 144.5-152.4) sets the quote in
+                             Instrument Serif Italic over a typewriter; attribution I. J. GOOD, 1965 in the caps label face. */
+:root {
+  --li-font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --li-font-italic: "Instrument Serif", "Iowan Old Style", Georgia, serif;   /* use with font-style: italic */
+  --li-font-caps: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --li-weight-caps: 500;
+
+  /* tracking, fitted by matching the rendered width/height of each real string (em of its own font size) */
+  --li-track-title: 0.10em;      /* THE LAST INVENTION, Instrument Serif caps, t 314.375 rect 160,38,436,60 */
+  --li-track-caps: 0.25em;       /* NICK BOSTROM, SUPERINTELLIGENCE (2014) t 88.0 rect 47,322,308,330 (0.25em);
+                                    LONDON t 2.5 rect 45,431,103,439 (0.26em) */
+  --li-track-caption: 0.33em;    /* A DATA CENTRE, SOMEWHERE COLD. t 176.0 rect 44,430,317,439 */
+  --li-track-credit: 0.17em;     /* WRITTEN & DIRECTED BY (gold, smaller) t 314.375 rect 160,146,306,153 */
+  --li-track-name: 0;            /* Dr Imogen Ashby, fitted 0.005em */
+
+  /* sizes as measured at 480p (scale with the frame: value / 480 of frame height) */
+  --li-size-title-480: 30.6px;   /* cap height 22px / Instrument Serif cap 0.720em */
+  --li-size-name-480: 28px;      /* Dr Imogen Ashby ascender-to-descender 28px, t 20.0 */
+  --li-size-caps-480: 11px;      /* cap height 8px / Inter cap 0.728em (LONDON, NICK BOSTROM label) */
+  --li-size-credit-480: 9.6px;   /* end-card gold labels, cap height 7px */
+  --li-inset-x: 5.2%;            /* lower thirds and place captions start at x 44-45 of 854 */
+  --li-caption-baseline: 91.5%;  /* place-caption cap bottom at y 439 of 480 (LONDON, DATA CENTRE) */
+
+  /* lower-third hairline rule: 34x2px at 480p, x 44-77, above the name
+     (t 18.0 rows 377-378; t 116.333 rows 385-386, Jack Good) */
+  --li-rule-w-480: 34px;
+  --li-rule-h-480: 2px;
+
+  /* colours: per-channel median of the named pixels */
+  --li-tungsten: #a9844d;        /* t 72.0 rect 0,0,854,140: pub lamp glow, warm lit pixels (R-B>50, L 100-240), n=7314 */
+  --li-tungsten-window: #895221; /* t 105.333 rect 440,120,660,300: Oxford college lit windows, warm pixels, n=2252 */
+  --li-brass: #bda98f;           /* t 18.0 rect 36,378,82,379: the lower-third rule, brightest scanline */
+  --li-brass-label: #988e73;     /* t 314.375 rect 150,90,330,165: end-card gold caps labels, top-40% luminance gold pixels */
+  --li-teal-night: #1c495b;      /* t 306.0 rect 100,10,300,60: embankment dusk sky over the Thames (end-card plate) */
+  --li-teal-deep: #235064;       /* t 306.0 rect 300,170,420,230: river water between lamp reflections */
+  --li-paper: #6e5d3c;           /* t 150.167 rect 330,70,560,140: the typewriter sheet as lit in the film (top quartile) */
+  --li-caption: #ece8e2;         /* t 18.0 rect 45,392,219,420: lower-third name glyphs (top 12% luminance) */
+  --li-black: #000001;           /* t 30.0 rect 10,10,160,90: opening title card ground (true black) */
+  --li-black-quote: #000002;     /* t 150.167 rect 20,380,200,470: quote card lower-left shadow (true black) */
+  --li-green-lamp: #416e3d;      /* t 108.0 rect 0,180,500,320: library bankers-lamp shades, green pixels, n=2413 */
+  --li-camel: #492c18;           /* t 12.0 rect 360,380,440,450: presenter's camel coat, embankment */
+}

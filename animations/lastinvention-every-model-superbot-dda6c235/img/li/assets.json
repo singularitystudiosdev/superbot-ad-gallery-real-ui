@@ -1,0 +1,1180 @@
+{
+ "film": {
+  "title": "THE LAST INVENTION",
+  "presentedBy": "Dr Imogen Ashby (fictional, per the end card)",
+  "writtenDirectedBy": "Fig",
+  "producedFor": "Gavin Purcell",
+  "endCardTools": "Runway · Seedance 2.5 · Nano Banana Pro · Lyria 3",
+  "endCardNote": "Imogen Ashby is fictional. Every frame, voice and note in this film was generated."
+ },
+ "post": {
+  "url": "https://x.com/gavinpurcell/status/2103304514329854102",
+  "author": "@gavinpurcell",
+  "clip": "https://video.twimg.com/amplify_video/2103304202617520128/vid/avc1/854x480/XAtyYiDr1QYeUZPu.mp4?tag=29",
+  "clipFormat": "854x480, 24fps, 315.4s (7569 frames)"
+ },
+ "method": "Every pixel is a crop or resize of a real frame of the clip; nothing drawn or generated. Per-asset frame = sharpest (Laplacian variance) non-cut frame inside a hand-checked text-free (or text-complete, for cards) window. Props are square PNG crops lanczos-resized to 512 with no baked vignette; plates, presenters and gorilla are full frames (or a 16:9 crop) lanczos-upscaled to 960x540 JPEG q88; cards are native 854x480 JPEG q88.",
+ "fonts": {
+  "serif": {
+   "google": "Instrument Serif",
+   "role": "title caps, lower-third names, chapter cards, definitions, credit names",
+   "compared": [
+    {
+     "text": "THE LAST INVENTION",
+     "t": 314.375,
+     "rect": [
+      160,
+      38,
+      436,
+      60
+     ],
+     "corr": 0.889,
+     "tracking": "0.10em"
+    },
+    {
+     "text": "Dr Imogen Ashby",
+     "t": 20.0,
+     "rect": [
+      45,
+      392,
+      219,
+      420
+     ],
+     "corr": 0.877,
+     "tracking": "0"
+    }
+   ]
+  },
+  "italic": {
+   "google": "Instrument Serif Italic",
+   "role": "dictionary headwords, quote card, end-card disclaimer and tools line",
+   "compared": [
+    {
+     "text": "superintelligence",
+     "t": 88.0,
+     "rect": [
+      46,
+      152,
+      291,
+      190
+     ],
+     "corr": 0.816
+    }
+   ]
+  },
+  "caps": {
+   "google": "Inter",
+   "weight": 500,
+   "role": "letterspaced caps labels (NOUN, role lines, place captions, credit labels, attributions)",
+   "compared": [
+    {
+     "text": "NICK BOSTROM, SUPERINTELLIGENCE (2014)",
+     "t": 88.0,
+     "rect": [
+      47,
+      322,
+      308,
+      330
+     ],
+     "corr": 0.754,
+     "tracking": "0.25em"
+    },
+    {
+     "text": "LONDON",
+     "t": 2.5,
+     "rect": [
+      45,
+      431,
+      103,
+      439
+     ],
+     "tracking": "0.26em"
+    },
+    {
+     "text": "A DATA CENTRE, SOMEWHERE COLD.",
+     "t": 176.0,
+     "rect": [
+      44,
+      430,
+      317,
+      439
+     ],
+     "tracking": "0.33em"
+    },
+    {
+     "text": "WRITTEN & DIRECTED BY",
+     "t": 314.375,
+     "rect": [
+      160,
+      146,
+      306,
+      153
+     ],
+     "tracking": "0.17em"
+    }
+   ],
+   "confidence": "soft: 8px caps at 480p; Karla 0.778 but 6% narrow"
+  },
+  "typewriter": {
+   "google": null,
+   "note": "no typewriter face in the film; the quote card uses Instrument Serif Italic"
+  }
+ },
+ "colours": {
+  "tungsten": {
+   "hex": "#a9844d",
+   "t": 72.0,
+   "rect": [
+    0,
+    0,
+    854,
+    140
+   ],
+   "how": "pub interior lamp glow: median of warm lit pixels (R-B>50, L 100-240) in top band"
+  },
+  "brass": {
+   "hex": "#bda98f",
+   "t": 18.0,
+   "rect": [
+    36,
+    378,
+    82,
+    379
+   ],
+   "how": "lower-third brass rule: brightest scanline, upper-half luminance pixels"
+  },
+  "brass-label": {
+   "hex": "#988e73",
+   "t": 314.375,
+   "rect": [
+    150,
+    90,
+    330,
+    165
+   ],
+   "how": "end-card gold caps labels: top-40% luminance of gold pixels"
+  },
+  "teal-night": {
+   "hex": "#1c495b",
+   "t": 306.0,
+   "rect": [
+    100,
+    10,
+    300,
+    60
+   ],
+   "how": "embankment dusk sky, top band"
+  },
+  "teal-deep": {
+   "hex": "#235064",
+   "t": 306.0,
+   "rect": [
+    300,
+    170,
+    420,
+    230
+   ],
+   "how": "river water between lamp reflections"
+  },
+  "paper": {
+   "hex": "#6e5d3c",
+   "t": 150.167,
+   "rect": [
+    330,
+    70,
+    560,
+    140
+   ],
+   "how": "typewriter sheet on quote card: top-quartile luminance (lit paper)"
+  },
+  "caption": {
+   "hex": "#ece8e2",
+   "t": 18.0,
+   "rect": [
+    45,
+    392,
+    219,
+    420
+   ],
+   "how": "lower-third name glyphs: top 12% luminance"
+  },
+  "black": {
+   "hex": "#000001",
+   "t": 30.0,
+   "rect": [
+    10,
+    10,
+    160,
+    90
+   ],
+   "how": "opening title card background"
+  },
+  "black-quote": {
+   "hex": "#000002",
+   "t": 150.167,
+   "rect": [
+    20,
+    380,
+    200,
+    470
+   ],
+   "how": "quote card lower-left shadow"
+  },
+  "green-lamp": {
+   "hex": "#416e3d",
+   "t": 108.0,
+   "rect": [
+    0,
+    180,
+    500,
+    320
+   ],
+   "how": "library bankers-lamp shades: green pixels"
+  },
+  "camel": {
+   "hex": "#492c18",
+   "t": 12.0,
+   "rect": [
+    360,
+    380,
+    440,
+    450
+   ],
+   "how": "presenter camel coat, embankment"
+  },
+  "tungsten-window": {
+   "hex": "#895221",
+   "t": 105.333,
+   "rect": [
+    440,
+    120,
+    660,
+    300
+   ],
+   "how": "Oxford college lit windows: warm pixels (R-B>50, L>80)"
+  }
+ },
+ "timeline": {
+  "dominoShot": "135.750-141.000s (frames 3258-3384); topple starts 136.833 (f3284)",
+  "chapterCards": {
+   "What We Mean By Clever": "~32.5-35.3 over pub exterior",
+   "The Last Invention": "~102.3-105.0 over Oxford college",
+   "The Gorilla Problem": "~171.5-174.2 over data centre overhead"
+  },
+  "dictionaryCards": {
+   "intelligence": "44.5-52.2",
+   "superintelligence": "84.5-92.4"
+  },
+  "jackGoodLowerThird": "115.6-117.3",
+  "quoteCard": "145.5-152.4",
+  "dataCentreCaption": "175.3-177.5",
+  "endCard": "306.5-315.4",
+  "openingTitle": "27.3-30.3: THE LAST INVENTION + \"Superintelligence, for the rest of us\""
+ },
+ "files": [
+  {
+   "file": "img/li/prop-chess.png",
+   "kind": "prop",
+   "beat": "Meshy 3D prop: chess piece + hand (\"what we mean by clever\" / strategy beat)",
+   "subject": "hand hovering over chess king",
+   "source": {
+    "t": 66.0,
+    "frame": 1584,
+    "rect": [
+     170,
+     40,
+     590,
+     460
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    512,
+    512
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/prop-rotors.png",
+   "kind": "prop",
+   "beat": "Meshy 3D prop: codebreaking rotor drum machine (Bletchley / Jack Good beat)",
+   "subject": "rotor drum machine close-up",
+   "source": {
+    "t": 134.958,
+    "frame": 3239,
+    "rect": [
+     0,
+     5,
+     470,
+     475
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    512,
+    512
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/prop-domino.png",
+   "kind": "prop",
+   "beat": "Meshy 3D prop: domino row (intelligence explosion / recursive self-improvement beat)",
+   "subject": "standing domino row before topple",
+   "source": {
+    "t": 136.5,
+    "frame": 3276,
+    "rect": [
+     150,
+     60,
+     490,
+     400
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    512,
+    512
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/prop-paperclip.png",
+   "kind": "prop",
+   "beat": "Meshy 3D prop: paperclip machine + clip pile (paperclip maximiser beat)",
+   "subject": "paperclip machine over pile of clips",
+   "source": {
+    "t": 228.833,
+    "frame": 5492,
+    "rect": [
+     190,
+     0,
+     670,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    512,
+    512
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/prop-typewriter.png",
+   "kind": "prop",
+   "beat": "Meshy 3D prop: typewriter with paper (Good 1965 quote beat)",
+   "subject": "typewriter, blank sheet, before quote fades in",
+   "source": {
+    "t": 144.5,
+    "frame": 3468,
+    "rect": [
+     200,
+     0,
+     680,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    512,
+    512
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/prop-reel.png",
+   "kind": "prop",
+   "beat": "Meshy 3D prop: reel-to-reel tape computers (1960s computing beat)",
+   "subject": "reel-to-reel tape banks",
+   "source": {
+    "t": 165.0,
+    "frame": 3960,
+    "rect": [
+     250,
+     0,
+     670,
+     420
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    512,
+    512
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-pub.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: pub interior (presenter at table)",
+   "subject": "pub interior wide, presenter seated",
+   "source": {
+    "t": 72.0,
+    "frame": 1728,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-pub-exterior.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: pub exterior at night (frame taken during fade-in, before chapter text)",
+   "subject": "pub windows at night",
+   "source": {
+    "t": 32.292,
+    "frame": 775,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-oxford.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: Oxford college exterior at dusk",
+   "subject": "Oxford college exterior, no chapter text",
+   "source": {
+    "t": 105.333,
+    "frame": 2528,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-library.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: college library with green bankers lamps",
+   "subject": "library interior, presenter from behind",
+   "source": {
+    "t": 108.0,
+    "frame": 2592,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-codebreaking-room.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: codebreaking machine room (rows of rotor drums)",
+   "subject": "bombe-style machine room",
+   "source": {
+    "t": 120.0,
+    "frame": 2880,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-datacentre.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: data centre aisle (cropped above the caption)",
+   "subject": "empty server aisle, caption cropped out",
+   "source": {
+    "t": 177.0,
+    "frame": 4248,
+    "rect": [
+     53,
+     0,
+     800,
+     420
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-datacentre-overhead.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: data centre overhead, after chapter text clears",
+   "subject": "server halls from above",
+   "source": {
+    "t": 175.0,
+    "frame": 4200,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-thames-night.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: Thames bridge at night",
+   "subject": "Thames bridge night, no caption",
+   "source": {
+    "t": 297.0,
+    "frame": 7128,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-embankment-night.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: Thames embankment night (end-card background before credits fade in)",
+   "subject": "embankment lamps, river, bridge",
+   "source": {
+    "t": 306.0,
+    "frame": 7344,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/plate-london-dawn.jpg",
+   "kind": "plate",
+   "beat": "Gemini location plate: London dawn skyline (Shard, Tower Bridge)",
+   "subject": "London skyline blue hour",
+   "source": {
+    "t": 284.5,
+    "frame": 6828,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/card-london.jpg",
+   "kind": "card",
+   "beat": "reference: place caption (letterspaced caps, bottom-left)",
+   "subject": "LONDON caption",
+   "source": {
+    "t": 3.0,
+    "frame": 72,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-lowerthird-imogen.jpg",
+   "kind": "card",
+   "beat": "reference: presenter lower third (brass rule, serif name, caps role line)",
+   "subject": "Dr Imogen Ashby lower third",
+   "source": {
+    "t": 18.0,
+    "frame": 432,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-title-open.jpg",
+   "kind": "card",
+   "beat": "reference: opening title card",
+   "subject": "THE LAST INVENTION, italic subtitle \"Superintelligence, for the rest of us\", over fibre optics",
+   "source": {
+    "t": 30.0,
+    "frame": 720,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-chapter-clever.jpg",
+   "kind": "card",
+   "beat": "reference: chapter card",
+   "subject": "What We Mean By Clever",
+   "source": {
+    "t": 34.917,
+    "frame": 838,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-dictionary-intelligence.jpg",
+   "kind": "card",
+   "beat": "reference: dictionary card",
+   "subject": "intelligence / NOUN definition card",
+   "source": {
+    "t": 51.0,
+    "frame": 1224,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-dictionary-superintelligence.jpg",
+   "kind": "card",
+   "beat": "reference: dictionary card with source line",
+   "subject": "superintelligence / Bostrom definition card",
+   "source": {
+    "t": 90.167,
+    "frame": 2164,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-chapter-last-invention.jpg",
+   "kind": "card",
+   "beat": "reference: chapter card",
+   "subject": "The Last Invention over Oxford",
+   "source": {
+    "t": 104.333,
+    "frame": 2504,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-lowerthird-jack-good.jpg",
+   "kind": "card",
+   "beat": "reference: historical lower third",
+   "subject": "I. J. \"Jack\" Good 1916-2009 at chalkboard",
+   "source": {
+    "t": 116.333,
+    "frame": 2792,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-typewriter-quote.jpg",
+   "kind": "card",
+   "beat": "reference: quote card (italic serif over typewriter, caps attribution)",
+   "subject": "Good 1965 quote card",
+   "source": {
+    "t": 150.167,
+    "frame": 3604,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-chapter-gorilla.jpg",
+   "kind": "card",
+   "beat": "reference: chapter card",
+   "subject": "The Gorilla Problem over data centre",
+   "source": {
+    "t": 172.667,
+    "frame": 4144,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-datacentre-caption.jpg",
+   "kind": "card",
+   "beat": "reference: place caption",
+   "subject": "A DATA CENTRE, SOMEWHERE COLD.",
+   "source": {
+    "t": 177.0,
+    "frame": 4248,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/card-title-end.jpg",
+   "kind": "card",
+   "beat": "reference: end credits card",
+   "subject": "THE LAST INVENTION end card with credits",
+   "source": {
+    "t": 314.375,
+    "frame": 7545,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    854,
+    480
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/presenter-embankment.jpg",
+   "kind": "presenter",
+   "beat": "presenter still: Thames embankment, night",
+   "subject": "Imogen Ashby to camera, embankment",
+   "source": {
+    "t": 12.0,
+    "frame": 288,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/presenter-pub.jpg",
+   "kind": "presenter",
+   "beat": "presenter still: pub",
+   "subject": "Imogen Ashby to camera, pub",
+   "source": {
+    "t": 36.0,
+    "frame": 864,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/gorilla.jpg",
+   "kind": "gorilla",
+   "beat": "gorilla still (gorilla problem beat)",
+   "subject": "silverback gorilla, forest",
+   "source": {
+    "t": 192.0,
+    "frame": 4608,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/gorilla-glass.jpg",
+   "kind": "gorilla",
+   "beat": "gorilla still: child hand on glass (gorilla problem beat)",
+   "subject": "child hand on glass, gorilla behind",
+   "source": {
+    "t": 204.0,
+    "frame": 4896,
+    "rect": [
+     0,
+     0,
+     854,
+     480
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px"
+   },
+   "size": [
+    960,
+    540
+   ],
+   "resize": "lanczos"
+  },
+  {
+   "file": "img/li/domino-sprite.png",
+   "kind": "sprite",
+   "beat": "switch chip: domino-topple sprite (intelligence explosion)",
+   "subject": "lead domino toppling into the row, 24 cells",
+   "source": {
+    "t": 136.833,
+    "frame": 3284,
+    "rect": [
+     230,
+     140,
+     590,
+     410
+    ],
+    "rectFormat": "x0,y0,x1,y1 in 854x480 source px",
+    "t_end": 137.917,
+    "frames": [
+     3284,
+     3285,
+     3287,
+     3288,
+     3289,
+     3290,
+     3291,
+     3292,
+     3293,
+     3294,
+     3296,
+     3297,
+     3298,
+     3299,
+     3300,
+     3301,
+     3302,
+     3304,
+     3305,
+     3306,
+     3307,
+     3308,
+     3309,
+     3310
+    ]
+   },
+   "size": [
+    8640,
+    270
+   ],
+   "resize": "none"
+  },
+  {
+   "file": "img/li/domino-sprite.json",
+   "kind": "sprite-meta",
+   "beat": "frame size/count for domino-sprite.png",
+   "subject": "sprite metadata",
+   "source": {
+    "derived": "img/li/domino-sprite.png"
+   }
+  },
+  {
+   "file": "img/li/theme.css",
+   "kind": "tokens",
+   "beat": "every beat: --li-* fonts, tracking, sizes, rule, colours",
+   "subject": "theme tokens",
+   "source": {
+    "colours": {
+     "tungsten": {
+      "hex": "#a9844d",
+      "t": 72.0,
+      "rect": [
+       0,
+       0,
+       854,
+       140
+      ],
+      "how": "pub interior lamp glow: median of warm lit pixels (R-B>50, L 100-240) in top band"
+     },
+     "brass": {
+      "hex": "#bda98f",
+      "t": 18.0,
+      "rect": [
+       36,
+       378,
+       82,
+       379
+      ],
+      "how": "lower-third brass rule: brightest scanline, upper-half luminance pixels"
+     },
+     "brass-label": {
+      "hex": "#988e73",
+      "t": 314.375,
+      "rect": [
+       150,
+       90,
+       330,
+       165
+      ],
+      "how": "end-card gold caps labels: top-40% luminance of gold pixels"
+     },
+     "teal-night": {
+      "hex": "#1c495b",
+      "t": 306.0,
+      "rect": [
+       100,
+       10,
+       300,
+       60
+      ],
+      "how": "embankment dusk sky, top band"
+     },
+     "teal-deep": {
+      "hex": "#235064",
+      "t": 306.0,
+      "rect": [
+       300,
+       170,
+       420,
+       230
+      ],
+      "how": "river water between lamp reflections"
+     },
+     "paper": {
+      "hex": "#6e5d3c",
+      "t": 150.167,
+      "rect": [
+       330,
+       70,
+       560,
+       140
+      ],
+      "how": "typewriter sheet on quote card: top-quartile luminance (lit paper)"
+     },
+     "caption": {
+      "hex": "#ece8e2",
+      "t": 18.0,
+      "rect": [
+       45,
+       392,
+       219,
+       420
+      ],
+      "how": "lower-third name glyphs: top 12% luminance"
+     },
+     "black": {
+      "hex": "#000001",
+      "t": 30.0,
+      "rect": [
+       10,
+       10,
+       160,
+       90
+      ],
+      "how": "opening title card background"
+     },
+     "black-quote": {
+      "hex": "#000002",
+      "t": 150.167,
+      "rect": [
+       20,
+       380,
+       200,
+       470
+      ],
+      "how": "quote card lower-left shadow"
+     },
+     "green-lamp": {
+      "hex": "#416e3d",
+      "t": 108.0,
+      "rect": [
+       0,
+       180,
+       500,
+       320
+      ],
+      "how": "library bankers-lamp shades: green pixels"
+     },
+     "camel": {
+      "hex": "#492c18",
+      "t": 12.0,
+      "rect": [
+       360,
+       380,
+       440,
+       450
+      ],
+      "how": "presenter camel coat, embankment"
+     },
+     "tungsten-window": {
+      "hex": "#895221",
+      "t": 105.333,
+      "rect": [
+       440,
+       120,
+       660,
+       300
+      ],
+      "how": "Oxford college lit windows: warm pixels (R-B>50, L>80)"
+     }
+    }
+   }
+  }
+ ]
+}

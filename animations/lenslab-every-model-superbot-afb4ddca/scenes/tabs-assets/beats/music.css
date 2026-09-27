@@ -1,0 +1,59 @@
+/* Music beat (beats/music.js): Lyria's lens lab score card, three cues with waveforms over a focus ring distance
+   scale. Nothing here transitions: opacity/transform/filter/clip are written from t in render, so ?t= freezes a frame.
+   Every selector is scoped under the hub and prefixed .mus- (the scoring chip reuses chat.css .dd-chiprow/.ch-tool/.spin).
+   Palette from the post clip: blue-black glass UI, cyan glow, brass focus ring. The layout box is unchanged from the
+   source beat (card 420px, rows 7px padding, title 11.5px, gap 5px, wave 20px) so the thread scroll is identical:
+   the bars now use the top 12px of the wave box and the engraved scale hangs below them, overflowing only into the
+   row's own bottom padding (absolute, so it adds no height). */
+
+#s-tabs .sbsite .hub .mus-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px;
+  padding: 10px 12px 6px; border-radius: 10px; background: linear-gradient(180deg, #121821, #0e1218);
+  box-shadow: inset 0 0 0 1px #243039, 0 8px 20px rgba(0, 0, 0, .35); transform-origin: 50% 0; }
+
+/* header: note icon in a brass-ringed lens, card title, the format on the right */
+#s-tabs .sbsite .hub .mus-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  font: 600 12.5px/1.2 var(--ui); color: #eef4f7; }
+#s-tabs .sbsite .hub .mus-hd small { margin-left: auto; font: 500 11px/1 var(--ui); color: #b39a6e; }
+#s-tabs .sbsite .hub .mus-ic { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #1d4452, #0a141a 72%);
+  box-shadow: inset 0 0 0 1.5px #c9964a, 0 0 6px rgba(110, 225, 255, .25); }
+#s-tabs .sbsite .hub .mus-note { width: 12px; height: 12px; fill: none; stroke: #8aefff; stroke-width: 2.2;
+  stroke-linecap: round; stroke-linejoin: round; }
+
+/* one cue: play button, title over waveform + distance scale, length */
+#s-tabs .sbsite .hub .mus-row { opacity: 0; display: flex; align-items: center; gap: 10px; padding: 7px 0;
+  border-top: 1px solid #1d252e; }
+#s-tabs .sbsite .hub .mus-btn { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px;
+  border-radius: 50%; background: #18202a; box-shadow: inset 0 0 0 1px #2d3a46; }
+#s-tabs .sbsite .hub .mus-play { width: 12px; height: 12px; fill: #e4edf2; margin-left: 2px; }
+#s-tabs .sbsite .hub .mus-live .mus-btn { background: #0f3442; box-shadow: inset 0 0 0 1px #5ad8f5, 0 0 8px rgba(90, 216, 245, .35); }
+#s-tabs .sbsite .hub .mus-live .mus-play { fill: #9af2ff; }
+#s-tabs .sbsite .hub .mus-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+#s-tabs .sbsite .hub .mus-title { font: 600 11.5px/1 var(--ui); color: #eef4f7; white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-wave { position: relative; box-sizing: border-box; display: flex; align-items: center; gap: 2px;
+  height: 20px; padding-bottom: 8px; }
+#s-tabs .sbsite .hub .mus-wave > i { flex: 1; min-width: 0; border-radius: 1px; opacity: .3; transform-origin: 50% 50%;
+  background: linear-gradient(180deg, #a6f5ff, #3fb0ee); }
+#s-tabs .sbsite .hub .mus-len { flex: none; width: 30px; text-align: right; opacity: 0;
+  font: 500 11px/1 var(--ui); color: #bda77c; font-variant-numeric: tabular-nums; }
+
+/* the focus ring engraving: a brass hairline, minor/major ticks hanging from it, distance labels under the ticks.
+   .mus-lit is the same ticks in bright brass, clipped in render to end at the focus index. */
+#s-tabs .sbsite .hub .mus-ring { position: absolute; left: 0; right: 0; top: 12.5px; height: 12px; pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(201, 150, 74, .38); }
+#s-tabs .sbsite .hub .mus-tks { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .mus-tk { position: absolute; top: 1px; width: 1px; height: 2px; margin-left: -.5px;
+  background: rgba(150, 118, 68, .6); }
+#s-tabs .sbsite .hub .mus-tk.mus-mj { height: 3.5px; background: rgba(176, 138, 78, .85); }
+#s-tabs .sbsite .hub .mus-lit { opacity: 0; }
+#s-tabs .sbsite .hub .mus-lit .mus-tk { background: #d9a85a; }
+#s-tabs .sbsite .hub .mus-lit .mus-tk.mus-mj { background: #f0c475; }
+#s-tabs .sbsite .hub .mus-lb { position: absolute; top: 5px; transform: translateX(-50%); white-space: nowrap;
+  font: 700 6.5px/1 var(--ui); letter-spacing: .02em; color: rgb(104, 84, 52); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .mus-lb.mus-unit { font-weight: 600; font-size: 5.5px; top: 5.6px; }
+
+/* the focus index: a cyan hairline over the bars with a diamond on the scale's hairline */
+#s-tabs .sbsite .hub .mus-idx { position: absolute; top: 0; height: 16px; width: 1px; margin-left: -.5px; opacity: 0;
+  pointer-events: none; background: #8ff0ff; box-shadow: 0 0 3px 1px rgba(90, 220, 255, .55); }
+#s-tabs .sbsite .hub .mus-idx::after { content: ''; position: absolute; left: -2px; top: 10.5px; width: 5px; height: 5px;
+  transform: rotate(45deg); background: #9af2ff; box-shadow: 0 0 4px rgba(90, 220, 255, .8); }

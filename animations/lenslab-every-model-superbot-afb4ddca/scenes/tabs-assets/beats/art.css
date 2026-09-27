@@ -1,0 +1,57 @@
+/* Art beat (beats/art.js): Gemini's six images as a 3x2 export grid: three focus plates (the valley at 37, 54 and
+   86 cm) and three material swatches, each a 512x512 photographic crop from the post clip filling its square. Nothing
+   here transitions: opacity/filter/transform and the lock state are written from t in render, so ?t= freezes a frame.
+   Every selector is scoped under the hub and prefixed .art-. The "Creating 6 images" chip reuses the shared
+   .dd-chiprow/.ch-tool tool-chip markup from chat.css; the pill look is repeated on .art-gen so the chip reads the
+   same even before that sheet lands. */
+
+/* the grid: three swatches a row, 6px apart, 420px of sheet */
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 420px;
+  max-width: 100%; margin-top: 2px; opacity: 0; transform-origin: 50% 0; }
+/* the swatch: a square dark frame the photo fills edge to edge */
+#s-tabs .sbsite .hub .art-tile { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden;
+  background: #121216; box-shadow: 0 0 0 1px #2a2a2e, 0 6px 16px rgba(0, 0, 0, .35); }
+/* the photo: covers the square, smooth-scaled (a photographic crop, not pixel art) */
+#s-tabs .sbsite .hub .art-shot { position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0; will-change: filter, transform; }
+
+/* the sweeping band: the Gemini blue-to-violet sweep that passes over a swatch while it resolves */
+#s-tabs .sbsite .hub .art-band { position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(100deg, transparent 25%, rgba(120, 160, 255, .42) 45%, rgba(214, 120, 255, .42) 55%, transparent 75%); }
+
+/* the autofocus bracket on a focus plate: four corner ticks that tighten onto the plane, green on lock */
+#s-tabs .sbsite .hub .art-af { position: absolute; left: 50%; top: 50%; width: 46%; height: 46%; opacity: 0;
+  pointer-events: none; color: rgba(255, 255, 255, .85); filter: drop-shadow(0 0 2px rgba(0, 0, 0, .6));
+  background:
+    linear-gradient(currentColor, currentColor) 0 0 / 11px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 0 / 1.5px 11px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 0 / 11px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 0 / 1.5px 11px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 100% / 11px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 100% / 1.5px 11px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 100% / 11px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 100% / 1.5px 11px no-repeat; }
+#s-tabs .sbsite .hub .art-af.lock { color: #3ddc84; }
+
+/* the header stamped on each swatch: a plate's focus-distance readout (green once locked) or the material tag, then
+   the file name + real pixel size once it is sharp */
+#s-tabs .sbsite .hub .art-tag { position: absolute; right: 5px; top: 5px; padding: 2px 5px 1px; border-radius: 4px;
+  background: rgba(12, 12, 14, .72); font: 600 8px/1 var(--mono); letter-spacing: .3px;
+  font-variant-numeric: tabular-nums; color: #9a9a9a; }
+#s-tabs .sbsite .hub .art-tag.art-focus { color: #d8d8de; }
+#s-tabs .sbsite .hub .art-tag.art-focus.lock { color: #3ddc84; }
+#s-tabs .sbsite .hub .art-cap { position: absolute; left: 5px; bottom: 5px; max-width: calc(100% - 10px); opacity: 0;
+  display: flex; flex-direction: column; gap: 2px; padding: 3px 5px; border-radius: 5px;
+  background: rgba(12, 12, 14, .8); font: 500 10px/1.1 var(--mono); color: #f2f2f7; }
+#s-tabs .sbsite .hub .art-cap b { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+  font-weight: 600; color: #fff; white-space: nowrap; }
+#s-tabs .sbsite .hub .art-cap small { color: #9a9a9a; }
+
+/* the "Creating 6 images" chip (inside the shared .dd-chiprow/.ch-tool markup) */
+#s-tabs .sbsite .hub .art-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .art-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .art-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .art-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .art-gen .ch-tool-t { color: #ececec; }

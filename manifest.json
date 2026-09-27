@@ -240,6 +240,14 @@
     "thumb": "assets/shots/liquidglass-every-model-v3-superbot-956467aa.png"
   },
   {
+    "id": "lenslab-every-model-v3-superbot-afb4ddca",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "build a lens lab that explains camera focus: Lyria 2 scores it, Meshy builds the lens and the valley, Gemini paints the focus plates, Opus 5.5 writes the optics, DeepSeek V4 Flash scrapes glass catalogs, GitHub takes the repo, Opus 5.5 builds it; ends on @RyanSael Opus 5.5 Lens Lab clip (7 requests)",
+    "src": "animations/lenslab-every-model-superbot-afb4ddca/?v=3",
+    "thumb": "assets/shots/lenslab-every-model-v3-superbot-afb4ddca.png"
+  },
+  {
     "id": "dark-souls-every-model-v1-superbot-80e24d9f",
     "type": "animation",
     "group": "Ad spots",

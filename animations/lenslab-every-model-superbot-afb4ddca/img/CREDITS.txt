@@ -1,0 +1,107 @@
+img CREDITS (lenslab-every-model-superbot)
+
+Every file in img/ll/ is cut or cropped from one source: the video in this post. Nothing was redrawn, recoloured
+or composited; the only processing is trim, crop, lanczos scale and re-encode.
+
+Post       https://x.com/RyanSael/status/2102591147927654847  (posted 2026-09-23 02:49 UTC)
+Author     Ryan Sael (@RyanSael), https://x.com/RyanSael
+Post text  "I asked Opus 5.5 to explain camera focus by building an interactive lens lab
+
+            Here's what it came up with after 1 hour 26 minutes in one shot, $25.66 API cost
+            https://lens.lab.sael.net
+
+            Move the focus ring and you can see the glass elements shift the sharp plane through the scene"
+Video      https://video.twimg.com/amplify_video/2102589341197619200/vid/avc1/1920x1080/0zt2fNiA4QMgvhkM.mp4
+           (1920x1080, 30 fps, 32.0 s, no audio; the post's own video, x.com/RyanSael/status/2102591147927654847/video/1)
+Live app   https://lens.lab.sael.net
+Made with  Claude Opus 5.5, one shot, 1h 26m, $25.66 API cost (per the post)
+
+The lens lab UI visible in the frames (THE PLANE OF FOCUS panel, FOCUS / APERTURE / SHARP ZONE readouts, the
+Foreground / Middle / Background and f/2 / f/5.6 / f/16 buttons, the small "Focus ring", "Helicoid", "Focus group",
+"Iris", "Rear group", "Front element", "Plane of focus" and "Sharp zone" label pills, the @RYANSAEL nameplate) is
+Ryan Sael's app, rendered as-is.
+
+
+SOURCE MAP
+All times are source-video seconds (frame = time x 30). The source has exactly four hard cuts, at 9.000s (frame 270),
+14.500s (435), 21.000s (630) and 25.500s (765), giving five shots:
+  0.000-9.000    overview, cursor drags the black knurled focus ring; focus 54 cm > 37 > 86 > 54 cm, elements shift
+  9.000-14.500   cutaway close-up of the element group; aperture f/2 stopping down to f/16 and back
+  14.500-21.000  sweep: the plane of focus moves Foreground (37 cm, pine) > Middle (54 cm, cabin) > Background (86 cm, peak)
+  21.000-25.500  ground glass (image plane, inverted image): Background > Foreground (pine) > Middle (cabin)
+  25.500-32.000  overview again: Assembled / Exploded toggle, then aperture to f/16 (not used)
+
+
+ll/lenslab-14s.mp4
+  1280x720, 30 fps, H.264 High yuv420p, CRF 21, no audio, +faststart, 420 frames, 14.000s, 3,313,394 bytes.
+  Four source spans at 1.0x, hard cuts only, no overlays. Cuts at clip 3.500s and 11.767s are the source's own cuts;
+  the cut at clip 6.500s is the one new hard cut (source 12.000s > 15.733s).
+
+  clip time          source time         source frames  shot   what happens
+  0.000-3.500        5.500-9.000         165-269        (a)    overview; focus ring at 83-86 cm (Background, peak sharp);
+                                                               ring turned at clip ~2.0-2.7 (source 7.5-8.2), glass elements
+                                                               shift, focus lands on 54-55 cm (cabin) by clip ~2.5
+  3.500-6.500        9.000-12.000        270-359        (b)    cutaway close-up of the element group, focus 54 cm throughout;
+                                                               f/2 (1.5 cm) at clip 3.5-4.5, stops down f/5.5 > f/8.6 > f/14
+                                                               over clip 4.5-5.75, f/16 (12.0-12.2 cm) from clip 5.75 to 6.5
+  6.500-11.767       15.733-21.000       472-629        (c)    sharp plane sweep through the cabin/pine diorama: Foreground
+                                                               37 cm hold to clip ~7.0, moves to Middle 54 cm clip 7.0-8.0,
+                                                               hold to clip ~9.3, moves to Background 86 cm clip 9.3-10.3, hold
+  11.767-14.000      21.000-23.233       630-696        (d)    ground glass (camera view, image upside down): Background 86 cm
+                                                               (peaks sharp) to clip ~12.5, refocus clip 12.5-13.3, then
+                                                               Foreground 37 cm (inverted pine sharp) to the end
+
+ll/poster.jpg
+  1280x720, frame 0 of lenslab-14s.mp4 (= source 5.500s, frame 165): the full overview, focus 83 cm, Background,
+  cursor on the focus ring. JPEG q1 of the decoded frame (PSNR 52.7 dB vs the clip's frame 0).
+
+
+STILL CROPS
+Crop rects are x,y,w,h in source pixels (1920x1080 frame at that time), then lanczos-scaled to the output size.
+Stills are exact frames: 6.000s = frame 180, 10.000s = 300, 15.600s = 468, 18.000s = 540, 20.500s = 615, 23.000s = 690.
+In the cutaway (10.000s) the lens points RIGHT: front of the lens (subject side) is on the right, rear (image-plane side)
+on the left.
+
+file                 out       source   crop x,y,w,h            content
+ll/mesh-lens.jpg     200x200   10.000s  300,150,880,880          lens barrel cutaway: open barrel with the glass element group,
+                                                                 rear brass ring (left), brass gear ring (right), nameplate
+ll/mesh-ring.jpg     200x200   10.000s  920,314,480,480          brass gear ring (centre) beside the black knurled focus ring
+                                                                 (right); edge of the coated focus-group element (left)
+ll/mesh-elements.jpg 200x200   10.000s  465,267,600,600          glass element group: rear elements, clear centre plate, amber
+                                                                 iris ring, the two coated focus-group elements
+ll/mesh-diorama.jpg  200x200   18.000s  470,280,700,700          cabin/pine valley diorama, plane-of-focus grid through the cabin
+                                                                 (Middle, 54 cm, cabin sharp)
+ll/art-1.jpg         512x512   15.600s  400,20,1060,1060         diorama, sharp plane at FOREGROUND (37 cm): front pine sharp with
+                                                                 rays converging, cabin and peaks blurred; dark lens front at left
+                                                                 (same held state as clip 6.5-7.0; 4 frames before that span)
+ll/art-2.jpg         512x512   18.000s  400,20,1060,1060         diorama, sharp plane at MIDDLE (54 cm): cabin sharp, front pines
+                                                                 and peaks blurred
+ll/art-3.jpg         512x512   20.500s  400,20,1060,1060         diorama, sharp plane at BACKGROUND (86 cm): peaks and far pines
+                                                                 sharp with glowing contour, cabin and front pines blurred
+ll/art-4.jpg         512x512   10.000s  1000,360,400,400         material: brass gear ring knurling (teeth, centre-left) against
+                                                                 the black knurled focus ring (right); coated element edge at left
+ll/art-5.jpg         512x512   23.000s  540,230,700,700          material: frosted ground glass (image plane) with the inverted
+                                                                 image at Foreground: upside-down pine sharp, cabin lights as bokeh
+                                                                 discs, ray cones and circle-of-confusion outlines; teal edge at bottom
+ll/art-6.jpg         512x512   10.000s  800,365,384,384          material: glass element surface and coating reflection: the two
+                                                                 coated focus-group elements (blue rims, domed front element); amber
+                                                                 iris glow at left edge, brass teeth at right edge
+ll/glass-1.jpg       256x256   6.000s   902,382,256,256          element 1 (front): the front element, a separate glass disc just
+                                                                 ahead of the barrel mouth, edge-on and soft, rays passing through
+                                                                 toward the diorama (green at right). Different shot and angle
+                                                                 from glass-2..6: in the cutaway it sits hidden inside the front barrel
+ll/glass-2.jpg       256x256   10.000s  851,397,320,320          element 2: focus group, front element (domed, bright blue coated
+                                                                 rim); brass gear teeth at right edge
+ll/glass-3.jpg       256x256   10.000s  750,407,320,320          element 3: focus group, rear element (bright ring edge, centre);
+                                                                 amber iris at left, element 2 at right
+ll/glass-4.jpg       256x256   10.000s  521,414,320,320          element 4: clear centre plate (translucent vertical slab, centre),
+                                                                 between the rear group (left) and the amber iris (right)
+ll/glass-5.jpg       256x256   10.000s  446,414,320,320          element 5: rear group, second element (thin curved sliver behind a
+                                                                 black spacer, centre); element 6 at left, element 4 at right
+ll/glass-6.jpg       256x256   10.000s  341,420,320,320          element 6 (rear): rear group, large curved rear element (bright
+                                                                 left edge, centre); rear brass ring at left edge
+
+Notes on the glass set: the iris (amber ring, "Iris" label) between elements 3 and 4 is not glass and is not counted.
+Six elements are separable, but only five are clear in the cutaway; element 1 comes from the overview shot. Neighbouring
+elements sit about 100 source px apart, so each 256 crop is centred on its element and shows its neighbours at the edges.
+Tiny render label pills ("Plane of focus", "Front element", "Sharp zone") are visible in art-1..3.

@@ -11,7 +11,7 @@ import assets from './beats/assets.js?v=1';
 import terminal from './beats/terminal.js?v=1';
 import diff from './beats/diff.js?v=1';
 import parallel from './beats/parallel.js?v=1';
-import preview from './beats/preview.js?v=2';
+import preview from './beats/preview.js?v=3';
 import code from './beats/code.js?v=2';
 import git from './beats/git.js?v=2';
 import art from './beats/art.js?v=2';
@@ -97,15 +97,15 @@ export const VARIANTS = {
     step('codex', preview),
     step('github', git),
     step('opus', play),
-  ], { hold: 0, chip: 0.26 }),
+  ], { hold: 0, chip: 0.18 }),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
 export const VARIANT = VARIANTS[VARIANT_KEY];
 
 // every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply.
 // The pacing is tight on purpose: a routing chip lands SW_OFF after the previous beat ends, resolves in
-// chipDur (0.22-0.28s), and the app answers 0.04s later, so the hand-off from one model to the next is
-// ~0.3s of movement instead of a second of dead air.
+// chipDur (0.16-0.28s), and the app answers 0.02s later, so the hand-off from one model to the next is
+// ~0.2s of movement instead of a second of dead air.
 function timeBeats(asks) {
   let s = CHAT_T0;
   return asks.map((a) => {
@@ -113,16 +113,16 @@ function timeBeats(asks) {
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
       k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.22;   // superbot's first routing chip lands
+      k.sw = k.send + 0.15;   // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
-      k.sw = s + 0.05;        // superbot carries on without being asked
+      k.sw = s + 0.02;        // superbot carries on without being asked
     }
     // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
     let at = k.sw;
-    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.13, done: at + Math.max(0.22, a.chipDur) }; at = c.done + 0.06; return c; });
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.09, done: at + Math.max(0.16, a.chipDur) }; at = c.done + 0.05; return c; });
     k.done = k.chips[k.chips.length - 1].done;
-    k.reply = k.done + 0.04;  // the app answers
+    k.reply = k.done + 0.02;  // the app answers
     k.T = a.mod.times(k.reply, a.opts);
     s = k.T.end + a.hold;     // the variant's pause before the next switch
     return { k };

@@ -15,7 +15,7 @@ export default {
     T.site = SITES.map((_, i) => r + (0.35 + i * 0.2) * p);
     T.done = T.site[SITES.length - 1] + 0.55 * p;
     T.ref = DECALS.map((_, i) => T.done + (0.1 + i * 0.08) * p);
-    T.end = T.ref[DECALS.length - 1] + 1.0 * p;
+    T.end = T.ref[DECALS.length - 1] + 0.55 * p;
     return T;
   },
   build(k, x) {

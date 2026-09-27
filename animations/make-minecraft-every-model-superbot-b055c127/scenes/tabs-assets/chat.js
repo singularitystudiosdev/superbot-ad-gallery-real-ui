@@ -6,18 +6,18 @@
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import { CFG } from './cuts.js?v=1';
-import opusCode from './beats/opus-code.js?v=1';
-import github from './beats/github.js?v=1';
-import decalScrape from './beats/decal-scrape.js?v=1';
-import decalGen from './beats/decal-gen.js?v=1';
-import opusShip from './beats/opus-ship.js?v=1';
+import { CFG } from './cuts.js?v=2';
+import opusCode from './beats/opus-code.js?v=2';
+import github from './beats/github.js?v=2';
+import decalScrape from './beats/decal-scrape.js?v=2';
+import decalGen from './beats/decal-gen.js?v=2';
+import opusShip from './beats/opus-ship.js?v=2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
 const bump = (p) => Math.sin(Math.PI * clamp(p));
 
-export const CHAT_T0 = 1.6; // the empty state has settled; the first ask starts typing
+export const CHAT_T0 = 1.2; // the empty state has settled; the first ask starts typing
 
 const APPS = {
   codex: { name: 'GPT-5 Codex', logo: brand('openai-logo.svg'), sub: '' },
@@ -52,7 +52,7 @@ function timeBeats(asks) {
     }
     // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
     let at = k.sw;
-    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + 0.65 }; at = c.done + 0.12; return c; });
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.3, done: at + 0.8 }; at = c.done + 0.12; return c; });
     k.done = k.chips[k.chips.length - 1].done;
     k.reply = k.done + 0.08;  // the app answers
     k.T = a.mod.times(k.reply, CFG);
@@ -61,7 +61,7 @@ function timeBeats(asks) {
   });
 }
 export const BEATS = timeBeats(STEPS.map((st, i) => ({ ...st, ask: CFG.asks[i] })));
-export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.3;
+export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.15;
 
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';

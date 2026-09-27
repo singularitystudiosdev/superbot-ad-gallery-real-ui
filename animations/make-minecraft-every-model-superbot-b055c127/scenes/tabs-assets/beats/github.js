@@ -10,7 +10,7 @@ export default {
     T.curIn = T.card + 0.1; T.curAt = T.curIn + 0.45 * p; T.press = T.curAt + 0.08;
     T.flip = T.press + 0.2;
     T.row = [T.flip + 0.45 * p, T.flip + 0.8 * p];
-    T.end = T.row[1] + 1.0 * p;
+    T.end = T.row[1] + 0.55 * p;
     return T;
   },
   build(k, x) {

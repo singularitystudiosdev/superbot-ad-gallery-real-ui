@@ -1,13 +1,13 @@
 // every-model-one-chat (forked from it-does-what-you-ask): the real superbot hub, cropped to its thread and composer (rail, sidebar and chat header
 // are hidden, ask.css), laid out at DW design px and scaled to the frame width. It opens on the empty state
 // ("Good evening. Where do we go?" over a centred composer) with the camera pushed in; the first send drops the
-// composer to the bottom, lifts the greeting away and eases the camera out while the three-request chat plays
-// (tabs-assets/chat.js). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
+// composer to the bottom, lifts the greeting away and settles the camera on a follow shot that punches in on every model switch while
+// the chat plays (tabs-assets/chat.js). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=9';
-import { CFG } from './tabs-assets/cuts.js?v=1';
-import { lerp, seg, outCubic, inOutCubic, boxIn } from '../lib.js';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=10';
+import { CFG } from './tabs-assets/cuts.js?v=2';
+import { clamp, lerp, seg, outCubic, inOutCubic, boxIn } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
 const H = 1080;
@@ -44,9 +44,34 @@ function lift(g) {
   return g.lift;
 }
 
+// camera shots in design px: Z multiplies the fit scale k and (x, y) is the design point held at the frame
+// centre, clamped so the frame never leaves the hub
+function shot(g, Z, x, y) {
+  const hw = g.DW / (2 * Z), hh = g.DH / (2 * Z);
+  return { Z, x: clamp(x, hw, g.DW - hw), y: clamp(y, hh, g.DH - hh) };
+}
+// zoom blends in log space so a push in and a pull back read at the same speed
+const mix = (a, b, p) => (p <= 0 ? a : p >= 1 ? b : { Z: Math.exp(lerp(Math.log(a.Z), Math.log(b.Z), p)), x: lerp(a.x, b.x, p), y: lerp(a.y, b.y, p) });
+const outQuart = (p) => 1 - Math.pow(1 - p, 4);
+
+// the thread's resting shot, composer on the bottom edge: the column fills most of the frame width, so 4:3 and
+// 16:9 read at the same type size, but never so tight that a card's height leaves the frame (narrow ratios stay 1)
+const followZ = (g) => clamp(Math.min(g.DW / 800, g.DH / 590), 1, 1.6);
+
+// every model switch is the ad's centre: the camera snaps onto the routing chip as it lands (Gemini-spot punch-in),
+// creeps in while it spins and resolves, then pulls back as the new model answers
+function punch(g, t, base, s) {
+  const k = s.c;
+  const w = outQuart(seg(t, k.sw - 0.04, k.sw + 0.4)) * (1 - inOutCubic(seg(t, k.done + 0.1, k.done + 0.6)));
+  if (w <= 0) return base;
+  const b = boxIn(s.sw, el.site);
+  const Z = clamp(Math.min(0.5 * g.DW / b.w, 0.18 * g.DH / b.h), followZ(g) * 1.7, 3.0) * (1 + 0.05 * seg(t, k.sw + 0.3, k.done + 0.6));
+  return mix(base, shot(g, Z, b.cx, b.cy), w);
+}
+
 export default {
   id: 'tabs',
-  dur: CHAT_END + 0.4,
+  dur: CHAT_END + 0.25,
 
   mount(section) {
     section.innerHTML = `
@@ -74,14 +99,6 @@ export default {
     const g = geo(W);
     const up = lift(g);
 
-    // camera: pushed in on the empty state, easing out once the thread starts
-    // (a narrow column already fills the frame, so it pushes in less)
-    const z0 = g.DW < 700 ? 1.08 : 1.2, z1 = g.DW < 700 ? 1.04 : 1.1;
-    const z = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
-    let S = g.k * z, cx = g.DW / 2, cy = g.DH / 2;
-    const cam = () => { el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${S.toFixed(5)}) translate(${(-cx).toFixed(2)}px,${(-cy).toFixed(2)}px)`; };
-    cam();
-
     // empty state -> thread: the composer glides down to the bottom and the greeting lifts away
     const drop = inOutCubic(seg(t, FIRST.send - 0.08, FIRST.send + 0.42));
     el.composer.style.transform = drop >= 1 ? 'none' : `translateY(${(-up * (1 - drop)).toFixed(2)}px)`;
@@ -92,13 +109,21 @@ export default {
 
     renderChat(el.chat, t);
 
-    // the zoom cut's finale: the camera dives into the running game until its screen fills the frame
-    const f = CFG.zoom && el.chat.focus;
+    // camera: pushed in on the empty state, settling onto the follow shot once the thread starts
+    const Zf = followZ(g);
+    const Ze = Math.max(1.04, Math.min(Zf * 1.12, g.DW / (el.composer.offsetWidth + 64)));
+    const empty = shot(g, lerp(Ze, Ze * 0.96, inOutCubic(seg(t, 0, CHAT_T0))), g.DW / 2, g.DH / 2);
+    let c = mix(empty, shot(g, Zf, g.DW / 2, g.DH), inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.6)));
+    for (const b of el.chat.beats) for (const s of b.sws) c = punch(g, t, c, s);
+
+    // the finale frames the running game: the zoom cut dives until its screen fills the frame
+    const f = el.chat.focus;
     const zf = f ? inOutCubic(seg(t, f.a, f.b)) : 0;
     if (zf > 0) {
       const b = boxIn(f.el, el.site);
-      S = lerp(S, Math.min(W / b.w, H / b.h), zf); cx = lerp(cx, b.cx, zf); cy = lerp(cy, b.cy, zf);
-      cam();
+      const fill = Math.min(g.DW / b.w, g.DH / b.h);
+      c = mix(c, shot(g, CFG.zoom ? fill : Math.max(Zf, fill * 0.86), b.cx, b.cy), zf);
     }
+    el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${(g.k * c.Z).toFixed(5)}) translate(${(-c.x).toFixed(2)}px,${(-c.y).toFixed(2)}px)`;
   },
 };

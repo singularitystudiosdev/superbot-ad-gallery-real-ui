@@ -7,7 +7,7 @@ import { lerp, seg, outBack, clamp } from '../../../lib.js';
 import { sayer, rise, TICK, TERM, GRID, O_BRANCH } from './kit.js';
 import { gen } from './kit.js';
 
-const CLIP = 6.0;
+const CLIP = 4.2;
 
 export default {
   times(r, c) {

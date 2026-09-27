@@ -12,7 +12,7 @@ export default {
     T.w0 = r + 0.3 * p;
     T.tile = DECALS.map((_, i) => [T.w0 + i * 0.16 * p, T.w0 + (0.55 + i * 0.16) * p]);
     T.w1 = T.tile[DECALS.length - 1][1];
-    T.end = T.w1 + 0.95 * p;
+    T.end = T.w1 + 0.55 * p;
     return T;
   },
   build(k, x) {

@@ -42,10 +42,10 @@
 
 /* ---- the end card: the line, then the mascot to its right ---- */
 #s-end .lock.ask-end { gap: 56px; }
-#s-end .ask-end .words h1 { font-size: 112px; letter-spacing: -.02em; white-space: nowrap; }
+#s-end .ask-end .words h1 { font-size: 168px; letter-spacing: -.045em; white-space: nowrap; }
 #s-end .ask-end .words h1 br { display: none; }
 html[data-ar="1x1"] #s-end .lock.ask-end, html[data-ar="4x5"] #s-end .lock.ask-end, html[data-ar="9x16"] #s-end .lock.ask-end { flex-direction: row; gap: 32px; text-align: left; }
-html[data-ar="1x1"] #s-end .ask-end .words h1, html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 96px; }
-html[data-ar="9x16"] #s-end .ask-end .words h1 { font-size: 64px; }
+html[data-ar="1x1"] #s-end .ask-end .words h1, html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 132px; }
+html[data-ar="9x16"] #s-end .ask-end .words h1 { font-size: 80px; }
 html[data-ar="1x1"] #s-end .ask-end .words h1 br, html[data-ar="4x5"] #s-end .ask-end .words h1 br, html[data-ar="9x16"] #s-end .ask-end .words h1 br { display: inline; }
 html[data-ar="9x16"] #s-end .ask-end .face { width: 150px; height: 150px; }

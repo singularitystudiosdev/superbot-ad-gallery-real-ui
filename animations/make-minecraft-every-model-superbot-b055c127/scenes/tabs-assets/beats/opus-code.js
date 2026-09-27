@@ -78,9 +78,9 @@ export default {
     const p = c.pace, T = { r };
     T.card = r + 0.35 * p;
     T.file = FILES.map((_, i) => T.card + (0.3 + i * 0.16) * p);
-    T.pane = SRC.map((_, i) => { const a = T.card + (0.55 + i * 1.3) * p; return [a, a + 1.18 * p]; });
+    T.pane = SRC.map((_, i) => { const a = T.card + (0.55 + i * 0.95) * p; return [a, a + 0.88 * p]; });
     T.done = T.pane[SRC.length - 1][1] + 0.15 * p;
-    T.end = T.done + 0.95 * p;
+    T.end = T.done + 0.55 * p;
     return T;
   },
   build(k, x) {

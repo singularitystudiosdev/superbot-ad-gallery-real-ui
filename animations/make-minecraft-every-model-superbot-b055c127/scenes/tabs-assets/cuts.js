@@ -4,7 +4,7 @@
 // clock), whether sam asks for each step, and the finale (zoom: the camera dives into the running game).
 export const CUTS = {
   auto: {
-    pace: 1, zoom: false, end: 'EVERY MODEL.<br> ONE CHAT.',
+    pace: 1, zoom: false, end: 'superbot',
     asks: ['I want to make minecraft', null, null, null, null],
     say: {
       code: 'On it. Writing the engine: terrain, chunks, meshing, physics, the renderer.',
@@ -15,7 +15,7 @@ export const CUTS = {
     },
   },
   steps: {
-    pace: 1.08, zoom: false, end: 'YOU ASK.<br> IT SWITCHES.',
+    pace: 1.08, zoom: false, end: 'superbot',
     asks: ['I want to make minecraft', 'push it to my github', 'find some block textures', 'make me the decals', 'put it all together'],
     say: {
       code: 'Opus 5.5 has the code. Engine first, then the player.',
@@ -26,7 +26,7 @@ export const CUTS = {
     },
   },
   zoom: {
-    pace: 0.86, zoom: true, end: 'ONE CHAT.<br> ONE GAME.',
+    pace: 0.86, zoom: true, end: 'superbot',
     asks: ['I want to make minecraft', null, null, null, null],
     say: {
       code: 'Writing the whole thing. Engine, world gen, player, renderer.',

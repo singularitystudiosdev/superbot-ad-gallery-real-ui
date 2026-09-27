@@ -7,9 +7,9 @@
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import { CFG } from './cuts.js?v=3';
-import opusCode from './beats/opus-code.js?v=3';
+import opusCode from './beats/opus-code.js?v=4';
 import github from './beats/github.js?v=4';
-import decalScrape from './beats/decal-scrape.js?v=3';
+import decalScrape from './beats/decal-scrape.js?v=4';
 import decalGen from './beats/decal-gen.js?v=3';
 import opusShip from './beats/opus-ship.js?v=4';
 

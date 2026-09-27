@@ -1,225 +1,331 @@
-// Claude Opus 5.5 writes the game as a hyper-sped work montage. Two write lanes run in parallel: each streams its
-// files into an editor pane as abstract syntax bars (never legible source) behind a live caret that starts at typing
-// speed and accelerates into a motion-blurred river, while the file tree lights, fills and flashes file by file and the
-// line total races (then eases) to +2,418. At done the river stops, a green scan sweeps the panes and the state pops
-// to Built. One speed profile drives everything, so the caret, the tree, the counters and the progress bar agree.
-// Pure function of t: the profile is integrated once in build() and every line is a seeded function of (lane, line),
-// so render() reads the clock and nothing else (no Math.random, no layout reads). Wide columns show both lanes' panes
-// (mc-code.css container query); narrow ones show lane 0 and the tree carries lane 1.
-import { clamp, seg, outCubic, outBack, rand, blink } from '../../../lib.js';
-import { sayer, rise, setText, fmt, REPO, TICK } from './kit.js';
+// Claude Opus 5.5 writes the game as a sped-up replay of a real agent run, in the grammar of Cursor's agent panel
+// (referent: Cursor changelog 1.7 demo video, changelog-1-7-0.mp4, and the 2.1 review video, changelog-2-1-1.mp4):
+// "Thought for 3s" and "Read package.json" tool rows, file-edit cards whose green diff hunks of real JS stream past
+// with line numbers, collapsed "Edited" rows, a terminal block running the tests to "41 passed", and the review bar
+// "14 files changed +2,418 -0" with Undo all / Accept all / Review. The transcript is bottom-anchored inside a fixed
+// viewport (CSS only), so every item that lands pushes the run up the way the real panel autoscrolls.
+// Pure function of t: every item's slot, height and stream are computed from the schedule in times(); render() reads
+// the clock and nothing else (no Math.random, no layout reads). Item heights are constants in --u units, so the
+// stacking is exact at every column width.
+import { seg, outCubic, outBack } from '../../../lib.js';
+import { sayer, rise, setText, fmt, REPO, TICK, TERM, O_BRANCH } from './kit.js';
 
-const FILES = [
-  ['engine/world.js', 262], ['engine/chunk.js', 242], ['engine/mesher.js', 248], ['engine/noise.js', 102],
-  ['game/player.js', 220], ['game/physics.js', 211], ['game/blocks.js', 166], ['render/webgl.ts', 300],
-  ['render/shaders.ts', 158], ['render/camera.ts', 99], ['ui/hotbar.js', 98], ['ui/inventory.js', 142],
-  ['game/loop.js', 74], ['main.js', 96],
-];
-const TOTAL = FILES.reduce((s, [, n]) => s + n, 0); // 2,418: the header total the montage counts up to
-const N = FILES.length;
-const STEPS = ['Scaffold project', 'Generate terrain', 'Chunk mesher', 'Player physics', 'Block textures', 'Tests passing'];
-const bump = (p) => Math.sin(Math.PI * clamp(p));
-const smooth = (x) => { const c = clamp(x); return c * c * (3 - 2 * c); };
+// ---- the code that flies past: plausible source for the engine files ----
+const NOISE = `// 2D simplex noise, seeded (after Gustavson)
+const F2 = 0.5 * (Math.sqrt(3) - 1);
+const G2 = (3 - Math.sqrt(3)) / 6;
 
-// the two write lanes: even files on lane 0, odd on lane 1, each written in order; start/end are cumulative lines
-const LANES = [0, 1].map((j) => {
-  let at = 0;
-  const files = FILES.map((f, i) => i).filter((i) => i % 2 === j).map((i) => { const o = { i, a: at, b: at + FILES[i][1] }; at = o.b; return o; });
-  return { files, total: at };
-});
-const LANE_OF = FILES.map((_, i) => LANES[i % 2].files.find((o) => o.i === i));
+export function createNoise2D(seed = 1) {
+  const perm = new Uint8Array(512);
+  const p = shuffle(range(256), mulberry32(seed));
+  for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
+  return (x, y) => {
+    const s = (x + y) * F2;
+    const i = Math.floor(x + s), j = Math.floor(y + s);
+    const t = (i + j) * G2;
+    const x0 = x - (i - t), y0 = y - (j - t);
+    const i1 = x0 > y0 ? 1 : 0, j1 = 1 - i1;
+    return 70 * (corner(perm, i, j, x0, y0) + corner(perm, i + i1, j + j1, x0 - i1 + G2, y0 - j1 + G2));
+  };
+}`;
+const WORLD = `import { createNoise2D } from './noise.js';
+import { Chunk, CHUNK_SIZE } from './chunk.js';
+import { BLOCK } from '../game/blocks.js';
 
-// the editor: SLOTS rows of abstract source, the caret parks ANCHOR rows down and the text scrolls under it
-const SLOTS = 34, ANCHOR = 16, BARS = 6, VMAX = 132; // VMAX: peak display lines per second
-const SPEED = [1, 0.9]; // lane 1 runs a touch slower on screen so the two rivers never scroll in lockstep
-const GAP = 1.4; // % of the track between runs on one line
-
-// one line of abstract source for lane j, line L: an indent that walks in blocks plus 1-6 coloured runs, from the seed
-const LINES = new Map();
-function line(j, L) {
-  const key = j * 100000 + L;
-  let o = LINES.get(key);
-  if (o) return o;
-  const s = j * 977.31 + L;
-  const blk = Math.floor(L / 6);
-  const ind = (Math.floor(rand(j * 53.1 + blk * 1.93 + 0.4) * 3) + (L % 6 === 0 ? 0 : 1)) * 5.5;
-  const bars = [];
-  if (rand(s * 1.37 + 0.5) >= 0.09) { // ~9% blank lines, as in real source
-    const cn = 1 + Math.floor(rand(s * 7.71 + 5) * BARS);
-    let x = ind;
-    for (let k = 0; k < cn && x < 84; k++) {
-      const w = Math.min(92 - x, 3 + rand(s * 13.37 + k * 5.9 + 2) * 17);
-      bars.push({ x, w, c: 1 + Math.floor(rand(s * 2.71 + k * 11.1 + 3) * 6) });
-      x += w + GAP;
-    }
+export class World {
+  constructor(seed) {
+    this.noise = createNoise2D(seed);
+    this.chunks = new Map();
   }
-  o = { bars, x0: ind, x1: bars.length ? bars[bars.length - 1].x + bars[bars.length - 1].w : ind };
-  LINES.set(key, o);
-  return o;
+
+  heightAt(x, z) {
+    const n = this.noise(x / 96, z / 96) * 0.7 + this.noise(x / 24, z / 24) * 0.3;
+    return Math.floor(32 + n * 18);
+  }
+
+  generate(cx, cz) {
+    const chunk = new Chunk(cx, cz);
+    for (let x = 0; x < CHUNK_SIZE; x++)
+      for (let z = 0; z < CHUNK_SIZE; z++) {
+        const h = this.heightAt(cx * CHUNK_SIZE + x, cz * CHUNK_SIZE + z);
+        for (let y = 0; y <= h; y++)
+          chunk.set(x, y, z, y === h ? BLOCK.GRASS : y > h - 4 ? BLOCK.DIRT : BLOCK.STONE);
+      }
+    return chunk;
+  }`;
+const MESHER = `import { CHUNK_SIZE, CHUNK_HEIGHT } from './chunk.js';
+import { isOpaque, faceUV } from '../game/blocks.js';
+
+export function buildMesh(chunk, world) {
+  const positions = [], normals = [], uvs = [], indices = [];
+  for (let y = 0; y < CHUNK_HEIGHT; y++)
+    for (let z = 0; z < CHUNK_SIZE; z++)
+      for (let x = 0; x < CHUNK_SIZE; x++) {
+        const id = chunk.get(x, y, z);
+        if (!id) continue;
+        for (const { dir, corners } of FACES) {
+          const n = world.neighbor(chunk, x + dir[0], y + dir[1], z + dir[2]);
+          if (isOpaque(n)) continue; // hidden face: never meshed
+          const base = positions.length / 3;
+          for (const [px, py, pz] of corners) positions.push(x + px, y + py, z + pz);
+          uvs.push(...faceUV(id, dir));
+          indices.push(base, base + 1, base + 2, base, base + 2, base + 3);
+        }
+      }
+  return { positions, normals, uvs, indices };
+}`;
+const PHYSICS = `const GRAVITY = -28;
+const TERMINAL = -54;
+
+export function stepPlayer(p, world, dt) {
+  p.vel.y = Math.max(TERMINAL, p.vel.y + GRAVITY * dt);
+  p.onGround = false;
+  for (const axis of ['x', 'y', 'z']) {
+    p.pos[axis] += p.vel[axis] * dt;
+    const hit = sweepAABB(p.box(), world);
+    if (!hit) continue;
+    p.pos[axis] -= hit.depth[axis];
+    if (axis === 'y' && p.vel.y < 0) p.onGround = true;
+    p.vel[axis] = 0;
+  }
+  if (p.onGround && p.input.jump) p.vel.y = 9.2;
 }
 
-const SLOT = `<div class="mcm-l"><div class="mcm-tk">${'<i></i>'.repeat(BARS)}</div></div>`;
-const pane = (j) => `<div class="mcm-code${j ? ' b' : ''}">
-  <div class="mcm-tab"><i></i><span>${FILES[j][0].split('/').pop()}</span><em>Ln 0</em></div>
-  <div class="mcm-ed"><i class="mcm-cur"></i><div class="mcm-stk">${SLOT.repeat(SLOTS)}</div>
-    <div class="mcm-ov"><i class="mcm-caret"></i></div><i class="mcm-scan"></i></div>
-</div>`;
+function sweepAABB(box, world) {
+  for (let x = Math.floor(box.min.x); x <= Math.floor(box.max.x); x++)
+    for (let y = Math.floor(box.min.y); y <= Math.floor(box.max.y); y++)
+      for (let z = Math.floor(box.min.z); z <= Math.floor(box.max.z); z++)
+        if (world.isSolid(x, y, z)) return overlap(box, x, y, z);
+  return null;
+}`;
+const WEBGL = `export class Renderer {
+  private gl: WebGL2RenderingContext;
+  private program: WebGLProgram;
+  private meshes = new Map<string, GPUChunk>();
+
+  constructor(canvas: HTMLCanvasElement) {
+    this.gl = canvas.getContext('webgl2', { antialias: false })!;
+    this.program = link(this.gl, VOXEL_VS, VOXEL_FS);
+    this.gl.enable(this.gl.DEPTH_TEST);
+    this.gl.enable(this.gl.CULL_FACE);
+  }
+
+  upload(key: string, mesh: Mesh) {
+    const gl = this.gl, vao = gl.createVertexArray()!;
+    gl.bindVertexArray(vao);
+    attrib(gl, 0, 3, mesh.positions);
+    attrib(gl, 1, 2, mesh.uvs);
+    this.meshes.set(key, { vao, count: mesh.indices.length });
+  }
+
+  draw(camera: Camera) {
+    const gl = this.gl;
+    gl.clearColor(0.53, 0.75, 0.96, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.useProgram(this.program);
+    gl.uniformMatrix4fv(this.uViewProj, false, camera.viewProj);`;
+const TESTS = [
+  ['$', 'npm test'],
+  ['', '> blockcraft@0.1.0 test'],
+  ['', '> vitest run'],
+  ['', ''],
+  ['ok', 'engine/noise.test.js', '(6 tests)', '3ms'],
+  ['ok', 'engine/world.test.js', '(7 tests)', '12ms'],
+  ['ok', 'engine/chunk.test.js', '(9 tests)', '8ms'],
+  ['ok', 'engine/mesher.test.js', '(8 tests)', '21ms'],
+  ['ok', 'game/physics.test.js', '(11 tests)', '6ms'],
+  ['', ''],
+  ['sum', 'Test Files', '5 passed (5)'],
+  ['sum', '     Tests', '41 passed (41)'],
+];
+const PASSED = '41 passed';
+
+// ---- the run: what lands, in order ----
+const SCRIPT = [
+  { k: 'row', v: 'Thought', a: 'for 3s' },
+  { k: 'row', v: 'Listed', a: 'blockcraft/' },
+  { k: 'row', v: 'Read', a: 'package.json' },
+  { k: 'card', f: 'engine/noise.js', n: 102, src: NOISE },
+  { k: 'card', f: 'engine/world.js', n: 262, src: WORLD },
+  { k: 'edit', f: 'engine/chunk.js', n: 242 },
+  { k: 'card', f: 'engine/mesher.js', n: 248, src: MESHER },
+  { k: 'edit', f: 'game/blocks.js', n: 166 },
+  { k: 'card', f: 'game/physics.js', n: 211, src: PHYSICS },
+  { k: 'edit', f: 'game/player.js', n: 220 },
+  { k: 'edit', f: 'game/loop.js', n: 74 },
+  { k: 'card', f: 'render/webgl.ts', n: 300, src: WEBGL },
+  { k: 'edit', f: 'render/shaders.ts', n: 158 },
+  { k: 'edit', f: 'render/camera.ts', n: 99 },
+  { k: 'edit', f: 'ui/hotbar.js', n: 98 },
+  { k: 'edit', f: 'ui/inventory.js', n: 142 },
+  { k: 'edit', f: 'main.js', n: 96 },
+  { k: 'row', v: 'Thought', a: 'for 1s' },
+  { k: 'term', cmd: 'npm test' },
+];
+const FILES = SCRIPT.filter((s) => s.f);
+const TOTAL = FILES.reduce((s, f) => s + f.n, 0); // 2,418
+// seconds at pace 1: how long an item takes to land/stream (DUR) and when the next one starts after it (STEP)
+const DUR = { row: 0.08, edit: 0.08, card: 0.2, term: 0.34 };
+const STEP = { row: 0.05, edit: 0.034, card: 0.15, term: 0.34 };
+// heights in --u units (1px at narrow columns, a bit more on wide ones); GAP rides inside each item's slot
+const BODY = 7, LH = 17; // a code/terminal body shows 7 lines of 17
+const HGT = { row: 22, edit: 28, card: 32 + BODY * LH + 12, term: 32 + BODY * LH + 12 };
+const GAP = 6;
+const WORK = 412; // the elapsed clock the run replays, in seconds (6m 52s)
+
+// ---- a small highlighter, run once at build: comments, strings, numbers, keywords, calls, types, members ----
+const KW = new Set('import export from const let var function return for of if else continue new class constructor private this true false null while break'.split(' '));
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function hl(src) {
+  const re = /(\/\/.*$)|('[^']*'|"[^"]*")|(\b\d+(?:\.\d+)?\b)|([A-Za-z_$][\w$]*)|(\s+)|([^\w\s])/g;
+  let out = '', m, prev = '';
+  while ((m = re.exec(src))) {
+    const [tok, cm, str, num, id, ws] = m;
+    if (cm) out += `<i class="c">${esc(cm)}</i>`;
+    else if (str) out += `<i class="s">${esc(str)}</i>`;
+    else if (num) out += `<i class="n">${esc(num)}</i>`;
+    else if (id) {
+      const next = src.slice(re.lastIndex).trimStart()[0];
+      const cls = KW.has(id) ? 'k' : next === '(' ? 'f' : /^[A-Z][A-Z0-9_]+$/.test(id) ? 'n' : /^[A-Z]/.test(id) ? 't' : prev === '.' ? 'p' : '';
+      out += cls ? `<i class="${cls}">${esc(id)}</i>` : esc(id);
+    } else out += esc(tok);
+    if (!ws) prev = tok;
+  }
+  return out;
+}
+
+const ext = (f) => (f.endsWith('.ts') ? 'ts' : 'js');
+const fileIco = (f) => `<b class="mcx-fi ${ext(f)}">${ext(f).toUpperCase()}</b>`;
+const nameOf = (f) => f.split('/').pop();
+const dirOf = (f) => (f.includes('/') ? f.slice(0, f.lastIndexOf('/')) : '');
+const stats = (n) => `<span class="mcx-add">+${fmt(n)}</span><span class="mcx-del">-0</span>`;
+const clock = (s) => `${Math.floor(s / 60)}m ${String(Math.floor(s % 60)).padStart(2, '0')}s`;
+
+function itemHTML(s) {
+  if (s.k === 'row') return `<div class="mcx-row"><span>${s.v}</span> ${esc(s.a)}</div>`;
+  if (s.k === 'edit') {
+    return `<div class="mcx-ed">${fileIco(s.f)}<b>${nameOf(s.f)}</b><s>${dirOf(s.f)}</s><em>${stats(s.n)}</em></div>`;
+  }
+  if (s.k === 'card') {
+    const lines = s.src.split('\n');
+    return `<div class="mcx-card">
+      <div class="mcx-ch">${fileIco(s.f)}<b>${nameOf(s.f)}</b><s>${dirOf(s.f)}</s><em><span class="mcx-add">+0</span><span class="mcx-del">-0</span></em></div>
+      <div class="mcx-bd"><div class="mcx-lines">${lines.map((l, i) => `<div class="mcx-l"><u>${i + 1}</u><code>${hl(l) || ' '}</code></div>`).join('')}</div></div>
+    </div>`;
+  }
+  // the terminal block
+  const tl = TESTS.map(([kind, a, b, c]) => {
+    if (kind === '$') return `<div class="mcx-l"><code><i class="dl">$</i> <i class="cmd">${esc(a)}</i></code></div>`;
+    if (kind === 'ok') return `<div class="mcx-l"><code> <i class="ok">&#10003;</i> ${esc(a)} <i class="dim">${esc(b)} ${esc(c)}</i></code></div>`;
+    if (kind === 'sum') return `<div class="mcx-l"><code><i class="dim">${esc(a)}</i>  <i class="ok">${esc(b)}</i></code></div>`;
+    return `<div class="mcx-l"><code><i class="dim">${esc(a) || ' '}</i></code></div>`;
+  }).join('');
+  return `<div class="mcx-term">
+    <div class="mcx-ch">${TERM}<b class="mcx-tv">Running</b><span class="mcx-cmd">${esc(s.cmd)}</span><em class="mcx-tst"><i class="mcx-spin"></i><span></span></em></div>
+    <div class="mcx-bd"><div class="mcx-lines">${tl}</div></div>
+  </div>`;
+}
 
 export default {
   times(r, c) {
     const p = c.pace, T = { r };
-    T.card = r + 0.1 * p;
-    T.sta = T.card + 0.1 * p;  // the caret starts typing, the counters start moving
-    T.done = T.card + 1.12 * p; // the river stops: green scan, Built
+    T.card = r + 0.08 * p;
+    let at = T.card + 0.1 * p;
+    T.items = SCRIPT.map((s) => { const o = { a: at, b: at + DUR[s.k] * p }; at += STEP[s.k] * p; return o; });
+    T.done = T.items[T.items.length - 1].b + 0.04 * p; // the tests pass: review bar live, Done
     T.end = T.done + 0.42 * p;
     return T;
   },
   build(k, x) {
     const T = k.T;
     const say = sayer(x, k.cfg.say.code);
-    const card = x.el(`<div class="mcm-card">
-      <svg class="mcm-defs" width="0" height="0" aria-hidden="true"><filter id="mcm-vblur" x="0" y="-10%" width="100%" height="120%"><feGaussianBlur stdDeviation="0 0"/></filter></svg>
-      <div class="mcm-hd">
-        <span class="mcm-ric">${REPO}</span><b>blockcraft</b><span class="mcm-br">main</span>
-        <em class="mcm-stat">+0 lines &middot; 0 files</em>
-        <em class="mcm-state"><i class="mcm-spin"></i>${TICK}<span>Writing</span></em>
+    const card = x.el(`<div class="mcx">
+      <div class="mcx-hd">
+        <span class="mcx-repo">${REPO}<b>blockcraft</b></span><span class="mcx-br">${O_BRANCH}main</span>
+        <em class="mcx-state"><i class="mcx-spin"></i>${TICK}<span class="mcx-sl">Working</span><span class="mcx-clk">0m 00s</span></em>
       </div>
-      <div class="mcm-bd">
-        <div class="mcm-tree">${FILES.map(([f]) => {
-          const cut = f.lastIndexOf('/') + 1;
-          return `<div class="mcm-f"><b class="mcm-fill"></b><span><s>${f.slice(0, cut)}</s>${f.slice(cut)}</span><em></em></div>`;
-        }).join('')}</div>
-        ${pane(0)}${pane(1)}
+      <div class="mcx-vp"><div class="mcx-stk">${SCRIPT.map((s) => `<div class="mcx-it">${itemHTML(s)}</div>`).join('')}<div class="mcx-sp"></div></div></div>
+      <div class="mcx-ft">
+        <span class="mcx-sum"><svg class="mcx-chev" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4"/></svg><b class="mcx-nf">0 files</b><span class="mcx-add">+0</span><span class="mcx-del">-0</span></span>
+        <span class="mcx-btns"><i class="mcx-b">Undo all</i><i class="mcx-b mcx-pri">Accept all</i><i class="mcx-b">Review</i></span>
       </div>
-      <div class="mcm-ft">
-        <span class="mcm-step">${STEPS[0]}</span>
-        <span class="mcm-prog"><i></i></span>
-        <em class="mcm-pct">0%</em>
-      </div>
-      <i class="mcm-flash"></i>
     </div>`);
     const $ = (s) => card.querySelector(s);
-    const blur = card.querySelector('feGaussianBlur');
-    const rows = [...card.querySelectorAll('.mcm-f')].map((n) => ({ n, fill: n.querySelector('.mcm-fill'), num: n.lastElementChild, st: '' }));
-    const prog = $('.mcm-prog > i'), pct = $('.mcm-pct'), stepEl = $('.mcm-step'), statEl = $('.mcm-stat');
-    const state = $('.mcm-state'), stateL = state.lastElementChild, stateTk = state.querySelector('.mc-tk');
-    const spin = $('.mcm-spin'), flash = $('.mcm-flash');
-    const panes = [...card.querySelectorAll('.mcm-code')].map((p) => ({
-      ed: p.querySelector('.mcm-ed'), stk: p.querySelector('.mcm-stk'), caret: p.querySelector('.mcm-caret'),
-      scan: p.querySelector('.mcm-scan'), name: p.querySelector('.mcm-tab span'), ln: p.querySelector('.mcm-tab em'),
-      slots: [...p.querySelectorAll('.mcm-l')].map((n) => ({ n, tk: n.firstElementChild, bars: [...n.firstElementChild.children], L: -1, vis: '', clip: '' })),
-    }));
-
-    // the one speed profile: a typing-speed start that accelerates into a flat-out run, then eases into the stop, so
-    // the caret visibly types first, the tree completes files faster and faster and the counters settle on the total
-    const U = Math.max(1e-3, T.done - T.sta), NS = 480;
-    const vel = (u) => (u < 0.3 ? 0.09 + 0.91 * smooth(u / 0.3) : u < 0.8 ? 1 : 1 - 0.95 * smooth((u - 0.8) / 0.2));
-    const H = new Float64Array(NS + 1);
-    for (let i = 1; i <= NS; i++) H[i] = H[i - 1] + (vel((i - 0.5) / NS) * VMAX * U) / NS;
-    const HEND = H[NS];
-    const disp = (t) => { const f = clamp((t - T.sta) / U) * NS, i = Math.min(NS - 1, Math.floor(f)); return H[i] + (H[i + 1] - H[i]) * (f - i); };
-    // when each file completes (its lane's share of the profile crosses the file's end): the moment its row flashes
-    const doneAt = FILES.map((_, i) => {
-      const o = LANE_OF[i], lt = LANES[i % 2].total, goal = (o.b / lt) * HEND;
-      let s = 0; while (s < NS && H[s] < goal - 1e-9) s++;
-      return T.sta + (s / NS) * U;
-    });
-
-    function renderPane(pn, j, t, h, live) {
-      const off = Math.max(0, h - ANCHOR), L0 = Math.floor(off), head = Math.floor(h), f = h - head;
-      pn.stk.style.setProperty('--sh', (off - L0).toFixed(3));
-      for (let s = 0; s < SLOTS; s++) {
-        const sl = pn.slots[s], L = L0 + s, ln = line(j, L);
-        if (sl.L !== L) {
-          sl.L = L;
-          sl.bars.forEach((b, q) => {
-            const bar = ln.bars[q];
-            // every property is rewritten either way, so a slot's DOM depends on its line alone, not on its history
-            b.style.display = bar ? '' : 'none';
-            b.style.left = bar ? `${bar.x.toFixed(2)}%` : '';
-            b.style.width = bar ? `${bar.w.toFixed(2)}%` : '';
-            b.className = bar ? `mcm-c${bar.c}` : '';
-          });
-        }
-        const vis = L > head ? 'hidden' : '';
-        if (sl.vis !== vis) { sl.n.style.visibility = vis; sl.vis = vis; }
-        // the line under the caret is only written as far as the caret has got
-        const clip = L === head && live ? `inset(0 ${(100 - (ln.x0 + f * (ln.x1 - ln.x0))).toFixed(2)}% 0 0)` : '';
-        if (sl.clip !== clip) { sl.tk.style.clipPath = clip; sl.clip = clip; }
+    // width classes in place of a CSS size container (see mc-code.css): the card's content width against the same
+    // thresholds, re-read only when the card resizes; a hidden card (0 wide) keeps its last classes
+    const sizeCls = (w) => { if (w > 0) { card.classList.toggle('mcx-wide', w >= 760); card.classList.toggle('mcx-narrow', w <= 470); } };
+    if (typeof ResizeObserver === 'function') new ResizeObserver((es) => sizeCls(es[es.length - 1].contentRect.width)).observe(card);
+    const items = [...card.querySelectorAll('.mcx-it')].map((n, i) => {
+      const s = SCRIPT[i], o = { n, s, ...T.items[i], h: -1, st: '' };
+      if (s.k === 'card' || s.k === 'term') {
+        o.lines = [...n.querySelectorAll('.mcx-l')];
+        o.box = n.querySelector('.mcx-lines');
+        o.shown = -1;
+        o.add = n.querySelector('.mcx-ch .mcx-add');
       }
-      const hl = line(j, head);
-      pn.ed.style.setProperty('--cy', (head - off).toFixed(3));
-      pn.caret.style.left = `${(live ? hl.x0 + f * (hl.x1 - hl.x0) : hl.x1).toFixed(2)}%`;
-      // the caret blinks while it waits for the first keystroke, burns solid while writing and goes at done
-      const on = t < T.sta ? blink(t - T.card, 0.5) : t < T.done;
-      pn.caret.style.opacity = on ? '1' : (1 - seg(t, T.done, T.done + 0.12)).toFixed(3);
-      // done: a green scan sweeps top to bottom and leaves the pane tinted
-      const sw = outCubic(seg(t, T.done, T.done + 0.24));
-      pn.scan.style.setProperty('--sw', sw.toFixed(3));
-      pn.scan.style.opacity = sw > 0 ? '1' : '0';
-      pn.scan.style.setProperty('--edge', (1 - seg(t, T.done + 0.24, T.done + 0.4)).toFixed(3));
-    }
+      if (s.k === 'term') { o.tv = n.querySelector('.mcx-tv'); o.tst = n.querySelector('.mcx-tst'); o.tsl = o.tst.lastElementChild; o.spin = o.tst.firstElementChild; }
+      return o;
+    });
+    const state = $('.mcx-state'), stateL = $('.mcx-sl'), clk = $('.mcx-clk'), spin = $('.mcx-hd .mcx-spin'), stTk = state.querySelector('.mc-tk');
+    const nf = $('.mcx-nf'), fAdd = $('.mcx-ft .mcx-add'), ft = $('.mcx-ft'), pri = $('.mcx-pri');
+
+    // lines streamed so far in a card/terminal body: slow first line, then a run to the end
+    const streamed = (o, t) => o.lines.length * outCubic(seg(t, o.a + 0.02 * (o.b - o.a), o.b)) ** 0.9;
 
     return {
       nodes: [say.node, card],
       marks: [[T.r, say.node], [T.card, card]],
       render(t) {
         say.render(t, T.r + 0.05);
-        rise(card, seg(t, T.card, T.card + 0.3), 16);
+        rise(card, seg(t, T.card, T.card + 0.2), 16);
         const d = t >= T.done;
-        const hd = disp(t), frac = hd / HEND; // share of the work written
-        const u = clamp((t - T.sta) / U), v = t > T.sta && !d ? vel(u) : 0;
-
-        // speed reads as vertical motion blur on the text once the river is flat out (never on the caret)
-        const sig = 2.4 * seg(v, 0.5, 1);
-        blur.setAttribute('stdDeviation', `0 ${sig.toFixed(2)}`);
-        panes.forEach((pn, j) => {
-          pn.stk.style.filter = sig > 0.05 ? 'url(#mcm-vblur)' : '';
-          renderPane(pn, j, t, hd * SPEED[j], !d);
-        });
-
-        // per file: lines written so far on its lane, active while its lane is inside it, a flash as it completes
         let lines = 0, files = 0;
-        const act = [-1, -1];
-        rows.forEach((r, i) => {
-          r.n.style.opacity = outCubic(seg(t, T.card + 0.03 + i * 0.014, T.card + 0.2 + i * 0.014)).toFixed(3);
-          const o = LANE_OF[i], w = frac * LANES[i % 2].total;
-          const nl = d ? FILES[i][1] : clamp(w - o.a, 0, FILES[i][1]);
-          const complete = d || w >= o.b - 1e-6;
-          const st = complete ? 'ok' : nl > 0 ? 'on' : '';
-          if (st === 'on') act[i % 2] = i;
-          if (r.st !== st) { r.n.classList.toggle('on', st === 'on'); r.n.classList.toggle('ok', st === 'ok'); r.st = st; }
-          r.fill.style.transform = `scaleX(${(nl / FILES[i][1]).toFixed(3)})`;
-          r.n.style.setProperty('--fl', bump(seg(t, doneAt[i], doneAt[i] + 0.16)).toFixed(3));
-          setText(r.num, nl > 0 ? `+${fmt(nl)}` : '');
-          lines += nl; if (complete) files++;
-        });
-        // each pane's tab follows its lane's current file, its line number racing and resetting file by file
-        panes.forEach((pn, j) => {
-          const i = act[j] >= 0 ? act[j] : (frac > 0 ? LANES[j].files[LANES[j].files.length - 1].i : j);
-          const o = LANE_OF[i], nl = d || act[j] < 0 ? (frac > 0 ? FILES[i][1] : 0) : clamp(frac * LANES[j].total - o.a, 0, FILES[i][1]);
-          setText(pn.name, FILES[i][0].split('/').pop());
-          setText(pn.ln, `Ln ${fmt(nl)}`);
+        items.forEach((o) => {
+          const { s } = o;
+          // the slot opens (height), which pushes the whole run up; the content lands just behind it
+          const e = outCubic(seg(t, o.a, o.a + 0.07));
+          const h = e * (HGT[s.k] + GAP);
+          if (Math.abs(h - o.h) > 1e-3) { o.n.style.height = `calc(var(--u) * ${h.toFixed(3)})`; o.h = h; }
+          o.n.style.opacity = e.toFixed(3);
+          if (s.k === 'card' || s.k === 'term') {
+            const nf2 = t < o.a ? 0 : streamed(o, t), shown = Math.min(o.lines.length, Math.ceil(nf2 - 1e-6));
+            if (shown !== o.shown) { o.lines.forEach((l, q) => { l.style.visibility = q < shown ? '' : 'hidden'; }); o.shown = shown; }
+            // once the body overflows it also scrolls its 6-unit top padding away, so no sliver of a line peeks under the header
+            const over = Math.max(0, nf2 - BODY);
+            o.box.style.transform = `translateY(calc(var(--u) * ${(-(over * LH + Math.min(1, over) * 6)).toFixed(2)}))`;
+            const live = t >= o.a && t < o.b;
+            o.n.classList.toggle('live', live);
+            if (s.k === 'card') {
+              const nl = s.n * seg(t, o.a, o.b);
+              setText(o.add, `+${fmt(nl)}`);
+              lines += nl; if (t >= o.b) files++;
+            } else {
+              const ok = t >= o.b;
+              setText(o.tv, ok ? 'Ran' : 'Running');
+              setText(o.tsl, ok ? PASSED : '');
+              o.tst.classList.toggle('ok', ok);
+              o.spin.style.transform = `rotate(${((t - o.a) * 900).toFixed(1)}deg)`;
+            }
+          } else if (s.k === 'edit' && t >= o.a) { lines += s.n; files++; }
         });
 
-        const q = d ? 1 : lines / TOTAL;
-        setText(statEl, `+${fmt(d ? TOTAL : lines)} lines · ${d ? N : files} files`);
-        prog.style.transform = `scaleX(${q.toFixed(4)})`;
-        setText(pct, `${Math.round(q * 100)}%`);
-        // the action ticker flashes through the steps, each new label landing bright then dimming
-        const sp = q * (STEPS.length - 1); // the last label, Tests passing, is kept for done
-        setText(stepEl, d ? STEPS[STEPS.length - 1] : STEPS[Math.min(STEPS.length - 2, Math.floor(sp))]);
-        stepEl.style.opacity = d || t < T.sta ? '1' : (0.4 + 0.6 * (1 - (sp % 1))).toFixed(3);
-
-        // the done beat: green frame, the total pill pulses, the state pops to Built with its tick
-        card.classList.toggle('mcm-done', d);
+        // header: the replayed elapsed clock races while Working, then Worked for 6m 52s with a tick
+        const w = seg(t, T.card, T.done);
+        setText(stateL, d ? 'Worked for' : 'Working');
+        setText(clk, clock(WORK * w));
         state.classList.toggle('ok', d);
-        setText(stateL, d ? 'Built' : 'Writing');
-        const pop = seg(t, T.done, T.done + 0.24);
-        stateTk.style.transform = d && pop < 1 ? `scale(${outBack(pop).toFixed(3)})` : '';
-        statEl.style.transform = d ? `scale(${(1 + 0.08 * bump(seg(t, T.done, T.done + 0.26))).toFixed(4)})` : '';
         spin.style.transform = `rotate(${((t - T.card) * 720).toFixed(1)}deg)`;
-        flash.style.opacity = bump(seg(t, T.done, T.done + 0.38)).toFixed(3);
+        const pop = seg(t, T.done, T.done + 0.22);
+        stTk.style.transform = d && pop < 1 ? `scale(${outBack(pop).toFixed(3)})` : '';
+
+        // the review bar: files and lines count up as edits land; at done its buttons go live and Accept all pulses
+        setText(nf, d ? `${FILES.length} files changed` : `${files} file${files === 1 ? '' : 's'}`);
+        setText(fAdd, `+${fmt(d ? TOTAL : lines)}`);
+        ft.classList.toggle('on', d);
+        card.classList.toggle('mcx-done', d);
+        const pb = Math.sin(Math.PI * seg(t, T.done, T.done + 0.3));
+        pri.style.transform = d ? `scale(${(1 + 0.08 * pb).toFixed(4)})` : '';
+        pri.style.boxShadow = d ? `0 0 0 ${(4 * pb).toFixed(2)}px rgba(236,236,241,${(0.22 * pb).toFixed(3)})` : '';
       },
     };
   },

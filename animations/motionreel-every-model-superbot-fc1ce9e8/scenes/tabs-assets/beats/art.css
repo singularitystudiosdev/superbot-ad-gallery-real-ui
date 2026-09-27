@@ -1,0 +1,71 @@
+/* Art beat (beats/art.js): Gemini's style board for the motion reel. The seven chapter stills of the clip on a 4x2
+   bar grid (01 IDENTITY spans two cells, as it spans two bars), a palette strip of the reel's five swatches with
+   their hex values, and a type strip setting its three faces on its red. Nothing here transitions: opacity/filter/
+   transform/clip-path/letter-spacing are written from t in render, so ?t= freezes a frame. Every selector is scoped
+   under the hub and prefixed .art-. The "Creating 7 style frames" chip reuses the shared .dd-chiprow/.ch-tool
+   tool-chip markup from chat.css; the pill look is repeated on .art-gen so the chip reads the same even before that
+   sheet lands. Palette and fonts come from style.css :root (--mr-*), each with its literal fallback. */
+
+/* the board: one ink sheet, 440px wide like the other beats' cards */
+#s-tabs .sbsite .hub .art-board { box-sizing: border-box; width: 440px; max-width: 100%; margin-top: 2px; padding: 9px 10px 10px;
+  border-radius: 10px; background: var(--mr-ink, #0F0F11); opacity: 0; transform-origin: 50% 0;
+  box-shadow: inset 0 0 0 1px #2a2a2e, 0 8px 22px rgba(0, 0, 0, .35); }
+#s-tabs .sbsite .hub .art-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+#s-tabs .sbsite .hub .art-head b { font: 600 12.5px/1.2 var(--ui); color: var(--mr-cream, #F2EFE7); }
+#s-tabs .sbsite .hub .art-head small { font: 500 8px/1 var(--mr-mono, var(--mono)); letter-spacing: .1em; color: #8e8b84; }
+
+/* the bar grid: four cells a row, one per bar. Each cell is a frame with its caption under it; the wide cell's
+   frame fills the row height its single-bar neighbours set */
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px 4px; }
+#s-tabs .sbsite .hub .art-tile { display: flex; flex-direction: column; gap: 3px; min-width: 0; margin: 0; opacity: 0;
+  transform-origin: 50% 60%; will-change: transform, opacity; }
+#s-tabs .sbsite .hub .art-tile.art-wide { grid-column: span 2; }
+#s-tabs .sbsite .hub .art-frame { position: relative; aspect-ratio: 16 / 9; border-radius: 5px; overflow: hidden;
+  background: #1a1a1f; box-shadow: 0 0 0 1px #2a2a2e, 0 4px 12px rgba(0, 0, 0, .35); }
+#s-tabs .sbsite .hub .art-wide .art-frame { aspect-ratio: auto; flex: 1 1 0; min-height: 0; }
+/* the still fills its frame; the wide IDENTITY frame crops to the title band so CLAUDE and its subtitle stay whole */
+#s-tabs .sbsite .hub .art-shot { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover;
+  will-change: filter; }
+#s-tabs .sbsite .hub .art-wide .art-shot { object-position: 50% 63%; }
+
+/* the sweeping band: the Gemini blue-to-violet sweep that passes over a frame while it resolves */
+#s-tabs .sbsite .hub .art-band { position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(100deg, transparent 25%, rgba(120, 160, 255, .42) 45%, rgba(214, 120, 255, .42) 55%, transparent 75%); }
+
+/* the chapter caption stamped under each frame once it lands, in the reel's mono, its number in the reel's red */
+#s-tabs .sbsite .hub .art-cap { display: block; max-width: 100%; opacity: 0; overflow: hidden; white-space: nowrap;
+  text-overflow: ellipsis; font: 500 7px/1.2 var(--mr-mono, var(--mono)); letter-spacing: .08em; color: #b9b5ac; }
+#s-tabs .sbsite .hub .art-cap b { font-weight: 700; color: var(--mr-red, #F04B3A); }
+
+/* a strip under the grid: its mono header, then its row */
+#s-tabs .sbsite .hub .art-sec { margin-top: 9px; }
+#s-tabs .sbsite .hub .art-sec-h { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 4px; opacity: 0;
+  font: 500 7px/1 var(--mr-mono, var(--mono)); letter-spacing: .1em; color: #8e8b84; white-space: nowrap; }
+
+/* the palette: five equal swatches, each painting up from its baseline, its hex value in the corner */
+#s-tabs .sbsite .hub .art-pal { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+#s-tabs .sbsite .hub .art-sw { position: relative; display: block; height: 30px; border-radius: 5px; transform: scaleY(0);
+  transform-origin: 50% 100%; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1); }
+#s-tabs .sbsite .hub .art-sw i { position: absolute; left: 5px; bottom: 4px; opacity: 0; font: 500 7.5px/1 var(--mr-mono, var(--mono));
+  font-style: normal; letter-spacing: .04em; }
+#s-tabs .sbsite .hub .art-sw-dark i { color: var(--mr-ink, #0F0F11); }
+#s-tabs .sbsite .hub .art-sw-light i { color: var(--mr-cream, #F2EFE7); }
+
+/* the type strip: the reel's three faces on its red, the way its title card sets them */
+#s-tabs .sbsite .hub .art-type { display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  padding: 9px 11px 8px; border-radius: 6px; background: var(--mr-red, #F04B3A); overflow: hidden; clip-path: inset(0 100% 0 0 round 6px); }
+#s-tabs .sbsite .hub .art-t { display: inline-block; opacity: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .art-t-d { font-family: var(--mr-display, 'Archivo', 'Arial Black', sans-serif); font-weight: 900; font-stretch: 125%;
+  font-size: 21px; line-height: 1; color: var(--mr-ink, #0F0F11); }
+#s-tabs .sbsite .hub .art-t-s { font-family: var(--mr-serif, 'Instrument Serif', Georgia, serif); font-style: italic; font-weight: 400;
+  font-size: 17px; line-height: 1; color: var(--mr-cream, #F2EFE7); }
+#s-tabs .sbsite .hub .art-t-m { font: 500 7.5px/1 var(--mr-mono, var(--mono)); letter-spacing: .12em; color: var(--mr-ink, #0F0F11); }
+
+/* the "Creating 7 style frames" chip (inside the shared .dd-chiprow/.ch-tool markup) */
+#s-tabs .sbsite .hub .art-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .art-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .art-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .art-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .art-gen .ch-tool-t { color: #ececec; }

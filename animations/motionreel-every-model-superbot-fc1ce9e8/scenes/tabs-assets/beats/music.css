@@ -1,0 +1,100 @@
+/* Music beat (beats/music.js): Lyria's score for the reel, drawn in the clip's own chrome: ink ground, corner brackets,
+   mono uppercase micro labels, the 128 BPM · 4/4 · 8 bar grid with its seven chapter cues, four stems, one playhead.
+   Nothing here transitions: opacity/transform/clip-path are written from t in render, so ?t= freezes a frame. Every
+   selector is scoped under the hub and prefixed .mus- (the composing chip reuses chat.css .dd-chiprow/.ch-tool/.spin).
+   Palette and type come from the reel's --mr-* vars (style.css :root), each with its literal as the fallback.
+   Width: music.js fit() writes the card's width in px, min(600, the message row's width from the card's left edge):
+   600 on 16x9, 512 on 9x16, 4x5 and 1x1. The width 100% capped at 600px below is only the fallback before the card
+   mounts; a fixed 600px capped at 100% would not do, because the reply's .m-main is a grid whose auto track grows to
+   a fixed width, so the 100% cap resolves against the grown track and the card runs off a 512px row. */
+
+#s-tabs .sbsite .hub .mus-card { --mus-cream: var(--mr-cream, #F2EFE7); --mus-red: var(--mr-red, #F04B3A);
+  --mus-mono: var(--mr-mono, 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace);
+  position: relative; opacity: 0; box-sizing: border-box; width: 100%; max-width: 600px; margin-top: 2px;
+  padding: 12px 16px 10px; border-radius: 4px; background: var(--mr-ink, #0F0F11); color: var(--mus-cream);
+  box-shadow: inset 0 0 0 1px rgba(242, 239, 231, .1), 0 10px 24px rgba(0, 0, 0, .4); transform-origin: 50% 0;
+  font-family: var(--mus-mono); font-variant-numeric: tabular-nums; }
+
+/* the clip's corner brackets */
+#s-tabs .sbsite .hub .mus-cb { position: absolute; width: 9px; height: 9px; border: 0 solid rgba(242, 239, 231, .55); }
+#s-tabs .sbsite .hub .mus-tl { top: 5px; left: 5px; border-top-width: 1px; border-left-width: 1px; }
+#s-tabs .sbsite .hub .mus-tr { top: 5px; right: 5px; border-top-width: 1px; border-right-width: 1px; }
+#s-tabs .sbsite .hub .mus-bl { bottom: 5px; left: 5px; border-bottom-width: 1px; border-left-width: 1px; }
+#s-tabs .sbsite .hub .mus-br { bottom: 5px; right: 5px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* header: SCORE · MOTION REEL · 2026 on the left, the chapter under the head on the right */
+#s-tabs .sbsite .hub .mus-hd { display: flex; align-items: center; gap: 8px; font-size: 9px; line-height: 16px;
+  letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-ic { display: grid; place-items: center; flex: none; width: 16px; height: 16px;
+  background: var(--mus-red); }
+#s-tabs .sbsite .hub .mus-note { width: 10px; height: 10px; fill: none; stroke: var(--mus-cream); stroke-width: 2.6;
+  stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .mus-hd b { font-weight: 800; color: var(--mus-cream); }
+#s-tabs .sbsite .hub .mus-hd span { color: rgba(242, 239, 231, .5); }
+#s-tabs .sbsite .hub .mus-ch { margin-left: auto; font-style: normal; font-weight: 800; color: var(--mus-cream); }
+
+/* 128 BPM · 4/4 · 8 bars · 0:15.00 (the length counts up with the head, then stamps) */
+#s-tabs .sbsite .hub .mus-meta { margin: 7px 0 9px; font-size: 12px; line-height: 16px; letter-spacing: .04em;
+  color: rgba(242, 239, 231, .78); white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-len { display: inline-block; font-weight: 700; color: var(--mus-cream); transform-origin: 0 60%; }
+#s-tabs .sbsite .hub .mus-len.mus-stamp { color: var(--mr-lime, #E3FF46); }
+
+/* the score: a label column and eight bars of lanes; bar lines, cut transients and the playhead ride one overlay */
+#s-tabs .sbsite .hub .mus-grid { position: relative; display: grid; grid-template-columns: 38px 1fr; column-gap: 8px;
+  row-gap: 3px; }
+#s-tabs .sbsite .hub .mus-lab { align-self: center; font-size: 7.5px; line-height: 10px; font-weight: 700;
+  letter-spacing: .14em; color: rgba(242, 239, 231, .46); white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-lane { position: relative; display: block; min-width: 0; }
+#s-tabs .sbsite .hub .mus-ruler { height: 12px; }
+#s-tabs .sbsite .hub .mus-n { position: absolute; top: 0; padding-left: 4px; font-size: 8px; line-height: 10px;
+  font-weight: 700; color: rgba(242, 239, 231, .62); }
+#s-tabs .sbsite .hub .mus-n.mus-lit { color: var(--mus-red); }
+#s-tabs .sbsite .hub .mus-tick { position: absolute; bottom: 0; width: 1px; height: 3px; margin-left: -.5px;
+  background: rgba(242, 239, 231, .28); }
+
+#s-tabs .sbsite .hub .mus-cues { height: 22px; }
+#s-tabs .sbsite .hub .mus-cue { position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column;
+  justify-content: center; padding-left: 3px; border-left: 1px solid var(--mus-red); font-size: 7.5px; line-height: 9px;
+  letter-spacing: .08em; white-space: nowrap; opacity: 0; }
+/* tighter tracking on the names so 06 KINETIC TYPE clears the 07 FIN flag one bar over */
+#s-tabs .sbsite .hub .mus-cue span { letter-spacing: .01em; }
+#s-tabs .sbsite .hub .mus-cue b { font-weight: 800; color: var(--mus-red); }
+#s-tabs .sbsite .hub .mus-cue span { font-weight: 700; color: var(--mus-cream); }
+/* a card music.js fit() set narrower than 600 (512 on 9x16, 4x5 and 1x1): one bar is 54px, so the flags drop to 6.5px
+   with flat name tracking and 06 KINETIC TYPE clears the 07 FIN line by about 5px, as it clears it by 6px at 600 */
+#s-tabs .sbsite .hub .mus-card.mus-tight .mus-cue { font-size: 6.5px; padding-left: 2px; }
+#s-tabs .sbsite .hub .mus-card.mus-tight .mus-cue span { letter-spacing: -.01em; }
+#s-tabs .sbsite .hub .mus-pick { position: absolute; top: 3px; height: 0; border-top: 1px dotted var(--mus-red);
+  transform-origin: 0 0; opacity: 0; }
+
+#s-tabs .sbsite .hub .mus-stem { height: 20px; }
+#s-tabs .sbsite .hub .mus-base { position: absolute; left: 0; right: 0; top: 50%; height: 1px; margin-top: -.5px;
+  background: rgba(242, 239, 231, .1); }
+#s-tabs .sbsite .hub .mus-wv { position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+  clip-path: inset(0 100% 0 0); }
+#s-tabs .sbsite .hub .mus-kick .mus-a { fill: var(--mus-cream); }
+#s-tabs .sbsite .hub .mus-kick .mus-b { fill: var(--mus-red); }
+#s-tabs .sbsite .hub .mus-sub .mus-a { fill: #6C6BFF; fill: color-mix(in srgb, var(--mr-blue, #302FF5) 72%, #fff); }
+#s-tabs .sbsite .hub .mus-hats .mus-a { fill: rgba(242, 239, 231, .6); }
+#s-tabs .sbsite .hub .mus-riser .mus-a { fill: var(--mr-lime, #E3FF46); }
+
+#s-tabs .sbsite .hub .mus-ov { position: absolute; top: -2px; bottom: 0; left: 46px; right: 0; pointer-events: none; }
+#s-tabs .sbsite .hub .mus-bar { position: absolute; top: 0; bottom: 0; width: 1px; margin-left: -.5px;
+  background: rgba(242, 239, 231, .2); transform-origin: 50% 0; opacity: 0; }
+#s-tabs .sbsite .hub .mus-hit { position: absolute; top: 0; bottom: 0; width: 1px; margin-left: -.5px;
+  background: var(--mus-red); box-shadow: 0 0 6px rgba(240, 75, 58, .7); opacity: 0; }
+#s-tabs .sbsite .hub .mus-head { position: absolute; top: -3px; bottom: -2px; left: 0; width: 2px; margin-left: -1px;
+  background: var(--mus-cream); box-shadow: 0 0 8px rgba(242, 239, 231, .45); opacity: 0; }
+#s-tabs .sbsite .hub .mus-head i { position: absolute; top: 0; left: -3px; width: 8px; height: 5px; background: var(--mus-cream);
+  clip-path: polygon(0 0, 100% 0, 50% 100%); }
+
+/* footer chrome: timecode · 60 FPS on the left; 128 BPM, four beat squares, BAR n/8 on the right; a progress rule */
+#s-tabs .sbsite .hub .mus-ft { display: flex; align-items: center; gap: 8px; margin-top: 9px; font-size: 8.5px;
+  line-height: 12px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: rgba(242, 239, 231, .5); }
+#s-tabs .sbsite .hub .mus-ft b { font-weight: 800; color: var(--mus-cream); }
+#s-tabs .sbsite .hub .mus-bpm { margin-left: auto; }
+#s-tabs .sbsite .hub .mus-sq { display: inline-flex; gap: 3px; }
+#s-tabs .sbsite .hub .mus-sq i { width: 7px; height: 7px; box-sizing: border-box; border: 1px solid rgba(242, 239, 231, .6); }
+#s-tabs .sbsite .hub .mus-sq i.on { background: var(--mus-cream); border-color: var(--mus-cream); }
+#s-tabs .sbsite .hub .mus-prog { display: block; height: 1px; margin-top: 5px; background: var(--mus-cream);
+  transform-origin: 0 50%; transform: scaleX(0); }

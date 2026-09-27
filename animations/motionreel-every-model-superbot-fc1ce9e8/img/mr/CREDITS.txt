@@ -1,0 +1,179 @@
+img/mr CREDITS (motionreel-every-model-superbot)
+
+Every file in img/mr/ is cut from one source: the video in this post. Nothing was redrawn, recoloured or
+composited. The only processing is frame selection, lanczos scale, one colour matrix conversion for the video
+(BT.601 to BT.709, see COLOUR; it restores the source colours, it does not change them) and re-encode. reel.mp4
+keeps every frame of the source at its own timestamp (the source is already exactly n/60). The audio track was
+dropped.
+
+Post       https://x.com/stephanlivera/status/2103315922098470926  (posted 2026-09-25 02:49:28 UTC)
+Author     Stephan Livera (@stephanlivera), https://x.com/stephanlivera
+Post text  Opus 5.5 on Max effort - "make a dynamic 15-second motion graphics video that shows what an incredible motion designer you are, like it's your showreel for a résumé. go all out."
+           (verbatim; the post then carries only its own media link https://t.co/nWPOFUOlvr, which is
+           x.com/stephanlivera/status/2103315922098470926/video/1)
+Ask        make a dynamic 15-second motion graphics video that shows what an incredible motion designer you are, like it's your showreel for a résumé. go all out.
+           (the prompt as quoted in the post, after "Opus 5.5 on Max effort - ". It is word for word the prompt
+           quoted in the source post of showreel-every-model-superbot, but this is a different reel: that one
+           opens on an orange dot on a line, this one on a red dot and asterisk on ink)
+Video      https://video.twimg.com/amplify_video/2103315748496302080/vid/avc1/1920x1080/Ug6RUqJ59vKTsnPX.mp4?tag=29
+           (the post's own video, media id 2103315748496302080; 1920x1080, 60 fps, H.264 High L5.0 yuv420p, no
+           colour tags, video 15.000 s = 900 frames at 4.37 Mb/s, AAC LC 48 kHz stereo 15.061 s at 128 kb/s,
+           8,463,499 bytes, container creation_time 2026-09-25T02:49:35Z; local copy
+           /tmp/retheme-showreel-9c7024fb/post-clip-1080.mp4,
+           sha256 019e1bf7bbc11236d517fac09deeb0aca164a55f29988e9d5f939fb00d04dbd4)
+Thumbnail  https://pbs.twimg.com/amplify_video_thumb/2103315748496302080/img/eScXkusmi5doSQFo.jpg (X's own; not used)
+Counts     1,611,626 views, 16,019 likes, 499 reposts, 328 replies, 282 quotes, 11,876 bookmarks
+           (read from api.fxtwitter.com on 2026-09-27; they move, quote them with that date)
+Made with  per the post: Opus 5.5 on Max effort, given the prompt above. The reel's own closing card reads
+           "EVERY FRAME WRITTEN IN CODE". The post states no time, cost or tooling.
+
+Everything visible in the frames (all type, the red asterisk, CLAUDE, "motion designer", the easing table, the
+morphing shapes, the truchet field, the point cloud, the kinetic words, the frame chrome, timecodes and labels) is
+the reel as posted, rendered as is.
+
+
+FILES
+  file               bytes      source frame   what
+  reel.mp4           8,054,393  0-899          the whole reel, 1920x1080, 60 fps, 900 frames, 15.000 s, no audio
+  poster.jpg         123,841    180 (3.000 s)  1920x1080: CLAUDE title card, "motion designer" under it, on red
+  ch01.jpg           59,719     180 (3.000 s)  960x540: 01 IDENTITY, the CLAUDE title card
+  ch02.jpg           36,941     276 (4.600 s)  960x540: 02 EASING, "Six ways to get from A to B." easing table
+  ch03.jpg           52,817     384 (6.400 s)  960x540: 03 MORPHING, white triangle with orbiting particles on blue
+  ch04.jpg           194,638    504 (8.400 s)  960x540: 04 SYSTEMS, truchet field with the red band sweeping in
+  ch05.jpg           47,031     612 (10.200 s) 960x540: 05 DEPTH, wireframe point-cloud sphere on ink
+  ch06.jpg           40,396     744 (12.400 s) 960x540: 06 KINETIC TYPE, NEVER on lime
+  ch07.jpg           59,507     876 (14.600 s) 960x540: 07 FIN, red asterisk + CLAUDE + motion designer end card
+  kt-ease.jpg        43,442     687 (11.450 s) 960x540: EASE, black wide caps on red
+  kt-in.jpg          21,421     701 (11.683 s) 960x540: IN. cream on ink, red full stop
+  kt-ease2.jpg       46,520     715 (11.917 s) 960x540: the second EASE, blue condensed caps on cream (extra)
+  kt-out.jpg         40,015     729 (12.150 s) 960x540: OUT. cream on blue, red full stop
+  kt-never.jpg       40,396     744 (12.400 s) 960x540: NEVER, black wide caps on lime (same frame as ch06.jpg,
+                                               so the two files are byte-identical)
+  kt-never-echo.jpg  116,483    752 (12.533 s) 960x540: the NEVER echo field, outlined rows scrolling (extra)
+  kt-linear.jpg      28,764     767 (12.783 s) 960x540: LINEAR. cream on ink, red full stop, thin arrow line
+  Each kt still is the most settled frame of its word (lowest frame-to-frame change), except kt-linear, whose
+  word never settles (see KINETIC TYPE).
+
+reel.mp4   H.264 High L5.0 yuv420p, crf 20, preset slow, GOP 30 (35 keyframes with scene cuts), +faststart (moov
+           at byte 36), one video stream, no audio, 900 frames, pts exactly n/60, 15.000 s, 4.29 Mb/s, tagged
+           BT.709 primaries, transfer and matrix, limited range.
+           sha256 ce3e256256d1e1e952e0ef64e07c5ac6b45e8a0fcbc4fc5200aaae940198484a
+Stills     JPEG q2, 4:4:4, full range, decoded BT.601 limited range from the source (see COLOUR).
+
+
+COLOUR
+The source carries no colour tags. Its YUV values are BT.601 limited range: decoded as BT.601 the flat grounds come
+out exactly #F04B3A red, #F2EFE7 cream, #302FF5 blue, #E3FF46 lime and #0F0F11 ink, all inside sRGB, while a BT.709
+decode pushes red, blue and lime out of gamut (red would clip to #FF5A37). Raw source YUV samples: red 121/96/202
+(frame 180), cream 221/124/130 (276), blue 76/215/114 (384), lime 218/46/123 (744), ink 29/129/128 (701).
+  Stills are decoded BT.601 limited to full range RGB; measured red #F04B38, cream #F2EFE6, blue #302FF5, lime
+  #E3FF44, ink #0F0F11.
+  reel.mp4 is converted BT.601 to BT.709 once (swscale accurate_rnd, full_chroma_int) and tagged BT.709, so a
+  browser that reads the tags and an HD player that assumes BT.709 both show the source colours; measured BT.709
+  decode red #EF4B3A, cream #F2EEE6, blue #2F2FF5, lime #E2FF46, ink #0F0F11 (all within 1 of the source).
+
+
+TIMING
+Frame numbers are decode-order indices 0..899; time is frame / 60. Every source frame already sits on n/60
+(0 of 900 off the grid), so the setpts=N/(60*TB) restamp in reel.mp4 moves nothing. Source frame n = reel frame n.
+The reel's own timecode (bottom left chrome, HH:MM:SS:FF at 60 fps) equals frame n exactly: "00:00:03:00" at
+frame 180, "00:00:10:12" at frame 612. The last frame (899) is a held end card; there is no fade out.
+
+BAR GRID (128 BPM: beat 0.46875 s = 28.125 frames, bar 1.875 s = 112.5 frames, 8 bars = 15 s)
+The reel's own counter (bottom right chrome, "BAR n/8" with four beat squares) turns over at
+  bar   1      2      3      4      5      6      7      8
+  frame 0      113    225    338    450    563    675    788
+  time  0.000  1.883  3.750  5.633  7.500  9.383  11.250 13.133
+Beats inside a bar fall every 28.125 frames (bar 2: 113, 141, 169, 197).
+
+
+CHAPTER MAP
+The top right chrome names the chapter. The reel sets a long dash between number and name; this file writes it
+as a middle dot. Each new label decodes in through scrambled glyphs over about 15 to 20 frames.
+  chapter            bars  bar-grid frames  time            label starts decoding
+  01 · IDENTITY      1-2   0-224            0.000-3.733     0 (a lone scramble glyph at frame 0)
+  02 · EASING        3     225-337          3.750-5.617     197, readable at 215 (a one beat pickup: beat 4 of bar 2)
+  03 · MORPHING      4     338-449          5.633-7.483     338
+  04 · SYSTEMS       5     450-562          7.500-9.367     450
+  05 · DEPTH         6     563-674          9.383-11.233    563
+  06 · KINETIC TYPE  7     675-787          11.250-13.117   675
+  07 · FIN           8     788-899          13.133-14.983   788
+
+What is on screen (found with ffmpeg scene scores, per-frame mean luma and chroma, frame-to-frame difference and
+frame-by-frame contact sheets; hard cuts are exact, soft changes are given as about):
+  0-112      ink ground with the chrome only; a small red dot appears (about 14-21) and holds; a thin ring expands
+             while the dot unfurls into a red asterisk (about 42-56); the asterisk turns, then shrinks back to a red
+             dot (about 100-110)
+  113-124    on the bar 2 downbeat a cream disk opens around the dot and red floods the frame
+  125-199    black "CLAUDE" rises letter by letter under a top rule ("N° 01" left, "SHOWREEL · 2026" right, long dash
+             in the reel), the letters squash and stretch, italic serif "motion designer" writes in (about 170-175)
+  200-212    CLAUDE collapses into dots; a cream diagonal wipe crosses the frame (about 205-212)
+  213-337    cream ground: italic serif "Six ways to get from A to B.", mono note "SAME DISTANCE · SAME DURATION
+             (0.94s)", six rows labelled linear, ease-in-out, expo-out, back-out, elastic, bounce, each with a small
+             curve glyph and a dot running its own track (table complete by about 225)
+  338        hard cut to blue
+  338-449    a white dot grows into a circle ringed by 12 orbiting particles (346-362), then morphs: rounded
+             triangle (370), triangle (378-394), star (402-418), pentagon (426), square (434-442); the particles
+             take the current shape
+  450        hard cut to ink, the white square held at centre
+  450-562    bracket marks subdivide the square (457), truchet tiles (quarter-circle arcs) spread out from the centre
+             (464) and fill the frame (471 on); a red band sweeps across the tiles (from about 499)
+  563-600    the tiles clear, a dot grid opens from the centre (576-585), a point grid plane in perspective carries a
+             wave and a vortex (585-600)
+  601-674    the points gather into a turning wireframe sphere (about 603-635), the sphere becomes a torus (about
+             640-660), the torus streaks off (about 665-674)
+  675-787    kinetic type, see below
+  788-899    red ground, a small ring at centre (788), the ring expands and a black asterisk spins up (796-812),
+             CLAUDE assembles beside it (820-836) with italic "motion designer" under it and the fine print line;
+             held to the last frame
+
+KINETIC TYPE (one word per eighth note, 14 frames = 0.2333 s; the beat grid gives 14.0625)
+  frames    word       look                                            settled   still
+  675-688   EASE       black wide caps on red, glitched in (676-680)   686-688   kt-ease.jpg (687)
+  689-702   IN.        cream on ink, red full stop                     700-702   kt-in.jpg (701)
+  703-716   EASE       blue condensed caps on cream                    715-716   kt-ease2.jpg (715)
+  717-730   OUT.       cream on blue, red full stop                    728-730   kt-out.jpg (729)
+  731-744   NEVER      black wide caps on lime                         743-744   kt-never.jpg (744)
+  745-758   NEVER      echo field: outlined NEVER rows, the centre     never     kt-never-echo.jpg (752)
+                       row solid, rows scrolling sideways
+  759-775   LINEAR.    cream on ink, red full stop, a thin arrow line; never     kt-linear.jpg (767)
+                       the word drifts at a constant rate (frame-to-
+                       frame change flat at 5.5 the whole span)
+  776-787   exit       LINEAR. slides off, a red circle opens (784)
+  788       FIN starts
+Read together: EASE IN. EASE OUT. NEVER LINEAR.
+
+
+CHROME (exact on-screen copy; the reel's long dashes are written here as middle dots)
+  top left      CLAUDE   MOTION REEL · 2026
+  top right     01 · IDENTITY ... 07 · FIN
+  bottom left   HH:MM:SS:FF timecode, then "60 FPS"; a thin progress rule under it
+  bottom right  "128 BPM", four beat squares (the current beat filled), "BAR n/8"
+  corners       four thin corner brackets frame the picture
+  01 top rule   N° 01  |  SHOWREEL · 2026
+  02 header     Six ways to get from A to B.  |  SAME DISTANCE · SAME DURATION (0.94s)
+  07 fine print SHOWREEL 2026 · 15 SECONDS · EVERY FRAME WRITTEN IN CODE  (ring and dot glyph)  AVAILABLE FOR NEW PROJECTS
+
+
+PALETTE (the ad's CSS custom properties in style.css :root, matched to the source's BT.601 decode above)
+  --mr-red    #F04B3A   title card, EASE ground, FIN ground, asterisk, full stops
+  --mr-cream  #F2EFE7   easing table ground, cream disk, IN. / OUT. / LINEAR. type
+  --mr-blue   #302FF5   morphing ground, OUT. ground, second EASE type
+  --mr-ink    #0F0F11   intro, systems, depth and IN. / LINEAR. grounds, chrome type
+  --mr-lime   #E3FF46   NEVER ground
+The ad's font variables (--mr-display 'Archivo' 900 wide, --mr-serif 'Instrument Serif' italic, --mr-mono
+'JetBrains Mono') are look-alike web fonts chosen for the ad. They are not a statement about which fonts the reel
+used; the post does not say.
+
+
+HOW THE FILES WERE MADE (ffmpeg 8, from the local copy S)
+  reel.mp4   ffmpeg -colorspace smpte170m -color_range tv -i S -map 0:v:0 -an
+               -vf "setpts=N/(60*TB),scale=in_color_matrix=bt601:out_color_matrix=bt709:in_range=tv:out_range=tv:
+                    flags=accurate_rnd+full_chroma_int+full_chroma_inp,format=yuv420p"
+               -fps_mode cfr -r 60 -c:v libx264 -profile:v high -pix_fmt yuv420p -preset slow -crf 20 -g 30
+               -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv -movflags +faststart
+             then a lossless stream copy through h264_metadata (colour_primaries=1, transfer_characteristics=1,
+             matrix_coefficients=1, video_full_range_flag=0) so the H.264 VUI carries all three BT.709 tags
+  stills     ffmpeg -i S -vf "select='eq(n,N)',scale=W:-2:flags=lanczos+accurate_rnd+full_chroma_int:
+               in_color_matrix=bt601:in_range=tv:out_color_matrix=bt601:out_range=pc,format=yuvj444p"
+               -frames:v 1 -qmin 1 -q:v 2 out.jpg      (W = 1920 for poster.jpg, 960 for the rest)

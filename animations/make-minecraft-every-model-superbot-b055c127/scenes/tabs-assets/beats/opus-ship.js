@@ -1,4 +1,5 @@
-// Back on Claude Opus 5.5, the ship: the decals are packed into the atlas, the build runs green and the push lands,
+// Still on Claude Opus 5.5, the ship: it carries on in the code beat's reply (chat.js, no second switch). The decals
+// scraped and made earlier are packed into the atlas, the build runs green and the code push lands,
 // then the game window opens and plays the real gameplay clip (gen/clip.mp4, 13 s into the source video). The <video>
 // follows t: it plays natively while the spot plays and is seeked to the exact frame when the clock is paused or
 // stepped (?t=, space, arrows), so a frozen frame is always the right one. focus() hands the window to the camera

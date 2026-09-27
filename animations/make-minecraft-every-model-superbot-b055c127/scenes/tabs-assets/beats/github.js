@@ -1,5 +1,5 @@
 // GitHub: the connect card lands, the pointer presses Connect and it flips to Connected (../../do-that-too-apps
-// cursor.js), then the repo is created and the engine pushed.
+// cursor.js), then the repo is created and the assets pushed (decal-scrape.js / decal-gen.js: 6 decals, 5 sounds).
 import { lerp, seg, outBack, inOutCubic, press, path } from '../../../lib.js';
 import { sayer, rise, GH, O_CHECK, O_BRANCH, REPO, TICK } from './kit.js';
 
@@ -22,7 +22,7 @@ export default {
     </div>`);
     const rows = x.el(`<div class="mc-rows">
       <div class="mc-row"><span class="mc-si">${REPO}</span><span>Created</span><b>sam/blockcraft</b><em class="mc-dim">private</em><span class="mc-okp">${TICK}</span></div>
-      <div class="mc-row"><span class="mc-si">${O_BRANCH}</span><span>Pushed</span><b>8 files</b><em class="mc-dim">main &middot; a41f9c2</em><span class="mc-okp">${TICK}</span></div>
+      <div class="mc-row"><span class="mc-si">${O_BRANCH}</span><span>Pushed</span><b>11 assets</b><em class="mc-dim">6 decals &middot; 5 sounds</em><span class="mc-okp">${TICK}</span></div>
     </div>`);
     const btn = card.querySelector('.cd-gh-btn'), ok = card.querySelector('.cd-gh-ok'), fa = card.firstElementChild, fb = card.lastElementChild;
     const rs = [...rows.children];

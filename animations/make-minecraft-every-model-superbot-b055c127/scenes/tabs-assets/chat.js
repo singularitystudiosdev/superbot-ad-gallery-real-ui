@@ -1,17 +1,18 @@
-// "I want to make minecraft": one ask, five hand-offs. Superbot switches to Claude Opus 5.5 to write the game,
-// connects GitHub, switches to DeepSeek V4 Flash to scrape for decals, to Gemini to make them, and back to Opus 5.5
-// to wire them in and run it (./beats/*.js). Its routing chips and the composer's platform chip follow the model.
+// "I want to make minecraft": one ask, five hand-offs, Opus last. Superbot switches to DeepSeek V4 Flash to scrape
+// for block references and sounds, to Gemini to make the decals, connects GitHub and pushes the assets, then switches
+// to Claude Opus 5.5 to write the game and, in the same reply (no second switch), wire the assets in and run it
+// (./beats/*.js). Its routing chips and the composer's platform chip follow the model.
 // ./cuts.js holds the three published cuts (?cut=): copy, pacing, follow-up asks and the finale. The thread is
 // bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import { CFG } from './cuts.js?v=3';
+import { CFG } from './cuts.js?v=4';
 import opusCode from './beats/opus-code.js?v=4';
-import github from './beats/github.js?v=4';
+import github from './beats/github.js?v=5';
 import decalScrape from './beats/decal-scrape.js?v=4';
 import decalGen from './beats/decal-gen.js?v=3';
-import opusShip from './beats/opus-ship.js?v=4';
+import opusShip from './beats/opus-ship.js?v=5';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -28,13 +29,14 @@ const APPS = {
   github: { name: 'GitHub', logo: brand('github-mark.svg'), sub: 'connected' },
 };
 
-// the hand-off order is fixed for every cut; the cut only decides whether sam asks for each step
+// the hand-off order is fixed for every cut; the cut only decides whether sam asks for each step. The ship step has
+// no chips: it is Opus 5.5 carrying on, so (unasked) it continues the code step's reply instead of opening its own
 const STEPS = [
-  { app: 'opus', mod: opusCode, chips: [['opus', 'Switching to Opus 5.5']] },
-  { app: 'github', mod: github, chips: [['github', 'Connecting to GitHub']] },
   { app: 'deepseek', mod: decalScrape, chips: [['deepseek', 'Switching to DeepSeek V4 Flash']] },
   { app: 'gemini', mod: decalGen, chips: [['gemini', 'Switching to Gemini']] },
-  { app: 'opus', mod: opusShip, chips: [['opus', 'Switching back to Opus 5.5']] },
+  { app: 'github', mod: github, chips: [['github', 'Connecting to GitHub']] },
+  { app: 'opus', mod: opusCode, chips: [['opus', 'Switching to Opus 5.5']] },
+  { app: 'opus', mod: opusShip, chips: [] },
 ];
 
 // every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply
@@ -55,8 +57,10 @@ function timeBeats(asks) {
     // spin) and the app answers a heartbeat later, so no beat holds longer than ~0.5s after something lands.
     let at = k.sw;
     k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.2, done: at + 0.5 }; at = c.done + 0.1; return c; });
-    k.done = k.chips[k.chips.length - 1].done;
+    // no chips: the same model carries on (after sam's ask lands, or straight on from the last beat)
+    k.done = k.chips.length ? k.chips[k.chips.length - 1].done : a.ask ? k.send + 0.2 : s;
     k.reply = k.done + 0.04;  // the app answers
+    k.cont = !a.ask && !k.chips.length; // appended to the previous reply, no header of its own
     k.T = a.mod.times(k.reply, CFG);
     s = k.T.end;
     return { k };
@@ -88,8 +92,15 @@ export function mountChat(hub) {
   const ctx = { hub, box, tile, OK, esc, el, brand, img, sbSrc };
 
   const sbAvatar = `<span class="avatar sb"><img src="${sbSrc}" alt=""/></span>`;
+  let prev = null; // the last reply's column, which a continuation beat appends to
   const build = ({ k }) => {
     const a = APPS[k.app];
+    if (k.cont && prev) {
+      const inst = k.mod.build(k, ctx);
+      inst.nodes.forEach((n) => prev.appendChild(n));
+      if (inst.nodes[0]) inst.nodes[0].style.marginTop = '12px';
+      return { k, u: null, sws: [], r: null, who: null, inst };
+    }
     const u = k.ask ? add(`<div class="msg qc-u"><span class="avatar">S</span><div class="m-main"><div class="m-head"><span class="m-name">sam</span></div><div class="m-text">${esc(k.ask)}</div></div></div>`) : null;
     const sws = k.chips.map((c) => {
       const w = add(`<div class="msg qc-m">${sbAvatar}<div class="m-main"><span class="qc-sw">${tile(c.app)}<span class="qc-swl">${esc(c.label)}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div></div>`);
@@ -97,13 +108,14 @@ export function mountChat(hub) {
     });
     const r = add(`<div class="msg qc-m qc-r">${sbAvatar}<div class="m-main"><div class="qc-who">${tile(k.app)}<b>${a.name}</b>${a.sub ? `<small>${a.sub}</small>` : ''}</div></div></div>`);
     const main = r.querySelector('.m-main');
+    prev = main;
     const inst = k.mod.build(k, ctx);
     inst.nodes.forEach((n) => main.appendChild(n));
     return { k, u, sws, r, who: main.firstElementChild, inst };
   };
   const beats = BEATS.map(build);
   // scroll marks: after each time, the feed's fold glides to that element's bottom
-  const scroll = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
+  const scroll = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), ...(b.who ? [[b.k.reply, b.who]] : []), ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
 
   // the composer's platform chip names the model, then follows the routed app
   const plat = hub.querySelector('.rc-plat');
@@ -196,7 +208,7 @@ export function renderChat(c, t) {
   c.beats.forEach((b) => {
     if (b.u) appear(b.u, t, b.k.send);
     b.sws.forEach((s) => { appear(s.w, t, s.c.sw); renderSwitch(s, t); });
-    appear(b.r, t, b.k.reply);
+    if (b.r) appear(b.r, t, b.k.reply);
     b.inst.render(t);
   });
   renderScroll(c, t);

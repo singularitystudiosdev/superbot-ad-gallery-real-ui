@@ -2,7 +2,7 @@
 // are hidden, ask.css), laid out at DW design px and scaled to the frame width. It opens on the empty state
 // ("Good evening. Where do we go?" over a centred composer) with the camera pushed in; the first send drops the
 // composer to the bottom, lifts the greeting away and eases the camera out while the seven-request chat plays
-// (tabs-assets/chat.js). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
+// (tabs-assets/chat.js); at every "Switching to …" the camera pushes onto the chip so it reads on a small screen. render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
 import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=1';
@@ -22,12 +22,13 @@ function geo(W) {
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';
   el.site.style.setProperty('--dw', DW + 'px');
-  el.geo = { W, DW, DH, k, lift: null };
+  el.geo = { W, DW, DH, k, lift: null, compW: 0, swL: 0 };
   return el.geo;
 }
 
 // how far the composer sits above its resting place in the empty state: just under the greeting, as a group
-// centred in the frame
+// centred in the frame. Also measures, once, the composer's width (the intro push-in must keep it in frame)
+// and the left edge of the "Switching to …" chips (every chip shares it; the switch camera frames it)
 function lift(g) {
   if (g.lift !== null) return g.lift;
   const main = el.main.getBoundingClientRect();
@@ -37,8 +38,41 @@ function lift(g) {
   const compH = comp.height / s, heroH = hero.height / s;
   const groupTop = (g.DH - (heroH + 34 + compH)) / 2;
   el.hero.style.top = groupTop.toFixed(2) + 'px';
+  g.compW = comp.width / s;
+  g.swL = (el.chat.beats[0].sw.getBoundingClientRect().left - main.left) / s;
+  const asks = el.chat.beats.filter((b) => b.u).map((b) => b.u.querySelector('.m-main').getBoundingClientRect().left);
+  g.askL = asks.length ? (Math.min(...asks) - main.left) / s : g.DW;
   g.lift = (comp.top - main.top) / s - (groupTop + heroH + 34);
   return g.lift;
+}
+
+// the switch camera: how far it is pushed onto the "Switching to …" chip. Eases in as the chip lands, holds
+// through the spinner and the tick, and eases back out once the app's reply is on screen
+const SWITCH_Z = 1.75, SWITCH_ZMAX = 2.4;
+function switchPush(t) {
+  let e = 0;
+  for (const { k } of BEATS) {
+    const inP = inOutCubic(seg(t, k.sw - 0.25, k.sw + 0.35));
+    const outP = inOutCubic(seg(t, k.reply + 0.3, k.reply + 0.95));
+    e = Math.max(e, inP * (1 - outP));
+  }
+  return e;
+}
+
+// the camera for time t: a zoom and the design-px point it centres. The empty state pushes in only as far as
+// keeps the composer inside the frame (4:3 and square leave almost no room); each switch pushes onto the chip,
+// framed from its left edge down to the bottom of the frame and tight enough that the frame's right edge stops
+// short of the leftmost ask bubble (right-aligned, wider asks reach further left), so no bubble is cut mid-word
+function camera(g, t) {
+  const fit = g.DW / (g.compW + 56);
+  const z0 = Math.max(1, Math.min(1.2, fit)), z1 = lerp(1, z0, 0.5);
+  const zI = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
+  const e = switchPush(t);
+  if (e <= 0) return { z: zI, x: g.DW / 2, y: g.DH / 2 };
+  const left = Math.max(0, g.swL - 28);
+  const zs = Math.min(SWITCH_ZMAX, Math.max(SWITCH_Z, g.DW / (g.askL - 16 - left)));
+  const vw = g.DW / zs, vh = g.DH / zs;
+  return { z: lerp(zI, zs, e), x: lerp(g.DW / 2, Math.min(g.DW - vw, left) + vw / 2, e), y: lerp(g.DH / 2, g.DH - vh / 2, e) };
 }
 
 export default {
@@ -60,7 +94,7 @@ export default {
     // the composer as the empty state shows it: SUPER is a switch (off), the platform chip names the model
     const sup = hub.querySelector('.rc-super');
     sup.innerHTML = 'SUPER<i class="ask-tg"><b></b>OFF</i>';
-    el = { site: q('.sbsite'), hub, main, hero, composer: hub.querySelector('.composer'), geo: null };
+    el = { site: q('.sbsite'), hub, main, hero, composer: hub.querySelector('.composer'), feed: hub.querySelector('.feed'), geo: null };
     el.chat = mountChat(hub);
   },
 
@@ -71,15 +105,16 @@ export default {
     const g = geo(W);
     const up = lift(g);
 
-    // camera: pushed in on the empty state, easing out once the thread starts
-    // (a narrow column already fills the frame, so it pushes in less)
-    const z0 = g.DW < 700 ? 1.08 : 1.2, z1 = g.DW < 700 ? 1.04 : 1.1;
-    const z = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
-    el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${(g.k * z).toFixed(5)}) translate(${(-g.DW / 2).toFixed(2)}px,${(-g.DH / 2).toFixed(2)}px)`;
+    // camera (set before the chat renders: the beats' cursor targets are read through this transform)
+    const cam = camera(g, t);
+    el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${(g.k * cam.z).toFixed(5)}) translate(${(-cam.x).toFixed(2)}px,${(-cam.y).toFixed(2)}px)`;
 
-    // empty state -> thread: the composer glides down to the bottom and the greeting lifts away
+    // empty state -> thread: the composer glides down to the bottom and the greeting lifts away. The feed is
+    // clipped at the composer's top edge while it travels, so the first bubble rises out of the composer instead
+    // of showing underneath it
     const drop = inOutCubic(seg(t, FIRST.send - 0.08, FIRST.send + 0.42));
     el.composer.style.transform = drop >= 1 ? 'none' : `translateY(${(-up * (1 - drop)).toFixed(2)}px)`;
+    el.feed.style.clipPath = drop >= 1 ? 'none' : `inset(0 0 ${(up * (1 - drop)).toFixed(2)}px 0)`;
     const heroIn = outCubic(seg(t, 0.15, 0.8));
     const heroOut = outCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.3));
     el.hero.style.opacity = (heroIn * (1 - heroOut)).toFixed(3);

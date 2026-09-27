@@ -10,8 +10,8 @@ const TICK = '<svg class="wk-tk" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19
 
 // standard clock: card right after the answer starts streaming, one step every 0.5 s, then the body
 export function stdTimes(r, nSteps, bodyDur, hold) {
-  const T = { r, card: r + 0.3 };
-  T.steps = Array.from({ length: nSteps }, (_, i) => [T.card + 0.25 + i * 0.5, T.card + 0.25 + i * 0.5 + 0.6]);
+  const T = { r, card: r + 0.22 };
+  T.steps = Array.from({ length: nSteps }, (_, i) => [T.card + 0.18 + i * 0.38, T.card + 0.18 + i * 0.38 + 0.45]);
   T.body = T.steps[nSteps - 1][1] + 0.05;
   T.bodyEnd = T.body + 0.5;
   T.done = T.body + bodyDur;

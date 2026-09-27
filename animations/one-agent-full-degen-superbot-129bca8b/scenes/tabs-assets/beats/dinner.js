@@ -8,7 +8,7 @@ const STAGES = ['Placed', 'Preparing', 'On the way'];
 
 export default {
   times(r) {
-    const T = stdTimes(r, 3, 1.7, 2.6);
+    const T = stdTimes(r, 3, 1.7, 1.2);
     T.photo = T.body + 0.1;
     T.eta = T.body + 0.6;
     T.stages = STAGES.map((_, i) => T.body + 0.8 + i * 0.3);

@@ -6,7 +6,7 @@ const TITLE = 'I let an agent YOLO for me for 12 days. Here are the tendies.';
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 2.2, 3.4);
+    const T = stdTimes(r, 2, 2.2, 1.0);
     T.title = [T.body + 0.1, T.body + 0.9];
     T.draw = [T.body + 0.5, T.body + 1.7];
     return T;

@@ -9,7 +9,7 @@ const SEQ = [1.9, -1.2, 8.4, -2.1, 1.4, -1.6, 0.9, 2.2, -2.4, 1.1, -3.0, 1.1];
 
 export default {
   times(r) {
-    const T = stdTimes(r, 1, 2.2, 2.9);
+    const T = stdTimes(r, 1, 2.2, 0.9);
     T.count = [T.body + 0.15, T.body + 1.2];
     T.draw = [T.body + 0.25, T.body + 1.6];
     T.dots = T.body + 0.6;

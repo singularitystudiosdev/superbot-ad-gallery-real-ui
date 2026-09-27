@@ -12,7 +12,7 @@ const KPI = [
 
 export default {
   times(r) {
-    const T = stdTimes(r, 3, 2.9, 3.3);
+    const T = stdTimes(r, 3, 2.9, 1.1);
     T.kpi = [T.body + 0.2, T.body + 1.3];
     T.draw = [T.body + 0.35, T.body + 2.45];
     T.tags = [T.draw[1] - 0.05, T.draw[1] + 0.9];

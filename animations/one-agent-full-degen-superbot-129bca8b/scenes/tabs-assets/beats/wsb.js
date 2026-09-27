@@ -12,7 +12,7 @@ const TOP = [
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 1.7, 2.7);
+    const T = stdTimes(r, 2, 1.7, 0.9);
     T.rows = TOP.map((_, i) => [T.body + 0.15 + i * 0.13, T.body + 1.15 + i * 0.13]);
     T.hot = T.body + 1.1;
     return T;

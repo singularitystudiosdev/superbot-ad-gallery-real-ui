@@ -41,9 +41,12 @@ function lift(g) {
   return g.lift;
 }
 
+// the whole thread plays this much faster than its authored clock
+const SPEED = 1.15;
+
 export default {
   id: 'tabs',
-  dur: CHAT_END + 0.4,
+  dur: (CHAT_END + 0.4) / SPEED,
 
   mount(section) {
     section.innerHTML = `
@@ -66,7 +69,7 @@ export default {
 
   render(lt, ctx) {
     if (!el) return;
-    const t = Math.max(0, lt);
+    const t = Math.max(0, lt) * SPEED;
     const W = (ctx && ctx.W) || 1920;
     const g = geo(W);
     const up = lift(g);

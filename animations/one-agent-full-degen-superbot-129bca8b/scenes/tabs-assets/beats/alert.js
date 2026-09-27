@@ -8,7 +8,7 @@ const BELL = '<svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 1.8, 2.9);
+    const T = stdTimes(r, 2, 1.8, 0.9);
     T.days = [T.body + 0.2, T.body + 0.75];
     T.flip = T.body + 0.8;
     T.active = T.flip + 0.25;

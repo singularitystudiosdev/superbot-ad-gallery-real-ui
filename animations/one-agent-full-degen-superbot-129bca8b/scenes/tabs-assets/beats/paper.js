@@ -4,7 +4,7 @@ import { stdTimes, workBeat, counter, fmt } from './wk.js?v=1';
 
 export default {
   times(r) {
-    const T = stdTimes(r, 2, 1.8, 2.7);
+    const T = stdTimes(r, 2, 1.8, 0.9);
     T.count = [T.body + 0.15, T.body + 1.05];
     T.flip = T.body + 0.9;
     T.live = T.flip + 0.3;

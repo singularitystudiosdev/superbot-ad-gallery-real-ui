@@ -22,7 +22,7 @@ const SEQUENCE = [
 // the durations a scene gets if its module fails to load (so the spot keeps its shape)
 const FALLBACK_DUR = { tabs: 36 };
 const SCENE_FADE = 0.3;
-const END_DUR = 4.4, DIP = 0.35;
+const END_DUR = 3.0, DIP = 0.35;
 
 // ---------- text cards ----------
 // A part is a word string, or { html } for styled words. This spot sequences no text card; the one spec is kept
@@ -144,7 +144,7 @@ function measureCaps() {
 
 // ---------- the end card (waffles-website drawEnd) ----------
 function buildEnd(sec) {
-  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>IT DOES<br> WHAT YOU ASK</h1></div></div><div class="face"></div></div>';
+  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1></div></div><div class="face"></div></div>';
   const mark = shell.makeMark(220);
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };

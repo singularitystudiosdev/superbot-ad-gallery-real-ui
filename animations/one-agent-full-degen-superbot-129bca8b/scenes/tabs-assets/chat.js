@@ -15,7 +15,7 @@ import dinner from './beats/dinner.js?v=1';
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
 const bump = (p) => Math.sin(Math.PI * clamp(p));
 
-export const CHAT_T0 = 1.9; // the empty state has settled; the first ask starts typing
+export const CHAT_T0 = 1.1; // the empty state has settled; the first ask starts typing
 
 const ASKS = [
   { mod: wsb, ask: 'What’s WSB buzzing about today?' },
@@ -32,9 +32,9 @@ export const BEATS = (() => {
   let s = CHAT_T0;
   return ASKS.map((a) => {
     const k = { ...a, s };
-    k.typeEnd = s + Math.min(1.25, 0.25 + a.ask.length * 0.014);
-    k.send = k.typeEnd + 0.22;
-    k.reply = k.send + 0.42; // superbot answers in place
+    k.typeEnd = s + Math.min(0.9, 0.2 + a.ask.length * 0.01);
+    k.send = k.typeEnd + 0.15;
+    k.reply = k.send + 0.3; // superbot answers in place
     k.T = a.mod.times(k.reply);
     s = k.T.end;
     return { k };

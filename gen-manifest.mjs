@@ -90,6 +90,12 @@ const more = [
   ['fantasy90s-every-model-v1-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=1', 'make a 90s fantasy 3D game: Meshy meshes first, then Opus 5.5 and Gemini in parallel (3 requests)', 'Ad spots'],
   ['fantasy90s-every-model-v2-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=2', 'make a 90s fantasy 3D game: Codex in the terminal, Opus 5.5 reviews and hands it back, Gemini (5 requests)', 'Ad spots'],
   ['fantasy90s-every-model-v3-superbot-042670d1', 'fantasy90s-every-model-superbot-042670d1/?v=3', 'make a 90s fantasy 3D game: Lyria chiptune first, Meshy, Gemini decals, Opus 5.5, DeepSeek scrapes decals, GitHub (7 requests)', 'Ad spots'],
+  // make a Splatoon game (2026-09-26): the one-ask nine-step ink build forked from fantasy90s v3's grammar. Opus 5.5
+  // writes the script, then superbot carries it: DeepSeek V4 Flash scrapes the ink refs, Meshy 5 models the plaza and
+  // Juno, HY-Motion 1.0 animates juno.glb, ElevenLabs and Suno v5 score it in parallel, Nano Banana paints the art,
+  // Opus 5.5 codes the turf war, Vercel ships it, and the last step is real gameplay trimmed from a bit into the post
+  // (@JaydenDavisNC's Opus 5.5 Splatoon capture, game: Inkwave).
+  ['inkwave-every-model-v1-superbot-f1a86d6f', 'inkwave-every-model-superbot-f1a86d6f/?v=1', 'make a Splatoon game: Opus 5.5 scripts it, DeepSeek scrapes, Meshy 5 models, HY-Motion animates, ElevenLabs + Suno sound, Nano Banana art, Opus codes, Vercel ships (9 steps)', 'Ad spots'],
   // make a Splatoon-style ink game (2026-09-26): the fantasy90s v3 routing reskinned to an ink shooter, ends on 13s of @JaydenDavisNC's Opus 5.5 build.
   ['splatoon-every-model-v3-superbot-7cf3d4da', 'splatoon-every-model-superbot-7cf3d4da/', 'make a Splatoon-style ink game: Lyria, Meshy, Gemini, Opus 5.5, DeepSeek, GitHub, then the real Opus 5.5 build plays (7 requests; clip @JaydenDavisNC)', 'Ad spots'],
   // make a Splatoon-style ink game (2026-09-26): one ask routed to seven models on one page (v3, the default cut):

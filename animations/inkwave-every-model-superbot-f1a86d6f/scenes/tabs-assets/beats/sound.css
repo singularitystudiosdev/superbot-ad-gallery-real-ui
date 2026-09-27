@@ -1,0 +1,71 @@
+/* Sound beat (beats/sound.js): the parallel sound fork, one request answered by two models at once. The left lane is
+   ElevenLabs' six effect pads (.sl-pad), the right lane is Suno's track card + stems (.sl-card/.sl-stem). Nothing here
+   transitions: opacity/transform/height are written from t in render, so ?t= freezes a frame. Every selector is scoped
+   under the hub and prefixed .sl-. The two lanes sit side by side and WRAP to one column when the card is too narrow to
+   hold both (no media query: the card's own width decides, which is what "narrow widths" means inside a scaled ad). */
+
+#s-tabs .sbsite .hub .sl-lanes { opacity: 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px;
+  width: 100%; margin-top: 2px; transform-origin: 50% 0; }
+#s-tabs .sbsite .hub .sl-lane { flex: 1 1 200px; min-width: 186px; box-sizing: border-box; padding: 9px 10px 10px;
+  border-radius: 10px; background: #141417; box-shadow: inset 0 0 0 1px #2a2a2e, 0 8px 20px rgba(0, 0, 0, .35); }
+#s-tabs .sbsite .hub .sl-lane.sl-done { box-shadow: inset 0 0 0 1px #24503a, 0 8px 20px rgba(0, 0, 0, .35); }
+#s-tabs .sbsite .hub .sl-hd { display: flex; align-items: center; gap: 7px; font: 600 12px/1 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .sl-hd .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .sl-hd .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .sl-hd small { font: 500 10px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .sl-sub { display: block; margin: 5px 0 7px; font: 500 10.5px/1 var(--ui); color: #8e8e93; }
+
+/* The six pads lay themselves out by the lane's own width: auto-fill gives 1 column in the ~231 px lane of the
+   side-by-side fork and 3 columns (a 3x2 grid) whenever the lane is wide enough (a stacked lane is ~471 px), and it
+   never falls below 150 px per pad, so a pad's name always has a whole line to itself and is never ellipsised. */
+#s-tabs .sbsite .hub .sl-pads { display: grid; gap: 4px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+#s-tabs .sbsite .hub .sl-pad { opacity: 0; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center;
+  gap: 3px 6px; padding: 4px 6px; margin: 0; border-radius: 7px; background: #1a1a1d;
+  box-shadow: inset 0 0 0 1px #232327; }
+#s-tabs .sbsite .hub .sl-play { flex: none; display: grid; place-items: center; width: 13px; height: 13px; opacity: .5; }
+#s-tabs .sbsite .hub .sl-play-i { width: 13px; height: 13px; fill: #d1d1d6; }
+#s-tabs .sbsite .hub .sl-lab { flex: 1 1 auto; min-width: 0; font: 600 10.5px/14px var(--ui); color: #ececec;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .sl-d { flex: none; font: 500 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #8e8e93;
+  font-variant-numeric: tabular-nums; }
+
+/* a waveform: 42 bars whose HEIGHTS are the post's own peak samples (beats/sound.js) and whose widths flex to the lane,
+   with the playhead that marks the recording edge. Bars start flat and are un-scaled by render as the playhead sweeps. */
+#s-tabs .sbsite .hub .sl-wave { position: relative; flex: none; display: flex; align-items: center; gap: 1px;
+  width: 84px; height: 20px; }
+#s-tabs .sbsite .hub .sl-pad .sl-wave { flex: 1 1 100%; width: auto; height: 18px; }
+#s-tabs .sbsite .hub .sl-bar-f, #s-tabs .sbsite .hub .sl-bar-m, #s-tabs .sbsite .hub .sl-bar-g { flex: 1 1 auto; width: auto; }
+#s-tabs .sbsite .hub .sl-bar { display: block; flex: none; width: 1px; height: 3px; border-radius: 1px;
+  background: linear-gradient(180deg, #9dc2ff, #5d91ec); transform-origin: 50% 50%; opacity: .16; }
+#s-tabs .sbsite .hub .sl-head { position: absolute; left: 0; top: 1px; bottom: 1px; width: 1.5px; border-radius: 1px;
+  background: rgba(255, 255, 255, .8); box-shadow: 0 0 6px rgba(140, 175, 255, .8); }
+
+#s-tabs .sbsite .hub .sl-tick { flex: none; display: grid; place-items: center; width: 13px; height: 13px;
+  opacity: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .sl-tick .qc-ok { width: 13px; height: 13px; }
+
+/* the Suno lane: the track card (real cover frame from the post, title, the tag line, the length) and its master wave */
+#s-tabs .sbsite .hub .sl-card { display: flex; align-items: center; gap: 8px; margin: 7px 0 5px; padding: 6px;
+  border-radius: 8px; background: #0e0e11; box-shadow: inset 0 0 0 1px #26262b; }
+#s-tabs .sbsite .hub .sl-cover { flex: none; width: 38px; height: 38px; border-radius: 6px; object-fit: cover;
+  background: #111; box-shadow: 0 0 0 1px #2f2f36; }
+#s-tabs .sbsite .hub .sl-card-txt { flex: 1; min-width: 0; display: grid; gap: 3px; }
+#s-tabs .sbsite .hub .sl-title { font: 600 11px/1 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .sl-meta { font: 500 9.5px/1.15 var(--ui); color: #8e8e93; }
+/* the master waveform records in as a whole (render scales the box on X), so its bars sit at full opacity from the
+   start: the playhead sweep is the container's own scaleX, not a per-bar fade. */
+#s-tabs .sbsite .hub .sl-wave-master { width: 100%; height: 22px; margin: 0 0 7px; transform-origin: 0 50%;
+  overflow: hidden; }
+#s-tabs .sbsite .hub .sl-wave-master .sl-bar { opacity: 1; }
+
+/* the four stems, each a row that renders in under its own playhead */
+#s-tabs .sbsite .hub .sl-stems { display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .sl-stem-hd { display: flex; align-items: center; gap: 5px; font: 600 10px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .sl-note { width: 12px; height: 12px; fill: none; stroke: #8e8e93; stroke-width: 2; }
+#s-tabs .sbsite .hub .sl-stem { opacity: 0; display: flex; align-items: center; gap: 6px; height: 24px; padding: 0 6px;
+  border-radius: 6px; background: #0e0e11; box-shadow: inset 0 0 0 1px #26262b; }
+/* a stem's waveform spans its row: the name and the length sit at the ends, the band fills everything between them, so
+   the row is never a label with a stub of a wave squeezed into one third of it. */
+#s-tabs .sbsite .hub .sl-stem .sl-wave { flex: 1 1 40px; width: auto; min-width: 0; height: 16px; }
+#s-tabs .sbsite .hub .sl-stem .sl-lab { flex: 0 1 auto; }
+#s-tabs .sbsite .hub .sl-stem .sl-bar { background: linear-gradient(180deg, #c9a8ff, #866cf6); }

@@ -1,0 +1,24 @@
+img/ink/deploy CREDITS (inkwave-every-model-superbot-f1a86d6f, the deploy beat / Vercel card)
+
+preview.jpg   the deployment card's preview thumbnail: a real frame of the game as played in the post's own
+              gameplay video, 52.15s into the post, downscaled to 640x360 (16:9, full frame, no crop, no
+              grading, no channel work: ffmpeg -ss 52.15 -i post720.mp4 -frames:v 1 -vf scale=640:360 -q:v 3).
+              The frame is mid-match on the "1:17" clock: lime and magenta ink across the plaza, the "Splat
+              Zone" style HUD top row, the "Got one, squished by Juno" killfeed, the special-ready banner, the
+              spawn tank at bottom left. Nothing in it was drawn or generated.
+              Source post: "Splatoon Game made by Opus 5.5", gameplay video by Jayden Davis (@JaydenDavisNC),
+              https://x.com/JaydenDavisNC/status/2103357848961036304
+              Source file: the 720p MP4 of that video downloaded from the post (post720.mp4, 1280x720, 60 fps,
+              147.8s). The same post and file feed img/ink/play (the finale clip) and the rest of this spot's
+              gameplay stills.
+              Why this frame: a deploy card's preview thumbnail shows the deployed site, and the site is the
+              game. It reads at thumbnail size (turf in both team colours, HUD, seaside map) without looking
+              like a splat or menu screen.
+
+Attribution owed: none beyond the credit line above. The post is linked in the ad's own credits, the footage
+is the post's own game capture, and the frame is unaltered apart from scale.
+
+Not in this folder: the deploy card's Vercel and GitHub marks, which come from brand/ (see brand/CREDITS.txt:
+vercel-logo.svg and github-logo.svg, both simple-icons CC0, both painted white for the dark card). The URL the
+card shows, inkwave-turf.vercel.app, is made up for the ad; the game's real URL is inkwave-six.vercel.app, and
+the commit, the short sha and the build log lines are this spot's own fiction, not a real deployment's.

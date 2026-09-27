@@ -1,0 +1,42 @@
+img/ink/meshy/ CREDITS: the Meshy 5 beat (scenes/tabs-assets/beats/meshy.js). Every file in this folder is a real 3D
+mesh render, produced offline by this repo's own headless three.js harness (harness kept at
+.tmp/meshy-f1a86d6f/render/app.js + shoot.mjs + sourcing.mjs + collect.mjs). Nothing here is drawn by hand, generated
+by an image model, or lifted from a screenshot.
+
+THE MODELS. Meshy's own community output, read from the public showcase feed with the site's unsigned read endpoint
+(https://www.meshy.ai/meshyd-api/web/public/showcases?search=<term>); each record carries its licence, its published
+triangle count and a signed geometry URL (quadJsonUrl) holding vertices plus quad face indices. All four are CC0 1.0
+(public domain dedication, no attribution required). The authors are named anyway so the source is on the record:
+
+  juno.glb    cand-1.webp, juno-clay-00..35.webp, juno-wire-00..35.webp, juno-tex-00..35.webp, strip-juno.webp
+              meshy.ai/discover/01942b2a-d09f-777e-a4d6-0aa7e1725c5a
+              prompt "splatoon" by al7755260, CC0 1.0, 58,764 triangles (29,358 verts / 29,382 quads).
+              A stylized squid kid: a Splatoon-style inkling in headphones, hoodie and sneakers, on its own in the
+              mesh. It is the mesh superbot hands to the next step (beats/motion.js), so it owns the viewport
+              turntable: 36 frames per pass per revolution, clay / wireframe / textured.
+  palm.glb    cand-2.webp, strip-palm.webp
+              meshy.ai/discover/0197878d-02f3-709b-8f25-91efbb4c7d05
+              prompt "palm tree" by TooPH, CC0 1.0, 189,311 triangles.
+              The plaza palm of Tidewater Plaza.
+  crate.glb   cand-3.webp, strip-crate.webp
+              meshy.ai/discover/019ba335-f82c-7698-b41a-8ee02c353ffa
+              prompt "Wooden Cargo Box" by kotBanditsky, CC0 1.0, 10,516 triangles.
+              The ink-turf crate, the low cover the players paint around.
+  kraken-billboard.glb   cand-4.webp, strip-kb.webp
+              meshy.ai/discover/019696e7-9b01-7323-a211-50ce5ee9b8c2
+              prompt "simple old rooftop billboard" by aimenghafoor263, CC0 1.0, 19,160 triangles.
+              The plaza's advertising board, the frame the KRAKEN ad hangs on. The mesh is the board; the ad copy is
+              the game's, not part of the asset.
+
+THE RENDERS. meshy.js names the triangle count printed on each badge from the model record above: those are the
+meshes' published counts, not decoration. Frames are 448x320 webp, 36 per revolution, written by
+canvas.toDataURL('image/webp', 0.92) inside headless Chrome (--use-angle=swiftshader), lit by meshy's own viewport
+recipe: a soft key from the upper front right, a cool rim behind, a low fill, a dark background and a faint grid
+floor. The clay pass is a plain grey standard material; the wireframe pass the same shell with a lime wire overlay;
+the textured pass an authored PBR material per subject (colours, metalness and roughness are recorded in the header
+of beats/meshy.js), tinted with the ad's ink lime: juno 0x93dd24 / 30% lime, the palm split by height into bark brown
+and leaf green / 10% and 26%, the crate 0x8a5a2b / 14%, the billboard steel 0x7b8087 / 16%. The lime is the ad's own
+ink colour, not a colour any of the meshes carries; it is named on the "Ink Lime" swatch in the viewport.
+
+NO API KEY. No Meshy account, key or credit was used: the showcase feed and the geometry URLs it signs are public
+reads. The rule this spot ships under (no hand-drawn or generated imagery) holds for every file here.

@@ -1,0 +1,88 @@
+/* Script beat (beats/script.js): the Inkwave script card, step 1 of the one published routing. Claude Opus 5.5's
+   artifact, styled as the family's document sheet (#121216, inset 1px #2a2a2e, var(--ui) copy, var(--font-mono) for the
+   file name, the § badges and the match-flow line), with the ad's own ink palette on the three things this beat owns:
+   the lime § badge of a section (the same mark the routing chip wears when it dispatches that section), the lime the
+   announcer's winning call wears, and the magenta of the match-flow separators and the "magenta" team word. The owner
+   tiles are the hub's own .qc-tile (chat.css), drawn through x.tile, so every app's official mark keeps its own plate.
+
+   Nothing here transitions and nothing animates on its own: opacity, transform and colour are all written from t in
+   render(), so ?t= freezes an exact frame. Every selector is scoped to the hub and prefixed .qb-script-. */
+
+/* the beat's root box (the reply's body) and the card itself */
+#s-tabs .sbsite .hub .qb-script { width: 100%; max-width: 100%; }
+#s-tabs .sbsite .hub .qb-script-card { opacity: 0; margin-top: 4px; box-sizing: border-box; width: 100%; max-width: 460px;
+  border-radius: 12px; background: #121216; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .38);
+  overflow: hidden; color: #f2f2f7; font: 12.5px/17px var(--ui); }
+
+/* header: the markdown badge, the file name, and the run pill (the sections written, then the tick) */
+#s-tabs .sbsite .hub .qb-script-hd { display: flex; align-items: center; gap: 7px; height: 28px; box-sizing: border-box;
+  padding: 0 10px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .qb-script-fi { flex: none; height: 16px; padding: 0 4px; border-radius: 4px; background: #1c1c22;
+  box-shadow: inset 0 0 0 1px #2a2a2e; color: #b6f000; font: 700 9px/16px var(--font-mono, ui-monospace, monospace);
+  letter-spacing: .04em; }
+#s-tabs .sbsite .hub .qb-script-fn { font: 600 12.5px/1 var(--font-mono, ui-monospace, monospace); color: #f2f2f7; }
+#s-tabs .sbsite .hub .qb-script-pill { position: relative; margin-left: auto; flex: none; display: inline-flex;
+  align-items: center; gap: 5px; height: 20px; padding: 0 9px 0 7px; border-radius: 999px; background: #1c1c22;
+  box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 10.5px/1 var(--ui); color: #9a9aa2; white-space: nowrap; }
+#s-tabs .sbsite .hub .qb-script-pill.is-done { background: #22300a; box-shadow: inset 0 0 0 1px #455c10; color: #d4f86a; }
+#s-tabs .sbsite .hub .qb-script-spin { flex: none; width: 9px; height: 9px; box-sizing: border-box; border-radius: 50%;
+  border: 1.6px solid #3a3a42; border-top-color: #6a9cff; }
+#s-tabs .sbsite .hub .qb-script-pill .qc-ok { position: absolute; left: 7px; top: 4px; width: 11px; height: 11px;
+  opacity: 0; stroke: #b6f000; }
+
+/* the document body */
+#s-tabs .sbsite .hub .qb-script-bd { padding: 8px 10px 9px; }
+
+/* the title line, typed: the markdown #, the title itself, and the caret that lands with the last character */
+#s-tabs .sbsite .hub .qb-script-title { display: flex; align-items: center; gap: 6px; min-height: 18px;
+  font: 600 12.5px/18px var(--font-mono, ui-monospace, monospace); color: #f2f2f7; }
+#s-tabs .sbsite .hub .qb-script-h1 { flex: none; color: #6b6b73; font-weight: 700; }
+#s-tabs .sbsite .hub .qb-script-title .qb-script-th { color: transparent; }  /* holds the line's width while it types */
+
+/* the map / teams / squad line: the post's own material */
+#s-tabs .sbsite .hub .qb-script-meta { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 2px;
+  font: 11px/15px var(--ui); color: #c7c7cc; opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-dot { flex: none; color: #e5189a; font-weight: 700; font-style: normal; }
+#s-tabs .sbsite .hub .qb-script-sq { color: #8e8e93; }
+#s-tabs .sbsite .hub .qb-script-lime { color: #b6f000; font-weight: 600; }
+#s-tabs .sbsite .hub .qb-script-mag { color: #e5189a; font-weight: 600; }
+
+/* the six dispatched sections: lime § badge, the section name, its body typed in, the owner tile on the right */
+#s-tabs .sbsite .hub .qb-script-ll { display: grid; gap: 1px; margin-top: 6px; }
+#s-tabs .sbsite .hub .qb-script-l { display: flex; align-items: center; gap: 6px; height: 21px; box-sizing: border-box;
+  padding: 0 1px; border-radius: 6px; opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-l.is-on { background: linear-gradient(90deg, rgba(182, 240, 0, .07), rgba(182, 240, 0, 0) 62%); }
+#s-tabs .sbsite .hub .qb-script-n { flex: none; height: 15px; padding: 0 4px; border-radius: 4px; background: #b6f000;
+  color: #0b0b0c; font: 800 10px/15px var(--font-mono, ui-monospace, monospace); letter-spacing: -.02em;
+  box-shadow: 0 1.5px 0 #4d6a00; }
+#s-tabs .sbsite .hub .qb-script-ti { flex: none; width: 50px; font: 600 11.5px/1 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .qb-script-tx { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap;
+  font: 11.5px/17px var(--ui); color: #a8a8b0; }
+#s-tabs .sbsite .hub .qb-script-th { color: transparent; }   /* the untyped tail keeps the line's width */
+#s-tabs .sbsite .hub .qb-script-ca { flex: none; width: 1.5px; height: 12px; border-radius: 1px; background: #b6f000;
+  opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-ow { flex: none; display: inline-flex; align-items: center; gap: 3px; opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-ow .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+
+/* the announcer block, screenplay format: the role centred, its four calls centred under it */
+#s-tabs .sbsite .hub .qb-script-vo { margin-top: 7px; padding: 6px 10px 7px; border-top: 1px solid #232327;
+  text-align: center; opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-role { font: 700 10px/13px var(--font-mono, ui-monospace, monospace); letter-spacing: .16em;
+  color: #8e8e93; opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-d { min-height: 15px; font: 12px/15px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .qb-script-d .qb-script-ca { display: inline-block; margin-left: 2px; vertical-align: -1px; }
+#s-tabs .sbsite .hub .qb-script-d:last-child { font-weight: 600; }
+#s-tabs .sbsite .hub .qb-script-d:last-child.is-on { color: #b6f000; text-shadow: 0 0 12px rgba(182, 240, 0, .35); }
+
+/* the match-flow line: READY > 3:00 > JUDGING > VICTORY, the last stage in the winning ink */
+#s-tabs .sbsite .hub .qb-script-flow { display: flex; align-items: center; gap: 5px; margin-top: 6px; padding-top: 7px;
+  border-top: 1px solid #232327; opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-fl { flex: none; font: 600 9.5px/1 var(--font-mono, ui-monospace, monospace);
+  letter-spacing: .08em; text-transform: uppercase; color: #8e8e93; }
+#s-tabs .sbsite .hub .qb-script-st { flex: none; height: 18px; padding: 0 6px; border-radius: 5px; background: #1c1c22;
+  box-shadow: inset 0 0 0 1px #2a2a2e; font: 700 10px/18px var(--font-mono, ui-monospace, monospace); color: #8e8e93;
+  opacity: 0; }
+#s-tabs .sbsite .hub .qb-script-st.is-on { color: #f2f2f7; }
+#s-tabs .sbsite .hub .qb-script-st.qb-script-v.is-on { background: #b6f000; color: #0b0b0c; box-shadow: 0 1.5px 0 #4d6a00; }
+#s-tabs .sbsite .hub .qb-script-ar { flex: none; color: #e5189a; font: 700 10px/1 var(--font-mono, ui-monospace, monospace);
+  opacity: 0; }

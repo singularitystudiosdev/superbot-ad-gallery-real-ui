@@ -1,0 +1,62 @@
+img/ink/scrape/ CREDITS: the DeepSeek V4 Flash beat (scenes/tabs-assets/beats/scrape.js). Every file in this folder is
+downloaded from the site it is stamped with in the beat. None is drawn by hand, none is generated, and none is a
+screenshot of another ad. The beat's own header carries the same record, file by file.
+
+WHAT THE CARD CLAIMS, AND WHAT IS REAL. The four searches, the page counts (splatoonwiki.org 22, polyhaven.com 63,
+kenney.nl 37, opengameart.org 58, 180 total) and the pick order are staged for the spot, like every other beat's card.
+The pictures are not staged: each one is the real preview image of a real asset, fetched from the library the chip names.
+
+1. POLY HAVEN, polyhaven.com (CC0 1.0, public domain dedication; https://polyhaven.com/license). HDRI skies and
+   PBR texture previews, taken off the site's own CDN thumbnail endpoint
+   (https://cdn.polyhaven.com/asset_img/thumbs/<slug>.png). The small mirror-ball/light-probe inset visible in the HDRI
+   frames is Poly Haven's own preview scene, part of the downloaded thumbnail. Eight files:
+
+     hdri-secluded-beach.webp   <- secluded_beach          HDRI, coastal dunes and open water, midday sun
+     hdri-fish-hoek-beach.webp  <- fish_hoek_beach         HDRI, beach at low tide under an overcast sky
+     hdri-small-harbor.webp     <- small_harbor_01         HDRI, small harbor at sunrise
+     hdri-simons-town.webp      <- simons_town_harbour     HDRI, harbour with a moored boat, morning
+     tex-pavers.webp            <- concrete_pavers_02      texture, reddish concrete pavers
+     tex-pavement.webp          <- concrete_pavement_03    texture, dark concrete pavement slabs
+     tex-concrete-worn.webp     <- concrete_floor_worn_001 texture, worn grey concrete floor
+     tex-checkered-paving.webp  <- checkered_pavement_tiles texture, checkered pavement tiles
+
+   These four skies and four grounds are the palette the plaza is blocked out in (seaside light, concrete plaza floor).
+
+2. KENNEY, kenney.nl (CC0 1.0; the packs' own License.txt ships with each download and names Kenney as the author,
+   credit not mandatory). The kit preview sheets, cropped from 918x515 to 918x440 to trim Kenney's own sample
+   watermark strip (its CC0 badge and wordmark) off the bottom edge. Nothing inside the artwork is altered. Three files:
+
+     kenney-nature.webp        <- Nature Kit sample.png        palms and tropical props on a teal island
+     kenney-survival.webp      <- Survival Kit sample.png      jungle, palm trees and supply crates
+     kenney-tower-defense.webp <- Tower Defense Kit sample.png crates, rocks and towers
+
+   The palm tree and the wooden crate the map needs are the props these kits supply; the Meshy beat models the ad's
+   own versions of them (img/ink/meshy/CREDITS.txt).
+
+3. OPENGAMEART.ORG, opengameart.org (all CC0 1.0). The paint splat textures. Two are one submission by Alexander123,
+   the third is Kenney's Splat Pack as mirrored on OpenGameArt:
+
+     oga-splat-a.webp    <- https://opengameart.org/sites/default/files/splat.png
+                            submission opengameart.org/content/splattexture, "SplatTexture" by Alexander123,
+                            CC0, "Copyright/Attribution Notice: NotNecessary"
+     oga-splat-b.webp    <- https://opengameart.org/sites/default/files/splat2.png
+                            the same submission, by Alexander123, CC0
+     oga-splat-pack.webp <- https://opengameart.org/sites/default/files/kenney_splatpack.zip
+                            splat02.png from Kenney's "Splat Pack" (CC0, license file in the pack: "License: (Creative
+                            Commons Zero, CC0)"), mirrored on OpenGameArt; the submission page is
+                            opengameart.org/content/splat-pack
+
+4. FAVICONS (fav-*.png). The sites' own marks, downloaded and resized to 48x48, used nominatively to label the pages
+   the run read. They are not artwork made for this spot:
+
+     fav-polyhaven.com.png      <- https://polyhaven.com/favicon.ico
+     fav-kenney.nl.png          <- https://kenney.nl/favicon.ico
+     fav-opengameart.org.png    <- https://opengameart.org/sites/all/themes/oga/opengameart2_favicon.ico
+                                   (the icon the site itself declares in its <link rel="shortcut icon">)
+     fav-splatoonwiki.org.png   <- https://www.google.com/s2/favicons?domain=splatoonwiki.org&sz=64
+                                   (splatoonwiki.org refuses a plain request with a 403, so its own 16x16 declared
+                                    mark was fetched through Google's public favicon service; the mark is the wiki's)
+
+No image in this folder is used as a claim about Inkwave, its store, or Nintendo: they are the reference board a build
+agent would actually assemble before modelling a seaside plaza, and the beat shows them as references, each wearing the
+mark of the library it came from.

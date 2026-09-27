@@ -1,0 +1,61 @@
+/* Art beat (beats/art.js): the eight painted tiles as a 4x2 art sheet, each one a real crop of the post's gameplay
+   video (img/ink/art/CREDITS.txt). A tile is a dark canvas holding the crop, the coarse mosaic of that same crop
+   that fades out as it resolves, the resolve sweep and grain, a corner tag naming what the crop is, and the stamped
+   caption. Nothing here transitions: opacity/filter/transform are written from t in render, so ?t= freezes a frame.
+   Every selector is scoped under the hub and prefixed .qb-art-. The "Painting 8 tiles" chip reuses the shared
+   .dd-chiprow/.ch-tool tool-chip markup from chat.css and repeats the pill look on .qb-art-gen. */
+
+/* the sheet: four tiles a row, two rows, 6px apart, 420px of board (the reference art beat's grid width). Two rows
+   rather than three so the whole board lands inside the chat column instead of scrolling off the top of it. */
+#s-tabs .sbsite .hub .qb-art-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 420px;
+  max-width: 100%; margin-top: 2px; opacity: 0; transform-origin: 50% 0; }
+
+/* one cell of the sheet: the square asset canvas, and under it the caption line naming what the crop is */
+#s-tabs .sbsite .hub .qb-art-cell { opacity: 0; }
+/* the canvas itself, faintly checked underneath so a crop that is not square (the four HUD strips) reads as a piece
+   placed on a sheet rather than as a missing image */
+#s-tabs .sbsite .hub .qb-art-tile { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden;
+  background: #0c0c0f; box-shadow: inset 0 0 0 1px #2a2a2e, 0 6px 16px rgba(0, 0, 0, .35); }
+#s-tabs .sbsite .hub .qb-art-tile::before { content: ""; position: absolute; inset: 0; opacity: .5;
+  background: repeating-conic-gradient(#17171c 0 25%, #101014 0 50%) 0 0 / 12px 12px; }
+
+/* the crop itself: fills the tile, arrives blurred and desaturated, sharpens as it resolves */
+#s-tabs .sbsite .hub .qb-art-shot { position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  object-fit: cover; opacity: 0; will-change: filter, transform; }
+/* a crop that is not 1:1 (the four HUD strips) is shown whole, inset on the canvas */
+#s-tabs .sbsite .hub .qb-art-cut { inset: 7px; width: calc(100% - 14px); height: calc(100% - 14px);
+  object-fit: contain; }
+
+/* the mosaic the tile resolves out of: the crop's own 24px-wide downscale (img/ink/art/noiz/), stretched back over
+   the tile by the browser with nearest-neighbour sampling, so the placeholder is the image's own pixels and never a
+   drawn or generated shape. It fades out as the sharp crop fades in. */
+#s-tabs .sbsite .hub .qb-art-noiz { position: absolute; inset: 0; background-size: cover; background-position: 50% 50%;
+  image-rendering: pixelated; filter: saturate(.6) contrast(1.25) brightness(1.06); }
+/* faint scanline grain over the tile while it is still resolving */
+#s-tabs .sbsite .hub .qb-art-grain { position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, .07) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay; }
+
+/* the sweep that crosses a tile while it resolves: this ad's ink colours, magenta into lime */
+#s-tabs .sbsite .hub .qb-art-band { position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(100deg, transparent 25%, rgba(229, 24, 154, .40) 45%, rgba(147, 221, 36, .40) 55%, transparent 75%); }
+
+/* what the crop is: a corner tag, mono, uppercase */
+#s-tabs .sbsite .hub .qb-art-tag { position: absolute; right: 5px; top: 5px; padding: 2px 5px 1px; border-radius: 4px;
+  background: rgba(10, 10, 12, .74); font: 600 7.5px/1 var(--mono); letter-spacing: .5px; text-transform: uppercase;
+  color: #b8b8bd; }
+/* the stamp: what the crop is, and the crop's own pixel size, under the tile once it is sharp */
+#s-tabs .sbsite .hub .qb-art-cap { display: block; margin-top: 4px; opacity: 0;
+  font: 500 9px/11px var(--mono); color: #d8d8dd; }
+#s-tabs .sbsite .hub .qb-art-cap b { display: block; overflow: hidden; text-overflow: ellipsis;
+  font-weight: 600; color: #f4f4f7; white-space: nowrap; }
+#s-tabs .sbsite .hub .qb-art-cap small { display: block; color: #86868c; }
+
+/* the "Painting 8 tiles" chip (inside the shared .dd-chiprow/.ch-tool markup) */
+#s-tabs .sbsite .hub .qb-art-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .qb-art-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .qb-art-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .qb-art-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .qb-art-gen .ch-tool-t { color: #ececec; }

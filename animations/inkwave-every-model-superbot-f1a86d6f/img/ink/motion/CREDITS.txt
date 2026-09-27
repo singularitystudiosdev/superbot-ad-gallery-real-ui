@@ -1,0 +1,51 @@
+img/ink/motion/ - every pixel is a real 3D render, no screenshots and no drawn art
+================================================================================
+
+WHAT THIS FOLDER HOLDS
+  swim-NN.webp     72 frames, 30fps (2.4s)   the "dive into ink and swim" motion
+  splat-NN.webp    72 frames, 30fps (2.4s)   the "strafe and fire the splattershot" motion
+  jump-NN.webp     72 frames, 30fps (2.4s)   the "super jump launch" motion
+  victory-NN.webp  72 frames, 30fps (2.4s)   the "victory pose on the podium" motion
+  juno-rig.webp    one still, 224x168        the carried rig thumbnail the card opens on
+
+  NN is 00..71. Frames are 224x168 webp, quantised from a headless three.js render.
+
+HOW THEY WERE MADE
+  Renderer: three.js r180 (three/examples/jsm/loaders/GLTFLoader.js) in headless Chromium via Playwright,
+  swiftshader backend, 224x168, ACESFilmic tone mapping. The renderer, its scene lighting and the exact
+  per-clip camera/pose arguments are kept beside this ad at .tmp/motion-f1a86d6f/harness/rig.html +
+  shoot_rig.mjs (gitignored); the GBL files it loads sit in the same folder.
+  Nothing in the beat runtime draws anything: the ad plays these baked webp frames as a pure function of t.
+
+CHARACTER (the rig HY-Motion is handed as juno.glb)
+  Rogue_Hooded.glb
+    KayKit Adventurers 2.0, "Hooded Rogue" chibi character, by Kay Lousberg (KayKit).
+    CC0 1.0 (public domain dedication). kaylousberg.itch.io
+    Pack: github.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0
+    File reached through the CC0 mirror github.com/GeorgeQLe/assets-kaykit-3d-characters
+    (assets/kaykit/adventurers-2.0/Characters/gltf/Rogue_Hooded.glb). 1 skinned mesh set, 32 nodes.
+    Rendered here as a 55% opacity ghost over its own texture atlas, tinted lime/teal (#9fe6c4) so it reads
+    as the ad's Juno.
+
+ANIMATION (the motions HY-Motion is asked for)
+  KayKit Character Animations 1.1, same author, CC0 1.0, same repo mirror, folder
+  assets/kaykit/character-animations-1.1/Animations/gltf/Rig_Medium/. These clips are authored on the
+  identical rig (same bone names), so they are played straight onto the character with THREE.AnimationMixer
+  and sampled at t = frame/30. The four motions are:
+    swim     Crawling              (Rig_Medium_MovementAdvanced.glb)
+    splat    Ranged_1H_Shooting    (Rig_Medium_CombatRanged.glb)
+    jump     Jump_Full_Long        (Rig_Medium_MovementBasic.glb)
+    victory  Cheering              (Rig_Medium_Simulation.glb)
+  The harness also loads Rig_Medium_Special.glb; 68 clips from those five sets are attached to the rig, which
+  is the "68 clips" the card names.
+
+THE LIME SKELETON
+  Not a THREE.SkeletonHelper: the overlay is real geometry built by the harness, a joint sphere on every bone
+  and a cylinder shaft between each bone and its parent, each parented to the bone itself so it follows the
+  skinning exactly, drawn depthTest-free in lime #b6f000 / #d6ff4d over the ghost body. Rim lights are the
+  ad's own ink colours: lime #b6f000 behind right, magenta #e5189a behind left. The clay tint colour, the
+  ghost opacity and the rim lights are authored lighting; the mesh, the skin weights and the animation curves
+  are all the CC0 assets above.
+
+  No Tencent/Hunyuan asset, API key or generated file is used anywhere in this folder: HY-Motion 1.0 is named
+  in the copy as the model the ad routed the request to, and the motion footage is the render above.

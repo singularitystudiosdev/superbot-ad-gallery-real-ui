@@ -1,0 +1,20 @@
+img/ink/play CREDITS (inkwave-every-model-superbot-f1a86d6f, the finale / play beat)
+
+inkwave-turf-8s.mp4   a 7.5s, no-audio trim (source 59.0-66.5s) of the video embedded in the post, cropped to a
+                      portrait 4:5 window (1728x2160 at x=1056 of the 3840x2160 frame, i.e. centred) and scaled to
+                      720x900, H.264 High, +faststart, AAC stripped.
+                      Source post: "Splatoon Game made by Opus 5.5", gameplay video by Jayden Davis
+                      (@JaydenDavisNC), https://x.com/JaydenDavisNC/status/2103357848961036304
+                      Source file: the highest-resolution MP4 variant the post carries, 3840x2160 (2160p, ~25.1 Mbps):
+                      https://video.twimg.com/amplify_video/2103357145110474752/vid/avc1/3840x2160/qVFYo7WVU5H82DZJ.mp4
+                      The window is trimmed from a bit into the post, not from its start: it opens mid-match on the
+                      "1:09" clock and closes on the DOUBLE SPLAT! callout (that banner first paints at ~65.0s and is
+                      still up at 66.5s, the clip's last frame). Audio was not carried: the spot supplies its own.
+poster.jpg            the trimmed clip's first frame (source 59.0s), same crop and scale as the clip.
+
+Everything on screen in the clip is the post's own footage (lime vs magenta turf, Tidewater Plaza, the HUD, the
+DOUBLE SPLAT! banner, the "Splatted by Juno" killfeed). Nothing in this folder was drawn or generated.
+Attribution owed: none beyond the credit line above; the footage is used with the post linked in the ad's own credits.
+
+Game name and URL: the game in the post is real ("Inkwave", https://inkwave-six.vercel.app/). The deploy URL the spot
+shows, inkwave-turf.vercel.app, is made up for the ad, along with the match stats the beat's chips print.

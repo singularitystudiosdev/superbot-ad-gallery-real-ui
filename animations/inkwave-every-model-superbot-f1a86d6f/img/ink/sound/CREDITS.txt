@@ -1,0 +1,31 @@
+img/ink/sound: the sound beat's audio analysis (beats/sound.js). Every waveform in that beat is drawn from the peak
+arrays in peaks.json, and every peak in peaks.json is a real sample of the X post's own audio.
+
+SOURCE AUDIO
+  /tmp/xad-media-f1a86d6f/post720.mp4 = x.com/JaydenDavisNC/status/2103357848961036304, AAC audio, 48 kHz stereo,
+  147.797 s (the post's own game capture: Splatoon-like "Inkwave" turf war).
+
+METHOD (reproducible, no generated data)
+  1. ffmpeg -v error -i post720.mp4 -ac 1 -ar 8000 -f s16le post8k.raw
+  2. per span: 48 bars, each bar = max |sample| in its bin, normalised to the span's own loudest bin (floor 0.02)
+  3. stems: the bed span band-split with ffmpeg (drums highpass 3k, bass lowpass 250, synth 250 Hz-1.2 kHz,
+     vocal chops 1.2-3 kHz, air highpass 6k), same per-bin peak measure, 40 bars; the mixdown row draws the bed span's
+     own peaks, unfiltered
+  4. written to peaks.json by the extractor kept at /tmp/xad-sound-f1a86d6f/extract.mjs (a build tool, not part of the ad)
+
+SPANS (starts in the post's own clock) and what is really there
+  splat   65.30-65.78  the "DOUBLE SPLAT!" banner is on screen at 65.3 s; a sharp ink burst lands at 65.32 s
+  swim    38.14-38.86  squid moving through her own ink on the plaza; the loudest smooth broadband span in the capture
+  jump    68.10-68.90  a super jump beam and its landing mark are on screen at 68.3-68.85 s ("1 minute left!" up)
+  burst   110.06-110.42 splattershot burst beside the player at 110.1 s ("SPLATTED BY Loop" lands at 110.9 s)
+  timeup  130.85-131.85 the "TIME'S UP!" card is on screen at 131.2 s; the stinger peaks at 131.24 s
+  cheer   135.86-136.70 the results screen's win jingle / crowd swell, 135.96 s
+  bed     138.90-141.30 the results screen's music bed, continuously loud 139.0-140.6 s (this is also the Suno card's
+                       master waveform: the post has one music bed, and the card does not invent a second)
+  stems             drums (highpass 3k) / bass (lowpass 250) / synth (250 Hz-1.2 kHz) / vocal chops (1.2-3 kHz) /
+                    air (highpass 6k) and mixdown (the whole bed, unfiltered) are band-limited views of that same bed
+                    (the Suno track the beat depicts does not exist, so the card must not invent audio it does not have)
+
+img/ink/sound/cover.jpg: a real frame of post720.mp4 at 60.2 s, scaled to 256x256
+  (ffmpeg -ss 60.2 -i post720.mp4 -frames:v 1 -vf scale=256:256) - the Suno card's cover. This is the same frame the
+  post shows at 1:08 of the match: the player in their own ink by the crates on Tidewater Plaza.

@@ -1,0 +1,100 @@
+/* Deploy beat (beats/deploy.js), step 8 of the one routing: the Vercel deployment sheet for the build the previous
+   beats produced. Drawn from Vercel's own deployment detail page (vercel.com/docs/deployments/logs: the deployment
+   header with the project name, the Production badge and the status pill; the Deployment Summary / Build Logs /
+   Domains / Source tab row; the commit row; the streaming build log panel; the deployment's preview thumbnail and
+   its domain), on Vercel's dark sheet. Two deliberate departures from Vercel's own palette, both so the sheet reads
+   as this ad's: the Building/Ready status uses the hub's own amber-to-green pair (#ffb224 / #34c759, the same green
+   chat.css gives a resolved routing chip) rather than Vercel's, and the build log panel keeps the family's #0a0a0a
+   sheet with its inset ring. Nothing here transitions and nothing animates on its own: opacity, transform and color
+   are all written from t in render, so ?t= freezes an exact frame. Every selector is scoped under the hub and every
+   class the beat owns is prefixed .qb-deploy- (the reply line reuses chat.css .qc-say, the check mark reuses .qc-ok).
+   The Vercel triangle and the GitHub octicon are the sourced marks in brand/ (simple-icons, CC0), painted white for
+   the dark card with the same brightness(0) invert(1) filter chat.css uses on its own dark app tiles. */
+
+/* the box the card mounts into, then the sheet itself. 456px, not the 600px the sheet would like: the thread's reply
+   column is var(--hub-reply) 471px in assets/hub-real.css, and a card fixed wider than that grows the reply column's
+   own grid track and overflows the feed instead of shrinking (measured headless: a 600px card laid out 600px inside a
+   471px column). The sibling cards sit at 420-440px for the same reason. */
+#s-tabs .sbsite .hub .qb-deploy { width: 456px; max-width: 100%; }
+#s-tabs .sbsite .hub .qb-deploy-card { opacity: 0; box-sizing: border-box; width: 100%;
+  border-radius: 10px; background: #0a0a0a; box-shadow: inset 0 0 0 1px #2a2a2a, 0 18px 40px rgba(0, 0, 0, .55);
+  overflow: hidden; color: #ededed; font: 12px/16px var(--ui); }
+
+/* ---------- deployment header: the triangle, the project, the Production badge, the status pill ---------- */
+#s-tabs .sbsite .hub .qb-deploy-hd { display: flex; align-items: center; gap: 8px; height: 36px; box-sizing: border-box;
+  padding: 0 10px; background: #000; border-bottom: 1px solid #262626; }
+#s-tabs .sbsite .hub .qb-deploy-tri { flex: none; display: grid; place-items: center; width: 16px; height: 16px;
+  border-radius: 5px; background: #000; box-shadow: inset 0 0 0 1px #2a2a2a; }
+#s-tabs .sbsite .hub .qb-deploy-tri img { display: block; width: 11px; height: 11px;
+  filter: brightness(0) invert(1); opacity: .95; }
+#s-tabs .sbsite .hub .qb-deploy-pj { font: 600 12.5px/1 var(--ui); color: #ededed; letter-spacing: -.01em; }
+#s-tabs .sbsite .hub .qb-deploy-env { flex: none; height: 17px; padding: 0 6px; border-radius: 999px;
+  box-shadow: inset 0 0 0 1px #2a2a2a; color: #8f8f8f; font: 600 9.5px/17px var(--ui); letter-spacing: .03em;
+  text-transform: uppercase; }
+/* the status pill: amber dot and "Building 12s" while the build runs, green dot and "Ready 34s" once it lands */
+#s-tabs .sbsite .hub .qb-deploy-st { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; flex: none;
+  height: 20px; padding: 0 9px; border-radius: 999px; background: #141400;
+  box-shadow: inset 0 0 0 1px #3a2f0a; color: #ffb224; font: 600 10.5px/1 var(--ui); }
+#s-tabs .sbsite .hub .qb-deploy-st.is-ready { background: #04140a; box-shadow: inset 0 0 0 1px #123a22; color: #34c759; }
+#s-tabs .sbsite .hub .qb-deploy-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+#s-tabs .sbsite .hub .qb-deploy-std { font: 600 10px/1 var(--font-mono); opacity: .75; font-variant-numeric: tabular-nums; }
+
+/* ---------- the tab row, Build Logs open ---------- */
+#s-tabs .sbsite .hub .qb-deploy-tabs { display: flex; align-items: flex-end; gap: 14px; height: 30px;
+  box-sizing: border-box; padding: 0 10px; background: #000; border-bottom: 1px solid #262626; }
+#s-tabs .sbsite .hub .qb-deploy-tab { height: 30px; display: inline-flex; align-items: center; color: #8f8f8f;
+  font: 500 11.5px/1 var(--ui); white-space: nowrap; }
+#s-tabs .sbsite .hub .qb-deploy-tab.is-on { color: #ededed; font-weight: 600; box-shadow: inset 0 -1.5px 0 #ededed; }
+
+/* ---------- the commit row: octicon, singularity/inkwave, the branch, the short sha, the message ---------- */
+#s-tabs .sbsite .hub .qb-deploy-src { display: flex; align-items: center; gap: 7px; height: 32px; box-sizing: border-box;
+  padding: 0 10px; border-bottom: 1px solid #262626; background: #0d0d0d; }
+#s-tabs .sbsite .hub .qb-deploy-gh { flex: none; display: grid; place-items: center; width: 16px; height: 16px; }
+#s-tabs .sbsite .hub .qb-deploy-gh img { display: block; width: 14px; height: 14px; filter: brightness(0) invert(1);
+  opacity: .85; }
+#s-tabs .sbsite .hub .qb-deploy-rp { display: inline-flex; align-items: baseline; gap: 2px; min-width: 0;
+  font: 600 11.5px/1 var(--ui); color: #ededed; }
+#s-tabs .sbsite .hub .qb-deploy-rp i { font-style: normal; color: #6a6a6a; }
+#s-tabs .sbsite .hub .qb-deploy-br { flex: none; display: inline-flex; align-items: center; height: 18px; padding: 0 7px;
+  border-radius: 999px; background: #141414; box-shadow: inset 0 0 0 1px #2a2a2a; color: #b8b8b8;
+  font: 600 10px/1 var(--font-mono); }
+#s-tabs .sbsite .hub .qb-deploy-sha { flex: none; font: 600 10.5px/1 var(--font-mono); color: #8f8f8f; }
+#s-tabs .sbsite .hub .qb-deploy-msg { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: #ededed; font: 11.5px/1 var(--ui); }
+
+/* ---------- the body: the build log panel, full width ---------- */
+#s-tabs .sbsite .hub .qb-deploy-body { padding: 10px; }
+#s-tabs .sbsite .hub .qb-deploy-logs { box-sizing: border-box; min-height: 150px; padding: 8px 9px; border-radius: 8px;
+  background: #0a0a0a; box-shadow: inset 0 0 0 1px #232323; font: 10.5px/15px var(--font-mono); }
+#s-tabs .sbsite .hub .qb-deploy-lg { display: flex; align-items: baseline; gap: 7px; opacity: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .qb-deploy-ts { flex: none; color: #5c5c5c; font: 10px/15px var(--font-mono); }
+#s-tabs .sbsite .hub .qb-deploy-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; color: #c9c9c9; }
+#s-tabs .sbsite .hub .qb-deploy-lg.is-cur .qb-deploy-tx { color: #ededed; }
+/* the check the build prints for a transformed module, and the block cursor on the log's newest line */
+#s-tabs .sbsite .hub .qb-deploy-ok { flex: none; width: 10px; height: 10px; fill: none; stroke: #34c759; stroke-width: 2.6;
+  stroke-linecap: round; stroke-linejoin: round; position: relative; top: 1px; }
+#s-tabs .sbsite .hub .qb-deploy-cur { flex: none; width: 5px; height: 10px; margin-left: 1px; background: #ededed; opacity: 0; }
+
+/* ---------- the footer: the deployed site's preview thumbnail, the generated domain, and the Visit button ----------
+   This is Vercel's deployment tile read sideways: the preview of what shipped on the left, the deployment's own
+   domain and its live state beside it, the Visit button on the right. The thumbnail is the post's own gameplay
+   frame (img/ink/deploy/CREDITS.txt): the site the build deployed is the game. */
+#s-tabs .sbsite .hub .qb-deploy-foot { display: flex; align-items: center; gap: 9px; box-sizing: border-box;
+  padding: 9px 10px; border-top: 1px solid #262626; background: #0d0d0d; }
+#s-tabs .sbsite .hub .qb-deploy-prev { position: relative; flex: none; box-sizing: border-box; width: 112px; height: 63px;
+  border-radius: 6px; overflow: hidden; background: #000; box-shadow: inset 0 0 0 1px #2a2a2a; }
+#s-tabs .sbsite .hub .qb-deploy-prev img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .qb-deploy-dm { flex: 1; min-width: 0; display: grid; gap: 5px; }
+#s-tabs .sbsite .hub .qb-deploy-url { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: #ededed; font: 600 11px/1 var(--font-mono); }
+#s-tabs .sbsite .hub .qb-deploy-live { display: inline-flex; align-items: center; gap: 5px; color: #34c759;
+  font: 600 10px/1 var(--ui); }
+#s-tabs .sbsite .hub .qb-deploy-visit { flex: none; display: inline-flex; align-items: center; height: 24px; padding: 0 12px;
+  border-radius: 999px; background: #ededed; color: #0a0a0a; font: 600 11px/1 var(--ui); transform-origin: 50% 50%; }
+
+/* the Vercel triangle in brand/vercel-logo.svg ships with no fill attribute, so on the hub's dark surfaces it paints
+   black and disappears: painted white here. It is not only this card's mark: the routing chip's 22px app tile
+   (.qc-t-vercel) and the composer's platform chip (.qc-pi img[data-app="vercel"]) show the same file, and both of
+   those are black surfaces too. The same brightness(0) invert(1) chat.css already uses on its own dark tiles. */
+#s-tabs .sbsite .hub .qc-t-vercel img,
+#s-tabs .sbsite .hub .qc-pi img[data-app="vercel"] { filter: brightness(0) invert(1); }

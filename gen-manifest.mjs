@@ -100,7 +100,6 @@ const more = [
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],
     // the no-switch family (2026-09-25): forked from the context-switch spot, built on the real superbot
   // hub UI, each keeping the same thread while a new model joins the rail. One member still listed.
-    ['same-chat-new-model-superbot-693c3a7f', 'same-chat-new-model-superbot-693c3a7f/', 'NEW MODEL. SAME CHAT', 'Ad spots'],
   // the "Superbot just works" family (2026-09-25): built on one kit (animations/just-works-kit-42aac446).
   // superbot aggregates a real ask across platforms and hands back a finished frontend in Chrome.
   ['just-works-waiver-night-gpt-superbot-42aac446', 'just-works-waiver-night-gpt-superbot-42aac446/', 'Waiver night, ChatGPT vs Superbot', 'Ad spots'],
@@ -116,7 +115,6 @@ const more = [
   ['just-works-reading-list-gpt-superbot-42aac446', 'just-works-reading-list-gpt-superbot-42aac446/', 'Libby + Goodreads + Kindle + Audible, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-watchlist-gpt-superbot-42aac446', 'just-works-watchlist-gpt-superbot-42aac446/', 'Letterboxd + IMDb + Trakt, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-ev-hunt-superbot-42aac446', 'just-works-ev-hunt-superbot-42aac446/', 'Tesla + Carvana + CarMax + CarGurus, one Model Y shortlist', 'Ad spots'],
-  ['just-works-ev-hunt-gpt-superbot-42aac446', 'just-works-ev-hunt-gpt-superbot-42aac446/', 'Tesla + Carvana + CarMax + CarGurus, ChatGPT vs Superbot', 'Ad spots'],
   ['just-works-mech-keys-superbot-42aac446', 'just-works-mech-keys-superbot-42aac446/', 'NovelKeys + CannonKeys + KBDfans + Drop + Keychron, one group-buy overview', 'Ad spots'],
   ['just-works-photo-gear-superbot-42aac446', 'just-works-photo-gear-superbot-42aac446/', 'Lightroom + B&H + MPB + KEH, one camera gear check', 'Ad spots'],
       ['deny-cascade-superbot-440813d4', 'deny-cascade-superbot-440813d4/', '"ASK ME ANYTHING"', 'Ad spots'],

@@ -18,8 +18,8 @@ import build from './beats/build.js?v=1';
 import render from './beats/render.js?v=2';
 import preview from './beats/preview.js?v=2';
 // v4 beats
-import opusLapse from './beats/opus-lapse.js?v=3';
-import dsSearch from './beats/ds-search.js?v=2';
+import opusLapse from './beats/opus-lapse.js?v=4';
+import dsSearch from './beats/ds-search.js?v=3';
 import meshy from './beats/meshy.js?v=2';
 import hailuo from './beats/hailuo.js?v=2';
 
@@ -107,17 +107,18 @@ export const VARIANTS = {
     step('superbot', play),
   ], 1.2),
 
-  // v4, the remake: Opus cooks through the codebase as a timelapse, DeepSeek searches for reference assets, Meshy turns
-  // them into real 3D meshes, MiniMax Hailuo animates the characters, ElevenLabs scores it, GitHub, Superbot plays.
+  // v4, the remake: DeepSeek searches for reference assets, Meshy turns them into real 3D meshes, MiniMax Hailuo
+  // animates the characters, ElevenLabs scores it, Opus cooks through the codebase as a timelapse, Superbot plays.
+  // v4 carries no GitHub beat: the push is told by the Opus timelapse's own task list, so a second "connected" card
+  // after it would restate the same step. v1-v3 keep theirs.
   '4': variant([
-    step('opus', opusLapse),
     step('deepseek', dsSearch),
     step('meshy', meshy),
     step('hailuo', hailuo),
     // markRows: at the tight v4 frame the score card's own rows are the smallest thing on screen; without a scroll stop
-    // per row, rows 2 and 3 land below the composer and wait there for the git beat. v1-v3 never pass it.
+    // per row, rows 2 and 3 land below the composer and wait there for the next beat. v1-v3 never pass it.
     step('eleven', audio, { markRows: true }),
-    step('github', git),
+    step('opus', opusLapse),
     step('superbot', play),
   ], 1),
 };
@@ -128,6 +129,12 @@ export const VARIANT = VARIANTS[VARIANT_KEY];
 // path it shipped with, so v1-v3 frames are untouched. v4 used to punch the camera in on every model switch; that is
 // gone, and the switch is read off the camera's one steady, tighter frame instead (tabs.js geo, W/2).
 const V4 = VARIANT_KEY === '4';
+
+// v4's only layout change (chat.css .qc-v4): the composer floats over the thread's bottom instead of sitting under the
+// feed, so the thread no longer ends on the feed's own clip line (a hard cut just above the composer). The newest line
+// now stops this far above the composer's top edge and everything below it dissolves into a gradient (the .qc-v4fade
+// band, chat.css) instead of being sliced. v1-v3 keep the shipped feed/composer split byte for byte.
+const FADE = 20;
 
 // every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply. W = the
 // variant's chip scale: the chip's own beats (swap, done, and the gap before the next chip) all stretch with it.
@@ -220,10 +227,29 @@ export function mountChat(hub) {
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
 
   const ph = hub.querySelector('.rc-ph');
-  return {
+
+  // v4 only: the composer leaves the flow (chat.css .qc-v4) so the thread runs the whole height of .main and slides
+  // under it, and this band is the gradient the thread dissolves into where it leaves view. It sits under the composer
+  // (z-index 2 vs 3) and its height is written from the composer's own box in renderScroll, so the fade always ends
+  // exactly where the composer's top edge is, however tall the composer measures.
+  const composer = hub.querySelector('.composer');
+  let fade = null;
+  if (V4) {
+    hub.classList.add('qc-v4');
+    fade = el('<div class="qc-v4fade"></div>');
+    fade.style.setProperty('--qc-fade', FADE + 'px');
+    composer.parentNode.insertBefore(fade, composer);
+  }
+
+  const c = {
     hub, pointer, site, feed, inner, beats, scroll, plat, pIcon, pImg, pMark, pLabel,
     ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'superbot',
+    composer, fade,
   };
+  // tooling: the same frozen-frame harness that publishes window.__AD can read the mounted thread (its scroll marks and
+  // beats) without the page telling it. Assignment only: nothing here changes what any variant renders.
+  if (window.__AD) window.__AD.chat = c;
+  return c;
 }
 
 function appear(n, t, a, dy = 10) {
@@ -284,7 +310,29 @@ function renderSwitch(s, t) {
 function renderScroll(c, t) {
   const bottom = (n) => { const b = boxIn(n, c.inner); return b.y + b.h; };
   const cs = getComputedStyle(c.feed);
-  const viewH = c.feed.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const padT = parseFloat(cs.paddingTop);
+  let viewH = c.feed.clientHeight - padT - parseFloat(cs.paddingBottom);
+  // v4: the composer floats over the thread (chat.css .qc-v4), so the line the newest content stops on is the composer's
+  // top edge minus the fade it dissolves into, not the feed's own bottom (which is now the bottom of the frame). The
+  // composer is read live, never assumed: its own height grows with the platform chip, and while it is still gliding
+  // up out of the empty state its transform is taken back off so the thread does not ride the drop.
+  if (V4 && c.composer && c.fade) {
+    const fb = c.feed.getBoundingClientRect(), cb = c.composer.getBoundingClientRect();
+    if (fb.height > 0) {
+      const k = c.feed.clientHeight / fb.height;                       // the feed's own px per screen px
+      const ct = getComputedStyle(c.composer).transform;
+      const m42 = ct && ct !== 'none' ? new DOMMatrix(ct).m42 : 0;     // the drop, in the composer's px
+      viewH = (cb.top - fb.top) * k - m42 - padT + 8 - FADE;           // anchor = composer top - FADE
+      const under = Math.max(0, (fb.bottom - cb.top) * k + m42);      // feed px from the composer's top to the feed's bottom
+      const h = (under + FADE).toFixed(2) + 'px';
+      if (c.fadeH !== h) { c.fadeH = h; c.fade.style.height = h; }
+      // the thread itself stops painting at the composer's top edge: without this clip, content sliding under the
+      // composer showed again beside it and in the frame's last pixel row, where the band's anti-aliased bottom edge and
+      // the feed's own overflow edge meet. The clip edge sits where the band is already solid, so the band covers it.
+      const clip = `inset(0px 0px ${under.toFixed(2)}px 0px)`;
+      if (c.feedClip !== clip) { c.feedClip = clip; c.feed.style.clipPath = clip; }
+    }
+  }
   // bottom-anchored like a live chat: the newest landed line sits just above the composer, so the thread grows
   // up out of it (the shift is negative while the thread is shorter than the feed). v4 gives the glide a longer,
   // longer-tailed ease so a big card appending (a 3D render, a video) never snaps the thread, and drives it on the

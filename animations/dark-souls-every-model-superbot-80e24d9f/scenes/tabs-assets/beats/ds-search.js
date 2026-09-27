@@ -143,8 +143,10 @@ export default {
 
     return {
       nodes: [card, say],
-      // scroll marks: the thread glides to each stage as it lands, and the last one brings the handoff line into frame
-      marks: [[T.card, rowEls[QUERIES.length - 1]], [T.found, chipEls[0]], [T.grid, grid], [T.say - 0.12, say]],
+      // scroll marks: the thread glides to each stage as it lands, and the last one brings the handoff line into frame.
+      // The grid's stop is the card's footer, not the grid itself: the "12 refs picked" line lands with the grid, and
+      // stopping on the grid parked that line under the composer until the handoff mark.
+      marks: [[T.card, rowEls[QUERIES.length - 1]], [T.found, chipEls[0]], [T.grid, foot], [T.say - 0.12, say]],
       render(t) {
         const n = streamCount(SAY, T.say + 0.03, 80, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }

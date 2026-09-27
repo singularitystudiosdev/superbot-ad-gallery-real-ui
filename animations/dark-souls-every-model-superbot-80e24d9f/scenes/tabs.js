@@ -6,21 +6,24 @@
 // (tabs-assets/chat.js, ?v=1..3 picks the routing). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's
 // generated stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=12';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END, VARIANT_KEY } from './tabs-assets/chat.js?v=14';
 import { lerp, seg, outCubic, inOutCubic } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
 const H = 1080;
 const FIRST = BEATS[0].k;
+// v4 (the remake, ?v=4) is framed like the reference spot; every other variant keeps the camera it shipped with
+const V4 = VARIANT_KEY === '4';
 
 let el = null;
 
 // the design box: a thread-wide hub, scaled so it fills the frame width (narrow ratios keep a readable column)
 function geo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
-  // pulled back far enough that every sent ask stays in frame through its whole answer (the DoorDash order is
-  // the tallest), so the thread lays out wider than the reference's 960
-  const DW = Math.max(560, Math.min(1480, W / 1.3));
+  // v4 tightens the box to the reference's own rule (one-agent-full-degen scenes/tabs.js: max(560, min(960, W/2))),
+  // so a card lands at the same on-screen size as the reference's and the thread reads large. v1-v3 keep the shipped,
+  // wider box byte for byte: their beats carry the tall DoorDash order, which needs the extra room.
+  const DW = V4 ? Math.max(560, Math.min(960, W / 2)) : Math.max(560, Math.min(1480, W / 1.3));
   const k = W / DW, DH = H / k;
   el.site.style.width = DW + 'px';
   el.site.style.height = DH.toFixed(3) + 'px';
@@ -78,6 +81,9 @@ export default {
     // (a narrow column already fills the frame, so it pushes in less)
     const z0 = g.DW < 700 ? 1.08 : 1.2, z1 = g.DW < 700 ? 1.04 : 1.1;
     const z = lerp(z0, z1, inOutCubic(seg(t, 0, CHAT_T0))) * lerp(1, 1 / z1, inOutCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.7)));
+    // the chat renders first so its own layout measures (renderScroll's boxIn reads) are this frame's, not last
+    // frame's; nothing it writes touches the site transform.
+    renderChat(el.chat, t);
     el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${(g.k * z).toFixed(5)}) translate(${(-g.DW / 2).toFixed(2)}px,${(-g.DH / 2).toFixed(2)}px)`;
 
     // empty state -> thread: the composer glides down to the bottom and the greeting lifts away
@@ -87,7 +93,5 @@ export default {
     const heroOut = outCubic(seg(t, FIRST.send - 0.1, FIRST.send + 0.3));
     el.hero.style.opacity = (heroIn * (1 - heroOut)).toFixed(3);
     el.hero.style.transform = `translate(-50%, ${((1 - heroIn) * 10 - heroOut * 40).toFixed(2)}px)`;
-
-    renderChat(el.chat, t);
   },
 };

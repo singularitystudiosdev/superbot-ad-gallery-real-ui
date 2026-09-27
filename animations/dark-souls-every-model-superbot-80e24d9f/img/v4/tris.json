@@ -1,0 +1,18 @@
+{
+  "knight": {
+    "tris": 2074,
+    "meshes": 1
+  },
+  "reaper": {
+    "tris": 9548,
+    "meshes": 6
+  },
+  "golem": {
+    "tris": 1252,
+    "meshes": 3
+  },
+  "bonfire": {
+    "tris": 704,
+    "meshes": 3
+  }
+}

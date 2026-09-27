@@ -1,0 +1,18 @@
+{
+  "elite": {
+    "tris": 218648,
+    "base": "#75787d"
+  },
+  "knight": {
+    "tris": 190012,
+    "base": "#7b7873"
+  },
+  "boss": {
+    "tris": 201890,
+    "base": "#aca398"
+  },
+  "sword": {
+    "tris": 212322,
+    "base": "#b5b7bf"
+  }
+}

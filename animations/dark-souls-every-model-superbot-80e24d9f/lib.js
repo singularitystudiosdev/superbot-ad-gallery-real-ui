@@ -8,6 +8,10 @@ export const seg = (t, a, b) => clamp((t - a) / (b - a));
 export const outCubic = (x) => 1 - Math.pow(1 - x, 3);
 export const outQuint = (x) => 1 - Math.pow(1 - x, 5);
 export const inOutCubic = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+/** a longer-tailed inOut than inOutCubic: slow start, fast middle, slow settle. The v4 thread's scroll-follow
+    (renderScroll in tabs-assets/chat.js) uses it so a big card appending (a 3D render, a video) has no visible
+    stop-start at either end. */
+export const inOutQuint = (x) => (x < 0.5 ? 16 * x * x * x * x * x : 1 - Math.pow(-2 * x + 2, 5) / 2);
 export const outBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
 /** set an element's opacity, clamped, 3 decimals */
 export const op = (el, v) => { el.style.opacity = clamp(v).toFixed(3); };

@@ -1,0 +1,111 @@
+/* Opus 5.5 timelapse coding beat (beats/opus-lapse.js): the mini IDE card. Same sheet as bld/ast/aud: #141416 with
+   an inset 1px #2a2a2e. Nothing here transitions and nothing animates on its own: opacity/transform/clip-path are all
+   written from t in render, so ?t= freezes an exact frame. Every selector is scoped under the hub and prefixed .olap-. */
+
+#s-tabs .sbsite .hub .olap { opacity: 0; margin-top: 4px; box-sizing: border-box; width: 100%; max-width: 410px;
+  border-radius: 12px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .38);
+  overflow: hidden; color: #f2f2f7; font: 12.5px/17px var(--ui); }
+
+/* header: the Claude mark, the repo, its branch, the TIMELAPSE badge and the state pill */
+#s-tabs .sbsite .hub .olap-hd { display: flex; align-items: center; gap: 7px; height: 30px; box-sizing: border-box;
+  padding: 0 9px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .olap-mk { flex: none; width: 16px; height: 16px; border-radius: 5px; background: #d97757;
+  display: grid; place-items: center; }
+#s-tabs .sbsite .hub .olap-mk img { width: 11px; height: 11px; display: block; filter: brightness(0) invert(1); }
+#s-tabs .sbsite .hub .olap-rp { font: 600 12px/1 var(--font-mono, ui-monospace, monospace); color: #f2f2f7;
+  white-space: nowrap; }
+#s-tabs .sbsite .hub .olap-br { flex: none; padding: 1px 6px; border-radius: 5px; background: #1f1f22; color: #8e8e93;
+  font: 600 9.5px/13px var(--ui); }
+#s-tabs .sbsite .hub .olap-bg { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 5px;
+  height: 18px; padding: 0 7px; border-radius: 999px; background: #21161a; box-shadow: inset 0 0 0 1px #3a2229;
+  font: 700 9px/1 var(--font-mono, ui-monospace, monospace); letter-spacing: .04em; color: #f0a2a8; white-space: nowrap; }
+#s-tabs .sbsite .hub .olap-rec { width: 6px; height: 6px; border-radius: 50%; background: #ff453a; flex: none;
+  box-shadow: 0 0 6px rgba(255, 69, 58, .8); }
+#s-tabs .sbsite .hub .olap-bg.is-stop .olap-rec { border-radius: 1px; background: #6ee7a0; box-shadow: none; }
+#s-tabs .sbsite .hub .olap-bg.is-stop { background: #10261b; box-shadow: inset 0 0 0 1px #1d4a33; color: #6ee7a0; }
+#s-tabs .sbsite .hub .olap-pill { position: relative; flex: none; display: inline-flex; align-items: center; gap: 5px;
+  height: 20px; padding: 0 8px 0 7px; border-radius: 999px; background: #1d1d21; box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 10px/1 var(--ui); color: #b8b8c0; }
+#s-tabs .sbsite .hub .olap-pill.is-done { background: #10261b; box-shadow: inset 0 0 0 1px #1d4a33; color: #6ee7a0; }
+#s-tabs .sbsite .hub .olap-spin { width: 9px; height: 9px; border-radius: 50%; border: 1.6px solid #3a3a42;
+  border-top-color: #d7d7de; box-sizing: border-box; }
+#s-tabs .sbsite .hub .olap-pill .qc-ok { position: absolute; left: 6px; top: 4px; width: 11px; height: 11px; opacity: 0; }
+#s-tabs .sbsite .hub .olap-pill.is-done .olap-spin { visibility: hidden; }
+
+/* the stat strip: files / lines / tests / elapsed clock */
+#s-tabs .sbsite .hub .olap-st { display: flex; align-items: center; gap: 12px; height: 25px; box-sizing: border-box;
+  padding: 0 10px; border-bottom: 1px solid #232327; background: #131315; }
+#s-tabs .sbsite .hub .olap-s { display: inline-flex; align-items: baseline; gap: 4px; }
+#s-tabs .sbsite .hub .olap-s em { font: 500 9px/1 var(--ui); font-style: normal; color: #6e6e75;
+  text-transform: uppercase; letter-spacing: .05em; }
+#s-tabs .sbsite .hub .olap-s b { font: 600 10.5px/1 var(--font-mono, ui-monospace, monospace); color: #f2f2f7;
+  font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .olap-s i { font: 500 9.5px/1 var(--font-mono, ui-monospace, monospace); font-style: normal;
+  color: #6e6e75; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .olap-ts.is-ok b, #s-tabs .sbsite .hub .olap-ts.is-ok i { color: #6ee7a0; }
+#s-tabs .sbsite .hub .olap-clk { margin-left: auto; }
+#s-tabs .sbsite .hub .olap-clk b { color: #f0a2a8; }
+
+/* body: the file tree on the left, the editor pane on the right */
+#s-tabs .sbsite .hub .olap-bd { display: grid; grid-template-columns: 152px minmax(0, 1fr); height: 164px;
+  box-sizing: border-box; border-bottom: 1px solid #232327; background: #101012; }
+#s-tabs .sbsite .hub .olap-tw { position: relative; overflow: hidden; padding: 2px 0; border-right: 1px solid #232327; }
+#s-tabs .sbsite .hub .olap-tree { will-change: transform; }
+#s-tabs .sbsite .hub .olap-r { display: flex; align-items: center; gap: 4px; height: 15px; box-sizing: border-box;
+  padding: 0 7px 0 6px; opacity: 0; white-space: nowrap; overflow: hidden; }
+#s-tabs .sbsite .hub .olap-r.is-new { background: #191922; }
+#s-tabs .sbsite .hub .olap-ca { flex: none; width: 0; height: 0; border-left: 3.5px solid #6e6e75;
+  border-top: 3px solid transparent; border-bottom: 3px solid transparent; }
+#s-tabs .sbsite .hub .olap-dn { font: 600 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #8e8e93;
+  overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .olap-i { flex: none; width: 5px; }
+#s-tabs .sbsite .hub .olap-fn { font: 500 10px/1 var(--font-mono, ui-monospace, monospace); color: #c9d1d9;
+  overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .olap-fr .olap-pl { margin-left: auto; padding-left: 6px; font: 500 9px/1 var(--font-mono, ui-monospace, monospace);
+  font-style: normal; color: #4f8f6a; font-variant-numeric: tabular-nums; }
+
+/* editor: its file tab, then the code viewport with the gutter, the lines and the scan line */
+#s-tabs .sbsite .hub .olap-ed { position: relative; display: grid; grid-template-rows: 21px minmax(0, 1fr); min-width: 0; }
+#s-tabs .sbsite .hub .olap-tb { display: flex; align-items: center; gap: 5px; padding: 0 8px; background: #16161a;
+  border-bottom: 1px solid #232327; min-width: 0; }
+#s-tabs .sbsite .hub .olap-ti { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #4f8f6a; }
+#s-tabs .sbsite .hub .olap-tab { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 500 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #d2a8ff; }
+#s-tabs .sbsite .hub .olap-tl { margin-left: auto; flex: none; font: 500 9px/1 var(--font-mono, ui-monospace, monospace);
+  font-style: normal; color: #6e6e75; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .olap-cd { position: relative; overflow: hidden; }
+#s-tabs .sbsite .hub .olap-code { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .olap-ln { display: flex; align-items: flex-start; height: 13px; box-sizing: border-box;
+  font: 10px/13px var(--font-mono, ui-monospace, monospace); white-space: pre; }
+#s-tabs .sbsite .hub .olap-ln.is-cur { background: #17171c; }
+#s-tabs .sbsite .hub .olap-gn { flex: none; width: 22px; padding-right: 6px; text-align: right; color: #3f3f47;
+  font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .olap-ln.is-cur .olap-gn { color: #8e8e93; }
+#s-tabs .sbsite .hub .olap-lc { min-width: 0; overflow: hidden; color: #c9d1d9; }
+/* the scan line: runs down the pane once per timelapse cut (its y and opacity are written from t) */
+#s-tabs .sbsite .hub .olap-sw { position: absolute; left: 0; right: 0; top: 0; height: 1px; opacity: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9), rgba(255, 255, 255, 0)); }
+
+/* syntax: a dark editor palette (comment, string, keyword, number, type, function) */
+#s-tabs .sbsite .hub .olap-c { color: #6e7a86; font-style: italic; }
+#s-tabs .sbsite .hub .olap-s { color: #a5d6ff; }
+#s-tabs .sbsite .hub .olap-k { color: #ff7b72; }
+#s-tabs .sbsite .hub .olap-n { color: #79c0ff; }
+#s-tabs .sbsite .hub .olap-y { color: #79c0ff; }
+#s-tabs .sbsite .hub .olap-f { color: #d2a8ff; }
+
+/* the commit feed: one tick per timelapse burst, the newest three in the window */
+#s-tabs .sbsite .hub .olap-fw { height: 60px; box-sizing: border-box; overflow: hidden; background: #141416; }
+#s-tabs .sbsite .hub .olap-fh { height: 15px; padding: 3px 9px 0; font: 500 8.5px/12px var(--ui); color: #5c5c63;
+  text-transform: uppercase; letter-spacing: .06em; }
+/* the viewport is exactly three rows: the list slides up inside it, so a row never shows through the label */
+#s-tabs .sbsite .hub .olap-fv { position: relative; height: 45px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, .25), #000 34%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, .25), #000 34%); }
+#s-tabs .sbsite .hub .olap-fl { will-change: transform; }
+#s-tabs .sbsite .hub .olap-cm { display: flex; align-items: center; gap: 6px; height: 15px; box-sizing: border-box;
+  padding: 0 9px; opacity: 0; white-space: nowrap; font: 9.5px/1 var(--font-mono, ui-monospace, monospace); }
+#s-tabs .sbsite .hub .olap-cm code { flex: none; color: #5c5c63; }
+#s-tabs .sbsite .hub .olap-cm span { min-width: 0; overflow: hidden; text-overflow: ellipsis; color: #b8b8c0; }
+#s-tabs .sbsite .hub .olap-cm em { margin-left: auto; flex: none; font-style: normal; color: #4f8f6a;
+  font-variant-numeric: tabular-nums; }

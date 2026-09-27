@@ -200,6 +200,14 @@
     "thumb": "assets/shots/dark-souls-every-model-v3-superbot-80e24d9f.png"
   },
   {
+    "id": "dark-souls-every-model-v4-superbot-80e24d9f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make Dark Souls: Opus 5.5 timelapse cooks the code, DeepSeek V4 Flash searches the assets, Meshy 5 models them in 3D, MiniMax Hailuo 02 animates, ElevenLabs score, GitHub, Superbot plays (v4 remake, 7 steps)",
+    "src": "animations/dark-souls-every-model-superbot-80e24d9f/?v=4",
+    "thumb": "assets/shots/dark-souls-every-model-v4-superbot-80e24d9f.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

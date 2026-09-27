@@ -210,3 +210,11 @@
 #s-tabs .sbsite .hub .yt-dl .dd-grp-a svg { width: 13px; height: 13px; stroke-width: 2.3; }
 #s-tabs .sbsite .hub .yt-dl .dd-check { width: 18px; height: 18px; stroke-width: 2.9; }
 #s-tabs .sbsite .hub .yt-lab-a { display: inline-block; min-width: 118px; }
+
+/* v4 (?v=4): the tighter camera frame is tabs.js geo (DW = W/2, the reference spot's rule), and its longer motion eases
+   are chat.js (V4). The per-switch camera punch-in is gone: no chip zoom, no appended camera transform, so .sbsite needs
+   no .v4 origin rule here (ask.css's `.sbsite.ask { transform-origin: 0 0 }` is the one the base camera transform math
+   assumes). */
+/* deliberately NO will-change on the camera subtree: a promoted layer would be re-scaled from a texture rasterised at
+   1x by the camera's own scale, and the tight v4 frame would go soft. Left unpromoted, Chromium re-rasterises at the
+   live camera scale; the translate the feed already animates (.feed-in, above) is the composited one. */

@@ -95,6 +95,10 @@ const more = [
   ['dark-souls-every-model-v1-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=1', 'make Dark Souls: ElevenLabs voices the boss, Opus 5.5 builds it, Superbot plays (3 switches)', 'Ad spots'],
   ['dark-souls-every-model-v2-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=2', 'make Dark Souls: Gemini paints the Gatewarden, Opus 5.5 builds the fight, Gemini textures the fog gate, GitHub, Superbot renders and plays (5 switches)', 'Ad spots'],
   ['dark-souls-every-model-v3-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=3', 'make Dark Souls: Opus 5.5 builds combat, DeepSeek assets, ElevenLabs score, Gemini art, Opus 5.5 live preview, GitHub, Superbot plays (7 switches)', 'Ad spots'],
+  // v4 remake (2026-09-26): seven steps of the same page, reframed tight like one-agent-full-degen (no per-switch zoom):
+  // Opus 5.5 cooks the codebase as a timelapse, DeepSeek V4 Flash searches the reference assets, Meshy 5 turns them
+  // into real 3D meshes, MiniMax Hailuo 02 animates the casts, ElevenLabs scores, GitHub, Superbot plays.
+  ['dark-souls-every-model-v4-superbot-80e24d9f', 'dark-souls-every-model-superbot-80e24d9f/?v=4', 'make Dark Souls: Opus 5.5 timelapse cooks the code, DeepSeek V4 Flash searches the assets, Meshy 5 models them in 3D, MiniMax Hailuo 02 animates, ElevenLabs score, GitHub, Superbot plays (v4 remake, 7 steps)', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

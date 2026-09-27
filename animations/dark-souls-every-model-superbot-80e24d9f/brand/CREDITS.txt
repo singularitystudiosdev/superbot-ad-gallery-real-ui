@@ -67,3 +67,14 @@ animations/mmorpg-every-model-superbot-d231c019 (fetched 2026-09-26), carried in
   elevenlabs-logo.svg       ElevenLabs mark, simple-icons (CC0)
                             https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg,
                             ElevenLabs trademark used nominatively.
+
+dark-souls-every-model-superbot-80e24d9f v4 additions (2026-09-26):
+  meshy-logo.svg            The official Meshy logo lockup from the header of https://www.meshy.ai, cropped to
+                            the mark itself (mark bbox x 12.13 y 5.50 w 48.37 h 53.00 in that lockup's 167x64
+                            space) and set on a light plate so it stays legible at the 22px app tile in the
+                            ad's dark hub. Meshy is a trademark of Meshy; the mark is used nominatively, to
+                            name the app superbot routed the request to. Pointed at by chat.js APPS.meshy.
+  minimax-logo.svg          The official MiniMax waveform logo, from simple-icons (CC0 1.0),
+                            https://cdn.jsdelivr.net/npm/simple-icons/icons/minimax.svg (24x24, mark only,
+                            recoloured to white for the dark app tile). Brand owner: MiniMax,
+                            https://www.minimax.io. Pointed at by chat.js APPS.hailuo.

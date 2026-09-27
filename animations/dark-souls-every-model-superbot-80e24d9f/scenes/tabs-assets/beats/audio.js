@@ -24,6 +24,16 @@ const REC = 0.52;     // seconds one waveform takes to record in, left to right
 const STAGGER = 0.3;  // gap between one row landing and the next
 const PLAY = '<svg class="aud-play-i" viewBox="0 0 24 24"><path d="M8.5 5.5 18 12l-9.5 6.5Z"/></svg>';
 
+// Scroll marks for the list's rows. v4's step passes opts.markRows: at the tight v4 frame (tabs.js geo, DW = W/2) the
+// card is small but rows 2 and 3 would land below the composer and sit there until the next beat scrolled the thread,
+// so every row gets its own anchor and the feed follows the list down as it lands. The mark leads the row by ROW_LEAD:
+// the feed's glide is 0.8s long (chat.js renderScroll, v4), so a mark set exactly on the row would still be ~24px short
+// when that row finished appearing, leaving it clipped under the composer; leading it by 0.22s puts the row in place
+// before it has fully landed. v1-v3 pass no markRows, so their marks are exactly the shipped [T.row[0], rows[0]].
+const ROW_LEAD = 0.3;
+const rowMarks = (opts, T, rows) =>
+  (opts && opts.markRows ? T.row.map((a, i) => [a - ROW_LEAD, rows[i]]) : [[T.row[0], rows[0]]]);
+
 // bar j of waveform i: a deterministic height from its index and the row's seed, so the same shape plays every time
 const barH = (i, j) => 3 + 15 * rand(i * 97 + j * 13 + 1);
 
@@ -104,7 +114,7 @@ function buildScore(k, x) {
 
   return {
     nodes: [say, chip, card],
-    marks: [[T.r, say], [T.label, chip], [T.card, card], [T.row[0], rows[0]]],
+    marks: [[T.r, say], [T.label, chip], [T.card, card], ...rowMarks(k.opts, T, rows)],
     render(t) {
       const n = streamCount(SAY, T.r + 0.06, 80, t);
       if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }
@@ -179,7 +189,7 @@ function buildVoice(k, x) {
 
   return {
     nodes: [say, chip, card],
-    marks: [[T.r, say], [T.label, chip], [T.card, card], [T.row[0], rows[0]]],
+    marks: [[T.r, say], [T.label, chip], [T.card, card], ...rowMarks(k.opts, T, rows)],
     render(t) {
       const n = streamCount(VOICE_SAY, T.r + 0.06, 80, t);
       if (n !== shown) { vis.textContent = VOICE_SAY.slice(0, n); hid.textContent = VOICE_SAY.slice(n); shown = n; }

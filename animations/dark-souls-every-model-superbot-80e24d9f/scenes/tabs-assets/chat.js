@@ -7,16 +7,21 @@
 // continue the app the previous step used (cont: no chip, no new header, the beat just follows). The thread is
 // bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of the scene's
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
-import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
+import { clamp, lerp, seg, outCubic, outQuint, outBack, inOutCubic, inOutQuint, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import git from './beats/git.js?v=2';
 import art from './beats/art.js?v=2';
 import play from './beats/play.js?v=1';
-import audio from './beats/audio.js?v=2';
+import audio from './beats/audio.js?v=3';
 import assets from './beats/assets.js?v=2';
 import build from './beats/build.js?v=1';
 import render from './beats/render.js?v=2';
 import preview from './beats/preview.js?v=2';
+// v4 beats
+import opusLapse from './beats/opus-lapse.js?v=2';
+import dsSearch from './beats/ds-search.js?v=2';
+import meshy from './beats/meshy.js?v=2';
+import hailuo from './beats/hailuo.js?v=2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -33,6 +38,8 @@ const APPS = {
   opus: { name: 'Claude Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
   eleven: { name: 'ElevenLabs', logo: brand('elevenlabs-logo.svg'), sub: 'in superbot' },
   github: { name: 'GitHub', logo: brand('github-logo.svg'), sub: 'connected' },
+  meshy: { name: 'Meshy 5', logo: brand('meshy-logo.svg'), sub: 'in superbot' },
+  hailuo: { name: 'MiniMax Hailuo 02', logo: brand('minimax-logo.svg'), sub: 'in superbot' },
   superbot: { name: 'Superbot', logo: null, sub: '' }, // drawn as its mark in CSS (SB_MARK, chat.css .sbm), not an image
 };
 
@@ -43,6 +50,8 @@ const CHIP = {
   gemini: 'Switching to Gemini',
   eleven: 'Switching to ElevenLabs',
   github: 'Connecting to GitHub',
+  meshy: 'Switching to Meshy 5',
+  hailuo: 'Switching to MiniMax Hailuo 02',
   superbot: 'Switched to Superbot',
 };
 // one request: the app that answers, its beat module, the chip that routes to it, and the beat's own options.
@@ -97,9 +106,28 @@ export const VARIANTS = {
     step('github', git),
     step('superbot', play),
   ], 1.2),
+
+  // v4, the remake: Opus cooks through the codebase as a timelapse, DeepSeek searches for reference assets, Meshy turns
+  // them into real 3D meshes, MiniMax Hailuo animates the characters, ElevenLabs scores it, GitHub, Superbot plays.
+  '4': variant([
+    step('opus', opusLapse),
+    step('deepseek', dsSearch),
+    step('meshy', meshy),
+    step('hailuo', hailuo),
+    // markRows: at the tight v4 frame the score card's own rows are the smallest thing on screen; without a scroll stop
+    // per row, rows 2 and 3 land below the composer and wait there for the git beat. v1-v3 never pass it.
+    step('eleven', audio, { markRows: true }),
+    step('github', git),
+    step('superbot', play),
+  ], 1),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
 export const VARIANT = VARIANTS[VARIANT_KEY];
+
+// v4 (this remake) is the only variant that takes the longer motion eases; every other variant runs exactly the code
+// path it shipped with, so v1-v3 frames are untouched. v4 used to punch the camera in on every model switch; that is
+// gone, and the switch is read off the camera's one steady, tighter frame instead (tabs.js geo, W/2).
+const V4 = VARIANT_KEY === '4';
 
 // every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply. W = the
 // variant's chip scale: the chip's own beats (swap, done, and the gap before the next chip) all stretch with it.
@@ -135,7 +163,9 @@ const el = (html) => { const t = document.createElement('template'); t.innerHTML
 
 export function mountChat(hub) {
   // the pointer lives in the scene section, in its px (the same space placeCursor writes)
-  const root = hub.closest('.sbsite').parentNode;
+  const site = hub.closest('.sbsite');   // the camera element: tabs.js puts the base transform on it (ask.css keeps
+                                         // .sbsite.ask at transform-origin 0 0, which that transform's math assumes)
+  const root = site.parentNode;
   const pointer = makeCursor();
   root.appendChild(pointer);
 
@@ -191,15 +221,18 @@ export function mountChat(hub) {
 
   const ph = hub.querySelector('.rc-ph');
   return {
-    hub, pointer, feed, inner, beats, scroll, plat, pIcon, pImg, pMark, pLabel,
+    hub, pointer, site, feed, inner, beats, scroll, plat, pIcon, pImg, pMark, pLabel,
     ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'superbot',
   };
 }
 
 function appear(n, t, a, dy = 10) {
-  const p = outCubic(seg(t, a, a + 0.42));
+  // v4: a longer, longer-tailed rise on a 3D translate (its own compositor layer), so a row appended into the tight
+  // v4 frame has no 1px snap; v1-v3 keep the shipped motion byte for byte.
+  const d = V4 ? 14 : dy, dur = V4 ? 0.55 : 0.42, ease = V4 ? outQuint : outCubic;
+  const p = ease(seg(t, a, a + dur));
   n.style.opacity = p.toFixed(3);
-  n.style.transform = p >= 1 ? 'none' : `translateY(${((1 - p) * dy).toFixed(2)}px)`;
+  n.style.transform = p >= 1 ? 'none' : (V4 ? `translate3d(0,${((1 - p) * d).toFixed(2)}px,0)` : `translateY(${((1 - p) * d).toFixed(2)}px)`);
 }
 
 function renderComposer(c, t) {
@@ -253,13 +286,17 @@ function renderScroll(c, t) {
   const cs = getComputedStyle(c.feed);
   const viewH = c.feed.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
   // bottom-anchored like a live chat: the newest landed line sits just above the composer, so the thread grows
-  // up out of it (the shift is negative while the thread is shorter than the feed)
+  // up out of it (the shift is negative while the thread is shorter than the feed). v4 gives the glide a longer,
+  // longer-tailed ease so a big card appending (a 3D render, a video) never snaps the thread, and drives it on the
+  // compositor with a 3D translate.
+  const dur = V4 ? 0.8 : 0.45, ease = V4 ? inOutQuint : inOutCubic;
   let y = 0;
   for (const [a, n] of c.scroll) {
     if (t <= a) break;
-    y = lerp(y, bottom(n), inOutCubic(seg(t, a, a + 0.45)));
+    y = lerp(y, bottom(n), ease(seg(t, a, a + dur)));
   }
-  c.inner.style.transform = `translateY(${(viewH - 8 - y).toFixed(2)}px)`;
+  const Y = (viewH - 8 - y).toFixed(2);
+  c.inner.style.transform = V4 ? `translate3d(0,${Y}px,0)` : `translateY(${Y}px)`;
 }
 
 export function renderChat(c, t) {

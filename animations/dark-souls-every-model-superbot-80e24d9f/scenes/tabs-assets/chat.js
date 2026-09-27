@@ -18,7 +18,7 @@ import build from './beats/build.js?v=1';
 import render from './beats/render.js?v=2';
 import preview from './beats/preview.js?v=2';
 // v4 beats
-import opusLapse from './beats/opus-lapse.js?v=5';
+import opusLapse from './beats/opus-lapse.js?v=6';
 import dsSearch from './beats/ds-search.js?v=3';
 import meshy from './beats/meshy.js?v=2';
 import hailuo from './beats/hailuo.js?v=2';

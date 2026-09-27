@@ -5,6 +5,11 @@
 #s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
 #s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
 #s-tabs .sbsite .hub .qc-r .m-main { max-width: min(100%, var(--hub-column)); width: 100%; }
+/* one column with the composer: ask.css centres the composer on --hub-column (640px), so the feed column and
+   the reply indent follow the same box. The ask's pill and every reply line then share the composer's edges
+   instead of the whole thread sitting half the difference (760 - 640) to the composer's left. */
+#s-tabs .sbsite.ask .hub { --hub-reply-inset: 0px; }
+#s-tabs .sbsite.ask .hub .main > .feed { padding-left: max(24px, calc((100% - var(--hub-column)) / 2)); padding-right: max(24px, calc((100% - var(--hub-column)) / 2)); }
 #s-tabs .sbsite .hub .qc-r .m-main > * { max-width: 100%; }
 
 /* composer: the ask is typed in, the send button lights while there is text */

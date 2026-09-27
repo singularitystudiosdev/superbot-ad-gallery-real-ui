@@ -164,9 +164,13 @@ function measureCaps() {
 }
 
 // ---------- the end card (waffles-website drawEnd) ----------
+// The lock-up is a full-frame composition, so on a narrower frame it scales with the frame width: 4:3 (1440)
+// takes 0.75 of the 16:9 measurements (h1 112px -> 84px, mascot 220px -> 165px, gap 56 -> 42) and keeps 8%
+// margin each side instead of hanging off both edges. style.css holds the matching rules.
+const END_SCALE = { '4x3': 0.75 };
 function buildEnd(sec) {
   sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>EVERY MODEL.<br> ONE CHAT.</h1></div></div><div class="face"></div></div>';
-  const mark = shell.makeMark(220);
+  const mark = shell.makeMark(Math.round(220 * (END_SCALE[(window.AR && window.AR.key)] || 1)));
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
 }
@@ -186,10 +190,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=11`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=12`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=15`)).default;
+    const m = (await import(`./scenes/${id}.js?v=16`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {
@@ -276,7 +280,10 @@ function fit() {
   stage.style.transform = `translate(-50%, -50%) scale(${k})`;
 }
 addEventListener('resize', fit); fit();
-addEventListener('archange', () => { fit(); measureCaps(); lastT = NaN; });
+addEventListener('archange', () => {
+  fit(); measureCaps(); lastT = NaN;
+  for (const s of SEGS) if (s.kind === 'end') s.end = buildEnd(s.sec); // the end mascot is sized to the frame
+});
 
 // ---------- the clock (waffles-website) ----------
 const q = new URLSearchParams(location.search);

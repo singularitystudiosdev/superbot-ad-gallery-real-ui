@@ -105,3 +105,10 @@
 #s-tabs .sbsite .stage-bar { opacity: 0; }
 #s-tabs .sbsite .body { grid-template-columns: minmax(0, 1fr); } /* the site's margin column is closed ("perched"), as in the ad's end state */
 #s-tabs .sbsite .rail-item.sb.sel::before { opacity: var(--sel-a, 0); } /* the selection pill fades in with the sidebar */
+
+/* ---------- the frame's top edge ---------- */
+/* The thread is bottom-anchored and longer than the feed, so a message is always leaving through the top.
+   This veil sits in FRAME px (a sibling of the camera, so the punch-in never moves it) and fades the top
+   band into the hub's background: the outgoing message dissolves instead of being sliced on the border. */
+#s-tabs .ask-edge { position: absolute; left: 0; right: 0; top: 0; height: 8%; z-index: 4; pointer-events: none;
+  background: linear-gradient(180deg, #0a0a0b 0%, rgba(10, 10, 11, .94) 28%, rgba(10, 10, 11, 0) 100%); }

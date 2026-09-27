@@ -32,7 +32,7 @@ export default {
     T.track = TRACKS.map((_, i) => r + 0.62 + i * STAGGER);
     T.fill = T.track.map((a) => a + 0.12);
     T.done = T.fill[TRACKS.length - 1] + FILL;
-    T.end = T.done + 0.55;
+    T.end = T.done + 0.45;   // the last length stamp lands at T.done + 0.2: 0.25s of dwell, then the next switch
     return T;
   },
   build(k, x) {

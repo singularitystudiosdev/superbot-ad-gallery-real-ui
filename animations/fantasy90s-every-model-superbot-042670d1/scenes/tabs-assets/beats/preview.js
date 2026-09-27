@@ -17,7 +17,7 @@ export default {
     const T = { r };
     T.win = r + 0.3;
     T.upd = UPDATES.map((_, i) => r + 0.95 + i * 0.62);
-    T.end = T.upd[UPDATES.length - 1] + 0.85;
+    T.end = T.upd[UPDATES.length - 1] + 0.55;   // last log line lands at +0.2, its flash fades by +0.3
     return T;
   },
   build(k, x) {

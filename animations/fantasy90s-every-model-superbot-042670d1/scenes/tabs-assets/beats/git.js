@@ -28,7 +28,7 @@ export default {
     T.commit = COMMITS.map((_, i) => r + 1.7 + i * 0.25);
     T.pushed = T.chipDone[2];
     T.main = T.commit[COMMITS.length - 1] + 0.12;
-    T.end = r + 3.0;
+    T.end = r + 2.95;   // the branch check finishes drawing at r + 2.72: 0.23s of dwell, then the next switch
     return T;
   },
   build(k, x) {

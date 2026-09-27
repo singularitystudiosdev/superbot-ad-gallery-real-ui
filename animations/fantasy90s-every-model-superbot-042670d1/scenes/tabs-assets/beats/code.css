@@ -1,36 +1,34 @@
-/* code beat: the writing chip's line counter, the file list, and the small editor card. Every selector is scoped
-   under #s-tabs .sbsite .hub and every class is prefixed code-. */
+/* code beat: the writing chip's line counter, and the work card (progress bar, file grid, rolling tool log). Every
+   selector is scoped under #s-tabs .sbsite .hub and every class is prefixed code-. Nothing here transitions: every
+   moving value is written from t in render, so ?t= freezes a frame. */
 #s-tabs .sbsite .hub .ch-tool .code-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
 #s-tabs .sbsite .hub .ch-tool.code-done .code-count { background: #0f2419; color: #3ddc84; }
 
-/* the file list: one pill per file, dim until its lines have counted up */
-#s-tabs .sbsite .hub .code-files { display: grid; gap: 4px; width: 312px; max-width: 100%; margin: 2px 0 9px; }
-#s-tabs .sbsite .hub .code-file { display: flex; align-items: center; gap: 8px; box-sizing: border-box; height: 24px; padding: 0 9px; border-radius: 7px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font: 500 10.5px/1 var(--font-mono, ui-monospace, monospace); color: #b8b8bf; opacity: 0; }
-#s-tabs .sbsite .hub .code-file::before { content: ""; flex: none; box-sizing: border-box; width: 8px; height: 8px; border: 1.6px solid #33333a; border-top: 0; border-right: 0; transform: rotate(-45deg) translateY(-1px); }
-#s-tabs .sbsite .hub .code-file .code-fname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-#s-tabs .sbsite .hub .code-file b { font-weight: 600; color: #8e8e93; font-variant-numeric: tabular-nums; }
-#s-tabs .sbsite .hub .code-file.on { color: #e5e5ea; box-shadow: inset 0 0 0 1px #24503a; }
-#s-tabs .sbsite .hub .code-file.on::before { border-color: #3ddc84; }
-#s-tabs .sbsite .hub .code-file.on b { color: #3ddc84; }
+/* the work card: a thin progress bar over the file grid and the tool log */
+#s-tabs .sbsite .hub .code-work { box-sizing: border-box; width: 440px; max-width: 100%; margin: 2px 0 0; padding: 8px 11px 8px; border-radius: 10px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite .hub .code-bar { position: relative; height: 4px; border-radius: 999px; overflow: hidden; background: #1f1f23; }
+#s-tabs .sbsite .hub .code-bar-f { display: block; height: 100%; border-radius: 999px; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #5d91ec, #866cf6); }
 
-/* the editor card: the head of the first file typing in, with a dim gutter and coloured spans */
-#s-tabs .sbsite .hub .code-ed { width: 440px; max-width: 100%; margin-top: 2px; border-radius: 10px; overflow: hidden; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
-#s-tabs .sbsite .hub .code-ed-hd { display: flex; align-items: center; gap: 7px; height: 26px; padding: 0 9px; border-bottom: 1px solid #202027; background: #141418; font: 10px/1 var(--font-mono, ui-monospace, monospace); color: #8e8e93; }
-#s-tabs .sbsite .hub .code-dots { display: inline-flex; gap: 4px; }
-#s-tabs .sbsite .hub .code-dots i { width: 6px; height: 6px; border-radius: 50%; background: #2f2f36; }
-#s-tabs .sbsite .hub .code-path { font-weight: 600; color: #cfcfd6; }
-#s-tabs .sbsite .hub .code-ed-n { margin-left: auto; color: #6f6f77; font-variant-numeric: tabular-nums; }
-#s-tabs .sbsite .hub .code-ed-bd { display: flex; gap: 9px; padding: 7px 8px 8px; }
-#s-tabs .sbsite .hub .code-gut { display: grid; flex: none; font: 11px/16px var(--font-mono, ui-monospace, monospace); color: #45454d; text-align: right; }
-#s-tabs .sbsite .hub .code-gut i { font-style: normal; height: 16px; }
-#s-tabs .sbsite .hub .code-src { flex: 1; min-width: 0; margin: 0; font: 11px/16px var(--font-mono, ui-monospace, monospace); white-space: pre; color: #d7d7de; }
-#s-tabs .sbsite .hub .code-ln { height: 16px; white-space: pre; }
-#s-tabs .sbsite .hub .code-caret { display: inline-block; width: 1.5px; height: 12px; vertical-align: -2px; background: #d7d7de; opacity: 0; }
-#s-tabs .sbsite .hub .code-k { color: #c58af9; }
-#s-tabs .sbsite .hub .code-t { color: #7fbcff; }
-#s-tabs .sbsite .hub .code-f { color: #82aaff; }
-#s-tabs .sbsite .hub .code-s { color: #9ccc65; }
-#s-tabs .sbsite .hub .code-n { color: #f6a06a; }
-#s-tabs .sbsite .hub .code-c { color: #5f5f68; font-style: italic; }
-#s-tabs .sbsite .hub .code-p { color: #8b8b93; }
-#s-tabs .sbsite .hub .code-x { color: #d7d7de; }
+/* the file grid: two columns of seven, each row landing as its file is written */
+#s-tabs .sbsite .hub .code-grid { display: grid; grid-template-rows: repeat(7, 15px); grid-auto-flow: column; grid-auto-columns: 1fr; column-gap: 14px; row-gap: 3px; margin: 10px 0 0; }
+#s-tabs .sbsite .hub .code-fr { display: flex; align-items: center; gap: 6px; min-width: 0; opacity: 0; font: 500 10.5px/15px var(--font-mono, ui-monospace, monospace); color: #63636a; }
+#s-tabs .sbsite .hub .code-fd { flex: none; box-sizing: border-box; width: 5px; height: 5px; border-radius: 50%; background: #33333a; }
+#s-tabs .sbsite .hub .code-fn { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .sbsite .hub .code-fl { flex: none; font-weight: 600; color: #4e4e56; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .code-fr.on { color: #c3c3ca; }
+#s-tabs .sbsite .hub .code-fr.on .code-fd { background: #3ddc84; }
+#s-tabs .sbsite .hub .code-fr.on .code-fl { color: #3ddc84; }
+
+/* the tool log: a four-row window; steps land at the foot and the stack rolls up off the top */
+/* exactly four 17px rows with 3px gaps (77px), so at rest the window never shows a half row; the rule above the steps
+   is drawn with an inset shadow so it costs no layout height */
+#s-tabs .sbsite .hub .code-log { height: 77px; margin-top: 9px; overflow: hidden; box-shadow: inset 0 1px 0 #202027; }
+#s-tabs .sbsite .hub .code-log-in { display: grid; gap: 3px; will-change: transform; }
+#s-tabs .sbsite .hub .code-li { display: flex; align-items: center; gap: 7px; height: 17px; opacity: 0; font: 500 11px/17px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .code-li .code-sd { flex: none; box-sizing: border-box; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid #4a4a52; }
+#s-tabs .sbsite .hub .code-li .code-lt { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .sbsite .hub .code-li.on { color: #e5e5ea; }
+#s-tabs .sbsite .hub .code-li.on .code-sd { display: none; }
+/* the step's check, drawn from the shell's tick (chat.js OK), hidden until the step lands */
+#s-tabs .sbsite .hub .code-li .qc-ok { flex: none; width: 13px; height: 13px; margin-left: -2px; opacity: 0; }
+#s-tabs .sbsite .hub .code-li.on .qc-ok { opacity: 1; }

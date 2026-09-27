@@ -28,3 +28,26 @@ f90/mesh-house.jpg     still at 18.0s, cropped to the village houses
 f90/mesh-torch.jpg     still at 14.5s, cropped to the torch
 f90/prev-9.0.jpg, prev-10.5.jpg, prev-12.0.jpg
                         stills at 9.0s, 10.5s and 12.0s, cropped to 1080x810 at y=260, for the hot-reload preview
+
+Added for the Gemini decal beat (2026-09-26). These are real CC0 90s-style pixel-art game assets, downloaded and
+cropped out of the source sprite sheets; they replace the video-frame crops the art beat used to show (art-1..4.jpg
+above are still on disk and still used by the parallel beat). None were redrawn.
+
+f90/decal-torch.png         lit wall torch, 16x16, a transparent sprite
+f90/decal-sword.png         sword, 10x21, a transparent sprite
+f90/decal-banner.png        heraldic wall banner, 16x16, a transparent sprite
+f90/decal-chest.png         loot chest, 16x16, a transparent sprite
+f90/decal-bricks.png        seamless stone brick wall, 16x16, tiles
+f90/decal-cracks.png        seamless cracked flagstone floor tile, 16x16, tiles
+
+  decal-torch.png          "Roguelike/RPG pack (1,700+ tiles)" by Kenney Vleugels for Kenney, with help by
+                           Lynn Evers - CC0 1.0 (http://creativecommons.org/publicdomain/zero/1.0/) -
+                           https://opengameart.org/content/roguelikerpg-pack-1700-tiles
+  decal-sword.png, decal-banner.png, decal-chest.png, decal-bricks.png, decal-cracks.png
+                           "16x16 DungeonTileset II" v1.3 by Robert (0x72) - CC0 1.0 -
+                           https://0x72.itch.io/dungeontileset-ii
+                           tilesheet copied from the DungeonRush mirror of the v1.3 sheet:
+                           https://github.com/yujqiao/DungeonRush -> res/drawable/0x72_DungeonTilesetII_v1_3.png
+
+Attribution owed for these six: none. Both packs are CC0 1.0, which requires no credit; the credit above is given
+by choice. If the spot ever needs a credit line, it is: "Decals: Kenney (kenney.nl) and 0x72 (0x72.itch.io), CC0".

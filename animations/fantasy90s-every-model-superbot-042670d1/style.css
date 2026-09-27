@@ -39,6 +39,12 @@ html[data-ar="1x1"] #s-end .lock, html[data-ar="4x5"] #s-end .lock { flex-direct
 html[data-ar="4x5"] #s-end .words h1 { font-size: 104px; }
 html[data-ar="1x1"] #s-end .words p, html[data-ar="4x5"] #s-end .words p { margin-left: 0; }
 
+/* 4:3: the end card is a full-frame composition, so it scales with the frame width (1440/1920) instead of
+   running off both edges of the narrower frame. The lock-up keeps 8% margin each side (1204px of 1440). */
+html[data-ar="4x3"] #s-end .lock.ask-end { gap: 42px; }
+html[data-ar="4x3"] #s-end .ask-end .face { width: 165px; height: 165px; }
+html[data-ar="4x3"] #s-end .ask-end .words h1 { font-size: 84px; }
+
 /* a scene that threw: a quiet placeholder so the spot keeps playing */
 .scene-err { position: absolute; inset: 0; display: grid; place-items: center; font: 600 28px/1.3 var(--font-mono); color: #5c5f68; }
 

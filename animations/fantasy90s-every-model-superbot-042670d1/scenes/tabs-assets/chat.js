@@ -11,11 +11,11 @@ import assets from './beats/assets.js?v=1';
 import terminal from './beats/terminal.js?v=1';
 import diff from './beats/diff.js?v=1';
 import parallel from './beats/parallel.js?v=1';
-import preview from './beats/preview.js?v=1';
-import code from './beats/code.js?v=1';
-import git from './beats/git.js?v=1';
-import art from './beats/art.js?v=1';
-import music from './beats/music.js?v=2';
+import preview from './beats/preview.js?v=2';
+import code from './beats/code.js?v=2';
+import git from './beats/git.js?v=2';
+import art from './beats/art.js?v=2';
+import music from './beats/music.js?v=3';
 import play from './beats/play.js?v=2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
@@ -65,7 +65,7 @@ const variant = (steps, pace = {}) => steps.map((s, i) => ({
   ...s,
   ...(i === 0 ? { ask: ASK } : {}),
   hold: Array.isArray(pace.hold) ? pace.hold[i] || 0 : pace.hold || 0,
-  chipDur: pace.chip || 0.65,
+  chipDur: pace.chip || 0.28,
 }));
 
 // the three published routings, one ad each (?v=1..3). Every one builds the same 90s fantasy game, Duskhold, and
@@ -97,12 +97,15 @@ export const VARIANTS = {
     step('codex', preview),
     step('github', git),
     step('opus', play),
-  ], { hold: 0, chip: 0.4 }),
+  ], { hold: 0, chip: 0.26 }),
 };
 export const VARIANT_KEY = (() => { const v = new URLSearchParams(location.search).get('v'); return VARIANTS[v] ? v : '1'; })();
 export const VARIANT = VARIANTS[VARIANT_KEY];
 
-// every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply
+// every beat's clock, laid end to end from CHAT_T0; each beat module owns everything after its reply.
+// The pacing is tight on purpose: a routing chip lands SW_OFF after the previous beat ends, resolves in
+// chipDur (0.22-0.28s), and the app answers 0.04s later, so the hand-off from one model to the next is
+// ~0.3s of movement instead of a second of dead air.
 function timeBeats(asks) {
   let s = CHAT_T0;
   return asks.map((a) => {
@@ -110,23 +113,36 @@ function timeBeats(asks) {
     if (a.ask) {
       k.typeEnd = s + Math.min(0.85, 0.15 + a.ask.length * 0.013);
       k.send = k.typeEnd + 0.15;
-      k.sw = k.send + 0.35;   // superbot's first routing chip lands
+      k.sw = k.send + 0.22;   // superbot's first routing chip lands
     } else {
       k.typeEnd = k.send = s;
-      k.sw = s + 0.2;         // superbot carries on without being asked
+      k.sw = s + 0.05;        // superbot carries on without being asked
     }
     // each chip lands, moves the platform chip to its app (swap) and resolves (done); the next lands just after
     let at = k.sw;
-    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.22, done: at + Math.max(0.3, a.chipDur) }; at = c.done + 0.12; return c; });
+    k.chips = a.chips.map(([app, label]) => { const c = { app, label, sw: at, swap: at + 0.13, done: at + Math.max(0.22, a.chipDur) }; at = c.done + 0.06; return c; });
     k.done = k.chips[k.chips.length - 1].done;
-    k.reply = k.done + 0.08;  // the app answers
+    k.reply = k.done + 0.04;  // the app answers
     k.T = a.mod.times(k.reply, a.opts);
     s = k.T.end + a.hold;     // the variant's pause before the next switch
     return { k };
   });
 }
 export const BEATS = timeBeats(VARIANT);
-export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.3;
+export const CHAT_END = BEATS[BEATS.length - 1].k.T.end + 0.2;
+
+// the camera punch (scenes/tabs.js) that emphasises every model switch: it eases in over the chip's own
+// resolve (PUNCH_IN), holds while the app answers, then glides back out from PUNCH_HOLD after the reply
+// until PUNCH_OUT later. A product of two clamped easings, so it is a pure, continuous function of t.
+export const PUNCH_IN = 0.32, PUNCH_HOLD = 0.15, PUNCH_OUT = 0.85;
+export function switchPunch(c, t) {
+  let amt = 0;
+  for (const p of c.punch) {
+    const a = inOutCubic(seg(t, p.sw, p.sw + PUNCH_IN)) * (1 - inOutCubic(seg(t, p.out, p.out + PUNCH_OUT)));
+    if (a > amt) amt = a;
+  }
+  return amt;
+}
 
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -173,6 +189,20 @@ export function mountChat(hub) {
   // scroll marks: after each time, the feed's fold glides to that element's bottom
   const scroll = beats.flatMap((b) => [...(b.u ? [[b.k.send, b.u]] : []), ...b.sws.map((s) => [s.c.sw, s.w]), [b.k.reply, b.who], ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
 
+  // one camera punch per routing chip, released PUNCH_HOLD after the app answers (scenes/tabs.js reads both)
+  const punch = beats.flatMap((b) => b.sws.map((s) => ({ sw: s.c.sw, out: b.k.reply + PUNCH_HOLD })));
+  // the routing chip's column centre in the site's layout px, where the camera leans at each switch. Read
+  // through offsetParent, so the camera transform and the thread's scroll do not move it: a constant for
+  // one layout, which is what keeps the punch a pure function of t. refocus() reruns when the frame resizes.
+  const site = hub.closest('.sbsite');
+  const focusX = () => {
+    const chip = beats[0].sws[0] && beats[0].sws[0].sw;
+    if (!chip || !site) return null;
+    let x = 0, n = chip;
+    while (n && n !== site) { x += n.offsetLeft; n = n.offsetParent; }
+    return n === site ? x + chip.offsetWidth / 2 : null;
+  };
+
   // the composer's platform chip names the model, then follows the routed app
   const plat = hub.querySelector('.rc-plat');
   const cat = plat.querySelector('.rc-cat');
@@ -186,10 +216,13 @@ export function mountChat(hub) {
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
 
   const ph = hub.querySelector('.rc-ph');
-  return {
-    hub, pointer, feed, inner, beats, scroll, plat, pIcon, pImg, pMark, pLabel,
+  const chat = {
+    hub, pointer, feed, inner, beats, scroll, punch, focus: null, refocus() { chat.focus = focusX(); },
+    plat, pIcon, pImg, pMark, pLabel,
     ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: 'codex',
   };
+  chat.refocus();
+  return chat;
 }
 
 function appear(n, t, a, dy = 10) {
@@ -251,7 +284,7 @@ function renderScroll(c, t) {
   let y = 0;
   for (const [a, n] of c.scroll) {
     if (t <= a) break;
-    y = lerp(y, bottom(n), inOutCubic(seg(t, a, a + 0.45)));
+    y = lerp(y, bottom(n), inOutCubic(seg(t, a, a + 0.3)));
   }
   c.inner.style.transform = `translateY(${(viewH - 8 - y).toFixed(2)}px)`;
 }

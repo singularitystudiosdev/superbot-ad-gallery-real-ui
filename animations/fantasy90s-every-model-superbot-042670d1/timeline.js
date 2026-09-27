@@ -169,7 +169,7 @@ function measureCaps() {
 // margin each side instead of hanging off both edges. style.css holds the matching rules.
 const END_SCALE = { '4x3': 0.75 };
 function buildEnd(sec) {
-  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>EVERY MODEL.<br> ONE CHAT.</h1></div></div><div class="face"></div></div>';
+  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1></div></div><div class="face"></div></div>';
   const mark = shell.makeMark(Math.round(220 * (END_SCALE[(window.AR && window.AR.key)] || 1)));
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };

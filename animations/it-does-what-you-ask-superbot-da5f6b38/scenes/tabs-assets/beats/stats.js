@@ -1,7 +1,7 @@
 // Reddit, the report: how the six posts are doing. Three KPI tiles count up (upvotes, comments, views), a "#1 on
 // r/memes today" badge pops, and the top three posts' bars grow to their upvotes. The numbers are made up.
 import { lerp, seg, outCubic, outBack, streamCount } from '../../../lib.js';
-import { MEMES, HERO, memeHTML } from './memes.js?v=2';
+import { MEMES, HERO, memeHTML } from './memes.js?v=3';
 import { fmt, ICON } from './reddit.js?v=1';
 
 const SAY = 'They’re doing amazing. Your Muse memes are blowing up.';
@@ -11,9 +11,9 @@ const KPIS = [
   { v: 2100000, l: 'views', d: '+540%' },
 ];
 const TOP = [
-  { m: { img: '', cap: '', title: HERO.title }, v: 31800, src: HERO.img },
-  { m: MEMES[1], v: 22400 },
-  { m: MEMES[0], v: 14900 },
+  { m: MEMES[1], v: 31800 },
+  { m: MEMES[0], v: 22400 },
+  { m: { img: '', cap: '', title: HERO.title }, v: 14900, src: HERO.img },
 ];
 
 export default {

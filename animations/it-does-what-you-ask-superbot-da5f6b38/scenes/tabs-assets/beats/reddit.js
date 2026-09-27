@@ -2,7 +2,7 @@
 // layout (subreddit row, title, the image over its blurred backdrop, vote and comment pills) and the first votes
 // and comments tick in. "u/sam" is made up.
 import { lerp, seg, outCubic, outBack, streamCount } from '../../../lib.js';
-import { HERO } from './memes.js?v=2';
+import { HERO } from './memes.js?v=3';
 
 const SAY = 'Posted it to r/memes.';
 export const ICON = {

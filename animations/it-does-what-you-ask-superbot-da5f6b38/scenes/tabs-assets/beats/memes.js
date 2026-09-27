@@ -1,15 +1,17 @@
 // Gemini, a batch at once: superbot carries straight on to Gemini, which makes more Muse memes. Each tile resolves
-// out of a blur under its own sweeping band, a beat after the one before. The images are real Muse memes posted to
-// Reddit (img/muse-*.jpg, see img/CREDITS.txt); their text is in the image, so they carry no caption strip.
+// out of a blur under its own sweeping band, a beat after the one before. The images are user-supplied Muse edits
+// (img/muse-*.jpg, see img/CREDITS.txt); they are shown whole, with no caption strip.
 import { lerp, seg, outCubic, streamCount } from '../../../lib.js';
 
 export const MEMES = [
-  { img: 'muse-rocketbench.jpg', cap: '', title: 'Muse Spark 1.3 vs GPT-6 Astra on RocketLeagueBench' },
-  { img: 'muse-openweights-wait.jpg', cap: '', title: 'New western open-weight SOTA dropped' },
-  { img: 'muse-filesystem.jpg', cap: '', title: 'I asked Meta’s Muse for its filesystem' },
+  { img: 'muse-office.jpg', cap: '', title: 'Muse pulling an all-nighter at Facebook' },
+  { img: 'muse-distracted.jpg', cap: '', title: 'me ignoring my terminal for Muse' },
+  { img: 'muse-forehead.jpg', cap: '', title: 'the bond between me and Muse' },
+  { img: 'muse-coat.jpg', cap: '', title: 'bundled up to go touch grass with Muse' },
+  { img: 'muse-device.jpg', cap: '', title: 'the only Meta device I need' },
 ];
 // the first meme (beats/gemini.js), the one posted on its own in beats/reddit.js
-export const HERO = { img: 'muse-weights.png', title: 'Hey, Meta. Where’s those Muse Spark weights?' };
+export const HERO = { img: 'muse-meme.png', title: 'Muse really said check your messages' };
 
 export const memeHTML = (x, m, cls = '') => `<span class="mm ${cls}">${m.cap ? `<span class="mm-cap">${x.esc(m.cap)}</span>` : ''}<span class="mm-pic"><img src="${x.img(m.img)}" alt=""/></span></span>`;
 

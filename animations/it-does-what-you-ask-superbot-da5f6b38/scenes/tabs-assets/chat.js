@@ -5,13 +5,13 @@
 // local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import gemini from './beats/gemini.js?v=2';
-import reddit from './beats/reddit.js?v=2';
-import youtube from './beats/youtube.js?v=2';
-import memes from './beats/memes.js?v=2';
-import redditBatch from './beats/reddit-batch.js?v=2';
-import stats from './beats/stats.js?v=2';
-import doordash from './beats/doordash.js?v=2';
+import gemini from './beats/gemini.js?v=3';
+import reddit from './beats/reddit.js?v=3';
+import youtube from './beats/youtube.js?v=3';
+import memes from './beats/memes.js?v=3';
+import redditBatch from './beats/reddit-batch.js?v=3';
+import stats from './beats/stats.js?v=3';
+import doordash from './beats/doordash.js?v=3';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;

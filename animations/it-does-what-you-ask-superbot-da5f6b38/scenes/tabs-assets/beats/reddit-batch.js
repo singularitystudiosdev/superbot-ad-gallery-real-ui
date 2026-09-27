@@ -1,7 +1,7 @@
 // Reddit, the batch: the new memes go up on r/memes one after another. Each row lands with its thumbnail and
 // title, spins while it posts and resolves to a green "Live"; a closing chip counts them.
 import { seg, outCubic, streamCount } from '../../../lib.js';
-import { MEMES, memeHTML } from './memes.js?v=2';
+import { MEMES, memeHTML } from './memes.js?v=3';
 
 const SAY = `Posting all ${MEMES.length} to r/memes.`;
 

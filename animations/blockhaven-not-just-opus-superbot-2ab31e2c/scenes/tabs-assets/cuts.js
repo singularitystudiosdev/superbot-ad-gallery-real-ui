@@ -5,8 +5,7 @@
 // beat's own clock; zoom: the camera pushes into the Play card as the scene hands off to the clip.
 export const CFG = {
   pace: 1, zoom: true,
-  end: 'Every model.<br>One chat.',
-  endSub: 'It’s not just Opus 5.5.',
+  end: 'superbot',
   asks: ['make me minecraft. call it BlockHaven', null, null, null, null, null],
   say: {
     scrape: 'Block and sound references from 6 texture sites and 4 sound libraries.',

@@ -48,16 +48,14 @@
 
 /* ---- the end card: the line, then the mascot to its right ---- */
 #s-end .lock.ask-end { gap: 56px; }
-/* blockhaven-not-just-opus: the headline is two lines ("Every model." / "One chat.") over the subline */
-#s-end .ask-end .words h1 { font-size: 150px; letter-spacing: -.045em; line-height: .98; white-space: nowrap; }
-#s-end .ask-end .words .end-sub { margin: 26px 0 0 4px; font-size: 44px; font-weight: 600; letter-spacing: -.015em; color: rgba(255, 255, 255, .62); }
+/* blockhaven-not-just-opus: the headline is the one word "superbot" */
+#s-end .ask-end .words h1 { font-size: 200px; letter-spacing: -.045em; line-height: .98; white-space: nowrap; }
 html[data-ar="1x1"] #s-end .lock.ask-end, html[data-ar="4x5"] #s-end .lock.ask-end, html[data-ar="9x16"] #s-end .lock.ask-end { flex-direction: row; gap: 32px; text-align: left; }
-html[data-ar="1x1"] #s-end .ask-end .words h1, html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 132px; }
+html[data-ar="1x1"] #s-end .ask-end .words h1, html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 160px; }
 html[data-ar="9x16"] #s-end .ask-end .words h1 { font-size: 80px; }
 html[data-ar="1x1"] #s-end .ask-end .words h1 br, html[data-ar="4x5"] #s-end .ask-end .words h1 br, html[data-ar="9x16"] #s-end .ask-end .words h1 br { display: inline; }
 html[data-ar="9x16"] #s-end .ask-end .face { width: 150px; height: 150px; }
-/* blockhaven-not-just-opus: on the 864px-wide 4:5 stage the two-line headline plus the 220px mascot ran past both
-   edges; the headline steps down and the mascot is zoomed to 150px so the lock fits with a margin */
-html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 104px; }
-html[data-ar="4x5"] #s-end .ask-end .words .end-sub { margin-top: 18px; font-size: 34px; }
+/* blockhaven-not-just-opus: on the 864px-wide 4:5 stage the headline plus the 220px mascot ran past both edges; the
+   headline steps down and the mascot is zoomed to 150px so the lock fits with a margin */
+html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 132px; }
 html[data-ar="4x5"] #s-end .ask-end .face { zoom: .68; }

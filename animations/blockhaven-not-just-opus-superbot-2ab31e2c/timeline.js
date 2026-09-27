@@ -9,13 +9,13 @@
 //   cards   2.7 to 6.1 "Everyone credits Opus 5.5." / "The secret?" / "It's not just Opus 5.5."
 //   tabs    the hub: one ask, six hand-offs, each opening on its routing chip; ends pushed into the Play card
 //   clip    @kepochnik's BlockHaven gameplay at full frame (credited in img/CREDITS.txt)
-//   end     "Every model. One chat." over "It's not just Opus 5.5."
+//   end     "superbot" beside the mascot
 // The engine: the whole spot is a pure function of t. ?t=<s> freezes a frame, ?t=<s>&play=1 plays on from there,
 // space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock. Scene modules (scenes/<id>.js) are mounted
 // once and rendered only while active; black text cards and the end card are drawn here.
 import * as lib from './lib.js';
 import * as shell from './shell.js';
-import { CFG } from './scenes/tabs-assets/cuts.js?v=6';
+import { CFG } from './scenes/tabs-assets/cuts.js?v=7';
 
 const { clamp, lerp, seg, outCubic, outQuint, inOutCubic, outBack } = lib;
 const H = 1080;
@@ -165,7 +165,7 @@ function measureCaps() {
 
 // ---------- the end card (waffles-website drawEnd) ----------
 function buildEnd(sec) {
-  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>' + CFG.end + '</h1><p class="end-sub">' + CFG.endSub + '</p></div></div><div class="face"></div></div>';
+  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>' + CFG.end + '</h1></div></div><div class="face"></div></div>';
   const mark = shell.makeMark(220);
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };

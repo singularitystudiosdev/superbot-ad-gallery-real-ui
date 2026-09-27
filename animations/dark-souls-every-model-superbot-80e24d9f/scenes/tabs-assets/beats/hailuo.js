@@ -18,9 +18,9 @@
 //                                    https://x.com/The_Alex/status/2102440678282412195, see img/CREDITS.txt),
 //                                    0.6s: the remake's knight advancing through the castle.
 //   img/v4/hailuo/poster-*.jpg       first frame of each clip, used as the video poster.
-//   brand/minimax-logo.svg           the official MiniMax waveform mark, from the official white MiniMax logo
-//                                    https://www.minimax.io/assets/logo/minimax-horizontal-white.webp,
-//                                    vectorized (potrace) so it scales in the 22px chip tile.
+//   brand/minimax-logo.svg           the official MiniMax waveform mark from simple-icons (CC0 1.0),
+//                                    https://cdn.jsdelivr.net/npm/simple-icons/icons/minimax.svg, recoloured
+//                                    white for the dark chip tile; see brand/CREDITS.txt.
 // The reference still in the composer is the ad's own art: img/ds/art-2.jpg (the Gatewarden, same @The_Alex
 // source as above). No API key for MiniMax/Hailuo, fal.ai or Replicate exists on this machine, so the clips are
 // cut from real Dark Souls footage instead of generated; see img/v4/hailuo/CREDITS.txt.

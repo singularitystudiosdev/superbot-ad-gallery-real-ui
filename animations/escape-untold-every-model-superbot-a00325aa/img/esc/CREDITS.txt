@@ -1,0 +1,32 @@
+img/esc: media cut from the "18 MONTHS TO ESCAPE" fashion film by @anabology
+
+Source post: https://x.com/anabology/status/2103534482930491441
+Author: anabology (@anabology), posted Fri Sep 25 2026 17:17:57 UTC
+Post text: "Gave Opus 5.5 donald's prompt, Midjourney, and a moodboard / 12 hours later, woke up to this:"
+Stats as fetched 2026-09-27 (fxtwitter): 4,276,813 views, 7,786 likes, 527 replies, 906 reposts, 6,396 bookmarks
+Source video: https://video.twimg.com/amplify_video/2103533196721704960/vid/avc1/1920x1080/hK-nvYk8GWyJLtjS.mp4?tag=29
+  (306.4 s, 1920x1080, 24 fps, H.264 + AAC)
+All frames, HUD cards, boards and audio below are the film's own; nothing redrawn. Timestamps are in the source video.
+
+film.mp4            167.333 to 190.667 s (23.33 s, 560 frames), 1280x720 H.264 + AAC 128k, 0.4 s audio fades
+                    beats: FEEL THE AGI, ESCAPE VELOCITY..., IT'S SO OVER?, WE'RE SO BACK!, highway split-flap boards
+                    (ESCAPE VELOCITY / LONGEVITY / PERMANENT UNDERCLASS 06 MONTHS), 11.2 KM/S eye
+film-poster.jpg     167.333 s (first frame of film.mp4)
+tweet-clip.mp4      1.208 to 7.625 s (6.42 s, 154 frames), 960x540, muted: "18 MONTHS TO ESCAPE THE PERMANENT
+                    UNDERCLASS" title card, light trails, ESCAPE VELOCITY ticket, highway car
+tweet-poster.jpg    1.208 s (first frame of tweet-clip.mp4)
+plates/plate-1.jpg  131.458 s, white grid room (crop 808x1010 at 502,18; scaled 1024x1280)
+plates/plate-2.jpg  95.125 s, backlit server-hall tunnel (crop 808x1010 at 356,18)
+plates/plate-3.jpg  23.000 s, night runway, Look 00 (crop 808x1010 at 508,18)
+plates/plate-4.jpg  80.958 s, amber corridor (crop 808x1010 at 526,18)
+motion/walk.mp4     131.333 to 134.083 s (2.75 s), grid room walk, crop 760x1040 at 556,20, 640x876, muted
+motion/walk.jpg     131.333 s (first frame of walk.mp4)
+motion/spin.mp4     95.125 to 98.083 s (2.96 s), tunnel 360 degree spin, crop 900x1040 at 420,20, 640x740, muted
+motion/spin.jpg     95.125 s (first frame of spin.mp4)
+hud/phones-down.jpg      21.5 s, ticket "PHONES DOWN. TOKENS UP." (crop 720x720 at 1090,250)
+hud/half-pay.jpg         38.6 s, receipt "Half your pay in tokens," (crop 600x560 at 1270,180)
+hud/stop-hiring.jpg      52.2 s, "STOP HIRING HUMANS?" (crop 1100x560 at 0,180)
+hud/twelve-nine-b.jpg    127.3 s, "Look 08. Hugging-face pin. $12.9B." (crop 800x860 at 30,150)
+hud/splitflap-boards.jpg 184.8 s, split-flap boards ESCAPE VELOCITY / LONGEVITY / PERMANENT UNDERCLASS 06 MONTHS
+                         (crop 1880x340 at 20,40)
+hud/feeling-agi.jpg      262.5 s, Claude Code card "Feeling the AGI... 307.2k tokens" (crop 760x400 at 1120,300)

@@ -163,6 +163,12 @@ const more = [
   // DeepSeek V4 Flash, Meshy 5, MiniMax Hailuo 02, ElevenLabs, Opus 5.5 in Remotion, Superbot plays the real clip
   // (animations/they-wont-tell-you-how-superbot-fccab6d9/CREDITS.txt).
   ['they-wont-tell-you-how-superbot-fccab6d9', 'they-wont-tell-you-how-superbot-fccab6d9/', 'THEY WONT TELL YOU HOW: a “I made this in 1 prompt” post, then make a launch video for Pocketsflow: DeepSeek V4 Flash researches, Meshy 5 models the mascot, MiniMax Hailuo 02 animates, ElevenLabs scores, Opus 5.5 cuts it in Remotion, Superbot plays (video @achxvi)', 'Ad spots'],
+  // THEY WONT TELL YOU HOW: 18 months to escape (2026-09-27): a fork of they-wont-tell-you-how fccab6d9. An X feed
+  // decelerates onto a fictional "I made this in 1 prompt" post (footage @anabology's "18 MONTHS TO ESCAPE" film, the
+  // most viewed Opus 5.5 video), the word column lands, then one chat builds that film: DeepSeek, Midjourney v7,
+  // MiniMax Hailuo 02, ElevenLabs, Claude Opus 5.5 on a 15:00 clock, GitHub, and Superbot plays the real film with sound
+  // (animations/escape-untold-every-model-superbot-a00325aa/CREDITS.txt).
+  ['escape-untold-every-model-superbot-a00325aa', 'escape-untold-every-model-superbot-a00325aa/', 'THEY WONT TELL YOU HOW: 18 months to escape (every model, one prompt)', 'Ad spots'],
   // ITS A LIE (2026-09-27): a fork of the pocketsflow-untold engine. A mock X post ("I MADE THIS IN ONE PROMPT", the
   // embedded clip @noahwachnik's voxel game) freeze-frames and glitches, hard cut to ITS A LIE / THE SECRET IS / ITS NOT
   // JUST OPUS 5.5, then the superbot hub routes "make me minecraft in the browser" to DeepSeek, Nano Banana, Meshy,

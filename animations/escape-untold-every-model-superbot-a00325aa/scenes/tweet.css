@@ -1,0 +1,96 @@
+/* Act 1, the doomscroll: X's dark ("Lights out") home timeline at X's own px (275px nav, 600px column, 350px rail),
+   scaled by the .tw-cam camera in scenes/tweet.js. Tokens are X dark: #000 ground, #E7E9EA text, #71767B secondary,
+   #2F3336 rules, #1D9BF0 accent, #202327 search field, #16181C boxes. A system font stack stands in for Chirp.
+   No CSS animation or transition: every moving value (scroll, blur, camera, control fade) is written from t. */
+#s-tweet {
+  --tw-bg: #000; --tw-fg: #E7E9EA; --tw-2: #71767B; --tw-rule: #2F3336; --tw-accent: #1D9BF0;
+  background: var(--tw-bg);
+  font-family: "TwitterChirp", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--tw-fg);
+  -webkit-font-smoothing: antialiased;
+}
+#s-tweet *, #s-tweet *::before, #s-tweet *::after { box-sizing: border-box; }
+#s-tweet .tw-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+#s-tweet .tw-cam { position: absolute; left: 0; top: 0; width: 1265px; transform-origin: 0 0; }
+#s-tweet .tw-page { position: relative; width: 1265px; height: 731px; background: var(--tw-bg); }
+#s-tweet .tw-ic { display: block; width: 18.75px; height: 18.75px; fill: currentColor; flex: none; }
+#s-tweet .tw-av { flex: none; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #16181c; }
+#s-tweet .tw-av img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tweet .tw-name { font-weight: 700; color: var(--tw-fg); }
+#s-tweet .tw-handle { color: var(--tw-2); }
+
+/* ---------- left nav ---------- */
+#s-tweet .tw-nav { position: absolute; left: 0; top: 0; width: 275px; height: 100%; padding: 0 16px 0 8px;
+  display: flex; flex-direction: column; align-items: flex-start; }
+#s-tweet .tw-logo { width: 52px; height: 52px; display: grid; place-items: center; margin-top: 2px; }
+#s-tweet .tw-logo .tw-ic { width: 30px; height: 30px; fill: var(--tw-fg); }
+#s-tweet .tw-nav-i { display: flex; align-items: center; height: 50px; padding: 0 12px; margin: 2px 0; font-size: 20px; line-height: 24px; color: var(--tw-fg); }
+#s-tweet .tw-nav-ic { position: relative; }
+#s-tweet .tw-nav-ic .tw-ic { width: 26.25px; height: 26.25px; fill: var(--tw-fg); }
+#s-tweet .tw-nav-l { margin: 0 16px 0 20px; }
+#s-tweet .tw-nav-i.is-on .tw-nav-l { font-weight: 700; }
+#s-tweet .tw-nav-i.has-dot .tw-nav-ic::after { content: "3"; position: absolute; top: -6px; left: 14px; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 9px; background: var(--tw-accent); color: #fff; font-size: 11px; line-height: 18px; font-weight: 700; text-align: center; border: 1px solid #000; }
+#s-tweet .tw-postbtn { width: 233px; height: 52px; margin: 16px 0 0; border-radius: 9999px; background: #EFF3F4; color: #0F1419;
+  font-size: 17px; line-height: 52px; font-weight: 700; text-align: center; }
+#s-tweet .tw-me { margin: auto 0 12px; width: 251px; display: flex; align-items: center; padding: 12px; font-size: 15px; line-height: 20px; }
+#s-tweet .tw-me-who { display: flex; flex-direction: column; margin-left: 12px; min-width: 0; }
+#s-tweet .tw-me .tw-more { margin-left: auto; fill: var(--tw-fg); }
+
+/* ---------- the column: sticky tabs over the scrolling feed ---------- */
+#s-tweet .tw-col { position: absolute; left: 275px; top: 0; width: 600px; height: 100%; overflow: hidden;
+  border-left: 1px solid var(--tw-rule); border-right: 1px solid var(--tw-rule); }
+#s-tweet .tw-feed { position: absolute; left: 0; top: 0; width: 100%; will-change: transform; }
+#s-tweet .tw-tabs { position: absolute; left: 0; top: 0; width: 100%; height: 53px; display: flex; z-index: 2;
+  background: rgba(0, 0, 0, .65); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--tw-rule); }
+#s-tweet .tw-tab { flex: 1; display: flex; justify-content: center; font-size: 15px; line-height: 20px; font-weight: 500; color: var(--tw-2); }
+#s-tweet .tw-tab span { position: relative; display: flex; align-items: center; height: 100%; }
+#s-tweet .tw-tab.is-on { color: var(--tw-fg); font-weight: 700; }
+#s-tweet .tw-tab.is-on span::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; border-radius: 9999px; background: var(--tw-accent); }
+
+/* a timeline cell: avatar, then header / text / media / actions */
+#s-tweet .tw-cell { display: flex; padding: 12px 16px; border-bottom: 1px solid var(--tw-rule); }
+#s-tweet .tw-cell > .tw-av { margin-right: 8px; }
+#s-tweet .tw-body { flex: 1; min-width: 0; }
+#s-tweet .tw-head { display: flex; align-items: center; font-size: 15px; line-height: 20px; white-space: nowrap; color: var(--tw-2); }
+#s-tweet .tw-badge { display: block; width: 18.75px; height: 18.75px; margin-left: 2px; fill: var(--tw-accent); flex: none; }
+#s-tweet .tw-head .tw-handle { margin-left: 4px; }
+#s-tweet .tw-dot { padding: 0 4px; }
+#s-tweet .tw-head .tw-more { margin-left: auto; }
+#s-tweet .tw-text { font-size: 15px; line-height: 20px; color: var(--tw-fg); word-wrap: break-word; }
+#s-tweet .tw-media { position: relative; margin-top: 12px; border: 1px solid var(--tw-rule); border-radius: 16px; overflow: hidden; background: #16181c; }
+#s-tweet .tw-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tweet .tw-acts { display: flex; align-items: center; margin-top: 12px; height: 20px; color: var(--tw-2); }
+#s-tweet .tw-act { flex: 1; display: flex; align-items: center; }
+#s-tweet .tw-n { margin-left: 4px; font-size: 13px; line-height: 16px; font-variant-numeric: tabular-nums; }
+#s-tweet .tw-act-end { display: flex; align-items: center; gap: 12px; }
+
+/* the hero's video card: X's media box with its time-left pill (bottom left) and mute toggle (bottom right) */
+#s-tweet .tw-vcard { aspect-ratio: 16 / 9; background: #000; }
+#s-tweet .tw-vid { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tweet .tw-pill { position: absolute; left: 12px; bottom: 12px; padding: 0 4px; border-radius: 4px; background: rgba(0, 0, 0, .77);
+  color: #fff; font-size: 13px; line-height: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+#s-tweet .tw-mute { position: absolute; right: 12px; bottom: 12px; width: 32px; height: 32px; border-radius: 50%; background: rgba(0, 0, 0, .77);
+  display: grid; place-items: center; }
+#s-tweet .tw-mute .tw-ic { width: 18px; height: 18px; fill: #fff; }
+/* X's attribution line under a re-shared video */
+#s-tweet .tw-from { margin-top: 4px; font-size: 13px; line-height: 16px; color: var(--tw-2); }
+#s-tweet .tw-from-n { font-weight: 700; }
+
+/* ---------- right rail ---------- */
+#s-tweet .tw-rail { position: absolute; left: 905px; top: 0; width: 350px; height: 100%; overflow: hidden; }
+#s-tweet .tw-search { display: flex; align-items: center; height: 42px; margin: 5px 0 12px; padding: 0 16px; border-radius: 9999px;
+  background: #202327; color: var(--tw-2); font-size: 15px; line-height: 20px; }
+#s-tweet .tw-search .tw-ic { width: 18.75px; height: 18.75px; margin-right: 12px; }
+#s-tweet .tw-box { border: 1px solid var(--tw-rule); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
+#s-tweet .tw-box h2 { margin: 0; font-size: 20px; line-height: 24px; font-weight: 800; color: var(--tw-fg); }
+#s-tweet .tw-prem { padding: 12px 16px; }
+#s-tweet .tw-prem p { margin: 8px 0 10px; font-size: 15px; line-height: 20px; font-weight: 700; color: var(--tw-fg); }
+#s-tweet .tw-sub { display: inline-block; height: 36px; padding: 0 16px; border-radius: 9999px; background: var(--tw-accent); color: #fff;
+  font-size: 15px; line-height: 36px; font-weight: 700; }
+#s-tweet .tw-trends h2 { padding: 12px 16px; }
+#s-tweet .tw-tr { padding: 12px 16px; }
+#s-tweet .tw-tr-m { display: flex; align-items: center; justify-content: space-between; font-size: 13px; line-height: 16px; color: var(--tw-2); }
+#s-tweet .tw-tr-t { margin-top: 2px; font-size: 15px; line-height: 20px; font-weight: 700; color: var(--tw-fg); }
+#s-tweet .tw-tr-n { margin-top: 4px; font-size: 13px; line-height: 16px; color: var(--tw-2); }
+#s-tweet .tw-showmore { padding: 16px; font-size: 15px; line-height: 20px; color: var(--tw-accent); }

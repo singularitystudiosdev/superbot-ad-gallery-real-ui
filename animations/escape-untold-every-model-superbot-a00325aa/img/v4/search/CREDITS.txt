@@ -1,0 +1,27 @@
+img/v4/search: the DeepSeek V4 Flash web-search beat (scenes/tabs-assets/beats/ds-search.js)
+Nothing here is drawn. The queries, page count and pick order are staged for the spot; the pictures are not.
+
+Moodboard tiles (mood-01..08.webp, 480x320, cwebp -q 80): frames of the "18 MONTHS TO ESCAPE" fashion film by
+@anabology, https://x.com/anabology/status/2103534482930491441 (source video 1920x1080, see ../../esc/CREDITS.txt),
+extracted with ffmpeg -ss <t>, centre crop 1620x1080 at x=150, scaled 480x320. (c) anabology. Used as the
+references the spot's own final output is built from.
+  mood-01.webp  t=23.0s   night highway walk, white puff blouse and black skirt
+  mood-02.webp  t=69.0s   white blouse on a lit plinth, "No grades, no tests. Taste is the moat."
+  mood-03.webp  t=245.0s  windblown portrait, "NOT OURS" tag
+  mood-04.webp  t=84.5s   close-up singing into a headset mic, gauge HUD
+  mood-05.webp  t=206.0s  split-flap digits "02"
+  mood-06.webp  t=298.0s  white room, the heroine walking away past a black square
+  mood-07.webp  t=176.0s  "BACK" highway close-up with the IT'S SO OVER? poll
+  mood-08.webp  t=115.0s  "Look 07. Impossible puzzles." hands and triangle
+
+Favicons (fav-*.png): the sites' own marks via Google's public favicon service,
+google.com/s2/favicons?domain=<host>&sz=64 (fetched 2026-09-27), used nominatively to label the real pages the
+search lists:
+  fav-x.com.png             x.com
+  fav-en.wikipedia.org.png  en.wikipedia.org  (Wikipedia is a trademark of the Wikimedia Foundation)
+  fav-github.com.png        github.com        (GitHub is a trademark of GitHub, Inc.)
+Pages listed as sources (all real, titles as published):
+  https://en.wikipedia.org/wiki/Escape_velocity                  "Escape velocity"
+  https://x.com/achxvi/status/2103918792845963545                 @achxvi "Opus 5.5 did this in 15 minutes"
+  https://github.com/yihui-dev/awesome-opus5-5-videos             "awesome-opus5-5-videos"
+  https://x.com/anabology/status/2103534482930491441              @anabology, the moodboard frames above

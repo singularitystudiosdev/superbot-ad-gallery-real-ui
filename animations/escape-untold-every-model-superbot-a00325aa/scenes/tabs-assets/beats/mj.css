@@ -1,0 +1,63 @@
+/* Midjourney beat (beats/mj.js, forked from the dark-souls v4 ad's beats/art.css): the /imagine job card, a 2x2 grid of
+   4:5 frames beside the prompt, the U1..U4 / V1..V4 buttons and the upscale line. Same sheet as the other v4 cards
+   (#121216, inset 1px #2a2a2e). Nothing here transitions: opacity / filter / transform are written from t in render,
+   so ?t= freezes a frame. Every selector is scoped under the hub and prefixed .mj- (and the app tile .qc-t-mj). */
+
+/* the app chip tile and the composer's platform chip: the white Midjourney emblem on black */
+#s-tabs .sbsite .hub .qc-t-mj { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-mj img { width: 15px; height: 15px; }
+#s-tabs .sbsite .hub .qc-pi img[data-app="mj"] { width: 13px; height: 13px; }
+
+#s-tabs .sbsite .hub .mj { opacity: 0; margin-top: 4px; box-sizing: border-box; width: 100%; max-width: 450px;
+  border-radius: 12px; background: #121216; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .38);
+  overflow: hidden; color: #f2f2f7; font: 12px/16px var(--ui); transform-origin: 50% 0; }
+
+/* header: the emblem, the name, the version pill, the job status */
+#s-tabs .sbsite .hub .mj-hd { display: flex; align-items: center; gap: 7px; height: 30px; box-sizing: border-box;
+  padding: 0 9px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .mj-mk { flex: none; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 5px;
+  background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .mj-mk img { width: 12px; height: 12px; display: block; }
+#s-tabs .sbsite .hub .mj-hd b { font: 600 12px/1 var(--ui); }
+#s-tabs .sbsite .hub .mj-v { padding: 1px 6px; border-radius: 999px; background: #1b1b22; box-shadow: inset 0 0 0 1px #2f2f3a;
+  font: 700 9px/13px var(--ui); color: #b9b9c6; }
+#s-tabs .sbsite .hub .mj-st { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font: 600 10px/1 var(--ui);
+  color: #9a9aa2; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#s-tabs .sbsite .hub .mj-spin { width: 9px; height: 9px; box-sizing: border-box; border-radius: 50%; border: 1.6px solid #3a3a42;
+  border-top-color: #c9c9cf; }
+#s-tabs .sbsite .hub .mj-st.is-done { color: #6ee7a0; }
+#s-tabs .sbsite .hub .mj-st.is-done .mj-spin { display: none; }
+
+/* body: the grid on the left, the prompt and the buttons on the right */
+#s-tabs .sbsite .hub .mj-bd { display: flex; gap: 10px; padding: 9px; }
+#s-tabs .sbsite .hub .mj-grid { flex: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; width: 232px; }
+#s-tabs .sbsite .hub .mj-t { position: relative; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: #0b0b0d;
+  box-shadow: inset 0 0 0 1px #26262c; }
+#s-tabs .sbsite .hub .mj-t.is-up { box-shadow: 0 0 0 2px #5865f2, 0 6px 18px rgba(88, 101, 242, .35); z-index: 1; }
+#s-tabs .sbsite .hub .mj-im { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); }
+/* the job's noise: a procedural grain the frames resolve out of (no imagery) */
+#s-tabs .sbsite .hub .mj-noise { position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background-size: 64px 64px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .6  0 0 0 0 .6  0 0 0 0 .65  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='64' height='64' filter='url(%23n)'/%3E%3C/svg%3E"); }
+#s-tabs .sbsite .hub .mj-n { position: absolute; left: 4px; top: 4px; display: grid; place-items: center; width: 14px; height: 14px;
+  border-radius: 4px; background: rgba(0, 0, 0, .6); font: 700 8.5px/1 var(--ui); color: #e5e5ea; }
+
+#s-tabs .sbsite .hub .mj-side { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+#s-tabs .sbsite .hub .mj-pr { padding: 6px 7px; border-radius: 8px; background: #0e0e11; box-shadow: inset 0 0 0 1px #26262c;
+  font: 10.5px/14px var(--font-mono, ui-monospace, monospace); color: #d9d9e0; word-break: break-word; }
+#s-tabs .sbsite .hub .mj-cmd { font-weight: 700; color: #8f9bff; }
+#s-tabs .sbsite .hub .mj-caret { display: inline-block; width: 1.5px; height: 10px; background: #e7e7ee; vertical-align: -1px; }
+#s-tabs .sbsite .hub .mj-hid { color: transparent; }
+#s-tabs .sbsite .hub .mj-ps { display: flex; flex-wrap: wrap; gap: 4px; }
+#s-tabs .sbsite .hub .mj-p { padding: 1px 6px; border-radius: 5px; background: #1d1d21; box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 9.5px/13px var(--font-mono, ui-monospace, monospace); color: #a9a9b3; }
+#s-tabs .sbsite .hub .mj-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+#s-tabs .sbsite .hub .mj-b { display: grid; place-items: center; height: 22px; border-radius: 5px; background: #2b2d31;
+  font: 600 10.5px/1 var(--ui); font-style: normal; color: #e3e5e8; }
+#s-tabs .sbsite .hub .mj-b.is-on { background: #5865f2; color: #fff; }
+#s-tabs .sbsite .hub .mj-upl { display: flex; align-items: center; gap: 5px; margin-top: auto; opacity: 0;
+  font: 600 10.5px/1 var(--ui); color: #c9c9cf; white-space: nowrap; }
+#s-tabs .sbsite .hub .mj-upl b { color: #f2f2f7; }
+#s-tabs .sbsite .hub .mj-ok { display: grid; place-items: center; width: 14px; height: 14px; border-radius: 50%; background: #14251b;
+  box-shadow: inset 0 0 0 1px #24503a; }
+#s-tabs .sbsite .hub .mj-ok .qc-ok { width: 10px; height: 10px; stroke: #6ee7a0; stroke-width: 3; }

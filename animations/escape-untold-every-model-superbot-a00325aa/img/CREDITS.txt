@@ -1,0 +1,18 @@
+img CREDITS (escape-untold-every-model-superbot-a00325aa)
+
+This ad forks they-wont-tell-you-how-superbot-fccab6d9, itself a fork of
+dark-souls-every-model-superbot-80e24d9f (?v=4). None of the earlier ads' media is carried
+here: the Pocketsflow cuts (img/pf/), the Meshy renders, the Hailuo clips, the Dark Souls
+footage and the unused fork leftovers (burger.jpg, muse-meme.png) were all removed.
+
+Every image and clip in this folder is sourced (no hand-drawn raster art) and is credited
+file by file, with source URL, timestamp or crop, and licence, in the CREDITS.txt beside it:
+
+esc/CREDITS.txt        every cut of the "18 MONTHS TO ESCAPE" film by @anabology,
+                       https://x.com/anabology/status/2103534482930491441: the film Superbot
+                       plays (film.mp4 + poster), the opener post's clip (tweet-clip.mp4 +
+                       poster), the Midjourney plates, the motion loops and the HUD crops
+v4/search/CREDITS.txt  the DeepSeek research grid: moodboard frames of the same film and each
+                       listed site's own favicon (Wikipedia, GitHub, X via Google s2)
+tweet/CREDITS.txt      the X feed opener: Unsplash avatars and desk photos for the fictional
+                       accounts, and X's own interface icons

@@ -45,6 +45,10 @@ match-row.png              NOT from X: the superbot composer's control row exact
                            t=0 on a 1920x1080 stage, screenshotted by .tmp/tkr-xfeed/capture-row.mjs (gallery root) at clip
                            x=204 y=649 w=1512 h=72. Re-run that script whenever the tabs chat route changes its first model
                            (the platform chip in this row names it).
+match-row.4x3.png, match-row.1x1.png, match-row.4x5.png, match-card.1x1.png, match-card.4x5.png
+                           NOT from X: the same superbot composer at tabs t=0 on the 1440, 1080 and 864 wide stages the
+                           gallery's ?ar=4x3 / 1x1 / 4x5 frames use, screenshotted by .tmp/tkr-ar/capture-row.mjs <ar> --write
+                           (--card for the whole card at 1:1 and 4:5). Re-run with match-row.png.
 
 icons/ (X platform UI furniture, keyless Iconify API, https://api.iconify.design/<set>/<name>.svg; lucide strokes set to 1.75):
   ri:twitter-x-fill (X logo, Premium)        material-symbols:verified (verified badge)
@@ -55,5 +59,6 @@ icons/ (X platform UI furniture, keyless Iconify API, https://api.iconify.design
   ri:image-line, ri:file-gif-line, ri:list-unordered, ri:emotion-line, ri:map-pin-line (composer tools)
   lucide:x (viewer close)                    ri:pause-fill (pause glyph)          ri:volume-mute-fill (muted badge)
   lucide:audio-waveform (the Lyria 2 + ElevenLabs tag in the X-ray)
-The pointer is ../../shell.js makeCursor() (the ad shell's own cursor).
+  ri:quill-pen-line (the compose button: 4:3's folded nav Post button, the mobile timeline's floating button)
+The pointer is ../../shell.js makeCursor() (the ad shell's own cursor); the 1:1 / 4:5 tap is a plain CSS touch dot and ripple.
 Brand tiles in the X-ray chips use ../../brand/*.svg (see brand/CREDITS.txt).

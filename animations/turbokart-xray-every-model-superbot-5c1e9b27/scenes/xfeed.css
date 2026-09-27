@@ -179,3 +179,69 @@
 #s-xfeed .xf-msb { position: absolute; left: 0; top: 0; z-index: 9; visibility: hidden; white-space: nowrap; transform-origin: 0 0; font-weight: 400;
   font-family: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif; }
 #s-xfeed .xf-mrow { position: absolute; left: 0; top: 0; z-index: 9; visibility: hidden; display: block; transform-origin: 0 0; }
+
+/* ---------------- the other frame ratios (xfeed.js LAYOUTS). 16:9 uses none of the rules below. ----------------
+   .xf-v2 is every non-16:9 layout (--kc: the viewer chrome's zoom), .xf-nar the 4:3 desktop, .xf-mob the 1:1 / 4:5
+   mobile web layout. Sizes the layout computes (the stage width, media box, cards, grid) are inline from xfeed.js. */
+#s-xfeed .xf-v2 .xf-chip.xf-side-a { transform-origin: 50% 100%; }
+#s-xfeed .xf-v2 .xf-chip.xf-side-u { transform-origin: 50% 0; }
+/* the match box's copy of the reply row, at the viewer chrome's scale (16:9 hard-codes kc = 1.5 above) */
+#s-xfeed .xf-v2 .xf-mx { gap: calc(8px * var(--kc)); padding: calc(12px * var(--kc)) calc(16px * var(--kc)); }
+#s-xfeed .xf-v2 .xf-mx .xf-av { width: calc(40px * var(--kc)); height: calc(40px * var(--kc)); }
+#s-xfeed .xf-v2 .xf-mx .xf-rph { font-size: calc(20px * var(--kc)); line-height: calc(24px * var(--kc)); }
+#s-xfeed .xf-v2 .xf-mx .xf-rbtn { height: calc(36px * var(--kc)); padding: 0 calc(16px * var(--kc)); font-size: calc(15px * var(--kc)); }
+
+/* 4:3: x.com under ~1000px wide: no right sidebar, the nav folded to its icons beside the timeline, Post as a round button */
+#s-xfeed .xf-nar .xf-side { display: none; }
+#s-xfeed .xf-nar .xf-nav { left: 199px; width: 88px; padding: 0 12px; display: flex; flex-direction: column; align-items: center; }
+#s-xfeed .xf-nar .xf-ni { gap: 0; padding: 0 12px; }
+#s-xfeed .xf-nar .xf-ni span { display: none; }
+#s-xfeed .xf-nar .xf-postbtn { width: 52px; height: 52px; font-size: 24px; }
+
+/* 1:1 and 4:5: x.com's mobile web timeline, design px under the camera's k */
+#s-xfeed .xf-mob .xf-app { width: auto; height: auto; }
+#s-xfeed .xf-mob .xf-main { left: 0; width: 100%; height: 100%; border: 0; }
+#s-xfeed .xf-mob .xf-scroll { top: 106px; }
+#s-xfeed .xf-mob .xf-hd { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+#s-xfeed .xf-mhead { display: block; height: 106px; }
+#s-xfeed .xf-mtop { position: relative; display: flex; align-items: center; height: 53px; padding: 0 16px; }
+#s-xfeed .xf-mtop .xf-av { width: 32px; height: 32px; }
+#s-xfeed .xf-mlogo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; font-size: 26px; color: #e7e9ea; }
+#s-xfeed .xf-mtabs { display: flex; height: 53px; }
+#s-xfeed .xf-fab { position: absolute; right: 16px; bottom: 69px; z-index: 3; width: 56px; height: 56px; border-radius: 50%;
+  background: #1d9bf0; color: #fff; display: grid; place-items: center; font-size: 24px; box-shadow: 0 2px 12px rgba(255, 255, 255, .18); }
+#s-xfeed .xf-mfoot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; height: 53px; box-sizing: border-box; display: flex;
+  align-items: center; justify-content: space-around; border-top: 1px solid #2f3336; background: rgba(0, 0, 0, .85);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #e7e9ea; font-size: 26px; }
+#s-xfeed .xf-mfoot span { display: flex; }
+
+#s-xfeed .xf-mob .xf-vbg { background: #000; }
+/* the mobile media viewer: top bar, and the bottom dock (author, first line, counts, reply field), zoom --kc inline */
+#s-xfeed .xf-mob .xf-mvtop { left: 0; top: 0; height: 53px; border-radius: 0; background: transparent; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-size: 24px; color: #eff3f4; }
+#s-xfeed .xf-mob .xf-mvtop .xf-more { margin-left: 0; color: #eff3f4; font-size: 22px; }
+#s-xfeed .xf-mob .xf-mvbot { left: 0; top: auto; bottom: 0; height: auto; border-left: 0; background: transparent; overflow: visible; }
+#s-xfeed .xf-mcap { display: flex; align-items: center; gap: 6px; height: 24px; padding: 0 16px; white-space: nowrap; }
+#s-xfeed .xf-mcap .xf-av { width: 20px; height: 20px; }
+#s-xfeed .xf-mcap b { font-weight: 700; }
+#s-xfeed .xf-mcap .xf-badge { margin-left: -4px; font-size: 17px; }
+#s-xfeed .xf-mcap .xf-hd { margin-left: 0; color: #71767b; }
+#s-xfeed .xf-mcapt { height: 20px; padding: 0 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #e7e9ea; }
+#s-xfeed .xf-mob .xf-vbar { position: static; width: auto; height: 48px; padding: 0 16px; color: #eff3f4; font-size: 13px; line-height: 16px; }
+#s-xfeed .xf-mob .xf-vbar .xf-a .xf-ic { font-size: 18.75px; }
+#s-xfeed .xf-mob .xf-vbar .xf-ar { gap: 12px; }
+#s-xfeed .xf-mob .xf-reply { height: 52px; box-sizing: border-box; padding: 0 16px; gap: 12px; border-top: 1px solid #2f3336; border-bottom: 0; }
+#s-xfeed .xf-mob .xf-reply .xf-av { width: 32px; height: 32px; }
+#s-xfeed .xf-mob .xf-rph { font-size: 17px; line-height: 20px; }
+#s-xfeed .xf-mob .xf-rbtn { height: 32px; font-size: 14px; }
+#s-xfeed .xf-mob .xf-mx { gap: calc(12px * var(--kc)); padding: 0 calc(16px * var(--kc)); }
+#s-xfeed .xf-mob .xf-mx .xf-av { width: calc(32px * var(--kc)); height: calc(32px * var(--kc)); }
+#s-xfeed .xf-mob .xf-mx .xf-rph { font-size: calc(17px * var(--kc)); line-height: calc(20px * var(--kc)); }
+#s-xfeed .xf-mob .xf-mx .xf-rbtn { height: calc(32px * var(--kc)); font-size: calc(14px * var(--kc)); }
+#s-xfeed .xf-mob .xf-pause { width: 104px; height: 104px; margin: -52px 0 0 -52px; font-size: 52px; }
+
+/* the tap (mobile has no pointer): a touch dot and its ripple, stage px, placed by xfeed.js */
+#s-xfeed .xf-tap { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 6; visibility: hidden; pointer-events: none; }
+#s-xfeed .xf-tapd, #s-xfeed .xf-tapr { position: absolute; left: 0; top: 0; width: 84px; height: 84px; border-radius: 50%; box-sizing: border-box; }
+#s-xfeed .xf-tapd { background: rgba(255, 255, 255, .36); box-shadow: 0 0 0 2px rgba(255, 255, 255, .55), 0 4px 18px rgba(0, 0, 0, .35); }
+#s-xfeed .xf-tapr { border: 3px solid rgba(255, 255, 255, .85); opacity: 0; }

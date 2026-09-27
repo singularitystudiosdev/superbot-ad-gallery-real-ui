@@ -164,7 +164,7 @@ function measureCaps() {
 
 // ---------- the end card (waffles-website drawEnd) ----------
 function buildEnd(sec) {
-  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>IT DOES<br> WHAT YOU ASK</h1></div></div><div class="face"></div></div>';
+  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1></div></div><div class="face"></div></div>';
   const mark = shell.makeMark(220);
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
@@ -185,10 +185,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=11`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=12`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=11`)).default;
+    const m = (await import(`./scenes/${id}.js?v=12`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

@@ -30,7 +30,7 @@ const APPS = {
 const ASKS = [
   { app: 'gemini', mod: gemini, verb: 'Switching to', ask: 'make me a meme of muse' },
   { app: 'reddit', mod: reddit, verb: 'Connecting to', ask: 'ok post it to my reddit' },
-  { app: 'youtube', mod: youtube, verb: 'Switching to', ask: 'make more from clips in the social network' },
+  { app: 'youtube', mod: youtube, verb: 'Switching to', ask: 'make more' },
   { app: 'gemini', mod: memes, verb: 'Switching to', ask: null },
   { app: 'reddit', mod: redditBatch, verb: 'Switching to', ask: 'post it' },
   { app: 'reddit', mod: stats, verb: 'Checking', ask: 'how are they doing' },

@@ -107,6 +107,9 @@ const more = [
   // make a Splatoon game (2026-09-26): seven requests in one thread, ending on the Inkwave launch. The closing clip
   // is @JaydenDavisNC's Opus 5.5 Splatoon capture (game: Inkwave) — https://x.com/JaydenDavisNC/status/2103357848961036304
   ['splatoon-every-model-v3-superbot-3081f5d2', 'splatoon-every-model-superbot-3081f5d2/?v=3', 'Superbot: make a Splatoon game, every model: Lyria 2 scores it, Meshy builds the meshes, Gemini paints the arena, Opus 5.5 codes the ink sim, DeepSeek V4 Flash scrapes decals, GitHub takes the repo, Opus 5.5 launches Inkwave; ends on @JaydenDavisNC’s Opus 5.5 Splatoon clip (7 requests)', 'Ad spots'],
+  // make a Mario Kart game (2026-09-27): the splatoon 3081f5d2 routing rethemed to a kart racer, each model switch an
+  // item-box roll; ends on @bridgemindai's Opus 5.5 Mario Kart clip (game: Turbo Kart Rally, Palm Cove Circuit).
+  ['mariokart-every-model-v3-superbot-7aec3197', 'mariokart-every-model-superbot-7aec3197/?v=3', 'Superbot: make a Mario Kart game, every model: Lyria 2 scores it, Meshy builds the karts, Gemini paints the roster, Opus 5.5 codes the drift physics, DeepSeek V4 Flash scrapes trackside boards, GitHub takes the repo, Opus 5.5 launches Turbo Kart Rally; each switch is an item-box roll; ends on @bridgemindai’s Opus 5.5 Mario Kart clip (7 requests)', 'Ad spots'],
   // make a Splatoon game (2026-09-26): the whole ink build in one chat, one model per step. Opus 5.5 writes the
   // brief, DeepSeek V4 Flash scrapes the ink refs, Meshy 5 models the arena, HY-Motion animates the cast,
   // ElevenLabs and Suno score it, Gemini paints the ink, Opus 5.5 codes Inkwave, GitHub ships it, and the last

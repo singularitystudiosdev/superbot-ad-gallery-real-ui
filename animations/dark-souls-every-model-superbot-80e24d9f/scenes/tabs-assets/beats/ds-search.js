@@ -68,9 +68,9 @@ const REFS = [
 const NPICK = REFS.length;   // 12 refs picked
 
 // per-query timings: the row pops in, types for QT, then its check lands
-const QT = 0.34;      // seconds one query takes to type
-const QSTEP = 0.46;   // gap between one query starting and the next
-const CPS = 82;       // chars/second the queries type at (QT / a query's own length)
+const QT = 0.22;      // seconds one query takes to type (the longest, 28 chars, at CPS)
+const QSTEP = 0.28;   // gap between one query starting and the next
+const CPS = 128;      // chars/second the queries type at (QT / a query's own length)
 const CHIP = 0.055;   // citation chips land one after another
 const TSTEP = 0.05;   // image tiles pop in
 const PSTEP = 0.06;   // picks land one after another

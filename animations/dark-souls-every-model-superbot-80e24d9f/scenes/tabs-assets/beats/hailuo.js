@@ -51,7 +51,7 @@ export default {
     T.prog1 = r + 3.15;                       // the job finishes
     T.grid = r + 3.22;                        // the four clips land
     T.clip0 = r + 3.34;                       // all four start moving together, like one batch
-    T.end = r + 6.0;
+    T.end = r + 4.7;                          // ~1.4s of the clips playing, then the next request routes
     return T;
   },
   build(k, x) {

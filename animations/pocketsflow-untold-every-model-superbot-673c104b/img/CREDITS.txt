@@ -7,9 +7,9 @@ nothing here changes them.
 
 Added for dark-souls-every-model-superbot (2026-09-26):
 
-ds/ds-clip.mp4   an 8s, 1280w, no-audio trim (source 13.0-21.0s) of the video by @The_Alex,
-                 https://x.com/The_Alex/status/2102440678282412195
-ds/poster.jpg    the trimmed clip's first frame, 1280w
+ds/poster.jpg    first frame of an 8s trim (source 13.0-21.0s) of the video by @The_Alex,
+                 https://x.com/The_Alex/status/2102440678282412195, 1280w (the trim itself
+                 was pruned from this fork; the v1-v3 routes still show this poster)
 ds/art-1.jpg     still at 68.0s, cropped to the knight with the red shield in the fog gate
 ds/art-2.jpg     still at 80.0s, cropped to the Gatewarden, the Last Oath, mid swing with its
                  greatsword

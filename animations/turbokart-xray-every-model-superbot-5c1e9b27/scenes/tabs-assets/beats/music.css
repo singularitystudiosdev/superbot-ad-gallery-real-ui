@@ -1,0 +1,52 @@
+/* Music beat (beats/music.js): Turbo Kart Rally's score + SFX card. Lyria 2's two cues (cue art from the game's title
+   screen, title over meta, waveform, length) over ElevenLabs' eight SFX in a two-column grid. Nothing here
+   transitions: opacity/transform are written from t in render, so ?t= freezes a frame. Every selector is scoped under
+   the hub and prefixed .mus- (the composing chip reuses chat.css .dd-chiprow/.ch-tool/.spin). */
+
+#s-tabs .sbsite .hub .mus-card { opacity: 0; box-sizing: border-box; width: 440px; max-width: 100%; margin-top: 2px;
+  padding: 10px 12px 8px; border-radius: 10px; background: #141417; box-shadow: inset 0 0 0 1px #2a2a2e,
+  0 8px 20px rgba(0, 0, 0, .35); transform-origin: 50% 0; }
+
+/* header: note icon, card title, the models on the right */
+#s-tabs .sbsite .hub .mus-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  font: 600 12.5px/1.2 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .mus-hd small { margin-left: auto; font: 500 11px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .mus-ic { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 6px;
+  background: linear-gradient(135deg, #4f7cff, #b061ff); }
+#s-tabs .sbsite .hub .mus-note { width: 13px; height: 13px; fill: none; stroke: #fff; stroke-width: 2.2;
+  stroke-linecap: round; stroke-linejoin: round; }
+
+/* one cue: cue art (or the stinger's checkered flag), title + meta over the waveform, length */
+#s-tabs .sbsite .hub .mus-row { opacity: 0; display: flex; align-items: center; gap: 10px; padding: 7px 0;
+  border-top: 1px solid #222226; }
+#s-tabs .sbsite .hub .mus-art { flex: none; display: block; width: 34px; height: 34px; border-radius: 6px; object-fit: cover;
+  box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .mus-flag { flex: none; width: 34px; height: 34px; border-radius: 6px; box-sizing: border-box;
+  background: repeating-conic-gradient(#e5e5ea 0 25%, #1c1c20 0 50%) 0 0 / 11px 11px; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .mus-live .mus-art, #s-tabs .sbsite .hub .mus-live .mus-flag { box-shadow: 0 0 0 1.5px #4f7cff; }
+#s-tabs .sbsite .hub .mus-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+#s-tabs .sbsite .hub .mus-title { display: flex; align-items: baseline; gap: 7px; font: 600 11.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .mus-title small { font: 500 10px/1 var(--ui); color: #8e8e93; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .mus-wave { display: flex; align-items: center; gap: 2px; height: 18px; }
+#s-tabs .sbsite .hub .mus-wave i { flex: 1; min-width: 0; border-radius: 1px; opacity: .18; transform-origin: 50% 50%;
+  background: linear-gradient(180deg, #8fb0ff, #b98cff); }
+#s-tabs .sbsite .hub .mus-len { flex: none; width: 30px; text-align: right; opacity: 0;
+  font: 500 11px/1 var(--ui); color: #a1a1a6; font-variant-numeric: tabular-nums; }
+
+/* ElevenLabs' SFX: a header, then eight sounds in two columns */
+#s-tabs .sbsite .hub .mus-sfx { padding-top: 7px; border-top: 1px solid #222226; }
+/* the 'sfx' set: the card header already names ElevenLabs, so the block drops its own header */
+#s-tabs .sbsite .hub .mus-sfx.mus-sfx-only { padding-top: 8px; }
+#s-tabs .sbsite .hub .mus-sfx-hd { opacity: 0; display: flex; align-items: center; gap: 7px; margin-bottom: 6px;
+  font: 600 11.5px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .mus-sfx-hd small { font: 500 10px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .mus-sfx-lg { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; background: #f2f2f7; }
+#s-tabs .sbsite .hub .mus-sfx-lg img { width: 11px; height: 11px; display: block; }
+#s-tabs .sbsite .hub .mus-sfx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; }
+#s-tabs .sbsite .hub .mus-sx { opacity: 0; display: flex; align-items: center; gap: 7px; height: 20px; padding: 0 7px;
+  border-radius: 6px; background: #0e0e11; box-shadow: inset 0 0 0 1px #222227; font: 500 10.5px/1 var(--ui); color: #b8b8bf; }
+#s-tabs .sbsite .hub .mus-sx.on { color: #ececec; }
+#s-tabs .sbsite .hub .mus-sx-n { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .mus-sx-w { flex: none; display: flex; align-items: center; gap: 1.5px; width: 50px; height: 12px; }
+#s-tabs .sbsite .hub .mus-sx-w i { flex: 1; min-width: 0; border-radius: 1px; opacity: .18; transform-origin: 50% 50%; background: #e5e5ea; }
+#s-tabs .sbsite .hub .mus-sx-l { flex: none; width: 24px; text-align: right; opacity: 0; color: #8e8e93; font-variant-numeric: tabular-nums; }

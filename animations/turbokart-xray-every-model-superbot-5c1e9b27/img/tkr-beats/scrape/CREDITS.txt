@@ -1,0 +1,44 @@
+img/tkr-beats/scrape CREDITS (turbokart-xray-every-model-superbot-5c1e9b27, prepared 2026-09-27)
+
+The DeepSeek V4 Flash scrape beat (scenes/tabs-assets/beats/scrape.js) lists five REAL public pages. Each one was
+fetched on 2026-09-27 and answered HTTP 200; the one-line fact shown under each row is a paraphrase of what that page
+says, quoted here so it can be checked.
+
+1. Drift, Super Mario Wiki
+   https://www.mariowiki.com/Drift
+   shown: "hop first, then hold the turn to drift"
+   page: "Drifting is done by holding and turning left or right ... In most Mario Kart games, the player must hop
+   before being able to drift."
+
+2. Mini-Turbo, Super Mario Wiki
+   https://www.mariowiki.com/Mini-Turbo
+   shown: "boost tiers last 0.621s, 1.674s, 2.633s"
+   page (Mario Kart 8 Deluxe section): "regular Mini-Turbo lasts for 0.621 seconds, Super Mini-Turbo lasts for 1.674
+   seconds and the Ultra Mini-Turbo lasts for 2.633 seconds"
+
+3. Mario Kart 8 item probability distributions, Super Mario Wiki
+   https://www.mariowiki.com/Mario_Kart_8_item_probability_distributions
+   shown: "item odds follow your distance from 1st"
+   page: "During races, each probability distribution is chosen depending on the distance from the frontrunner in the
+   moment the Item Box was opened."
+
+4. Mario Kart, Super Mario Wiki (https://www.mariowiki.com/100cc redirects to it; the row shows host mariowiki.com/100cc
+   and the page's own title, "Mario Kart")
+   https://www.mariowiki.com/100cc  ->  https://www.mariowiki.com/Mario_Kart
+   shown: "engine classes: 50cc, 100cc, 150cc, Mirror"
+   page: "Mario Kart games typically have four recurring difficulty levels: 50 cc, 100cc, 150cc, and an extra Mirror
+   class"
+
+5. The Pure Advantage: Advanced Racing Game AI, Game Developer
+   https://www.gamedeveloper.com/design/the-pure-advantage-advanced-racing-game-ai
+   shown: "speed-only rubber banding reads as unfair"
+   page: "Usually rubber band methods rely predominately on speed changes, and so are often criticized because it's
+   obvious when AI riders are going superhumanly fast or brain dead slow." and "players can get frustrated and feel
+   the competition is not fair."
+
+Favicons (downloaded from the sites themselves, unmodified except format/size):
+  mariowiki.png      https://mario.wiki.gallery/favicon.ico (the icon mariowiki.com's pages link as rel="icon"),
+                     48x48 frame of the .ico converted to PNG. Super Mario Wiki / Nintendo mushroom mark.
+  gamedeveloper.png  https://eu-images.contentstack.com/v3/assets/blt740a130ae3c5d529/blteb534220c9a8a107/6a98440a5c2822b099b0baea/GameDeveloper-Favicon.png
+                     (the rel="icon" of gamedeveloper.com's article page), scaled 512 -> 64 px. Game Developer mark.
+Marks are shown nominatively, as a browser tab would show them.

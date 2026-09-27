@@ -1,0 +1,55 @@
+/* Play beat (beats/play.js): the Turbo Kart Rally window. Two parts:
+   .play-slot  the window's footprint in the thread (title bar + the clip's 1920:988 picture). Never painted; it only
+               carries the chat's scroll marks. Its width and left offset are fitted per frame ratio in play.js.
+   .play-win   the visible window, an overlay in the scene root (#s-tabs .ask-root), placed over the slot every frame
+               and grown from there to the whole frame. Its chrome is sized in hub px times --k (screen px per hub px),
+               which play.js writes, so it matches the thread's scale exactly while it sits in the thread.
+   Nothing here transitions: geometry, opacity, filters and the glyph are written from t in render, so ?t= freezes a
+   frame. Every class the beat owns is prefixed .play- (the chip rows reuse chat.css .dd-chiprow/.ch-tool/.spin). */
+
+#s-tabs .sbsite .hub .play-slot { visibility: hidden; box-sizing: border-box; width: 100%; max-width: none; }
+#s-tabs .sbsite .hub .play-slot-bar { height: 30px; }
+#s-tabs .sbsite .hub .play-slot-screen { aspect-ratio: 1920 / 988; }
+
+/* above the chat's pointer (style.css .cursor, z 30): once grown, the game owns the frame */
+#s-tabs .play-win { --k: 1; position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 31; opacity: 0;
+  display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden; border-radius: 10px;
+  background: #000; box-shadow: inset 0 0 0 1px #2c2c31, 0 18px 44px rgba(0, 0, 0, .5); pointer-events: none;
+  user-select: none; }
+
+/* the macOS-ish title bar: three traffic lights, the game's name centred */
+#s-tabs .play-bar { flex: none; display: flex; align-items: center; gap: calc(8px * var(--k)); height: calc(30px * var(--k));
+  padding: 0 calc(11px * var(--k)); background: #17171a; border-bottom: calc(1px * var(--k)) solid #232327;
+  box-sizing: border-box; overflow: hidden; }
+#s-tabs .play-bar::after { content: ""; flex: none; width: calc(42px * var(--k)); }
+#s-tabs .play-dots { flex: none; display: inline-flex; gap: calc(6px * var(--k)); }
+#s-tabs .play-dots i { width: calc(10px * var(--k)); height: calc(10px * var(--k)); border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25); }
+#s-tabs .play-dots i:nth-child(1) { background: #ff5f57; }
+#s-tabs .play-dots i:nth-child(2) { background: #febc2e; }
+#s-tabs .play-dots i:nth-child(3) { background: #28c840; }
+#s-tabs .play-title { flex: 1; min-width: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font: 600 calc(12px * var(--k))/1 var(--ui); letter-spacing: .01em; color: #e5e5ea; }
+
+/* the picture: the whole 1920x988 clip, never cropped (lap, standings and speed sit at the frame edges) */
+#s-tabs .play-screen { position: relative; flex: 1; min-height: 0; background: #000; overflow: hidden; }
+#s-tabs .play-vid, #s-tabs .play-freeze { position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+  object-fit: contain; background: transparent; }
+#s-tabs .play-vid { background: #000; }
+
+/* the X-ray look the cold open left the frame in: a faint blueprint grid over the desaturated freeze */
+#s-tabs .play-grid { position: absolute; inset: 0; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+  background-image:
+    linear-gradient(rgba(120, 180, 255, .22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 180, 255, .22) 1px, transparent 1px),
+    linear-gradient(rgba(120, 180, 255, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 180, 255, .08) 1px, transparent 1px);
+  background-size: calc(96px * var(--k)) calc(96px * var(--k)), calc(96px * var(--k)) calc(96px * var(--k)),
+    calc(24px * var(--k)) calc(24px * var(--k)), calc(24px * var(--k)) calc(24px * var(--k)); }
+
+/* the pause / play glyph: a dark disc in the middle of the picture */
+#s-tabs .play-glyph { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; opacity: 0;
+  width: calc(64px * var(--k)); height: calc(64px * var(--k)); border-radius: 50%; color: #fff;
+  background: rgba(15, 20, 25, .72); box-shadow: 0 0 0 calc(1px * var(--k)) rgba(255, 255, 255, .18), 0 8px 24px rgba(0, 0, 0, .45);
+  transform: translate(-50%, -50%); }
+#s-tabs .play-glyph svg { width: 58%; height: 58%; display: block; }

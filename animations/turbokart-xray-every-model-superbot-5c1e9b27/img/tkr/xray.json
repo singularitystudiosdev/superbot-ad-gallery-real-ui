@@ -1,0 +1,372 @@
+{
+ "T": 24.0,
+ "mainStart": 21.0,
+ "mainEnd": 34.0,
+ "src": {
+  "w": 2098,
+  "h": 1080,
+  "fps": 60,
+  "duration": 52.4,
+  "file": "bm-1080.mp4 (@bridgemindai, x.com/bridgemindai/status/2102451997395866021)"
+ },
+ "raceClockOffset": 15.12,
+ "clips": {
+  "title": {
+   "file": "media/tkr-title.mp4",
+   "srcStart": 0.0,
+   "srcEnd": 4.6,
+   "w": 1280,
+   "h": 658
+  },
+  "main": {
+   "file": "media/tkr-main.mp4",
+   "srcStart": 21.0,
+   "srcEnd": 34.0,
+   "w": 1920,
+   "h": 988,
+   "freezeAt": 3.0
+  }
+ },
+ "freezeImg": {
+  "full": "freeze.jpg",
+  "w1280": "freeze-1280.jpg"
+ },
+ "hud": {
+  "lap": {
+   "x": 10,
+   "y": 12,
+   "w": 200,
+   "h": 142
+  },
+  "item": {
+   "x": 956,
+   "y": 2,
+   "w": 186,
+   "h": 204
+  },
+  "standings": {
+   "x": 1906,
+   "y": 9,
+   "w": 188,
+   "h": 312
+  },
+  "minimap": {
+   "x": 4,
+   "y": 782,
+   "w": 292,
+   "h": 290
+  },
+  "speed": {
+   "x": 1743,
+   "y": 855,
+   "w": 350,
+   "h": 215
+  },
+  "kart": {
+   "x": 950,
+   "y": 472,
+   "w": 195,
+   "h": 208
+  }
+ },
+ "hudImg": {
+  "lap": "hud/lap.png",
+  "item": "hud/item.png",
+  "standings": "hud/standings.png",
+  "minimap": "hud/minimap.png",
+  "speed": "hud/speed.png",
+  "kart": "kart.png"
+ },
+ "freeze": {
+  "track": "Palm Cove Circuit",
+  "class": "100cc",
+  "laps": 3,
+  "lap": 1,
+  "lapOf": 3,
+  "time": "0:08.88",
+  "place": 7,
+  "placeLabel": "7th",
+  "speed": 132,
+  "speedUnit": "km/h",
+  "item": "lightning",
+  "itemKey": "E / SHIFT",
+  "player": "Toadly",
+  "standings": [
+   "Rex",
+   "Grumbo",
+   "Koopz",
+   "Dotty",
+   "Zippy",
+   "Blaze",
+   "Toadly",
+   "Bella"
+  ],
+  "note": "Item box settled on lightning; three rival karts visible ahead on the straight."
+ },
+ "after": [
+  {
+   "src": 25.5,
+   "raceTime": "0:10.4",
+   "place": 7,
+   "event": "lightning used: screen flash, rivals ahead spin out in dust"
+  },
+  {
+   "src": 26.2,
+   "raceTime": "0:11.1",
+   "place": 6
+  },
+  {
+   "src": 26.4,
+   "raceTime": "0:11.3",
+   "place": 5
+  },
+  {
+   "src": 27.5,
+   "raceTime": "0:12.4",
+   "place": 3
+  },
+  {
+   "src": 28.5,
+   "raceTime": "0:13.4",
+   "place": 2
+  },
+  {
+   "src": 30.5,
+   "raceTime": "0:15.4",
+   "place": 1,
+   "speed": 190,
+   "event": "boost pad"
+  },
+  {
+   "src": 30.8,
+   "raceTime": "0:15.7",
+   "place": 2
+  }
+ ],
+ "afterNote": "Approximate source times (+/-0.25s) read off contact sheets; places and speeds as shown by the HUD. The lightning sits in the item box from ~23.8s to ~25.4s source; the main clip ends at mainEnd in 2nd place.",
+ "roster": [
+  {
+   "name": "Blaze",
+   "kart": "CAP KART",
+   "spd": 3,
+   "acc": 3,
+   "hdl": 3,
+   "wgt": 3,
+   "max": 5,
+   "portrait": "roster/blaze.png",
+   "card": "roster/card-blaze.png",
+   "portraitRect": {
+    "x": 48,
+    "y": 179,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 33,
+    "y": 119,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 7.0,
+   "round": "roster/round-blaze.png"
+  },
+  {
+   "name": "Zippy",
+   "kart": "CAP KART",
+   "spd": 3,
+   "acc": 4,
+   "hdl": 3,
+   "wgt": 2,
+   "max": 5,
+   "portrait": "roster/zippy.png",
+   "card": "roster/card-zippy.png",
+   "portraitRect": {
+    "x": 401,
+    "y": 179,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 385,
+    "y": 119,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 7.0,
+   "round": "roster/round-zippy.png"
+  },
+  {
+   "name": "Bella",
+   "kart": "CROWN KART",
+   "spd": 2,
+   "acc": 4,
+   "hdl": 5,
+   "wgt": 2,
+   "max": 5,
+   "portrait": "roster/bella.png",
+   "card": "roster/card-bella.png",
+   "portraitRect": {
+    "x": 48,
+    "y": 399,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 33,
+    "y": 339,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 7.0,
+   "round": "roster/round-bella.png"
+  },
+  {
+   "name": "Toadly",
+   "kart": "MUSHROOM KART",
+   "spd": 2,
+   "acc": 5,
+   "hdl": 4,
+   "wgt": 1,
+   "max": 5,
+   "portrait": "roster/toadly.png",
+   "card": "roster/card-toadly.png",
+   "portraitRect": {
+    "x": 401,
+    "y": 399,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 385,
+    "y": 339,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 3.5,
+   "round": "roster/round-toadly.png"
+  },
+  {
+   "name": "Rex",
+   "kart": null,
+   "spd": 5,
+   "acc": 1,
+   "hdl": 2,
+   "wgt": 5,
+   "max": 5,
+   "portrait": "roster/rex.png",
+   "card": "roster/card-rex.png",
+   "portraitRect": {
+    "x": 48,
+    "y": 618,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 33,
+    "y": 558,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 7.0
+  },
+  {
+   "name": "Grumbo",
+   "kart": null,
+   "spd": 4,
+   "acc": 2,
+   "hdl": 2,
+   "wgt": 4,
+   "max": 5,
+   "portrait": "roster/grumbo.png",
+   "card": "roster/card-grumbo.png",
+   "portraitRect": {
+    "x": 401,
+    "y": 618,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 385,
+    "y": 558,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 7.0
+  },
+  {
+   "name": "Koopz",
+   "kart": null,
+   "spd": 3,
+   "acc": 3,
+   "hdl": 4,
+   "wgt": 2,
+   "max": 5,
+   "portrait": "roster/koopz.png",
+   "card": "roster/card-koopz.png",
+   "portraitRect": {
+    "x": 48,
+    "y": 836,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 33,
+    "y": 776,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 7.0
+  },
+  {
+   "name": "Dotty",
+   "kart": null,
+   "spd": 2,
+   "acc": 4,
+   "hdl": 4,
+   "wgt": 1,
+   "max": 5,
+   "portrait": "roster/dotty.png",
+   "card": "roster/card-dotty.png",
+   "portraitRect": {
+    "x": 401,
+    "y": 836,
+    "w": 88,
+    "h": 88
+   },
+   "cardRect": {
+    "x": 385,
+    "y": 776,
+    "w": 340,
+    "h": 206
+   },
+   "cardFrom": 7.0
+  }
+ ],
+ "rosterNote": "Pips read off the grid cards at 7.0s and cross-checked with the detail panel for Blaze (3.5s), Zippy (5.3s), Bella (5.9s), Toadly (7.0s). kart label is shown only for those four (the game writes it 'CAP · KART'; the middle dot is replaced by a space here). round-<name>.png is the circular detail-panel portrait, alpha-masked, rect 1722,132,186,186 at those times.",
+ "crops": {
+  "logo": {
+   "file": "logo.png",
+   "t": 0.5,
+   "x": 615,
+   "y": 95,
+   "w": 885,
+   "h": 430
+  },
+  "board": {
+   "file": "board.png",
+   "t": 7.0,
+   "x": 906,
+   "y": 374,
+   "w": 312,
+   "h": 50
+  },
+  "select": {
+   "file": "select.jpg",
+   "t": 7.0
+  },
+  "title": {
+   "file": "title.jpg",
+   "t": 0.5
+  }
+ }
+}

@@ -1,0 +1,181 @@
+/* scene 'xfeed': x.com (dark, 2026) at 1280x720 design px under a camera, X's media viewer in stage px, and the
+   match-cut box. Every selector is scoped under #s-xfeed. No transitions or keyframes: xfeed.js sets every moving
+   value from lt. Glyphs are Iconify SVGs (img/x/icons, CREDITS.txt) drawn as masks in currentColor. */
+#s-xfeed { background: #000; }
+#s-xfeed .xf-root {
+  position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; color: #e7e9ea;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; font-size: 15px; line-height: 20px;
+}
+#s-xfeed .xf-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+#s-xfeed .xf-ic { display: inline-block; flex: none; width: 1em; height: 1em; background: currentColor; font-style: normal;
+  -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; }
+#s-xfeed .xf-av { flex: none; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; display: block; background: #333639; }
+#s-xfeed .xf-badge { color: #1d9bf0; font-size: 18.75px; margin-left: 2px; }
+
+/* ---------------- the page (design px; .xf-cam scales it) ---------------- */
+#s-xfeed .xf-cam { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; }
+#s-xfeed .xf-app { position: relative; width: 1280px; height: 720px; background: #000; overflow: hidden; }
+
+#s-xfeed .xf-nav { position: absolute; left: 12px; top: 0; width: 275px; height: 720px; padding: 0 12px 0 8px; box-sizing: border-box; }
+#s-xfeed .xf-logo { width: 52px; height: 52px; display: grid; place-items: center; font-size: 30px; color: #e7e9ea; }
+#s-xfeed .xf-ni { display: flex; align-items: center; gap: 20px; height: 50px; padding: 0 12px; font-size: 20px; line-height: 24px; color: #e7e9ea; }
+#s-xfeed .xf-ni .xf-ic { font-size: 26.25px; }
+#s-xfeed .xf-ni.on { font-weight: 700; }
+#s-xfeed .xf-postbtn { margin-top: 16px; width: 233px; height: 52px; border-radius: 9999px; background: #eff3f4; color: #0f1419;
+  font-weight: 700; font-size: 17px; display: grid; place-items: center; }
+
+#s-xfeed .xf-main { position: absolute; left: 287px; top: 0; width: 600px; height: 720px; border-left: 1px solid #2f3336;
+  border-right: 1px solid #2f3336; box-sizing: border-box; overflow: hidden; }
+#s-xfeed .xf-head { position: absolute; left: 0; right: 0; top: 0; height: 53px; display: flex; z-index: 3; box-sizing: border-box;
+  background: rgba(0, 0, 0, .65); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #2f3336; }
+#s-xfeed .xf-tab { position: relative; flex: 1; display: grid; place-items: center; font-size: 15px; font-weight: 500; color: #71767b; }
+#s-xfeed .xf-tab.on { color: #e7e9ea; font-weight: 700; }
+#s-xfeed .xf-tab.on::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 56px; height: 4px; margin-left: -28px; border-radius: 9999px; background: #1d9bf0; }
+#s-xfeed .xf-scroll { position: absolute; left: 0; top: 53px; width: 100%; }
+
+#s-xfeed .xf-compose { display: flex; gap: 8px; padding: 12px 16px 8px; border-bottom: 1px solid #2f3336; }
+#s-xfeed .xf-cin { flex: 1; min-width: 0; }
+#s-xfeed .xf-cph { padding: 8px 0 20px; font-size: 20px; line-height: 24px; color: #71767b; }
+#s-xfeed .xf-ctools { display: flex; align-items: center; gap: 16px; color: #1d9bf0; font-size: 20px; padding-left: 2px; }
+#s-xfeed .xf-cpost { margin-left: auto; height: 36px; padding: 0 16px; border-radius: 9999px; background: #eff3f4; color: #0f1419;
+  opacity: .5; font-size: 15px; font-weight: 700; display: grid; place-items: center; }
+
+#s-xfeed .xf-post { position: relative; display: flex; gap: 8px; padding: 12px 16px 0; border-bottom: 1px solid #2f3336; }
+#s-xfeed .xf-pb { flex: 1; min-width: 0; }
+#s-xfeed .xf-ph { display: flex; align-items: center; height: 20px; white-space: nowrap; }
+#s-xfeed .xf-nm { font-weight: 700; color: #e7e9ea; }
+#s-xfeed .xf-hd { color: #71767b; margin-left: 4px; }
+#s-xfeed .xf-dot { color: #71767b; padding: 0 4px; }
+#s-xfeed .xf-dt { color: #71767b; }
+#s-xfeed .xf-more { margin-left: auto; color: #71767b; font-size: 18.75px; display: flex; }
+#s-xfeed .xf-tx { white-space: pre-wrap; overflow-wrap: break-word; color: #e7e9ea; }
+#s-xfeed .xf-sm { display: block; color: #1d9bf0; }
+/* the marker sweep: a yellow copy of the phrase, clipped from the right (xfeed.js writes the clip) */
+#s-xfeed .xf-hl { position: relative; white-space: nowrap; }
+#s-xfeed .xf-hlc { position: absolute; left: -2px; top: 0; padding: 0 2px; border-radius: 3px; background: #ffd400; color: #0f1419;
+  clip-path: inset(-2px 100% -2px 0); white-space: nowrap; }
+#s-xfeed .xf-md { position: relative; margin-top: 12px; border: 1px solid #2f3336; border-radius: 16px; overflow: hidden; background: #16181c; }
+#s-xfeed .xf-md .xf-v { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+#s-xfeed .xf-dur { position: absolute; left: 12px; bottom: 12px; padding: 0 4px; border-radius: 4px; background: rgba(0, 0, 0, .77);
+  color: #fff; font-size: 13px; line-height: 20px; font-variant-numeric: tabular-nums; }
+#s-xfeed .xf-mute { position: absolute; right: 12px; bottom: 12px; width: 32px; height: 32px; border-radius: 50%; background: rgba(0, 0, 0, .77);
+  display: grid; place-items: center; color: #fff; font-size: 18px; }
+#s-xfeed .xf-act { display: flex; align-items: center; height: 32px; margin: 4px 0 8px; color: #71767b; font-size: 13px; line-height: 16px; }
+#s-xfeed .xf-a { flex: 1; display: flex; align-items: center; gap: 4px; }
+#s-xfeed .xf-a .xf-ic { font-size: 18.75px; }
+#s-xfeed .xf-ar { flex: none; display: flex; align-items: center; gap: 12px; }
+#s-xfeed .xf-ar .xf-a { flex: none; }
+#s-xfeed .xf-bmi { position: relative; display: inline-flex; }
+#s-xfeed .xf-bmf { position: absolute; left: 0; top: 0; color: #1d9bf0; visibility: hidden; }
+#s-xfeed .xf-bm.on .xf-bmf { visibility: visible; }
+#s-xfeed .xf-bm.on .xf-bmo { visibility: hidden; }
+#s-xfeed .xf-bm.on { color: #1d9bf0; }
+
+#s-xfeed .xf-side { position: absolute; left: 917px; top: 0; width: 350px; }
+#s-xfeed .xf-search { margin-top: 6px; height: 42px; box-sizing: border-box; border-radius: 9999px; border: 1px solid #2f3336;
+  display: flex; align-items: center; gap: 12px; padding: 0 16px; color: #71767b; }
+#s-xfeed .xf-search .xf-ic { font-size: 18px; }
+#s-xfeed .xf-card { margin-top: 16px; border: 1px solid #2f3336; border-radius: 16px; padding: 12px 16px; }
+#s-xfeed .xf-card h2 { margin: 0; font-size: 20px; line-height: 24px; font-weight: 800; }
+#s-xfeed .xf-card p { margin: 6px 0 12px; }
+#s-xfeed .xf-sub { display: inline-grid; place-items: center; height: 36px; padding: 0 16px; border-radius: 9999px; background: #1d9bf0; color: #fff; font-weight: 700; }
+#s-xfeed .xf-fr { display: flex; align-items: center; gap: 8px; padding: 12px 0 0; }
+#s-xfeed .xf-fn { flex: 1; min-width: 0; display: grid; }
+#s-xfeed .xf-fn b { display: flex; align-items: center; font-weight: 700; white-space: nowrap; }
+#s-xfeed .xf-fn span { color: #71767b; }
+#s-xfeed .xf-fb { height: 32px; padding: 0 16px; border-radius: 9999px; background: #eff3f4; color: #0f1419; font-size: 14px; font-weight: 700; display: grid; place-items: center; }
+
+/* ---------------- X's media viewer (stage px; the chrome is x.com at zoom 1.5) ---------------- */
+#s-xfeed .xf-viewer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; visibility: hidden; z-index: 5; }
+#s-xfeed .xf-vbg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: rgba(0, 0, 0, .95); }
+#s-xfeed .xf-vmedia { position: absolute; transform-origin: 0 0; }
+#s-xfeed .xf-frame { position: absolute; inset: 0; overflow: hidden; background: #000; }
+#s-xfeed .xf-frame video, #s-xfeed .xf-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+#s-xfeed .xf-fz { visibility: hidden; }
+/* the blueprint: a faint blue wash, a fine grid every 23.25px and a major grid every 116.25px (media px) */
+#s-xfeed .xf-grid { position: absolute; inset: 0; opacity: 0;
+  background-color: rgba(22, 70, 150, .16);
+  background-image:
+    linear-gradient(rgba(120, 180, 255, .30) 1px, transparent 1px), linear-gradient(90deg, rgba(120, 180, 255, .30) 1px, transparent 1px),
+    linear-gradient(rgba(120, 180, 255, .12) 1px, transparent 1px), linear-gradient(90deg, rgba(120, 180, 255, .12) 1px, transparent 1px);
+  background-size: 116.25px 116.25px, 116.25px 116.25px, 23.25px 23.25px, 23.25px 23.25px;
+  background-position: -1px -1px; }
+#s-xfeed .xf-lift { position: absolute; inset: 0; perspective: 1400px; transform-style: preserve-3d; pointer-events: none; }
+#s-xfeed .xf-pc { position: absolute; transform-origin: 50% 50%; visibility: hidden; }
+#s-xfeed .xf-pc img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#s-xfeed .xf-pc.lit img, #s-xfeed .xf-pc.lit .xf-wave { outline: 1.5px solid rgba(140, 195, 255, .85); outline-offset: 0; border-radius: 3px; }
+#s-xfeed .xf-wave { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0; border-radius: 9999px;
+  background: rgba(12, 22, 40, .9); color: #cfe3ff; font-size: 34px; }
+#s-xfeed .xf-pc.lit .xf-wave { border-radius: 9999px; }
+#s-xfeed .xf-leads { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+#s-xfeed .xf-leads line { stroke: rgba(170, 210, 255, .9); stroke-width: 1.5px; stroke-dasharray: 1 1; stroke-dashoffset: 1; stroke-linecap: round; }
+#s-xfeed .xf-leads circle { fill: #cfe3ff; opacity: 0; }
+#s-xfeed .xf-chips { position: absolute; inset: 0; pointer-events: none; }
+/* the model chip: the chat's model signature (tile + name + what it did), at stage size */
+#s-xfeed .xf-chip { position: absolute; display: flex; align-items: center; gap: 12px; padding: 9px 18px 9px 9px; border-radius: 16px;
+  background: rgba(17, 17, 19, .95); border: 1px solid rgba(255, 255, 255, .14); box-shadow: 0 12px 30px rgba(0, 0, 0, .55);
+  white-space: nowrap; transform-origin: 0 50%; opacity: 0;
+  font-family: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif; }
+#s-xfeed .xf-chip.xf-side-l { transform-origin: 100% 50%; }
+#s-xfeed .xf-chip.xf-side-b { transform-origin: 0 0; }
+#s-xfeed .xf-tiles { display: flex; }
+#s-xfeed .xf-tiles .xf-tile + .xf-tile { margin-left: -8px; box-shadow: 0 0 0 2px rgba(17, 17, 19, 1); }
+#s-xfeed .xf-tile { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; overflow: hidden; }
+#s-xfeed .xf-tile img { width: 26px; height: 26px; object-fit: contain; display: block; }
+#s-xfeed .xf-t-opus { background: #d97757; }
+#s-xfeed .xf-t-opus img { filter: brightness(0) invert(1); }
+#s-xfeed .xf-t-gem { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-xfeed .xf-t-ds { background: #15151b; box-shadow: inset 0 0 0 1px #34343a; }
+#s-xfeed .xf-t-codex { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-xfeed .xf-t-codex img { width: 30px; height: 30px; }
+#s-xfeed .xf-t-eleven { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-xfeed .xf-t-eleven img { width: 20px; height: 20px; }
+#s-xfeed .xf-cn b { display: block; font-weight: 600; font-size: 20px; line-height: 24px; color: #ececec; }
+#s-xfeed .xf-cn small { display: block; font-weight: 500; font-size: 16px; line-height: 20px; color: #a1a1a6; }
+#s-xfeed .xf-pause { position: absolute; left: 50%; top: 50%; width: 136px; height: 136px; margin: -68px 0 0 -68px; border-radius: 50%;
+  background: rgba(15, 20, 25, .72); box-shadow: 0 0 0 2px rgba(255, 255, 255, .22), 0 10px 40px rgba(0, 0, 0, .5);
+  display: grid; place-items: center; color: #fff; font-size: 68px; opacity: 0; }
+
+#s-xfeed .xf-vclose { position: absolute; left: 18px; top: 18px; width: 51px; height: 51px; border-radius: 50%; background: rgba(15, 20, 25, .75);
+  display: grid; place-items: center; color: #eff3f4; font-size: 30px; }
+#s-xfeed .xf-vbar { position: absolute; top: 986px; width: 900px; height: 54px; display: flex; align-items: center; color: #eff3f4; font-size: 19.5px; line-height: 24px; }
+#s-xfeed .xf-vbar .xf-a .xf-ic { font-size: 28px; }
+#s-xfeed .xf-vbar .xf-ar { gap: 18px; }
+#s-xfeed .xf-vbar .xf-bm.on { color: #1d9bf0; }
+#s-xfeed .xf-vcol { position: absolute; left: 1395px; top: 0; width: 525px; height: 1080px; background: #000; border-left: 1.5px solid #2f3336; box-sizing: border-box; overflow: hidden; }
+#s-xfeed .xf-z { zoom: 1.5; width: 349px; }
+#s-xfeed .xf-dhead { display: flex; align-items: center; gap: 8px; padding: 16px 16px 0; }
+#s-xfeed .xf-dn { flex: 1; min-width: 0; display: grid; }
+#s-xfeed .xf-dn b { display: flex; align-items: center; font-weight: 700; }
+#s-xfeed .xf-dn span { color: #71767b; }
+#s-xfeed .xf-dtx { padding: 12px 16px 0; white-space: pre-wrap; overflow-wrap: break-word; }
+#s-xfeed .xf-dtime { padding: 16px 16px; color: #71767b; }
+#s-xfeed .xf-dtime b { color: #e7e9ea; font-weight: 700; }
+#s-xfeed .xf-dact { display: flex; align-items: center; height: 48px; margin: 0 16px; border-top: 1px solid #2f3336; border-bottom: 1px solid #2f3336;
+  color: #71767b; font-size: 13px; }
+#s-xfeed .xf-dact .xf-a .xf-ic { font-size: 22.5px; }
+#s-xfeed .xf-dact > .xf-a:last-child { flex: none; margin-left: 12px; }
+#s-xfeed .xf-reply { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #2f3336; }
+#s-xfeed .xf-rph { flex: 1; min-width: 0; font-size: 20px; line-height: 24px; color: #71767b; white-space: nowrap; }
+#s-xfeed .xf-rbtn { flex: none; height: 36px; padding: 0 16px; border-radius: 9999px; background: #eff3f4; color: #0f1419; opacity: .5;
+  font-weight: 700; display: grid; place-items: center; }
+
+/* the cards: tweet voice over the media, a soft scrim behind the words only */
+#s-xfeed .xf-say { position: absolute; left: 697px; top: 540px; transform: translate(-50%, -50%); z-index: 6; opacity: 0; white-space: nowrap;
+  font-weight: 800; font-size: 92px; line-height: 1.08; letter-spacing: -.025em; color: #fff; text-shadow: 0 2px 22px rgba(0, 0, 0, .45); }
+#s-xfeed .xf-say::before { content: ""; position: absolute; inset: -60px -110px; z-index: -1;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, .62), rgba(0, 0, 0, .36) 55%, rgba(0, 0, 0, 0)); }
+#s-xfeed .xf-say2 { top: 420px; font-size: 84px; }
+#s-xfeed .xf-w { display: inline-block; }
+
+/* ---------------- the match cut ---------------- */
+#s-xfeed .xf-mbg { position: absolute; inset: 0; background: rgb(10, 10, 11); opacity: 0; z-index: 7; }
+#s-xfeed .xf-morph { position: absolute; left: 0; top: 0; visibility: hidden; overflow: hidden; z-index: 8; transform-origin: 0 0; }
+#s-xfeed .xf-mx { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 12px; padding: 18px 24px; box-sizing: border-box; transform-origin: 0 0; }
+#s-xfeed .xf-mx .xf-av { width: 60px; height: 60px; }
+#s-xfeed .xf-mx .xf-rph { font-size: 30px; line-height: 36px; }
+#s-xfeed .xf-mx .xf-rbtn { height: 54px; padding: 0 24px; font-size: 22.5px; }
+#s-xfeed .xf-msb { position: absolute; left: 0; top: 0; z-index: 9; visibility: hidden; white-space: nowrap; transform-origin: 0 0; font-weight: 400;
+  font-family: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif; }
+#s-xfeed .xf-mrow { position: absolute; left: 0; top: 0; z-index: 9; visibility: hidden; display: block; transform-origin: 0 0; }

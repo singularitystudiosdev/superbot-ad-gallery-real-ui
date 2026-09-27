@@ -117,6 +117,11 @@ const more = [
   // its clip to the title screen, then Opus 5.5 plans the build and routes 8 requests; ends on the post's real clip
   // (game: Turbo Kart Rally; every game frame trimmed from the post video).
   ['mariokart-rewind-every-model-superbot-c30de946', 'mariokart-rewind-every-model-superbot-c30de946/', 'Superbot: make a Mario Kart game, one prompt, every model: opens on @bridgemindai’s ONE SHOT post and VHS-rewinds its clip to the title screen; Opus 5.5 writes the build plan, Gemini paints the 8 racers, Meshy turns the portraits into karts, DeepSeek V4 Flash pulls item sprites and odds, Opus 5.5 wires the game, Lyria 2 scores it, GitHub ships one commit per model, Opus 5.5 launches Turbo Kart Rally; ends on the post’s real clip (8 requests)', 'Ad spots'],
+  // THE TEARDOWN, make a kart racer (2026-09-27): the fantasy90s 042670d1 ?v=3 engine rethemed to Turbo Kart Rally. An X
+  // cold open flexes real Opus 5.5 one-shot posts, @bridgemindai's Opus 5.5 kart racer (x.com/bridgemindai/status/2102451997395866021, game: Turbo
+  // Kart Rally, Palm Cove Circuit) freezes mid-race and its HUD lifts off tagged by the model that built each piece, then
+  // one chat builds it and the frozen frame resumes into the real clip (animations/turbokart-xray-every-model-superbot-5c1e9b27/img/tkr/xray.json).
+  ['turbokart-xray-every-model-v3-superbot-5c1e9b27', 'turbokart-xray-every-model-superbot-5c1e9b27/?v=3', 'THE TEARDOWN: the X feed flexes Opus 5.5 one-shots, @bridgemindai’s Turbo Kart Rally freezes mid-race, the HUD lifts off tagged by model (wanna know how? it’s not just Opus 5.5.), then one chat builds it: DeepSeek V4 Flash research, Gemini roster, Nano Banana Pro portraits, Lyria 2 + ElevenLabs score, Opus 5.5 code, GPT-5 Codex playtest, GitHub; the frozen frame resumes into the real clip (clip @bridgemindai, 8 requests)', 'Ad spots'],
   // make a video on western civilization (2026-09-27): the mariokart 7aec3197 routing rethemed to Prometheus and the
   // fire, each model switch a fire pass; ends on @IterIntellectus's Claude-made western civilization film
   // (https://x.com/IterIntellectus/status/2103212539895017864; animations/prometheus-every-model-superbot-0a738a62/img/prometheus/assets.json).

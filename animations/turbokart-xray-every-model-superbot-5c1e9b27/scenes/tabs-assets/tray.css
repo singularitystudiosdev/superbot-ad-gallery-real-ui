@@ -1,0 +1,63 @@
+/* The build tray (tabs-assets/tray.js): a small card in the hub's .main, in hub px, docked above the composer's right
+   end. It shows the frozen frame in play.css's X-ray look (saturate .35, brightness .88, contrast 1.06, the blueprint
+   grid at .55 in screen blend, its cells scaled to the tray's picture) with every HUD piece cut out as a dashed slot.
+   Nothing here transitions: position, opacity and every snap are written from t in renderTray. Every class the tray
+   owns is prefixed .tray- (the pips reuse chat.css .qc-tile / .qc-t-<app>, the check reuses .qc-ok). */
+
+#s-tabs .sbsite .hub .tray { position: absolute; left: 0; top: 0; z-index: 2; width: 140px; box-sizing: border-box;
+  padding: 5px 5px 6px; border-radius: 10px; background: #141417;
+  box-shadow: inset 0 0 0 1px #26262b, 0 12px 28px rgba(0, 0, 0, .45);
+  opacity: 0; visibility: hidden; pointer-events: none; user-select: none; transform-origin: 0 100%; }
+
+/* header: 'turbo kart rally · n/7 parts', then the GitHub part's 'pushed' check (a dashed ring until it lands) */
+#s-tabs .sbsite .hub .tray-hd { display: flex; align-items: center; gap: 4px; height: 12px; margin: 0 1px 4px;
+  font: 600 7.5px/1 var(--ui); letter-spacing: .02em; color: #8e8e93; white-space: nowrap; }
+#s-tabs .sbsite .hub .tray-hd b { font-weight: 700; color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .tray-push { position: relative; flex: none; margin-left: auto; display: grid; place-items: center;
+  width: 10px; height: 10px; border-radius: 50%; }
+#s-tabs .sbsite .hub .tray-push.tray-on { background: rgba(52, 211, 153, .14); }
+#s-tabs .sbsite .hub .tray-push .qc-ok { display: block; width: 8px; height: 8px; opacity: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .tray-ring { position: absolute; inset: 1px; box-sizing: border-box;
+  border-radius: 50%; border: .75px dashed rgba(120, 180, 255, .8); }
+
+/* the picture: the frozen frame at its own 2098:1080, desaturated under the blueprint grid */
+#s-tabs .sbsite .hub .tray-pic { position: relative; aspect-ratio: 2098 / 1080; border-radius: 5px; overflow: hidden;
+  background: #000; box-shadow: inset 0 0 0 1px #26262b; }
+#s-tabs .sbsite .hub .tray-frz { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(.35) brightness(.88) contrast(1.06); }
+/* play.css's grid (96px / 24px cells over a 640 hub px picture) at the tray's 130 hub px: 19.5px / 4.875px */
+#s-tabs .sbsite .hub .tray-grid { position: absolute; inset: 0; pointer-events: none; opacity: .55; mix-blend-mode: screen;
+  background-image:
+    linear-gradient(rgba(120, 180, 255, .22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 180, 255, .22) 1px, transparent 1px),
+    linear-gradient(rgba(120, 180, 255, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 180, 255, .08) 1px, transparent 1px);
+  background-size: 19.5px 19.5px, 19.5px 19.5px, 4.875px 4.875px, 4.875px 4.875px; }
+
+/* a HUD slot at its xray.json rect: blanked out and dashed while empty, the full-colour crop once its part lands */
+#s-tabs .sbsite .hub .tray-slot { position: absolute; z-index: 1; box-sizing: border-box; border-radius: 1.5px;
+  border: .75px dashed rgba(120, 180, 255, .85); background: rgba(9, 14, 24, .84); }
+#s-tabs .sbsite .hub .tray-slot.tray-on { border-color: transparent; background: transparent; z-index: 2; }
+#s-tabs .sbsite .hub .tray-piece { position: absolute; inset: -.75px; display: block; width: calc(100% + 1.5px);
+  height: calc(100% + 1.5px); object-fit: fill; opacity: 0; transform-origin: 50% 50%; }
+
+/* the Lyria 2 + ElevenLabs strip along the bottom edge: the music loop's bars, then the SFX burst's */
+#s-tabs .sbsite .hub .tray-wave { display: flex; align-items: center; gap: 3px; height: 9px; margin-top: 4px; padding: 1px 3px;
+  box-sizing: border-box; border-radius: 3px; border: .75px dashed rgba(120, 180, 255, .7); }
+#s-tabs .sbsite .hub .tray-wave.tray-on { border-color: transparent; background: #0e0e11; }
+#s-tabs .sbsite .hub .tray-wv { display: flex; align-items: center; gap: .8px; height: 100%; opacity: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .tray-wv-m { flex: 22; }
+#s-tabs .sbsite .hub .tray-wv-s { flex: 12; }
+#s-tabs .sbsite .hub .tray-wv i { flex: 1; min-width: 0; border-radius: .5px; }
+#s-tabs .sbsite .hub .tray-wv-m i { background: linear-gradient(180deg, #8fb0ff, #b98cff); }
+#s-tabs .sbsite .hub .tray-wv-s i { background: #d1d1d6; }
+
+/* the model pips: a column beside the card, one per part (the parallel part carries both tiles) */
+#s-tabs .sbsite .hub .tray-pips { position: absolute; left: calc(100% + 5px); top: 2px; display: flex; flex-direction: column;
+  gap: 1.5px; }
+#s-tabs .sbsite .hub .tray-pip { display: flex; height: 13px; opacity: 0; transform-origin: 0 50%; }
+#s-tabs .sbsite .hub .tray-pip .qc-tile { width: 13px; height: 13px; border-radius: 4px; }
+#s-tabs .sbsite .hub .tray-pip .qc-tile img { width: 8.5px; height: 8.5px; }
+/* chat.css gives ElevenLabs no tile ground; in the column it sits on the same dark tile as Gemini's marks */
+#s-tabs .sbsite .hub .tray-pip .qc-t-elevenlabs { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .tray-pip .qc-tile + .qc-tile { margin-left: -3px; box-shadow: 0 0 0 1px #0a0a0b; }

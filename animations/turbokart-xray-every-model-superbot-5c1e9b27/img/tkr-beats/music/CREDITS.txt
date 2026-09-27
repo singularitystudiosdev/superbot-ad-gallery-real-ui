@@ -1,0 +1,6 @@
+img/tkr-beats/music/cover.jpg
+  Square crop of the Turbo Kart Rally title screen, real clip pixels: img/tkr/title.jpg (frame at 0.5s of
+  /tmp/mk/bm-1080.mp4, @bridgemindai, x.com/bridgemindai/status/2102451997395866021), cropped 1080x1080 at x=517
+  (centred on the logo) and scaled to 240x240:
+    ffmpeg -i img/tkr/title.jpg -vf "crop=1080:1080:517:0,scale=240:240" -q:v 3 img/tkr-beats/music/cover.jpg
+  Used as the Lyria 2 cue art in scenes/tabs-assets/beats/music.js and parallel.js. No drawn art.

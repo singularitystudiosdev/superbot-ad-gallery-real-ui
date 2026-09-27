@@ -240,20 +240,20 @@
     "thumb": "assets/shots/liquidglass-every-model-v3-superbot-956467aa.png"
   },
   {
-    "id": "showreel-every-model-v3-superbot-f7a45e10",
-    "type": "animation",
-    "group": "Ad spots",
-    "title": "make a 15-second motion graphics showreel, go all out: Lyria 2 scores it, Meshy models the hero meshes, Gemini paints the style frames, Opus 5.5 keys the reel in code, DeepSeek V4 Flash pulls type and palette, GitHub takes the repo, Opus 5.5 and GPT 6 Astra render it; ends on the @shneural Opus 5.5 Max vs GPT 6 Astra Max clip (7 requests)",
-    "src": "animations/showreel-every-model-superbot-f7a45e10/?v=3",
-    "thumb": "assets/shots/showreel-every-model-v3-superbot-f7a45e10.png"
-  },
-  {
     "id": "lenslab-every-model-v3-superbot-afb4ddca",
     "type": "animation",
     "group": "Ad spots",
     "title": "build a lens lab that explains camera focus: Lyria 2 scores it, Meshy builds the lens and the valley, Gemini paints the focus plates, Opus 5.5 writes the optics, DeepSeek V4 Flash scrapes glass catalogs, GitHub takes the repo, Opus 5.5 builds it; ends on @RyanSael Opus 5.5 Lens Lab clip (7 requests)",
     "src": "animations/lenslab-every-model-superbot-afb4ddca/?v=3",
     "thumb": "assets/shots/lenslab-every-model-v3-superbot-afb4ddca.png"
+  },
+  {
+    "id": "showreel-every-model-v3-superbot-f7a45e10",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 15-second motion graphics showreel: Lyria 2 scores it, Meshy models the hero shapes, Gemini paints the style frames, Opus 5.5 writes the reel as code, DeepSeek V4 Flash samples the type and palette, GitHub takes the repo, then the same prompt to Opus 5.5 and GPT 6 Astra; ends on @shneural Opus 5.5 vs GPT 6 Astra showreel clip (7 requests)",
+    "src": "animations/showreel-every-model-superbot-f7a45e10/?v=3",
+    "thumb": "assets/shots/showreel-every-model-v3-superbot-f7a45e10.png"
   },
   {
     "id": "dark-souls-every-model-v1-superbot-80e24d9f",

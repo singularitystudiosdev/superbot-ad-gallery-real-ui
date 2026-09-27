@@ -353,6 +353,14 @@
     "thumb": "assets/shots/they-wont-tell-you-how-superbot-fccab6d9.png"
   },
   {
+    "id": "its-a-lie-every-model-superbot-54829cd7",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ITS A LIE: \"I made this in one prompt\", then the models behind BlockHaven",
+    "src": "animations/its-a-lie-every-model-superbot-54829cd7/",
+    "thumb": "assets/shots/its-a-lie-every-model-superbot-54829cd7.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

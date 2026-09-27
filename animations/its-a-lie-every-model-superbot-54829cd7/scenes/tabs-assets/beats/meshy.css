@@ -1,0 +1,95 @@
+/* Meshy 5 beat (beats/meshy.js): four 3D previews, the picked mesh in Meshy's dark viewport, and the finished GLB
+   strip. Nothing here transitions and nothing animates on its own: opacity / transform / mask-image / filter are all
+   written from t in render, so ?t= freezes an exact frame. Every selector is scoped under the hub and prefixed .msy-.
+   The "Generating 4 previews" chip reuses the shared .dd-chiprow / .ch-tool markup from chat.css and repeats the pill
+   look on .msy-gen, the same way beats/art.css does. */
+
+/* the "Generating 4 previews" chip */
+#s-tabs .sbsite .hub .msy-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .msy-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .msy-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .msy-gen .qc-tile img { width: 14px; height: 14px; border-radius: 5px; }
+#s-tabs .sbsite .hub .msy-gen .ch-tool-t { color: #ececec; }
+
+/* ---------- the four preview candidates: a 2x2 sheet of clay renders, each with its own progress ---------- */
+#s-tabs .sbsite .hub .msy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px;
+  width: 360px; max-width: 100%; margin-top: 2px; opacity: 0; transform-origin: 50% 0; }
+#s-tabs .sbsite .hub .msy-cand { position: relative; aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden;
+  background: #101114; box-shadow: inset 0 0 0 1px #2a2a2e, 0 8px 20px rgba(0, 0, 0, .35); }
+#s-tabs .sbsite .hub .msy-cimg { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0;
+  transform-origin: 50% 50%; will-change: filter, transform; }
+#s-tabs .sbsite .hub .msy-cand.is-pick { box-shadow: inset 0 0 0 2px #9fe8ff, 0 8px 22px rgba(40, 130, 190, .3); }
+/* the per-candidate percent, its rail, and the name Meshy writes on the tile */
+#s-tabs .sbsite .hub .msy-cpct { position: absolute; left: 6px; top: 6px; display: inline-flex; align-items: center;
+  height: 17px; padding: 0 6px; border-radius: 999px; background: rgba(10, 10, 12, .82); box-shadow: inset 0 0 0 1px #2c2c31;
+  font: 600 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #d7d7de; }
+#s-tabs .sbsite .hub .msy-cname { position: absolute; left: 7px; bottom: 8px; max-width: 70%; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; font: 600 10px/1 var(--font-mono, ui-monospace, monospace); color: #f2f2f7;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .8); }
+#s-tabs .sbsite .hub .msy-cbar { position: absolute; left: 7px; right: 7px; bottom: 3px; height: 2px; display: block;
+  border-radius: 999px; background: rgba(255, 255, 255, .14); overflow: hidden; }
+#s-tabs .sbsite .hub .msy-cbar > i { display: block; height: 100%; width: 100%; border-radius: 999px; background: #9fe8ff;
+  transform: scaleX(0); transform-origin: 0 50%; }
+#s-tabs .sbsite .hub .msy-ctick { position: absolute; right: 6px; top: 6px; width: 18px; height: 18px; opacity: 0;
+  border-radius: 999px; background: rgba(10, 30, 24, .88); box-shadow: inset 0 0 0 1px #1d4a33; display: grid;
+  place-items: center; }
+#s-tabs .sbsite .hub .msy-ctick .qc-ok { width: 11px; height: 11px; color: #6ee7a0; }
+
+/* ---------- the viewport: the picked mesh, on Meshy's dark studio floor ---------- */
+#s-tabs .sbsite .hub .msy-vp { width: 360px; max-width: 100%; margin-top: 2px; border-radius: 12px; overflow: hidden;
+  background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0, 0, 0, .4); opacity: 0;
+  transform-origin: 50% 0; }
+/* chrome is 24/23 tall rather than 28/27: at the v4 frame (DW = W/2) the viewport + strip must fit the feed with
+   margin, so the card gives up a few px here instead of cropping the render any deeper. */
+#s-tabs .sbsite .hub .msy-hd { display: flex; align-items: center; gap: 7px; height: 24px; box-sizing: border-box;
+  padding: 0 9px; border-bottom: 1px solid #232327; }
+#s-tabs .sbsite .hub .msy-mk { flex: none; width: 17px; height: 17px; border-radius: 5px; overflow: hidden; }
+#s-tabs .sbsite .hub .msy-mk img { display: block; width: 100%; height: 100%; }
+/* 11px / 9px (the reference ran 12 / 10 on "knight.glb"): "pocketsflow_mascot.glb" is twice as long, and at 12px
+   it pushed the "Texturing NN%" pill past the card's right edge. The file name is also the one item allowed to give
+   way (ellipsis) so the state pill can never clip. */
+#s-tabs .sbsite .hub .msy-file { min-width: 0; overflow: hidden; text-overflow: ellipsis;
+  font: 600 11px/1 var(--font-mono, ui-monospace, monospace); color: #f2f2f7; white-space: nowrap; }
+#s-tabs .sbsite .hub .msy-htri { flex: none; font: 500 9px/1 var(--font-mono, ui-monospace, monospace); color: #7d8b96;
+  white-space: nowrap; }
+#s-tabs .sbsite .hub .msy-state { margin-left: auto; flex: none; display: inline-flex; align-items: center; height: 19px;
+  padding: 0 8px; border-radius: 999px; background: #1d1d21; box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #b8b8c0; white-space: nowrap; }
+#s-tabs .sbsite .hub .msy-state.is-tex { background: #10261b; box-shadow: inset 0 0 0 1px #1d4a33; color: #6ee7a0; }
+/* the render itself: the three baked passes, stacked and cross-faded from t */
+/* the render is 448x320 but the frame is cut to 448/279: the mesh's own ink runs y 30..300 of 320, so cover with a
+   50%/58% position hides 19px above and 14px below and keeps the whole figure (feet included) inside, no re-render. */
+#s-tabs .sbsite .hub .msy-frame { position: relative; width: 100%; aspect-ratio: 448 / 279; background: #101114; overflow: hidden; }
+#s-tabs .sbsite .hub .msy-ly { position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 58%; will-change: opacity, mask-image; }
+#s-tabs .sbsite .hub .msy-lwire { opacity: 0; }
+#s-tabs .sbsite .hub .msy-ltex { opacity: 0; }
+#s-tabs .sbsite .hub .msy-sweep { position: absolute; top: 0; bottom: 0; left: 0; width: 18%; opacity: 0;
+  pointer-events: none; mix-blend-mode: screen; filter: blur(3px);
+  background: linear-gradient(100deg, transparent 0%, rgba(140, 212, 255, .14) 38%, rgba(214, 242, 255, .30) 52%, rgba(140, 212, 255, .14) 66%, transparent 100%); }
+/* Meshy's own mode pills, with the spinner on the right of the bar */
+#s-tabs .sbsite .hub .msy-tools { display: flex; align-items: center; gap: 5px; height: 23px; box-sizing: border-box;
+  padding: 0 8px; border-top: 1px solid #232327; background: #131315; }
+#s-tabs .sbsite .hub .msy-pill { display: inline-flex; align-items: center; height: 18px; padding: 0 8px;
+  border-radius: 6px; background: #1b1b1f; box-shadow: inset 0 0 0 1px #292a2f;
+  font: 600 10px/1 var(--ui); color: #9a9aa2; white-space: nowrap; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .msy-pill.is-on { background: #12222c; box-shadow: inset 0 0 0 1px #2f5f77; color: #9fe8ff; }
+#s-tabs .sbsite .hub .msy-spin { margin-left: auto; width: 11px; height: 11px; border-radius: 50%; box-sizing: border-box;
+  border: 1.6px solid #3a3a42; border-top-color: #d7d7de; }
+
+/* ---------- the finished GLBs ---------- */
+#s-tabs .sbsite .hub .msy-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px;
+  width: 360px; max-width: 100%; margin-top: 2px; opacity: 0; }
+#s-tabs .sbsite .hub .msy-tile { display: grid; gap: 3px; opacity: 0; }
+#s-tabs .sbsite .hub .msy-thumb { position: relative; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden;
+  background: #101114; box-shadow: inset 0 0 0 1px #2a2a2e, 0 8px 18px rgba(0, 0, 0, .34); }
+#s-tabs .sbsite .hub .msy-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .msy-glb { position: absolute; left: 6px; top: 6px; display: inline-flex; align-items: center;
+  height: 16px; padding: 0 5px; border-radius: 5px; background: rgba(10, 26, 19, .9); box-shadow: inset 0 0 0 1px #1d4a33;
+  font: 700 9px/1 var(--font-mono, ui-monospace, monospace); letter-spacing: .04em; color: #6ee7a0;
+  transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .msy-tname { font: 600 9.5px/1.2 var(--font-mono, ui-monospace, monospace); color: #d7d7de;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .sbsite .hub .msy-tris { font: 500 9px/1 var(--ui); color: #8e8e93; }

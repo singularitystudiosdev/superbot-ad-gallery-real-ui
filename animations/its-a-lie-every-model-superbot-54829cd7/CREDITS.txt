@@ -1,0 +1,32 @@
+its-a-lie-every-model-superbot-54829cd7 CREDITS (2026-09-27)
+
+This ad forks pocketsflow-untold-every-model-superbot-673c104b (engine, X-post scene, superbot hub chat, beats).
+Brand marks: brand/CREDITS.txt. Everything below is third-party footage and imagery, used with credit on screen.
+
+FOOTAGE AND IMAGES (img/bh/, cut with ffmpeg by the media worker; per-file sources and timestamps in img/bh/manifest.json)
+  noah.mp4, noah-poster.jpg
+      A trim of the voxel game video posted by @noahwachnik, https://x.com/noahwachnik/status/2102470200415166699
+      Plays in the cold open's mock X post, credited on screen the way X credits a reposted video: "From @noahwachnik".
+      The post's author (Kai, @kaiships) is the series' fictional persona, not a real account, and the "I MADE THIS IN
+      ONE PROMPT" claim is the ad's setup, which the next card calls a lie.
+  blockhaven.mp4, stills/title.jpg (the reveal's poster), stills/*.jpg, craft.jpg, scenic.mp4
+      From the BlockHaven video posted by @kepochnik, https://x.com/kepochnik/status/2103502454750920925
+      The reveal plays blockhaven.mp4 (title screen, the ocean pan, punching an oak log until it cracks) with the
+      on-screen credit "BlockHaven by @kepochnik". BlockHaven is @kepochnik's game.
+  tex/*.png
+      16x16-texel block textures cropped from the same BlockHaven video (@kepochnik, link above), nearest-neighbour
+      upscaled. They skin the DeepSeek results' thumbnails, the Nano Banana atlas, the Meshy blocks and the browser
+      tab's favicon. No image model generated them.
+
+img/avatar-kai.jpg
+      The fictional author's avatar, carried over unchanged from pocketsflow-untold (a 200x200 crop of the Pocketsflow
+      launch film's mascot, video by @achxvi, https://x.com/achxvi/status/2103918792845963545).
+
+img/fav-minecraft.wiki.png, img/fav-0fps.net.png, img/fav-reddit.com.png
+      Site favicons fetched 2026-09-27 from https://www.google.com/s2/favicons?domain=<host>&sz=64, marks of their owners,
+      used to label the pages the staged DeepSeek crawl reads.
+
+STAGED FOR THE SPOT
+  The chat, its routing, the queries, counts, file names, code hunks, test output, the atlas pack, the Meshy triangle
+  counts and the audio waveforms are illustrative. No DeepSeek, Gemini, Meshy, ElevenLabs, Suno or Claude call was made.
+  The spot is silent: the waveforms are drawn shapes, not decoded audio.

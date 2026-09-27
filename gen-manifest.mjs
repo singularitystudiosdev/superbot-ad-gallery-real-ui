@@ -158,6 +158,12 @@ const more = [
   // DeepSeek V4 Flash, Meshy 5, MiniMax Hailuo 02, ElevenLabs, Opus 5.5 in Remotion, Superbot plays the real clip
   // (animations/they-wont-tell-you-how-superbot-fccab6d9/CREDITS.txt).
   ['they-wont-tell-you-how-superbot-fccab6d9', 'they-wont-tell-you-how-superbot-fccab6d9/', 'THEY WONT TELL YOU HOW: a “I made this in 1 prompt” post, then make a launch video for Pocketsflow: DeepSeek V4 Flash researches, Meshy 5 models the mascot, MiniMax Hailuo 02 animates, ElevenLabs scores, Opus 5.5 cuts it in Remotion, Superbot plays (video @achxvi)', 'Ad spots'],
+  // ITS A LIE (2026-09-27): a fork of the pocketsflow-untold engine. A mock X post ("I MADE THIS IN ONE PROMPT", the
+  // embedded clip @noahwachnik's voxel game) freeze-frames and glitches, hard cut to ITS A LIE / THE SECRET IS / ITS NOT
+  // JUST OPUS 5.5, then the superbot hub routes "make me minecraft in the browser" to DeepSeek, Nano Banana, Meshy,
+  // ElevenLabs, Suno and Claude Opus 5.5, and the reveal plays BlockHaven by @kepochnik
+  // (animations/its-a-lie-every-model-superbot-54829cd7/CREDITS.txt).
+  ['its-a-lie-every-model-superbot-54829cd7', 'its-a-lie-every-model-superbot-54829cd7/', 'ITS A LIE: "I made this in one prompt", then the models behind BlockHaven', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

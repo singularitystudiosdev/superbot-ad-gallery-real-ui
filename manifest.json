@@ -233,6 +233,14 @@
     "thumb": "assets/shots/mariokart-every-model-v3-superbot-7aec3197.png"
   },
   {
+    "id": "mariokart-rewind-every-model-superbot-c30de946",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot: make a Mario Kart game, one prompt, every model: opens on @bridgemindai’s ONE SHOT post and VHS-rewinds its clip to the title screen; Opus 5.5 writes the build plan, Gemini paints the 8 racers, Meshy turns the portraits into karts, DeepSeek V4 Flash pulls item sprites and odds, Opus 5.5 wires the game, Lyria 2 scores it, GitHub ships one commit per model, Opus 5.5 launches Turbo Kart Rally; ends on the post’s real clip (8 requests)",
+    "src": "animations/mariokart-rewind-every-model-superbot-c30de946/",
+    "thumb": "assets/shots/mariokart-rewind-every-model-superbot-c30de946.png"
+  },
+  {
     "id": "prometheus-every-model-v3-superbot-0a738a62",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,85 @@
+Forked from mariokart-every-model-superbot-7aec3197 for mariokart-rewind-every-model-superbot-c30de946 (2026-09-27).
+img CREDITS (Turbo Kart Rally)
+
+Still on disk in img/, unchanged from the previous game version:
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
+
+Added for mariokart-every-model-superbot-7aec3197 (2026-09-26). Source post: @bridgemindai,
+"Opus 5.5 One-Shot a Mario Kart Game", https://x.com/bridgemindai/status/2102451997395866021
+(game: Turbo Kart Rally, track: Palm Cove Circuit). Every file in kart/ is a crop, trim or rectification of
+real frames of that post's 1080p mp4
+(https://video.twimg.com/amplify_video/2102451221483180032/vid/avc1/2098x1080/vHjQ8jI6WsTR-TPn.mp4,
+2098x1080, 52.4s, variable frame rate, no audio). Nothing was drawn, painted or generated. Crops are given as
+w x h @ (x,y) in source pixels; timestamps are source seconds.
+
+kart/clip-window.mp4     source 0.4-4.4s (title screen), full frame scaled to 960x494, resampled to 30fps CFR,
+                         h264 crf 18 yuv420p, -g 12, faststart, no audio (120 frames, 4.000s)
+kart/poster.jpg          that clip's first frame (source 0.4s), 960x494
+kart/clip-montage.mp4    the finale montage, full frame scaled to 1920x988 (no crop), 30fps CFR, h264 crf 18
+                         yuv420p, -g 12, faststart, no audio, 494 frames, 16.467s, five hard cuts in order:
+                           source  4.40- 7.60s  ->  out  0.000- 3.200s  CHOOSE YOUR RACER (Blaze)
+                           source  7.75-10.30s  ->  out  3.200- 5.767s  Palm Cove Circuit flyover
+                           source 13.60-17.40s  ->  out  5.767- 9.567s  countdown and start under the gantry
+                           source 22.40-25.40s  ->  out  9.567-12.567s  lap 1, lightning bolt item
+                           source 48.40-52.30s  ->  out 12.567-16.467s  late race, red shell item
+kart/montage-poster.jpg  the montage's first frame (source 4.4s), 1920x988
+kart/title.jpg           1.0s, 960x470 @ (570,80): the TURBO KART RALLY title-screen logo, unscaled
+
+kart/mesh-1.jpg          34.0s, 260x260 @ (920,445) -> 200x200: Toadly's blue mushroom kart from behind
+kart/mesh-2.jpg          4.8s, 420x420 @ (885,450) -> 200x200: Blaze's red cap kart on the racer select screen
+kart/mesh-3.jpg          24.0s, 200x200 @ (952,0): the top-center item box HUD holding the lightning bolt
+kart/mesh-5.jpg          16.1s, 480x480 @ (1510,330) -> 200x200 lanczos: Zippy's green #2 cap kart pulling away from
+                         the start grid (driver in the green cap)
+kart/mesh-6.jpg          6.03s, 340x340 @ (970,640) -> 200x200 lanczos: Bella's pink crown kart (crowned driver,
+                         BELLA rear wing) driving past on the racer select screen
+kart/mesh-4.jpg          14.0s, 380x380 @ (585,40) -> 200x200: the start gantry's checkered pillar and TURBO banner
+                         (the HUD item box covers the middle of the banner in every race frame, so the crop
+                         stops at the left half)
+
+kart/art-1.jpg           4.6s, 196x196 @ (1720,130) -> 512x512 lanczos: Blaze, right-panel portrait
+kart/art-2.jpg           5.4s, same crop: Zippy
+kart/art-3.jpg           5.9s, same crop: Bella
+kart/art-4.jpg           6.3s, same crop: Toadly
+kart/art-5.jpg           6.9s, 338x204 @ (34,558), unscaled: Rex's tile in the CHOOSE YOUR RACER grid
+kart/art-6.jpg           6.9s, 338x204 @ (388,558), unscaled: Grumbo's grid tile
+kart/art-7.jpg           6.9s, 338x204 @ (34,777), unscaled: Koopz's grid tile
+kart/art-8.jpg           6.9s, 338x204 @ (388,777), unscaled: Dotty's grid tile
+  art-5..8               the clip never hovers these four, so they have no big right-panel portrait; their grid
+                         badges are ~84px in source, so the whole grid tile is used instead of an upscaled badge
+
+kart/decal-1.png         24.0s, TURBO board, quad TL(181,521) TR(355,499) BL(196,612) BR(367,571)
+kart/decal-2.png         24.0s, KART board, quad TL(359,498) TR(468,484) BL(371,566) BR(476,545)
+kart/decal-3.png         24.0s, RALLY board, quad TL(472,483) TR(549,473) BL(478,544) BR(554,527)
+kart/decal-4.png         34.0s, GO! star board, quad TL(77,508) TR(228,489) BL(87,593) BR(239,563)
+  those four             ffmpeg perspective (sense=source) rectifies the trackside board's own pixels to 240x160,
+                         lanczos, centred on a transparent 256x256 canvas
+kart/decal-5.png         10.3s, 150x150 @ (1460,5) -> 256x256: checkered flag on the start gantry pillar
+kart/decal-6.png         34.0s, 320x320 @ (300,550) -> 256x256: red and white corner curb
+
+kart/find-1.png          24.0s, 100x120 @ (1004,30): lightning bolt item in the item box
+kart/find-2.png          50.0s, 150x120 @ (980,40): red shell item in the item box
+kart/find-3.png          14.0s, 170x170 @ (966,4): empty item box
+kart/find-4.png          14.0s, 170x160 @ (1928,905): 5th place position badge
+kart/find-5.png          24.0s, 270x270 @ (14,790): track minimap
+kart/find-6.png          34.0s, 200x200 @ (1712,855): speedometer dial reading 132 km/h
+kart/find-7.png          23.5s, 120x112 @ (994,34): green shell in the item roulette
+kart/find-8.png          23.25s, same crop: winged blue shell in the item roulette
+kart/find-9.png          42.75s, same crop: banana held in the item box
+kart/find-10.png         37.0s, same crop: mushroom held in the item box
+kart/find-11.png         22.25s, same crop: triple mushroom in the item roulette
+kart/find-12.png         35.5s, same crop: star in the item roulette
+  all finds              unscaled, saved as RGBA png. find-1, 2 and 7..12 are the eight items the clip's item
+                         roulette shows (lightning, red shell, green shell, blue shell, banana, mushroom, triple
+                         mushroom, star)
+
+kart/assets.json         manifest of the above (labels, dims, cut list). The .glb names and triangle counts it
+                         lists for the mesh beat are made up for the spot; the game ships no such files. The item
+                         odds table in the scrape beat (odds.json, draft) is made up for the spot too; only the
+                         item set comes from the clip.
+
+Game, track and racer names (Turbo Kart Rally, Palm Cove Circuit, Blaze, Zippy, Bella, Toadly, Rex, Grumbo,
+Koopz, Dotty) are the ones shown in the video. Footage and stills are from the video by @bridgemindai (link above).

@@ -1,0 +1,33 @@
+img/intro: the cold open (scenes/intro.js). Every picture here is the real @bridgemindai post or a trim of its video.
+Nothing was drawn, painted or generated. (The verified badge, X logo, action icons and the VCR OSD glyphs are UI
+furniture drawn inline as SVG / CSS by scenes/intro.js and intro.css.)
+
+Source post   https://x.com/bridgemindai/status/2102451997395866021  (BridgeMind @bridgemindai, 5:36 PM Sep 22, 2026)
+              text, name, handle, time and stats (177 replies, 220 reposts, 3,623 likes, 1,018 bookmarks,
+              369,612 views) copied verbatim from the post's API record
+Source video  https://video.twimg.com/amplify_video/2102451221483180032/vid/avc1/3472x1786/z4EszXa5u3BfHcx-.mp4
+              (local 1080p copy /tmp/mk-c30de946/clip1080.mp4: 2098x1080, 52.4s, variable frame rate, no audio)
+
+avatar.jpg    https://pbs.twimg.com/profile_images/2011440113071382528/e2Qscbca_400x400.jpg, 400x400, unmodified
+
+fwd.mp4       source 37.7-40.7s (lap 1: Wario's overtake on the left, a boost, side by side), full frame scaled to
+              1280x658 lanczos, fps=30 CFR, h264 crf 20 yuv420p, -g 15, +faststart, no audio: 90 frames, 3.000s
+                ffmpeg -ss 37.7 -i clip1080.mp4 -t 3.0 -vf "fps=30,scale=1280:-2:flags=lanczos,format=yuv420p" \
+                  -an -c:v libx264 -crf 20 -g 15 -movflags +faststart -r 30 fwd.mp4
+fwd-poster.jpg  fwd.mp4's first frame (source 37.7s), 1280x658
+
+rew.mp4       the VHS rewind: 57 single frames grabbed at eased source times, played back in order at 30fps
+                s_i = S1 - (S1 - 0.4) * inOutQuad(i / 56),  i = 0..56,  S1 = 37.7 + 89/30 = 40.6667 (fwd's last frame)
+                inOutQuad(x) = x < .5 ? 2x^2 : 1 - (2 - 2x)^2 / 2   (slow off the pause, fast mid-way, settles on the title)
+              so frame 0 = source 40.6667s and frame 56 = source 0.4000s (the TURBO KART RALLY title screen); it runs
+              backward through the race, the GO! start, CHOOSE YOUR RACER, to the title. Each frame:
+                ffmpeg -ss <s_i> -i clip1080.mp4 -frames:v 1 -vf "scale=1600:-2:flags=lanczos" f<i>.png
+              encoded all-intra so every seek is exact: 1600x824, 30fps, h264 crf 20 yuv420p, -g 1, +faststart,
+              no audio, 57 frames, 1.900s
+                ffmpeg -framerate 30 -i f%02d.png -vf format=yuv420p -an -c:v libx264 -crf 20 -g 1 -keyint_min 1 \
+                  -movflags +faststart -r 30 rew.mp4
+              The frame times (i s_i): 0 40.6667, 1 40.6410, 2 40.5639, ... 28 20.5333, ... 55 0.4257, 56 0.4000
+              (scenes/intro.js srcAt() recomputes the same list to drive the on-screen source timecode)
+
+Neither trim overlaps the source ranges the finale montage uses (img/kart: 4.4-10.3, 13.6-17.4, 22.4-25.4, 48.4-52.3);
+rew.mp4 passes through them only as single rewind frames.

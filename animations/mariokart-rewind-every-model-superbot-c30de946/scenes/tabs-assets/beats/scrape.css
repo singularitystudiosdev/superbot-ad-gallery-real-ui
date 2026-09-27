@@ -1,0 +1,53 @@
+/* Scrape beat (beats/scrape.js): DeepSeek's asset sweep. The chip's page counter, then one card: two library rows
+   crawling (bar, page count, CC0 hits), the kept strip (eight item sprites on transparency swatches, four HUD pieces
+   as small chips under them, all real crops from the source clip), and the odds.json draft (place x item, a bar per
+   cell). Nothing here transitions: every moving value is written from t in render, so ?t= freezes a frame. Every
+   selector is scoped under the hub and prefixed .sc-. */
+#s-tabs .sbsite .hub .ch-tool .sc-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10px/16px var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ch-tool.sc-done .sc-count { background: #0f2419; color: #3ddc84; }
+
+#s-tabs .sbsite .hub .sc-card { box-sizing: border-box; width: 440px; max-width: 100%; margin: 2px 0 0; padding: 9px 11px 10px; border-radius: 10px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* the library rows: name, crawl bar, page count, hit count */
+#s-tabs .sbsite .hub .sc-sites { display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .sc-row { display: grid; grid-template-columns: 112px 1fr 62px 58px; align-items: center; column-gap: 9px; height: 17px; opacity: 0; font: 500 10.5px/17px var(--font-mono, ui-monospace, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .sc-site { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #c3c3ca; }
+#s-tabs .sbsite .hub .sc-bar { height: 4px; border-radius: 999px; overflow: hidden; background: #1f1f23; }
+#s-tabs .sbsite .hub .sc-bar i { display: block; height: 100%; border-radius: 999px; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #4d6bfe, #7c8cff); }
+#s-tabs .sbsite .hub .sc-pg { text-align: right; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-hit { text-align: right; color: #63636a; }
+#s-tabs .sbsite .hub .sc-row.on .sc-hit { color: #3ddc84; font-weight: 600; }
+
+/* the kept strip: a label, eight item swatches in one row, then the four HUD pieces as small chips */
+#s-tabs .sbsite .hub .sc-kept { display: flex; align-items: baseline; justify-content: space-between; margin: 9px 0 6px; padding-top: 8px; box-shadow: inset 0 1px 0 #202027; opacity: 0; font: 600 11px/1 var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .sc-kept small { font: 500 10px/1 var(--font-mono, ui-monospace, monospace); color: #63636a; }
+#s-tabs .sbsite .hub .sc-finds { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+#s-tabs .sbsite .hub .sc-find { display: grid; gap: 3px; align-content: start; opacity: 0; transform-origin: 50% 60%; min-width: 0; }
+#s-tabs .sbsite .hub .sc-sw { aspect-ratio: 1 / 1; border-radius: 7px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  background: repeating-conic-gradient(#26262c 0 25%, #1a1a1f 0 50%) 0 0 / 10px 10px; box-shadow: 0 0 0 1px #2a2a2e; }
+/* clip crops: scaled smooth, never pixelated, soft corners */
+#s-tabs .sbsite .hub .sc-sw img { width: 80%; height: 80%; object-fit: contain; border-radius: 5px; }
+#s-tabs .sbsite .hub .sc-cap { text-align: center; font: 600 8.5px/1.15 var(--ui); color: #c9c9cf; min-height: 20px;
+  overflow-wrap: anywhere; }
+#s-tabs .sbsite .hub .sc-huds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 6px; }
+#s-tabs .sbsite .hub .sc-hud { display: flex; align-items: center; gap: 6px; min-width: 0; height: 28px; padding: 0 6px 0 3px;
+  border-radius: 7px; background: #141418; box-shadow: inset 0 0 0 1px #24242a; opacity: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .sc-hud .sc-sw { flex: none; width: 22px; height: 22px; border-radius: 5px; background: #1a1a1f; }
+#s-tabs .sbsite .hub .sc-hud .sc-sw img { width: 100%; height: 100%; border-radius: 3px; }
+#s-tabs .sbsite .hub .sc-hud .sc-cap { min-height: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font: 500 9.5px/1 var(--font-mono, ui-monospace, monospace); color: #a1a1a6; }
+
+/* odds.json: header, then a place x item table; each cell is its share and a small bar */
+#s-tabs .sbsite .hub .sc-odds { margin-top: 9px; padding-top: 8px; box-shadow: inset 0 1px 0 #202027; opacity: 0; }
+#s-tabs .sbsite .hub .sc-ohd { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 5px; }
+#s-tabs .sbsite .hub .sc-ohd b { font: 600 11px/1 var(--font-mono, ui-monospace, monospace); color: #e5e5ea; }
+#s-tabs .sbsite .hub .sc-ohd small { font: 500 9.5px/1 var(--ui); color: #63636a; }
+#s-tabs .sbsite .hub .sc-otab { display: grid; grid-template-columns: 28px repeat(8, 1fr); column-gap: 5px; row-gap: 3px; align-items: center; }
+#s-tabs .sbsite .hub .sc-oh { display: flex; justify-content: center; height: 18px; }
+#s-tabs .sbsite .hub .sc-oh img { width: 18px; height: 18px; object-fit: contain; border-radius: 4px; }
+#s-tabs .sbsite .hub .sc-op { font: 700 10px/1 var(--ui); color: #ffd23f; }
+#s-tabs .sbsite .hub .sc-oc { display: grid; gap: 2px; min-width: 0; }
+#s-tabs .sbsite .hub .sc-oc b { font: 600 9px/1 var(--font-mono, ui-monospace, monospace); color: #e5e5ea; text-align: center; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-oc.sc-zero b { color: #4a4a50; }
+#s-tabs .sbsite .hub .sc-oc i { display: block; height: 4px; border-radius: 999px; overflow: hidden; background: #1f1f23; }
+#s-tabs .sbsite .hub .sc-oc u { display: block; height: 100%; border-radius: 999px; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #4d6bfe, #7c8cff); }

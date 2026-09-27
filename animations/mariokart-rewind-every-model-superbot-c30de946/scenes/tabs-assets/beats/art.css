@@ -1,0 +1,43 @@
+/* Art beat (beats/art.js): Gemini's eight racers as one roster sheet on the select screen's navy: four square
+   portraits (real crops of the CHOOSE YOUR RACER right-panel badge) over four real grid tiles from the same screen.
+   Nothing here transitions: opacity/filter/transform are written from t in render, so ?t= freezes a frame. Every
+   selector is scoped under the hub and prefixed .art-. The "Creating 8 images" chip reuses the shared
+   .dd-chiprow/.ch-tool tool-chip markup from chat.css; the pill look is repeated on .art-gen so the chip reads the
+   same even before that sheet lands. */
+
+/* the sheet: a row of four portraits, then a row of four grid tiles, 440px wide */
+#s-tabs .sbsite .hub .art-sheet { display: grid; gap: 6px; width: 440px; max-width: 100%; margin-top: 2px; opacity: 0;
+  transform-origin: 50% 0; }
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+/* the tile: a square of the select screen's card navy, so the round badge sits on its own ground */
+#s-tabs .sbsite .hub .art-tile { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; background: #161a33;
+  box-shadow: 0 0 0 1px #2a2a2e, 0 6px 16px rgba(0, 0, 0, .35); }
+/* the grid tiles keep the select screen card's own shape (338x204) */
+#s-tabs .sbsite .hub .art-tile.art-gt { aspect-ratio: 338 / 204; border-radius: 7px; background: #1a1d45; }
+#s-tabs .sbsite .hub .art-shot { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0;
+  will-change: filter, transform; }
+
+/* the sweeping band: the Gemini blue-to-violet sweep that passes over a tile while it resolves */
+#s-tabs .sbsite .hub .art-band { position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(100deg, transparent 25%, rgba(120, 160, 255, .42) 45%, rgba(214, 120, 255, .42) 55%, transparent 75%); }
+
+/* the stamps on each tile once it is sharp: pixel size tag, racer name + kart */
+#s-tabs .sbsite .hub .art-tag { position: absolute; right: 4px; top: 4px; padding: 2px 4px 1px; border-radius: 4px;
+  opacity: 0; background: rgba(12, 12, 14, .72); font: 600 6.5px/1 var(--mono); letter-spacing: .4px; color: #9a9a9a; }
+#s-tabs .sbsite .hub .art-gt .art-tag { top: auto; bottom: 4px; }
+#s-tabs .sbsite .hub .art-cap { position: absolute; left: 4px; bottom: 4px; max-width: calc(100% - 8px); opacity: 0;
+  display: flex; flex-direction: column; gap: 1px; padding: 3px 5px; border-radius: 5px;
+  background: rgba(12, 12, 14, .8); font: 500 8.5px/1.1 var(--mono); color: #f2f2f7; }
+#s-tabs .sbsite .hub .art-cap b { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+  font: 700 10.5px/1.1 var(--ui); color: #fff; white-space: nowrap; }
+#s-tabs .sbsite .hub .art-cap small { color: #ffb347; font-weight: 600; white-space: nowrap; }
+
+/* the "Creating 8 images" chip (inside the shared .dd-chiprow/.ch-tool markup) */
+#s-tabs .sbsite .hub .art-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .art-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 999px; background: rgba(12, 12, 14, .78); box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .art-gen .qc-tile { width: 20px; height: 20px; border-radius: 999px; }
+#s-tabs .sbsite .hub .art-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .art-gen .ch-tool-t { color: #ececec; }

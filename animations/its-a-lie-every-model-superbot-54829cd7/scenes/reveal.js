@@ -1,8 +1,7 @@
 // reveal: Act 4. The game the chat's parts add up to: BlockHaven, playing in a browser tab at localhost:5173 (the dev
 // server Opus started at the end of the chat). The scene hard-cuts in on the browser window floating on black, the
 // BLOCKHAVEN title screen up; the camera pushes in until the page fills the frame (the tab strip leaves at the top), and
-// the footage cuts through the gameplay: the ocean pan, then punching an oak log until it cracks. A small, honest
-// credit sits bottom left the whole time: "BlockHaven by @kepochnik".
+// the footage cuts through the gameplay: the ocean pan, then punching an oak log until it cracks.
 //
 // FOOTAGE: img/bh/blockhaven.mp4, a trim of @kepochnik's BlockHaven video (see CREDITS.txt): 0-2.5s the title screen,
 // 2.5-10.5s gameplay. CUTS maps scene time onto clip time as three straight pieces (title, ocean pan, tree punch), so
@@ -11,7 +10,7 @@
 // render(lt) is a pure function of local time. The clip is a real <video>: a frozen frame (?t= puts body.freeze) pauses
 // it and seeks to the frame t asks for; a playing frame plays it and only re-seeks past DRIFT_TOL of drift (which is
 // also how each cut lands: the wanted time jumps, the drift check seeks).
-import { clamp, lerp, seg, inOutCubic, outCubic } from '../lib.js';
+import { clamp, lerp, seg, inOutCubic } from '../lib.js';
 
 const H = 1080;
 const DUR = 6.0;
@@ -60,10 +59,9 @@ export default {
     </div>
     <div class="rv-page"><video class="rv-vid" muted playsinline preload="auto" poster="${bh(POSTER)}" src="${bh(CLIP)}"></video></div>
   </div>
-</div>
-<div class="rv-credit">BlockHaven by @kepochnik</div>`;
+</div>`;
     const q = (s) => section.querySelector(s);
-    el = { cam: q('.rv-cam'), win: q('.rv-win'), page: q('.rv-page'), vid: q('.rv-vid'), credit: q('.rv-credit'), geo: null };
+    el = { cam: q('.rv-cam'), win: q('.rv-win'), page: q('.rv-page'), vid: q('.rv-vid'), geo: null };
     el.vid.muted = true;
     el.vid.defaultMuted = true;
     new MutationObserver(() => { if (!section.classList.contains('on') && !el.vid.paused) el.vid.pause(); })
@@ -92,11 +90,6 @@ export default {
     const fy = lerp(wh / 2, BAR + ph / 2, f);   // the focus slides from the window's centre to the page's centre
     el.cam.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${s.toFixed(5)}) translate(${(-pw / 2).toFixed(2)}px,${(-fy).toFixed(2)}px)`;
     el.win.style.borderRadius = `${lerp(14, 0, f).toFixed(2)}px`;
-
-    // the credit: small, bottom left, in from the start
-    const c = outCubic(seg(t, 0.25, 0.7));
-    el.credit.style.opacity = c.toFixed(3);
-    el.credit.style.transform = c >= 1 ? 'none' : `translateY(${((1 - c) * 10).toFixed(2)}px)`;
 
     const w = want(t);
     const vid = el.vid;

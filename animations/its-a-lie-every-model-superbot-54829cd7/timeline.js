@@ -36,15 +36,13 @@ const FALLBACK_DUR = { tweet: 4.2, lie: 3.5, tabs: 13.4, reveal: 6.0 };
 const HARD_CUTS = new Set(['tweet>lie', 'lie>tabs', 'tabs>reveal']);
 const SCENE_FADE = 0.3;
 const END_DUR = 3.2, DIP = 0.35;
-// the end card's sub-line (no em-dashes, no hype words): the pricing complaint and the quality complaint, answered
-const END_SUB = 'Opus writes the code. Cheaper models do the rest.';
 
-// ---------- the end card (waffles-website drawEnd, with a sub-line) ----------
+// ---------- the end card (waffles-website drawEnd) ----------
 function buildEnd(sec) {
-  sec.innerHTML = `<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1><p class="end-sub">${lib.esc(END_SUB)}</p></div></div><div class="face"></div></div>`;
+  sec.innerHTML = `<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1></div></div><div class="face"></div></div>`;
   const mark = shell.makeMark(220);
   sec.querySelector('.face').appendChild(mark.el);
-  return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), sub: sec.querySelector('.end-sub'), mark };
+  return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
 }
 function renderEnd(e, lt) {
   const f = seg(lt, 0, 0.5);
@@ -54,10 +52,6 @@ function renderEnd(e, lt) {
   // the line slides out from behind the mascot (it sits to the line's right)
   e.slide.style.transform = `translateX(${((1 - outQuint(w)) * 110).toFixed(2)}%)`;
   lib.op(e.slide, w);
-  // the sub-line lands a beat after the name
-  const s = outQuint(seg(lt, 0.75, 1.3));
-  e.sub.style.opacity = s.toFixed(3);
-  e.sub.style.transform = s >= 1 ? 'none' : `translateY(${((1 - s) * 14).toFixed(2)}px)`;
   e.mark.render(lt);
 }
 
@@ -66,10 +60,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=1`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=2`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=1`)).default;
+    const m = (await import(`./scenes/${id}.js?v=2`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

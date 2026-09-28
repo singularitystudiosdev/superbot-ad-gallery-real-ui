@@ -1,10 +1,10 @@
-// first-model-all-models-superbot-df54f063: "THE FIRST MODEL / WITH ALL THE MODELS." A fork of
+// first-model-all-models-superbot-df54f063: "THE MODEL / WITH ALL THE MODELS." A fork of
 // blockhaven-not-just-opus-superbot-2ab31e2c (engine, cards, chat, clip scene); shared spec in the chat log
 // /tmp/model-switch-ad-df54f063.md. The claim: one model picker that holds every model, each part of a job routed to
 // the model built for it, in one chat.
-//   cards   0 to 3.5   "THE FIRST MODEL" / "WITH ALL THE MODELS"
-//   deck    3.5 to 8   a deck of model cards switches, faster and faster, then deals out into the full roster
-//   tabs    8 to 15    one ask ("Make a Japanese relaxing biking demo"), three hand-offs, each on its routing chip:
+//   cards   0 to 3.5   "THE MODEL" / "WITH ALL THE MODELS"
+//   deck    3.5 to 7.25 a deck of model cards switches through the roster, faster and faster
+//   tabs    7.25 to 14.25 one ask ("Make a Japanese relaxing biking demo"), three hand-offs, each on its routing chip:
 //                      Meshy models it, DeepSeek scrapes the textures and ambient audio, Opus 5.5 codes it
 //   clip    Prasenjit's (@prasenx) Opus 5.5 bike ride at full frame, with its sound (credited in img/CREDITS.txt)
 //   end     "superbot" beside the mascot
@@ -31,7 +31,7 @@ const SEQUENCE = [
   ['end', 'end'],
 ];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape)
-const FALLBACK_DUR = { deck: 4.5, tabs: 7, clip: 6.5 };
+const FALLBACK_DUR = { deck: 3.75, tabs: 7, clip: 6.5 };
 const SCENE_FADE = 0.3;
 const END_DUR = 3.5, DIP = 0.35;
 // joins played as straight cuts (no fade on either side): card to card, the second card's black into the deck, and
@@ -43,7 +43,7 @@ const HARD_CUTS = new Set(['first>all', 'all>deck', 'tabs>clip']);
 // or { html } for styled words. The last part and the logo are kept on one line (never orphan the logo).
 const B = (f) => new URL('./brand/' + f, import.meta.url).href;
 const CARDS = {
-  first: { dur: 1.6, parts: ['THE', 'FIRST', 'MODEL'] },
+  first: { dur: 1.6, parts: ['THE', 'MODEL'] },
   all: { dur: 1.9, parts: ['WITH', { g: 'ALL' }, { g: 'THE' }, { g: 'MODELS' }] },
 };
 // card motion (seconds, local): words rise 18px + unblur 8px, outQuint .55s, staggered .06s

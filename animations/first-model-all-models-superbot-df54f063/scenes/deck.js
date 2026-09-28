@@ -1,14 +1,12 @@
-// Scene "deck" (4.5 s): "...WITH ALL THE MODELS" made literal. A deck of model cards flicks through all 16 models of
-// the roster, faster and faster, under superbot's routing chip ("Switching to <Model> ✓"), then deals out into a 4x4
-// grid of the whole roster, which holds until the timeline fades the scene.
-//   A  0.00 to 3.30  the deck: front card = logo + name + role, two dimmed cards peek below it. Each switch, the front
-//                    card lifts up and back (rise, tilt, shrink, blur, fade) and the next rises from the pile to front.
-//                    Cards 1 to 4 hold ~0.40 s, then the cadence tightens to 0.08 s for the last few.
-//   B  3.30 to 3.90  the deal: the deck folds away and 16 compact tiles fly out of it into the grid, staggered in
-//                    roster order; settled by 3.90 and held.
+// Scene "deck" (3.75 s): "...WITH ALL THE MODELS" made literal. A deck of model cards flicks through all 16 models of
+// the roster, faster and faster, under superbot's routing chip ("Switching to <Model> ✓").
+//   0.00 to 3.45  the deck: front card = logo + name + role, two dimmed cards peek below it. Each switch, the front
+//                 card lifts up and back (rise, tilt, shrink, blur, fade) and the next rises from the pile to front.
+//                 Cards 1 to 4 hold ~0.40 s, then the cadence tightens to 0.08 s for the last few.
+//   3.45 to 3.75  the last card and the chip lift away together while the timeline fades the scene into the chat.
 // render(lt) is a pure function of lt: every position, opacity and stroke is computed from lt here; nothing in
 // deck.css animates on its own.
-import { clamp, lerp, seg, outCubic, outQuint, inOutCubic, rand } from '../lib.js';
+import { clamp, lerp, seg, outCubic, outQuint, inOutCubic } from '../lib.js';
 
 const B = (f) => new URL('../brand/' + f, import.meta.url).href;
 
@@ -40,8 +38,8 @@ const N = ROSTER.length;
 const GAPS = [0.42, 0.40, 0.38, 0.38, 0.30, 0.24, 0.19, 0.15, 0.12, 0.10, 0.09, 0.08, 0.08, 0.08, 0.08];
 export const SWITCH = [0];                     // SWITCH[i]: card i starts rising to the front
 for (const g of GAPS) SWITCH.push(+(SWITCH[SWITCH.length - 1] + g).toFixed(4));
-const DEAL = 3.30;                             // phase B starts
-const gapAfter = (i) => (i + 1 < N ? SWITCH[i + 1] : DEAL) - SWITCH[i];
+const END = 3.45;                              // the exit lift starts; the scene ends 0.30 s later
+const gapAfter = (i) => (i + 1 < N ? SWITCH[i + 1] : END) - SWITCH[i];
 // switch duration: short and snappy; at the fast end the switch fills its whole gap so the deck flows
 const SW_DUR = (i) => Math.min(0.24, 0.92 * gapAfter(i));
 const ENTER = 0.30;                            // the deck rises in (the join from the black card is a hard cut)
@@ -60,10 +58,7 @@ function current(lt) {
 }
 
 // ---------- geometry (stage px; the stage is always 1080 tall) ----------
-const DECK_Y = 566;          // front card centre (deck.css: .dk-card top 346 + 440/2; the chip sits at 214)
 const PEEK_Y = 54, PEEK_S = 0.075;             // each card down the pile: lower by PEEK_Y, smaller by PEEK_S
-const GRID_GAP = 16, GRID_TH = 172, GRID_MAX = 768;
-const DEAL_AT = 0.07, DEAL_STAG = 0.019, DEAL_DUR = 0.26; // last tile lands at DEAL + AT + 15 * STAG + DUR = 3.915
 
 let el = null;
 
@@ -75,11 +70,10 @@ function measure() {
 
 export default {
   id: 'deck',
-  dur: 4.5,
+  dur: 3.75,
 
   mount(sec) {
     const card = (m, i) => `<div class="dk-card" data-i="${i}"><div class="dk-face"><img class="dk-logo" src="${B(m.logo)}" alt="" decoding="sync"/><div class="dk-name">${m.name}</div><div class="dk-role">${m.role}</div></div><i class="dk-shade"></i></div>`;
-    const tile = (m, i) => `<div class="dk-tile" data-i="${i}"><img src="${B(m.logo)}" alt="" decoding="sync"/><b>${m.name}</b></div>`;
     sec.innerHTML = `
 <div class="dk-chipwrap"><div class="dk-chip">
   <span class="dk-ct"><img class="dk-ci dk-ci-a" alt="" decoding="sync"/><img class="dk-ci dk-ci-b" alt="" decoding="sync"/></span>
@@ -87,7 +81,6 @@ export default {
   <svg class="dk-ok" viewBox="0 0 24 24"><path pathLength="1" d="M5 12.5l4.5 4.5L19 7.5"/></svg>
 </div></div>
 <div class="dk-deck">${ROSTER.map(card).join('')}</div>
-<div class="dk-grid">${ROSTER.map(tile).join('')}</div>
 <div class="dk-meas">${ROSTER.map((m) => `<span class="dk-n">${m.name}</span>`).join('')}</div>`;
     const q = (s) => sec.querySelector(s);
     const qa = (s) => [...sec.querySelectorAll(s)];
@@ -98,7 +91,6 @@ export default {
       ok: q('.dk-ok path'),
       deck: q('.dk-deck'),
       cards: qa('.dk-card').map((c) => ({ c, face: c.querySelector('.dk-face'), shade: c.querySelector('.dk-shade') })),
-      tiles: qa('.dk-tile'),
       meas: qa('.dk-meas .dk-n'),
       nameW: null, shown: [-1, -1],
     };
@@ -106,20 +98,17 @@ export default {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
   },
 
-  render(lt, ctx) {
+  render(lt) {
     if (!el) return;
     if (!el.nameW) measure();
-    const W = (ctx && ctx.W) || 864;
     const t = clamp(lt, 0, this.dur);
 
-    // ---------- phase A: the deck ----------
+    // ---------- the deck ----------
     const ent = outQuint(seg(t, 0, ENTER));
-    // the deal: the front card's face clears first, then the blank deck folds away under the tiles flying off it
-    const faceDeal = 1 - seg(t, DEAL, DEAL + 0.07);
-    const fold = inOutCubic(seg(t, DEAL + 0.04, DEAL + 0.34));
-    el.deck.style.opacity = (ent * (1 - fold)).toFixed(3);
-    el.deck.style.transform = `translateY(${((1 - ent) * 70 - fold * 10).toFixed(2)}px) scale(${lerp(1, 0.62, fold).toFixed(4)})`;
-    el.deck.style.visibility = fold >= 1 ? 'hidden' : 'visible';
+    // the exit: the last card lifts up and away under the timeline's fade into the chat
+    const out = inOutCubic(seg(t, END, END + 0.3));
+    el.deck.style.opacity = (ent * (1 - out)).toFixed(3);
+    el.deck.style.transform = `translateY(${((1 - ent) * 70 - out * 60).toFixed(2)}px) scale(${lerp(1, 0.94, out).toFixed(4)})`;
 
     const k = deckK(t);
     el.cards.forEach(({ c, face, shade }, i) => {
@@ -146,7 +135,7 @@ export default {
       c.style.opacity = o.toFixed(3);
       c.style.transform = rx > 0.01 ? `perspective(1500px) translateY(${ty.toFixed(2)}px) rotateX(${rx.toFixed(2)}deg) scale(${sc.toFixed(4)})` : `translateY(${ty.toFixed(2)}px) scale(${sc.toFixed(4)})`;
       c.style.filter = blur > 0.05 ? `blur(${blur.toFixed(2)}px)` : 'none';
-      face.style.opacity = (fo * faceDeal).toFixed(3);
+      face.style.opacity = fo.toFixed(3);
       shade.style.opacity = dim.toFixed(3);
     });
 
@@ -178,37 +167,9 @@ export default {
       draw = outCubic(seg(t, SWITCH[cur] + dly, SWITCH[cur] + dly + clamp(0.8 * g - dly, 0.05, 0.24)));
     }
     el.ok.style.strokeDashoffset = (1 - draw).toFixed(4);
-    // the chip rides in with the deck and lifts out as the deal starts
+    // the chip rides in with the deck and lifts out with it
     const cIn = outQuint(seg(t, 0.04, 0.34));
-    const cOut = inOutCubic(seg(t, DEAL - 0.02, DEAL + 0.26));
-    el.chipWrap.style.opacity = (cIn * (1 - cOut)).toFixed(3);
-    el.chipWrap.style.transform = `translateY(${((1 - cIn) * 24 - cOut * 30).toFixed(2)}px)`;
-
-    // ---------- phase B: the deal into the roster grid ----------
-    const gw = Math.min(GRID_MAX, W - 96);
-    const tw = (gw - 3 * GRID_GAP) / 4;
-    const gh = 4 * GRID_TH + 3 * GRID_GAP;
-    const gx = (W - gw) / 2, gy = (1080 - gh) / 2;
-    const show = t >= DEAL;
-    el.tiles.forEach((tl, i) => {
-      if (!show) { tl.style.visibility = 'hidden'; return; }
-      const r = Math.floor(i / 4), col = i % 4;
-      const x = gx + col * (tw + GRID_GAP), y = gy + r * (GRID_TH + GRID_GAP);
-      tl.style.left = x.toFixed(2) + 'px';
-      tl.style.top = y.toFixed(2) + 'px';
-      tl.style.width = tw.toFixed(2) + 'px';
-      tl.style.height = GRID_TH + 'px';
-      const a = DEAL + DEAL_AT + i * DEAL_STAG;
-      const s = seg(t, a, a + DEAL_DUR);
-      const e = outQuint(s);
-      tl.style.visibility = s > 0 ? 'visible' : 'hidden';
-      // from the deck's centre, card-sized-down and a touch rotated, to its slot
-      const dx = W / 2 - (x + tw / 2), dy = DECK_Y - (y + GRID_TH / 2);
-      const rot = (rand(i + 3) - 0.5) * 16;
-      tl.style.opacity = clamp(s * 3.2).toFixed(3);
-      tl.style.transform = e >= 1 ? 'none'
-        : `translate(${(dx * (1 - e)).toFixed(2)}px, ${(dy * (1 - e)).toFixed(2)}px) rotate(${(rot * (1 - e)).toFixed(2)}deg) scale(${lerp(0.7, 1, e).toFixed(4)})`;
-      tl.style.zIndex = String(100 - i);
-    });
+    el.chipWrap.style.opacity = (cIn * (1 - out)).toFixed(3);
+    el.chipWrap.style.transform = `translateY(${((1 - cIn) * 24 - out * 60).toFixed(2)}px)`;
   },
 };

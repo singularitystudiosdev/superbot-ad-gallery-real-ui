@@ -180,12 +180,12 @@ const more = [
   // BlockHaven" through six models before @kepochnik's clip plays
   // (animations/blockhaven-not-just-opus-superbot-2ab31e2c/img/CREDITS.txt).
   ['blockhaven-not-just-opus-superbot-2ab31e2c', 'blockhaven-not-just-opus-superbot-2ab31e2c/', 'IT\'S NOT JUST OPUS 5.5: mine @noahwachnik\'s post, then one chat builds BlockHaven. DeepSeek V4 Flash, Gemini, Meshy 5, ElevenLabs, Opus 5.5, Superbot plays it (clip @kepochnik)', 'Ad spots'],
-  // THE FIRST MODEL WITH ALL THE MODELS (2026-09-28): a fork of blockhaven 2ab31e2c. Two caps cards, a deck of 16 model
-  // cards switching faster and faster under the routing chip before dealing out into the roster, then one 7 s chat
+  // THE MODEL WITH ALL THE MODELS (2026-09-28): a fork of blockhaven 2ab31e2c. Two caps cards, a deck of 16 model
+  // cards switching faster and faster under the routing chip, then one 7 s chat
   // routes "Make a Japanese relaxing biking demo" to Meshy (3D), DeepSeek (textures + ambient audio) and Opus 5.5
   // (code) before @prasenx's Opus 5.5 bike ride plays full frame
   // (animations/first-model-all-models-superbot-df54f063/img/CREDITS.txt, brand/CREDITS.txt).
-  ['first-model-all-models-superbot-df54f063', 'first-model-all-models-superbot-df54f063/', 'THE FIRST MODEL WITH ALL THE MODELS: 16 model cards switch, then one 7 s chat builds a Japanese bike ride. Meshy, DeepSeek, Opus 5.5 (clip @prasenx)', 'Ad spots'],
+  ['first-model-all-models-superbot-df54f063', 'first-model-all-models-superbot-df54f063/', 'THE MODEL WITH ALL THE MODELS: 16 model cards switch, then one 7 s chat builds a Japanese bike ride. Meshy, DeepSeek, Opus 5.5 (clip @prasenx)', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

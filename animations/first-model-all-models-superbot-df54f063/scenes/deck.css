@@ -1,4 +1,4 @@
-/* Scene "deck" (scenes/deck.js): the model card deck under superbot's routing chip, then the dealt roster grid.
+/* Scene "deck" (scenes/deck.js): the model card deck under superbot's routing chip.
    House look: the chat's routing chip (tabs-assets/chat.css .qc-sw) scaled up for a 4:5 feed, the cards' display
    type (var(--ui) 700, -.02em), the app's raised surfaces. Every moving value is written per frame by deck.js;
    nothing here transitions or animates on its own. Geometry is in stage px (1080 tall), centred on the width. */
@@ -35,10 +35,3 @@
 /* the pile's dimming: a flat black veil, so a card below the front reads as further back without a filter */
 #s-deck .dk-shade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
 
-/* ---------- the roster grid: 4 x 4 compact tiles, placed and sized by deck.js ---------- */
-#s-deck .dk-grid { position: absolute; inset: 0; }
-#s-deck .dk-tile { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
-  border-radius: 26px; background: linear-gradient(180deg, #1b1b1e 0%, #121214 100%);
-  box-shadow: inset 0 0 0 1.5px #2c2c31, 0 16px 40px rgb(0 0 0 / .5); visibility: hidden; transform-origin: 50% 50%; }
-#s-deck .dk-tile img { width: 64px; height: 64px; object-fit: contain; display: block; }
-#s-deck .dk-tile b { font: 700 26px/1 var(--ui); letter-spacing: -.01em; color: #fff; white-space: nowrap; }

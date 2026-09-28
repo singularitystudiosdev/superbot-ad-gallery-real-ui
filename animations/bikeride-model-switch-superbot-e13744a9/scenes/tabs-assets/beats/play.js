@@ -1,8 +1,9 @@
 // Play beat, the finale: Claude Opus 5.5 says "Press play.", the game lands in the chat as a card and starts rolling,
-// then the card opens to full frame (GROW, deliberate) and the real clip plays out with its own sound.
-// The clip is img/bike/ride.mp4 (9.5s, 1280x720, the bike ride running in the browser; see img/CREDITS.txt). It has a
-// hard cut at 5.10s (side view of the red bike, then first-person handlebars at sunset); the card opens at clip time
-// CARD_HOLD (0.8s), well before it, and the whole clip plays.
+// then the card opens to full frame (GROW, deliberate) and the real clip plays out with its own sound: ~3 s on screen
+// in all (rolls in the card CARD_HOLD 0.3 s, opens over GROW 0.4 s, full frame until c0 + ON_SCREEN), then the end card.
+// The clip is img/bike/ride.mp4 (3.4 s, 1280x720 @60, one shot: the side view of the red bike in the golden paddy,
+// source 177.50-180.90; see img/CREDITS.txt). The file runs 0.4 s past ON_SCREEN so the scene's 0.3 s fade to the end
+// card still has picture under it.
 //
 // There is ONE <video>, on a layer in the scene root (outside the camera). While the card sits in the chat that layer
 // is pinned over the card's picture frame; GROW interpolates it from there to the whole frame. So nothing is ever
@@ -18,13 +19,14 @@ import { clamp, lerp, seg, outCubic, inOutCubic, streamCount } from '../../../li
 const SAY = 'Press play.';
 const POSTER = 'bike/poster.jpg';
 const CLIP = 'bike/ride.mp4';
-const CLIP_LEN = 9.5; /* deliberate */ // ride.mp4's length: the whole clip plays
+const CLIP_LEN = 3.4; /* deliberate */ // ride.mp4's length
+const ON_SCREEN = 3.0; /* deliberate */ // clip start to the scene's fade to the end card (the brief's ~3 s ending)
 const CLIP_END = CLIP_LEN - 0.05;     // inside the last frame: a seek never lands past the end
 const CPS = 80;
 const CARD_AT = 0.25;                  // "Press play." streams, then the card lands
 const CARD_IN = 0.3;                   // the card rising into the thread
-const CARD_HOLD = 0.8; /* deliberate */ // the card sits in the chat, playing, before it opens
-const GROW = 0.5; /* deliberate */     // the card opens to full frame (the brief's deliberate 500ms)
+const CARD_HOLD = 0.3; /* deliberate */ // the card sits in the chat, playing, before it opens
+const GROW = 0.4; /* deliberate */     // the card opens to full frame
 const RADIUS = 10;                     // the card's corner radius (the hub's card radius), eased to 0 at full frame
 const SEED_TOL = 0.002;                // a held frame re-seeks whenever it is off at all
 const DRIFT_TOL = 0.2;                 // live playback only re-seeks once the element has drifted further than this
@@ -50,7 +52,7 @@ export default {
     T.c0 = T.card + CARD_IN;           // ...and once it has landed the clip starts rolling in it
     T.grow = T.c0 + CARD_HOLD;         // the card starts opening
     T.full = T.grow + GROW;            // full frame
-    T.end = T.c0 + CLIP_END;           // the whole clip plays, then the scene fades to the end card
+    T.end = T.c0 + ON_SCREEN;          // full frame until here, then the scene fades to the end card
     return T;
   },
   build(k, x) {
@@ -113,7 +115,8 @@ export default {
         const running = !document.body.classList.contains('freeze') && !HOLD.on && now - clkAt < 150;
         const len = Number.isFinite(vid.duration) && vid.duration > 0 ? vid.duration - 0.05 : CLIP_END;
         const want = clamp(t - T.c0, 0, Math.min(CLIP_END, len));
-        const live = running && t >= T.c0 && t < T.end;
+        // live through the scene's fade to the end card too (the file runs past T.end), so the fade is not a stepped seek
+        const live = running && t >= T.c0 && t < T.c0 + Math.min(CLIP_END, len);
         if (live) {
           playing = true;
           if (vid.paused) start();

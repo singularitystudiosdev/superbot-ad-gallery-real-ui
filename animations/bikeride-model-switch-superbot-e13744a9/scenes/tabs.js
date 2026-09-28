@@ -3,11 +3,12 @@
 // ("Good evening. Where do we go?" over a centred composer), the ask is typed and sent, and superbot hands the build
 // from model to model (tabs-assets/chat.js). This file owns the CAMERA: at every hand-off it pushes in on the switch
 // pill until the pill sits at frame centre at ~1.8x, holds while the spinner resolves to the check, and pulls back
-// while the reply builds. Under prefers-reduced-motion the push is a cut (in at mid-push, out at mid-pull).
+// while the reply builds. A beat can ask for its own push (chat.js FOCUS: the Opus code panel fills the frame width
+// while the run plays). Under prefers-reduced-motion every push is a cut (in at mid-push, out at mid-pull).
 // render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's generated stylesheets
 // (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, renderChatAfter, BEATS, CAMERA, CHAT_END, PUSH, PULL } from './tabs-assets/chat.js?v=e2834f7d';
+import { mountChat, renderChat, renderChatAfter, BEATS, CAMERA, FOCUS, CHAT_END, PUSH, PULL } from './tabs-assets/chat.js?v=e2834f7d';
 import { lerp, seg, outCubic, outQuint, inOutCubic, boxIn } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
@@ -52,9 +53,9 @@ function lift(g) {
   return g.lift;
 }
 
-// how far the camera is pushed in on pill m at t: 0 at rest, 1 parked on it
+// how far the camera is pushed in on pill (or beat focus) m at t: 0 at rest, 1 parked on it
 function pushOf(m, t, rm) {
-  if (rm) return t >= m.sw + PUSH / 2 && t < m.pull + PULL / 2 ? 1 : 0;
+  if (rm) return t >= (m.sw + m.landed) / 2 && t < (m.pull + m.back) / 2 ? 1 : 0;
   return outQuint(seg(t, m.sw, m.landed)) * (1 - inOutCubic(seg(t, m.pull, m.back)));
 }
 
@@ -112,6 +113,15 @@ export default {
       // the pill's box in design px (boxIn divides out the camera's own scale, so this does not feed back)
       const b = boxIn(m.node, el.site);
       const zp = Math.min(ZOOM, (W * FILL_W) / Math.max(1, b.w * g.k));
+      cx = lerp(cx, b.cx, f); cy = lerp(cy, b.cy, f); z = lerp(z, zp, f);
+    }
+    // a beat's own push (chat.js FOCUS, e.g. the Opus code panel): centre the node and scale it to fill m.fill of the
+    // frame width, never past 92% of the frame height and never below the resting scale (4:5 already fills its width)
+    for (const m of FOCUS) {
+      const f = pushOf(m, t, rm);
+      if (f <= 0 || !m.node) continue;
+      const b = boxIn(m.node, el.site);
+      const zp = Math.max(1, Math.min((W * m.fill) / Math.max(1, b.w * g.k), (H * 0.92) / Math.max(1, b.h * g.k)));
       cx = lerp(cx, b.cx, f); cy = lerp(cy, b.cy, f); z = lerp(z, zp, f);
     }
     el.site.style.transform = `translate(${(W / 2).toFixed(2)}px,${H / 2}px) scale(${(g.k * z).toFixed(5)}) translate(${(-cx).toFixed(2)}px,${(-cy).toFixed(2)}px)`;

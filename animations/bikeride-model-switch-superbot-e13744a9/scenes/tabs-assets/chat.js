@@ -6,7 +6,7 @@
 // (the sound effects), code.js (the game's files) and play.js (the ride itself, opened to full frame).
 // The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of
 // the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
-import { lerp, seg, outCubic, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
+import { lerp, seg, outCubic, inOutCubic, esc, boxIn, placeCursor, streamCount } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import art from './beats/art.js?v=e2834f7d';
 import blender from './beats/blender.e2834f7d.js?v=e2834f7d';
@@ -19,10 +19,12 @@ const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
 
 // ---------- the clock of the chat (scene-local seconds) ----------
-export const CHAT_T0 = 0.4;          // the hub has faded up from black; the ask starts typing
-const TYPE = 2.2; /* deliberate */   // the ask types out over this long (34 characters, a readable pace)
-const SEND = 0.2;                    // last character to the send press
-const FIRST_PILL = 0.2;              // send to the first pill landing
+export const CHAT_T0 = 0.35;         // the hub has faded up from black; the ask starts typing
+export const TYPE_CPS = 50; /* deliberate */ // a typewriter: one character every 0.02 s (character k lands at CHAT_T0 + k/50)
+const SEND = 0.17;                   // last character to the send press (34 chars land at 1.03, send 1.20)
+const FIRST_PILL = 0.2;              // send to the first pill landing (1.40)
+// the Opus step writes the game (code.js) inside this window after its reply starts, then plays it (play.js)
+export const OPUS_WINDOW = 4.5; /* deliberate */
 export const SLOT = 4.2; /* deliberate */ // one model's turn: its pill, the camera move, its reply
 // the camera move on every pill (scenes/tabs.js owns the move itself; these are its marks)
 export const PUSH = 0.5; /* deliberate */ // push-in onto the pill, outQuint
@@ -56,20 +58,22 @@ const CHIP = {
 
 // one hand-off: the app that answers, its pill, and the beat modules its reply plays in order (Opus writes the game,
 // then plays it, under one pill)
-const step = (app, mods, opts = {}) => ({ app, mods, opts, label: CHIP[app] });
+// win: the first beat's window from the reply start; the next beat starts at the window's end even if that beat
+// finishes early (a beat that overruns its window pushes on). 0 = the next beat follows straight on.
+const step = (app, mods, opts = {}, win = 0) => ({ app, mods, opts, win, label: CHIP[app] });
 export const ROUTE = [
   step('gemini', [art]),
   step('blender', [blender]),
   step('lyria', [music]),
   step('elevenlabs', [assets]),
-  step('opus', [code, play]),
+  step('opus', [code, play], {}, OPUS_WINDOW),
 ];
 
 // every step's clock. The ask types from CHAT_T0 and is sent; pill i lands at FIRST + i * SLOT (or later, if the
 // previous reply overran its slot), the camera pushes in, the check lands while it holds, the camera pulls back and the
 // reply builds. Each beat module's times(r) owns everything after its own start.
 function timeBeats(route) {
-  const typeEnd = CHAT_T0 + TYPE;
+  const typeEnd = CHAT_T0 + ASK.length / TYPE_CPS; // the last character lands
   const send = typeEnd + SEND;
   const first = send + FIRST_PILL;
   let prevEnd = -Infinity;
@@ -83,7 +87,11 @@ function timeBeats(route) {
     k.back = k.pull + PULL;           // ...and is at rest
     k.reply = k.pull + REPLY;         // the app answers
     let r = k.reply;
-    k.parts = a.mods.map((mod) => { const T = mod.times(r, a.opts); r = T.end; return { mod, T }; });
+    k.parts = a.mods.map((mod, j) => {
+      const T = mod.times(r, a.opts);
+      r = j === 0 && a.win ? Math.max(T.end, k.reply + a.win) : T.end;
+      return { mod, T };
+    });
     k.end = r;
     prevEnd = r;
     return { k };
@@ -93,6 +101,10 @@ export const BEATS = timeBeats(ROUTE);
 export const CHAT_END = BEATS[BEATS.length - 1].k.end;
 // the marks scenes/tabs.js drives the camera from, one per pill (the node is filled in by mountChat)
 export const CAMERA = BEATS.map(({ k }) => ({ sw: k.sw, landed: k.landed, pull: k.pull, back: k.back, node: null }));
+// beat-level camera moves: a beat whose times() carries T.focus ({ sw, landed, pull, back }) and whose build() hands
+// back a focus node gets a push onto that node (code.js: the Opus panel, pushed in to fill the frame width while the
+// run plays). Same shape as CAMERA; `fill` is the share of the frame width the node fills when parked.
+export const FOCUS = BEATS.flatMap(({ k }) => k.parts.filter(({ T }) => T.focus).map(({ T }) => ({ ...T.focus, T, fill: 0.9, node: null })));
 
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -128,6 +140,7 @@ export function mountChat(hub) {
     const insts = k.parts.map(({ mod, T }) => {
       const inst = mod.build({ ...k, T }, ctx);
       inst.nodes.forEach((n) => main.appendChild(n));
+      if (inst.focus) { const f = FOCUS.find((m) => m.T === T); if (f) f.node = inst.focus; }
       return inst;
     });
     return { k, u, sw, r, who: main.firstElementChild, insts };
@@ -172,7 +185,7 @@ function renderComposer(c, t) {
   const b = c.beats.find(({ k }) => k.ask && t >= k.s && t < k.send);
   let ph;
   if (b) {
-    const n = Math.round(b.k.ask.length * seg(t, b.k.s, b.k.typeEnd));
+    const n = streamCount(b.k.ask, b.k.s, TYPE_CPS, t); // k characters at CHAT_T0 + 0.02k
     ph = `<span class="qc-typed">${esc(b.k.ask.slice(0, n))}</span><i class="qc-caret"></i>`;
   } else ph = esc(c.phText);
   if (ph !== c.lastPh) { c.ph.innerHTML = ph; c.lastPh = ph; }

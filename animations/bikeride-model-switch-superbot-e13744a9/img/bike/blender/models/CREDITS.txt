@@ -1,0 +1,25 @@
+Blender beat assets (beats/blender.e2834f7d.js). Made 2026-09-28.
+
+Models: bike.glb, farmhouse.glb, vending.glb, tree.glb
+  Source images: the game's own frames, img/bike/asset-bike.jpg, asset-house.jpg, asset-vending.jpg, asset-tree.jpg
+  (crops of the @prasenx bike-ride clip, see img/CREDITS.txt).
+  1. Isolation: fal.ai fal-ai/nano-banana/edit (Google Gemini 2.5 Flash Image), one call per prop: the object alone on
+     white, same art style (the bike without its rider, the whole farmhouse with its roof, the pair of vending
+     machines, the lone tree). 4 images x $0.039 = $0.156.
+  2. Image to 3D: fal.ai fal-ai/trellis-2 (Microsoft TRELLIS.2), resolution 1024, decimation_target 60000,
+     texture_size 2048, seed 7. 4 meshes x $0.30 = $1.20.
+  3. Blender 5.2.2 LTS (Homebrew cask `blender`): glTF import, joined to one object per prop, named, origin at the
+     base, sized (farmhouse 5.4 m longest side, tree 4.2 m tall, vending 1.8 m tall, bike 1.8 m long), smooth shading,
+     Metallic zeroed (TRELLIS baked a metallic map; these are wood, paint and leaves), exported glTF binary with JPEG
+     textures (quality 88).
+  License: fal.ai outputs, commercial use allowed per the fal model pages (both endpoints marked "Commercial use").
+  Sizes: bike.glb 3,126,556 B; farmhouse.glb 3,334,100 B; vending.glb 2,411,740 B; tree.glb 1,795,816 B.
+  Total fal spend: $1.356.
+
+Capture: ../frames/00.jpg .. 29.jpg (1280x738 JPEG, 2.7 MB total)
+  The real Blender 5.2.2 LTS GUI window on macOS (Layout workspace, Material Preview, default Blender Dark theme,
+  UI scale 1.25, window 1180x760), the four models in the viewport and the Outliner. Captured by Blender's own
+  bpy.ops.screen.screenshot driven from bpy.app.timers while the script orbited the 3D view 38 to 8 degrees about Z
+  (60 captures); every other capture kept, cropped to the top bar, the 3D viewport and the Outliner/Properties column
+  (the timeline and status bar cut), scaled to 1280 wide.
+  Build scripts (outside the repo): /tmp/msw/v2-B.e2834f7d/work/fal3d.py, build_scene.py, capture.py.

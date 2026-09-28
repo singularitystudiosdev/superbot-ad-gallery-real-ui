@@ -1,12 +1,11 @@
-// first-model-all-models-superbot-df54f063: "THE MODEL / WITH ALL THE MODELS." A fork of
+// first-model-all-models-superbot-df54f063: the model switcher, no opening text. A fork of
 // blockhaven-not-just-opus-superbot-2ab31e2c (engine, cards, chat, clip scene); shared spec in the chat log
 // /tmp/model-switch-ad-df54f063.md. The claim: one model picker that holds every model, each part of a job routed to
 // the model built for it, in one chat.
-//   cards   0 to 3.5   "THE MODEL" / "WITH ALL THE MODELS"
-//   deck    3.5 to 7.25 a deck of model cards switches through the roster, faster and faster
-//   tabs    7.25 to 14.25 one ask ("Make a Japanese relaxing biking demo"), three hand-offs, each on its routing chip:
+//   deck    0 to 3.75  a deck of model cards switches through the roster, faster and faster (opens the spot)
+//   tabs    3.75 to 10.75 one ask ("Make a Japanese relaxing biking demo"), three hand-offs, each on its routing chip:
 //                      Meshy models it, DeepSeek scrapes the textures and ambient audio, Opus 5.5 codes it
-//   clip    Prasenjit's (@prasenx) Opus 5.5 bike ride at full frame, with its sound (credited in img/CREDITS.txt)
+//   clip    10.75 to 13.45 Prasenjit's (@prasenx) Opus 5.5 bike ride at full frame, 2.7 s, with its sound (img/CREDITS.txt)
 //   end     "superbot" beside the mascot
 // The engine: the whole spot is a pure function of t. ?t=<s> freezes a frame, ?t=<s>&play=1 plays on from there,
 // space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock. Scene modules (scenes/<id>.js) are mounted
@@ -23,33 +22,29 @@ const dip = document.getElementById('dip');
 
 // ---------- the sequence (CONTRACT.txt) ----------
 const SEQUENCE = [
-  ['card', 'first'],
-  ['card', 'all'],
   ['scene', 'deck'],
   ['scene', 'tabs'],
   ['scene', 'clip'],
   ['end', 'end'],
 ];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape)
-const FALLBACK_DUR = { deck: 3.75, tabs: 7, clip: 6.5 };
+const FALLBACK_DUR = { deck: 3.75, tabs: 7, clip: 2.7 };
 const SCENE_FADE = 0.3;
 const END_DUR = 3.5, DIP = 0.35;
-// joins played as straight cuts (no fade on either side): card to card, the second card's black into the deck, and
-// the push into the output window into the clip on the same framing.
-const HARD_CUTS = new Set(['first>all', 'all>deck', 'tabs>clip']);
+// joins played as straight cuts (no fade on either side): the push into the output window into the clip on the same
+// framing.
+const HARD_CUTS = new Set(['tabs>clip']);
 
 // ---------- text cards ----------
 // A part is a word string, or { img, cls, alt, after } for a brand wordmark (after = trailing punctuation),
 // or { html } for styled words. The last part and the logo are kept on one line (never orphan the logo).
 const B = (f) => new URL('./brand/' + f, import.meta.url).href;
-const CARDS = {
-  first: { dur: 1.6, parts: ['THE', 'MODEL'] },
-  all: { dur: 1.9, parts: ['WITH', { g: 'ALL' }, { g: 'THE' }, { g: 'MODELS' }] },
-};
+// no text cards: the opening "THE MODEL / WITH ALL THE MODELS" cards were cut at the user's request (2026-09-28), so
+// the spot opens on the deck. The card engine below stays for the house SEQUENCE contract.
+const CARDS = {};
 // card motion (seconds, local): words rise 18px + unblur 8px, outQuint .55s, staggered .06s
 // The design timings are scaled by one factor K shared by every card, chosen so the busiest card still has
 // its text fully landed and its logo fully popped READ_HOLD seconds before its exit starts (same motion on all).
-// Two caps lines read as one sentence, so each holds READ_HOLD = 0.6 s before its exit.
 const W_RISE = 18, W_BLUR = 8, CARD_OUT = 0.25, READ_HOLD = 0.6;
 const BASE = { in: 0.12, stag: 0.06, dur: 0.55, gap: 0.15, logo: 0.45 };
 const settleAt = (c, k) => k * (BASE.in + (c.parts.length - 1) * BASE.stag + BASE.dur + (c.logo ? BASE.gap + BASE.logo : 0));

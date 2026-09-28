@@ -11,7 +11,7 @@ import { CLIP, clipFrame } from './tabs-assets/cuts.js?v=8';
 
 const g = (f) => new URL('../gen/' + f, import.meta.url).href;
 const H = 1080;
-const DUR = 6.5;
+const DUR = 2.7;
 const SEED_TOL = 0.02, DRIFT_TOL = 0.25;
 
 let el = null;

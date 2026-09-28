@@ -1,0 +1,4 @@
+img CREDITS (first-model-every-model-superbot-7d540b7f)
+
+The chat scene uses no raster media: the preview card art is inline vector (scenes/tabs-assets/beats/code.js).
+Model logos live in brand/ (meshy-logo.svg, deepseek-logo.svg, claude-logo.svg).

@@ -1,0 +1,18 @@
+/* DeepSeek beat: scraped files streaming in, then the count line. Scoped under #s-tabs .sbsite .hub, classes
+   prefixed sx-. No transitions: scrape.js writes every moving value from t. */
+#s-tabs .sbsite .hub .sx-card { box-sizing: border-box; width: 440px; max-width: 100%; padding: 6px; border-radius: 12px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite .hub .sx-rows { display: grid; gap: 2px; }
+#s-tabs .sbsite .hub .sx-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto 50px 14px; align-items: center; gap: 10px; height: 30px; padding: 0 10px 0 5px; border-radius: 8px; opacity: 0; }
+#s-tabs .sbsite .hub .sx-row:nth-child(odd) { background: #111115; }
+#s-tabs .sbsite .hub .sx-k { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; }
+#s-tabs .sbsite .hub .sx-k svg { width: 15px; height: 15px; display: block; }
+#s-tabs .sbsite .hub .sx-au .sx-k { background: rgba(77, 107, 254, .14); color: #8ea2ff; }
+#s-tabs .sbsite .hub .sx-im .sx-k { background: rgba(245, 180, 90, .13); color: #f2bd72; }
+#s-tabs .sbsite .hub .sx-n { font: 500 11.5px/1 var(--font-mono, "SF Mono", ui-monospace, Menlo, monospace); color: #e4e4e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .sx-src { font: 500 10.5px/1 var(--ui); color: #7c7c84; white-space: nowrap; }
+#s-tabs .sbsite .hub .sx-sz { font: 600 10.5px/1 var(--font-mono, "SF Mono", ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; color: #9a9aa2; text-align: right; }
+#s-tabs .sbsite .hub .sx-row .qc-ok { width: 13px; height: 13px; opacity: 0; }
+#s-tabs .sbsite .hub .sx-foot { display: flex; align-items: center; gap: 8px; height: 30px; margin-top: 4px; padding: 0 10px; border-top: 1px solid #1d1d22; font: 500 11.5px/1 var(--ui); color: #a9a9b0; opacity: 0; }
+#s-tabs .sbsite .hub .sx-foot b { font-weight: 700; color: #ececec; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sx-dot { width: 7px; height: 7px; border-radius: 50%; background: #4d6bfe; box-shadow: 0 0 0 3px rgba(77,107,254,.18); }
+#s-tabs .sbsite .hub .sx-foot.on .sx-dot { background: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,.18); }

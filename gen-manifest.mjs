@@ -196,6 +196,12 @@ const more = [
   // (code) before @prasenx's Opus 5.5 bike ride plays full frame for 2.7 s
   // (animations/first-model-all-models-superbot-df54f063/img/CREDITS.txt, brand/CREDITS.txt).
   ['first-model-all-models-superbot-df54f063', 'first-model-all-models-superbot-df54f063/', 'MODEL SWITCHER: 16 model cards switch, then one 7 s chat builds a Japanese bike ride. Meshy, DeepSeek, Opus 5.5 (clip @prasenx)', 'Ad spots'],
+  // THE FIRST MODEL WITH ALL THE MODELS, live-ride cut (2026-09-28): a fork of pdoom abba733b. The title over a deck of
+  // 14 model switches that deals out into the roster, then one 7 s chat routes "Make a Japanese relaxing biking demo"
+  // to Meshy, DeepSeek and Opus 5.5 with a zoom on each switch, and the ride it builds plays as a live three.js scene,
+  // hard-cut from the preview card (animations/first-model-every-model-superbot-7d540b7f/brand/CREDITS.txt,
+  // scenes/ride-assets/CREDITS.txt).
+  ['first-model-every-model-superbot-7d540b7f', 'first-model-every-model-superbot-7d540b7f/', 'THE FIRST MODEL WITH ALL THE MODELS: 14 model cards switch, then one 7 s chat zooms on each switch (Meshy, DeepSeek, Opus 5.5) and the three.js Japanese bike ride it builds plays live', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

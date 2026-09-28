@@ -419,6 +419,14 @@
     "thumb": "assets/shots/first-model-all-models-superbot-df54f063.png"
   },
   {
+    "id": "first-model-every-model-superbot-7d540b7f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "THE FIRST MODEL WITH ALL THE MODELS: 14 model cards switch, then one 7 s chat zooms on each switch (Meshy, DeepSeek, Opus 5.5) and the three.js Japanese bike ride it builds plays live",
+    "src": "animations/first-model-every-model-superbot-7d540b7f/",
+    "thumb": "assets/shots/first-model-every-model-superbot-7d540b7f.png"
+  },
+  {
     "id": "wsb-to-wings-switcher-superbot-cbe85cdb",
     "type": "animation",
     "group": "Ad spots",

@@ -12,7 +12,7 @@
 #s-tabs .sbsite.ask .hub > .rail, #s-tabs .sbsite.ask .hub > .chats, #s-tabs .sbsite.ask .hub .chat-head { display: none; }
 #s-tabs .sbsite.ask .hub .main { background: #0a0a0b; }
 #s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 760px) / 2)) 4px; }
-#s-tabs .sbsite.ask .hub .composer { position: relative; z-index: 3; width: min(760px, calc(100% - 48px)); margin: 6px auto 16px; will-change: transform; }
+#s-tabs .sbsite.ask .hub .composer { position: relative; z-index: 3; width: min(760px, calc(100% - 48px)); margin: 6px auto 16px; } /* no will-change: a promoted layer keeps an old sub-pixel raster, so frames would depend on seek history */
 
 /* ---- the empty state (the real app's home: mark + greeting over the composer) ---- */
 #s-tabs .sbsite.ask .ask-hero { position: absolute; left: 50%; top: 30%; z-index: 2; display: flex; align-items: center; gap: .47em; font-size: min(34px, calc(var(--dw, 960px) * .042)); white-space: nowrap; pointer-events: none; opacity: 0; }

@@ -1,0 +1,87 @@
+Files shown in the DeepSeek "scraped assets" beat (scenes/tabs-assets/beats/scrape.js).
+Images: the JPGs in this folder are 240x168 thumbnails of the originals below.
+Audio: not shipped; only the duration and waveform peaks (computed with ffmpeg from the original) are baked into manifest.js.
+
+rice-paddies.jpg  (image)
+  Title:   Sunset Field 夕焼け田んぼ
+  Author:  Cool-Rock.com
+  Source:  https://www.flickr.com/photos/30389035@N07/18677475301
+  File:    https://live.staticflickr.com/391/18677475301_bd8c0b5ba1_o.jpg
+  License: CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/)
+
+minka-house.jpg  (image)
+  Title:   Japanese traditional style farmhouse / 旧新井家住宅(きゅう あらいけ じゅうたく)
+  Author:  TANAKA Juuyoh (田中十洋)
+  Source:  https://www.flickr.com/photos/13910409@N05/3181370995
+  File:    https://live.staticflickr.com/3403/3181370995_f0b38f5cb9_o.jpg
+  License: CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/)
+
+bike-basket.jpg  (image)
+  Title:   A red vintage bicycle with a basket parked against a modern geometric patterned fence on a stone-paved ground.
+  Author:  Nilo Velez
+  Source:  https://wordpress.org/photos/photo/92165f572e/
+  File:    https://pd.w.org/2024/03/92165f572e792c087.07325317.jpg
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+country-road.jpg  (image)
+  Title:   水田、農道、藤岡市
+  Author:  takanori00
+  Source:  https://www.flickr.com/photos/121004196@N06/14737280618
+  File:    https://live.staticflickr.com/3897/14737280618_5c44bdfba4_o.jpg
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+utility-poles.jpg  (image)
+  Title:   141021-170708-PA211026
+  Author:  nuulvakor
+  Source:  https://www.flickr.com/photos/108231792@N04/15640777562
+  File:    https://live.staticflickr.com/3932/15640777562_8d40b9249b_o.jpg
+  License: Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/)
+
+sunset-sky.jpg  (image)
+  Title:   The Sky Is On Fire
+  Author:  Greg Zaal, Rico Cilliers
+  Source:  https://polyhaven.com/a/the_sky_is_on_fire
+  File:    https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/16k%2B/the_sky_is_on_fire_16k.hdr
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+dirt-road.jpg  (image)
+  Title:   Ground 079 S
+  Author:  ambientCG
+  Source:  https://ambientcg.com/a/Ground079S
+  File:    https://ambientcg.com/get?file=Ground079S_8K-JPG.zip
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+wood-planks.jpg  (image)
+  Title:   Weathered Brown Planks
+  Author:  Dimitrios Savva, Rico Cilliers
+  Source:  https://polyhaven.com/a/weathered_brown_planks
+  File:    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/16k/weathered_brown_planks/weathered_brown_planks_diff_16k.jpg
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+cicadas.mp3  (audio)
+  Title:   Japanese cicada
+  Author:  macdaddyno1
+  Source:  https://freesound.org/people/macdaddyno1/sounds/321589/
+  File:    https://cdn.freesound.org/previews/321/321589_313780-hq.mp3
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+bicycle-bell.mp3  (audio)
+  Title:   Bike Bell.wav
+  Author:  altazor80
+  Source:  https://freesound.org/people/altazor80/sounds/367744/
+  File:    https://cdn.freesound.org/previews/367/367744_6715918-hq.mp3
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+furin-chime.mp3  (audio)
+  Title:   Furin japanese wind chime.wav
+  Author:  ayustat2001
+  Source:  https://freesound.org/people/ayustat2001/sounds/501168/
+  File:    https://cdn.freesound.org/previews/501/501168_4648939-hq.mp3
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+
+koto-phrase.mp3  (audio)
+  Title:   Intro Koto Japanese Style.m4a
+  Author:  tranthanhepu
+  Source:  https://freesound.org/people/tranthanhepu/sounds/486440/
+  File:    https://cdn.freesound.org/previews/486/486440_3973625-hq.mp3
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)

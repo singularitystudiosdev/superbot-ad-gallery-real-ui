@@ -1,10 +1,20 @@
 ride-assets credits (recorded 2026-09-28)
 
+clip.mp4, clip-wide.mp4, clip-first.jpg, clip-wide-first.jpg (and ../../img/ride-poster.jpg, rendered from clip.mp4)
+  Footage: Prasenjit (@prasenx) on X, "opus 5.5 built this bike ride in the browser / every tree and sound generated in code"
+  Post: https://x.com/prasenx/status/2102717687604633959
+  Retrieved 2026-09-28 with yt-dlp, format http-10368: 1920x1080, 60fps, h264 High, 219.75s.
+  Excerpt used: source frames 195 to 554 inclusive at 60fps, 0:03.250 to 0:09.250 (6.000s, 360 frames), one continuous take
+  (the golden-hour chase behind the rider, from the rear three-quarter close-up past the houses to the rice paddies).
+  Edits: crop and scale only, no audio.
+    clip.mp4       crop 864x1080 at x=480, y=0 from 1920x1080, scaled 1.25x to 1080x1350 (4:5); the source's km/h
+                   readout (bottom right, about x 1810..1890, y 1040..1070) falls outside the crop (x 480..1344).
+    clip-wide.mp4  the same 360 frames uncropped, 1920x1080 (used when the frame is wider than 1.2:1).
+    clip-first.jpg / clip-wide-first.jpg  frame 0 of each, used as the <video> poster.
+  Credited on screen in the ride scene as "clip @prasenx".
+
 three.module.min.js
   three.js r170 (npm three@0.170.0), build/three.module.min.js
   Source: https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js
   License: MIT, Copyright 2010-2024 three.js authors (https://github.com/mrdoob/three.js/blob/r170/LICENSE)
-
-No other third-party files. Every model (rider, mamachari, torii, stone lanterns, trees, poles, houses,
-Fuji, hills) and every texture (road, grass, clouds, petals, glow) is generated in code in ../ride.js.
-Style reference only (no footage, textures or models reused): https://x.com/prasenx/status/2102717687604633959
+  No longer used by ../ride.js (kept in place for other users of this copy).

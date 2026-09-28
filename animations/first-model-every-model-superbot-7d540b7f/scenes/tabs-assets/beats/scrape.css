@@ -1,18 +1,44 @@
-/* DeepSeek beat: scraped files streaming in, then the count line. Scoped under #s-tabs .sbsite .hub, classes
-   prefixed sx-. No transitions: scrape.js writes every moving value from t. */
-#s-tabs .sbsite .hub .sx-card { box-sizing: border-box; width: 440px; max-width: 100%; padding: 6px; border-radius: 12px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
-#s-tabs .sbsite .hub .sx-rows { display: grid; gap: 2px; }
-#s-tabs .sbsite .hub .sx-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto 50px 14px; align-items: center; gap: 10px; height: 30px; padding: 0 10px 0 5px; border-radius: 8px; opacity: 0; }
-#s-tabs .sbsite .hub .sx-row:nth-child(odd) { background: #111115; }
-#s-tabs .sbsite .hub .sx-k { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; }
-#s-tabs .sbsite .hub .sx-k svg { width: 15px; height: 15px; display: block; }
-#s-tabs .sbsite .hub .sx-au .sx-k { background: rgba(77, 107, 254, .14); color: #8ea2ff; }
-#s-tabs .sbsite .hub .sx-im .sx-k { background: rgba(245, 180, 90, .13); color: #f2bd72; }
-#s-tabs .sbsite .hub .sx-n { font: 500 11.5px/1 var(--font-mono, "SF Mono", ui-monospace, Menlo, monospace); color: #e4e4e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#s-tabs .sbsite .hub .sx-src { font: 500 10.5px/1 var(--ui); color: #7c7c84; white-space: nowrap; }
-#s-tabs .sbsite .hub .sx-sz { font: 600 10.5px/1 var(--font-mono, "SF Mono", ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; color: #9a9aa2; text-align: right; }
-#s-tabs .sbsite .hub .sx-row .qc-ok { width: 13px; height: 13px; opacity: 0; }
-#s-tabs .sbsite .hub .sx-foot { display: flex; align-items: center; gap: 8px; height: 30px; margin-top: 4px; padding: 0 10px; border-top: 1px solid #1d1d22; font: 500 11.5px/1 var(--ui); color: #a9a9b0; opacity: 0; }
+/* DeepSeek beat: the real scraped files (image thumbnails, audio cards with baked waveforms), then the count line.
+   Scoped under #s-tabs .sbsite .hub, classes prefixed sx-. No transitions or keyframes: scrape.js writes every moving
+   value from t. Height budget: the card must stay <= 340 design px (it is ~333). */
+#s-tabs .sbsite .hub .sx-card { box-sizing: border-box; width: 440px; max-width: 100%; padding: 7px 8px; border-radius: 12px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+
+/* header: logo, live label, progress, counter */
+#s-tabs .sbsite .hub .sx-hd { display: flex; align-items: center; gap: 7px; height: 20px; margin-bottom: 6px; padding: 0 2px; }
+#s-tabs .sbsite .hub .sx-logo { width: 15px; height: 15px; display: block; }
+#s-tabs .sbsite .hub .sx-lb { font: 600 11px/1 var(--ui); color: #e4e4e8; }
+#s-tabs .sbsite .hub .sx-bar { flex: 1; height: 3px; border-radius: 2px; background: #1c1c22; overflow: hidden; }
+#s-tabs .sbsite .hub .sx-bar i { display: block; height: 100%; background: #4d6bfe; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .sx-hd.on .sx-bar i { background: #34d399; }
+#s-tabs .sbsite .hub .sx-ct { min-width: 30px; text-align: right; font: 600 10px/1 var(--mono); font-variant-numeric: tabular-nums; color: #9a9aa2; }
+
+/* image grid: 4 per row */
+#s-tabs .sbsite .hub .sx-gi { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+#s-tabs .sbsite .hub .sx-t { min-width: 0; opacity: 0; }
+#s-tabs .sbsite .hub .sx-th { position: relative; height: 58px; border-radius: 6px; overflow: hidden; background: #16161b; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05); }
+#s-tabs .sbsite .hub .sx-sk { position: absolute; inset: 0; background: linear-gradient(100deg, #16161b 30%, #24242c 50%, #16161b 70%); background-size: 300% 100%; }
+#s-tabs .sbsite .hub .sx-th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; }
+#s-tabs .sbsite .hub .sx-ck { position: absolute; top: 4px; right: 4px; display: grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; background: rgba(10,10,14,.72); opacity: 0; }
+#s-tabs .sbsite .hub .sx-ck .qc-ok { width: 10px; height: 10px; }
+#s-tabs .sbsite .hub .sx-n { margin-top: 3px; font: 500 9.5px/11px var(--mono); color: #e4e4e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .sx-d { font: 500 9px/11px var(--ui); color: #7c7c86; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.1px; }
+
+/* audio cards: 2 per row */
+#s-tabs .sbsite .hub .sx-ga { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 6px; }
+#s-tabs .sbsite .hub .sx-au { display: flex; align-items: center; gap: 7px; box-sizing: border-box; height: 42px; padding: 0 8px 0 7px; border-radius: 8px; background: #121217; box-shadow: inset 0 0 0 1px #1f1f26; }
+#s-tabs .sbsite .hub .sx-pl { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(77,107,254,.16); color: #8ea2ff; }
+#s-tabs .sbsite .hub .sx-pl svg { width: 13px; height: 13px; display: block; margin-left: 1px; }
+#s-tabs .sbsite .hub .sx-mid { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .sx-au .sx-n { margin: 0 0 3px; }
+#s-tabs .sbsite .hub .sx-wv { display: block; width: 100%; height: 15px; fill: #7f93ff; }
+#s-tabs .sbsite .hub .sx-rt { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+#s-tabs .sbsite .hub .sx-du { display: flex; align-items: center; gap: 3px; font: 600 9.5px/11px var(--mono); font-variant-numeric: tabular-nums; color: #b4b4bc; }
+#s-tabs .sbsite .hub .sx-du .qc-ok { width: 10px; height: 10px; opacity: 0; }
+#s-tabs .sbsite .hub .sx-rt .sx-d { max-width: 86px; }
+
+/* footer: the count line */
+#s-tabs .sbsite .hub .sx-foot { display: flex; align-items: center; gap: 7px; height: 20px; margin-top: 6px; padding: 4px 3px 0; border-top: 1px solid #1d1d22; font: 500 11px/1 var(--ui); color: #a9a9b0; opacity: 0; }
 #s-tabs .sbsite .hub .sx-foot b { font-weight: 700; color: #ececec; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sx-lic { margin-left: auto; font: 500 9.5px/1 var(--mono); color: #6f6f78; white-space: nowrap; }
 #s-tabs .sbsite .hub .sx-dot { width: 7px; height: 7px; border-radius: 50%; background: #4d6bfe; box-shadow: 0 0 0 3px rgba(77,107,254,.18); }
 #s-tabs .sbsite .hub .sx-foot.on .sx-dot { background: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,.18); }

@@ -1,7 +1,7 @@
 /* The hub's five-request chat (chat.js + beats/{plan,code,git,art,play}.js). Every moving value is written from lt,
    so nothing here transitions. Ported card styles (GitHub card + sheet, DoorDash order, mp3 card, tool chips) live
    in ports.css; each beat's own card styles live in scenes/tabs-assets/beats/<name>.css. */
-#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
+#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; } /* no will-change: a promoted layer keeps a raster from an earlier sub-pixel scroll phase, so frames would depend on seek history */
 #s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
 #s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
 #s-tabs .sbsite .hub .qc-r .m-main { max-width: min(100%, var(--hub-column)); width: 100%; }

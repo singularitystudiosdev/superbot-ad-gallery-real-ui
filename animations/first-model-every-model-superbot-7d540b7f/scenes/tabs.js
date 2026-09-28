@@ -7,8 +7,8 @@
 // into its slot as the chat returns. The last beat's preview card grows toward the frame (a native-size twin
 // again) to hand off to the next scene. render(lt) is a pure function of local time.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, APPS, SEND, CHAT_END, Z_IN, Z_HOLD, Z_OUT, Z_LEN, Z_DONE, Z_SHINE, OK } from './tabs-assets/chat.js?v=fm1';
-import { cardHtml } from './tabs-assets/beats/code.js?v=fm1';
+import { mountChat, renderChat, BEATS, APPS, SEND, CHAT_END, FIN, Z_IN, Z_HOLD, Z_OUT, Z_LEN, Z_DONE, Z_SHINE, OK } from './tabs-assets/chat.js?v=fm2';
+import { cardHtml } from './tabs-assets/finale.js?v=fm2';
 import { clamp, lerp, seg, outCubic, inOutCubic, outBack, boxIn, esc } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
@@ -106,7 +106,8 @@ function renderPill(p, k, t, e, X, Y, s1) {
 
 export default {
   id: 'tabs',
-  dur: CHAT_END + 0.4,
+  // the chat's length: the routes are chained from each beat's window (chat.js), the finale's cut ends it
+  dur: CHAT_END,
 
   mount(section) {
     section.innerHTML = `
@@ -132,6 +133,9 @@ export default {
     Object.assign(el, { bigRow: el.big.querySelector('.pv-row'), bigLive: el.big.querySelector('.pv-live'), bigPlay: el.big.querySelector('.pv-play'), bigRing: el.big.querySelector('.pv-ring') });
     el.chat = mountChat(hub);
     el.fontSet = false;
+    // exporters wait on this (timeline.js): the beats' async assets (three.js models, scraped thumbnails) and the poster
+    const poster = el.big.querySelector('.pv-media img');
+    this.ready = Promise.all([el.chat.ready, poster && poster.decode ? poster.decode().catch(() => {}) : null]);
   },
 
   render(lt, ctx) {
@@ -140,6 +144,12 @@ export default {
     const W = (ctx && ctx.W) || 1920;
     const g = geo(W);
     const up = lift(g);
+    // the posters are the ride clip's frame 0 in its opening band: the 4:5 clip's, or the wide clip's past 1.2:1
+    const posterSrc = W / H > 1.2 ? 'img/ride-poster-wide.jpg' : 'img/ride-poster.jpg';
+    if (el.posterSrc !== posterSrc) {
+      el.posterSrc = posterSrc;
+      document.querySelectorAll('#s-tabs .pv-media img').forEach((im) => im.setAttribute('src', posterSrc));
+    }
 
     // camera: pushed in on the empty state, easing out as the thread starts
     const z0 = g.DW < 700 ? 1.08 : 1.2;
@@ -194,24 +204,26 @@ export default {
     });
 
     // the hand-off: the preview card grows toward the frame as a native-size twin while the chat recedes
-    const last = el.chat.beats[BEATS.length - 1];
-    const T = last.k.T, card = last.inst.card;
+    const T = FIN, card = el.chat.fin.card;
     if (t >= T.grow) {
       const b = boxIn(card, el.site);
       const cx = b.x + b.w / 2, cy = b.y + b.h / 2;
       const Sx = W / 2 + s0 * (cx - g.DW / 2), Sy = H / 2 + s0 * (cy - g.DH / 2);
-      // native end size: exactly W x round(W * 27.4 / 44) (864 x 538 at 4x5), radius 27, centred on the frame
-      el.big.style.fontSize = (W / 44).toFixed(4) + 'px';
-      el.big.style.width = W + 'px';
-      el.big.style.height = Math.round((W * 27.4) / 44) + 'px';
-      el.big.style.borderRadius = '27px';
-      const Bw = W, Bh = Math.round((W * 27.4) / 44);
+      // native end size: W x 538 (the ride's opening band), radius 27, centred on the frame. At 4x5 that is exactly
+      // W x round(W * 27.4 / 44) = 864 x 538; on a wide frame the card's own 864 x 538 box widens to W as it grows,
+      // so it lands on the ride's band instead of a W-wide card of the thread card's aspect
       const e = inOutCubic(seg(t, T.grow, T.grow + 0.5));
+      const wide = W / H > 1.2, NW = wide ? 864 : W;
+      const Bw = wide ? lerp(NW, W, e) : W, Bh = Math.round((NW * 27.4) / 44);
+      el.big.style.fontSize = (NW / 44).toFixed(4) + 'px';
+      el.big.style.width = Bw + 'px';
+      el.big.style.height = Bh + 'px';
+      el.big.style.borderRadius = '27px';
       // the chrome leaves so only the poster remains in the rect: footer, badge, play button, ring
-      const f = outCubic(seg(t, 7.0, 7.35));
+      const f = outCubic(seg(t, T.fade[0], T.fade[1]));
       el.bigRow.style.opacity = el.bigLive.style.opacity = el.bigPlay.style.opacity = el.bigRing.style.opacity = (1 - f).toFixed(3);
       el.bigRow.style.transform = f > 0 ? `translateY(${(f * 0.35 * el.bigRow.offsetHeight).toFixed(2)}px)` : 'none';
-      const sc = e >= 1 ? 1 : lerp((s0 * b.w) / Bw, 1, e);
+      const sc = e >= 1 ? 1 : lerp((s0 * b.w) / NW, 1, e);
       const X = e >= 1 ? W / 2 : lerp(Sx, W / 2, e), Y = e >= 1 ? H / 2 : lerp(Sy, H / 2, e);
       el.big.style.display = 'block';
       el.big.style.transform = e >= 1 ? `translate(0px,${((H - Bh) / 2).toFixed(2)}px)` : `translate(${(X - Bw / 2).toFixed(2)}px,${(Y - Bh / 2).toFixed(2)}px) scale(${sc.toFixed(5)})`;

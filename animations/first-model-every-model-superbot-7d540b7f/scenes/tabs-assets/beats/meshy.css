@@ -1,18 +1,31 @@
-/* Meshy beat: five model rows generating (thumb, name, progress bar, then check + triangle count). Scoped under
-   #s-tabs .sbsite .hub, classes prefixed ms-. No transitions: meshy.js writes every moving value from t. */
-#s-tabs .sbsite .hub .ms-card { box-sizing: border-box; width: 440px; max-width: 100%; padding: 6px; border-radius: 12px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); display: grid; gap: 2px; opacity: 0; }
-#s-tabs .sbsite .hub .ms-row { display: grid; grid-template-columns: 28px minmax(0, 1fr) 88px 92px; align-items: center; gap: 10px; height: 36px; padding: 0 10px 0 4px; border-radius: 8px; opacity: 0; }
-#s-tabs .sbsite .hub .ms-row:nth-child(odd) { background: #111115; }
-#s-tabs .sbsite .hub .ms-th { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; background: #17171c; box-shadow: inset 0 0 0 1px #26262c; }
-#s-tabs .sbsite .hub .ms-th svg { width: 18px; height: 18px; display: block; }
-#s-tabs .sbsite .hub .ms-n { font: 500 11.5px/1 var(--mono); color: #c7c7cc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#s-tabs .sbsite .hub .ms-bar { position: relative; height: 4px; border-radius: 999px; background: #1f1f24; overflow: hidden; }
-#s-tabs .sbsite .hub .ms-bar i { position: absolute; inset: 0; border-radius: 999px; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #5d91ec, #9a7bff); }
-#s-tabs .sbsite .hub .ms-row.on .ms-bar i { background: #34d399; }
-#s-tabs .sbsite .hub .ms-st { position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 6px; font: 600 10.5px/1 var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
-#s-tabs .sbsite .hub .ms-pc { color: #8e8e93; }
-#s-tabs .sbsite .hub .ms-tr { display: none; color: #9fe8c6; }
-#s-tabs .sbsite .hub .ms-row.on .ms-pc { display: none; }
-#s-tabs .sbsite .hub .ms-row.on .ms-tr { display: inline; }
-#s-tabs .sbsite .hub .ms-row.on .ms-n { color: #ececec; }
-#s-tabs .sbsite .hub .ms-st .qc-ok { width: 13px; height: 13px; opacity: 0; }
+/* Meshy beat: a Meshy-style result grid (header + 3x2 dark tiles, one WebGL canvas drawn per tile by scissor).
+   Scoped under #s-tabs .sbsite .hub, classes prefixed ms3-. No transitions: meshy.js writes every moving value from t.
+   Geometry constants (card 440, grid 420 x 266, tile 136 x (108 view + 22 label), gap 6) mirror meshy.js. */
+#s-tabs .sbsite .hub .ms3-card { box-sizing: border-box; width: 440px; max-width: 100%; padding: 10px; border-radius: 12px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite .hub .ms3-hd { display: flex; align-items: center; gap: 7px; height: 28px; margin-bottom: 8px; padding: 0 2px 0 4px; font: 600 12.5px/1 var(--ui); color: #f2f2f2; white-space: nowrap; }
+#s-tabs .sbsite .hub .ms3-logo { width: 18px; height: 18px; display: block; border-radius: 5px; }
+#s-tabs .sbsite .hub .ms3-mode { padding: 4px 7px; border-radius: 999px; background: #1a1a1e; box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); font: 500 10.5px/1 var(--ui); color: #a4a4ab; }
+#s-tabs .sbsite .hub .ms3-cnt { margin-left: auto; display: flex; align-items: center; gap: 5px; font: 600 10.5px/1 var(--mono); font-variant-numeric: tabular-nums; color: #8e8e93; }
+#s-tabs .sbsite .hub .ms3-cnt .qc-ok { width: 13px; height: 13px; display: none; }
+#s-tabs .sbsite .hub .ms3-cnt.on { color: #c5f955; }
+#s-tabs .sbsite .hub .ms3-cnt.on .qc-ok { display: block; stroke: #c5f955; }
+#s-tabs .sbsite .hub .ms3-grid { position: relative; width: 420px; height: 266px; display: grid; grid-template-columns: repeat(3, 136px); grid-template-rows: repeat(2, 130px); gap: 6px; }
+#s-tabs .sbsite .hub .ms3-tile { position: relative; border-radius: 9px; overflow: hidden; background: radial-gradient(120% 90% at 50% 34%, #1f1f25 0%, #151518 62%, #111113 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); opacity: 0; }
+#s-tabs .sbsite .hub .ms3-view { height: 108px; }
+#s-tabs .sbsite .hub .ms3-lb { display: flex; align-items: center; height: 22px; padding: 0 8px; background: #111114; box-shadow: 0 -1px 0 rgba(255,255,255,.05); }
+#s-tabs .sbsite .hub .ms3-nm { font: 500 10px/1 var(--mono); color: #9a9aa1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .ms3-tile.on .ms3-nm { color: #e6e6ea; }
+#s-tabs .sbsite .hub .ms3-gl { position: absolute; left: 0; top: 0; width: 420px; height: 266px; display: block; z-index: 1; pointer-events: none; }
+#s-tabs .sbsite .hub .ms3-ov { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+#s-tabs .sbsite .hub .ms3-fx { position: absolute; border-radius: 9px 9px 0 0; background: radial-gradient(115% 95% at 50% 46%, rgba(0,0,0,0) 58%, rgba(0,0,0,.42) 100%); opacity: 0; }
+#s-tabs .sbsite .hub .ms3-st { position: absolute; top: 6px; right: 6px; display: flex; align-items: center; gap: 4px; height: 17px; padding: 0 6px; border-radius: 999px; background: rgba(10,10,12,.72); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); font: 600 9.5px/1 var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#s-tabs .sbsite .hub .ms3-pc { color: #c5f955; }
+#s-tabs .sbsite .hub .ms3-tr { display: none; color: #d9d9de; }
+#s-tabs .sbsite .hub .ms3-tr::after { content: ' tris'; color: #8e8e93; font-weight: 500; }
+#s-tabs .sbsite .hub .ms3-st .qc-ok { display: none; width: 11px; height: 11px; stroke: #c5f955; }
+#s-tabs .sbsite .hub .ms3-fx.on .ms3-pc { display: none; }
+#s-tabs .sbsite .hub .ms3-fx.on .ms3-tr { display: inline; }
+#s-tabs .sbsite .hub .ms3-fx.on .ms3-st .qc-ok { display: block; }
+#s-tabs .sbsite .hub .ms3-bar { position: absolute; left: 8px; right: 8px; bottom: 6px; height: 3px; border-radius: 999px; background: rgba(255,255,255,.1); overflow: hidden; }
+#s-tabs .sbsite .hub .ms3-bar i { position: absolute; inset: 0; border-radius: 999px; transform-origin: 0 50%; transform: scaleX(0); background: #c5f955; }
+#s-tabs .sbsite .hub .ms3-fx.on .ms3-bar { display: none; }

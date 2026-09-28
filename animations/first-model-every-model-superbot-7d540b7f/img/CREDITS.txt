@@ -1,4 +1,11 @@
 img CREDITS (first-model-every-model-superbot-7d540b7f)
 
-The chat scene uses no raster media: the preview card art is inline vector (scenes/tabs-assets/beats/code.js).
-Model logos live in brand/ (meshy-logo.svg, deepseek-logo.svg, claude-logo.svg).
+ride-poster.jpg       Frame 0 of scenes/ride-assets/clip.mp4 in the chat card's hand-off band (y 271..809 of the
+                      864x1080 stage, rendered at 2x). The footage is Prasenjit (@prasenx),
+                      https://x.com/prasenx/status/2102717687604633959, used as the ad's output clip; see
+                      scenes/ride-assets/CREDITS.txt for the timestamps and crop.
+ride-poster-wide.jpg  The same band (1920x538 at y 271) of scenes/ride-assets/clip-wide-first.jpg, for frames wider
+                      than 1.2:1. Same source and credit.
+
+Model logos live in brand/ (credits in brand/CREDITS.txt); the chat's scraped thumbnails and audio are credited in
+scenes/tabs-assets/scraped/CREDITS.txt.

@@ -1,42 +1,91 @@
-/* Opus 5.5 beat: the build readout (cw-) and the preview card (pv-). The preview card is em-based so the same
-   markup renders natively at any size (tabs.js lays a large twin of it for the hand-off). No transitions. */
-#s-tabs .sbsite .hub .cw-card { box-sizing: border-box; width: 440px; max-width: 100%; padding: 10px 12px 8px; border-radius: 12px; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); margin-bottom: 10px; opacity: 0; }
-#s-tabs .sbsite .hub .cw-head { display: flex; align-items: center; justify-content: space-between; font: 500 11.5px/1 var(--ui); color: #a9a9b0; }
-#s-tabs .sbsite .hub .cw-head b { font: 600 11px/1 var(--mono); color: #ececec; }
-#s-tabs .sbsite .hub .cw-pc { font: 600 10.5px/1 var(--mono); font-variant-numeric: tabular-nums; color: #8e8e93; }
-#s-tabs .sbsite .hub .cw-card.on .cw-pc { color: #34d399; }
-#s-tabs .sbsite .hub .cw-bar { position: relative; height: 3px; margin: 8px 0 8px; border-radius: 999px; background: #1f1f24; overflow: hidden; }
-#s-tabs .sbsite .hub .cw-bar i { position: absolute; inset: 0; transform-origin: 0 50%; transform: scaleX(0); border-radius: 999px; background: linear-gradient(90deg, #d97757, #f0a17f); }
-#s-tabs .sbsite .hub .cw-card.on .cw-bar i { background: #34d399; }
-#s-tabs .sbsite .hub .cw-files { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; row-gap: 1px; padding-bottom: 7px; border-bottom: 1px solid #1d1d22; }
-#s-tabs .sbsite .hub .cw-f { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 18px; font: 500 10.5px/1 var(--mono); color: #c7c7cc; opacity: 0; }
-#s-tabs .sbsite .hub .cw-f span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#s-tabs .sbsite .hub .cw-f b { font-weight: 600; font-variant-numeric: tabular-nums; color: #3ddc84; }
-#s-tabs .sbsite .hub .cw-steps { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; padding-top: 7px; }
-#s-tabs .sbsite .hub .cw-s { display: flex; align-items: center; gap: 7px; height: 19px; font: 500 11px/1 var(--ui); color: #a9a9b0; opacity: 0; }
-#s-tabs .sbsite .hub .cw-s.on { color: #e5e5ea; }
-#s-tabs .sbsite .hub .cw-s.cw-ok.on { color: #34d399; font-weight: 600; }
-#s-tabs .sbsite .hub .cw-st { position: relative; width: 12px; height: 12px; flex: none; }
-#s-tabs .sbsite .hub .cw-st .qc-spin { position: absolute; inset: 1px; border-width: 1.6px; }
-#s-tabs .sbsite .hub .cw-st .qc-ok { position: absolute; inset: 0; width: 12px; height: 12px; opacity: 0; }
-#s-tabs .sbsite .hub .qc-say.cw-done { color: #ececec; font-weight: 500; opacity: 0; }
+/* Opus 5.5 beat (beats/code.js): the ride written as a sped-up agent run in Cursor's agent-panel grammar, re-authored
+   from the make-minecraft ad's mc-code.css (zoom cut). Tool rows, file-edit cards with green diff hunks and line
+   numbers, collapsed Edited rows, a terminal block, and the review bar. The card fills the 471px reply column at a
+   fixed 330px height (the 16x9 feed budget); item heights are px constants the JS stacks exactly. Palette: Cursor
+   Dark's syntax colours (#82D2CE keywords, #EBC88D constants, #AAA0FA members, #EFB080 calls). No transitions. */
+#s-tabs .sbsite .hub .cx { position: relative; box-sizing: border-box; width: 100%; max-width: 471px; height: 330px; margin-bottom: 10px; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: #0d0d10; box-shadow: 0 0 0 1px #26262b, 0 12px 26px rgba(0,0,0,.45); font: 12px/1.3 var(--ui); color: #d6d6dd; opacity: 0; transition: none; }
+#s-tabs .sbsite .hub .cx.cx-done { box-shadow: 0 0 0 1px rgba(79,197,127,.55), 0 0 22px rgba(79,197,127,.12), 0 12px 26px rgba(0,0,0,.45); }
+#s-tabs .sbsite .hub .cx svg { flex: none; }
 
-/* ---- the preview card (em-based: 1em = 10px in the thread; 44em x 27.4em) ---- */
-#s-tabs .pv-card { position: relative; box-sizing: border-box; width: 44em; height: 27.4em; border-radius: 1.4em; overflow: hidden; background: #0a0a0b; font-family: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif; }
-#s-tabs .sbsite .hub .pv-card { font-size: 10px; max-width: 100%; opacity: 0; }
-#s-tabs .pv-media { position: absolute; inset: 0; background: #0a0a0b; }
-#s-tabs .pv-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; display: block; }
-#s-tabs .pv-play { position: absolute; left: 50%; top: 11em; width: 5.2em; height: 5.2em; margin: -2.6em 0 0 -2.6em; display: grid; place-items: center; border-radius: 50%; background: rgba(14, 12, 20, .55); box-shadow: inset 0 0 0 .1em rgba(255,255,255,.28); }
-#s-tabs .pv-play svg { width: 2.4em; height: 2.4em; margin-left: .25em; display: block; }
-#s-tabs .pv-live { position: absolute; left: 1.2em; top: 1.2em; padding: .5em .8em; border-radius: 999px; background: rgba(14, 12, 20, .55); font: 700 .85em/1 "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif; letter-spacing: .1em; color: #f4efe9; }
-#s-tabs .pv-live::before { content: ""; display: inline-block; width: .6em; height: .6em; margin-right: .55em; border-radius: 50%; background: #34d399; vertical-align: .02em; }
-#s-tabs .pv-row { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 1em; height: 5.4em; padding: 0 1.2em; background: #111114; box-shadow: 0 -.1em 0 #1d1d22; }
-#s-tabs .pv-ic { flex: none; display: grid; place-items: center; width: 3em; height: 3em; border-radius: .9em; background: linear-gradient(135deg, #d97757, #b4506f); }
-#s-tabs .pv-ic svg { width: 1.8em; height: 1.8em; display: block; }
-#s-tabs .pv-tx { display: flex; flex-direction: column; gap: .45em; min-width: 0; flex: 1; }
-#s-tabs .pv-tx b { font-size: 1.35em; font-weight: 650; color: #f2f2f5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.1; }
-#s-tabs .pv-tx small { font-size: 1.05em; font-weight: 500; color: #8e8e93; line-height: 1.1; }
-#s-tabs .pv-open { flex: none; display: inline-flex; align-items: center; gap: .35em; height: 2.9em; padding: 0 1em 0 1.2em; border-radius: 999px; background: #f2f2f5; font-size: 1.1em; font-weight: 650; color: #0b0b0d; }
-#s-tabs .pv-open svg { width: 1.3em; height: 1.3em; display: block; }
-/* the card's ring is inset (it never draws outside the rect) and is its own layer so it can fade at the hand-off */
-#s-tabs .pv-ring { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 .1em #2a2a30; pointer-events: none; }
+/* header: repo, branch, the replayed clock */
+#s-tabs .sbsite .hub .cx-hd { display: flex; align-items: center; gap: 9px; flex: none; height: 36px; padding: 0 12px; border-bottom: 1px solid #222226; background: #141417; }
+#s-tabs .sbsite .hub .cx-repo { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
+#s-tabs .sbsite .hub .cx-repo b { font: 600 13px/1 var(--ui); color: #ededf0; }
+#s-tabs .sbsite .hub .cx-hd .cx-oct { width: 14px; height: 14px; fill: #8b8b93; }
+#s-tabs .sbsite .hub .cx-br { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 7px 0 5px; border-radius: 6px; background: #1f1f23; font: 11px/1 var(--mono); color: #a1a1aa; }
+#s-tabs .sbsite .hub .cx-br .cx-oct { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .cx-state { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font: 500 12px/1 var(--ui); font-style: normal; color: #9d9da6; white-space: nowrap; }
+#s-tabs .sbsite .hub .cx-clk { font: 500 12px/1 var(--mono); font-variant-numeric: tabular-nums; color: #c9c9cf; }
+#s-tabs .sbsite .hub .cx-spin { display: block; flex: none; width: 11px; height: 11px; border-radius: 50%; border: 1.6px solid #3a3a40; border-top-color: #c9c9cf; box-sizing: border-box; }
+#s-tabs .sbsite .hub .cx-state .cx-tk { display: none; width: 14px; height: 14px; fill: none; stroke: #4fc57f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .cx-state.ok .cx-spin { display: none; }
+#s-tabs .sbsite .hub .cx-state.ok .cx-tk { display: block; }
+#s-tabs .sbsite .hub .cx-state.ok .cx-clk { color: #4fc57f; }
+
+/* the transcript viewport: the stack is bottom-anchored, so it grows upward once it overflows; the spacer keeps a
+   short run at the top */
+#s-tabs .sbsite .hub .cx-vp { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-vp::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 24px; background: linear-gradient(#0d0d10, rgba(13,13,16,0)); pointer-events: none; }
+#s-tabs .sbsite .hub .cx-stk { position: absolute; left: 0; right: 0; bottom: 0; min-height: 100%; display: flex; flex-direction: column; padding: 10px 12px 4px; box-sizing: border-box; }
+#s-tabs .sbsite .hub .cx-sp { flex: 1; }
+#s-tabs .sbsite .hub .cx-it { flex: none; height: 0; overflow: hidden; opacity: 0; }
+
+/* tool rows, as in the panel: the verb dimmer, its argument lighter */
+#s-tabs .sbsite .hub .cx-row { height: 22px; display: flex; align-items: center; gap: .35em; padding-left: 2px; font: 500 13px/1 var(--ui); color: #b4b4bc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .cx-row span { color: #7c7c85; }
+
+/* file icon badge and stats */
+#s-tabs .sbsite .hub .cx-fi { flex: none; display: inline-block; width: 17px; font: 800 8.5px/1 var(--ui); letter-spacing: -.02em; text-align: center; }
+#s-tabs .sbsite .hub .cx-fi.js { color: #e8c46b; }
+#s-tabs .sbsite .hub .cx-fi.ts { color: #5aa7e8; }
+#s-tabs .sbsite .hub .cx-add { color: #4fc57f; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cx-del { color: #f0616d; margin-left: .45em; }
+
+/* collapsed edit row: a thin bordered pill */
+#s-tabs .sbsite .hub .cx-ed { height: 28px; box-sizing: border-box; display: flex; align-items: center; gap: 7px; padding: 0 10px 0 8px; border-radius: 7px; border: 1px solid #26262b; background: #151518; font: 500 12.5px/1 var(--ui); color: #e2e2e6; white-space: nowrap; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-ed s, #s-tabs .sbsite .hub .cx-ch s { text-decoration: none; color: #6f6f78; font-weight: 400; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+#s-tabs .sbsite .hub .cx-ed em, #s-tabs .sbsite .hub .cx-ch em { margin-left: auto; padding-left: 8px; font: 500 12px/1 var(--mono); font-style: normal; white-space: nowrap; }
+
+/* file-edit card and terminal block share the frame: a header row and a 7-line body */
+#s-tabs .sbsite .hub .cx-card, #s-tabs .sbsite .hub .cx-term { height: 163px; box-sizing: border-box; display: flex; flex-direction: column; border-radius: 8px; border: 1px solid #26262b; background: #131316; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-ch { flex: none; height: 32px; box-sizing: border-box; display: flex; align-items: center; gap: 7px; padding: 0 10px 0 8px; border-bottom: 1px solid #222227; background: #17171b; font: 500 12.5px/1 var(--ui); color: #e2e2e6; white-space: nowrap; }
+#s-tabs .sbsite .hub .cx-ch b { font-weight: 600; }
+#s-tabs .sbsite .hub .cx-bd { position: relative; flex: 1; min-height: 0; overflow: hidden; padding: 6px 0; box-sizing: border-box; }
+#s-tabs .sbsite .hub .cx-l { display: flex; height: 17px; align-items: center; font: 11.5px/17px var(--mono); white-space: pre; }
+#s-tabs .sbsite .hub .cx-l code { font: inherit; color: #d6d6dd; background: none; padding: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-l i { font-style: normal; }
+/* added lines: green wash, green gutter bar, line numbers */
+#s-tabs .sbsite .hub .cx-card .cx-l { background: rgba(63,185,80,.11); box-shadow: inset 2px 0 0 #3fb950; }
+#s-tabs .sbsite .hub .cx-card .cx-l u { flex: none; width: 32px; padding-right: 11px; box-sizing: border-box; text-align: right; text-decoration: none; color: #5b6b60; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cx-l .k { color: #82d2ce; }
+#s-tabs .sbsite .hub .cx-l .s { color: #e394dc; }
+#s-tabs .sbsite .hub .cx-l .n { color: #ebc88d; }
+#s-tabs .sbsite .hub .cx-l .f { color: #efb080; }
+#s-tabs .sbsite .hub .cx-l .t { color: #87c3ff; }
+#s-tabs .sbsite .hub .cx-l .p { color: #aaa0fa; }
+#s-tabs .sbsite .hub .cx-l .c { color: #6d6d75; font-style: italic; }
+
+/* terminal block */
+#s-tabs .sbsite .hub .cx-term { background: #0f0f11; }
+#s-tabs .sbsite .hub .cx-term .cx-ico { width: 15px; height: 15px; fill: none; stroke: #9d9da6; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .cx-tv { font-weight: 500 !important; color: #9d9da6; }
+#s-tabs .sbsite .hub .cx-cmd { font: 500 12px/1 var(--mono); color: #e2e2e6; }
+#s-tabs .sbsite .hub .cx-tst { display: inline-flex; align-items: center; gap: 6px; color: #4fc57f; }
+#s-tabs .sbsite .hub .cx-tst.ok .cx-spin { display: none; }
+#s-tabs .sbsite .hub .cx-term .cx-l { padding-left: 12px; }
+#s-tabs .sbsite .hub .cx-l .dl { color: #f0616d; }
+#s-tabs .sbsite .hub .cx-l .cmd { color: #ebc88d; }
+#s-tabs .sbsite .hub .cx-l .ok { color: #4fc57f; }
+#s-tabs .sbsite .hub .cx-l .dim { color: #7c7c85; }
+
+/* the review bar: changed files and lines, then Undo all / Accept all / Review, live at done */
+#s-tabs .sbsite .hub .cx-ft { display: flex; align-items: center; gap: 10px; flex: none; height: 44px; padding: 0 9px 0 8px; border-top: 1px solid #222226; background: #141417; white-space: nowrap; }
+#s-tabs .sbsite .hub .cx-sum { display: inline-flex; align-items: center; gap: 6px; min-width: 0; font: 500 12.5px/1 var(--ui); color: #b4b4bc; }
+#s-tabs .sbsite .hub .cx-sum .cx-add, #s-tabs .sbsite .hub .cx-sum .cx-del { font: 500 12px/1 var(--mono); }
+#s-tabs .sbsite .hub .cx-sum .cx-del { margin-left: 0; }
+#s-tabs .sbsite .hub .cx-chev { width: 13px; height: 13px; fill: none; stroke: #7c7c85; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .cx-nf { font-weight: 600; color: #e2e2e6; }
+#s-tabs .sbsite .hub .cx-btns { display: inline-flex; gap: 5px; margin-left: auto; opacity: .4; }
+#s-tabs .sbsite .hub .cx-ft.on .cx-btns { opacity: 1; }
+#s-tabs .sbsite .hub .cx-b { display: inline-flex; align-items: center; height: 26px; padding: 0 9px; border-radius: 7px; border: 1px solid #323238; font: 500 12px/1 var(--ui); font-style: normal; color: #d6d6dd; }
+#s-tabs .sbsite .hub .cx-b.cx-pri { border-color: #ececf1; background: #ececf1; color: #141416; font-weight: 600; }

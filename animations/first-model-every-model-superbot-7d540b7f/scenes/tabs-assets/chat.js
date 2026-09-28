@@ -4,9 +4,10 @@
 // empty frame, resolves it and flies it back). The thread is bottom-anchored so every message rises out of the
 // composer. renderChat(c, t) is a pure function of the scene's local time.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn } from '../../lib.js';
-import meshy from './beats/meshy.js?v=fm1';
-import scrape from './beats/scrape.js?v=fm1';
-import code from './beats/code.js?v=fm1';
+import meshy from './beats/meshy.js?v=fm2';
+import scrape from './beats/scrape.js?v=fm2';
+import code from './beats/code.js?v=fm2';
+import finale from './finale.js?v=fm2';
 
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 const bump = (p) => Math.sin(Math.PI * clamp(p));
@@ -19,8 +20,8 @@ export const TYPE0 = 0.25, TYPE1 = 0.95, SEND = 1.05;
 export const Z_IN = 0.26, Z_HOLD = 0.34, Z_OUT = 0.2, Z_LEN = Z_IN + Z_HOLD + Z_OUT;
 export const Z_DONE = Z_IN + 0.1;          // the spinner resolves to the check (zoom-relative)
 export const Z_SHINE = [Z_IN - 0.02, Z_IN + 0.3]; // the shine band's sweep (zoom-relative)
-export const CHAT_END = 7.0;
-export const PREVIEW = { say: 6.55, card: 6.6, grow: 6.8 };
+// the gap from the send to Meshy's chip, from a chip to its zoom, and from the Opus beat's end to the ready line
+export const CHIP0 = SEND + 0.1, CHIP_Z = 0.1, FIN_GAP = 0.08;
 
 export const APPS = {
   meshy: { name: 'Meshy', logo: brand('meshy-logo.svg') },
@@ -28,18 +29,26 @@ export const APPS = {
   opus: { name: 'Opus 5.5', logo: brand('claude-logo.svg') },
 };
 
-// the three routings: the chip lands in the thread at `chip`, the zoom runs z0 .. z0 + Z_LEN, the model answers at
-// the zoom's end
+// the three routings, chained: each chip lands in the thread at `chip` (Meshy's just after the send, the next ones
+// at the previous beat's T.end), the zoom runs z0 .. z0 + Z_LEN, the model answers at the zoom's end and owns its
+// window up to its T.end. The finale (ready line + preview card) follows the Opus beat.
 const ROUTES = [
-  { app: 'meshy', mod: meshy, chip: 1.15, z0: 1.25 },
-  { app: 'deepseek', mod: scrape, chip: 2.75, z0: 2.85 },
-  { app: 'opus', mod: code, chip: 4.35, z0: 4.45 },
+  { app: 'meshy', mod: meshy },
+  { app: 'deepseek', mod: scrape },
+  { app: 'opus', mod: code },
 ];
+const r3 = (v) => Math.round(v * 1000) / 1000;
+let at = CHIP0;
 export const BEATS = ROUTES.map((r) => {
-  const k = { ...r, label: `Switching to ${APPS[r.app].name}`, z1: r.z0 + Z_LEN, done: r.z0 + Z_DONE, reply: r.z0 + Z_LEN };
+  const chip = r3(at), z0 = r3(chip + CHIP_Z);
+  const k = { ...r, chip, z0, label: `Switching to ${APPS[r.app].name}`, z1: r3(z0 + Z_LEN), done: r3(z0 + Z_DONE), reply: r3(z0 + Z_LEN) };
   k.T = r.mod.times(k.reply);
+  at = k.T.end;
   return k;
 });
+export const FIN = finale.times(r3(BEATS[BEATS.length - 1].T.end + FIN_GAP));
+// the scene's length: the finale's cut
+export const CHAT_END = r3(FIN.end);
 
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
@@ -81,18 +90,23 @@ export function mountChat(hub) {
   const sbAvatar = `<span class="avatar sb"><img src="${sbSrc}" alt=""/></span>`;
   const u = add(`<div class="msg qc-u"><span class="avatar">S</span><div class="m-main"><div class="m-head"><span class="m-name">sam</span></div><div class="m-text">${esc(ASK)}</div></div></div>`);
 
+  let fin = null;
   const beats = BEATS.map((k) => {
     const w = add(`<div class="msg qc-m">${sbAvatar}<div class="m-main"><span class="qc-sw">${tile(k.app)}<span class="qc-swl">${esc(k.label)}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div></div>`);
     const r = add(`<div class="msg qc-m qc-r">${sbAvatar}<div class="m-main"><div class="qc-who">${tile(k.app)}<b>${APPS[k.app].name}</b><small>in superbot</small></div></div></div>`);
     const main = r.querySelector('.m-main');
     const inst = k.mod.build(k, ctx);
     inst.nodes.forEach((n) => main.appendChild(n));
+    // the finale continues the last (Opus) reply
+    if (k === BEATS[BEATS.length - 1]) { fin = finale.build(FIN, ctx); fin.nodes.forEach((n) => main.appendChild(n)); }
     const sw = w.querySelector('.qc-sw');
     return { k, w, sw, spin: sw.querySelector('.qc-spin'), ok: sw.querySelector('.qc-st .qc-ok'), r, who: main.firstElementChild, inst };
   });
 
   // scroll marks: after each time, the feed's fold glides so that element's bottom sits on the fold
-  const scroll = [[SEND, u], ...beats.flatMap((b) => [[b.k.chip, b.w], [b.k.reply, b.who], ...b.inst.marks])].sort((x, y) => x[0] - y[0]);
+  const scroll = [[SEND, u], ...beats.flatMap((b) => [[b.k.chip, b.w], [b.k.reply, b.who], ...b.inst.marks]), ...fin.marks].sort((x, y) => x[0] - y[0]);
+  // a beat that loads assets at build (three.js models, thumbnails) hands back inst.ready; tabs.js waits on all of them
+  const ready = Promise.all(beats.map((b) => b.inst.ready).filter(Boolean));
 
   // the composer's platform chip names the model superbot routed to
   const plat = hub.querySelector('.rc-plat');
@@ -107,7 +121,7 @@ export function mountChat(hub) {
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
 
   const ph = hub.querySelector('.rc-ph');
-  return { hub, feed, inner, u, beats, scroll, plat, cat, pImg, pLabel, ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: null };
+  return { hub, feed, inner, u, beats, fin, ready, scroll, plat, cat, pImg, pLabel, ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: null };
 }
 
 function renderComposer(c, t) {
@@ -175,5 +189,6 @@ export function renderChat(c, t) {
     rise(b.r, t, b.k.reply, 0.26, 8);
     b.inst.render(t);
   });
+  c.fin.render(t);
   renderScroll(c, t);
 }

@@ -23,9 +23,9 @@ export const CHAT_T0 = 0.35;         // the hub has faded up from black; the ask
 export const TYPE_CPS = 50; /* deliberate */ // a typewriter: one character every 0.02 s (character k lands at CHAT_T0 + k/50)
 const SEND = 0.17;                   // last character to the send press (34 chars land at 1.03, send 1.20)
 const FIRST_PILL = 0.2;              // send to the first pill landing (1.40)
-// the Opus step writes the game (code.js) inside this window after its reply starts, then plays it (play.js)
-export const OPUS_WINDOW = 4.5; /* deliberate */
-export const SLOT = 4.2; /* deliberate */ // one model's turn: its pill, the camera move, its reply
+// the schedule is content-driven: each beat's times(r).end is its last visible change, and the next thing (the next
+// pill, or the next beat under the same pill, e.g. "Press play." after the code) starts GAP after it
+export const GAP = 0.2; /* deliberate */ // the user: "it should be like 0.2"
 // the camera move on every pill (scenes/tabs.js owns the move itself; these are its marks)
 export const PUSH = 0.5; /* deliberate */ // push-in onto the pill, outQuint
 export const HOLD = 1.0; /* deliberate */ // parked on the pill: label still and fully legible (the brief asks >= 0.8s)
@@ -33,7 +33,6 @@ export const PULL = 0.5; /* deliberate */ // pull back to the thread, inOutCubic
 const CHECK = 0.45; /* deliberate */ // after the push lands, the spinner resolves to the check
 const REPLY = 0.05;                  // pull-back start to the model's reply line
 const APPEAR = 0.3;                  // a message rising out of the composer
-const MIN_GAP = 0.1;                 // a beat that overruns its slot pushes the next pill back by at least this
 
 // the one ask the whole spot is about
 export const ASK = 'Relaxing Japanese bike riding game';
@@ -58,42 +57,44 @@ const CHIP = {
 
 // one hand-off: the app that answers, its pill, and the beat modules its reply plays in order (Opus writes the game,
 // then plays it, under one pill)
-// win: the first beat's window from the reply start; the next beat starts at the window's end even if that beat
-// finishes early (a beat that overruns its window pushes on). 0 = the next beat follows straight on.
-const step = (app, mods, opts = {}, win = 0) => ({ app, mods, opts, win, label: CHIP[app] });
+const step = (app, mods, opts = {}) => ({ app, mods, opts, label: CHIP[app] });
 export const ROUTE = [
   step('gemini', [art]),
   step('blender', [blender]),
   step('lyria', [music]),
   step('elevenlabs', [assets]),
-  step('opus', [code, play], {}, OPUS_WINDOW),
+  step('opus', [code, play]),
 ];
 
-// every step's clock. The ask types from CHAT_T0 and is sent; pill i lands at FIRST + i * SLOT (or later, if the
-// previous reply overran its slot), the camera pushes in, the check lands while it holds, the camera pulls back and the
-// reply builds. Each beat module's times(r) owns everything after its own start.
+// every step's clock. The ask types from CHAT_T0 and is sent; the first pill lands FIRST_PILL after the send, and
+// every later pill lands GAP after the previous step's last visible change; the camera pushes in, the check lands
+// while it holds, the camera pulls back and the reply builds. Each beat module's times(r) owns everything after its
+// own start and reports end = its last visible change; a beat may also report next (code.js: its run is done) when
+// the beat after it under the same pill is cued from earlier than end (the code's camera pull-back overlaps
+// "Press play."). A step ends when the last of its beats has settled.
 function timeBeats(route) {
   const typeEnd = CHAT_T0 + ASK.length / TYPE_CPS; // the last character lands
   const send = typeEnd + SEND;
   const first = send + FIRST_PILL;
-  let prevEnd = -Infinity;
+  let prevEnd = null;
   return route.map((a, i) => {
     const k = { app: a.app, opts: a.opts, label: a.label };
     if (i === 0) Object.assign(k, { ask: ASK, s: CHAT_T0, typeEnd, send });
-    k.sw = Math.max(first + i * SLOT, prevEnd + MIN_GAP); // the pill lands
+    k.sw = prevEnd === null ? first : prevEnd + GAP; // the pill lands
     k.landed = k.sw + PUSH;           // the camera is parked on it
     k.done = k.landed + CHECK;        // spinner -> check; the composer's model chip switches here
     k.pull = k.landed + HOLD;         // the camera starts back
     k.back = k.pull + PULL;           // ...and is at rest
     k.reply = k.pull + REPLY;         // the app answers
-    let r = k.reply;
-    k.parts = a.mods.map((mod, j) => {
+    let r = k.reply, end = k.back;
+    k.parts = a.mods.map((mod) => {
       const T = mod.times(r, a.opts);
-      r = j === 0 && a.win ? Math.max(T.end, k.reply + a.win) : T.end;
+      end = Math.max(end, T.end);
+      r = (Number.isFinite(T.next) ? T.next : T.end) + GAP;
       return { mod, T };
     });
-    k.end = r;
-    prevEnd = r;
+    k.end = end;
+    prevEnd = end;
     return { k };
   });
 }

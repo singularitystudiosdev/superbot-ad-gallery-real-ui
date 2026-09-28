@@ -13,7 +13,6 @@
 import { seg, outCubic, streamCount } from '../../../lib.js';
 
 const SAY = 'Wrote the ride: terrain, sky, bike and sound, all in the browser.';
-const CPS = 85;
 const REPO_NAME = 'bikeride';
 
 // ---- the game: the four files whose hunks stream past in cards ----
@@ -308,16 +307,23 @@ const TESTS = [
 ];
 
 // seconds: how long an item takes to land/stream (DUR) and when the next one starts after it (STEP). The reference
-// ran its whole run in ~1.6 s; this one has ~3.5 s for 13 items, so each card streams its whole file in 0.58 s.
-const DUR = { row: 0.1, edit: 0.1, card: 0.58, term: 0.45 };
-const STEP = { row: 0.09, edit: 0.1, card: 0.5, term: 0.45 };
-const CARD_AT = 0.1;   // the reply line starts, then the panel rises
-const FIRST = 0.12;    // the panel is up, then the first row lands
-const SETTLE = 0.04;   // the tests pass, then the run is done
-const HOLD_DONE = 0.45; /* deliberate */ // done: the review bar reads, pushed in, before the camera pulls back
-const FOCUS_AT = 0.45; /* deliberate */  // the panel has appeared, then the camera starts in on it
-const FOCUS_PUSH = 0.5; /* deliberate */ // push-in, outQuint (the pill push's PUSH)
-const FOCUS_PULL = 0.5; /* deliberate */ // pull-back, inOutCubic (the pill push's PULL)
+// ran its whole run in ~1.6 s; this one has ~2.8 s for 13 items, so each card streams its whole file in 0.464 s.
+// v3 pace: every duration below (and the camera's push/hold/pull on the panel) is 0.8x its v2 value.
+const DUR = { row: 0.08, edit: 0.08, card: 0.464, term: 0.36 };
+const STEP = { row: 0.072, edit: 0.08, card: 0.4, term: 0.36 };
+const CPS_SAY = 106.25;  // the reply line streams at this many characters a second (v2 85)
+const SAY_AT = 0.04;     // reply start to the line's first character
+const CARD_AT = 0.08;    // the reply line starts, then the panel rises
+const CARD_IN = 0.16;    // the panel rising in
+const SLOT_IN = 0.064;   // an item's slot opening (and its content landing)
+const FIRST = 0.096;     // the panel is up, then the first row lands
+const SETTLE = 0.032;    // the tests pass, then the run is done
+const POP = 0.176;       // done: the header check pops in
+const PULSE = 0.24;      // done: Accept all pulses once
+const HOLD_DONE = 0.36; /* deliberate */ // done: the review bar reads, pushed in, before the camera pulls back
+const FOCUS_AT = 0.36; /* deliberate */  // the panel has appeared, then the camera starts in on it
+const FOCUS_PUSH = 0.4; /* deliberate */ // push-in, outQuint
+const FOCUS_PULL = 0.4; /* deliberate */ // pull-back, inOutCubic
 // heights in --u units (1px at narrow columns, a bit more on wide ones); GAP rides inside each item's slot
 const BODY = 7, LH = 17; // a code/terminal body shows 7 lines of 17
 const HGT = { row: 22, edit: 28, card: 32 + BODY * LH + 12, term: 32 + BODY * LH + 12 };
@@ -396,10 +402,13 @@ export default {
     T.items = SCRIPT.map((s) => { const o = { a: at, b: at + DUR[s.k] }; at += STEP[s.k]; return o; });
     T.done = T.items[T.items.length - 1].b + SETTLE; // the tests pass: review bar live, Worked for
     // the camera (scenes/tabs.js, via chat.js FOCUS) pushes in on the panel once it is up, holds through the run,
-    // and is back at rest before the beat ends (the Opus window's "Press play." lands at r + 4.5)
+    // and pulls back to rest after done
     const sw = T.card + FOCUS_AT;
     T.focus = { sw, landed: sw + FOCUS_PUSH, pull: T.done + HOLD_DONE, back: T.done + HOLD_DONE + FOCUS_PULL };
-    T.end = T.focus.back;
+    // chat.js cues the next beat ("Press play.") from done, not from end: the pull-back overlaps it
+    T.next = T.done;
+    // the beat's last visible change: the camera back at rest (the panel itself settles at done + PULSE)
+    T.end = Math.max(T.focus.back, T.done + PULSE, r + SAY_AT + SAY.length / CPS_SAY);
     return T;
   },
   build(k, x) {
@@ -444,15 +453,15 @@ export default {
       focus: card, // the camera's target while T.focus runs (chat.js FOCUS)
       marks: [[T.r, say], [T.card, card]],
       render(t) {
-        const ns = streamCount(SAY, T.r + 0.05, CPS, t);
+        const ns = streamCount(SAY, T.r + SAY_AT, CPS_SAY, t);
         if (ns !== said) { vis.textContent = SAY.slice(0, ns); hid.textContent = SAY.slice(ns); said = ns; }
-        rise(card, seg(t, T.card, T.card + 0.2), 16);
+        rise(card, seg(t, T.card, T.card + CARD_IN), 16);
         const d = t >= T.done;
         let lines = 0, files = 0;
         items.forEach((o) => {
           const { s } = o;
           // the slot opens (height), which pushes the whole run up; the content lands just behind it
-          const e = outCubic(seg(t, o.a, o.a + 0.08));
+          const e = outCubic(seg(t, o.a, o.a + SLOT_IN));
           const h = e * (HGT[s.k] + GAP);
           if (Math.abs(h - o.h) > 1e-3) { o.n.style.height = `calc(var(--u) * ${h.toFixed(3)})`; o.h = h; }
           o.n.style.opacity = e.toFixed(3);
@@ -483,7 +492,7 @@ export default {
         setText(clk, `${Math.floor(Math.max(0, Math.min(t, T.done) - T.r))}s`);
         state.classList.toggle('ok', d);
         spin.style.transform = `rotate(${((t - T.card) * 720).toFixed(1)}deg)`;
-        const pop = seg(t, T.done, T.done + 0.22);
+        const pop = seg(t, T.done, T.done + POP);
         stTk.style.transform = d && pop < 1 ? `scale(${(0.6 + 0.4 * outCubic(pop)).toFixed(3)})` : '';
 
         // the review bar: files and lines count up as edits land; at done its buttons go live and Accept all pulses
@@ -491,7 +500,7 @@ export default {
         setText(fAdd, `+${d ? TOTAL : lines}`);
         ft.classList.toggle('on', d);
         card.classList.toggle('code-done', d);
-        const pb = Math.sin(Math.PI * seg(t, T.done, T.done + 0.3));
+        const pb = Math.sin(Math.PI * seg(t, T.done, T.done + PULSE));
         pri.style.transform = d ? `scale(${(1 + 0.06 * pb).toFixed(4)})` : '';
         pri.style.boxShadow = d ? `0 0 0 ${(4 * pb).toFixed(2)}px rgba(236,236,236,${(0.22 * pb).toFixed(3)})` : '';
       },

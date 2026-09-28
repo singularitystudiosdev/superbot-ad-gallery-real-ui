@@ -8,11 +8,18 @@ import { lerp, seg, outCubic, streamCount } from '../../../lib.js';
 const SAY = 'A slow lo-fi loop. Koto over soft Rhodes.';
 // the loop's two parts, in the order they are composed
 const TRACKS = ['Koto', 'Soft Rhodes'];
-const CPS = 80;
+// v3 pace: every duration below is 0.8x its v2 value (the user: "about 20% faster in just its work")
+const CPS = 100;                       // v2 80
+const SAY_AT = 0.048;                  // reply start to the line's first character
+const CHIP_AT = 0.176;                 // reply start to the "Composing the loop" chip
+const CARD_AT = 0.32;                  // reply start to the loop's card
+const TRACK_AT = 0.496;                // reply start to the first part landing
+const FILL_AT = 0.096;                 // a part landing to its waveform starting to fill
 const BARS = 36;                       // waveform bars per part
-const FILL = 0.95; /* deliberate */    // one part filling its waveform as it is generated
-const STAGGER = 0.32; /* deliberate */ // one part starting to the next
-const RISE = 0.3;                      // the chip, the card and each row rising in
+const FILL = 0.76; /* deliberate */    // one part filling its waveform as it is generated
+const STAGGER = 0.256; /* deliberate */ // one part starting to the next
+const RISE = 0.24;                     // the chip, the card and each row rising in
+const CHECK_IN = 0.08, CHECK_OUT = 0.16; // a part's check fades in from CHECK_IN before its fill ends to CHECK_OUT after
 const NOTE = '<svg class="mus-note" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>';
 const PLAY = '<svg class="mus-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>';
 
@@ -28,12 +35,13 @@ const heights = (seed, smooth) => Array.from({ length: BARS }, (_, i) => {
 export default {
   times(r) {
     const T = { r };
-    T.chip = r + 0.22;
-    T.card = r + 0.4;
-    T.track = TRACKS.map((_, i) => r + 0.62 + i * STAGGER);
-    T.fill = T.track.map((a) => a + 0.12);
+    T.chip = r + CHIP_AT;
+    T.card = r + CARD_AT;
+    T.track = TRACKS.map((_, i) => r + TRACK_AT + i * STAGGER);
+    T.fill = T.track.map((a) => a + FILL_AT);
     T.done = T.fill[TRACKS.length - 1] + FILL;
-    T.end = T.done + 0.45;   // the last check lands at T.done + 0.2: 0.25s of dwell, then the next switch
+    // the beat's last visible change: the last part's check fully in (r + 1.768)
+    T.end = Math.max(T.done + CHECK_OUT, r + SAY_AT + SAY.length / CPS);
     return T;
   },
   build(k, x) {
@@ -59,7 +67,7 @@ export default {
       nodes: [say, chip, card],
       marks: [[T.r, say], [T.chip, chip], [T.card, card], [T.track[TRACKS.length - 1], rows[TRACKS.length - 1].row]],
       render(t) {
-        const n = streamCount(SAY, T.r + 0.06, CPS, t);
+        const n = streamCount(SAY, T.r + SAY_AT, CPS, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }
 
         // the composing chip: lands, spins, then resolves once the last part has filled
@@ -85,7 +93,7 @@ export default {
             b.style.transform = `scaleY(${lerp(0.25, 1, outCubic(on)).toFixed(3)})`;
           });
           row.classList.toggle('mus-live', p > 0 && p < 1);
-          len.style.opacity = outCubic(seg(t, T.fill[i] + FILL - 0.1, T.fill[i] + FILL + 0.2)).toFixed(3);
+          len.style.opacity = outCubic(seg(t, T.fill[i] + FILL - CHECK_IN, T.fill[i] + FILL + CHECK_OUT)).toFixed(3);
         });
       },
     };

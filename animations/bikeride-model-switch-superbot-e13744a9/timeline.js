@@ -21,8 +21,9 @@ const SEQUENCE = [
   ['scene', 'tabs'],
   ['end', 'end'],
 ];
-// the durations a scene gets if its module fails to load (so the spot keeps its shape)
-const FALLBACK_DUR = { tabs: 28.1 };
+// the durations a scene gets if its module fails to load (so the spot keeps its shape). A loaded scene reports its
+// own dur (tabs: its content-driven chat schedule + the 0.3 s fade), which is what CYCLE follows; this mirrors it.
+const FALLBACK_DUR = { tabs: 23.37 };
 const SCENE_FADE = 0.3;
 const END_DUR = 4.4, DIP = 0.35; /* deliberate */ // the end card holds; the dip to black at the loop
 

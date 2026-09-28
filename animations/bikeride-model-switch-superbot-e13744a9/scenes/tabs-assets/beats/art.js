@@ -11,12 +11,17 @@ import { lerp, seg, outCubic, streamCount } from '../../../lib.js';
 const SAY = 'Painted the decals: maple leaves, sakura petals, rice grass, sunflowers, hydrangeas and moss.';
 // the six decals, in the order Gemini paints them (file names under img/bike/decals/)
 const DECALS = ['maple-leaf', 'sakura-petals', 'rice-grass', 'sunflower', 'hydrangea', 'moss-stone'];
-const CPS = 80;                       // the reply line streams at this many characters a second
-const CARD = 0.18;                    // reply start to the sheet rising in
-const LEAD = 0.2;                     // the sheet landing to the first decal starting to resolve
-const PAINT = 0.42; /* deliberate */  // one decal resolving out of the blur
-const STAGGER = 0.12;                 // one decal starting to the next
-const TAIL = 0.45;                    // the last decal landing to the beat's end
+// v3 pace: every duration below is 0.8x its v2 value (the user: "about 20% faster in just its work")
+const CPS = 100;                      // the reply line streams at this many characters a second (v2 80)
+const SAY_AT = 0.048;                 // reply start to the line's first character
+const CARD = 0.144;                   // reply start to the sheet rising in
+const RISE = 0.36;                    // the sheet rising in
+const LEAD = 0.16;                    // the sheet landing to the first decal starting to resolve
+const PAINT = 0.336; /* deliberate */ // one decal resolving out of the blur
+const STAGGER = 0.096;                // one decal starting to the next
+const CAP = 0.12;                     // a file name fades in over +-CAP around its decal going crisp
+const LABEL_OUT = 0.2;                // the "Creating decals" label fading as the last decal lands
+const SWEEP = 1.75;                   // band sweeps a second (v2 1.4, one sweep in 0.8x the time)
 
 // a decal resolving out of a blur (decal-gen's unblur, pure function of t)
 function unblur(im, t, w0, w1) {
@@ -29,9 +34,10 @@ function unblur(im, t, w0, w1) {
 // the sweeping "generating" band across the sheet and its label (decal-gen's band)
 function band(gen, genl, t, w0, w1) {
   const p = seg(t, w0, w1);
-  gen.style.transform = `translateX(${lerp(-110, 110, (Math.max(0, t - w0) * 1.4) % 1).toFixed(1)}%)`;
+  // the band parks once it is gone, so nothing under the sheet changes after w1
+  gen.style.transform = `translateX(${lerp(-110, 110, (Math.max(0, Math.min(t, w1) - w0) * SWEEP) % 1).toFixed(1)}%)`;
   gen.style.opacity = (p >= 1 ? 0 : 1 - seg(p, 0.85, 1)).toFixed(3);
-  genl.style.opacity = (1 - seg(t, w1 - 0.25, w1)).toFixed(3);
+  genl.style.opacity = (1 - seg(t, w1 - LABEL_OUT, w1)).toFixed(3);
 }
 
 // the sheet rising in (decal-gen's rise)
@@ -48,7 +54,8 @@ export default {
     T.w0 = T.card + LEAD;                                                    // the band starts, decal 1 resolving
     T.tile = DECALS.map((_, i) => [T.w0 + i * STAGGER, T.w0 + i * STAGGER + PAINT]); // each decal: blur -> crisp
     T.w1 = T.tile[DECALS.length - 1][1];                                     // the last decal is crisp, band gone
-    T.end = Math.max(T.w1, r + 0.06 + SAY.length / CPS) + TAIL;              // r + 1.85 with these constants
+    // the beat's last visible change: the last file name fully in (r + 1.24), or the line's last character
+    T.end = Math.max(T.w1 + CAP, r + SAY_AT + SAY.length / CPS);
     return T;
   },
   build(k, x) {
@@ -80,11 +87,11 @@ export default {
       marks: [[T.r, say], [T.card, card]],
       render(t) {
         fit();
-        const n = streamCount(SAY, T.r + 0.06, CPS, t);
+        const n = streamCount(SAY, T.r + SAY_AT, CPS, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }
-        rise(card, seg(t, T.card, T.card + 0.45));
+        rise(card, seg(t, T.card, T.card + RISE));
         tiles.forEach((im, i) => { unblur(im, t, T.tile[i][0], T.tile[i][1]); });
-        caps.forEach((c, i) => { c.style.opacity = seg(t, T.tile[i][1] - 0.15, T.tile[i][1] + 0.15).toFixed(3); });
+        caps.forEach((c, i) => { c.style.opacity = seg(t, T.tile[i][1] - CAP, T.tile[i][1] + CAP).toFixed(3); });
         band(g, gl, t, T.w0, T.w1);
       },
     };

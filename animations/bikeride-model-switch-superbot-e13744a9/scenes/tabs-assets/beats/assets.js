@@ -13,10 +13,16 @@ const TAKES = [
   ['Gravel', 'gravel.wav'],
   ['Wind in the rice', 'wind-in-the-rice.wav'],
 ];
-const CPS = 80;
-const GEN = 0.8; /* deliberate */  // one take generating
-const STAGGER = 0.22;              // one row landing to the next
-const RISE = 0.3;                  // the chip, the card and each row rising in
+// v3 pace: every duration below is 0.8x its v2 value (the user: "about 20% faster in just its work")
+const CPS = 100;                   // v2 80
+const SAY_AT = 0.048;              // reply start to the line's first character
+const CHIP_AT = 0.176;             // reply start to the "Generating 4 sound effects" chip
+const CARD_AT = 0.32;              // reply start to the takes card
+const ROW_AT = 0.44;               // reply start to the first take landing
+const METER_AT = 0.08;             // a take landing to its meter starting
+const GEN = 0.64; /* deliberate */ // one take generating (from its row landing to Ready)
+const STAGGER = 0.176;             // one row landing to the next
+const RISE = 0.24;                 // the chip, the card and each row rising in
 const LVL = 5;                     // level-meter bars in a take's tile
 // the resting waveform each take settles into (0..1 per bar): a hum, a ring and decay, a crunch, a swell
 const REST = [[0.5, 0.7, 0.6, 0.75, 0.55], [1, 0.7, 0.45, 0.3, 0.2], [0.6, 0.9, 0.5, 0.85, 0.6], [0.3, 0.55, 0.8, 0.6, 0.35]];
@@ -24,11 +30,12 @@ const REST = [[0.5, 0.7, 0.6, 0.75, 0.55], [1, 0.7, 0.45, 0.3, 0.2], [0.6, 0.9, 
 export default {
   times(r) {
     const T = { r };
-    T.chip = r + 0.22;
-    T.card = r + 0.4;
-    T.row = TAKES.map((_, i) => r + 0.55 + i * STAGGER);
+    T.chip = r + CHIP_AT;
+    T.card = r + CARD_AT;
+    T.row = TAKES.map((_, i) => r + ROW_AT + i * STAGGER);
     T.done = T.row[TAKES.length - 1] + GEN;
-    T.end = Math.max(T.done, r + SAY.length / CPS) + 0.4;
+    // the beat's last visible change: the last take settles on its waveform and reads Ready (r + 1.608)
+    T.end = Math.max(T.done, r + SAY_AT + SAY.length / CPS);
     return T;
   },
   build(k, x) {
@@ -55,7 +62,7 @@ export default {
       nodes: [say, chip, card],
       marks: [[T.r, say], [T.chip, chip], [T.card, card], [T.row[TAKES.length - 1], rows[TAKES.length - 1].row]],
       render(t) {
-        const n = streamCount(SAY, T.r + 0.06, CPS, t);
+        const n = streamCount(SAY, T.r + SAY_AT, CPS, t);
         if (n !== shown) { vis.textContent = SAY.slice(0, n); hid.textContent = SAY.slice(n); shown = n; }
 
         rise(chip, seg(t, T.chip, T.chip + RISE), 8);
@@ -72,7 +79,7 @@ export default {
         rows.forEach((m, i) => {
           const a = T.row[i];
           rise(m.row, seg(t, a, a + RISE), 6);
-          const p = seg(t, a + 0.1, a + GEN);
+          const p = seg(t, a + METER_AT, a + GEN);
           // the meter: each bar moves on its own phase while the take generates, then eases into the take's waveform
           const settle = outCubic(seg(p, 0.6, 1));
           m.bars.forEach((b, j) => {

@@ -28,4 +28,6 @@ Generated assets (credited in their own files):
                         (Nano Banana Pro); prompts and alpha process in img/bike/decals/CREDITS.txt.
   bike/blender/         Blender beat: bike/farmhouse/vending/tree.glb made from the asset-*.jpg crops above
                         (fal nano-banana isolation, then TRELLIS.2 image-to-3D meshes), shown in the real
-                        Blender 5.2.2 LTS UI (frames/00..29.jpg); see img/bike/blender/models/CREDITS.txt.
+                        Blender 5.2.2 LTS UI: one square turntable per model, each model alone, a 36 degree
+                        orbit captured as 18 GUI screenshots (bike/, farmhouse/, vending/, tree/ 00..17.jpg;
+                        380x380 JPEG q80, 72 frames, 1,207,605 bytes); see img/bike/blender/models/CREDITS.txt.

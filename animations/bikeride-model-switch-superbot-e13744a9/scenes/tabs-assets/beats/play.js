@@ -92,6 +92,7 @@ export default {
     let shown = -1;
     const clk = { t: NaN };
     let clkAt = 0;
+    let feed = null; // the thread's viewport (the card's clip), found once the card is mounted
 
     return {
       nodes: [say, card],
@@ -132,6 +133,7 @@ export default {
         if (t < T.card) { layer.style.opacity = '0'; layer.style.pointerEvents = 'none'; return; }
         const b = x.box(shot);
         const root = x.root;
+        feed = feed || card.closest('.feed');
         const W = root.offsetWidth, H = root.offsetHeight;
         const g = inOutCubic(seg(t, T.grow, T.full));
         const L = lerp(b.x, 0, g), Tp = lerp(b.y, 0, g), Wd = lerp(b.w, W, g), Ht = lerp(b.h, H, g);
@@ -142,6 +144,12 @@ export default {
         layer.style.width = `${Wd.toFixed(2)}px`;
         layer.style.height = `${Ht.toFixed(2)}px`;
         layer.style.borderRadius = `${(RADIUS * s * (1 - g)).toFixed(2)}px ${(RADIUS * s * (1 - g)).toFixed(2)}px 0 0`;
+        // while the card sits in the chat the layer is cut to the feed's viewport, as the card itself is: the card
+        // lands while the thread is still gliding up (and the camera is still pulling back from the code), so part
+        // of it is below the fold for a moment and must not draw over the composer. Released as the card opens.
+        const fb = feed ? x.box(feed) : null;
+        const cutT = fb ? Math.max(0, fb.y - Tp) * (1 - g) : 0, cutB = fb ? Math.max(0, Tp + Ht - (fb.y + fb.h)) * (1 - g) : 0;
+        layer.style.clipPath = cutT > 0.01 || cutB > 0.01 ? `inset(${cutT.toFixed(2)}px 0 ${cutB.toFixed(2)}px 0)` : '';
         layer.style.opacity = card.style.opacity;
         layer.style.pointerEvents = g >= 1 ? 'auto' : 'none';
       },

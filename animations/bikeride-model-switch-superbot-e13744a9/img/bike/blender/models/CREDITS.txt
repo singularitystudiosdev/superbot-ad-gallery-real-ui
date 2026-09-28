@@ -16,10 +16,13 @@ Models: bike.glb, farmhouse.glb, vending.glb, tree.glb
   Sizes: bike.glb 3,126,556 B; farmhouse.glb 3,334,100 B; vending.glb 2,411,740 B; tree.glb 1,795,816 B.
   Total fal spend: $1.356.
 
-Capture: ../frames/00.jpg .. 29.jpg (1280x738 JPEG, 2.7 MB total)
-  The real Blender 5.2.2 LTS GUI window on macOS (Layout workspace, Material Preview, default Blender Dark theme,
-  UI scale 1.25, window 1180x760), the four models in the viewport and the Outliner. Captured by Blender's own
-  bpy.ops.screen.screenshot driven from bpy.app.timers while the script orbited the 3D view 38 to 8 degrees about Z
-  (60 captures); every other capture kept, cropped to the top bar, the 3D viewport and the Outliner/Properties column
-  (the timeline and status bar cut), scaled to 1280 wide.
-  Build scripts (outside the repo): /tmp/msw/v2-B.e2834f7d/work/fal3d.py, build_scene.py, capture.py.
+Captures: ../bike/, ../farmhouse/, ../vending/, ../tree/ 00.jpg .. 17.jpg (380x380 JPEG, 72 frames, 1,207,605 B total)
+  The real Blender 5.2.2 LTS GUI window on macOS (Layout workspace, 3D viewport in Material Preview, default Blender
+  Dark theme and viewport gradient, grid floor and axis lines, UI scale 1.25), opened on the scene built above. For each
+  model alone (the other three hidden with hide_set, nothing selected, 3D cursor overlay off) the script fitted the view
+  to the model over its whole orbit (distance and pivot from projected vertices), then orbited the 3D view 36 degrees
+  about Z (from 24 to -12 degrees off the model's own facing; pitch 66-74 degrees), capturing the whole Blender window
+  with Blender's own bpy.ops.screen.screenshot driven from bpy.app.timers at each of 18 steps. Each capture cropped to a
+  1680 px square centred in the 3D viewport (toolbar, header, gizmo and panels outside it), scaled to 380 px, JPEG q80.
+  Build scripts (outside the repo): /tmp/msw/v2-B.e2834f7d/work/fal3d.py, build_scene.py;
+  /tmp/msw/v3-Q.e2834f7d/work/capture_q.py, crop_q.py.

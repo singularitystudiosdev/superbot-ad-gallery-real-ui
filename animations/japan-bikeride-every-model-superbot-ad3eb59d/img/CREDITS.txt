@@ -1,7 +1,9 @@
 img/ride/clip.mp4, img/ride/poster.jpg: the reply's video (the "relaxing Japan bikeride" the ask produces).
   source_url: https://x.com/prasenx/status/2102717687604633959 (author @prasenx)
   source file: 1920x1080 h264, 60 fps, 219.75 s (the post's highest-bitrate variant)
-  window: 30.750 s -> 34.150 s of the source (frames 1845-2048, 204 frames, 3.400 s), no scene cuts inside
+  window: 1.000 s -> 4.400 s of the source (frames 60-263, 204 frames, 3.400 s): the post's opening
+          third-person intro (rider seen from behind/side; the source's own shot cuts at ~1.4 s and ~3.2 s play inside)
   processing: crop=1824:1026:48:0 then lanczos scale back to 1920x1080 (removes the burned-in game HUD speed readout);
-              h264 CRF 18, 60 fps (not resampled), no audio, +faststart. poster.jpg = its first frame.
+              h264 CRF 17 preset slow, GOP 8, 60 fps (not resampled), no audio, +faststart,
+              +1/240 s pts offset (keeps the scene's boundary seek and the renderer's mid-frame seek off frame edges). poster.jpg = its first frame.
   The spot shows clip time 0 .. 3.2 s (master t 3.65 -> 6.85). The footage is a stylised 3D-rendered countryside ride.

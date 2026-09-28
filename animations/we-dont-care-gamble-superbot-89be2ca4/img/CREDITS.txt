@@ -1,7 +1,10 @@
-img CREDITS (one-agent-full-degen)
+img CREDITS (we-dont-care-gamble)
 
-ribeye.jpg   "Beef Ribeye Steak & Shrimps with Potato Fries" by Ceeseven, Wikimedia Commons, CC BY-SA 4.0,
-             https://commons.wikimedia.org/wiki/File:Beef_Ribeye_Steak_%26_Shrimps_with_Potato_Fries.jpg
-             (960px thumbnail, fetched 2026-09-26). Shown cropped in the dinner order card (beats/dinner.js).
+This spot ships no photographic or third-party image assets. Everything on screen — the hub chrome, the tray
+of app tiles, the winnings site's chrome, its chart, its payout rows and the confetti burst — is drawn in
+CSS/SVG/canvas from code in this folder.
 
-The mention counts, backtest results, paper-trading results, alert and order shown in the spot are mock UI.
+The winnings shown (the $48,210 total, the "biggest hits" payouts, the biggest-night figure) and the accounts
+they would have come from are fictional. No sportsbook or casino brand name or logo appears anywhere in the
+spot: the venues in the wins list are described generically ("high limit room", "final table"). The
+"gamble" line is a quote about advice, not an offer, and no game, odds, payout or bonus is shown or promised.

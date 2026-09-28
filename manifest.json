@@ -218,6 +218,14 @@
     "desc": "One prompt, fourteen model switches, a relaxing Japan bike ride back in under four seconds."
   },
   {
+    "id": "japan-bikeride-every-model-superbot-fec00f6a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "MAKE ME RELAXING JAPAN BIKERIDE: one prompt, 16 model switches, the ride on screen at 3.3 s, superbot end card (clip @prasenx)",
+    "src": "animations/japan-bikeride-every-model-superbot-fec00f6a/",
+    "thumb": "assets/shots/japan-bikeride-every-model-superbot-fec00f6a.png"
+  },
+  {
     "id": "inkwave-every-model-superbot-3f9d27b4",
     "type": "animation",
     "group": "Ad spots",

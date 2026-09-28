@@ -108,6 +108,8 @@ const more = [
   // then a black superbot end card (animations/japan-bikeride-every-model-superbot-ad3eb59d/img/CREDITS.txt, brand/CREDITS.txt).
   ['japan-bikeride-every-model-superbot-ad3eb59d', 'japan-bikeride-every-model-superbot-ad3eb59d/', 'Japan bikeride, every model', 'Ad spots',
     { desc: 'One prompt, fourteen model switches, a relaxing Japan bike ride back in under four seconds.' }],
+  // MAKE ME RELAXING JAPAN BIKERIDE (2026-09-28): clip X @prasenx https://x.com/prasenx/status/2102717687604633959; logos animations/japan-bikeride-every-model-superbot-fec00f6a/brand/CREDITS.txt.
+  ['japan-bikeride-every-model-superbot-fec00f6a', 'japan-bikeride-every-model-superbot-fec00f6a/', 'MAKE ME RELAXING JAPAN BIKERIDE: one prompt, 16 model switches, the ride on screen at 3.3 s, superbot end card (clip @prasenx)', 'Ad spots'],
   // make a Splatoon-style ink game (2026-09-26): one ask routed to seven models on one page (v3, the default cut):
   // Lyria scores the match, Meshy models the props, Gemini draws the ink decals, DeepSeek scrapes CC0 prop
   // libraries, GitHub pushes Inkwave, Opus 5.5 codes the game and plays it.

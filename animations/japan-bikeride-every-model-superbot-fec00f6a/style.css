@@ -1,0 +1,107 @@
+/* japan-bikeride-every-model: "Make me relaxing Japan bikeride" typed into superbot, the routing pill burns through
+   sixteen models and lands on Claude Opus 5.5, the clip grows to the full frame, hard cut to the end card.
+   Every moving value is written by timeline.js from t; nothing in this file transitions or animates.
+   Look plan: the tokens below are the only colours in the spot (brand logos keep their own). */
+:root {
+  --black: #000000;    /* end card */
+  --bg: #0b0b0c;       /* app */
+  --surface: #141416;  /* pill, composer */
+  --line: #2a2a2e;     /* hairline, user bubble */
+  --text: #ececec;
+  --muted: #8e8e93;
+  --ok: #34d399;       /* the one accent: the check */
+  --white: #ffffff;    /* the end-card wordmark (reference image 2) */
+  --cyan: #00e5c3;     /* the mark's fringe */
+  --magenta: #c026d3;
+  --ui: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+  --r-pill: 999px;
+  --r-card: 16px;
+  --k: 1;              /* chat scale per ratio */
+  --e: 1;              /* end-card scale per ratio */
+}
+html[data-ar="4x3"] { --k: 1; --e: .9; }
+html[data-ar="1x1"] { --k: .92; --e: .75; }
+html[data-ar="4x5"] { --k: .78; --e: .6; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--black); overflow: hidden; }
+body { font-family: var(--ui); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; left: 50%; top: 50%; width: var(--ar-w, 1920px); height: 1080px; overflow: hidden;
+  background: var(--bg); transform: translate(-50%, -50%) scale(var(--fit, 1)); transform-origin: 50% 50%; }
+
+/* ---------------- the chat ---------------- */
+#chat { position: absolute; inset: 0; --col: min(calc(1100px * var(--k)), calc(var(--ar-w, 1920px) - 96px)); }
+.top { position: absolute; top: calc(44px * var(--k)); left: 50%; width: var(--col); transform: translateX(-50%);
+  display: flex; align-items: center; gap: calc(14px * var(--k)); font: 700 calc(26px * var(--k)) / 1 var(--ui); letter-spacing: -.02em; }
+.sb-tile { position: relative; flex: none; width: calc(46px * var(--k)); height: calc(46px * var(--k)); border-radius: var(--r-card);
+  background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.sb-tile .cat { inset: 20%; }
+
+.col { position: absolute; top: 0; bottom: 0; left: 50%; width: var(--col); transform: translateX(-50%); }
+
+/* composer: laid out at its docked bottom position; timeline.js lifts it to the frame's vertical centre for the
+   empty state (t < 1.15) and FLIPs it down on send. Typed text + caret, the send button lights while there is text */
+.composer { position: absolute; left: 0; right: 0; bottom: calc(60px * var(--k)); height: calc(104px * var(--k)); z-index: 2;
+  display: flex; align-items: center; gap: calc(18px * var(--k)); padding: 0 calc(14px * var(--k)) 0 calc(42px * var(--k));
+  border-radius: var(--r-pill); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.field { flex: 1; min-width: 0; display: flex; align-items: center; overflow: hidden; white-space: nowrap;
+  font: 400 calc(40px * var(--k)) / 1.3 var(--ui); letter-spacing: -.005em; color: var(--text); }
+.caret { flex: none; width: calc(3px * var(--k)); height: calc(48px * var(--k)); margin: 0 calc(2px * var(--k)) 0 calc(1px * var(--k)); background: var(--text); }
+.ph { color: var(--muted); }
+.send { flex: none; display: grid; place-items: center; width: calc(76px * var(--k)); height: calc(76px * var(--k));
+  border-radius: var(--r-pill); background: var(--line); color: var(--muted); }
+.send svg { width: calc(34px * var(--k)); height: calc(34px * var(--k)); fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.send.on { background: var(--text); color: var(--bg); }
+
+/* thread: every slot is reserved from the first frame, so nothing reflows. timeline.js places it with translateY:
+   bubble + pill centred between the header and the docked composer through the burst, then bubble + pill + card */
+.thread { position: absolute; left: 0; right: 0; top: 0; display: flex; flex-direction: column; gap: calc(32px * var(--k)); }
+.row { display: flex; }
+.row-u { justify-content: flex-end; }
+.row-m { justify-content: flex-start; }
+.bubble { margin: 0; max-width: 86%; padding: calc(24px * var(--k)) calc(34px * var(--k)); border-radius: var(--r-card);
+  background: var(--line); color: var(--text); font: 500 calc(38px * var(--k)) / 1.3 var(--ui); letter-spacing: -.005em; white-space: nowrap; opacity: 0; }
+
+/* the switch pill (reference image 1) at hero scale */
+.sw { display: inline-flex; align-items: center; height: calc(132px * var(--k)); padding: 0 calc(44px * var(--k)) 0 calc(23px * var(--k));
+  border-radius: var(--r-pill); background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--line); opacity: 0; }
+.sw-tile { position: relative; flex: none; width: calc(86px * var(--k)); height: calc(86px * var(--k)); border-radius: var(--r-card); overflow: hidden;
+  background: color-mix(in srgb, var(--line) 50%, var(--surface)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--text) 12%, var(--line)); }
+.lg { position: absolute; inset: 0; display: grid; place-items: center; visibility: hidden; }
+.lg img { display: block; width: calc(var(--lk) * 100%); height: calc(var(--lk) * 100%); object-fit: contain; }
+.sw-lab { display: flex; align-items: center; margin-left: calc(32px * var(--k)); white-space: nowrap;
+  font: 600 calc(50px * var(--k)) / 1.3 var(--ui); letter-spacing: -.01em; color: var(--text); }
+.sw-win { position: relative; display: block; flex: none; height: 1.3em; margin-left: .26em; overflow: hidden; }
+.nm { position: absolute; left: 0; top: 0; visibility: hidden; }
+/* the loading shimmer (pdoom chat.css .qc-swl), only until the first check lands */
+.sw-lab.shim .sw-fix, .sw-lab.shim .nm { background: linear-gradient(90deg, var(--muted) 0%, var(--muted) 40%, var(--text) 50%, var(--muted) 60%, var(--muted) 100%);
+  background-size: 250% 100%; background-position: var(--sh, 100%) 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sw-st { position: relative; flex: none; width: calc(42px * var(--k)); height: calc(42px * var(--k)); margin-left: calc(24px * var(--k)); }
+.sw-spin { position: absolute; inset: calc(4px * var(--k)); border-radius: var(--r-pill); border: calc(3.5px * var(--k)) solid var(--line); border-top-color: var(--text); }
+.sw-ok { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ok); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#swOk { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+
+.slot { width: min(calc(680px * var(--k)), 100%); aspect-ratio: 16 / 9; }
+html[data-ar="4x5"] .slot { width: 100%; } /* the tall frame gives the card the column */
+html[data-ar="1x1"] .slot { width: 84%; }  /* the square's wide column: a full-width card would crowd the header */
+
+/* ---------------- the clip: card in the thread, then the full frame ---------------- */
+#clip { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: hidden; visibility: hidden; z-index: 5;
+  background: var(--bg); border-radius: var(--r-card); }
+#clip img, #clip video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------------- the end card (reference image 2): no motion at all ---------------- */
+#endcard { position: absolute; inset: 0; z-index: 10; display: none; place-items: center; background: var(--black); }
+#endcard.on { display: grid; }
+.lock { display: flex; align-items: center; gap: .66em; font: 800 calc(168px * var(--e)) / 1 var(--ui); letter-spacing: -.04em; }
+#word { margin: 0; font: inherit; color: var(--white); visibility: hidden; }
+.mark { position: relative; top: .07em; flex: none; width: 1.84em; height: calc(1.84em * 70 / 76); visibility: hidden; } /* top: seats the face on the word's glyph centre, as in image 2 */
+#word.on, .mark.on { visibility: visible; }
+
+/* the superbot cat: sb-mark-live's silhouette as a CSS mask (--cat, set by timeline.js), slit eyes, three layers
+   like the live mark: cyan up-left, magenta down-right, the #ececec face on top */
+.cat { position: absolute; inset: 0; -webkit-mask: var(--cat) center / contain no-repeat; mask: var(--cat) center / contain no-repeat; }
+.cat-c { background: var(--cyan); transform: translate(-1%, -1%); }
+.cat-m { background: var(--magenta); transform: translate(1%, 1%); }
+.cat-w { background: var(--text); }

@@ -1,0 +1,29 @@
+brand/ CREDITS: every third-party mark in this spot. All marks are the property of their owners and appear
+nominatively, to name the model superbot's routing pill switches to. Files are byte-for-byte copies of the
+vetted marks already shipped in this gallery; provenance is recorded in the source ad's brand/CREDITS.txt.
+
+From ../first-model-all-models-superbot-df54f063/brand/ (lobehub icons-static-svg / simple-icons / Wikimedia):
+  gemini-logo.svg       Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg.
+                        Used for Lyria 2 (Google's music model), as in pdoom-mv-every-model (APPS.lyria).
+  deepmind-logo.svg     Google DeepMind mark, lobehub icons/deepmind-color.svg: the mark for Veo 3 (a DeepMind model).
+  kling-logo.svg        Kling (Kuaishou), lobehub icons/kling-color.svg, colours unmodified.
+  runway-logo.svg       Runway, lobehub icons/runway.svg, fill set to #ffffff.
+  nanobanana-logo.svg   Nano Banana (Google), lobehub icons/nanobanana-color.svg, colours unmodified.
+  suno-logo.svg         Suno, icons/suno.svg, fill set to #ffffff.
+  elevenlabs-logo.svg   ElevenLabs two-bar mark, simple-icons (CC0), fill #fff.
+  hunyuan-logo.svg      Tencent Hunyuan, lobehub icons/hunyuan-color.svg.
+  minimax-logo.svg      MiniMax, lobehub icons/minimax-color.svg, colours unmodified.
+  qwen-logo.svg         Qwen (Alibaba), lobehub icons/qwen-color.svg, colours unmodified.
+  grok-logo.svg         Grok (xAI), lobehub icons/grok.svg, fill set to #ffffff.
+  deepseek-logo.svg     DeepSeek whale, lobehub icons/deepseek-color.svg, unmodified.
+  openai-logo.svg       OpenAI mark (round badge), from animations/who-are-you-superbot-268c902c/assets/openai.svg.
+  claude-logo.svg       Claude mark in Anthropic's #d97757 (carried over from tendie-model-selector-superbot-3c27b88b).
+
+From ../first-model-every-model-superbot-7d540b7f/brand/:
+  midjourney-logo.svg   Midjourney sailboat, lobehub icons/midjourney.svg, fill set to #fff.
+  flux-logo.svg         FLUX (Black Forest Labs), lobehub icons/flux.svg, fill set to #fff.
+  meshy-logo.svg        Meshy, lobehub icons/meshy.svg, fill set to #fff.
+
+SUPERBOT
+  The cat mark (header tile and end card) is drawn in CSS from the mask geometry of ../../assets/sb-mark-live.html
+  (first party), with the eyes as slits to match the reference end card.

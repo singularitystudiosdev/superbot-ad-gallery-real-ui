@@ -1,10 +1,10 @@
 // DeepSeek: the scrape. One crawler card: a header with a live total ("Scraping 37 assets" counting up to "Scraped 148
 // assets") and how many sources are in, then the five CC0 libraries it crawls, each ticking from queued to fetching
 // (spinner, progress bar, its own count climbing) to done (check), then what landed in assets/: a sky HDRI and four
-// texture swatches, then three sound files as chips, each tagged by type. The swatches are close crops of real frames of
-// the ride (gen/clip-poster.jpg, gen/ride/meshy-torii.png) standing in for the scraped maps; the per-site counts and the
-// file names are made up (they sum to 148). Pure function of t: every slot comes from times(), render() reads the clock
-// and nothing else.
+// texture swatches, then three sound files as chips, each tagged by type. The tiles are real CC0 assets from those
+// libraries (gen/scrape/: ambientCG colour maps and a Poly Haven HDRI's tonemapped preview, credited in img/CREDITS.txt);
+// the per-site counts and the file names are made up (they sum to 148). Pure function of t: every slot comes from
+// times(), render() reads the clock and nothing else.
 import { seg, outCubic } from '../../../lib.js';
 import { sayer, rise, setText, gen } from './kit.js';
 
@@ -18,13 +18,15 @@ const SRC = [
 ];
 const TOTAL = SRC.reduce((a, s) => a + s[2], 0); // 148
 
-// what lands in assets/, in landing order: [name, type, source row, the frame crop: gen/ file, background-size, -position]
+// what lands in assets/, in landing order: [name, type, source row, the asset's preview: gen/ file, background-size,
+// -position]. sky_dusk = Poly Haven qwantani_dusk_2_puresky (its horizon band); the textures = ambientCG colour maps
+// Ground103, PaintedWood003, Moss002, Grass004.
 const IMG = [
-  ['sky_dusk.hdr', 'HDRI', 0, 'clip-poster.jpg', '290%', '97% 0%'],
-  ['dirt_road', 'texture', 0, 'clip-poster.jpg', '400%', '20% 100%'],
-  ['torii_red', 'texture', 1, 'ride/meshy-torii.png', '760%', '21% 62%'],
-  ['leaf_moss', 'texture', 1, 'clip-poster.jpg', '560%', '61% 27%'],
-  ['grass', 'texture', 3, 'clip-poster.jpg', '560%', '100% 64%'],
+  ['sky_dusk.hdr', 'HDRI', 0, 'scrape/sky_dusk.jpg', 'cover', '62% 50%'],
+  ['dirt_road', 'texture', 1, 'scrape/dirt_road.jpg', 'cover', '50% 50%'],
+  ['torii_red', 'texture', 1, 'scrape/torii_red.jpg', 'cover', '50% 50%'],
+  ['leaf_moss', 'texture', 1, 'scrape/leaf_moss.jpg', 'cover', '50% 50%'],
+  ['grass', 'texture', 1, 'scrape/grass.jpg', 'cover', '50% 50%'],
 ];
 // [file, source row]
 const SND = [

@@ -18,15 +18,15 @@ gen/clip.mp4                   2.900 s excerpt, source 0:07.000 to 0:09.900 (sou
                                the 4:5 cover crop (centre 864 px) removes it.
 gen/clip-poster.jpg            The excerpt's first frame (source 0:07.000), 1920x1080, JPEG q2.
 
-gen/ride/*.png                 512x512 crops of single source frames (square region, Lanczos to 512):
-  meshy-bike.png               1:20.000, 520 px square at x 90, y 410: the rider on the red bicycle,
-                               side view, daylight.
-  meshy-torii.png              0:10.750, 700 px square at x 1000, y 130: the red torii and shrine steps at sunset
-                               (inside the excerpt).
-  meshy-tree.png               0:13.000, 520 px square at x 270, y 40: a broadleaf tree against the sunset sky
-                               (inside the excerpt). No cherry (sakura) tree appears anywhere in the video; this
-                               is the closest real tree.
-  meshy-lantern.png            0:11.000, 320 px square at x 1090, y 500: a stone lantern (toro) beside the torii
-                               (inside the excerpt).
+gen/scrape/*.jpg               The DeepSeek step's assets/ tiles: real CC0 assets, downloaded 2026-09-28.
+  sky_dusk.jpg                 Poly Haven HDRI "Qwantani Dusk 2 (Pure Sky)" (qwantani_dusk_2_puresky), CC0,
+                               https://polyhaven.com/a/qwantani_dusk_2_puresky ; its tonemapped JPG preview, the
+                               horizon band (rows 22% to 56%), scaled to 720 px wide.
+  dirt_road.jpg                ambientCG "Ground 103" colour map (1K-JPG), CC0, https://ambientcg.com/a/Ground103
+  torii_red.jpg                ambientCG "Painted Wood 003" colour map (1K-JPG), CC0, https://ambientcg.com/a/PaintedWood003
+  leaf_moss.jpg                ambientCG "Moss 002" colour map (1K-JPG), CC0, https://ambientcg.com/a/Moss002
+  grass.jpg                    ambientCG "Grass 004" colour map (1K-JPG), CC0, https://ambientcg.com/a/Grass004
+                               Each colour map scaled from 1024 to 256 px square (Lanczos). No attribution required
+                               (CC0); credited here anyway.
 
 Any repo names, commit hashes, line counts, file names and handles shown in the spot's chat UI are made up.

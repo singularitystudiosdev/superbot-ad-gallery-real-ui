@@ -10,7 +10,7 @@ import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCurso
 import { makeCursor } from '../../shell.js';
 import { CFG } from './cuts.js?v=8';
 import meshy from './beats/meshy.js?v=3';
-import scrape from './beats/scrape.js?v=2';
+import scrape from './beats/scrape.js?v=3';
 import code from './beats/code.js?v=1';
 import output from './beats/output.js?v=1';
 

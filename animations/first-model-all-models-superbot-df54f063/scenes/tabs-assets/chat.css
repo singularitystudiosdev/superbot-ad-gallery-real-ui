@@ -1,0 +1,70 @@
+/* The chat (chat.js + beats/*.js): the ask, the routing chips, the replies' header rows and the fold. Every moving
+   value is written from lt, so nothing here transitions. Sizes are hub design px; at 4:5 the camera scales them by
+   1.543 (tabs.js geo), so the routing chip's 19px label is 29px on the frame and the header's name 25px. */
+/* the thread's one track is the column's real width (minmax(0, 1fr)): a fixed-width card can never widen the
+   column past the frame, and full-width reply children resolve against the column itself */
+#s-tabs .sbsite .hub .feed { grid-template-columns: minmax(0, 1fr); }
+#s-tabs .sbsite .hub .feed-in { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; align-content: start; gap: 12px; will-change: transform; }
+/* the hub's own welcome line and date divider are not part of this spot: the chat starts on an empty thread */
+#s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
+#s-tabs .sbsite .hub .qc-u .m-text { font-size: 14.5px; line-height: 20px; padding: 9px 16px; border-radius: 18px; }
+#s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
+#s-tabs .sbsite .hub .qc-r .m-main { flex: 1 1 auto; min-width: 0; max-width: min(100%, var(--hub-column)); width: auto; }
+#s-tabs .sbsite .hub .qc-r .m-main > * { max-width: 100%; }
+
+/* composer: the ask is typed in, the send button lights while there is text */
+#s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
+#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+#s-tabs .sbsite .hub .rc-send.qc-on { background: linear-gradient(90deg, #5d91ec, #866cf6); color: #fff !important; }
+#s-tabs .sbsite .hub .qc-pi { display: inline-grid; place-items: center; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi img { width: 12px; height: 12px; object-fit: contain; }
+
+/* model tiles: each brand mark on its own ground */
+#s-tabs .sbsite .hub .qc-tile { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-tile img { width: 15px; height: 15px; object-fit: contain; display: block; }
+#s-tabs .sbsite .hub .qc-t-meshy { background: #f3f3ef; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-deepseek { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-opus { background: #f6f1e9; }
+/* superbot's tile: its mark, static. The silhouette is the mask geometry of assets/sb-mark-live.html (eyes cut out)
+   used as a CSS mask, three layers deep like the live mark (storm-0 up-left, storm-3 down-right, fg on top), so
+   it needs no SVG mask ids and draws the same in every browser */
+#s-tabs .sbsite .hub { --sb-cat: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%2212%2018%2076%2070%22%3E%3Cmask%20id%3D%22m%22%3E%3Cg%20fill%3D%22white%22%3E%3Crect%20x%3D%2214%22%20y%3D%2232%22%20width%3D%2272%22%20height%3D%2254%22%20rx%3D%2215%22%2F%3E%3Cpath%20d%3D%22M14%2046V28Q14%2020%2021%2021Q28%2024%2036%2032Z%22%2F%3E%3Cpath%20d%3D%22M86%2046V28Q86%2020%2079%2021Q72%2024%2064%2032Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22black%22%3E%3Cellipse%20cx%3D%2235%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3Cellipse%20cx%3D%2265%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3C%2Fg%3E%3C%2Fmask%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20mask%3D%22url(%23m)%22%2F%3E%3C%2Fsvg%3E"); }
+#s-tabs .sbsite .hub .qc-t-superbot { position: relative; background: #0b0b0c; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .sbm { position: absolute; inset: 16%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#s-tabs .sbsite .hub .sbm-c { background: #00e5c3; transform: translate(-0.6px, -0.6px); }
+#s-tabs .sbsite .hub .sbm-m { background: #c026d3; transform: translate(0.6px, 0.6px); }
+#s-tabs .sbsite .hub .sbm-w { background: #ececec; }
+#s-tabs .sbsite .hub .qc-pi-sb { position: relative; display: none; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi-sb .sbm { inset: 0; }
+
+/* superbot's routing chip, sized to read at feed size: "Switching to X" beside the model's tile, shimmering until it
+   resolves to a check */
+#s-tabs .sbsite .hub .qc-sw { display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 18px 0 8px; border-radius: 999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 28px rgba(0,0,0,.35); font: 600 19px/1 var(--ui); letter-spacing: -.01em; white-space: nowrap; }
+#s-tabs .sbsite .hub .qc-sw > .qc-tile { width: 36px; height: 36px; border-radius: 11px; }
+#s-tabs .sbsite .hub .qc-sw > .qc-tile img { width: 23px; height: 23px; }
+#s-tabs .sbsite .hub .qc-swl { background: linear-gradient(90deg, #8e8e93 0%, #8e8e93 40%, #ffffff 50%, #8e8e93 60%, #8e8e93 100%); background-size: 250% 100%; background-position: var(--sh, 100%) 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+#s-tabs .sbsite .hub .qc-sw.qc-done .qc-swl { background: none; color: #ececec; }
+#s-tabs .sbsite .hub .qc-st { position: relative; width: 20px; height: 20px; margin-left: 2px; }
+#s-tabs .sbsite .hub .qc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2.5px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .qc-ok { width: 14px; height: 14px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .qc-st .qc-ok { position: absolute; inset: 0; width: 20px; height: 20px; stroke-width: 3; opacity: 0; }
+
+/* the routed model's answer: a header row (tile, name, "in superbot"; a one-line result once it has folded), then
+   the body, which folds away (chat.js renderSqueeze) as the next hand-off lands */
+#s-tabs .sbsite .hub .qc-who { display: flex; align-items: center; gap: 9px; margin: 0 0 8px; font: 700 16.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .qc-who .qc-tile { width: 26px; height: 26px; border-radius: 8px; }
+#s-tabs .sbsite .hub .qc-who .qc-tile img { width: 17px; height: 17px; }
+#s-tabs .sbsite .hub .qc-who small { font-weight: 500; font-size: 12px; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-sum { display: inline-flex; align-items: center; gap: 5px; height: 24px; margin-left: 4px; padding: 0 10px 0 7px; border-radius: 999px; background: rgba(52, 211, 153, .12); font: 600 12px/1 var(--ui); color: #34d399; opacity: 0; }
+#s-tabs .sbsite .hub .qc-sum .qc-ok { width: 13px; height: 13px; stroke-width: 3; }
+#s-tabs .sbsite .hub .qc-body { display: grid; justify-items: start; min-width: 0; width: 100%; }
+#s-tabs .sbsite .hub .qc-body > * { max-width: 100%; }
+#s-tabs .sbsite .hub .qc-say { min-height: 20px; margin-bottom: 10px; font: 14px/20px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .qc-say .qc-hid { color: transparent; }
+
+/* tool chips inside the hub (the shell's .ch-tool pill and spinner, with the hub's colours) */
+#s-tabs .sbsite .hub .ch-tool { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 9px; padding: 4px 11px 4px 8px; border-radius: 999px; background: #141416; box-shadow: inset 0 0 0 1px #2e2e31; font-size: 12px; line-height: 18px; color: #a1a1a6; }
+#s-tabs .sbsite .hub .ch-tool .ds-count { margin-left: 2px; padding: 0 7px; border-radius: 999px; background: #1f1f23; color: #e5e5ea; font: 600 10.5px/17px var(--font-mono); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .spin { width: 13px; height: 13px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #5b8dff; flex: none; box-sizing: border-box; }
+#s-tabs .sbsite .hub .spin.done { border: 0; background: #34c759; position: relative; }
+#s-tabs .sbsite .hub .spin.done::after { content: ""; position: absolute; left: 4.5px; top: 2.5px; width: 3px; height: 6px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }

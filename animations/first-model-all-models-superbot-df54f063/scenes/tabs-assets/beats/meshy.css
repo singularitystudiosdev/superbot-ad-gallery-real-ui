@@ -1,0 +1,24 @@
+/* Meshy (beats/meshy.js): a Meshy-style result card, four models in a row, each turning in on a turntable as a
+   wireframe and textured behind a scan line. Hub design px (the camera scales the site). Nothing transitions. */
+#s-tabs .sbsite .hub .mx-card { width: 100%; max-width: 560px; border-radius: 14px; overflow: hidden; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite .hub .mx-hd { display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 12px; border-bottom: 1px solid #232326; background: #18181b; white-space: nowrap; }
+#s-tabs .sbsite .hub .mx-title { font: 600 13px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .mx-n { font: 500 12px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .mx-state { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font: 600 12px/1 var(--ui); color: #c7c7cc; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .mx-spin { width: 13px; height: 13px; stroke: #ececec; stroke-dasharray: 26 12; }
+#s-tabs .sbsite .hub .mx-ok { display: none; place-items: center; }
+#s-tabs .sbsite .hub .mx-ok .qc-ok { width: 15px; height: 15px; stroke-width: 3; }
+
+#s-tabs .sbsite .hub .mx-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 10px; }
+#s-tabs .sbsite .hub .mx-cell { display: grid; gap: 7px; min-width: 0; opacity: 0; }
+/* the viewport: a turntable in perspective; the model turns inside it */
+#s-tabs .sbsite .hub .mx-view { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: #0c0c0e; box-shadow: inset 0 0 0 1px #2a2a2e; perspective: 380px; }
+#s-tabs .sbsite .hub .mx-rot { position: absolute; inset: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .mx-img { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }
+/* the wire copy: the model dimmed to its silhouette under a triangulated mesh; the scan cuts it away from the top */
+#s-tabs .sbsite .hub .mx-wire { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .mx-wire .mx-img { filter: grayscale(1) brightness(.34) contrast(1.25); }
+#s-tabs .sbsite .hub .mx-mesh { position: absolute; inset: 0; width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .mx-mesh path { fill: none; stroke: rgba(236,236,241,.5); stroke-width: 1; vector-effect: non-scaling-stroke; }
+#s-tabs .sbsite .hub .mx-scan { position: absolute; left: 0; right: 0; top: 0; height: 16px; margin-top: -16px; background: linear-gradient(rgba(236,236,241,0), rgba(236,236,241,.3)); border-bottom: 2px solid #ececf1; opacity: 0; }
+#s-tabs .sbsite .hub .mx-lab { font: 600 12.5px/1.1 var(--ui); color: #e5e5ea; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; }

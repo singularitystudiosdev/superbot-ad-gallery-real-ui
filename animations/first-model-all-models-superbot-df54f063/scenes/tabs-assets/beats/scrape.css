@@ -1,0 +1,24 @@
+/* DeepSeek (beats/scrape.js): the tool chip counting files, then one card with the two source lists: texture swatches
+   (name, site) and ambient-audio rows (play glyph, file, waveform, length, library). Hub design px. Nothing transitions. */
+#s-tabs .sbsite .hub .ds-chiprow { opacity: 0; }
+#s-tabs .sbsite .hub .ds-card { width: 100%; max-width: 560px; box-sizing: border-box; padding: 12px 12px 12px; border-radius: 14px; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite .hub .ds-cap { margin: 0 0 8px 2px; font: 700 10.5px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: #8e8e93; opacity: 0; }
+
+/* textures: four swatches, each a crop standing in for the scraped map */
+#s-tabs .sbsite .hub .ds-sws { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0 0 14px; }
+#s-tabs .sbsite .hub .ds-t { display: grid; gap: 3px; min-width: 0; opacity: 0; }
+#s-tabs .sbsite .hub .ds-sw { position: relative; display: block; aspect-ratio: 16 / 10; margin-bottom: 3px; border-radius: 8px; background-repeat: no-repeat; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+#s-tabs .sbsite .hub .ds-sw em { position: absolute; left: 5px; top: 5px; padding: 3px 5px; border-radius: 5px; background: rgba(12,12,14,.72); font: 700 9px/1 var(--font-mono); font-style: normal; color: #e5e5ea; }
+#s-tabs .sbsite .hub .ds-t b { font: 600 12px/1.2 var(--ui); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .ds-t small { font: 500 10.5px/1.2 var(--ui); color: #8e8e93; white-space: nowrap; }
+
+/* ambient audio: one row per sound, its waveform drawing in as it downloads */
+#s-tabs .sbsite .hub .ds-aus { display: grid; gap: 6px; }
+#s-tabs .sbsite .hub .ds-au { display: flex; align-items: center; gap: 9px; min-width: 0; height: 32px; padding: 0 10px 0 5px; border-radius: 9px; background: #1a1a1d; box-shadow: inset 0 0 0 1px #26262a; opacity: 0; }
+#s-tabs .sbsite .hub .ds-pb { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #4d6bfe; }
+#s-tabs .sbsite .hub .ds-pl { width: 12px; height: 12px; fill: #fff; }
+#s-tabs .sbsite .hub .ds-au b { flex: none; width: 128px; font: 600 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .ds-wv { flex: 1; min-width: 36px; height: 20px; display: flex; align-items: center; gap: 2px; }
+#s-tabs .sbsite .hub .ds-wv i { flex: 1; min-width: 1px; border-radius: 1px; background: #9fb0ff; }
+#s-tabs .sbsite .hub .ds-au em { flex: none; font: 500 11.5px/1 var(--font-mono); font-style: normal; color: #c7c7cc; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ds-au small { flex: none; width: 62px; text-align: right; font: 500 11px/1 var(--ui); color: #8e8e93; white-space: nowrap; }

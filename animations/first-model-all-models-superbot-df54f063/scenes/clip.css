@@ -1,0 +1,5 @@
+/* The landing (scenes/clip.js): the bike ride at full frame height, cover-cropped around the rider. clip.js sizes and
+   places .cl-frame from lt (the settle); nothing here transitions. */
+#s-clip { background: #000; overflow: hidden; }
+#s-clip .cl-frame { position: absolute; left: 0; top: 0; overflow: hidden; background: #000; }
+#s-clip .cl-vid { display: block; width: 100%; height: 100%; object-fit: cover; }

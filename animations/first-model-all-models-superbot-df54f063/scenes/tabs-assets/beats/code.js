@@ -1,7 +1,8 @@
 // Opus 5.5 codes the ride in three.js as a sped-up replay of an agent run, in the grammar of Cursor's agent panel
-// (referent: Cursor changelog 1.7 demo video and the 2.1 review video): "Thought" and "Read" tool rows, a file-edit card
-// whose green diff hunk of real JS streams past with line numbers, collapsed "Edited" rows, a terminal block running
-// the build to "built in 1.84s", and the review bar "6 files changed +870 -0" with Undo all / Accept all / Review.
+// (referent: Cursor changelog 1.7 demo video and the 2.1 review video): "Thought" and "Read" tool rows, four file-edit
+// cards (ride, terrain, trees, audio) whose green diff hunks of JS stream past with line numbers, 16 lines at a time,
+// collapsed "Edited" rows, a terminal block running the build to "built in 1.84s", and the review bar
+// "6 files changed +870 -0" with Undo all / Accept all / Review.
 // The transcript is bottom-anchored inside a fixed viewport (CSS only), so every item that lands pushes the run up the
 // way the real panel autoscrolls. Styles: ../mc-code.css.
 // Pure function of t: every item's slot, height and stream are computed from the schedule in times(); render() reads
@@ -11,18 +12,34 @@ import { sayer, rise, setText, fmt, REPO, TICK, TERM, O_BRANCH } from './kit.js'
 
 // ---- the code that flies past: plausible source for the ride (bike on a looping road, terrain, trees, ambience) ----
 const RIDE = `import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { buildTerrain } from './terrain.js';
 import { plantTrees } from './trees.js';
 import { ambience } from './audio.js';
+import { ROUTE, CHASE } from './route.js';
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog('#f4b6a0', 40, 260);
+const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 900);
+const sun = new THREE.DirectionalLight('#ffd2a6', 2.4);
+sun.position.set(-120, 60, 80);
+sun.castShadow = true;
+scene.add(sun, new THREE.HemisphereLight('#f7c6d9', '#3d5a2a', 0.8));
+
 const road = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, 0, z)), true);
-const bike = await loadModel('assets/models/bike_rider.glb');
+const bike = (await new GLTFLoader().loadAsync('assets/models/bike_rider.glb')).scene;
+const wheels = ['wheel_f', 'wheel_r'].map((n) => bike.getObjectByName(n));
 scene.add(buildTerrain(road), plantTrees(road, 180), bike);
 ambience.play(['cicadas', 'chimes', 'stream']);
 
-let u = 0;
+let u = 0, speed = 0;
+addEventListener('keydown', (e) => e.code === 'Space' && (speed = Math.min(speed + 1, 9)));
 renderer.setAnimationLoop(() => {
   u = (u + 0.00012 * speed) % 1; // one lap of the valley road
   const p = road.getPointAt(u), ahead = road.getPointAt((u + 0.002) % 1);
@@ -34,6 +51,115 @@ renderer.setAnimationLoop(() => {
   ambience.freewheel(speed);
   renderer.render(scene, camera);
 });`;
+const TERRAIN = `import * as THREE from 'three';
+import { createNoise2D } from 'simplex-noise';
+
+const noise = createNoise2D(seeded(7));
+const SIZE = 640, SEG = 256;
+const DIRT = new THREE.Color('#9a6a44'), WATER = new THREE.Color('#e9b9a4');
+const GRASS = new THREE.Color('#5d8a35'), DRY = new THREE.Color('#a8a04e');
+
+export function buildTerrain(road) {
+  const geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG);
+  geo.rotateX(-Math.PI / 2);
+  const pos = geo.attributes.position;
+  const colors = new Float32Array(pos.count * 3);
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i), z = pos.getZ(i);
+    const d = distanceToRoad(road, x, z);
+    let h = fbm(x * 0.004, z * 0.004) * 38; // rolling hills
+    h += Math.max(0, fbm(x * 0.001, z * 0.001) - 0.4) * 160; // far mountains
+    h *= THREE.MathUtils.smoothstep(d, 6, 40); // flatten the road bed
+    pos.setY(i, h);
+    const c = paddyColor(h, d, x, z);
+    colors.set([c.r, c.g, c.b], i * 3);
+  }
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  geo.computeVertexNormals();
+  const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.92, flatShading: true });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+function fbm(x, z, oct = 5) {
+  let a = 0.5, f = 1, s = 0;
+  for (let o = 0; o < oct; o++) { s += a * noise(x * f, z * f); a *= 0.5; f *= 2; }
+  return s * 0.5 + 0.5;
+}
+
+function paddyColor(h, d, x, z) {
+  if (d < 5) return DIRT; // the road
+  if (h < 1.2 && (Math.floor(x / 18) + Math.floor(z / 18)) % 3) return WATER; // flooded paddies
+  return GRASS.clone().lerp(DRY, fbm(x * 0.02, z * 0.02));
+}`;
+const TREES = `import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const LEAF = new THREE.MeshStandardMaterial({ color: '#5f8f3e', roughness: 0.8 });
+const BARK = new THREE.MeshStandardMaterial({ color: '#6b4a32', roughness: 1 });
+const UP = new THREE.Vector3(0, 1, 0);
+
+export function plantTrees(road, count) {
+  const trunks = new THREE.InstancedMesh(trunkGeo(), BARK, count);
+  const crowns = new THREE.InstancedMesh(crownGeo(), LEAF, count);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3();
+  for (let i = 0; i < count; i++) {
+    const u = i / count, side = i % 2 ? 1 : -1;
+    const p = road.getPointAt(u).add(sideOffset(road, u, side * (9 + rand(i) * 30)));
+    const k = 0.7 + rand(i + 99) * 0.8;
+    q.setFromAxisAngle(UP, rand(i + 7) * Math.PI * 2);
+    m.compose(p, q, s.set(k, k * (0.9 + rand(i + 3) * 0.3), k));
+    trunks.setMatrixAt(i, m);
+    crowns.setMatrixAt(i, m);
+    crowns.setColorAt(i, LEAF.color.clone().offsetHSL(rand(i) * 0.04, 0, rand(i + 5) * 0.12 - 0.06));
+  }
+  const group = new THREE.Group().add(trunks, crowns);
+  group.traverse((o) => (o.castShadow = true));
+  return group;
+}
+
+function crownGeo() {
+  const blobs = [[0, 5.2, 0, 2.6], [1.3, 4.6, 0.6, 1.9], [-1.1, 4.8, -0.5, 2.0], [0.2, 6.4, 0.3, 1.7]];
+  return mergeGeometries(blobs.map(([x, y, z, r]) => new THREE.IcosahedronGeometry(r, 1).translate(x, y, z)));
+}
+
+const trunkGeo = () => new THREE.CylinderGeometry(0.18, 0.3, 4.2, 6).translate(0, 2.1, 0);`;
+const AUDIO = `const ctx = new AudioContext();
+const master = ctx.createGain();
+master.gain.value = 0.8;
+master.connect(ctx.destination);
+
+const BEDS = {
+  cicadas: 'assets/audio/cicadas.ogg',
+  chimes: 'assets/audio/chimes.ogg',
+  stream: 'assets/audio/stream.ogg',
+};
+const tick = ctx.createGain();
+tick.gain.value = 0;
+tick.connect(master);
+
+async function load(url) {
+  const res = await fetch(url);
+  return ctx.decodeAudioData(await res.arrayBuffer());
+}
+
+export const ambience = {
+  async play(names) {
+    for (const n of names) {
+      const src = ctx.createBufferSource();
+      src.buffer = await load(BEDS[n]);
+      src.loop = true;
+      const g = ctx.createGain();
+      g.gain.value = n === 'chimes' ? 0.35 : 0.6;
+      src.connect(g).connect(master);
+      src.start(ctx.currentTime + Math.random() * 0.4);
+    }
+  },
+  freewheel(speed) {
+    tick.gain.setTargetAtTime(Math.min(0.4, speed * 0.05), ctx.currentTime, 0.1);
+  },
+};`;
 const BUILD = [
   ['$', 'npm run build'],
   ['', '> japan-ride@1.0.0 build'],
@@ -52,21 +178,22 @@ const SCRIPT = [
   { k: 'row', v: 'Thought', a: 'for 2s' },
   { k: 'row', v: 'Read', a: 'assets/models/ assets/audio/' },
   { k: 'card', f: 'src/ride.js', n: 318, src: RIDE },
-  { k: 'edit', f: 'src/terrain.js', n: 264 },
-  { k: 'edit', f: 'src/trees.js', n: 142 },
-  { k: 'edit', f: 'src/audio.js', n: 88 },
+  { k: 'card', f: 'src/terrain.js', n: 264, src: TERRAIN },
+  { k: 'card', f: 'src/trees.js', n: 142, src: TREES },
+  { k: 'card', f: 'src/audio.js', n: 88, src: AUDIO },
   { k: 'edit', f: 'src/input.js', n: 22 },
   { k: 'edit', f: 'index.html', n: 36 },
   { k: 'term', cmd: 'npm run build' },
 ];
 const FILES = SCRIPT.filter((s) => s.f);
 const TOTAL = FILES.reduce((s, f) => s + f.n, 0); // 870
-// seconds at pace 1: how long an item takes to land/stream (DUR) and when the next one starts after it (STEP)
-const DUR = { row: 0.07, edit: 0.07, card: 0.26, term: 0.22 };
-const STEP = { row: 0.045, edit: 0.04, card: 0.2, term: 0.22 };
+// seconds at pace 1: how long an item takes to land/stream (DUR) and when the next one starts after it (STEP); the
+// four code cards overlap a little, so ~150 lines pour through in about 0.75 s
+const DUR = { row: 0.06, edit: 0.06, card: 0.24, term: 0.2 };
+const STEP = { row: 0.04, edit: 0.035, card: 0.17, term: 0.2 };
 // heights in --u units (1px at narrow columns, a bit more on wide ones); GAP rides inside each item's slot
-const BODY = 7, LH = 17; // a code/terminal body shows 7 lines of 17
-const HGT = { row: 22, edit: 28, card: 32 + BODY * LH + 12, term: 32 + BODY * LH + 12 };
+const BODY = 16, TBODY = 9, LH = 17; // a code body shows 16 lines of 17, the terminal its 9 build lines
+const HGT = { row: 22, edit: 28, card: 32 + BODY * LH + 12, term: 32 + TBODY * LH + 12 };
 const GAP = 6;
 const WORK = 258; // the elapsed clock the run replays, in seconds (4m 18s)
 
@@ -186,7 +313,7 @@ export default {
             const nf2 = t < o.a ? 0 : streamed(o, t), shown = Math.min(o.lines.length, Math.ceil(nf2 - 1e-6));
             if (shown !== o.shown) { o.lines.forEach((l, q) => { l.style.visibility = q < shown ? '' : 'hidden'; }); o.shown = shown; }
             // once the body overflows it also scrolls its 6-unit top padding away, so no sliver of a line peeks under the header
-            const over = Math.max(0, nf2 - BODY);
+            const over = Math.max(0, nf2 - (s.k === 'term' ? TBODY : BODY));
             o.box.style.transform = `translateY(calc(var(--u) * ${(-(over * LH + Math.min(1, over) * 6)).toFixed(2)}))`;
             o.n.classList.toggle('live', t >= o.a && t < o.b);
             if (s.k === 'card') {

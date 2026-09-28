@@ -3,7 +3,7 @@
    card fills the chat column (no fixed px widths) and sizes itself by width class (see the end); the transcript's item heights are
    multiples of --u (1px, a little more on wide columns) so the JS can stack them exactly. Palette: Cursor Dark's
    syntax colours (#82D2CE keywords, #EBC88D constants, #AAA0FA members, #EFB080 calls) on the hub's #141416 card. */
-#s-tabs .sbsite .hub .mcx { position: relative; width: 100%; height: 268px; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); font: 12px/1.3 var(--ui); color: #d6d6dd; opacity: 0; }
+#s-tabs .sbsite .hub .mcx { position: relative; width: 100%; height: 520px; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); font: 12px/1.3 var(--ui); color: #d6d6dd; opacity: 0; }
 #s-tabs .sbsite .hub .mcx.mcx-done { box-shadow: 0 0 0 1px rgba(79,197,127,.55), 0 0 22px rgba(79,197,127,.12), 0 14px 36px rgba(0,0,0,.45); transition: none; }
 #s-tabs .sbsite .hub .mcx svg { flex: none; }
 
@@ -46,8 +46,11 @@
 #s-tabs .sbsite .hub .mcx-ed s, #s-tabs .sbsite .hub .mcx-ch s { text-decoration: none; color: #6f6f78; font-weight: 400; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 #s-tabs .sbsite .hub .mcx-ed em, #s-tabs .sbsite .hub .mcx-ch em { margin-left: auto; padding-left: 8px; font: 500 calc(var(--u) * 12)/1 var(--font-mono); font-style: normal; white-space: nowrap; }
 
-/* file-edit card and terminal block share the frame: a header row and a 7-line body */
-#s-tabs .sbsite .hub .mcx-card, #s-tabs .sbsite .hub .mcx-term { height: calc(var(--u) * 163); box-sizing: border-box; display: flex; flex-direction: column; border-radius: calc(var(--u) * 8); border: 1px solid #2a2a2f; background: #17171a; overflow: hidden; }
+/* file-edit card and terminal block share the frame: a header row and a body (code 16 lines = 316, terminal 9 = 197;
+   beats/code.js HGT) */
+#s-tabs .sbsite .hub .mcx-card { height: calc(var(--u) * 316); }
+#s-tabs .sbsite .hub .mcx-term { height: calc(var(--u) * 197); }
+#s-tabs .sbsite .hub .mcx-card, #s-tabs .sbsite .hub .mcx-term { box-sizing: border-box; display: flex; flex-direction: column; border-radius: calc(var(--u) * 8); border: 1px solid #2a2a2f; background: #17171a; overflow: hidden; }
 #s-tabs .sbsite .hub .mcx-ch { flex: none; height: calc(var(--u) * 32); box-sizing: border-box; display: flex; align-items: center; gap: calc(var(--u) * 7); padding: 0 calc(var(--u) * 10) 0 calc(var(--u) * 8); border-bottom: 1px solid #25252a; background: #1b1b1f; font: 500 calc(var(--u) * 12.5)/1 var(--ui); color: #e2e2e6; white-space: nowrap; }
 #s-tabs .sbsite .hub .mcx-ch b { font-weight: 600; }
 #s-tabs .sbsite .hub .mcx-bd { position: relative; flex: 1; min-height: 0; overflow: hidden; padding: calc(var(--u) * 6) 0; box-sizing: border-box; }

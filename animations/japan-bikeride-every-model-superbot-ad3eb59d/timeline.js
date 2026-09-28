@@ -1,4 +1,4 @@
-// japan-bikeride-every-model-superbot: the engine. The whole 9.4 s spot is a pure function of t (60 fps clock):
+// japan-bikeride-every-model-superbot: the engine. The whole 11.3 s spot is a pure function of t (60 fps clock):
 // ?t=<s> freezes a frame (and sets body.freeze, the deterministic <video> branch), ?t=<s>&play=1 plays on from there,
 // space pauses, arrows step 0.25 s, R restarts; window.__AD.seek(t) draws any frame for export, __AD.ready says so.
 //
@@ -7,12 +7,16 @@
 //              The ask "Make me relaxing Japan bikeride" is typed and sent, superbot bursts through 14 models
 //              ("Switching to <Model>" pills), the Veo 3 video lands as a reply card at 3.55, plays from 3.65 and
 //              FLIP-expands to full bleed at 3.95-4.50. The scene ends on a hard cut.
-//   6.85-9.40  the end card: pure black; END_WORDS cut in one per step from 7.15 (no fade, slide, blur or scale),
-//              then the superbot mark cuts in to their right at 7.45. It holds to the last frame (no dip).
+//   6.85-8.90  the "models" card: pure black; ALL 7.00, MODELS 7.20, IN 7.40, ONE 7.60, each a hard cut (no fade,
+//              slide, blur or scale). ALL / MODELS / IN are white; ONE wears the superbot storm gradient (a seamless
+//              tile drifting slowly with t from 7.60) under one white shine band that sweeps it 7.75-8.40 (inOutCubic).
+//              Holds to 8.90, then a hard cut to black.
+//   8.90-11.30 the end card: pure black; END_WORDS cut in one per step from 9.05 (no fade, slide, blur or scale),
+//              then the superbot mark cuts in to their right at 9.35. It holds to the last frame (no dip).
 import * as lib from './lib.js';
 import * as shell from './shell.js';
 
-const { clamp } = lib;
+const { clamp, lerp, seg, inOutCubic } = lib;
 const H = 1080;
 const W = () => (window.AR && window.AR.w) || 1920;
 const stage = document.getElementById('stage');
@@ -20,10 +24,93 @@ const stage = document.getElementById('stage');
 // ---------- the sequence ----------
 const SEQUENCE = [
   ['scene', 'tabs'],
+  ['models', 'models'],
   ['end', 'end'],
 ];
 const FALLBACK_DUR = { tabs: 6.85 };
-const END_DUR = 2.55; // 6.85 -> 9.40
+const MODELS_DUR = 2.05; // 6.85 -> 8.90
+const END_DUR = 2.40;    // 8.90 -> 11.30
+
+// ---------- the "ALL MODELS IN ONE" card ----------
+// Black, the words in the gallery cards' headline face (cards.css .card: var(--ui), 700, -.02em), uppercase as
+// typed, ~9% of frame height. One line when it fits in MODELS_MAX_W of the frame width, else two centred lines
+// (ALL MODELS / IN ONE), chosen per aspect ratio. Every word is laid out up front (visibility only, never
+// display:none), so nothing shifts when the next word cuts in.
+// ONE: the gallery's storm gradient + shine (pdoom-mv-every-model-superbot-abba733b cards.css .card .gt and its
+// timeline.js renderGrads; first-model-every-model-superbot-7d540b7f scenes/intro.js "ALL"): two background layers
+// clipped to the glyphs, a soft white shine band over a blue -> violet -> magenta -> pink -> back seamless tile.
+// The tile's drift and the band's sweep are pure functions of local t, so every frame is exact.
+const MODELS_LINES = [['ALL', 'MODELS'], ['IN', 'ONE']];
+const MODELS_T0 = 0.15;          // local: ALL cuts in at 7.00
+const MODELS_STEP = 0.20;        // MODELS 7.20, IN 7.40, ONE 7.60
+const MODELS_FS = 0.09;          // word size as a share of frame height
+const MODELS_MAX_W = 0.88;       // one line only if it fits in this share of the frame width
+const ONE_AT = MODELS_T0 + 3 * MODELS_STEP;          // 0.75 local = 7.60
+const SHINE = [0.90, 1.55];                          // 7.75 -> 8.40, inOutCubic
+const GRAD_V = 60;                                   // gradient drift, px/s (slow)
+const GRAD_P0 = 0.14;                                // the tile's start phase: ONE opens on violet -> magenta -> pink
+
+function buildModels(sec) {
+  sec.innerHTML = '';
+  const block = document.createElement('div');
+  block.className = 'mc-block';
+  const words = [];
+  const lines = MODELS_LINES.map((ws, li) => {
+    if (li) block.appendChild(document.createTextNode(' '));
+    const ln = document.createElement('span');
+    ln.className = 'mc-ln';
+    ws.forEach((w, i) => {
+      if (i) ln.appendChild(document.createTextNode(' '));
+      const s = document.createElement('span');
+      s.className = 'mc-w';
+      if (w === 'ONE') {
+        const g = document.createElement('span');
+        g.className = 'gt';
+        g.textContent = w;
+        s.appendChild(g);
+      } else s.textContent = w;
+      ln.appendChild(s);
+      words.push(s);
+    });
+    block.appendChild(ln);
+    return ln;
+  });
+  sec.appendChild(block);
+  const m = { sec, block, lines, words, gt: sec.querySelector('.gt'), laid: null };
+  layoutModels(m);
+  return m;
+}
+
+function layoutModels(m) {
+  const fw = W();
+  const fs = H * MODELS_FS;
+  m.block.style.fontSize = fs.toFixed(2) + 'px';
+  // one line first: if the whole phrase fits, keep it; else split into the two lines, and only if a line still
+  // overflows, shrink the type to fit
+  m.block.classList.remove('two');
+  let w = m.block.scrollWidth;
+  if (w > fw * MODELS_MAX_W) {
+    m.block.classList.add('two');
+    w = Math.max(...m.lines.map((ln) => ln.scrollWidth));
+    if (w > fw * MODELS_MAX_W) m.block.style.fontSize = (fs * (fw * MODELS_MAX_W) / w).toFixed(2) + 'px';
+  }
+  m.gw = m.gt.offsetWidth;
+  m.laid = { fw, two: m.block.classList.contains('two') };
+}
+
+function renderModels(m, lt) {
+  if (!m.laid || m.laid.fw !== W()) layoutModels(m);
+  // hard cuts: each word is either not there or fully there
+  m.words.forEach((s, i) => { s.style.visibility = lt >= MODELS_T0 + i * MODELS_STEP ? 'visible' : 'hidden'; });
+  // ONE: the storm tile drifts left from the moment ONE lands; one shine band sweeps it left to right
+  const gw = m.gw || 200;
+  const P = Math.round(gw * 2.3);
+  const drift = (GRAD_P0 * P + Math.max(0, lt - ONE_AT) * GRAD_V) % P;
+  const band = gw * 0.62;
+  const sx = lerp(-band, gw + band * 0.1, inOutCubic(seg(lt, SHINE[0], SHINE[1])));
+  m.gt.style.backgroundSize = `${band.toFixed(1)}px 100%, ${P}px 100%`;
+  m.gt.style.backgroundPosition = `${sx.toFixed(1)}px 0, ${(-drift).toFixed(1)}px 0`;
+}
 
 // ---------- the end card ----------
 // Black, white words in the product's own UI face (the existing end card's weight 800, -0.02em), each a hard cut,
@@ -32,8 +119,8 @@ const END_DUR = 2.55; // 6.85 -> 9.40
 // Measurements (per the brief): word size ~9% of frame height; mark ink height = 2.1 x the ascender ('b' top to
 // baseline), vertically centred on that ascender band; gap word -> mark ink = 0.9 x ascender; the group is centred.
 const END_WORDS = ['superbot'];
-const END_T0 = 0.30;      // local: first word cuts in at 7.15
-const END_STEP = 0.30;    // one word per step; the mark takes the step after the last word (7.45)
+const END_T0 = 0.15;      // local: first word cuts in at 9.05
+const END_STEP = 0.30;    // one word per step; the mark takes the step after the last word (9.35)
 const END_FS = 0.09;      // word size as a share of frame height
 const END_MAX_W = 0.84;   // the group never spans more than this share of the frame width
 // the mark's ink box inside its square (viewBox 0 0 100 100): x 14..86, y 20.5..86
@@ -142,7 +229,7 @@ await Promise.all(sceneIds.map(async (id) => {
 const SEGS = [];
 let acc = 0;
 for (const [kind, id] of SEQUENCE) {
-  const dur = kind === 'end' ? END_DUR : Math.max(0.5, +MODS[id].dur || FALLBACK_DUR[id] || 6.85);
+  const dur = kind === 'end' ? END_DUR : kind === 'models' ? MODELS_DUR : Math.max(0.5, +MODS[id].dur || FALLBACK_DUR[id] || 6.85);
   const sec = document.createElement('section');
   sec.className = 'scene';
   sec.id = `s-${id}`;
@@ -170,6 +257,7 @@ function markBroken(s) {
 }
 for (const s of SEGS) {
   if (s.kind === 'end') s.end = buildEnd(s.sec);
+  else if (s.kind === 'models') s.models = buildModels(s.sec);
   else {
     s.mod = MODS[s.id];
     if (s.mod.broken) { markBroken(s); continue; }
@@ -177,7 +265,7 @@ for (const s of SEGS) {
   }
 }
 // the end line is measured in the loaded face: re-lay it once the fonts are in
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const s of SEGS) if (s.end) layoutEnd(s.end); lastT = NaN; if (paused) render(lastDrawn); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { for (const s of SEGS) { if (s.end) layoutEnd(s.end); if (s.models) layoutModels(s.models); } lastT = NaN; if (paused) render(lastDrawn); });
 
 // ---------- draw one frame ----------
 // Every cut in this spot is hard: the active segment is fully on, every other one is hidden.
@@ -196,6 +284,7 @@ function render(t) {
   // scene modules also get told when they are off, so a <video> inside one can pause
   for (const s of SEGS) if (s !== cur && s.mod && !s.broken && typeof s.mod.off === 'function') { try { s.mod.off(); } catch (err) { report(s, 'off', err); } }
   if (cur.kind === 'end') renderEnd(cur.end, lt);
+  else if (cur.kind === 'models') renderModels(cur.models, lt);
   else if (!cur.broken) {
     try { cur.mod.render(lt, ctx); } catch (err) { report(cur, 'render', err); }
   }
@@ -211,7 +300,7 @@ function fit() {
 addEventListener('resize', fit); fit();
 addEventListener('archange', () => {
   fit(); lastT = NaN;
-  for (const s of SEGS) if (s.end) layoutEnd(s.end);
+  for (const s of SEGS) { if (s.end) layoutEnd(s.end); if (s.models) layoutModels(s.models); }
 });
 
 // ---------- the clock ----------

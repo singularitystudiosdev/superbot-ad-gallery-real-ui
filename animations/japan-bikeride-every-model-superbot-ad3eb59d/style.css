@@ -26,6 +26,28 @@ svg { flex: none; }
 #s-end .end-w { position: absolute; margin: 0; font-family: var(--ui); font-weight: 800; letter-spacing: -.02em; line-height: 1; color: #fff; white-space: nowrap; visibility: hidden; }
 #s-end .end-mark { position: absolute; display: grid; place-items: center; visibility: hidden; }
 
+/* ================= the "ALL MODELS IN ONE" card: black, white words, ONE in the storm gradient =================
+   The gallery cards' headline face (cards.css .card: var(--ui), 700, -.02em). timeline.js layoutModels() sets the
+   size and picks one line or two (.two: ALL MODELS / IN ONE) per aspect ratio; words are hidden with visibility
+   only, so the layout never changes as they cut in. */
+#s-models { background: #000; z-index: 20; display: grid; place-items: center; }
+#s-models .mc-block { margin: 0; font-family: var(--ui); font-weight: 700; letter-spacing: -.02em; line-height: 1.12; color: #fff;
+  text-align: center; white-space: nowrap; }
+/* one line: the two halves run inline, joined by a real space; two lines: each half is its own centred line */
+#s-models .mc-ln { display: inline; }
+#s-models .mc-block.two .mc-ln { display: block; width: max-content; margin: 0 auto; }
+#s-models .mc-w { display: inline-block; visibility: hidden; }
+/* ONE: the storm gradient (pdoom cards.css .card .gt, first-model intro.css "ALL"), a seamless tile under a white
+   shine band; both layers' positions/sizes are written per frame by renderModels(), nothing animates on its own */
+#s-models .gt { display: inline-block; color: transparent; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; background-repeat: no-repeat, repeat-x;
+  background-image:
+    linear-gradient(100deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 0) 22%, rgb(255 255 255 / .5) 40%, rgb(255 255 255 / .95) 50%, rgb(255 255 255 / .5) 60%, rgb(255 255 255 / 0) 78%, rgb(255 255 255 / 0) 100%),
+    linear-gradient(90deg, #3d7bff 0%, #7a4dff 22%, #b033e0 40%, #ff3d9a 55%, #b033e0 70%, #7a4dff 85%, #3d7bff 100%);
+  background-size: 50% 100%, 460px 100%; background-position: -200% 0, 0 0;
+  /* the clip box must cover the glyphs' overshoot */
+  padding: 0 .03em .06em; margin: 0 -.03em -.06em; }
+
 /* a scene that threw: a quiet placeholder so the spot keeps playing */
 .scene-err { position: absolute; inset: 0; display: grid; place-items: center; font: 600 28px/1.3 var(--font-mono); color: #5c5f68; }
 

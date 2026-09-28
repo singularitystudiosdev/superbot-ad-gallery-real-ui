@@ -1,0 +1,26 @@
+bikeride-model-switch-superbot-e13744a9: img/ CREDITS
+
+All footage and stills in img/bike/ come from one screen recording posted on X:
+  Post:   https://x.com/prasenx/status/2102717687604633959  by @prasenx
+          "opus 5.5 built this bike ride in the browser / every tree and sound generated in code,
+           nothing was downloaded". The post says the game was built by Claude Opus 5.5, in the browser.
+  Video:  https://video.twimg.com/amplify_video/2102714784470962176/vid/avc1/1920x1080/np3eAWzr-f_v8Wdl.mp4
+          (1920x1080 @ 60 fps, 219.7 s, AAC stereo). Rights remain with @prasenx; used as a quoted clip.
+
+Every frame was cropped to the top-left 1792x1008 of the 1920x1080 source (a 16:9 crop) before scaling.
+That removes the game's own speed read-out ("49 km/h") from the bottom-right corner. The asset crops
+were cut from the full frame, away from that corner. Timestamps are source seconds.
+
+  bike/ride.mp4       1280x720 @ 60 fps, 9.50 s, H.264 High + AAC 128k, loudnorm -16 LUFS, 0.3 s audio fades.
+                      Segment 1: 177.50-182.60 (side view of the rider on the red bike, golden-hour paddies,
+                      camera orbits behind her). Hard cut. Segment 2: 196.20-200.60 (first-person handlebars
+                      at sunset, the lane past the farmhouses). Source audio (the game's generated ambience) kept.
+  bike/poster.jpg     1280x720, the first frame of ride.mp4 (source 177.50).
+  bike/concept-1.jpg  1024x576, source 118.0 (sunset over the flooded paddy, rider at the fence).
+  bike/concept-2.jpg  1024x576, source 137.0 (blue-sky paddy, cedar and fence).
+  bike/concept-3.jpg  1024x576, source 59.0 (farmhouse lane, power lines, stone lantern).
+  bike/asset-bike.jpg     512x512, source 180.0, crop 1040x1040+300+40 (the red bicycle with its rider).
+  bike/asset-house.jpg    512x512, source 186.0, crop 600x600+1260+90 (two-storey wooden farmhouse).
+  bike/asset-vending.jpg  512x512, source 214.0, crop 560x560+160+320 (the pair of vending machines).
+  bike/asset-tree.jpg     512x512, source 186.0, crop 540x540+250+0 (lone broadleaf tree over the paddy;
+                          stands in for the "cedar.glb" tile).

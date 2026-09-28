@@ -1,0 +1,19 @@
+/* Blender beat (beats/blender.e2834f7d.js): the four exported models as one row of tiles, each a render over its .glb
+   name and a green check. Four across at every frame ratio. Nothing here transitions: opacity/filter/transform are
+   written from t in render, so ?t= freezes a frame. Scoped under the hub, every class prefixed .bl- (the chip reuses
+   chat.css .dd-chiprow/.ch-tool/.spin). */
+
+#s-tabs .sbsite .hub .bl-chiprow { opacity: 0; }
+#s-tabs .sbsite .hub .bl-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; width: 100%;
+  max-width: 640px; margin-top: 2px; opacity: 0; }
+/* one model: its render on the logo-tile fill, the hub's card radius */
+#s-tabs .sbsite .hub .bl-tile { display: flex; flex-direction: column; min-width: 0; opacity: 0; border-radius: 10px;
+  overflow: hidden; background: #141416; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .bl-shot { aspect-ratio: 1; overflow: hidden; background: #1c1c1f; }
+#s-tabs .sbsite .hub .bl-shot img { display: block; width: 100%; height: 100%; object-fit: cover; will-change: filter, transform; }
+/* the exported file name and its check */
+#s-tabs .sbsite .hub .bl-cap { display: flex; align-items: center; gap: 5px; min-width: 0; padding: 6px 7px 7px;
+  box-shadow: inset 0 1px 0 #2a2a2e; font: 600 10px/1 var(--mono); color: #ececec; }
+#s-tabs .sbsite .hub .bl-cap b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-weight: 600; }
+#s-tabs .sbsite .hub .bl-cap .qc-ok { flex: none; width: 12px; height: 12px; opacity: 0; }

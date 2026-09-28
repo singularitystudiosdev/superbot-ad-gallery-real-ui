@@ -1,0 +1,31 @@
+/* Art beat (beats/art.js): Gemini's three concept stills as one sheet, three 16:9 frames across the reply column at
+   every frame ratio, each with its file name on a strip beneath it. Nothing here transitions: opacity/filter/transform
+   are written from t in render, so ?t= freezes a frame. Every selector is scoped under the hub and prefixed .art-.
+   The "Creating 3 images" chip reuses the shared .dd-chiprow/.ch-tool tool-chip markup from chat.css. */
+
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px;
+  width: 100%; max-width: 640px; margin-top: 2px; opacity: 0; transform-origin: 50% 0; }
+/* one frame over its label strip, on the hub's card radius */
+#s-tabs .sbsite .hub .art-tile { position: relative; display: flex; flex-direction: column; min-width: 0;
+  border-radius: 10px; overflow: hidden; background: #141416; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .art-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #1c1c1f; }
+#s-tabs .sbsite .hub .art-shot { display: block; opacity: 0; will-change: filter, transform; }
+#s-tabs .sbsite .hub .art-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  object-position: 50% 50%; }
+/* the sweeping band: a pale pass over the frame while it resolves (the pill text colour at low alpha) */
+#s-tabs .sbsite .hub .art-band { position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent 30%, rgba(236, 236, 238, .22) 50%, transparent 70%); }
+/* the label strip, stamped once the frame is sharp */
+#s-tabs .sbsite .hub .art-cap { display: flex; min-width: 0; padding: 5px 7px 6px; opacity: 0;
+  box-shadow: inset 0 1px 0 #2a2a2e; font: 600 9.5px/1.1 var(--mono); color: #ececec; }
+#s-tabs .sbsite .hub .art-cap b { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis;
+  font-weight: 600; white-space: nowrap; }
+
+/* the "Creating 3 images" chip (inside the shared .dd-chiprow/.ch-tool markup) */
+#s-tabs .sbsite .hub .art-genrow { opacity: 0; margin: -2px 0 8px; }
+#s-tabs .sbsite .hub .art-gen { display: inline-flex; align-items: center; gap: 7px; height: 28px; margin: 0;
+  padding: 0 11px 0 4px; border-radius: 9999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e;
+  font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .art-gen .qc-tile { width: 20px; height: 20px; border-radius: 9999px; }
+#s-tabs .sbsite .hub .art-gen .qc-tile img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .art-gen .ch-tool-t { color: #ececec; }

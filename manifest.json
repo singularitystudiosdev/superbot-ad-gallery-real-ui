@@ -200,6 +200,15 @@
     "thumb": "assets/shots/splatoon-every-model-v3-superbot-7cf3d4da.png"
   },
   {
+    "id": "bikeride-model-switch-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Every model, one chat: bike ride. Relaxing Japanese bike riding game: Gemini concept art, Blender 3D assets, Lyria 2 music, ElevenLabs sound effects, Claude Opus 5.5 writes the code, then the real game plays (5 switches; clip @prasenx)",
+    "src": "animations/bikeride-model-switch-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-model-switch-superbot-e13744a9.png",
+    "desc": "Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

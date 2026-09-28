@@ -3,8 +3,3 @@
 #s-ride { background: #0a0a0b; }
 #s-ride .rd-win { position: absolute; inset: 0; overflow: hidden; background: #0a0a0b; }
 #s-ride .rd-vid { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; background: #0a0a0b; }
-
-/* the footage credit: one quiet chip, bottom left, over the road (the source's own km/h readout is cropped out) */
-#s-ride .rd-credit { position: absolute; left: 28px; bottom: 30px; display: inline-flex; align-items: center; height: 34px; padding: 0 13px;
-  border-radius: 10px; background: rgba(14, 10, 18, .46); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
-  font: 600 17px/1 var(--ui); letter-spacing: .01em; color: rgba(255, 248, 244, .92); white-space: nowrap; opacity: 0; pointer-events: none; }

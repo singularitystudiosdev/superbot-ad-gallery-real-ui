@@ -205,7 +205,7 @@ const more = [
   // minecraft zoom cut) with a zoom on each switch, and hard-cuts from the preview card into the post's real ride
   // footage (animations/first-model-every-model-superbot-7d540b7f: brand/, scenes/tabs-assets/scraped/ and
   // scenes/ride-assets/ CREDITS.txt).
-  ['first-model-every-model-superbot-7d540b7f', 'first-model-every-model-superbot-7d540b7f/', 'THE FIRST MODEL WITH ALL THE MODELS: 14 model cards switch, then one 8 s chat zooms on each switch: Meshy models the 3D grid, DeepSeek scrapes the assets, Opus 5.5 codes, and the Japanese bike ride plays (clip @prasenx)', 'Ad spots'],
+  ['first-model-every-model-superbot-7d540b7f', 'first-model-every-model-superbot-7d540b7f/', 'THE FIRST MODEL WITH ALL THE MODELS: 14 model cards switch, then one 8 s chat zooms on each switch: Meshy models the 3D grid, DeepSeek scrapes the assets, Opus 5.5 codes, and the Japanese bike ride plays', 'Ad spots'],
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],

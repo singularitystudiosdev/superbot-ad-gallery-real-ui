@@ -15,7 +15,7 @@ const dip = document.getElementById('dip');
 // ---------- the sequence (CONTRACT.txt) ----------
 // first-model-every-model-superbot: "THE FIRST MODEL / WITH ALL THE MODELS" over a deck of model switches (intro),
 // the one-ask chat "Make a Japanese relaxing biking demo" routed Meshy -> DeepSeek -> Opus 5.5 with a zoom on each
-// switch (tabs), the ride it builds, played from the reference post's real footage (clip @prasenx) (ride), and the end card
+// switch (tabs), the ride it builds, played from the reference post's real footage (ride), and the end card
 const SEQUENCE = [
   ['scene', 'intro'],
   ['scene', 'tabs'],
@@ -194,10 +194,10 @@ const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
 const MODS = {};
 await Promise.all(sceneIds.map(async (id) => {
   const css = document.createElement('link');
-  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=13`, import.meta.url).href;
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=14`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=20`)).default;
+    const m = (await import(`./scenes/${id}.js?v=21`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

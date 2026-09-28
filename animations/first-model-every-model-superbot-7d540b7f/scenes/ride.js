@@ -1,6 +1,6 @@
 // ride: the OUTPUT of the ask, "Make a Japanese relaxing biking demo": the real footage from the reference post,
 // Prasenjit (@prasenx), "opus 5.5 built this bike ride in the browser / every tree and sound generated in code",
-// https://x.com/prasenx/status/2102717687604633959 (credit on screen as "clip @prasenx", and in ride-assets/CREDITS.txt).
+// https://x.com/prasenx/status/2102717687604633959 (provenance in ride-assets/CREDITS.txt only; no on-screen credit).
 // 6.0s of it, one continuous take: source frames 195..554 at 60fps (0:03.250 to 0:09.250 of 3:39.75), the golden-hour
 // chase behind the girl on her red bicycle, from the rear three-quarter close-up past the houses to the paddies.
 //   ride-assets/clip.mp4       4:5, 1080x1350: crop 864x1080 at x=480 from the 1920x1080 source, scaled 1.25x
@@ -17,7 +17,7 @@
 // tall, centred on y=540, radius 27, showing img/ride-poster.jpg (this clip's frame 0 in that band, rendered at 2x). At
 // lt=0 the full-size clip is clipped to exactly that rect; the clip then opens to the full frame over lt 0..0.55 with
 // cubic-bezier(0.05,0.7,0.1,1) while the footage keeps playing underneath.
-import { clamp, lerp, seg, outCubic } from '../lib.js';
+import { clamp, lerp, seg } from '../lib.js';
 
 const H = 1080;
 const FPS = 60;
@@ -27,7 +27,6 @@ const CARD_H = 538, CARD_R = 27;  // the chat's preview card: y 271..809, full w
 const OPEN = 0.55;                // the reveal
 const SEED_TOL = 0.002;           // a held frame re-seeks whenever it is off at all
 const DRIFT_TOL = 0.2;            // live playback only re-seeks once the element has drifted further than this
-const CREDIT = 'clip @prasenx';
 const A = (f) => new URL('./ride-assets/' + f, import.meta.url).href;
 const VARIANTS = {
   tall: { src: A('clip.mp4'), poster: A('clip-first.jpg') },
@@ -96,10 +95,9 @@ export default {
   mount(section, ctx) {
     section.innerHTML = `<div class="rd-win">
       <video class="rd-vid" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback></video>
-      <span class="rd-credit">${CREDIT}</span>
     </div>`;
     const q = (s) => section.querySelector(s);
-    el = { sec: section, win: q('.rd-win'), vid: q('.rd-vid'), credit: q('.rd-credit'), variant: '', clk: { t: NaN, at: 0 }, hold: null };
+    el = { sec: section, win: q('.rd-win'), vid: q('.rd-vid'), variant: '', clk: { t: NaN, at: 0 }, hold: null };
     const vid = el.vid;
     // the muted content attribute does not set the muted IDL property, and an unmuted video cannot start on its own
     vid.muted = true;
@@ -150,11 +148,6 @@ export default {
     const e = emphasized(seg(frameAt(lt) / FPS, 0, OPEN));
     const ins = lerp((H - CARD_H) / 2, 0, e), rad = lerp(CARD_R, 0, e);
     el.win.style.clipPath = e >= 1 ? 'none' : `inset(${ins.toFixed(2)}px 0px ${ins.toFixed(2)}px 0px round ${rad.toFixed(2)}px)`;
-
-    // the credit settles in once the frame is open, and leaves with the scene's own fade
-    const c = outCubic(seg(lt, 0.7, 1.15));
-    el.credit.style.opacity = c.toFixed(3);
-    el.credit.style.transform = c >= 1 ? 'none' : `translateY(${((1 - c) * 8).toFixed(2)}px)`;
 
     // the clip follows t: it plays only while the clock is really running, and every other time it is parked on
     // exactly the frame t asks for

@@ -1,63 +1,71 @@
 Files shown in the DeepSeek "scraped assets" beat (scenes/tabs-assets/beats/scrape.js).
-Images: the JPGs in this folder are 240x168 thumbnails of the originals below.
+Images: the files in this folder are square 240x240 crops/resizes of the originals below (the pixels are the originals'; nothing drawn or generated).
 Audio: not shipped; only the duration and waveform peaks (computed with ffmpeg from the original) are baked into manifest.js.
+Retrieved: 2026-09-28 (all files).
 
-rice-paddies.jpg  (image)
-  Title:   Sunset Field 夕焼け田んぼ
-  Author:  Cool-Rock.com
-  Source:  https://www.flickr.com/photos/30389035@N07/18677475301
-  File:    https://live.staticflickr.com/391/18677475301_bd8c0b5ba1_o.jpg
-  License: CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/)
-
-minka-house.jpg  (image)
-  Title:   Japanese traditional style farmhouse / 旧新井家住宅(きゅう あらいけ じゅうたく)
-  Author:  TANAKA Juuyoh (田中十洋)
-  Source:  https://www.flickr.com/photos/13910409@N05/3181370995
-  File:    https://live.staticflickr.com/3403/3181370995_f0b38f5cb9_o.jpg
-  License: CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/)
-
-bike-basket.jpg  (image)
-  Title:   A red vintage bicycle with a basket parked against a modern geometric patterned fence on a stone-paved ground.
-  Author:  Nilo Velez
-  Source:  https://wordpress.org/photos/photo/92165f572e/
-  File:    https://pd.w.org/2024/03/92165f572e792c087.07325317.jpg
+tatami_mat.jpg  (image)
+  Title:   Tatami Mat (diffuse map, 2K)
+  Author:  Charlotte Baglioni
+  Source:  https://polyhaven.com/a/tatami_mat
+  File:    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/tatami_mat/tatami_mat_diff_2k.jpg
   License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+  Date:    2026-09-28
 
-country-road.jpg  (image)
-  Title:   水田、農道、藤岡市
-  Author:  takanori00
-  Source:  https://www.flickr.com/photos/121004196@N06/14737280618
-  File:    https://live.staticflickr.com/3897/14737280618_5c44bdfba4_o.jpg
+kawara_tiles.jpg  (image)
+  Title:   Roofing Tiles 013 A (material preview)
+  Author:  ambientCG (Lennart Demes)
+  Source:  https://ambientcg.com/a/RoofingTiles013A
+  File:    https://ambientcg.com/get?file=RoofingTiles013A_2K-JPG.zip (RoofingTiles013A.png)
   License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+  Date:    2026-09-28
 
-utility-poles.jpg  (image)
-  Title:   141021-170708-PA211026
-  Author:  nuulvakor
-  Source:  https://www.flickr.com/photos/108231792@N04/15640777562
-  File:    https://live.staticflickr.com/3932/15640777562_8d40b9249b_o.jpg
-  License: Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/)
-
-sunset-sky.jpg  (image)
-  Title:   The Sky Is On Fire
-  Author:  Greg Zaal, Rico Cilliers
-  Source:  https://polyhaven.com/a/the_sky_is_on_fire
-  File:    https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/16k%2B/the_sky_is_on_fire_16k.hdr
+torii_gate.png  (image)
+  Title:   Japanese style simple backgrounds: temple (torii gate background)
+  Author:  oyasumi
+  Source:  https://opengameart.org/content/japanese-style-simple-backgrounds
+  File:    https://opengameart.org/sites/default/files/temple_0.png
   License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+  Date:    2026-09-28
 
-dirt-road.jpg  (image)
-  Title:   Ground 079 S
-  Author:  ambientCG
-  Source:  https://ambientcg.com/a/Ground079S
-  File:    https://ambientcg.com/get?file=Ground079S_8K-JPG.zip
+sugi_cedar.jpg  (image)
+  Title:   Japanese Cedar Planks (diffuse map, 2K)
+  Author:  Charlotte Baglioni, Rico Cilliers
+  Source:  https://polyhaven.com/a/japanese_cedar_planks
+  File:    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/japanese_cedar_planks/japanese_cedar_planks_diff_2k.jpg
   License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+  Date:    2026-09-28
 
-wood-planks.jpg  (image)
-  Title:   Weathered Brown Planks
-  Author:  Dimitrios Savva, Rico Cilliers
-  Source:  https://polyhaven.com/a/weathered_brown_planks
-  File:    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/16k/weathered_brown_planks/weathered_brown_planks_diff_16k.jpg
+seigaiha_wave.jpg  (image)
+  Title:   Seigaiha (kirikane pattern)
+  Author:  Yoshikazu0323
+  Source:  https://commons.wikimedia.org/wiki/File:Seigaiha.JPG
+  File:    https://upload.wikimedia.org/wikipedia/commons/2/2e/Seigaiha.JPG
+  License: Public domain (released by the author; see the file page)
+  Date:    2026-09-28
+
+ishigaki_wall.jpg  (image)
+  Title:   Japanese Stone Wall (diffuse map, 2K)
+  Author:  Charlotte Baglioni, Dario Barresi, Rico Cilliers
+  Source:  https://polyhaven.com/a/japanese_stone_wall
+  File:    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/japanese_stone_wall/japanese_stone_wall_diff_2k.jpg
   License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+  Date:    2026-09-28
 
+bamboo_fence.jpg  (image)
+  Title:   Bamboo Wall (diffuse map, 2K)
+  Author:  Amal Kumar
+  Source:  https://polyhaven.com/a/bamboo_wall
+  File:    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/bamboo_wall/bamboo_wall_diff_2k.jpg
+  License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+  Date:    2026-09-28
+
+katagami_kasa.jpg  (image)
+  Title:   Japanese Katagami Stencil Geometric Ornament (umbrellas, water and pine needle clusters), late 19th century
+  Author:  Unknown (public domain due to age)
+  Source:  https://commons.wikimedia.org/wiki/File:Japanese_Katagami_Stencil_Geometric_Ornament.jpg
+  File:    https://upload.wikimedia.org/wikipedia/commons/7/7e/Japanese_Katagami_Stencil_Geometric_Ornament.jpg
+  License: Public domain
+  Date:    2026-09-28
 cicadas.mp3  (audio)
   Title:   Japanese cicada
   Author:  macdaddyno1

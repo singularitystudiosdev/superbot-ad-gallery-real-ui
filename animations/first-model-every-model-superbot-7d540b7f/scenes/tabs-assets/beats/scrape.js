@@ -1,13 +1,15 @@
 // DeepSeek beat: "Scraping references, textures and ambience." over a card that shows the ACTUAL files scraped for
-// the Japanese biking demo: a grid of real image thumbnails (skeleton shimmer, then the photo pops in, then a download
-// check) and audio cards with real waveforms (peaks baked by ffmpeg into ../scraped/manifest.js) drawing left to right.
+// the Japanese biking demo: a grid of asset-library swatches (real Japanese textures, patterns and a game sprite, each a
+// square swatch beside its specs: kind tag, resolution, tiling; skeleton shimmer, then the swatch pops in, then a
+// download check) and audio cards with real waveforms (peaks baked by ffmpeg into ../scraped/manifest.js) drawing left to right.
 // It closes on a footer that counts exactly what is shown: "Scraped N files from M sources".
 // Pure function of t (scene-local time): no timers, no transitions; seeded values only.
 import { seg, outCubic, outBack, clamp } from '../../../lib.js';
-import { IMAGES, AUDIO } from '../scraped/manifest.js?v=fm2';
+import { IMAGES, AUDIO } from '../scraped/manifest.js?v=fm4';
 
 const SAY = 'Scraping references, textures and ambience.';
 const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7.2v9.6a.8.8 0 0 0 1.2.7l7.6-4.8a.8.8 0 0 0 0-1.4L10.2 6.5A.8.8 0 0 0 9 7.2z" fill="currentColor"/></svg>';
+const TAGC = { PBR: 'pbr', pattern: 'pat', sprite: 'spr' }; // tag chip colour per asset kind
 const STAG = 0.033;                         // tile-to-tile stagger
 const FILES = [...IMAGES.map((f) => ({ ...f, kind: 'im' })), ...AUDIO.map((f) => ({ ...f, kind: 'au' }))];
 const N = FILES.length;
@@ -39,7 +41,8 @@ export default {
     const T = k.T;
     const say = x.sayEl(SAY);
     const tiles = FILES.map((f) => f.kind === 'im'
-      ? `<div class="sx-t sx-im"><div class="sx-th"><i class="sx-sk"></i><img src="${img(f)}" alt="" decoding="sync"/><span class="sx-ck">${x.OK}</span></div>
+      ? `<div class="sx-t sx-im"><div class="sx-th"><div class="sx-sw"><i class="sx-sk"></i><img src="${img(f)}" alt="" decoding="sync"/><span class="sx-ck">${x.OK}</span></div>
+          <div class="sx-sp"><b class="sx-tg ${TAGC[f.tag] || ''}">${x.esc(f.tag)}</b><span class="sx-rs">${x.esc(f.meta[0])}</span><span class="sx-ml">${x.esc(f.meta[1])}</span></div></div>
           <div class="sx-n">${x.esc(f.file)}</div><div class="sx-d">${x.esc(f.domain)}</div></div>`
       : `<div class="sx-t sx-au"><span class="sx-pl">${PLAY}</span><div class="sx-mid"><div class="sx-n">${x.esc(f.file)}</div>${wave(f.peaks)}</div>
           <div class="sx-rt"><span class="sx-du">${dur(f.dur)}${x.OK}</span><span class="sx-d">${x.esc(f.domain)}</span></div></div>`);
@@ -51,7 +54,7 @@ export default {
       <div class="sx-foot"><span class="sx-dot"></span><span>Scraped <b class="sx-c">0</b> files from <b class="sx-s">0</b> sources</span><span class="sx-lic">${x.esc(LIC)}</span></div></div>`);
     const ts = [...card.querySelectorAll('.sx-t')].map((n, i) => ({
       n, kind: FILES[i].kind,
-      im: n.querySelector('.sx-th img'), sk: n.querySelector('.sx-sk'), wv: n.querySelector('.sx-wv'),
+      im: n.querySelector('.sx-th img'), sk: n.querySelector('.sx-sk'), sp: n.querySelector('.sx-sp'), wv: n.querySelector('.sx-wv'),
       ck: n.querySelector('.sx-ck') || n.querySelector('.sx-du .qc-ok'), last: '',
     }));
     const lb = card.querySelector('.sx-lb'), bar = card.querySelector('.sx-bar i'), ct = card.querySelector('.sx-ct');
@@ -81,6 +84,7 @@ export default {
             o.im.style.opacity = p.toFixed(3);
             o.im.style.transform = p >= 1 ? 'none' : `scale(${(1.08 - 0.08 * p).toFixed(4)})`;
             o.sk.style.opacity = (1 - p).toFixed(3);
+            o.sp.style.opacity = p.toFixed(3);
             o.sk.style.backgroundPosition = `${(160 - ((t - a) * 2.2 % 1) * 320).toFixed(1)}% 0`;
           } else {
             o.wv.style.clipPath = pop >= 1 ? 'none' : `inset(0 ${(100 - 100 * outCubic(pop)).toFixed(2)}% 0 0)`;

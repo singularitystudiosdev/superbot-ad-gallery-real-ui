@@ -3,7 +3,7 @@
 export const SCENE = `import * as THREE from 'three';
 import { toonRamp } from './materials/toon';
 
-const SKY = 'textures/sunset-sky.jpg'; // Poly Haven HDRI
+const ROOF = 'textures/kawara_tiles.jpg'; // ambientCG
 
 export function createScene(canvas: HTMLCanvasElement) {
   const renderer = new THREE.WebGLRenderer({ canvas });
@@ -11,11 +11,11 @@ export function createScene(canvas: HTMLCanvasElement) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.shadowMap.enabled = true;
 
-  // sunset: painted sky, peach fog over the paddies
+  // sunset: peach sky and fog, kawara on the roofs
   const scene = new THREE.Scene();
-  const sky = new THREE.TextureLoader().load(SKY);
-  sky.mapping = THREE.EquirectangularReflectionMapping;
-  scene.background = scene.environment = sky;
+  scene.background = new THREE.Color(0xf6c3a0);
+  const roof = new THREE.TextureLoader().load(ROOF);
+  roof.wrapS = roof.wrapT = THREE.RepeatWrapping;
   scene.fog = new THREE.Fog(0xf2b99a, 40, 220);
 
   const sun = new THREE.DirectionalLight(0xffd2a1, 2.4);
@@ -24,8 +24,8 @@ export function createScene(canvas: HTMLCanvasElement) {
   scene.add(sun, new THREE.HemisphereLight(0xffe4c8, 0x5b6e3a));
 
   const camera = new THREE.PerspectiveCamera(42, 16 / 9);
-  const gradientMap = toonRamp([0.35, 0.7, 1]);
-  return { renderer, scene, camera, sun, gradientMap };
+  const ramp = toonRamp([0.35, 0.7, 1]);
+  return { renderer, scene, camera, sun, ramp, roof };
 }`;
 
 export const ASSETS = `import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -80,13 +80,13 @@ export class Rider {
 export const WORLD = `import { Reflector } from 'three/addons/objects/Reflector.js';
 
 export function buildWorld(scene: THREE.Scene, a: Assets) {
-  const dirt = tex('textures/dirt-road.jpg', 1, 40);
+  const sugi = tex('textures/sugi_cedar.jpg', 40, 1);
   const road = new THREE.Mesh(
     new THREE.PlaneGeometry(ROAD_W, ROAD_LEN, 1, 64),
-    new THREE.MeshToonMaterial({ map: dirt }),
+    new THREE.MeshToonMaterial({ color: 0xc9a27a }),
   );
   road.rotation.x = -Math.PI / 2;
-  scene.add(road);
+  scene.add(road, fenceAlong(ROAD_LEN, sugi));
 
   // rice paddies: shallow water that mirrors the sky
   for (const side of [-1, 1]) {

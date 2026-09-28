@@ -1,0 +1,41 @@
+brand/ CREDITS (japan-bikeride-every-model-superbot): every third-party mark in this spot, where it came from, and
+the usage note. All marks are the property of their owners and appear here nominatively, to name the model superbot
+routes the request to (one "Switching to <Model>" pill each, scenes/tabs-assets/chat.js ROSTER). Every file was
+copied unchanged from a sibling gallery folder that sourced it; the original sourcing is repeated below.
+
+Copied from ../pdoom-mv-every-model-superbot-abba733b/brand (see its CREDITS.txt):
+  claude-logo.svg       Claude mark, simple-icons (CC0 1.0), https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg.
+                        Fill set to #fff for the dark hub tile. Trademark of Anthropic. Pill: Claude Opus 5.5.
+  gemini-logo.svg       Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                        Pills: Gemini 3 Pro, and Lyria 2 (Google's music model; the Gemini mark, as the pdoom spot used it).
+  openai-logo.svg       OpenAI mark (round badge), from animations/who-are-you-superbot-268c902c/assets/openai.svg.
+                        Trademark of OpenAI. Pill: GPT-5.
+  deepseek-logo.svg     DeepSeek whale mark, @lobehub/icons-static-svg icons/deepseek-color.svg (MIT), unmodified.
+                        Trademark of Hangzhou DeepSeek Artificial Intelligence Co., Ltd. Pill: DeepSeek V4.
+  elevenlabs-logo.svg   ElevenLabs mark (the two bars), simple-icons 16.32.0 (CC0 1.0),
+                        https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg. Fill set to #fff.
+                        Trademark of Eleven Labs, Inc. Pill: ElevenLabs.
+
+Copied from ../first-model-every-model-superbot-7d540b7f/brand (see its CREDITS.txt; "lobehub" =
+@lobehub/icons-static-svg 1.95.1, MIT, https://unpkg.com/@lobehub/icons-static-svg@1.95.1/icons/<name>.svg; the 1em
+width/height and inline style attributes were replaced by width="24" height="24" so the file works as <img>):
+  grok-logo.svg         Grok mark, lobehub icons/grok.svg, currentColor fill set to #fff. xAI. Pill: Grok 4.
+  midjourney-logo.svg   Midjourney sailboat mark, lobehub icons/midjourney.svg, currentColor fill set to #fff.
+                        Midjourney, Inc. Pill: Midjourney v7.
+  kling-logo.svg        Kling mark (colour), lobehub icons/kling-color.svg, colours unmodified. Kuaishou Technology.
+                        Pill: Kling 2.5.
+  minimax-logo.svg      MiniMax mark (brand gradient), lobehub icons/minimax-color.svg, colours unmodified. MiniMax, the
+                        maker of Hailuo. Pill: Hailuo 02.
+  runway-logo.svg       Runway mark, lobehub icons/runway.svg, currentColor fill set to #fff. Runway AI, Inc.
+                        Pill: Runway Gen-4.
+
+Copied from ../first-model-all-models-superbot-df54f063/brand (MODEL DECK section of its CREDITS.txt; lobehub
+@lobehub/icons-static-svg 1.95.1, MIT, paths unmodified):
+  nanobanana-logo.svg   icons/nanobanana-color.svg. Nano Banana (Google). Pill: Nano Banana.
+  bytedance-logo.svg    icons/bytedance-color.svg. ByteDance, the maker of Seedance (ByteDance Seed); no Seedance-specific
+                        mark exists in lobehub or simple-icons. Pill: Seedance.
+  deepmind-logo.svg     icons/deepmind-color.svg. Google DeepMind, the maker of Veo. Pill: Veo 3 (the video model).
+
+SUPERBOT
+  The mark on the end card is ../../assets/sb-mark-live.{css,js} (first party), drawn through shell.js makeMark.
+  The hub UI (scenes/tabs-assets/hub-markup.js, hub.css, tile.svg, mark-clean.svg) is superbot's own interface.

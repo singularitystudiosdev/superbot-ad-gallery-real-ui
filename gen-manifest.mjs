@@ -103,6 +103,11 @@ const more = [
   // make a k-pop music video about p(doom) (2026-09-27): the fantasy90s v3 routing rethemed to an M/V, ends on 10s of @donaldjewkes' one-prompt Opus 5.5 M/V.
   ['pdoom-mv-every-model-v3-superbot-abba733b', 'pdoom-mv-every-model-superbot-abba733b/', 'make a k-pop music video about p(doom): Lyria, ElevenLabs, Gemini, Opus 5.5, DeepSeek, GitHub, then the real Opus 5.5 M/V plays (7 requests; clip @donaldjewkes)', 'Ad spots',
     { desc: "Ends on the 0:19 to 0:29 hook of the M/V 'Upping My P(doom)' by Donald Jewkes (@donaldjewkes), made with one prompt in Claude Opus 5.5." }],
+  // Japan bikeride, every model (2026-09-28): "Make me relaxing Japan bikeride" typed into the hub, 14 model switch
+  // pills burst past, and the Veo 3 reply card lands before 4 s and opens full frame on @prasenx's bike ride clip,
+  // then a black superbot end card (animations/japan-bikeride-every-model-superbot-ad3eb59d/img/CREDITS.txt, brand/CREDITS.txt).
+  ['japan-bikeride-every-model-superbot-ad3eb59d', 'japan-bikeride-every-model-superbot-ad3eb59d/', 'Japan bikeride, every model', 'Ad spots',
+    { desc: 'One prompt, fourteen model switches, a relaxing Japan bike ride back in under four seconds.' }],
   // make a Splatoon-style ink game (2026-09-26): one ask routed to seven models on one page (v3, the default cut):
   // Lyria scores the match, Meshy models the props, Gemini draws the ink decals, DeepSeek scrapes CC0 prop
   // libraries, GitHub pushes Inkwave, Opus 5.5 codes the game and plays it.

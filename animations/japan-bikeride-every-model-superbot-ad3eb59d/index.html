@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: Make me relaxing Japan bikeride</title>
+<script src="../../assets/ar.js"></script>
+<script>
+// 9:16 is not in the shared ar.js ratio list, so this spot adds it for itself: ?ar=9x16 gives a 608 x 1080 stage
+// (the same contract ar.js writes for its own ratios: window.AR, data-ar and the --ar-* vars). Re-applied on resize
+// because ar.js, unlocked, re-picks the nearest of its four ratios on every resize.
+(function () {
+  var q = (new URLSearchParams(location.search).get('ar') || '').replace(':', 'x').replace('-', 'x');
+  if (q !== '9x16') return;
+  var doc = document.documentElement;
+  function apply() {
+    var w = 608;
+    var prev = window.AR && window.AR.key;
+    window.AR = { key: '9x16', w: w, h: 1080, crop: (1920 - w) / 2, ratio: 9 / 16, a: 9, b: 16 };
+    doc.dataset.ar = '9x16';
+    doc.style.setProperty('--ar-w', w + 'px');
+    doc.style.setProperty('--ar-crop', ((1920 - w) / 2) + 'px');
+    doc.style.setProperty('--ar-ratio', '9 / 16');
+    doc.style.setProperty('--ar-f', String(9 / 16));
+    if (prev && prev !== '9x16') dispatchEvent(new CustomEvent('archange', { detail: window.AR }));
+  }
+  apply();
+  addEventListener('resize', apply);
+})();
+</script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=jb1">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=jb1">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=jb1">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment (the chat scene, then the end card) -->
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=jb1"></script>
+</body>
+</html>

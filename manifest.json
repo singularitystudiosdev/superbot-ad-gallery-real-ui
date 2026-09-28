@@ -209,6 +209,15 @@
     "desc": "Ends on the 0:19 to 0:29 hook of the M/V 'Upping My P(doom)' by Donald Jewkes (@donaldjewkes), made with one prompt in Claude Opus 5.5."
   },
   {
+    "id": "japan-bikeride-every-model-superbot-ad3eb59d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Japan bikeride, every model",
+    "src": "animations/japan-bikeride-every-model-superbot-ad3eb59d/",
+    "thumb": "assets/shots/japan-bikeride-every-model-superbot-ad3eb59d.png",
+    "desc": "One prompt, fourteen model switches, a relaxing Japan bike ride back in under four seconds."
+  },
+  {
     "id": "inkwave-every-model-superbot-3f9d27b4",
     "type": "animation",
     "group": "Ad spots",

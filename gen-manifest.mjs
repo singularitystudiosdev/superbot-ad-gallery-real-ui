@@ -209,6 +209,11 @@ const more = [
   ['wsb-to-wings-switcher-superbot-cbe85cdb', 'wsb-to-wings-switcher-superbot-cbe85cdb/', 'From WSB to Wings in One Ask', 'Ad spots'],
   ['tendie-model-selector-superbot-3c27b88b', 'tendie-model-selector-superbot-3c27b88b/', 'The Right Model for Every Tendie', 'Ad spots'],
   ['one-agent-full-degen-superbot-129bca8b', 'one-agent-full-degen-superbot-129bca8b/', 'One Agent. Full Degen.', 'Ad spots'],
+  // OPUS 5.5 SAYS YOU SHOULDN'T GAMBLE (2026-09-28): the one-agent-full-degen 129bca8b engine forked and
+  // rethemed: two text cards ("Opus 5.5 says you shouldn't gamble" with the last word red, then "WE DONT CARE!"
+  // under a confetti burst), then one ask — "Make a website of all my winnings" — and superbot's work card grows
+  // sams-winnings.site out of the thread to fill the frame. Fictional winnings; no casino or sportsbook brands.
+  ["we-dont-care-gamble-superbot-89be2ca4", "we-dont-care-gamble-superbot-89be2ca4/", "WE DONT CARE: Opus 5.5 says you shouldn't gamble, then superbot builds a website of all my winnings", "Ad spots"],
     // the no-switch family (2026-09-25): forked from the context-switch spot, built on the real superbot
   // hub UI, each keeping the same thread while a new model joins the rail. One member still listed.
   // the "Superbot just works" family (2026-09-25): built on one kit (animations/just-works-kit-42aac446).

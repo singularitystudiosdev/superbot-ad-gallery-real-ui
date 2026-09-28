@@ -1,0 +1,7 @@
+img CREDITS (one-agent-full-degen)
+
+ribeye.jpg   "Beef Ribeye Steak & Shrimps with Potato Fries" by Ceeseven, Wikimedia Commons, CC BY-SA 4.0,
+             https://commons.wikimedia.org/wiki/File:Beef_Ribeye_Steak_%26_Shrimps_with_Potato_Fries.jpg
+             (960px thumbnail, fetched 2026-09-26). Shown cropped in the dinner order card (beats/dinner.js).
+
+The mention counts, backtest results, paper-trading results, alert and order shown in the spot are mock UI.

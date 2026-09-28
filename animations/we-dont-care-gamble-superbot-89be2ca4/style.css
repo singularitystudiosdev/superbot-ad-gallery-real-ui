@@ -1,0 +1,59 @@
+/* do-that-too-superbot: "I can do that too." The stage, the scene layers and the chrome outside the stage.
+   Base lifted from ../waffles-website-superbot-87a583a1/style.css. The app window is in shell.css,
+   the text cards in cards.css, the end card at the bottom of this file. */
+:root {
+  /* superbot-desktop tokens (packages/tokens) */
+  --bg: #0d0d0d; --card: #0a0a0a; --raised: #1a1a1c; --line: #1e1e21; --line-strong: #3a3b40;
+  --fg: #e6e8ee; --fg-2: #c9ccd4; --muted: #aeb1bc; --ok: #23a559; --storm-1: #2b6bff;
+  --grad: linear-gradient(90deg, #22d3ee 0%, #5b8dff 52%, #8b5cf6 100%);
+  --danger: #ef4444; --accent: #5b8dff;
+  /* the violet end of the app gradient (the Publish button / --grad's last stop) */
+  --sb-violet: #8b5cf6;
+  --storm-0: #00e5c3; --storm-2: #6a1fd8; --storm-3: #c026d3; --storm-4: #ff3d9a;
+  --storm: linear-gradient(135deg, var(--storm-0) 0%, var(--storm-1) 25%, var(--storm-2) 50%, var(--storm-3) 75%, var(--storm-4) 100%);
+  --ui: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; overflow: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+svg { flex: none; }
+
+/* the pointer cursor (lib/shell makeCursor): same svg and shadow as waffles-website .cursor */
+.cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 30; pointer-events: none;
+  fill: #fff; stroke: #000; stroke-width: 1.3; stroke-linejoin: round; filter: drop-shadow(0 3px 6px rgb(0 0 0 / .5)); transform-origin: 17px 11px; }
+
+/* ================= end card (waffles-website lock-up) ================= */
+#s-end { display: grid; place-items: center; background: #000; z-index: 20; }
+#s-end .lock { display: flex; align-items: center; gap: 44px; }
+#s-end .face { flex: none; width: 220px; height: 220px; display: grid; place-items: center; }
+#s-end .words { overflow: hidden; }
+#s-end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#s-end .words p { margin: 12px 0 0 6px; font-size: 34px; color: var(--muted); font-weight: 500; }
+html[data-ar="1x1"] #s-end .lock, html[data-ar="4x5"] #s-end .lock { flex-direction: column; gap: 28px; text-align: center; }
+html[data-ar="4x5"] #s-end .words h1 { font-size: 104px; }
+html[data-ar="1x1"] #s-end .words p, html[data-ar="4x5"] #s-end .words p { margin-left: 0; }
+
+/* a scene that threw: a quiet placeholder so the spot keeps playing */
+.scene-err { position: absolute; inset: 0; display: grid; place-items: center; font: 600 28px/1.3 var(--font-mono); color: #5c5f68; }
+
+/* ================= chrome outside the stage ================= */
+.hint { position: fixed; right: 18px; bottom: 14px; font-size: 11px; color: var(--muted); opacity: .6; user-select: none; }
+body.freeze .hint { display: none; }
+.rec-btn { position: fixed; top: 18px; right: 18px; z-index: 40; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
+  background: var(--card); color: var(--fg); border: 1px solid var(--line); font: 700 13px/1 var(--font-mono); letter-spacing: .04em; cursor: pointer; transition: border-color .15s, background-color .15s; }
+.rec-btn:hover { border-color: var(--accent); }
+.rec-btn .rec-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--danger); flex: none; }
+.rec-btn.recording { background: #1a0e0e; border-color: var(--danger); color: #fff; }
+.rec-btn.recording .rec-dot { animation: wr-rec-blink 1s steps(2) infinite; }
+@keyframes wr-rec-blink { 50% { opacity: .25; } }
+.rec-btn:disabled { opacity: .7; cursor: default; }
+.rec-hud { display: none; position: fixed; bottom: 18px; left: 18px; z-index: 40; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+  background: rgba(20, 8, 8, .85); border: 1px solid #5c3030; color: #fff; font: 700 12px/1 var(--font-mono); }
+.rec-hud .rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: wr-rec-blink 1s steps(2) infinite; }
+body.freeze .rec-btn { display: none; }

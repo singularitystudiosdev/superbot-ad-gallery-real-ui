@@ -460,6 +460,14 @@
     "thumb": "assets/shots/one-agent-full-degen-superbot-129bca8b.png"
   },
   {
+    "id": "we-dont-care-gamble-superbot-89be2ca4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "WE DONT CARE: Opus 5.5 says you shouldn't gamble, then superbot builds a website of all my winnings",
+    "src": "animations/we-dont-care-gamble-superbot-89be2ca4/",
+    "thumb": "assets/shots/we-dont-care-gamble-superbot-89be2ca4.png"
+  },
+  {
     "id": "just-works-waiver-night-gpt-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",

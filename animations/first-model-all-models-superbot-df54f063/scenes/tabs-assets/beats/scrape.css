@@ -1,24 +1,44 @@
-/* DeepSeek (beats/scrape.js): the tool chip counting files, then one card with the two source lists: texture swatches
-   (name, site) and ambient-audio rows (play glyph, file, waveform, length, library). Hub design px. Nothing transitions. */
-#s-tabs .sbsite .hub .ds-chiprow { opacity: 0; }
-#s-tabs .sbsite .hub .ds-card { width: 100%; max-width: 560px; box-sizing: border-box; padding: 12px 12px 12px; border-radius: 14px; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); opacity: 0; }
-#s-tabs .sbsite .hub .ds-cap { margin: 0 0 8px 2px; font: 700 10.5px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: #8e8e93; opacity: 0; }
+/* DeepSeek (beats/scrape.js): one crawler card. A header with the live total and the sources count, the five source
+   rows (status, domain, progress bar, count, kind), then assets/: an HDRI and four texture swatches, then three sound
+   chips, each tagged by type. Hub design px; every text is 13px or larger. Nothing transitions. */
+#s-tabs .sbsite .hub .ds-card { width: 100%; max-width: 560px; box-sizing: border-box; padding: 12px; border-radius: 14px; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); opacity: 0; }
 
-/* textures: four swatches, each a crop standing in for the scraped map */
-#s-tabs .sbsite .hub .ds-sws { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0 0 14px; }
-#s-tabs .sbsite .hub .ds-t { display: grid; gap: 3px; min-width: 0; opacity: 0; }
-#s-tabs .sbsite .hub .ds-sw { position: relative; display: block; aspect-ratio: 16 / 10; margin-bottom: 3px; border-radius: 8px; background-repeat: no-repeat; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
-#s-tabs .sbsite .hub .ds-sw em { position: absolute; left: 5px; top: 5px; padding: 3px 5px; border-radius: 5px; background: rgba(12,12,14,.72); font: 700 9px/1 var(--font-mono); font-style: normal; color: #e5e5ea; }
-#s-tabs .sbsite .hub .ds-t b { font: 600 12px/1.2 var(--ui); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#s-tabs .sbsite .hub .ds-t small { font: 500 10.5px/1.2 var(--ui); color: #8e8e93; white-space: nowrap; }
+/* header: spinner then check, "Scraping 37 assets" counting up, "3 of 5 sources" on the right */
+#s-tabs .sbsite .hub .ds-hd { display: flex; align-items: center; gap: 9px; height: 26px; margin: 0 2px 9px 4px; white-space: nowrap; }
+#s-tabs .sbsite .hub .ds-hd .spin { width: 16px; height: 16px; }
+#s-tabs .sbsite .hub .ds-hd .spin.done::after { left: 5.5px; top: 3px; width: 3.5px; height: 7.5px; border-width: 0 2px 2px 0; }
+#s-tabs .sbsite .hub .ds-hl { font: 600 17px/1 var(--ui); letter-spacing: -.01em; color: #ececec; }
+#s-tabs .sbsite .hub .ds-n { font-weight: 700; font-variant-numeric: tabular-nums; color: #fff; }
+#s-tabs .sbsite .hub .ds-of { margin-left: auto; font: 500 13px/1 var(--ui); color: #8e8e93; font-variant-numeric: tabular-nums; }
 
-/* ambient audio: one row per sound, its waveform drawing in as it downloads */
-#s-tabs .sbsite .hub .ds-aus { display: grid; gap: 6px; }
-#s-tabs .sbsite .hub .ds-au { display: flex; align-items: center; gap: 9px; min-width: 0; height: 32px; padding: 0 10px 0 5px; border-radius: 9px; background: #1a1a1d; box-shadow: inset 0 0 0 1px #26262a; opacity: 0; }
-#s-tabs .sbsite .hub .ds-pb { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #4d6bfe; }
-#s-tabs .sbsite .hub .ds-pl { width: 12px; height: 12px; fill: #fff; }
-#s-tabs .sbsite .hub .ds-au b { flex: none; width: 128px; font: 600 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#s-tabs .sbsite .hub .ds-wv { flex: 1; min-width: 36px; height: 20px; display: flex; align-items: center; gap: 2px; }
-#s-tabs .sbsite .hub .ds-wv i { flex: 1; min-width: 1px; border-radius: 1px; background: #9fb0ff; }
-#s-tabs .sbsite .hub .ds-au em { flex: none; font: 500 11.5px/1 var(--font-mono); font-style: normal; color: #c7c7cc; font-variant-numeric: tabular-nums; }
-#s-tabs .sbsite .hub .ds-au small { flex: none; width: 62px; text-align: right; font: 500 11px/1 var(--ui); color: #8e8e93; white-space: nowrap; }
+/* the sources: queued, fetching, done */
+#s-tabs .sbsite .hub .ds-rows { display: grid; gap: 3px; }
+#s-tabs .sbsite .hub .ds-row { display: flex; align-items: center; gap: 10px; height: 26px; padding: 0 10px 0 8px; border-radius: 8px; background: #1a1a1d; box-shadow: inset 0 0 0 1px #26262a; opacity: .4; }
+#s-tabs .sbsite .hub .ds-row .spin.ds-wait { border-top-color: #3a3a3f; }
+#s-tabs .sbsite .hub .ds-row b { flex: none; width: 128px; font: 500 13px/1 var(--font-mono); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .ds-bar { flex: 1; min-width: 40px; height: 4px; border-radius: 2px; background: #26262a; overflow: hidden; }
+#s-tabs .sbsite .hub .ds-bar i { display: block; height: 100%; border-radius: 2px; background: #4d6bfe; transform: scaleX(0); transform-origin: 0 50%; }
+#s-tabs .sbsite .hub .ds-row em { flex: none; width: 26px; text-align: right; font: 600 13px/1 var(--font-mono); font-style: normal; color: #ececec; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ds-row em.ds-z { color: #5a5a5f; }
+#s-tabs .sbsite .hub .ds-row small { flex: none; width: 60px; font: 500 13px/1 var(--ui); color: #8e8e93; white-space: nowrap; }
+
+/* assets/: what landed */
+#s-tabs .sbsite .hub .ds-dir { display: flex; align-items: center; gap: 6px; margin: 11px 0 7px 4px; opacity: 0; }
+#s-tabs .sbsite .hub .ds-dir b { font: 600 13px/1 var(--font-mono); color: #c7c7cc; }
+#s-tabs .sbsite .hub .ds-fo { width: 15px; height: 15px; fill: #8e8e93; }
+#s-tabs .sbsite .hub .ds-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+#s-tabs .sbsite .hub .ds-a { display: grid; gap: 5px; min-width: 0; opacity: 0; }
+#s-tabs .sbsite .hub .ds-a.ds-wide { grid-column: span 2; }
+#s-tabs .sbsite .hub .ds-im { position: relative; display: block; height: 60px; border-radius: 8px; background-repeat: no-repeat; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+#s-tabs .sbsite .hub .ds-a b { padding-left: 2px; font: 500 13px/1.1 var(--font-mono); color: #d1d1d6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .ds-snd { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+#s-tabs .sbsite .hub .ds-s { display: flex; align-items: center; gap: 7px; min-width: 0; height: 30px; padding: 0 9px 0 5px; border-radius: 8px; background: #1a1a1d; box-shadow: inset 0 0 0 1px #26262a; opacity: 0; }
+#s-tabs .sbsite .hub .ds-s b { min-width: 0; font: 500 13px/1 var(--font-mono); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* type tags: over a swatch's corner, or leading a sound chip */
+#s-tabs .sbsite .hub .ds-tg { flex: none; padding: 3px 5px; border-radius: 5px; background: rgba(12,12,14,.8); font: 700 13px/1 var(--ui); font-style: normal; }
+#s-tabs .sbsite .hub .ds-im .ds-tg { position: absolute; left: 4px; top: 4px; }
+#s-tabs .sbsite .hub .ds-s .ds-tg { background: rgba(159,176,255,.14); }
+#s-tabs .sbsite .hub .ds-g-tex { color: #7ee2b1; }
+#s-tabs .sbsite .hub .ds-g-hdri { color: #f6c46e; }
+#s-tabs .sbsite .hub .ds-g-aud { color: #a9b8ff; }

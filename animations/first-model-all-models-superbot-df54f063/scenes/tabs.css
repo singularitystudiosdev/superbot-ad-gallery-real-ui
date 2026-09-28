@@ -2,8 +2,8 @@
    #s-tabs. The chat, the crop and the Opus code card are styled by tabs-assets/chat.css, ask.css and
    mc-code.css (linked by index.html). No transitions or keyframes: tabs.js and the beats set every moving value from lt. */
 @import url("tabs-assets/hub.css"); /* the Superbot hub, scoped under #s-tabs .sbsite (generated) */
-@import url("tabs-assets/beats/meshy.css?v=2");
-@import url("tabs-assets/beats/scrape.css?v=1");
+@import url("tabs-assets/beats/meshy.css?v=3");
+@import url("tabs-assets/beats/scrape.css?v=2");
 @import url("tabs-assets/beats/output.css?v=1");
 #s-tabs { background: #000; }
 

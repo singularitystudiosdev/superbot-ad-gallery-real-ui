@@ -4,7 +4,7 @@
 // the model built for it, in one chat.
 //   deck    0 to 3.75  a deck of model cards switches through the roster, faster and faster (opens the spot)
 //   tabs    3.75 to 10.75 one ask ("Make a Japanese relaxing biking demo"), three hand-offs, each on its routing chip:
-//                      Meshy models it, DeepSeek scrapes the textures and ambient audio, Opus 5.5 codes it
+//                      Meshy models it, DeepSeek scrapes the assets, Opus 5.5 codes it
 //   clip    10.75 to 13.45 Prasenjit's (@prasenx) Opus 5.5 bike ride at full frame, 2.7 s, with its sound (img/CREDITS.txt)
 //   end     "superbot" beside the mascot
 // The engine: the whole spot is a pure function of t. ?t=<s> freezes a frame, ?t=<s>&play=1 plays on from there,

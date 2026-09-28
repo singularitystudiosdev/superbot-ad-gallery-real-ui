@@ -1,5 +1,5 @@
 // first-model-all-models: the chat's copy and the hand-off contract with the clip scene. One ask, three hand-offs in a
-// fixed order: Meshy models the ride, DeepSeek scrapes its textures and ambient audio, Opus 5.5 codes it, and the
+// fixed order: Meshy models the ride, DeepSeek scrapes its assets, Opus 5.5 codes it, and the
 // output window opens on the ride. timeline.js reads CFG.end (the end card's word).
 export const CFG = {
   pace: 1,
@@ -7,7 +7,7 @@ export const CFG = {
   ask: 'Make a Japanese relaxing biking demo',
   say: {
     mesh: 'Modeling the ride in 3D: 4 assets.',
-    scrape: 'Textures and ambient sound for the ride.',
+    scrape: 'Scraping textures, skies and sounds for the ride.',
     code: 'Coding the ride in three.js.',
   },
 };

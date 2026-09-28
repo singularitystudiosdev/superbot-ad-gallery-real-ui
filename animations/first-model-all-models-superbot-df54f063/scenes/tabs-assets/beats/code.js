@@ -20,7 +20,7 @@ scene.fog = new THREE.Fog('#f4b6a0', 40, 260);
 const road = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, 0, z)), true);
 const bike = await loadModel('assets/models/bike_rider.glb');
 scene.add(buildTerrain(road), plantTrees(road, 180), bike);
-ambience.play(['cicadas', 'wind_chimes', 'stream']);
+ambience.play(['cicadas', 'chimes', 'stream']);
 
 let u = 0;
 renderer.setAnimationLoop(() => {

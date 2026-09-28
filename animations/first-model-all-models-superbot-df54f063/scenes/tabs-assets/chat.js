@@ -1,5 +1,5 @@
 // "Make a Japanese relaxing biking demo": one ask, three hand-offs, 7 s. Superbot switches to Meshy for the 3D models
-// (beats/meshy.js), to DeepSeek for the textures and ambient audio (beats/scrape.js), to Opus 5.5 for the three.js code
+// (beats/meshy.js), to DeepSeek to scrape the assets (beats/scrape.js), to Opus 5.5 for the three.js code
 // (beats/code.js), and the output window opens on the ride (beats/output.js, the push into the clip). Every switch is
 // its own large routing chip ("Switching to Meshy", spinner, then a check), the reply under it opens on a header row
 // with the model's logo and name, the composer's model chip follows, and the previous reply compresses to its header
@@ -9,8 +9,8 @@
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn, placeCursor } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
 import { CFG } from './cuts.js?v=8';
-import meshy from './beats/meshy.js?v=2';
-import scrape from './beats/scrape.js?v=1';
+import meshy from './beats/meshy.js?v=3';
+import scrape from './beats/scrape.js?v=2';
 import code from './beats/code.js?v=1';
 import output from './beats/output.js?v=1';
 
@@ -39,7 +39,7 @@ const SWAP = 0.16, DONE = 0.34, REPLY = 0.05, SQUEEZE = [-0.06, 0.26];
 // the hand-offs in order; `label` is the routing chip's line, `sum` is the one line a reply keeps once it has compressed
 const STEPS = [
   { app: 'meshy', mod: meshy, label: 'Switching to Meshy', sum: '4 models' },
-  { app: 'deepseek', mod: scrape, label: 'Switching to DeepSeek', sum: '4 textures · 4 sounds' },
+  { app: 'deepseek', mod: scrape, label: 'Switching to DeepSeek', sum: '148 assets' },
   { app: 'opus', mod: code, label: 'Switching to Opus 5.5', sum: 'Built' },
   { app: 'opus', mod: output, cont: true },
 ];

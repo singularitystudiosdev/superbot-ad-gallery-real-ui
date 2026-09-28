@@ -5,10 +5,13 @@
 // pill until the pill sits at frame centre at ~1.8x, holds while the spinner resolves to the check, and pulls back
 // while the reply builds. A beat can ask for its own push (chat.js FOCUS: the Opus code panel fills the frame width
 // while the run plays). Under prefers-reduced-motion every push is a cut (in at mid-push, out at mid-pull).
+// The nozoom cut (?cut=nozoom, tabs-assets/cut.js) never moves the camera: no empty-state zoom, no pill push, no
+// panel push; the design box sits at rest (scale 1, centred) from the first frame to the last.
 // render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's generated stylesheets
 // (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, renderChatAfter, BEATS, CAMERA, FOCUS, CHAT_END, PUSH, PULL } from './tabs-assets/chat.js?v=e2834f7d';
+import { mountChat, renderChat, renderChatAfter, BEATS, CAMERA, FOCUS, CHAT_END } from './tabs-assets/chat.js?v=e2834f7d';
+import { ZOOM as ZOOM_CUT } from './tabs-assets/cut.js?v=e2834f7d';
 import { lerp, seg, outCubic, outQuint, inOutCubic, boxIn } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;
@@ -103,9 +106,10 @@ export default {
     renderChat(el.chat, t);
 
     // camera. At rest it frames the whole design box (centre DW/2, DH/2); the empty state sits a little pushed in
-    // (a narrow column already fills the frame, so it pushes in less) and eases out as the ask is sent.
+    // (a narrow column already fills the frame, so it pushes in less) and eases out as the ask is sent. The nozoom
+    // cut stays at rest throughout (CAMERA and FOCUS are empty there too).
     const z0 = g.DW < 700 ? 1.06 : 1.12;
-    let z = rm ? 1 : lerp(z0, 1, drop);
+    let z = rm || !ZOOM_CUT ? 1 : lerp(z0, 1, drop);
     let cx = g.DW / 2, cy = g.DH / 2;
     for (const m of CAMERA) {
       const f = pushOf(m, t, rm);

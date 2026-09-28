@@ -5,6 +5,7 @@
 // and the superbot end card (the mark and the wordmark, drawn here).
 import * as lib from './lib.js';
 import * as shell from './shell.js';
+import { CUT } from './scenes/tabs-assets/cut.js?v=e2834f7d';
 
 const { clamp, lerp, seg, outQuint } = lib;
 const H = 1080;
@@ -14,16 +15,17 @@ const dip = document.getElementById('dip');
 
 // ---------- the sequence ----------
 // the hub cropped to its thread, fading up from black on the empty state, then the one-ask chat
-// "Relaxing Japanese bike riding game" (scenes/tabs-assets/chat.js: Gemini, Blender, Lyria 2, ElevenLabs,
-// Claude Opus 5.5, one switch pill each, the camera pushing in on every pill; it ends on the ride playing full frame),
-// then the end card
+// "Relaxing Japanese bike riding game" (scenes/tabs-assets/chat.js: Gemini, Blender, ElevenLabs, Claude Opus 5.5,
+// one switch pill each; in the default zoom cut the camera pushes in on every pill, in ?cut=nozoom it never moves;
+// it ends on the ride playing full frame), then the end card
 const SEQUENCE = [
   ['scene', 'tabs'],
   ['end', 'end'],
 ];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape). A loaded scene reports its
-// own dur (tabs: its content-driven chat schedule + the 0.3 s fade), which is what CYCLE follows; this mirrors it.
-const FALLBACK_DUR = { tabs: 23.37 };
+// own dur (tabs: its content-driven chat schedule + the 0.3 s fade), which is what CYCLE follows; this mirrors it by
+// hand, per cut (measured v4: zoom CHAT_END 19.554 + 0.3, nozoom 17.954 + 0.3).
+const FALLBACK_DUR = { tabs: CUT === 'nozoom' ? 18.254 : 19.854 };
 const SCENE_FADE = 0.3;
 const END_DUR = 4.4, DIP = 0.35; /* deliberate */ // the end card holds; the dip to black at the loop
 
@@ -86,7 +88,7 @@ for (const [kind, id] of SEQUENCE) {
 const CYCLE = +acc.toFixed(4);
 const T = {};
 SEGS.forEach((s) => { T[s.id] = s.t0; });
-window.__AD = { segments: SEGS.map(({ kind, id, t0, t1 }) => ({ kind, id, t0, t1 })), CYCLE };
+window.__AD = { segments: SEGS.map(({ kind, id, t0, t1 }) => ({ kind, id, t0, t1 })), CYCLE, cut: CUT };
 
 // ---------- mount ----------
 const ctx = { W: W(), H, t: 0, lib, shell };

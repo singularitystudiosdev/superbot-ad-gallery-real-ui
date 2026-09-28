@@ -127,9 +127,9 @@ export async function createRide(scene, camera) {
     return u;
   };
 }`;
-const AUDIO = `// the Lyria loop and ElevenLabs takes, in Web Audio
+const AUDIO = `// the ElevenLabs takes, in Web Audio
 const TAKES = [
-  'ride-loop', 'cicadas', 'bike-bell', 'gravel', 'wind-in-the-rice',
+  'cicadas', 'bike-bell', 'gravel', 'wind-in-the-rice',
 ];
 
 export async function startAudio() {
@@ -150,7 +150,6 @@ export async function startAudio() {
     src.start();
     return { src, g };
   };
-  loop('ride-loop', 0.5);
   loop('cicadas', 0.25);
   const wind = loop('wind-in-the-rice', 0.1);
   const gravel = loop('gravel', 0);
@@ -395,20 +394,23 @@ function rise(n, p, dy) {
 }
 
 export default {
-  times(r) {
+  times(r, opts = {}) {
     const T = { r };
     T.card = r + CARD_AT;
     let at = T.card + FIRST;
     T.items = SCRIPT.map((s) => { const o = { a: at, b: at + DUR[s.k] }; at += STEP[s.k]; return o; });
     T.done = T.items[T.items.length - 1].b + SETTLE; // the tests pass: review bar live, Worked for
-    // the camera (scenes/tabs.js, via chat.js FOCUS) pushes in on the panel once it is up, holds through the run,
-    // and pulls back to rest after done
-    const sw = T.card + FOCUS_AT;
-    T.focus = { sw, landed: sw + FOCUS_PUSH, pull: T.done + HOLD_DONE, back: T.done + HOLD_DONE + FOCUS_PULL };
-    // chat.js cues the next beat ("Press play.") from done, not from end: the pull-back overlaps it
+    // zoom cut only (chat.js passes opts.zoom; nozoom has no camera move): the camera (scenes/tabs.js, via chat.js
+    // FOCUS) pushes in on the panel once it is up, holds through the run, and pulls back to rest after done
+    if (opts.zoom !== false) {
+      const sw = T.card + FOCUS_AT;
+      T.focus = { sw, landed: sw + FOCUS_PUSH, pull: T.done + HOLD_DONE, back: T.done + HOLD_DONE + FOCUS_PULL };
+    }
+    // chat.js cues the next beat ("Press play.") from done, not from end: the settle (and the zoom cut's pull-back)
+    // overlaps it
     T.next = T.done;
-    // the beat's last visible change: the camera back at rest (the panel itself settles at done + PULSE)
-    T.end = Math.max(T.focus.back, T.done + PULSE, r + SAY_AT + SAY.length / CPS_SAY);
+    // the beat's last visible change: the camera back at rest in the zoom cut; the panel itself settles at done + PULSE
+    T.end = Math.max(T.focus ? T.focus.back : 0, T.done + PULSE, r + SAY_AT + SAY.length / CPS_SAY);
     return T;
   },
   build(k, x) {
@@ -450,7 +452,7 @@ export default {
 
     return {
       nodes: [say, card],
-      focus: card, // the camera's target while T.focus runs (chat.js FOCUS)
+      focus: T.focus ? card : null, // the camera's target while T.focus runs (chat.js FOCUS; zoom cut only)
       marks: [[T.r, say], [T.card, card]],
       render(t) {
         const ns = streamCount(SAY, T.r + SAY_AT, CPS_SAY, t);

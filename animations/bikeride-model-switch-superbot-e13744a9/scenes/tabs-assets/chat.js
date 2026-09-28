@@ -1,16 +1,17 @@
 // The one-ask chat. The ask ("Relaxing Japanese bike riding game") is typed into the composer and sent, and superbot
-// hands the build from model to model: Gemini, Blender, Lyria 2, ElevenLabs, Claude Opus 5.5. Every hand-off is ONE
-// switch pill (the real hub's "Switching to X" pill: logo tile, label, spinner that resolves to a green check), and
-// every pill is the moment the camera pushes in on (scenes/tabs.js reads CAMERA below). The routed model then answers
-// with its own beat: art.js (concept stills), blender.e2834f7d.js (exported models), music.js (the loop), assets.js
-// (the sound effects), code.js (the game's files) and play.js (the ride itself, opened to full frame).
+// hands the build from model to model: Gemini, Blender, ElevenLabs, Claude Opus 5.5. Every hand-off is ONE switch
+// pill (the real hub's "Switching to X" pill: logo tile, label, spinner that resolves to a green check). In the zoom
+// cut (default) every pill is the moment the camera pushes in on (scenes/tabs.js reads CAMERA below); in the nozoom
+// cut (?cut=nozoom, cut.js) the camera never moves and each reply starts GAP after its pill's check. The routed model
+// then answers with its own beat: art.js (the decals), blender.e2834f7d.js (the models), assets.js (the sound
+// effects), code.js (the game's files) and play.js (the ride itself, opened to full frame).
 // The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function of
 // the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { lerp, seg, outCubic, inOutCubic, esc, boxIn, placeCursor, streamCount } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
+import { ZOOM } from './cut.js?v=e2834f7d';
 import art from './beats/art.js?v=e2834f7d';
 import blender from './beats/blender.e2834f7d.js?v=e2834f7d';
-import music from './beats/music.js?v=e2834f7d';
 import assets from './beats/assets.js?v=e2834f7d';
 import code from './beats/code.js?v=e2834f7d';
 import play from './beats/play.js?v=e2834f7d';
@@ -32,6 +33,7 @@ export const HOLD = 1.0; /* deliberate */ // parked on the pill: label still and
 export const PULL = 0.5; /* deliberate */ // pull back to the thread, inOutCubic, while the reply starts
 const CHECK = 0.45; /* deliberate */ // after the push lands, the spinner resolves to the check
 const REPLY = 0.05;                  // pull-back start to the model's reply line
+// nozoom: no push to wait for, so the reply starts GAP after the check lands (pill + 0.95 + 0.20 = pill + 1.15)
 const APPEAR = 0.3;                  // a message rising out of the composer
 
 // the one ask the whole spot is about
@@ -40,7 +42,6 @@ export const ASK = 'Relaxing Japanese bike riding game';
 const APPS = {
   gemini: { name: 'Gemini', logo: brand('gemini-logo.svg'), sub: 'in superbot' },
   blender: { name: 'Blender', logo: brand('blender-logo.svg'), sub: 'connected' },
-  lyria: { name: 'Lyria 2', logo: brand('gemini-logo.svg'), sub: 'in superbot' }, // Google's music model, Gemini mark
   elevenlabs: { name: 'ElevenLabs', logo: brand('elevenlabs-logo.svg'), sub: 'in superbot' },
   opus: { name: 'Claude Opus 5.5', logo: brand('claude-logo.svg'), sub: 'in superbot' },
   superbot: { name: 'Superbot', logo: null, sub: '' }, // drawn as its mark in CSS (SB_MARK, chat.css .sbm), not an image
@@ -50,7 +51,6 @@ const APPS = {
 const CHIP = {
   gemini: 'Switching to Gemini',
   blender: 'Connecting to Blender',
-  lyria: 'Switching to Lyria 2',
   elevenlabs: 'Switching to ElevenLabs',
   opus: 'Switching to Claude Opus 5.5',
 };
@@ -61,17 +61,17 @@ const step = (app, mods, opts = {}) => ({ app, mods, opts, label: CHIP[app] });
 export const ROUTE = [
   step('gemini', [art]),
   step('blender', [blender]),
-  step('lyria', [music]),
   step('elevenlabs', [assets]),
   step('opus', [code, play]),
 ];
 
 // every step's clock. The ask types from CHAT_T0 and is sent; the first pill lands FIRST_PILL after the send, and
-// every later pill lands GAP after the previous step's last visible change; the camera pushes in, the check lands
-// while it holds, the camera pulls back and the reply builds. Each beat module's times(r) owns everything after its
-// own start and reports end = its last visible change; a beat may also report next (code.js: its run is done) when
-// the beat after it under the same pill is cued from earlier than end (the code's camera pull-back overlaps
-// "Press play."). A step ends when the last of its beats has settled.
+// every later pill lands GAP after the previous step's last visible change. Zoom cut: the camera pushes in, the
+// check lands while it holds, the camera pulls back and the reply builds. Nozoom cut: the check lands at the same
+// mark (pill + PUSH + CHECK) and the reply starts GAP after it. Each beat module's times(r, opts) owns everything
+// after its own start and reports end = its last visible change (opts.zoom tells it which cut is playing); a beat may
+// also report next (code.js: its run is done) when the beat after it under the same pill is cued from earlier than
+// end (the code's camera pull-back overlaps "Press play."). A step ends when the last of its beats has settled.
 function timeBeats(route) {
   const typeEnd = CHAT_T0 + ASK.length / TYPE_CPS; // the last character lands
   const send = typeEnd + SEND;
@@ -81,14 +81,22 @@ function timeBeats(route) {
     const k = { app: a.app, opts: a.opts, label: a.label };
     if (i === 0) Object.assign(k, { ask: ASK, s: CHAT_T0, typeEnd, send });
     k.sw = prevEnd === null ? first : prevEnd + GAP; // the pill lands
-    k.landed = k.sw + PUSH;           // the camera is parked on it
-    k.done = k.landed + CHECK;        // spinner -> check; the composer's model chip switches here
-    k.pull = k.landed + HOLD;         // the camera starts back
-    k.back = k.pull + PULL;           // ...and is at rest
-    k.reply = k.pull + REPLY;         // the app answers
-    let r = k.reply, end = k.back;
+    k.done = k.sw + PUSH + CHECK;     // spinner -> check; the composer's model chip switches here
+    let end;
+    if (ZOOM) {
+      k.landed = k.sw + PUSH;         // the camera is parked on it
+      k.pull = k.landed + HOLD;       // the camera starts back
+      k.back = k.pull + PULL;         // ...and is at rest
+      k.reply = k.pull + REPLY;       // the app answers
+      end = k.back;
+    } else {
+      k.reply = k.done + GAP;         // the app answers as soon as the check has landed
+      end = k.reply;                  // the check's own pop (0.2 s) has finished by then
+    }
+    let r = k.reply;
+    const opts = { ...a.opts, zoom: ZOOM };
     k.parts = a.mods.map((mod) => {
-      const T = mod.times(r, a.opts);
+      const T = mod.times(r, opts);
       end = Math.max(end, T.end);
       r = (Number.isFinite(T.next) ? T.next : T.end) + GAP;
       return { mod, T };
@@ -100,11 +108,12 @@ function timeBeats(route) {
 }
 export const BEATS = timeBeats(ROUTE);
 export const CHAT_END = BEATS[BEATS.length - 1].k.end;
-// the marks scenes/tabs.js drives the camera from, one per pill (the node is filled in by mountChat)
-export const CAMERA = BEATS.map(({ k }) => ({ sw: k.sw, landed: k.landed, pull: k.pull, back: k.back, node: null }));
+// the marks scenes/tabs.js drives the camera from, one per pill (the node is filled in by mountChat); none in nozoom
+export const CAMERA = ZOOM ? BEATS.map(({ k }) => ({ sw: k.sw, landed: k.landed, pull: k.pull, back: k.back, node: null })) : [];
 // beat-level camera moves: a beat whose times() carries T.focus ({ sw, landed, pull, back }) and whose build() hands
 // back a focus node gets a push onto that node (code.js: the Opus panel, pushed in to fill the frame width while the
-// run plays). Same shape as CAMERA; `fill` is the share of the frame width the node fills when parked.
+// run plays). Same shape as CAMERA; `fill` is the share of the frame width the node fills when parked. Empty in
+// nozoom (code.js only reports T.focus when opts.zoom is on).
 export const FOCUS = BEATS.flatMap(({ k }) => k.parts.filter(({ T }) => T.focus).map(({ T }) => ({ ...T.focus, T, fill: 0.9, node: null })));
 
 const SB_MARK = '<i class="sbm sbm-c"></i><i class="sbm sbm-m"></i><i class="sbm sbm-w"></i>';
@@ -135,7 +144,7 @@ export function mountChat(hub) {
     const u = k.ask ? add(`<div class="msg qc-u"><span class="avatar">S</span><div class="m-main"><div class="m-head"><span class="m-name">sam</span></div><div class="m-text">${esc(k.ask)}</div></div></div>`) : null;
     const w = add(`<div class="msg qc-m">${sbAvatar}<div class="m-main"><span class="qc-sw">${tile(k.app)}<span class="qc-swl">${esc(k.label)}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div></div>`);
     const sw = { w, sw: w.querySelector('.qc-sw'), spin: w.querySelector('.qc-spin'), ok: w.querySelector('.qc-st .qc-ok') };
-    CAMERA[i].node = sw.sw;
+    if (CAMERA[i]) CAMERA[i].node = sw.sw;
     const r = add(`<div class="msg qc-m qc-r">${sbAvatar}<div class="m-main"><div class="qc-who">${tile(k.app)}<b>${a.name}</b>${a.sub ? `<small>${a.sub}</small>` : ''}</div></div></div>`);
     const main = r.querySelector('.m-main');
     const insts = k.parts.map(({ mod, T }) => {

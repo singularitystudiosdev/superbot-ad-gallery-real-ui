@@ -74,11 +74,11 @@ const more = [
   ['make-minecraft-every-model-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/', 'I WANT TO MAKE MINECRAFT · every model, one chat', 'Ad spots'],
   ['make-minecraft-every-model-steps-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/?cut=steps', 'I WANT TO MAKE MINECRAFT · you ask, it switches', 'Ad spots'],
   ['make-minecraft-every-model-zoom-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/?cut=zoom', 'I WANT TO MAKE MINECRAFT · into the game', 'Ad spots'],
-  // BUT WE WILL, do my job call center (2026-09-28): standalone spot. "ChatGPT won't do your job for you" with the
-  // red word "job", then a slam "BUT WE WILL", then the one ask "Do my job for me": superbot connects to your call
-  // center, learns your voice from 38 recorded calls, analyzes 1,284 past calls, then answers live (incoming call
-  // from Maria Lopez, order 48213) and the camera zooms into the live-call card. All names/numbers fictional.
-  ['do-my-job-callcenter-superbot-497a61f3', 'do-my-job-callcenter-superbot-497a61f3/', 'BUT WE WILL · Do my job for me: superbot takes your call center shift', 'Ad spots'],
+  // BUT WE WILL, do my job call center (2026-09-28; v2 2026-09-29): standalone spot. "ChatGPT won't do your job for
+  // you" with the red word "job", then a slam "BUT WE WILL", then the one ask "Do my job for me": superbot clocks in
+  // at Comcast and the camera dives from the chat into a rebuilt Einstein 360 agent desktop, where it turns CTI on,
+  // matches the voice, reads 1,284 past calls and works a queue of inbound calls to "Queue clear". All names/numbers fictional.
+  ['do-my-job-callcenter-superbot-497a61f3', 'do-my-job-callcenter-superbot-497a61f3/', 'BUT WE WILL · Do my job for me: superbot answers Comcast calls in Einstein 360', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

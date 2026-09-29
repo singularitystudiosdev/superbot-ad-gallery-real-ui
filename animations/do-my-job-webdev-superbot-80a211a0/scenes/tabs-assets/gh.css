@@ -238,6 +238,9 @@
 #s-tabs .gh-call-r { flex: none; width: var(--gh-w-side); min-height: 0; display: flex; flex-direction: column; gap: var(--gh-s3); }
 #s-tabs .gh-side { flex: none; }
 #s-tabs .gh-si { padding: var(--gh-s1) 0 var(--gh-s2); border-bottom: var(--gh-bw) solid var(--gh-border-muted); font-size: var(--gh-fs-xs); line-height: var(--gh-lh-xs); min-width: 0; }
+/* Primer's .sr-only, verbatim: github.com heads the sidebar with a visually hidden h2, so its h3s keep a valid heading order.
+   color: transparent is ours: nothing is drawn either way, and it marks the 1px box as non-ink for the frame probes */
+#s-tabs .gh-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: 0; overflow: hidden; clip: rect(0, 0, 0, 0); word-wrap: normal; border: 0; color: transparent; }
 #s-tabs .gh-si + .gh-si { padding-top: var(--gh-s2); }
 #s-tabs .gh-si h3 { margin-bottom: var(--gh-s1); font: var(--gh-w-semibold) var(--gh-fs-xs)/var(--gh-lh-xs) var(--gh-font); color: var(--gh-fg-muted); }
 #s-tabs .gh-sv { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gh-s1); min-width: 0; }

@@ -56,4 +56,5 @@ body.freeze .hint { display: none; }
 .rec-hud { display: none; position: fixed; bottom: 18px; left: 18px; z-index: 40; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
   background: rgba(20, 8, 8, .85); border: 1px solid #5c3030; color: #fff; font: 700 12px/1 var(--font-mono); }
 .rec-hud .rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: wr-rec-blink 1s steps(2) infinite; }
+@media (prefers-reduced-motion: reduce) { .rec-btn.recording .rec-dot, .rec-hud .rec-dot { animation: none; } } /* operator chrome only: the dot holds steady instead of blinking */
 body.freeze .rec-btn { display: none; }

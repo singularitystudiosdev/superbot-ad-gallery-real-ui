@@ -102,6 +102,7 @@ export const STR = {
   wantsMerge: (n, base, head) => `${STR.me} wants to merge ${plural(n, 'commit', 'commits')} into ${base} from ${head}`,
   mergedLine: (n, base, head) => `${STR.me} merged ${plural(n, 'commit', 'commits')} into ${base} from ${head}`,
   // sidebar (the PR page's own headings and empty values)
+  metadata: 'Metadata', // github.com's own visually hidden h2 over the sidebar's h3s (sr-only, not drawn)
   reviewers: 'Reviewers', noReviews: 'No reviews', approved: 'Approved', reviewRequired: 'Review required',
   changesApproved: 'Changes approved',
   assignees: 'Assignees',

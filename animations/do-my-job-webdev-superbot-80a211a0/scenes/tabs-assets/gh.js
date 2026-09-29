@@ -191,7 +191,7 @@ export function mount(section, ctx) {
       <ul class="gh-list"></ul>
     </aside>
 
-    <main class="gh-main">
+    <div class="gh-main"><!-- a div, not github.com's <main>: the ad page's one main landmark is #stage -->
       <div class="gh-view gh-v-repo">
         ${repoBand}
         <div class="gh-repo-g">
@@ -234,6 +234,7 @@ export function mount(section, ctx) {
           </div>
           <div class="gh-call-r">
             <div class="gh-side">
+              <h2 class="gh-sr">${esc(STR.metadata)}</h2>
               <div class="gh-si"><h3>${esc(STR.reviewers)}</h3><div class="gh-sv gh-sv-rev"></div></div>
               <div class="gh-si"><h3>${esc(STR.assignees)}</h3><div class="gh-sv"><span class="gh-av gh-av-me"></span><b>${esc(STR.me)}</b></div></div>
               <div class="gh-si"><h3>${esc(STR.labels)}</h3><div class="gh-sv gh-sv-lb"></div></div>
@@ -252,7 +253,7 @@ export function mount(section, ctx) {
             </div>
           </div>
       </div>
-    </main>
+    </div>
   </div>
   <footer class="gh-foot">
     <span class="gh-foot-l">${I.markGithub}<span>© 2026 GitHub, Inc.</span></span>

@@ -10,7 +10,7 @@
 // (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
 import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END, CHAT_ZOOM } from './tabs-assets/chat.js?v=1';
-import gh from './tabs-assets/gh.js?v=1';
+import gh from './tabs-assets/gh.js?v=2';
 import { clamp, lerp, seg, outCubic, inOutCubic, boxIn } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;

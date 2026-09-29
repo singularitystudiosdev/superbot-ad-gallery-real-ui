@@ -88,6 +88,14 @@
     "thumb": "assets/shots/do-my-job-callcenter-superbot-497a61f3.png"
   },
   {
+    "id": "do-my-job-lawyer-superbot-9c459cb1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot works a litigator’s federal docket in Clio",
+    "src": "animations/do-my-job-lawyer-superbot-9c459cb1/",
+    "thumb": "assets/shots/do-my-job-lawyer-superbot-9c459cb1.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

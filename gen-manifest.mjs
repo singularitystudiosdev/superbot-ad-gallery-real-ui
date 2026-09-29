@@ -79,6 +79,12 @@ const more = [
   // at Comcast and the camera dives from the chat into a rebuilt Einstein 360 agent desktop, where it turns CTI on,
   // matches the voice, reads 1,284 past calls and works a queue of inbound calls to "Queue clear". All names/numbers fictional.
   ['do-my-job-callcenter-superbot-497a61f3', 'do-my-job-callcenter-superbot-497a61f3/', 'BUT WE WILL · Do my job for me: superbot answers Comcast calls in Einstein 360', 'Ad spots'],
+  // BUT WE WILL, do my job lawyer (2026-09-29): the same intro and slam, then "Do my job for me" as a federal
+  // litigator: superbot signs in to Clio Manage and the camera dives into the matter desk, where it connects, matches
+  // your writing, reads your judges' rules and works the ECF notice queue (orders read, deadlines calendared, drafts
+  // in your voice). Dockets, ECF entries and judges' rules are real (CourtListener RECAP, cited in img/CREDITS.txt);
+  // drafts, task names and counts are the ad's own copy.
+  ['do-my-job-lawyer-superbot-9c459cb1', 'do-my-job-lawyer-superbot-9c459cb1/', 'BUT WE WILL · Do my job for me: superbot works a litigator’s federal docket in Clio', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

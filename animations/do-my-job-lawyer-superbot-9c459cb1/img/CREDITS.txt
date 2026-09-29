@@ -1,0 +1,108 @@
+img/ CREDITS (do-my-job-lawyer-superbot-9c459cb1)
+
+Third-party artwork in this folder: two Clio logo files, fetched 2026-09-29. Neither was redrawn. Clio, the Clio
+logo and "Clio Manage" are trademarks of Themis Solutions Inc. (dba Clio); they are used here nominatively, to name
+the product whose matter page the spot rebuilds. Nothing in the spot states or implies that Clio made, sponsors or
+endorses it.
+
+clio-logo.svg        Current Clio horizontal logo (check-in-rounded-square mark plus "Clio" wordmark), one fill
+                     #0070E0, viewBox 0 0 131 44.
+                     Direct: https://www.clio.com/wp-content/uploads/2025/09/clio-logo.svg
+                     Page:   https://www.clio.com/ (site header and footer); also offered on
+                             https://www.clio.com/about/brand-assets/
+                     Usage here: as fetched, unaltered, on the white badge of the chat's sign-in card.
+
+clio-mark-white.png  Clio mark only, white on transparent (the glyph Clio Manage shows at the top left of its
+                     blue top bar). Downscaled from 2500x2500 to 128x128 for size (macOS sips -Z 128); no other
+                     change.
+                     Direct: https://docs.developers.clio.com/img/clio-logo-white.png
+                     Page:   https://docs.developers.clio.com/guides/clio-manage/custom-actions/ (site header)
+                     Usage here: the top-left of the rebuilt Clio Manage top bar.
+
+Terms, quoted from Clio's pages on 2026-09-29:
+  https://www.clio.com/about/brand-assets/
+    "To help you (to help us) keep our brand consistent, please review our Limited Brand Use License to
+    understand how and when to leverage the Clio brand."
+  https://www.clio.com/about/brand-assets/clio-limited-brand-use-license/
+    "... grants you a limited, non-exclusive, non-assignable, non-transferable, worldwide, revocable right to use
+    the Clio Icon, Name and/or Product Names solely in connection with an application ("Integration") connected to
+    the Clio API in accordance with the Developer Terms of Service."
+    "You may not: ... Use the Clio Icon, Name and/or Product Names in a way that implies affiliation with, or
+    sponsorship, endorsement, or approval by Clio of your products or services; ... Alter, animate, or distort the
+    Clio Icon, Name and/or Product Names or combine it with any other symbols, words, images, or designs ..."
+  Footer: "(c) 2008 - 2026 Themis Solutions Inc. (Clio)".
+  NOTE FOR PUBLISHING: that licence covers Clio API integrations only. This spot is not an API integration, so the
+  licence does not grant the use above; the use rests on nominative reference alone. The logos are shown static
+  and unaltered (the card as a whole fades and scales with the scene, as every element does). Clear this with
+  whoever owns publishing before the spot ships.
+
+Nothing else in this folder is third-party. The Clio Manage desk itself is not an image: it is rebuilt in
+HTML/CSS/SVG in ../scenes/tabs-assets/clio.{js,css}. Its layout, colours, type and radii come from reference
+material kept outside the repo in /tmp/clioref-9c459cb1 (help.clio.com article screenshots of the 2023-2025 app,
+and the design-token custom properties in app.clio.com's stylesheet); no screenshot is embedded in the ad. The
+nav and toolbar icons are hand-drawn SVG in the solid style Clio uses, not Font Awesome's or Clio's files.
+
+The docket content on the desk is real public record: case captions, case numbers, ECF entries, docket text and
+judges' standing-order provisions, each with its source URL in ../scenes/tabs-assets/clio-data.js (CourtListener
+RECAP, cand.uscourts.gov, ded.uscourts.gov). The superbot action labels, draft lines and task titles are the ad's
+own copy written from those entries. No person's name is invented: the signed-in user is a generic avatar.
+
+Fonts:
+  ../scenes/tabs-assets/fonts/inter-latin-var.woff2
+    Inter, by Rasmus Andersson. Licence: SIL Open Font License 1.1 (https://github.com/rsms/inter/blob/master/LICENSE.txt).
+    Latin subset, variable weight, fetched 2026-09-29 from the Google Fonts CSS API
+    (https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700) and served from this folder, with no
+    remote font URL anywhere in the ad. Clio Manage's own stylesheet names Inter first in its sans stack.
+  ../scenes/tabs-assets/fonts/barlow-{400,500,600,700}.woff2
+    Barlow, by Jeremy Tribby. Licence: SIL Open Font License 1.1 (https://github.com/jpt/barlow/blob/master/OFL.txt).
+    Kept from the call-center spot for the superbot HUD, which is unchanged.
+
+Sources
+
+Every docket and rule URL the desk's strings were taken from or verified against (checked 2026-09-29). They stay
+off screen; the per-string mapping is in the verification audit kept with the reference material. Docket entries
+and headers (CourtListener RECAP):
+https://www.courtlistener.com/docket/68048039/154/penguin-random-house-llc-v-robbins/
+https://www.courtlistener.com/docket/69314070/oracle-america-inc-v-procore-technologies-inc/
+https://www.courtlistener.com/docket/69314070/103/oracle-america-inc-v-procore-technologies-inc/
+https://www.courtlistener.com/docket/69314070/426/oracle-america-inc-v-procore-technologies-inc/
+https://www.courtlistener.com/docket/69314070/429/oracle-america-inc-v-procore-technologies-inc/
+https://www.courtlistener.com/docket/69314070/432/oracle-america-inc-v-procore-technologies-inc/
+https://www.courtlistener.com/docket/69314070/433/oracle-america-inc-v-procore-technologies-inc/
+https://www.courtlistener.com/docket/69314070/oracle-america-inc-v-procore-technologies-inc/?filed_after=03/01/2025&filed_before=03/20/2025
+https://www.courtlistener.com/docket/70238228/nielsen-company-us-llc-v-tvision-insights-inc/
+https://www.courtlistener.com/docket/70238228/159/nielsen-company-us-llc-v-tvision-insights-inc/
+https://www.courtlistener.com/docket/70238228/161/nielsen-company-us-llc-v-tvision-insights-inc/
+https://www.courtlistener.com/docket/70238228/162/nielsen-company-us-llc-v-tvision-insights-inc/
+https://www.courtlistener.com/docket/70238228/163/nielsen-company-us-llc-v-tvision-insights-inc/
+https://www.courtlistener.com/docket/70513159/210/disney-enterprises-inc-v-midjourney-inc/
+https://www.courtlistener.com/docket/71266654/95/nokia-of-america-corporation-v-acer-inc/
+https://www.courtlistener.com/docket/71502325/american-federation-of-government-employees-afl-cio-v-united-states/
+https://www.courtlistener.com/docket/71502325/194/american-federation-of-government-employees-afl-cio-v-united-states/
+https://www.courtlistener.com/docket/71502325/196/american-federation-of-government-employees-afl-cio-v-united-states/
+https://www.courtlistener.com/docket/71502325/198/american-federation-of-government-employees-afl-cio-v-united-states/
+https://www.courtlistener.com/docket/71502325/199/american-federation-of-government-employees-afl-cio-v-united-states/
+https://www.courtlistener.com/docket/72349967/29/the-california-institute-of-technology-v-zoom-communications-inc/
+https://www.courtlistener.com/docket/73493138/36/pharmaceutical-care-management-association-v-gillespie/
+https://www.courtlistener.com/docket/74694036/35/wilus-institute-of-standards-and-technology-inc-v-tp-link-corporation-pte/
+https://www.courtlistener.com/docket/74725379/91/federal-trade-commission-v-amazoncom-inc/
+https://www.courtlistener.com/docket/74745193/28/the-southeastern-conference-v-louisiana-state-university/
+https://www.courtlistener.com/docket/74754553/19/the-seattle-times-company-v-openai-inc/
+
+Filed documents (RECAP PDFs):
+https://storage.courtlistener.com/recap/gov.uscourts.cand.457131/gov.uscourts.cand.457131.199.0.pdf
+https://storage.courtlistener.com/recap/gov.uscourts.cand.438381/gov.uscourts.cand.438381.433.0.pdf
+https://storage.courtlistener.com/recap/gov.uscourts.ded.89114/gov.uscourts.ded.89114.159.0.pdf
+
+Judges' standing orders and chambers documents:
+https://cand.uscourts.gov/sites/default/files/standing-orders/JudgeIllston_Standing-Order-9-23-2025.pdf
+https://cand.uscourts.gov/sites/default/files/standing-orders/JST-CivilStandingOrder-06.03.26.pdf
+https://www.ded.uscourts.gov/sites/ded/files/CJBCC2022.pdf
+https://www.ded.uscourts.gov/sites/ded/files/Guidelines%20for%20Discovery%20Disputes-CJB.pdf
+https://www.ded.uscourts.gov/sites/ded/files/chambers/Rule%2016%20Scheduling%20Order%20-%20Patent%20-%20Revised%203.2025.pdf
+
+Court pages for the judges' names and titles:
+https://cand.uscourts.gov/judges/lb/beeler-laurel
+https://cand.uscourts.gov/judges/si/illston-susan
+https://cand.uscourts.gov/judges/jst/tigar-jon-s
+https://www.ded.uscourts.gov/judge/magistrate-judge-christopher-j-burke

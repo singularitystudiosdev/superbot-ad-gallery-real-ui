@@ -492,6 +492,14 @@
     "thumb": "assets/shots/chatgpt-memebot-phantom-superbot-293fef02.png"
   },
   {
+    "id": "chatgpt-predictionbot-superbot-6cc423a0",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT says you shouldn't gamble: make me a prediction market trading bot, superbot connects Polymarket, backtests, flags buys, then trades it live",
+    "src": "animations/chatgpt-predictionbot-superbot-6cc423a0/",
+    "thumb": "assets/shots/chatgpt-predictionbot-superbot-6cc423a0.png"
+  },
+  {
     "id": "chatgpt-polywins-superbot-cae00e02",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,140 @@
+/* live.css: beat 2 (beats/live.js): the Polymarket account the bot trades, as a browser window that first sits in
+   superbot's card and then grows out of the thread to fill the frame. Polymarket's dark palette (navy surfaces
+   #1e2833 on #151b23, lines #2e3b4a, muted #899cb2, brand blue #2e5cff, Yes green #3fd07a). The page is always laid
+   out at the frame's width (JS sets .pm-page width/height) and scaled to its window, so the preview and the full
+   frame are one document. Every moving value is written from lt; nothing here transitions. */
+#s-tabs .pm-win { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 12px;
+  background: #151b23; box-shadow: inset 0 0 0 1px #2e3b4a; font-family: var(--ui); color: #fff; }
+#s-tabs .pm-rev { position: absolute; left: 0; top: 0; z-index: 20; opacity: 0; pointer-events: none; }
+#s-tabs .pm-bar { flex: none; display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 10px; background: #1a222c; border-bottom: 1px solid #26313d; }
+#s-tabs .pm-dots { display: flex; gap: 4px; flex: none; }
+#s-tabs .pm-dots i { width: 6px; height: 6px; border-radius: 50%; background: #34414f; }
+#s-tabs .pm-url { display: inline-flex; align-items: center; gap: 5px; margin: 0 auto; height: 18px; padding: 0 12px; border-radius: 999px;
+  background: #11161d; box-shadow: inset 0 0 0 1px #26313d; font: 500 10px/1 var(--font-mono); color: #899cb2; }
+#s-tabs .pm-lk { width: 9px; height: 9px; fill: none; stroke: #3fd07a; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .pm-view { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #151b23; }
+#s-tabs .wk.pm-wk .pm-view { flex: none; height: 290px; }
+#s-tabs .wk.pm-wk .pm-url { font-size: 9px; }
+
+#s-tabs .pm-page { position: absolute; left: 0; top: 0; transform-origin: 0 0; display: flex; flex-direction: column;
+  background: radial-gradient(90% 50% at 70% 0%, rgba(46,92,255,.10), transparent 70%), #151b23; }
+#s-tabs .pm-page svg { overflow: visible; }
+
+/* top nav */
+#s-tabs .pm-nav { flex: none; display: flex; align-items: center; gap: 14px; height: 68px; padding: 0 32px; border-bottom: 1px solid #26313d; }
+#s-tabs .pm-logo { width: 32px; height: 32px; border-radius: 8px; }
+#s-tabs .pm-brand { font: 700 21px/1 var(--ui); letter-spacing: -.02em; }
+#s-tabs .pm-search { flex: 1; max-width: 360px; height: 38px; margin-left: 10px; padding: 0 16px; display: flex; align-items: center; border-radius: 10px;
+  background: #1e2833; color: #6b7d92; font: 500 14px/1 var(--ui); }
+#s-tabs .pm-nv { display: grid; gap: 5px; margin-left: auto; text-align: right; }
+#s-tabs .pm-nv + .pm-nv { margin-left: 18px; }
+#s-tabs .pm-nv small { font: 500 11px/1 var(--ui); color: #899cb2; }
+#s-tabs .pm-nv b { font: 700 16px/1 var(--ui); color: #3fd07a; font-variant-numeric: tabular-nums; }
+#s-tabs .pm-av { display: grid; place-items: center; width: 36px; height: 36px; margin-left: 12px; border-radius: 50%;
+  background: linear-gradient(135deg, #2e5cff, #c026d3); font: 700 15px/1 var(--ui); }
+
+/* the body: one column, two on the wide frames */
+#s-tabs .pm-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr; align-content: start; gap: 22px; padding: 26px 32px; }
+html[data-ar="16x9"] #s-tabs .pm-grid { grid-template-columns: 1fr 620px; gap: 32px; padding: 34px 44px; }
+html[data-ar="4x3"] #s-tabs .pm-grid { grid-template-columns: 1fr 540px; gap: 28px; padding: 30px 36px; }
+
+/* the lead market */
+#s-tabs .pm-mkt { display: grid; gap: 14px; min-width: 0; }
+#s-tabs .pm-mh { display: flex; align-items: center; gap: 14px; }
+#s-tabs .pm-ic.pm-mi { width: 56px; height: 56px; border-radius: 12px; font-size: 14px; }
+#s-tabs .pm-mt { display: grid; gap: 7px; min-width: 0; }
+#s-tabs .pm-mt small { font: 500 13px/1 var(--ui); color: #899cb2; }
+#s-tabs .pm-mt h1 { margin: 0; font: 700 28px/1.1 var(--ui); letter-spacing: -.02em; white-space: nowrap; }
+#s-tabs .pm-bot { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 13px; border-radius: 999px;
+  background: #1e2833; box-shadow: inset 0 0 0 1px #2e3b4a; font: 600 13px/1 var(--ui); color: #899cb2; }
+#s-tabs .pm-bot i { width: 8px; height: 8px; border-radius: 50%; background: #56657a; }
+#s-tabs .pm-bot.pm-on { color: #3fd07a; box-shadow: inset 0 0 0 1px rgba(63,208,122,.45); background: rgba(39,174,96,.12); }
+#s-tabs .pm-bot.pm-on i { background: #3fd07a; box-shadow: 0 0 10px #3fd07a; }
+#s-tabs .pm-ch { display: flex; align-items: baseline; gap: 10px; height: 52px; }
+#s-tabs .pm-chn { font: 800 48px/1 var(--ui); letter-spacing: -.03em; color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .pm-chn.pm-up { color: #3fd07a; text-shadow: 0 0 24px rgba(63,208,122,.35); }
+#s-tabs .pm-ch > span:not(.pm-res) { font: 600 18px/1 var(--ui); color: #899cb2; }
+#s-tabs .pm-dl { font: 700 17px/1 var(--ui); font-style: normal; color: #3fd07a; font-variant-numeric: tabular-nums; opacity: 0; }
+#s-tabs .pm-res { align-self: center; margin-left: auto; display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px; border-radius: 999px;
+  background: #3fd07a; color: #062016; font: 800 14px/1 var(--ui); box-shadow: 0 0 26px rgba(63,208,122,.55); opacity: 0; }
+#s-tabs .pm-res svg, #s-tabs .pm-won svg, #s-tabs .pm-tb svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+/* chart */
+#s-tabs .pm-chart { position: relative; height: 300px; margin-right: 46px; margin-bottom: 22px; }
+html[data-ar="1x1"] #s-tabs .pm-chart { height: 360px; }
+html[data-ar="16x9"] #s-tabs .pm-chart { height: 600px; }
+html[data-ar="4x3"] #s-tabs .pm-chart { height: 560px; }
+#s-tabs .pm-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+#s-tabs .pm-grd line { stroke: #26313d; stroke-width: 1; stroke-dasharray: 3 5; vector-effect: non-scaling-stroke; }
+#s-tabs .pm-line { fill: none; stroke: #2e5cff; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 6px rgba(46,92,255,.55)); }
+#s-tabs .pm-vx { stroke: #899cb2; stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; opacity: 0; }
+#s-tabs .pm-yls { position: absolute; top: 0; bottom: 0; right: -46px; width: 40px; }
+#s-tabs .pm-yl { position: absolute; right: 0; transform: translateY(-50%); font: 500 12px/1 var(--ui); color: #6b7d92; }
+#s-tabs .pm-xl { position: absolute; left: 0; right: 0; bottom: -22px; height: 14px; }
+#s-tabs .pm-xl span { position: absolute; transform: translateX(-50%); font: 500 12px/1 var(--ui); color: #6b7d92; white-space: nowrap; }
+#s-tabs .pm-xl span:first-child { transform: none; }
+#s-tabs .pm-xl span:last-child { transform: translateX(-100%); }
+#s-tabs .pm-head { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #2e5cff;
+  box-shadow: 0 0 0 3px #151b23, 0 0 18px #2e5cff; }
+#s-tabs .pm-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #2e5cff; }
+#s-tabs .pm-buy { position: absolute; display: flex; align-items: center; gap: 8px; font-style: normal; opacity: 0; transform-origin: 13px 50%; }
+#s-tabs .pm-buy b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #3fd07a; color: #062016; font: 800 13px/1 var(--ui);
+  box-shadow: 0 0 0 3px #151b23, 0 0 16px rgba(63,208,122,.7); }
+#s-tabs .pm-buy span { height: 26px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 7px; background: #1e2833; box-shadow: inset 0 0 0 1px #2e3b4a;
+  font: 700 12px/1 var(--ui); color: #3fd07a; white-space: nowrap; }
+
+/* portfolio + positions */
+#s-tabs .pm-side { display: grid; gap: 16px; align-content: start; min-width: 0; }
+#s-tabs .pm-pf { display: grid; gap: 8px; padding: 18px 22px; border-radius: 14px; background: #1e2833; box-shadow: inset 0 0 0 1px #2e3b4a; }
+#s-tabs .pm-pf > small { font: 500 13px/1 var(--ui); color: #899cb2; }
+#s-tabs .pm-tot { display: flex; align-items: center; gap: 14px; }
+#s-tabs .pm-big { display: inline-block; font: 800 54px/1 var(--ui); letter-spacing: -.03em; color: #fff; font-variant-numeric: tabular-nums; transform-origin: 0 60%; }
+#s-tabs .pm-big.pm-upt { color: #eafff2; }
+#s-tabs .pm-gain { display: inline-grid; place-items: center; height: 34px; padding: 0 12px; border-radius: 9px; background: #3fd07a; color: #062016;
+  font: 800 18px/1 var(--ui); font-style: normal; font-variant-numeric: tabular-nums; box-shadow: 0 0 28px rgba(63,208,122,.6); opacity: 0; }
+#s-tabs .pm-pl { font: 700 16px/1 var(--ui); color: #899cb2; font-variant-numeric: tabular-nums; }
+#s-tabs .pm-pl.pm-upt { color: #3fd07a; }
+#s-tabs .pm-pl small { margin-left: 4px; font-weight: 500; font-size: 13px; color: #6b7d92; }
+#s-tabs .pm-pos { border-radius: 14px; background: #1e2833; box-shadow: inset 0 0 0 1px #2e3b4a; overflow: hidden; }
+#s-tabs .pm-poh { display: grid; grid-template-columns: auto 1fr 64px 120px; align-items: center; gap: 12px; height: 44px; padding: 0 18px; border-bottom: 1px solid #2e3b4a; }
+#s-tabs .pm-poh b { font: 700 15px/1 var(--ui); }
+#s-tabs .pm-poh .pm-pn { justify-self: start; display: inline-grid; place-items: center; min-width: 22px; height: 20px; padding: 0 6px; border-radius: 6px;
+  background: #2e3b4a; font: 700 11px/1 var(--ui); color: #cfd9e6; }
+#s-tabs .pm-poh small { display: none; }
+#s-tabs .pm-pr { position: relative; display: grid; grid-template-columns: 36px 1fr 64px 120px; align-items: center; gap: 12px; height: 64px; padding: 0 18px;
+  border-top: 1px solid #26313d; opacity: 0; overflow: hidden; }
+#s-tabs .pm-pr:first-of-type { border-top: 0; }
+#s-tabs .pm-pr .pm-ic { width: 36px; height: 36px; font-size: 10px; }
+#s-tabs .pm-pt { display: grid; gap: 6px; min-width: 0; }
+#s-tabs .pm-pt b { font: 650 14px/1.1 var(--ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .pm-pt small { font: 500 12px/1 var(--ui); color: #899cb2; font-variant-numeric: tabular-nums; }
+#s-tabs .pm-yes { margin-right: 6px; padding: 2px 6px; border-radius: 4px; background: rgba(39,174,96,.18); color: #3fd07a; font-style: normal; font-weight: 700; }
+#s-tabs .pm-pc { justify-self: end; padding: 6px 8px; border-radius: 7px; }
+#s-tabs .pm-pc b { font: 700 15px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .pm-pv { display: grid; gap: 5px; justify-items: end; }
+#s-tabs .pm-pv b { font: 700 15px/1 var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .pm-pv small { font: 700 12.5px/1 var(--ui); color: #3fd07a; font-variant-numeric: tabular-nums; }
+#s-tabs .pm-pv small.pm-neg { color: #f07070; }
+#s-tabs .pm-won { position: absolute; right: 150px; top: 50%; margin-top: -13px; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px;
+  border-radius: 999px; background: #3fd07a; color: #062016; font: 800 12px/1 var(--ui); font-style: normal; box-shadow: 0 0 18px rgba(63,208,122,.6); opacity: 0; }
+#s-tabs .pm-pr.pm-wonrow { background: linear-gradient(90deg, rgba(63,208,122,.12), rgba(63,208,122,.02) 80%); }
+#s-tabs .pm-flash { position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(63,208,122,.35), transparent); opacity: 0; pointer-events: none; }
+
+/* the bot's fills */
+#s-tabs .pm-toasts { position: absolute; right: 90px; top: 230px; display: grid; gap: 10px; width: 420px; z-index: 3; }
+#s-tabs .pm-toast { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 12px; height: 60px; padding: 0 16px; border-radius: 12px;
+  background: rgba(30,40,51,.96); box-shadow: inset 0 0 0 1px rgba(63,208,122,.4), 0 14px 36px rgba(0,0,0,.5); opacity: 0; }
+#s-tabs .pm-tb { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #3fd07a; color: #062016; }
+#s-tabs .pm-toast > span:nth-child(2) { display: grid; gap: 5px; min-width: 0; }
+#s-tabs .pm-toast b { font: 700 14px/1 var(--ui); }
+#s-tabs .pm-toast small { font: 500 12px/1 var(--ui); color: #899cb2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .pm-toast em { font: 700 14px/1 var(--ui); font-style: normal; color: #cfd9e6; font-variant-numeric: tabular-nums; }
+
+/* full-frame effects: particles and the rising +$ labels */
+#s-tabs .pm-fx { position: absolute; left: 0; top: 0; z-index: 4; pointer-events: none; }
+#s-tabs .pm-float { position: absolute; z-index: 5; font: 800 30px/1 var(--ui); color: #3fd07a; font-variant-numeric: tabular-nums; white-space: nowrap;
+  text-shadow: 0 0 22px rgba(63,208,122,.8), 0 2px 8px rgba(0,0,0,.6); opacity: 0; }
+/* wide frames: the positions panel sits top right, so the fills land over the chart instead */
+html[data-ar="16x9"] #s-tabs .pm-toasts { right: auto; left: 720px; top: 330px; }
+html[data-ar="4x3"] #s-tabs .pm-toasts { right: auto; left: 380px; top: 320px; }

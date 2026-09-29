@@ -227,6 +227,10 @@ const more = [
   // the ask connects Phantom with every-model-one-chat's DoorDash chip, backtests 4 strategies, flags buys, reports a summary, then
   // "Look's good, let's do it" and the Phantom wallet zooms out of the thread to fill the frame, trading $6,000 up to $10,220. Tickers and figures are fictional.
   ['chatgpt-memebot-phantom-superbot-293fef02', 'chatgpt-memebot-phantom-superbot-293fef02/', 'ChatGPT says you shouldn\'t gamble: make me a memecoin trading bot, superbot connects Phantom, backtests, flags buys, then trades it live', 'Ad spots'],
+  // make me a prediction market trading bot (2026-09-28): cae00e01 hand-built into its own folder: "gamble" rises in plain red (no scale punch),
+  // the ask connects Polymarket with every-model-one-chat's DoorDash chip (composer chip follows), backtests 5 strategies, scans 1,412 live markets, flags 3 buys,
+  // reports a summary, then "Look's good, let's do it" and the Polymarket account grows out of the thread: 3 fills, the chance line climbs to Resolved Yes, wins burst, $2,500 to $5,654. Markets and figures are fictional.
+  ['chatgpt-predictionbot-superbot-6cc423a0', 'chatgpt-predictionbot-superbot-6cc423a0/', 'ChatGPT says you shouldn\'t gamble: make me a prediction market trading bot, superbot connects Polymarket, backtests, flags buys, then trades it live', 'Ad spots'],
   ['chatgpt-polywins-superbot-cae00e02', 'chatgpt-polywins-superbot-cae00e02/', 'ChatGPT says you shouldn\'t gamble: superbot builds a site of all my Polymarket wins', 'Ad spots'],
   ['chatgpt-sportsbook-superbot-cae00e03', 'chatgpt-sportsbook-superbot-cae00e03/', 'ChatGPT says you shouldn\'t gamble: superbot builds a site of all my DraftKings wins', 'Ad spots'],
   ['claude-memecoins-superbot-cae00e04', 'claude-memecoins-superbot-cae00e04/', 'Claude says you shouldn\'t gamble: superbot builds a site of all my memecoin wins', 'Ad spots'],

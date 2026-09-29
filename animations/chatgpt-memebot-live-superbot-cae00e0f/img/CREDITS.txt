@@ -4,12 +4,17 @@ This spot ships no photographic or third party image assets. Everything on scree
 tiles, the four phase trading panel, its bars, its equity line, its tickets and the confetti burst - is drawn in
 CSS/SVG/canvas from code in this folder.
 
-Every number is invented demo data: the four backtest scores (return, win rate, drawdown) for Volume breakout,
-Fresh pair sniper, Dev wallet follow and Momentum + trailing stop; the paper account (opened at $5,000 of play
-money, closed at $6,284) and its daily equity path; the live order ticket; and the scoreboard (realized P&L
-+$1,284, win rate 58% on 29 wins and 21 losses, max drawdown read off the paper curve, one open SOL position).
-The 412 Solana pairs and the 90 day candle window are fictional. Nothing here is a quote, an offer, a promise
-of return or a claim about superbot.
+Every number is invented demo data. The backtest scores (return, win rate, drawdown) for Volume breakout, Fresh
+pair sniper, Dev wallet follow and Momentum + trailing stop are fictional, as are the 412 Solana pairs and the
+90 day candle window.
+
+The paper run and the live run are two separate account simulations, and the live one did worse:
+- paper account, $5,000 of play money, 14 days, closed at $5,640 (+$640) on the curve the paper phase draws;
+- live account, $2,000 stake, the same 14 days and the same rules, realized +$186 on 32 fills (18 winners, 14
+  losers, 56% win rate), with a max drawdown read off its own live curve. Live ran below paper after fees and
+  slippage.
+The open position (WIF long) and every ticket, price and amount shown are invented too. Nothing here is a
+quote, an offer, a promise of return or a claim about superbot.
 
 Axiom is named as plain text only, with a plain letter tile; no venue logo, exchange mark or chain mark appears
 anywhere, and the rail's own third party app tiles are not rendered in this spot. The advice on the first card

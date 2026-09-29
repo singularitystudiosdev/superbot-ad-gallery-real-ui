@@ -9,41 +9,48 @@
 //   3 CONNECT   the routing chips from the reference spot (chips [[app, label], ...], sw -> swap -> done) land:
 //               "Paper run passed", then "Connected to Axiom". The venue's plain letter tile grows into the
 //               hub rail while the composer's platform chip swaps to the venue, then the live ticket fills.
-//   4 RESULTS   the honest scoreboard: winner, realized P&L, win rate with the losing count, max drawdown and
-//               the open position. No multipliers, no hype, no promises.
+//   4 RESULTS   the honest scoreboard of the LIVE run: winner, realized P&L on the live stake, win rate with
+//               the losing count, max drawdown and the open position. No multipliers, no hype, no promises.
 //
 // Every value is written from the scene's lt, so ?t=<s> and window.__AD.seek(t) reproduce any frame exactly.
-// The figures are the variant's constants, and the drawdown on the scoreboard is the drawdown of the very
-// equity path the paper phase draws, so the two can never disagree.
+// Paper and live are separate accounts on separate curves: the paper curve is drawn in phase 2 and ends at
+// start + paper pnl, the live curve ends at stake + live pnl and the scoreboard's drawdown is read off it, so
+// no figure on screen is typed in twice or claims a paper result as a live one.
 import { clamp, lerp, seg, outCubic, outQuint, inOutCubic, outBack } from '../../../lib.js';
 import { workBeat, stdTimes, equityChart, counter, fmt } from './wk.js';
 import V from '../../../variant.js';
 
 const B = V.bot;
 const P = B.paper;
-const L = B.live.ticket;
+const LIV = B.live;
+const L = LIV.ticket;
 const R = B.results;
 const bump = (p) => Math.sin(Math.PI * clamp(p));
 const money = (n) => '$' + fmt(Math.round(n));
 const signed = (n) => (n > 0 ? '+' : n < 0 ? '-' : '') + Math.abs(n).toFixed(1) + '%';
 
-// ---- the paper account: one point per day, and the last point is exactly start + realized P&L ----
-const EQUITY = (() => {
-  const out = [P.start];
-  let v = P.start;
-  P.increments.forEach((d) => { v += d; out.push(v); });
-  out[out.length - 1] += (P.start + R.pnl) - out[out.length - 1];
+// ---- the two runs are separate accounts: the paper curve is drawn, the live curve is what the scoreboard's
+// drawdown is read off. Both end exactly at start + their own P&L, so no figure is typed in twice. ----
+function equity(start, total, shape) {
+  const sum = shape.reduce((a, b) => a + b, 0) || 1;
+  const k = total / sum;
+  const out = [start];
+  let v = start;
+  for (const w of shape) { v += w * k; out.push(v); }
+  out[out.length - 1] = start + total;
   return out;
-})();
-const LO = Math.floor((Math.min(...EQUITY) - 60) / 100) * 100;
-const HI = Math.ceil((Math.max(...EQUITY) + 60) / 100) * 100;
-const TICKS = (() => { const t = []; for (let v = Math.ceil(LO / 500) * 500; v <= HI; v += 500) t.push(v); return t; })();
-// the worst peak to trough the paper run had: the scoreboard quotes this number, it is not typed in twice
-const DD = (() => {
-  let peak = EQUITY[0], dd = 0;
-  for (const v of EQUITY) { if (v > peak) peak = v; dd = Math.min(dd, (v - peak) / peak); }
+}
+function worstDrop(series) {
+  let peak = series[0], dd = 0;
+  for (const v of series) { if (v > peak) peak = v; dd = Math.min(dd, (v - peak) / peak); }
   return dd * 100;
-})();
+}
+const PAPER = equity(P.start, P.pnl, P.shape);
+const LIVE = equity(LIV.stake, LIV.pnl, LIV.shape);
+const LO = Math.floor((Math.min(...PAPER) - 40) / 100) * 100;
+const HI = Math.ceil((Math.max(...PAPER) + 40) / 100) * 100;
+const TICKS = (() => { const t = []; for (let v = Math.ceil(LO / 500) * 500; v <= HI; v += 500) t.push(v); return t; })();
+const LIVE_DD = worstDrop(LIVE);
 
 // ---- the beat's clock ----
 const DUR = 14.6, HOLD = 1.6;
@@ -103,12 +110,12 @@ const cnHTML = (x) => `<div class="lc-p lc-cn">${head('CONNECT', 'same rules, re
 const rsHTML = (x) => `<div class="lc-p lc-rs">${head('RESULTS', `${P.days} days live`)}
     <div class="lc-win"><span class="lc-wt">${x.OK}</span><b>${R.winner}</b><em>WINNER</em></div>
     <div class="lc-kpis">
-      <div class="lc-k"><small>Realized P&amp;L</small><b class="lc-pnl">$0</b><span>booked in ${P.days} days</span></div>
+      <div class="lc-k"><small>Realized P&amp;L</small><b class="lc-pnl">$0</b><span>live stake ${money(LIV.stake)}</span></div>
       <div class="lc-k"><small>Win rate</small><b class="lc-wr">0%</b><span>${R.wins}W · ${R.losses}L of ${R.trades}</span></div>
       <div class="lc-k"><small>Max drawdown</small><b class="lc-dd">0.0%</b><span>worst peak to trough</span></div>
       <div class="lc-k"><small>Open position</small><b class="lc-op">${R.open.name}</b><span>${R.open.sub}</span></div>
     </div>
-    <small class="lc-foot">Demo figures, shown on a $5,000 stake. Trading carries risk.</small></div>`;
+    <small class="lc-foot">Demo figures. Live stake ${money(LIV.stake)}. Live ran below paper after fees and slippage. Trading carries risk.</small></div>`;
 
 const bodyHTML = (chartHtml, x) => `<div class="lc">
   <div class="lc-bar">${['Backtest', 'Paper trade', 'Connect', 'Results'].map((s, i) => `<span class="lc-sg" data-s="${i}"><b>${i + 1}</b>${s}<i class="lc-sgp"></i></span>`).join('')}</div>
@@ -121,8 +128,8 @@ export function build(k, x) {
   const chart = equityChart({
     W: 476, H: 132, lo: LO, hi: HI, ticks: TICKS, L: 44, R: 56, accent: '#34d399',
     yfmt: (v) => `$${(v / 1000).toFixed(1)}k`,
-    xl: [[0, 'day 1'], [(EQUITY.length - 1) / 2, `day ${Math.round((EQUITY.length - 1) / 2)}`], [EQUITY.length - 1, `day ${P.days}`]],
-    series: [{ v: EQUITY, cls: 'eq-up', tag: `+${money(R.pnl)}` }],
+    xl: [[0, 'day 1'], [(PAPER.length - 1) / 2, `day ${Math.round((PAPER.length - 1) / 2)}`], [PAPER.length - 1, `day ${P.days}`]],
+    series: [{ v: PAPER, cls: 'eq-up', tag: `+${money(P.pnl)}` }],
   });
   const wb = workBeat(x, k, {
     say: V.say, title: V.workTitle, sub: V.workSub, steps: V.steps, body: bodyHTML(chart.html, x),
@@ -152,9 +159,9 @@ export function build(k, x) {
   }));
   const win = el('.lc-win');
   const kpis = els('.lc-k');
-  const cPnl = counter(el('.lc-pnl'), R.pnl, r0 + 0.42, r0 + 1.42, (v) => `+${money(v)}`);
+  const cPnl = counter(el('.lc-pnl'), LIV.pnl, r0 + 0.42, r0 + 1.42, (v) => `+${money(v)}`);
   const cWinRate = counter(el('.lc-wr'), R.winRate, r0 + 0.42, r0 + 1.32, (v) => `${Math.round(v)}%`);
-  const cDd = counter(el('.lc-dd'), DD, r0 + 0.42, r0 + 1.32, (v) => `${v.toFixed(1)}%`);
+  const cDd = counter(el('.lc-dd'), LIVE_DD, r0 + 0.42, r0 + 1.32, (v) => `${v.toFixed(1)}%`);
 
   // ---- hub level: the rail opens once, the venue tile lands in it, the composer chip swaps ----
   const hub = x.hub;

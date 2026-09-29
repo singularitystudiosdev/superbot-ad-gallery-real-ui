@@ -468,6 +468,102 @@
     "thumb": "assets/shots/we-dont-care-gamble-superbot-89be2ca4.png"
   },
   {
+    "id": "chatgpt-memecoins-superbot-cae00e01",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT says you shouldn't gamble: superbot builds a site of all my memecoin wins",
+    "src": "animations/chatgpt-memecoins-superbot-cae00e01/",
+    "thumb": "assets/shots/chatgpt-memecoins-superbot-cae00e01.png"
+  },
+  {
+    "id": "chatgpt-polywins-superbot-cae00e02",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT says you shouldn't gamble: superbot builds a site of all my Polymarket wins",
+    "src": "animations/chatgpt-polywins-superbot-cae00e02/",
+    "thumb": "assets/shots/chatgpt-polywins-superbot-cae00e02.png"
+  },
+  {
+    "id": "chatgpt-sportsbook-superbot-cae00e03",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT says you shouldn't gamble: superbot builds a site of all my DraftKings wins",
+    "src": "animations/chatgpt-sportsbook-superbot-cae00e03/",
+    "thumb": "assets/shots/chatgpt-sportsbook-superbot-cae00e03.png"
+  },
+  {
+    "id": "claude-memecoins-superbot-cae00e04",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Claude says you shouldn't gamble: superbot builds a site of all my memecoin wins",
+    "src": "animations/claude-memecoins-superbot-cae00e04/",
+    "thumb": "assets/shots/claude-memecoins-superbot-cae00e04.png"
+  },
+  {
+    "id": "claude-polywins-superbot-cae00e05",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Claude says you shouldn't gamble: superbot builds a site of all my Polymarket wins",
+    "src": "animations/claude-polywins-superbot-cae00e05/",
+    "thumb": "assets/shots/claude-polywins-superbot-cae00e05.png"
+  },
+  {
+    "id": "claude-sportsbook-superbot-cae00e06",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Claude says you shouldn't gamble: superbot builds a site of all my DraftKings wins",
+    "src": "animations/claude-sportsbook-superbot-cae00e06/",
+    "thumb": "assets/shots/claude-sportsbook-superbot-cae00e06.png"
+  },
+  {
+    "id": "gemini-memecoins-superbot-cae00e07",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Gemini says you shouldn't gamble: superbot builds a site of all my memecoin wins",
+    "src": "animations/gemini-memecoins-superbot-cae00e07/",
+    "thumb": "assets/shots/gemini-memecoins-superbot-cae00e07.png"
+  },
+  {
+    "id": "gemini-polywins-superbot-cae00e08",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Gemini says you shouldn't gamble: superbot builds a site of all my Polymarket wins",
+    "src": "animations/gemini-polywins-superbot-cae00e08/",
+    "thumb": "assets/shots/gemini-polywins-superbot-cae00e08.png"
+  },
+  {
+    "id": "gemini-sportsbook-superbot-cae00e09",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Gemini says you shouldn't gamble: superbot builds a site of all my DraftKings wins",
+    "src": "animations/gemini-sportsbook-superbot-cae00e09/",
+    "thumb": "assets/shots/gemini-sportsbook-superbot-cae00e09.png"
+  },
+  {
+    "id": "grok-memecoins-superbot-cae00e0a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Grok says you shouldn't gamble: superbot builds a site of all my memecoin wins",
+    "src": "animations/grok-memecoins-superbot-cae00e0a/",
+    "thumb": "assets/shots/grok-memecoins-superbot-cae00e0a.png"
+  },
+  {
+    "id": "grok-polywins-superbot-cae00e0b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Grok says you shouldn't gamble: superbot builds a site of all my Polymarket wins",
+    "src": "animations/grok-polywins-superbot-cae00e0b/",
+    "thumb": "assets/shots/grok-polywins-superbot-cae00e0b.png"
+  },
+  {
+    "id": "grok-sportsbook-superbot-cae00e0c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Grok says you shouldn't gamble: superbot builds a site of all my DraftKings wins",
+    "src": "animations/grok-sportsbook-superbot-cae00e0c/",
+    "thumb": "assets/shots/grok-sportsbook-superbot-cae00e0c.png"
+  },
+  {
     "id": "just-works-waiver-night-gpt-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",

@@ -111,6 +111,8 @@ export const PACKS = {
   // user's own words typed lowercase and verbatim, and the thing superbot builds is a live trading bot
   // dashboard instead of a site of wins. Chain/venue names are plain text only and every figure below is mock
   // UI data, as each folder's img/CREDITS.txt states. The five row amounts sum to the hero total in both packs.
+  // The dashboard also renames the three site labels the wins packs share: heroLabel LIVE P&L, chartLegend
+  // Equity, nightLabel BEST DAY (the base defaults are LIFETIME WINS / All winnings / BIGGEST NIGHT).
   memebot: {
     ask: 'make me a memecoin trading bot',
     say: 'On it. Wiring the signal, the wallet and the sell ladder.',
@@ -120,7 +122,10 @@ export const PACKS = {
       hero: 'Memecoin trading bot, live',
       sub: '412 pairs watched · one signal · sells laddered',
       totalDisplay: '$31,480',
+      heroLabel: 'LIVE P&L',
       chartLabel: 'EQUITY, 30 DAYS',
+      chartLegend: 'Equity',
+      nightLabel: 'BEST DAY',
       hitsLabel: 'OPEN POSITIONS',
       hitsTitle: 'Open positions',
       rows: [
@@ -149,7 +154,10 @@ export const PACKS = {
       hero: 'Prediction market bot, live',
       sub: '1,912 markets priced · only edges over 4%',
       totalDisplay: '$18,260',
+      heroLabel: 'LIVE P&L',
       chartLabel: 'EQUITY, 30 DAYS',
+      chartLegend: 'Equity',
+      nightLabel: 'BEST DAY',
       hitsLabel: 'LIVE POSITIONS',
       hitsTitle: 'Live positions',
       rows: [

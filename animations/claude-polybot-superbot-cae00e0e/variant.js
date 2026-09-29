@@ -15,6 +15,9 @@ export default {
     "sub": "1,912 markets priced · only edges over 4%",
     "totalDisplay": "$18,260",
     "chartLabel": "EQUITY, 30 DAYS",
+    "heroLabel": "LIVE P&L",
+    "chartLegend": "Equity",
+    "nightLabel": "BEST DAY",
     "hitsLabel": "LIVE POSITIONS",
     "hitsTitle": "Live positions",
     "rows": [

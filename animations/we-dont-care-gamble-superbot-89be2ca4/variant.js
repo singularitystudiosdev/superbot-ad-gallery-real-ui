@@ -29,6 +29,13 @@ export default {
     // the total the counter climbs to, as displayed. The chart's own axis and the "+" tag are derived from it.
     totalDisplay: '$48,210',
     chartLabel: 'CUMULATIVE WINS',
+    // the small label above the hero headline, the legend beside the chart head, and the night card's own
+    // label. These are the wins-site defaults; the two bot cells override them to read as a live P&L dashboard.
+    // They landed after the first twelve cells were generated, so a cell that does not name one omits the key
+    // and the render falls back to the same string (see scenes/tabs-assets/beats/winnings.js).
+    heroLabel: 'LIFETIME WINS',
+    chartLegend: 'All winnings',
+    nightLabel: 'BIGGEST NIGHT',
     // the payouts list's own headings
     hitsLabel: 'TOP PAYOUTS',
     hitsTitle: 'Biggest hits',

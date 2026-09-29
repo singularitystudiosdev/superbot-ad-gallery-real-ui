@@ -15,6 +15,9 @@ export default {
     "sub": "412 pairs watched · one signal · sells laddered",
     "totalDisplay": "$31,480",
     "chartLabel": "EQUITY, 30 DAYS",
+    "heroLabel": "LIVE P&L",
+    "chartLegend": "Equity",
+    "nightLabel": "BEST DAY",
     "hitsLabel": "OPEN POSITIONS",
     "hitsTitle": "Open positions",
     "rows": [

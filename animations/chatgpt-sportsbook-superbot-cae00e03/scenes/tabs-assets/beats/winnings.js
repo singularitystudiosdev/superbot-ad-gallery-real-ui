@@ -10,6 +10,11 @@ import V from '../../../variant.js';
 
 const S = V.site;
 const SITE = S.slug;
+// the three label fields are newer than the first twelve generated cells: a cell that predates them sets no
+// value, so the read falls back to the exact wins-site wording the base spot declared as their default.
+const HERO_LABEL = S.heroLabel || 'LIFETIME WINS';
+const CHART_LEGEND = S.chartLegend || 'All winnings';
+const NIGHT_LABEL = S.nightLabel || 'BIGGEST NIGHT';
 const TOTAL = Number(String(S.totalDisplay).replace(/[^0-9.]/g, '')) || 0; // the hero total the counter climbs to
 
 const money = (n) => '$' + fmt(Math.round(n));
@@ -77,13 +82,13 @@ function winHtml(mode, chartHtml) {
   <div class="wn-view"><div class="wn-page">
     <div class="wn-col">
       <header class="wn-hero">
-        <small>LIFETIME WINS</small>
+        <small>${HERO_LABEL}</small>
         <h1>${S.hero}</h1>
         <div class="wn-tot"><span class="wn-cur">$</span><b class="wn-num">0</b></div>
         <p class="wn-sub">${S.sub}</p>
       </header>
       <section class="wn-card2">
-        <div class="wn-chhd"><small>${S.chartLabel}</small><span class="wn-lg"><i></i>All winnings</span></div>
+        <div class="wn-chhd"><small>${S.chartLabel}</small><span class="wn-lg"><i></i>${CHART_LEGEND}</span></div>
         ${chartHtml}
       </section>
       <section class="wn-hitsec">
@@ -91,7 +96,7 @@ function winHtml(mode, chartHtml) {
         <ul class="wn-list">${rows}</ul>
       </section>
       <section class="wn-night">
-        <small>BIGGEST NIGHT</small>
+        <small>${NIGHT_LABEL}</small>
         <div class="wn-nh"><b>${plus(S.night.amount)}</b><span>${S.night.label}</span></div>
         <p>${S.night.sub}</p>
       </section>

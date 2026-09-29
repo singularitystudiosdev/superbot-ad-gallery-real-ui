@@ -136,6 +136,14 @@
     "thumb": "assets/shots/do-my-job-financial-advisor-superbot-38facc16.png"
   },
   {
+    "id": "do-my-job-webdev-superbot-80a211a0",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot works a web developer’s excalidraw issues on GitHub",
+    "src": "animations/do-my-job-webdev-superbot-80a211a0/",
+    "thumb": "assets/shots/do-my-job-webdev-superbot-80a211a0.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

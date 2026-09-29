@@ -124,6 +124,13 @@ const more = [
   // the Trump Account rules are IRS's, and the 60/40 drift uses real VTI/VXUS/BND closes Dec 31, 2025 to Sep 28, 2026
   // (all cited in img/CREDITS.txt); no person is named, request wording and replies are the ad's own copy.
   ['do-my-job-financial-advisor-superbot-38facc16', 'do-my-job-financial-advisor-superbot-38facc16/', 'BUT WE WILL · Do my job for me: superbot works a financial advisor’s client requests in Wealthbox', 'Ad spots'],
+  // BUT WE WILL, do my job web developer (2026-09-29): the same intro and slam, then "Do my job for me" as a web
+  // developer: superbot signs in to GitHub (issues, pull request, checks and merge box rebuilt in HTML/CSS from Primer
+  // Octicons and Primer primitives) and works 12 real excalidraw/excalidraw issues assigned to you: the repo's rules
+  // read verbatim, three real fix diffs typed (#11876 localize Sign up/Sign in, #7332 drop the dark-mode canvas filter
+  // for Firefox, #11914 Cmd/Ctrl+Shift+S while editing text), the real checks pass, Merge pull request (all cited in
+  // img/CREDITS.txt).
+  ['do-my-job-webdev-superbot-80a211a0', 'do-my-job-webdev-superbot-80a211a0/', 'BUT WE WILL · Do my job for me: superbot works a web developer’s excalidraw issues on GitHub', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

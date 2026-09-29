@@ -1,7 +1,8 @@
-// do-my-job-callcenter: "ChatGPT won’t do your job for you" -> "BUT WE WILL" -> superbot takes the shift at a
-// call center: it connects the line, learns the voice, reads the last calls and answers the next one.
-// The line on card 1, the ask, the answer and the slam all come from ./variant.js; the four beats' copy lives in
-// scenes/tabs-assets/beats/*.js. No confetti: the slam card is clean.
+// do-my-job-callcenter: "ChatGPT won’t do your job for you" -> "BUT WE WILL" -> superbot clocks in at Comcast:
+// the camera dives from the chat into a rebuilt Einstein 360 agent desktop, where it turns CTI on, matches the
+// voice, reads 1,284 past calls and answers a queue of inbound calls to "Queue clear".
+// The line on card 1, the ask, the answer and the slam all come from ./variant.js; the chat beat's copy lives in
+// scenes/tabs-assets/beats/signin.js and the desktop's in scenes/tabs-assets/e360-data.js. No confetti.
 // The engine is one-agent-full-degen's: the whole spot is a pure function of t (?t=<s> freezes a
 // frame, ?t=<s>&play=1 plays on, space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock).
 // It lays the SEQUENCE end to end: two black text cards (drawn here), the hub scene cropped to its thread
@@ -24,7 +25,7 @@ const SEQUENCE = [
   ['end', 'end'],
 ];
 // the duration the scene gets if its module fails to load (so the spot keeps its shape)
-const FALLBACK_DUR = { tabs: 11 };
+const FALLBACK_DUR = { tabs: 23.1 };
 const SCENE_FADE = 0.3;
 const END_DUR = 3.0, DIP = 0.35;
 

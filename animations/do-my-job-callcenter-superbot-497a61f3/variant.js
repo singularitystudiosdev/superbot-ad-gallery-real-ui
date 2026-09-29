@@ -1,4 +1,4 @@
-// The copy of the call-center spot: the two black text cards, the ask, superbot's answer and the four beats'
+// The copy of the call-center spot: the two black text cards, the ask, superbot's answer and the signin beat's
 // own strings (beats/*.js). This folder is a standalone spot, not a generated variant cell, so this file is
 // hand-written and no other folder is its source. Every string here is fictional.
 export default {
@@ -8,5 +8,5 @@ export default {
   "redWord": "job",
   "slamLine": "BUT WE WILL",
   "ask": "Do my job for me",
-  "say": "On it. Taking your shift at the call center."
+  "say": "On it. Clocking in at Comcast."
 };

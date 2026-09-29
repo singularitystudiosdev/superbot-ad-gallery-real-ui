@@ -1,0 +1,37 @@
+img/ CREDITS (do-my-job-callcenter-superbot-497a61f3)
+
+Third-party artwork in this folder: two logos, fetched 2026-09-28 from Wikimedia Commons. Both are tagged
+Public domain (PD-textlogo / PD-shape: the marks are simple geometric shapes and text and fall below the
+threshold of originality on Commons). Trademark rights are separate and are not affected by the public-domain
+tag: both marks remain the property of Comcast Corporation and are used here nominatively, to name the company
+whose agent desktop the spot rebuilds. Neither file was redrawn; the only alteration is a CSS colour swap.
+
+comcast-logo.svg   Comcast peacock + COMCAST wordmark.
+                   Source: https://commons.wikimedia.org/wiki/File:Comcast.svg
+                   Direct: https://upload.wikimedia.org/wikipedia/commons/8/87/Comcast.svg
+                   Credit on the Commons file page: Comcast Corporation, https://corporate.comcast.com/
+                   Licence as tagged on Commons: Public domain (PD-textlogo), attribution not required.
+                   Usage here: inside the chat card's badge (as fetched) and in the Einstein 360 app bar, where it
+                   is rendered white for the dark bar with CSS filter brightness(0) invert(1) (same artwork, one
+                   flat colour).
+
+xfinity-logo.svg   Xfinity wordmark (purple).
+                   Source: https://commons.wikimedia.org/wiki/File:Xfinity_logo_2021.svg
+                   Direct: https://upload.wikimedia.org/wikipedia/commons/b/bc/Xfinity_logo_2021.svg
+                   Credit on the Commons file page: Xfinity website.
+                   Licence as tagged on Commons: Public domain (PD-textlogo), attribution not required.
+                   Usage here: the app bar's queue chip and the inbound queue's subtitle, rendered white with the
+                   same CSS filter (same artwork, one flat colour).
+
+Nothing else in this folder is third-party. The Einstein 360 desktop itself is not an image: it is rebuilt in
+HTML/CSS/SVG in ../../scenes/tabs-assets/e360.{js,css}, with the layout, the panels and the colours taken from
+reference screenshots kept outside the repo at /tmp/e360ref-497a61f3 (Comcast training cards and a partner
+write-up); no screenshot is embedded in the ad. Every caller, ticket id, XRE code, account number, phone number,
+figure and time on that desktop is fictional.
+
+Fonts: ../../scenes/tabs-assets/fonts/barlow-{400,500,600,700}.woff2
+  Barlow, by Jeremy Tribby. Licence: SIL Open Font License 1.1
+  (https://github.com/jpt/barlow/blob/master/OFL.txt). Latin subset, woff2, fetched 2026-09-28 from the Google
+  Fonts CSS API (https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700) and served from this
+  folder, with no remote font URL anywhere in the ad. Used as the closest free stand-in for the DIN-like sans on
+  the real Einstein 360 screens.

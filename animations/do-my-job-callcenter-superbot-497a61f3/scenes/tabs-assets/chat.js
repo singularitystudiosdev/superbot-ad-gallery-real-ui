@@ -1,39 +1,36 @@
 // The one-ask thread: "Do my job for me" is typed into the composer and sent, superbot answers in place
-// (variant.js say) and then works the shift in four beats inside the same reply column — connecting to the call
-// center, emulating the voice, analyzing the previous calls, and answering the next one (./beats/*.js). Nothing
-// routes anywhere: the composer's model chip reads "superbot" the whole time. The thread is bottom-anchored so
-// every part rises out of the composer. renderChat(c, t) is a pure function of the scene's local time.
+// (variant.js say) and then clocks in at Comcast in a single reply beat (./beats/signin.js) whose card the camera
+// dives into, handing the frame to the Einstein 360 desktop (./e360.js). Nothing routes anywhere: the composer's
+// model chip reads "superbot" the whole time. The thread is bottom-anchored so every part rises out of the
+// composer. renderChat(c, t) is a pure function of the scene's local time.
 import { lerp, seg, outCubic, inOutCubic, esc, boxIn, streamCount } from '../../lib.js';
 import V from '../../variant.js';
-import connecting from './beats/connecting.js?v=1';
-import voice from './beats/voice.js?v=1';
-import calls from './beats/calls.js?v=1';
-import answering from './beats/answering.js?v=1';
+import signin from './beats/signin.js?v=1';
 
 export const CHAT_T0 = 1.0;  // the empty state has settled; the ask starts typing
-const STEPS = [connecting, voice, calls, answering];
-const PRE = 0.35;            // the answer line finishes streaming a beat before the first chip lands
-const BEAT_DUR = 4.05;       // how far apart the four beats start (each beat lands 1.2 s before its window ends)
-const TAIL = 0.4;            // the hold after the finale's zoom lands
+const STEPS = [signin];
+const PRE = 0.35;            // the answer line finishes streaming a beat before the chip lands
+const TAIL = 0.0;            // the signin beat's own end is the last thing the chat shows
 
 const ASK = V.ask;
 const SAY = V.say;
 
-// one ask, one reply; each beat's clock is laid end to end from the reply
+// one ask, one reply; the beat's clock is laid off the reply
 export const BEATS = (() => {
   const s = CHAT_T0;
   const typeEnd = s + Math.min(0.55, 0.15 + ASK.length * 0.006);
   const send = typeEnd + 0.1;
   const reply = send + 0.22;
-  const steps = STEPS.map((m, i) => {
-    const r = reply + PRE + i * BEAT_DUR;
+  const steps = STEPS.map((m) => {
+    const r = reply + PRE;
     return { m, r, T: m.times(r) };
   });
   const end = steps[steps.length - 1].T.end + TAIL;
   return [{ k: { ask: ASK, s, typeEnd, send, reply, steps, T: { end } } }];
 })();
 const K = BEATS[BEATS.length - 1].k;
-export const CHAT_END = K.T.end;
+export const CHAT_END = K.T.end;          // the chat copy has landed by here
+export const CHAT_ZOOM = K.T.zoomEnd;     // the camera's dive into the card finishes here
 
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
 
@@ -48,7 +45,8 @@ export function mountChat(hub) {
   const add = (html) => { const n = el(html); inner.appendChild(n); return n; };
 
   const box = (n) => boxIn(n, root);
-  const ctx = { hub, box, esc, el, sbSrc, root };
+  const asset = (name) => new URL(`../../img/${name === 'logo' ? 'comcast-logo.svg' : name === 'xfinity' ? 'xfinity-logo.svg' : name}`, import.meta.url).href;
+  const ctx = { hub, box, esc, el, sbSrc, root, asset };
 
   const k = K;
   const sbAvatar = `<span class="avatar sb"><img src="${sbSrc}" alt=""/></span>`;

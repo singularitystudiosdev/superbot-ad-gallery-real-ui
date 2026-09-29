@@ -1,7 +1,7 @@
-// Shared pieces of the four call-center beats: the tool chip row (the doordash beat's .ch-tool/.spin pill),
-// the resolve pill (the doordash beat's .dd-btn: same gradient, dip, shine and drawn check, renamed .cc-pill),
-// a counting helper, and the icon set (inline SVG UI furniture, no third-party logos).
-// Every moving value is written from t, so ?t=<s> reproduces any frame exactly. No string here is real.
+// Shared pieces of the single chat beat (signin.js): the tool chip row, the resolve pill, a counting helper and
+// the two icons it needs. The chip row and the pill are the doordash beat's .ch-tool spinner pill and its .dd-btn
+// resolve pill (ported in ports.css / callcenter.css with the timings unchanged). Every moving value is written
+// from t, so ?t=<s> reproduces any frame exactly. No string here is real.
 import { lerp, seg, outCubic, outBack } from '../../../lib.js';
 
 export const fmt = (n) => Number(n).toLocaleString('en-US');
@@ -9,11 +9,8 @@ export const fmt = (n) => Number(n).toLocaleString('en-US');
 const ico = (inner, cls = 'cc-ic') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${inner}</svg>`;
 
 export const ICO = {
-  headset: ico('<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M3 14h2.2a1 1 0 0 1 1 1v3.4a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2v-2.4A1 1 0 0 1 3 14Z"/><path d="M21 14h-2.2a1 1 0 0 0-1 1v3.4a1 1 0 0 0 1 1H19a2 2 0 0 0 2-2v-2.4a1 1 0 0 0 0-1Z"/><path d="M17.5 19.4a3.4 3.4 0 0 1-3.4 3.1h-1.6"/>'),
   phone: ico('<path d="M6.6 3H4.9A1.9 1.9 0 0 0 3 5.1C3.7 13 10 19.3 17.9 20a1.9 1.9 0 0 0 2.1-1.9v-1.7a1.9 1.9 0 0 0-1.5-1.9l-2.3-.5a1.9 1.9 0 0 0-1.9.7l-.9 1.2a12.3 12.3 0 0 1-5-5l1.2-.9a1.9 1.9 0 0 0 .7-1.9l-.5-2.3A1.9 1.9 0 0 0 6.6 3Z"/>'),
-  wave: ico('<path d="M3 12h2.5l2-6 3 12 3-15 3 18 2-9H21"/>'),
-  history: ico('<path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3 9"/><path d="M3 4.5V9h4.5"/><path d="M12 8.5V12l3 2"/>'),
-  play: ico('<path d="M8 5.5v13l11-6.5Z"/>'),
+  headset: ico('<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M3 14h2.2a1 1 0 0 1 1 1v3.4a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2v-2.4A1 1 0 0 1 3 14Z"/><path d="M21 14h-2.2a1 1 0 0 0-1 1v3.4a1 1 0 0 0 1 1H19a2 2 0 0 0 2-2v-2.4a1 1 0 0 0 0-1Z"/><path d="M17.5 19.4a3.4 3.4 0 0 1-3.4 3.1h-1.6"/>'),
   check: ico('<path d="M5 12.5l4.5 4.5L19 7.5"/>', 'cc-ic cc-tick'),
 };
 
@@ -51,8 +48,9 @@ export function pillParts(card) {
     bag: q('.cc-grp-a svg'), check: q('.cc-check'), checkP: q('.cc-check-p'), shine: q('.cc-shine'),
   };
 }
-/** renderPill(p, t, P): the pill resolving at P. Identical motion to doordash.js (dip, shine, drawn check).
-    stepping (`dots`) appends 1..3 animated dots to the running label, so it reads "Connecting..." then flips. */
+/** renderPill(p, t, P): the pill resolving at P. The dip, the shine and the drawn check are unchanged from
+    doordash.js; stepping (`dots`) appends 1..3 animated dots to the running label, so it reads "Connecting..."
+    then flips to the resolved label. */
 export function renderPill(p, t, P, dots = false) {
   if (dots) {
     const n = 1 + (Math.floor(Math.max(0, t - P + 1.6) * 4) % 3);

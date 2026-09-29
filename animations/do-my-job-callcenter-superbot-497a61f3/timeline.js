@@ -31,7 +31,7 @@ const END_DUR = 3.0, DIP = 0.35;
 
 // ---------- text cards ----------
 // A part is a word string, { r } for the red word, or { html } for styled words.
-// says: variant.introLine (only variant.redWord red; it lands last and takes one extra punch)
+// says: variant.introLine (only variant.redWord red; it simply appears in red, no punch, no glow)
 // slam: "BUT WE WILL" slammed in, clean (no confetti burst: the brief asks for a clean slam)
 // the card-1 line comes from variant.js: one span per word, and the variant's redWord is the red one
 const lineParts = (line, red) => String(line).split(' ').map((w) => (w === red ? { r: w } : w));
@@ -41,9 +41,10 @@ const CARDS = {
 };
 // card motion (seconds, local): words rise 18px + unblur 8px, outQuint .55s, staggered .06s, scaled by one
 // factor K shared by every card so the busiest card still has its text landed READ_HOLD seconds before exit.
+// The red word strikes no pose of its own: it only takes its colour, no extra scale punch and no glow.
 const W_RISE = 18, W_BLUR = 8, CARD_OUT = 0.3, READ_HOLD = 1.2;
 const BASE = { in: 0.12, stag: 0.06, dur: 0.55 };
-const SLAM_IN = 0.34, SLAM_SCALE = 1.42, SHAKE = 10;
+const SLAM_IN = 0.34, SLAM_SCALE = 1.42;
 const settleAt = (c, k) => k * (BASE.in + (c.parts.length - 1) * BASE.stag + BASE.dur);
 const K = Math.min(1, ...Object.values(CARDS).map((c) => (c.dur - CARD_OUT - READ_HOLD) / settleAt(c, 1)));
 const W_IN = BASE.in * K, W_STAG = BASE.stag * K, W_DUR = BASE.dur * K;
@@ -74,29 +75,23 @@ function buildCard(sec, spec) {
 function renderCard(c, lt, dur) {
   const slam = c.spec.mode === 'slam';
   const e = inOutCubic(seg(lt, dur - CARD_OUT, dur));
-  let shake = '';
   if (slam) {
     const p = outBack(seg(lt, 0.02, 0.02 + SLAM_IN));
-    const amp = SHAKE * Math.exp(-Math.max(0, lt - 0.02) * 8.5) * seg(lt, 0, 0.05);
-    shake = `${(Math.sin(lt * 63) * amp).toFixed(2)}px,${(Math.cos(lt * 51) * amp * 0.5).toFixed(2)}px`;
     const sc = lerp(SLAM_SCALE, 1, p) * lerp(1, 0.985, e);
     c.words.forEach((w) => {
       w.el.style.opacity = clamp(seg(lt, 0, 0.1) * 1.3).toFixed(3);
       w.el.style.filter = 'none';
       w.el.style.transform = `scale(${sc.toFixed(4)})`;
     });
-    c.line.style.transform = `translate(${shake}) scale(1)`;
+    c.line.style.transform = 'scale(1)';
   } else {
     c.words.forEach((w, i) => {
       const at = W_IN + i * W_STAG;
       const p = outQuint(seg(lt, at, at + W_DUR));
-      const punch = w.red ? seg(lt, at + W_DUR - 0.04, at + W_DUR + 0.32) : 0;
-      const sc = w.red ? lerp(1.3, 1, outBack(punch)) : 1;
       w.el.style.opacity = clamp(p * 1.15).toFixed(3);
       const dy = (1 - p) * W_RISE;
-      w.el.style.transform = `translateY(${dy.toFixed(2)}px) scale(${sc.toFixed(4)})`;
+      w.el.style.transform = `translateY(${dy.toFixed(2)}px)`;
       w.el.style.filter = p >= 1 ? 'none' : `blur(${((1 - p) * W_BLUR).toFixed(2)}px)`;
-      if (w.red) w.el.style.textShadow = `0 0 ${(lerp(30, 18, punch)).toFixed(1)}px rgba(255,48,64,${lerp(0.62, 0.34, punch).toFixed(2)})`;
     });
     c.line.style.transform = e > 0 ? `scale(${lerp(1, 0.985, e).toFixed(4)})` : 'none';
   }

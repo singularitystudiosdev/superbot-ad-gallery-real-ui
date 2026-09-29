@@ -108,6 +108,14 @@ const more = [
   // drafted line's Sources quote from the Mailchimp homepage, pricing page and live App Store listing (all cited in
   // img/CREDITS.txt); the request comments and drafted copy are the ad's own.
   ['do-my-job-copywriter-superbot-cda60abe', 'do-my-job-copywriter-superbot-cda60abe/', 'BUT WE WILL · Do my job for me: superbot writes the Mailchimp copy deck in Google Docs', 'Ad spots'],
+  // BUT WE WILL, do my job journalist (2026-09-29): the same intro and slam, then "Do my job for me" as a journalist:
+  // superbot signs in to WordPress (7.1.2 block editor, rebuilt in HTML/CSS) and works a reporter's story budget of 12
+  // real primary-source releases from Thu, Sept. 24, 2026 (BEA, DOL, Census, BLS, EIA, Freddie Mac, Fed, USDA NASS,
+  // Costco, NASA): headline options with live character counts, dateline + lede + second paragraph typed, every
+  // number fact-checked against the release, AP style fixes from 12 verbatim AP Stylebook rules, Submit for Review to
+  // Pending (all cited in img/CREDITS.txt); the headlines, ledes and second paragraphs are the ad's own copy built
+  // only from release facts.
+  ['do-my-job-journalist-superbot-f8795b48', 'do-my-job-journalist-superbot-f8795b48/', 'BUT WE WILL · Do my job for me: superbot works a reporter’s story budget in WordPress', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

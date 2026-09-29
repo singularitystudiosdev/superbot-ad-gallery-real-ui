@@ -1,0 +1,379 @@
+/* wp.css: the WordPress desk (wp.js): the block editor of the current release (WordPress 7.1.2, Twenty Twenty-Five
+   on the canvas, the "modern" admin colour scheme a fresh install gets) with the day's story budget in the left
+   panel slot, rebuilt in HTML/CSS from reference material kept outside the repo in /tmp/jr-ad.f8795b48 (NOTES.txt
+   there). No reference image is embedded: the desk is HTML.
+   Everything is scoped under #s-tabs so the hub stylesheet is untouched. Nothing here transitions: every moving value
+   is written from t by wp.js. Layout is authored in design px (frame height is always 1080 / UI scale), so text keeps
+   its size at every ratio; only the grid changes, and square / portrait stack the settings panels and the budget under
+   the canvas. The superbot HUD at the bottom of this file is the call-center spot's HUD with its selectors renamed,
+   values unchanged (it keeps its own Barlow face).
+   Reference files named below (in /tmp/jr-ad.f8795b48):
+     M    = ref/measure.json: getComputedStyle of the live editor (Playground render of WordPress 7.1.2 at 1440x900;
+            file measure-computed.txt is its readable dump)
+     R15  = ref/ref-15-editor-post-tab-1920x1080.png (the same editor at 1920x1080), pixel samples
+     BS   = ref/base-styles_colors.scss, ref/base-styles_variables.scss (@wordpress/base-styles, Gutenberg trunk)
+     DS   = scss/design-token-fallbacks.mjs (WordPress Design System tokens, Gutenberg c5cdf2a8, the 7.1 era)
+     CMP  = scss/{placeholder,snackbar,modal,notice}_style.scss, scss/badge_styles.scss (@wordpress/components, c5cdf2a8)
+     TT25 = the canvas's theme.json values read from the render (M canvas.globalVars) */
+
+@font-face { font-family: 'Manrope'; font-style: normal; font-weight: 200 800; font-display: block; src: url('fonts/manrope-var.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/barlow-400.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 500; font-display: block; src: url('fonts/barlow-500.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 600; font-display: block; src: url('fonts/barlow-600.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow'; font-style: normal; font-weight: 700; font-display: block; src: url('fonts/barlow-700.woff2') format('woff2'); }
+
+#s-tabs .wp-root {
+  /* type */
+  --wp-font: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* BS $font-family-body; M body */
+  --wp-canvas-font: 'Manrope', sans-serif;      /* TT25 --wp--preset--font-family--manrope; M canvas.paragraph */
+  --wp-hud-font: 'Barlow', 'DIN Alternate', 'Helvetica Neue', Helvetica, Arial, sans-serif; /* inherited: the spot's HUD */
+  /* colour: the admin theme */
+  --wp-theme: #3858e9;          /* M rootVars --wp-admin-theme-color (admin colour "modern") */
+  --wp-theme-ink: #eff0f2;      /* M publishButton / inserterToggle color */
+  /* colour: WordPress grays (BS) */
+  --wp-g900: #1e1e1e; --wp-g800: #2f2f2f; --wp-g700: #757575; --wp-g600: #949494;
+  --wp-g400: #ccc; --wp-g300: #ddd; --wp-g200: #e0e0e0; --wp-g100: #f0f0f0; --wp-white: #fff;
+  --wp-c-g100: #fcfcfc;         /* M rootVars --wp-components-color-gray-100 (settings toggle icon, pressed) */
+  --wp-c-g200: #dbdbdb;         /* M sidebarHeader border-bottom; DS --wpds-color-stroke-surface-neutral */
+  --wp-c-g600: #8d8d8d;         /* M textInputNewCategory border */
+  --wp-c-g700: #707070;         /* R15 (1670,142) the Post tab's indicator; M rootVars --wp-components-color-gray-700 */
+  --wp-rule: rgba(0, 0, 0, .133); /* M skeletonHeader box-shadow (0 1px 0) and sidebar (-1px 0 0) */
+  --wp-ab-ink: #f3f1f1;         /* M abIcons color (the admin bar's glyphs) */
+  --wp-ab-av: #303030;          /* M avatar border */
+  /* colour: alerts (BS) and the badges built on them (CMP badge: color-mix of white / black with the base) */
+  --wp-yellow: #f0b849; --wp-green: #4ab866; --wp-red: #cc1818;
+  /* colour: notice, info intent (DS) */
+  --wp-info-bg: #f3f9ff; --wp-info-line: #a9c6e7; --wp-info-ink: #001b4f;
+  /* colour: the canvas (TT25) */
+  --wp-cv-ink: #111111;         /* TT25 --wp--preset--color--contrast; M canvas.paragraph color */
+  /* radius (BS radius scale; M buttons 2px, document bar 4px) */
+  --wp-r-xs: 1px; --wp-r: 2px; --wp-r-md: 4px; --wp-r-lg: 8px;
+  /* elevation (BS) */
+  --wp-el-sm: 0 1px 2px rgba(0,0,0,.05), 0 2px 3px rgba(0,0,0,.04), 0 6px 6px rgba(0,0,0,.03), 0 8px 8px rgba(0,0,0,.02);
+  --wp-el-lg: 0 5px 15px rgba(0,0,0,.08), 0 15px 27px rgba(0,0,0,.07), 0 30px 36px rgba(0,0,0,.04), 0 50px 43px rgba(0,0,0,.02);
+  position: absolute; inset: 0; z-index: 3; opacity: 0; overflow: hidden; background: var(--wp-white);
+  font-family: var(--wp-font); color: var(--wp-g900); -webkit-font-smoothing: antialiased; }
+#s-tabs .wp { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; display: flex; flex-direction: column; overflow: hidden;
+  font: 400 13px/18.2px var(--wp-font); }  /* M body: 13px / 18.2px */
+#s-tabs .wp svg { flex: none; }
+#s-tabs .wp .wp-i { width: 24px; height: 24px; fill: currentColor; }
+#s-tabs .wp-body { flex: 1; min-height: 0; display: flex; }
+
+/* ================= the admin bar (M adminBar: 32px, #1e1e1e, 13px/32px white; glyphs 20px) =================
+   The site-name item is left out: the spot shows no site or outlet name. */
+#s-tabs .wp-ab { flex: none; height: 32px; display: flex; align-items: stretch; background: var(--wp-g900); color: var(--wp-white); font: 400 13px/32px var(--wp-font); white-space: nowrap; }
+#s-tabs .wp-ab-i { display: flex; align-items: center; gap: 6px; padding: 0 8px; color: var(--wp-white); }
+#s-tabs .wp-ab-i .wp-i { width: 20px; height: 20px; color: var(--wp-ab-ink); }
+#s-tabs .wp-ab-w { padding: 0 7px; }             /* M adminBarWpLogo: padding 0 7px, 35px wide */
+#s-tabs .wp-ab-me { margin-left: auto; gap: 8px; padding-right: 10px; }
+#s-tabs .wp-ab-av { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--wp-ab-av); background:
+  radial-gradient(circle at 50% 38%, var(--wp-white) 0 22%, transparent 23%), radial-gradient(ellipse 58% 42% at 50% 100%, var(--wp-white) 0 70%, transparent 71%), var(--wp-g400); }
+
+/* ================= the editor header (M editorHeader: 64px, white, 0 1px 0 rule; buttons 32px, radius 2) ================= */
+#s-tabs .wp-top { flex: none; position: relative; z-index: 2; height: 64px; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 16px;
+  background: var(--wp-white); box-shadow: 0 1px 0 0 var(--wp-rule); }
+#s-tabs .wp-tl { display: flex; align-items: center; gap: 8px; padding-left: 8px; }   /* M: back x=8, inserter x=48 */
+#s-tabs .wp-b { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: var(--wp-r); color: var(--wp-g900); }
+#s-tabs .wp-ins { background: var(--wp-theme); color: var(--wp-theme-ink); }          /* M inserterToggle */
+#s-tabs .wp-redo { color: var(--wp-g600); }                                           /* M redoDisabled */
+#s-tabs .wp-undo { color: var(--wp-g600); }
+#s-tabs .wp-undo.on { color: var(--wp-g900); }                                        /* M undo */
+#s-tabs .wp-set { background: var(--wp-g900); color: var(--wp-c-g100); }             /* M settingsToggle (pressed) */
+/* the document bar (M documentBar: 450 x 32, #f0f0f0, radius 4; title 13px, "· Post" #2f2f2f with 4px lead) */
+#s-tabs .wp-dbar { width: 450px; height: 32px; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 0 12px; border-radius: var(--wp-r-md); background: var(--wp-g100); white-space: nowrap; }
+#s-tabs .wp-dbar-t { min-width: 0; overflow: hidden; color: var(--wp-g900); }
+#s-tabs .wp-dbar-k { flex: none; padding-left: 4px; color: var(--wp-g800); }
+#s-tabs .wp-tr { display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding-right: 8px; }   /* M headerSettings */
+#s-tabs .wp-save { height: 32px; display: flex; align-items: center; padding: 4px 12px; font-weight: 600; color: var(--wp-theme); white-space: nowrap; }  /* M saveDraftButton */
+#s-tabs .wp-save .wp-i { display: none; margin: 0 2px 0 -6px; }
+#s-tabs .wp-save.is-saved { color: var(--wp-g700); }   /* ref-08 saved state: a check, then "Saved" in gray */
+#s-tabs .wp-save.is-saved .wp-i { display: block; }
+#s-tabs .wp-pub { height: 32px; display: flex; align-items: center; padding: 4px 12px; border-radius: var(--wp-r); background: var(--wp-theme); color: var(--wp-theme-ink);
+  font-weight: 600; white-space: nowrap; transform-origin: 50% 50%; }                   /* M publishButton */
+#s-tabs .wp-pub.busy { background: var(--wp-g900); }
+
+/* ================= the story budget: the left panel slot (M listViewSidebar: 350px; tabs 48px, 13px, 16px pads) ================= */
+#s-tabs .wp-bud { flex: none; width: 350px; margin: 0 0 232px; display: flex; flex-direction: column; background: var(--wp-white); box-shadow: 1px 0 0 0 var(--wp-rule); overflow: hidden; }
+#s-tabs .wp-bud-h { flex: none; height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border-bottom: 1px solid var(--wp-c-g200); white-space: nowrap; }
+#s-tabs .wp-bud-h > b { align-self: stretch; display: flex; align-items: center; font-weight: 400; box-shadow: inset 0 -2px 0 var(--wp-c-g700); }  /* a tab, selected */
+#s-tabs .wp-bud-live { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font: 400 12px/20px var(--wp-font); color: var(--wp-g700); opacity: 0; }
+#s-tabs .wp-bud-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--wp-theme); }
+#s-tabs .wp-bud-live b { font-weight: 600; color: var(--wp-g900); }
+#s-tabs .wp-bud-live.clear { min-height: 24px; padding: 2px 8px; border-radius: var(--wp-r); background: color-mix(in srgb, var(--wp-white) 90%, var(--wp-green)); color: color-mix(in srgb, #000 50%, var(--wp-green)); }  /* CMP badge is-success */
+#s-tabs .wp-bud-live.clear .wp-i { width: 20px; height: 20px; margin: -2px -2px -2px -4px; }
+#s-tabs .wp-bud-day { flex: none; display: flex; align-items: center; gap: 10px; padding: 12px 16px 6px; white-space: nowrap; }
+#s-tabs .wp-bud-date { font-weight: 600; }
+#s-tabs .wp-bud-bar { flex: 1; height: 4px; border-radius: var(--wp-r); background: var(--wp-g100); overflow: hidden; }
+#s-tabs .wp-bud-bar i { display: block; width: 0; height: 100%; background: var(--wp-theme); }
+#s-tabs .wp-bud-pc { font-weight: 400; color: var(--wp-g700); font-variant-numeric: tabular-nums; }
+#s-tabs .wp-bud-top { flex: none; display: flex; align-items: baseline; gap: 8px; padding: 2px 16px 10px; white-space: nowrap; }
+#s-tabs .wp-bud-n { font: 600 20px/24px var(--wp-font); font-variant-numeric: tabular-nums; }   /* BS $font-size-x-large */
+#s-tabs .wp-bud-top small { font-size: 13px; color: var(--wp-g700); }
+#s-tabs .wp-bud-sub { margin-left: auto; color: var(--wp-g700); }
+/* column heads: M inserterCategoryHeading (11px 600 uppercase #757575) */
+#s-tabs .wp-bud-cols { flex: none; display: flex; justify-content: space-between; padding: 6px 16px; border-top: 1px solid var(--wp-g200); border-bottom: 1px solid var(--wp-g200);
+  font: 600 11px/18.2px var(--wp-font); text-transform: uppercase; color: var(--wp-g700); }
+#s-tabs .wp-bud-list { position: relative; flex: 1; min-height: 0; margin: 0; padding: 6px 0 4px; list-style: none; overflow: hidden; }
+/* a row: M listViewRow (32px, 13px) with a second line for the source and its release time */
+#s-tabs .wp-bi { position: absolute; left: 4px; right: 4px; height: 40px; display: flex; align-items: center; gap: 10px; padding: 0 12px; border-radius: var(--wp-r); opacity: 0; will-change: transform; }
+#s-tabs .wp-bi-m { min-width: 0; flex: 1; display: grid; }
+#s-tabs .wp-bi-n { font: 400 13px/18.2px var(--wp-font); color: var(--wp-g900); white-space: nowrap; overflow: hidden; }
+#s-tabs .wp-bi-r { font: 400 12px/16px var(--wp-font); color: var(--wp-g700); white-space: nowrap; overflow: hidden; }
+#s-tabs .wp-bi-r { display: flex; min-width: 0; }
+#s-tabs .wp-bi-o { min-width: 0; font-weight: 600; color: var(--wp-g800); white-space: nowrap; overflow: hidden; }
+#s-tabs .wp-bi-r { gap: 8px; }
+#s-tabs .wp-bi-at { flex: none; }
+#s-tabs .wp-bud-empty { position: absolute; left: 16px; right: 16px; top: 42%; text-align: center; color: var(--wp-g700); }
+/* the status: CMP badge (12px/20px, 2px 8px, radius 2, min-height 24); default = gray-100 / gray-800,
+   intents are color-mix(white 90%, base) on color-mix(black 50%, base): info = the theme colour, warning = alert yellow */
+#s-tabs .wp-st { flex: none; display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px; border-radius: var(--wp-r); font: 400 12px/20px var(--wp-font); font-style: normal; white-space: nowrap;
+  background: var(--wp-g100); color: var(--wp-g800); transform-origin: 100% 50%; }
+#s-tabs .wp-st.s-ip { background: color-mix(in srgb, var(--wp-white) 90%, var(--wp-theme)); color: color-mix(in srgb, #000 50%, var(--wp-theme)); }
+#s-tabs .wp-st.s-pr { background: color-mix(in srgb, var(--wp-white) 90%, var(--wp-yellow)); color: color-mix(in srgb, #000 50%, var(--wp-yellow)); }
+
+/* ================= the canvas (M visualEditorArea / canvas: white, Twenty Twenty-Five) =================
+   The theme sizes its type with viewport units inside the canvas iframe; here the canvas is a size container and the
+   same clamp() formulas run on its width (cqw), so type scales with the canvas exactly as it does in the iframe. */
+#s-tabs .wp-cv { position: relative; flex: 1; min-width: 0; min-height: 0; background: var(--wp-white); container-type: size; overflow: hidden; }
+#s-tabs .wp-view { position: absolute; inset: 0; opacity: 0; display: flex; flex-direction: column; }
+#s-tabs .wp-doc { --pad: clamp(30px, 5cqw, 50px);   /* TT25 --wp--style--root--padding-left/right */
+  width: 100%; max-width: calc(645px + 2 * var(--pad)); margin: 0 auto; padding: 0 var(--pad) 40px;   /* TT25 content size 645px */
+  font: 300 clamp(1.125rem, 1.125rem + ((1cqw - 0.2rem) * 0.392), 1.375rem)/1.4 var(--wp-canvas-font); letter-spacing: -0.1px; color: var(--wp-cv-ink); } /* M canvas.paragraph: large preset, 300, 1.4, -0.1px */
+#s-tabs .wp-title { margin: 30px 0 30px; font: 400 clamp(2.15rem, 2.15rem + ((1cqw - 0.2rem) * 1.333), 3rem)/1.125 var(--wp-canvas-font); letter-spacing: -0.1px; }  /* M canvas.postTitle: xx-large, 400, 1.125, .67em margins */
+#s-tabs .wp-v-idle .wp-title { margin-top: 94px; }  /* M postTitleWrapper margin-top 64px + the title's own .67em */
+#s-tabs .wp-title.is-ph, #s-tabs .wp-p.is-ph { color: color-mix(in srgb, var(--wp-cv-ink) 62%, transparent); }  /* BS $dark-gray-placeholder is 62% */
+#s-tabs .wp-p { margin: 0 0 1.2rem; }                                      /* TT25 --wp--style--block-gap 1.2rem */
+#s-tabs .wp-dl { font-weight: 700; }   /* the dateline as filed: WASHINGTON; ISSAQUAH, Wash. (state in its AP abbreviation, not capitals) */
+#s-tabs .wp-car { display: inline-block; width: 1.5px; height: 1.05em; margin: 0 1px -0.16em; background: var(--wp-cv-ink); }
+#s-tabs .wp-title .wp-car { width: 2px; }
+#s-tabs .wp-quote { margin: 1.2rem 0 0; padding: 20px 30px; border-left: 2px solid var(--wp-cv-ink); }   /* M canvas.quote */
+#s-tabs .wp-quote p { margin: 0; }
+#s-tabs .wp-quote cite { display: block; margin-top: .6em; font-size: .875rem; font-style: normal; font-weight: 300; }  /* TT25 small preset */
+#s-tabs .wp-srch { margin: 1.2rem 0 0; font: 400 clamp(1.125rem, 1.125rem + ((1cqw - 0.2rem) * 0.392), 1.375rem)/1.125 var(--wp-canvas-font); letter-spacing: -0.1px; }
+#s-tabs .wp-src { margin: 1.2rem 0 0; padding: 0 0 0 40px; }             /* M canvas.list: 40px indent */
+#s-tabs .wp-src li { margin-top: 8px; overflow-wrap: anywhere; }         /* M canvas.listItem */
+#s-tabs .wp-src li:first-child { margin-top: 0; }
+#s-tabs .wp-src-u { color: var(--wp-cv-ink); text-decoration: underline; text-underline-offset: .15em; }
+/* the release, as an editor notice pinned above the canvas (CMP notice, info intent: DS tokens) */
+#s-tabs .wp-v-call { padding: 0; }
+#s-tabs .wp-story { padding-top: 16px; }   /* the notice sits clear of the editor header, as the editor's notices do */
+#s-tabs .wp-notice { margin: 0 0 16px; padding: 12px; border: 1px solid var(--wp-info-line); border-radius: var(--wp-r-lg); background: var(--wp-info-bg); color: var(--wp-info-ink);
+  font: 400 13px/20px var(--wp-font); letter-spacing: 0; opacity: 0; }
+/* the notice's head: the label left, the releasing organisation and its release time right (a long organisation name
+   wraps, right-aligned, beside the label; the time never breaks) */
+#s-tabs .wp-notice-h { display: flex; align-items: baseline; gap: 12px; }
+#s-tabs .wp-notice-h > b { flex: none; font-weight: 600; }
+#s-tabs .wp-notice-src { flex: 1; min-width: 0; display: flex; justify-content: flex-end; align-items: baseline; gap: 12px; color: var(--wp-info-ink); opacity: .75; }
+#s-tabs .wp-notice-o { min-width: 0; text-align: right; }
+#s-tabs .wp-notice-at { flex: none; white-space: nowrap; }
+#s-tabs .wp-says { margin: 4px 0 0; }
+/* the headline options, as a block placeholder (CMP placeholder: 1px #1e1e1e inset, radius 2, 13px, 600 label) with
+   the editor's buttons: secondary (1px theme outline) and, once pressed, primary (theme fill) */
+#s-tabs .wp-opts { margin: 24px 0 0; padding: 16px; border-radius: var(--wp-r); box-shadow: inset 0 0 0 1px var(--wp-g900); font: 400 13px/18.2px var(--wp-font); letter-spacing: 0; color: var(--wp-g900); opacity: 0; }
+#s-tabs .wp-opts-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; font-weight: 600; white-space: nowrap; }
+#s-tabs .wp-opts-c { font-weight: 400; color: var(--wp-g700); font-variant-numeric: tabular-nums; }
+#s-tabs .wp-opts-c b { font-weight: 600; color: var(--wp-g900); }
+#s-tabs .wp-opts-b { display: grid; gap: 8px; }
+#s-tabs .wp-opt { min-width: 0; height: 32px; display: flex; align-items: center; gap: 12px; padding: 4px 12px; border-radius: var(--wp-r); box-shadow: inset 0 0 0 1px var(--wp-theme);
+  color: var(--wp-theme); font-weight: 600; white-space: nowrap; transform-origin: 50% 50%; }
+#s-tabs .wp-opt-t { min-width: 0; flex: 1; overflow: hidden; }
+#s-tabs .wp-opt small { flex: none; font: 400 12px/1 var(--wp-font); opacity: .8; font-variant-numeric: tabular-nums; }
+#s-tabs .wp-opt.on { background: var(--wp-theme); color: var(--wp-theme-ink); }
+/* the canvas viewport under the notice */
+#s-tabs .wp-vp { position: relative; flex: 1; min-height: 0; overflow: hidden; --cvfade: 0px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 var(--cvfade)); mask-image: linear-gradient(180deg, transparent, #000 var(--cvfade)); }
+#s-tabs .wp-scroll { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+/* the snackbar (CMP snackbar: rgba(0,0,0,.85), radius 4, 12px 20px, 13px, elevation small), centred on the frame and
+   resting on the footer, as ref-20 shows it after a Contributor submits; its action is an external link ("↗") */
+#s-tabs .wp-snack { position: absolute; left: 50%; bottom: 33px; z-index: 3; display: flex; gap: 32px; padding: 12px 20px; border-radius: var(--wp-r-md); background: rgba(0, 0, 0, .85); box-shadow: var(--wp-el-sm);
+  color: var(--wp-white); font: 400 13px/18.2px var(--wp-font); white-space: nowrap; opacity: 0; transform: translateX(-50%); }
+#s-tabs .wp-snack-a u { text-underline-offset: 2.6px; }
+/* LEARN: the AP Stylebook in the editor's modal (CMP modal: rgba(0,0,0,.35) overlay, white frame, radius 8, elevation
+   large; header 72px, 24px pads, 20px 600 title; the content 4px 24px 24px) */
+#s-tabs .wp-v-act { align-items: center; justify-content: center; padding: 20px; background: rgba(0, 0, 0, .35); }
+#s-tabs .wp-modal { width: 100%; max-width: 760px; height: 100%; max-height: 620px; display: flex; flex-direction: column; border-radius: var(--wp-r-lg); background: var(--wp-white); box-shadow: var(--wp-el-lg); overflow: hidden; }
+#s-tabs .wp-mh { flex: none; height: 72px; display: flex; align-items: center; gap: 12px; padding: 0 16px 0 24px; border-bottom: 1px solid var(--wp-c-g200); }
+#s-tabs .wp-mh h2 { margin: 0; font: 600 20px/1 var(--wp-font); white-space: nowrap; }
+#s-tabs .wp-mcnt { margin-left: auto; display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+#s-tabs .wp-mcnt b { font: 600 20px/24px var(--wp-font); font-variant-numeric: tabular-nums; }
+#s-tabs .wp-mcnt small { font-size: 13px; color: var(--wp-g700); }
+#s-tabs .wp-mhead { flex: none; display: flex; gap: 16px; margin: 4px 24px 0; padding: 8px 0; border-bottom: 1px solid var(--wp-g200); font: 600 11px/18.2px var(--wp-font); text-transform: uppercase; color: var(--wp-g700); }
+#s-tabs .wp-act-vp { position: relative; flex: 1; min-height: 0; margin: 0 24px 24px; overflow: hidden; --fade: 0px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent); }
+#s-tabs .wp-act-in { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+#s-tabs .wp-arow { height: 56px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--wp-g100); }
+#s-tabs .wp-ar-e { flex: none; width: 150px; min-width: 0; }
+#s-tabs .wp-ar-e b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; }
+#s-tabs .wp-ar-q { flex: 1.6; min-width: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#s-tabs .wp-ar-l { flex: 1; min-width: 0; color: var(--wp-g700); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#s-tabs .wp-mhead .wp-ar-q, #s-tabs .wp-mhead .wp-ar-l { display: block; color: var(--wp-g700); }
+
+/* ================= the settings sidebar (M sidebar: 280px, white, -1px 0 0 rule) ================= */
+#s-tabs .wp-side { flex: none; width: 280px; display: flex; flex-direction: column; background: var(--wp-white); box-shadow: -1px 0 0 0 var(--wp-rule); overflow: hidden; }
+/* tabs (M sidebarHeader 47px + 1px #dbdbdb; tab 13px, 1px 16px pads, 48px) */
+#s-tabs .wp-tabs { flex: none; height: 48px; display: flex; align-items: center; padding-right: 8px; border-bottom: 1px solid var(--wp-c-g200); }
+#s-tabs .wp-tab { height: 47px; display: flex; align-items: center; padding: 1px 16px; }
+#s-tabs .wp-tab.on { box-shadow: inset 0 -2px 0 var(--wp-c-g700); }
+#s-tabs .wp-sx { margin-left: auto; }
+#s-tabs .wp-side-in { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
+#s-tabs .wp-side-in > * { flex: none; }
+/* Fact check is the last panel: it takes the height left and its list shows a window of whole rows (wp.js) */
+#s-tabs .wp-side-in > .wp-pn-fc { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+#s-tabs .wp-pn-fc .wp-pn-b { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+#s-tabs .wp-pn-fc .wp-fc-sum { flex: none; }
+#s-tabs .wp-pn-fc .wp-fc-empty { order: -1; }   /* (the empty line sits under the panel title, above the flexing list) */
+/* the summary: card (M postCardPanel: 24px icon, 13px/20px 600 title), content info (13px #757575), rows (M panelRow:
+   34px, label 13px/20px, value a 13px theme-colour button with 4px 12px 4px 8px pads, 4px apart) */
+#s-tabs .wp-sum { padding: 16px; }
+#s-tabs .wp-card { display: flex; align-items: flex-start; gap: 8px; min-height: 24px; }
+#s-tabs .wp-card-t { flex: 1; min-width: 0; padding-top: 2px; font: 600 13px/20px var(--wp-font); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#s-tabs .wp-card-s { margin: 12px 0 12px; color: var(--wp-g700); white-space: nowrap; overflow: hidden; }
+#s-tabs .wp-rows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+#s-tabs .wp-row { min-width: 0; min-height: 34px; display: flex; align-items: center; gap: 8px; }
+#s-tabs .wp-rl { flex: none; width: 94px; line-height: 20px; }
+#s-tabs .wp-rv { min-width: 0; flex: 1; display: flex; align-items: center; gap: 4px; padding: 4px 12px 4px 8px; line-height: 20px; color: var(--wp-theme); white-space: nowrap; overflow: hidden; }
+/* a long slug wraps, as the live row wraps it (ref-15); at most two lines here */
+#s-tabs .wp-rv-slug, #s-tabs .wp-rv-dl { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; white-space: normal; overflow-wrap: anywhere; overflow: hidden; }
+/* a Contributor's Status is plain text, not a button (ref-16, ref-20); so is the newsroom's Dateline field */
+#s-tabs .wp-rv-txt { color: var(--wp-g900); }
+/* the spot's bold beat: Draft turns Pending on the Submit for Review press, the row flashing the theme colour */
+#s-tabs .wp-rv-st { border-radius: var(--wp-r); --fl: 0; background: color-mix(in srgb, var(--wp-theme) calc(var(--fl) * 16%), transparent); }
+#s-tabs .wp-rv-st.is-pending .wp-st-l { font-weight: 600; }
+/* panels (M panelBody: 1px #e0e0e0 top; title 13px 600, 16px 48px 16px 16px, 50px; arrow 24px; body 16px pads) */
+#s-tabs .wp-pn { border-top: 1px solid var(--wp-g200); }
+#s-tabs .wp-pn h3 { height: 50px; margin: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font: 600 13px/18.2px var(--wp-font); }
+#s-tabs .wp-pn h3 .wp-i:last-child { display: none; }
+#s-tabs .wp-pn-b { padding: 0 16px 16px; }
+#s-tabs .wp-pn-cat h3 .wp-i, #s-tabs .wp-pn-tag h3 .wp-i { display: none; }
+#s-tabs .wp-pn-cat h3 .wp-i:last-child, #s-tabs .wp-pn-tag h3 .wp-i:last-child { display: block; }   /* closed: chevron-down */
+#s-tabs .wp-pn-cat .wp-pn-b, #s-tabs .wp-pn-tag .wp-pn-b { display: none; }
+/* categories (M categoryCheckboxInput 16px theme fill, radius 2; label 13px/16px) and tags (M tagTokenText #ddd, 24px) */
+#s-tabs .wp-chk { display: flex; align-items: center; gap: 8px; line-height: 16px; }
+#s-tabs .wp-chk > i { width: 16px; height: 16px; display: grid; place-items: center; border-radius: var(--wp-r); box-shadow: inset 0 0 0 1px var(--wp-g900); color: var(--wp-white); }
+#s-tabs .wp-chk > i .wp-i { width: 20px; height: 20px; opacity: 0; }
+#s-tabs .wp-chk.on > i { background: var(--wp-theme); box-shadow: inset 0 0 0 1px var(--wp-theme); }
+#s-tabs .wp-chk.on > i .wp-i { opacity: 1; }
+#s-tabs .wp-toks { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border: 1px solid var(--wp-g600); border-radius: var(--wp-r); min-height: 34px; }
+#s-tabs .wp-toks.none .wp-tokset { display: none; }
+#s-tabs .wp-tokset { display: contents; }
+#s-tabs .wp-tok { padding: 0 8px; border-radius: var(--wp-r-xs); background: var(--wp-g300); line-height: 24px; white-space: nowrap; }
+/* Fact check and AP style: rows in the panel's own 13px, a badge on the summary line (CMP badge) */
+#s-tabs .wp-fc-sum { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+#s-tabs .wp-pn-fc h3 .wp-badge { margin: 0 8px 0 auto; }
+#s-tabs .wp-fc-n { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+#s-tabs .wp-badge { flex: none; display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px; border-radius: var(--wp-r); font: 400 12px/20px var(--wp-font); font-style: normal; white-space: nowrap;
+  background: color-mix(in srgb, var(--wp-white) 90%, var(--wp-yellow)); color: color-mix(in srgb, #000 50%, var(--wp-yellow)); transform-origin: 50% 50%; }
+#s-tabs .wp-badge.ok { background: color-mix(in srgb, var(--wp-white) 90%, var(--wp-green)); color: color-mix(in srgb, #000 50%, var(--wp-green)); }
+#s-tabs .wp-fc-list, #s-tabs .wp-ap-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; align-content: start; }
+#s-tabs .wp-fc-list { flex: 1; min-height: 0; overflow: hidden; }
+#s-tabs .wp-fc { height: 24px; display: flex; align-items: center; gap: 8px; min-width: 0; white-space: nowrap; }
+#s-tabs .wp-tick { flex: none; width: 16px; height: 16px; display: grid; place-items: center; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--wp-g600); color: var(--wp-white); font-style: normal; }
+#s-tabs .wp-tick .wp-i { width: 18px; height: 18px; opacity: 0; }
+#s-tabs .wp-fc.on .wp-tick { background: var(--wp-green); box-shadow: none; }
+#s-tabs .wp-fc.on .wp-tick .wp-i { opacity: 1; }
+#s-tabs .wp-fc-t { flex: 0 1 auto; min-width: 0; font-weight: 600; overflow: hidden; }
+#s-tabs .wp-fc-s { min-width: 0; flex: 1; color: var(--wp-g700); overflow: hidden; }
+/* an AP fix: the old text struck, an arrow, the new text; the Stylebook entry floats right. A long fix wraps between
+   the old text and the new (never inside the new). It lands with a short theme-colour flash (--fl, wp.js). */
+#s-tabs .wp-ap { min-height: 24px; margin: 0 -4px; padding: 2px 4px; line-height: 20px; border-radius: var(--wp-r); --fl: 0;
+  background: color-mix(in srgb, var(--wp-theme) calc(var(--fl) * 14%), transparent); }
+#s-tabs .wp-ap s { color: var(--wp-g700); }
+#s-tabs .wp-ap-to { display: inline-flex; align-items: center; gap: 2px; white-space: nowrap; vertical-align: top; }
+#s-tabs .wp-ap-to .wp-i { width: 18px; height: 18px; color: var(--wp-g700); }
+#s-tabs .wp-ap-to b { font-weight: 600; }
+#s-tabs .wp-ap-r { float: right; margin-left: 8px; font-size: 12px; color: var(--wp-g700); white-space: nowrap; }
+#s-tabs .wp-empty { margin: 0; color: var(--wp-g700); }
+#s-tabs .wp-m-empty { padding: 16px 0; }
+
+/* ================= the footer (M footerBreadcrumbBar: 32px + 1px #e0e0e0 top; 13px; crumbs 0 8px pads) ================= */
+#s-tabs .wp-foot { flex: none; position: relative; z-index: 2; height: 33px; display: flex; align-items: center; gap: 16px; padding: 0 16px 0 10px; border-top: 1px solid var(--wp-g200); background: var(--wp-white); white-space: nowrap; }
+#s-tabs .wp-crumb { display: flex; align-items: center; }
+#s-tabs .wp-crumb > span { padding: 0 8px; }
+#s-tabs .wp-crumb > i { display: grid; color: var(--wp-g900); }
+#s-tabs .wp-crumb.solo > i, #s-tabs .wp-crumb.solo .wp-crumb-b { display: none; }
+#s-tabs .wp-fs { margin-left: auto; display: flex; align-items: center; gap: 20px; color: var(--wp-g700); }
+#s-tabs .wp-fs b { font-weight: 600; color: var(--wp-g900); font-variant-numeric: tabular-nums; }
+
+/* ================= the superbot HUD: the call-center spot's, values unchanged ================= */
+#s-tabs .wp-hud { position: absolute; left: 8px; bottom: 41px; width: 336px; padding: 11px 13px; border-radius: 10px;
+  background: rgba(11,12,14,.93); box-shadow: 0 10px 34px rgba(0,0,0,.4), inset 0 0 0 1px rgba(255,255,255,.09); color: #eceef1; font-family: var(--wp-hud-font); z-index: 3; }
+#s-tabs .wp-hud .wp-hi { fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .wp-hud-h { display: flex; align-items: center; gap: 9px; }
+#s-tabs .wp-hud-mark { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: #1b1c20; }
+#s-tabs .wp-hud-cur { flex: 1; min-width: 0; font: 600 12.5px/16px var(--wp-hud-font); color: #fff; }
+#s-tabs .wp-hud-steps { margin: 9px 0 0; padding: 0; list-style: none; display: grid; gap: 5px; }
+#s-tabs .wp-hud-steps li { display: flex; align-items: center; gap: 8px; font: 500 11.5px/14px var(--wp-hud-font); color: #83878f; }
+#s-tabs .wp-hud-steps li i { flex: none; width: 13px; height: 13px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px #3a3d44; display: grid; place-items: center; }
+#s-tabs .wp-hud-steps li i::after { content: ''; width: 5px; height: 8px; margin-top: -2px; border: solid #05210c; border-width: 0 1.8px 1.8px 0; transform: rotate(45deg) scale(0); }
+#s-tabs .wp-hud-steps li.done { color: #d7dade; }
+#s-tabs .wp-hud-steps li.done i { background: #34c759; box-shadow: none; }
+#s-tabs .wp-hud-steps li.done i::after { transform: rotate(45deg) scale(1); }
+#s-tabs .wp-hud-steps li.done.cur { color: #fff; }
+#s-tabs .wp-hud-steps li.cur { color: #fff; font-weight: 600; }
+#s-tabs .wp-hud-steps li.cur i { background: radial-gradient(circle, #34c759 0 3.3px, transparent 3.9px); }
+#s-tabs .wp-hud-voice, #s-tabs .wp-hud-res, #s-tabs .wp-hud-stats { overflow: hidden; max-height: 0; opacity: 0; }
+#s-tabs .wp-hud-voice { margin-top: 10px; }
+#s-tabs .wp-hud-lane { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+#s-tabs .wp-hud-lane b { flex: none; width: 92px; font: 600 10.5px/1 var(--wp-hud-font); color: #83878f; white-space: nowrap; }
+#s-tabs .wp-hud-lane.sb b { color: #34c759; }
+#s-tabs .wp-hud-bars { flex: 1; min-width: 0; height: 30px; display: flex; align-items: center; gap: 2px; }
+#s-tabs .wp-hud-bars i { flex: 1 1 0; min-width: 1px; height: 3px; border-radius: 2px; background: #4a4f57; }
+#s-tabs .wp-hud-lane.sb .wp-hud-bars i { background: linear-gradient(180deg, #6ef09a, #34c759); }
+#s-tabs .wp-hud-mh { display: flex; align-items: center; gap: 8px; font: 500 10.5px/1 var(--wp-hud-font); color: #83878f; }
+#s-tabs .wp-hud-ok { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font: 700 12px/1 var(--wp-hud-font); color: #6ef09a; opacity: 0; transform-origin: 100% 50%; }
+#s-tabs .wp-hud-ok .wp-hi { width: 11px; height: 11px; }
+#s-tabs .wp-hud-meter { height: 5px; margin-top: 4px; border-radius: 3px; background: #22252b; overflow: hidden; }
+#s-tabs .wp-hud-meter i { display: block; width: 0; height: 100%; background: linear-gradient(90deg, #6ef09a, #34c759); }
+#s-tabs .wp-hud-res { margin-top: 10px; }
+#s-tabs .wp-hud-res > b { display: block; font: 600 11px/1 var(--wp-hud-font); color: #a9aeb6; margin-bottom: 7px; }
+#s-tabs .wp-hud-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+#s-tabs .wp-hud-chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 7px;
+  background: rgba(52,199,89,.12); box-shadow: inset 0 0 0 1px rgba(52,199,89,.3); color: #6ef09a; font: 600 10.5px/13px var(--wp-hud-font); }
+#s-tabs .wp-hud-chip .wp-hi { width: 10px; height: 10px; }
+#s-tabs .wp-hud-stats { display: flex; gap: 12px; margin-top: 9px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.09);
+  font: 500 10.5px/1 var(--wp-hud-font); color: #83878f; white-space: nowrap; }
+#s-tabs .wp-hud-stats b { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ================= 4x3: a narrower budget, the post card back in the summary (the frame is 900 design px tall) ================= */
+html[data-ar="4x3"] #s-tabs .wp-bud { width: 300px; }
+html[data-ar="4x3"] #s-tabs .wp-hud { width: 292px; }
+html[data-ar="4x3"] #s-tabs .wp-dbar { width: 340px; }
+html[data-ar="4x3"] #s-tabs .wp-fs > span:not(:first-child) { display: none; }
+
+/* ================= 16x9: the frame is 831 design px tall: the summary drops the post card (the title is in the
+   document bar and on the canvas) ================= */
+html[data-ar="16x9"] #s-tabs .wp-card { display: none; }
+html[data-ar="16x9"] #s-tabs .wp-card-s { margin-top: 0; }
+
+/* ================= square and portrait: the canvas on top, the settings panels in a strip under it, the budget at
+   the bottom right beside the HUD (the call-center restack) ================= */
+html[data-ar="1x1"] #s-tabs .wp-body, html[data-ar="4x5"] #s-tabs .wp-body { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto auto; }
+html[data-ar="1x1"] #s-tabs .wp-cv, html[data-ar="4x5"] #s-tabs .wp-cv { grid-row: 1; }
+html[data-ar="1x1"] #s-tabs .wp-side, html[data-ar="4x5"] #s-tabs .wp-side { grid-row: 2; width: auto; height: 272px; box-shadow: 0 -1px 0 0 var(--wp-rule); }
+html[data-ar="1x1"] #s-tabs .wp-tabs, html[data-ar="4x5"] #s-tabs .wp-tabs { display: none; }
+html[data-ar="1x1"] #s-tabs .wp-side-in, html[data-ar="4x5"] #s-tabs .wp-side-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+html[data-ar="1x1"] #s-tabs .wp-sum, html[data-ar="4x5"] #s-tabs .wp-sum { grid-column: 1; grid-row: 1; padding: 8px 16px 4px; box-shadow: 1px 0 0 0 var(--wp-g200); }
+html[data-ar="1x1"] #s-tabs .wp-card, html[data-ar="4x5"] #s-tabs .wp-card,
+html[data-ar="1x1"] #s-tabs .wp-card-s, html[data-ar="4x5"] #s-tabs .wp-card-s,
+html[data-ar="1x1"] #s-tabs .wp-pn-cat, html[data-ar="4x5"] #s-tabs .wp-pn-cat,
+html[data-ar="1x1"] #s-tabs .wp-pn-tag, html[data-ar="4x5"] #s-tabs .wp-pn-tag { display: none; }
+html[data-ar="1x1"] #s-tabs .wp-rows, html[data-ar="4x5"] #s-tabs .wp-rows { gap: 0; }
+html[data-ar="1x1"] #s-tabs .wp-pn-fc, html[data-ar="4x5"] #s-tabs .wp-pn-fc { grid-column: 2; grid-row: 1 / 3; border-top: 0; }
+html[data-ar="1x1"] #s-tabs .wp-pn-ap, html[data-ar="4x5"] #s-tabs .wp-pn-ap { grid-column: 1; grid-row: 2; box-shadow: 1px 0 0 0 var(--wp-g200); }
+html[data-ar="1x1"] #s-tabs .wp-pn h3, html[data-ar="4x5"] #s-tabs .wp-pn h3 { height: 40px; }
+html[data-ar="1x1"] #s-tabs .wp-bud, html[data-ar="4x5"] #s-tabs .wp-bud { grid-row: 3; width: auto; height: 250px; margin: 0 0 0 350px; box-shadow: -1px 0 0 0 var(--wp-rule), 0 -1px 0 0 var(--wp-rule); }
+html[data-ar="1x1"] #s-tabs .wp-bud-top, html[data-ar="4x5"] #s-tabs .wp-bud-top { display: none; }
+html[data-ar="1x1"] #s-tabs .wp-bud-h, html[data-ar="4x5"] #s-tabs .wp-bud-h { height: 40px; }
+html[data-ar="1x1"] #s-tabs .wp-tl .wp-redo, html[data-ar="4x5"] #s-tabs .wp-tl .wp-redo,
+html[data-ar="1x1"] #s-tabs .wp-prev, html[data-ar="4x5"] #s-tabs .wp-prev,
+html[data-ar="4x5"] #s-tabs .wp-save, html[data-ar="4x5"] #s-tabs .wp-more { display: none; }
+html[data-ar="1x1"] #s-tabs .wp-dbar, html[data-ar="4x5"] #s-tabs .wp-dbar { width: 300px; }
+html[data-ar="4x5"] #s-tabs .wp-dbar { width: 260px; }
+html[data-ar="1x1"] #s-tabs .wp-fs > span:not(:first-child), html[data-ar="4x5"] #s-tabs .wp-fs > span:not(:first-child) { display: none; }
+html[data-ar="1x1"] #s-tabs .wp-hud, html[data-ar="4x5"] #s-tabs .wp-hud { left: 8px; width: 330px; bottom: 41px; }
+html[data-ar="4x5"] #s-tabs .wp-ab-i:nth-child(2) { display: none; }
+html[data-ar="1x1"] #s-tabs .wp-bud { height: 216px; }
+/* the snackbar rests on the settings strip, over the canvas, clear of the HUD */
+html[data-ar="4x5"] #s-tabs .wp-snack { bottom: calc(33px + 250px + 272px + 8px); }
+html[data-ar="1x1"] #s-tabs .wp-snack { bottom: calc(33px + 216px + 272px + 8px); }

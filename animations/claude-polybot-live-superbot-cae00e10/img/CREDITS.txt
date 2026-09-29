@@ -1,0 +1,16 @@
+img CREDITS (claude-polybot-live-superbot-cae00e10)
+
+This spot ships no photographic or third party image assets. Everything on screen - the hub chrome, the app
+tiles, the four phase trading panel, its bars, its equity line, its tickets and the confetti burst - is drawn in
+CSS/SVG/canvas from code in this folder.
+
+Every number is invented demo data: the four backtest scores (return, win rate, drawdown) for Fade the crowd,
+News spike chase, Late favourite and Edge over 4% vs fair price; the paper account (opened at $5,000 of play
+money, closed at $6,046) and its daily equity path; the live order ticket; and the scoreboard (realized P&L
++$1,046, win rate 57% on 28 wins and 21 losses, max drawdown read off the paper curve, one open market
+position). The 1,912 markets and the 90 day book window are fictional. Nothing here is a quote, an offer, a
+promise of return or a claim about superbot.
+
+Polymarket is named as plain text only, with a plain letter tile; no venue logo, exchange mark or chain mark
+appears anywhere, and the rail's own third party app tiles are not rendered in this spot. The advice on the
+first card belongs to a fictional Claude voice, not to the companies behind these names.

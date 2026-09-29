@@ -1,0 +1,16 @@
+img CREDITS (chatgpt-memebot-live-superbot-cae00e0f)
+
+This spot ships no photographic or third party image assets. Everything on screen - the hub chrome, the app
+tiles, the four phase trading panel, its bars, its equity line, its tickets and the confetti burst - is drawn in
+CSS/SVG/canvas from code in this folder.
+
+Every number is invented demo data: the four backtest scores (return, win rate, drawdown) for Volume breakout,
+Fresh pair sniper, Dev wallet follow and Momentum + trailing stop; the paper account (opened at $5,000 of play
+money, closed at $6,284) and its daily equity path; the live order ticket; and the scoreboard (realized P&L
++$1,284, win rate 58% on 29 wins and 21 losses, max drawdown read off the paper curve, one open SOL position).
+The 412 Solana pairs and the 90 day candle window are fictional. Nothing here is a quote, an offer, a promise
+of return or a claim about superbot.
+
+Axiom is named as plain text only, with a plain letter tile; no venue logo, exchange mark or chain mark appears
+anywhere, and the rail's own third party app tiles are not rendered in this spot. The advice on the first card
+belongs to a fictional ChatGPT voice, not to the companies behind these names.

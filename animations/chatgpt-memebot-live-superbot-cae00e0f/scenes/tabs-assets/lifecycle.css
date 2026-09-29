@@ -1,0 +1,116 @@
+/* lifecycle.css: the four-phase trading panel inside superbot's work card (beats/lifecycle.js), plus the two
+   hub level moves the CONNECT phase makes: the rail opens and the venue's letter tile grows into it, and the
+   composer's platform chip swaps to the venue. Everything is written per frame from lt by the beat; nothing
+   here transitions. Scoped under #s-tabs like the family's other sheets. */
+#s-tabs .hub {
+  --lc-up: #34d399; --lc-dn: #ff6b6b; --lc-line: #242428; --lc-soft: #17171a; --lc-ink: #ececf0;
+  /* the rail is part of the hub now, so the rail tiles need the surface token the hub styles never defined */
+  --surface: #1a1a1c;
+}
+
+/* the working card carries the whole lifecycle: it fits whatever column it is given instead of a hard 500px */
+#s-tabs .hub .wk { width: 100%; max-width: 500px; }
+#s-tabs .hub .wk-sr { height: 21px; }
+#s-tabs .hub .wk-bdi { padding: 8px 12px 10px; }
+
+/* ---------- the hub rail: opened by the beat, venue tile grown into it ---------- */
+/* hub.css gives every hub node a 300ms colour/box-shadow transition and the hub a 300ms grid-template-columns
+   one; this spot writes those same properties from lt every frame, so nothing in the scene may free-run */
+#s-tabs .sbsite.ask .hub.qc-hub-split, #s-tabs .sbsite.ask .hub.qc-hub-split * { transition: none; }
+#s-tabs .sbsite.ask .hub.qc-hub-split > .rail { display: flex; }
+/* the rail's third party app tiles are not part of this story: the rail reads superbot, the venue, then the tray */
+#s-tabs .sbsite.ask .hub.qc-hub-split > .rail .rail-item[data-app] { display: none; }
+#s-tabs .sbsite.ask .hub .rail-item.qc-rail-venue { background: #26262a; color: var(--lc-ink); font: 700 20px/1 var(--ui); overflow: visible; }
+#s-tabs .sbsite.ask .hub .rail-item.folder .dot { display: none; }
+#s-tabs .sbsite.ask .hub .rail-item.qc-rail-venue i { position: absolute; right: -2px; bottom: -2px; width: 7px; height: 7px; border-radius: 50%; background: var(--lc-up); box-shadow: 0 0 0 2px #0d0d0d; }
+
+/* the composer's platform chip when the venue is driving: a plain letter tile, never a logo */
+#s-tabs .hub .qc-pi .qc-vt { display: grid; place-items: center; width: 12px; height: 12px; border-radius: 3.5px; background: #26262a; color: var(--lc-ink); font: 700 8px/1 var(--ui); }
+#s-tabs .hub .qc-t-venue { background: #26262a; color: var(--lc-ink); font: 700 11px/1 var(--ui); }
+
+/* chat.css promotes the feed to its own composited layer (will-change: transform) while the beat translates
+   it every frame; as a promoted layer at a fractional offset its raster is resampled, which made a handful of
+   pixels differ between two renders of the same seek(t) frame. In this spot the translation is the only motion
+   it has, so the hint is dropped. */
+#s-tabs .hub .feed-in { will-change: auto; }
+
+/* ---------- the panel frame ---------- */
+#s-tabs .hub .lc { display: grid; gap: 8px; }
+#s-tabs .hub .lc-bar { display: flex; gap: 6px; }
+#s-tabs .hub .lc-sg { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 5px; height: 20px; border-radius: 8px; overflow: hidden; background: #16161a; box-shadow: inset 0 0 0 1px var(--lc-line); font: 600 9.5px/1 var(--ui); color: #6e6e76; white-space: nowrap; }
+#s-tabs .hub .lc-sg b { display: grid; place-items: center; width: 13px; height: 13px; flex: none; border-radius: 4px; background: #242429; font: 700 8.5px/1 var(--font-mono); color: #8e8e93; }
+#s-tabs .hub .lc-sg.on { color: var(--lc-ink); background: #1c1c22; }
+#s-tabs .hub .lc-sg.on b { background: #2c2c34; color: var(--lc-ink); }
+#s-tabs .hub .lc-sgp { position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: var(--lc-up); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .hub .lc-stage { position: relative; height: 230px; }
+#s-tabs .hub .lc-p { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 7px; opacity: 0; }
+#s-tabs .hub .lc-h { display: flex; align-items: baseline; gap: 8px; height: 15px; }
+#s-tabs .hub .lc-h small { font: 700 8.5px/1 var(--ui); letter-spacing: .16em; color: var(--lc-up); }
+#s-tabs .hub .lc-h span { margin-left: auto; font: 500 9.5px/1 var(--ui); color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- 1 backtest ---------- */
+#s-tabs .hub .lc-rows { display: grid; gap: 6px; }
+#s-tabs .hub .lc-br { display: grid; grid-template-columns: minmax(0, 1fr) 52px 34px; grid-template-rows: 13px 7px 11px; align-items: center; column-gap: 6px; row-gap: 2px; padding: 5px 8px; border-radius: 9px; background: var(--lc-soft); box-shadow: inset 0 0 0 1px var(--lc-line); opacity: 0; }
+#s-tabs .hub .lc-br.alive { background: #12211c; box-shadow: inset 0 0 0 1px #23503f; }
+#s-tabs .hub .lc-bn { position: relative; grid-area: 1 / 1; font: 600 11px/1 var(--ui); color: #dcdce2; white-space: nowrap; overflow: hidden; }
+#s-tabs .hub .lc-bn .lc-bs { position: absolute; left: 0; right: 2px; top: 50%; height: 1.5px; background: #ff6b6b; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .hub .lc-bv { grid-area: 1 / 2; text-align: right; font: 700 12px/1 var(--font-mono); color: #ececf0; font-variant-numeric: tabular-nums; }
+#s-tabs .hub .lc-btag { grid-area: 1 / 3; text-align: center; height: 15px; border-radius: 4px; font: 700 8.5px/15px var(--font-mono); letter-spacing: .04em; opacity: 0; }
+#s-tabs .hub .lc-btag.cut { background: #2a1a1c; color: #ff8a8a; }
+#s-tabs .hub .lc-btag.pass { background: #12291f; color: var(--lc-up); }
+#s-tabs .hub .lc-bb { grid-area: 2 / 1; height: 5px; border-radius: 3px; background: #202024; overflow: hidden; }
+#s-tabs .hub .lc-bb i { display: block; width: 0; height: 100%; border-radius: 3px; background: var(--lc-up); }
+#s-tabs .hub .lc-bm { grid-area: 3 / 1; font: 500 9.5px/1 var(--ui); color: #8e8e93; white-space: nowrap; overflow: hidden; }
+#s-tabs .hub .lc-bm b { color: #c7c7cc; font-variant-numeric: tabular-nums; }
+
+/* ---------- 2 paper trade ---------- */
+#s-tabs .hub .lc-pill { display: inline-flex; align-items: center; gap: 7px; align-self: flex-start; height: 22px; padding: 0 10px 0 7px; border-radius: 999px; background: #1d2130; box-shadow: inset 0 0 0 1px #33406b; font: 600 10px/1 var(--ui); color: #cdd6ff; opacity: 0; }
+#s-tabs .hub .lc-pill i { width: 7px; height: 7px; border-radius: 50%; background: #7c8cf8; }
+#s-tabs .hub .lc-chart { padding: 3px 6px 0; border-radius: 10px; background: #101012; box-shadow: inset 0 0 0 1px var(--lc-line); }
+#s-tabs .hub .lc-chart svg.eq { display: block; width: 100%; height: auto; overflow: visible; shape-rendering: geometricPrecision; }
+#s-tabs .hub .lc-chart .eq-g { stroke: #1f1f24; stroke-width: 1; stroke-dasharray: 2 3; }
+#s-tabs .hub .lc-chart .eq-g0 { stroke: #2f2f36; stroke-dasharray: none; }
+#s-tabs .hub .lc-chart .eq-yl, #s-tabs .hub .lc-chart .eq-xl { font: 500 8px/1 var(--font-mono); fill: #6e6e76; }
+#s-tabs .hub .lc-chart .eq-yl { text-anchor: end; }
+#s-tabs .hub .lc-chart .eq-xl { text-anchor: middle; }
+#s-tabs .hub .lc-chart .eq-l { fill: none; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+#s-tabs .hub .lc-chart .eq-l.eq-up { stroke: var(--lc-up); }
+#s-tabs .hub .lc-chart .eq-head { fill: var(--lc-up); stroke: none; opacity: 0; }
+/* no blur() here: a blurred layer does not rasterise bit-identically in headless Chromium, which made the
+   chart's live head the only pixels that differed between two renders of the same seek(t) frame */
+#s-tabs .hub .lc-chart .eq-glow { display: none; }
+#s-tabs .hub .lc-chart .eq-x { stroke: #8e8e93; stroke-width: .8; stroke-dasharray: 2 2; opacity: 0; }
+#s-tabs .hub .lc-chart .eq-tag { opacity: 0; }
+#s-tabs .hub .lc-chart .eq-tag rect { fill: var(--lc-up); }
+#s-tabs .hub .lc-chart .eq-tag text { font: 700 8.5px/1 var(--font-mono); text-anchor: middle; fill: #06231a; }
+
+/* ---------- tickets (paper and live) ---------- */
+#s-tabs .hub .lc-tk { display: flex; align-items: center; gap: 9px; height: 44px; padding: 0 11px; border-radius: 10px; background: #131317; box-shadow: inset 0 0 0 1px var(--lc-line); opacity: 0; }
+#s-tabs .hub .lc-tk .lc-tag { flex: none; height: 18px; padding: 0 7px; border-radius: 5px; background: #23232a; font: 700 9px/18px var(--font-mono); letter-spacing: .06em; color: #b6b6bd; }
+#s-tabs .hub .lc-tk.live .lc-tag { background: #12291f; color: var(--lc-up); }
+#s-tabs .hub .lc-tkm { flex: 1; min-width: 0; display: grid; gap: 3px; }
+#s-tabs .hub .lc-tkm b { font: 700 11.5px/1 var(--font-mono); color: #f2f2f7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .hub .lc-tkm small { font: 500 9.5px/1 var(--ui); color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .hub .lc-tkv { flex: none; min-width: 56px; text-align: right; font: 700 12px/1 var(--font-mono); color: #d8d8de; font-variant-numeric: tabular-nums; }
+#s-tabs .hub .lc-fill { flex: none; height: 18px; padding: 0 8px; border-radius: 5px; background: #12291f; box-shadow: inset 0 0 0 1px #23503f; font: 700 9px/18px var(--font-mono); letter-spacing: .06em; color: var(--lc-up); opacity: 0; }
+
+/* ---------- 3 connect ---------- */
+#s-tabs .hub .lc-chips { display: flex; flex-direction: column; gap: 7px; align-items: flex-start; }
+#s-tabs .hub .lc-cn .qc-sw { opacity: 0; transform-origin: 0 50%; }
+#s-tabs .hub .lc-chips .qc-sw { transform-origin: 0 50%; }
+
+/* ---------- 4 results ---------- */
+#s-tabs .hub .lc-win { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; border-radius: 9px; background: #12211c; box-shadow: inset 0 0 0 1px #23503f; opacity: 0; }
+#s-tabs .hub .lc-wt { display: grid; place-items: center; width: 15px; height: 15px; }
+#s-tabs .hub .lc-wt svg { width: 15px; height: 15px; fill: none; stroke: var(--lc-up); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .hub .lc-win b { font: 650 12px/1 var(--ui); color: #eafff6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .hub .lc-win em { margin-left: auto; flex: none; font-style: normal; font: 700 8.5px/1 var(--font-mono); letter-spacing: .08em; color: var(--lc-up); }
+#s-tabs .hub .lc-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+#s-tabs .hub .lc-k { display: grid; gap: 3px; padding: 7px 9px; border-radius: 9px; background: var(--lc-soft); box-shadow: inset 0 0 0 1px var(--lc-line); opacity: 0; }
+#s-tabs .hub .lc-k small { font: 600 8.5px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; color: #7d7d85; }
+#s-tabs .hub .lc-k b { font: 700 15px/1 var(--font-mono); color: #f2f2f7; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .hub .lc-k span { font: 500 9.5px/1.25 var(--ui); color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .hub .lc-k:nth-child(1) b { color: var(--lc-up); }
+#s-tabs .hub .lc-foot { font: 500 9px/1.3 var(--ui); color: #6e6e76; }
+/* the two short phases spread down the stage instead of clumping under its head */
+#s-tabs .hub .lc-cn, #s-tabs .hub .lc-rs { justify-content: space-between; }

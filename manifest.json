@@ -476,6 +476,14 @@
     "thumb": "assets/shots/chatgpt-memecoins-superbot-cae00e01.png"
   },
   {
+    "id": "chatgpt-memebot-axiom-superbot-6e571750",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT says you shouldn't gamble: make me a memecoin trading bot, superbot connects Axiom, backtests 4 strategies and flags the buys",
+    "src": "animations/chatgpt-memebot-axiom-superbot-6e571750/",
+    "thumb": "assets/shots/chatgpt-memebot-axiom-superbot-6e571750.png"
+  },
+  {
     "id": "chatgpt-polywins-superbot-cae00e02",
     "type": "animation",
     "group": "Ad spots",

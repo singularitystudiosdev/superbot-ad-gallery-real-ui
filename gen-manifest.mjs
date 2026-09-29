@@ -221,6 +221,8 @@ const more = [
   // superbot's work card grows that variant's site. Provider names are plain text only; every figure is fictional
   // mock UI data (each folder's img/CREDITS.txt). One row per cell; the base spot stays listed just above.
   ['chatgpt-memecoins-superbot-cae00e01', 'chatgpt-memecoins-superbot-cae00e01/', 'ChatGPT says you shouldn\'t gamble: superbot builds a site of all my memecoin wins', 'Ad spots'],
+  // make me a memecoin trading bot (2026-09-28): the cae00e01 spot hand-built into its own folder: the red word "gamble" rises in plain red (no scale punch), then the ask "make me a memecoin trading bot" connects Axiom the way every-model-one-chat connects DoorDash, backtests 4 strategies (Volume spike +38.6% vs hold SOL +7.4%) and flags buys with a ping. Fictional mock data; Axiom named as plain text and its own icon.
+  ['chatgpt-memebot-axiom-superbot-6e571750', 'chatgpt-memebot-axiom-superbot-6e571750/', 'ChatGPT says you shouldn\'t gamble: make me a memecoin trading bot, superbot connects Axiom, backtests 4 strategies and flags the buys', 'Ad spots'],
   ['chatgpt-polywins-superbot-cae00e02', 'chatgpt-polywins-superbot-cae00e02/', 'ChatGPT says you shouldn\'t gamble: superbot builds a site of all my Polymarket wins', 'Ad spots'],
   ['chatgpt-sportsbook-superbot-cae00e03', 'chatgpt-sportsbook-superbot-cae00e03/', 'ChatGPT says you shouldn\'t gamble: superbot builds a site of all my DraftKings wins', 'Ad spots'],
   ['claude-memecoins-superbot-cae00e04', 'claude-memecoins-superbot-cae00e04/', 'Claude says you shouldn\'t gamble: superbot builds a site of all my memecoin wins', 'Ad spots'],

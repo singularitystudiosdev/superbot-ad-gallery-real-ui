@@ -46,8 +46,9 @@ export const HIT = {
   s: "POPCAT", name: "Popcat", icon: "popcat.png",
   mc: 49.71, // $M at entry (DexScreener marketCap 49,710,681)
   supplyM: 980.1, // circulating supply, M (marketCap / priceUsd 0.05072)
-  // liquidity and 6h flow are the Raydium pair (DexScreener); 24h volume is the all-venue total (CoinGecko), as in the scan row
-  liq: "$3.97M", vol24: "$11.2M", vol6h: "$70K", buys6h: 131, sells6h: 111,
+  // the Raydium pair, as Axiom's token page shows it (DexScreener): liquidity, 24h pair volume and txns, pair age
+  dex: "Raydium", age: "2y", supply: "980M", // pair created 2023-12-12
+  liq: "$3.97M", vol24: "$512K", buys24: 1635, sells24: 1311,
 };
 
 export const SOL_USD = 116.78; // CoinGecko simple/price, same pull

@@ -10,7 +10,7 @@
 // 5. "I'm out, we are up $174." 9 SOL in ($1,051.02), $1,225.02 out, PnL +$174.00. The candles are illustration.
 import { seg, outCubic, outBack, lerp, clamp, streamCount } from '../../../lib.js';
 import { stdTimes, workBeat, counter, equityChart, fmt } from './wk.js?v=2';
-import { TOKENS, HIT, SOL_USD } from './tokens.js?v=2';
+import { TOKENS, HIT, SOL_USD } from './tokens.js?v=3';
 
 const pct = (v, d = 1) => `${v > 0 ? '+' : v < 0 ? '-' : ''}${Math.abs(v).toFixed(d)}%`;
 const STRAT = [0,-0.16,0.19,1.29,1.7,2.85,3.89,5.15,5.63,6.69,7.72,9.16,9.21,10.65,11.62,13.04,13.53,14.82,13.36,12.36,12.25,11.78,10.15,9.39,8.39,8.23,7.12,6.54,5.7,4.67,5.37,6.03,7.17,8.82,10.39,11.58,12.53,14.24,15.55,16.64,17.3,18.76,19.02,19.24,19.58,21.51,22.8,23.79,24.23,25.96,27.69,29.21,29.42,29.75,31.02,32.5,33.89,35.61,36.46,36.86,37.06,38.36,38.6];
@@ -49,13 +49,35 @@ const CANDLES = CLOSES.map((c, i) => {
   const w = (0.004 + rnd() * 0.009) * K;
   return { o, c, h: Math.max(o, c) + w * rnd(), l: Math.min(o, c) - w * rnd() };
 });
-const CW = 300, CH = 164, PL = 4, PR = 40, PT = 8, PB = 8, LO = 1.08 * K, HI = 1.5 * K;
+// Axiom's chart pane at card scale: candles over a volume strip over a time axis, price axis on the right.
+// Candle i is the minute 02:28 + i UTC, so the entry candle closes at 02:54, the minute the stats were pulled.
+const CW = 336, CH = 176, PL = 2, PR = 34, PT = 6, VB = 22, TA = 11, LO = 1.08 * K, HI = 1.5 * K;
+const PY = CH - VB - TA - 4; // bottom of the price area
 const SLOT = (CW - PL - PR) / N;
 const cx = (i) => PL + SLOT * (i + 0.5);
-const cy = (v) => PT + ((HI - v) / (HI - LO)) * (CH - PT - PB);
+const cy = (v) => PT + ((HI - v) / (HI - LO)) * (PY - PT);
+const VOL = CANDLES.map((c, i) => (i > ENTRY ? 0.45 + rnd() * 0.55 : 0.12 + rnd() * 0.4) * (c.c >= c.o ? 1 : 0.8));
+const TIMES = [[2, '02:30'], [17, '02:45'], [32, '03:00']];
 const mcTxt = (v) => `$${v.toFixed(2)}M`;
 const pxTxt = (v) => `$${(v / HIT.supplyM).toFixed(5)}`;
 const usd = (v) => `$${fmt(v, 0)}`;
+const ohlc = (c, close) => {
+  const d = close - c.o;
+  return `<i>O</i>${c.o.toFixed(2)}M <i>H</i>${Math.max(c.h, close).toFixed(2)}M <i>L</i>${c.l.toFixed(2)}M <i>C</i>${close.toFixed(2)}M ${d >= 0 ? '+' : ''}${(d * 1000).toFixed(0)}K (${pct((d / c.o) * 100, 2)})`;
+};
+// UI furniture drawn as Axiom draws it (outline glyphs), not brand art
+const ICON = {
+  copy: '<svg viewBox="0 0 16 16"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 10.5V4a1 1 0 0 1 1-1h6.5"/></svg>',
+  x: '<svg viewBox="0 0 16 16"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>',
+  web: '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c2 2 2 9 0 11M8 2.5c-2 2-2 9 0 11"/></svg>',
+  tg: '<svg viewBox="0 0 16 16"><path d="M13.5 3L2.5 7.5l4 1.5 1.5 4 2-2.5 3 2z"/></svg>',
+  find: '<svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4"/><path d="M10 10l3.5 3.5"/></svg>',
+  star: '<svg viewBox="0 0 16 16"><path d="M8 2.5l1.7 3.5 3.8.5-2.8 2.6.7 3.8L8 11.1l-3.4 1.8.7-3.8L2.5 6.5l3.8-.5z"/></svg>',
+  bolt: '<svg viewBox="0 0 16 16"><path d="M9 2L4 9h4l-1 5 5-7H8z"/></svg>',
+  gas: '<svg viewBox="0 0 16 16"><rect x="3" y="3" width="6" height="10" rx="1"/><path d="M9 6h2l1.5 1.5V12a1 1 0 0 1-2 0V9H9"/></svg>',
+  tip: '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5"/><path d="M8 5v6M6 6.8h3a1.2 1.2 0 0 1 0 2.4H7a1.2 1.2 0 0 0 0 2.4h3"/></svg>',
+  ind: '<svg viewBox="0 0 16 16"><path d="M2 12l4-5 3 3 5-6"/></svg>',
+};
 
 // a streamed line of superbot's answer, the same motion as workBeat's
 function sayLine(x, text, t0) {
@@ -79,30 +101,47 @@ function scanBody(x) {
     <div class="sc-win"><div class="sc-lens"><em class="sc-stamp">HIT</em></div><div class="sc-list">${rows}</div></div>`;
 }
 
+// Axiom's token page (axiom.trade/meme/<pair>), laid out as the real one: top nav, token header, chart pane with
+// its toolbar and legend, and the right-hand instant-trade panel ending in the Bought / Sold / Holding / PnL row.
 function axiomCard(x) {
-  const grid = [44, 48, 52, 56, 60].map((v) => `<line class="ax-gl" x1="${PL}" x2="${CW - PR}" y1="${cy(v).toFixed(1)}" y2="${cy(v).toFixed(1)}"/><text class="ax-yl" x="${CW - PR + 5}" y="${(cy(v) + 3).toFixed(1)}">${v}M</text>`).join('');
-  const candles = CANDLES.map((q, i) => `<g class="ax-c ${q.c >= q.o ? 'up' : 'dn'}"><line x1="${cx(i).toFixed(1)}" x2="${cx(i).toFixed(1)}"/><rect x="${(cx(i) - SLOT * 0.34).toFixed(1)}" width="${(SLOT * 0.68).toFixed(1)}" rx="0.6"/></g>`).join('');
+  const grid = [44, 48, 52, 56, 60].map((v) => `<line class="ax-gl" x1="${PL}" x2="${CW - PR}" y1="${cy(v).toFixed(1)}" y2="${cy(v).toFixed(1)}"/><text class="ax-yl" x="${CW - PR + 4}" y="${(cy(v) + 2.5).toFixed(1)}">${v}M</text>`).join('');
+  const times = TIMES.map(([i, s]) => `<text class="ax-xl" x="${cx(i).toFixed(1)}" y="${CH - 2}">${s}</text>`).join('');
+  const candles = CANDLES.map((q, i) => `<g class="ax-c ${q.c >= q.o ? 'up' : 'dn'}"><rect class="ax-vb" x="${(cx(i) - SLOT * 0.36).toFixed(1)}" width="${(SLOT * 0.72).toFixed(1)}" y="${(CH - TA - VOL[i] * VB).toFixed(1)}" height="${(VOL[i] * VB).toFixed(1)}"/><line x1="${cx(i).toFixed(1)}" x2="${cx(i).toFixed(1)}"/><rect class="ax-cb" x="${(cx(i) - SLOT * 0.34).toFixed(1)}" width="${(SLOT * 0.68).toFixed(1)}"/></g>`).join('');
+  const bubble = (cls, ch) => `<g class="ax-mk ${cls}"><circle r="5.6"/><text y="2.5">${ch}</text></g>`;
+  const buyShare = HIT.buys24 / (HIT.buys24 + HIT.sells24);
   return x.el(`<div class="ax">
-    <div class="ax-bar">${x.tile('axiom')}<b class="ax-brand">AXIOM</b><span class="ax-nav"><span class="on">Discover</span><span>Pulse</span><span>Trackers</span></span><span class="ax-srch">Search by token or CA</span><span class="ax-auto"><img src="${x.sbSrc}" alt=""/>superbot trading</span></div>
-    <div class="ax-tok"><img class="ax-av" src="${x.img('tokens/' + HIT.icon)}" alt=""/><span class="ax-nm"><b>${HIT.s}</b><small>${HIT.name}</small></span>
+    <div class="ax-bar"><span class="ax-logo"><img src="${x.img('axiom.png')}" alt=""/><b>AXIOM</b><em>Pro</em></span>
+      <span class="ax-nav"><span class="on">Discover</span><span>Pulse</span><span>Trackers</span><span>Perpetuals</span></span>
+      <span class="ax-srch">${ICON.find}Search by token or CA...<kbd>/</kbd></span><span class="ax-dep">Deposit</span></div>
+    <div class="ax-tok"><img class="ax-av" src="${x.img('tokens/' + HIT.icon)}" alt=""/>
+      <span class="ax-nm"><span class="ax-n1"><b>${HIT.s}</b><small>${HIT.name}</small>${ICON.copy}</span><span class="ax-n2"><em>${HIT.age}</em>${ICON.x}${ICON.web}${ICON.tg}${ICON.find}</span></span>
       <span class="ax-mc"><b>${mcTxt(ENTRY_MC)}</b></span>
-      <span class="ax-kv"><small>Price</small><b class="ax-px">${pxTxt(ENTRY_MC)}</b></span><span class="ax-kv"><small>Liquidity</small><b>${HIT.liq}</b></span><span class="ax-kv"><small>24h Vol</small><b>${HIT.vol24}</b></span></div>
+      <span class="ax-kv"><small>Price</small><b class="ax-px">${pxTxt(ENTRY_MC)}</b></span><span class="ax-kv"><small>Liquidity</small><b>${HIT.liq}</b></span><span class="ax-kv"><small>Supply</small><b>${HIT.supply}</b></span>
+      <span class="ax-fav">${ICON.star}</span></div>
     <div class="ax-main">
-      <div class="ax-ch"><div class="ax-chh"><span class="ax-tf"><b>1m</b><span>5m</span><span>1h</span></span><span class="ax-pair">${HIT.s}/USD Market Cap on Axiom</span></div>
-        <svg class="ax-svg" viewBox="0 0 ${CW} ${CH}">${grid}<line class="ax-en" x1="${PL}" x2="${CW - PR}" y1="${cy(ENTRY_MC).toFixed(1)}" y2="${cy(ENTRY_MC).toFixed(1)}"/>${candles}
-          <line class="ax-pl" x1="${PL}" x2="${CW - PR}"/><g class="ax-tag"><rect x="${CW - PR + 1}" width="${PR - 1}" height="13" rx="2.5"/><text x="${CW - PR + 4}"></text></g>
-          <g class="ax-mk ax-b"><rect width="11" height="11" rx="2.5"/><text>B</text></g><g class="ax-mk ax-s"><rect width="11" height="11" rx="2.5"/><text>S</text></g></svg></div>
+      <div class="ax-ch">
+        <div class="ax-tools"><b>1m</b><span>${ICON.ind}Indicators</span><span>Display Options</span><span><em>USD</em>/SOL</span><span><em>MarketCap</em>/Price</span></div>
+        <div class="ax-leg"><span class="ax-pair">${HIT.s}/USD on ${HIT.dex} · 1 · axiom.trade</span><i class="ax-dot"></i></div>
+        <div class="ax-ohlc"></div>
+        <svg class="ax-svg" viewBox="0 0 ${CW} ${CH}">${grid}${times}<line class="ax-en" x1="${PL}" x2="${CW - PR}" y1="${cy(ENTRY_MC).toFixed(1)}" y2="${cy(ENTRY_MC).toFixed(1)}"/>${candles}
+          <line class="ax-pl" x1="${PL}" x2="${CW - PR}"/><g class="ax-tag"><rect x="${CW - PR + 1}" width="${PR - 1}" height="11" rx="2"/><text x="${CW - PR + 3.5}" y="8"></text></g>
+          ${bubble('ax-b', 'B')}${bubble('ax-s', 'S')}</svg>
+      </div>
       <div class="ax-side">
-        <div class="ax-vol"><span><small>6h Vol</small><b>${HIT.vol6h}</b></span><span><small>Buys</small><b class="up">${HIT.buys6h}</b></span><span><small>Sells</small><b class="dn">${HIT.sells6h}</b></span></div>
+        <div class="ax-vol"><span><small>24h Vol</small><b>${HIT.vol24}</b></span><span><small>Buys</small><b class="up">${fmt(HIT.buys24)}</b></span><span><small>Sells</small><b class="dn">${fmt(HIT.sells24)}</b></span></div>
+        <div class="ax-ratio"><i style="width:${(buyShare * 100).toFixed(1)}%"></i></div>
         <div class="ax-tabs"><span class="ax-tb">Buy</span><span class="ax-ts">Sell</span></div>
         <div class="ax-ord"><span class="on">Market</span><span>Limit</span><span>Adv.</span></div>
-        <div class="ax-amt"><small>Amount</small><b class="ax-amv">${SOL_IN}</b><em class="ax-amu">SOL</em></div>
-        <div class="ax-pre ax-pb"><span>1</span><span>3</span><span class="on">${SOL_IN}</span><span>20</span></div>
-        <div class="ax-pre ax-ps"><span>25%</span><span>50%</span><span>75%</span><span class="on">100%</span></div>
+        <div class="ax-amt"><small>AMOUNT</small><b class="ax-amv">${SOL_IN}</b><img class="ax-amu" src="${x.img('tokens/sol.png')}" alt=""/><em class="ax-pctu">%</em></div>
+        <div class="ax-pre ax-pb"><span>0.01</span><span>0.1</span><span>1</span><span>10</span></div>
+        <div class="ax-pre ax-ps"><span>10%</span><span>25%</span><span>50%</span><span class="on">100%</span></div>
+        <div class="ax-set"><span>${ICON.bolt}25%</span><span>${ICON.gas}0.002</span><span>${ICON.tip}0.002</span><span>Off</span></div>
+        <div class="ax-adv"><i></i>Advanced Trading Strategy</div>
         <div class="ax-btn"><span class="ax-bl">Buy ${HIT.s}</span><i class="ax-flash"></i></div>
+        <div class="ax-pnl"><span><small>Bought</small><b>$0</b></span><span class="ax-sd"><small>Sold</small><b>$0</b></span><span><small>Holding</small><b>$0</b></span><span class="ax-p"><small>PnL</small><b>+$0 (+0%)</b></span></div>
+        <div class="ax-presets"><span class="on">PRESET 1</span><span>PRESET 2</span><span>PRESET 3</span></div>
       </div>
     </div>
-    <div class="ax-pnl"><span><small>Bought</small><b>$0</b></span><span><small>Sold</small><b>$0</b></span><span><small>Holding</small><b>$0</b></span><span class="ax-p"><small>PnL</small><b>+$0</b></span></div>
   </div>`);
 }
 
@@ -165,12 +204,13 @@ export default {
     const say1 = sayLine(x, `I found a good buy ($${HIT.s}), executing`, ex.r);
     const ax = axiomCard(x);
     const q = (sel) => ax.querySelector(sel);
-    const cs = [...ax.querySelectorAll('.ax-c')].map((g) => ({ g, w: g.querySelector('line'), b: g.querySelector('rect') }));
+    const cs = [...ax.querySelectorAll('.ax-c')].map((g) => ({ g, w: g.querySelector('line'), b: g.querySelector('.ax-cb') }));
     const pl = q('.ax-pl'), tag = q('.ax-tag'), tagTx = q('.ax-tag text'), en = q('.ax-en');
     const mB = q('.ax-b'), mS = q('.ax-s');
     const side = q('.ax-side'), btn = q('.ax-btn'), bl = q('.ax-bl'), flash = q('.ax-flash');
-    const amv = q('.ax-amv'), amu = q('.ax-amu');
-    const mc = q('.ax-mc b'), px = q('.ax-px');
+    const amv = q('.ax-amv');
+    const mc = q('.ax-mc b'), px = q('.ax-px'), leg = q('.ax-ohlc');
+    let lastLeg = '';
     const [pB, pS, pH, pP] = [...ax.querySelectorAll('.ax-pnl b')];
     const pnlBox = q('.ax-p');
 
@@ -240,23 +280,25 @@ export default {
         const cur = t < ex.stream[0] ? ENTRY_MC : li === ENTRY ? ENTRY_MC : lerp(CANDLES[li].o, CANDLES[li].c, lf);
         const yc = cy(cur);
         pl.setAttribute('y1', yc.toFixed(2)); pl.setAttribute('y2', yc.toFixed(2));
-        tag.setAttribute('transform', `translate(0 ${(yc - 6.5).toFixed(2)})`);
-        tagTx.setAttribute('y', '9.6');
+        tag.setAttribute('transform', `translate(0 ${(yc - 5.5).toFixed(2)})`);
         tagTx.textContent = `${cur.toFixed(2)}M`;
+        // the legend reads the live candle, green or red like Axiom's
+        const lc = CANDLES[li], lg = ohlc(lc, cur);
+        if (lg !== lastLeg) { leg.innerHTML = lg; leg.classList.toggle('dn', cur < lc.o); lastLeg = lg; }
         const tg = seg(t, ex.hist[1] - 0.1, ex.hist[1] + 0.2);
         pl.style.opacity = tg.toFixed(3); tag.style.opacity = tg.toFixed(3);
         mc.textContent = mcTxt(cur);
         px.textContent = pxTxt(cur);
 
-        // the buy: button dips and flashes, B lands under the entry candle, the entry line fades in
+        // the buy: button dips and flashes, the B bubble lands under the entry candle, the entry line fades in;
+        // then the panel flips to Sell (red tab, % presets with 100% picked) and the S bubble lands on the exit
         const bp = seg(t, ex.buy - 0.12, ex.buy + 0.18);
         const sp = seg(t, ex.sell - 0.12, ex.sell + 0.18);
         const sell = t >= ex.sell - 0.35;
         side.classList.toggle('sell', sell);
-        const label = t < ex.buy ? `Buy ${HIT.s}` : !sell ? `Bought ${SOL_IN} SOL` : t < ex.sell ? `Sell ${HIT.s}` : 'Sold 100%';
+        const label = sell ? `Sell ${HIT.s}` : `Buy ${HIT.s}`;
         if (label !== lastBtn) { bl.textContent = label; lastBtn = label; }
         amv.textContent = sell ? '100' : String(SOL_IN);
-        amu.textContent = sell ? '%' : 'SOL';
         const dip = Math.max(Math.sin(Math.PI * bp), Math.sin(Math.PI * sp));
         btn.style.transform = dip > 0.001 ? `scale(${(1 - 0.05 * dip).toFixed(4)})` : 'none';
         const fl = (a) => (t >= a ? 1 - seg(t, a, a + 0.45) : 0);
@@ -264,8 +306,8 @@ export default {
         const mk = (g, i, v, below, a0) => {
           const m = outBack(seg(t, a0, a0 + 0.35));
           g.style.opacity = clamp(m).toFixed(3);
-          const yy = below ? cy(v) + 4 : cy(v) - 15;
-          g.setAttribute('transform', `translate(${(cx(i) - 5.5).toFixed(2)} ${(yy + (1 - m) * (below ? 6 : -6)).toFixed(2)})`);
+          const yy = below ? cy(v) + 9 : cy(v) - 9;
+          g.setAttribute('transform', `translate(${cx(i).toFixed(2)} ${(yy + (1 - m) * (below ? 6 : -6)).toFixed(2)}) scale(${lerp(0.5, 1, clamp(m)).toFixed(3)})`);
         };
         mk(mB, ENTRY, CANDLES[ENTRY].l, true, ex.buy);
         mk(mS, N - 1, CANDLES[N - 1].h, false, ex.sell);
@@ -275,10 +317,10 @@ export default {
         const held = t >= ex.buy && t < ex.sell;
         const val = BOUGHT * (cur / ENTRY_MC);
         pB.textContent = t >= ex.buy ? usd(BOUGHT) : '$0';
-        pS.textContent = t >= ex.sell ? `$${fmt(SOLD, 2)}` : '$0';
+        pS.textContent = t >= ex.sell ? usd(SOLD) : '$0';
         pH.textContent = held ? usd(val) : '$0';
         const pnl = t >= ex.sell ? SOLD - BOUGHT : held ? val - BOUGHT : 0;
-        pP.textContent = `${pnl >= 0 ? '+' : '-'}$${fmt(Math.abs(pnl), 2)} (${pct((pnl / BOUGHT) * 100)})`;
+        pP.textContent = pnl ? `${pnl >= 0 ? '+' : '-'}$${fmt(Math.abs(pnl), 0)} (${pct((pnl / BOUGHT) * 100)})` : '+$0 (+0%)';
         pnlBox.classList.toggle('up', pnl > 0.005);
         pnlBox.classList.toggle('won', t >= ex.sell);
 

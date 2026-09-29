@@ -164,6 +164,13 @@ const more = [
   // their company's release gives; the email, voicemail and note are the ad's own copy restating only the sourced
   // trigger.
   ['do-my-job-sdr-superbot-b5acc09b', 'do-my-job-sdr-superbot-b5acc09b/', 'BUT WE WILL · Do my job for me: superbot works a sales development rep’s task queue in Outreach', 'Ad spots'],
+  // BUT WE WILL, do my job proofreader and editor (2026-09-29): the same intro and slam, then "Do my job for me" as a
+  // proofreader and editor: superbot signs in to Word for the web (Review tab, Track Changes and Navigation pane
+  // rebuilt in HTML/CSS/SVG), turns on Track Changes, reads 12 style rules from the GPO Style Manual, the Guardian style
+  // guide, the OFR Document Drafting Handbook and IUPAC, then fixes 12 real published errors: the missing serial comma
+  // in Maine's overtime law, the "responsibilty" typo on Australia's $50 note, and an "or" that sat in a Federal Reserve
+  // rule from 1980 until 2026. Every fix is matched to the correction the publisher printed (all cited in img/CREDITS.txt).
+  ['do-my-job-proofreader-editor-superbot-c54c5ecd', 'do-my-job-proofreader-editor-superbot-c54c5ecd/', 'BUT WE WILL · Do my job for me: superbot proofreads and edits in Microsoft Word', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

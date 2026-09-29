@@ -176,6 +176,14 @@
     "thumb": "assets/shots/do-my-job-sdr-superbot-b5acc09b.png"
   },
   {
+    "id": "do-my-job-proofreader-editor-superbot-c54c5ecd",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot proofreads and edits in Microsoft Word",
+    "src": "animations/do-my-job-proofreader-editor-superbot-c54c5ecd/",
+    "thumb": "assets/shots/do-my-job-proofreader-editor-superbot-c54c5ecd.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

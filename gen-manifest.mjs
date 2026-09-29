@@ -85,6 +85,12 @@ const more = [
   // in your voice). Dockets, ECF entries and judges' rules are real (CourtListener RECAP, cited in img/CREDITS.txt);
   // drafts, task names and counts are the ad's own copy.
   ['do-my-job-lawyer-superbot-9c459cb1', 'do-my-job-lawyer-superbot-9c459cb1/', 'BUT WE WILL · Do my job for me: superbot works a litigator’s federal docket in Clio', 'Ad spots'],
+  // BUT WE WILL, do my job data analyst (2026-09-29): the same intro and slam, then "Do my job for me" as a data
+  // analyst: superbot signs in to BigQuery and Slack and the camera dives into BigQuery Studio beside a #data-requests
+  // thread, where it writes the SQL, charts the result and replies with the chart for each request (World Cup final
+  // trips out of the city, Hudson Yards Jul 4 fireworks pickups, CRZ congestion fees by fleet). Every table, result
+  // and chart is real NYC TLC July 2026 trip data (cited in img/CREDITS.txt); request wording and replies are the ad's own copy.
+  ['do-my-job-data-analyst-superbot-0368c93c', 'do-my-job-data-analyst-superbot-0368c93c/', 'BUT WE WILL · Do my job for me: superbot works a data analyst’s request queue in BigQuery', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

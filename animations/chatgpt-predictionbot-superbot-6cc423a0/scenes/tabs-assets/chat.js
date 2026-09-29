@@ -5,7 +5,7 @@
 // imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, inOutCubic, esc, boxIn } from '../../lib.js';
 import bot from './beats/bot.js?v=1';
-import live from './beats/live.js?v=1';
+import live from './beats/live.js?v=2';
 import V from '../../variant.js';
 
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;

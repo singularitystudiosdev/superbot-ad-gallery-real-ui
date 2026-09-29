@@ -1,11 +1,14 @@
 img CREDITS (chatgpt-predictionbot-superbot-6cc423a0)
 
 polymarket-icon.svg: Polymarket's app icon, reused from the gallery's existing copy
-(animations/wsb-to-wings-switcher-superbot-cbe85cdb/brand/polymarket-icon.svg). Trademark of Polymarket; shown
-nominatively as the app superbot connects to. No endorsement by Polymarket is stated or implied.
+(animations/wsb-to-wings-switcher-superbot-cbe85cdb/brand/polymarket-icon.svg).
+polymarket-wordmark.svg: Polymarket's nav wordmark, copied from the header of polymarket.com on 2026-09-28 and
+recoloured white (paths unchanged). Both are Polymarket trademarks, shown nominatively as the app superbot connects
+to and trades on. No endorsement by Polymarket is stated or implied.
 
-Everything else on screen (the hub chrome, the backtest and scan cards, the summary, the Polymarket-style
-portfolio window, its chart, the toasts and the particle bursts) is drawn in CSS/SVG/canvas from code in this folder.
+The Polymarket screen itself (nav, category row, chart, trade card, positions) is rebuilt in HTML/CSS/SVG from code
+in this folder, matched to the live site's dark theme. Everything else on screen (the hub chrome, the backtest and
+scan cards, the summary, the toasts and the particle bursts) is drawn in CSS/SVG/canvas from code in this folder.
 
 Every market, price, share count and dollar figure (the 5 backtested strategies, the 1,412 scanned markets, the 3
 flagged buys, the $2,500 account growing to $5,654.06) is fictional mock UI data written in variant.js. Nothing

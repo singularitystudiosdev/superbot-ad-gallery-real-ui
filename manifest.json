@@ -144,6 +144,14 @@
     "thumb": "assets/shots/do-my-job-webdev-superbot-80a211a0.png"
   },
   {
+    "id": "do-my-job-market-research-analyst-superbot-5aa2de03",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot works a market research analyst’s crosstab queue in Qualtrics",
+    "src": "animations/do-my-job-market-research-analyst-superbot-5aa2de03/",
+    "thumb": "assets/shots/do-my-job-market-research-analyst-superbot-5aa2de03.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

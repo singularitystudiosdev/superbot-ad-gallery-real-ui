@@ -131,6 +131,13 @@ const more = [
   // for Firefox, #11914 Cmd/Ctrl+Shift+S while editing text), the real checks pass, Merge pull request (all cited in
   // img/CREDITS.txt).
   ['do-my-job-webdev-superbot-80a211a0', 'do-my-job-webdev-superbot-80a211a0/', 'BUT WE WILL · Do my job for me: superbot works a web developer’s excalidraw issues on GitHub', 'Ad spots'],
+  // BUT WE WILL, do my job market research analyst (2026-09-29): the same intro and slam, then "Do my job for me" as a
+  // market research analyst: superbot signs in to Qualtrics XM (Data & Analysis > Crosstabs, rebuilt in HTML/CSS) and
+  // works a saved crosstab queue on the Federal Reserve's SHED 2025 public-use data (12,934 respondents, weighted
+  // column percents, 95% column stat tests), types each finding into the report and matches it to the Fed's published
+  // figure in "Economic Well-Being of U.S. Households in 2025" (May 13, 2026); 12 verbatim codebook and report facts
+  // (all cited in img/CREDITS.txt); the findings are the ad's own sentences built only from the tabulated data.
+  ['do-my-job-market-research-analyst-superbot-5aa2de03', 'do-my-job-market-research-analyst-superbot-5aa2de03/', 'BUT WE WILL · Do my job for me: superbot works a market research analyst’s crosstab queue in Qualtrics', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

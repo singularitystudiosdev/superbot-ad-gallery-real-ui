@@ -1,0 +1,97 @@
+img/ CREDITS (do-my-job-market-research-analyst-superbot-5aa2de03)
+
+Provenance only. Nothing in this file is shown on screen.
+
+Qualtrics and XM are trademarks or registered trademarks of Qualtrics LLC or its affiliates.
+
+(The line above is Qualtrics' attribution statement, "[QUALTRICS' TRADEMARKS] is/are the trademark(s) or registered
+trademark(s) of Qualtrics LLC or its affiliates.", filled in for the marks this ad shows, as the Trademark Attribution
+section of https://www.qualtrics.com/trademark/ asks, fetched 2026-09-29. The marks are used nominatively, to name the
+product whose screens the spot rebuilds; no endorsement by Qualtrics is claimed or implied.)
+
+
+=== Third-party artwork in this folder: one logo ===
+
+qualtrics-logo.svg   The Qualtrics XM wordmark (black "qualtrics" with the XM mark in its gradient), as fetched,
+                     byte for byte: no redraw, no recolour, no crop.
+                     Source: https://www.qualtrics.com/m/qualtrics-xm-long.svg (referenced in the HTML of
+                     https://www.qualtrics.com/), fetched 2026-09-29.
+                     Usage here: inside the chat card's white badge (../scenes/tabs-assets/beats/signin.js) and at the
+                     left of the rebuilt project header (../scenes/tabs-assets/qx.js), where the live app shows its XM mark.
+                     Qualtrics' trademark page (https://www.qualtrics.com/trademark/, fetched 2026-09-29) grants third
+                     parties no logo licence and lists showing "any logos of Qualtrics (or variations of them) other than
+                     your permitted Qualtrics Partner Network logo" among the practices to avoid; it asks for the
+                     attribution line above at the end of an advertisement. Clear this before any paid placement.
+
+The Qualtrics desk itself is not an image: it is rebuilt in HTML/CSS/SVG in ../scenes/tabs-assets/qx.{js,css}
+(chrome strings in qx-ui.js), with the layout, colours, sizes and labels taken from the Qualtrics support pages listed
+under Sources below. No screenshot is embedded in the ad. The icons on the desk are plain glyphs drawn for this
+rebuild; no Qualtrics icon artwork is copied.
+
+
+=== Sources (all retrieved 2026-09-29) ===
+
+Survey content: ../scenes/tabs-assets/qx-data.js. Every figure is computed from the Federal Reserve Board's Survey of
+Household Economics and Decisionmaking (SHED) 2025 public-use file (12,934 respondents, weighted with the file's
+`weight` variable) and matches the figure the Board published; every quote and codebook note is verbatim. SHED is a
+publication of the Board of Governors of the Federal Reserve System; its use here implies no endorsement.
+
+Data and codebook
+  https://www.federalreserve.gov/consumerscommunities/shed.htm                      (survey home page)
+  https://www.federalreserve.gov/consumerscommunities/shed_data.htm                 (data page)
+  https://www.federalreserve.gov/consumerscommunities/files/SHED_public_use_data_2025_(CSV).zip
+                                                                                    (public-use data, CSV)
+  https://www.federalreserve.gov/consumerscommunities/files/SHED_2025codebook.pdf   (codebook: variables, labels,
+                                                                                    display logic, weights)
+
+Report "Economic Well-Being of U.S. Households in 2025" (released May 13, 2026)
+  https://www.federalreserve.gov/publications/files/2025-report-economic-well-being-us-households-202605.pdf
+  https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-executive-summary.htm
+  https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-overall-financial-well-being.htm
+  https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-employment-and-job-quality.htm
+  https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-credit.htm
+  https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-banking.htm
+  https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-savings-investments.htm
+  https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-description.htm
+                                                                                    (Description of the Survey)
+  https://www.federalreserve.gov/publications/2026-supplemental-appendixes-report-economic-well-being-us-households-2025-appendix-a.htm
+                                                                                    (Appendix A, questionnaire)
+  https://www.federalreserve.gov/publications/2026-supplemental-appendixes-report-economic-well-being-us-households-2025-appendix-b.htm
+                                                                                    (Appendix B, topline responses)
+  The page, section and quote behind each item are in qx-data.js (DATASET.urls, QUEUE[i].published.url / .loc /
+  .quote, LEARN[i].src).
+
+Qualtrics documentation (UI labels, layout, the significance-letter method)
+  https://www.qualtrics.com/support/survey-platform/data-and-analysis-module/data-and-analysis-overview/
+  https://www.qualtrics.com/support/survey-platform/data-and-analysis-module/cross-tabulation/cross-tabulation-overview/
+                                                                                    (incl. "Column Stat Tests (All) is a
+                                                                                    pairwise z-test")
+  https://www.qualtrics.com/support/survey-platform/data-and-analysis-module/cross-tabulation/cross-tabulation-options/
+  https://www.qualtrics.com/support/survey-platform/reports-module/reports-section/paginated-reports-overview/
+  https://www.qualtrics.com/support/survey-platform/reports-module/reports-section/reports-toolbar/
+  https://www.qualtrics.com/support/survey-platform/reports-module/reports-section/inserting-report-content/
+  https://www.qualtrics.com/support/survey-platform/reports-module/results-section/reports-overview/
+  https://www.qualtrics.com/support/survey-platform/reports-module/results-section/report-pages/
+  https://www.qualtrics.com/support/survey-platform/getting-started/survey-platform-overview/
+  https://www.qualtrics.com/support/getting-started-qualtrics/home/
+  https://www.qualtrics.com/trademark/                                              (trademark attribution)
+  https://www.qualtrics.com/m/qualtrics-xm-long.svg                                 (logo, see above)
+
+
+=== Fonts: ../scenes/tabs-assets/fonts/ ===
+
+  roboto-latin-var.woff2   Roboto (variable, weights 400 to 700), latin subset. Licence: SIL Open Font License 1.1
+                           (https://fonts.google.com/specimen/Roboto/license). Fetched 2026-09-29 from the Google
+                           Fonts CSS API (https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700).
+                           The Qualtrics app's own face is SAP's "72" (proprietary, not redistributed); Roboto is the
+                           nearest open face by cap height, x-height and glyph shapes, and stands in for it on the desk.
+  courier-prime-{400,700}.woff2
+                           Courier Prime, latin subset. Licence: SIL Open Font License 1.1
+                           (https://fonts.google.com/specimen/Courier+Prime/license). Fetched 2026-09-29 from
+                           https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700. Stands in for the
+                           Courier-like monospace the crosstab table prints its figures and letters in.
+  barlow-{400,500,600,700}.woff2
+                           Barlow, by Jeremy Tribby. Licence: SIL Open Font License 1.1
+                           (https://github.com/jpt/barlow/blob/master/OFL.txt). Inherited from the source spot
+                           (do-my-job-callcenter-superbot-497a61f3); superbot's own HUD chrome.
+All fonts are served from this folder, with no remote font URL anywhere in the ad.

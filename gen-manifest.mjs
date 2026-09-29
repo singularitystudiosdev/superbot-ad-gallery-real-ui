@@ -116,6 +116,14 @@ const more = [
   // Pending (all cited in img/CREDITS.txt); the headlines, ledes and second paragraphs are the ad's own copy built
   // only from release facts.
   ['do-my-job-journalist-superbot-f8795b48', 'do-my-job-journalist-superbot-f8795b48/', 'BUT WE WILL · Do my job for me: superbot works a reporter’s story budget in WordPress', 'Ad spots'],
+  // BUT WE WILL, do my job financial advisor (2026-09-29): the same intro and slam, then "Do my job for me" as a
+  // financial advisor: superbot signs in to Wealthbox with Schwab connected and the camera dives into the CRM desk,
+  // where it matches your writing, reads your past notes and works the client request queue (answer drafted with the
+  // rule quoted, task ticked, reply posted in your writing). The 2026 RMD is the real IRS Pub. 590-B worked example
+  // ($100,000 / Table III 24.6 = $4,065), contribution limits and the Roth catch-up wage rule are IRS's 2026 figures,
+  // the Trump Account rules are IRS's, and the 60/40 drift uses real VTI/VXUS/BND closes Dec 31, 2025 to Sep 28, 2026
+  // (all cited in img/CREDITS.txt); no person is named, request wording and replies are the ad's own copy.
+  ['do-my-job-financial-advisor-superbot-38facc16', 'do-my-job-financial-advisor-superbot-38facc16/', 'BUT WE WILL · Do my job for me: superbot works a financial advisor’s client requests in Wealthbox', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

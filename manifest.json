@@ -128,6 +128,14 @@
     "thumb": "assets/shots/do-my-job-journalist-superbot-f8795b48.png"
   },
   {
+    "id": "do-my-job-financial-advisor-superbot-38facc16",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot works a financial advisor’s client requests in Wealthbox",
+    "src": "animations/do-my-job-financial-advisor-superbot-38facc16/",
+    "thumb": "assets/shots/do-my-job-financial-advisor-superbot-38facc16.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

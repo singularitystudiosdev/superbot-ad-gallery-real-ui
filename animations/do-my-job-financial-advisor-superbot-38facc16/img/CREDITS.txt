@@ -1,0 +1,92 @@
+img/ CREDITS (do-my-job-financial-advisor-superbot-38facc16)
+
+Third-party artwork in this folder: one Wealthbox logo file, fetched 2026-09-29. It was not redrawn. Wealthbox, the
+Wealthbox mark and "Wealthbox CRM" are marks of Wealthbox (Wealthbox Inc.); they are used here nominatively, to name the
+product whose desk the spot rebuilds. Nothing in the spot states or implies that Wealthbox, or Charles Schwab, made,
+sponsors or endorses it.
+
+wealthbox-icon.svg   The Wealthbox hexagon "W" mark, one fill #0260FD (the 2026 brand blue), viewBox 0 0 40 45.
+                     Direct: https://www.wealthbox.com/wp-content/themes/wealthbox/img/brand/wealthbox-icon-2026.svg
+                     Page:   https://www.wealthbox.com/ (fetched through the Wayback Machine, 2026-09 capture, because the
+                             live site answers with a Cloudflare challenge)
+                     Usage here: as fetched, unaltered, on the white badge of the chat's sign-in card; and at the top
+                     left of the rebuilt Wealthbox header, rendered white for the blue bar with CSS filter
+                     brightness(0) invert(1) (same artwork, one flat colour).
+
+Terms, quoted from Wealthbox's site on 2026-09-29:
+  https://www.wealthbox.com/terms-of-service/
+    "All product names, names of services, trademarks and service marks ("Marks") are our property or the property of
+    their respective owners, as indicated. You may not use the Marks or copyrights for any purpose whatsoever other
+    than as permitted by this Agreement."
+  No public brand-guidelines or press-kit page was found. NOTE FOR PUBLISHING: the use above rests on nominative
+  reference alone; the mark is shown static and unaltered apart from the one-colour swap in the header (the card as a
+  whole fades and scales with the scene, as every element does). Clear this with whoever owns publishing before the
+  spot ships.
+  Schwab is named as a custodian Wealthbox lists among its integrations:
+  https://www.wealthbox.com/integrations/charles-schwab/ ("Charles Schwab integration for Wealthbox CRM"). No Schwab
+  logo is used anywhere in the spot; "Schwab" appears as text only.
+
+Nothing else in this folder is third-party. The Wealthbox desk itself is not an image: it is rebuilt in HTML/CSS/SVG
+in ../scenes/tabs-assets/wealthbox.{js,css}. Its colours, type, radii and chrome sizes are Wealthbox's own, taken from
+the production app stylesheet (cdn.crmworkspace.com/assets/application-98aa509d.css, application.tailwind-3ee9d214.css)
+and the app screenshots on wealthbox.com, kept outside the repo in /tmp/fa-wbref.38facc16; every one of those values is
+a custom property in ../scenes/tabs-assets/wealthbox.tokens.css. No screenshot is embedded in the ad. The nav and
+toolbar icons are hand-drawn SVG, not Wealthbox's helium-icons font.
+
+No person is named anywhere in the spot. Client requests are identified by the situation and the account
+registration only (for example "Turns 75 in 2026, spouse 6 years younger", "Traditional IRA, 2026 RMD"); no account
+number, name, phone or email is shown. The signed-in user is a generic avatar labelled "Advisor"; workflow steps are
+"Completed By: superbot". The client questions, task titles and drafted replies are the ad's own copy, written as
+plain restatements of the sourced figures below and nothing beyond them. Text in quotation marks on the answer card is
+verbatim from the named source. Every count on screen is the literal number of items on screen (12 client requests,
+12 tasks, 14 past notes).
+
+Fonts:
+  ../scenes/tabs-assets/fonts/inter-latin-var.woff2
+    Inter, by Rasmus Andersson. Licence: SIL Open Font License 1.1 (https://github.com/rsms/inter/blob/master/LICENSE.txt).
+    Latin subset, variable weight, from the Google Fonts CSS API (https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700),
+    copied from the lawyer spot's folder and served from this folder, with no remote font URL anywhere in the ad.
+    Wealthbox's app stylesheet names "Inter" first in its font stack.
+  ../scenes/tabs-assets/fonts/barlow-{400,500,600,700}.woff2
+    Barlow, by Jeremy Tribby. Licence: SIL Open Font License 1.1 (https://github.com/jpt/barlow/blob/master/OFL.txt).
+    Kept from the call-center spot for the superbot HUD, which is unchanged.
+
+Sources (checked 2026-09-29; the per-figure mapping is in the records of ../scenes/tabs-assets/wealthbox-data.js,
+each of which carries its `src`; the verbatim quotes are in the research pack /tmp/fa-facts.38facc16):
+
+Request 1, 2026 RMD (turns 75 in 2026, spouse sole beneficiary 6 years younger, $100,000, Table III 24.6, $4,065,
+due Dec 31, 2026, 25% / 10% excise, Form 5329):
+  https://www.irs.gov/pub/irs-pdf/p590b.pdf   (Pub. 590-B (2025), the 2026 worked example, and Appendix B Table III)
+Withholding default 10% on nonperiodic payments, Form W-4R:
+  https://www.irs.gov/pub/irs-pdf/fw4r.pdf
+Request 2, 2026 catch-up ($24,500, $8,000, $32,500, $11,250 at 60 to 63, IRA $7,500 plus $1,100; Roth catch-up
+wage threshold $150,000):
+  https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500   (IR-2025-111)
+  https://www.irs.gov/pub/irs-drop/n-25-67.pdf   (Notice 2025-67; also the 2026 QCD cap $111,000)
+  https://www.federalregister.gov/documents/2025/09/16/2025-17865/catch-up-contributions   (TD 10033)
+Request 3, Trump Account ($1,000 pilot for births 2025 through 2028, Form 4547, no contributions before July 4, 2026,
+$5,000 a year, employer up to $2,500):
+  https://www.irs.gov/newsroom/treasury-irs-issue-guidance-on-trump-accounts-established-under-the-working-families-tax-cuts-notice-announces-upcoming-regulations   (IR-2025-117)
+  https://www.irs.gov/pub/irs-drop/n-25-68.pdf   (Notice 2025-68)
+The nine other requests and their tasks:
+  https://www.irs.gov/pub/irs-drop/rp-25-19.pdf   (HSA $4,400 self-only, $8,750 family)
+  https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-deductibles   (Part B $202.90, deductible $283)
+  https://www.medicare.gov/basics/get-started-with-medicare/get-more-coverage/joining-a-plan   (Oct 15 to Dec 7)
+  https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section151&num=0&edition=prelim   (senior deduction $6,000, 2025 to 2028, $150,000 joint)
+  https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title26-section164&num=0&edition=prelim   (SALT cap $40,400 for 2026, $505,000, $10,000 floor)
+  https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill   (IR-2025-103: gift exclusion $19,000; estate $15,000,000; standard deduction $32,200 / $16,100)
+  https://www.ssa.gov/news/en/press/releases/2025-10-24.html   (COLA 2.8% from January)
+  https://www.ssa.gov/news/en/cola/factsheets/2026.html   (average retired worker $2,015 to $2,071)
+Firm compliance to-dos on the idle view:
+  https://www.sec.gov/about/forms/formadv-instructions.pdf   (annual updating amendment within 90 days after fiscal year end)
+  https://www.sec.gov/newsroom/press-releases/2024-58   (Regulation S-P: smaller entities 24 months after publication)
+  https://www.federalregister.gov/documents/2024/06/03/2024-11116/regulation-s-p-privacy-of-consumer-financial-information-and-safeguarding-customer-information   (published Jun 3, 2024, so smaller entities comply by Jun 3, 2026)
+The Schwab model panel (a 60/40 model of VTI 36 / VXUS 24 / BND 40 set Dec 31, 2025, the ad's own illustrative model,
+carried on real closing prices to Sep 28, 2026: VTI 335.27 to 375.84, VXUS 75.44 to 85.75, BND 74.07 to 70.28, which
+drift it to 38.22 / 25.84 / 35.94, equity 64.06%; trades sell VTI 2.22 pts, sell VXUS 1.84 pts, buy BND 4.06 pts;
+expense ratios 0.03% / 0.05% / 0.03%):
+  Yahoo Finance v8 chart API (raw responses kept with the research pack as /tmp/fa-mkt.38facc16/y_VTI.json,
+  y_VXUS.json, y_BND.json), matched to the cent against Nasdaq's historical quotes API (api.nasdaq.com), and Vanguard's
+  fund data API for the expense ratios; pulled 2026-09-29 into /tmp/fa-mkt.38facc16/market.json. Public pages for the
+  same series: https://finance.yahoo.com/quote/VTI/history/  https://finance.yahoo.com/quote/VXUS/history/
+  https://finance.yahoo.com/quote/BND/history/

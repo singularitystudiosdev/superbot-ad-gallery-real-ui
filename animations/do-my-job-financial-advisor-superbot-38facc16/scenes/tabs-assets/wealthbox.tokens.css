@@ -1,0 +1,161 @@
+/* wealthbox.tokens.css: every Wealthbox value the rebuilt desk uses, as custom properties. wealthbox.css reads
+   only these vars; no colour, radius, size or spacing literal is written there.
+   Source of the Wealthbox values: the reference notes in /tmp/fa-wbref.38facc16/notes.md, compiled 2026-09-29 from
+   Wealthbox's production app CSS (cdn.crmworkspace.com/assets/application-98aa509d.css and
+   application.tailwind-3ee9d214.css, the --wb-color-* ramp) and the marketing screenshots of the app (contact
+   page, workflow steps, opportunities). Body text #5b626e and page #e9eef2 are the app CSS `body` rule.
+   The last block is ad chrome (the superbot HUD and the spot's layout scale), not Wealthbox, and says so. */
+#s-tabs .wb-root {
+  /* ---- --wb-color-* ramp (app CSS) ---- */
+  --wb-blue-25: #f2f7fc;  --wb-blue-50: #e6f0fa;  --wb-blue-100: #cfe2f6;  --wb-blue-200: #9fc5ed;
+  --wb-blue-300: #6fa8e5; --wb-blue-400: #3f8bdc; --wb-blue-500: #106ed4;  --wb-blue-600: #0d5db4;
+  --wb-blue-700: #0b4c93; --wb-blue-800: #083c74; --wb-blue-900: #062c54;  --wb-navy-950: #010e25;
+  --wb-gray-25: #f9fafb;  --wb-gray-50: #f4f6f8;  --wb-gray-100: #e9eef2;  --wb-gray-150: #dce1e6;
+  --wb-gray-200: #c3c9cf; --wb-gray-300: #b7bdc4; --wb-gray-400: #9fa5ae;  --wb-gray-500: #888e98;
+  --wb-gray-600: #717883; --wb-gray-700: #5b626e; --wb-gray-800: #464d5a;  --wb-gray-900: #313947;
+  --wb-green-50: #ecf8ed; --wb-green-100: #d9f1dc; --wb-green-400: #5dc377; --wb-green-500: #15b356;
+  --wb-green-600: #1c964a; --wb-green-700: #1e7a3d;
+  --wb-orange-50: #fff2e7; --wb-orange-400: #ff9d47; --wb-orange-500: #ff8400; --wb-orange-600: #d56f0b;
+  --wb-red-50: #fce6e6;   --wb-red-400: #ec3f3f;  --wb-red-500: #e81010;   --wb-red-600: #c50d0d;
+  --wb-purple-50: #f6eef8; --wb-purple-300: #c59ad3; --wb-purple-500: #9b59b6; --wb-purple-600: #824c98;
+  --wb-yellow-50: #fffceb; --wb-yellow-200: #fef3af; --wb-yellow-500: #ebe312; --wb-yellow-700: #9f991b;
+  --wb-white: #ffffff;
+
+  /* ---- semantic roles (app CSS rules named in the notes) ---- */
+  --wb-primary: var(--wb-blue-500);           /* .h-btn--primary, header, brand */
+  --wb-primary-hover: var(--wb-blue-600);     /* .h-btn--primary:hover, bold link blue */
+  --wb-success: var(--wb-green-500);          /* "Complete Step", "Post", done checks */
+  --wb-page: var(--wb-gray-100);              /* body background-color #e9eef2 */
+  --wb-surface: var(--wb-white);              /* cards */
+  --wb-surface-2: var(--wb-gray-50);          /* tab strip, page behind cards */
+  --wb-hairline: var(--wb-gray-100);          /* default border #e9eef2 */
+  --wb-control: #d0d5db;                      /* buttons / inputs border */
+  --wb-text: var(--wb-gray-700);              /* body color #5b626e */
+  --wb-text-strong: var(--wb-gray-900);       /* headings, "Steps" H1 */
+  --wb-text-muted: var(--wb-gray-500);
+  --wb-link: var(--wb-blue-500);
+  --wb-header-bg: var(--wb-blue-500);         /* #header background */
+  --wb-search-bg: var(--wb-blue-400);         /* #global-search input bg #3f8bdc */
+  --wb-toggle-border: var(--wb-blue-400);     /* 1px right border of the sidenav toggle */
+  --wb-sidenav-bg: var(--wb-gray-900);        /* #sidenav #313947 */
+  --wb-sidenav-text: var(--wb-gray-400);      /* items #9fa5ae */
+  --wb-sidenav-active-bg: #1c2129;            /* active item rgb(28,33,41) */
+  --wb-sidenav-hover-bg: #272d38;
+  --wb-nav-contacts: var(--wb-blue-500);      /* coloured active left borders, per section */
+  --wb-nav-workflows: var(--wb-orange-500);
+  --wb-nav-opportunities: var(--wb-green-500);
+  --wb-nav-calendar: var(--wb-red-500);
+  --wb-nav-projects: var(--wb-yellow-700);
+  --wb-nav-reports: var(--wb-purple-500);
+  --wb-nav-dashboards: var(--wb-purple-300);
+  --wb-nav-ai: var(--wb-purple-500);
+  --wb-nav-email: #0fecda;
+  --wb-nav-files: var(--wb-blue-300);
+  --wb-nav-activity: var(--wb-white);
+  --wb-focus-ring: rgba(16, 110, 212, .4);    /* 0 0 0 .1875rem rgba(16,110,212,.4) */
+  --wb-card-hover-shadow: rgba(0, 0, 0, .06); /* 0 2px 2px 0 rgba(0,0,0,.06) */
+  --wb-border-8: #00000014;                   /* --border / --input / --sidebar-border */
+  --wb-border-tertiary: #0000003d;
+  --wb-mask: #000000;                         /* alpha mask stop, not a painted colour */
+
+  /* ---- type (app CSS font stack; sizes from the notes) ---- */
+  --wb-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --wb-fs-body: 14px;        /* body font-size .875rem */
+  --wb-lh-body: 1.5;         /* body line-height */
+  --wb-fs-name: 20px;        /* contact name, about 20px bold */
+  --wb-fs-step: 20px;        /* current workflow step title */
+  --wb-fs-tag: 12px;         /* tag pills, gray-700 12px */
+  --wb-fs-h1: 26px;          /* "Steps" / "Opportunities" H1 */
+  --wb-fs-sm: 13px;
+  --wb-fs-xs: 12px;
+  --wb-fs-2xs: 11px;
+  --wb-fs-lg: 16px;
+  --wb-fs-num: 30px;         /* the inbox's waiting count */
+  --wb-fw-regular: 400; --wb-fw-medium: 500; --wb-fw-semibold: 600; --wb-fw-bold: 700;
+  --wb-lh-tight: 1.2;
+  --wb-lh-snug: 1.35;
+  --wb-track-display: -.02em;
+
+  /* ---- radii: two values, plus full rounds ---- */
+  --wb-r-control: 4px;       /* .25rem: controls, inputs, pills with corners, chips */
+  --wb-r-card: 8px;          /* .5rem: cards, the header card, workflow step cards */
+  --wb-r-round: 50%;         /* avatars, step circles */
+  --wb-r-pill: 9999px;       /* tag pills */
+
+  /* ---- chrome dimensions (app CSS) ---- */
+  --wb-header-h: 52px;       /* #header */
+  --wb-toggle-w: 52px;       /* sidenav toggle 52x52 */
+  --wb-search-h: 34px;       /* #global-search input height */
+  --wb-search-w: 220px;      /* 168 to 220px responsive */
+  --wb-search-pad: 34px;     /* left padding for the magnifier */
+  --wb-headshot: 34px;       /* .headshot-icon 34x34 in the header */
+  --wb-icon: 20px;           /* header tool icons */
+  --wb-sidenav-w: 200px;     /* 12.5rem expanded */
+  --wb-sidenav-w-min: 48px;  /* collapsed to icons */
+  --wb-nav-border: 3px;      /* coloured left border of an item */
+  --wb-nav-pad-y: 8px; --wb-nav-pad-r: 16px; --wb-nav-pad-l: 14px;
+  --wb-sidenav-foot-h: 40px; /* sidenav footer */
+  --wb-photo: 90px;          /* contact header photo, about 90px */
+  --wb-photo-sm: 64px;       /* the ad's compact header card (the page is scaled 1.3x on 16x9, so it renders at 83px) */
+  --wb-photo-xs: 48px;       /* the header card photo on the portrait frames */
+  --wb-tab-h: 36px;          /* the content tab strip */
+  --wb-ring: 2px;            /* step circle outline, target tick */
+  --wb-focus-w: 3px;         /* focus ring width, .1875rem */
+  --wb-check-stroke: 3;      /* stroke of a drawn check */
+  --wb-accent-bar: 4px;      /* contact header card blue left accent */
+  --wb-tab-underline: 2px;   /* active content tab underline */
+  --wb-widget-pad: 10px;     /* .sidebar-widget padding */
+  --wb-step-dot: 34px;       /* workflow step circle */
+
+  /* ---- spacing scale (4px step) ---- */
+  --wb-s-1: 4px; --wb-s-2: 8px; --wb-s-3: 12px; --wb-s-4: 16px; --wb-s-5: 20px; --wb-s-6: 24px; --wb-s-8: 32px;
+  --wb-hair: 1px;
+
+  /* ---- ad chrome, NOT Wealthbox: the superbot HUD carried over from the call-center spot, and the pane sizes
+          of this spot's layout (the queue column, the math column, the model panel) ---- */
+  --ad-hud-bg: rgba(11, 12, 14, .93);
+  --ad-hud-edge: rgba(255, 255, 255, .09);
+  --ad-hud-shadow: rgba(0, 0, 0, .4);
+  --ad-hud-tile: #1b1c20;
+  --ad-hud-ink: #eceef1;
+  --ad-hud-ink-2: #a9aeb6;
+  --ad-hud-ink-3: #83878f;
+  --ad-hud-ring: #3a3d44;
+  --ad-hud-track: #22252b;
+  --ad-hud-green: #34c759;
+  --ad-hud-green-2: #6ef09a;
+  --ad-hud-green-ink: #05210c;
+  --ad-hud-green-bg: rgba(52, 199, 89, .12);
+  --ad-hud-green-edge: rgba(52, 199, 89, .3);
+  --ad-hud-w: 336px;
+  --ad-q-w: 336px;           /* the inbox column */
+  --ad-q-room: 196px;        /* room under the inbox for the HUD, as in the source spot */
+  --ad-math-w: 300px;        /* the answer card's math column */
+  --ad-model-w: 340px;       /* the Schwab model panel */
+  --ad-row-h: 40px;          /* one inbox row, one task row */
+  --ad-arow-h: 52px;         /* one activity row */
+  --ad-bar-h: 10px;          /* a weight bar */
+  --ad-lower-h: 226px;       /* the Tasks + model row under the answer card */
+  --ad-q-h-portrait: 236px;  /* the inbox height when portrait stacks it under the answer */
+  --ad-col-cat: 124px;       /* task category column */
+  --ad-col-src: 112px;       /* task source column */
+  --ad-col-tk: 108px;        /* model panel ticker column */
+  --ad-col-w: 76px;          /* model panel weight column */
+  --ad-tr-l: 76px;           /* reply label column */
+  --ad-hud-lab: 70px;        /* HUD lane label */
+  --ad-hud-clear: 124px;     /* portrait: how far the HUD at its tallest rises above the inbox row */
+  --ad-hud-over: 56px;       /* portrait: how far the HUD during ANSWER rises into the Tasks card */
+  --ad-hud-ring-w: 1.5px;    /* HUD step circle outline */
+  --ad-tick-w: 4px; --ad-tick-h: 7px; --ad-tick-stroke: 1.8px;   /* HUD step tick glyph */
+  --ad-dot-r: 3.3px; --ad-dot-feather: .6px;                      /* HUD current-step dot */
+  --ad-icon-bold: 3.2;       /* stroke of the small bold checks */
+  --ad-check-len: 24;        /* dash length of the drawn model check */
+  --ad-empty-top: 46%;       /* the inbox's empty line, as in the source spot */
+}
+
+/* ---- per-ratio values (layout, not Wealthbox): 4x3 narrows the columns; portrait (1x1 and 4x5, both a 1028 px
+        tall design box) narrows them further, folds the inbox to two rows and uses the small header photo ---- */
+html[data-ar="4x3"] #s-tabs .wb-root { --ad-q-w: 300px; --ad-hud-w: 300px; --ad-math-w: 250px; --ad-model-w: 300px; --ad-col-cat: 110px;
+  --wb-search-w: 168px; }
+html[data-ar="1x1"] #s-tabs .wb-root, html[data-ar="4x5"] #s-tabs .wb-root { --ad-math-w: 250px; --ad-model-w: 290px; --ad-col-cat: 116px;
+  --wb-search-w: 168px; --ad-q-h-portrait: 140px; --ad-lower-h: 230px; --wb-photo-sm: var(--wb-photo-xs); }

@@ -5,7 +5,7 @@
 // The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function
 // of the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn } from '../../lib.js';
-import memebot from './beats/memebot.js?v=2';
+import memebot from './beats/memebot.js?v=3';
 import trade from './beats/trade.js?v=3';
 
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;

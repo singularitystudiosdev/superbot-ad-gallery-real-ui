@@ -1,9 +1,10 @@
 // Ask 1's answer, once fomo is connected: two work cards and a summary, back to back.
 //   1. Backtest: four strategies replayed on 90 days of Solana memecoins; KPIs count up, the equity lines draw.
-//   2. Buy scan: fresh tokens ranked by score; the flagged buys light up, the rug-risk one is dimmed out.
+//   2. Buy scan: eight trending tokens ranked by score; the three buys light up, the watch/skip rows dim out.
 //   3. Summary: the plan in three lines and the question the user answers with ask 2.
-// The three buys are real coins trending on fomo (icons from their on-chain token metadata via Jupiter's token list,
-// see brand/CREDITS.txt); $GLORP, the skipped one, is made up so no real coin is called a rug. Every number is mock UI.
+// Every row is a real Solana memecoin tradable on fomo: the three the user named plus five from Jupiter's live
+// top-trending list on 2026-09-28 (icons from their token metadata, see brand/CREDITS.txt). The watch/skip reasons
+// are each coin's real 24h move that day, never a rug claim; the scores and every trade are mock UI.
 import { lerp, seg, outCubic, outBack, rand, streamCount } from '../../../lib.js';
 import { stdTimes, workBeat, counter, equityChart, grow } from './wk.js';
 
@@ -25,11 +26,16 @@ const SERIES = [
 SERIES.forEach((s, i) => { s.v[N - 1] = [212, 148, 61, 18][i]; });
 
 const BUYS = [
-  { tk: '$PAID', icon: 'paid.png', why: 'volume 14x in 3h', score: 94, buy: true },
-  { tk: '$STONK', icon: 'stonk.png', why: 'whale wallets buying', score: 88, buy: true },
-  { tk: '$JEANPHIL', icon: 'jeanphil.png', why: 'top fomo traders in', score: 81, buy: true },
-  { tk: '$GLORP', icon: null, why: 'dev holds 38%', score: 22, buy: false },
+  { tk: '$PAID', icon: 'paid.png', why: 'volume 14x in 3h', score: 94, act: 'buy' },
+  { tk: '$STONK', icon: 'stonk.png', why: 'whale wallets buying', score: 88, act: 'buy' },
+  { tk: '$JEANPHIL', icon: 'jeanphil.png', why: 'top fomo traders in', score: 81, act: 'buy' },
+  { tk: '$neet', icon: 'neet.png', why: 'up 20% today, wait for a dip', score: 72, act: 'watch' },
+  { tk: '$e/acc', icon: 'eacc.png', why: 'up 67% today, late entry', score: 64, act: 'watch' },
+  { tk: '$CATE', icon: 'cate.png', why: 'flat today, no momentum', score: 47, act: 'skip' },
+  { tk: '$BOME', icon: 'bome.png', why: 'down 4% today', score: 39, act: 'skip' },
+  { tk: '$USELESS', icon: 'useless.png', why: 'down 13% today', score: 31, act: 'skip' },
 ];
+const TAG = { buy: 'BUY', watch: 'WATCH', skip: 'SKIP' };
 
 const SUM = [
   'Best backtest: <b>Momentum</b>, <em class="up">+212%</em> over 90 days, 61% win rate',
@@ -41,7 +47,7 @@ const SUM_ASK = 'Want me to start trading?';
 
 function times(r) {
   const A = stdTimes(r, 3, 2.1, 0.25);
-  const B = stdTimes(A.end, 2, 1.7, 0.25);
+  const B = stdTimes(A.end, 2, 2.5, 0.25); // eight rows land, then the verdicts
   const S = { r: B.end, card: B.end + 0.3 };
   S.lines = SUM.map((_, i) => S.card + 0.25 + i * 0.4);
   S.ask = S.lines[SUM.length - 1] + 0.5;
@@ -72,9 +78,9 @@ function build(k, x) {
   const kDd = counter(bt.q('.k-dd'), -18, A.body + 0.3, A.body + 1.1, (v) => `${Math.round(v)}%`);
 
   // 2. buy scan
-  const rows = BUYS.map((b, i) => `<div class="ws-row mb-row${b.buy ? '' : ' mb-skip'}"><i class="ws-hot"></i><span class="ws-rk">${i + 1}</span>
-      <span class="ws-tk">${b.icon ? `<img class="mb-ti" src="${x.brand('tokens/' + b.icon)}" alt=""/>` : '<i class="mb-ti mb-tl">G</i>'}<b>${b.tk}</b><small>${b.why}</small></span><span class="ws-bar"><i></i></span>
-      <span class="mb-tag${b.buy ? '' : ' no'}">${b.buy ? 'BUY' : 'SKIP'}</span><span class="ws-n">${b.score}</span></div>`).join('');
+  const rows = BUYS.map((b, i) => `<div class="ws-row mb-row mb-${b.act}"><i class="ws-hot"></i><span class="ws-rk">${i + 1}</span>
+      <span class="ws-tk"><img class="mb-ti" src="${x.brand('tokens/' + b.icon)}" alt=""/><b>${b.tk}</b><small>${b.why}</small></span><span class="ws-bar"><i></i></span>
+      <span class="mb-tag ${b.act}">${TAG[b.act]}</span><span class="ws-n">${b.score}</span></div>`).join('');
   const sc = workBeat(x, { T: B }, {
     say: 'Momentum wins. Now scanning live for buys that fit it.',
     title: 'Scanning for buys', sub: 'Trending on fomo, live',
@@ -102,16 +108,17 @@ function build(k, x) {
 
     sc.render(t);
     scRows.forEach((r, i) => {
-      const a = B.body + 0.12 + i * 0.16;
+      const a = B.body + 0.12 + i * 0.11, v = B.body + 1.3 + i * 0.07; // row lands at a, its verdict at v
+      const buy = BUYS[i].act === 'buy';
       const p = outCubic(seg(t, a, a + 0.35));
-      r.n.style.opacity = (p * (BUYS[i].buy ? 1 : lerp(1, 0.45, seg(t, B.body + 1.1, B.body + 1.4)))).toFixed(3);
+      r.n.style.opacity = (p * (buy ? 1 : lerp(1, 0.5, seg(t, B.body + 1.9, B.body + 2.2)))).toFixed(3);
       r.n.style.transform = p >= 1 ? 'none' : `translateX(${((1 - p) * -10).toFixed(2)}px)`;
       r.bar.style.width = (BUYS[i].score * outCubic(seg(t, a + 0.1, a + 0.7))).toFixed(1) + '%';
-      const h = BUYS[i].buy ? outCubic(seg(t, B.body + 0.9 + i * 0.12, B.body + 1.2 + i * 0.12)) : 0;
+      const h = buy ? outCubic(seg(t, v, v + 0.3)) : 0;
       r.hot.style.opacity = h.toFixed(3);
       r.hot.style.transform = `scaleX(${lerp(0.9, 1, h).toFixed(4)})`;
-      const g = outBack(seg(t, B.body + 0.9 + i * 0.12, B.body + 1.25 + i * 0.12));
-      r.tag.style.opacity = seg(t, B.body + 0.9 + i * 0.12, B.body + 1.05 + i * 0.12).toFixed(3);
+      const g = outBack(seg(t, v, v + 0.35));
+      r.tag.style.opacity = seg(t, v, v + 0.15).toFixed(3);
       r.tag.style.transform = `scale(${lerp(0.5, 1, g).toFixed(4)})`;
     });
 

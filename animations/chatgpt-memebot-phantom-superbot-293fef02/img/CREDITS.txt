@@ -1,8 +1,8 @@
 img CREDITS (chatgpt-memebot-phantom-superbot-293fef02)
 
 This spot ships no photographic image assets. The hub chrome, the work cards, the charts and the account panel are
-drawn in CSS/SVG from code in this folder. Third-party marks: fomo's app icon and the $PAID, $STONK and $JEANPHIL
-token icons (see ../brand/CREDITS.txt).
+drawn in CSS/SVG from code in this folder. Third-party marks: fomo's app icon and the icons of the eight real coins in
+the scan (see ../brand/CREDITS.txt).
 
 The coins are real and trending on fomo, but the backtest results, the $6,000 account and every trade and price move
-are fictional mock UI data. $GLORP (the skipped token) is made up. No returns are promised anywhere in the spot.
+are fictional mock UI data. No returns are promised anywhere in the spot.

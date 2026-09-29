@@ -16,15 +16,16 @@
 #s-tabs .hub .eq-tag.eq-d text { fill: #b6ccf6; }
 #s-tabs .hub .bt-kpi b.mb-name { font: 700 14px/16px var(--ui); letter-spacing: -.01em; }
 
-/* buy scan: rank, token + why, score bar, BUY/SKIP pill, score */
-#s-tabs .hub .mb-scan .ws-row { grid-template-columns: 18px 220px 1fr 38px 26px; }
+/* buy scan: rank, token icon + name + why, score bar, BUY/WATCH/SKIP pill, score */
+#s-tabs .hub .mb-scan .ws-row { grid-template-columns: 18px 250px 1fr 46px 26px; }
 #s-tabs .hub .mb-scan .ws-tk { align-items: center; }
 #s-tabs .hub .mb-ti { flex: none; width: 18px; height: 18px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px #2a2a30; }
-#s-tabs .hub .mb-tl { display: grid; place-items: center; background: #2a2a31; font: 700 9px/1 var(--ui); font-style: normal; color: #8f8f99; }
 #s-tabs .hub .mb-scan .ws-row .ws-bar i { background: linear-gradient(90deg, #2fbf8a, #34d399); }
+#s-tabs .hub .mb-scan .ws-row.mb-watch .ws-bar i { background: linear-gradient(90deg, #7a5a22, #f5b942); box-shadow: none; }
 #s-tabs .hub .mb-scan .ws-row.mb-skip .ws-bar i { background: linear-gradient(90deg, #7a3a3a, #ff6b6b); box-shadow: none; }
 #s-tabs .hub .mb-tag { justify-self: center; display: inline-grid; place-items: center; height: 17px; padding: 0 7px; border-radius: 999px; background: rgba(52,211,153,.16); color: var(--up); font: 800 8.5px/1 var(--ui); letter-spacing: .06em; opacity: 0; }
-#s-tabs .hub .mb-tag.no { background: rgba(255,107,107,.13); color: var(--dn); }
+#s-tabs .hub .mb-tag.watch { background: rgba(245,185,66,.14); color: #f5b942; }
+#s-tabs .hub .mb-tag.skip { background: rgba(255,107,107,.13); color: var(--dn); }
 
 /* summary card */
 #s-tabs .hub .mb-sum { width: 500px; box-sizing: border-box; padding: 12px 14px 10px; border-radius: 14px; background: var(--wk-bg); box-shadow: 0 0 0 1px var(--wk-line), 0 18px 40px rgba(0,0,0,.45); opacity: 0; font: 12px/17px var(--ui); color: #d8d8de; }

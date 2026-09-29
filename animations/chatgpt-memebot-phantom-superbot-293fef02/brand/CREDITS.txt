@@ -6,4 +6,11 @@ tokens/: each coin's own icon from its on-chain token metadata, as listed by Jup
   paid.png      $PAID      mint 98kfF7rmsg1QDUEoCqNE7g7M1FdrTt92TEp2CLzypump  ipfs QmfUMmXdXkJ4oyV2NGbgiKkh7qhnhmUZ1toN2kQKD4UDxM
   stonk.png     $STONK     mint 6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx  https://static.datapi.jup.ag/images/asset-icon/stonk.webp
   jeanphil.png  $JEANPHIL  mint 14cmYsjbqAHh1DW7iC5cQ2tiAaarbBxvTRHS8K1Tpump  ipfs bafybeicswknzjbbpuujvqxjqyyj4wnatdljzpn2jigiswykk4bu7g7pfye
-The coins are real; every price move, trade and balance shown for them in the spot is fictional mock UI.
+  neet.png      $neet      mint Ce2gx9KGXJ6C9Mp5b5x1sn9Mg87JwEbrQby4Zqo3pump
+  eacc.png      $e/acc     mint CbcyNo7m1amFWqEQm2m4PLv1UNvpcL3C1Ujm6AkzpKoU
+  cate.png      $CATE      mint Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump
+  bome.png      $BOME      mint ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82
+  useless.png   $USELESS   mint Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk
+The last five came from Jupiter's top-trending list (https://lite-api.jup.ag/tokens/v2/toptrending/1h and /24h,
+2026-09-28); their scan reasons quote that day's real 24h move (neet +19.9%, e/acc +67.4%, CATE +3.2%, BOME -3.9%,
+USELESS -13.2%). The coins are real; every price move, trade and balance shown for them in the spot is fictional mock UI.

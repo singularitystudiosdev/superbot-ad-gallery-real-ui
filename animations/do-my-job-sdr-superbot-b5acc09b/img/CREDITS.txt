@@ -1,0 +1,122 @@
+img/ CREDITS (do-my-job-sdr-superbot-b5acc09b)
+
+Internal provenance for the spot. Nothing in this file is shown on screen. Generated with the desk data by
+/tmp/sdr-ad.b5acc09b/tools/gen-data.b5acc09b.mjs from the research pack /tmp/sdr-ad.b5acc09b/research (facts.json,
+fetched 2026-09-29T13:13:18Z; every quote re-verified against research/src/<slug>.txt by research/tools/merge.py and again by
+/tmp/sdr-ad.b5acc09b/tools/audit.b5acc09b.mjs).
+
+THIRD-PARTY ARTWORK
+  outreach-logo.svg    Outreach horizontal logo (Nucleo mark #5951FF + OUTREACH wordmark #1F1F1F).
+                       In the package: Logo Horizontal/SVG/OutreachLogo-Horizontal-PassionBlueGrey.svg
+  outreach-nucleo.svg  Outreach Nucleo mark alone (#5951FF). In the package: Nucleo/SVG/OutreachNucleo-PassionBlue.svg
+  Source: both files come unaltered from Outreach's logo package,
+  https://cdn-mktg.outreach.io/assets/Downloadable-assets/Outreach-Logos.zip, downloaded 2026-09-29 from the brand page
+  https://www.outreach.ai/brand.
+  Usage here: outreach-logo.svg on the white badge of the chat's sign-in card; outreach-nucleo.svg as the app mark at
+  the top of the rebuilt sidebar and, rendered white with CSS filter brightness(0) invert(1), in the task-flow header's
+  link row.
+
+TRADEMARK NOTE
+  Outreach, the Outreach logo and Kaia are trademarks of Outreach Corporation, used here nominatively to identify the
+  product whose web app the spot rebuilds. Not affiliated with, sponsored or endorsed by Outreach.
+
+The Outreach desk is not an image: it is rebuilt in HTML/CSS/SVG in ../scenes/tabs-assets/outreach.{js,css} from
+support.outreach.io screenshots and the web app's theme (reference list: /tmp/sdr-ad.b5acc09b/ref/refs.txt). No
+screenshot is embedded. UI icons (outreach-ui.js) are hand-drawn.
+
+WHAT IS ON SCREEN AND WHY IT IS TRUE
+  No person is named anywhere. Each prospect is shown as the title the account's own release gives its quoted or
+  appointed executive, plus the company; the avatar is the company's initials. The signed-in seat is "you" (initials
+  SD); no personal name, no phone digits (bullets only), mailbox on example.com (not shown). The worked email, voicemail
+  and LinkedIn note are the ad's own copy, restating the account's sourced trigger and its date; every number in them
+  is in that account's sourced headline or date. Actions are one-sided: no reply, no meeting. Every count on screen
+  is the literal number of items on screen (12 tasks, 3 sequences, 12 findings).
+  Trigger cards show a plain fact line composed from the sourced headline (release headlines that name a person are
+  never shown); a verbatim quote is shown only when it needs no redaction.
+  "Local time" is the prospect's clock at the desk's "now" (Tue Sep 29 2026, 10:05 AM US Eastern), computed from the
+  sourced HQ city; blank where no HQ is sourced. The dialer timer is time-lapsed UI state. Sequence names ("Funding
+  announced", "New revenue leader", "New office opened") are the ad's own labels; their steps use only Outreach's
+  documented step-type names.
+
+ACCOUNTS (company | on-screen title | trigger | date | publisher | url | title sourced by)
+  Hyro | Vice President of Sales Development | Named a new VP of Sales Development | 2026-07-29 | PR Newswire | https://www.prnewswire.com/news-releases/hyro-expands-go-to-market-leadership-with-brant-castellow-as-chief-revenue-officer-and-yehuda-berkowitz-as-vp-of-sales-development-302836717.html | "As Vice President of Sales Development" (research/src/acct-hyro-cro.txt)
+  Abstract | Chief Revenue Officer | Named its first Chief Revenue Officer | 2026-09-14 | PR Newswire | https://www.prnewswire.com/news-releases/abstract-names-jonathan-eller-chief-revenue-officer-302877181.html | "as its first Chief Revenue Officer" (research/src/acct-abstract-cro.txt)
+  ConstructConnect | EVP, Chief Revenue Officer | Named a new EVP, Chief Revenue Officer | 2026-09-01 | PR Newswire | https://www.prnewswire.com/news-releases/jay-rouse-joins-constructconnect-as-evp-chief-revenue-officer-to-accelerate-next-phase-of-growth-302862894.html | "EVP, Chief Revenue Officer" (research/src/acct-constructconnect-cro.txt)
+  AllianceHCM | Chief Revenue Officer | Named a new Chief Revenue Officer | 2026-09-28 | PR Newswire | https://www.prnewswire.com/news-releases/alliancehcm-accelerates-growth-trajectory-with-executive-leadership-expansion-and-upcoming-product-innovation-302891045.html | "Joining AllianceHCM as Chief Revenue Officer" (research/src/acct-alliancehcm-cro.txt)
+  BackOps | Co-founder and CEO | Raised $42M Series B | 2026-09-16 | PR Newswire | https://www.prnewswire.com/news-releases/backops-raises-42m-series-b-to-scale-its-ai-resolution-layer-for-supply-chain-operations-302879927.html | "co-founder and CEO of BackOps" (research/src/acct-backops-pr.txt)
+  Dili | Co-founder and CEO | Raised $21.7m in total funding | 2026-07-30 | GlobeNewswire | https://www.globenewswire.com/news-release/2026/07/30/3336377/0/en/dili-raises-21-7m-from-khosla-ventures-to-bring-ai-powered-assurance-to-america-s-infrastructure-boom.html | "co-founder and CEO of Dili" (research/src/acct-dili-gnw.txt)
+      fetched via: Wayback copy (globenewswire.com blocks curl)
+  Probook | CEO and co-founder | Raised $40M to scale its go-to-market team | 2026-06-23 | GlobeNewswire | https://www.globenewswire.com/news-release/2026/06/23/3316215/0/en/probook-raises-40m-from-andreessen-horowitz-and-sequoia-to-scale-the-ai-operating-system-for-home-services.html | "CEO and co-founder of Probook" (research/src/acct-probook-gnw.txt)
+      fetched via: Wayback copy (globenewswire.com blocks curl)
+  Passionfroot | Co-founder and CEO | Raised $15M Series A led by Insight Partners | 2026-07-22 | PR Newswire | https://www.prnewswire.com/news-releases/passionfroot-raises-15m-series-a-led-by-insight-partners-to-power-creator-led-growth-in-the-ai-era-302831506.html | "Co-founder and CEO of Passionfroot" (research/src/acct-passionfroot-pr.txt)
+  Clinch | VP of Growth, EMEA | Opened a new central office in London | 2026-09-09 | PR Newswire | https://www.prnewswire.com/news-releases/clinch-expands-london-presence-with-new-central-office-and-appointment-of-colin-cherry-as-vp-of-growth-emea-302871700.html | "as VP of Growth, EMEA" (research/src/acct-clinch-london.txt)
+  Chargeflow | VP of Sales | Opened a new NYC office at Rockefeller Plaza | 2026-04-09 | PR Newswire | https://www.prnewswire.com/news-releases/chargeflow-expands-north-american-presence-with-new-nyc-office-at-rockefeller-plaza-302737754.html | "VP of Sales" (research/src/acct-chargeflow-nyc.txt)
+  Legora | CEO and Co-Founder | Opened offices in Madrid, Milan and Paris | 2026-06-10 | Legora (company newsroom) | https://legora.com/newsroom/legora-opens-in-madrid-milan-and-paris-and-establishes-london-engineering-base-as-european-customer-demand-accelerates | "CEO and Co-Founder of Legora" (research/src/acct-legora-news.txt)
+  Assured | Co-founder & CEO | Raised $19M Series A led by Insight Partners | 2026-07-30 | GlobeNewswire | https://www.globenewswire.com/news-release/2026/07/30/3335854/0/en/assured-raises-19m-series-a-led-by-insight-partners-to-automate-healthcare-provider-operations-with-ai-agents.html | "Co-founder & CEO of Assured" (research/src/acct-assured-gnw.txt)
+      fetched via: Wayback copy (globenewswire.com blocks curl)
+  innoscripta SE (in an earlier pick) was replaced by Assured: no sales role is sourced on innoscripta's own pages.
+
+WORKED TASKS
+  Email (row 1, BackOps): trigger https://www.prnewswire.com/news-releases/backops-raises-42m-series-b-to-scale-its-ai-resolution-layer-for-supply-chain-operations-302879927.html
+  Call (row 2, AllianceHCM): trigger https://www.prnewswire.com/news-releases/alliancehcm-accelerates-growth-trajectory-with-executive-leadership-expansion-and-upcoming-product-innovation-302891045.html
+  LinkedIn (row 3, Clinch): trigger https://www.prnewswire.com/news-releases/clinch-expands-london-presence-with-new-central-office-and-appointment-of-colin-cherry-as-vp-of-growth-emea-302871700.html
+
+FINDINGS (LEARN beat; stat | publisher | date | sample | url)
+  2.1X | Gong (Gong Labs) | 2018-04-19 (published) | 90,380 cold calls | https://www.gong.io/blog/cold-call-opening-lines/
+  6.6X | Gong (Gong Labs) | 2018-04-19 (published) | 90,380 cold calls | https://www.gong.io/blog/cold-call-opening-lines/
+  11.24% | Gong (Gong Labs x 30 Minutes to President's Club) | 2024-07-24 (published) | 300M+ cold calls | https://www.gong.io/blog/the-best-and-worst-cold-call-openers-backed-by-data-from-300m-calls
+  4.8 minutes | 30 Minutes to President's Club (data from Gong) | 2026-04-15 (published) | 300M+ cold calls | https://www.30mpc.com/interactive-resources/how-to-master-cold-calls-data-from-300m-calls-30mpc
+  55% | Gong | 2021-08-16 (published) | thousands of cold calls | https://www.gong.io/blog/cold-call-stats
+  25 and 50 words | Lavender | 2023-01-08 (published) | no sample stated | https://www.lavender.ai/blog/best-length-cold-email
+  17.5% | Lavender | 2023-05-04 (published) | no sample stated | https://www.lavender.ai/blog/cold-email-subject-line-tips
+  133% | Belkins | 2025-08-06 (published) | 5.5 million emails | https://belkins.io/blog/b2b-cold-email-subject-line-statistics
+  58.6% | Belkins | 2026-06-26 (updated) | 7,530,489 sent emails | https://belkins.io/blog/sales-follow-up-statistics
+  9 to 11am | 30 Minutes to President's Club (data from Gong) | 2026-04-15 (published) | 300M+ cold calls | https://www.30mpc.com/interactive-resources/how-to-master-cold-calls-data-from-300m-calls-30mpc
+  +115% | 30 Minutes to President's Club (data from Gong) | 2026-04-15 (published) | 300M+ cold calls | https://www.30mpc.com/interactive-resources/how-to-master-cold-calls-data-from-300m-calls-30mpc
+  17.6% | Belkins | 2026-06-29 (updated) | 14,077 individual contact records | https://belkins.io/blog/linkedin-outreach-study
+  The 2018 Gong Labs rows (90,380 cold calls) are shown with their year. Dataset sizes appear only on their own rows;
+  they are never summed. Call-time guidance is 30MPC's 2026 9 to 11am finding (300M+ calls).
+
+RULE CHIPS (short imperatives, each from one finding above)
+  Personalize with a real trigger  <-  belkins-personalization-reply-133
+  Reason for the call first  <-  gong-reason-for-call
+  Call 9 to 11am their time  <-  30mpc-best-time-9-11am
+  Voicemail, then email  <-  30mpc-voicemail-email-reply
+  Email under 50 words  <-  lavender-email-25-50-words
+  Two-word subject line  <-  lavender-subject-two-words
+
+OUTREACH VOCABULARY (support.outreach.io)
+  https://support.outreach.io/support/solutions/articles/159000425632-how-to-create-an-outreach-sequence  (Auto Email)
+  https://support.outreach.io/support/solutions/articles/159000425524-outreach-sequence-overview  (Manual Email; Phone Call; Generic Task; LinkedIn)
+  https://support.outreach.io/support/solutions/articles/159000425747-how-to-manage-outreach-linkedin-tasks  (LinkedIn: View a Profile; LinkedIn: Interact with Post; LinkedIn: Send Message; LinkedIn: Send Connection Request; LinkedIn: Other; Connect in; Interact)
+  https://support.outreach.io/support/solutions/articles/159000425783-how-to-manage-outreach-tasks  (Email; Call; Meet in Person; Action Item/Generic Task; Send LinkedIn Connection Request; Mark Complete; Send & Complete / Log Call & Complete)
+  https://support.outreach.io/support/solutions/articles/159000429165-configure-sequential-dialing  (Start tasks; Start sequential dialing; Log call and continue; Hang Up and Continue; No Answer; Sequential Dialing)
+  https://support.outreach.io/support/solutions/articles/159000426365-global-sidebar-task-flow  (play button; All Tasks / One-Off Tasks / Sequence Tasks)
+  https://support.outreach.io/support/solutions/articles/159000425834-outreach-glossary  (Skip task; answered; unanswered; Voicemail drop (glossary); Kaia)
+  https://support.outreach.io/support/solutions/articles/159000426016-outreach-everywhere-universal-task-flow-overview  (Universal Task Flow)
+  https://support.outreach.io/support/solutions/articles/159000425864-managing-call-dispositions-and-call-purposes  (Type: Answered / Not Answered)
+  https://support.outreach.io/support/solutions/articles/159000426109-how-to-set-default-call-disposition-for-voicemail-drops-beta-  (Default For Voicemail Drop)
+  https://support.outreach.io/support/solutions/articles/159000426436-how-to-make-and-log-phone-calls-with-the-outreach-dialer  (Call log option: Success; Call log option: No Answer; Call log option: Busy)
+  https://support.outreach.io/support/solutions/articles/159000426249  (Voicemail Left)
+  https://support.outreach.io/support/solutions/articles/159000426253-outreach-sequence-states-overview  (Pending; Active; Paused; Paused OOTO; Disabled; Failed; Bounced; Finished (Replied); Finished (No Reply); Opted-Out)
+  https://support.outreach.io/support/solutions/articles/159000426083-outreach-dialer-overview  (Outreach Dialer; Outreach Voice (calling product))
+  https://support.outreach.io/support/solutions/articles/159000426362-how-to-leave-a-voicemail-drop-beta-  (Voicemail Drop; Leave Voicemail and Hang Up)
+  https://support.outreach.io/support/solutions/articles/159000425990-outreach-variables-overview  (Outreach Dialer; {{sender.first_name}}; {{company}})
+  https://support.outreach.io/support/solutions/articles/159000433239-agents-ai-overview  (Omni; Research Agent; Personalization Agent; Revenue Agent; Deal Agent; Meeting Prep Agent)
+  https://support.outreach.io/support/solutions/articles/159000425183-outreach-research-agent-overview  (Agents & AI (nav))
+  Disposition shown: "Voicemail Left", the disposition name on screen in Outreach's own doc screenshot: Using the Outreach
+  Call List View, https://support.outreach.io/support/solutions/articles/159000426249 (Call List, Disposition column;
+  kept as /tmp/sdr-ad.b5acc09b/ref/img/159000426249-01.png). It is in the screenshot, not the article text. No call
+  purpose is shown (purposes are admin-defined; none documented). "Sequence action: Automatic", task states and the
+  tile row come from the support-portal screenshots in /tmp/sdr-ad.b5acc09b/ref.
+
+LINKEDIN NOTE LIMIT
+  200 characters for members without Premium ("Each message can be up to 200 characters"), https://www.linkedin.com/help/linkedin/answer/a563153
+  (Last updated: 5 months ago (relative, as shown 2026-09-29)). No Premium limit is claimed.
+
+FONTS (../scenes/tabs-assets/fonts/)
+  roboto-flex-latin-var.woff2  Roboto Flex, by Font Bureau / Google. SIL Open Font License 1.1.
+  work-sans-latin-var.woff2    Work Sans, by Wei Huang. SIL Open Font License 1.1.
+  Latin subsets fetched 2026-09-29 from the Google Fonts CSS API
+  (https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400..700&family=Work+Sans:wght@500..700), served from this
+  folder with no remote font URL. They are the Outreach app's own faces (theme: "Roboto Flex" body, "Work Sans" headings).

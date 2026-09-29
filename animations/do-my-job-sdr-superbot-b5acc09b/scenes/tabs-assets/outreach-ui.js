@@ -1,0 +1,83 @@
+// outreach-ui.js: the Outreach desk's UI furniture icons, drawn by hand in the reference screenshots' line style
+// (24px grid, 1.8px round-cap stroke, see /tmp/sdr-ad.b5acc09b/ref/refs.txt). They are chrome, not marks: the only
+// third-party artwork in this spot is the Outreach logo in ../../img (see ../../img/CREDITS.txt). No copy lives here;
+// every label is in outreach-data.js.
+const ico = (inner, w = 1.8, cls = '') => `<svg class="or-i ${cls}" viewBox="0 0 24 24" aria-hidden="true" style="--sw:${w}">${inner}</svg>`;
+const fill = (inner, cls = '') => `<svg class="or-i or-if ${cls}" viewBox="0 0 24 24" aria-hidden="true">${inner}</svg>`;
+
+export const I = {
+  // left navigation (Home ... Reports)
+  home: ico('<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9.5h17"/><path d="M9.5 9.5V20"/>'),
+  pipeline: ico('<path d="M12 3.5a8.5 8.5 0 1 1-8.5 8.5"/><path d="M12 7.5a4.5 4.5 0 1 1-4.5 4.5"/>'),
+  prospects: ico('<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>'),
+  accounts: ico('<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.2A1.7 1.7 0 0 1 10.7 3.5h2.6A1.7 1.7 0 0 1 15 5.2V7"/><path d="M3 12.5h18"/>'),
+  opps: ico('<path d="M12 2.8v18.4"/><path d="M16.5 6.4A3.9 3.9 0 0 0 13 4.8h-2.2a3.1 3.1 0 0 0 0 6.2h2.4a3.1 3.1 0 0 1 0 6.2h-2.4a3.9 3.9 0 0 1-3.6-1.9"/>'),
+  kaia: ico('<path d="M3 12h2"/><path d="M7 8v8"/><path d="M11 4.5v15"/><path d="M15 8v8"/><path d="M19 10.5v3"/>', 2),
+  agents: ico('<path d="M6.5 20.5v-3.2A7.5 7.5 0 1 1 18.8 12l1.2 2.7-2 .4v2.4a1.6 1.6 0 0 1-1.6 1.6h-1.9v1.4"/><path d="M10.2 9.2a2.1 2.1 0 1 1 2.6 2.1v1.4"/>'),
+  forecast: ico('<path d="M3.5 3.5v17h17"/><path d="m7 15 4-4.5 3 3 5.5-6.5"/>'),
+  records: ico('<rect x="4.5" y="3" width="15" height="18" rx="2"/><path d="M8.5 8h7"/><path d="M8.5 12h7"/><path d="M8.5 16h4"/>'),
+  activity: ico('<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M6.5 12.5h2.2l1.8-4 3 7.5 1.8-3.5h2.2"/>'),
+  content: ico('<path d="M21 3 10.2 13.8"/><path d="M21 3 14.4 21l-4.2-7.2L3 9.6Z"/>'),
+  reports: ico('<path d="M5 20.5V12"/><path d="M12 20.5V4"/><path d="M19 20.5v-6"/>', 2.2),
+  // header
+  search: ico('<circle cx="10.8" cy="10.8" r="6.8"/><path d="m20.5 20.5-4.8-4.8"/>'),
+  bell: ico('<path d="M6 9.4a6 6 0 0 1 12 0c0 4.4 1.3 5.7 1.9 6.3H4.1C4.7 15.1 6 13.8 6 9.4Z"/><path d="M10 18.8a2.2 2.2 0 0 0 4 0"/>'),
+  help: ico('<circle cx="12" cy="12" r="8.8"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.7.3-1 .8-1 1.5v.6"/><path d="M12 16.9v.1"/>'),
+  phone: ico('<path d="M6.6 3.2H4.9A1.9 1.9 0 0 0 3 5.3C3.7 13.2 10 19.5 17.9 20.2a1.9 1.9 0 0 0 2.1-1.9v-1.7a1.9 1.9 0 0 0-1.5-1.9l-2.3-.5a1.9 1.9 0 0 0-1.9.7l-.9 1.2a12.3 12.3 0 0 1-5-5l1.2-.9a1.9 1.9 0 0 0 .7-1.9l-.5-2.3A1.9 1.9 0 0 0 6.6 3.2Z"/>'),
+  mail: ico('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.6 6.2 8.4 6.6 8.4-6.6"/>'),
+  calendar: ico('<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M8 14h2"/>'),
+  tasks: ico('<rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="m7 9 1.6 1.6L11 8"/><path d="M13.5 9.4H17"/><path d="m7 15 1.6 1.6L11 14"/><path d="M13.5 15.4H17"/>'),
+  plus: ico('<path d="M12 5v14"/><path d="M5 12h14"/>', 2.2),
+  bolt: ico('<path d="M13.2 2.8 5 13.6h6.4l-1 7.6L19 10.4h-6.4Z"/>', 1.9),
+  chevDown: fill('<path d="M6.5 9.5h11L12 15.5Z"/>'),
+  chevRight: ico('<path d="m9.5 5.5 6.5 6.5-6.5 6.5"/>', 2),
+  chevLeft: ico('<path d="m14.5 5.5-6.5 6.5 6.5 6.5"/>', 2),
+  chevUp: ico('<path d="m6 15 6-6 6 6"/>', 2),
+  chevSm: ico('<path d="m6 9 6 6 6-6"/>', 2),
+  info: ico('<circle cx="12" cy="12" r="8.8"/><path d="M12 11v5.4"/><path d="M12 7.7v.1"/>'),
+  sort: ico('<path d="M8 20V4"/><path d="m4 7.5 4-4 4 4"/><path d="M16 4v16"/><path d="m12 16.5 4 4 4-4"/>'),
+  columns: ico('<rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M9 4.5v15"/><path d="M15 4.5v15"/>'),
+  refresh: ico('<path d="M19.5 12a7.5 7.5 0 1 1-2.3-5.4"/><path d="M19.8 4v4.2h-4.2"/>'),
+  close: ico('<path d="m6 6 12 12"/><path d="M18 6 6 18"/>', 2),
+  circleX: fill('<circle cx="12" cy="12" r="9"/><path d="m8.8 8.8 6.4 6.4M15.2 8.8l-6.4 6.4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>'),
+  // task types (Type column, flow header)
+  email: ico('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.6 6.2 8.4 6.6 8.4-6.6"/>'),
+  call: ico('<path d="M6.6 3.2H4.9A1.9 1.9 0 0 0 3 5.3C3.7 13.2 10 19.5 17.9 20.2a1.9 1.9 0 0 0 2.1-1.9v-1.7a1.9 1.9 0 0 0-1.5-1.9l-2.3-.5a1.9 1.9 0 0 0-1.9.7l-.9 1.2a12.3 12.3 0 0 1-5-5l1.2-.9a1.9 1.9 0 0 0 .7-1.9l-.5-2.3A1.9 1.9 0 0 0 6.6 3.2Z"/>'),
+  linkedin: ico('<rect x="3.2" y="3.2" width="17.6" height="17.6" rx="3"/><path d="M8 10.6v6"/><path d="M8 7.3v.1"/><path d="M11.6 16.6v-6"/><path d="M11.6 13.2a2.6 2.6 0 0 1 5.2 0v3.4"/>', 1.9),
+  action: ico('<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 3h6v3H9z"/><path d="M8.5 11h7"/><path d="M8.5 15h5"/>'),
+  meet: ico('<circle cx="9" cy="8.5" r="3.4"/><path d="M3 19.5a6 6 0 0 1 12 0"/><path d="M15.5 5.4a3.4 3.4 0 0 1 0 6.3"/><path d="M17.5 14a6 6 0 0 1 3.5 5.5"/>'),
+  // task flow
+  collapse: ico('<path d="M4 4v16"/><path d="M20 12H9"/><path d="m13 7.5-4.5 4.5 4.5 4.5"/>'),
+  gear: ico('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>'),
+  sendSm: ico('<path d="M21 3 10.2 13.8"/><path d="M21 3 14.4 21l-4.2-7.2L3 9.6Z"/>'),
+  cloud: ico('<path d="M7 18.5h10.5a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.3A3.4 3.4 0 0 0 7 18.5Z"/>'),
+  clock: ico('<circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3 1.9"/>'),
+  sparkle: ico('<path d="M12 3.5c.7 4.2 2.3 5.8 6.5 6.5-4.2.7-5.8 2.3-6.5 6.5-.7-4.2-2.3-5.8-6.5-6.5 4.2-.7 5.8-2.3 6.5-6.5Z"/><path d="M18.5 15.5c.3 1.6.9 2.2 2.5 2.5-1.6.3-2.2.9-2.5 2.5-.3-1.6-.9-2.2-2.5-2.5 1.6-.3 2.2-.9 2.5-2.5Z"/>', 1.6),
+  copy: ico('<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'),
+  snooze: ico('<circle cx="12" cy="13" r="7.6"/><path d="M9.6 10.4h4.8l-4.8 5.2h4.8"/><path d="m4 5 3-2.2M20 5l-3-2.2"/>'),
+  more: fill('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>'),
+  check: ico('<path d="M4.8 12.6 9 16.8 19.2 6.6"/>', 2.6),
+  checkC: fill('<circle cx="12" cy="12" r="10"/><path d="M7.2 12.4 10.4 15.6 16.8 8.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'),
+  okc: ico('<circle cx="12" cy="12" r="8.8"/><path d="m8.2 12.3 2.6 2.6 5-5.2"/>'),
+  play: fill('<path d="M8 5.5v13l10.5-6.5Z"/>'),
+  // editor toolbar (the compose window's row, left to right)
+  textA: ico('<path d="m6.5 16 5.5-12 5.5 12"/><path d="M8.6 11.6h6.8"/><path d="M4 20.5h16"/>'),
+  attach: ico('<path d="m20 11.5-8.2 8.2a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/>'),
+  link: ico('<path d="M10 14a4.2 4.2 0 0 0 6 0l3-3a4.2 4.2 0 0 0-6-6l-1.2 1.2"/><path d="M14 10a4.2 4.2 0 0 0-6 0l-3 3a4.2 4.2 0 0 0 6 6l1.2-1.2"/>'),
+  image: ico('<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m20.5 16-5-5-8.5 8.5"/>'),
+  scissors: ico('<circle cx="6.5" cy="6.5" r="2.8"/><circle cx="6.5" cy="17.5" r="2.8"/><path d="M8.8 8.3 20 18"/><path d="M8.8 15.7 20 6"/>'),
+  braces: ico('<path d="M8.5 4H8a2 2 0 0 0-2 2v3.6a2 2 0 0 1-2 2 2 2 0 0 1 2 2V18a2 2 0 0 0 2 2h.5"/><path d="M15.5 4h.5a2 2 0 0 1 2 2v3.6a2 2 0 0 0 2 2 2 2 0 0 0-2 2V18a2 2 0 0 1-2 2h-.5"/>'),
+  list: ico('<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.1M4.5 12h.1M4.5 18h.1"/>', 2.2),
+  // Outreach Voice dialer
+  mic: ico('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5v3.5"/>', 2),
+  headset: ico('<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 14.5h2.4a1 1 0 0 1 1 1v3.4a1 1 0 0 1-1 1H5.8A1.8 1.8 0 0 1 4 18.1Z"/><path d="M20 14.5h-2.4a1 1 0 0 0-1 1v3.4a1 1 0 0 0 1 1h.6a1.8 1.8 0 0 0 1.8-1.8Z"/>', 2),
+  callLog: ico('<rect x="4" y="4" width="14" height="16.5" rx="2"/><path d="M7.5 9h7M7.5 12.5h7M7.5 16h4"/><path d="M19.5 2.5v5M17 5h5"/>', 1.9),
+  hangup: fill('<path d="M2.6 13.9c-.5-.6-.5-1.5.1-2 5.2-4.5 13.4-4.5 18.6 0 .6.5.6 1.4.1 2l-1.5 1.7c-.5.5-1.3.6-1.9.2l-2.2-1.5c-.5-.3-.7-.9-.6-1.5l.3-1.5a13.3 13.3 0 0 0-7 0l.3 1.5c.1.6-.1 1.2-.6 1.5l-2.2 1.5c-.6.4-1.4.3-1.9-.2Z"/>'),
+  transfer: ico('<path d="M6.6 3.2H4.9A1.9 1.9 0 0 0 3 5.3C3.7 13.2 10 19.5 17.9 20.2a1.9 1.9 0 0 0 2.1-1.9v-1.7a1.9 1.9 0 0 0-1.5-1.9l-2.3-.5a1.9 1.9 0 0 0-1.9.7l-.9 1.2a12.3 12.3 0 0 1-5-5l1.2-.9a1.9 1.9 0 0 0 .7-1.9l-.5-2.3A1.9 1.9 0 0 0 6.6 3.2Z"/><path d="M16 3v5M19.5 3v5"/>', 1.9),
+  keypad: fill('<circle cx="6" cy="5" r="1.6"/><circle cx="12" cy="5" r="1.6"/><circle cx="18" cy="5" r="1.6"/><circle cx="6" cy="10.5" r="1.6"/><circle cx="12" cy="10.5" r="1.6"/><circle cx="18" cy="10.5" r="1.6"/><circle cx="6" cy="16" r="1.6"/><circle cx="12" cy="16" r="1.6"/><circle cx="18" cy="16" r="1.6"/><circle cx="12" cy="21.2" r="1.6"/>'),
+  record: `<svg class="or-i" viewBox="0 0 24 24" aria-hidden="true" style="--sw:2"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.4" fill="currentColor" stroke="none"/></svg>`,
+  voicemail: ico('<circle cx="6.5" cy="12.5" r="3.6"/><circle cx="17.5" cy="12.5" r="3.6"/><path d="M6.5 16.1h11"/>', 2),
+  wave: ico('<path d="M4 12h1.5"/><path d="M8 8.5v7"/><path d="M12 5v14"/><path d="M16 8.5v7"/><path d="M18.5 12H20"/>', 2),
+  waveAi: fill('<path d="M12 2.5c.6 5.2 1.7 8.3 4.2 9.5-2.5 1.2-3.6 4.3-4.2 9.5-.6-5.2-1.7-8.3-4.2-9.5 2.5-1.2 3.6-4.3 4.2-9.5Z"/><path d="M5 8c.3 2.2.8 3.4 2 4-1.2.6-1.7 1.8-2 4-.3-2.2-.8-3.4-2-4 1.2-.6 1.7-1.8 2-4Z"/><path d="M19 8c.3 2.2.8 3.4 2 4-1.2.6-1.7 1.8-2 4-.3-2.2-.8-3.4-2-4 1.2-.6 1.7-1.8 2-4Z"/>'),
+  hudCheck: ico('<path d="M4.8 12.6 9 16.8 19.2 6.6"/>', 3.2),
+};

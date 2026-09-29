@@ -153,6 +153,17 @@ const more = [
   // (Entry docs · UK ETA · DOCS added); real flights on their real routes and schedules, each case on a published
   // rule (all cited in img/CREDITS.txt); traveler names, record locators and ticket serials are fictional.
   ['do-my-job-travel-agent-superbot-8163d44c', 'do-my-job-travel-agent-superbot-8163d44c/', 'BUT WE WILL · Do my job for me: superbot works a travel agent’s Sabre queue', 'Ad spots'],
+  // BUT WE WILL, do my job sales development rep (2026-09-29): the same intro and slam, then "Do my job for me" as a
+  // sales development rep: superbot signs in to Outreach (Tasks list and the email, call and LinkedIn task flows
+  // rebuilt in HTML/CSS/SVG from support.outreach.io, Outreach's documented step types only), reads 12 published
+  // cold-outreach findings (Gong Labs, 30 Minutes to President's Club, Lavender, Belkins, each with its year and
+  // dataset size) and works a 12-task queue on 12 real companies, each with a dated public sales-growth trigger from
+  // its own release: the BackOps $42M Series B email (Sep 16, 2026), the AllianceHCM new Chief Revenue Officer call
+  // logged Voicemail Left (Sep 28, 2026) and the Clinch London office LinkedIn connection request (Sep 9, 2026; note
+  // under LinkedIn's 200-character limit), all cited in img/CREDITS.txt. No person is named: prospects show the title
+  // their company's release gives; the email, voicemail and note are the ad's own copy restating only the sourced
+  // trigger.
+  ['do-my-job-sdr-superbot-b5acc09b', 'do-my-job-sdr-superbot-b5acc09b/', 'BUT WE WILL · Do my job for me: superbot works a sales development rep’s task queue in Outreach', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

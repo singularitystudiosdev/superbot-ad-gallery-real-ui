@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: BUT WE WILL · do my job for me as a sales development rep (Outreach)</title>
+<meta name="description" content="superbot signs in to Outreach and works a sales development rep's task queue: an email step, an Outreach Voice call step and a LinkedIn connection request.">
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="cards.css?v=2">
+<link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=1">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=1">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=1">
+<link rel="stylesheet" href="scenes/tabs-assets/signin.css?v=1">
+<link rel="stylesheet" href="scenes/tabs-assets/outreach.css?v=1">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment (cards, scenes, end) in order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=2"></script>
+</body>
+</html>

@@ -248,6 +248,11 @@ const more = [
   // cells as tools/var89-matrix.mjs; chain and venue names plain text only, every figure fictional mock UI data.
   ['chatgpt-memebot-superbot-cae00e0d', 'chatgpt-memebot-superbot-cae00e0d/', 'ChatGPT says you shouldn\'t gamble: superbot builds a memecoin trading bot', 'Ad spots'],
   ['claude-polybot-superbot-cae00e0e', 'claude-polybot-superbot-cae00e0e/', 'Claude says you shouldn\'t gamble: superbot builds a prediction market trading bot', 'Ad spots'],
+  // THE LIVE CELLS (2026-09-28): the same two bot cells taken live — the paper backtest first, then a real
+  // connect and live trades on Axiom / Polymarket (2k book, +186 / +142). Same we-dont-care engine; venue
+  // names plain text only and every figure fictional mock UI data.
+  ['chatgpt-memebot-live-superbot-cae00e0f', 'chatgpt-memebot-live-superbot-cae00e0f/', 'ChatGPT says you shouldn\'t gamble: superbot backtests, paper trades, then trades live on Axiom', 'Ad spots'],
+  ['claude-polybot-live-superbot-cae00e10', 'claude-polybot-live-superbot-cae00e10/', 'Claude says you shouldn\'t gamble: superbot backtests, paper trades, then trades live on Polymarket', 'Ad spots'],
     // the no-switch family (2026-09-25): forked from the context-switch spot, built on the real superbot
   // hub UI, each keeping the same thread while a new model joins the rail. One member still listed.
   // the "Superbot just works" family (2026-09-25): built on one kit (animations/just-works-kit-42aac446).

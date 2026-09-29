@@ -604,6 +604,22 @@
     "thumb": "assets/shots/claude-polybot-superbot-cae00e0e.png"
   },
   {
+    "id": "chatgpt-memebot-live-superbot-cae00e0f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT says you shouldn't gamble: superbot backtests, paper trades, then trades live on Axiom",
+    "src": "animations/chatgpt-memebot-live-superbot-cae00e0f/",
+    "thumb": "assets/shots/chatgpt-memebot-live-superbot-cae00e0f.png"
+  },
+  {
+    "id": "claude-polybot-live-superbot-cae00e10",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Claude says you shouldn't gamble: superbot backtests, paper trades, then trades live on Polymarket",
+    "src": "animations/claude-polybot-live-superbot-cae00e10/",
+    "thumb": "assets/shots/claude-polybot-live-superbot-cae00e10.png"
+  },
+  {
     "id": "just-works-waiver-night-gpt-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",

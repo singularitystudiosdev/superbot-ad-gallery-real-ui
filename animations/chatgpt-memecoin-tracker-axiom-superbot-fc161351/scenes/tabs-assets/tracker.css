@@ -1,0 +1,170 @@
+/* beats/tracker.js: the watchlist, the alert rules, the DeepSeek chip line, the ticker scan (a list rolling through
+   a lens to an ALERT), the summary and the Axiom token page with superbot's notifications over it.
+   Alerts are amber (information, not a win); Axiom's own palette on its page: near-black panels, hairline borders,
+   the usual green/red candles, blue accent. */
+#s-tabs .hub { --al: #f5b544; }
+#s-tabs .hub .qc-chipline { margin: 10px 0 2px; }
+
+/* ---- 1. watchlist */
+#s-tabs .hub .wl-hd, #s-tabs .hub .wl-row { display: grid; grid-template-columns: 1fr 62px 52px 54px 58px 70px; align-items: center; column-gap: 6px; padding: 0 8px; }
+#s-tabs .hub .wl-hd { font: 600 8.5px/1 var(--ui); letter-spacing: .1em; text-transform: uppercase; color: #6f6f7a; padding-bottom: 7px; }
+#s-tabs .hub .wl-hd span:not(:first-child), #s-tabs .hub .wl-row span:not(:first-child) { text-align: right; }
+#s-tabs .hub .wl-row { height: 30px; border-top: 1px solid #1c1c21; font: 500 10.5px/1 var(--mono); color: #c9c9d1; font-variant-numeric: tabular-nums; opacity: 0; }
+#s-tabs .hub .wl-tk { display: flex; align-items: center; gap: 7px; min-width: 0; }
+#s-tabs .hub .wl-tk img { flex: none; width: 17px; height: 17px; border-radius: 50%; object-fit: cover; background: #1b1b21; }
+#s-tabs .hub .wl-tk b { font: 700 10.5px/1 var(--mono); color: #eeeef3; }
+#s-tabs .hub .wl-row .dn { color: #ff8a8a; }
+#s-tabs .hub .wl-row .up { color: var(--up); }
+#s-tabs .hub .wl-h { color: #eeeef3; }
+
+/* ---- 2. alert rules */
+#s-tabs .hub .ar-row { display: flex; align-items: center; gap: 11px; height: 38px; padding: 0 4px; }
+#s-tabs .hub .ar-row + .ar-row { border-top: 1px solid #1c1c21; }
+#s-tabs .hub .ar-ic { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: rgba(245,181,68,.12); color: var(--al); }
+#s-tabs .hub .ar-ic svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .hub .ar-tx { display: grid; gap: 4px; }
+#s-tabs .hub .ar-tx b { font: 650 12px/1 var(--ui); color: #f1f1f5; }
+#s-tabs .hub .ar-tx small { font: 500 9.5px/1 var(--ui); color: #7d7d85; }
+#s-tabs .hub .ar-sw { margin-left: auto; flex: none; width: 32px; height: 18px; padding: 2px; box-sizing: border-box; border-radius: 999px; background: #3a3a40; }
+#s-tabs .hub .ar-sw.on { background: var(--up); }
+#s-tabs .hub .ar-sw i { display: block; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+
+/* ---- 4. ticker scan */
+#s-tabs .hub .sc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+#s-tabs .hub .sc-n { display: flex; align-items: baseline; gap: 7px; }
+#s-tabs .hub .sc-n b { font: 700 19px/1 var(--mono); color: #f4f4f6; font-variant-numeric: tabular-nums; }
+#s-tabs .hub .sc-n small { font: 500 10px/1 var(--ui); color: #8e8e96; }
+#s-tabs .hub .sc-st { position: relative; display: grid; height: 22px; }
+#s-tabs .hub .sc-w, #s-tabs .hub .sc-h { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; font: 600 10px/1 var(--ui); white-space: nowrap; justify-self: end; }
+#s-tabs .hub .sc-w { color: #c9c9d1; background: #1b1b21; box-shadow: inset 0 0 0 1px #2a2a32; }
+#s-tabs .hub .sc-w i { width: 6px; height: 6px; border-radius: 50%; background: #7c8cf8; box-shadow: 0 0 8px rgba(124,140,248,.7); }
+#s-tabs .hub .sc-h { opacity: 0; color: #1d1403; background: var(--al); font-weight: 800; letter-spacing: .12em; box-shadow: 0 0 18px rgba(245,181,68,.4); }
+#s-tabs .hub .sc-hd, #s-tabs .hub .sc-row { display: grid; grid-template-columns: 1fr 64px 56px 48px; align-items: center; column-gap: 6px; padding: 0 10px; }
+#s-tabs .hub .sc-hd { font: 600 8.5px/1 var(--ui); letter-spacing: .12em; text-transform: uppercase; color: #6f6f7a; padding-bottom: 6px; }
+#s-tabs .hub .sc-hd span:not(:first-child), #s-tabs .hub .sc-row span:not(:first-child) { text-align: right; }
+#s-tabs .hub .sc-win { position: relative; height: 130px; overflow: hidden; border-radius: 10px; background: #0e0e12; box-shadow: inset 0 0 0 1px #1f1f26;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); }
+#s-tabs .hub .sc-list { will-change: transform; }
+#s-tabs .hub .sc-row { height: 26px; font: 500 10px/1 var(--mono); color: #9a9aa4; font-variant-numeric: tabular-nums; }
+#s-tabs .hub .sc-tk { display: flex; align-items: center; gap: 7px; min-width: 0; }
+#s-tabs .hub .sc-tk img { flex: none; width: 16px; height: 16px; border-radius: 50%; object-fit: cover; background: #1b1b21; }
+#s-tabs .hub .sc-tk b { font: 700 10.5px/1 var(--mono); color: #e6e6ec; }
+#s-tabs .hub .sc-vx { color: #c9c9d1; font-weight: 700; }
+#s-tabs .hub .sc-vx.lo { color: #6f6f7a; }
+#s-tabs .hub .sc-flagrow.on .sc-tk b, #s-tabs .hub .sc-flagrow.on .sc-vx { color: var(--al); }
+#s-tabs .hub .sc-lens { position: absolute; z-index: 2; left: 4px; right: 4px; top: 52px; height: 26px; border-radius: 8px; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); background: rgba(255,255,255,.035); }
+#s-tabs .hub .sc-lens.on { box-shadow: inset 0 0 0 1.5px var(--al), 0 0 22px rgba(245,181,68,.25); background: rgba(245,181,68,.08); }
+#s-tabs .hub .sc-stamp { position: absolute; left: 116px; top: 50%; padding: 3px 8px; border-radius: 5px; border: 1.5px solid var(--al); color: var(--al);
+  font: 900 11px/1 var(--ui); letter-spacing: .18em; font-style: normal; opacity: 0; background: rgba(24,16,3,.88); }
+#s-tabs .hub .sc-fw { height: 0; overflow: hidden; opacity: 0; }
+#s-tabs .hub .sc-flag { display: flex; align-items: center; gap: 8px; margin-top: 10px; height: 32px; padding: 0 11px; border-radius: 9px; background: rgba(245,181,68,.1); box-shadow: inset 0 0 0 1px rgba(245,181,68,.35); }
+#s-tabs .hub .sc-flag svg { flex: none; width: 14px; height: 14px; fill: none; stroke: var(--al); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .hub .sc-flag b { font: 700 11.5px/1 var(--ui); color: #fbe3b4; }
+#s-tabs .hub .sc-flag small { margin-left: auto; font: 500 9.5px/1 var(--mono); color: #b89a63; }
+
+/* ---- 5. summary */
+#s-tabs .hub .sm-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+#s-tabs .hub .sm-row { display: grid; gap: 6px; padding: 9px 11px; border-radius: 9px; background: var(--wk-soft); box-shadow: inset 0 0 0 1px #222227; }
+#s-tabs .hub .sm-row small { font: 600 8.5px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: #7d7d85; }
+#s-tabs .hub .sm-row b { font: 650 12px/1 var(--ui); color: #f1f1f5; white-space: nowrap; }
+#s-tabs .hub .sm-note { display: flex; align-items: center; gap: 7px; margin-top: 11px; padding-top: 10px; border-top: 1px solid #1f1f24; font: 500 10.5px/1 var(--ui); color: #a8a8b0; }
+#s-tabs .hub .sm-note svg { flex: none; width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- 6. Axiom token page, after Axiom's /meme/<pair> page (2026): colors sampled from a 1280px capture of the
+   live page. #526fff is its blue (active nav, USD / MarketCap toggles); candles are the chart's usual green and red.
+   Rebuilt information-only: the right column holds token info and superbot's alert rules. */
+#s-tabs .hub .ax { --cu: #16c08e; --cd: #eb2a4f; --ab: #526fff; --axl: #1c1e22; --am: #7f838c;
+  position: relative; width: 500px; margin: 8px 0 4px; border-radius: 12px; overflow: hidden; background: #0b0c0e; box-shadow: inset 0 0 0 1px #202227, 0 14px 34px rgba(0,0,0,.45);
+  color: #f1f2f4; font-family: var(--ui); font-variant-numeric: tabular-nums; opacity: 0; }
+#s-tabs .hub .ax svg { fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .hub .ax-bar { display: flex; align-items: center; gap: 10px; height: 28px; padding: 0 9px; border-bottom: 1px solid var(--axl); }
+#s-tabs .hub .ax-logo { display: flex; align-items: center; gap: 4px; }
+#s-tabs .hub .ax-logo img { width: 13px; height: 13px; border-radius: 50%; }
+#s-tabs .hub .ax-logo b { font: 800 10px/1 var(--ui); letter-spacing: .06em; }
+#s-tabs .hub .ax-logo em { font: 500 8.5px/1 var(--ui); font-style: normal; color: var(--am); }
+#s-tabs .hub .ax-nav { display: flex; gap: 8px; font: 600 8.5px/1 var(--ui); color: #e9eaee; }
+#s-tabs .hub .ax-nav .on { color: var(--ab); }
+#s-tabs .hub .ax-srch { flex: 1; min-width: 0; display: flex; align-items: center; gap: 4px; height: 17px; padding: 0 3px 0 6px; border-radius: 999px; box-shadow: inset 0 0 0 1px #26282e; font: 500 7.5px/1 var(--ui); color: #6c7079; white-space: nowrap; overflow: hidden; }
+#s-tabs .hub .ax-srch svg { width: 8px; height: 8px; flex: none; }
+#s-tabs .hub .ax-srch kbd { margin-left: auto; padding: 1px 4px; border-radius: 4px; background: #1d1f24; font: 600 7px/1.2 var(--ui); color: #a3a6ae; }
+#s-tabs .hub .ax-ro { display: inline-flex; align-items: center; gap: 4px; height: 17px; padding: 0 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2c2f36; font: 600 8px/1 var(--ui); color: #c9ccd2; }
+#s-tabs .hub .ax-ro svg { width: 9px; height: 9px; }
+#s-tabs .hub .ax-tok { display: flex; align-items: center; gap: 9px; height: 40px; padding: 0 9px; border-bottom: 1px solid var(--axl); }
+#s-tabs .hub .ax-av { flex: none; width: 26px; height: 26px; border-radius: 5px; object-fit: cover; }
+#s-tabs .hub .ax-nm { display: grid; gap: 4px; }
+#s-tabs .hub .ax-n1 { display: flex; align-items: baseline; gap: 4px; }
+#s-tabs .hub .ax-n1 b { font: 700 10.5px/1 var(--ui); }
+#s-tabs .hub .ax-n1 small { font: 500 8.5px/1 var(--ui); color: var(--am); }
+#s-tabs .hub .ax-n1 svg { width: 7px; height: 7px; color: var(--am); align-self: center; }
+#s-tabs .hub .ax-n2 { display: flex; align-items: center; gap: 5px; color: #9aa0a9; }
+#s-tabs .hub .ax-n2 em { font: 600 7.5px/1 var(--ui); font-style: normal; color: #3efaad; }
+#s-tabs .hub .ax-n2 svg { width: 7.5px; height: 7.5px; }
+#s-tabs .hub .ax-mc b { font: 700 14px/1 var(--ui); letter-spacing: -.01em; }
+#s-tabs .hub .ax-kv { display: grid; gap: 4px; }
+#s-tabs .hub .ax-kv small { font: 500 7.5px/1 var(--ui); color: var(--am); }
+#s-tabs .hub .ax-kv b { font: 600 8.5px/1 var(--ui); }
+#s-tabs .hub .ax-fav { margin-left: auto; color: var(--am); }
+#s-tabs .hub .ax-fav svg { width: 10px; height: 10px; }
+#s-tabs .hub .ax-main { display: grid; grid-template-columns: 1fr 176px; }
+#s-tabs .hub .ax-ch { min-width: 0; padding-bottom: 4px; }
+#s-tabs .hub .ax-tools { display: flex; align-items: center; gap: 9px; height: 20px; padding: 0 8px; border-bottom: 1px solid var(--axl); font: 600 7.5px/1 var(--ui); color: #d9dbe0; white-space: nowrap; overflow: hidden; }
+#s-tabs .hub .ax-tools b { font-weight: 700; }
+#s-tabs .hub .ax-tools span { display: inline-flex; align-items: center; gap: 3px; }
+#s-tabs .hub .ax-tools svg { width: 8px; height: 8px; }
+#s-tabs .hub .ax-tools em { font-style: normal; color: var(--ab); }
+#s-tabs .hub .ax-leg { display: flex; align-items: center; gap: 5px; padding: 5px 8px 0; font: 600 7.5px/1 var(--ui); color: #d9dbe0; }
+#s-tabs .hub .ax-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cu); box-shadow: 0 0 0 2px rgba(22,192,142,.25); }
+#s-tabs .hub .ax-svg { display: block; width: 100%; height: auto; overflow: visible; margin-top: 6px; }
+#s-tabs .hub .ax-svg * { stroke-linecap: butt; }
+#s-tabs .hub .ax-gl { stroke: #16181c; stroke-width: .6; }
+#s-tabs .hub .ax-yl, #s-tabs .hub .ax-xl { fill: #6f737c; stroke: none; font: 500 6.5px var(--ui); }
+#s-tabs .hub .ax-xl { text-anchor: middle; }
+#s-tabs .hub .ax-c { opacity: 0; }
+#s-tabs .hub .ax-c line { stroke-width: .8; }
+#s-tabs .hub .ax-c.up line { stroke: var(--cu); } #s-tabs .hub .ax-c.up .ax-cb { fill: var(--cu); stroke: none; }
+#s-tabs .hub .ax-c.dn line { stroke: var(--cd); } #s-tabs .hub .ax-c.dn .ax-cb { fill: var(--cd); stroke: none; }
+#s-tabs .hub .ax-c .ax-vb { stroke: none; opacity: .32; }
+#s-tabs .hub .ax-c.up .ax-vb { fill: var(--cu); } #s-tabs .hub .ax-c.dn .ax-vb { fill: var(--cd); }
+#s-tabs .hub .ax-c.sp .ax-vb { fill: var(--al); opacity: .75; }
+#s-tabs .hub .ax-band { opacity: 0; }
+#s-tabs .hub .ax-band rect { fill: rgba(245,181,68,.08); stroke: rgba(245,181,68,.45); stroke-width: .6; stroke-dasharray: 2 1.5; }
+#s-tabs .hub .ax-band text { fill: var(--al); stroke: none; font: 800 7px var(--ui); text-anchor: middle; }
+#s-tabs .hub .ax-pl { stroke: var(--cu); stroke-width: .6; stroke-dasharray: 1 1.6; opacity: 0; }
+#s-tabs .hub .ax-tag { opacity: 0; }
+#s-tabs .hub .ax-tag rect { fill: var(--cu); stroke: none; }
+#s-tabs .hub .ax-tag text { fill: #fff; stroke: none; font: 700 6.5px var(--ui); }
+#s-tabs .hub .ax-side { display: flex; flex-direction: column; gap: 8px; padding: 8px 8px 9px; border-left: 1px solid var(--axl); background: #0e0f11; }
+#s-tabs .hub .ax-sh { font: 700 8.5px/1 var(--ui); color: #e9eaee; }
+#s-tabs .hub .ax-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+#s-tabs .hub .ax-info span { display: grid; gap: 4px; justify-items: center; padding: 6px 2px; border-radius: 6px; box-shadow: inset 0 0 0 1px #23252b; }
+#s-tabs .hub .ax-info b { font: 650 8.5px/1 var(--ui); color: #f1f2f4; }
+#s-tabs .hub .ax-info small { font: 500 6.5px/1 var(--ui); color: var(--am); white-space: nowrap; }
+#s-tabs .hub .ax-al { display: grid; gap: 5px; margin-top: 2px; padding: 7px 7px 8px; border-radius: 8px; background: #121316; box-shadow: inset 0 0 0 1px #23252b; }
+#s-tabs .hub .ax-alh { display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }
+#s-tabs .hub .ax-alh img { width: 11px; height: 11px; border-radius: 3px; }
+#s-tabs .hub .ax-alh b { font: 700 8px/1 var(--ui); color: #f1f2f4; }
+#s-tabs .hub .ax-alh em { margin-left: auto; display: inline-flex; align-items: center; gap: 3px; height: 13px; padding: 0 6px; border-radius: 999px; background: #1d1f24; font: 700 7px/1 var(--ui); font-style: normal; color: #7f838c; }
+#s-tabs .hub .ax-alh em i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
+#s-tabs .hub .ax-alh em.on { background: rgba(52,211,153,.14); color: #34d399; }
+#s-tabs .hub .ax-alr { display: flex; align-items: center; gap: 5px; height: 16px; font: 500 7.5px/1 var(--ui); color: #c9ccd2; }
+#s-tabs .hub .ax-alr svg { flex: none; width: 9px; height: 9px; color: var(--am); stroke-width: 2; }
+#s-tabs .hub .ax-alr i { margin-left: auto; width: 5px; height: 5px; border-radius: 50%; background: #34363d; }
+#s-tabs .hub .ax-alr.hot { color: #fbe3b4; }
+#s-tabs .hub .ax-alr.hot svg { color: var(--al); }
+#s-tabs .hub .ax-alr.hot i { background: var(--al); box-shadow: 0 0 6px var(--al); }
+
+/* superbot's notifications, an iOS-style stack over the top of the chart: the newest on top */
+#s-tabs .hub .ax-toasts { position: absolute; left: 12px; top: 74px; width: 298px; height: 64px; pointer-events: none; }
+#s-tabs .hub .ax-toast { position: absolute; left: 0; top: 0; width: 100%; height: 46px; box-sizing: border-box; display: flex; align-items: center; gap: 9px; padding: 0 11px;
+  border-radius: 12px; background: rgba(30,31,36,.94); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 10px 26px rgba(0,0,0,.55); opacity: 0; transform-origin: 50% 0; }
+#s-tabs .hub .ax-toast img { flex: none; width: 24px; height: 24px; border-radius: 7px; }
+#s-tabs .hub .ax-tt { display: grid; gap: 3px; min-width: 0; flex: 1; }
+#s-tabs .hub .ax-tt1 { display: flex; align-items: baseline; gap: 5px; }
+#s-tabs .hub .ax-tt1 b { font: 600 8px/1 var(--ui); color: #a8abb3; letter-spacing: .02em; }
+#s-tabs .hub .ax-tt1 small { margin-left: auto; font: 500 7.5px/1 var(--ui); color: #6f737c; }
+#s-tabs .hub .ax-tt2 { font: 700 10.5px/1.1 var(--ui); color: #f4f4f6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .hub .ax-tt3 { font: 500 8.5px/1.1 var(--ui); color: #9a9da6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .hub .ax-toast.hot { box-shadow: inset 0 0 0 1px rgba(245,181,68,.55), 0 10px 26px rgba(0,0,0,.55), 0 0 22px rgba(245,181,68,.18); }
+#s-tabs .hub .ax-toast.hot .ax-tt2 { color: #fbe3b4; }
+#s-tabs .hub .ax-toast.under .ax-tt { visibility: hidden; }

@@ -492,6 +492,15 @@
     "thumb": "assets/shots/chatgpt-memebot-axiom-superbot-6e571750.png"
   },
   {
+    "id": "chatgpt-memecoin-tracker-axiom-superbot-fc161351",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT can't watch Axiom for you: superbot builds a read-only memecoin tracker",
+    "src": "animations/chatgpt-memecoin-tracker-axiom-superbot-fc161351/",
+    "thumb": "assets/shots/chatgpt-memecoin-tracker-axiom-superbot-fc161351.png",
+    "desc": "superbot connects Axiom read-only, builds a memecoin watchlist with alert rules and flags a POPCAT volume spike. Tracking only, it never trades."
+  },
+  {
     "id": "chatgpt-memebot-phantom-superbot-293fef02",
     "type": "animation",
     "group": "Ad spots",
@@ -500,12 +509,30 @@
     "thumb": "assets/shots/chatgpt-memebot-phantom-superbot-293fef02.png"
   },
   {
+    "id": "chatgpt-memecoin-tracker-fomo-superbot-2ccee0a4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "WANNA TRACK EVERY MEMECOIN? superbot builds a read-only fomo tracker",
+    "src": "animations/chatgpt-memecoin-tracker-fomo-superbot-2ccee0a4/",
+    "thumb": "assets/shots/chatgpt-memecoin-tracker-fomo-superbot-2ccee0a4.png",
+    "desc": "superbot connects fomo read-only, builds an 8-token memecoin watchlist with alert rules, and pings you when volume, holders, liquidity or trending ranks move. Tracking only, it never trades."
+  },
+  {
     "id": "chatgpt-predictionbot-superbot-6cc423a0",
     "type": "animation",
     "group": "Ad spots",
     "title": "ChatGPT says you shouldn't gamble: make me a prediction market trading bot, superbot connects Polymarket, backtests, flags buys, then trades it live",
     "src": "animations/chatgpt-predictionbot-superbot-6cc423a0/",
     "thumb": "assets/shots/chatgpt-predictionbot-superbot-6cc423a0.png"
+  },
+  {
+    "id": "chatgpt-polymarket-tracker-superbot-a0b21a33",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT can't watch Polymarket for you: superbot builds a read-only Polymarket tracker",
+    "src": "animations/chatgpt-polymarket-tracker-superbot-a0b21a33/",
+    "thumb": "assets/shots/chatgpt-polymarket-tracker-superbot-a0b21a33.png",
+    "desc": "superbot connects Polymarket read-only, builds a watchlist, arms odds and volume alerts, and pings you when the Fed market jumps 34% to 52%. Tracking only, it never trades."
   },
   {
     "id": "chatgpt-polywins-superbot-cae00e02",

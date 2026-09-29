@@ -1,4 +1,4 @@
-// var89-generate.mjs: build the 12 variant folders of the we-dont-care spot from tools/var89-matrix.mjs.
+// var89-generate.mjs: build the variant folders of the we-dont-care spot from tools/var89-matrix.mjs.
 //
 //   node tools/var89-generate.mjs            # writes animations/<id>/ for every matrix cell
 //

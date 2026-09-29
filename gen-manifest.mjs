@@ -232,6 +232,12 @@ const more = [
   ['grok-memecoins-superbot-cae00e0a', 'grok-memecoins-superbot-cae00e0a/', 'Grok says you shouldn\'t gamble: superbot builds a site of all my memecoin wins', 'Ad spots'],
   ['grok-polywins-superbot-cae00e0b', 'grok-polywins-superbot-cae00e0b/', 'Grok says you shouldn\'t gamble: superbot builds a site of all my Polymarket wins', 'Ad spots'],
   ['grok-sportsbook-superbot-cae00e0c', 'grok-sportsbook-superbot-cae00e0c/', 'Grok says you shouldn\'t gamble: superbot builds a site of all my DraftKings wins', 'Ad spots'],
+  // THE BOT CELLS (2026-09-28): the same we-dont-care spot with the user's own words typed lowercase into the
+  // composer, "make me a memecoin trading bot" / "make me a prediction market trading bot", and superbot builds
+  // a live trading bot dashboard (sams-memebot.site / sams-polybot.site) instead of a site of wins. Same two
+  // cells as tools/var89-matrix.mjs; chain and venue names plain text only, every figure fictional mock UI data.
+  ['chatgpt-memebot-superbot-cae00e0d', 'chatgpt-memebot-superbot-cae00e0d/', 'ChatGPT says you shouldn\'t gamble: superbot builds a memecoin trading bot', 'Ad spots'],
+  ['claude-polybot-superbot-cae00e0e', 'claude-polybot-superbot-cae00e0e/', 'Claude says you shouldn\'t gamble: superbot builds a prediction market trading bot', 'Ad spots'],
     // the no-switch family (2026-09-25): forked from the context-switch spot, built on the real superbot
   // hub UI, each keeping the same thread while a new model joins the rail. One member still listed.
   // the "Superbot just works" family (2026-09-25): built on one kit (animations/just-works-kit-42aac446).

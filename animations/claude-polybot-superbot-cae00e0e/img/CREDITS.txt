@@ -1,0 +1,9 @@
+img CREDITS (claude-polybot-superbot-cae00e0e)
+
+This spot ships no photographic or third-party image assets. Everything on screen — the hub chrome, the tray
+of app tiles, the wins site's chrome, its chart, its payout rows and the confetti burst — is drawn in
+CSS/SVG/canvas from code in this folder.
+
+The live positions and equity (the $18,260 total, the five markets and the best day) are fictional mock UI data. Prediction-market names are described in plain text only; no venue logo appears. The account it would have come from is the Claude voice on the first card: a fictional
+assistant quoting advice, not an offer. sams-polybot.site is a fictional address and no game, odds, payout or
+bonus is shown or promised anywhere in the spot.

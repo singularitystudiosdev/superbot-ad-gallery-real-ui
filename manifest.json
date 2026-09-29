@@ -564,6 +564,22 @@
     "thumb": "assets/shots/grok-sportsbook-superbot-cae00e0c.png"
   },
   {
+    "id": "chatgpt-memebot-superbot-cae00e0d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ChatGPT says you shouldn't gamble: superbot builds a memecoin trading bot",
+    "src": "animations/chatgpt-memebot-superbot-cae00e0d/",
+    "thumb": "assets/shots/chatgpt-memebot-superbot-cae00e0d.png"
+  },
+  {
+    "id": "claude-polybot-superbot-cae00e0e",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Claude says you shouldn't gamble: superbot builds a prediction market trading bot",
+    "src": "animations/claude-polybot-superbot-cae00e0e/",
+    "thumb": "assets/shots/claude-polybot-superbot-cae00e0e.png"
+  },
+  {
     "id": "just-works-waiver-night-gpt-superbot-42aac446",
     "type": "animation",
     "group": "Ad spots",

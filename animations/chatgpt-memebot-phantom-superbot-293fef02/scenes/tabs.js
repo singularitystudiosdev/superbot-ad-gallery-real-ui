@@ -2,11 +2,11 @@
 // are hidden, ask.css), laid out at DW design px and scaled to the frame width. It opens on the empty state
 // ("Good evening. Where do we go?" over a centred composer) with the camera pushed in; the one send drops the
 // composer to the bottom, lifts the greeting away and eases the camera out while the ask plays out
-// (tabs-assets/chat.js: two asks; beats/trade.js grows the Phantom wallet out of the thread to fill the
+// (tabs-assets/chat.js: two asks; beats/trade.js grows the fomo account out of the thread to fill the
 // frame). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's generated
 // stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=3';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=4';
 import { lerp, seg, outCubic, inOutCubic } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;

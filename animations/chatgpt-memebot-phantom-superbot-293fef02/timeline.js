@@ -1,5 +1,5 @@
 // memecoin trading bot: "ChatGPT says you shouldn't gamble" -> "WE DONT CARE!" -> superbot builds a memecoin
-// trading bot on the user's Phantom wallet (scenes/tabs-assets/chat.js). The two text cards read ./variant.js.
+// trading bot on the user's fomo account (scenes/tabs-assets/chat.js). The two text cards read ./variant.js.
 // The engine is one-agent-full-degen's: the whole spot is a pure function of t (?t=<s> freezes a
 // frame, ?t=<s>&play=1 plays on, space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock).
 // It lays the SEQUENCE end to end: two black text cards (drawn here), the hub scene cropped to its thread
@@ -137,7 +137,7 @@ await Promise.all(sceneIds.map(async (id) => {
   css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=1`, import.meta.url).href;
   document.head.appendChild(css);
   try {
-    const m = (await import(`./scenes/${id}.js?v=2`)).default;
+    const m = (await import(`./scenes/${id}.js?v=3`)).default;
     if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
     MODS[id] = m;
   } catch (err) {

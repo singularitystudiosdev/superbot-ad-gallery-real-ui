@@ -1,12 +1,12 @@
-// The two-ask chat. Ask 1 ("make me a memecoin trading bot"): superbot connects the user's Phantom wallet with the
-// same shimmering routing chip the DoorDash ad uses ("Connecting to Phantom", spinner -> check), then answers with
+// The two-ask chat. Ask 1 ("make me a memecoin trading bot"): superbot connects the user's fomo account with the
+// same shimmering routing chip the DoorDash ad uses ("Connecting to fomo", spinner -> check), then answers with
 // ./beats/memebot.js (backtest card, buy-scan card, summary). Ask 2 ("Look's good, let's do it"): ./beats/trade.js
-// trades live in the Phantom wallet and zooms that wallet out of the thread to fill the frame as the balance climbs.
+// trades live in the fomo account and zooms that account out of the thread to fill the frame as the balance climbs.
 // The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function
 // of the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn } from '../../lib.js';
-import memebot from './beats/memebot.js?v=1';
-import trade from './beats/trade.js?v=2';
+import memebot from './beats/memebot.js?v=2';
+import trade from './beats/trade.js?v=3';
 
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
 const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
@@ -15,7 +15,7 @@ const bump = (p) => Math.sin(Math.PI * clamp(p));
 export const CHAT_T0 = 1.1; // the empty state has settled; the ask starts typing
 
 const ASKS = [
-  { mod: memebot, ask: 'make me a memecoin trading bot', chips: [['phantom', 'Connecting to Phantom']] },
+  { mod: memebot, ask: 'make me a memecoin trading bot', chips: [['fomo', 'Connecting to fomo']] },
   { mod: trade, ask: "Look's good, let's do it", chips: [], hold: 0.75 }, // hold: the go-ahead stays readable before the wallet opens
 ];
 
@@ -39,7 +39,7 @@ export const CHAT_END = LAST.T.end + 0.2;
 
 export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
-const APPS = { phantom: { logo: brand('phantom-logo.svg'), name: 'Phantom' } };
+const APPS = { fomo: { logo: brand('fomo-mark.png'), name: 'fomo' } }; // fomo writes its name lowercase
 const tile = (app) => `<span class="qc-tile qc-t-${app}"><img src="${APPS[app].logo}" alt=""/></span>`;
 
 export function mountChat(hub) {
@@ -73,7 +73,7 @@ export function mountChat(hub) {
   // scroll marks: after each time, the feed's fold glides to that element's bottom
   const marks = beats.flatMap((b) => [[b.k.send, b.u], ...b.sws.map((s) => [s.c.sw, s.w]), ...b.inst.marks]).sort((x, y) => x[0] - y[0]);
 
-  // the composer's model chip: superbot, start to finish (Phantom is the account it trades in, not the model)
+  // the composer's model chip: superbot, start to finish (fomo is the account it trades in, not the model)
   const plat = hub.querySelector('.rc-plat');
   const cat = plat.querySelector('.rc-cat');
   const pIcon = el(`<span class="qc-pi"><img alt="" src="${sbSrc}" data-app="superbot"/></span>`);

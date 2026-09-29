@@ -1,3 +1,9 @@
-phantom-logo.svg: Phantom ghost mark, the official favicon served at https://phantom.com/_web_platform_assets/favicon.svg
-(fetched 2026-09-28; wrapper groups stripped, the ghost path kept byte for byte). Trademark of Phantom Technologies;
-used nominatively to show the wallet superbot connects to.
+fomo-mark.png: fomo's app icon, the PNG embedded in https://fomo.family/favicon.svg (fetched 2026-09-28), downscaled to 256px.
+Trademark of FOMO Labs; used nominatively to show the trading account superbot connects to.
+
+tokens/: each coin's own icon from its on-chain token metadata, as listed by Jupiter's token API
+(https://lite-api.jup.ag/tokens/v2/search, fetched 2026-09-28), downscaled to 128px PNG:
+  paid.png      $PAID      mint 98kfF7rmsg1QDUEoCqNE7g7M1FdrTt92TEp2CLzypump  ipfs QmfUMmXdXkJ4oyV2NGbgiKkh7qhnhmUZ1toN2kQKD4UDxM
+  stonk.png     $STONK     mint 6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx  https://static.datapi.jup.ag/images/asset-icon/stonk.webp
+  jeanphil.png  $JEANPHIL  mint 14cmYsjbqAHh1DW7iC5cQ2tiAaarbBxvTRHS8K1Tpump  ipfs bafybeicswknzjbbpuujvqxjqyyj4wnatdljzpn2jigiswykk4bu7g7pfye
+The coins are real; every price move, trade and balance shown for them in the spot is fictional mock UI.

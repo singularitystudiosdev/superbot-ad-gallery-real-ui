@@ -1,8 +1,9 @@
-// Ask 1's answer, once Phantom is connected: two work cards and a summary, back to back.
+// Ask 1's answer, once fomo is connected: two work cards and a summary, back to back.
 //   1. Backtest: four strategies replayed on 90 days of Solana memecoins; KPIs count up, the equity lines draw.
 //   2. Buy scan: fresh tokens ranked by score; the flagged buys light up, the rug-risk one is dimmed out.
 //   3. Summary: the plan in three lines and the question the user answers with ask 2.
-// Tickers are made up for the ad; every number here is the demo's own, shown inside the product mock.
+// The three buys are real coins trending on fomo (icons from their on-chain token metadata via Jupiter's token list,
+// see brand/CREDITS.txt); $GLORP, the skipped one, is made up so no real coin is called a rug. Every number is mock UI.
 import { lerp, seg, outCubic, outBack, rand, streamCount } from '../../../lib.js';
 import { stdTimes, workBeat, counter, equityChart, grow } from './wk.js';
 
@@ -24,15 +25,15 @@ const SERIES = [
 SERIES.forEach((s, i) => { s.v[N - 1] = [212, 148, 61, 18][i]; });
 
 const BUYS = [
-  { tk: '$ZAPCAT', why: 'volume 14x in 3h', score: 94, buy: true },
-  { tk: '$MOONFROG', why: 'whale wallets buying', score: 88, buy: true },
-  { tk: '$HONKER', why: 'breakout on Raydium', score: 81, buy: true },
-  { tk: '$GLORP', why: 'dev holds 38%', score: 22, buy: false },
+  { tk: '$PAID', icon: 'paid.png', why: 'volume 14x in 3h', score: 94, buy: true },
+  { tk: '$STONK', icon: 'stonk.png', why: 'whale wallets buying', score: 88, buy: true },
+  { tk: '$JEANPHIL', icon: 'jeanphil.png', why: 'top fomo traders in', score: 81, buy: true },
+  { tk: '$GLORP', icon: null, why: 'dev holds 38%', score: 22, buy: false },
 ];
 
 const SUM = [
   'Best backtest: <b>Momentum</b>, <em class="up">+212%</em> over 90 days, 61% win rate',
-  'Flagged buys: <b>$ZAPCAT</b>, <b>$MOONFROG</b>, <b>$HONKER</b>',
+  'Flagged buys: <b>$PAID</b>, <b>$STONK</b>, <b>$JEANPHIL</b>',
   'Plan: <b>$2,000</b> each, take profits above <em class="up">+50%</em>, stop loss at <em class="dn">-15%</em>',
 ];
 const SUM_SAY = "Here's the summary.";
@@ -54,9 +55,9 @@ function build(k, x) {
   // 1. backtest
   const chart = equityChart({ series: SERIES, lo: -30, hi: 240, ticks: [0, 100, 200], xl: [[0, 'Jul 1'], [29, 'Aug 1'], [N - 1, 'Sep 28']] });
   const bt = workBeat(x, { T: A }, {
-    say: 'Phantom is connected. Backtesting strategies before it trades a cent.',
+    say: 'fomo is connected. Backtesting strategies before it trades a cent.',
     title: 'Backtesting strategies', sub: '90 days of Solana memecoins',
-    steps: ['Read your Phantom wallet: <b>$6,000</b> available', 'Replayed <b>4,812</b> memecoin launches', 'Tested <b>4</b> strategies'],
+    steps: ['Read your fomo account: <b>$6,000</b> available', 'Replayed <b>4,812</b> memecoin launches', 'Tested <b>4</b> strategies'],
     body: `<div class="bt-kpis">
         <div class="bt-kpi"><small>Winner</small><b class="mb-name">Momentum</b></div>
         <div class="bt-kpi up"><small>Return</small><b class="k-ret">+0%</b></div>
@@ -72,12 +73,12 @@ function build(k, x) {
 
   // 2. buy scan
   const rows = BUYS.map((b, i) => `<div class="ws-row mb-row${b.buy ? '' : ' mb-skip'}"><i class="ws-hot"></i><span class="ws-rk">${i + 1}</span>
-      <span class="ws-tk"><b>${b.tk}</b><small>${b.why}</small></span><span class="ws-bar"><i></i></span>
+      <span class="ws-tk">${b.icon ? `<img class="mb-ti" src="${x.brand('tokens/' + b.icon)}" alt=""/>` : '<i class="mb-ti mb-tl">G</i>'}<b>${b.tk}</b><small>${b.why}</small></span><span class="ws-bar"><i></i></span>
       <span class="mb-tag${b.buy ? '' : ' no'}">${b.buy ? 'BUY' : 'SKIP'}</span><span class="ws-n">${b.score}</span></div>`).join('');
   const sc = workBeat(x, { T: B }, {
     say: 'Momentum wins. Now scanning live for buys that fit it.',
-    title: 'Scanning for buys', sub: 'Pump.fun and Raydium, live',
-    steps: ['Checked <b>1,284</b> tokens launched today', 'Dropped <b>1,061</b> rugs, honeypots and dev dumps'],
+    title: 'Scanning for buys', sub: 'Trending on fomo, live',
+    steps: ['Checked <b>1,284</b> trending tokens', 'Dropped <b>1,061</b> rugs, honeypots and dev dumps'],
     body: `<div class="ws-h"><span>Flagged tokens</span><span>Score</span></div>${rows}`,
     cls: 'mb-scan',
   });
@@ -85,7 +86,7 @@ function build(k, x) {
 
   // 3. summary
   const sayEl = x.el(`<div class="qc-say"><span class="qc-vis"></span><span class="qc-hid">${x.esc(SUM_SAY)}</span></div>`);
-  const sum = x.el(`<div class="mb-sum"><div class="mb-sum-h"><span class="mb-gh"><img src="${x.brand('phantom-logo.svg')}" alt=""/></span>Trading plan</div>
+  const sum = x.el(`<div class="mb-sum"><div class="mb-sum-h"><img class="mb-gh" src="${x.brand('fomo-mark.png')}" alt=""/>Trading plan</div>
       ${SUM.map((s, i) => `<div class="mb-l"><i>${i + 1}</i><span>${s}</span></div>`).join('')}
       <div class="mb-ask">${SUM_ASK}</div></div>`);
   const lines = [...sum.querySelectorAll('.mb-l')], ask = sum.querySelector('.mb-ask');

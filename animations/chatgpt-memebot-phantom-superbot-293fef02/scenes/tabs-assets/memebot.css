@@ -1,9 +1,9 @@
-/* Memecoin bot: the Phantom connect tile, the backtest's extra series, the buy scan, the summary card, and the
-   Phantom wallet that trades live (beats/memebot.js, beats/trade.js). Every moving value is written by the beats. */
+/* Memecoin bot: the fomo connect tile, the backtest's extra series, the buy scan, the summary card, and the
+   fomo account that trades live (beats/memebot.js, beats/trade.js). Every moving value is written by the beats. */
 
-/* connect chip tile: Phantom's app icon is the white ghost on its lavender */
-#s-tabs .sbsite .hub .qc-t-phantom { background: #ab9ff2; }
-#s-tabs .sbsite .hub .qc-t-phantom img { width: 15px; height: 15px; filter: brightness(0) invert(1); }
+/* connect chip tile: fomo's app icon (the lavender mark on its navy) fills the tile */
+#s-tabs .sbsite .hub .qc-t-fomo { background: #0b0920; }
+#s-tabs .sbsite .hub .qc-t-fomo img { width: 100%; height: 100%; object-fit: cover; }
 
 /* backtest: two more strategies beside Momentum (green) and Hold SOL (grey) */
 #s-tabs .hub .lg-v i { background: #ab9ff2; }
@@ -17,7 +17,10 @@
 #s-tabs .hub .bt-kpi b.mb-name { font: 700 14px/16px var(--ui); letter-spacing: -.01em; }
 
 /* buy scan: rank, token + why, score bar, BUY/SKIP pill, score */
-#s-tabs .hub .mb-scan .ws-row { grid-template-columns: 18px 196px 1fr 38px 26px; }
+#s-tabs .hub .mb-scan .ws-row { grid-template-columns: 18px 220px 1fr 38px 26px; }
+#s-tabs .hub .mb-scan .ws-tk { align-items: center; }
+#s-tabs .hub .mb-ti { flex: none; width: 18px; height: 18px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px #2a2a30; }
+#s-tabs .hub .mb-tl { display: grid; place-items: center; background: #2a2a31; font: 700 9px/1 var(--ui); font-style: normal; color: #8f8f99; }
 #s-tabs .hub .mb-scan .ws-row .ws-bar i { background: linear-gradient(90deg, #2fbf8a, #34d399); }
 #s-tabs .hub .mb-scan .ws-row.mb-skip .ws-bar i { background: linear-gradient(90deg, #7a3a3a, #ff6b6b); box-shadow: none; }
 #s-tabs .hub .mb-tag { justify-self: center; display: inline-grid; place-items: center; height: 17px; padding: 0 7px; border-radius: 999px; background: rgba(52,211,153,.16); color: var(--up); font: 800 8.5px/1 var(--ui); letter-spacing: .06em; opacity: 0; }
@@ -26,8 +29,7 @@
 /* summary card */
 #s-tabs .hub .mb-sum { width: 500px; box-sizing: border-box; padding: 12px 14px 10px; border-radius: 14px; background: var(--wk-bg); box-shadow: 0 0 0 1px var(--wk-line), 0 18px 40px rgba(0,0,0,.45); opacity: 0; font: 12px/17px var(--ui); color: #d8d8de; }
 #s-tabs .hub .mb-sum-h { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; font: 650 12px/1 var(--ui); color: #f4f4f6; }
-#s-tabs .hub .mb-sum-h img { width: 11px; height: 11px; filter: brightness(0) invert(1); }
-#s-tabs .hub .mb-sum-h .mb-gh { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; background: #ab9ff2; }
+#s-tabs .hub .mb-sum-h .mb-gh { width: 18px; height: 18px; border-radius: 5px; }
 #s-tabs .hub .mb-l, #s-tabs .hub .mb-ask { height: 0; overflow: hidden; opacity: 0; }
 #s-tabs .hub .mb-l > span { display: block; padding: 4px 0 4px 26px; position: relative; }
 #s-tabs .hub .mb-l i { position: absolute; margin: 4px 0 0 0; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: #1e1e24; font: 700 9.5px/1 var(--ui); font-style: normal; color: #c9ccff; }
@@ -38,12 +40,11 @@
 #s-tabs .hub .mb-ask { font: 600 12px/1 var(--ui); color: #f4f4f6; }
 #s-tabs .hub .mb-ask::before { content: ""; display: block; height: 9px; margin-top: 4px; border-top: 1px solid #222227; }
 
-/* the Phantom wallet (thread copy .ph-in and full-frame copy .ph-big share everything here) */
+/* the fomo account (thread copy .ph-in and full-frame copy .ph-big share everything here) */
 #s-tabs .ph-win { width: 500px; box-sizing: border-box; padding: 14px 16px 10px; border-radius: 18px; background: #1c1c1f; box-shadow: 0 0 0 1px #2c2c33, 0 24px 60px rgba(0,0,0,.55); font: 12px/1 var(--ui); color: #fff; opacity: 0; }
 #s-tabs .ph-big { position: absolute; left: 0; top: 0; z-index: 20; transform-origin: 0 0; pointer-events: none; }
 #s-tabs .ph-top { display: flex; align-items: center; gap: 10px; }
-#s-tabs .ph-av { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #ab9ff2; }
-#s-tabs .ph-av img { width: 20px; height: 20px; filter: brightness(0) invert(1); }
+#s-tabs .ph-av { width: 32px; height: 32px; border-radius: 9px; }
 #s-tabs .ph-acc { display: grid; gap: 4px; }
 #s-tabs .ph-acc b { font: 650 13px/1 var(--ui); }
 #s-tabs .ph-acc small { font: 500 10.5px/1 var(--ui); color: #8f8f99; }
@@ -60,16 +61,19 @@
 #s-tabs .ph-feed-h { padding: 6px 0 4px; border-top: 1px solid #2a2a30; font: 650 10px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; color: #8f8f99; }
 #s-tabs .ph-row { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 6px; margin: 0 -6px; border-radius: 9px; opacity: 0; }
 #s-tabs .ph-row.flash { background: rgba(171,159,242,.1); }
-#s-tabs .ph-ic { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #2a2a31; }
-#s-tabs .ph-ic svg { width: 13px; height: 13px; fill: none; stroke: #c9c4f7; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-#s-tabs .ph-row.sell .ph-ic { background: rgba(46,192,139,.16); }
+/* the token's own icon, with a small buy/sell arrow badge on its corner */
+#s-tabs .ph-ic { position: relative; flex: none; width: 26px; height: 26px; }
+#s-tabs .ph-ic img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; display: block; }
+#s-tabs .ph-ic i { position: absolute; right: -3px; bottom: -3px; display: grid; place-items: center; width: 13px; height: 13px; border-radius: 50%; background: #2a2a31; box-shadow: 0 0 0 2px #1c1c1f; }
+#s-tabs .ph-ic svg { width: 8px; height: 8px; fill: none; stroke: #c9c4f7; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .ph-row.sell .ph-ic i { background: #174a37; }
 #s-tabs .ph-row.sell .ph-ic svg { stroke: #2ec08b; }
 #s-tabs .ph-rt { display: grid; gap: 4px; }
 #s-tabs .ph-rt b { font: 650 12px/1 var(--ui); }
 #s-tabs .ph-rt small { font: 500 10px/1 var(--ui); color: #8f8f99; }
 #s-tabs .ph-amt { margin-left: auto; font: 650 12px/1 var(--ui); font-style: normal; color: #b8b8c2; font-variant-numeric: tabular-nums; }
 #s-tabs .ph-row.sell .ph-amt { color: #2ec08b; }
-#s-tabs .ph-row.loss .ph-ic { background: rgba(255,107,107,.14); }
+#s-tabs .ph-row.loss .ph-ic i { background: #4a1f22; }
 #s-tabs .ph-row.loss .ph-ic svg { stroke: #ff6b6b; }
 #s-tabs .ph-row.loss .ph-amt { color: #ff6b6b; }
 

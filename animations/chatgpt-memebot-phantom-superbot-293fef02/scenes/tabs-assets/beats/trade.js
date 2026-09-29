@@ -1,4 +1,4 @@
-// Ask 2's answer ("Look's good, let's do it"): superbot trades live inside the user's Phantom wallet. The wallet
+// Ask 2's answer ("Look's good, let's do it"): superbot trades live inside the user's fomo account. The account
 // opens in the thread, then zooms out of it to fill the frame while the balance swings from $6,000 down, back up,
 // spikes, pulls back and settles at $8,579; the activity feed logs the three buys, one stop-loss and two take-profits.
 // Two copies are built from the same markup: the one in the thread and the full-frame one in the scene root
@@ -22,14 +22,15 @@ const BAL = Array.from({ length: N }, (_, i) => {
 
 const FEED = [
   // proceeds add up to END: 1,700 + 3,680 + 3,199
-  { at: 0.03, side: 'buy', tk: '$ZAPCAT', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
-  { at: 0.07, side: 'buy', tk: '$MOONFROG', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
-  { at: 0.11, side: 'buy', tk: '$HONKER', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
-  { at: 0.26, side: 'sell loss', tk: '$MOONFROG', sub: 'Stop loss hit, -15%', amt: '+$1,700' },
-  { at: 0.66, side: 'sell', tk: '$ZAPCAT', sub: 'Take profit hit, +84%', amt: '+$3,680' },
-  { at: 0.95, side: 'sell', tk: '$HONKER', sub: 'Take profit hit, +60%', amt: '+$3,199' },
+  { at: 0.03, side: 'buy', tk: '$PAID', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
+  { at: 0.07, side: 'buy', tk: '$STONK', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
+  { at: 0.11, side: 'buy', tk: '$JEANPHIL', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
+  { at: 0.26, side: 'sell loss', tk: '$STONK', sub: 'Stop loss hit, -15%', amt: '+$1,700' },
+  { at: 0.66, side: 'sell', tk: '$PAID', sub: 'Take profit hit, +84%', amt: '+$3,680' },
+  { at: 0.95, side: 'sell', tk: '$JEANPHIL', sub: 'Take profit hit, +60%', amt: '+$3,199' },
 ];
-const SAY = 'Trading now, inside your Phantom wallet.';
+const SAY = 'Trading now, inside your fomo account.';
+const ICON = { $PAID: 'paid.png', $STONK: 'stonk.png', $JEANPHIL: 'jeanphil.png' };
 const ARROW = { buy: '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>', sell: '<svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>' };
 const verb = (side) => (side === 'buy' ? 'Bought' : 'Sold');
 
@@ -45,13 +46,13 @@ function times(r) {
 
 function walletHtml(x, chartHtml, cls) {
   return `<div class="ph-win ${cls}">
-    <div class="ph-top"><span class="ph-av"><img src="${x.brand('phantom-logo.svg')}" alt=""/></span>
-      <div class="ph-acc"><b>Account 1</b><small>Phantom · Solana</small></div>
+    <div class="ph-top"><img class="ph-av" src="${x.brand('fomo-mark.png')}" alt=""/>
+      <div class="ph-acc"><b>sam</b><small>fomo · Solana</small></div>
       <em class="ph-live"><img src="${x.sbSrc}" alt=""/>superbot trading<i></i></em></div>
     <div class="ph-bal"><b class="ph-num">$6,000.00</b><div class="ph-chg"><span class="ph-d">+$0.00</span><span class="ph-p">+0.00%</span></div></div>
     <div class="ph-chart">${chartHtml}</div>
     <div class="ph-feed-h">Activity</div>
-    <div class="ph-feed">${FEED.map((f) => `<div class="ph-row ${f.side}"><span class="ph-ic">${ARROW[f.side.split(' ')[0]]}</span>
+    <div class="ph-feed">${FEED.map((f) => `<div class="ph-row ${f.side}"><span class="ph-ic"><img src="${x.brand('tokens/' + ICON[f.tk])}" alt=""/><i>${ARROW[f.side.split(' ')[0]]}</i></span>
       <span class="ph-rt"><b>${verb(f.side)} ${f.tk}</b><small>${f.sub}</small></span><em class="ph-amt">${f.amt}</em></div>`).join('')}</div>
   </div>`;
 }

@@ -1,4 +1,4 @@
-// memecoin trading bot: "ChatGPT says you shouldn't gamble" -> "WE DONT CARE!" -> superbot builds a memecoin
+// memecoin trading bot: "WANNA STOP GETTING RUGGED?" -> "WE DONT CARE!" -> superbot builds a memecoin
 // trading bot on the user's fomo account (scenes/tabs-assets/chat.js). The two text cards read ./variant.js.
 // The engine is one-agent-full-degen's: the whole spot is a pure function of t (?t=<s> freezes a
 // frame, ?t=<s>&play=1 plays on, space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock).
@@ -33,7 +33,12 @@ const END_DUR = 3.0, DIP = 0.35;
 // says:      variant.introLine (only variant.redWord red; it lands last, same motion as the rest, just red)
 // dontcare:  "WE DONT CARE!" slammed in, with the confetti burst on the same beat
 // the card-1 line comes from variant.js: one span per word, and the variant's redWord is the red one
-const lineParts = (line, red) => String(line).split(' ').map((w) => (w === red ? { r: w } : w));
+// a red word may carry trailing punctuation ("RUGGED?"): only the word goes red, the mark stays white
+const lineParts = (line, red) => String(line).split(' ').map((w) => {
+  if (w === red) return { r: w };
+  const m = w.match(/^(.+?)([?!.,]+)$/);
+  return m && m[1] === red ? { html: `<span class="rd">${m[1]}</span>${m[2]}` } : w;
+});
 const CARDS = {
   says: { dur: 2.4, parts: lineParts(V.introLine, V.redWord) },
   dontcare: { dur: 2.1, mode: 'slam', parts: [V.slamLine] },

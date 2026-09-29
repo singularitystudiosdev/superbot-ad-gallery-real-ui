@@ -8,7 +8,7 @@
 import * as lib from './lib.js';
 import * as shell from './shell.js';
 import { renderConfetti } from './confetti.js';
-import V from './variant.js';
+import V from './variant.js?v=2'; // versioned: Pages caches modules 10 min, and the intro copy lives here
 
 const { clamp, lerp, seg, outQuint, inOutCubic, outBack } = lib;
 const H = 1080;

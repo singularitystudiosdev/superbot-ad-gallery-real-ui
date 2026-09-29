@@ -1,0 +1,112 @@
+/* The four call-center beat cards (beats/*.js), all scoped under #s-tabs .sbsite .hub so the hub stylesheet is
+   never touched. Base geometry is the hub's own language: 12px radius, #0e0e10 ground, inner hairline
+   (#2e2e31), 10-12px type, tabular numerals in mono. The resolve pill copies ports.css .dd-btn's geometry,
+   gradient, shine and drawn check (same values), renamed .cc-pill. Nothing animates here: every moving value is
+   written from t by the beats. */
+
+/* ---------- the card ---------- */
+#s-tabs .sbsite .hub .cc-card { position: relative; width: 100%; max-width: 520px; margin: 3px 0 2px; border-radius: 12px;
+  background: #0e0e10; box-shadow: inset 0 0 0 1px #2e2e31, 0 10px 30px rgba(0,0,0,.35); overflow: hidden; color: #f2f2f7; opacity: 0; }
+#s-tabs .sbsite .hub .cc-head { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid #242427; }
+#s-tabs .sbsite .hub .cc-badge { flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center;
+  background: rgba(52,211,153,.13); color: #34d399; }
+#s-tabs .sbsite .hub .cc-badge svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .cc-ht { min-width: 0; flex: 1; }
+#s-tabs .sbsite .hub .cc-ht b { display: block; font: 600 11.5px/15px var(--ui); color: #f2f2f7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .cc-ht small { display: block; font: 10px/14px var(--ui); color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .cc-live { flex: none; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 8px; border-radius: 999px;
+  background: rgba(52,211,153,.12); font: 700 8.5px/1 var(--ui); letter-spacing: .09em; color: #34d399; opacity: 0; }
+#s-tabs .sbsite .hub .cc-live i { width: 6px; height: 6px; border-radius: 50%; background: #34d399; opacity: 0; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .cc-ic { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .cc-tick { width: 11px; height: 11px; stroke-width: 3; }
+
+/* ---------- a chord line + the two/three stat tiles ---------- */
+#s-tabs .sbsite .hub .cc-seatrow { display: flex; align-items: center; gap: 8px; padding: 8px 10px 2px; }
+#s-tabs .sbsite .hub .cc-seat { font: 600 11px/15px var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .cc-seat-note { margin-left: auto; font: 500 10px/14px var(--ui); color: #8e8e93; opacity: 0; }
+#s-tabs .sbsite .hub .cc-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 6px 10px 0; }
+#s-tabs .sbsite .hub .cc-tiles3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 8px 10px 0; }
+#s-tabs .sbsite .hub .cc-tile { display: grid; gap: 1px; padding: 7px 9px; border-radius: 9px; background: #151517; box-shadow: inset 0 0 0 1px #26262a; opacity: 0; }
+#s-tabs .sbsite .hub .cc-tile b { font: 800 16px/19px var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cc-tile small { font: 500 9.5px/13px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .cc-tiles3 .cc-tile b { font-size: 14px; line-height: 17px; }
+
+/* ---------- b: the voice lanes, the meter, the sample chip ---------- */
+#s-tabs .sbsite .hub .cc-samp { flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px 0 7px; border-radius: 999px;
+  background: #1c1c1f; box-shadow: inset 0 0 0 1px #2e2e31; font: 600 9.5px/1 var(--ui); color: #c7c7cc; }
+#s-tabs .sbsite .hub .cc-samp .cc-ic { width: 10px; height: 10px; fill: currentColor; stroke: none; }
+#s-tabs .sbsite .hub .cc-lanes { display: grid; gap: 6px; padding: 8px 10px 2px; }
+#s-tabs .sbsite .hub .cc-lane { display: flex; align-items: center; gap: 8px; opacity: 0; }
+#s-tabs .sbsite .hub .cc-lane-t { flex: none; width: 58px; font: 600 9.5px/12px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .cc-lane.sb .cc-lane-t { color: #34d399; }
+#s-tabs .sbsite .hub .cc-bars { flex: 1; min-width: 0; height: 30px; display: flex; align-items: center; gap: 2px; }
+#s-tabs .sbsite .hub .cc-bars i { flex: 1 1 0; min-width: 1.5px; height: 3px; border-radius: 2px; background: #4a4a52; }
+#s-tabs .sbsite .hub .cc-lane.sb .cc-bars i { background: linear-gradient(180deg, #5eead4, #34d399); }
+#s-tabs .sbsite .hub .cc-match { padding: 6px 10px 2px; }
+#s-tabs .sbsite .hub .cc-match-h { display: flex; align-items: baseline; gap: 8px; font: 500 10px/14px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .cc-match-n { margin-left: auto; font: 800 12px/15px var(--font-mono); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cc-meter { height: 5px; margin-top: 4px; border-radius: 3px; background: #1f1f22; overflow: hidden; }
+#s-tabs .sbsite .hub .cc-meter i { display: block; width: 0; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #5eead4, #34d399); }
+
+/* ---------- c: the history rows, the playbook chips and the reasons bar ---------- */
+#s-tabs .sbsite .hub .cc-count { flex: none; display: grid; justify-items: end; }
+#s-tabs .sbsite .hub .cc-count b { font: 800 14px/16px var(--font-mono); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cc-count small { font: 500 9px/12px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .cc-crows { margin: 0; padding: 6px 10px 2px; list-style: none; display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .cc-crow { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 8px; background: #151517; box-shadow: inset 0 0 0 1px #232327; opacity: 0; }
+#s-tabs .sbsite .hub .cc-who { flex: 1.1; min-width: 0; font: 600 10.5px/14px var(--ui); color: #f2f2f7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .cc-topic { flex: 1; min-width: 0; font: 500 10px/14px var(--ui); color: #a1a1a6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .cc-dur { flex: none; font: 600 10px/14px var(--font-mono); color: #8e8e93; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cc-out { flex: none; padding: 2px 7px; border-radius: 999px; font: 700 9px/13px var(--ui); font-style: normal; }
+#s-tabs .sbsite .hub .cc-out.ok { background: rgba(52,211,153,.13); color: #34d399; }
+#s-tabs .sbsite .hub .cc-out.rf { background: rgba(110,124,242,.16); color: #9aa6ff; }
+#s-tabs .sbsite .hub .cc-play { padding: 8px 10px 2px; opacity: 0; }
+#s-tabs .sbsite .hub .cc-play-h { font: 700 9.5px/13px var(--ui); letter-spacing: .08em; text-transform: uppercase; color: #8e8e93; }
+#s-tabs .sbsite .hub .cc-pchips { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; margin-top: 5px; }
+#s-tabs .sbsite .hub .cc-pchip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 9px;
+  background: rgba(52,211,153,.10); box-shadow: inset 0 0 0 1px rgba(52,211,153,.24); font: 600 10px/13px var(--ui); color: #34d399; opacity: 0; }
+#s-tabs .sbsite .hub .cc-pchip-b { display: grid; gap: 3px; padding: 6px 9px; background: #151517; box-shadow: inset 0 0 0 1px #26262a; color: #f2f2f7; }
+#s-tabs .sbsite .hub .cc-mini { display: flex; gap: 2px; width: 150px; height: 5px; border-radius: 3px; background: #1f1f22; overflow: hidden; opacity: 0; }
+#s-tabs .sbsite .hub .cc-mini i { display: block; width: 0; height: 100%; background: #6e7cf2; }
+#s-tabs .sbsite .hub .cc-mini i:nth-child(2) { background: #5ec8e6; }
+#s-tabs .sbsite .hub .cc-mini i:nth-child(3) { background: #34d399; }
+#s-tabs .sbsite .hub .cc-mini-l { display: flex; align-items: baseline; gap: 6px; }
+#s-tabs .sbsite .hub .cc-mini-l b { font: 700 9.5px/12px var(--ui); }
+#s-tabs .sbsite .hub .cc-mini-l small { font: 500 9.5px/12px var(--font-mono); color: #a1a1a6; white-space: nowrap; }
+
+/* ---------- d: the call, the transcript, the resolved chip ---------- */
+#s-tabs .sbsite .hub .cc-turns { display: grid; gap: 6px; padding: 8px 10px 2px; }
+#s-tabs .sbsite .hub .cc-turn { display: flex; gap: 8px; opacity: 0; }
+#s-tabs .sbsite .hub .cc-sp { flex: none; width: 46px; padding-top: 1px; font: 700 9px/12px var(--ui); letter-spacing: .06em; text-transform: uppercase; color: #8e8e93; }
+#s-tabs .sbsite .hub .cc-turn.you .cc-sp { color: #34d399; }
+#s-tabs .sbsite .hub .cc-turn p { margin: 0; flex: 1; min-width: 0; padding: 6px 9px; border-radius: 9px; background: #151517; box-shadow: inset 0 0 0 1px #26262a;
+  font: 10.5px/15px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .cc-turn.you p { background: rgba(52,211,153,.09); box-shadow: inset 0 0 0 1px rgba(52,211,153,.22); }
+#s-tabs .sbsite .hub .cc-th, #s-tabs .sbsite .hub .cc-t1h, #s-tabs .sbsite .hub .cc-t2h { color: transparent; }
+#s-tabs .sbsite .hub .cc-res { display: flex; align-items: center; gap: 8px; padding: 8px 10px 0; opacity: 0; }
+#s-tabs .sbsite .hub .cc-res-chip { display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px 0 7px; border-radius: 999px;
+  background: rgba(52,211,153,.13); font: 700 10px/1 var(--ui); color: #34d399; }
+#s-tabs .sbsite .hub .cc-res-chip .cc-tick { transform-origin: 50% 50%; transform: scale(calc(.4 + .6 * var(--t, 0))); opacity: calc(.3 + .7 * var(--t, 0)); }
+#s-tabs .sbsite .hub .cc-res-note { font: 500 10px/14px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .cc-ca { display: inline-block; font-variant-numeric: tabular-nums; transition: none; }
+
+/* ---------- the resolve pill: ports.css .dd-btn's geometry, gradient, shine and check ---------- */
+#s-tabs .sbsite .hub .cc-pill { position: relative; height: 40px; margin: 8px 10px 10px; border-radius: 999px; isolation: isolate; overflow: hidden;
+  background: linear-gradient(90deg, #5ec8e6 0%, #6e7cf2 52%, #a86ef0 100%); color: #fff; transform-origin: 50% 50%;
+  box-shadow: 0 0 14px rgba(110,124,242,.45), 0 0 30px rgba(168,110,240,.22), inset 0 1px 0 rgba(255,255,255,.22); }
+#s-tabs .sbsite .hub .cc-grp { position: absolute; left: 50%; top: 50%; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transform: translate(-50%, -50%); }
+#s-tabs .sbsite .hub .cc-grp svg { flex: none; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .cc-grp-a { font: 700 11.5px/14px var(--ui); letter-spacing: .005em; }
+#s-tabs .sbsite .hub .cc-grp-a .cc-ic { width: 13px; height: 13px; stroke-width: 2.3; }
+#s-tabs .sbsite .hub .cc-lab-a { display: inline-block; min-width: 132px; text-align: center; }  /* the animated dots never shift the pill */
+#s-tabs .sbsite .hub .cc-grp-b { gap: 8px; font: 800 16px/20px var(--ui); letter-spacing: -.01em; opacity: 0; }
+#s-tabs .sbsite .hub .cc-check { width: 18px; height: 18px; stroke-width: 2.9; }
+#s-tabs .sbsite .hub .cc-check-p { stroke-dasharray: 23; stroke-dashoffset: 23; }
+#s-tabs .sbsite .hub .cc-shine { position: absolute; top: -30%; bottom: -30%; left: 0; width: 42%; z-index: 1; pointer-events: none; opacity: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.6) 50%, rgba(255,255,255,0) 100%); transform: translateX(-160%) skewX(-20deg); }
+
+/* narrow frames: the reply column is 560px at 4:5, so the cards are already fluid; only the transcript's speaker
+   gutter and the reason bar need to give way */
+html[data-ar="4x5"] #s-tabs .sbsite .hub .cc-sp, html[data-ar="1x1"] #s-tabs .sbsite .hub .cc-sp { width: 40px; }
+html[data-ar="4x5"] #s-tabs .sbsite .hub .cc-mini, html[data-ar="1x1"] #s-tabs .sbsite .hub .cc-mini { width: 110px; }
+html[data-ar="4x5"] #s-tabs .sbsite .hub .cc-lab-a, html[data-ar="1x1"] #s-tabs .sbsite .hub .cc-lab-a { min-width: 112px; }

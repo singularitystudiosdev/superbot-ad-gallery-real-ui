@@ -6,7 +6,7 @@
 // frame). render(lt) is a pure function of local time. The scene keeps the id "tabs" so the hub's generated
 // stylesheets (scoped under #s-tabs) apply unchanged.
 import { hubMarkup } from './tabs-assets/hub-markup.js';
-import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=5';
+import { mountChat, renderChat, BEATS, CHAT_T0, CHAT_END } from './tabs-assets/chat.js?v=8';
 import { lerp, seg, outCubic, inOutCubic } from '../lib.js';
 
 const asset = (f) => new URL('./tabs-assets/' + f, import.meta.url).href;

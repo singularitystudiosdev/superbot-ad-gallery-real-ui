@@ -14,3 +14,7 @@ tokens/: each coin's own icon from its on-chain token metadata, as listed by Jup
 The last five came from Jupiter's top-trending list (https://lite-api.jup.ag/tokens/v2/toptrending/1h and /24h,
 2026-09-28); their scan reasons quote that day's real 24h move (neet +19.9%, e/acc +67.4%, CATE +3.2%, BOME -3.9%,
 USELESS -13.2%). The coins are real; every price move, trade and balance shown for them in the spot is fictional mock UI.
+
+The account screen copies the layout and colours of fomo's portfolio screen from its App Store screenshots
+(https://apps.apple.com/app/id6741115427, fomo 1.94, "Track your portfolio in real time"). fomo sets it in Aeonik
+(CoType, commercial, served without CORS), so the spot uses Geist (OFL, Google Fonts) in its place. The UI icons are drawn in SVG.

@@ -230,7 +230,7 @@ const more = [
   ['chatgpt-memebot-axiom-superbot-6e571750', 'chatgpt-memebot-axiom-superbot-6e571750/', 'ChatGPT says you shouldn\'t gamble: make me a memecoin trading bot, superbot backtests on Axiom, DeepSeek scans every ticker to a HIT, buys $POPCAT and exits up $174', 'Ad spots'],
   // make me a memecoin trading bot, fomo cut (2026-09-28; id kept from its first Phantom cut): cae00e01 hand-built into its own folder: "gamble" rises in plain red (no scale punch),
   // the ask connects fomo with every-model-one-chat's DoorDash chip, backtests 4 strategies, flags fomo's trending $PAID, $STONK, $JEANPHIL, reports a summary, then
-  // "Look's good, let's do it" and the fomo account zooms out of the thread to fill the frame, trading $6,000 through a loss, a climb, a spike and a drop to $8,579. The coins are real, every figure is fictional.
+  // "Look's good, let's do it" and the fomo portfolio screen (a 1:1 copy of the app's) zooms out of the thread to fill the frame, trading $6,000 through a loss, a climb, a spike and a drop to $8,579. The coins are real, every figure is fictional.
   ['chatgpt-memebot-phantom-superbot-293fef02', 'chatgpt-memebot-phantom-superbot-293fef02/', 'WANNA STOP GETTING RUGGED? make me a memecoin trading bot, superbot connects fomo, backtests, flags $PAID, $STONK and $JEANPHIL, then trades them live', 'Ad spots'],
   // make me a prediction market trading bot (2026-09-28): cae00e01 hand-built into its own folder: "gamble" rises in plain red (no scale punch),
   // the ask connects Polymarket with every-model-one-chat's DoorDash chip (composer chip follows), backtests 5 strategies, scans 1,412 live markets, flags 3 buys,

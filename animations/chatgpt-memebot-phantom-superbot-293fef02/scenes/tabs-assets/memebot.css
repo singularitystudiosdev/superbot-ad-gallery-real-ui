@@ -41,52 +41,75 @@
 #s-tabs .hub .mb-ask { font: 600 12px/1 var(--ui); color: #f4f4f6; }
 #s-tabs .hub .mb-ask::before { content: ""; display: block; height: 9px; margin-top: 4px; border-top: 1px solid #222227; }
 
-/* the fomo account (thread copy .ph-in and full-frame copy .ph-big share everything here) */
-#s-tabs .ph-win { width: 500px; box-sizing: border-box; padding: 14px 16px 10px; border-radius: 18px; background: #1c1c1f; box-shadow: 0 0 0 1px #2c2c33, 0 24px 60px rgba(0,0,0,.55); font: 12px/1 var(--ui); color: #fff; opacity: 0; }
-#s-tabs .ph-big { position: absolute; left: 0; top: 0; z-index: 20; transform-origin: 0 0; pointer-events: none; }
-#s-tabs .ph-top { display: flex; align-items: center; gap: 10px; }
-#s-tabs .ph-av { width: 32px; height: 32px; border-radius: 9px; }
-#s-tabs .ph-acc { display: grid; gap: 4px; }
-#s-tabs .ph-acc b { font: 650 13px/1 var(--ui); }
-#s-tabs .ph-acc small { font: 500 10.5px/1 var(--ui); color: #8f8f99; }
-#s-tabs .ph-live { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px 0 5px; border-radius: 999px; background: #262631; font: 650 10.5px/1 var(--ui); font-style: normal; color: #e4e0ff; }
-#s-tabs .ph-live img { width: 16px; height: 16px; border-radius: 5px; }
-#s-tabs .ph-live i { width: 7px; height: 7px; border-radius: 50%; background: #2ec08b; box-shadow: 0 0 8px #2ec08b; }
-#s-tabs .ph-bal { padding: 16px 0 10px; text-align: center; }
-#s-tabs .ph-num { display: block; font: 800 36px/1 var(--ui); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-#s-tabs .ph-chg { display: inline-flex; gap: 8px; margin-top: 8px; font: 650 13px/1 var(--ui); color: #2ec08b; font-variant-numeric: tabular-nums; }
-#s-tabs .ph-p { padding: 3px 7px; margin-top: -3px; border-radius: 6px; background: rgba(46,192,139,.14); }
-#s-tabs .ph-win.neg .ph-chg { color: #ff6b6b; }
-#s-tabs .ph-win.neg .ph-p { background: rgba(255,107,107,.14); }
-#s-tabs .ph-chart { margin: 2px -4px 8px; }
-#s-tabs .ph-feed-h { padding: 6px 0 4px; border-top: 1px solid #2a2a30; font: 650 10px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; color: #8f8f99; }
-#s-tabs .ph-row { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 6px; margin: 0 -6px; border-radius: 9px; opacity: 0; }
-#s-tabs .ph-row.flash { background: rgba(171,159,242,.1); }
-/* the token's own icon, with a small buy/sell arrow badge on its corner */
-#s-tabs .ph-ic { position: relative; flex: none; width: 26px; height: 26px; }
-#s-tabs .ph-ic img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; display: block; }
-#s-tabs .ph-ic i { position: absolute; right: -3px; bottom: -3px; display: grid; place-items: center; width: 13px; height: 13px; border-radius: 50%; background: #2a2a31; box-shadow: 0 0 0 2px #1c1c1f; }
-#s-tabs .ph-ic svg { width: 8px; height: 8px; fill: none; stroke: #c9c4f7; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-#s-tabs .ph-row.sell .ph-ic i { background: #174a37; }
-#s-tabs .ph-row.sell .ph-ic svg { stroke: #2ec08b; }
-#s-tabs .ph-rt { display: grid; gap: 4px; }
-#s-tabs .ph-rt b { font: 650 12px/1 var(--ui); }
-#s-tabs .ph-rt small { font: 500 10px/1 var(--ui); color: #8f8f99; }
-#s-tabs .ph-amt { margin-left: auto; font: 650 12px/1 var(--ui); font-style: normal; color: #b8b8c2; font-variant-numeric: tabular-nums; }
-#s-tabs .ph-row.sell .ph-amt { color: #2ec08b; }
-#s-tabs .ph-row.loss .ph-ic i { background: #4a1f22; }
-#s-tabs .ph-row.loss .ph-ic svg { stroke: #ff6b6b; }
-#s-tabs .ph-row.loss .ph-amt { color: #ff6b6b; }
+/* the fomo account: fomo's own portfolio screen, measured off its App Store shot (fomo 1.94). Thread copy .fo-in and
+   full-frame copy .fo-big share everything here. fomo sets it in Aeonik (commercial, no CORS on fomo.family/fonts),
+   so Geist stands in; the colours are sampled from the shot. */
+#s-tabs .fo-win { --fo-bg: #080611; --fo-band: #111119; --fo-line: #1d1d29; --fo-dim: #9a9cab; --fo-mute: #484c55;
+  --fo-up: #22c55e; --fo-dn: #ef4444; --fo-blue: #5468fc;
+  width: 430px; box-sizing: border-box; overflow: hidden; border-radius: 34px; background: var(--fo-bg);
+  box-shadow: 0 0 0 1px var(--fo-line), 0 30px 80px rgba(0,0,0,.6); color: #fff; opacity: 0;
+  font: 400 15px/1.25 Geist, Aeonik, Inter, system-ui, sans-serif; font-variant-numeric: tabular-nums; letter-spacing: -.005em; }
+#s-tabs .fo-big { position: absolute; left: 0; top: 0; z-index: 20; transform-origin: 0 0; pointer-events: none; }
+#s-tabs .fo-i { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 
-/* the wallet's chart: degen.css scopes its chart rules to .hub, the full-frame copy lives outside it */
-#s-tabs .ph-win svg.eq { display: block; width: 100%; height: auto; overflow: visible; }
-#s-tabs .ph-win .eq-g { stroke: #2a2a31; stroke-width: 1; stroke-dasharray: 2 3; }
-#s-tabs .ph-win .eq-yl { font: 500 8px/1 var(--font-mono); fill: #6f6f78; text-anchor: end; }
-#s-tabs .ph-win .eq-l { fill: none; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
-#s-tabs .ph-win .eq-l.eq-s { stroke: #2ec08b; }
-#s-tabs .ph-win .eq-head { fill: #eafff6; stroke: #2ec08b; stroke-width: 1.5; opacity: 0; }
-#s-tabs .ph-win .eq-glow { fill: #2ec08b; opacity: 0; filter: blur(3px); }
-#s-tabs .ph-win .eq-x { stroke: #9a9aa2; stroke-width: .8; stroke-dasharray: 2 2; opacity: 0; }
-#s-tabs .ph-win .eq-tag { opacity: 0; }
-#s-tabs .ph-win .eq-tag rect { fill: #2ec08b; }
-#s-tabs .ph-win .eq-tag text { font: 700 9px/1 var(--font-mono); text-anchor: middle; fill: #062016; }
+/* profile band */
+#s-tabs .fo-prof { padding: 20px 20px 16px; background: var(--fo-band); }
+#s-tabs .fo-top { display: flex; align-items: flex-start; justify-content: space-between; }
+#s-tabs .fo-av { position: relative; width: 64px; height: 64px; border-radius: 50%; background: radial-gradient(circle at 38% 34%, #b8fbff 0%, #3fe3f5 38%, #0bb8d6 100%); }
+#s-tabs .fo-av i { position: absolute; right: -4px; bottom: -2px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #0b0b12; color: #fff; }
+#s-tabs .fo-av .fo-i { width: 13px; height: 13px; stroke-width: 2.2; }
+#s-tabs .fo-tools { display: flex; gap: 16px; padding-top: 4px; color: #cfd0d8; }
+#s-tabs .fo-name { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 22px; font-weight: 500; letter-spacing: -.01em; }
+#s-tabs .fo-clan { width: 24px; height: 24px; border-radius: 6px; }
+#s-tabs .fo-handle { margin-top: 3px; color: var(--fo-dim); font-size: 15px; }
+#s-tabs .fo-bio { display: flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 15px; color: #f1f1f4; }
+#s-tabs .fo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--fo-up); box-shadow: 0 0 8px var(--fo-up); }
+#s-tabs .fo-stats { margin-top: 10px; font-size: 14px; color: var(--fo-dim); }
+#s-tabs .fo-stats b { color: #fff; font-weight: 600; }
+#s-tabs .fo-stats b + b, #s-tabs .fo-stats b:nth-of-type(2) { margin-left: 16px; }
+#s-tabs .fo-meta { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 12.5px; color: var(--fo-dim); }
+#s-tabs .fo-meta .fo-i { width: 15px; height: 15px; color: #6b6d7a; }
+#s-tabs .fo-meta span { margin-right: 10px; }
+
+/* portfolio: balance, chart, cash, positions */
+#s-tabs .fo-pf { padding: 16px 20px 14px; background-image: radial-gradient(rgba(255,255,255,.035) 1px, transparent 1.2px); background-size: 11px 11px; }
+#s-tabs .fo-balrow { display: flex; align-items: flex-start; justify-content: space-between; }
+#s-tabs .fo-bal { font-size: 36px; font-weight: 500; letter-spacing: -.025em; line-height: 1; }
+#s-tabs .fo-cents { color: var(--fo-mute); }
+#s-tabs .fo-pnl { margin-top: 7px; font-size: 15px; color: #d8d9e0; }
+#s-tabs .fo-d { color: var(--fo-up); }
+#s-tabs .fo-win.neg .fo-d { color: var(--fo-dn); }
+#s-tabs .fo-tf { display: flex; gap: 4px; font-size: 13px; font-weight: 500; color: #6b6d7a; }
+#s-tabs .fo-tf span { padding: 6px 8px; border-radius: 8px; }
+#s-tabs .fo-tf .on { background: #191925; color: #fff; }
+#s-tabs .fo-chart { display: block; width: calc(100% + 40px); height: auto; margin: 10px -20px 6px; overflow: visible; }
+#s-tabs .fo-line { fill: none; stroke: var(--fo-up); stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+#s-tabs .fo-head { fill: var(--fo-up); }
+#s-tabs .fo-cash { display: flex; align-items: center; gap: 14px; margin-top: 4px; }
+#s-tabs .fo-cashic { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #151521; font-size: 22px; }
+#s-tabs .fo-cash > div { flex: 1; display: grid; gap: 4px; }
+#s-tabs .fo-cash small { font-size: 13px; color: var(--fo-dim); }
+#s-tabs .fo-cash b { font-size: 18px; font-weight: 500; }
+#s-tabs .fo-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: #0e0e1a; box-shadow: inset 0 0 0 1px #25253a; font-size: 22px; line-height: 1; }
+#s-tabs .fo-posh { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; font-size: 17px; font-weight: 500; }
+#s-tabs .fo-n { font-style: normal; color: var(--fo-dim); font-weight: 400; }
+#s-tabs .fo-oc { display: flex; padding: 3px; border-radius: 10px; box-shadow: inset 0 0 0 1px #22222e; font-size: 13px; font-weight: 500; color: #6b6d7a; }
+#s-tabs .fo-oc span { display: flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 8px; }
+#s-tabs .fo-oc .on { background: #151b3f; color: #8d9cf7; }
+#s-tabs .fo-oc .on i { width: 6px; height: 6px; border-radius: 50%; background: var(--fo-blue); }
+#s-tabs .fo-chips { display: flex; gap: 8px; margin-top: 12px; font-size: 14.5px; color: #d0d1d8; }
+#s-tabs .fo-chips span { padding: 8px 13px; border-radius: 12px; box-shadow: inset 0 0 0 1px #2a2a36; }
+#s-tabs .fo-chips .on { background: #16151f; color: #fff; }
+#s-tabs .fo-rows { margin-top: 6px; min-height: 192px; } /* three rows of room, so the screen never changes height */
+#s-tabs .fo-row { display: flex; align-items: center; gap: 13px; height: 0; overflow: hidden; opacity: 0; }
+#s-tabs .fo-ti { position: relative; flex: none; width: 46px; height: 46px; }
+#s-tabs .fo-ti img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; display: block; }
+#s-tabs .fo-ti i { position: absolute; right: -3px; bottom: -2px; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: var(--fo-blue); box-shadow: 0 0 0 2px var(--fo-bg); }
+#s-tabs .fo-ti svg { width: 11px; height: 11px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .fo-rt { flex: 1; display: grid; gap: 4px; }
+#s-tabs .fo-rt b { font-size: 16.5px; font-weight: 500; }
+#s-tabs .fo-rt small { font-size: 13px; color: var(--fo-dim); }
+#s-tabs .fo-rv { display: grid; gap: 4px; justify-items: end; }
+#s-tabs .fo-rv b { font-size: 16.5px; font-weight: 500; }
+#s-tabs .fo-rv small { font-size: 13px; color: var(--fo-up); }
+#s-tabs .fo-rv small.dn { color: var(--fo-dn); }

@@ -99,6 +99,15 @@ const more = [
   // Publication 850 glossary terms and the QA catches quote RAE style rules (all cited in img/CREDITS.txt); job
   // statuses and counts are the ad's own copy.
   ['do-my-job-translator-superbot-e60f1bcc', 'do-my-job-translator-superbot-e60f1bcc/', 'BUT WE WILL · Do my job for me: superbot works an English-to-Spanish translator’s queue in Phrase TMS', 'Ad spots'],
+  // BUT WE WILL, do my job copywriter (2026-09-29): the same intro and slam, then "Do my job for me" as a copywriter:
+  // superbot signs in to Google Docs and the camera dives into a Mailchimp copy deck, where it matches your writing
+  // style, reads the Mailchimp Content Style Guide and works the deck's request comments (Search ad headlines,
+  // Subject lines, App Store subtitle: drafts streamed in as suggestions with a live character count, checks ticked,
+  // reply posted, thread resolved). Every platform limit is quoted from the Google Ads, Apple App Store Connect,
+  // Google Play, Meta, LinkedIn, X and Mailchimp help pages, the style rules from styleguide.mailchimp.com, each
+  // drafted line's Sources quote from the Mailchimp homepage, pricing page and live App Store listing (all cited in
+  // img/CREDITS.txt); the request comments and drafted copy are the ad's own.
+  ['do-my-job-copywriter-superbot-cda60abe', 'do-my-job-copywriter-superbot-cda60abe/', 'BUT WE WILL · Do my job for me: superbot writes the Mailchimp copy deck in Google Docs', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

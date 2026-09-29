@@ -112,6 +112,14 @@
     "thumb": "assets/shots/do-my-job-translator-superbot-e60f1bcc.png"
   },
   {
+    "id": "do-my-job-copywriter-superbot-cda60abe",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot writes the Mailchimp copy deck in Google Docs",
+    "src": "animations/do-my-job-copywriter-superbot-cda60abe/",
+    "thumb": "assets/shots/do-my-job-copywriter-superbot-cda60abe.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

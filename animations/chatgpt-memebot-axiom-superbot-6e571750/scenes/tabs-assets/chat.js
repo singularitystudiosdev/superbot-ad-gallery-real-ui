@@ -1,11 +1,12 @@
 // The one-ask chat: "make me a memecoin trading bot" is typed into the composer and sent; superbot connects the
 // user's Axiom account the way every-model-one-chat connects DoorDash (a "Connecting to Axiom" chip shimmers to a
-// check, the composer's model chip swaps to Axiom), then answers as "Axiom in superbot" with two work cards
-// (./beats/memebot.js): the strategy backtest, then the live buy flags.
+// check, the composer's model chip swaps to Axiom), then answers as "Axiom in superbot" (./beats/memebot.js):
+// the strategy backtest, a DeepSeek connect chip (raised by the beat through ctx.chip, routed via inst.routes),
+// the ticker scan to a HIT, the trade on an Axiom token page, and the exit.
 // The thread is bottom-anchored so every message rises out of the composer. renderChat(c, t) is a pure function
 // of the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { clamp, lerp, seg, outCubic, outBack, inOutCubic, esc, boxIn } from '../../lib.js';
-import memebot from './beats/memebot.js?v=1';
+import memebot from './beats/memebot.js?v=3';
 import V from '../../variant.js';
 
 const img = (f) => new URL('../../img/' + f, import.meta.url).href;
@@ -13,7 +14,10 @@ const bump = (p) => Math.sin(Math.PI * clamp(p));
 
 export const CHAT_T0 = 1.1; // the empty state has settled; the ask starts typing
 
-const APPS = { axiom: { name: 'Axiom', logo: img('axiom.png'), sub: 'in superbot' } };
+const APPS = {
+  axiom: { name: 'Axiom', logo: img('axiom.png'), sub: 'in superbot' },
+  deepseek: { name: 'DeepSeek', logo: img('deepseek.png'), sub: 'in superbot' },
+};
 
 const ASKS = [
   { mod: memebot, ask: V.ask, app: 'axiom', label: 'Connecting to Axiom' },
@@ -53,7 +57,13 @@ export function mountChat(hub) {
   const add = (html) => { const n = el(html); inner.appendChild(n); return n; };
 
   const box = (n) => boxIn(n, root);
-  const ctx = { hub, box, OK, esc, el, img, sbSrc, root, tile };
+  // a connect chip a beat raises mid-answer (k: { sw, done }), drawn exactly like the ask's own
+  const chip = (app, label, k) => {
+    const node = el(`<div class="qc-chipline"><span class="qc-sw">${tile(app)}<span class="qc-swl">${esc(label)}</span><span class="qc-st"><i class="qc-spin"></i>${OK}</span></span></div>`);
+    const s = { k, sw: node.firstElementChild, spin: node.querySelector('.qc-spin'), ok: node.querySelector('.qc-st .qc-ok') };
+    return { node, render(t) { appear(node, t, k.sw, 8); renderSwitch(s, t); } };
+  };
+  const ctx = { hub, box, OK, esc, el, img, sbSrc, root, tile, chip };
 
   const sbAvatar = `<span class="avatar sb"><img src="${sbSrc}" alt=""/></span>`;
   const beats = BEATS.map(({ k }) => {
@@ -108,7 +118,8 @@ function renderComposer(c, t) {
 
 function renderRouting(c, t) {
   let app = 'superbot', swap = -1;
-  c.beats.forEach(({ k }) => { if (t >= k.swap) { app = k.app; swap = k.swap; } });
+  const routes = c.beats.flatMap(({ k, inst }) => [k, ...(inst.routes || [])]).sort((x, y) => x.swap - y.swap);
+  routes.forEach((r) => { if (t >= r.swap) { app = r.app; swap = r.swap; } });
   // platform chip: dips out, swaps, comes back
   if (app !== c.lastApp) {
     c.pImg.src = app === 'superbot' ? c.sbSrc : APPS[app].logo;

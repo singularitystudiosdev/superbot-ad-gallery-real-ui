@@ -172,3 +172,5 @@
 #s-tabs .sbsite .hub .qc-t-axiom { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
 #s-tabs .sbsite .hub .qc-t-axiom img, #s-tabs .sbsite .hub .qc-who .qc-t-axiom img { width: 100%; height: 100%; border-radius: 50%; }
 #s-tabs .sbsite .hub .qc-pi img[data-app="axiom"] { border-radius: 50%; }
+#s-tabs .sbsite .hub .qc-t-deepseek { background: #fff; }
+#s-tabs .sbsite .hub .qc-t-deepseek img { width: 78%; height: 78%; }

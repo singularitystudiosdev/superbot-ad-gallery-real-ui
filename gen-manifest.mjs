@@ -225,7 +225,7 @@ const more = [
   ['chatgpt-memebot-axiom-superbot-6e571750', 'chatgpt-memebot-axiom-superbot-6e571750/', 'ChatGPT says you shouldn\'t gamble: make me a memecoin trading bot, superbot connects Axiom, backtests 4 strategies and flags the buys', 'Ad spots'],
   // make me a memecoin trading bot, Phantom cut (2026-09-28): cae00e01 hand-built into its own folder: "gamble" rises in plain red (no scale punch),
   // the ask connects Phantom with every-model-one-chat's DoorDash chip, backtests 4 strategies, flags buys, reports a summary, then
-  // "Look's good, let's do it" and the Phantom wallet zooms out of the thread to fill the frame, trading $6,000 up to $10,220. Tickers and figures are fictional.
+  // "Look's good, let's do it" and the Phantom wallet zooms out of the thread to fill the frame, trading $6,000 through a loss, a climb, a spike and a drop to $8,579. Tickers and figures are fictional.
   ['chatgpt-memebot-phantom-superbot-293fef02', 'chatgpt-memebot-phantom-superbot-293fef02/', 'ChatGPT says you shouldn\'t gamble: make me a memecoin trading bot, superbot connects Phantom, backtests, flags buys, then trades it live', 'Ad spots'],
   // make me a prediction market trading bot (2026-09-28): cae00e01 hand-built into its own folder: "gamble" rises in plain red (no scale punch),
   // the ask connects Polymarket with every-model-one-chat's DoorDash chip (composer chip follows), backtests 5 strategies, scans 1,412 live markets, flags 3 buys,

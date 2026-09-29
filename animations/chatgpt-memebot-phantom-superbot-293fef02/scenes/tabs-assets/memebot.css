@@ -69,6 +69,9 @@
 #s-tabs .ph-rt small { font: 500 10px/1 var(--ui); color: #8f8f99; }
 #s-tabs .ph-amt { margin-left: auto; font: 650 12px/1 var(--ui); font-style: normal; color: #b8b8c2; font-variant-numeric: tabular-nums; }
 #s-tabs .ph-row.sell .ph-amt { color: #2ec08b; }
+#s-tabs .ph-row.loss .ph-ic { background: rgba(255,107,107,.14); }
+#s-tabs .ph-row.loss .ph-ic svg { stroke: #ff6b6b; }
+#s-tabs .ph-row.loss .ph-amt { color: #ff6b6b; }
 
 /* the wallet's chart: degen.css scopes its chart rules to .hub, the full-frame copy lives outside it */
 #s-tabs .ph-win svg.eq { display: block; width: 100%; height: auto; overflow: visible; }

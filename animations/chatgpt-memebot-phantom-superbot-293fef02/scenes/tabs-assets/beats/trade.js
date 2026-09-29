@@ -1,39 +1,44 @@
 // Ask 2's answer ("Look's good, let's do it"): superbot trades live inside the user's Phantom wallet. The wallet
-// opens in the thread, then zooms out of it to fill the frame while the balance climbs from $6,000 to $10,220,
-// the chart draws up and the activity feed logs the three buys and three take-profit sells.
+// opens in the thread, then zooms out of it to fill the frame while the balance swings from $6,000 down, back up,
+// spikes, pulls back and settles at $8,579; the activity feed logs the three buys, one stop-loss and two take-profits.
 // Two copies are built from the same markup: the one in the thread and the full-frame one in the scene root
 // (outside the scaled hub); both are driven by the same clock, so the handoff between them is invisible.
 import { lerp, seg, outCubic, inOutCubic, rand, streamCount } from '../../../lib.js';
 import { equityChart, fmt } from './wk.js';
 
-const START = 6000, END = 10220;
-const N = 64;
-// the balance: flat while the buys fill, a shallow dip, then the climb with the sells stepping it up
+const START = 6000, END = 8579;
+const N = 96;
+// the balance's shape, as [x, $] keys: the buys fill, a semi big loss (-20%), the climb, the spike, the drop, and
+// a close at END; smoothstep between keys plus jagged noise so it reads like a live memecoin wallet
+const KEYS = [[0, 6000], [0.1, 6080], [0.27, 4790], [0.35, 5180], [0.52, 7350], [0.57, 7050], [0.66, 9920], [0.73, 8850], [0.8, 7480], [0.9, 8150], [1, END]];
 const BAL = Array.from({ length: N }, (_, i) => {
   const x = i / (N - 1);
-  const climb = (END - START) * Math.pow(seg(x, 0.16, 1), 1.25);
-  const dip = -260 * Math.exp(-Math.pow((x - 0.24) / 0.06, 2));
-  const n = i === 0 || i === N - 1 ? 0 : (rand(i + 5) - 0.5) * 140;
-  return +(START + climb + dip + n).toFixed(2);
+  const j = Math.max(0, KEYS.findIndex(([kx]) => kx >= x) - 1);
+  const [x0, v0] = KEYS[j], [x1, v1] = KEYS[j + 1];
+  const u = seg(x, x0, x1), e = u * u * (3 - 2 * u);
+  const n = i === 0 || i === N - 1 ? 0 : (rand(i + 5) - 0.5) * 260;
+  return +(lerp(v0, v1, e) + n).toFixed(2);
 });
 
 const FEED = [
-  { at: 0.04, side: 'buy', tk: '$ZAPCAT', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
-  { at: 0.10, side: 'buy', tk: '$MOONFROG', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
-  { at: 0.16, side: 'buy', tk: '$HONKER', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
-  { at: 0.50, side: 'sell', tk: '$ZAPCAT', sub: 'Take profit hit, +84%', amt: '+$3,680' },
-  { at: 0.72, side: 'sell', tk: '$MOONFROG', sub: 'Take profit hit, +71%', amt: '+$3,420' },
-  { at: 0.92, side: 'sell', tk: '$HONKER', sub: 'Take profit hit, +56%', amt: '+$3,120' },
+  // proceeds add up to END: 1,700 + 3,680 + 3,199
+  { at: 0.03, side: 'buy', tk: '$ZAPCAT', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
+  { at: 0.07, side: 'buy', tk: '$MOONFROG', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
+  { at: 0.11, side: 'buy', tk: '$HONKER', sub: 'Bought with 2,000 USDC', amt: '-$2,000' },
+  { at: 0.26, side: 'sell loss', tk: '$MOONFROG', sub: 'Stop loss hit, -15%', amt: '+$1,700' },
+  { at: 0.66, side: 'sell', tk: '$ZAPCAT', sub: 'Take profit hit, +84%', amt: '+$3,680' },
+  { at: 0.95, side: 'sell', tk: '$HONKER', sub: 'Take profit hit, +60%', amt: '+$3,199' },
 ];
 const SAY = 'Trading now, inside your Phantom wallet.';
 const ARROW = { buy: '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>', sell: '<svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>' };
+const verb = (side) => (side === 'buy' ? 'Bought' : 'Sold');
 
 function times(r) {
   const T = { r, card: r + 0.25 };
   T.live = T.card + 0.45;
   T.zoom = T.live + 0.35;
   T.zoomEnd = T.zoom + 0.9;
-  T.tradeEnd = T.live + 3.6;
+  T.tradeEnd = T.live + 4.4; // long enough for every swing to read
   T.end = T.tradeEnd + 1.3;
   return T;
 }
@@ -46,15 +51,15 @@ function walletHtml(x, chartHtml, cls) {
     <div class="ph-bal"><b class="ph-num">$6,000.00</b><div class="ph-chg"><span class="ph-d">+$0.00</span><span class="ph-p">+0.00%</span></div></div>
     <div class="ph-chart">${chartHtml}</div>
     <div class="ph-feed-h">Activity</div>
-    <div class="ph-feed">${FEED.map((f) => `<div class="ph-row ${f.side}"><span class="ph-ic">${ARROW[f.side]}</span>
-      <span class="ph-rt"><b>${f.side === 'buy' ? 'Bought' : 'Sold'} ${f.tk}</b><small>${f.sub}</small></span><em class="ph-amt">${f.amt}</em></div>`).join('')}</div>
+    <div class="ph-feed">${FEED.map((f) => `<div class="ph-row ${f.side}"><span class="ph-ic">${ARROW[f.side.split(' ')[0]]}</span>
+      <span class="ph-rt"><b>${verb(f.side)} ${f.tk}</b><small>${f.sub}</small></span><em class="ph-amt">${f.amt}</em></div>`).join('')}</div>
   </div>`;
 }
 
 function build(k, x) {
   const T = k.T;
   const mk = (cls) => {
-    const chart = equityChart({ W: 476, H: 140, series: [{ v: BAL, cls: 'eq-s', tag: '+70%' }], lo: 5400, hi: 10800, ticks: [6000, 8000, 10000], R: 44, yfmt: (v) => `$${v / 1000}k` });
+    const chart = equityChart({ W: 476, H: 140, series: [{ v: BAL, cls: 'eq-s', tag: '+43%' }], lo: 4200, hi: 10600, ticks: [5000, 7500, 10000], R: 44, yfmt: (v) => `$${v / 1000}k` });
     const win = x.el(walletHtml(x, chart.html, cls));
     return { win, chart, svg: win.querySelector('svg.eq'), num: win.querySelector('.ph-num'), d: win.querySelector('.ph-d'), p: win.querySelector('.ph-p'), rows: [...win.querySelectorAll('.ph-row')], last: '' };
   };

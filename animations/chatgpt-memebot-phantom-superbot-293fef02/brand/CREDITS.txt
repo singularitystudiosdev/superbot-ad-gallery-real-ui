@@ -1,0 +1,3 @@
+phantom-logo.svg: Phantom ghost mark, the official favicon served at https://phantom.com/_web_platform_assets/favicon.svg
+(fetched 2026-09-28; wrapper groups stripped, the ghost path kept byte for byte). Trademark of Phantom Technologies;
+used nominatively to show the wallet superbot connects to.

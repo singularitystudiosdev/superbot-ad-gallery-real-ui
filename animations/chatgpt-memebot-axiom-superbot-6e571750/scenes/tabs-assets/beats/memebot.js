@@ -2,13 +2,15 @@
 // 1. Backtest: 4 entry strategies over 90 days of Solana memecoin launches; the winner (Volume spike) is drawn
 //    against simply holding SOL. Volume spike +38.6% vs SOL +7.4%, 61% win rate, max drawdown -8.8%.
 // 2. DeepSeek connects (the same routing chip as Axiom; the composer chip swaps with it) to score tickers.
-// 3. Scan: every live Axiom ticker is scraped (counter to 2,418), the list rolls through a lens while superbot
-//    waits, then eases to a stop on $FROGE and the lens stamps HIT.
-// 4. "I found a good buy ($FROGE), executing": an Axiom token page (market-cap candles, instant-trade panel,
-//    Bought / Sold / Holding / PnL row). The 7 SOL buy fills, candles stream up, B and S markers land.
-// 5. "I'm out, we are up $174." Bought $1,050, sold $1,224.20, PnL +$174.20 (+16.6%). Fictional mock data.
+// 3. Scan: every live Axiom ticker is scraped (counter to 2,418), the list of real Solana memecoins (./tokens.js,
+//    real icons, market caps and volumes) rolls through a lens while superbot waits, then eases to a stop on
+//    $POPCAT and the lens stamps HIT.
+// 4. "I found a good buy ($POPCAT), executing": an Axiom token page with POPCAT's real stats (market-cap candles,
+//    instant-trade panel, Bought / Sold / Holding / PnL row). The 9 SOL buy fills, candles stream up, B and S land.
+// 5. "I'm out, we are up $174." 9 SOL in ($1,051.02), $1,225.02 out, PnL +$174.00. The candles are illustration.
 import { seg, outCubic, outBack, lerp, clamp, streamCount } from '../../../lib.js';
 import { stdTimes, workBeat, counter, equityChart, fmt } from './wk.js?v=2';
+import { TOKENS, HIT, SOL_USD } from './tokens.js?v=2';
 
 const pct = (v, d = 1) => `${v > 0 ? '+' : v < 0 ? '-' : ''}${Math.abs(v).toFixed(d)}%`;
 const STRAT = [0,-0.16,0.19,1.29,1.7,2.85,3.89,5.15,5.63,6.69,7.72,9.16,9.21,10.65,11.62,13.04,13.53,14.82,13.36,12.36,12.25,11.78,10.15,9.39,8.39,8.23,7.12,6.54,5.7,4.67,5.37,6.03,7.17,8.82,10.39,11.58,12.53,14.24,15.55,16.64,17.3,18.76,19.02,19.24,19.58,21.51,22.8,23.79,24.23,25.96,27.69,29.21,29.42,29.75,31.02,32.5,33.89,35.61,36.46,36.86,37.06,38.36,38.6];
@@ -22,42 +24,37 @@ const KPI = [
   { l: 'Max drawdown', v: -8.8, f: (v) => pct(v), c: 'dn' },
 ];
 
-// ---- the scan: a long list of live pairs, $FROGE near the end; the lens is the list's middle row
+// ---- the scan: real Solana memecoins, $POPCAT near the end; the lens is the list's middle row. Only the
+// DeepSeek score column is the ad's own.
 let seed = 11;
 const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
-const NAMES = ['PEPU', 'BONKZ', 'WAGMI', 'DOGEX', 'CHAD', 'MOONR', 'SNEK', 'BRETTO', 'NUB', 'GOAT2', 'SIGMA', 'TURBO', 'KITTY', 'RIZZ', 'MOCHI', 'ZEUS', 'BASED', 'PONK', 'GLORP', 'SHIBU', 'NEKO', 'HONK', 'YOLO', 'MEW2', 'DEGEN', 'SLERF', 'COPE', 'POPO', 'BLOB', 'WOJAK', 'GRIMA', 'TOAD', 'LUNAR', 'BOBO', 'CRABS', 'SPUD', 'MILK', 'NOOT', 'FLOKY', 'BEANS', 'FROGE', 'HAMSTR', 'BLORP', 'GIGACAT', 'PIXL', 'MOTH'];
-const HIT_I = NAMES.indexOf('FROGE');
-const HUES = [140, 200, 30, 280, 350, 60, 170, 250];
-const ROWS = NAMES.map((s, i) => {
-  const hit = i === HIT_I;
-  return {
-    s, hit, hue: HUES[i % HUES.length],
-    mc: hit ? '$1.24M' : `$${(20 + rnd() * 900).toFixed(0)}K`,
-    vol: hit ? '$19K' : `$${(0.4 + rnd() * 9).toFixed(1)}K`,
-    sc: hit ? 96 : Math.round(8 + rnd() * 58),
-  };
-});
+const HIT_I = TOKENS.findIndex((q) => q.s === HIT.s);
+const ROWS = TOKENS.map((q, i) => ({ ...q, hit: i === HIT_I, sc: i === HIT_I ? 96 : Math.round(8 + rnd() * 58) }));
 const RH = 26, LENS = 2; // row height (px) and the lens row inside the 5-row window
 const SCROLL_TO = (HIT_I - LENS) * RH;
 // constant roll while waiting, then a slot-machine ease onto the hit (speeds match at the seam)
 const roll = (p) => (p <= 0.7 ? 0.8 * (p / 0.7) : 0.8 + 0.2 * (1 - (1 - (p - 0.7) / 0.3) ** 2));
 
 // ---- the trade: 1-minute market-cap candles (in $M). Entry at the close of candle ENTRY, exit at the last one.
-const ENTRY_MC = 1.24, BOUGHT = 1050, SOLD = 1224.2, EXIT_MC = ENTRY_MC * (SOLD / BOUGHT);
-const HIST = [1.13, 1.12, 1.14, 1.16, 1.15, 1.13, 1.14, 1.17, 1.16, 1.18, 1.17, 1.15, 1.16, 1.19, 1.18, 1.2, 1.19, 1.17, 1.18, 1.21, 1.2, 1.19, 1.22, 1.21, 1.23, 1.22, 1.24];
-const RUN = [1.262, 1.281, 1.272, 1.301, 1.324, 1.316, 1.343, 1.338, 1.361, 1.392, 1.381, 1.405, 1.398, 1.421, 1.433, EXIT_MC];
+// The shape is drawn on a unit path ending at 1.24 and scaled onto POPCAT's real entry market cap.
+const SOL_IN = 9, BOUGHT = SOL_IN * SOL_USD, SOLD = BOUGHT + 174;
+const K = HIT.mc / 1.24;
+const ENTRY_MC = HIT.mc, EXIT_MC = ENTRY_MC * (SOLD / BOUGHT);
+const HIST = [1.13, 1.12, 1.14, 1.16, 1.15, 1.13, 1.14, 1.17, 1.16, 1.18, 1.17, 1.15, 1.16, 1.19, 1.18, 1.2, 1.19, 1.17, 1.18, 1.21, 1.2, 1.19, 1.22, 1.21, 1.23, 1.22, 1.24].map((v) => v * K);
+const RUN = [...[1.262, 1.281, 1.272, 1.301, 1.324, 1.316, 1.343, 1.338, 1.361, 1.392, 1.381, 1.405, 1.398, 1.421, 1.433].map((v) => v * K), EXIT_MC];
 const CLOSES = [...HIST, ...RUN];
 const ENTRY = HIST.length - 1, N = CLOSES.length;
 const CANDLES = CLOSES.map((c, i) => {
-  const o = i ? CLOSES[i - 1] : c - 0.006;
-  const w = 0.004 + rnd() * 0.009;
+  const o = i ? CLOSES[i - 1] : c - 0.006 * K;
+  const w = (0.004 + rnd() * 0.009) * K;
   return { o, c, h: Math.max(o, c) + w * rnd(), l: Math.min(o, c) - w * rnd() };
 });
-const CW = 300, CH = 164, PL = 4, PR = 40, PT = 8, PB = 8, LO = 1.08, HI = 1.5;
+const CW = 300, CH = 164, PL = 4, PR = 40, PT = 8, PB = 8, LO = 1.08 * K, HI = 1.5 * K;
 const SLOT = (CW - PL - PR) / N;
 const cx = (i) => PL + SLOT * (i + 0.5);
 const cy = (v) => PT + ((HI - v) / (HI - LO)) * (CH - PT - PB);
 const mcTxt = (v) => `$${v.toFixed(2)}M`;
+const pxTxt = (v) => `$${(v / HIT.supplyM).toFixed(5)}`;
 const usd = (v) => `$${fmt(v, 0)}`;
 
 // a streamed line of superbot's answer, the same motion as workBeat's
@@ -74,35 +71,35 @@ function sayLine(x, text, t0) {
   };
 }
 
-function scanBody() {
-  const rows = ROWS.map((r) => `<div class="sc-row${r.hit ? ' sc-hitrow' : ''}"><span class="sc-tk"><i style="--h:${r.hue}">${r.s[0]}</i><b>$${r.s}</b></span><span>${r.mc}</span><span>${r.vol}</span><span class="sc-sc${r.sc < 30 ? ' lo' : ''}">${r.sc}</span></div>`).join('');
+function scanBody(x) {
+  const rows = ROWS.map((r) => `<div class="sc-row${r.hit ? ' sc-hitrow' : ''}"><span class="sc-tk"><img src="${x.img('tokens/' + r.icon)}" alt=""/><b>$${r.s}</b></span><span>${r.mc}</span><span>${r.vol}</span><span class="sc-sc${r.sc < 30 ? ' lo' : ''}">${r.sc}</span></div>`).join('');
   return `<div class="sc-top"><span class="sc-n"><b>0</b><small>tickers scraped</small></span>
       <span class="sc-st"><span class="sc-w"><i></i>Waiting for a hit</span><span class="sc-h">HIT</span></span></div>
-    <div class="sc-hd"><span>Token</span><span>MC</span><span>5m vol</span><span>Score</span></div>
+    <div class="sc-hd"><span>Token</span><span>MC</span><span>24h vol</span><span>Score</span></div>
     <div class="sc-win"><div class="sc-lens"><em class="sc-stamp">HIT</em></div><div class="sc-list">${rows}</div></div>`;
 }
 
 function axiomCard(x) {
-  const grid = [1.1, 1.2, 1.3, 1.4, 1.5].map((v) => `<line class="ax-gl" x1="${PL}" x2="${CW - PR}" y1="${cy(v).toFixed(1)}" y2="${cy(v).toFixed(1)}"/><text class="ax-yl" x="${CW - PR + 5}" y="${(cy(v) + 3).toFixed(1)}">${v.toFixed(1)}M</text>`).join('');
+  const grid = [44, 48, 52, 56, 60].map((v) => `<line class="ax-gl" x1="${PL}" x2="${CW - PR}" y1="${cy(v).toFixed(1)}" y2="${cy(v).toFixed(1)}"/><text class="ax-yl" x="${CW - PR + 5}" y="${(cy(v) + 3).toFixed(1)}">${v}M</text>`).join('');
   const candles = CANDLES.map((q, i) => `<g class="ax-c ${q.c >= q.o ? 'up' : 'dn'}"><line x1="${cx(i).toFixed(1)}" x2="${cx(i).toFixed(1)}"/><rect x="${(cx(i) - SLOT * 0.34).toFixed(1)}" width="${(SLOT * 0.68).toFixed(1)}" rx="0.6"/></g>`).join('');
   return x.el(`<div class="ax">
     <div class="ax-bar">${x.tile('axiom')}<b class="ax-brand">AXIOM</b><span class="ax-nav"><span class="on">Discover</span><span>Pulse</span><span>Trackers</span></span><span class="ax-srch">Search by token or CA</span><span class="ax-auto"><img src="${x.sbSrc}" alt=""/>superbot trading</span></div>
-    <div class="ax-tok"><span class="ax-av">F</span><span class="ax-nm"><b>FROGE</b><small>Frog Emperor</small></span>
-      <span class="ax-mc"><b>$1.24M</b></span>
-      <span class="ax-kv"><small>Price</small><b class="ax-px">$0.00124</b></span><span class="ax-kv"><small>Liquidity</small><b>$182K</b></span><span class="ax-kv"><small>Holders</small><b>3,912</b></span></div>
+    <div class="ax-tok"><img class="ax-av" src="${x.img('tokens/' + HIT.icon)}" alt=""/><span class="ax-nm"><b>${HIT.s}</b><small>${HIT.name}</small></span>
+      <span class="ax-mc"><b>${mcTxt(ENTRY_MC)}</b></span>
+      <span class="ax-kv"><small>Price</small><b class="ax-px">${pxTxt(ENTRY_MC)}</b></span><span class="ax-kv"><small>Liquidity</small><b>${HIT.liq}</b></span><span class="ax-kv"><small>24h Vol</small><b>${HIT.vol24}</b></span></div>
     <div class="ax-main">
-      <div class="ax-ch"><div class="ax-chh"><span class="ax-tf"><b>1m</b><span>5m</span><span>1h</span></span><span class="ax-pair">FROGE/USD Market Cap on Axiom</span></div>
+      <div class="ax-ch"><div class="ax-chh"><span class="ax-tf"><b>1m</b><span>5m</span><span>1h</span></span><span class="ax-pair">${HIT.s}/USD Market Cap on Axiom</span></div>
         <svg class="ax-svg" viewBox="0 0 ${CW} ${CH}">${grid}<line class="ax-en" x1="${PL}" x2="${CW - PR}" y1="${cy(ENTRY_MC).toFixed(1)}" y2="${cy(ENTRY_MC).toFixed(1)}"/>${candles}
           <line class="ax-pl" x1="${PL}" x2="${CW - PR}"/><g class="ax-tag"><rect x="${CW - PR + 1}" width="${PR - 1}" height="13" rx="2.5"/><text x="${CW - PR + 4}"></text></g>
           <g class="ax-mk ax-b"><rect width="11" height="11" rx="2.5"/><text>B</text></g><g class="ax-mk ax-s"><rect width="11" height="11" rx="2.5"/><text>S</text></g></svg></div>
       <div class="ax-side">
-        <div class="ax-vol"><span><small>5m Vol</small><b>$19K</b></span><span><small>Buys</small><b class="up">120</b></span><span><small>Sells</small><b class="dn">71</b></span></div>
+        <div class="ax-vol"><span><small>6h Vol</small><b>${HIT.vol6h}</b></span><span><small>Buys</small><b class="up">${HIT.buys6h}</b></span><span><small>Sells</small><b class="dn">${HIT.sells6h}</b></span></div>
         <div class="ax-tabs"><span class="ax-tb">Buy</span><span class="ax-ts">Sell</span></div>
         <div class="ax-ord"><span class="on">Market</span><span>Limit</span><span>Adv.</span></div>
-        <div class="ax-amt"><small>Amount</small><b class="ax-amv">7</b><em class="ax-amu">SOL</em></div>
-        <div class="ax-pre ax-pb"><span>1</span><span>3</span><span class="on">7</span><span>10</span></div>
+        <div class="ax-amt"><small>Amount</small><b class="ax-amv">${SOL_IN}</b><em class="ax-amu">SOL</em></div>
+        <div class="ax-pre ax-pb"><span>1</span><span>3</span><span class="on">${SOL_IN}</span><span>20</span></div>
         <div class="ax-pre ax-ps"><span>25%</span><span>50%</span><span>75%</span><span class="on">100%</span></div>
-        <div class="ax-btn"><span class="ax-bl">Buy FROGE</span><i class="ax-flash"></i></div>
+        <div class="ax-btn"><span class="ax-bl">Buy ${HIT.s}</span><i class="ax-flash"></i></div>
       </div>
     </div>
     <div class="ax-pnl"><span><small>Bought</small><b>$0</b></span><span><small>Sold</small><b>$0</b></span><span><small>Holding</small><b>$0</b></span><span class="ax-p"><small>PnL</small><b>+$0</b></span></div>
@@ -158,14 +155,14 @@ export default {
       sub: 'DeepSeek, scoring with Volume spike',
       steps: ['Scraped every live pair on <b>Axiom</b>', 'Scoring each one with <b>DeepSeek</b>'],
       cls: 'wk-sc',
-      body: scanBody(),
+      body: scanBody(x),
     });
     const scN = counter(s.q('.sc-n b'), 2418, sc.count[0], sc.count[1], (v) => fmt(Math.round(v)));
     const list = s.q('.sc-list'), lens = s.q('.sc-lens'), stamp = s.q('.sc-stamp'), hitRow = s.q('.sc-hitrow');
     const wait = s.q('.sc-w'), hitTx = s.q('.sc-h'), dot = s.q('.sc-w i');
 
     // 4. execute on Axiom
-    const say1 = sayLine(x, 'I found a good buy ($FROGE), executing', ex.r);
+    const say1 = sayLine(x, `I found a good buy ($${HIT.s}), executing`, ex.r);
     const ax = axiomCard(x);
     const q = (sel) => ax.querySelector(sel);
     const cs = [...ax.querySelectorAll('.ax-c')].map((g) => ({ g, w: g.querySelector('line'), b: g.querySelector('rect') }));
@@ -207,9 +204,12 @@ export default {
         const hit = t >= sc.hit;
         lens.classList.toggle('on', hit);
         hitRow.classList.toggle('on', hit);
-        wait.style.opacity = (1 - hp).toFixed(3);
+        // the two pills never share the frame: "Waiting" is gone before "HIT" lands
+        wait.style.opacity = (1 - seg(t, sc.hit - 0.05, sc.hit + 0.08)).toFixed(3);
         dot.style.opacity = (0.35 + 0.65 * (0.5 + 0.5 * Math.cos((t - sc.count[1]) * 6))).toFixed(3);
-        hitTx.style.opacity = hp.toFixed(3);
+        const hq = seg(t, sc.hit + 0.08, sc.hit + 0.3);
+        hitTx.style.opacity = hq.toFixed(3);
+        hitTx.style.transform = `scale(${lerp(0.85, 1, outBack(hq)).toFixed(4)})`;
         stamp.style.opacity = outCubic(hp).toFixed(3);
         stamp.style.transform = `translateY(-50%) scale(${lerp(1.6, 1, outBack(hp)).toFixed(4)}) rotate(${lerp(-14, -6, outCubic(hp)).toFixed(2)}deg)`;
 
@@ -242,20 +242,20 @@ export default {
         pl.setAttribute('y1', yc.toFixed(2)); pl.setAttribute('y2', yc.toFixed(2));
         tag.setAttribute('transform', `translate(0 ${(yc - 6.5).toFixed(2)})`);
         tagTx.setAttribute('y', '9.6');
-        tagTx.textContent = `${cur.toFixed(3)}M`;
+        tagTx.textContent = `${cur.toFixed(2)}M`;
         const tg = seg(t, ex.hist[1] - 0.1, ex.hist[1] + 0.2);
         pl.style.opacity = tg.toFixed(3); tag.style.opacity = tg.toFixed(3);
         mc.textContent = mcTxt(cur);
-        px.textContent = `$${(cur / 1000).toFixed(5)}`;
+        px.textContent = pxTxt(cur);
 
         // the buy: button dips and flashes, B lands under the entry candle, the entry line fades in
         const bp = seg(t, ex.buy - 0.12, ex.buy + 0.18);
         const sp = seg(t, ex.sell - 0.12, ex.sell + 0.18);
         const sell = t >= ex.sell - 0.35;
         side.classList.toggle('sell', sell);
-        const label = t < ex.buy ? 'Buy FROGE' : !sell ? 'Bought 7 SOL' : t < ex.sell ? 'Sell FROGE' : 'Sold 100%';
+        const label = t < ex.buy ? `Buy ${HIT.s}` : !sell ? `Bought ${SOL_IN} SOL` : t < ex.sell ? `Sell ${HIT.s}` : 'Sold 100%';
         if (label !== lastBtn) { bl.textContent = label; lastBtn = label; }
-        amv.textContent = sell ? '100' : '7';
+        amv.textContent = sell ? '100' : String(SOL_IN);
         amu.textContent = sell ? '%' : 'SOL';
         const dip = Math.max(Math.sin(Math.PI * bp), Math.sin(Math.PI * sp));
         btn.style.transform = dip > 0.001 ? `scale(${(1 - 0.05 * dip).toFixed(4)})` : 'none';

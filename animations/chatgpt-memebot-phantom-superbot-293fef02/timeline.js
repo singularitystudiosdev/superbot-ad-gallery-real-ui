@@ -1,14 +1,12 @@
-// memecoin trading bot: "WANNA STOP GETTING RUGGED?" -> "WE DONT CARE!" -> superbot builds a memecoin
-// trading bot on the user's fomo account (scenes/tabs-assets/chat.js). The two text cards read ./variant.js.
+// memecoin trading bot: "WANNA STOP GETTING RUGGED?" -> superbot builds a memecoin trading bot on the user's
+// fomo account (scenes/tabs-assets/chat.js). The text card reads ./variant.js.
 // The engine is one-agent-full-degen's: the whole spot is a pure function of t (?t=<s> freezes a
 // frame, ?t=<s>&play=1 plays on, space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock).
-// It lays the SEQUENCE end to end: two black text cards (drawn here), the hub scene cropped to its thread
-// (scenes/tabs.js) and the end card. confetti.js draws the "WE DONT CARE!" burst on its own stage-level canvas
-// from the spot's ABSOLUTE t, so it keeps falling across the cut into the chat.
+// It lays the SEQUENCE end to end: one black text card (drawn here), the hub scene cropped to its thread
+// (scenes/tabs.js) and the end card.
 import * as lib from './lib.js';
 import * as shell from './shell.js';
-import { renderConfetti } from './confetti.js';
-import V from './variant.js?v=2'; // versioned: Pages caches modules 10 min, and the intro copy lives here
+import V from './variant.js?v=3'; // versioned: Pages caches modules 10 min, and the intro copy lives here
 
 const { clamp, lerp, seg, outQuint, inOutCubic, outBack } = lib;
 const H = 1080;
@@ -19,7 +17,6 @@ const dip = document.getElementById('dip');
 // ---------- the sequence ----------
 const SEQUENCE = [
   ['card', 'says'],
-  ['card', 'dontcare'],
   ['scene', 'tabs'],
   ['end', 'end'],
 ];
@@ -31,7 +28,6 @@ const END_DUR = 3.0, DIP = 0.35;
 // ---------- text cards ----------
 // A part is a word string, { r } for the red word, or { html } for styled words.
 // says:      variant.introLine (only variant.redWord red; it lands last, same motion as the rest, just red)
-// dontcare:  "WE DONT CARE!" slammed in, with the confetti burst on the same beat
 // the card-1 line comes from variant.js: one span per word, and the variant's redWord is the red one
 // a red word may carry trailing punctuation ("RUGGED?"): only the word goes red, the mark stays white
 const lineParts = (line, red) => String(line).split(' ').map((w) => {
@@ -41,20 +37,18 @@ const lineParts = (line, red) => String(line).split(' ').map((w) => {
 });
 const CARDS = {
   says: { dur: 2.4, parts: lineParts(V.introLine, V.redWord) },
-  dontcare: { dur: 2.1, mode: 'slam', parts: [V.slamLine] },
 };
 // card motion (seconds, local): words rise 18px + unblur 8px, outQuint .55s, staggered .06s, scaled by one
 // factor K shared by every card so the busiest card still has its text landed READ_HOLD seconds before exit.
 const W_RISE = 18, W_BLUR = 8, CARD_OUT = 0.3, READ_HOLD = 1.2;
 const BASE = { in: 0.12, stag: 0.06, dur: 0.55 };
-const SLAM_IN = 0.34, SLAM_SCALE = 1.42, SHAKE = 10;
 const settleAt = (c, k) => k * (BASE.in + (c.parts.length - 1) * BASE.stag + BASE.dur);
 const K = Math.min(1, ...Object.values(CARDS).map((c) => (c.dur - CARD_OUT - READ_HOLD) / settleAt(c, 1)));
 const W_IN = BASE.in * K, W_STAG = BASE.stag * K, W_DUR = BASE.dur * K;
 
 function buildCard(sec, spec) {
   sec.classList.add('card');
-  sec.classList.add(spec.mode === 'slam' ? 'card-slam' : 'card-rise');
+  sec.classList.add('card-rise');
   const line = document.createElement('p');
   line.className = 'cl';
   const words = [];
@@ -76,46 +70,19 @@ function buildCard(sec, spec) {
 }
 
 function renderCard(c, lt, dur) {
-  const slam = c.spec.mode === 'slam';
   const e = inOutCubic(seg(lt, dur - CARD_OUT, dur));
-  let shake = '';
-  if (slam) {
-    const p = outBack(seg(lt, 0.02, 0.02 + SLAM_IN));
-    const amp = SHAKE * Math.exp(-Math.max(0, lt - 0.02) * 8.5) * seg(lt, 0, 0.05);
-    shake = `${(Math.sin(lt * 63) * amp).toFixed(2)}px,${(Math.cos(lt * 51) * amp * 0.5).toFixed(2)}px`;
-    const sc = lerp(SLAM_SCALE, 1, p) * lerp(1, 0.985, e);
-    c.words.forEach((w) => {
-      w.el.style.opacity = clamp(seg(lt, 0, 0.1) * 1.3).toFixed(3);
-      w.el.style.filter = 'none';
-      w.el.style.transform = `scale(${sc.toFixed(4)})`;
-    });
-    c.line.style.transform = `translate(${shake}) scale(1)`;
-  } else {
-    c.words.forEach((w, i) => {
-      const at = W_IN + i * W_STAG;
-      // the red word enters like the others and just reads red: no scale punch, no glow pulse
-      const p = outQuint(seg(lt, at, at + W_DUR));
-      w.el.style.opacity = clamp(p * 1.15).toFixed(3);
-      const dy = (1 - p) * W_RISE;
-      w.el.style.transform = `translateY(${dy.toFixed(2)}px)`;
-      w.el.style.filter = p >= 1 ? 'none' : `blur(${((1 - p) * W_BLUR).toFixed(2)}px)`;
-    });
-    c.line.style.transform = e > 0 ? `scale(${lerp(1, 0.985, e).toFixed(4)})` : 'none';
-  }
+  c.words.forEach((w, i) => {
+    const at = W_IN + i * W_STAG;
+    // the red word enters like the others and just reads red: no scale punch, no glow pulse
+    const p = outQuint(seg(lt, at, at + W_DUR));
+    w.el.style.opacity = clamp(p * 1.15).toFixed(3);
+    const dy = (1 - p) * W_RISE;
+    w.el.style.transform = `translateY(${dy.toFixed(2)}px)`;
+    w.el.style.filter = p >= 1 ? 'none' : `blur(${((1 - p) * W_BLUR).toFixed(2)}px)`;
+  });
+  c.line.style.transform = e > 0 ? `scale(${lerp(1, 0.985, e).toFixed(4)})` : 'none';
   c.line.style.opacity = (1 - e).toFixed(3);
 }
-
-// ---------- the confetti canvas (stage level, absolute t) ----------
-const cf = document.createElement('canvas');
-cf.id = 'cf';
-stage.insertBefore(cf, dip);
-const cg = cf.getContext('2d');
-function fitConfetti() {
-  const w = W();
-  cf.width = w; cf.height = H;
-  cf.style.width = w + 'px'; cf.style.height = H + 'px';
-}
-fitConfetti();
 
 // ---------- the end card (one-agent-full-degen drawEnd) ----------
 function buildEnd(sec) {
@@ -164,10 +131,9 @@ for (const [kind, id] of SEQUENCE) {
   acc += dur;
 }
 const CYCLE = +acc.toFixed(4);
-const CONF_T0 = +((SEGS.find((s) => s.id === 'dontcare').t0) + 0.14).toFixed(4);
 const T = {};
 SEGS.forEach((s) => { T[s.kind === 'card' ? 'card_' + s.id : s.id] = s.t0; });
-window.__AD = { id: V.id, segments: SEGS.map(({ kind, id, t0, t1 }) => ({ kind, id, t0, t1 })), CYCLE, confettiAt: CONF_T0, cardK: K, cardSettle: Object.fromEntries(Object.entries(CARDS).map(([id, c]) => [id, +settleAt(c, K).toFixed(3)])) };
+window.__AD = { id: V.id, segments: SEGS.map(({ kind, id, t0, t1 }) => ({ kind, id, t0, t1 })), CYCLE, cardK: K, cardSettle: Object.fromEntries(Object.entries(CARDS).map(([id, c]) => [id, +settleAt(c, K).toFixed(3)])) };
 
 // ---------- mount ----------
 const ctx = { W: W(), H, t: 0, lib, shell };
@@ -216,7 +182,6 @@ function render(t) {
       try { cur.mod.render(lt, ctx); } catch (err) { report(cur, 'render', err); }
     }
   }
-  renderConfetti(cg, t, CONF_T0, W(), H);
   // the dip at the loop: the end card goes to black over its last DIP seconds (t=0 opens on black too)
   dip.style.opacity = seg(t, CYCLE - DIP, CYCLE).toFixed(3);
 }
@@ -229,7 +194,7 @@ function fit() {
   stage.style.transform = `translate(-50%, -50%) scale(${k})`;
 }
 addEventListener('resize', fit); fit();
-addEventListener('archange', () => { fit(); fitConfetti(); lastT = NaN; });
+addEventListener('archange', () => { fit(); lastT = NaN; });
 
 // ---------- the clock ----------
 const q = new URLSearchParams(location.search);

@@ -146,6 +146,13 @@ const more = [
   // IND-507-01 and F8962-070 go from Rejected to Accepted with the IRS error text and fix, and the extended due date is
   // Oct 15, 2026 (all cited in img/CREDITS.txt); no person is named, client emails and replies are the ad's own copy.
   ['do-my-job-tax-preparer-superbot-0f0aa66c', 'do-my-job-tax-preparer-superbot-0f0aa66c/', 'BUT WE WILL · Do my job for me: superbot works a tax preparer’s extension queue in ProConnect Tax', 'Ad spots'],
+  // BUT WE WILL, do my job travel agent (2026-09-29): the same intro and slam, then "Do my job for me" as a travel
+  // agent: superbot signs in to Sabre Red 360 (queue list, PNR panel and command line rebuilt in HTML/CSS) and works
+  // the PNR queue, typing real Sabre entries and answering each traveler: UA 852 TPE to SFO (Schedule change ·
+  // Rebooked UA872 · Reissued); LH 440 FRA to IAH (Delay claim · EU261 · Filed with Lufthansa); UA 934 EWR to LHR
+  // (Entry docs · UK ETA · DOCS added); real flights on their real routes and schedules, each case on a published
+  // rule (all cited in img/CREDITS.txt); traveler names, record locators and ticket serials are fictional.
+  ['do-my-job-travel-agent-superbot-8163d44c', 'do-my-job-travel-agent-superbot-8163d44c/', 'BUT WE WILL · Do my job for me: superbot works a travel agent’s Sabre queue', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

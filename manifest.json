@@ -160,6 +160,14 @@
     "thumb": "assets/shots/do-my-job-tax-preparer-superbot-0f0aa66c.png"
   },
   {
+    "id": "do-my-job-travel-agent-superbot-8163d44c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot works a travel agent’s Sabre queue",
+    "src": "animations/do-my-job-travel-agent-superbot-8163d44c/",
+    "thumb": "assets/shots/do-my-job-travel-agent-superbot-8163d44c.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

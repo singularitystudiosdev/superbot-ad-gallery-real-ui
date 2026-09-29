@@ -91,6 +91,14 @@ const more = [
   // trips out of the city, Hudson Yards Jul 4 fireworks pickups, CRZ congestion fees by fleet). Every table, result
   // and chart is real NYC TLC July 2026 trip data (cited in img/CREDITS.txt); request wording and replies are the ad's own copy.
   ['do-my-job-data-analyst-superbot-0368c93c', 'do-my-job-data-analyst-superbot-0368c93c/', 'BUT WE WILL · Do my job for me: superbot works a data analyst’s request queue in BigQuery', 'Ad spots'],
+  // BUT WE WILL, do my job translator (2026-09-29): the same intro and slam, then "Do my job for me" as an
+  // English-to-Spanish translator: superbot signs in to Phrase TMS and the camera dives into the CAT editor, where it
+  // matches your translation style, reads your style guides and works the job queue (segments confirmed, term base
+  // entries applied, QA warnings fixed). Every segment is a real US federal publication with its official Spanish (DOL
+  // minimum wage poster, IRS Publication 1, Medicare & You 2027 and 9 more), term base entries are the official IRS
+  // Publication 850 glossary terms and the QA catches quote RAE style rules (all cited in img/CREDITS.txt); job
+  // statuses and counts are the ad's own copy.
+  ['do-my-job-translator-superbot-e60f1bcc', 'do-my-job-translator-superbot-e60f1bcc/', 'BUT WE WILL · Do my job for me: superbot works an English-to-Spanish translator’s queue in Phrase TMS', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

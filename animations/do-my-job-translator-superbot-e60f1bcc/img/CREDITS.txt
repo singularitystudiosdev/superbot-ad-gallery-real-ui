@@ -1,0 +1,107 @@
+img/ CREDITS (do-my-job-translator-superbot-e60f1bcc)
+
+Third-party artwork in this folder: two Phrase logo files, fetched 2026-09-29. Neither was redrawn or recoloured.
+Phrase, the Phrase logo and "Phrase TMS" are trademarks of their owner; they are used here nominatively, to name the
+product whose CAT web editor the spot rebuilds. Nothing in the spot states or implies that Phrase made, sponsors or
+endorses it.
+
+phrase-logo.svg      Current Phrase horizontal logo (mark plus "Phrase" wordmark): #181818 wordmark and outline,
+                     #03EAB3 accent leaf, viewBox 0 0 98 30. Copied as-is from the inline <svg> in the site header
+                     (figure.wp-block-phrase-com-site-logo).
+                     Page:   https://phrase.com/ ; same artwork as the official kit file
+                             https://phrase.com/wp-content/uploads/2022/11/Phrase_Logo_Kit-1.zip (phrase_logo_default.svg),
+                             offered on https://phrase.com/brand/
+                     Usage here: as fetched, unaltered, on the white badge of the chat's sign-in card.
+
+phrase-app-icon.svg  Phrase app tile (green rounded square #03EAB3, black mark, white leaf), viewBox 0 0 24 24.
+                     Copied as-is from the inline <svg data-icon="FaviconPhrase"> above "Welcome to Phrase".
+                     Page:   https://eu.phrase.com/idm-ui/signin
+                     Usage here: the top-left of the rebuilt editor's header, where the product shows its mark.
+
+Brand guidance, quoted from https://phrase.com/brand/ ("Phrase Brand Guidelines") on 2026-09-29:
+    "Use a full-color logo with black logotype on a white or light gray background."
+    "Don't change the lockup of the logotype and logo mark. The logo mark is always to the left of the logotype."
+    "Don't adjust the width or height of the logo to fit better into a space."
+    "Don't change or alter the logo mark color."
+  The page carries visual rules only and no licence grant. NOTE FOR PUBLISHING: the use here rests on nominative
+  reference alone (same position as the Clio logo in the lawyer spot and the Comcast logo in the call-center
+  spot). Both files are shown static and unaltered (the card and the desk fade and scale with the scene, as every
+  element does). Clear this with whoever owns publishing before the spot ships.
+
+Nothing else in this folder is third-party. The Phrase TMS desk itself is not an image: it is rebuilt in
+HTML/CSS/SVG in ../scenes/tabs-assets/phrase.{js,css}. Its layout, colours, type and radii come from reference
+material kept outside the repo in /tmp/phraseref-e60f1bcc (NOTES.md there): frames of Phrase's official YouTube
+webinars (https://www.youtube.com/watch?v=oQjAMHZyRJk and https://www.youtube.com/watch?v=5oF2meVBKVs),
+support.phrase.com Help Center captures (for example https://support.phrase.com/hc/en-us/articles/5709683926812-CAT-Pane-TMS
+and https://support.phrase.com/hc/en-us/articles/5743620785948-CAT-web-editor-releases-2026), a render of the live
+sign-in page, and the design-token custom properties of Phrase's design system (sds) in
+https://eu.phrase.com/idm-ui/_nuxt/entry-f201c38.css. No screenshot is embedded in the ad. The toolbar, rail and
+status icons are hand-drawn SVG in the outline style the editor uses, not Phrase's files.
+
+The translation content on the desk is real: U.S. federal publications (public domain under 17 U.S.C. 105) and
+their official Spanish versions published by the same agencies. Every English source segment and every Spanish
+target is verbatim from the agency's files; term base entries are verbatim from official glossaries (IRS
+Publication 850, CuidadoDeSalud.gov, CFPB); style rules are quoted verbatim from the RAE and ASALE Diccionario
+panhispánico de dudas. Each record carries its source URL in ../scenes/tabs-assets/phrase-data.js. The HUD's short
+rule labels and the two QA corrections ("EE.UU." to "EE. UU.", "sólo" to "solo") are the ad's own copy, each a
+plain restatement of the DPD rule it sits on. No person's name is invented: the signed-in user is an initial.
+
+Fonts:
+  ../scenes/tabs-assets/fonts/inter-latin-var.woff2
+    Inter, by Rasmus Andersson. Licence: SIL Open Font License 1.1 (https://github.com/rsms/inter/blob/master/LICENSE.txt).
+    Latin subset (covers á é í ó ú ü ñ ¿ ¡), variable weight, fetched 2026-09-29 from the Google Fonts CSS API
+    (https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700) and served from this folder, with no
+    remote font URL anywhere in the ad. Phrase's design system names Inter first in its font stack.
+  Segment text uses the system's Arial, as the editor's grid does; no file is bundled for it.
+  ../scenes/tabs-assets/fonts/barlow-{400,500,600,700}.woff2
+    Barlow, by Jeremy Tribby. Licence: SIL Open Font License 1.1 (https://github.com/jpt/barlow/blob/master/OFL.txt).
+    Kept from the call-center spot for the superbot HUD, which is unchanged.
+
+Sources
+
+Every publication, glossary and style-guide URL the desk's strings were taken from (fetched 2026-09-29; files and
+extractions kept in /tmp/translator-ref-e60f1bcc/src). They stay off screen.
+https://www.dol.gov/sites/dolgov/files/WHD/legacy/files/minwagep.pdf
+https://www.dol.gov/sites/dolgov/files/WHD/legacy/files/minwagesp.pdf
+https://www.irs.gov/pub/irs-pdf/p1.pdf
+https://www.irs.gov/pub/irs-pdf/p1sp.pdf
+https://www.medicare.gov/publications/10050-medicare-and-you.pdf
+https://www.medicare.gov/publications/10050-S-medicare-and-you.pdf
+https://www.osha.gov/sites/default/files/publications/osha3165.pdf
+https://www.osha.gov/sites/default/files/publications/osha3167.pdf
+https://www.eeoc.gov/sites/default/files/2023-06/22-088_EEOC_KnowYourRights6.12.pdf
+https://www.eeoc.gov/sites/default/files/2023-06/22-088_EEOC_KnowYourRightsSp6.12.pdf
+https://www.hud.gov/sites/dfiles/FHEO/documents/928-1.pdf
+https://www.hud.gov/sites/dfiles/FHEO/documents/928-1a.pdf
+https://www.irs.gov/pub/irs-pdf/p594.pdf
+https://www.irs.gov/pub/irs-pdf/p594sp.pdf
+https://www.ssa.gov/pubs/EN-05-10035.pdf
+https://www.ssa.gov/pubs/ES-05-10935.pdf
+https://www.uscis.gov/sites/default/files/document/guides/M-618.pdf
+https://www.uscis.gov/sites/default/files/document/guides/M-618_sp.pdf
+https://files.consumerfinance.gov/f/documents/bcfp_consumer-rights-summary_2018-09.pdf
+https://files.consumerfinance.gov/f/documents/bcfp_consumer-rights-summary_2018-09_es.pdf
+https://files.consumerfinance.gov/f/201503_cfpb_your-home-loan-toolkit-web.pdf
+https://files.consumerfinance.gov/f/201507_cfpb_your-home-loan-toolkit-web-spanish.pdf
+https://www.medicare.gov/publications/10116-your-medicare-benefits.pdf
+https://www.medicare.gov/publications/10116-S-your-medicare-benefits.pdf
+https://www.irs.gov/pub/irs-pdf/p850.pdf
+https://www.healthcare.gov/glossary/premium/
+https://www.cuidadodesalud.gov/es/glossary/premium/
+https://www.healthcare.gov/glossary/open-enrollment-period/
+https://www.cuidadodesalud.gov/es/glossary/open-enrollment-period/
+https://files.consumerfinance.gov/f/documents/cfpb_adult-fin-ed_spanish-style-guide-glossary.pdf
+https://www.rae.es/dpd/mayúsculas
+https://www.rae.es/dpd/signos de interrogación y exclamación
+https://www.rae.es/dpd/Estados Unidos
+https://www.rae.es/dpd/tilde
+https://www.rae.es/dpd/sigla
+
+How the strings were checked (2026-09-29): /tmp/translator-ref-e60f1bcc/build.py re-extracts every PDF above with
+poppler pdftotext and refuses to write content.json unless each English and Spanish segment occurs verbatim in its
+file (line wraps joined by one space), each glossary headword is followed by its equivalent, and each RAE quote occurs
+in the saved DPD article. phrase-data.js is generated from content.json by /tmp/phraseref-e60f1bcc/gen-data.mjs.
+The on-screen audit (every visible string at every ratio, every 0.1 s) is in /tmp/translator-ref-e60f1bcc/AUDIT.txt.
+Page numbers in the CAT pane read "PDF p. N" because they are 1-based PDF page indexes from pdftotext, which differ
+from the printed folio in some files (CFPB glossary PDF p. 62 is printed page 61; CMS 10116-S PDF p. 98 is printed
+page 96; IRS Publication 850 indexes equal its printed pages).

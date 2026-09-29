@@ -104,6 +104,14 @@
     "thumb": "assets/shots/do-my-job-data-analyst-superbot-0368c93c.png"
   },
   {
+    "id": "do-my-job-translator-superbot-e60f1bcc",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUT WE WILL · Do my job for me: superbot works an English-to-Spanish translator’s queue in Phrase TMS",
+    "src": "animations/do-my-job-translator-superbot-e60f1bcc/",
+    "thumb": "assets/shots/do-my-job-translator-superbot-e60f1bcc.png"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,141 @@
+img/ CREDITS (do-my-job-tax-preparer-superbot-0f0aa66c)
+
+Third-party artwork in this folder: two Intuit files, fetched 2026-09-29. Neither was redrawn or traced. Intuit, ProConnect
+and the Intuit ProConnect Tax marks are trademarks of Intuit Inc. They are used here nominatively, to name the product
+whose desk the spot rebuilds. Nothing in the spot states or implies that Intuit made, sponsors or endorses it.
+
+Intuit-ProConnect-Tax-2-line.svg   The official two-line wordmark "INTUIT" over "ProConnect Tax", viewBox 0 0 310 75, one
+                                   fill #2B3135, from Intuit's digital asset library:
+                                   https://digitalasset.intuit.com/render/content/dam/intuit/pcg/en_us/logos/proconnect-tax/Intuit-ProConnect-Tax-2-line.svg
+                                   (the wordmark family referenced by https://accountants.intuit.com/tax-software/tax-online/).
+                                   Usage here: as fetched, unaltered, on the white badge of the chat's sign-in card.
+proconnect-rail-mark-capture-1x.png  48x46 crop, unaltered pixels, of the circle-arrow mark atop ProConnect's collapsed nav
+                                   rail, from Intuit's own interactive demo of the 2025 app (capture
+                                   https://c.navattic.com/nv_static/nk_cmmljks0z00j5356u29984l28, demo https://intuit.navattic.com/uk190cl7,
+                                   linked from https://accountants.intuit.com/tax-software/tax-online/ai-features/). No vector file of the
+                                   in-app mark is published. Usage here: at the top of the rebuilt nav rail.
+
+Trademark notice, quoted verbatim from the ProConnect sign-in page footer (https://ito.intuit.com/app/protax/sign-in/,
+fetched 2026-09-29):
+  "Intuit, QuickBooks, QB, TurboTax, ProConnect, Credit Karma, and Mailchimp are registered trademarks of Intuit Inc.
+   Terms and conditions, features, support, pricing, and service options subject to change without notice."
+No public Intuit brand-guidelines or press-kit page for ProConnect was found (https://www.intuit.com/legal/trademarks/
+answered 404). NOTE FOR PUBLISHING: the use above rests on nominative reference alone; both marks are shown static and
+unaltered (the card and the desk as a whole fade and scale with the scene, as every element does). Clear this with whoever
+owns publishing before the spot ships.
+
+Nothing else in this folder is third-party. The ProConnect desk is not an image: it is rebuilt in HTML/CSS/SVG in
+../scenes/tabs-assets/proconnect.{js,css}. Its colours, type sizes, radii and chrome sizes are measured from Intuit's own
+lossless captures of the 2025 app (the Navattic demo above), the "ProConnect Tax Online: The Fundamentals" webinar
+(https://www.youtube.com/watch?v=vNULxPT9Ifc, Intuit Accountants channel) and Intuit help-article images; every value is a
+custom property in ../scenes/tabs-assets/proconnect.tokens.css, with the pixel it was sampled from. The reference pack
+itself stays outside the repo (.tmp/tp-uiref.0f0aa66c in the pipeline project). No screenshot is embedded in the ad. The
+nav, toolbar and tab icons are hand-drawn SVG, not Intuit's icon files. The desk's wording is the product's own (2025
+generation): the tabs Profile / SmartReturn / Input return / Check return / File return, the return-type card "1040
+Individual" with Rejected / Not e-filed / Transmitted / Accepted, the columns FEDERAL EFILE STATUS / STATE EFILE STATUS /
+EXTENSION EFILE STATUS, the diagnostics headings Fatal Diagnostics / EF Critical Diagnostics / Suggestions, the e-file statuses Received
+by Intuit / Received by agency / Accepted / Rejected (https://accountants.intuit.com/support/en-us/help-article/electronic-filing/e-file-status-descriptions-proconnect/L7kP5XGRA_US_en_US)
+and the rejected acknowledgement's "Error message: / Solution: / Code:".
+
+No person is named anywhere in the spot and no client is invented. Returns are identified by their situation only (for
+example "Tips paid through a 1099-K platform", "Prior-year AGI rejected (IND-031-04)"); no SSN, EIN, PTIN, EFIN,
+submission ID or Intuit reference number is shown. The Intuit demo's own sample data is not used. The firm slot reads
+"Your firm" and the signed-in user is a generic avatar. The three answered returns are the IRS and Treasury worked
+examples themselves (none of which names a person). The client emails and drafted replies are the ad's own copy, written
+as plain restatements of the sourced facts below and nothing beyond them. Text in quotation marks on the answer card, and
+every "Error message" line, is verbatim from the named source. Every count on screen is the literal number of items on
+screen (12 extended returns, 6 of them rejected, 14 past returns, 4 fixes learned). Two values are not from a source: the
+ad's clock, Tue Sep 29, 2026 (the acknowledgement date 09/29/2026), and "16 days left" to Oct 15, 2026 (calendar
+arithmetic from that clock). Weekdays are calendar arithmetic.
+
+Fonts:
+  Avenir Next (system font of the macOS render host), the same design as Intuit's "Avenir Next forINTUIT", named in the
+    font stack of Intuit's web shell (https://plugin.intuitcdn.net/web-shell/shell.7463a9a8bbb60de5ffa1.css). Not bundled.
+  ../scenes/tabs-assets/fonts/barlow-{400,500,600,700}.woff2
+    Barlow, by Jeremy Tribby. Licence: SIL Open Font License 1.1 (https://github.com/jpt/barlow/blob/master/OFL.txt).
+    Kept from the call-center spot for the superbot HUD, which is unchanged.
+
+Sources (retrieved 2026-09-29). Every figure, code, date and line number on screen is taken from one of these; each record
+of ../scenes/tabs-assets/proconnect-data.js carries the ids of the facts-pack entries it restates (`src`), and the pack
+(facts.json, with a verbatim quote and a text snapshot per entry) is .tmp/tp-facts.0f0aa66c in the pipeline project.
+  Form 4868, Application for Automatic Extension of Time To File U.S. Individual Income Tax Return, 2025 (Created 10/1/25)
+    https://www.irs.gov/pub/irs-pdf/f4868.pdf
+    facts ids: A-01, A-02
+  IRS news release WA-2026-02, WA-2026-02 (Aug. 31, 2026)
+    https://www.irs.gov/newsroom/irs-announces-tax-relief-for-taxpayers-impacted-by-wildfires-in-douglas-county-washington-various-deadlines-postponed-to-feb-1-2027
+    facts ids: A-15
+  Publication 4164, Modernized e-File (MeF) Guide for Software Developers and Transmitters, Processing Year 2026, Rev. 12-2025
+    https://www.irs.gov/pub/irs-pdf/p4164.pdf
+    facts ids: B-09
+  Publication 4012, VITA/TCE Volunteer Resource Guide (2025 Returns), Rev. 9-2025
+    https://www.irs.gov/pub/irs-pdf/p4012.pdf
+    facts ids: B-13, B-20, B-26, B-33
+  IRS Free File Fillable Forms reject-code help page IND-031-04, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/ind-031-04
+    facts ids: B-14, E-01
+  Instructions for Form 1040 and 1040-SR (incl. Instructions for Schedule 1-A), 2025
+    https://www.irs.gov/pub/irs-pdf/i1040gi.pdf
+    facts ids: B-15, B-17, B-45, C-17, C-25, C-26, C-29, C-31, C-32, C-37, D-01-in, D-01-out, D-02-in, D-02-out, E-07
+  IRS Free File Fillable Forms reject-code help page IND-032-04, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/ind-032-04
+    facts ids: B-18
+  IRS Free File Fillable Forms reject-code help page IND-181-01, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/ind-181-01
+    facts ids: B-19, E-02
+  IRS Free File Fillable Forms reject-code help page IND-180-01, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/ind-180-01
+    facts ids: B-21
+  IRS Free File Fillable Forms reject-code help page IND-183-01, Page last reviewed 18-Mar-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/ind-183-01
+    facts ids: B-22
+  IRS Free File Fillable Forms reject-code help page IND-507-01, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/ind-507-01
+    facts ids: B-25, E-03
+  IRS Free File Fillable Forms reject-code help page R0000-504-02, Page last reviewed 18-Mar-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/r0000-504-02
+    facts ids: B-27
+  IRS Free File Fillable Forms reject-code help page IND-517-02, Page last reviewed 17-Mar-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/ind-517-02
+    facts ids: B-29, E-06
+  IRS Free File Fillable Forms reject-code help page F8962-070, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/f8962-070
+    facts ids: B-32, E-04
+  IRS MeF Tax Year 2025 Known Issues and Solutions (xlsx), TY2025 workbook as retrieved 2026-09-29
+    https://www.irs.gov/pub/irs-schema/ty2025-known-issues-and-solutions.xlsx
+    facts ids: B-34, E-05
+  IRS Free File Fillable Forms reject-code help page R0000-500-01, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/r0000-500-01
+    facts ids: B-35
+  IRS Free File Fillable Forms reject-code help page R0000-503-02, Page last reviewed 18-Mar-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/r0000-503-02
+    facts ids: B-36
+  IRS Free File Fillable Forms reject-code help page R0000-902-01, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/r0000-902-01
+    facts ids: B-37
+  IRS Free File Fillable Forms reject-code help page FW2-502, Page last reviewed 30-Jan-2026
+    https://www.irs.gov/filing/free-file-fillable-forms/fw2-502
+    facts ids: B-38
+  IRS: Working Families Tax Cuts - individuals and workers, Page last reviewed 27-Aug-2026
+    https://www.irs.gov/newsroom/working-families-tax-cuts-individuals-and-workers
+    facts ids: C-02, C-28
+  Form 1040, U.S. Individual Income Tax Return, 2025 (Created 9/5/25)
+    https://www.irs.gov/pub/irs-pdf/f1040.pdf
+    facts ids: C-07
+  Schedule 1-A (Form 1040), Additional Deductions, 2025 (Created 11/4/25)
+    https://www.irs.gov/pub/irs-pdf/f1040s1a.pdf
+    facts ids: C-11, C-14
+  T.D. 10054, Car Loan Interest Deduction, final regulations (91 FR 57214, FR Doc. 2026-18219), Published 2026-09-08
+    https://www.federalregister.gov/documents/full_text/text/2026/09/08/2026-18219.txt
+    facts ids: C-30, D-03-calc, D-03-in, D-03-out
+  Executive Order 14247, Modernizing Payments To and From America's Bank Account (90 FR, FR Doc. 2025-05522), Published 2025-03-28
+    https://www.federalregister.gov/documents/full_text/text/2025/03/28/2025-05522.txt
+    facts ids: C-44
+  FS-2026-02, Questions and answers about Executive Order 14247, Jan. 2026
+    https://www.irs.gov/pub/taxpros/fs-2026-02.pdf
+    facts ids: C-45, C-46
+  Publication 1345, Handbook for Authorized IRS e-file Providers of Individual Income Tax Returns, Rev. 12-2025
+    https://www.irs.gov/pub/irs-pdf/p1345.pdf
+    facts ids: C-49
+  IRS: Understanding your CP53E notice, Page last reviewed 11-May-2026
+    https://www.irs.gov/individuals/understanding-your-cp53e-notice
+    facts ids: E-08

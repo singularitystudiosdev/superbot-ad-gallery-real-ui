@@ -1,0 +1,197 @@
+/* proconnect.tokens.css: Intuit ProConnect Tax (web, ito.intuit.com/app/protax) desk values as custom properties.
+   Draft for the tax-preparer spot. A builder's proconnect.css should read only these vars.
+   Sources (all measured 2026-09-29, see REPORT.md "Tokens" for the exact pixel per value):
+     [L]  refs/01-tax-returns-list-2025.png      official Intuit Navattic capture, 1920x1031, 1 image px = 1 CSS px
+     [R]  refs/02-return-header-smartreturn-tab.png  same demo, 1920x1031, 1x
+     [I]  refs/03-input-return-w2-details.png    same demo family, 2765x1683, rendered 1.571x larger than [L]/[R]
+          ("Wells, Jordan" cap height 22px vs 14px); every [I] size below is divided by 1.571 into the [L] frame
+     [F]  refs/04-forms-1040-page2.png           same demo, 1903x1037, 1x
+     [D]  refs/07-check-return-diagnostics-tally.gif  accountants.intuit.com features page asset, 1000x1000
+     [V6] refs/06-check-return-ef-critical-diagnostics.jpg, [V7] refs/07-file-return-efile-return.jpg: 1920x1080 frames of
+          Intuit's YouTube webinar (JPEG/video colour shift: layout and wording only, colours marked where used)
+     [H9] refs/09-file-return-critical-diagnostics-exist.png (help-article PNG, lossless)
+     [H10] refs/10-efile-dashboard-rejected-ack-2018.jpeg
+     [S]  plugin.intuitcdn.net/web-shell/shell.7463a9a8bbb60de5ffa1.css (Intuit web shell loaded by the ProConnect
+          sign-in page): font-family "Avenir Next forINTUIT"
+   Font sizes are derived from measured cap heights / 0.708 (Avenir Next cap-height ratio), in the 1920px frame of
+   [L]; that frame may itself be a 125% OS scale of a 1536px viewport, so the numbers are right for a 1920x1080 ad
+   frame, not necessarily ProConnect's CSS source values.
+   The grays and the blue are exact Intuit Design System values (#393a3d #6b6c72 #8d9096 #babec5 #d4d7dc #eceef1
+   #f4f5f8 #0077c5); they sample as flat, un-antialiased fills in the 1x captures. */
+:root {
+  /* ---- brand / action ---- */
+  --pc-blue: #0077c5;              /* [L] "All" card header, seg underline, links; [R] "Return actions" fill */
+  --pc-blue-strong: #0365ac;       /* [L] "Create tax return" fill as captured (darker than --pc-blue: hover/pressed state or page variant) */
+  --pc-blue-outline: #215ea3;      /* [L] "Batch actions" 2px border + label */
+  --pc-blue-engine: #1176c0;       /* [I] Input return: active tab underline, W-2 list left bar, "View all input screens" text */
+  --pc-blue-help: #0f64a8;         /* [I] (?) help icon */
+  --pc-avatar: #0097e6;            /* [L] user avatar circle, white initial */
+  --pc-avatar-alt: #236cfb;        /* [F] avatar as rendered on the Forms view */
+  --pc-alert-dot: #c9067a;         /* [L][R] magenta dot after "Settings" and inside "Return actions" */
+
+  /* ---- left nav ---- */
+  --pc-nav-bg: #055393;            /* [L] x150 y800 */
+  --pc-nav-active-bg: #063b67;     /* [L] "Tax returns" row y132..187 */
+  --pc-nav-active-bar: #ffffff;    /* [L] 5px white bar x0..5 on the active row */
+  --pc-nav-text: #ffffff;          /* [L] item labels and section labels "TAX", "WORKFLOW SOLUTIONS" */
+  --pc-nav-divider: #6b6c72;       /* [L] 1px rules at y417, y650, y955 */
+  --pc-nav-w: 250px;               /* [L] expanded */
+  --pc-nav-w-collapsed: 75px;      /* [R] icon rail inside a return */
+  --pc-nav-item-h: 55px;           /* [L] 55px pitch, active fill 132..187 */
+  --pc-nav-icon: 22px;             /* [L] outline icons, about 22px */
+
+  /* ---- chrome ---- */
+  --pc-topbar-bg: #ffffff;         /* [L] y0..58 */
+  --pc-topbar-h: 60px;             /* [L] 59px + 1px rule */
+  --pc-rule: #d4d7dc;              /* [L] topbar rule y59, card borders, table header/row rules */
+  --pc-page: #f4f5f8;              /* [L] page behind cards; tab strips; table header; seg active */
+  --pc-surface: #ffffff;
+  --pc-panel: #eceef1;             /* [F] Forms tree list bg; [I] input list hover band */
+  --pc-selected: #e3e5e8;          /* [I][F] selected tree row ("Wages, Salaries, Tips (W-2)", "1040") */
+  --pc-control-border: #8d9096;    /* [L] segmented control border; [I] empty input + checkbox border */
+  --pc-input-border: #b9bec5;      /* [L] "Filter" box; [F] "Search Forms" box; [I] Views panel frame #babec4 */
+  --pc-input-valid: #349f33;       /* [I] filled input border (green) */
+  --pc-scroll-thumb: #8b8b8b;      /* [L] card carousel scrollbar */
+
+  /* ---- text ---- */
+  --pc-text: #393a3d;              /* [L] titles, headers, body; [F] form title */
+  --pc-text-2: #6b6c72;            /* [L] secondary: "PTO Testing Account", unselected seg labels, card labels "Individual" */
+  --pc-text-3: #5d686f;            /* [L] "Not started" / "Not e-filed" cell text; [D] gray count badge */
+  --pc-text-placeholder: #b9bec5;  /* [L] "Filter" placeholder */
+  --pc-link: #0077c5;              /* [L] client and return names, "Send client request" */
+  --pc-form-entry: #0200fb;        /* [F] typed values printed on the IRS form (monospace, pure blue) */
+  --pc-form-field: #e2edfb;        /* [F] fillable-field tint on the IRS form */
+
+  /* ---- status ---- */
+  --pc-red: #d52b1e;               /* [L] notifications count badge (lossless); [H9] red "!" diagnostic icons and alert border */
+  --pc-diag-critical: var(--pc-red); /* count badges "Fatal Diagnostics", "EF Critical Diagnostics"; [D] marketing asset samples #c6150f */
+  --pc-diag-suggestion: #5d686f;   /* [D] gray count badge "Suggestions" */
+  --pc-diag-border: #c3ced5;       /* [D] diagnostics box border and row rules */
+  --pc-valid: #349f33;             /* [I] validated (filled) input border */
+  --pc-green: #2ca01c;             /* Intuit green: 24 uses in web-shell legacy-shell-harmony CSS; [V7] green diagnostics check samples #40af2d through video compression */
+  --pc-alert-bg: #fdf3f1;          /* [V6][V7] "Fatal and/or EF Critical diagnostics exist" banner and diagnostic message band */
+  --pc-error-field-bg: #f9e7e7;    /* [V6] input flagged by a diagnostic ("Street"), red border */
+  --pc-btn-disabled: #a4c8e8;      /* [H9] disabled "E-file" button fill */
+  /* Accepted / Rejected / Received wording is plain text in the list cells; see REPORT.md "Status colours". */
+  --pc-status-accepted: var(--pc-green); /* no captured Accepted cell in the current UI; tile colour in 2018 dashboard was blue */
+  --pc-status-rejected: var(--pc-red);   /* [H10] "Rejected" status link renders red text (2018 E-File Dashboard) */
+  --pc-status-neutral: #5d686f;    /* [L] "Not e-filed" as rendered */
+
+  /* ---- type ---- */
+  --pc-font: 'Avenir Next forINTUIT', 'Avenir Next', 'Avenir', Arial, -apple-system, 'Helvetica Neue', sans-serif; /* [S] */
+  --pc-font-form: 'Courier New', Courier, monospace;  /* [F] entries printed on the 1040 image */
+  --pc-fs-page-title: 27px;        /* [L] "Tax Returns 2025", cap height 19px, regular (year demi) */
+  --pc-fs-return-title: 31px;      /* [F] "1040: 2025 U.S. Individual Income Tax Return" and [R] "Let's get Jordan's documents", cap 22px */
+  --pc-fs-list-title: 24px;        /* [L] "2025 - All", cap 17px */
+  --pc-fs-body: 16px;              /* [L] cell text "Not started", links "Jessica 01", cap height 11..12px */
+  --pc-fs-nav: 17px;               /* [L] nav labels, cap height 12px, medium */
+  --pc-fs-nav-section: 15px;       /* [L] "TAX", "WORKFLOW SOLUTIONS", cap 11px, bold, uppercase */
+  --pc-fs-th: 15px;                /* [L] table headers, uppercase, medium, cap height 11px */
+  --pc-fs-btn: 20px;               /* [L] "Create tax return", "Batch actions", "View return"; [R] "Notes", "Return actions", "Wells, Jordan": cap 14px, demi */
+  --pc-fs-seg: 17px;               /* [L] "By return type" etc, cap 12px, demi when active */
+  --pc-fs-meta-label: 15px;        /* [R] "Tax Year", "Return type", cap 11px */
+  --pc-fs-meta-value: 20px;        /* [R] "2025", "1040", cap 14px, demi */
+  --pc-fs-tab: 17px;               /* [R] "Profile", "SmartReturn", "Input return", cap 12px */
+  --pc-fs-rail: 13px;              /* [R] right rail captions "Tax organizer", "Import hub" */
+  --pc-fw-regular: 400; --pc-fw-medium: 500; --pc-fw-demi: 600; --pc-fw-bold: 700;
+
+  /* ---- radii ---- */
+  --pc-r-btn: 2px;                 /* [L] "Create tax return", "View return", "Batch actions" corners */
+  --pc-r-input: 2px;               /* [L] Filter, [I] inputs */
+  --pc-r-card: 4px;                /* [L] return-type summary cards */
+  --pc-r-tile: 8px;                /* [R] "Upload from this device" tile, "Last year's documents" card */
+  --pc-r-pill: 9999px;             /* [L] count pills "56", "55" */
+  --pc-r-round: 50%;               /* avatar, diagnostics count badge */
+
+  /* ---- sizes ---- */
+  --pc-btn-h: 45px;                /* [L] "Create tax return" 78..123, "View return" 569..614 */
+  --pc-btn-border: 2px;            /* [L] outlined buttons ("View return", "Batch actions"); [R] "Notes" */
+  --pc-seg-h: 42px;                /* [L] "By return type | ..." y79..120 */
+  --pc-seg-underline: 4px;         /* [L] active segment y116..119 */
+  --pc-tab-strip-h: 61px;          /* [R] return tabs y133..193 */
+  --pc-tab-underline: 4px;         /* [R] active return tab, width of the tab (250..455) */
+  --pc-return-header-h: 73px;      /* [R] "Wells, Jordan | Client profile | Tax Year | Return type" y60..132 */
+  --pc-card-w: 275px;              /* [L] summary card 260..535 */
+  --pc-card-head-h: 42px;          /* [L] y141..183 */
+  --pc-th-h: 86px;                 /* [L] table header y464..549 (3-line headers) */
+  --pc-row-h: 83px;                /* [L] row pitch 550..633 (2-line "Select assignee") */
+  --pc-filter-h: 43px;             /* [L] y397..440 */
+  --pc-input-h: 43px;              /* [I] 67 native px / 1.571 */
+  --pc-input-row-h: 63px;          /* [I] field row pitch between #d4d7dc rules, 99 native px / 1.571 */
+  --pc-input-list-w: 358px;        /* [I] "Views" panel, 563 native px / 1.571 */
+  --pc-forms-list-w: 355px;        /* [F] "Forms" panel 20..375 */
+  --pc-right-rail-w: 95px;         /* [R] 1825..1920 */
+  --pc-avatar-d: 37px;             /* [L] y11..48 */
+  --pc-count-pill-h: 21px;         /* [L] */
+  --pc-diag-badge-d: 36px;         /* [D] at 1000px asset scale; about 20px in app */
+}
+
+/* ======================================================================================================================
+   Everything above this line is the reference pack's draft token file (.tmp/tp-uiref.0f0aa66c/proconnect.tokens.css),
+   copied verbatim. Below: the spot's own values, NOT ProConnect's: the superbot HUD carried over from the call-center
+   spot (ad chrome), two smaller type steps for the dense panes, and the pane sizes of this spot's layout (the queue
+   column, the answer card's math column, the ack card, row pitches) with their per-ratio overrides.
+   ====================================================================================================================== */
+#s-tabs .pc-root {
+  --ad-hud-bg: rgba(11, 12, 14, .93);
+  --ad-hud-edge: rgba(255, 255, 255, .09);
+  --ad-hud-shadow: rgba(0, 0, 0, .4);
+  --ad-hud-tile: #1b1c20;
+  --ad-hud-ink: #eceef1;
+  --ad-hud-ink-2: #a9aeb6;
+  --ad-hud-ink-3: #83878f;
+  --ad-hud-ring: #3a3d44;
+  --ad-hud-track: #22252b;
+  --ad-hud-green: #34c759;
+  --ad-hud-green-2: #6ef09a;
+  --ad-hud-green-ink: #05210c;
+  --ad-hud-green-bg: rgba(52, 199, 89, .12);
+  --ad-hud-green-edge: rgba(52, 199, 89, .3);
+  --ad-hud-white: #ffffff;
+  --ad-hud-font: 'Barlow', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ad-hud-ring-w: 1.5px;
+  --ad-tick-w: 4px; --ad-tick-h: 7px; --ad-tick-stroke: 1.8px;
+  --ad-dot-r: 3.3px; --ad-dot-feather: .6px;
+  --ad-icon-bold: 3.2;
+
+  --ad-fs-sm: 14px;          /* secondary lines in the dense panes (between the product's 16px body and 13px captions) */
+  --ad-fs-xs: 13px;          /* = --pc-fs-rail, the product's smallest caption */
+  --ad-lh: 1.4;             /* >= Avenir Next's content box (1.375em), so no one-line box clips a glyph */
+  --ad-gap: 16px;            /* the gutter between panes */
+  --ad-pad: 20px;            /* the inner padding of a pane */
+  --ad-mask: #000;           /* mask-image ink (not a colour on screen) */
+
+  --ad-q-w: 390px;           /* the extension queue column */
+  --ad-q-room: 250px;        /* room under the queue for the HUD, as in the source spot */
+  --ad-hud-w: 390px;
+  --ad-math-w: 380px;        /* the answer card's math column */
+  --ad-ack-w: 470px;         /* the Rejected ack card */
+  --ad-lower-h: 270px;       /* the E-File Dashboard + ack row under the answer card */
+  --ad-title-w: 460px;       /* the longest a return's title may run in its header */
+  --ad-qrow-h: 66px;         /* one queue row (two lines: the return name, then its code and status chip) */
+  --ad-erow-h: 60px;         /* one E-File Dashboard row (answer view): the name, then its fix on up to two lines */
+  --ad-trow-h: 52px;         /* one Tax Returns list row (idle view) */
+  --ad-prow-h: 52px;         /* one past-return row (E-File Dashboard, LEARN) */
+  --ad-th-h: 56px;           /* the list's two-line column headings */
+  --ad-col-type: 76px; --ad-col-st: 170px; --ad-col-ext: 190px; --ad-col-code: 150px; --ad-col-chip: 196px;
+  --ad-col-pst: 150px; --ad-col-lift: 140px;
+  --ad-hist-w: 186px;        /* the ack card's status history column */
+  --ad-hist-row: 30px;
+  --ad-filter-w: 360px;
+  --ad-chip-h: 26px;
+  --ad-badge-d: 22px;        /* a diagnostics count badge */
+  --ad-hud-voice-h: 140px; --ad-hud-res-h: 120px; --ad-hud-stats-h: 40px;
+  --ad-hud-clear: 150px;     /* portrait: how far the HUD at its tallest rises above the queue row */
+  --ad-hud-over: 64px;       /* portrait: how far the HUD during the answer beat rises into the lower row */
+  --ad-q-h-portrait: 214px;
+  --ad-rh-h: var(--pc-return-header-h);
+  --ad-tab-h: var(--pc-tab-strip-h);
+}
+html[data-ar="4x3"] #s-tabs .pc-root, html[data-ar="1x1"] #s-tabs .pc-root { --ad-fs-xs: 14px; }  /* a 14px floor on the frames that scale less */
+html[data-ar="4x3"] #s-tabs .pc-root { --ad-q-w: 320px; --ad-hud-w: 320px; --ad-math-w: 330px; --ad-ack-w: 420px; --ad-title-w: 380px;
+  --ad-filter-w: 260px; --ad-col-st: 150px; --ad-col-ext: 170px; }
+html[data-ar="1x1"] #s-tabs .pc-root, html[data-ar="4x5"] #s-tabs .pc-root { --ad-hud-w: 330px; --ad-math-w: 330px; --ad-ack-w: 420px;
+  --ad-lower-h: 220px; --ad-rh-h: 60px; --ad-tab-h: 52px; --ad-filter-w: 220px; --ad-col-st: 150px; --ad-col-ext: 170px;
+  --ad-title-w: 420px; --ad-col-chip: 186px; }
+html[data-ar="1x1"] #s-tabs .pc-root, html[data-ar="4x3"] #s-tabs .pc-root { --ad-ack-w: 100%; --ad-hud-over: 0px; }
+html[data-ar="4x5"] #s-tabs .pc-root { --ad-q-h-portrait: 232px; --ad-ack-w: 100%; --ad-math-w: 300px; --ad-title-w: 360px; }

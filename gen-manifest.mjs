@@ -138,6 +138,14 @@ const more = [
   // figure in "Economic Well-Being of U.S. Households in 2025" (May 13, 2026); 12 verbatim codebook and report facts
   // (all cited in img/CREDITS.txt); the findings are the ad's own sentences built only from the tabulated data.
   ['do-my-job-market-research-analyst-superbot-5aa2de03', 'do-my-job-market-research-analyst-superbot-5aa2de03/', 'BUT WE WILL · Do my job for me: superbot works a market research analyst’s crosstab queue in Qualtrics', 'Ad spots'],
+  // BUT WE WILL, do my job tax preparer (2026-09-29): the same intro and slam, then "Do my job for me" as a tax
+  // preparer: superbot signs in to the Intuit ProConnect Tax desk with Intuit e-file connected and works the Oct 15, 2026
+  // extension queue (client email answered from the IRS worked example, reply drafted in your writing, return e-filed,
+  // rejects fixed). The answered returns are the IRS Schedule 1-A worked examples (tips $7,000 on line 5, overtime
+  // $15,000 / 3 = $5,000, car loan interest $2,000 under Treas. Reg. 1.163-16), the MeF rejects IND-031-04, IND-181-01,
+  // IND-507-01 and F8962-070 go from Rejected to Accepted with the IRS error text and fix, and the extended due date is
+  // Oct 15, 2026 (all cited in img/CREDITS.txt); no person is named, client emails and replies are the ad's own copy.
+  ['do-my-job-tax-preparer-superbot-0f0aa66c', 'do-my-job-tax-preparer-superbot-0f0aa66c/', 'BUT WE WILL · Do my job for me: superbot works a tax preparer’s extension queue in ProConnect Tax', 'Ad spots'],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

@@ -13,9 +13,7 @@
   --surface: #ffffff;
   --ink: #14171c;
   --hairline: #d4d8de;
-  --target: 36px;
 }
-@media (pointer: coarse) { :root { --target: 44px; } }
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -46,62 +44,35 @@ video {
   background: var(--canvas);
 }
 
-#sound {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--target);
-  height: var(--target);
-  padding: 0;
-  border: 1px solid var(--hairline);
-  border-radius: 9999px;
-  background: var(--surface);
-  color: var(--ink);
-  cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.14) 0 2px 4px;
-}
-#sound:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-#sound svg { width: 16px; height: 16px; }
-#sound .on { display: none; }
-#sound[aria-pressed="true"] .on { display: block; }
-#sound[aria-pressed="true"] .off { display: none; }
 </style>
 </head>
 <body>
 <div class="frame">
-  <video id="film" src="final.mp4" poster="poster.png" autoplay muted loop playsinline preload="auto"
-    aria-label="Knit intro v44: Big type (4:5): The Knit ad with a different scan intro: Burst stream with bigger type, a faster scroll and thick green segments. Then the same groups, join and chat, ending on the knit card, with sound (18s loop)."></video>
-  <button type="button" id="sound" aria-pressed="false" aria-label="Unmute">
-    <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></g></svg>
-    <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/></g></svg>
-  </button>
+  <video id="film" src="final.mp4" poster="poster.png" autoplay loop playsinline preload="auto"
+    aria-label="Knit intro v44: Big type (4:5): The Knit ad with a different scan intro: Burst stream with bigger type, a faster scroll and thick green segments. Then the same groups, join and chat, ending on the knit card, with sound on (18s loop)."></video>
 </div>
 <script>
   const video = document.getElementById("film");
-  const sound = document.getElementById("sound");
-  const paint = () => {
-    sound.setAttribute("aria-pressed", String(!video.muted));
-    sound.setAttribute("aria-label", video.muted ? "Unmute" : "Mute");
-  };
+  // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
+  // viewer's first click, key or touch.
   const unmute = () => {
     video.muted = false;
-    if (video.paused) video.play().catch(() => {});
+    video.play().catch(() => {});
   };
-  sound.addEventListener("click", () => {
-    if (video.muted) unmute();
-    else video.muted = true;
-  });
-  video.addEventListener("volumechange", paint);
+  const start = () => {
+    video.muted = false;
+    video.play().catch(() => {
+      video.muted = true;
+      video.play().catch(() => {});
+    });
+  };
+  for (const type of ["pointerdown", "keydown", "touchstart"]) addEventListener(type, unmute, { once: true, capture: true });
   // the gallery lightbox posts { type: "unmute" } on the viewer's first click or key
   addEventListener("message", (e) => {
     if (e.data && e.data.type === "unmute") unmute();
   });
-  // a muted autoplay can still be refused (low power mode); retry once the file can play
-  video.addEventListener("canplay", () => { if (video.paused) video.play().catch(() => {}); }, { once: true });
-  paint();
+  if (video.readyState >= 2) start();
+  else video.addEventListener("canplay", start, { once: true });
 </script>
 </body>
 </html>

@@ -171,11 +171,18 @@ const more = [
   // in Maine's overtime law, the "responsibilty" typo on Australia's $50 note, and an "or" that sat in a Federal Reserve
   // rule from 1980 until 2026. Every fix is matched to the correction the publisher printed (all cited in img/CREDITS.txt).
   ['do-my-job-proofreader-editor-superbot-c54c5ecd', 'do-my-job-proofreader-editor-superbot-c54c5ecd/', 'BUT WE WILL · Do my job for me: superbot proofreads and edits in Microsoft Word', 'Ad spots'],
-  // Knit sounds (2026-09-30): the Knit ad (intro v01) with each of its four quiet click soundtracks.
-  ['knit-sound-soft-clicks-4ebaebee', 'knit-sound-soft-clicks-4ebaebee/', 'Knit: Soft clicks sound', 'Ad spots', { download: 'animations/knit-sound-soft-clicks-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
-  ['knit-sound-ticks-and-pops-4ebaebee', 'knit-sound-ticks-and-pops-4ebaebee/', 'Knit: Ticks and pops sound', 'Ad spots', { download: 'animations/knit-sound-ticks-and-pops-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
-  ['knit-sound-keys-4ebaebee', 'knit-sound-keys-4ebaebee/', 'Knit: Keys sound', 'Ad spots', { download: 'animations/knit-sound-keys-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
-  ['knit-sound-glass-taps-4ebaebee', 'knit-sound-glass-taps-4ebaebee/', 'Knit: Glass taps sound', 'Ad spots', { download: 'animations/knit-sound-glass-taps-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // Knit (2026-09-30): the eleven kept intro variants of the Knit ad, each the 18 s film with the original soundtrack.
+  ['knit-intro-v01-4x5', 'knit-intro-v01-4x5/', "Knit: find your people, from a Mac scan to a group chat", 'Ad spots', { download: 'animations/knit-intro-v01-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v04-4x5', 'knit-intro-v04-4x5/', "Knit intro v04: Searching Computer...", 'Ad spots', { download: 'animations/knit-intro-v04-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v10-4x5', 'knit-intro-v10-4x5/', "Knit intro v10: One line at a time", 'Ad spots', { download: 'animations/knit-intro-v10-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v15-4x5', 'knit-intro-v15-4x5/', "Knit intro v15: Big number", 'Ad spots', { download: 'animations/knit-intro-v15-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v18-4x5', 'knit-intro-v18-4x5/', "Knit intro v18: Progress fill", 'Ad spots', { download: 'animations/knit-intro-v18-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v19-4x5', 'knit-intro-v19-4x5/', "Knit intro v19: Frame below", 'Ad spots', { download: 'animations/knit-intro-v19-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v20-4x5', 'knit-intro-v20-4x5/', "Knit intro v20: Agent steps", 'Ad spots', { download: 'animations/knit-intro-v20-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v44-4x5', 'knit-intro-v44-4x5/', "Knit intro v44: Big type", 'Ad spots', { download: 'animations/knit-intro-v44-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v57-4x5', 'knit-intro-v57-4x5/', "Knit intro v57: Scanning, no count", 'Ad spots', { download: 'animations/knit-intro-v57-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v58-4x5', 'knit-intro-v58-4x5/', "Knit intro v58: Scanning and searching", 'Ad spots', { download: 'animations/knit-intro-v58-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-intro-v63-4x5', 'knit-intro-v63-4x5/', "Knit intro v63: Scanning, emoji, no count", 'Ad spots', { download: 'animations/knit-intro-v63-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

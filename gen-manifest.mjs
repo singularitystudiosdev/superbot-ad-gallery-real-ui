@@ -171,6 +171,11 @@ const more = [
   // in Maine's overtime law, the "responsibilty" typo on Australia's $50 note, and an "or" that sat in a Federal Reserve
   // rule from 1980 until 2026. Every fix is matched to the correction the publisher printed (all cited in img/CREDITS.txt).
   ['do-my-job-proofreader-editor-superbot-c54c5ecd', 'do-my-job-proofreader-editor-superbot-c54c5ecd/', 'BUT WE WILL · Do my job for me: superbot proofreads and edits in Microsoft Word', 'Ad spots'],
+  // Knit sounds (2026-09-30): the Knit ad (intro v01) with each of its four quiet click soundtracks.
+  ['knit-sound-soft-clicks-4ebaebee', 'knit-sound-soft-clicks-4ebaebee/', 'Knit: Soft clicks sound', 'Ad spots', { download: 'animations/knit-sound-soft-clicks-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-sound-ticks-and-pops-4ebaebee', 'knit-sound-ticks-and-pops-4ebaebee/', 'Knit: Ticks and pops sound', 'Ad spots', { download: 'animations/knit-sound-ticks-and-pops-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-sound-keys-4ebaebee', 'knit-sound-keys-4ebaebee/', 'Knit: Keys sound', 'Ad spots', { download: 'animations/knit-sound-keys-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-sound-glass-taps-4ebaebee', 'knit-sound-glass-taps-4ebaebee/', 'Knit: Glass taps sound', 'Ad spots', { download: 'animations/knit-sound-glass-taps-4ebaebee/final.mp4', downloadLabel: 'MP4 4:5' }],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

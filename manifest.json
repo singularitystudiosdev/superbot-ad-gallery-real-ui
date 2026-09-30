@@ -184,6 +184,46 @@
     "thumb": "assets/shots/do-my-job-proofreader-editor-superbot-c54c5ecd.png"
   },
   {
+    "id": "knit-sound-soft-clicks-4ebaebee",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit: Soft clicks sound",
+    "src": "animations/knit-sound-soft-clicks-4ebaebee/",
+    "thumb": "assets/shots/knit-sound-soft-clicks-4ebaebee.png",
+    "download": "animations/knit-sound-soft-clicks-4ebaebee/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
+    "id": "knit-sound-ticks-and-pops-4ebaebee",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit: Ticks and pops sound",
+    "src": "animations/knit-sound-ticks-and-pops-4ebaebee/",
+    "thumb": "assets/shots/knit-sound-ticks-and-pops-4ebaebee.png",
+    "download": "animations/knit-sound-ticks-and-pops-4ebaebee/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
+    "id": "knit-sound-keys-4ebaebee",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit: Keys sound",
+    "src": "animations/knit-sound-keys-4ebaebee/",
+    "thumb": "assets/shots/knit-sound-keys-4ebaebee.png",
+    "download": "animations/knit-sound-keys-4ebaebee/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
+    "id": "knit-sound-glass-taps-4ebaebee",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit: Glass taps sound",
+    "src": "animations/knit-sound-glass-taps-4ebaebee/",
+    "thumb": "assets/shots/knit-sound-glass-taps-4ebaebee.png",
+    "download": "animations/knit-sound-glass-taps-4ebaebee/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

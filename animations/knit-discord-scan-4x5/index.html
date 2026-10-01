@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Knit on Discord: scan to servers (4:5)</title>
+<title>Knit intro: Discord style (4:5)</title>
 <style>
-/* Plays the rendered 1080x1350 film (final.mp4, 22 s, 60 fps, with sound) at 4:5 on
-   the film's own grey canvas. The gallery loads this page in a frame at any
-   ?ar=; the 4:5 picture is fitted whole and the rest of the frame stays grey. */
+/* Plays the rendered 1080x1350 film (final.mp4, 18 s, 60 fps, with sound) at 4:5 on
+   the film's own dark canvas. The gallery loads this page in a frame at any
+   ?ar=; the 4:5 picture is fitted whole and the rest of the frame stays dark. */
 :root {
-  --canvas: #eef0f3;
+  --canvas: #19191c;
   --surface: #ffffff;
   --ink: #14171c;
   --hairline: #d4d8de;
@@ -49,7 +49,7 @@ video {
 <body>
 <div class="frame">
   <video id="film" src="final.mp4" poster="poster.png" autoplay loop playsinline preload="auto"
-    aria-label="Knit on Discord: scan to servers (4:5): The Knit ad on Discord: a scan of your computer turns into the Discord servers that fit you, with sound on (22s loop)."></video>
+    aria-label="Knit intro: Discord style (4:5): The Knit v57 intro in a dark Discord-style skin: a scan of your computer finds what you are into, suggests groups near Laramie, you join one and the group chat comes alive, with sound on (18s loop)."></video>
 </div>
 <script>
   const video = document.getElementById("film");

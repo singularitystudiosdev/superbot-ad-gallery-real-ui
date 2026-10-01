@@ -183,8 +183,8 @@ const more = [
   ['knit-intro-v57-4x5', 'knit-intro-v57-4x5/', "Knit intro v57: Scanning, no count", 'Ad spots', { download: 'animations/knit-intro-v57-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-intro-v58-4x5', 'knit-intro-v58-4x5/', "Knit intro v58: Scanning and searching", 'Ad spots', { download: 'animations/knit-intro-v58-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-intro-v63-4x5', 'knit-intro-v63-4x5/', "Knit intro v63: Scanning, emoji, no count", 'Ad spots', { download: 'animations/knit-intro-v63-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
-  // Knit on Discord (2026-10-01): the 22 s scan-to-servers film, 1080x1350 60 fps with sound.
-  ['knit-discord-scan-4x5', 'knit-discord-scan-4x5/', "Knit on Discord: scan to servers", 'Ad spots', { download: 'animations/knit-discord-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // Knit intro, Discord style (2026-10-01): the v57 intro flow (scan, groups near Laramie, join, group chat, end card) in a dark Discord-style skin, 18 s 1080x1350 60 fps with sound.
+  ['knit-discord-scan-4x5', 'knit-discord-scan-4x5/', "Knit intro: Discord style", 'Ad spots', { download: 'animations/knit-discord-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-whatsapp-scan-4x5', 'knit-whatsapp-scan-4x5/', "Knit on WhatsApp: scan to groups", 'Ad spots', { download: 'animations/knit-whatsapp-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-instagram-scan-4x5', 'knit-instagram-scan-4x5/', "Knit on Instagram: your Mac, as Stories", 'Ad spots', { download: 'animations/knit-instagram-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-snapchat-scan-4x5', 'knit-snapchat-scan-4x5/', "Knit, Snapchat-style: your Mac, scanned into groups", 'Ad spots', { download: 'animations/knit-snapchat-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],

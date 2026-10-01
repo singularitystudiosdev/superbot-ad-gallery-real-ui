@@ -435,6 +435,16 @@
     "desc": "A scan of your Mac lands as a voted thread of what you are into, folds into one card, ranks groups near you, and you join one and say hi."
   },
   {
+    "id": "knit-x-scan-4x5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit, X-style: your Mac, read into groups",
+    "src": "animations/knit-x-scan-4x5/",
+    "thumb": "assets/shots/knit-x-scan-4x5.png",
+    "download": "animations/knit-x-scan-4x5/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "knit-twitch-scan-4x5",
     "type": "animation",
     "group": "Ad spots",

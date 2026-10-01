@@ -188,6 +188,7 @@ const more = [
   ['knit-whatsapp-scan-4x5', 'knit-whatsapp-scan-4x5/', "Knit on WhatsApp: scan to groups", 'Ad spots', { download: 'animations/knit-whatsapp-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-instagram-scan-4x5', 'knit-instagram-scan-4x5/', "Knit on Instagram: your Mac, as Stories", 'Ad spots', { download: 'animations/knit-instagram-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-snapchat-scan-4x5', 'knit-snapchat-scan-4x5/', "Knit on Snapchat: your Mac, scanned into groups", 'Ad spots', { download: 'animations/knit-snapchat-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-groupme-scan-4x5', 'knit-groupme-scan-4x5/', "Knit on GroupMe: your Mac, read into groups", 'Ad spots', { download: 'animations/knit-groupme-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

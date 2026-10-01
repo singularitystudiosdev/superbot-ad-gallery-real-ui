@@ -192,6 +192,8 @@ const more = [
   ['knit-groupme-scan-4x5', 'knit-groupme-scan-4x5/', "Knit on GroupMe: your Mac, read into groups", 'Ad spots', { download: 'animations/knit-groupme-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // Knit, Facebook-style (2026-10-01): the v57 scan flow (scan, groups near Portland, join, group, photo walk, end card) in a Facebook-like feel with no Facebook mark, 18 s 1080x1350 30 fps with sound.
   ['knit-facebook-scan-4x5', 'knit-facebook-scan-4x5/', "Knit, Facebook-style: your Mac, read into groups", 'Ad spots', { download: 'animations/knit-facebook-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // Knit, Telegram-style (2026-10-01): the v57 scan flow (scan, groups near Laramie, join, group chat with a poll, end card) in a Telegram-like feel (gradient wallpaper, bubbles), 18 s 1080x1350 60 fps with sound.
+  ['knit-telegram-scan-4x5', 'knit-telegram-scan-4x5/', "Knit, Telegram-style: your Mac, read into groups", 'Ad spots', { download: 'animations/knit-telegram-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

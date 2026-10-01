@@ -364,6 +364,16 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "knit-telegram-scan-4x5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit, Telegram-style: your Mac, read into groups",
+    "src": "animations/knit-telegram-scan-4x5/",
+    "thumb": "assets/shots/knit-telegram-scan-4x5.png",
+    "download": "animations/knit-telegram-scan-4x5/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

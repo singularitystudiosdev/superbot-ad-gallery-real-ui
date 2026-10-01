@@ -314,6 +314,16 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "knit-instagram-scan-4x5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit on Instagram: your Mac, as Stories",
+    "src": "animations/knit-instagram-scan-4x5/",
+    "thumb": "assets/shots/knit-instagram-scan-4x5.png",
+    "download": "animations/knit-instagram-scan-4x5/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

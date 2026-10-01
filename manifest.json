@@ -404,6 +404,16 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "knit-viber-scan-4x5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit, Viber-style: your Mac, read into communities",
+    "src": "animations/knit-viber-scan-4x5/",
+    "thumb": "assets/shots/knit-viber-scan-4x5.png",
+    "download": "animations/knit-viber-scan-4x5/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "mmorpg-every-model-v3-superbot-d231c019",
     "type": "animation",
     "group": "Ad spots",

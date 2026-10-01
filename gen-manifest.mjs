@@ -200,6 +200,8 @@ const more = [
   ['knit-messenger-scan-4x5', 'knit-messenger-scan-4x5/', "Knit, Messenger-style: your Mac, read into group chats", 'Ad spots', { download: 'animations/knit-messenger-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // Knit, WeChat-style (2026-10-01): the v57 scan flow (scan, interests and traits, groups near San Francisco in a half-screen dialog, join, the group chat, end card) in a WeChat-like feel through WeUI with no WeChat mark or app chrome, 18 s 1080x1350 30 fps with sound.
   ['knit-wechat-scan-4x5', 'knit-wechat-scan-4x5/', "Knit, WeChat-style: your Mac, read into groups", 'Ad spots', { download: 'animations/knit-wechat-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // Knit, Viber-style (2026-10-01): the v57 scan flow (scan, finds, communities near Laramie, join, the group chat with a poll, end card) in a purple-messenger ad language (colour fields, pulse rings, tilted frames, 3D emoji) with no Viber mark or app chrome, 18 s 1080x1350 60 fps with sound.
+  ['knit-viber-scan-4x5', 'knit-viber-scan-4x5/', "Knit, Viber-style: your Mac, read into communities", 'Ad spots', { download: 'animations/knit-viber-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

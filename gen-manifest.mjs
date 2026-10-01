@@ -187,6 +187,7 @@ const more = [
   ['knit-discord-scan-4x5', 'knit-discord-scan-4x5/', "Knit intro: Discord style", 'Ad spots', { download: 'animations/knit-discord-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-whatsapp-scan-4x5', 'knit-whatsapp-scan-4x5/', "Knit on WhatsApp: scan to groups", 'Ad spots', { download: 'animations/knit-whatsapp-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-instagram-scan-4x5', 'knit-instagram-scan-4x5/', "Knit on Instagram: your Mac, as Stories", 'Ad spots', { download: 'animations/knit-instagram-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['knit-stories-scan-4x5', 'knit-stories-scan-4x5/', "Knit Stories: scan to groups", 'Ad spots', { download: 'animations/knit-stories-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-snapchat-scan-4x5', 'knit-snapchat-scan-4x5/', "Knit, Snapchat-style: your Mac, scanned into groups", 'Ad spots', { download: 'animations/knit-snapchat-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-groupme-scan-4x5', 'knit-groupme-scan-4x5/', "Knit on GroupMe: your Mac, read into groups", 'Ad spots', { download: 'animations/knit-groupme-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.

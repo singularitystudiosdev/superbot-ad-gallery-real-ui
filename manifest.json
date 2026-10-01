@@ -324,6 +324,16 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "knit-stories-scan-4x5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Knit Stories: scan to groups",
+    "src": "animations/knit-stories-scan-4x5/",
+    "thumb": "assets/shots/knit-stories-scan-4x5.png",
+    "download": "animations/knit-stories-scan-4x5/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "knit-snapchat-scan-4x5",
     "type": "animation",
     "group": "Ad spots",

@@ -183,6 +183,8 @@ const more = [
   ['knit-intro-v57-4x5', 'knit-intro-v57-4x5/', "Knit intro v57: Scanning, no count", 'Ad spots', { download: 'animations/knit-intro-v57-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-intro-v58-4x5', 'knit-intro-v58-4x5/', "Knit intro v58: Scanning and searching", 'Ad spots', { download: 'animations/knit-intro-v58-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['knit-intro-v63-4x5', 'knit-intro-v63-4x5/', "Knit intro v63: Scanning, emoji, no count", 'Ad spots', { download: 'animations/knit-intro-v63-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // Knit on Discord (2026-10-01): the 22 s scan-to-servers film, 1080x1350 60 fps with sound.
+  ['knit-discord-scan-4x5', 'knit-discord-scan-4x5/', "Knit on Discord: scan to servers", 'Ad spots', { download: 'animations/knit-discord-scan-4x5/final.mp4', downloadLabel: 'MP4 4:5' }],
   // I want to make a MMO RPG (2026-09-26): five routings of one page (?v=1..5) through plan, code, git, art, play.
   ['mmorpg-every-model-v3-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=3', 'I want to make a MMO RPG: Gemini art first, DeepSeek lore, Opus 5.5 codes', 'Ad spots'],
   ['mmorpg-every-model-v4-superbot-d231c019', 'mmorpg-every-model-superbot-d231c019/?v=4', 'I want to make a MMO RPG: DeepSeek, Codex server, Opus 5.5 client, Gemini, GitHub', 'Ad spots'],

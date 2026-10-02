@@ -464,6 +464,10 @@ const more = [
   ['swarm-console', 'swarm-console/', 'SWARM // command', 'Mascot & toys'],
   ['swarm-constellation', 'swarm-constellation/', 'SWARM.GG — agent constellation', 'Mascot & toys'],
   ['agent-feed', 'agent-feed/', 'superbot optimizer — agent feed', 'Mascot & toys'],
+  // every model, one chat (2026-10-01): the 4:5 phone cut of the merge spot — ChatGPT, Claude, Gemini, Grok, Copilot and
+  // Reddit land in one hand and the app tiles merge into one app, then Gemini makes the meme, DeepSeek digs through
+  // Reddit and the order is placed on DoorDash. 26.4 s, 1080x1350, 30 fps, with sound; ships its own final.mp4.
+  ['every-model-merge-phone-4x5-d10630b5', 'every-model-merge-phone-4x5-d10630b5/', "Every model, one chat: all your apps merge into Superbot", 'Ad spots', { download: 'animations/every-model-merge-phone-4x5-d10630b5/final.mp4', downloadLabel: 'MP4 4:5' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

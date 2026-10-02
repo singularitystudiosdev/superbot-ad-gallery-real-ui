@@ -96,6 +96,64 @@ function clearMarked() {
   copyText('Delete these ad gallery items (superbot-ad-gallery-real-ui): none, the marked list is empty.');
 }
 
+// ---- favorites: the ☆ a tile carries top-right pins it to the top of the grid. Nothing is written
+// to the manifest: the ids live in this browser's localStorage, so the order survives a reload.
+const FAV_KEY = 'gallery.favorites.v1';
+let FAVORITES = [];
+try { const v = JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); if (Array.isArray(v)) FAVORITES = v.filter((id) => typeof id === 'string'); } catch { FAVORITES = []; }
+const isFav = (id) => FAVORITES.includes(id);
+function saveFavorites() { localStorage.setItem(FAV_KEY, JSON.stringify(FAVORITES)); }
+// a favorite whose ad left the manifest would keep a phantom rank in the sort: drop it
+function pruneFavorites() {
+  const known = new Set(ITEMS.map((i) => i.id));
+  const kept = FAVORITES.filter((id) => known.has(id));
+  if (kept.length === FAVORITES.length) return;
+  console.info(`gallery: dropped ${FAVORITES.length - kept.length} favorite(s) for ads that are no longer in the gallery`);
+  FAVORITES = kept;
+  saveFavorites();
+}
+// favorites first, the newest favorite at the very top; every other ad keeps manifest order
+// (Array.prototype.sort is stable, so an equal rank resolves to the original order)
+function favoritesFirst(list) {
+  const rank = new Map(FAVORITES.map((id, i) => [id, i]));
+  return list.sort((a, b) => (rank.has(a.id) ? rank.get(a.id) : Infinity) - (rank.has(b.id) ? rank.get(b.id) : Infinity));
+}
+// one button, two labels: the tile shows ☆/★, the lightbox shows the word
+function setFavButton(btn, on) {
+  if (!btn) return;
+  btn.classList.toggle('on', on);
+  btn.setAttribute('aria-pressed', String(on));
+  btn.textContent = on ? btn.dataset.on : btn.dataset.off;
+}
+// move the tiles already on screen into the new order instead of re-rendering the grid, so a
+// thumbnail never blanks out while its ad jumps to the top
+function reorderGrid() {
+  const grid = $('grid');
+  const tiles = new Map([...grid.children].map((el) => [el.dataset.id, el]));
+  for (const it of filtered()) { const el = tiles.get(it.id); if (el) grid.appendChild(el); }
+}
+function renderCount() {
+  const n = FAVORITES.length;
+  $('count').textContent = `${filtered().length} items` + (n ? ` · ${n} favorite${n === 1 ? '' : 's'}` : '');
+}
+function toggleFavorite(it, btn) {
+  const i = FAVORITES.indexOf(it.id);
+  const now = i === -1;
+  if (now) FAVORITES.unshift(it.id); else FAVORITES.splice(i, 1); // unshift: the ad just favorited lands on top
+  saveFavorites();
+  setFavButton(btn, now);
+  const tile = btn && btn.closest('.tile');
+  if (tile) tile.classList.toggle('favorited', now);
+  reorderGrid();
+  renderCount();
+  if (!$('lb').hidden) { // the list re-ranked under the viewer: keep the SAME ad open, no reload
+    const list = filtered();
+    openIdx = Math.max(0, list.indexOf(it));
+    setFavButton($('lbFav'), isFav(it.id));
+    renderLbPos(it, list.length);
+  }
+}
+
 // ---- permalinks: <gallery>/#<id> opens that ad in the viewer; the hash follows the open ad ----
 const permalink = (it) => `${location.origin}${location.pathname}#${encodeURIComponent(it.id)}`;
 const directLink = (it) => new URL(it.type === 'image' ? srcFor(it, it.src) : it.src, location.href).href;
@@ -299,7 +357,7 @@ addEventListener('resize', sizeFrame);
 function byGroup(list) { return list.filter(i => filter === 'All' || i.group === filter); }
 function byType(list) { return list.filter(i => typeFilter === 'all' || i.type === typeFilter); }
 function filtered() {
-  return byType(byGroup(ITEMS));
+  return favoritesFirst(byType(byGroup(ITEMS)));
 }
 
 // ---- grid + filters ----
@@ -351,18 +409,20 @@ function renderGrid() {
   const grid = $('grid');
   grid.innerHTML = '';
   $('empty').hidden = list.length > 0;
-  $('count').textContent = `${list.length} items`;
+  renderCount();
   for (const it of list) {
     // the tile is a container: the thumbnail and the badge open the lightbox, the caption is editable
-    const marked = MARKED.includes(it.id);
+    const marked = MARKED.includes(it.id), favorited = isFav(it.id);
     const t = document.createElement('div');
-    t.className = 'tile' + (it.type === 'animation' ? ' anim' : '') + (marked ? ' marked' : '');
+    t.className = 'tile' + (it.type === 'animation' ? ' anim' : '') + (marked ? ' marked' : '') + (favorited ? ' favorited' : '');
     t.id = `ad-${it.id}`;
+    t.dataset.id = it.id; // reorderGrid() moves tiles by this, never by the DOM id
     const s = sizeOf(it);
     const wh = s ? ` width="${s.w}" height="${s.h}"` : '';
     const title = titleOf(it);
     t.innerHTML =
       `<button type="button" class="mark${marked ? ' on' : ''}" aria-pressed="${marked}" title="mark for deletion: copies the marked list to your clipboard, deletes nothing" aria-label="mark ${esc(it.id)} for deletion">✕</button>` +
+      `<button type="button" class="fav${favorited ? ' on' : ''}" aria-pressed="${favorited}" data-off="☆" data-on="★" title="favorite: pins it to the top of the grid; kept in this browser" aria-label="favorite ${esc(it.id)}">${favorited ? '★' : '☆'}</button>` +
       `<button type="button" class="open" aria-label="${it.type === 'animation' ? 'play' : 'zoom'}: ${esc(title)}"><img src="${srcFor(it, it.thumb)}" alt="${esc(title)}" loading="lazy"${wh}></button>` +
       `<span class="meta"><button type="button" class="badge">${it.type === 'animation' ? '▶ play' : '⤢ zoom'}</button>` +
       `<a class="plink" href="#${encodeURIComponent(it.id)}" title="copy this ad's permalink">🔗 link</a>` +
@@ -380,6 +440,7 @@ function renderGrid() {
     t.querySelector('.open').onclick = (e) => open(it, e);
     t.querySelector('.badge').onclick = (e) => open(it, e);
     t.querySelector('.mark').onclick = (e) => { e.preventDefault(); e.stopPropagation(); toggleMark(it, e.currentTarget); };
+    t.querySelector('.fav').onclick = (e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(it, e.currentTarget); };
     const pl = t.querySelector('.plink');
     pl.onclick = (e) => { // copy, don't navigate; right-click / middle-click still get the real #link
       e.preventDefault();
@@ -391,6 +452,10 @@ function renderGrid() {
 
 // ---- lightbox ----
 let stageGen = 0; // bumped per renderStage so a card still running for the last ad stands down
+function renderLbPos(it, len) {
+  const arLabel = RATIOS.find(x => x[0] === (it.type === 'image' ? arOf(it) : ar))[1];
+  $('lbPos').textContent = `${openIdx + 1} / ${len} · ${it.group}${it.type === 'animation' || it.ars ? ` · ${arLabel}` : ''}`;
+}
 function renderStage() {
   const list = filtered();
   const it = list[openIdx];
@@ -444,8 +509,8 @@ function renderStage() {
   $('lbLink').href = `#${encodeURIComponent(it.id)}`;
   $('lbOpen').href = directLink(it);
   $('lbTitle').textContent = titleOf(it);
-  const arLabel = RATIOS.find(x => x[0] === (it.type === 'image' ? arOf(it) : ar))[1];
-  $('lbPos').textContent = `${openIdx + 1} / ${list.length} · ${it.group}${it.type === 'animation' || it.ars ? ` · ${arLabel}` : ''}`;
+  setFavButton($('lbFav'), isFav(it.id));
+  renderLbPos(it, list.length);
 }
 
 function open(item, e) {
@@ -498,13 +563,14 @@ $('markCopy').onclick = () => {
   copyText(markPayload()).then(() => flashLabel($('markCopy'), '✓ copied', `✕ ${MARKED.length} marked · copy list`));
 };
 $('markClear').onclick = clearMarked;
+$('lbFav').onclick = () => { const it = filtered()[openIdx]; if (it) toggleFavorite(it, $('lbFav')); };
 renderCopy();
 renderMarkBar();
 renderSoon();
 
 fetch('manifest.json')
   .then(r => r.json())
-  .then(data => { ITEMS = data; pruneMarks(); renderMarkBar(); renderAr(); renderTypePicker(); renderChips(); renderGrid(); openFromHash(); })
+  .then(data => { ITEMS = data; pruneMarks(); pruneFavorites(); renderMarkBar(); renderAr(); renderTypePicker(); renderChips(); renderGrid(); openFromHash(); })
   .catch(err => {
     console.error(err);
     document.getElementById('empty').hidden = false;

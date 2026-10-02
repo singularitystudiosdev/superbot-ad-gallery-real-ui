@@ -239,6 +239,27 @@ body.lb-open .soon-pick { right: 268px; }
 .tile.marked::before { border-top-color: var(--amber); border-left-color: var(--amber); }
 .tile.marked::after { border-top-color: var(--amber); border-right-color: var(--amber); }
 
+/* ---- favorites: the ☆ a tile carries top-right pins it to the top of the grid; the ids live in
+   this browser's localStorage, so the order survives a reload. Green, to read apart from the ✕ ---- */
+.tile .fav {
+  position: absolute; top: 8px; right: 8px; z-index: 2;
+  font-family: var(--mono); font-size: 12px; line-height: 1;
+  padding: 5px 8px; cursor: pointer; border-radius: 0;
+  color: var(--dim); background: rgba(5, 8, 5, .72); border: 1px solid var(--line);
+  transition: color .12s, border-color .12s, background .12s;
+}
+.tile .fav:hover, .tile .fav:focus-visible { color: var(--acc); border-color: var(--acc); outline: none; }
+.tile .fav.on { color: var(--bg); background: var(--acc); border-color: var(--acc); }
+.tile.favorited { border-color: var(--acc); box-shadow: 0 0 24px -6px #3dff7a55; }
+.tile.favorited::before, .tile.favorited::after { opacity: 1; }
+.lb-caption .lb-fav {
+  font-family: var(--mono); font-size: 11.5px; line-height: 1;
+  background: none; border: none; border-radius: 0; padding: 0; cursor: pointer;
+  color: var(--dim); border-bottom: 1px dashed transparent;
+}
+.lb-caption .lb-fav:hover, .lb-caption .lb-fav:focus-visible { color: var(--acc); border-bottom-color: var(--acc); outline: none; }
+.lb-caption .lb-fav.on { color: var(--acc); border-bottom-color: var(--acc); }
+
 .mark-bar {
   position: fixed; left: 24px; bottom: 20px; z-index: 11;
   display: flex; gap: 2px; padding: 3px;
@@ -258,5 +279,6 @@ body.lb-open .mark-bar { display: none; }
 /* touch floor: 44x44 on a coarse pointer (Apple HIG / M3 48dp), 24x24 minimum otherwise (WCAG 2.2 SC 2.5.8) */
 @media (pointer: coarse) {
   .tile .mark { min-width: 44px; min-height: 44px; }
+  .tile .fav { min-width: 44px; min-height: 44px; }
   .mark-bar button { min-height: 44px; }
 }

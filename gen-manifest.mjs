@@ -434,6 +434,12 @@ const more = [
   // the twelve icons back in from the frame edges into the superbot mark. 26.4 s, 1080x1350,
   // 30 fps, with sound; ships its own final.mp4.
   ['every-model-converge-4x5-398eded5', 'every-model-converge-4x5-398eded5/', "Every model, one chat: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-4x5-398eded5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // converge variants (2026-10-02): the same 21.6 s converge spine (identical beats, timing and score),
+  // rethemed twice. apps: the hook throws the five apps you juggle (ChatGPT, Claude, Grok, Cursor,
+  // Copilot) and the copy reads 'five apps, one chat'. day: the hook keeps the router pills and the copy
+  // runs the whole day, standup meme to the 24 min burger. 21.6 s, 1080x1350, 30 fps, with sound.
+  ['every-model-converge-apps-4x5-4741876c', 'every-model-converge-apps-4x5-4741876c/', "Five apps, one chat: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-apps-4x5-4741876c/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['every-model-converge-day-4x5-60e5248a', 'every-model-converge-day-4x5-60e5248a/', "One chat, all day: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-day-4x5-60e5248a/final.mp4', downloadLabel: 'MP4 4:5' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

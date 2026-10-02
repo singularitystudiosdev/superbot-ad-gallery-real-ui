@@ -126,11 +126,20 @@ function setFavButton(btn, on) {
   btn.textContent = on ? btn.dataset.on : btn.dataset.off;
 }
 // move the tiles already on screen into the new order instead of re-rendering the grid, so a
-// thumbnail never blanks out while its ad jumps to the top
+// thumbnail never blanks out while its ad jumps to the top. Favorites belong in the band and
+// everything else in the columns, so each box keeps only the tiles that are its own.
 function reorderGrid() {
-  const grid = $('grid');
-  const tiles = new Map([...grid.children].map((el) => [el.dataset.id, el]));
-  for (const it of filtered()) { const el = tiles.get(it.id); if (el) grid.appendChild(el); }
+  const fav = new Set(FAVORITES);
+  const band = $('favBand'), cols = $('gridCols');
+  for (const box of [band, cols]) { // a tile on the wrong side (favorited from the viewer, say) moves over
+    const inBand = box.id === 'favBand';
+    for (const el of [...box.children]) if (fav.has(el.dataset.id) !== inBand) (inBand ? cols : band).appendChild(el);
+  }
+  for (const box of [band, cols]) { // then each box reads in filtered() order
+    const tiles = new Map([...box.children].map((el) => [el.dataset.id, el]));
+    for (const it of filtered()) { const el = tiles.get(it.id); if (el) box.appendChild(el); }
+  }
+  band.hidden = !band.children.length;
 }
 function renderCount() {
   const n = FAVORITES.length;
@@ -144,7 +153,7 @@ function toggleFavorite(it, btn) {
   setFavButton(btn, now);
   const tile = btn && btn.closest('.tile');
   if (tile) tile.classList.toggle('favorited', now);
-  reorderGrid();
+  reorderGrid(); // also moves the tile into the band (or back into the columns): the node moves, the thumbnail never reloads
   renderCount();
   if (!$('lb').hidden) { // the list re-ranked under the viewer: keep the SAME ad open, no reload
     const list = filtered();
@@ -406,7 +415,8 @@ function renderTypePicker() {
 
 function renderGrid() {
   const list = filtered();
-  const grid = $('grid');
+  const band = $('favBand'), grid = $('gridCols');
+  band.innerHTML = '';
   grid.innerHTML = '';
   $('empty').hidden = list.length > 0;
   renderCount();
@@ -446,8 +456,10 @@ function renderGrid() {
       e.preventDefault();
       copyText(permalink(it)).then(() => flashLabel(pl, '✓ copied', '🔗 link'));
     };
-    grid.appendChild(t);
+    // favorites fill the band across the top row; everything else flows into the columns below
+    (favorited ? band : grid).appendChild(t);
   }
+  band.hidden = !list.some((it) => isFav(it.id));
 }
 
 // ---- lightbox ----

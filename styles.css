@@ -50,8 +50,18 @@ h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; letter-spacing: .5px; }
 
 .grid {
   max-width: 1400px; margin: 22px auto 40px; padding: 0 24px;
-  columns: 4 260px; column-gap: 16px;
 }
+.grid-cols { columns: 4 260px; column-gap: 16px; }
+/* favorites fill the FIRST cells of the grid, left to right across the top; the rest of the
+   gallery keeps the masonry columns below (multi-column flow fills one column top-to-bottom, so
+   favorites used to stack under each other down the left column instead of sitting side by side) */
+.fav-band {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;
+  align-items: start; /* each tile keeps its own height; the row is as tall as its tallest */
+  margin-bottom: 16px;
+}
+.fav-band[hidden] { display: none; }
+.fav-band .tile { margin-bottom: 0; } /* the grid gap already spaces the band */
 .tile {
   break-inside: avoid; margin-bottom: 16px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 0;

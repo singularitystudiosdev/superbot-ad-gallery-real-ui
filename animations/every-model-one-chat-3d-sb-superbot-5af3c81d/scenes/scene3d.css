@@ -1,0 +1,105 @@
+/* scene3d.css — the 3D cut of every-model-one-chat: the hub becomes a floating panel inside a dark parallax void,
+   with a keyframed camera above it (scenes/tabs.js) and a logo ring behind the end card (timeline.js).
+   Scoped under .ask3d / .end3d so the flat cut's stylesheets stay untouched, and placed last in index.html so it
+   wins the cascade over ask.css on equal specificity. No animation, no transition, no tween anywhere: every moving
+   value in here is written from t by JS, never by the compositor. */
+
+/* ---- the box the 3D space is cut into (ask.css already set these; this is the void colour behind the panel) ---- */
+#s-tabs .ask-root.ask3d { position: absolute; inset: 0; overflow: hidden; background: #050507; }
+
+/* ---- the void: perspective carrier, then the rig (rotation) and the camera (pan + dolly) ----
+   inset 0 (not -8%): the camera's transform origin is 0 0, so the carrier must be exactly the frame box or the
+   whole rig is silently offset by the overhang. The layers bleed on their own offsets instead, and .ask-root's
+   overflow:hidden clips them either way. */
+.ask3d .env3d { position: absolute; inset: 0; perspective: 1800px; perspective-origin: 50% 50%; transform-style: preserve-3d; }
+.ask3d .rig3d { position: absolute; inset: 0; transform-origin: 50% 50%; transform-style: preserve-3d; will-change: transform; }
+.ask3d .cam3d { position: absolute; inset: 0; transform-origin: 0 0; transform-style: preserve-3d; will-change: transform; }
+
+/* ---- the panel: the hub itself, a lit screen hanging in the dark ---- */
+.ask3d .panel3d {
+  position: absolute; left: 0; top: 0; border-radius: 28px; overflow: hidden; background: #0a0a0b;
+  box-shadow: 0 60px 120px -30px #000, 0 0 0 1px rgba(255, 255, 255, .07);
+}
+
+/* ---- the floor: two raked grid planes under the panel, each scrolling toward the viewer with t ----
+   The pattern sits on a much taller inner <i> that carries the scroll as a transform (tabs.js), so the frame
+   never pays for a background-position-y repaint; the outer plane keeps the rake, the parallax and the soft mask. */
+.ask3d .grid {
+  position: absolute; pointer-events: none;
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 40%, #000 34%, transparent 100%);
+  mask-image: radial-gradient(70% 70% at 50% 40%, #000 34%, transparent 100%);
+}
+.ask3d .grid i { position: absolute; left: 0; right: 0; top: -80%; height: 300%; display: block; }
+/* the near plane: the floor the panel hangs over */
+.ask3d .grid.gn { left: -25%; right: -25%; bottom: -12%; height: 78%; }
+.ask3d .grid.gn i {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(91, 141, 255, .34) 0 1px, transparent 1px 84px),
+    repeating-linear-gradient(90deg, rgba(91, 141, 255, .24) 0 1px, transparent 1px 84px);
+}
+/* the far plane: higher, shallower, double cells and less than half the scroll speed, dimmer, and fading out at
+   the top so the two planes never read as one muddy mesh */
+.ask3d .grid.gf {
+  left: -42%; right: -42%; top: 12%; height: 74%;
+  -webkit-mask-image: radial-gradient(66% 62% at 50% 86%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(66% 62% at 50% 86%, #000 30%, transparent 100%);
+}
+.ask3d .grid.gf i {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(91, 141, 255, .17) 0 1px, transparent 1px 168px),
+    repeating-linear-gradient(90deg, rgba(91, 141, 255, .12) 0 1px, transparent 1px 168px);
+}
+
+/* ---- dust motes (60, seeded, drifting up and sideways with wrap-around) ----
+   every eighth is a bokeh body: large, pre-blurred at mount and parallaxing four times as hard as the fine dust,
+   so the void has a near, out-of-focus layer as well as the far pinpricks */
+.ask3d .dust { position: absolute; inset: 0; }
+.ask3d .dust i { position: absolute; left: 50%; top: 50%; border-radius: 50%; background: rgba(255, 255, 255, .55); }
+
+/* ---- the logo burst: the model a routing chip switched to, arriving at the chip (tabs.js renderBurst) ----
+   anchored by its right edge to the chip's icon, so however large it grows it expands away from the label.
+   The hub is its own layer (z-index 6) with an opaque background, so the burst has to clear it to be seen. */
+.ask3d .burst-logo {
+  position: absolute; left: 0; top: 0; width: 44px; height: 44px; object-fit: contain; opacity: 0; z-index: 8;
+  transform-origin: 100% 50%; pointer-events: none;
+}
+
+/* ---- the neighbouring models drifting past behind the panel during a chip's window ---- */
+.ask3d .drift-logo {
+  position: absolute; left: 0; top: 0; width: 150px; height: 150px; object-fit: contain; opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- the backdrop word: the model the last routing chip switched to, low and blurred behind the panel ----
+   the blur sits on the wrapper and the storm gradient on the inner <b>, because filter + background-clip:text
+   on one element is the one combination this project already avoids (see timeline.js's gradient words) */
+.ask3d .env-word {
+  position: absolute; inset: 0; display: grid; place-items: center; white-space: nowrap;
+  font: 800 300px/.85 var(--ui, system-ui); letter-spacing: -.03em; filter: blur(1.5px); pointer-events: none;
+}
+.ask3d .env-word b {
+  font: inherit; font-weight: inherit; letter-spacing: inherit;
+  background-image: linear-gradient(96deg, #1e3a8a 0%, #5b8dff 16%, #8b5cf6 44%, #c026d3 72%, #5b8dff 100%);
+  background-size: 320% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ---- the void's two light bodies ---- */
+.ask3d .glowA, .ask3d .glowB { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(40px); }
+.ask3d .glowA { left: -6%; top: -12%; width: 72%; height: 96%; background: radial-gradient(closest-side, rgba(91, 141, 255, .54), rgba(91, 141, 255, 0) 72%); }
+.ask3d .glowB { right: -12%; bottom: -18%; width: 80%; height: 100%; background: radial-gradient(closest-side, rgba(192, 38, 211, .38), rgba(139, 92, 246, .19) 46%, rgba(139, 92, 246, 0) 74%); }
+
+/* ---- the routing chip lights up when its route resolves (--punch is written by chat3d.js) ---- */
+#s-tabs .ask3d .hub .msg .qc-sw { box-shadow: inset 0 0 0 1px #2a2a2e, 0 0 calc(14px * var(--punch, 0)) rgba(91, 141, 255, .55); }
+
+/* ================= the end card: the lockup in the same void, a logo ring behind it ================= */
+#s-end .end3d .void3d { position: relative; perspective: 1800px; perspective-origin: 50% 50%; transform-style: preserve-3d; }
+#s-end .end3d .rig3d { position: relative; transform-origin: 50% 50%; transform-style: preserve-3d; }
+/* the lock's own flex row, one nesting level in: gap 56 (32 in portrait) as ask.css .lock.ask-end had it */
+#s-end .end3d .cam3d { display: flex; align-items: center; gap: 56px; transform-style: preserve-3d; }
+html[data-ar="1x1"] #s-end .end3d .cam3d,
+html[data-ar="4x5"] #s-end .end3d .cam3d,
+html[data-ar="9x16"] #s-end .end3d .cam3d { flex-direction: row; gap: 32px; text-align: left; }
+#s-end .end3d .words, #s-end .end3d .face { transform-style: preserve-3d; }
+/* the ring: centred well behind the lockup, orbiting slowly; each logo carries its own radius and phase */
+#s-end .end3d .ring3d { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
+#s-end .end3d .ring3d img { position: absolute; left: 0; top: 0; width: 92px; height: 92px; margin: -46px 0 0 -46px; object-fit: contain; }

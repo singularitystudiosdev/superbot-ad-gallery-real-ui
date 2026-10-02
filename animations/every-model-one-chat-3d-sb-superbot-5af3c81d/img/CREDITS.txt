@@ -1,0 +1,7 @@
+img CREDITS (it-does-what-you-ask)
+
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.

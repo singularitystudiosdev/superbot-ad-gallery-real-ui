@@ -56,6 +56,14 @@
     "thumb": "assets/shots/every-model-one-chat-sb-combo-efa8df82.png"
   },
   {
+    "id": "every-model-one-chat-3d-sb-superbot-5af3c81d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Switched to Superbot (3D cut)",
+    "src": "animations/every-model-one-chat-3d-sb-superbot-5af3c81d/?route=superbot",
+    "thumb": "assets/shots/every-model-one-chat-3d-sb-superbot-5af3c81d.png"
+  },
+  {
     "id": "every-model-one-chat-3d-phone-superbot-ab7049c5",
     "type": "animation",
     "group": "Ad spots",

@@ -69,6 +69,10 @@ const more = [
   ['every-model-one-chat-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/', 'EVERY MODEL. ONE CHAT. · Connecting to DoorDash', 'Ad spots'],
   ['every-model-one-chat-sb-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/?route=superbot', 'EVERY MODEL. ONE CHAT. · Switched to Superbot', 'Ad spots'],
   ['every-model-one-chat-sb-combo-efa8df82', 'every-model-one-chat-superbot-efa8df82/?route=combo', 'EVERY MODEL. ONE CHAT. · Superbot, then DoorDash', 'Ad spots'],
+  // 3D cut (2026-10-01): the route=superbot spot as a floating 3D panel in a parallax void with a keyframed
+  // camera — the panel tilts and the camera swings as the chips run, model logos bursting and converging, and
+  // the order card punches in at the end. Same source spot as the three 2D entries above, rebuilt as a 3D one.
+  ['every-model-one-chat-3d-sb-superbot-5af3c81d', 'every-model-one-chat-3d-sb-superbot-5af3c81d/?route=superbot', 'EVERY MODEL. ONE CHAT. · Switched to Superbot (3D cut)', 'Ad spots'],
   // 3D phone (2026-10-01): the same spot shot inside a moving 3D phone. The phone's screen drives the
   // route=superbot source spot (iframe, seeked by stage.js) and the model icons orbit, converge and merge
   // into the superbot tile as the camera swings. Poster = the merge beat (stage t 15.2).

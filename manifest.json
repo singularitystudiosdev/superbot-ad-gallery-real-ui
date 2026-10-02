@@ -1247,6 +1247,16 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "every-model-converge-4x5-398eded5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Every model, one chat: twelve apps fuse into Superbot",
+    "src": "animations/every-model-converge-4x5-398eded5/",
+    "thumb": "assets/shots/every-model-converge-4x5-398eded5.png",
+    "download": "animations/every-model-converge-4x5-398eded5/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -468,6 +468,14 @@ const more = [
   // Reddit land in one hand and the app tiles merge into one app, then Gemini makes the meme, DeepSeek digs through
   // Reddit and the order is placed on DoorDash. 26.4 s, 1080x1350, 30 fps, with sound; ships its own final.mp4.
   ['every-model-merge-phone-4x5-d10630b5', 'every-model-merge-phone-4x5-d10630b5/', "Every model, one chat: all your apps merge into Superbot", 'Ad spots', { download: 'animations/every-model-merge-phone-4x5-d10630b5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // every model, one chat (2026-10-02): the converge cut of the same spot, built on a fork of the
+  // every-model-4x5 engine retimed to a 26.4 s spine. Twelve real app icons sit on the iOS home
+  // screen, lift OUT of the phone onto the full stage, spiral and implode into the Superbot tile,
+  // and the tile dives back into the phone; then the superbot route plays out (Gemini meme,
+  // DeepSeek V4 Flash scraping Reddit, a DoorDash burger order in 24 min) and the end card flies
+  // the twelve icons back in from the frame edges into the superbot mark. 26.4 s, 1080x1350,
+  // 30 fps, with sound; ships its own final.mp4.
+  ['every-model-converge-4x5-398eded5', 'every-model-converge-4x5-398eded5/', "Every model, one chat: twelve apps fuse into Superbot", 'Ad spots', { download: 'animations/every-model-converge-4x5-398eded5/final.mp4', downloadLabel: 'MP4 4:5' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

@@ -440,6 +440,11 @@ const more = [
   // runs the whole day, standup meme to the 24 min burger. 21.6 s, 1080x1350, 30 fps, with sound.
   ['every-model-converge-apps-4x5-4741876c', 'every-model-converge-apps-4x5-4741876c/', "Five apps, one chat: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-apps-4x5-4741876c/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['every-model-converge-day-4x5-60e5248a', 'every-model-converge-day-4x5-60e5248a/', "One chat, all day: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-day-4x5-60e5248a/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // converge variants 3 and 4 (2026-10-02): same 21.6 s spine and score, each hook aimed at a ranked
+  // r/LLM complaint (sell-to-reddit llm_ai, 30 days). limit: usage limits and pricing (rank 1), 'hit a
+  // limit? switch models'. nerfed: output quality regressions (rank 2, rising), 'model nerfed? use another'.
+  ['every-model-converge-limit-4x5-7f41c37b', 'every-model-converge-limit-4x5-7f41c37b/', "Hit a limit? Switch models: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-limit-4x5-7f41c37b/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['every-model-converge-nerfed-4x5-04314497', 'every-model-converge-nerfed-4x5-04314497/', "Model nerfed? Use another: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-nerfed-4x5-04314497/final.mp4', downloadLabel: 'MP4 4:5' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

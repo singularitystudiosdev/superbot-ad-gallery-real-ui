@@ -985,6 +985,26 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "every-model-converge-limit-4x5-7f41c37b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Hit a limit? Switch models: Superbot desktop on the knit phone",
+    "src": "animations/every-model-converge-limit-4x5-7f41c37b/",
+    "thumb": "assets/shots/every-model-converge-limit-4x5-7f41c37b.png",
+    "download": "animations/every-model-converge-limit-4x5-7f41c37b/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
+    "id": "every-model-converge-nerfed-4x5-04314497",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Model nerfed? Use another: Superbot desktop on the knit phone",
+    "src": "animations/every-model-converge-nerfed-4x5-04314497/",
+    "thumb": "assets/shots/every-model-converge-nerfed-4x5-04314497.png",
+    "download": "animations/every-model-converge-nerfed-4x5-04314497/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

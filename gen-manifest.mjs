@@ -433,7 +433,7 @@ const more = [
   // DeepSeek V4 Flash scraping Reddit, a DoorDash burger order in 24 min) and the end card flies
   // the twelve icons back in from the frame edges into the superbot mark. 26.4 s, 1080x1350,
   // 30 fps, with sound; ships its own final.mp4.
-  ['every-model-converge-4x5-398eded5', 'every-model-converge-4x5-398eded5/', "Every model, one chat: twelve apps fuse into Superbot", 'Ad spots', { download: 'animations/every-model-converge-4x5-398eded5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['every-model-converge-4x5-398eded5', 'every-model-converge-4x5-398eded5/', "Every model, one chat: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-4x5-398eded5/final.mp4', downloadLabel: 'MP4 4:5' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

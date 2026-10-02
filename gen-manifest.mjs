@@ -69,6 +69,10 @@ const more = [
   ['every-model-one-chat-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/', 'EVERY MODEL. ONE CHAT. · Connecting to DoorDash', 'Ad spots'],
   ['every-model-one-chat-sb-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/?route=superbot', 'EVERY MODEL. ONE CHAT. · Switched to Superbot', 'Ad spots'],
   ['every-model-one-chat-sb-combo-efa8df82', 'every-model-one-chat-superbot-efa8df82/?route=combo', 'EVERY MODEL. ONE CHAT. · Superbot, then DoorDash', 'Ad spots'],
+  // 3D phone (2026-10-01): the same spot shot inside a moving 3D phone. The phone's screen drives the
+  // route=superbot source spot (iframe, seeked by stage.js) and the model icons orbit, converge and merge
+  // into the superbot tile as the camera swings. Poster = the merge beat (stage t 15.2).
+  ['every-model-one-chat-3d-phone-superbot-ab7049c5', 'every-model-one-chat-3d-phone-superbot-ab7049c5/', 'EVERY MODEL. ONE CHAT. · on a moving 3D phone', 'Ad spots'],
   // I want to make minecraft (2026-09-26): Opus 5.5 codes, GitHub, DeepSeek V4 Flash scrapes decals, Gemini makes them,
   // Opus 5.5 ships the game; three cuts of one page (?cut=).
   ['make-minecraft-every-model-superbot-b055c127', 'make-minecraft-every-model-superbot-b055c127/', 'I WANT TO MAKE MINECRAFT · every model, one chat', 'Ad spots'],

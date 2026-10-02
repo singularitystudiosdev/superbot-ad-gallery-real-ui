@@ -1,0 +1,238 @@
+/* phone.css — the 3D phone stage for "every model, one chat".
+   The device is pure CSS 3D (no three.js): a stack of plates gives it a steel side wall, a conic
+   gradient gives the rim a titanium edge, and the screen is an iframe showing the live source spot.
+   Everything that moves is transform/opacity only; the camera path lives in stage.js and is a pure
+   function of t, so ?t=<s> reproduces a frame exactly. */
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; height: 100%; background: #04050a; overflow: hidden; }
+
+/* ar.css sets the width from --ar-w; stage.js re-states it in JS (same contract as timeline.js fit()) */
+#stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--ar-w, 1920px);
+  height: 1080px;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% 50%;
+  overflow: hidden;
+  background: #04050a;
+}
+
+/* the slow elliptical glow behind the phone (driven from t in stage.js, never a CSS keyframe:
+   a CSS animation would run on wall-clock time and make ?t= frames non-deterministic) */
+#glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1240px;
+  height: 1240px;
+  margin: -620px 0 0 -620px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(84, 140, 255, .22), rgba(84, 140, 255, .075) 46%, rgba(4, 5, 10, 0) 74%);
+  filter: blur(24px);
+  opacity: .85;
+  will-change: transform, opacity;
+}
+
+#rig {
+  position: absolute;
+  inset: 0;
+  perspective: 1600px;
+  perspective-origin: 50% 47%;
+}
+
+/* the rotating node: a 0x0 point at the stage centre, so every child rotates about the phone's middle */
+#rig3d {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---------- the device ---------- */
+#phone {
+  position: absolute;
+  left: -187.5px;
+  top: -406px;
+  width: 375px;
+  height: 812px;
+  transform-style: preserve-3d;
+}
+
+/* the side wall: eight rounded plates 2px apart. Rotated a few degrees they read as one slab of steel. */
+#phone .plate {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  background: linear-gradient(90deg, #262b31, #6f767e 9%, #414850 32%, #60676f 58%, #2d333a 86%, #1c2126);
+}
+#phone .plate:nth-of-type(1) { transform: translateZ(-2px); }
+#phone .plate:nth-of-type(2) { transform: translateZ(-4px); }
+#phone .plate:nth-of-type(3) { transform: translateZ(-6px); }
+#phone .plate:nth-of-type(4) { transform: translateZ(-8px); }
+#phone .plate:nth-of-type(5) { transform: translateZ(-10px); }
+#phone .plate:nth-of-type(6) { transform: translateZ(-12px); }
+#phone .plate:nth-of-type(7) { transform: translateZ(-14px); }
+#phone .plate:nth-of-type(8) { transform: translateZ(-16px); }
+
+#phone .back {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  transform: translateZ(-17px);
+  background: linear-gradient(155deg, #39414a, #171b21 58%, #05070a);
+}
+
+/* the front: a titanium rim (conic gradient) with the screen punched out of it */
+#phone .face {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  transform: translateZ(0.4px);
+  background: conic-gradient(from 205deg at 50% 50%,
+      #6b727a, #d9e0e7 8%, #8f979f 21%, #3f464e 35%, #bbc3cb 49%, #5c636b 66%, #e8eef4 80%, #454c53 92%, #767d85);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, .16),
+    0 0 0 2px rgba(0, 0, 0, .55),
+    0 34px 90px rgba(0, 0, 0, .66);
+}
+
+#phone .screen {
+  position: absolute;
+  inset: 11px;
+  border-radius: 34px;
+  overflow: hidden;
+  background: #000;
+  transform: translateZ(0.6px);
+  isolation: isolate;
+}
+
+#phone .screen iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+  z-index: 1;
+}
+
+/* the end-card spot: stacked over the chat spot, and invisible (visibility, not display: the iframe keeps
+   its 353x790 box, so the source ad's fit() and its `?t=` frame stay exactly what a live swap would show)
+   until stage.js cross-fades to it at the source's chat -> end boundary. Pointer-events off so it never
+   eats a click meant for the stage. */
+#phone .screen iframe#src-end {
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* the screen is dead black until the ad's power-on moment (window.__ICONS_FLASH.t, default 3.10) */
+#screen-off {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #000;
+  opacity: 1;
+}
+
+/* the power-on bloom: a brief cold-white lift when the screen lights up */
+#screen-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(60% 50% at 50% 42%, #e8f1ff, #9dc0ff 60%, #4a6ea8);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* top camera pill */
+#phone .cam {
+  position: absolute;
+  left: 50%;
+  top: 21px;
+  width: 92px;
+  height: 26px;
+  margin-left: -46px;
+  border-radius: 13px;
+  background: #04060a;
+  transform: translateZ(1px);
+  z-index: 5;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .07), 0 1px 2px rgba(0, 0, 0, .6);
+}
+#phone .cam i {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 32%, #2b3d61, #05070c 64%);
+  box-shadow: 0 0 0 1px rgba(120, 150, 200, .25);
+}
+
+/* glass sheen: a 115deg gradient on a 220% canvas, slid by the tilt in stage.js */
+#phone .sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border-radius: 44px;
+  opacity: .10;
+  pointer-events: none;
+  transform: translateZ(2px);
+  mix-blend-mode: screen;
+  background: linear-gradient(115deg,
+      rgba(255, 255, 255, .95) 0%,
+      rgba(255, 255, 255, .38) 17%,
+      rgba(255, 255, 255, 0) 41%,
+      rgba(255, 255, 255, 0) 61%,
+      rgba(255, 255, 255, .42) 83%,
+      rgba(255, 255, 255, .9) 100%);
+  background-size: 220% 220%;
+  background-position: 50% 50%;
+}
+
+/* the soft contact shadow under the device; stage.js counter-translates it against the tilt so it stays
+   where the phone meets the floor instead of swinging with it */
+#contact {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 560px;
+  height: 170px;
+  margin: 292px 0 0 -280px;
+  pointer-events: none;
+  transform: translateZ(-30px);
+  background: radial-gradient(closest-side, rgba(0, 0, 0, .88), rgba(0, 0, 0, .34) 52%, rgba(0, 0, 0, 0) 78%);
+  filter: blur(16px);
+  will-change: transform;
+}
+
+/* the icon layer (item #3 writes icons.js + icons.css): a full stage-sized plate in the rig, over the
+   device but not inside its 3D rotation, so a flat 2D module can lay itself out in stage px */
+#icons {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* the tail fade to black */
+#fade {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: every model, one chat — 3D phone</title>
+<!-- ar.js first: it sets window.AR from ?ar= and mirrors --ar-w onto <html> before anything paints -->
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="phone.css?v=1">
+</head>
+<body>
+<div id="stage">
+  <div id="glow"></div>
+
+  <div id="rig">
+    <div id="rig3d">
+      <div id="contact"></div>
+      <div id="phone">
+        <!-- the side wall: eight plates stacked behind the front face at translateZ(-2..-16px) -->
+        <i class="plate"></i>
+        <i class="plate"></i>
+        <i class="plate"></i>
+        <i class="plate"></i>
+        <i class="plate"></i>
+        <i class="plate"></i>
+        <i class="plate"></i>
+        <i class="plate"></i>
+        <div class="back"></div>
+        <div class="face">
+          <div class="screen">
+            <!-- TWO live source spots, both driven frame by frame by stage.js through contentWindow.__AD.seek(t).
+                 #src is the chat, laid out at the screen's own aspect so it fills the phone edge to edge.
+                 #src-end is the end card at its own design width (its headline is a fixed 96px nowrap line, so
+                 at the screen's aspect it runs off the right edge); it is held invisible on the end card and
+                 cross-faded over #src at the source's own chat -> end segment boundary. -->
+            <iframe id="src" title="every model, one chat" scrolling="no"
+              src="../every-model-one-chat-superbot-efa8df82/index.html?route=superbot&amp;ar=4x5&amp;t=0"></iframe>
+            <iframe id="src-end" title="every model, one chat — end card" scrolling="no" aria-hidden="true"
+              src="../every-model-one-chat-superbot-efa8df82/index.html?route=superbot&amp;ar=4x5&amp;t=0"></iframe>
+            <div id="screen-off"></div>
+            <div id="screen-flash"></div>
+          </div>
+          <div class="cam"><i></i></div>
+          <div class="sheen"></div>
+        </div>
+      </div>
+    </div>
+    <div id="icons"></div>
+  </div>
+
+  <div id="fade"></div>
+</div>
+<script type="module" src="stage.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+/* App Store Connect beat (beats/asc.js): the connect sheet in the chat (App Store Connect's light web look) and the
+   full-frame layer carrying the one client: App Store Connect's TestFlight page (16:9) or a compact TestFlight card
+   (4:5), beside the iPhone where the Steadyloop app opens. Pinned over the sheet, then opened to the whole frame. Every
+   colour is a chat.css --ap-* (Apple's web neutrals) or --ios-* (iOS system colours) variable; the type is the system
+   stack (-apple-system, BlinkMacSystemFont, then the vendored Inter). Nothing here transitions: position, size, clip,
+   opacity and transform are written from t in asc.js, so ?t= freezes a frame. Classes are prefixed .ac- (the sheet and
+   the layer), .as- (App Store Connect) and .ip- (the iPhone). */
+
+#s-tabs .ui-i { flex: none; width: 24px; height: 24px; fill: currentColor; }
+
+/* ---- the connect sheet, in the chat ---- */
+#s-tabs .sbsite .hub .ac-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .ac-card { opacity: 0; box-sizing: border-box; width: 380px; max-width: 100%; margin-top: 2px; border-radius: 12px;
+  background: var(--ap-card); box-shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 10px 28px rgba(0, 0, 0, .35); overflow: hidden;
+  font-family: var(--ap-font); color: var(--ap-text); -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .ac-vp { position: relative; height: 250px; padding: 0 16px; box-sizing: border-box; overflow: hidden; }
+#s-tabs .sbsite .hub .ac-hd { display: flex; align-items: center; gap: 10px; height: 48px; font: 600 15px/1 var(--ap-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .ac-mark { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; background: #0d96f6; }
+#s-tabs .sbsite .hub .ac-mark img { width: 17px; height: 17px; display: block; }
+#s-tabs .sbsite .hub .ac-app-row { display: flex; align-items: center; gap: 12px; height: 56px; margin-bottom: 4px; border-top: 1px solid var(--ap-line-2); border-bottom: 1px solid var(--ap-line-2); }
+#s-tabs .sbsite .hub .ac-ic { flex: none; width: 38px; height: 38px; display: block; }
+#s-tabs .sbsite .hub .ac-at { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+#s-tabs .sbsite .hub .ac-at b { font: 600 15px/1.1 var(--ap-font); }
+#s-tabs .sbsite .hub .ac-at small { font: 400 12.5px/1.1 var(--ap-font); color: var(--ap-text-2); }
+#s-tabs .sbsite .hub .ac-step { display: flex; align-items: center; gap: 11px; height: 34px; font: 400 14px/1 var(--ap-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .ac-ok { position: relative; flex: none; width: 20px; height: 20px; }
+#s-tabs .sbsite .hub .ac-spin { position: absolute; inset: 2px; border-radius: 50%; border: 2px solid var(--ap-line); border-top-color: var(--ap-blue); }
+#s-tabs .sbsite .hub .ac-done { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: var(--ap-green); opacity: 0; }
+#s-tabs .sbsite .hub .ac-done .ui-i { width: 13px; height: 13px; color: #fff; }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .ac-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--ap-card); }
+#s-tabs .ac-client { position: absolute; left: 0; top: 0; display: grid; grid-template-columns: 62% 38%; transform-origin: 0 0; overflow: hidden;
+  background: var(--ap-card); color: var(--ap-text); font: 400 14px/1.3 var(--ap-font); -webkit-font-smoothing: antialiased; }
+#s-tabs .as-tcard { display: none; }
+
+/* App Store Connect: top bar, app header, tab row, sidebar, builds table */
+#s-tabs .as-page { display: flex; flex-direction: column; min-width: 0; background: var(--ap-card); box-shadow: 1px 0 0 var(--ap-line); z-index: 1; }
+#s-tabs .as-top { flex: none; display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 28px; border-bottom: 1px solid var(--ap-line); white-space: nowrap; }
+#s-tabs .as-apple { flex: none; width: 17px; height: 20px; display: block; }
+#s-tabs .as-top > b { font: 600 17px/1 var(--ap-font); letter-spacing: -.2px; }
+#s-tabs .as-top nav { display: flex; gap: 24px; margin-left: 36px; }
+#s-tabs .as-top nav span { font: 400 14px/1 var(--ap-font); color: var(--ap-text-2); }
+#s-tabs .as-top nav span.on { color: var(--ap-text); font-weight: 600; }
+#s-tabs .as-me { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; font: 400 14px/1 var(--ap-font); color: var(--ap-text); }
+#s-tabs .as-me .ui-i { width: 22px; height: 22px; color: var(--ap-text-3); }
+#s-tabs .as-apph { flex: none; display: flex; align-items: center; gap: 14px; height: 74px; padding: 0 28px; }
+#s-tabs .as-apph img { width: 42px; height: 42px; display: block; }
+#s-tabs .as-apph b { font: 700 24px/1 var(--ap-font); letter-spacing: -.4px; }
+#s-tabs .as-tabs { flex: none; display: flex; gap: 30px; height: 40px; padding: 0 28px; border-bottom: 1px solid var(--ap-line); white-space: nowrap; }
+#s-tabs .as-tabs span { font: 500 15px/38px var(--ap-font); color: var(--ap-text-2); }
+#s-tabs .as-tabs span.on { color: var(--ap-text); box-shadow: inset 0 -2px 0 var(--ap-blue); }
+#s-tabs .as-body { flex: 1; min-height: 0; display: flex; }
+#s-tabs .as-side { flex: none; width: 184px; padding: 8px 12px 0 18px; box-sizing: border-box; border-right: 1px solid var(--ap-line-2); }
+#s-tabs .as-sh { display: flex; align-items: center; justify-content: space-between; margin: 18px 0 6px; padding: 0 10px; font: 600 12.5px/1 var(--ap-font); color: var(--ap-text-2); }
+#s-tabs .as-plus { width: 15px; height: 15px; color: var(--ap-blue); }
+#s-tabs .as-si { height: 30px; padding: 0 10px; border-radius: 7px; font: 400 14px/30px var(--ap-font); }
+#s-tabs .as-si.on { background: var(--ap-line-2); font-weight: 600; }
+#s-tabs .as-main { flex: 1; min-width: 0; padding: 26px 28px; box-sizing: border-box; }
+#s-tabs .as-main h2 { margin: 0 0 18px; font: 700 24px/1 var(--ap-font); letter-spacing: -.4px; }
+#s-tabs .as-tbl { border: 1px solid var(--ap-line); border-radius: 12px; overflow: hidden; }
+#s-tabs .as-tr { display: grid; grid-template-columns: 1.3fr 1.1fr .85fr .8fr .8fr .85fr .8fr .85fr; gap: 8px; align-items: center; padding: 0 16px; white-space: nowrap; }
+#s-tabs .as-th { height: 40px; background: var(--ap-page); border-bottom: 1px solid var(--ap-line); font: 600 12.5px/1 var(--ap-font); color: var(--ap-text-2); }
+#s-tabs .as-ver { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-bottom: 1px solid var(--ap-line-2); font: 600 14px/1 var(--ap-font); }
+#s-tabs .as-ver .ui-i { width: 12px; height: 12px; color: var(--ap-text-2); }
+#s-tabs .as-row { height: 58px; font: 400 14px/1 var(--ap-font); }
+#s-tabs .as-bld { display: inline-flex; align-items: center; gap: 10px; font-weight: 500; color: var(--ap-blue); }
+#s-tabs .as-bld img { width: 30px; height: 30px; display: block; }
+#s-tabs .as-stat { display: inline-flex; align-items: center; gap: 7px; }
+#s-tabs .as-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--ap-green); }
+#s-tabs .as-inst { display: inline-flex; font-variant-numeric: tabular-nums; }
+#s-tabs .as-i1 { display: none; font-weight: 700; }
+#s-tabs .as-up { display: flex; align-items: center; gap: 8px; margin: 30px 0 14px; font: 700 19px/1 var(--ap-font); letter-spacing: -.3px; }
+#s-tabs .as-up .ui-i { width: 13px; height: 13px; color: var(--ap-text-2); }
+#s-tabs .as-tr2 { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr; gap: 8px; align-items: center; padding: 0 16px; white-space: nowrap; }
+#s-tabs .as-tbl2 .as-row { height: 48px; }
+
+/* the phone's pane: a calm light neutral */
+#s-tabs .as-dev { position: relative; min-width: 0; background: var(--ap-line-2); overflow: hidden; }
+
+/* ---- portrait (4:5): the compact TestFlight card on top, the phone large under it ---- */
+#s-tabs .ac-client.ac-tall { display: flex; flex-direction: column; background: var(--ap-page); }
+#s-tabs .ac-tall .as-page { display: none; }
+#s-tabs .ac-tall .as-tcard { display: block; flex: none; margin: 30px 30px 0; padding: 18px 22px 18px; border: 1px solid var(--ap-line); border-radius: 12px; background: var(--ap-card); }
+#s-tabs .ac-tall .as-dev { flex: 1; background: transparent; }
+#s-tabs .as-tc-top { display: flex; align-items: center; gap: 9px; padding-bottom: 14px; border-bottom: 1px solid var(--ap-line-2); white-space: nowrap; }
+#s-tabs .as-tc-top b { font: 600 17px/1 var(--ap-font); letter-spacing: -.2px; }
+#s-tabs .as-tc-top span { margin-left: auto; font: 600 15px/1 var(--ap-font); color: var(--ap-blue); }
+#s-tabs .as-tc-app { display: flex; align-items: center; gap: 14px; padding: 16px 0; }
+#s-tabs .as-tc-app img { width: 54px; height: 54px; display: block; }
+#s-tabs .as-tc-app span { display: flex; flex-direction: column; gap: 6px; }
+#s-tabs .as-tc-app b { font: 700 24px/1 var(--ap-font); letter-spacing: -.4px; }
+#s-tabs .as-tc-app small { font: 400 15px/1 var(--ap-font); color: var(--ap-text-2); }
+#s-tabs .as-tc-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; padding-top: 14px; border-top: 1px solid var(--ap-line-2); }
+#s-tabs .as-tc-stats > span { display: flex; flex-direction: column; gap: 8px; }
+#s-tabs .as-tc-stats small { font: 400 14px/1 var(--ap-font); color: var(--ap-text-2); }
+#s-tabs .as-tc-stats b { font: 600 20px/1 var(--ap-font); }
+
+/* ---- the iPhone: 393 x 852 points, scaled into its pane by asc.js; a dark bezel drawn as a spread ring ---- */
+#s-tabs .ip { position: absolute; left: 50%; top: 50%; width: 393px; height: 852px; border-radius: 54px; transform-origin: 50% 50%;
+  box-shadow: 0 0 0 12px #1c1c1e, 0 0 0 13.5px #48484a, 0 30px 60px rgba(0, 0, 0, .18); }
+#s-tabs .ip-screen { position: absolute; inset: 0; border-radius: 54px; overflow: hidden; background: #34404f; }
+#s-tabs .ip-island { position: absolute; left: 50%; top: 11px; width: 124px; height: 36px; margin-left: -62px; border-radius: 18px; background: #000; }
+/* the Lock Screen: a flat calm wallpaper, the date and the clock */
+#s-tabs .ip-lock { position: absolute; inset: 0; background: #34404f; color: #fff; text-align: center; }
+#s-tabs .ip-date { margin-top: 112px; font: 600 21px/1 var(--ap-font); opacity: .9; }
+#s-tabs .ip-clock { margin-top: 6px; font: 700 96px/1 var(--ap-font); letter-spacing: -2px; }
+/* the status bar: white over the Lock Screen (no clock there, it is the big one), dark over the app with 9:41 */
+#s-tabs .ip-sb { position: absolute; left: 0; right: 0; top: 0; height: 54px; display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 30px 0 52px; box-sizing: border-box; color: #fff; z-index: 3; }
+#s-tabs .ip-time { font: 600 17px/1 var(--ap-font); visibility: hidden; }
+#s-tabs .ip-sb.ip-dark { color: #000; }
+#s-tabs .ip-sb.ip-dark .ip-time { visibility: visible; }
+#s-tabs .ip-sbi { display: inline-flex; align-items: center; gap: 6px; }
+#s-tabs .ip-sbi .ui-i { width: 18px; height: 18px; }
+#s-tabs .ip-sbi .ip-sig { width: 19px; height: 19px; }
+#s-tabs .ip-sbi .ip-bat { width: 28px; height: 28px; }
+/* the TestFlight banner */
+#s-tabs .ip-ban { position: absolute; left: 9px; top: 56px; width: 375px; height: 82px; display: flex; align-items: center; gap: 11px; padding: 0 14px;
+  box-sizing: border-box; border-radius: 24px; background: #f2f2f7; color: #000; z-index: 2; visibility: hidden; }
+#s-tabs .ip-tf { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #0d96f6; color: #fff; }
+#s-tabs .ip-tf .ui-i { width: 26px; height: 26px; }
+#s-tabs .ip-bt { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+#s-tabs .ip-b1 { display: flex; align-items: baseline; font: 400 13px/18px var(--ap-font); color: var(--ios-label-2); }
+#s-tabs .ip-b1 b { font-weight: 600; color: #000; font-size: 15px; }
+#s-tabs .ip-b1 time { margin-left: auto; }
+#s-tabs .ip-b2 { font: 600 15px/19px var(--ap-font); }
+#s-tabs .ip-b3 { font: 400 15px/19px var(--ap-font); }
+/* the Steadyloop app: Today, an inset grouped list of habits with their streak rings */
+#s-tabs .ip-app { position: absolute; inset: 0; background: var(--ios-bg); visibility: hidden; z-index: 1; }
+#s-tabs .ip-in { position: relative; width: 393px; height: 852px; padding-top: 60px; box-sizing: border-box; transform-origin: 0 0; color: #000; }
+#s-tabs .ip-in h1 { margin: 34px 20px 0; font: 700 34px/41px var(--ap-font); letter-spacing: -.4px; }
+#s-tabs .ip-sub { margin: 2px 20px 20px; font: 400 17px/22px var(--ap-font); color: var(--ios-label-2); }
+#s-tabs .ip-list { margin: 0 16px; border-radius: 14px; background: #fff; overflow: hidden; }
+#s-tabs .ip-h { position: relative; display: flex; align-items: center; gap: 14px; height: 76px; padding: 0 18px 0 16px; }
+#s-tabs .ip-h + .ip-h::before { content: ''; position: absolute; left: 74px; right: 0; top: 0; height: .5px; background: var(--ios-sep); }
+#s-tabs .ip-ring { flex: none; width: 44px; height: 44px; }
+#s-tabs .ip-rt, #s-tabs .ip-ra { fill: none; stroke-width: 5.5; }
+#s-tabs .ip-rt { stroke: var(--ios-orange-track); }
+#s-tabs .ip-ra { stroke: var(--ios-orange); stroke-linecap: round; transform: rotate(-90deg); transform-origin: 22px 22px; }
+#s-tabs .ip-hn { flex: 1; min-width: 0; font: 400 17px/22px var(--ap-font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .ip-hc { flex: none; font: 400 15px/1 var(--ap-font); color: var(--ios-label-2); white-space: nowrap; }
+#s-tabs .ip-hc b { font: 600 17px/1 var(--ap-font); color: #000; font-variant-numeric: tabular-nums; }
+#s-tabs .ip-hc .ip-hc2 { display: none; }
+#s-tabs .ip-foot { margin: 12px 32px 0; font: 400 13px/18px var(--ap-font); color: var(--ios-label-2); }
+#s-tabs .ip-foot .ip-f1 { display: none; }
+/* the simulator's touch indicator and the home indicator */
+#s-tabs .ip-touch { position: absolute; left: 0; top: 0; width: 44px; height: 44px; box-sizing: border-box; border-radius: 50%;
+  background: rgba(120, 120, 128, .38); border: 2px solid rgba(255, 255, 255, .8); opacity: 0; z-index: 4; }
+#s-tabs .ip-home { position: absolute; left: 50%; bottom: 8px; width: 140px; height: 5px; margin-left: -70px; border-radius: 3px; background: #fff; z-index: 3; }
+#s-tabs .ip-home.ip-dark { background: #000; }

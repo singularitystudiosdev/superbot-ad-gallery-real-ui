@@ -1,0 +1,85 @@
+/* Portfolio beat (beats/portfolio.js): the card in the chat (a picture frame the full-frame layer is pinned over, and a
+   name strip) and the full-frame layer: a dark positions list in the grammar of a brokerage app (ticker and shares
+   left, last price and today's % right, a tiny sparkline between), superbot's alert chip on every row, and a
+   lock-screen style Messages notification. Palette and data colours are style.css --pf-*; the alert chips use the
+   superbot --accent. Prices in tabular numerals. Nothing here transitions: every moving value is written from t. */
+#s-tabs .sbsite .hub .pf-say { margin-top: 10px; }
+#s-tabs .sbsite .hub .pf-card { opacity: 0; box-sizing: border-box; width: 360px; max-width: 100%; margin-top: 2px;
+  border-radius: 10px; overflow: hidden; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .pf-shot { position: relative; aspect-ratio: 16 / 9; background: var(--pf-canvas); }
+#s-tabs .sbsite .hub .pf-cap { display: flex; align-items: baseline; gap: 8px; padding: 7px 10px 8px;
+  box-shadow: inset 0 1px 0 #2a2a2e; font: 600 11.5px/1.1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .pf-cap small { margin-left: auto; font: 500 10px/1 var(--ui); color: #8e8e93; font-variant-numeric: tabular-nums; }
+
+/* the full-frame layer, in the scene root's px (outside the camera), above the hub */
+#s-tabs .pf-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; background: var(--pf-canvas); opacity: 0;
+  pointer-events: none; }
+#s-tabs .pf-app { position: absolute; left: 0; top: 0; transform-origin: 0 0; display: flex; align-items: center;
+  justify-content: center; background: var(--pf-canvas); color: var(--pf-text); font-family: var(--ui); }
+#s-tabs .pf-col { width: 760px; }
+#s-tabs .pf-app.pf-wide { align-items: flex-end; padding-bottom: 56px; box-sizing: border-box; }
+
+/* header: the account, read-only, superbot watching; the title; today's change (no totals, no returns) */
+#s-tabs .pf-top { display: flex; align-items: center; gap: 10px; font: 600 15px/1 var(--ui); color: var(--pf-muted); }
+#s-tabs .pf-acct { display: inline-flex; align-items: center; gap: 8px; }
+#s-tabs .pf-acct svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .pf-acct b { color: var(--pf-text); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+#s-tabs .pf-ro { height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: var(--pf-pill);
+  box-shadow: inset 0 0 0 1px var(--pf-line); font: 600 12px/1 var(--ui); color: var(--pf-muted); }
+#s-tabs .pf-watch { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px 0 4px;
+  border-radius: var(--pf-pill); background: color-mix(in srgb, var(--pf-accent) 14%, var(--pf-row));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pf-accent) 40%, transparent); font: 600 13px/1 var(--ui); color: #e5e9ff; }
+#s-tabs .pf-watch img { width: 22px; height: 22px; border-radius: 7px; }
+#s-tabs .pf-h { margin: 26px 0 8px; font: 700 40px/1 var(--ui); letter-spacing: -.01em; color: var(--pf-text); }
+#s-tabs .pf-today { display: flex; align-items: baseline; gap: 8px; margin-bottom: 22px; font: 600 17px/1 var(--ui);
+  font-variant-numeric: tabular-nums; color: var(--pf-gain); }
+#s-tabs .pf-today span { color: var(--pf-muted); font-weight: 500; }
+#s-tabs .pf-today.dn { color: var(--pf-loss); }
+
+/* the positions list */
+#s-tabs .pf-list { border-radius: var(--pf-radius); background: var(--pf-row); box-shadow: inset 0 0 0 1px var(--pf-line); overflow: hidden; }
+#s-tabs .pf-row { position: relative; display: grid; grid-template-columns: 1fr 132px 170px; align-items: center; gap: 22px;
+  height: 92px; padding: 0 22px; box-sizing: border-box; transform-origin: 50% 50%; }
+#s-tabs .pf-row + .pf-row { box-shadow: inset 0 1px 0 var(--pf-line); }
+#s-tabs .pf-row.hit { background: color-mix(in srgb, var(--pf-loss) 13%, var(--pf-row)); box-shadow: inset 4px 0 0 var(--pf-loss); }
+#s-tabs .pf-row.hit + .pf-row { box-shadow: inset 0 1px 0 var(--pf-line); }
+#s-tabs .pf-l { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+#s-tabs .pf-sym { font: 700 22px/1 var(--ui); letter-spacing: .01em; color: var(--pf-text); }
+#s-tabs .pf-sub { display: flex; align-items: center; gap: 10px; }
+#s-tabs .pf-sh { font: 500 14px/1 var(--ui); color: var(--pf-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* superbot's armed alert chip: bell + the threshold; once the text has gone, a check and "Text sent" */
+#s-tabs .pf-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 11px 0 8px; border-radius: var(--pf-pill);
+  background: color-mix(in srgb, var(--pf-accent) 13%, var(--pf-row)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pf-accent) 38%, transparent);
+  font: 600 13px/1 var(--ui); font-variant-numeric: tabular-nums; color: #dfe6ff; white-space: nowrap; transform-origin: 0 50%; }
+#s-tabs .pf-chip i { display: grid; place-items: center; }
+#s-tabs .pf-chip svg { width: 14px; height: 14px; fill: none; stroke: var(--pf-accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .pf-chip .pf-ck { display: none; }
+#s-tabs .pf-chip.sent { background: var(--pf-accent); box-shadow: none; color: #fff; }
+#s-tabs .pf-chip.sent svg { stroke: #fff; stroke-width: 2.8; }
+#s-tabs .pf-chip.sent .pf-bell { display: none; }
+#s-tabs .pf-chip.sent .pf-ck { display: grid; }
+#s-tabs .pf-sp { display: block; width: 132px; height: 40px; overflow: visible; }
+#s-tabs .pf-sp path { fill: none; vector-effect: non-scaling-stroke; }
+#s-tabs .pf-sp .pf-ln { stroke: var(--pf-gain); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+#s-tabs .pf-row.dn .pf-ln { stroke: var(--pf-loss); }
+#s-tabs .pf-sp .pf-base { stroke: var(--pf-line); stroke-width: 1.2; stroke-dasharray: 3 3; }
+#s-tabs .pf-r { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; }
+#s-tabs .pf-px { font: 600 21px/1 var(--ui); font-variant-numeric: tabular-nums; color: var(--pf-text); }
+#s-tabs .pf-pc { font: 600 15px/1 var(--ui); font-variant-numeric: tabular-nums; color: var(--pf-gain); }
+#s-tabs .pf-row.dn .pf-pc { color: var(--pf-loss); }
+
+/* the lock-screen style Messages notification, top centre of the frame */
+#s-tabs .pf-ban { position: absolute; left: 50%; top: 26px; width: 700px; box-sizing: border-box; display: flex; gap: 14px;
+  padding: 16px 20px 18px 16px; border-radius: var(--pf-radius); opacity: 0;
+  background: rgba(58, 60, 66, .82); -webkit-backdrop-filter: blur(24px) saturate(1.4); backdrop-filter: blur(24px) saturate(1.4);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255, 255, 255, .08); color: #fff; }
+#s-tabs .pf-av { position: relative; flex: none; width: 46px; height: 46px; }
+#s-tabs .pf-av img { width: 46px; height: 46px; border-radius: 12px; display: block; }
+#s-tabs .pf-badge { position: absolute; right: -5px; bottom: -5px; width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center;
+  background: #34c759; box-shadow: 0 0 0 2px rgba(58, 60, 66, 1); }
+#s-tabs .pf-badge svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .pf-bt { flex: 1; min-width: 0; }
+#s-tabs .pf-bh { display: flex; align-items: baseline; margin-bottom: 5px; }
+#s-tabs .pf-bh b { font: 700 19px/1.2 var(--ui); }
+#s-tabs .pf-bh small { margin-left: auto; font: 500 16px/1 var(--ui); color: rgba(235, 235, 245, .6); }
+#s-tabs .pf-bt p { margin: 0; font: 500 19px/1.32 var(--ui); color: #fff; font-variant-numeric: tabular-nums; }

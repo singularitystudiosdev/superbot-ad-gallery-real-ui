@@ -212,6 +212,11 @@ const more = [
     { desc: 'Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5.' }],
   ['bikeride-model-switch-nozoom-superbot-e13744a9', 'bikeride-model-switch-superbot-e13744a9/?cut=nozoom', 'make a relaxing Japanese bike riding game, no zoom: Gemini, Blender, ElevenLabs, Opus 5.5, then the real Opus 5.5 build plays (4 switches; clip @prasenx)', 'Ad spots',
     { desc: 'Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5.' }],
+  // Watch my portfolio (2026-10-03): stock-trading remake of bikeride-model-switch. One chat hands off to Gemini (watch
+  // rule), Finnhub (live quotes), Twilio (SMS verified), Claude Opus 5.5 (read-only watch.js) and a view-only brokerage,
+  // then NVDA slips past -5% and the lock-screen text lands. Watching only: no trade buttons, no return claims.
+  ['niche-stocks-model-switch-superbot-8d2a45f0', 'niche-stocks-model-switch-superbot-8d2a45f0/', 'Watch my portfolio and text me if any position drops more than 5% today: Gemini, Finnhub, Twilio, Opus 5.5, your brokerage, then the text lands (5 switches)', 'Ad spots',
+    { desc: 'One sentence in, five hand-offs: Gemini turns it into a watch rule, Finnhub streams live quotes, Twilio verifies your number, Claude Opus 5.5 writes the read-only watcher, and your brokerage connects with view-only access. NVDA slips past -5% and superbot texts you. Watching only, no trades placed.' }],
   ['pdoom-mv-every-model-v3-superbot-abba733b', 'pdoom-mv-every-model-superbot-abba733b/', 'make a k-pop music video about p(doom): Lyria, ElevenLabs, Gemini, Opus 5.5, DeepSeek, GitHub, then the real Opus 5.5 M/V plays (7 requests; clip @donaldjewkes)', 'Ad spots',
     { desc: "Ends on the 0:19 to 0:29 hook of the M/V 'Upping My P(doom)' by Donald Jewkes (@donaldjewkes), made with one prompt in Claude Opus 5.5." }],
   // Japan bikeride, every model (2026-09-28): "Make me relaxing Japan bikeride" typed into the hub, 14 model switch

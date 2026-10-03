@@ -1,0 +1,9 @@
+fonts/ CREDITS (internal)
+
+roboto-latin-{400,500,700}-normal.woff2
+  Roboto, latin subset, from @fontsource/roboto 5.2.10
+  (https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.2.10/files/roboto-latin-<weight>-normal.woff2), fetched 2026-10-03,
+  unmodified. Copyright 2011 Google Inc. (https://github.com/googlefonts/roboto-classic).
+  Licence: Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+  Used for the YouTube Studio window's UI (scenes/tabs-assets/beats/studio.css @font-face): Studio's own UI family.
+  Vendored so nothing is fetched at render. The superbot hub keeps the source ad's families.

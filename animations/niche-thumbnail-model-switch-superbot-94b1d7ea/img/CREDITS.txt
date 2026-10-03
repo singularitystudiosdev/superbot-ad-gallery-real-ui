@@ -1,0 +1,36 @@
+img/ CREDITS (internal, never shown on screen): every photo in this spot, its source, author and licence.
+All photos are from Unsplash under the Unsplash License (free, no attribution required;
+https://unsplash.com/license). Each was checked as a free (not Unsplash+) photo. Originals were downloaded on
+2026-10-03; the files here are crops, scaled, and (for thumb-*) colour graded with type composed over them.
+
+thumb-a.jpg, raw-a.jpg, sw-0955.jpg
+  https://unsplash.com/photos/6uhTmirqHlA  by Master Unknown  Unsplash License (free, no attribution required)
+  Tent lit from inside on snow at dusk. Concept A "3 NIGHTS ON ICE"; the 09:55 row swatch.
+
+thumb-b.jpg, raw-b.jpg, sw-1230.jpg
+  https://unsplash.com/photos/ADB2JLt8j9E  by Marek Piwnicki  Unsplash License (free, no attribution required)
+  Glacier ice wall and crevasse. Concept B "IT CRACKED" (red circle and arrow composed over it); the 12:30 swatch.
+
+thumb-c.jpg, raw-c.jpg, sw-0712.jpg
+  https://unsplash.com/photos/kkjdOX5SIqA  by Christian Wiebel  Unsplash License (free, no attribution required)
+  Blue ice cave with a small figure. Concept C "−24°C"; the 07:12 swatch.
+
+sw-0041.jpg
+  https://unsplash.com/photos/APQMMLwWAjE  by Jérôme Boursier  Unsplash License (free, no attribution required)
+  View out of a tent door over snowy mountains. The 00:41 row swatch ("base camp, wind picking up").
+
+sw-0320.jpg
+  https://unsplash.com/photos/_LFt7-f4WTI  by Benjamin Chambon  Unsplash License (free, no attribution required)
+  Crampons on glacier ice. The 03:20 row swatch ("crampons on, crossing the ice").
+
+sw-1548.jpg
+  https://unsplash.com/photos/FRmZlU1UJgc  by Mèng Jiǎ  Unsplash License (free, no attribution required)
+  Glacier lagoon at sunrise. The 15:48 row swatch ("sunrise over the glacier").
+
+sw-1802.jpg
+  https://unsplash.com/photos/fkfKa0E1muw  by Martin Brechtl  Unsplash License (free, no attribution required)
+  Glacier ice field from above. The 18:02 row swatch ("packing out").
+
+Composition: thumb-a/b/c.jpg are 1280x720 screenshots of an HTML composition over raw-a/b/c.jpg (crop, grade,
+vignette, Anton type with a heavy outline, one yellow accent word; Anton is SIL OFL 1.1, baked into the JPGs, not
+shipped). The composition source is kept outside the repo (scratch dir).

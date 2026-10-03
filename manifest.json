@@ -410,6 +410,15 @@
     "desc": "One prompt in superbot: Gemini reads 64 Instagram DMs and finds 5 brand offers, Claude Opus 5.5 writes 5 replies in the creator's voice, GPT-6 Astra picks and captions 7 posts from the camera roll, then superbot sends the replies in Instagram and fills the week in Planner."
   },
   {
+    "id": "niche-thumbnail-model-switch-superbot-94b1d7ea",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Make 3 thumbnails for my Iceland vlog and A/B test them: Gemini, Opus 5.5, Nano Banana Pro, then superbot runs the A/B test in YouTube Studio (4 switches)",
+    "src": "animations/niche-thumbnail-model-switch-superbot-94b1d7ea/",
+    "thumb": "assets/shots/niche-thumbnail-model-switch-superbot-94b1d7ea.png",
+    "desc": "One prompt in superbot: Gemini watches the 18:42 vlog and picks three frames, Claude Opus 5.5 writes three thumbnail concepts, Nano Banana Pro renders them at 1280 x 720, then superbot connects to YouTube Studio and runs the A/B test until a winner is shown to all viewers."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

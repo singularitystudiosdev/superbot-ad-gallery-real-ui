@@ -1,0 +1,19 @@
+fonts/ CREDITS (internal)
+
+inter-latin-wght-normal.woff2
+  Inter (variable, wght axis 100 to 900), latin subset, from @fontsource-variable/inter 5.3.0
+  (https://cdn.jsdelivr.net/npm/@fontsource-variable/inter@5/files/inter-latin-wght-normal.woff2), unmodified; copied
+  from animations/niche-podcast-model-switch-superbot-b26eacf4/fonts/ (fetched there 2026-10-03). Copyright 2016 The
+  Inter Project Authors (https://github.com/rsms/inter). Licence: SIL Open Font License 1.1 (https://openfontlicense.org).
+  Used for every beehiiv surface (consent card, checklist, post editor; beats/beehiiv.css @font-face "Inter BH") as the
+  open substitute for beehiiv's own faces (beehiiv.com's stylesheet sets SatoshiFont and ClashGroteskFont, commercial
+  typefaces, NOT bundled; the app's help-center screenshots show a neo-grotesk UI face).
+
+lora-latin-wght-normal.woff2
+  Lora (variable, wght axis 400 to 700), latin subset, from @fontsource-variable/lora 5.3.0
+  (https://cdn.jsdelivr.net/npm/@fontsource-variable/lora@5/files/lora-latin-wght-normal.woff2), fetched 2026-10-03,
+  unmodified. Copyright 2011 The Lora Project Authors. Licence: SIL Open Font License 1.1.
+  Used for the post's own headings on the beehiiv canvas (the newsletter template's serif: masthead, title, story
+  headings; "Lora BH").
+
+Both are vendored so nothing is fetched at render. The superbot hub keeps the source ad's families.

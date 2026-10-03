@@ -626,6 +626,15 @@
     "desc": "One ask in superbot: Gemini listens to all 24 tracks and finds 4 problems, SAM Audio pulls the hum and headphone bleed out of the vocal chop, Claude Opus 5.5 writes the mix as 38 moves, GPT-6 Astra masters it to -14 LUFS against the reference, then superbot connects to Ableton Live and bounces the master, ready for Spotify."
   },
   {
+    "id": "niche-newsletter-model-switch-superbot-80d86619",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Turn my saved links into Sunday's issue and draft it in beehiiv: Gemini, GPT-6 Astra, Opus 5.5, then superbot drafts it in beehiiv (4 switches)",
+    "src": "animations/niche-newsletter-model-switch-superbot-80d86619/",
+    "thumb": "assets/shots/niche-newsletter-model-switch-superbot-80d86619.png",
+    "desc": "One prompt in superbot: Gemini reads 23 saved links and the last 12 issues and keeps the 5 best stories, GPT-6 Astra picks the cover photo and writes its alt text, Claude Opus 5.5 writes issue 87 in the writer's voice, then superbot connects to beehiiv and drafts it, ready to schedule for Sunday 7:00 AM."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

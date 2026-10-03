@@ -527,6 +527,15 @@
     "desc": "One ask in superbot: Gemini searches 214 homes for sale, GreatSchools rates the schools near each one, GPT-6 Astra reads the listing photos, Claude Opus 5.5 picks the best three and finds free time, then superbot books the viewings on Zillow: a map of 8 matches with school ratings and 3 viewings on your calendar."
   },
   {
+    "id": "niche-etsy-model-switch-superbot-b01f62c6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer every buyer message and update my shipping times for the holidays: Gemini, Opus 5.5, GPT-6 Astra, then superbot updates your Etsy shop (4 switches)",
+    "src": "animations/niche-etsy-model-switch-superbot-b01f62c6/",
+    "thumb": "assets/shots/niche-etsy-model-switch-superbot-b01f62c6.png",
+    "desc": "One prompt in superbot: Gemini reads 23 buyer conversations and 31 open orders, Claude Opus 5.5 writes a reply to every buyer in the shop's voice, GPT-6 Astra sets holiday processing times and order-by dates on all 48 listings, then superbot connects to Etsy: every message answered and every listing ready for Dec 24."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

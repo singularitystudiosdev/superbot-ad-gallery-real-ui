@@ -1,0 +1,32 @@
+/* Shipping beat (beats/shipping.js): GPT-6 Astra setting holiday processing times. A hub card in the base's query-card
+   grammar and dark palette (query.css .dq-*): header with the spinner resolving to the check, a result window whose
+   lines land with green check glyphs, the run's chips and the tally line. Nothing here transitions: opacity/transform
+   are written from t in render, so ?t= freezes a frame. Every class is prefixed .sp-. */
+
+#s-tabs .sbsite .hub .sp-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 9px 11px 11px;
+  border-radius: 10px; background: var(--dt-card); transform-origin: 50% 0; box-shadow: inset 0 0 0 1px var(--dt-line); }
+#s-tabs .sbsite .hub .sp-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+  font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .sp-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .sp-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .sp-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+#s-tabs .sbsite .hub .sp-meta { margin-left: auto; font: 500 11.5px/1 var(--ui); color: #8e8e93; }
+
+/* the result window (query.css .dq-res) */
+#s-tabs .sbsite .hub .sp-res { padding: 5px 0; border-radius: 8px; background: var(--dt-win); }
+#s-tabs .sbsite .hub .sp-row { opacity: 0; display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 12px;
+  font: 12.5px/1 var(--ui); color: var(--dt-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .sp-row + .sp-row { border-top: 1px solid var(--dt-line); }
+#s-tabs .sbsite .hub .sp-row .qc-ok { flex: none; }
+#s-tabs .sbsite .hub .sp-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .sp-l b { font-weight: 600; color: var(--dt-head); }
+#s-tabs .sbsite .hub .sp-n { flex: none; margin-left: auto; font: 500 11.5px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--dt-muted); }
+#s-tabs .sbsite .hub .sp-row.sp-all .sp-l { font-weight: 600; color: var(--dt-head); }
+#s-tabs .sbsite .hub .sp-row.sp-all .sp-n { color: var(--dt-green); }
+
+/* the run's chips and the tally (query.css .dq-chip) */
+#s-tabs .sbsite .hub .sp-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+#s-tabs .sbsite .hub .sp-chip { opacity: 0; display: inline-flex; align-items: center; height: 26px; padding: 0 11px;
+  border-radius: 9999px; background: #232327; box-shadow: inset 0 0 0 1px #3a3a40;
+  font: 600 12px/1 var(--ui); color: var(--dt-head); white-space: nowrap; }
+#s-tabs .sbsite .hub .sp-tally { opacity: 0; margin-top: 10px; font: 600 12.5px/1.2 var(--ui); color: var(--dt-gold); }

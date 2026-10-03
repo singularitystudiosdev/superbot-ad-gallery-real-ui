@@ -1,0 +1,34 @@
+/* train.py beat (beats/trainpy.js): Claude Opus 5.5 writing the script. A hub card (the base's card grammar and greys):
+   the header ("train.py", the muted "Python" as plain text), a mono well with a line-number gutter where the script
+   types out, and the green check line. No tab strip, no Run, no copy icon, no footer buttons. The syntax colours are
+   GitHub's dark ones as the github sibling (niche-github-model-switch-superbot-0cb69286, beats/diff.css) uses them,
+   from @primer/primitives dark (chat.css --gh-*). Nothing here transitions: everything is written from t in render.
+   Every class is prefixed .tp-. Radii: 10px card and 8px well (the base's). */
+
+#s-tabs .sbsite .hub .tp-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 11px 13px 12px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .tp-card .ni { flex: none; display: block; }
+#s-tabs .sbsite .hub .tp-hd { display: flex; align-items: baseline; gap: 8px; font: 600 13px/1.2 var(--font-mono); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .tp-ic { align-self: center; display: grid; place-items: center; width: 16px; height: 16px; color: #c4c7c5; }
+#s-tabs .sbsite .hub .tp-ic .ni { width: 15px; height: 15px; }
+#s-tabs .sbsite .hub .tp-lang { font: 500 11.5px/1 var(--ui); color: #8e8e93; }
+
+/* the script: 16 lines of 18 in the mono face, a line-number gutter */
+#s-tabs .sbsite .hub .tp-well { margin-top: 10px; padding: 8px 10px 8px 0; border-radius: 8px; background: #0b0b0c; box-shadow: inset 0 0 0 1px #232326; }
+#s-tabs .sbsite .hub .tp-l { display: flex; height: 18px; font: 400 11.5px/18px var(--font-mono); white-space: pre; }
+#s-tabs .sbsite .hub .tp-l u { flex: none; width: 34px; padding-right: 12px; box-sizing: border-box; text-align: right; text-decoration: none; color: #5c5c66; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .tp-l code { display: inline-flex; align-items: center; font: inherit; color: var(--gh-fg-default); background: none; padding: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .tp-l i { font-style: normal; }
+#s-tabs .sbsite .hub .tp-l .kw { color: var(--gh-syn-keyword); }
+#s-tabs .sbsite .hub .tp-l .st { color: var(--gh-syn-string); }
+#s-tabs .sbsite .hub .tp-l .cn { color: var(--gh-syn-constant); }
+#s-tabs .sbsite .hub .tp-l .fn { color: var(--gh-syn-entity); }
+#s-tabs .sbsite .hub .tp-l .cm { color: var(--gh-fg-muted); }
+#s-tabs .sbsite .hub .tp-l .tp-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; background: #ececec; opacity: 0; }
+
+#s-tabs .sbsite .hub .tp-ft { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 10px; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .tp-ft .qc-ok { flex: none; }
+
+/* portrait (4:5): the column is narrower, so the script steps down half a size and the longest line (the comment)
+   still ends inside the well */
+html[data-ar="4x5"] #s-tabs .sbsite .hub .tp-l { font-size: 10.5px; }

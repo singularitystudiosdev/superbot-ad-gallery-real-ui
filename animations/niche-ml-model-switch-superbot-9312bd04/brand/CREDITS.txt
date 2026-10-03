@@ -1,0 +1,65 @@
+brand/ CREDITS (internal): every third-party mark, icon set and font in this spot, where it came from, and the usage
+note. All marks are the property of their owners. They appear here nominatively (naming the model or service superbot
+routes the ask to, and showing the Hugging Face model page superbot publishes to) and unaltered except where noted.
+Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (the knot), Simple Icons `openai` (CC0 1.0), fetched from the Iconify API
+                     https://api.iconify.design/simple-icons/openai.svg?color=%23ffffff (path verbatim, fill #fff by
+                     the API's color parameter for the dark hub). Trademark of OpenAI, used nominatively for the
+                     "GPT-6 Astra" status line. (Carried over from the base ad's brand/.)
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg (simple-icons,
+                     CC0 1.0). Fill set to #fff for the dark hub. Trademark of Anthropic. (Carried over from the base.)
+hf-logo.svg          Hugging Face logo (the smiling-face mark), the official file from Hugging Face's brand page
+                     https://huggingface.co/brand ("HF LOGOS", .svg), file
+                     https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg?download=true,
+                     fetched 2026-10-03, byte-identical (sha256
+                     942cad1ccda905ac5a659dfd2d78b344fccfb84a8a3ac3721e08f488205638a0). Used unmodified and never
+                     recoloured. Trademark of Hugging Face, Inc. The brand page offers the assets for download "to use
+                     in your projects"; it states no further usage terms on the page. Used for the "Connecting to
+                     Hugging Face" status line, the "Hugging Face connected" reply header, the connect card and the
+                     model page's header bar. Commercial use in a paid ad: worth confirming with Hugging Face before it
+                     runs; flagged to the publisher.
+
+FONTS (fonts/)
+  source-sans-pro-latin-{400,600,700}-normal.woff2 and ibm-plex-mono-latin-{400,600}-normal.woff2: the exact files
+  huggingface.co serves (https://huggingface.co/front/assets/fonts/<name>.woff2, fetched 2026-10-03), which are the
+  faces its pages compute to ("Source Sans Pro" for text, "IBM Plex Mono" for the repo name and code; measured with
+  getComputedStyle on https://huggingface.co/google/vit-base-patch16-224). Source Sans Pro: Adobe, SIL Open Font
+  License 1.1. IBM Plex Mono: IBM, SIL Open Font License 1.1. Used only on the Hugging Face model page.
+
+UI ICONS
+  Every UI glyph on the hub cards and the connect card (images, file-code, key-round, cpu, target, upload, check;
+  scenes/tabs-assets/beats/ml-icons.js) is a Lucide icon (Lucide Contributors, ISC License,
+  https://github.com/lucide-icons/lucide), fetched from the Iconify API https://api.iconify.design/lucide/<name>.svg on
+  2026-10-03, markup verbatim.
+
+PHOTOS
+  The bird photos (photos/) are listed one by one, with source, author and licence, in photos/CREDITS.txt. Only public
+  domain, CC0, Pexels or Unsplash licensed photos are used, because no credit is shown on screen.
+
+HUGGING FACE LOOK (sources of record)
+  Colours, sizes and type: measured headlessly (Playwright chromium, getComputedStyle, light theme) on
+  https://huggingface.co/google/vit-base-patch16-224 (header bar, title row, muted greys, model card prose) and
+  https://huggingface.co/openai/whisper-large-v3 (model card table); brand colours #FFD21E and #FF9D00 from
+  https://huggingface.co/brand ("HF COLORS"). Every value used is listed in scenes/tabs-assets/beats/hfhub.css.
+  The syntax colours of the train.py card are GitHub's dark ones (@primer/primitives), carried from the github sibling
+  niche-github-model-switch-superbot-0cb69286 (scenes/tabs-assets/chat.css --gh-*).
+
+SUPERBOT HUB UI KIT (carried unchanged with the fork)
+  scenes/tabs-assets/: the inline icon symbols in icons.js (the hub's rail, hidden in this crop). The hub's mono is the
+  base's own --font-mono and its sans the base's --ui (no font files vendored); the greeting's serif stack is the
+  base's ("Iowan Old Style", Palatino, Georgia: system fonts).
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar and greeting mark are scenes/tabs-assets/tile.svg and mark-clean.svg (first party).
+
+MADE UP FOR THE SPOT
+  The account wrenfield (huggingface.co/wrenfield) and its model wrenfield/backyard-birds-vit, the 2,400 photos and
+  every count (44 labels fixed, 61 duplicates, 37 blurry shots, 2,302 kept, 12 burst shots, the 1,842 / 230 / 230
+  split), the training curve, the confusion matrix (seeded, hfpage.js), the 94.3% accuracy, macro F1 0.93, top-3 99.1%
+  and the sample prediction scores are fictional. The photos are real photographs of the species named under them. The
+  base checkpoint google/vit-base-patch16-224 is real (Apache-2.0) and the transformers API in train.py is the real,
+  current one. No author names, no "@" anywhere on screen.

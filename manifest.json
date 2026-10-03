@@ -743,6 +743,15 @@
     "desc": "One prompt in superbot: Gemini reads 1,284 posts across the community's 6 categories and finds 23 with no reply, Claude Opus 5.5 drafts every answer and the weekly roundup, GPT-6 Astra checks each answer against the docs and leaves 2 for a person, then superbot connects to Discourse: 21 replies posted and the roundup pinned to the top."
   },
   {
+    "id": "niche-wordpress-model-switch-superbot-f7b4fe31",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Fix everything Site Health is flagging on my WordPress site: Gemini, Opus 5.5, GPT-6 Astra, then superbot clears Site Health in WordPress (4 switches)",
+    "src": "animations/niche-wordpress-model-switch-superbot-f7b4fe31/",
+    "thumb": "assets/shots/niche-wordpress-model-switch-superbot-f7b4fe31.png",
+    "desc": "One ask in superbot: Gemini reads the Site Health report, debug log and 23 plugins and traces a failed scheduled event to the child theme, Claude Opus 5.5 fixes the PHP 8.3 error in functions.php, GPT-6 Astra tests every fix on a staging copy, then superbot connects to WordPress with an application password and Site Health turns Good."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

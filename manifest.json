@@ -653,6 +653,15 @@
     "desc": "One prompt in superbot: Gemini reads the 12-page brand brief and pulls the colours, fonts and sizes, Claude Opus 5.5 writes three layouts in the brand's voice, Nano Banana Pro renders the post, story and poster, then superbot connects to Canva and files all three in the launch folder."
   },
   {
+    "id": "niche-gamedev-model-switch-superbot-01d0971d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Fix the jump bug players keep reporting and ship it to itch.io: Gemini, Opus 5.5, GPT-6 Astra, then superbot ships the patch on itch.io (4 switches)",
+    "src": "animations/niche-gamedev-model-switch-superbot-01d0971d/",
+    "thumb": "assets/shots/niche-gamedev-model-switch-superbot-01d0971d.png",
+    "desc": "One ask in superbot: Gemini reads 312 player reports to find why jumps get dropped, Claude Opus 5.5 adds a jump buffer, coyote time and a landing test, GPT-6 Astra runs the tests and 500 bot playtests, then superbot connects to itch.io, pushes the Web build with butler and the patched game runs in the browser."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

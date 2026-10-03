@@ -1,0 +1,47 @@
+/* Playtest beat (beats/playtest.js): GPT-6 Astra's GUT run and Web export. A hub card in the github sibling's tests
+   grammar and greys: a header (status spinner resolving to the check, "Running tests", the project and the branch), a
+   mono terminal well where the two commands type and GUT's result lines land (each script's path and its bold
+   "N/N passed.", two totals lines in GUT's own padding, the green "All tests passed!"), the run's chips and the
+   footer with the check. The pass greens are GitHub's own (@primer/primitives dark
+   fgColor-success, chat.css --gh-success-fg). Nothing here transitions: opacity/transform/visibility are written from t
+   in render, so ?t= freezes a frame. Every class is prefixed .ts-. Radii: 10px card and 8px well (the base's), pills
+   fully round. */
+
+#s-tabs .sbsite .hub .ts-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 10px 12px 11px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .ts-card .gd-i { flex: none; display: block; }
+
+#s-tabs .sbsite .hub .ts-hd { display: flex; align-items: center; gap: 8px; font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .ts-repo { margin-left: auto; font: 500 11.5px/1 var(--font-mono); color: #a8abb2; }
+#s-tabs .sbsite .hub .ts-br { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 7px; border-radius: 6px; background: #222226;
+  font: 11px/1 var(--font-mono); color: #a1a1aa; }
+#s-tabs .sbsite .hub .ts-br .gd-i { width: 11px; height: 11px; }
+#s-tabs .sbsite .hub .ts-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .ts-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .ts-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the terminal well: 8 lines of 19 */
+#s-tabs .sbsite .hub .ts-term { margin-top: 10px; padding: 8px 12px; border-radius: 8px; background: #0b0b0c; box-shadow: inset 0 0 0 1px #232326; }
+#s-tabs .sbsite .hub .ts-ln { display: flex; align-items: center; gap: 8px; height: 19px; font: 12px/19px var(--font-mono); color: #c4c7c5; white-space: pre; opacity: 0; }
+#s-tabs .sbsite .hub .ts-ln em { font-style: normal; color: #8e8e93; }
+#s-tabs .sbsite .hub .ts-cmd b { font-weight: 400; color: #8e8e93; }
+#s-tabs .sbsite .hub .ts-cmd span { color: #ececec; }
+#s-tabs .sbsite .hub .ts-cmd span i { font-style: normal; }
+#s-tabs .sbsite .hub .ts-cmd:not(:first-child) { margin-top: 6px; }
+#s-tabs .sbsite .hub .ts-caret { display: none; width: 7px; height: 14px; margin-left: -6px;  background: #ececec; text-decoration: none; }
+/* GUT: the script path, then its "N/N passed." in bold (gut.gd logs it with fmts.bold); the totals in GUT's padding
+   (white-space: pre keeps it); the final line in green (summary.gd: fmts.green) */
+#s-tabs .sbsite .hub .ts-ok { gap: 1.5ch; }
+#s-tabs .sbsite .hub .ts-ok em { color: #ececec; font-weight: 700; }
+#s-tabs .sbsite .hub .ts-sum { color: #a8abb2; }
+#s-tabs .sbsite .hub .ts-sum:nth-child(5) { margin-top: 6px; }
+#s-tabs .sbsite .hub .ts-all { color: var(--gh-success-fg); font-weight: 700; }
+/* portrait (4:5): the column is narrower, so the well steps down to 11px and the export command ends inside it */
+html[data-ar="4x5"] #s-tabs .sbsite .hub .ts-ln { font-size: 11px; }
+
+/* the run's chips and the footer */
+#s-tabs .sbsite .hub .ts-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+#s-tabs .sbsite .hub .ts-chip { opacity: 0; height: 22px; padding: 0 10px; border-radius: 9999px; background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038;
+  font: 500 11.5px/22px var(--ui); color: #c4c7c5; white-space: nowrap; }
+#s-tabs .sbsite .hub .ts-ft { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 10px; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .ts-ft .qc-ok { flex: none; }

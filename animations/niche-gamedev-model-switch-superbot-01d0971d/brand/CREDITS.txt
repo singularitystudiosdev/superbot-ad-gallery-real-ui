@@ -1,0 +1,54 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the itch.io surfaces superbot connects to) and unaltered except where noted.
+Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (round badge), copied from animations/bikeride-model-switch-superbot-e13744a9/brand/
+                     (which copied it from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6).
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+itchio-logo-textless-white.svg, itchio-logo-white.svg
+                     The official itch.io logos, itch.io press kit https://itch.io/press-kit (zip
+                     https://github.com/itchio/press-kit/archive/v2019.01.02.zip, logos/), byte for byte. Used on the
+                     "Connecting to itch.io" pill tile (on the press kit app-icon red #fa5c5c), the composer chip, the
+                     reply header, the authorization card and the itch.io page's owner header. Trademark of itch corp.
+
+UI ICONS
+  The few UI glyphs (git-branch, file, check, check-circle-fill, comment, repo-push, person, play) are Octicons
+  (GitHub, MIT License, https://github.com/primer/octicons), path data carried over verbatim from the github sibling
+  (Iconify API, fetched 2026-10-03), in scenes/tabs-assets/beats/glyphs.js. The Run game icon is itch.io's own
+  icon_play svg, copied verbatim from a live itch.io game page.
+
+ITCH.IO SURFACES (sources of record, all fetched headlessly 2026-10-03; strings in /tmp/gamedev-01d0971d/research/)
+  Authorization card: itch.io OAuth docs https://itch.io/docs/api/oauth. Scope names and descriptions verbatim:
+  profile:me "View the user's public profile (username, avatar, etc.)", profile:games "List the games the user is
+  developing.". The docs say the approval page shows "the permissions your scopes ask for, and buttons to approve or
+  deny": the buttons read Deny and Approve. The live authorize page (https://itch.io/user/oauth) redirects to the login
+  page, so its exact title and button strings could not be fetched; the card's title ("Connect superbot to itch.io")
+  and account line are ours. Buttons use itch.io's .button / .button.outline styles from game.css.
+  Game page: live pages https://k-ramstack.itch.io/leaftaker (Godot, HTML5, Run game, Development log) and
+  https://ninja-muffin24.itch.io/funkin, stylesheet https://static.itch.io/game.css?1791049261. Copied: the
+  load_iframe_btn "Run game" button and its icon, the More information table labels (Updated, Status, Platforms,
+  Author, Genre, Made with, Tags), the "Development log" section, the comment anatomy (.community_post), and the
+  owner header (.header_widget .owner_tools with its "Manage:" label and .tool_button, .publish_status
+  .pub_toggle.published #90ce59). The owner tool labels (Edit game, Edit theme, Analytics) are inferred: the
+  owner-only markup is not served logged out; game.css confirms the owner tools bar, the edit_theme_btn and the
+  pencil-icon tool button. itch.io chrome hexes: button #ff2449 / shadow #c3223e, outline rgba(255,36,73,.4),
+  Published #90ce59, header text #eeeeee, info panel label opacity .7, hr/border #dadada. Dates are plain dates.
+  butler: https://itch.io/docs/butler/pushing.html "butler push directory user/game:channel".
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar in the hub is scenes/tabs-assets/tile.svg (first party).
+
+MADE UP FOR THE SPOT
+  The solo dev "Noor Haddad" (itch.io username noorhaddad), the game "Pocket Summit" (noorhaddad.itch.io/pocket-summit,
+  patch 1.0.4), the player "mossyboots" and their comment, the 312 reports, the code, the test results and the
+  playtest numbers are fictional. Name check (2026-10-03, https://itch.io/search): "Bramblehop" is taken (Bramblehop
+  Adventure, a Windows platformer by Developer X; bramblehop.itch.io answers 404), "Mossbound" is taken (Mossbound:
+  whisperwood, and a developer named MossBound), "Pocket Summit" returned no project with that title, so the spot uses
+  Pocket Summit. itch.io shows usernames bare: no "@" appears anywhere on screen.

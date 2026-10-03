@@ -383,6 +383,15 @@
     "desc": "One ask in superbot: Gemini researches 212 Austin cafe sites, GPT-6 Astra reads their menu photos, Claude Opus 5.5 writes 40 personal emails, then superbot sends them from Gmail and books the first tasting."
   },
   {
+    "id": "niche-data-model-switch-superbot-f2c8e563",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Clean this sales CSV and build me a revenue dashboard: Gemini, Opus 5.5, DuckDB, then superbot builds it in Google Sheets (4 switches)",
+    "src": "animations/niche-data-model-switch-superbot-f2c8e563/",
+    "thumb": "assets/shots/niche-data-model-switch-superbot-f2c8e563.png",
+    "desc": "One prompt in superbot: Gemini reads the messy CSV, Claude Opus 5.5 writes and runs the cleaning script, DuckDB rolls revenue up by month and region, then superbot connects to Google Sheets: duplicates removed, dates and currencies fixed, and a revenue dashboard tab with charts by month and region."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

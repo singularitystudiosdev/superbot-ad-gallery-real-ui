@@ -1,0 +1,40 @@
+/* Backlog beat (beats/backlog.js): Gemini reading the raw CSV. A hub card (the takes-card grammar) holding a small
+   file window (the CSV's header pinned, its raw lines in mono under it) that scrolls past fast, then dims under a
+   scrim while the issue chips land over it; "Ready to clean" is the one gold thing. Nothing here transitions:
+   opacity/transform/filter are written from t in render, so ?t= freezes a frame. Every class is prefixed .bk-. */
+
+#s-tabs .sbsite .hub .bk-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 9px 11px 11px;
+  border-radius: 10px; background: var(--dt-card); transform-origin: 50% 0; box-shadow: inset 0 0 0 1px var(--dt-line); }
+#s-tabs .sbsite .hub .bk-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+  font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .bk-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .bk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .bk-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+#s-tabs .sbsite .hub .bk-cnt { margin-left: auto; font: 500 11.5px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .bk-n { font-weight: 700; color: #ececec; font-variant-numeric: tabular-nums; }
+
+/* the file window: the header line pinned, then 5 raw lines of 22px, in mono */
+#s-tabs .sbsite .hub .bk-vp { position: relative; border-radius: 8px; overflow: hidden; background: var(--dt-win);
+  font: 500 11.5px/22px var(--font-mono); color: var(--dt-text); }
+#s-tabs .sbsite .hub .bk-fh { height: 24px; padding: 0 12px; line-height: 24px; border-bottom: 1px solid var(--dt-line); color: var(--dt-muted); white-space: nowrap; }
+#s-tabs .sbsite .hub .bk-win { height: 110px; overflow: hidden; }
+#s-tabs .sbsite .hub .bk-list { will-change: transform; }
+#s-tabs .sbsite .hub .bk-row { height: 22px; padding: 0 12px; white-space: nowrap; overflow: hidden; color: var(--dt-dim); }
+#s-tabs .sbsite .hub .bk-row span { color: var(--dt-text); }
+#s-tabs .sbsite .hub .bk-row .bk-id { color: var(--dt-muted); }
+#s-tabs .sbsite .hub .bk-row .bk-dt { color: var(--dt-blue); }
+#s-tabs .sbsite .hub .bk-row .bk-am { color: #f6c27a; }
+/* a blank region: the empty field between the two commas, marked so the hole reads */
+#s-tabs .sbsite .hub .bk-blank { display: inline-block; width: 18px; height: 12px; margin: 0 1px; vertical-align: -1px; border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(242, 139, 130, .55); background: var(--dt-red-bg); }
+/* a line that repeats the one above it */
+#s-tabs .sbsite .hub .bk-row.bk-dup { background: var(--dt-red-bg); box-shadow: inset 2px 0 0 var(--dt-red); }
+
+/* the resolve: a scrim over the lines, the chips centred over it */
+#s-tabs .sbsite .hub .bk-scrim { position: absolute; inset: 0; opacity: 0; background: rgba(20, 20, 22, .8); }
+#s-tabs .sbsite .hub .bk-chips { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center;
+  justify-content: center; gap: 7px; padding: 0 12px; }
+#s-tabs .sbsite .hub .bk-chip { opacity: 0; display: inline-flex; align-items: center; height: 26px; padding: 0 11px;
+  border-radius: 9999px; background: #232327; box-shadow: inset 0 0 0 1px #3a3a40;
+  font: 600 12px/1 var(--ui); color: var(--dt-head); white-space: nowrap; }
+#s-tabs .sbsite .hub .bk-chip.bk-ready { background: var(--dt-gold-bg); box-shadow: inset 0 0 0 1px var(--dt-gold); color: var(--dt-gold); }

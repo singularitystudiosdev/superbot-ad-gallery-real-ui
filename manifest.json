@@ -617,6 +617,15 @@
     "desc": "One prompt in superbot: Gemini watches 6 sourdough workshops (5:48:20) and finds 24 lessons, Claude Opus 5.5 writes the curriculum and 4 quizzes, GPT-6 Astra checks every lesson and answer, then superbot connects to Teachable and publishes Sourdough from Scratch: 24 lessons, $149, live."
   },
   {
+    "id": "niche-music-model-switch-superbot-fed85549",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Mix and master my beat so it's ready for Spotify: Gemini, SAM Audio, Opus 5.5, GPT-6 Astra, then superbot mixes and bounces it in Ableton Live (5 switches)",
+    "src": "animations/niche-music-model-switch-superbot-fed85549/",
+    "thumb": "assets/shots/niche-music-model-switch-superbot-fed85549.png",
+    "desc": "One ask in superbot: Gemini listens to all 24 tracks and finds 4 problems, SAM Audio pulls the hum and headphone bleed out of the vocal chop, Claude Opus 5.5 writes the mix as 38 moves, GPT-6 Astra masters it to -14 LUFS against the reference, then superbot connects to Ableton Live and bounces the master, ready for Spotify."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

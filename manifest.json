@@ -374,6 +374,15 @@
     "desc": "One prompt in superbot: Gemini reads what bread communities post and picks the rules and flair, GPT Image 2.5 turns the club photo into the banner and icon, Claude Opus 5.5 writes the AutoModerator rules and the welcome post, then superbot connects to Reddit and builds r/NorthsideSourdough. The first member post gets AutoMod's recipe reminder."
   },
   {
+    "id": "niche-email-model-switch-superbot-a07d6c19",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Email 40 Austin cafes a personal pitch for our cold brew and book tastings: Gemini, GPT-6 Astra, Opus 5.5, then superbot sends from Gmail and books the first tasting (4 switches)",
+    "src": "animations/niche-email-model-switch-superbot-a07d6c19/",
+    "thumb": "assets/shots/niche-email-model-switch-superbot-a07d6c19.png",
+    "desc": "One ask in superbot: Gemini researches 212 Austin cafe sites, GPT-6 Astra reads their menu photos, Claude Opus 5.5 writes 40 personal emails, then superbot sends them from Gmail and books the first tasting."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

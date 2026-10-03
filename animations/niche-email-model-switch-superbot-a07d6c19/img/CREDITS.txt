@@ -1,0 +1,12 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+menu-board.jpg
+  "Cafe Menu Written with Chalk on Board", photo by Atahan Demir on Pexels,
+  https://www.pexels.com/photo/cafe-menu-written-with-chalk-on-board-15484278/
+  (downloaded from https://images.pexels.com/photos/15484278/pexels-photo-15484278.jpeg?w=1600, 1600 x 2401),
+  fetched 2026-10-03. Licence: Pexels License (https://www.pexels.com/license/): free to use, attribution not
+  required, modification allowed. No CC BY / CC BY-SA terms.
+  Derived: cropped with ffmpeg to the chalkboard (crop 790x1130 at 360,880, then 790x990 at 0,60 of that), metadata
+  stripped. The crop leaves out the shop's sign above the board and the lettering on the wall behind it. The board
+  reads Espresso, Latte, Mocha, Cappuccino, Macchiato (no cold brew); menu.js's highlight boxes are measured on
+  these chalk lines of the crop.

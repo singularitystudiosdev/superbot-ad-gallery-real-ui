@@ -1,0 +1,66 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the Google surfaces superbot connects to) and unaltered except where noted.
+Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the source ad's brand/.)
+openai-logo.svg      OpenAI mark (round badge), copied from animations/bikeride-model-switch-superbot-e13744a9/brand/
+                     (which copied it from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6).
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+
+gmail-logo.svg       Gmail icon (2020), Wikimedia Commons File:Gmail_icon_(2020).svg
+                     https://commons.wikimedia.org/wiki/File:Gmail_icon_(2020).svg
+                     (https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg), author Google,
+                     licence: public domain (PD-textlogo; Commons: "Public domain", attribution not required),
+                     trademarked. Fetched 2026-10-03, unaltered. Used for the "Connecting to Gmail" pill, the composer
+                     chip, the consent card's Gmail scope rows, the checklist and the Gmail top bar.
+google-g.svg         Google "G" logo, Wikimedia Commons File:Google_"G"_logo.svg
+                     https://commons.wikimedia.org/wiki/File:Google_%22G%22_logo.svg
+                     (https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg), author Google LLC,
+                     licence: public domain (PD-textlogo), trademarked. Fetched 2026-10-03, unaltered. The consent
+                     card's "Sign in with Google" header.
+google-calendar.svg  Google Calendar icon (2020), Wikimedia Commons File:Google_Calendar_icon_(2020).svg
+                     https://commons.wikimedia.org/wiki/File:Google_Calendar_icon_(2020).svg
+                     (https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg), author
+                     Google, licence: public domain (PD-textlogo), trademarked. Fetched 2026-10-03, unaltered.
+google-keep.svg      Google Keep icon (2020), Wikimedia Commons File:Google_Keep_2020_Logo.svg
+                     https://commons.wikimedia.org/wiki/File:Google_Keep_2020_Logo.svg
+                     (https://upload.wikimedia.org/wikipedia/commons/c/cb/Google_Keep_2020_Logo.svg), author Google,
+                     licence: public domain, trademarked. Fetched 2026-10-03, unaltered. Gmail's side-panel rail.
+google-tasks.svg     Google Tasks icon (2021), Wikimedia Commons File:Google_Tasks_2021.svg
+                     https://commons.wikimedia.org/wiki/File:Google_Tasks_2021.svg
+                     (https://upload.wikimedia.org/wikipedia/commons/5/5b/Google_Tasks_2021.svg), author Google,
+                     licence: public domain, trademarked. Fetched 2026-10-03, unaltered. Gmail's side-panel rail.
+google-contacts.svg  Google Contacts icon (2022), Wikimedia Commons File:Google_Contacts_icon_(2022).svg
+                     https://commons.wikimedia.org/wiki/File:Google_Contacts_icon_(2022).svg
+                     (https://upload.wikimedia.org/wikipedia/commons/a/a8/Google_Contacts_icon_%282022%29.svg), author
+                     Google, licence: public domain, trademarked. Fetched 2026-10-03, unaltered. Gmail's side-panel rail.
+
+UI ICONS
+  Every Gmail UI glyph (menu, search, help, settings, apps, compose pencil, inbox, star, snoozed, sent, drafts,
+  scheduled, label, checkbox, refresh, more, chevrons, close, add, check, mail) is Material Symbols (Google, Apache
+  License 2.0), fetched from the Iconify API https://api.iconify.design/material-symbols.json on 2026-10-03, path
+  data verbatim in scenes/tabs-assets/beats/gm-icons.js. Gmail's own icon set.
+
+PHOTO
+  img/menu-board.jpg, see img/CREDITS.txt.
+
+GOOGLE'S CONSENT STRINGS
+  The three scope rows are Google's own descriptions, verbatim: gmail.send "Send email on your behalf" and
+  gmail.modify "Read, compose, and send emails from your Gmail account"
+  (https://developers.google.com/workspace/gmail/api/auth/scopes), calendar.events "View and edit events on all your
+  calendars" (https://developers.google.com/identity/protocols/oauth2/scopes). Fetched 2026-10-03.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar in the hub is scenes/tabs-assets/tile.svg (first party).
+
+MADE UP FOR THE SPOT
+  The cafes (Juniper Street Cafe, Pecan Row Coffee, Bluebonnet Bakehouse, Second Shift Coffee, Larkspur Cafe), the
+  people (Sam Ortiz, Maya, Dev, Rosa, Eli, Nora and the rest) and the user's brand "Lantern Cold Brew" are fictional.
+  Each displayed cafe name and the brand name was web-searched with "Austin" on 2026-10-03 (Bing): no business of that
+  name surfaced. No email addresses appear anywhere on screen; the account chip shows a name only.

@@ -1,0 +1,24 @@
+audio/ CREDITS (internal). Provenance is never shown on screen. No key or secret is recorded here.
+
+voice-note.mp3
+  ElevenLabs API (https://api.elevenlabs.io/v1/text-to-speech/{voice_id}/with-timestamps), model eleven_v3,
+  stock (premade) voice Roger (CwhRBWXzGAHq8TQ4Fs17), output_format mp3_44100_128. Generated Sat, 03 Oct 2026 20:38:23 GMT (2026-10-03).
+  request-id 1YRZpcsuuo1y7WpQHc0E, character-cost 111.
+  Input text (the spoken form, so "$49" and "7:05" are read as words; a comma after "dynamic" keeps the read one
+  breath long):
+    "The forty-nine dollar dynamic, it ignores most of the room echo, you can hear it side by side at seven oh five."
+  On screen the reply reads, unchanged: "The $49 dynamic. It ignores most of the room echo, you can hear it side by
+  side at 7:05."
+  Cross-check transcript (local whisper-cli, ggml-small.en, of the final file): "The $49 dynamic, it ignores most of the room echo. You can hear it side by side at 705."
+  Processing: leading and trailing silence cut to 40 ms, two-pass loudnorm to -16 LUFS / -1.5 dBTP, mono 44.1 kHz,
+  MP3 128k (/tmp/ytv2-6ea1fe33/bake-voice.py). The API's original output is kept in the build scratch
+  (/tmp/ytv2-6ea1fe33/voice/raw.mp3).
+  Usage: ElevenLabs output used under the account's plan terms. A stock voice reads a fictional creator's reply; no
+  real person's voice is cloned.
+
+voice-note.js
+  Data baked from voice-note.mp3 by the same script: its length, a 48-bar amplitude envelope (RMS of the real
+  samples), and the on-screen words with their spoken times (ElevenLabs character alignment (with-timestamps), spoken words grouped onto the on-screen words).
+
+The chime at the pin (mixed in at render only, not a file here): the base ad's synthesized two-tone chime (two sine
+notes, A5 then E6, ffmpeg aevalsrc), first party.

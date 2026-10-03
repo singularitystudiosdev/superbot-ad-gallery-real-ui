@@ -572,6 +572,15 @@
     "desc": "One ask in superbot: Gemini reads 3 meetings of messy notes and finds 12 action items, Claude Opus 5.5 writes each one as a task with one owner and turns vague dates into real ones, GPT-6 Astra checks every task has an owner and a workday due date, then superbot connects to Notion and builds the Launch tracker board with all 12 tasks assigned."
   },
   {
+    "id": "niche-podcast-model-switch-superbot-b26eacf4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Edit my raw interview into episode 42 and publish it on Spotify: Gemini, Opus 5.5, GPT-6 Astra, then superbot publishes it on Spotify for Creators (4 switches)",
+    "src": "animations/niche-podcast-model-switch-superbot-b26eacf4/",
+    "thumb": "assets/shots/niche-podcast-model-switch-superbot-b26eacf4.png",
+    "desc": "One prompt in superbot: Gemini listens to a 74-minute raw interview and cuts 17:36, Claude Opus 5.5 writes the title, show notes and 7 chapters, GPT-6 Astra checks every chapter, level and name, then superbot connects to Spotify for Creators and publishes episode 42: 56:32, live on Spotify."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

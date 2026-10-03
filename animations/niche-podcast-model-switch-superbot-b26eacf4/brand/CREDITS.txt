@@ -1,0 +1,69 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the Spotify for Creators surfaces superbot connects to) and unaltered except for fill colour as
+noted. Provenance is never shown on screen.
+
+gemini-logo.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                       (Carried over from the base ad's brand/.)
+claude-logo.svg        Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                       (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+openai-logo.svg        OpenAI mark (round badge), copied from animations/niche-youtube-model-switch-superbot-3828921d/brand/
+                       (which carried it from animations/bikeride-model-switch-superbot-e13744a9/brand/, which copied it
+                       from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of OpenAI, used
+                       nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                       https://en.wikipedia.org/spotify-for-creators-logo.svg
+                       The official Spotify for Creators lockup (the Spotify icon and "for Creators"), as Spotify serves it
+                       in the header of https://creators.spotify.com/ (inline <svg data-encore-id="logoS4C"
+                       class="logoS4C__condensed" viewBox="0 0 530.1 117.9">, fetched 2026-10-03). Path data verbatim.
+                       Three edits only: fill="var(--decorative-base)" resolved to #000000 (the value of
+                       --decorative-base in the dashboard's light theme .encore-s4c-light-theme), xmlns added, height
+                       dropped; and the site's own CSS rule for the condensed lockup (".logoS4C__condensed
+                       path:last-child{transform:translateX(-280px)}", in
+                       https://microfrontend-nonhosted-cdn.spotifycdn.com/_next/static/css/c6e7ffca29e418a1.css) written
+                       as transform="translate(-280 0)" on the two paths it matches, so the file renders exactly as the
+                       site does. Used whole in the episode page's top bar. No Spotify wordmark is typeset anywhere.
+                       Trademark of Spotify AB, used nominatively to name the platform superbot connects to and to mock
+                       its dashboard.
+spotify-mark.svg       Spotify icon, Simple Icons "spotify", https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/spotify.svg
+                       (simple-icons 16.33.0, CC0 1.0 data), fetched 2026-10-03. Path verbatim; only fill="#1ED760" was
+                       added on the <svg> root (Spotify green: Simple Icons' brand hex 1ED760, and the Encore positive set
+                       background-base #1ed760 in Spotify's own CSS), so the three bars are cut out to the surface under
+                       it, as the real icon reads. Used for the pill tile, the reply header, the composer chip, the
+                       connect sheet, the checklist and the Distribution row. Trademark of Spotify AB.
+
+UI ICONS
+  scenes/tabs-assets/beats/lucide-icons.js: Lucide, lucide-static 1.50.0 (ISC, https://github.com/lucide-icons/lucide),
+  SVG files from https://cdn.jsdelivr.net/npm/lucide-static@1.50.0/icons/<name>.svg, fetched 2026-10-03: audio-lines,
+  chart-column, check, chevron-left, circle-check, file-text, house, image, list-ordered, mic, pencil, play, rss,
+  scissors, settings, skip-forward, upload, user-round. Path data verbatim. The attachment chip's waveform glyph in
+  chat.js is the same audio-lines path inlined. The hub's own glyphs (the check, the spinner, the panel's doc icon) are
+  the base's.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+DATA
+  Everything in the spot's episode is made up for it: the show "Kiln and Counter", the host "Maya Ortiz" (initials MO),
+  the guest "Lena Brooks", episode 42 and its title, summary and chapters, the file name ep42-raw-interview.wav, every
+  duration (1:14:08 raw; cuts 8:35, 6:10 and 2:51, total 17:36; 56:32 final: 4448 s minus 1056 s is 3392 s), the
+  214 filler words and the release date Oct 3, 2026. Any resemblance to a real show or person is coincidental.
+  Show name check (2026-10-03): the brief's first name "Side Door Sessions" is a real podcast (iTunes Search API
+  https://itunes.apple.com/search?media=podcast&entity=podcast&term=Side%20Door%20Sessions returns "Side Door
+  Sessions" by sidedoorsessionspodcast; iHeart and Audible list it, hosted by Dareen Lynch), so it was dropped. The
+  next name, "Kiln and Counter", has no exact match (the same iTunes query returns 50 fuzzy hits, none of that name;
+  a web search for "Kiln and Counter" podcast returns no podcast), so the show is "Kiln and Counter".
+  Facts checked against Spotify's own help center (2026-10-03):
+  - Chapters: https://support.spotify.com/us/creators/article/episode-chapters/ : Episodes > the episode > Details >
+    Chapters; manual chapters as "(MM:SS) Title", first at 00:00, at least 3 chapters, at least 30 s apart, titles
+    under 40 characters. The seven chapters meet all of it (00:00 first, smallest gap 72 s, longest title 21 chars,
+    last 53:10 under 56:32).
+  - Distribution: https://support.spotify.com/us/creators/article/distributing-your-show-to-other-platforms/ and
+    /finding-and-enabling-your-rss-feed/ : a show hosted on Spotify is on Spotify automatically; other platforms
+    (Apple Podcasts included) need the creator to submit the RSS feed ("we don't distribute automatically"). So the
+    Distribution card shows only Spotify (Live) and RSS feed (Updated); no Apple Podcasts row.
+  - Labels from the dashboard app's own bundle (https://d1rx8vrt2hn1hc.cloudfront.net/builds/bundle-6efc3fd78262c046a7a5.js):
+    the episode page tabs "Details", "Analytics", "Monetize" (EpisodePage.Nav.*), the "Audio" tag
+    (EpisodeHeader.AudioTagLabel), the status "Published" (EpisodePage.Header.Status.Published "Published: {dateTime}")
+    and "Processing" (AudioSegmentSubtitle.ProcessingAudioLabel "Processing..."), "Episodes" (EpisodesListScreen.Header).
+    The sidebar items Home, Episodes, Analytics and Settings are the sections the help articles name (Go to
+    Episodes / Analytics / Settings; the bundle's Home screen).

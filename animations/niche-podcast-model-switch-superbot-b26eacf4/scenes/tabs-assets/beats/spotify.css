@@ -1,0 +1,180 @@
+/* Spotify beat (beats/spotify.js): the account connection sheet and the checklist card in the chat (Spotify's dark
+   consent look), and the full-frame layer carrying the one Spotify for Creators episode page (the dashboard's light
+   s4c theme). Every colour, shadow, radius and type value is a Spotify Encore value from Spotify's own stylesheets
+   (chat.css --sp-*, values and sources there); icons are Lucide (lucide-icons.js); the Spotify for Creators lockup and
+   the Spotify icon are the sourced files in brand/. Nothing here transitions: position, size, radius, opacity and
+   transform are written from t in spotify.js, so ?t= freezes a frame. Classes: .sc- connect sheet, .sk- checklist
+   card, .sp- the episode page and shared Spotify parts (buttons, avatar, the icon tile, pills). Radii, Encore's own:
+   --sp-r 6px (--encore-corner-radius-larger: cards, sheets, the toast, the mini window), --sp-r-img 4px
+   (--encore-corner-radius-base, the image radius: art, cover, thumbnails) and --sp-pill 9999px
+   (--encore-border-radius-rounded: buttons, pills, avatars, the nav items). */
+
+/* Inter stands in for Spotify's SpotifyMixUI / Circular (commercial, not bundled), vendored (fonts/CREDITS.txt) */
+@font-face { font-family: 'Inter SP'; src: url('../../../fonts/inter-latin-wght-normal.woff2?v=b26eacf4') format('woff2'); font-weight: 100 900; font-style: normal; font-display: block; }
+
+#s-tabs .lc { flex: none; display: block; width: 20px; height: 20px; }
+
+/* ---- shared Spotify parts ---- */
+#s-tabs .sp-btn { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 20px; box-sizing: border-box;
+  border-radius: var(--sp-pill); font: 700 14px/18px var(--sp-sans); white-space: nowrap; }
+#s-tabs .sp-btn.sp-sec { box-shadow: inset 0 0 0 1px var(--sp-d-ess-sub); color: var(--sp-d-text); }
+#s-tabs .sp-btn.sp-pri { background: var(--sp-green); color: var(--sp-on-green); }
+#s-tabs .sp-btn.sp-pri.sp-hit { background: var(--sp-green-press); }
+#s-tabs .sp-av { flex: none; display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: var(--sp-pill); background: var(--sp-text); color: var(--sp-bg);
+  font: 700 12px/1 var(--sp-sans); letter-spacing: .02em; }
+/* the Spotify icon (brand/spotify-mark.svg: the green disc, its three bars cut out to the surface under it) */
+#s-tabs .sp-ic { flex: none; display: block; width: 40px; height: 40px; }
+#s-tabs .sp-ic img { display: block; width: 100%; height: 100%; }
+/* the show's cover art: the photograph, Encore's over-media scrim, the show's name set in the substitute face */
+#s-tabs .sp-cover { position: relative; flex: none; display: block; overflow: hidden; border-radius: var(--sp-r-img); }
+#s-tabs .sp-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sp-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--sp-media) 0%, rgba(0, 0, 0, 0) 62%); }
+#s-tabs .sp-cover b { position: absolute; left: 8%; right: 8%; bottom: 8%; z-index: 1; color: var(--sp-media-text); font: 800 15px/1.02 var(--sp-sans); letter-spacing: -.01em; }
+
+/* ---- the connection sheet (dark, Encore s4c-dark) ---- */
+#s-tabs .sbsite .hub .sk-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .sc-card { opacity: 0; box-sizing: border-box; width: 400px; max-width: 100%; margin-top: 2px; padding: 18px 18px 16px; border-radius: var(--sp-r);
+  background: var(--sp-d-bg); box-shadow: inset 0 0 0 1px var(--sp-d-line), var(--sp-shadow-high); color: var(--sp-d-text); font-family: var(--sp-sans); }
+#s-tabs .sbsite .hub .sc-card.sc-tall { width: 340px; }
+#s-tabs .sbsite .hub .sc-logos { display: flex; align-items: center; justify-content: center; }
+#s-tabs .sbsite .hub .sc-logos .qc-tile.sc-sb { width: 40px; height: 40px; }
+#s-tabs .sbsite .hub .sc-dots { display: block; width: 40px; margin: 0 10px; border-top: 2px dotted var(--sp-d-ess-sub); }
+#s-tabs .sbsite .hub .sc-title { margin: 14px 0 14px; text-align: center; font: 700 18px/1.25 var(--sp-sans); color: var(--sp-d-text); text-wrap: balance; }
+#s-tabs .sbsite .hub .sc-acct { display: flex; align-items: center; gap: 10px; padding: 10px 0; box-shadow: inset 0 1px 0 var(--sp-d-line), inset 0 -1px 0 var(--sp-d-line);
+  font: 400 14px/1.3 var(--sp-sans); color: var(--sp-d-sub); }
+#s-tabs .sbsite .hub .sc-acct b { font-weight: 700; color: var(--sp-d-text); }
+#s-tabs .sbsite .hub .sc-av { width: 28px; height: 28px; font-size: 11px; background: var(--sp-d-text); color: var(--sp-d-bg); }
+#s-tabs .sbsite .hub .sc-perm { display: grid; gap: 2px; padding: 8px 0 2px; }
+#s-tabs .sbsite .hub .sc-row { display: flex; align-items: center; gap: 10px; height: 30px; font: 400 13.5px/1.3 var(--sp-sans); color: var(--sp-d-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-row .lc { width: 18px; height: 18px; color: var(--sp-d-sub); }
+#s-tabs .sbsite .hub .sc-tall .sc-row { font-size: 12.5px; }
+#s-tabs .sbsite .hub .sc-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
+/* ---- the checklist card (dark), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .sk-card { opacity: 0; box-sizing: border-box; width: 400px; max-width: 100%; margin-top: 10px; padding: 10px 12px 12px;
+  border-radius: var(--sp-r); background: var(--sp-d-bg); box-shadow: inset 0 0 0 1px var(--sp-d-line), var(--sp-shadow-high); font-family: var(--sp-sans); color: var(--sp-d-text); }
+#s-tabs .sbsite .hub .sk-card.sk-tall { width: 340px; }
+#s-tabs .sbsite .hub .sk-tall .sk-step { font-size: 12.5px; }
+#s-tabs .sbsite .hub .sk-step { display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 2px; font: 400 13px/1 var(--sp-sans); white-space: nowrap; color: var(--sp-d-sub); }
+#s-tabs .sbsite .hub .sk-step b { font-weight: 700; color: var(--sp-d-text); }
+#s-tabs .sbsite .hub .sk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .sk-sp { width: 22px; height: 22px; }
+#s-tabs .sbsite .hub .sk-ic { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: var(--sp-pill); background: var(--sp-d-elev); color: var(--sp-d-text); }
+#s-tabs .sbsite .hub .sk-ic .lc { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .sk-ok { position: relative; flex: none; width: 15px; height: 15px; margin-left: auto; }
+#s-tabs .sbsite .hub .sk-spin { position: absolute; inset: 1px; border-radius: var(--sp-pill); border: 2px solid var(--sp-d-line); border-top-color: var(--sp-d-sub); }
+#s-tabs .sbsite .hub .sk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: var(--sp-green); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .sk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: var(--sp-r); background: var(--sp-bg); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .sp-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--sp-bg); }
+#s-tabs .sp-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: var(--sp-bg); color: var(--sp-text); font: 400 14px/20px var(--sp-sans); -webkit-font-smoothing: antialiased; }
+
+/* the top bar (white, a hairline under it) */
+#s-tabs .sp-top { flex: none; display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 24px; background: var(--sp-bg); box-shadow: inset 0 -1px 0 var(--sp-line); }
+#s-tabs .sp-logo { display: block; height: 28px; width: auto; }
+
+#s-tabs .sp-body { flex: 1; min-height: 0; display: flex; }
+/* the sidebar (16:9): Encore's app-frame surface, the show, the nav */
+#s-tabs .sp-side { flex: none; width: 232px; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; padding: 18px 12px; background: var(--sp-hi); box-shadow: inset -1px 0 0 var(--sp-line); }
+#s-tabs .sp-show { display: flex; align-items: center; gap: 12px; padding: 0 6px 16px; }
+#s-tabs .sp-cv-s { width: 56px; height: 56px; }
+#s-tabs .sp-cv-s b { font-size: 9.5px; }
+#s-tabs .sp-show > span:last-child { min-width: 0; display: grid; gap: 2px; }
+#s-tabs .sp-show > span:last-child b { font: 700 15px/19px var(--sp-sans); }
+#s-tabs .sp-show > span:last-child small { font: 400 13px/17px var(--sp-sans); color: var(--sp-sub); }
+#s-tabs .sp-nav { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 12px; border-radius: var(--sp-pill); font: 700 14px/18px var(--sp-sans); color: var(--sp-sub); }
+#s-tabs .sp-nav .lc { width: 20px; height: 20px; }
+#s-tabs .sp-nav.on { background: var(--sp-frame-hi); color: var(--sp-text); }
+
+/* the page */
+#s-tabs .sp-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; padding: 14px 28px 0; box-sizing: border-box; }
+#s-tabs .sp-crumb { flex: none; display: flex; align-items: center; gap: 4px; font: 700 14px/20px var(--sp-sans); color: var(--sp-sub); }
+#s-tabs .sp-crumb .lc { width: 18px; height: 18px; margin-left: -4px; }
+#s-tabs .sp-head { flex: none; display: flex; align-items: center; gap: 20px; }
+#s-tabs .sp-art { flex: none; display: block; width: 104px; height: 104px; border-radius: var(--sp-r-img); object-fit: cover; box-shadow: var(--sp-shadow); }
+#s-tabs .sp-hm { flex: 1; min-width: 0; display: grid; gap: 4px; }
+#s-tabs .sp-eyebrow { display: flex; align-items: center; gap: 8px; font: 700 14px/18px var(--sp-sans); color: var(--sp-sub); }
+#s-tabs .sp-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: var(--sp-r-img); background: var(--sp-tint); font: 700 12px/1 var(--sp-sans); color: var(--sp-text); }
+#s-tabs .sp-hm h1 { margin: 0; font: 800 26px/31px var(--sp-sans); letter-spacing: -.01em; color: var(--sp-text); }
+#s-tabs .sp-meta { display: flex; gap: 14px; font: 400 14px/18px var(--sp-sans); color: var(--sp-sub); white-space: nowrap; }
+#s-tabs .sp-meta span:first-child { font-weight: 700; color: var(--sp-text); }
+#s-tabs .sp-stat { flex: none; display: grid; justify-items: end; align-self: flex-start; margin-top: 4px; }
+#s-tabs .sp-pill { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px 0 12px; box-sizing: border-box; border-radius: var(--sp-pill);
+  font: 700 14px/1 var(--sp-sans); white-space: nowrap; }
+#s-tabs .sp-proc { background: var(--sp-tint); color: var(--sp-sub); }
+#s-tabs .sp-spin { display: block; width: 14px; height: 14px; box-sizing: border-box; border-radius: var(--sp-pill); border: 2px solid var(--sp-line); border-top-color: var(--sp-sub); }
+/* the bold moment: Encore's positive set, Spotify green with a black label */
+#s-tabs .sp-pub { background: var(--sp-green); color: var(--sp-on-green); opacity: 0; transform-origin: 100% 50%; }
+#s-tabs .sp-pub .lc { width: 16px; height: 16px; stroke-width: 3; }
+
+#s-tabs .sp-tabs { flex: none; display: flex; gap: 28px; box-shadow: inset 0 -1px 0 var(--sp-line); }
+#s-tabs .sp-tabs span { padding: 6px 0 10px; font: 700 15px/20px var(--sp-sans); color: var(--sp-sub); }
+#s-tabs .sp-tabs span.on { color: var(--sp-text); box-shadow: inset 0 -2px 0 var(--sp-text); }
+
+#s-tabs .sp-cols { flex: 1; min-height: 0; display: flex; gap: 20px; align-items: flex-start; }
+#s-tabs .sp-det { flex: 1; min-width: 0; display: grid; gap: 12px; }
+#s-tabs .sp-card { padding: 14px 18px 16px; border-radius: var(--sp-r); background: var(--sp-bg); box-shadow: inset 0 0 0 1px var(--sp-line); }
+#s-tabs .sp-card h2 { margin: 0; font: 700 16px/22px var(--sp-sans); color: var(--sp-text); }
+#s-tabs .sp-desc p { margin: 6px 0 0; font: 400 14px/20px var(--sp-sans); color: var(--sp-text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+#s-tabs .sp-ch-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+#s-tabs .sp-chn { font: 400 13px/18px var(--sp-sans); color: var(--sp-sub); font-variant-numeric: tabular-nums; }
+#s-tabs .sp-edit { display: flex; align-items: center; gap: 6px; margin-left: auto; align-self: center; font: 700 14px/18px var(--sp-sans); color: var(--sp-sub); }
+#s-tabs .sp-edit .lc { width: 16px; height: 16px; }
+#s-tabs .sp-chap ol { margin: 0; padding: 0; list-style: none; display: grid; }
+#s-tabs .sp-chap li { display: flex; align-items: center; gap: 14px; height: 28px; font: 400 14px/18px var(--sp-sans); color: var(--sp-text); opacity: 0; }
+#s-tabs .sp-chap li + li { box-shadow: inset 0 1px 0 var(--sp-hi); }
+#s-tabs .sp-ts { flex: none; width: 58px; font-variant-numeric: tabular-nums; color: var(--sp-sub); }
+
+/* the rail (16:9): the episode preview (Encore's inverted set), then Distribution */
+#s-tabs .sp-rail { flex: none; width: 300px; display: grid; gap: 12px; }
+#s-tabs .sp-prev { display: grid; grid-template-columns: 64px 1fr; column-gap: 12px; row-gap: 12px; align-items: center; padding: 14px; border-radius: var(--sp-r); background: var(--sp-inv); color: var(--sp-inv-text); }
+#s-tabs .sp-prev > img { width: 64px; height: 64px; border-radius: var(--sp-r-img); object-fit: cover; display: block; }
+#s-tabs .sp-pv-t { min-width: 0; display: grid; gap: 2px; }
+#s-tabs .sp-pv-t b { font: 700 14px/18px var(--sp-sans); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#s-tabs .sp-pv-t small { font: 400 13px/17px var(--sp-sans); color: var(--sp-inv-sub); }
+#s-tabs .sp-pv-bar { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; }
+#s-tabs .sp-play { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--sp-pill); background: var(--sp-inv-text); color: var(--sp-inv); }
+#s-tabs .sp-play .lc { width: 14px; height: 14px; fill: currentColor; margin-left: 2px; }
+#s-tabs .sp-pv-bar i { flex: 1; height: 4px; border-radius: var(--sp-pill); background: var(--sp-inv-hi); box-shadow: inset 0 0 0 1px var(--sp-inv-line); }
+#s-tabs .sp-pv-time { grid-column: 1 / -1; display: flex; justify-content: space-between; margin-top: -6px; font: 400 12px/16px var(--sp-sans); color: var(--sp-inv-sub); font-variant-numeric: tabular-nums; }
+#s-tabs .sp-dist h2 { margin-bottom: 6px; }
+#s-tabs .sp-drow { display: flex; align-items: center; gap: 12px; height: 44px; }
+#s-tabs .sp-drow + .sp-drow { box-shadow: inset 0 1px 0 var(--sp-hi); }
+#s-tabs .sp-d-ic { width: 26px; height: 26px; }
+#s-tabs .sp-d-gl { display: grid; place-items: center; border-radius: var(--sp-pill); background: var(--sp-hi); color: var(--sp-text); }
+#s-tabs .sp-d-gl .lc { width: 15px; height: 15px; }
+#s-tabs .sp-dl { font: 700 14px/18px var(--sp-sans); }
+#s-tabs .sp-dsw { display: grid; justify-items: end; margin-left: auto; }
+#s-tabs .sp-dsw .sp-pill { height: 26px; padding: 0 11px; font-size: 13px; }
+#s-tabs .sp-wait { background: var(--sp-hi); color: var(--sp-sub); }
+#s-tabs .sp-live { background: var(--sp-pos-bg); color: var(--sp-pos-text); opacity: 0; transform-origin: 100% 50%; }
+
+/* the toast: Encore's inverted surface, the green check, the one bold line */
+#s-tabs .sp-toast { position: absolute; left: 50%; bottom: 26px; z-index: 2; display: flex; align-items: center; gap: 14px; padding: 14px 24px 14px 16px; border-radius: var(--sp-r);
+  background: var(--sp-inv); color: var(--sp-inv-text); box-shadow: var(--sp-shadow-high); opacity: 0; transform: translateX(-50%); white-space: nowrap; }
+#s-tabs .sp-toast .lc { width: 30px; height: 30px; color: var(--sp-green); }
+#s-tabs .sp-toast span { display: grid; gap: 2px; }
+#s-tabs .sp-toast b { font: 700 18px/23px var(--sp-sans); }
+#s-tabs .sp-toast small { font: 400 14px/18px var(--sp-sans); color: var(--sp-inv-sub); }
+
+/* ---- portrait (4:5): no sidebar, no rail, no breadcrumb or description; a larger scale, compact header ---- */
+#s-tabs .sp-narrow .sp-wide { display: none; }
+#s-tabs .sp-narrow .sp-top { height: 56px; padding: 0 18px; }
+#s-tabs .sp-narrow .sp-logo { height: 26px; }
+#s-tabs .sp-narrow .sp-main { gap: 12px; padding: 16px 18px 0; }
+#s-tabs .sp-narrow .sp-head { display: grid; grid-template-columns: 96px 1fr; column-gap: 16px; row-gap: 12px; align-items: start; }
+#s-tabs .sp-narrow .sp-art { width: 96px; height: 96px; }
+#s-tabs .sp-narrow .sp-hm h1 { font-size: 20px; line-height: 25px; }
+#s-tabs .sp-narrow .sp-eyebrow { font-size: 14px; }
+#s-tabs .sp-narrow .sp-meta { gap: 12px; font-size: 14px; }
+#s-tabs .sp-narrow .sp-stat { grid-column: 1 / -1; justify-items: start; margin-top: 0; }
+#s-tabs .sp-narrow .sp-pub { transform-origin: 0 50%; }
+#s-tabs .sp-narrow .sp-tabs { gap: 22px; }
+#s-tabs .sp-narrow .sp-card { padding: 12px 16px 12px; }
+#s-tabs .sp-narrow .sp-chap li { height: 30px; font-size: 15px; }
+#s-tabs .sp-narrow .sp-ts { width: 62px; }
+#s-tabs .sp-narrow .sp-chn, #s-tabs .sp-narrow .sp-edit { font-size: 14px; }
+#s-tabs .sp-narrow .sp-toast { bottom: 18px; padding: 12px 20px 12px 14px; gap: 12px; }
+#s-tabs .sp-narrow .sp-toast b { font-size: 17px; line-height: 22px; }

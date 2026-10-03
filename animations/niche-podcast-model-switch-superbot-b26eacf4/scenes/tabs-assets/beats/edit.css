@@ -1,0 +1,50 @@
+/* Edit beat (beats/edit.js): Gemini listening to 74 min of the raw interview and marking the edit. A hub card in the
+   base's catalog grammar and its own dark tokens (chat.css --dt-*, and the hub greys the base fork uses): the
+   recording row (a neutral waveform glyph tile, the recording, its length and tracks), the counter with the waveform
+   strip under it (the base's thin counter bar, drawn as the episode's waveform: played bars light up, the cut regions
+   shade in), three findings (a glyph tile, the finding, where or how many, the time it cuts; the first highlighted)
+   and the footer. Nothing here transitions: opacity/transform are written from t in render, so ?t= freezes a frame.
+   Every class is prefixed .ct-. Radii: 10px card and 8px rows/tiles (the base's), pills fully round. */
+
+#s-tabs .sbsite .hub .ct-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 11px 12px 11px;
+  border-radius: 10px; background: var(--dt-card); transform-origin: 50% 0; box-shadow: inset 0 0 0 1px var(--dt-line); }
+
+/* the recording row */
+#s-tabs .sbsite .hub .ct-store { display: flex; align-items: center; gap: 10px; }
+#s-tabs .sbsite .hub .ct-bag { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .ct-bag .lc { width: 16px; height: 16px; display: block; color: #c7c7cc; }
+#s-tabs .sbsite .hub .ct-sm { flex: 1; min-width: 0; display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .ct-sm b { font: 600 13px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .ct-sm code { padding: 0; background: none; font: 500 11.5px/1.2 var(--ui); color: var(--dt-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* the status icon (spinner resolving to the check) */
+#s-tabs .sbsite .hub .ct-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .ct-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .ct-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the counter, the waveform strip and the findings */
+#s-tabs .sbsite .hub .ct-ch { opacity: 0; display: flex; align-items: center; gap: 8px; margin-top: 13px; font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .ct-n { font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ct-wave { opacity: 0; position: relative; display: flex; align-items: center; gap: 1px; height: 18px; margin: 9px 0 6px; }
+#s-tabs .sbsite .hub .ct-wave > i { flex: 1; min-height: 2px; border-radius: 9999px; background: #34343a; }
+#s-tabs .sbsite .hub .ct-wave > i.on { background: var(--dt-blue); }
+/* a cut region: the base's red tint over the bars it removes; a filler tick: one thin red line */
+#s-tabs .sbsite .hub .ct-wave > i.ct-cut { position: absolute; top: -2px; bottom: -2px; min-height: 0; border-radius: 3px; background: var(--dt-red-bg); box-shadow: inset 0 0 0 1px rgba(242, 139, 130, .55); opacity: 0; }
+#s-tabs .sbsite .hub .ct-wave > i.ct-tick { position: absolute; top: 1px; bottom: 1px; width: 1.5px; min-height: 0; margin-left: -.75px; border-radius: 0; background: var(--dt-red); opacity: 0; }
+#s-tabs .sbsite .hub .ct-list { display: grid; gap: 2px; }
+#s-tabs .sbsite .hub .ct-row { opacity: 0; display: flex; align-items: center; gap: 10px; padding: 7px 8px; margin: 0 -8px; border-radius: 8px; }
+/* the first finding: the hub's raised row, so the one that matters reads first */
+#s-tabs .sbsite .hub .ct-row.ct-hi { background: #1e1e21; box-shadow: inset 0 0 0 1px #2e2e31; }
+#s-tabs .sbsite .hub .ct-th { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; overflow: hidden; background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .ct-gl .lc { width: 17px; height: 17px; color: #ececec; }
+#s-tabs .sbsite .hub .ct-main { flex: 1; min-width: 0; display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .ct-r1 { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+#s-tabs .sbsite .hub .ct-r1 b { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .ct-tag { margin-left: auto; flex: none; height: 19px; padding: 0 8px; border-radius: 9999px; background: #1e1e21; box-shadow: inset 0 0 0 1px #2e2e31;
+  font: 500 11px/19px var(--ui); color: #c7c7cc; }
+#s-tabs .sbsite .hub .ct-hi .ct-tag { background: #ececec; box-shadow: none; color: var(--dt-card); font-weight: 600; }
+#s-tabs .sbsite .hub .ct-tx { font: 12px/1.3 var(--ui); color: #c7c7cc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ct-hi .ct-tx { color: #ececec; }
+
+#s-tabs .sbsite .hub .ct-ft { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 9px; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .ct-ft .qc-ok { flex: none; }

@@ -1,0 +1,18 @@
+img/ CREDITS (internal): every photograph in this spot, where it came from, and its licence. Both are Unsplash
+photographs mirrored on Wikimedia Commons, tagged CC0 1.0 there (public domain dedication), so neither owes on-screen
+attribution, and neither is credited on screen. Fetched 2026-10-03 through Commons (Special:FilePath at 2000 px; the
+licence read from the Commons API, prop=imageinfo, extmetadata LicenseShortName "CC0"). Each file is a square crop of
+the source downscaled with Pillow (LANCZOS) to 600 x 600, JPEG q86. No identifiable face appears in either. Nothing is
+drawn or generated.
+
+show-cover.jpg   The show's cover art photograph ("Kiln and Counter"; the sidebar's show tile, where the show's name is
+                 set over it in HTML with Encore's over-media scrim). Square crop of "Making pottery (Unsplash).jpg",
+                 hands throwing on a potter's wheel, top down, by Jared Sluyter (Unsplash jaredsluyter, Springdale,
+                 United States), https://commons.wikimedia.org/wiki/File:Making_pottery_(Unsplash).jpg (originally
+                 https://unsplash.com/photos/znw9Xs5I9ro). Licence: CC0 1.0.
+ep42-art.jpg     Episode 42's artwork (the episode header, the preview card). Square crop of "Handmade Terracotta
+                 Ceramics (Unsplash).jpg", stacked handmade terracotta bowls and vessels, by Igor Ovsyannykov (Unsplash
+                 igorovsyannykov, New Delhi, India),
+                 https://commons.wikimedia.org/wiki/File:Handmade_Terracotta_Ceramics_(Unsplash).jpg (originally
+                 https://unsplash.com/photos/HT_MKv4MuVc). Licence: CC0 1.0. It stands in for the made-up guest's work;
+                 it is not a photo of a real studio of that name.

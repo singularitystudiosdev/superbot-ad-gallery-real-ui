@@ -356,6 +356,15 @@
     "desc": "One prompt in superbot: Gemini reads #general, ElevenLabs Scribe transcribes the voice notes, Claude Opus 5.5 writes the catch-up and the replies, then superbot posts them in Discord."
   },
   {
+    "id": "niche-x-model-switch-superbot-5e94b3a8",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Draft replies to every comment on my last post and show me before sending: Grok, Gemini, Opus 5.5, then superbot posts the approved replies on X (4 switches)",
+    "src": "animations/niche-x-model-switch-superbot-5e94b3a8/",
+    "thumb": "assets/shots/niche-x-model-switch-superbot-5e94b3a8.png",
+    "desc": "One prompt in superbot: Grok reads the comments, Gemini learns your voice from your past replies, Claude Opus 5.5 drafts a reply to each comment, then superbot opens your post on X so you approve each draft with one tap before it posts."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

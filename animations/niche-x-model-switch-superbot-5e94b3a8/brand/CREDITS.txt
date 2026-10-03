@@ -1,0 +1,28 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+grok.png             (scenes/tabs-assets/grok.png) the Grok app icon from the superbot hub UI kit, carried with the
+                     fork from bikeride-model-switch-superbot-e13744a9 (the hub's own rail icon, unmodified). Grok and its
+                     mark are trademarks of xAI. Used for the "Switching to Grok" pill tile and the composer chip.
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+
+x-logo.svg           X mark, Simple Icons "x" icon,
+                     https://cdn.jsdelivr.net/npm/simple-icons/icons/x.svg (simple-icons 16.33.0, https://simpleicons.org),
+                     fetched 2026-10-03. Licence: CC0 1.0 (Simple Icons' licence for its SVG files). Path verbatim; only a
+                     fill="#fff" attribute was added on the <svg> root so it reads on black. X and the X logo are
+                     trademarks of X Corp., used nominatively to name the app superbot connects to and to mock its web
+                     client in the result screen. Every X mark in the spot (pill tile, composer chip, Opus panel chip,
+                     connect card, the client's nav logo) is this one file; the client's Premium nav icon draws the same
+                     path inline (beats/x.js). The client's other icons and the blue verified badge are simple
+                     line drawings made for the spot in X's style, not X's own artwork.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  mark on the "Draft by superbot" label in the X screen is scenes/tabs-assets/tile.svg (first party).
+
+The app ("Tidepool"), its post, the people (Sam Rivera, Maya Chen, Jordan Blake, Priya Nair, Leo Park and the names in
+Sam's past replies), their comments, the replies, the counts and the trends are made up for the spot. No photos of
+real people: every avatar is a colour circle with an initial.

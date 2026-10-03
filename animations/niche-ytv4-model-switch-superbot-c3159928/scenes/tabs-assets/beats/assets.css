@@ -1,0 +1,44 @@
+/* Assets beat (beats/assets.js): the card in the thread holding the mini window, and the ASSET STAGE layer (scene root
+   px, outside the camera) laid out at the frame size (1920 x 1080 at 16:9) and scaled into the window. superbot's own
+   dark surface and the hub's colours (#0b0b0c stage, #141416 raised, #ececec text, #8e8e93 muted), Google Sans Flex
+   (vendored, studio.css @font-face "GSF"). Nothing here transitions and nothing is a control: no button, tab or toggle
+   shapes, no progress bar, no glow, no counts or action row on the post. Every moving value is written from t in
+   assets.js. Radii: 16px (the images), 20px (the post card) and fully round (the avatar). */
+
+/* the card in the thread: just the window, framed like the hub's cards */
+#s-tabs .sbsite .hub .as-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; padding: 6px;
+  border-radius: 14px; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); }
+#s-tabs .sbsite .hub .as-shot { aspect-ratio: 16 / 9; border-radius: 10px; background: #0b0b0c; }
+
+/* ---- the stage layer ---- */
+#s-tabs .as-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #0b0b0c; }
+#s-tabs .as-app { position: absolute; left: 0; top: 0; overflow: hidden; transform-origin: 0 0; background: #0b0b0c; color: #ececec;
+  font-family: "GSF", "Google Sans", var(--ui), sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* header strip: the Gemini mark + "Made with Nano Banana Pro" left, the video title right in grey; plain text only */
+#s-tabs .as-hd { position: absolute; left: 0; right: 0; top: 0; z-index: 2; display: flex; align-items: center; gap: 18px; height: 84px;
+  padding: 0 80px; box-sizing: border-box; background: #0b0b0c; box-shadow: inset 0 -1px 0 #232326; white-space: nowrap; }
+#s-tabs .as-mk { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .as-mk img { width: 28px; height: 28px; }
+#s-tabs .as-hd b { font-weight: 600; font-size: 28px; line-height: 1; color: #f2f2f4; }
+#s-tabs .as-vt { margin-left: auto; font-weight: 400; font-size: 24px; line-height: 1; color: #8e8e93; }
+
+/* the images: shown as generated, in a rounded frame with a soft shadow (the dark fill shows while one resolves) */
+#s-tabs .as-th, #s-tabs .as-pi { position: absolute; overflow: hidden; border-radius: 16px; background: #141416;
+  box-shadow: 0 0 0 1px #26262a, 0 24px 60px rgba(0,0,0,.55); }
+#s-tabs .as-pi { position: relative; width: 700px; height: 700px; margin-top: 16px; box-shadow: 0 0 0 1px #26262a; }
+#s-tabs .as-img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform-origin: 50% 50%; }
+
+/* captions: plain text under each image */
+#s-tabs .as-cap { position: absolute; white-space: nowrap; opacity: 0; }
+#s-tabs .as-cap-a { font: 400 30px/38px "GSF", "Google Sans", var(--ui), sans-serif; color: #8e8e93; }
+#s-tabs .as-cap-a b { font-weight: 600; color: #f2f2f4; }
+#s-tabs .as-cap-b { font: 400 26px/32px "GSF", "Google Sans", var(--ui), sans-serif; color: #8e8e93; }
+
+/* the community post card, superbot's raised surface: avatar and name, the post text, the image */
+#s-tabs .as-post { position: absolute; box-sizing: border-box; padding: 20px; border-radius: 20px; background: #141416;
+  box-shadow: 0 0 0 1px #26262a, 0 24px 60px rgba(0,0,0,.5); opacity: 0; }
+#s-tabs .as-ph { display: flex; align-items: center; gap: 14px; height: 40px; white-space: nowrap; }
+#s-tabs .as-av { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--yt-me); color: #fff; font: 500 20px/1 "GSF", var(--ui), sans-serif; }
+#s-tabs .as-ph b { font-weight: 600; font-size: 26px; line-height: 1; color: #f2f2f4; }
+#s-tabs .as-pt { margin-top: 12px; font-weight: 400; font-size: 32px; line-height: 40px; color: #ececec; }

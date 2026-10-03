@@ -815,6 +815,15 @@
     "desc": "One prompt in superbot: Gemini reads a 97 row supplier sheet and cleans up 23 messy sizes and colors, Claude Opus 5.5 writes 4 product pages and sets up 96 variations, GPT-6 Astra checks every variation before publishing, then superbot connects to WooCommerce with the store's REST API key and publishes 4 variable products with price, SKU, stock and weight on each one."
   },
   {
+    "id": "niche-ytv4-model-switch-superbot-c3159928",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video, pin the best one, and make a community post and a new thumbnail: the Nano Banana Pro images shown full size (5 switches, variant, 16:9)",
+    "src": "animations/niche-ytv4-model-switch-superbot-c3159928/",
+    "thumb": "assets/shots/niche-ytv4-model-switch-superbot-c3159928.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d that puts the generated images on screen. One ask in superbot: Gemini watches the latest video and ranks its 1,284 comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies, Nano Banana Pro makes a new thumbnail and a community post image for the video (both shown large), then superbot posts the replies, pins the best one and publishes the thumbnail and the post. 16:9 only."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

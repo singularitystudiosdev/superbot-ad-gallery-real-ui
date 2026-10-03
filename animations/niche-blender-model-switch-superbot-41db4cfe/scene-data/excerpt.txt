@@ -1,0 +1,8 @@
+COLORWAYS = {
+    "Sage": "#8FAE8B",
+    "Coral": "#E2725B",
+    "Midnight": "#1E2A44",
+}
+camera.data.lens = 85
+scene.render.engine = "CYCLES"
+for name, hex_value in COLORWAYS.items():

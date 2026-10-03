@@ -689,6 +689,15 @@
     "desc": "One prompt in superbot: Gemini watches a 2h 14m process video and keeps the 5 steps patrons ask about, GPT-6 Astra picks 8 of 38 sketchbook photos and writes the alt text, Claude Opus 5.5 writes the October post in the creator's voice, then superbot connects to Patreon, fills in the post, and the creator publishes it for paid members."
   },
   {
+    "id": "niche-blender-model-switch-superbot-41db4cfe",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Render my alarm clock model in 3 colorways for the product page: Gemini, Opus 5.5, Nano Banana Pro, then superbot renders them in Blender (4 switches)",
+    "src": "animations/niche-blender-model-switch-superbot-41db4cfe/",
+    "thumb": "assets/shots/niche-blender-model-switch-superbot-41db4cfe.png",
+    "desc": "One prompt in superbot: Gemini reads the client brief and the model file and writes the spec, Claude Opus 5.5 writes the Blender scene script, Nano Banana Pro recolors the body texture three ways, then superbot connects to Blender and renders one product shot per colorway."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

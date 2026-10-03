@@ -1,0 +1,15 @@
+niche-blender-model-switch-superbot-41db4cfe: CREDITS (internal only; nothing on screen credits anyone)
+
+3D model     "Alarm Clock 01" (alarm_clock_01) by James Ray Cock (modeling and texturing) and Yann Kervran (rigging),
+             Poly Haven, https://polyhaven.com/a/alarm_clock_01 . Licence: CC0 1.0 Universal (public domain
+             dedication). Used for the body textures (render beat) and the three Cycles renders (result window).
+HDRI         "Studio Small 09" by Sergej Majboroda, Poly Haven, https://polyhaven.com/a/studio_small_09 . CC0 1.0.
+             Steel reflections in the renders only.
+Scene script The code lines in the Opus beat are verbatim lines of render_colorways.py, the script that rendered the
+             three colorways (asset build: work/blender-assets-41db4cfe/out/render_colorways.py, excerpt.txt).
+Blender logo brand/blender-logo.svg: Wikimedia Commons "File:Blender logo no text.svg"
+             (https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg), unmodified, the same
+             file as ../bikeride-model-switch-superbot-e13744a9/brand/blender-logo.svg. Official mark per
+             https://www.blender.org/about/logo/ ; trademark of the Blender Foundation, used nominatively.
+Other marks  Gemini, Claude: see brand/CREDITS.txt.
+Images       see img/CREDITS.txt.

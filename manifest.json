@@ -347,6 +347,15 @@
     "desc": "One sentence in, five hand-offs: Gemini turns it into a watch rule, Finnhub streams live quotes, Twilio verifies your number, Claude Opus 5.5 writes the read-only watcher, and your brokerage connects with view-only access. NVDA slips past -5% and superbot texts you. Watching only, no trades placed."
   },
   {
+    "id": "niche-discord-model-switch-superbot-3b7e91c4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "catch me up on #general and reply to my mentions: Gemini, ElevenLabs Scribe, Opus 5.5, then superbot posts the replies in Discord (4 switches)",
+    "src": "animations/niche-discord-model-switch-superbot-3b7e91c4/",
+    "thumb": "assets/shots/niche-discord-model-switch-superbot-3b7e91c4.png",
+    "desc": "One prompt in superbot: Gemini reads #general, ElevenLabs Scribe transcribes the voice notes, Claude Opus 5.5 writes the catch-up and the replies, then superbot posts them in Discord."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

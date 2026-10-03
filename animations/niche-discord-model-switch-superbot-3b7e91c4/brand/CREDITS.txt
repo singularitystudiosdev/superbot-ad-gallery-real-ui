@@ -1,0 +1,26 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+elevenlabs-logo.svg  ElevenLabs mark (the two bars), https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg
+                     (simple-icons 16.32.0, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Eleven Labs, Inc.
+                     Used for the "ElevenLabs Scribe" pill (Scribe is ElevenLabs' speech-to-text model).
+
+discord-logo.svg     Discord mark (Clyde), Simple Icons "discord" icon,
+                     https://cdn.jsdelivr.net/npm/simple-icons/icons/discord.svg (simple-icons 16.33.0, https://simpleicons.org),
+                     fetched 2026-10-03. Licence: CC0 1.0 (Simple Icons' licence for its SVG files). Path verbatim; only a
+                     fill="#fff" attribute was added on the <svg> root so it reads on the blurple tile and on the coloured
+                     default-avatar circles. Discord and the Discord logo are trademarks of Discord Inc., used
+                     nominatively to name the app superbot connects to and to mock its client in the result screen.
+                     Never redrawn: every Discord mark in the spot (pill tile, composer chip, rail home button, default
+                     avatars, connect card) is this one file.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar in the Discord screen is scenes/tabs-assets/tile.svg (first party).
+
+The Discord screen's server ("Pixel Forge"), people (Leo, Maya, Theo, Jordan, Priya, Nina, sam) and messages are made
+up for the spot. No photos of real people: every avatar is Discord's default-avatar style (colour circle + the mark).

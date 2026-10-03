@@ -842,6 +842,15 @@
     "desc": "Variant of niche-youtube-model-switch-superbot-3828921d for YouTube Shorts creators. One ask in superbot: Gemini reads this week's comments and ranks the top five, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 turns each top comment into one line of the next Short's script, shown side by side, then superbot cuts the vertical Short with captions and posts it from YouTube Studio. 16:9 only."
   },
   {
+    "id": "niche-ytv7-model-switch-superbot-74bf761f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Find where viewers dropped off in my last video and rewrite the first 30 seconds of the next one: the retention drop-off marked, then the old intro beside superbot's rewrite (4 switches, variant, 16:9)",
+    "src": "animations/niche-ytv7-model-switch-superbot-74bf761f/",
+    "thumb": "assets/shots/niche-ytv7-model-switch-superbot-74bf761f.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d for YouTube analytics. One ask in superbot: it reads the last video's audience retention in YouTube Studio, Gemini marks the drop-off at 0:21 during the sponsor read, GPT-6 Astra reads the most re-watched frame at 4:38, and Claude Opus 5.5 rewrites the first 30 seconds of the next video, shown beside the old intro. 16:9 only."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

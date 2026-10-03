@@ -752,6 +752,15 @@
     "desc": "One ask in superbot: Gemini reads the Site Health report, debug log and 23 plugins and traces a failed scheduled event to the child theme, Claude Opus 5.5 fixes the PHP 8.3 error in functions.php, GPT-6 Astra tests every fix on a staging copy, then superbot connects to WordPress with an application password and Site Health turns Good."
   },
   {
+    "id": "niche-devops-model-switch-superbot-cc72ade8",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Find why checkout keeps crashlooping in prod and roll out a fix: Gemini, Opus 5.5, GPT-6 Astra, then superbot rolls it out to production on GitLab (4 switches)",
+    "src": "animations/niche-devops-model-switch-superbot-cc72ade8/",
+    "thumb": "assets/shots/niche-devops-model-switch-superbot-cc72ade8.png",
+    "desc": "One ask in superbot for DevOps engineers: Gemini reads the pod logs and events from 3 failed deploys and finds the OOMKill, Claude Opus 5.5 raises the memory limit, adds a startup probe and a rollout check, GPT-6 Astra lints and validates every manifest and rolls it out on staging, then superbot connects to GitLab, opens merge request !318 and the pipeline rolls the fix out to production."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

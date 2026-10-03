@@ -1,0 +1,68 @@
+/* Query beat (beats/query.js): Perplexity's check. The backlog card's frame (status spinner, label, a sources chip)
+   holding the result table (Company | Role | On careers page | Signal | Verdict) landing row by row, each verdict a pill:
+   Real green with a check, Ghost red with the row struck through softly; then the summary chips. On a narrow column
+   (.dq-narrow, set by query.js) Company and Role stack in one cell and the Signal wraps. Nothing here transitions:
+   opacity/transform/--gh are written from t in render, so ?t= freezes a frame. Every class is prefixed .dq-. */
+
+#s-tabs .sbsite .hub .dq-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 9px 11px 11px;
+  border-radius: 10px; background: var(--dt-card); transform-origin: 50% 0; box-shadow: inset 0 0 0 1px var(--dt-line); }
+#s-tabs .sbsite .hub .dq-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+  font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .dq-hd b { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .dq-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .dq-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .dq-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+/* the sources chip: three overlapping source dots, then the count (Perplexity's teal) */
+#s-tabs .sbsite .hub .dq-meta { flex: none; margin-left: auto; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px 0 6px;
+  border-radius: 9999px; background: rgba(31, 184, 205, .1); box-shadow: inset 0 0 0 1px rgba(31, 184, 205, .45); font: 600 11px/1 var(--ui); color: #7fd9e6; }
+#s-tabs .sbsite .hub .dq-src { display: inline-flex; }
+#s-tabs .sbsite .hub .dq-src s { display: block; width: 10px; height: 10px; margin-left: -3px; border-radius: 50%; box-shadow: 0 0 0 1.5px var(--dt-card); }
+#s-tabs .sbsite .hub .dq-src s:nth-child(1) { margin-left: 0; background: #1fb8cd; }
+#s-tabs .sbsite .hub .dq-src s:nth-child(2) { background: #e8e8ee; }
+#s-tabs .sbsite .hub .dq-src s:nth-child(3) { background: #f0b232; }
+
+/* the Perplexity reply spans the composer's column, as the Opus panel does (write.css) */
+#s-tabs .sbsite .hub .qc-r:has(.dq-card) { --hub-reply: 100%; }
+
+/* the table */
+#s-tabs .sbsite .hub .dq-res { padding: 2px 0 4px; border-radius: 8px; background: var(--dt-win); font: 500 11.5px/1.25 var(--ui); color: var(--dt-text); }
+#s-tabs .sbsite .hub .dq-rh, #s-tabs .sbsite .hub .dq-row { position: relative; display: grid; grid-template-columns: 84px 150px 90px 1fr 64px;
+  align-items: center; gap: 7px; padding: 0 10px; }
+#s-tabs .sbsite .hub .dq-rh { height: 26px; border-bottom: 1px solid var(--dt-line); margin-bottom: 2px; font-size: 11px; font-weight: 600; color: var(--dt-muted); white-space: nowrap; }
+#s-tabs .sbsite .hub .dq-row { --gh: 0; height: 27px; opacity: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .dq-row + .dq-row { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04); }
+#s-tabs .sbsite .hub .dq-row > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .dq-row .dq-c0 b { font-weight: 600; color: var(--dt-head); }
+#s-tabs .sbsite .hub .dq-row .dq-c0 small { display: none; }
+#s-tabs .sbsite .hub .dq-row .dq-c3 { font-size: 11px; color: #b9b9c2; }
+#s-tabs .sbsite .hub .dq-yes { color: #8fd6a8; font-weight: 600; }
+#s-tabs .sbsite .hub .dq-no { color: var(--dt-red); font-weight: 600; }
+/* a ghost row: dims and strikes through softly (--gh 0..1, the strike's scaleX, written from t) */
+#s-tabs .sbsite .hub .dq-row.dq-gh > span:not(.dq-c4) { opacity: calc(1 - var(--gh) * .45); }
+#s-tabs .sbsite .hub .dq-strike { position: absolute; left: 8px; right: 82px; top: 50%; height: 1.5px; border-radius: 1px;
+  background: rgba(242, 139, 130, .55); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
+/* the verdict pills */
+#s-tabs .sbsite .hub .dq-c4 { display: flex; }
+#s-tabs .sbsite .hub .dq-v { opacity: 0; display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 8px 0 6px; border-radius: 9999px;
+  font: 700 11px/1 var(--ui); font-style: normal; }
+#s-tabs .sbsite .hub .dq-v svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .dq-vr { background: rgba(79, 197, 127, .14); box-shadow: inset 0 0 0 1px rgba(79, 197, 127, .6); color: #6fdc9b; }
+#s-tabs .sbsite .hub .dq-vg { background: rgba(242, 139, 130, .14); box-shadow: inset 0 0 0 1px rgba(242, 139, 130, .6); color: #ff9a90; }
+
+/* narrow (4:5): Company over Role in one cell, the Signal wraps to two lines */
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-rh, #s-tabs .sbsite .hub .dq-card.dq-narrow .dq-row { grid-template-columns: 150px 68px 1fr 64px; gap: 7px; padding: 0 10px; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-c1 { display: none; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-rh { height: 36px; white-space: normal; line-height: 1.15; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-row { height: 36px; white-space: normal; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-row .dq-c0 b, #s-tabs .sbsite .hub .dq-card.dq-narrow .dq-row .dq-c0 small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-row .dq-c0 small { font-size: 10.5px; color: #a9a9b2; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-c3 { line-height: 1.2; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-strike { left: 8px; right: 78px; }
+#s-tabs .sbsite .hub .dq-card.dq-narrow .dq-hd { font-size: 12px; }
+
+/* the summary chips */
+#s-tabs .sbsite .hub .dq-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+#s-tabs .sbsite .hub .dq-chip { opacity: 0; display: inline-flex; align-items: center; height: 26px; padding: 0 11px;
+  border-radius: 9999px; font: 700 12px/1 var(--ui); white-space: nowrap; }
+#s-tabs .sbsite .hub .dq-chip.dq-real { background: rgba(79, 197, 127, .12); box-shadow: inset 0 0 0 1px rgba(79, 197, 127, .7); color: #6fdc9b; }
+#s-tabs .sbsite .hub .dq-chip.dq-ghost { background: rgba(242, 139, 130, .12); box-shadow: inset 0 0 0 1px rgba(242, 139, 130, .7); color: #ff9a90; }

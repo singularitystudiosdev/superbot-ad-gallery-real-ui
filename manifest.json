@@ -428,6 +428,15 @@
     "desc": "One ask in superbot: Gemini watches the latest video and ranks its 1,284 comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies in the creator's voice, then superbot posts them in YouTube Studio and pins the best one."
   },
   {
+    "id": "niche-linkedin-model-switch-superbot-05fd7f45",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Apply to real jobs that fit my resume, skip the fake listings: Gemini, Perplexity, Opus 5.5, then superbot applies on LinkedIn (4 switches)",
+    "src": "animations/niche-linkedin-model-switch-superbot-05fd7f45/",
+    "thumb": "assets/shots/niche-linkedin-model-switch-superbot-05fd7f45.png",
+    "desc": "One prompt in superbot: Gemini reads 412 LinkedIn job posts and finds 21 that fit the resume, Perplexity checks each one against the company careers page and the news and drops 9 ghost listings, Claude Opus 5.5 tailors the resume and writes a note to each hiring manager, then superbot connects to LinkedIn, applies to the 12 real roles with Easy Apply, and the hiring manager writes back to set up a call."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

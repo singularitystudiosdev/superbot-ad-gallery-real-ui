@@ -1,0 +1,44 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+gemini-logo.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                       Carried over unchanged from the Data remake (niche-data-model-switch-superbot-f2c8e563).
+
+perplexity-logo.svg    Perplexity mark, Simple Icons "perplexity" icon,
+                       https://cdn.jsdelivr.net/npm/simple-icons/icons/perplexity.svg (simple-icons 16.33.0,
+                       https://simpleicons.org), fetched 2026-10-03. Licence: CC0 1.0 (Simple Icons' licence for its SVG
+                       files). Path verbatim; only a fill="#1FB8CD" attribute was added on the <svg> root (Perplexity's brand
+                       hex in Simple Icons' data). Shown on Perplexity's off-black tile (#091717, chat.css .qc-t-perplexity).
+                       Perplexity and its logo are trademarks of Perplexity AI, Inc., used nominatively to name the model
+                       superbot routes the check to (pill tile, reply header, composer chip).
+
+claude-logo.svg        Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                       (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+                       Carried over unchanged from the Data remake.
+
+linkedin-logo.svg      LinkedIn mark, Simple Icons "linkedin" icon, pinned to the last major version that still ships it:
+                       https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/linkedin.svg (simple-icons 13.21.0; the icon
+                       was removed from simple-icons 14.0.0 on, which 404s), fetched 2026-10-03. Licence: CC0 1.0 (the
+                       package's licence field, "CC0-1.0"). Path verbatim (the blue rounded square with the "in" cut out);
+                       only a fill="#0A66C2" attribute was added on the <svg> root (LinkedIn blue, the hex in Simple Icons'
+                       data). It sits on white wherever it appears so the "in" reads white on the blue tile, as LinkedIn
+                       draws it; on the blue Easy Apply button it is painted white (CSS filter) so the "in" shows the
+                       button's blue. Never redrawn: every LinkedIn mark in the spot (pill tile, composer chip, connect
+                       card, the page's nav logo, the Easy Apply button and card footers) is this one file. LinkedIn and
+                       the "in" logo are trademarks of LinkedIn Corporation, used nominatively to name the platform
+                       superbot applies on and to mock its Jobs, Easy Apply and Messaging UI in the result screen
+                       (brand guidelines: https://brand.linkedin.com/policies).
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+CONTENT
+  Every person, company, job post, number and message in the spot is made up for it: the candidate Dana Ruiz (Senior
+  Product Manager, Chicago, previously at Fernway Pay), the hiring manager Priya Shah (Director of Product, Payments at
+  Ledgerline), the companies Ledgerline, Fernway Pay, Quorvi, Paywick, Kestrova Bank, Talloway, Trelmont Labs,
+  Fieldnote, Orbiq Pay, Zentrafin, Norvale Software, Halvik and Tessaro, every job title, fit score, salary, applicant
+  count and careers-page signal, the phone number +1 312 555 0148 (a 555 number), the file names
+  Dana_Ruiz_Resume.pdf and Dana_Ruiz_Resume_Ledgerline.pdf, and both messages. Any resemblance to a real person or
+  company is coincidental. Avatars are initials only (no faces); company logos are coloured tiles with initials.
+  The LinkedIn screens use LinkedIn's own system font stack (no font files are vendored).

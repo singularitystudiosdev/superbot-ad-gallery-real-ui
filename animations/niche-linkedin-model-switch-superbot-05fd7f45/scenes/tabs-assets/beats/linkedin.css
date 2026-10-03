@@ -1,0 +1,273 @@
+/* LinkedIn beat (beats/linkedin.js): the connect card in the chat (three steps ticking, the mini window under them) and
+   the full-frame layer carrying the one LinkedIn window: pinned over the card's window, then opened to the whole frame.
+   The window is LinkedIn's light web UI at its own px (scaled to the frame by linkedin.js): page #F4F2EE, white cards
+   with a 1px rgba(0,0,0,.08) border and 8px radius, primary blue #0A66C2 on fully rounded pill buttons, text
+   rgba(0,0,0,.9) / .6, success green #01754F, LinkedIn's own system font stack (--li-ui, chat.css). Wide (16:9) is the
+   desktop Jobs search page; tall (4:5) is the mobile-width reflow. Initials avatars and initials logo tiles only.
+   Nothing here transitions: opacity, transform, size and colour are written from t in linkedin.js, so ?t= freezes a
+   frame. Every class is prefixed .li-. */
+
+/* ---- the connect card, in the chat ---- */
+#s-tabs .sbsite .hub .li-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .li-card-c { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; padding: 8px 10px 10px;
+  border-radius: 10px; background: var(--dt-card); box-shadow: inset 0 0 0 1px var(--dt-line); }
+#s-tabs .sbsite .hub .li-card-c.li-tallc { width: 340px; }
+#s-tabs .sbsite .hub .li-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px;
+  font: 12.5px/1 var(--ui); color: #c9c9cf; white-space: nowrap; }
+#s-tabs .sbsite .hub .li-step b { font-weight: 600; color: #ececec; }
+#s-tabs .sbsite .hub .li-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .li-ct-i { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; overflow: hidden; background: #fff; }
+#s-tabs .sbsite .hub .li-ct-s { border-radius: 4px; }
+#s-tabs .sbsite .hub .li-ct-s .li-in { display: block; width: 20px; height: 20px; }
+#s-tabs .sbsite .hub .li-ct-d { background: #8c5a2b; font: 700 8.5px/1 var(--ui); color: #fff; }
+#s-tabs .sbsite .hub .li-ct-n { background: #26262b; font: 700 9.5px/1 var(--ui); color: #ececec; box-shadow: inset 0 0 0 1px #3a3a40; }
+#s-tabs .sbsite .hub .li-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .li-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .li-ok .li-ck { position: absolute; inset: 0; width: 14px; height: 14px; opacity: 0; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+/* the mini window's frame: the full-frame layer is pinned over it (its aspect is the frame's, set by linkedin.js) */
+#s-tabs .sbsite .hub .li-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: 8px; background: #f4f2ee; }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .li-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #f4f2ee; }
+#s-tabs .li-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: #f4f2ee; color: rgba(0, 0, 0, .9); font: 400 14px/20px var(--li-ui); -webkit-font-smoothing: antialiased; }
+#s-tabs .li-app * { box-sizing: border-box; }
+#s-tabs .li-i { flex: none; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .li-i .li-fl { fill: currentColor; stroke: none; }
+#s-tabs .li-in { flex: none; display: block; width: 34px; height: 34px; }
+#s-tabs .li-dot { display: inline-block; margin: 0 6px; font-style: normal; }
+#s-tabs .li-av { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; font: 600 13px/1 var(--li-ui); font-style: normal; color: #fff; letter-spacing: .02em; }
+#s-tabs .li-av-dr { background: #8c5a2b; }
+#s-tabs .li-av-ps { background: #5b4a8a; }
+#s-tabs .li-lg { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 8px; background: var(--c); font: 700 21px/1 var(--li-ui); color: #fff; }
+#s-tabs .li-lg-s { width: 32px; height: 32px; border-radius: 6px; font-size: 15px; }
+
+/* the top nav: the in mark, the search pill, the nav items (Jobs active), Me, For Business */
+#s-tabs .li-nav { position: relative; z-index: 2; flex: none; height: 52px; background: #fff; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-navin { display: flex; align-items: center; height: 100%; max-width: 1280px; margin: 0 auto; padding: 0 16px; }
+#s-tabs .li-search { display: flex; align-items: center; gap: 8px; width: 280px; height: 34px; margin-left: 8px; padding: 0 14px; border-radius: 17px; background: #edf3f8;
+  color: rgba(0, 0, 0, .6); font-size: 14px; }
+#s-tabs .li-search .li-i { width: 18px; height: 18px; stroke-width: 2; color: rgba(0, 0, 0, .75); }
+#s-tabs .li-items { display: flex; align-items: stretch; height: 100%; margin-left: auto; }
+#s-tabs .li-ni { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 80px; height: 100%; padding: 0 4px;
+  color: rgba(0, 0, 0, .6); font-size: 12px; line-height: 16px; white-space: nowrap; }
+#s-tabs .li-ni > span { display: inline-flex; align-items: center; }
+#s-tabs .li-ni .li-caret { width: 16px; height: 16px; }
+#s-tabs .li-ni.li-on { color: rgba(0, 0, 0, .9); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .9); }
+#s-tabs .li-meni .li-av { width: 24px; height: 24px; font-size: 10px; }
+#s-tabs .li-vsep { flex: none; align-self: stretch; width: 1px; margin: 0 8px; background: rgba(0, 0, 0, .08); }
+#s-tabs .li-badge { position: absolute; top: 3px; left: calc(50% + 4px); display: grid; place-items: center; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px;
+  background: #cb112d; box-shadow: 0 0 0 2px #fff; font: 700 11px/1 var(--li-ui); font-style: normal; color: #fff; opacity: 0; }
+
+/* the search bar row: keyword and location fields, then the filter pills (Easy Apply on, in LinkedIn's green) */
+#s-tabs .li-sbar { position: relative; z-index: 1; flex: none; height: 56px; background: #fff; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-sbin { display: flex; align-items: center; gap: 8px; height: 100%; max-width: 1280px; margin: 0 auto; padding: 0 16px; }
+#s-tabs .li-field { display: flex; align-items: center; gap: 8px; width: 270px; height: 36px; padding: 0 12px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .6); }
+#s-tabs .li-field .li-i { width: 18px; height: 18px; stroke-width: 2; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-field b { font-weight: 400; font-size: 14px; color: rgba(0, 0, 0, .9); white-space: nowrap; }
+#s-tabs .li-sbin .li-vsep { align-self: center; height: 32px; margin: 0 6px; }
+#s-tabs .li-pill { display: inline-flex; align-items: center; gap: 2px; height: 32px; padding: 0 12px 0 14px; border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .6);
+  font: 600 15px/1 var(--li-ui); color: rgba(0, 0, 0, .6); white-space: nowrap; }
+#s-tabs .li-pill .li-caret { width: 18px; height: 18px; }
+#s-tabs .li-pill.li-pon { padding: 0 14px; background: #01754f; box-shadow: none; color: #fff; }
+
+/* the main area: the results list beside the job */
+#s-tabs .li-main { position: relative; z-index: 1; flex: 1; min-height: 0; }
+#s-tabs .li-split { display: grid; grid-template-columns: 500px 1fr; height: 100%; max-width: 1280px; margin: 0 auto; background: #fff;
+  box-shadow: 1px 0 0 rgba(0, 0, 0, .08), -1px 0 0 rgba(0, 0, 0, .08); }
+#s-tabs .li-list { overflow: hidden; border-right: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-lh { display: flex; flex-direction: column; justify-content: center; height: 64px; padding: 0 16px; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-lh b { font-size: 18px; line-height: 24px; font-weight: 600; }
+#s-tabs .li-lh small { font-size: 13px; line-height: 18px; color: rgba(0, 0, 0, .6); }
+/* a results card */
+#s-tabs .li-jc { position: relative; display: flex; gap: 12px; padding: 12px 16px 11px; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-jc.li-sel { background: #edf3f8; box-shadow: inset 3px 0 0 #0a66c2; }
+#s-tabs .li-jb { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+#s-tabs .li-jt { font-size: 16px; line-height: 21px; font-weight: 600; color: #0a66c2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .li-jco { font-size: 14px; line-height: 19px; color: rgba(0, 0, 0, .9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .li-jco .li-dot { margin: 0 4px; }
+#s-tabs .li-jl { font-size: 14px; line-height: 19px; color: rgba(0, 0, 0, .6); white-space: nowrap; }
+#s-tabs .li-ver { display: flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 12px; line-height: 17px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-ver .li-shield { width: 15px; height: 15px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-ver .li-shield .li-wk { stroke: #fff; stroke-width: 2.2; fill: none; }
+/* the footer's three states share one cell, flipped over (rotateX) by linkedin.js */
+#s-tabs .li-jf { display: grid; margin-top: 4px; perspective: 300px; font-size: 12px; line-height: 18px; }
+#s-tabs .li-jf > span { grid-area: 1 / 1; display: flex; align-items: center; white-space: nowrap; transform-origin: 50% 50%; backface-visibility: hidden; }
+#s-tabs .li-f0 { color: rgba(0, 0, 0, .6); }
+#s-tabs .li-f0 .li-dot { margin: 0 5px; }
+#s-tabs .li-f0 .li-in { width: 15px; height: 15px; margin-right: 4px; background: #fff; border-radius: 2px; }
+#s-tabs .li-f1, #s-tabs .li-f2 { gap: 4px; font-weight: 600; color: #01754f; opacity: 0; }
+#s-tabs .li-f1 .li-ck, #s-tabs .li-f2 .li-ck { width: 16px; height: 16px; stroke-width: 2.6; }
+
+/* the job */
+#s-tabs .li-detail { position: relative; min-width: 0; overflow: hidden; padding: 22px 26px; }
+#s-tabs .li-dco { display: flex; align-items: center; gap: 10px; }
+#s-tabs .li-dco b { font-size: 14px; font-weight: 600; }
+#s-tabs .li-h1 { margin: 10px 0 6px; font-size: 26px; line-height: 32px; font-weight: 600; letter-spacing: -.005em; }
+#s-tabs .li-meta { font-size: 14px; line-height: 20px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-meta .li-dot { margin: 0 8px; }
+#s-tabs .li-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+#s-tabs .li-tags span { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 10px; border-radius: 4px; background: #edf3f8;
+  font-size: 14px; font-weight: 600; color: rgba(0, 0, 0, .75); white-space: nowrap; }
+#s-tabs .li-tags .li-i { width: 18px; height: 18px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-acts { position: relative; display: flex; align-items: center; gap: 8px; height: 40px; margin-top: 18px; }
+#s-tabs .li-ea { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 22px 0 18px; border-radius: 24px; background: #0a66c2;
+  font-size: 16px; font-weight: 600; color: #fff; transform-origin: 50% 50%; }
+#s-tabs .li-ea .li-in-w { width: 20px; height: 20px; filter: brightness(0) invert(1); }
+#s-tabs .li-save { display: inline-flex; align-items: center; height: 40px; padding: 0 22px; border-radius: 24px; box-shadow: inset 0 0 0 1px #0a66c2;
+  font-size: 16px; font-weight: 600; color: #0a66c2; }
+#s-tabs .li-applied { position: absolute; left: 0; top: 0; bottom: 0; display: grid; align-items: center; opacity: 0; perspective: 400px; }
+#s-tabs .li-applied > span { grid-area: 1 / 1; display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: #01754f; white-space: nowrap; backface-visibility: hidden; }
+#s-tabs .li-applied .li-ck { width: 22px; height: 22px; stroke-width: 2.6; }
+#s-tabs .li-applied u { text-decoration: none; color: #0a66c2; }
+#s-tabs .li-applied .li-dot { color: rgba(0, 0, 0, .6); }
+#s-tabs .li-a2 { opacity: 0; }
+#s-tabs .li-team { margin-top: 20px; padding: 16px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); }
+#s-tabs .li-team h3, #s-tabs .li-about h3 { margin: 0 0 12px; font-size: 18px; line-height: 24px; font-weight: 600; }
+#s-tabs .li-tm { display: flex; align-items: center; gap: 12px; }
+#s-tabs .li-tm .li-av { width: 48px; height: 48px; font-size: 17px; }
+#s-tabs .li-tmb { min-width: 0; }
+#s-tabs .li-tmb > div { display: flex; align-items: center; gap: 8px; }
+#s-tabs .li-tmb b { font-size: 16px; line-height: 21px; font-weight: 600; }
+#s-tabs .li-tmb small { display: block; font-size: 14px; line-height: 19px; color: rgba(0, 0, 0, .6); white-space: nowrap; }
+#s-tabs .li-poster { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: 4px; background: rgba(0, 0, 0, .06); font-size: 12px; font-weight: 600; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-mbtn { display: inline-flex; align-items: center; gap: 6px; height: 32px; margin-left: auto; padding: 0 16px 0 12px; border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .6);
+  font-size: 15px; font-weight: 600; color: rgba(0, 0, 0, .75); white-space: nowrap; }
+#s-tabs .li-mbtn .li-i { width: 16px; height: 16px; }
+#s-tabs .li-about { margin-top: 22px; }
+#s-tabs .li-about p { margin: 0 0 8px; font-size: 14px; line-height: 20px; }
+
+/* the toast: white card, the green check strip */
+#s-tabs .li-toast { position: absolute; z-index: 5; left: 24px; bottom: 24px; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 14px 0 0; border-radius: 8px;
+  background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 6px 18px rgba(0, 0, 0, .16); opacity: 0; overflow: hidden; }
+#s-tabs .li-tst { align-self: stretch; width: 8px; background: #01754f; }
+#s-tabs .li-toast > .li-ck { width: 22px; height: 22px; stroke-width: 2.6; color: #01754f; }
+#s-tabs .li-toast > span { font-size: 15px; font-weight: 600; white-space: nowrap; }
+#s-tabs .li-toast > .li-i:last-child { width: 18px; height: 18px; margin-left: 10px; color: rgba(0, 0, 0, .6); }
+
+/* the docked messaging window, bottom-right */
+#s-tabs .li-chat { position: absolute; z-index: 6; right: 24px; bottom: 0; display: flex; flex-direction: column; width: 384px; height: 456px; border-radius: 8px 8px 0 0;
+  background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 4px 20px rgba(0, 0, 0, .18); opacity: 0; overflow: hidden; }
+#s-tabs .li-chh { flex: none; display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 8px 0 12px; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-chh b { font-size: 14px; font-weight: 600; }
+#s-tabs .li-avw { position: relative; flex: none; }
+#s-tabs .li-pres { position: absolute; right: -1px; bottom: -1px; width: 11px; height: 11px; border-radius: 50%; background: #01754f; box-shadow: 0 0 0 2px #fff; }
+#s-tabs .li-chi { display: flex; gap: 6px; margin-left: auto; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-chi .li-i { width: 20px; height: 20px; }
+#s-tabs .li-chb { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: 12px 14px; overflow: hidden; }
+#s-tabs .li-cm { display: flex; gap: 10px; }
+#s-tabs .li-cmb { min-width: 0; }
+#s-tabs .li-cmh { display: flex; align-items: baseline; font-size: 14px; line-height: 20px; }
+#s-tabs .li-cmh b { font-weight: 600; }
+#s-tabs .li-cmh .li-dot { margin: 0 6px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-cmh small { font-size: 12px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-cm p { margin: 2px 0 0; font-size: 14px; line-height: 20px; }
+#s-tabs .li-reply { opacity: 0; }
+#s-tabs .li-day { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; color: rgba(0, 0, 0, .6); text-transform: uppercase; letter-spacing: .04em; opacity: 0; }
+#s-tabs .li-day::before, #s-tabs .li-day::after { content: ''; flex: 1; height: 1px; background: rgba(0, 0, 0, .08); }
+#s-tabs .li-qr { display: flex; flex-wrap: wrap; gap: 8px; padding-left: 42px; }
+#s-tabs .li-qr span { display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: 16px; box-shadow: inset 0 0 0 1px #0a66c2;
+  font-size: 14px; font-weight: 600; color: #0a66c2; white-space: nowrap; opacity: 0; }
+#s-tabs .li-chc { flex: none; display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 12px; border-top: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-chc span { flex: 1; display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 4px; background: #f4f2ee; font-size: 14px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-chc .li-i { width: 20px; height: 20px; color: rgba(0, 0, 0, .35); }
+
+/* the time skip: the page dims, a clock pill flips from 10:42 AM to Monday 9:14 AM */
+#s-tabs .li-dim { position: absolute; z-index: 8; inset: 0; background: #000; opacity: 0; }
+#s-tabs .li-clock { position: absolute; z-index: 9; left: 50%; top: 50%; display: grid; place-items: center; min-width: 300px; height: 64px; padding: 0 30px; border-radius: 32px;
+  background: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, .3); perspective: 400px; opacity: 0; }
+#s-tabs .li-clock span { grid-area: 1 / 1; font-size: 24px; font-weight: 600; white-space: pre; backface-visibility: hidden; }
+#s-tabs .li-cl1 { opacity: 0; }
+
+/* the Easy Apply modal over its dim backdrop */
+#s-tabs .li-mw { position: absolute; z-index: 10; inset: 0; display: none; }
+#s-tabs .li-bk { position: absolute; inset: 0; background: rgba(0, 0, 0, .6); opacity: 0; }
+#s-tabs .li-modal { position: absolute; left: 50%; top: 50%; display: flex; flex-direction: column; width: 640px; border-radius: 8px; background: #fff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .35); overflow: hidden; opacity: 0; }
+#s-tabs .li-mh { flex: none; display: flex; align-items: center; height: 60px; padding: 0 16px 0 24px; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-mh b { font-size: 20px; line-height: 28px; font-weight: 400; }
+#s-tabs .li-x { margin-left: auto; display: grid; place-items: center; width: 40px; height: 40px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-mbs { position: relative; height: 446px; }
+#s-tabs .li-mb { position: absolute; inset: 0; padding: 20px 24px; }
+#s-tabs .li-prog { display: flex; align-items: center; gap: 12px; }
+#s-tabs .li-prog i { flex: 1; height: 8px; border-radius: 4px; background: #e8e8e8; overflow: hidden; }
+#s-tabs .li-prog b { display: block; width: 100%; height: 100%; border-radius: 4px; background: #0a66c2; }
+#s-tabs .li-prog span { font-size: 14px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-mb h2 { margin: 16px 0 14px; font-size: 18px; line-height: 24px; font-weight: 600; }
+#s-tabs .li-sec + .li-sec { margin-top: 18px; }
+#s-tabs .li-sec h4 { margin: 0 0 10px; font-size: 16px; line-height: 20px; font-weight: 600; }
+#s-tabs .li-ci { display: flex; align-items: center; gap: 12px; }
+#s-tabs .li-ci b { display: block; font-size: 16px; line-height: 21px; font-weight: 600; }
+#s-tabs .li-ci small { display: block; font-size: 14px; line-height: 19px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-av-l { width: 56px; height: 56px; font-size: 19px; }
+#s-tabs .li-fld { margin-top: 12px; }
+#s-tabs .li-fld label { display: block; margin-bottom: 4px; font-size: 14px; line-height: 18px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-fld span { display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .6); font-size: 15px; }
+#s-tabs .li-res { display: flex; align-items: center; gap: 12px; padding: 10px 14px 10px 10px; border-radius: 8px; background: #f3f8fd; box-shadow: inset 0 0 0 2px #0a66c2; }
+#s-tabs .li-pdf { flex: none; display: grid; place-items: center; width: 44px; height: 52px; border-radius: 4px; background: #cc1016; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: .03em; }
+#s-tabs .li-res b { display: block; font-size: 15px; line-height: 20px; font-weight: 600; }
+#s-tabs .li-res small { display: block; font-size: 13px; line-height: 18px; color: #01754f; font-weight: 600; }
+#s-tabs .li-rck { margin-left: auto; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #0a66c2; color: #fff; }
+#s-tabs .li-rck .li-ck { width: 16px; height: 16px; stroke-width: 3; }
+#s-tabs .li-follow { display: flex; align-items: center; gap: 10px; margin-top: 18px; font-size: 15px; }
+#s-tabs .li-cbx { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 4px; background: #01754f; color: #fff; }
+#s-tabs .li-cbx .li-ck { width: 16px; height: 16px; stroke-width: 3; }
+#s-tabs .li-sent { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; opacity: 0; text-align: center; }
+#s-tabs .li-bigck { width: 76px; height: 76px; }
+#s-tabs .li-bigck circle { fill: #01754f; }
+#s-tabs .li-bigck path { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .li-sent b { font-size: 22px; line-height: 28px; font-weight: 600; }
+#s-tabs .li-mf { position: relative; flex: none; display: flex; align-items: center; justify-content: flex-end; gap: 8px; height: 68px; padding: 0 24px; border-top: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-back { display: inline-flex; align-items: center; height: 36px; padding: 0 18px; border-radius: 18px; box-shadow: inset 0 0 0 1px #0a66c2; font-size: 16px; font-weight: 600; color: #0a66c2; }
+#s-tabs .li-submit, #s-tabs .li-done { display: inline-flex; align-items: center; height: 36px; padding: 0 18px; border-radius: 18px; background: #0a66c2; font-size: 16px; font-weight: 600; color: #fff; transform-origin: 50% 50%; }
+#s-tabs .li-done { position: absolute; right: 24px; top: 16px; padding: 0 26px; opacity: 0; }
+
+/* ---- tall (4:5): LinkedIn at mobile width ---- */
+#s-tabs .li-tall .li-navin { padding: 0 12px; gap: 10px; }
+#s-tabs .li-tall .li-logo .li-in { width: 32px; height: 32px; }
+#s-tabs .li-tall .li-search { flex: 1; width: auto; margin-left: 0; }
+#s-tabs .li-tall .li-ni { min-width: 40px; padding: 0; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-tall .li-badge { left: calc(50% + 2px); top: 6px; }
+#s-tabs .li-tall .li-me { width: 32px; height: 32px; }
+#s-tabs .li-col { height: 100%; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
+#s-tabs .li-tall .li-detail { flex: none; padding: 14px 16px 16px; background: #fff; border-bottom: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-tall .li-h1 { margin: 8px 0 4px; font-size: 22px; line-height: 28px; }
+#s-tabs .li-tall .li-meta .li-dot { margin: 0 6px; }
+#s-tabs .li-tall .li-tags { margin-top: 10px; gap: 6px; }
+#s-tabs .li-tall .li-tags span { height: 28px; padding: 0 10px 0 8px; font-size: 13px; gap: 5px; }
+#s-tabs .li-tall .li-tags .li-i { width: 16px; height: 16px; }
+#s-tabs .li-tall .li-acts { margin-top: 14px; }
+#s-tabs .li-tall .li-ea, #s-tabs .li-tall .li-save { flex: 1; justify-content: center; }
+#s-tabs .li-tall .li-applied { right: 0; justify-items: center; }
+#s-tabs .li-tall .li-team { margin-top: 14px; padding: 12px 14px; }
+#s-tabs .li-tall .li-team h3 { margin-bottom: 10px; font-size: 16px; line-height: 20px; }
+#s-tabs .li-tall .li-tm .li-av { width: 44px; height: 44px; font-size: 16px; }
+#s-tabs .li-tall .li-tmb small { font-size: 13px; }
+#s-tabs .li-tall .li-mbtn { height: 30px; padding: 0 12px 0 10px; font-size: 14px; }
+#s-tabs .li-more { flex: 1; min-height: 0; background: #fff; border-top: 1px solid rgba(0, 0, 0, .08); }
+#s-tabs .li-mt { display: flex; align-items: baseline; justify-content: space-between; padding: 12px 16px 4px; }
+#s-tabs .li-mt b { font-size: 16px; font-weight: 600; }
+#s-tabs .li-mt small { font-size: 13px; color: rgba(0, 0, 0, .6); }
+#s-tabs .li-tall .li-jc { padding: 10px 16px; gap: 12px; }
+#s-tabs .li-tall .li-lg { width: 42px; height: 42px; font-size: 18px; }
+#s-tabs .li-tall .li-jt { font-size: 15px; line-height: 20px; }
+#s-tabs .li-tall .li-jco { font-size: 13px; line-height: 18px; color: rgba(0, 0, 0, .7); }
+#s-tabs .li-tall .li-ver { display: none; }
+#s-tabs .li-tall .li-jf { margin-top: 2px; }
+#s-tabs .li-tall .li-toast { left: 12px; right: 12px; top: 62px; bottom: auto; height: 52px; }
+#s-tabs .li-tall .li-toast > span { font-size: 14px; white-space: normal; line-height: 18px; }
+#s-tabs .li-tall .li-chat { left: 0; right: 0; width: auto; height: 62%; border-radius: 12px 12px 0 0; }
+#s-tabs .li-tall .li-clock { min-width: 0; height: 56px; padding: 0 24px; }
+#s-tabs .li-tall .li-clock span { font-size: 21px; }
+#s-tabs .li-tall .li-modal { left: 0; right: 0; top: auto; bottom: 0; width: auto; border-radius: 16px 16px 0 0; opacity: 1; }
+#s-tabs .li-tall .li-mh { height: 54px; padding-left: 18px; }
+#s-tabs .li-tall .li-mh b { font-size: 18px; }
+#s-tabs .li-tall .li-mbs { height: 432px; }
+#s-tabs .li-tall .li-mb { padding: 16px 18px; }
+#s-tabs .li-tall .li-mb h2 { margin: 12px 0 10px; }
+#s-tabs .li-tall .li-sec + .li-sec { margin-top: 14px; }
+#s-tabs .li-tall .li-res b { font-size: 13.5px; }
+#s-tabs .li-tall .li-follow { margin-top: 14px; }
+#s-tabs .li-tall .li-sent b { font-size: 20px; padding: 0 20px; }
+#s-tabs .li-tall .li-mf { height: 64px; padding: 0 18px; }
+#s-tabs .li-tall .li-done { right: 18px; top: 14px; }

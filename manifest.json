@@ -770,6 +770,15 @@
     "desc": "One ask in superbot: Gemini reads all 14 sheets and 48,210 formulas and traces 37 broken formulas to 4 causes, Claude Opus 5.5 rewrites each one with exact-match lookups and table references, GPT-6 Astra checks every region against the ledger, then superbot connects to Excel, writes the fixes back and the workbook ties out."
   },
   {
+    "id": "niche-motion-model-switch-superbot-74195fef",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Reformat my launch promo for 9:16, 1:1 and 4:5 and render all three: Gemini, Opus 5.5, GPT-6 Astra, then superbot renders it in After Effects (4 switches)",
+    "src": "animations/niche-motion-model-switch-superbot-74195fef/",
+    "thumb": "assets/shots/niche-motion-model-switch-superbot-74195fef.png",
+    "desc": "One prompt in superbot: Gemini watches the launch promo and maps 8 shots, Claude Opus 5.5 writes the After Effects script that reframes it, GPT-6 Astra checks all 3 layouts against title safe, then superbot opens the project in After Effects, builds the 9:16, 1:1 and 4:5 comps and renders all three."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

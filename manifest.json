@@ -482,6 +482,15 @@
     "desc": "One ask in superbot: Gemini reads the repo, the issue thread and CI to find the root cause, Claude Opus 5.5 writes the fix and a Remember me test, GPT-6 Astra runs all 214 tests and reviews the diff, then superbot connects to GitHub, opens PR #483 and merges it once all four checks pass."
   },
   {
+    "id": "niche-shopify-model-switch-superbot-a3b73360",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Rewrite all my product descriptions and flag the ones missing photos: Gemini, Opus 5.5, GPT-6 Astra, then superbot updates your Shopify store (4 switches)",
+    "src": "animations/niche-shopify-model-switch-superbot-a3b73360/",
+    "thumb": "assets/shots/niche-shopify-model-switch-superbot-a3b73360.png",
+    "desc": "One prompt in superbot: Gemini reads all 48 products and every photo, Claude Opus 5.5 rewrites each description in the store's voice, GPT-6 Astra checks every rewrite against the product specs, then superbot connects to Shopify: all 48 descriptions updated and the 5 products missing photos flagged in a Missing photos view."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

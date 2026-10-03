@@ -1,0 +1,22 @@
+img/ CREDITS (internal): every photograph in this spot, where it came from, and its licence. None of them owes
+on-screen attribution (Pexels licence or CC0), and none is credited on screen. Each file is a square crop of the
+source, downscaled to 160 x 160 px (Pillow, LANCZOS), JPEG q88. Nothing is drawn or generated.
+
+mug.jpg       Speckled Stoneware Mug thumbnail. Crop of the mug in "Still Life with Minimalist Tableware" by
+              Галина Ласаева (Galina Lasaeva), Pexels photo 11065504,
+              https://www.pexels.com/photo/still-life-with-minimalist-tableware-11065504/ (file
+              https://images.pexels.com/photos/11065504/pexels-photo-11065504.jpeg), fetched 2026-10-03. Pexels License
+              (free to use, attribution not required).
+plate.jpg     Stoneware Dinner Plate thumbnail. Crop of the plate in the same Pexels photo 11065504 (Galina Lasaeva),
+              Pexels License.
+candle.jpg    Fig and Cedar Soy Candle thumbnail. Crop of the lit amber jar in "DIY Candles (Unsplash).jpg", Wikimedia
+              Commons, https://commons.wikimedia.org/wiki/File:DIY_Candles_(Unsplash).jpg, by Fabio Issao (Unsplash
+              fabioissao). Licence: CC0 1.0 (as tagged on Commons).
+pourover.jpg  Ceramic Pour-Over Set thumbnail. Crop of "Manual drip (pour-over) coffee.jpg", Wikimedia Commons,
+              https://commons.wikimedia.org/wiki/File:Manual_drip_(pour-over)_coffee.jpg, by Kim Sanso. Licence: CC0 1.0.
+vase.jpg      Sand Glaze Bud Vase thumbnail. Crop of "Large ceramic bottles (Unsplash).jpg", Wikimedia Commons,
+              https://commons.wikimedia.org/wiki/File:Large_ceramic_bottles_(Unsplash).jpg, by Jessica Ruscello
+              (Unsplash jruscello). Licence: CC0 1.0.
+
+Rows without photos (Linen Table Runner, Olive Wood Serving Board, Waffle Weave Tea Towel) show Polaris's image
+placeholder icon (ImageIcon) on a subdued tile, as the Shopify admin does; no photo stands in for them.

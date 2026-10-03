@@ -1,0 +1,43 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the Shopify surfaces superbot connects to) and unaltered except for fill colour as
+noted. Provenance is never shown on screen.
+
+gemini-logo.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                       (Carried over from the base ad's brand/.)
+claude-logo.svg        Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                       (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+openai-logo.svg        OpenAI mark (round badge), copied from animations/niche-youtube-model-switch-superbot-3828921d/brand/
+                       (which carried it from animations/bikeride-model-switch-superbot-e13744a9/brand/, which copied it
+                       from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of OpenAI, used
+                       nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                       https://en.wikipedia.org/wiki/GPT-6).
+shopify-logo.svg       Shopify bag mark, Simple Icons "shopify" icon,
+                       https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/shopify.svg (simple-icons 16.33.0,
+                       https://simpleicons.org; its data lists hex 7AB55C and source/guidelines
+                       https://www.shopify.com/brand-assets), fetched 2026-10-03. Licence: CC0 1.0 (Simple Icons' licence for
+                       its SVG files). Path verbatim; only a fill="#7AB55C" attribute was added on the <svg> root. Icon only:
+                       no Shopify wordmark is typeset anywhere. Shopify and the bag logo are trademarks of Shopify Inc., used
+                       nominatively to name the platform superbot connects to and to mock its admin (pill tile, reply header,
+                       composer chip, Gemini's store row, the install card, the admin top bar).
+
+UI ICONS
+  scenes/tabs-assets/beats/polaris-icons.js: Polaris icons, @shopify/polaris-icons 9.3.1 (MIT,
+  https://github.com/Shopify/polaris-icons), the SVG files from https://unpkg.com/@shopify/polaris-icons@9.3.1/dist/svg/,
+  fetched 2026-10-03, path data verbatim: Apps, ChartVertical, Check, CheckCircle, ChevronDown/Right/Up, Collection,
+  Content, Discount, Filter, GiftCard, Home, Image (the empty-image placeholder), Inventory, Lock, MenuHorizontal,
+  Notification, Order, Person, Plus, PlusCircle, Product, Search, Settings, Sidekick, Sort, Store, StoreOnline, Target,
+  Transfer, X. The hub's own glyphs (the check, the spinner, the panel's doc icon) are the base's.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+DATA
+  Everything in the spot's data is made up for it: the store "Lumen & Clay" (lumen-and-clay.myshopify.com; a web
+  search for the exact name on 2026-10-03 surfaced no store or brand of that name), its 48 products, 131 photos, the 5
+  products with no photos and the 41 thin descriptions, every product title, status, inventory count, category and
+  every old and new description. Any resemblance to a real shop is coincidental. Product thumbnails are real
+  photographs (img/CREDITS.txt). The two SEO limits Astra checks (titles under 70 characters, meta descriptions
+  under 160) are Shopify's own, help.shopify.com/en/manual/promoting-marketing/seo/adding-keywords (fetched
+  2026-10-03): "You can enter up to 70 characters in the title", "It's recommended that 160 characters is used in the
+  description".

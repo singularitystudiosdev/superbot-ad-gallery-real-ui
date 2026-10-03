@@ -1,0 +1,130 @@
+/* The hub's four-hand-off chat (chat.js + beats/{catalog,write,check,shopify}.js). Every moving value is written from lt,
+   so nothing here transitions. The shared tool-chip styles live in ports.css; each beat's own card styles live in
+   scenes/tabs-assets/beats/<name>.css. */
+/* Two palettes, set on the scene root so both the hub's beats and the full-frame admin layer (outside the hub) read
+   them. --dt-*: the base fork's own dark card tokens (niche-data), unchanged, for the three model cards in the hub.
+   --pl-*: Shopify's own Polaris tokens, light theme, every value verbatim from @shopify/polaris-tokens 9.4.2,
+   https://unpkg.com/@shopify/polaris-tokens@9.4.2/dist/css/styles.css (fetched 2026-10-03), for every Shopify surface
+   (the install card, the checklist card and the admin): color-bg rgba(241,241,241) #f1f1f1, color-bg-surface #ffffff,
+   color-bg-surface-secondary #f7f7f7, color-bg-surface-tertiary #f3f3f3, color-bg-surface-hover #f7f7f7,
+   color-bg-surface-selected #f1f1f1, color-bg-inverse #1a1a1a (the top bar), color-bg-surface-inverse #303030 (the
+   toast), color-bg-fill-brand #303030 and -active #1a1a1a (the primary button), color-bg-fill-secondary #f1f1f1,
+   color-bg-fill-tertiary #e3e3e3, color-bg-fill-transparent-secondary rgba(0,0,0,.06), color-nav-bg #ebebeb,
+   color-nav-bg-surface-selected #fafafa, color-text #303030, color-text-secondary #616161, color-text-disabled
+   #b5b5b5, color-text-inverse #e3e3e3, color-text-inverse-secondary #b5b5b5, color-text-brand-on-bg-fill #ffffff,
+   color-text-link #005bd3, color-border #e3e3e3, color-border-secondary #ebebeb, color-border-tertiary #cccccc,
+   color-input-border #8a8a8a, color-input-bg-surface #fdfdfd, color-icon #4a4a4a, color-icon-secondary #8a8a8a,
+   color-avatar-four-bg-fill #51c0ff with color-avatar-four-text-on-bg-fill #002133 (the LC store avatar),
+   color-bg-fill-success-secondary #affebf with color-text-success #014b40 (the Rewritten badge), color-bg-fill-info-
+   secondary #d5ebff with color-text-info #003a5a (Draft), color-icon-success #047b5d (checks), and ONE accent family,
+   critical: color-bg-fill-critical-secondary #fed1d7 with color-text-critical #8e0b21 (the Missing photos badges and
+   the new tab's count), color-bg-surface-critical #fee8eb (the flagged rows' tint). shadow-100 0 1px 0 rgba(26,26,26,
+   .07) and shadow-bevel-100 (cards), shadow-button and shadow-button-primary (buttons), shadow-600 (the toast).
+   Radii: border-radius-300 12px (cards), -200 8px (buttons, inputs, thumbnails), -full (badges, avatars).
+   Type: Polaris font-family-sans ('Inter', -apple-system, ...); Inter is vendored under fonts/ (shopify.css
+   @font-face, the variable wght axis so Polaris's 450 / 550 / 650 weights render true). */
+#s-tabs {
+  --dt-card: #141416; --dt-win: #1b1b1f; --dt-line: #2a2a2e; --dt-text: #d6d6dd; --dt-head: #f2f2f5; --dt-muted: #8e8e96;
+  --dt-dim: #6f6f78; --dt-gold: #f0b232; --dt-gold-bg: rgba(240, 178, 50, .12); --dt-red: #f28b82; --dt-red-bg: rgba(242, 139, 130, .1);
+  --dt-green: #4fc57f; --dt-blue: #8ab4f8;
+  --pl-bg: #f1f1f1; --pl-surface: #ffffff; --pl-surface-2: #f7f7f7; --pl-surface-3: #f3f3f3; --pl-surface-hover: #f7f7f7;
+  --pl-surface-selected: #f1f1f1; --pl-inverse: #1a1a1a; --pl-surface-inverse: #303030;
+  --pl-fill-brand: #303030; --pl-fill-brand-active: #1a1a1a; --pl-fill-2: #f1f1f1; --pl-fill-3: #e3e3e3;
+  --pl-fill-transparent-2: rgba(0, 0, 0, .06); --pl-nav-bg: #ebebeb; --pl-nav-selected: #fafafa;
+  --pl-text: #303030; --pl-text-2: #616161; --pl-text-disabled: #b5b5b5; --pl-text-inverse: #e3e3e3; --pl-text-inverse-2: #b5b5b5;
+  --pl-text-on-brand: #ffffff; --pl-link: #005bd3;
+  --pl-border: #e3e3e3; --pl-border-2: #ebebeb; --pl-border-3: #cccccc; --pl-input-border: #8a8a8a; --pl-input-bg: #fdfdfd;
+  --pl-icon: #4a4a4a; --pl-icon-2: #8a8a8a; --pl-icon-success: #047b5d;
+  --pl-success-bg: #affebf; --pl-success-text: #014b40; --pl-info-bg: #d5ebff; --pl-info-text: #003a5a;
+  --pl-critical-bg: #fed1d7; --pl-critical-text: #8e0b21; --pl-critical-surface: #fee8eb;
+  --pl-shadow-100: 0 1px 0 0 rgba(26, 26, 26, .07);
+  --pl-shadow-bevel: 1px 0 0 0 rgba(0, 0, 0, .13) inset, -1px 0 0 0 rgba(0, 0, 0, .13) inset, 0 -1px 0 0 rgba(0, 0, 0, .17) inset, 0 1px 0 0 rgba(204, 204, 204, .5) inset;
+  --pl-shadow-button: 0 -1px 0 0 #b5b5b5 inset, 0 0 0 1px rgba(0, 0, 0, .1) inset, 0 .5px 0 1.5px #ffffff inset;
+  --pl-shadow-button-primary: 0 -1px 0 1px rgba(0, 0, 0, .8) inset, 0 0 0 1px rgba(48, 48, 48, 1) inset, 0 .5px 0 1.5px rgba(255, 255, 255, .25) inset;
+  --pl-shadow-button-primary-inset: 0 3px 0 0 rgb(0, 0, 0) inset;
+  --pl-shadow-600: 0 20px 20px -8px rgba(26, 26, 26, .28);
+  --pl-sans: 'Inter PL', 'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
+#s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
+#s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
+#s-tabs .sbsite .hub .qc-r .m-main { max-width: min(100%, var(--hub-column)); width: 100%; }
+/* one column with the composer: ask.css centres the composer on --hub-column (640px), so the feed column and
+   the reply indent follow the same box. The ask's pill and every reply line then share the composer's edges
+   instead of the whole thread sitting half the difference (760 - 640) to the composer's left. */
+#s-tabs .sbsite.ask .hub { --hub-reply-inset: 0px; }
+#s-tabs .sbsite.ask .hub .main > .feed { padding-left: max(24px, calc((100% - var(--hub-column)) / 2)); padding-right: max(24px, calc((100% - var(--hub-column)) / 2)); }
+#s-tabs .sbsite .hub .qc-r .m-main > * { max-width: 100%; }
+
+/* composer: the ask is typed in, the send button lights while there is text */
+#s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
+#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+#s-tabs .sbsite .hub .rc-send.qc-on { background: #ececec; color: #0b0b0c !important; }
+#s-tabs .sbsite .hub .qc-pi { display: inline-grid; place-items: center; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi img { width: 12px; height: 12px; object-fit: contain; }
+/* the composer chip's mark, sized per app so the swap between models never shifts the row */
+#s-tabs .sbsite .hub .qc-pi img[data-app="gemini"],
+#s-tabs .sbsite .hub .qc-pi img[data-app="astra"],
+#s-tabs .sbsite .hub .qc-pi img[data-app="opus"],
+#s-tabs .sbsite .hub .qc-pi img[data-app="shopify"] { width: 12px; height: 12px; }
+
+
+/* app tiles */
+#s-tabs .sbsite .hub .qc-tile { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-tile img { width: 15px; height: 15px; object-fit: contain; display: block; }
+#s-tabs .sbsite .hub .qc-t-gemini { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+/* Shopify: its bag mark (brand/shopify-logo.svg, Simple Icons, filled #7AB55C) on a dark tile */
+#s-tabs .sbsite .hub .qc-t-shopify { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+/* GPT-6 Astra: OpenAI's round badge (brand/openai-logo.svg, black disc, white knot) fills its tile */
+#s-tabs .sbsite .hub .qc-t-astra { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-astra img { width: 100%; height: 100%; }
+/* Claude: its orange tile, mark painted white (brand/claude-logo.svg is fetched white already; the filter pins it) */
+#s-tabs .sbsite .hub .qc-t-opus { background: #d97757; }
+#s-tabs .sbsite .hub .qc-t-opus img { filter: brightness(0) invert(1); }
+/* superbot's tile: its mark, static. The silhouette is the mask geometry of assets/sb-mark-live.html (eyes cut out)
+   used as a CSS mask, three layers deep like the live mark (storm-0 up-left, storm-3 down-right, fg on top), so
+   it needs no SVG mask ids and draws the same in every browser */
+#s-tabs .sbsite .hub { --sb-cat: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%2212%2018%2076%2070%22%3E%3Cmask%20id%3D%22m%22%3E%3Cg%20fill%3D%22white%22%3E%3Crect%20x%3D%2214%22%20y%3D%2232%22%20width%3D%2272%22%20height%3D%2254%22%20rx%3D%2215%22%2F%3E%3Cpath%20d%3D%22M14%2046V28Q14%2020%2021%2021Q28%2024%2036%2032Z%22%2F%3E%3Cpath%20d%3D%22M86%2046V28Q86%2020%2079%2021Q72%2024%2064%2032Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22black%22%3E%3Cellipse%20cx%3D%2235%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3Cellipse%20cx%3D%2265%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3C%2Fg%3E%3C%2Fmask%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20mask%3D%22url(%23m)%22%2F%3E%3C%2Fsvg%3E"); }
+#s-tabs .sbsite .hub .qc-t-superbot { position: relative; background: #0b0b0c; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .sbm { position: absolute; inset: 16%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#s-tabs .sbsite .hub .sbm-c { background: #00e5c3; transform: translate(-0.6px, -0.6px); }
+#s-tabs .sbsite .hub .sbm-m { background: #c026d3; transform: translate(0.6px, 0.6px); }
+#s-tabs .sbsite .hub .sbm-w { background: #ececec; }
+#s-tabs .sbsite .hub .qc-pi-sb { position: relative; display: none; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi-sb .sbm { inset: 0; }
+
+/* superbot's switch pill: "Switching to X", its spinner resolving to the green check (the camera pushes in on it) */
+#s-tabs .sbsite .hub .qc-sw { display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 12px 0 6px; border-radius: 9999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 13px/1 var(--ui); }
+/* the label is solid and never changes once the pill lands, so it reads the whole time the camera holds on it */
+#s-tabs .sbsite .hub .qc-swl { color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .qc-st { position: relative; width: 14px; height: 14px; margin-left: 2px; }
+#s-tabs .sbsite .hub .qc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .qc-ok { width: 14px; height: 14px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .qc-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the routed app's answer */
+#s-tabs .sbsite .hub .qc-who { display: flex; align-items: center; gap: 7px; margin: 2px 0 7px; font: 600 12.5px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .qc-who .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .qc-who .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-who .qc-t-superbot img { width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .qc-who small { font-weight: 500; font-size: 10.5px; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-say { min-height: 18px; margin-bottom: 9px; font: 12.5px/18px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .qc-say .qc-hid { color: transparent; }
+#s-tabs .sbsite .hub .qc-fin2 { margin: 12px 0 8px; }
+
+/* tool chips inside the hub (the shell's spinner, with the hub's colours) */
+#s-tabs .sbsite .hub .ch-tool { margin: 0 0 7px; }
+#s-tabs .sbsite .hub .spin { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; flex: none; box-sizing: border-box; }
+#s-tabs .sbsite .hub .spin.done { border: 0; background: #34d399; position: relative; }
+#s-tabs .sbsite .hub .spin.done::after { content: ""; position: absolute; left: 4px; top: 2.5px; width: 3px; height: 5.5px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
+
+
+
+
+
+#s-tabs .sbsite .hub .dd-chiprow { opacity: 0; }
+
+
+/* the hub's own welcome line and date divider are not part of this spot: the chat starts on an empty thread */
+#s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
+

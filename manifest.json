@@ -500,6 +500,15 @@
     "desc": "One prompt in superbot: Gemini reads 3,412 App Store reviews and ranks what people ask for, Claude Opus 5.5 writes the app in Expo and passes 14 of 14 tests in the iOS Simulator, Expo builds it for iOS, then superbot connects to App Store Connect: build 1.0 (1) is in TestFlight, 4 testers are invited, and the app opens on an iPhone."
   },
   {
+    "id": "niche-support-model-switch-superbot-6e224be4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Clear the weekend ticket backlog in Zendesk: Gemini, Opus 5.5, GPT-6 Astra, then superbot answers and solves 209 tickets in Zendesk (4 switches)",
+    "src": "animations/niche-support-model-switch-superbot-6e224be4/",
+    "thumb": "assets/shots/niche-support-model-switch-superbot-6e224be4.png",
+    "desc": "One ask in superbot: Gemini reads 212 unassigned tickets and the help center and sorts them into 4 groups, Claude Opus 5.5 drafts 209 replies from the help center articles, GPT-6 Astra checks every draft against the ticket and the policy and holds 3 double charges for a human, then superbot connects to Zendesk, sends the replies and clears the unassigned queue to 0."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

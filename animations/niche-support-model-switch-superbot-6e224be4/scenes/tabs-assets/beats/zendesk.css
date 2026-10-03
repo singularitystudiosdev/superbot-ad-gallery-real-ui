@@ -1,0 +1,166 @@
+/* Zendesk beat (beats/zendesk.js): Zendesk's OAuth authorization card and the checklist card in the chat, and the
+   full-frame layer carrying the one Zendesk client (Agent Workspace, the Unassigned tickets view, light). Every Zendesk
+   colour is a Zendesk Garden token (chat.css --zd-*, values and source there); type is Garden's own stacks (--zd-sans,
+   --zd-mono). Layout follows Zendesk's own help-center screenshots (views_list_for_agents.png, view_3_1_filter.png,
+   views_ticket_hover_new.png; see brand/CREDITS.txt). Nothing here transitions: position, size, radius, height, opacity
+   and transform are written from t in zendesk.js, so ?t= freezes a frame. Classes: .za- authorization card, .gk-
+   checklist card (superbot's own, the hub's greys), .zd- the Zendesk client. Radii on every Zendesk surface: Garden md
+   4px (cards, table, buttons, badges, the notification) and fully round (avatars), nothing else. */
+
+#s-tabs .zd-i { flex: none; display: block; width: 16px; height: 16px; }
+
+/* ---- the authorization card (trailkit.zendesk.com/oauth/authorizations/new, light) ---- */
+#s-tabs .sbsite .hub .za-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .za-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; border-radius: var(--zd-r); overflow: hidden;
+  background: var(--zd-white); box-shadow: inset 0 0 0 1px var(--zd-grey-300); color: var(--zd-grey-900); font-family: var(--zd-sans); }
+#s-tabs .sbsite .hub .za-card.za-tall { width: 350px; }
+#s-tabs .sbsite .hub .za-url { height: 24px; padding: 0 12px; background: var(--zd-grey-100); box-shadow: inset 0 -1px 0 var(--zd-grey-200);
+  font: 10.5px/24px var(--zd-mono); color: var(--zd-grey-700); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .za-in { padding: 14px 14px 12px; }
+#s-tabs .sbsite .hub .za-logos { display: flex; align-items: center; justify-content: center; }
+#s-tabs .sbsite .hub .za-logos .qc-tile.za-sb { width: 34px; height: 34px; border-radius: var(--zd-r); }
+#s-tabs .sbsite .hub .za-dots { display: block; width: 44px; margin: 0 8px; border-top: 2px dotted var(--zd-grey-400); }
+#s-tabs .sbsite .hub .za-zd { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--zd-r); background: var(--zd-kale-900); color: var(--zd-white); }
+#s-tabs .sbsite .hub .za-zd .zd-i { width: 18px; height: 18px; }
+#s-tabs .sbsite .hub .za-title { margin: 10px 0 4px; text-align: center; font: 400 12.5px/1.4 var(--zd-sans); color: var(--zd-grey-700); }
+#s-tabs .sbsite .hub .za-title b { font: 600 18px/1.3 var(--zd-sans); color: var(--zd-grey-900); margin-right: 3px; }
+#s-tabs .sbsite .hub .za-ask { margin-bottom: 11px; text-align: center; font: 13px/1.45 var(--zd-sans); color: var(--zd-grey-900); }
+#s-tabs .sbsite .hub .za-ask b { font-weight: 600; }
+#s-tabs .sbsite .hub .za-box { border-radius: var(--zd-r); box-shadow: inset 0 0 0 1px var(--zd-grey-300); overflow: hidden; }
+#s-tabs .sbsite .hub .za-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; }
+#s-tabs .sbsite .hub .za-row + .za-row { box-shadow: inset 0 1px 0 var(--zd-grey-300); }
+#s-tabs .sbsite .hub .za-ri { color: var(--zd-grey-700); }
+#s-tabs .sbsite .hub .za-row span { display: grid; gap: 1px; }
+#s-tabs .sbsite .hub .za-row b { font: 600 12.5px/1.35 var(--zd-sans); color: var(--zd-grey-900); }
+#s-tabs .sbsite .hub .za-row small { font: 11.5px/1.35 var(--zd-sans); color: var(--zd-grey-700); }
+#s-tabs .sbsite .hub .za-btns { display: flex; gap: 8px; margin-top: 12px; }
+#s-tabs .sbsite .hub .za-b { flex: 1; display: inline-flex; align-items: center; justify-content: center; height: 32px; border-radius: var(--zd-r);
+  font: 600 13px/1 var(--zd-sans); white-space: nowrap; }
+#s-tabs .sbsite .hub .za-deny { background: var(--zd-white); box-shadow: inset 0 0 0 1px var(--zd-blue-700); color: var(--zd-blue-700); }
+#s-tabs .sbsite .hub .za-go { background: var(--zd-blue-700); color: var(--zd-white); }
+#s-tabs .sbsite .hub .za-go.za-hit { background: var(--zd-blue-800); }
+
+/* ---- the checklist card (superbot's own, the hub's greys and green check), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: 10px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font-family: var(--ui); }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 320px; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 27px; padding: 0 2px; font: 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 600; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 9999px; background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038; color: #a8abb2; }
+#s-tabs .sbsite .hub .gk-ic .zd-i { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .gk-ic.gk-zd { background: var(--zd-kale-900); box-shadow: none; color: var(--zd-white); }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: var(--zd-r); background: var(--zd-white); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .zd-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--zd-white); }
+#s-tabs .zd-app { position: absolute; left: 0; top: 0; display: flex; transform-origin: 0 0; overflow: hidden;
+  background: var(--zd-white); color: var(--zd-grey-900); font: 400 14px/20px var(--zd-sans); -webkit-font-smoothing: antialiased; }
+#s-tabs .zd-app b { font-weight: 600; }
+
+/* the product nav: Garden kale, the Zendesk mark on top, Views selected */
+#s-tabs .zd-nav { flex: none; display: flex; flex-direction: column; align-items: center; width: 60px; padding-top: 12px; background: var(--zd-kale-900); }
+#s-tabs .zd-logo { display: grid; place-items: center; width: 60px; height: 44px; margin-bottom: 10px; color: var(--zd-white); }
+#s-tabs .zd-logo .zd-i { width: 28px; height: 28px; }
+#s-tabs .zd-nb { display: grid; place-items: center; width: 60px; height: 52px; color: var(--zd-grey-400); }
+#s-tabs .zd-nb .zd-i { width: 20px; height: 20px; }
+#s-tabs .zd-nb.zd-on { background: var(--zd-grey-600); color: var(--zd-white); }
+
+#s-tabs .zd-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+/* the top bar: + Add on the left, search, the product tray, notifications and the agent's letter avatar on the right */
+#s-tabs .zd-top { flex: none; display: flex; align-items: center; height: 52px; padding: 0 20px 0 12px; box-shadow: inset 0 -1px 0 var(--zd-grey-300); }
+#s-tabs .zd-add { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: var(--zd-r); font: 600 14px/1 var(--zd-sans); color: var(--zd-grey-700); }
+#s-tabs .zd-add .zd-i { width: 14px; height: 14px; }
+#s-tabs .zd-tools { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+#s-tabs .zd-ib { display: grid; place-items: center; width: 36px; height: 36px; color: var(--zd-grey-700); }
+#s-tabs .zd-av { display: grid; place-items: center; width: 32px; height: 32px; margin-left: 8px; border-radius: 9999px; font: 600 12px/1 var(--zd-sans); font-style: normal; color: var(--zd-white); }
+
+#s-tabs .zd-cols { flex: 1; min-height: 0; display: flex; }
+/* the Views list */
+#s-tabs .zd-views { flex: none; width: 262px; box-sizing: border-box; padding: 20px 16px 0 20px; box-shadow: inset -1px 0 0 var(--zd-grey-300); }
+#s-tabs .zd-vh { display: flex; align-items: center; padding-bottom: 12px; box-shadow: inset 0 -1px 0 var(--zd-grey-300); }
+#s-tabs .zd-vh b { font: 600 22px/28px var(--zd-sans); color: var(--zd-grey-900); }
+#s-tabs .zd-vhi { display: flex; gap: 14px; margin-left: auto; margin-right: 4px; color: var(--zd-grey-900); }
+#s-tabs .zd-vhi .zd-i { width: 18px; height: 18px; }
+#s-tabs .zd-vhi .zd-i + .zd-i { color: var(--zd-grey-700); }
+#s-tabs .zd-vsec { display: flex; align-items: center; justify-content: space-between; height: 44px; padding-right: 4px; }
+#s-tabs .zd-vsec b { font: 600 14px/20px var(--zd-sans); }
+#s-tabs .zd-vsec .zd-i { color: var(--zd-grey-700); }
+#s-tabs .zd-vr { display: flex; align-items: center; height: 36px; padding: 0 14px; margin-bottom: 2px; border-radius: var(--zd-r); white-space: nowrap; color: var(--zd-grey-900); }
+#s-tabs .zd-vr span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .zd-vn { margin-left: 12px; font-weight: 400 !important; font-variant-numeric: tabular-nums; }
+#s-tabs .zd-vr.zd-von { background: var(--zd-blue-300); font-weight: 600; }
+#s-tabs .zd-vr.zd-von .zd-vn { font-weight: 600 !important; }
+#s-tabs .zd-vr.zd-vz { color: var(--zd-grey-700); }
+
+/* the view */
+#s-tabs .zd-main { position: relative; flex: 1; min-width: 0; padding: 22px 22px 0; }
+#s-tabs .zd-mh { display: flex; align-items: center; gap: 22px; }
+#s-tabs .zd-mh h1 { margin: 0 auto 0 0; font: 400 26px/32px var(--zd-sans); color: var(--zd-grey-900); }
+#s-tabs .zd-act, #s-tabs .zd-play { display: inline-flex; align-items: center; gap: 6px; font: 400 14px/20px var(--zd-sans); color: var(--zd-blue-700); }
+#s-tabs .zd-act .zd-i { width: 14px; height: 14px; }
+#s-tabs .zd-fl { margin-top: 16px; }
+#s-tabs .zd-fb { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border-radius: var(--zd-r); box-shadow: inset 0 0 0 1px var(--zd-blue-700);
+  font: 400 14px/1 var(--zd-sans); color: var(--zd-blue-700); }
+#s-tabs .zd-fb .zd-i { width: 14px; height: 14px; }
+#s-tabs .zd-cnt { margin-top: 16px; font: 400 14px/20px var(--zd-sans); color: var(--zd-grey-700); }
+#s-tabs .zd-n { font-variant-numeric: tabular-nums; }
+
+/* the table: Zendesk's view columns (checkbox, status, ID, Subject, Requester, Requested, Priority, Assignee) */
+#s-tabs .zd-table { position: relative; margin-top: 12px; }
+/* wide: the table stops short of the page's right edge, so the payoff push (zendesk.js PUSH) frames it whole */
+#s-tabs .zd-app:not(.zd-narrow) .zd-table { margin-right: 70px; }
+#s-tabs .zd-th, #s-tabs .zd-tri { display: flex; align-items: center; height: 40px; box-shadow: inset 0 -1px 0 var(--zd-grey-300); white-space: nowrap; }
+#s-tabs .zd-th { font-weight: 600; color: var(--zd-grey-900); }
+#s-tabs .zd-c { flex: none; display: inline-flex; align-items: center; gap: 4px; padding: 0 10px; box-sizing: border-box; overflow: hidden; }
+#s-tabs .zd-sort { width: 12px; height: 12px; color: var(--zd-grey-600); }
+#s-tabs .zd-cb { width: 36px; }
+#s-tabs .zd-cb i { display: block; width: 16px; height: 16px; box-sizing: border-box; border-radius: var(--zd-r); box-shadow: inset 0 0 0 1px var(--zd-grey-400); }
+#s-tabs .zd-cst { width: 80px; }
+#s-tabs .zd-cid { width: 70px; font: 400 13px/20px var(--zd-mono); color: var(--zd-grey-700); }
+#s-tabs .zd-th .zd-cid { font: 600 14px/20px var(--zd-sans); color: var(--zd-grey-900); }
+#s-tabs .zd-csub { flex: 1; min-width: 0; display: block; text-overflow: ellipsis; }
+#s-tabs .zd-creq { width: 140px; }
+#s-tabs .zd-cwhen { width: 118px; }
+#s-tabs .zd-cpri { width: 80px; }
+#s-tabs .zd-casg { width: 96px; display: inline-grid; }
+#s-tabs .zd-casg > span { grid-area: 1 / 1; }
+#s-tabs .zd-a1 { opacity: 0; }
+/* a solved row greys out where it stands (it keeps its place in the table) */
+#s-tabs .zd-tr.zd-done .zd-tri { color: var(--zd-grey-600); }
+#s-tabs .zd-tr.zd-done .zd-cid { color: var(--zd-grey-400); }
+/* the status badges: Zendesk's status colours (chat.css), 4px corners, white bold label; three stacked, crossfaded */
+#s-tabs .zd-bs { display: inline-grid; }
+#s-tabs .zd-b { grid-area: 1 / 1; justify-self: start; display: inline-block; height: 22px; padding: 0 8px; border-radius: var(--zd-r);
+  font: 600 12px/22px var(--zd-sans); font-style: normal; color: var(--zd-white); }
+#s-tabs .zd-b-new { background: var(--zd-new); }
+#s-tabs .zd-b-open { background: var(--zd-open); }
+#s-tabs .zd-b-solved { background: var(--zd-solved); opacity: 0; }
+#s-tabs .zd-b-onhold { background: var(--zd-hold); opacity: 0; }
+
+/* Garden's success notification (Notification type success) as a toast at the ToastProvider's top-end placement, under
+   the top bar: white, the success border, the success icon and title; Garden's large shadow (0 20px 28px, grey-1200
+   #0a0d0e at opacity 200 = .16). Sized for the ad (title 20px, body 16px, past the page's 14px body x 1.25) and kept
+   inside the payoff push's frame (zendesk.js PUSH: its right edge sits left of the pushed frame's right edge) */
+#s-tabs .zd-note { position: absolute; z-index: 3; right: 97px; top: 62px; display: flex; align-items: flex-start; gap: 14px; width: 440px; box-sizing: border-box; padding: 20px 20px 20px 22px;
+  border-radius: var(--zd-r); background: var(--zd-white); box-shadow: inset 0 0 0 1px var(--zd-success-border), 0 20px 28px rgba(10, 13, 14, .16); opacity: 0; }
+#s-tabs .zd-note-i { width: 26px; height: 26px; margin-top: 0; color: var(--zd-success-fg); }
+#s-tabs .zd-note-t { flex: 1; display: grid; gap: 5px; }
+#s-tabs .zd-note-t b { font: 600 20px/26px var(--zd-sans); color: var(--zd-success-fg); }
+#s-tabs .zd-note-t span { font: 400 16px/22px var(--zd-sans); color: var(--zd-grey-900); }
+#s-tabs .zd-note-x { width: 16px; height: 16px; margin-top: 4px; color: var(--zd-grey-600); }
+
+/* ---- portrait (4:5): no Views list; the narrow nav, the top bar, the view with three columns, the notification ---- */
+#s-tabs .zd-app.zd-narrow .zd-views, #s-tabs .zd-app.zd-narrow .zd-wide,
+#s-tabs .zd-app.zd-narrow .zd-cb, #s-tabs .zd-app.zd-narrow .zd-cid, #s-tabs .zd-app.zd-narrow .zd-cwhen,
+#s-tabs .zd-app.zd-narrow .zd-cpri, #s-tabs .zd-app.zd-narrow .zd-casg { display: none; }
+#s-tabs .zd-app.zd-narrow .zd-nav { width: 52px; }
+#s-tabs .zd-app.zd-narrow .zd-logo, #s-tabs .zd-app.zd-narrow .zd-nb { width: 52px; }
+#s-tabs .zd-app.zd-narrow .zd-main { padding: 20px 18px 0; }
+#s-tabs .zd-app.zd-narrow .zd-cst { width: 88px; padding-left: 4px; }
+#s-tabs .zd-app.zd-narrow .zd-creq { width: 150px; }
+#s-tabs .zd-app.zd-narrow .zd-note { right: 14px; top: 60px; width: 292px; padding: 16px 14px 16px 16px; gap: 10px; }
+#s-tabs .zd-app.zd-narrow .zd-mh h1 { font-size: 24px; }

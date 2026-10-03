@@ -1,0 +1,62 @@
+/* Pairs beat (beats/pairs.js): the card in the thread holding the mini window, and the REPLY BOARD layer (scene root
+   px, outside the camera) laid out at the frame size (1920 x 1080 at 16:9) and scaled into the window. superbot's own
+   dark surface and the hub's colours (hub.css: #0d0d0d card, #ececec text, #9a9a9a muted, accent #2b6bff, the green
+   check #34d399), Google Sans Flex (vendored, studio.css @font-face "GSF"). Nothing here transitions and nothing is a
+   control: no button, tab or toggle shapes, no glow; the like counts are plain state text. Every moving value is
+   written from t in pairs.js. Radii: 20px (reply cards, the outline) and fully round (avatars). */
+
+/* the card in the thread: just the window, framed like the hub's cards */
+#s-tabs .sbsite .hub .pb-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; padding: 6px;
+  border-radius: 14px; background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); }
+#s-tabs .sbsite .hub .pb-shot { aspect-ratio: 16 / 9; border-radius: 10px; background: #0b0b0c; }
+
+/* ---- the board layer ---- */
+#s-tabs .pb-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #0b0b0c; }
+#s-tabs .pb-app { position: absolute; left: 0; top: 0; overflow: hidden; transform-origin: 0 0; background: #0b0b0c; color: #ececec;
+  font-family: "GSF", "Google Sans", var(--ui), sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* header strip: Claude mark + "Replies by Claude Opus 5.5" left, the video title right in grey; plain text only */
+#s-tabs .pb-hd { position: absolute; left: 0; right: 0; top: 0; z-index: 2; display: flex; align-items: center; gap: 18px; height: 96px;
+  padding: 0 80px; box-sizing: border-box; background: #0b0b0c; box-shadow: inset 0 -1px 0 #232326; white-space: nowrap; }
+#s-tabs .pb-mk { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: #d97757; }
+#s-tabs .pb-mk img { width: 26px; height: 26px; }
+#s-tabs .pb-hd b { font-weight: 600; font-size: 28px; line-height: 1; color: #f2f2f4; }
+#s-tabs .pb-vt { margin-left: auto; font-weight: 400; font-size: 24px; line-height: 1; color: #8e8e93; }
+
+/* the list, scrolled (teleprompter) and scaled (overview) from pairs.js */
+#s-tabs .pb-view { position: absolute; left: 0; right: 0; top: 96px; bottom: 0; overflow: hidden; }
+#s-tabs .pb-list { position: absolute; left: 80px; right: 80px; top: 0; display: flex; flex-direction: column; gap: 14px; transform-origin: 50% 0; }
+#s-tabs .pb-row { --ol: 0; position: relative; display: grid; grid-template-columns: 40fr 6fr 54fr; align-items: center; padding: 14px 22px;
+  border-radius: 20px; box-shadow: 0 0 0 3px rgba(43,107,255, calc(var(--ol) * .85)); }
+
+/* left: the viewer's comment */
+#s-tabs .pb-cm { min-width: 0; opacity: 0; }
+#s-tabs .pb-who { display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+#s-tabs .pb-av { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--c); color: #fff;
+  font-weight: 500; font-size: 30px; line-height: 1; }
+#s-tabs .pb-nm { font-weight: 600; font-size: 30px; line-height: 1; color: #ececec; }
+#s-tabs .pb-lk { display: inline-flex; align-items: center; gap: 8px; font-weight: 400; font-size: 26px; line-height: 1; color: #9a9a9a; font-variant-numeric: tabular-nums; }
+#s-tabs .pb-lk .yt-i { width: 26px; height: 26px; color: #8e8e93; }
+#s-tabs .pb-ct { margin-top: 16px; font-weight: 400; font-size: 40px; line-height: 1.3; color: #d9d9de; overflow-wrap: break-word; }
+
+/* the connector: a 2px line drawing left to right, ending in a small arrow, superbot accent */
+#s-tabs .pb-cn { position: relative; display: flex; align-items: center; height: 16px; margin: 0 14px 0 18px; }
+#s-tabs .pb-ln { flex: 1; height: 2px; border-radius: 1px; background: #2b6bff; transform-origin: 0 50%; transform: scaleX(0); opacity: 0; }
+#s-tabs .pb-ah { flex: none; width: 12px; height: 16px; margin-left: -6px; fill: none; stroke: #2b6bff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+
+/* right: superbot's reply, on a softly raised card */
+#s-tabs .pb-rp { min-width: 0; padding: 20px 30px 22px; border-radius: 20px; background: #19191c; box-shadow: inset 0 0 0 1px #26262a; opacity: 0; }
+#s-tabs .pb-rh { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
+#s-tabs .pb-av.pb-me { width: 46px; height: 46px; font-size: 22px; background: #1e8e3e; }
+#s-tabs .pb-rh b { font-weight: 600; font-size: 26px; line-height: 1; color: #ececec; }
+#s-tabs .pb-rh small { font-weight: 400; font-size: 22px; line-height: 1; color: #8e8e93; }
+#s-tabs .pb-rt { margin-top: 10px; font-weight: 450; font-size: 48px; line-height: 1.3; color: #f7f7f8; overflow-wrap: break-word; }
+#s-tabs .pb-hid { color: transparent; }
+/* the soft caret: zero-width, so it never changes how the line wraps */
+#s-tabs .pb-caret { position: relative; display: inline-block; width: 0; height: 1em; vertical-align: -0.12em; font-style: normal; opacity: 0; }
+#s-tabs .pb-caret::after { content: ""; position: absolute; left: 2px; top: 0; bottom: 0; width: 3px; border-radius: 2px; background: rgba(247,247,248,.6); }
+
+/* the status line under the overview, with the hub's green check */
+#s-tabs .pb-status { position: absolute; left: 50%; bottom: 30px; display: flex; align-items: center; gap: 14px; opacity: 0;
+  font-weight: 500; font-size: 32px; line-height: 1.2; color: #ececec; white-space: nowrap; }
+#s-tabs .pb-ok { flex: none; width: 34px; height: 34px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }

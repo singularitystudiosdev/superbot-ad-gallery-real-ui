@@ -1,0 +1,25 @@
+/* lowerthird.css: the broadcast lower-third (one per cut) and the superbot corner bug.
+   Classic two-tier news strap: a storm-gradient accent block, a near-black name bar (model name, bold caps) and a
+   white action bar (sentence case) under it, bottom-left over the canvas. Everything moves from lowerthird.js per
+   frame (no CSS transitions or animations), so a seek draws the same pixels every time.
+   Type: Google Sans Flex, bundled as family "YX Sans" by ux/studio.css (fonts/, OFL). */
+
+/* the strap hangs off the window's left bezel onto the canvas (left 56 < window 104), so in cut 1 it ends left of
+   Gemini's rank badges (x >= 430) and every rank 1-5 stays readable; it ends 14px above the window's bottom bezel */
+.lt { position: absolute; left: 56px; top: 896px; z-index: 20; display: flex; align-items: stretch;
+  pointer-events: none; filter: drop-shadow(0 12px 26px rgba(0, 0, 0, .42)); }
+.lt-acc { flex: none; width: 16px; transform-origin: 50% 100%;
+  background: linear-gradient(180deg, #00e5c3 0%, #2b6bff 34%, #6a1fd8 66%, #c026d3 100%); }
+.lt-body { display: flex; flex-direction: column; align-items: flex-start; }
+.lt-name, .lt-line { white-space: nowrap; font-family: "YX Sans", "Google Sans", Roboto, Arial, sans-serif; }
+.lt-name { background: #0b0b10; color: #fff; height: 74px; padding: 0 30px 0 24px; display: flex; align-items: center;
+  font-size: 48px; font-weight: 800; letter-spacing: .035em; font-variation-settings: "wdth" 100; }
+.lt-line { background: #ffffff; color: #0f0f0f; height: 50px; padding: 0 28px 0 24px; display: flex; align-items: center;
+  font-size: 28px; font-weight: 500; letter-spacing: 0; }
+.lt-name span, .lt-line span { display: block; will-change: transform; }
+
+/* the network bug: superbot's own tile (brand/tile.svg, copied from the original spot) and its wordmark, top right */
+.bug { position: absolute; right: 104px; top: 22px; z-index: 20; display: flex; align-items: center; gap: 12px;
+  height: 46px; opacity: .94; pointer-events: none; }
+.bug img { width: 44px; height: 44px; display: block; }
+.bug b { font: 700 30px/1 "YX Sans", "Google Sans", Roboto, Arial, sans-serif; color: #fff; letter-spacing: -.01em; }

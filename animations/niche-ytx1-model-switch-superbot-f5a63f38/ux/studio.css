@@ -1,0 +1,183 @@
+/* ytx1 YouTube Studio rebuild: the channel "Community" page (Comments tab), light theme, inside a framed browser
+   window on superbot's dark stage. Built by ux/studio.js; every moving part is written from JS per frame (no CSS
+   transitions or animations here), so a seek renders the same pixels every time.
+   Geometry is Studio's own CSS px (measured from the Nov 2025 / Sep 2026 reference frames listed in ux/CREDITS.txt):
+   top bar 64, left menu 256, page title 25/32, tabs 48, filter bar 48, comment rows ~116, avatars 40 (replies 32).
+   Palette: YouTube's --yt-sys-color-baseline light values (text #0f0f0f, secondary #606060, outline rgba(0,0,0,.1),
+   additive rgba(0,0,0,.05), call-to-action #065fd4, brand red #f03).
+   Classes: .yx-  stage / frame / browser bar, .st-  the Studio page, .sb-  superbot overlays (rank badge, counter). */
+
+@font-face { font-family: "YX Roboto"; font-weight: 400; font-style: normal; font-display: block;
+  src: url("../fonts/roboto-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "YX Roboto"; font-weight: 500; font-style: normal; font-display: block;
+  src: url("../fonts/roboto-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "YX Roboto"; font-weight: 700; font-style: normal; font-display: block;
+  src: url("../fonts/roboto-latin-700-normal.woff2") format("woff2"); }
+/* YouTube Sans is not redistributable: Google Sans Flex (OFL) stands in for the page title and the logo-adjacent type */
+@font-face { font-family: "YX Sans"; font-weight: 100 1000; font-style: normal; font-display: block;
+  src: url("../fonts/google-sans-flex-latin-wght-normal.woff2") format("woff2"); }
+
+.yx-stage {
+  --yt-bg: #ffffff; --yt-text: #0f0f0f; --yt-text2: #606060; --yt-text3: #909090; --yt-outline: rgba(0,0,0,.1);
+  --yt-line: #e5e5e5; --yt-additive: rgba(0,0,0,.05); --yt-chip: #f2f2f2; --yt-blue: #065fd4; --yt-red: #ff0033;
+  --yt-owner: #0f0f0f; --yt-nav-sel: #f2f2f2;
+  --sb-bg: #08080b; --sb-rank-a: #4c8dff; --sb-rank-b: #a76bff; --sb-hl: rgba(76,141,255,.10); --sb-hl-bar: #4c8dff;
+  --ui: "YX Roboto", Roboto, Arial, sans-serif; --title: "YX Sans", "YouTube Sans", "YX Roboto", sans-serif;
+  position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--sb-bg);
+  background-image: radial-gradient(1200px 700px at 50% 42%, #17171f 0%, #0c0c11 55%, #060608 100%);
+  font-family: var(--ui); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+}
+.yx-stage *, .yx-stage *::before, .yx-stage *::after { box-sizing: border-box; }
+.yx-i { display: block; flex: none; width: 24px; height: 24px; }
+
+/* ---- the frame: a dark bezel (all four edges visible on the canvas), the browser bar, the viewport ---- */
+.yx-win { position: absolute; left: 64px; top: 44px; width: 1792px; height: 992px; padding: 12px; border-radius: 22px;
+  background: linear-gradient(180deg, #24242b, #18181d); transform-origin: 50% 50%;
+  box-shadow: 0 0 0 1px #2e2e36, 0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06); }
+.yx-screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 11px; background: #fff;
+  display: flex; flex-direction: column; }
+.yx-bar { flex: none; position: relative; display: flex; align-items: center; height: 44px; padding: 0 16px;
+  background: #e9ebef; box-shadow: inset 0 -1px 0 #d3d6dc; }
+.yx-dots { display: flex; gap: 8px; }
+.yx-dots i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.12); }
+.yx-dots i:nth-child(2) { background: #febc2e; }
+.yx-dots i:nth-child(3) { background: #28c840; }
+.yx-url { position: absolute; left: 50%; top: 7px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px;
+  width: 640px; height: 30px; padding: 0 14px; border-radius: 15px; background: #fff; color: #3c4043;
+  font: 400 14px/1 var(--ui); white-space: nowrap; }
+.yx-url .yx-i { width: 15px; height: 15px; color: #5f6368; }
+.yx-url b { font-weight: 400; color: #202124; }
+.yx-port { position: relative; flex: 1; min-height: 0; overflow: hidden; background: var(--yt-bg); }
+
+/* ---- the Studio app (CSS px at zoom 1; studio.js scales it to the port) ---- */
+.st-app { position: absolute; left: 0; top: 0; transform-origin: 0 0; display: flex; flex-direction: column;
+  overflow: hidden; background: var(--yt-bg); color: var(--yt-text); font: 400 14px/20px var(--ui); }
+.st-app .yx-i { color: var(--yt-text); }
+
+/* top bar */
+.st-top { position: relative; z-index: 3; flex: none; display: flex; align-items: center; height: 64px; padding: 0 24px 0 12px;
+  background: var(--yt-bg); box-shadow: 0 1px 0 var(--yt-outline); }
+.st-ib { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
+.st-logo { flex: none; margin-left: 20px; display: flex; align-items: center; }
+.yx-logo { display: block; height: 24px; width: auto; }
+.st-search { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); display: flex; align-items: center; gap: 14px;
+  width: clamp(300px, calc(100% - 800px), 560px); height: 40px; padding: 0 16px; border-radius: 20px; background: var(--yt-chip); color: var(--yt-text2);
+  font: 400 15px/1 var(--ui); white-space: nowrap; }
+.st-search .yx-i { color: var(--yt-text2); }
+.st-right { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.st-ask { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px 0 10px; margin-left: 4px; border-radius: 18px;
+  font: 500 14px/1 var(--ui); white-space: nowrap; }
+.st-ask .yx-i { width: 20px; height: 20px; }
+.st-create { display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px 0 10px; margin-left: 8px; border-radius: 18px;
+  box-shadow: inset 0 0 0 1px var(--yt-outline); font: 500 14px/1 var(--ui); white-space: nowrap; }
+.st-me { flex: none; width: 32px; height: 32px; margin-left: 16px; border-radius: 50%; object-fit: cover; background: #ddd; }
+
+/* body: left menu | page */
+.st-body { position: relative; flex: 1; min-height: 0; display: flex; }
+.st-nav { position: relative; flex: none; width: 256px; display: flex; flex-direction: column; background: var(--yt-bg);
+  box-shadow: inset -1px 0 0 var(--yt-outline); }
+.st-chan { display: flex; flex-direction: column; align-items: center; padding: 24px 0 16px; }
+.st-chan img { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; background: #ddd; }
+.st-chan b { margin-top: 16px; font: 500 15px/22px var(--ui); }
+.st-chan span { font: 400 12px/18px var(--ui); color: var(--yt-text2); }
+.st-nv { display: flex; align-items: center; gap: 24px; height: 48px; margin: 0 12px; padding: 0 12px; border-radius: 8px;
+  font: 400 15px/1 var(--ui); white-space: nowrap; }
+.st-nv.on { background: var(--yt-nav-sel); font-weight: 500; }
+.st-nv .tag { color: var(--yt-text2); font-weight: 400; margin-left: -18px; }
+.st-navfoot { margin-top: auto; padding-bottom: 8px; }
+
+/* the page column scrolls under the fixed bar + menu */
+.st-page { position: relative; flex: 1; min-width: 0; overflow: hidden; }
+.st-scroll { position: absolute; left: 0; top: 0; width: 100%; }
+.st-title { padding: 24px 32px 0; height: 56px; font: 600 25px/32px var(--title); letter-spacing: -.1px; }
+.st-tabs { position: relative; display: flex; gap: 40px; height: 48px; margin-top: 14px; padding: 0 32px;
+  box-shadow: inset 0 -1px 0 var(--yt-line); }
+.st-tab { position: relative; display: flex; align-items: center; font: 500 15px/1 var(--ui); color: var(--yt-text2); white-space: nowrap; }
+.st-tab.on { color: var(--yt-text); }
+.st-tab.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; border-radius: 2px 2px 0 0; background: var(--yt-text); }
+.st-filter { display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 20px; box-shadow: inset 0 -1px 0 var(--yt-line); }
+.st-filter > .yx-i { margin-right: 12px; color: var(--yt-text2); }
+.st-chip { display: flex; align-items: center; gap: 4px; height: 32px; padding: 0 6px 0 12px; border-radius: 8px; background: var(--yt-chip);
+  font: 500 14px/1 var(--ui); white-space: nowrap; }
+.st-chip .yx-i { width: 20px; height: 20px; }
+.st-chip.ic { padding-left: 8px; }
+.st-head { position: relative; height: 56px; box-shadow: inset 0 -1px 0 var(--yt-line); }
+.st-cb { position: absolute; left: 20px; width: 24px; height: 24px; color: var(--yt-text2) !important; }
+.st-head .st-cb { top: 16px; }
+
+/* ---- comment list: rows are absolutely placed by studio.js (row order / rise hook) ---- */
+.st-list { position: relative; }
+.st-row { position: absolute; left: 0; right: 0; top: 0; background: var(--yt-bg); box-shadow: inset 0 -1px 0 var(--yt-line); }
+.st-hl { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: var(--sb-hl); }
+.st-hl::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--sb-hl-bar); }
+.st-row > .st-cb { top: 18px; }
+.st-av { position: absolute; left: 76px; top: 16px; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #e5e5e5; }
+.st-main { position: relative; margin: 0 432px 0 132px; padding: 16px 0 16px; max-width: 760px; }
+.st-pinwrap { overflow: hidden; height: 0; }
+.st-pinned { display: flex; align-items: center; gap: 4px; height: 20px; padding-bottom: 2px; font: 400 12px/18px var(--ui); color: var(--yt-text2); white-space: nowrap; }
+.st-pinned .yx-i { width: 14px; height: 14px; color: var(--yt-text2); transform: rotate(45deg); }
+.st-meta { display: flex; align-items: center; height: 18px; font: 400 12px/18px var(--ui); color: var(--yt-text2); white-space: nowrap; }
+.st-meta .dot { margin: 0 6px; }
+.st-owner { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 11px;
+  background: var(--yt-owner); color: #fff; font: 500 12px/1 var(--ui); }
+.st-owner .yx-i { width: 13px; height: 13px; color: #c6c6c6; }
+.st-text { margin-top: 2px; font: 400 14px/20px var(--ui); color: var(--yt-text); }
+.st-acts { position: relative; display: flex; align-items: center; height: 36px; margin-top: 8px; }
+.st-reply { display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 18px; background: var(--yt-chip);
+  font: 500 14px/1 var(--ui); white-space: nowrap; }
+.st-count { position: absolute; left: 84px; top: 0; display: flex; align-items: center; gap: 4px; height: 36px;
+  font: 400 14px/1 var(--ui); color: var(--yt-text2); white-space: nowrap; }
+.st-count .yx-i { color: var(--yt-text3); }
+.st-count.has { color: var(--yt-text); }
+.st-count.has .yx-i { color: var(--yt-text); }
+.st-icons { position: absolute; left: 207px; top: 0; display: flex; align-items: center; gap: 16px; height: 36px; }
+.st-sub .st-icons { left: 81px; }
+.st-btn { position: relative; display: grid; place-items: center; min-width: 40px; height: 36px; }
+.st-like-b { padding: 0 8px; }
+.st-btn .yx-i { color: var(--yt-text); }
+.st-like { display: flex; align-items: center; }
+.st-like .n { margin-left: 4px; font: 400 12px/1 var(--ui); color: var(--yt-text2); white-space: nowrap; }
+
+/* creator heart: the outline glyph gives way to the creator's avatar with the red heart badge */
+.st-heart .yx-i { position: absolute; left: 8px; top: 6px; }
+.st-hearted { position: absolute; left: 9px; top: 7px; width: 22px; height: 22px; opacity: 0; }
+.st-hearted img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; display: block; }
+.st-hearted .yx-i { position: absolute; left: 11px; top: 10px; width: 16px; height: 16px; color: var(--yt-red);
+  filter: drop-shadow(0 0 0 #fff) drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff); }
+
+/* video column on the right of every row */
+.st-vid { position: absolute; right: 24px; top: 16px; display: flex; gap: 16px; width: 376px; }
+.st-vid img { flex: none; width: 120px; height: 68px; border-radius: 8px; object-fit: cover; background: #e5e5e5; }
+.st-vid div { font: 400 14px/20px var(--ui); color: var(--yt-text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* reply composer (opens under the comment) */
+.st-compwrap { overflow: hidden; height: 0; }
+.st-comp { display: flex; gap: 16px; padding-top: 12px; }
+.st-comp > img { flex: none; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin-top: 4px; }
+.st-field { position: relative; flex: 1; min-height: 64px; padding: 8px 14px 10px; border-radius: 8px; box-shadow: inset 0 0 0 1.5px var(--yt-text); }
+.st-field .lb { font: 400 12px/16px var(--ui); color: var(--yt-text2); }
+.st-field .tx { margin-top: 2px; min-height: 20px; font: 400 14px/20px var(--ui); color: var(--yt-text); white-space: pre-wrap; }
+.st-field .ph { color: var(--yt-text2); }
+.st-caret { display: inline-block; width: 1.5px; height: 18px; margin-left: 1px; vertical-align: -4px; background: var(--yt-text); }
+.st-cbtns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; padding-bottom: 4px; }
+.st-tbtn { display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 18px; font: 500 14px/1 var(--ui); white-space: nowrap; }
+.st-tbtn.go { background: var(--yt-chip); color: var(--yt-text3); }
+.st-tbtn.go.on { color: var(--yt-text); }
+
+/* the posted creator reply (nested thread under the comment) */
+.st-subwrap { overflow: hidden; height: 0; }
+.st-sub { position: relative; padding: 12px 0 0; }
+.st-sub > .st-cb { top: 14px; left: -112px; }
+.st-sub > .st-av2 { position: absolute; left: 0; top: 12px; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.st-sub .st-sbody { margin-left: 48px; }
+.st-sub .st-text { max-width: 600px; }
+
+/* ---- superbot overlays on the Studio rows (Gemini's ranking) ---- */
+.sb-rank { position: absolute; left: 54px; top: 8px; width: 28px; height: 28px; border-radius: 50%; opacity: 0;
+  display: grid; place-items: center; color: #fff; font: 700 15px/1 var(--title);
+  background: linear-gradient(135deg, var(--sb-rank-a), var(--sb-rank-b));
+  box-shadow: 0 0 0 2px #fff, 0 3px 10px rgba(76,90,255,.35); }
+.sb-counter { position: absolute; right: 24px; top: 14px; display: flex; align-items: center; gap: 8px; height: 28px; padding: 0 12px;
+  border-radius: 14px; opacity: 0; background: #0f0f0f; color: #fff; font: 500 13px/1 var(--ui); white-space: nowrap; }
+.sb-counter i { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--sb-rank-a), var(--sb-rank-b)); }
+.sb-counter b { font-weight: 700; font-variant-numeric: tabular-nums; }

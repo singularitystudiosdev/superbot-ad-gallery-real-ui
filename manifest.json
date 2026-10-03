@@ -680,6 +680,15 @@
     "desc": "One ask in superbot: Gemini reads 1,240 player reports to find why saves get wiped, Claude Opus 5.5 adds load retries, a session lock and a failed-load test in Luau, GPT-6 Astra runs 42 tests and 2,000 simulated rejoins, then superbot connects to Roblox and publishes version 214 of the experience."
   },
   {
+    "id": "niche-patreon-model-switch-superbot-8f4b57c6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Make October's Patreon post from my sketches and process video: Gemini, GPT-6 Astra, Opus 5.5, then superbot sets it up on Patreon (4 switches)",
+    "src": "animations/niche-patreon-model-switch-superbot-8f4b57c6/",
+    "thumb": "assets/shots/niche-patreon-model-switch-superbot-8f4b57c6.png",
+    "desc": "One prompt in superbot: Gemini watches a 2h 14m process video and keeps the 5 steps patrons ask about, GPT-6 Astra picks 8 of 38 sketchbook photos and writes the alt text, Claude Opus 5.5 writes the October post in the creator's voice, then superbot connects to Patreon, fills in the post, and the creator publishes it for paid members."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

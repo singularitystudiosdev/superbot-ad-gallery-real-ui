@@ -1,0 +1,34 @@
+img/ CREDITS (internal). Provenance is never shown on screen. Every photo is a real photograph of an open sketchbook,
+published on Unsplash under the Unsplash License (https://unsplash.com/license: free to use, modification allowed, no
+attribution required; none of them is Unsplash+, the search API returned premium=false, plus=false for each). No CC BY /
+CC BY-SA files. No identifiable faces (hands only). All fetched 2026-10-03 via unsplash.com/napi/search/photos
+(query "bird sketchbook"), originals downloaded at 2000 px wide (images.unsplash.com/<photo>?w=2000), kept in the build
+scratch /tmp/patreon-8f4b57c6/cand/o-*.jpg. Derived files cropped and scaled with ffmpeg (lanczos), metadata stripped.
+
+SUBJECT: no licensed real photo of a sketchbook page with a heron drawing exists on Unsplash, Pexels or Wikimedia
+Commons (searched 2026-10-03: "heron sketch", "sketchbook heron", Commons CC0/PD search, Openverse). The best photo
+shows an ink and watercolor ROBIN, so the story's heron became a robin everywhere (rows, box label, title, intro, alt).
+
+  u2  "Bird sketches adorn an open sketchbook", pure julia (@purejulia), https://unsplash.com/photos/IHFVoLLKh3M
+      (images.unsplash.com/photo-1742137187734-a8f3b2aa4298), 4000 x 6000.
+      -> lead.jpg (crop 2000x1125 at 0,1413 of the 2000x3000 rendition, 1280x720): the lead image GPT-6 Astra picks
+         (sketches.js, box measured on this crop: the robin, 588,116 to 1078,602) and the header image in the Patreon
+         editor (patreon.js). Alt text (sketches.js ALT) is true of it: "An open sketchbook with an ink and watercolor
+         robin perched on a branch." -> page-1.jpg
+  u1  "Birds sketched in a book next to a pen", pure julia, https://unsplash.com/photos/gnpJYIskDuk
+      (photo-1742137187464-bdbf0bcc26f0) -> page-2.jpg, clip-1.jpg
+  u7  "a drawing of a bird and a bird on a book" (owl and hare), pure julia, https://unsplash.com/photos/SBa8QSjlTAo
+      (photo-1658078875195-4f91a607209c) -> page-3.jpg, clip-2.jpg
+  u9  "a drawing on a table" (flamingo and elephant), pure julia, https://unsplash.com/photos/_Sym-NPMlbU
+      (photo-1658078873414-8a48e706dcc1) -> page-4.jpg, clip-3.jpg
+  j1  "a person holding a drawing" (bee-eater and robin, a hand), pure julia, https://unsplash.com/photos/UZNcpDCzSrk
+      (photo-1658702157629-9620d1eb676e) -> page-5.jpg, clip-4.jpg
+  j3  "a hand holding a few cards" (toucan sketchbook, a hand), pure julia, https://unsplash.com/photos/kPw_1TBF77k
+      (photo-1658702157626-328cc744ebe5) -> page-6.jpg, clip-5.jpg
+  j2  "white and brown book on white textile" (botanical sketchbook), pure julia, https://unsplash.com/photos/XJxfn6anoe8
+      (photo-1611770362960-9c11b182871b) -> page-7.jpg
+  j6  "person holding white and black bird print card" (starling pencil sketch, hands), Jill Dimond (@jilldimond),
+      https://unsplash.com/photos/OwC5qkRGL1Y (photo-1615717146113-495e481c17c9) -> page-8.jpg
+
+  page-1..8.jpg: 240 x 300 (4:5) crops, the "8 pages" strip in the editor and six of them in the Astra card.
+  clip-1..5.jpg: 320 x 180 (16:9) centre crops, the 5 clip thumbnails (timecodes from process.js; no play glyphs).

@@ -1,0 +1,162 @@
+/* Patreon beat (beats/patreon.js): Patreon's authorize sheet and the checklist card in the chat, and the layer carrying
+   the one Patreon post editor (2026, light) inside a superbot frame. Everything reads chat.css --pt-* (Patreon's
+   creator greys, sampled from the help center's screenshots; see chat.css). Nothing here transitions: position, size,
+   radius, opacity and transform are written from t in patreon.js, so ?t= freezes a frame. Classes: .gc- authorize
+   sheet, .gk- checklist card, .pt- the framed editor. Radii on the Patreon surfaces: 12px (cards, the frame, toast) and
+   fully round (Patreon's pills, avatars). */
+
+/* Inter (SIL OFL 1.1, the variable weight axis, latin) as the open substitute for Patreon's commercial UI face,
+   vendored under fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "Inter PT"; font-style: normal; font-weight: 100 900; font-display: block; src: url("../../../fonts/inter-latin-wght-normal.woff2?v=8f4b57c6") format("woff2"); }
+
+#s-tabs .pt-full .lc, #s-tabs .sbsite .hub .gc-card .lc, #s-tabs .sbsite .hub .gk-card .lc { flex: none; width: 16px; height: 16px; }
+
+/* ---- the authorize sheet (light, Patreon's surfaces) ---- */
+#s-tabs .sbsite .hub .pt-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .gc-card { opacity: 0; box-sizing: border-box; width: 400px; max-width: 100%; margin-top: 2px; border-radius: var(--pt-radius);
+  background: var(--pt-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); color: var(--pt-text); font-family: var(--pt-sans); overflow: hidden; }
+#s-tabs .sbsite .hub .gc-top { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 14px; border-bottom: 1px solid var(--pt-line);
+  font: 500 11.5px/1 var(--pt-sans); color: var(--pt-text2); }
+#s-tabs .sbsite .hub .gc-top img { width: 13px; height: 14px; }
+#s-tabs .sbsite .hub .gc-body { padding: 14px 18px 14px; text-align: center; }
+#s-tabs .sbsite .hub .gc-logos { display: flex; align-items: center; justify-content: center; gap: 6px; }
+#s-tabs .sbsite .hub .gc-logos .qc-tile.gc-app { width: 34px; height: 34px; border-radius: 50%; }
+#s-tabs .sbsite .hub .gc-pt { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--pt-surface); box-shadow: inset 0 0 0 1px var(--pt-line2); }
+#s-tabs .sbsite .hub .gc-pt img { width: 15px; height: 16px; }
+#s-tabs .sbsite .hub .gc-ln { width: 22px; height: 1.5px; background: var(--pt-line2); }
+#s-tabs .sbsite .hub .gc-mid { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--pt-ink); color: #fff; }
+#s-tabs .sbsite .hub .gc-mid .lc { width: 10px; height: 10px; stroke-width: 3; }
+#s-tabs .sbsite .hub .gc-title { margin-top: 9px; font: 700 18px/1.2 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .sbsite .hub .gc-ws { margin-top: 3px; font: 400 12.5px/1.35 var(--pt-sans); color: var(--pt-text2); }
+#s-tabs .sbsite .hub .gc-ws b { font-weight: 600; color: var(--pt-text); }
+#s-tabs .sbsite .hub .gc-acct { display: inline-flex; align-items: center; gap: 6px; height: 22px; margin-top: 8px; padding: 0 10px 0 3px; border-radius: 9999px;
+  background: var(--pt-pill); font: 500 11.5px/1 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .sbsite .hub .gc-av { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--pt-me); color: #fff; font: 600 7.5px/1 var(--pt-sans); font-style: normal; }
+#s-tabs .sbsite .hub .gc-sel { margin: 11px 0 4px; text-align: left; font: 600 12px/1.35 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .sbsite .hub .gc-row { display: flex; align-items: center; gap: 8px; min-height: 24px; text-align: left; font: 400 12.5px/1.3 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .sbsite .hub .gc-row span { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .gc-cb { flex: none; display: grid; place-items: center; width: 16px; height: 16px; color: var(--pt-text); font-style: normal; }
+#s-tabs .sbsite .hub .gc-cb .lc { width: 14px; height: 14px; stroke-width: 2.6; }
+#s-tabs .sbsite .hub .gc-act { position: relative; margin-top: 12px; }
+#s-tabs .sbsite .hub .gc-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+#s-tabs .sbsite .hub .gc-go, #s-tabs .sbsite .hub .gc-deny { display: grid; place-items: center; height: 32px; border-radius: 9999px; font: 600 12.5px/1 var(--pt-sans); }
+#s-tabs .sbsite .hub .gc-go { background: var(--pt-ink); color: #fff; }
+#s-tabs .sbsite .hub .gc-deny { background: var(--pt-pill); color: var(--pt-text); }
+/* after the tap: the buttons are gone, a plain line says what happened (no control left standing) */
+#s-tabs .sbsite .hub .gc-done { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 7px; opacity: 0;
+  font: 600 12.5px/1 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .sbsite .hub .gc-done .lc { color: var(--pt-green); }
+
+/* ---- the checklist card (light, Patreon's surfaces), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: var(--pt-radius); background: var(--pt-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: var(--pt-sans); }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 300px; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px; font: 12.5px/1 var(--pt-sans); color: var(--pt-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 600; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; }
+#s-tabs .sbsite .hub .gk-img { box-shadow: inset 0 0 0 1px var(--pt-line2); }
+#s-tabs .sbsite .hub .gk-img img { width: 9px; height: 10px; }
+#s-tabs .sbsite .hub .gk-ms { background: var(--pt-pill); color: var(--pt-text); }
+#s-tabs .sbsite .hub .gk-ms .lc { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--pt-line); border-top-color: var(--pt-ink); }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: var(--pt-green); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: 8px; background: var(--pt-page); box-shadow: inset 0 0 0 1px var(--pt-line); }
+
+/* ---- the dimmed hub behind the open window, and the framed window (scene root px, outside the camera) ---- */
+#s-tabs .pt-dim { position: absolute; inset: 0; z-index: 5; opacity: 0; pointer-events: none; background: #050506; }
+#s-tabs .pt-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #0e0e10;
+  box-shadow: 0 0 0 1px #2c2c31, 0 24px 60px rgba(0,0,0,.55); }
+#s-tabs .pt-win { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  font: 400 14px/20px var(--pt-sans); -webkit-font-smoothing: antialiased; }
+
+/* the superbot title bar: the frame that says this is superbot driving the creator's patreon.com, not the page itself */
+#s-tabs .pt-sb { flex: none; display: flex; align-items: center; gap: 9px; height: 40px; padding: 0 14px; box-sizing: border-box;
+  background: #0e0e10; color: #ececec; font: 500 13px/1 var(--pt-sans); white-space: nowrap; }
+#s-tabs .pt-sb .qc-tile.pt-sbt { position: relative; flex: none; width: 22px; height: 22px; border-radius: 7px; overflow: hidden; }
+#s-tabs .pt-sb b { font-weight: 700; font-size: 14px; color: #fff; }
+#s-tabs .pt-sbv { width: 1px; height: 16px; margin: 0 3px; background: #34343a; }
+#s-tabs .pt-sbp { width: 14px; height: 15px; padding: 3px; border-radius: 6px; background: #fff; }
+#s-tabs .pt-sbu { color: #c9c9cf; }
+#s-tabs .pt-sbr { margin-left: auto; color: #8e8e93; }
+
+/* the editor client */
+#s-tabs .pt-app { position: relative; flex: 1; min-height: 0; display: flex; background: var(--pt-surface); color: var(--pt-text); }
+#s-tabs .pt-rail { flex: none; width: 56px; display: flex; flex-direction: column; align-items: center; gap: 22px; padding-top: 18px; box-sizing: border-box;
+  box-shadow: inset -1px 0 0 var(--pt-line); }
+#s-tabs .pt-rm { width: 17px; height: 19px; margin-bottom: 6px; }
+#s-tabs .pt-ri { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: #9a9a9a; font-style: normal; }
+#s-tabs .pt-ri .lc { width: 18px; height: 18px; }
+#s-tabs .pt-ri.pt-ron { color: var(--pt-text); box-shadow: inset 0 0 0 1px var(--pt-line2); }
+#s-tabs .pt-rav { display: grid; place-items: center; width: 28px; height: 28px; margin-top: auto; margin-bottom: 16px; border-radius: 50%; background: var(--pt-me); color: #fff; font: 600 11px/1 var(--pt-sans); }
+#s-tabs .pt-main { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+/* top bar: close | Draft, Preview post (small, dimmed), Publish -> the plain Published status */
+#s-tabs .pt-top { flex: none; display: flex; align-items: center; height: 64px; padding: 0 20px; box-sizing: border-box; }
+#s-tabs .pt-x { display: grid; place-items: center; width: 30px; height: 30px; color: #8a8a8a; opacity: .45; }
+#s-tabs .pt-x .lc { width: 16px; height: 16px; }
+#s-tabs .pt-acts { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+#s-tabs .pt-draft { display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: 9999px; background: var(--pt-pill); font: 600 13px/1 var(--pt-sans); color: var(--pt-text2); }
+#s-tabs .pt-prev { display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px; border-radius: 9999px; background: var(--pt-pill); opacity: .55;
+  font: 600 13px/1 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .pt-prev .lc { width: 15px; height: 15px; }
+#s-tabs .pt-slot { position: relative; display: inline-flex; align-items: center; justify-content: flex-end; min-width: 92px; height: 38px; }
+#s-tabs .pt-pub { display: inline-flex; align-items: center; height: 38px; padding: 0 20px; border-radius: 9999px; background: var(--pt-ink); color: #fff;
+  font: 600 14px/1 var(--pt-sans); opacity: 0; visibility: hidden; }
+#s-tabs .pt-done { position: absolute; right: 0; top: 50%; display: inline-flex; align-items: center; gap: 7px; margin-top: -10px; height: 20px; opacity: 0;
+  font: 400 14px/1 var(--pt-sans); color: var(--pt-text2); white-space: nowrap; }
+#s-tabs .pt-done b { font-weight: 700; color: var(--pt-text); }
+#s-tabs .pt-done .lc { width: 18px; height: 18px; color: var(--pt-green); }
+
+#s-tabs .pt-body { flex: 1; min-height: 0; display: flex; }
+#s-tabs .pt-canvas { flex: 1; min-width: 0; overflow: hidden; }
+#s-tabs .pt-post { width: 600px; margin: 0 auto; padding-top: 8px; }
+#s-tabs .pt-b { opacity: 0; }
+#s-tabs .pt-lead { height: 230px; border-radius: 12px; overflow: hidden; background: #ddd; }
+#s-tabs .pt-lead img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+#s-tabs .pt-title { margin: 18px 0 0; font: 700 30px/1.2 var(--pt-sans); letter-spacing: -.01em; color: var(--pt-text); }
+#s-tabs .pt-intro { margin: 12px 0 0; font: 400 15px/1.55 var(--pt-sans); color: #1d1d1d; }
+#s-tabs .pt-aud { display: none; }
+#s-tabs .pt-pages { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-top: 16px; }
+#s-tabs .pt-pg { display: block; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: #ddd; }
+#s-tabs .pt-pg img, #s-tabs .pt-clip img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .pt-clips { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 12px; }
+#s-tabs .pt-clip { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #222; }
+#s-tabs .pt-clip i { position: absolute; left: 5px; bottom: 5px; padding: 2px 5px; border-radius: 4px; background: rgba(0,0,0,.72);
+  font: 600 11px/1.2 var(--pt-sans); font-style: normal; color: #fff; font-variant-numeric: tabular-nums; }
+
+/* the Settings panel, plain text only: Audience, "Paid-only access, all 3 tiers" and the three tier names. No radio,
+   checkbox, dropdown or toggle shapes and no accent blue: nothing on a held frame reads as a live control (policy guard 2) */
+#s-tabs .pt-panel { flex: none; width: 300px; box-sizing: border-box; padding: 0 18px; box-shadow: inset 1px 0 0 var(--pt-line); }
+#s-tabs .pt-ph { height: 52px; margin: 0 -18px; padding: 0 18px; display: flex; align-items: center; box-shadow: inset 0 -1px 0 var(--pt-line); font: 600 16px/1 var(--pt-sans); color: var(--pt-text2); }
+#s-tabs .pt-gh { margin: 18px 0 10px; font: 600 14px/1 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .pt-al { margin-bottom: 12px; font: 500 13px/1.35 var(--pt-sans); color: var(--pt-text); }
+#s-tabs .pt-tier { padding: 4px 0; font: 400 13px/1.3 var(--pt-sans); color: var(--pt-text2); }
+
+/* the bold moment: Patreon's dark toast, bottom centre of the editor */
+#s-tabs .pt-toast { position: absolute; left: 50%; bottom: 22px; display: flex; align-items: center; gap: 12px; padding: 13px 20px 13px 14px; border-radius: 12px; opacity: 0;
+  background: #000; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.28); white-space: nowrap; }
+#s-tabs .pt-toast > .lc { width: 24px; height: 24px; color: #4ade80; }
+#s-tabs .pt-toast span { display: grid; gap: 4px; }
+#s-tabs .pt-toast b { font: 600 15px/1.2 var(--pt-sans); }
+#s-tabs .pt-toast small { font: 400 13px/1.2 var(--pt-sans); color: #c9c9c9; }
+
+/* portrait (4:5): no rail, no Settings panel, no Preview post, no clips row; the audience shows as one line under the
+   intro; every type size here is >= 13 design px (x1.7 = 22px at 1080) */
+#s-tabs .pt-win.pt-narrow .pt-rail, #s-tabs .pt-win.pt-narrow .pt-panel, #s-tabs .pt-win.pt-narrow .pt-prev,
+#s-tabs .pt-win.pt-narrow .pt-clips, #s-tabs .pt-win.pt-narrow .pt-sbr, #s-tabs .pt-win.pt-narrow .pt-x { display: none; }
+#s-tabs .pt-win.pt-narrow .pt-sb { padding: 0 12px; }
+#s-tabs .pt-win.pt-narrow .pt-top { height: 56px; padding: 0 14px; }
+#s-tabs .pt-win.pt-narrow .pt-acts { gap: 8px; }
+#s-tabs .pt-win.pt-narrow .pt-slot { min-width: 84px; }
+#s-tabs .pt-win.pt-narrow .pt-post { width: auto; padding: 4px 18px 0; }
+#s-tabs .pt-win.pt-narrow .pt-lead { height: 196px; }
+#s-tabs .pt-win.pt-narrow .pt-title { margin-top: 12px; font-size: 22px; line-height: 1.22; }
+#s-tabs .pt-win.pt-narrow .pt-intro { margin-top: 8px; font-size: 14px; line-height: 1.5; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+#s-tabs .pt-win.pt-narrow .pt-aud { display: flex; align-items: center; gap: 7px; margin-top: 10px; font: 500 13px/1 var(--pt-sans); color: var(--pt-text2); }
+#s-tabs .pt-win.pt-narrow .pt-aud .lc { width: 14px; height: 14px; }
+#s-tabs .pt-win.pt-narrow .pt-pages { gap: 5px; margin-top: 12px; }
+#s-tabs .pt-win.pt-narrow .pt-toast { bottom: 7px; padding: 12px 16px 12px 12px; }
+#s-tabs .pt-win.pt-narrow .pt-toast b { font-size: 15px; }
+#s-tabs .pt-win.pt-narrow .pt-done { font-size: 13px; }

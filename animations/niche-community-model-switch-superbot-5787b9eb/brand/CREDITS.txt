@@ -1,0 +1,65 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and showing the Discourse forum superbot connects to) and unaltered except for fill colour as
+noted. Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (round badge), copied from animations/niche-support-model-switch-superbot-6e224be4/brand/
+                     (which copied it from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6).
+discourse-logo.svg   Discourse mark, Simple Icons "discourse" icon,
+                     https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/discourse.svg (simple-icons 16.33.0,
+                     https://simpleicons.org; data/simple-icons.json: hex 000000, source https://www.discourse.org),
+                     fetched 2026-10-03. Licence: CC0 1.0 (Simple Icons' licence for its SVG files). Path verbatim;
+                     only a fill="#000000" attribute was added on the <svg> root (Simple Icons' recorded hex), set on a
+                     white tile so it reads on the dark hub. The discourse/discourse repository publishes its logo only
+                     as PNG (public/images/discourse-logo-sketch*.png, d-logo-sketch*.png; no SVG in the tree,
+                     checked via the GitHub trees API on 2026-10-03), so the Simple Icons mark is used. Discourse and the
+                     Discourse logo are trademarks of Civilized Discourse Construction Kit, Inc., used nominatively to
+                     name the forum software superbot connects to. Never redrawn: every Discourse mark in the spot (pill
+                     tile, reply header, composer label, connect card, the edge bar of the result view) is this one file.
+
+ICONS (UI furniture)
+  Material Design Icons by Pictogrammers (https://github.com/Templarian/MaterialDesign), Apache License 2.0. Paths
+  taken verbatim from the Iconify API (https://api.iconify.design/mdi.json?icons=forum-outline,pin-outline), fetched
+  2026-10-03: forum-outline (the Opus panel's header, beats/replies.js) and pin-outline (the pinned topic's glyph in
+  the Discourse view, beats/discourse.js; meta.discourse.org currently draws its pin with Lucide's "pin", which is
+  ISC-licensed, so the Apache-licensed MDI pin of the same outline shape is used instead). Check ticks and
+  spinners are the base ad's own CSS/SVG strokes (UI furniture). The Primer octicons of the base were removed.
+
+DISCOURSE UI AND PALETTE (sources of record, fetched 2026-10-03)
+  Layout: meta.discourse.org/latest, rendered headless (Playwright) and read for its computed styles: the topic list
+  columns (Topic, posters, Replies, Views; the Activity column is NOT used), title then category badge (a 0.75em
+  square, 2px radius, and the name at font-down-1), 24px round avatars, 1px --primary-low row borders, the pinned
+  topic's pin glyph and excerpt. Stylesheets:
+  https://sea3.discourse-cdn.com/meta/stylesheets/common_bd24b3ff6de16ea7129ecce9942a97451f9bebf2.css
+  (--category-badge-size 0.75em, --category-badge-border-radius 2px, --d-topic-list-avatar-size 24px,
+  --font-up-1 1.1487em, --font-down-1 0.8706em, .topic-list-item.highlighted animation background-fade-highlight
+  2.5s ease-out from var(--tertiary-low), --font-family: Inter, Arial, sans-serif) and
+  color_definitions_meta-light_144_331_e5d7ac64b7bf73571c238e7b24ef469af374b542.css (meta's own branded scheme,
+  tertiary #7b5fe2, NOT used: the spot uses Discourse's default light scheme below).
+  Default light scheme: https://raw.githubusercontent.com/discourse/discourse/main/app/assets/stylesheets/common/foundation/colors.scss
+  ($primary #222, $secondary #fff, $tertiary #08c, $highlight #ffff4d) and color_transformations.scss (primary-low
+  = scale-color lightness 90% -> #e9e9e9, primary-medium 50% -> #919191, primary-high 30% -> #646464, tertiary-low
+  85% -> #d1f0ff, highlight-bg 70% -> #ffffca). Category colours: config/site_settings.yml category_colors default
+  "BF1E2E|F1592A|F7941D|9EB83B|3AB54A|12A89D|25AAE2|0E76BD|652D90|92278F|ED207B|8C6238|231F20|808281|B3B5B4|E45735"
+  (Questions 12A89D, Feature requests 652D90, Bugs BF1E2E, Introductions 9EB83B, Announcements 25AAE2, Show and tell
+  ED207B; the amber of "Left for you" is F7941D from the same list, its tint #fde9d1). Letter avatars:
+  lib/letter_avatar.rb (the username's first letter, white at 80% on LetterAvatar::COLORS[md5(username)[0,15] %
+  216]: maya #cab0a1, jonas #aeb1de, ana #a6a055, tomas #439d5e, lena #c68b51, kofi #4bbf92, ravi #58956e).
+  Every value is a --dc-* variable in scenes/tabs-assets/chat.css.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar in the hub and on the result view's edge bar is scenes/tabs-assets/tile.svg (first party).
+
+MADE UP FOR THE SPOT
+  The product "Fernote" and its forum "Fernote Community" (checked 2026-10-03: no known product of that name; web
+  search returned only Evernote results, the App Store search API and npm returned 0 results), the admin Maya, the
+  members Jonas, Ana, Tomas, Lena, Kofi, Ravi, every post title, count and view figure, the replies, the roundup,
+  the docs matches and the check results are fictional. No photos. No "@" appears anywhere on screen.

@@ -734,6 +734,15 @@
     "desc": "One prompt in superbot: Gemini reads the 84-page pricing ebook and maps its 9 chapters, Claude Opus 5.5 writes the product page, GPT-6 Astra checks every claim against the files and blurs a client name on page 31, then superbot connects to Gumroad, attaches the PDF and rate calculator and publishes the ebook as a digital product at $29."
   },
   {
+    "id": "niche-community-model-switch-superbot-5787b9eb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer our forum's unanswered posts and pin the weekly roundup: Gemini, Opus 5.5, GPT-6 Astra, then superbot posts the replies in Discourse (4 switches)",
+    "src": "animations/niche-community-model-switch-superbot-5787b9eb/",
+    "thumb": "assets/shots/niche-community-model-switch-superbot-5787b9eb.png",
+    "desc": "One prompt in superbot: Gemini reads 1,284 posts across the community's 6 categories and finds 23 with no reply, Claude Opus 5.5 drafts every answer and the weekly roundup, GPT-6 Astra checks each answer against the docs and leaves 2 for a person, then superbot connects to Discourse: 21 replies posted and the roundup pinned to the top."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

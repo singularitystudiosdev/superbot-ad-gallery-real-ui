@@ -1,0 +1,12 @@
+fonts/ CREDITS (internal)
+
+inter-latin-{400,500,600,700}-normal.woff2
+  Inter, latin subset, from @fontsource/inter 5.3.0
+  (https://cdn.jsdelivr.net/npm/@fontsource/inter@latest/files/inter-latin-<weight>-normal.woff2), fetched 2026-10-03,
+  unmodified. Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter). Licence: SIL Open Font
+  License 1.1 (https://openfontlicense.org).
+  Declared as "Inter SB" in scenes/tabs-assets/chat.css. It is the face of the Strava surfaces (the authorize sheet and
+  the Training Calendar, beats/strava.css --sv-font: "Inter SB", -apple-system, BlinkMacSystemFont, sans-serif) and the
+  fallback in the reads beat's light list stack (-apple-system, BlinkMacSystemFont, "Inter SB", sans-serif). Strava's
+  own web typeface is not vendored. The system font (SF Pro) is never vendored either: it is only used where the
+  viewer's own system supplies it. The superbot hub keeps the source ad's families.

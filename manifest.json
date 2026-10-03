@@ -833,6 +833,15 @@
     "desc": "Variant of niche-youtube-model-switch-superbot-3828921d for YouTube sponsorships. One ask in superbot: Gemini sorts 23 sponsor emails into good fits, needs details, not a fit and scams, GPT-6 Astra checks the product photo a brand attached, Claude Opus 5.5 drafts each reply in the creator's voice and flags the scam, then superbot reads YouTube Studio and fills in the rate card. 16:9 only."
   },
   {
+    "id": "niche-ytv6-model-switch-superbot-3e406642",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Turn this week's top comments into the script for my next Short and post it: each top comment becomes one line of the Short's script, then the Short is posted from YouTube Studio (4 switches, Shorts variant, 16:9)",
+    "src": "animations/niche-ytv6-model-switch-superbot-3e406642/",
+    "thumb": "assets/shots/niche-ytv6-model-switch-superbot-3e406642.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d for YouTube Shorts creators. One ask in superbot: Gemini reads this week's comments and ranks the top five, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 turns each top comment into one line of the next Short's script, shown side by side, then superbot cuts the vertical Short with captions and posts it from YouTube Studio. 16:9 only."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

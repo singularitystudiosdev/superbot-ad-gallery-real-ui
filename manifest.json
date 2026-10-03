@@ -455,6 +455,15 @@
     "desc": "One prompt in superbot: Gemini reads 18,240 messages from the group and ranks the questions members ask most, Claude Opus 5.5 writes the bot and tests it on 40 past questions, Cloudflare Workers keeps it online 24/7, then superbot adds it to the Telegram group as an admin and it answers a new member in under a second."
   },
   {
+    "id": "niche-webdev-model-switch-superbot-2b7aa677",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Build me a landing page for my bakery and put it live: Gemini, Opus 5.5, GitHub, then superbot deploys it live on Vercel (4 switches)",
+    "src": "animations/niche-webdev-model-switch-superbot-2b7aa677/",
+    "thumb": "assets/shots/niche-webdev-model-switch-superbot-2b7aa677.png",
+    "desc": "One ask in superbot: Gemini plans the bakery's one-page site and writes the copy, Claude Opus 5.5 builds it in Next.js and Tailwind, superbot pushes the repo to GitHub, then deploys it on Vercel: Building to Ready, then the live Maple Street Bakery site."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

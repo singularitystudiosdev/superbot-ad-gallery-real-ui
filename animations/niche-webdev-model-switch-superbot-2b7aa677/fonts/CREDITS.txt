@@ -1,0 +1,16 @@
+fonts/ CREDITS (internal)
+
+All from Fontsource 5.3.0 (https://cdn.jsdelivr.net/npm/@fontsource/<family>@5.3.0/files/<family>-latin-<weight>-normal.woff2),
+latin subset, fetched 2026-10-03, unmodified. Each family's licence is bundled beside it (LICENSE-<family>.txt).
+
+geist-sans-latin-{400,500,600,700}-normal.woff2
+  Geist Sans, (C) 2023 Vercel, made in collaboration with basement.studio. SIL Open Font License 1.1 (LICENSE-geist-sans.txt).
+  The Vercel dashboard's UI face (beats/vercel.css @font-face "Geist VC"), and the bakery page's body text.
+geist-mono-latin-{400,500}-normal.woff2
+  Geist Mono, Copyright 2024 The Geist Project Authors. SIL Open Font License 1.1 (LICENSE-geist-mono.txt).
+  The Vercel build logs and commit hashes (beats/vercel.css @font-face "Geist Mono VC").
+fraunces-latin-{400,600,700}-normal.woff2
+  Fraunces, Copyright 2020 The Fraunces Project Authors. SIL Open Font License 1.1 (LICENSE-fraunces.txt).
+  The bakery page's serif display face (beats/vercel.css @font-face "Fraunces MSB").
+
+The superbot hub keeps the source ad's families. The Chrome window chrome uses the system UI face, as Chrome does.

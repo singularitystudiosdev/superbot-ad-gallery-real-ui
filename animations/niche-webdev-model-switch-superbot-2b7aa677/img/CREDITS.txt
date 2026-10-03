@@ -1,0 +1,24 @@
+img/ CREDITS (internal, never shown on screen)
+
+Every photo on the fictional Maple Street Bakery landing page is a real photograph from Unsplash, used under the
+Unsplash License (https://unsplash.com/license: free to use, commercial use allowed, no attribution required). All
+five were checked as free (premium:false, plus:false) in Unsplash's own search API on 2026-10-03 and fetched from
+images.unsplash.com, resized and cropped by imgix on download (the query below). No credit, author name or handle
+appears anywhere on screen; they are recorded here only.
+
+hero.jpg            Bread loaves on bakery shelves. Photo by Angelo Pantazis.
+                    https://unsplash.com/photos/grilled-meat-on-black-grill-2-U0A2tNYhM (id 2-U0A2tNYhM; Unsplash's
+                    auto-generated slug is wrong, the photo is a bread shelf)
+                    file https://images.unsplash.com/photo-1579697096985-41fe1430e5df?w=2400&q=80&fm=jpg
+sourdough.jpg       Golden brown artisan sourdough on a wooden plate. Photo by Alan Aprilio.
+                    https://unsplash.com/photos/golden-brown-artisan-sourdough-bread-on-wooden-plate-FJyjcrEBsMo
+                    file https://images.unsplash.com/photo-1775591648306-9d1889c0b019?w=900&h=900&fit=crop&q=80&fm=jpg
+croissant.jpg       Freshly baked croissants on a baking sheet. Photo by arh Lee.
+                    https://unsplash.com/photos/freshly-baked-croissants-on-a-baking-sheet-P3uyZxdjhX8
+                    file https://images.unsplash.com/photo-1747459707229-7b1b7c8367e0?w=900&h=900&fit=crop&q=80&fm=jpg
+cinnamon-knot.jpg   Swedish cinnamon and cardamom knots with pearl sugar. Photo by Oskar Yildiz.
+                    https://unsplash.com/photos/baked-pastry-9B9-Wq1cZMI
+                    file https://images.unsplash.com/photo-1564953112050-951290a2ae74?rect=1150,700,1500,1500&w=900&h=900&fit=crop&q=80&fm=jpg
+galette.jpg         Fruit pie with a cut-out crust. Photo by Masha Fathi.
+                    https://unsplash.com/photos/pie-on-blue-and-white-textile-_PL4luMSMpM
+                    file https://images.unsplash.com/photo-1591452810654-7e035c52c8af?w=900&h=900&fit=crop&q=80&fm=jpg

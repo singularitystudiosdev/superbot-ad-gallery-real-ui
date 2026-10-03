@@ -644,6 +644,15 @@
     "desc": "One prompt in superbot: Gemini culls 3,412 wedding photos to 624 keepers, Claude Opus 5.5 plans the gallery in four sets, Nano Banana Pro edits every keeper to one look, then superbot connects to Pixieset, uploads the sets and sends the couple their gallery."
   },
   {
+    "id": "niche-canva-model-switch-superbot-2486ff8d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Make 3 launch designs from this brief and put them in Canva: Gemini, Opus 5.5, Nano Banana Pro, then superbot files them in Canva (4 switches)",
+    "src": "animations/niche-canva-model-switch-superbot-2486ff8d/",
+    "thumb": "assets/shots/niche-canva-model-switch-superbot-2486ff8d.png",
+    "desc": "One prompt in superbot: Gemini reads the 12-page brand brief and pulls the colours, fonts and sizes, Claude Opus 5.5 writes three layouts in the brand's voice, Nano Banana Pro renders the post, story and poster, then superbot connects to Canva and files all three in the launch folder."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

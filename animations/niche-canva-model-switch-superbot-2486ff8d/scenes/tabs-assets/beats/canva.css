@@ -1,0 +1,142 @@
+/* Canva beat (beats/canva.js): the connect card in the chat (the heading, three steps ticking, the mini window under
+   them) and the full-frame layer carrying the one Canva window: pinned over the card's window, then opened to the
+   whole frame. The window is a slim superbot edge on top of Canva's light web UI at its own px (scaled to the frame by
+   canva.js): the icon rail, the Projects panel with the folder tree, and the white sheet with the search field, the
+   breadcrumb, the folder title and the three design cards; the toast floats over the foot. No call-to-action buttons
+   anywhere (X ad policy amendment). Nothing here transitions: opacity and transform are written from t in canva.js,
+   so ?t= freezes a frame. Every class is prefixed .cv-.
+   Palette and metrics from Canva's own App UI Kit (@canva/app-ui-kit 5.14.3, dist/styles.ltr.css, light theme):
+   text #0F1015, subtle text #0F1015D9, subtlest #101219B2, borders #35415A33, neutral fill #39466024 / subtle
+   #404F6D0F, sunken surface #F3F4F7, selected #A370FC26 on #4A2E7E, primary #8B3DFF, positive #008009, raised
+   shadow "0 0 0 .5px #404f6d12, 0 2px 5px #151e821f, 0 6px 12px #151e820f", element radius 10px / 12px, 8px unit. */
+
+/* Canva Sans (Canva's UI face) is proprietary and not bundled. Its stand-in is Noto Sans (SIL OFL 1.1), the family
+   the App UI Kit's own font stack falls back to; latin subset from @fontsource/noto-sans, vendored under fonts/
+   (fonts/CREDITS.txt), so nothing is fetched at render. */
+@font-face { font-family: "Noto Sans CV"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/noto-sans-latin-400-normal.woff2?v=2486ff8d") format("woff2"); }
+@font-face { font-family: "Noto Sans CV"; font-style: normal; font-weight: 600; font-display: block; src: url("../../../fonts/noto-sans-latin-600-normal.woff2?v=2486ff8d") format("woff2"); }
+#s-tabs { --cv-ui: "Noto Sans CV", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --cv-fg: #0F1015; --cv-fg2: #0F1015D9; --cv-fg3: #101219B2; --cv-line: #35415A33; --cv-fill: #39466024; --cv-fill2: #404F6D0F;
+  --cv-sunk: #F3F4F7; --cv-sel: #A370FC26; --cv-sel-fg: #4A2E7E; --cv-pri: #8B3DFF; --cv-pos: #008009;
+  --cv-raised: 0 0 0 .5px #404f6d12, 0 2px 5px #151e821f, 0 6px 12px #151e820f; }
+
+/* ---- the connect card, in the chat ---- */
+#s-tabs .sbsite .hub .cv-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .cv-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; padding: 8px 10px 10px;
+  border-radius: 10px; background: var(--dt-card); box-shadow: inset 0 0 0 1px var(--dt-line); }
+#s-tabs .sbsite .hub .cv-card.cv-tall { width: 340px; }
+#s-tabs .sbsite .hub .cv-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px;
+  font: 12.5px/1 var(--ui); color: #c9c9cf; white-space: nowrap; }
+#s-tabs .sbsite .hub .cv-step b { font-weight: 600; color: #ececec; }
+#s-tabs .sbsite .hub .cv-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .cv-ct-i { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; overflow: hidden; }
+#s-tabs .sbsite .hub .cv-ct-s { background: #fff; }
+#s-tabs .sbsite .hub .cv-ct-s img { width: 20px; height: 20px; display: block; }
+#s-tabs .sbsite .hub .cv-ct-f { background: #26262b; box-shadow: inset 0 0 0 1px #3a3a40; }
+#s-tabs .sbsite .hub .cv-ct-f .cv-i { width: 12px; height: 12px; stroke: #ececec; stroke-width: 2; }
+#s-tabs .sbsite .hub .cv-ct-n { background: #26262b; font: 700 10px/1 var(--ui); color: #ececec; box-shadow: inset 0 0 0 1px #3a3a40; }
+#s-tabs .sbsite .hub .cv-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .cv-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .cv-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+/* the mini window's frame: the full-frame layer is pinned over it (its aspect is the frame's, set by canva.js) */
+#s-tabs .sbsite .hub .cv-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: 8px; background: var(--cv-sunk); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .cv-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--cv-sunk); }
+#s-tabs .cv-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: var(--cv-sunk); color: var(--cv-fg); font: 400 14px/20px var(--cv-ui); -webkit-font-smoothing: antialiased; }
+#s-tabs .cv-app img { display: block; }
+#s-tabs .cv-i { flex: none; width: 24px; height: 24px; fill: none; stroke: var(--cv-fg); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .cv-i .cv-fl { fill: currentColor; stroke: none; }
+#s-tabs .cv-land { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* superbot's edge on the window: the superbot mark and name, a dot, the Canva mark and name. Plain labels, no controls */
+#s-tabs .cv-edge { position: relative; z-index: 3; flex: none; display: flex; align-items: center; gap: 7px; height: 30px; padding: 0 14px;
+  background: #141416; color: #ececec; font: 600 12.5px/1 var(--ui); white-space: nowrap; }
+#s-tabs .cv-edge .cv-sb { width: 16px; height: 16px; border-radius: 4px; }
+#s-tabs .cv-edge .cv-mk { width: 16px; height: 16px; border-radius: 50%; background: #fff; }
+#s-tabs .cv-edge b { font-weight: 600; }
+#s-tabs .cv-edge .cv-dot { width: 3px; height: 3px; margin: 0 2px; border-radius: 50%; background: #8e8e96; }
+
+/* everything under the edge: the rail, the Projects panel, the sheet (the push scales only .cv-page, inside the sheet) */
+#s-tabs .cv-stage { position: relative; flex: 1; min-height: 0; display: flex; }
+
+/* the icon rail: Projects active (its icon on the lavender selected tile, as in Canva's Help Center screenshots) */
+#s-tabs .cv-rail { flex: none; width: 72px; display: flex; flex-direction: column; justify-content: space-between; padding: 14px 0 14px; box-sizing: border-box; }
+#s-tabs .cv-rail ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+#s-tabs .cv-rail li { display: flex; flex-direction: column; align-items: center; gap: 4px; font: 400 11px/14px var(--cv-ui); color: var(--cv-fg2); white-space: nowrap; }
+#s-tabs .cv-ri { display: grid; place-items: center; width: 40px; height: 36px; border-radius: 10px; }
+#s-tabs .cv-ri .cv-i { width: 22px; height: 22px; stroke: var(--cv-fg2); }
+#s-tabs .cv-rail li.on .cv-ri { background: var(--cv-sel); }
+#s-tabs .cv-rail li.on .cv-i { stroke: var(--cv-pri); fill: var(--cv-sel); }
+#s-tabs .cv-rail li.on .cv-rl { color: var(--cv-fg); font-weight: 600; }
+#s-tabs .cv-rb { display: grid; justify-items: center; gap: 12px; }
+#s-tabs .cv-av { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #B4643C; color: #fff; font: 600 13px/1 var(--cv-ui); }
+
+/* the Projects panel: the folder tree, Trash at the foot */
+#s-tabs .cv-panel { flex: none; width: 252px; display: flex; flex-direction: column; padding: 12px 12px 14px 8px; box-sizing: border-box; }
+#s-tabs .cv-ph { height: 40px; display: flex; align-items: center; padding: 0 10px; }
+#s-tabs .cv-ph img { width: 30px; height: 30px; border-radius: 50%; background: #fff; }
+#s-tabs .cv-tree { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+#s-tabs .cv-tree li { display: flex; align-items: center; gap: 10px; height: 38px; padding: 0 10px; border-radius: 8px; font: 400 14px/1 var(--cv-ui); color: var(--cv-fg); white-space: nowrap; }
+#s-tabs .cv-tree li > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .cv-tree .cv-i { width: 20px; height: 20px; stroke: var(--cv-fg2); }
+#s-tabs .cv-tree .cv-caret { width: 12px; height: 12px; margin: 0 -4px 0 -2px; color: var(--cv-fg3); transform: rotate(90deg); }
+#s-tabs .cv-tree .cv-av-s { width: 20px; height: 20px; font-size: 10px; }
+#s-tabs .cv-tree .cv-t1 { padding-left: 24px; }
+#s-tabs .cv-tree .cv-t2 { padding-left: 46px; }
+#s-tabs .cv-tree li.on { background: var(--cv-sel); color: var(--cv-sel-fg); font-weight: 600; }
+#s-tabs .cv-tree li.on .cv-i { stroke: var(--cv-sel-fg); }
+#s-tabs .cv-trash { margin-top: auto; display: flex; align-items: center; gap: 10px; height: 38px; padding: 0 10px; font: 400 14px/1 var(--cv-ui); color: var(--cv-fg); }
+#s-tabs .cv-trash .cv-i { width: 20px; height: 20px; stroke: var(--cv-fg2); }
+
+/* the sheet: white, rounded, raised over the page; the search on top, then the folder */
+#s-tabs .cv-sheet { position: relative; flex: 1; min-width: 0; margin: 8px 8px 8px 0; border-radius: 12px; background: #fff; box-shadow: var(--cv-raised); overflow: hidden; }
+#s-tabs .cv-top { display: flex; align-items: center; justify-content: center; height: 64px; padding: 0 20px; }
+#s-tabs .cv-search { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 360px; height: 40px; padding: 0 14px; box-sizing: border-box;
+  border-radius: 10px; box-shadow: inset 0 0 0 1px var(--cv-line); color: var(--cv-fg3); font: 400 14px/1 var(--cv-ui); white-space: nowrap; overflow: hidden; }
+#s-tabs .cv-search .cv-i { width: 20px; height: 20px; stroke: var(--cv-fg2); }
+#s-tabs .cv-sic { display: none; }
+#s-tabs .cv-page { padding: 6px 36px 0; }
+#s-tabs .cv-crumb { display: flex; align-items: center; gap: 4px; font: 400 13px/18px var(--cv-ui); color: var(--cv-fg3); white-space: nowrap; }
+#s-tabs .cv-crumb b { font-weight: 600; color: var(--cv-fg); }
+#s-tabs .cv-crumb .cv-chev { width: 14px; height: 14px; stroke: var(--cv-fg3); stroke-width: 2; }
+#s-tabs .cv-h1 { display: flex; align-items: center; gap: 10px; margin: 12px 0 22px; font: 600 26px/34px var(--cv-ui); letter-spacing: -.2px; color: var(--cv-fg); white-space: nowrap; }
+#s-tabs .cv-h1 .cv-i { width: 28px; height: 28px; stroke: var(--cv-fg2); }
+
+/* the design cards: Canva's grey tile with the design letterboxed in it, the title, the type and "Edited just now" */
+#s-tabs .cv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 20px; }
+#s-tabs .cv-dc { min-width: 0; opacity: 0; }
+#s-tabs .cv-tile { position: relative; aspect-ratio: 11 / 10; border-radius: 10px; background: var(--cv-sunk); overflow: hidden; }
+#s-tabs .cv-lb { position: absolute; inset: 16px; display: flex; align-items: center; justify-content: center; }
+#s-tabs .cv-lb img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 2px; box-shadow: 0 1px 2px #151e8226, 0 4px 10px #151e821a; opacity: 0; }
+#s-tabs .cv-up { position: absolute; left: 22%; right: 22%; top: 50%; height: 4px; margin-top: -2px; border-radius: 2px; background: var(--cv-fill); overflow: hidden; opacity: 0; }
+#s-tabs .cv-up b { display: block; height: 100%; background: var(--cv-pri); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .cv-dt { margin-top: 10px; font: 600 14px/20px var(--cv-ui); color: var(--cv-fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .cv-dm { display: flex; align-items: center; gap: 5px; margin-top: 2px; font: 400 12px/16px var(--cv-ui); color: var(--cv-fg3); white-space: nowrap; }
+#s-tabs .cv-dm .cv-i { width: 15px; height: 15px; stroke: var(--cv-fg3); stroke-width: 1.8; }
+#s-tabs .cv-dm i { font-style: normal; }
+
+/* the toast: a dark rounded bar at the foot of the window, a green check and the line, nothing to press */
+#s-tabs .cv-toastw { position: absolute; left: 0; right: 0; bottom: 28px; z-index: 4; display: flex; justify-content: center; pointer-events: none; }
+#s-tabs .cv-toast { display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px 0 16px; border-radius: 12px; background: #0F1015F2;
+  color: #fff; font: 600 15px/1 var(--cv-ui); white-space: nowrap; box-shadow: 0 8px 16px #151e821f, 0 24px 24px #151e820f; opacity: 0; }
+#s-tabs .cv-toast .cv-i { width: 22px; height: 22px; color: #3BB54A; }
+#s-tabs .cv-toast .cv-i .cv-wk { stroke: #fff; stroke-width: 2.4; }
+
+/* portrait (4:5): Canva's narrow layout. The Projects panel folds away, the rail keeps its icons (labels under them,
+   smaller), the search field is its icon, and the cards wrap two to a row so each design stays large */
+#s-tabs .cv-narrow .cv-panel { display: none; }
+#s-tabs .cv-narrow .cv-rail { width: 64px; }
+#s-tabs .cv-narrow .cv-rail li { font-size: 10px; }
+#s-tabs .cv-narrow .cv-sheet { margin-left: 0; }
+#s-tabs .cv-narrow .cv-top { justify-content: flex-end; height: 52px; }
+#s-tabs .cv-narrow .cv-search { display: none; }
+#s-tabs .cv-narrow .cv-sic { display: grid; place-items: center; width: 40px; height: 40px; }
+#s-tabs .cv-narrow .cv-sic .cv-i { width: 20px; height: 20px; stroke: var(--cv-fg2); }
+#s-tabs .cv-narrow .cv-page { padding: 0 22px; }
+#s-tabs .cv-narrow .cv-crumb { font-size: 12px; }
+#s-tabs .cv-narrow .cv-h1 { margin: 8px 0 16px; font-size: 23px; }
+#s-tabs .cv-narrow .cv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 16px; }
+#s-tabs .cv-narrow .cv-tile { aspect-ratio: 4 / 3; }
+#s-tabs .cv-narrow .cv-toastw { bottom: 22px; }

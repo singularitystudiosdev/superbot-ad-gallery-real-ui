@@ -1,0 +1,43 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+gemini-logo.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                       Used for Gemini and for Nano Banana Pro (Google's Gemini 3 Pro Image model,
+                       https://deepmind.google/models/gemini-image/pro/), which ships under the Gemini brand: pill tile,
+                       reply header, composer chip.
+claude-logo.svg        Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                       (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+
+canva-logo.svg         Canva mark, Simple Icons "canva" icon via https://api.iconify.design/simple-icons/canva.svg
+                       (HTTP 200, iconify's simple-icons collection 16.33.0), fetched 2026-10-03; the unmodified download
+                       is kept beside it as canva-raw.svg. Licence: CC0 1.0 (Simple Icons' licence for its SVG files).
+                       Path verbatim; the only change is fill="currentColor" -> fill="#00C4CC" and the 1em size attributes
+                       dropped. #00C4CC is the brand colour Simple Icons records for Canva (simple-icons@15.0.0
+                       data/simple-icons.json: {"title":"Canva","hex":"00C4CC","source":"https://www.canva.com"}; Canva
+                       was later removed from Simple Icons' own data, the icon remains on iconify). Canva is a trademark
+                       of Canva Pty Ltd, used nominatively to name the app superbot connects to (pill tile, reply header,
+                       composer chip, connect card, the window's edge and Projects panel) and to mock its web UI in the
+                       result screen. Never redrawn. Canva's script wordmark is not used anywhere.
+
+CANVA UI SOURCES (the full-frame window)
+  Tokens: @canva/app-ui-kit 5.14.3, https://unpkg.com/@canva/app-ui-kit@5.14.3/dist/styles.ltr.css (colours, radii,
+  shadows, font stack; values listed at the top of scenes/tabs-assets/beats/canva.css).
+  Layout: Canva Help Center product screenshots on https://www.canva.com/help/manage-folder-contents/ (Projects view:
+  icon rail, Projects panel, search "Search designs, folders, and uploads", item tiles with title and "type • detail"
+  meta) and the article text of https://www.canva.com/help/create-folders/ and
+  https://www.canva.com/help/find-designs-and-folders/. Design type names ("Instagram Post", "Instagram Story",
+  "Poster") as Canva names them on https://www.canva.com/create/instagram-posts/, /create/instagram-stories/,
+  /create/posters/ (all fetched 2026-10-03). Unverified details are kept plain (no extra controls invented).
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+STORY AND DATA
+  Everything in the spot's story is made up for it: the client "Copperleaf Coffee" and its "Autumn Blend" (out
+  Oct 14), the file copperleaf_brief.pdf and its 12 pages, every page caption in the read beat, "Maya, brand lead",
+  the layouts in launch_set.md, the folder "Autumn Blend launch" and the avatar letter. A search on 2026-10-03 found
+  no notable coffee brand named Copperleaf Coffee (only an unrelated software company, Copperleaf, and a small
+  two-word "Copper Leaf Coffee Roaster" site); any resemblance is coincidental. The brand kit (Copper #B4643C, Oat
+  #F2E8DA, Pine #2F4236, Fraunces and Inter) is made up for the spot. The photos are real, sourced stock photos:
+  see ../img/CREDITS.txt.

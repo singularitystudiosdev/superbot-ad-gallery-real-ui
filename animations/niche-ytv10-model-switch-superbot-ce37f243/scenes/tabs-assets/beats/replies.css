@@ -1,0 +1,55 @@
+/* Replies beat (beats/replies.js): Opus 5.5 writing the five replies and the pin decision, in the base's code-panel
+   grammar and colours (Cursor Dark: the panel greys, the green check). Header, the file name, the editor body with line
+   numbers, the review bar. ytv10 policy guard: no clock, no buttons, the file name and draft count are plain text. Nothing here transitions: every moving value is written from t in render, so ?t=
+   freezes a frame. Every class is prefixed .em-. */
+#s-tabs .sbsite .hub .em-x { position: relative; width: 100%; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden;
+  background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); font: 12px/1.3 var(--ui); color: #d6d6dd; opacity: 0; }
+#s-tabs .sbsite .hub .em-x.em-done { box-shadow: 0 0 0 1px rgba(79,197,127,.55), 0 0 22px rgba(79,197,127,.12), 0 14px 36px rgba(0,0,0,.45); }
+#s-tabs .sbsite .hub .em-x svg { flex: none; }
+
+/* header: project, draft count, the beat's own clock */
+#s-tabs .sbsite .hub .em-hd { display: flex; align-items: center; gap: 10px; flex: none; height: 36px; padding: 0 12px; border-bottom: 1px solid #232326; background: #18181b; }
+#s-tabs .sbsite .hub .em-proj { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
+#s-tabs .sbsite .hub .em-proj b { font: 600 13px/1 var(--ui); color: #ededf0; }
+#s-tabs .sbsite .hub .em-ico { width: 15px; height: 15px; color: #8b8b93; }
+#s-tabs .sbsite .hub .em-br { font: 11px/1 var(--font-mono); color: #8b8b93; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-state { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font: 500 12px/1 var(--ui); font-style: normal; color: #9d9da6; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-spin { display: block; flex: none; width: 11px; height: 11px; border-radius: 50%; border: 1.6px solid #3a3a40; border-top-color: #c9c9cf; box-sizing: border-box; }
+#s-tabs .sbsite .hub .em-state .em-tk { display: none; width: 14px; height: 14px; fill: none; stroke: #4fc57f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .em-state.ok .em-spin { display: none; }
+#s-tabs .sbsite .hub .em-state.ok .em-tk { display: block; }
+#s-tabs .sbsite .hub .em-state.ok { color: #4fc57f; }
+
+/* the file name, plain text on the bar (no tab shape: nothing reads as a control) */
+#s-tabs .sbsite .hub .em-tabs { display: flex; flex: none; height: 32px; background: #18181b; border-bottom: 1px solid #232326; overflow: hidden; }
+#s-tabs .sbsite .hub .em-tab { display: inline-flex; align-items: center; gap: 6px; padding: 0 12px;
+  font: 500 12px/1 var(--ui); color: #c9c9cf; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-fi { font: 800 8.5px/1 var(--ui); letter-spacing: -.02em; color: #87c3ff; }
+
+/* the editor body: 11 lines of 17, a line-number gutter */
+#s-tabs .sbsite .hub .em-bd { position: relative; flex: none; padding: 9px 0 10px; }
+/* the pin decision's mark on Priya's reply (lines 1 and 2): a soft band and a rule in the Opus accent */
+#s-tabs .sbsite .hub .em-mk { position: absolute; left: 0; right: 0; top: 7px; height: 38px; opacity: 0; background: rgba(217,119,87,.14); box-shadow: inset 2px 0 0 #d97757; }
+#s-tabs .sbsite .hub .em-l { display: flex; height: 17px; align-items: center; font: 11.5px/17px var(--font-mono); white-space: pre; }
+#s-tabs .sbsite .hub .em-l u { flex: none; width: 40px; padding-right: 14px; box-sizing: border-box; text-align: right; text-decoration: none; color: #5c5c66; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .em-l code { display: inline-flex; align-items: center; font: inherit; color: #d6d6dd; background: none; padding: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .em-l i { font-style: normal; }
+#s-tabs .sbsite .hub .em-l .k { color: #82d2ce; }
+#s-tabs .sbsite .hub .em-caret { display: none; width: 1.5px; height: 13px; margin-left: 1px; background: #ececec; }
+
+/* the review bar */
+#s-tabs .sbsite .hub .em-ft { display: flex; align-items: center; gap: 10px; flex: none; height: 44px; padding: 0 10px 0 8px; border-top: 1px solid #232326; background: #18181b; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-sum { display: inline-flex; align-items: center; gap: 6px; min-width: 0; font: 500 12.5px/1 var(--ui); color: #b4b4bc; }
+/* the pin decision is long: on a narrow column it wraps to a second line instead of running under the buttons */
+#s-tabs .sbsite .hub .em-ft.on { height: auto; min-height: 44px; padding-top: 7px; padding-bottom: 7px; }
+#s-tabs .sbsite .hub .em-ft.on .em-sum { white-space: normal; }
+#s-tabs .sbsite .hub .em-ft.on .em-nf { line-height: 1.3; }
+#s-tabs .sbsite .hub .em-cnt { font: 500 12px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: #9d9da6; }
+#s-tabs .sbsite .hub .em-nf { font-weight: 600; color: #e2e2e6; }
+#s-tabs .sbsite .hub .em-ft.on .em-nf { color: #4fc57f; }
+/* done: the base's green check lands in front of the pin decision */
+#s-tabs .sbsite .hub .em-sum .em-dn { display: none; width: 14px; height: 14px; fill: none; stroke: #4fc57f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .em-ft.on .em-dn { display: block; }
+
+/* the Opus reply spans the composer's column, as the source's panel does */
+#s-tabs .sbsite .hub .qc-r:has(.em-x) { --hub-reply: 100%; }

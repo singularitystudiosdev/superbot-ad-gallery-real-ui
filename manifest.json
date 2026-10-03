@@ -862,6 +862,15 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-ytv10-model-switch-superbot-ce37f243",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and pin the best one: before and after, from a pile of unanswered comments to every top comment answered and the best one pinned (4 calm switches, variant, 16:9)",
+    "src": "animations/niche-ytv10-model-switch-superbot-ce37f243/",
+    "thumb": "assets/shots/niche-ytv10-model-switch-superbot-ce37f243.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d, retimed to a 40 to 45 second before and after. It opens on the latest video's pile of 1,284 unanswered comments, then one ask in superbot: Gemini watches the video and ranks the comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies, each switch at a calmer pace, and it ends on the same YouTube Studio page with the top five answered and the best one pinned. 16:9 only."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

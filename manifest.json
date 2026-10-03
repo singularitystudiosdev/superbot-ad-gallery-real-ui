@@ -662,6 +662,15 @@
     "desc": "One ask in superbot: Gemini reads 312 player reports to find why jumps get dropped, Claude Opus 5.5 adds a jump buffer, coyote time and a landing test, GPT-6 Astra runs the tests and 500 bot playtests, then superbot connects to itch.io, pushes the Web build with butler and the patched game runs in the browser."
   },
   {
+    "id": "niche-obsidian-model-switch-superbot-d1018d78",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Turn my 40 saved articles on sleep into linked notes in my Obsidian vault: Gemini, Opus 5.5, GPT-6 Astra, then superbot writes them into the vault (4 switches)",
+    "src": "animations/niche-obsidian-model-switch-superbot-d1018d78/",
+    "thumb": "assets/shots/niche-obsidian-model-switch-superbot-d1018d78.png",
+    "desc": "One prompt in superbot: Gemini reads 40 saved articles on sleep and pulls 46 ideas, Claude Opus 5.5 writes 46 linked notes, GPT-6 Astra checks every note against its article, then superbot opens the Obsidian vault, adds the notes, links them to 31 existing notes and builds a Sleep and Memory map."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

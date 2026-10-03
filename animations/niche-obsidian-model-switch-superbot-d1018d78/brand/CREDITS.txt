@@ -1,0 +1,59 @@
+brand/ CREDITS (internal): every third-party mark, icon set and font in this spot, where it came from, and the usage
+note. All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and showing the Obsidian vault superbot writes into) and unaltered except where noted.
+Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (the knot), Simple Icons `openai` (CC0 1.0), fetched from the Iconify API
+                     https://api.iconify.design/simple-icons/openai.svg?color=%23ffffff on 2026-10-03 (path verbatim,
+                     fill set to #fff by the API's color parameter for the dark hub; no badge, no tile). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" status line (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6). Replaces the base's round black badge, which read as a tile
+                     behind the mark.
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub. Trademark of Anthropic.
+obsidian-mark.svg    Obsidian logo (the gradient mark), the official file from Obsidian's brand page
+                     https://obsidian.md/brand (file https://obsidian.md/images/obsidian-logo-gradient.svg, fetched
+                     2026-10-03, byte-identical, sha256 119b01b96c99f736098742c329f440313b6763bd2aea22cafe08179699431280).
+                     Used unmodified, never recoloured, distorted or reconfigured, per the brand page's usage rule
+                     ("Please do not edit, change, distort, recolor, or reconfigure the Obsidian logo."). Mark only: no
+                     Obsidian wordmark is typeset anywhere in the spot. The brand page also says: "The Obsidian name,
+                     logo and app icon are trademarks ... If you want to use Obsidian assets for commercial purposes,
+                     please contact us." This is a paid ad, so permission from Obsidian (Dynalist Inc.) should be
+                     confirmed before it runs; flagged to the publisher. Used for the "Opening your Obsidian vault"
+                     status line, the "Obsidian connected" reply header and the connect card.
+
+UI ICONS
+  Every UI glyph on the hub cards and in the Obsidian file explorer (folder, folder-open, file-plus, link, map,
+  newspaper, file-text, check; scenes/tabs-assets/beats/obsidian-icons.js) is a Lucide icon (Lucide Contributors, ISC
+  License, https://github.com/lucide-icons/lucide), fetched from the Iconify API
+  https://api.iconify.design/lucide/<name>.svg on 2026-10-03, markup verbatim. Obsidian's own icon set is not used;
+  the explorer's carets are replaced by folder glyphs (no disclosure control is drawn).
+
+OBSIDIAN LOOK (sources of record)
+  Colours, sizes, radii and type stacks: Obsidian's app stylesheet as shipped by Obsidian Publish,
+  https://publish.obsidian.md/app.css (fetched 2026-10-03), read headlessly (Playwright chromium, getComputedStyle)
+  with body.theme-dark, i.e. Obsidian's default dark theme; cross-checked on the live help site
+  https://obsidian.md/help/ (where https://publish.obsidian.md/help/ now lands), which ships the same variables and
+  overrides only --color-base-00 (#101010). Every value used is listed in scenes/tabs-assets/chat.css (--ob-*) and
+  beats/vault.css. Graph colours: --graph-node, --graph-line, --graph-node-focused, --graph-text (same stylesheet;
+  reference https://help.obsidian.md/plugins/graph and https://docs.obsidian.md/Reference/CSS+variables). Fonts: no
+  font files are vendored; Obsidian's --font-interface / --font-text and --font-monospace stacks resolve to the system
+  UI face and SF Mono / Menlo on macOS. Measured --link-decoration is underline; the map note's links are drawn
+  without one on purpose (an underlined link reads as tappable; this ad draws nothing that looks tappable).
+
+SUPERBOT HUB UI KIT (carried unchanged with the fork)
+  scenes/tabs-assets/: the inline icon symbols in icons.js (the hub's rail, hidden in this crop). The hub's mono is the
+  base's own --font-mono and its sans the base's --ui (no font files vendored); the greeting's serif stack is the
+  base's ("Iowan Old Style", Palatino, Georgia: system fonts).
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar and greeting mark are scenes/tabs-assets/tile.svg and mark-clean.svg (first party).
+
+MADE UP FOR THE SPOT
+  The vault Second Brain (~/Notes/Second Brain, 1,284 notes) and its folders, the 40 saved articles and their titles,
+  the word count, the 46 notes and their titles, the map note Sleep and Memory, the 212 links, the 31 linked notes
+  (Spaced repetition, Exam prep 2026, Hippocampus, Morning routine, Neocortex and the rest), the 58 quotes and the
+  check results are fictional. No author names, no "@" anywhere on screen.

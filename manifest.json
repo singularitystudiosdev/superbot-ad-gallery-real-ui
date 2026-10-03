@@ -563,6 +563,15 @@
     "desc": "One prompt in superbot: Gemini reads 214 emails and next week's calendar and finds 6 call requests and 2 double bookings, GPT-6 Astra fits all 6 calls inside each client's 9 to 5 across 5 time zones, Claude Opus 5.5 writes every invite with the time in the client's zone, then superbot connects to Google Calendar: 6 calls booked, 2 meetings moved, no overlaps."
   },
   {
+    "id": "niche-notion-model-switch-superbot-04836275",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Turn my messy meeting notes into a project tracker with owners and due dates: Gemini, Opus 5.5, GPT-6 Astra, then superbot builds the tracker in Notion (4 switches)",
+    "src": "animations/niche-notion-model-switch-superbot-04836275/",
+    "thumb": "assets/shots/niche-notion-model-switch-superbot-04836275.png",
+    "desc": "One ask in superbot: Gemini reads 3 meetings of messy notes and finds 12 action items, Claude Opus 5.5 writes each one as a task with one owner and turns vague dates into real ones, GPT-6 Astra checks every task has an owner and a workday due date, then superbot connects to Notion and builds the Launch tracker board with all 12 tasks assigned."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,86 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the Notion surfaces superbot connects to) and unaltered except where noted.
+Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (round badge), copied from animations/bikeride-model-switch-superbot-e13744a9/brand/
+                     (which copied it from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6).
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+notion-mark.svg      Notion mark, Simple Icons `notion` (CC0 1.0), fetched verbatim from the Iconify API
+                     https://api.iconify.design/simple-icons/notion.svg on 2026-10-03 (fill currentColor, unaltered:
+                     black on the white tile; painted white by a CSS filter in the dark composer chip). Trademark of
+                     Notion Labs, Inc. Icon only: no Notion wordmark is typeset anywhere in the spot. Used for the
+                     "Connecting to Notion" pill tile, the composer chip and the "Notion connected" reply header; the
+                     same path (inline, scenes/tabs-assets/beats/notion-icons.js 'notion') is the mark in the
+                     authorization prompt's header and logo row and on the checklist's first step.
+
+UI ICONS
+  Every UI glyph on the Notion surfaces and the hub cards (search, house, calendar-days, sparkles, inbox, layout-grid,
+  file-text, table-2, kanban, list-filter, arrow-up-down, sliders-horizontal, star, clock-3, ellipsis, plus, users,
+  pencil, chevron-down, chevrons-up-down, check, and the rest listed in scenes/tabs-assets/beats/notion-icons.js) is a
+  Lucide icon (Lucide Contributors, ISC License, https://github.com/lucide-icons/lucide), fetched from the Iconify API
+  https://api.iconify.design/lucide/<name>.svg on 2026-10-03, markup verbatim. Notion's own icon font is not licensed
+  for reuse and is not used. Page icons are neutral page glyphs (file-text, table-2), never emoji. Avatars and the
+  workspace tile are letter avatars (initials on Notion's measured gray, rgba(28,19,1,.11), in Notion's measured chip
+  text #494846), UI furniture; never a drawn face.
+
+NOTION'S AUTHORIZATION PROMPT AND PAGE PICKER (sources of record)
+  Notion developers, "Authorization", https://developers.notion.com/docs/authorization (lands on
+  /guides/get-started/authorization; fetched 2026-10-03): "a prompt describes the connection capabilities, presented
+  to the user as what the connection would like to be able to do in the workspace. A user can either select pages to
+  grant the connection access to, or cancel the request"; "If the user opts to `Select pages`, then a page picker
+  interface opens"; "If the user clicks `Allow access` ...". Its two figures, read for layout and wording:
+  ec39f97-Screen_Shot_2021-07-22_at_2.58.28_PM.png ("Prompt for authorizing a standard connection"): a header with the
+  Notion mark and the workspace switcher, the connection's icon, "<connection> wants to access <workspace>",
+  "<connection> wants to", the lines "View and edit pages you select", "Add new pages to <workspace>", "View names and
+  emails" (each with a chevron), Cancel and the blue Select pages, then "Make sure you trust <connection>" and "If you
+  continue, you may be sharing sensitive information." (the card keeps the first sentence); and
+  a4009ce-Screen_Shot_2021-07-22_at_3.09.51_PM.png ("Page picker interface"): "Allow <connection> to access these
+  pages", "Search for pages in <workspace>", the WORKSPACE / SHARED / PRIVATE sections with checkboxes, Back and the
+  blue Allow access. The capability lines are the prompt's own user-facing wording for the capabilities in
+  https://developers.notion.com/reference/capabilities (Read content, Update content, Insert content; "User information
+  ..."). In the card the connection's icon slot holds superbot's tile and the Notion mark joined by a dotted connector;
+  the docs' screenshot shows the Notion wordmark beside the mark in the header, which the card drops (icon only). No
+  string contains a dash, so no line was split.
+
+NOTION BOARD, SIDEBAR AND PALETTE (sources of record)
+  Board: Notion help "Board view (Kanban)", https://www.notion.com/help/boards (fetched 2026-10-03): boards "can be
+  grouped by status, assignee, priority"; group by another property from the settings menu; "large, medium, or small
+  card sizes"; "To the immediate right of each column heading, you'll see a gray number ... the number of cards in
+  each column". Empty group label: Notion names the empty group "No <property>" (seen live on the measured page: its
+  board's empty Status group reads "No Status"), so the empty Owner group is "No Owner". Date format: the measured
+  page's date properties read "May 11, 2025" (Notion's default full date, month day, year), so Due reads e.g.
+  "October 9, 2026"; only May dates were on the page, so the spelled-out long month name follows the same format and
+  was not seen for a long month. Status: "Not started" is Notion's default status option (help "Database properties",
+  https://www.notion.com/help/database-properties: status tags in To-do, In Progress and Complete groups); its chip
+  colours (gray rgba(28,19,1,.11), text #494846, 9px radius, dot) were measured live on a "Not started" chip. Sidebar:
+  Notion help "Navigate with the sidebar", https://www.notion.com/help/navigate-with-the-sidebar (fetched 2026-10-03):
+  the workspace switcher, Search, Home, Chats with Notion AI, Meetings, Inbox, Library, and the Teamspaces / Shared /
+  Private sections.
+  Palette, radii, sizes, type: measured headlessly (Playwright chromium, getComputedStyle) on a live public Notion
+  board page, https://linnon-lab.notion.site/color-coded-task-management-board (Notion web 23.13.20261003.0412, light
+  theme, 2026-10-03), and the page title / body type on
+  https://notion.notion.site/Getting-started-with-Projects-Tasks-Sprints-b9bc1775be334046a46c38149362a978 (40px/48px
+  700 title, 16px/24px body, #2c2c2b text, #fff canvas, a 44px top bar). Every value used is listed in
+  scenes/tabs-assets/chat.css (--nt-*). Type: Notion's own UI stack as measured (ui-sans-serif, -apple-system,
+  "system-ui", "Segoe UI Variable Display", "Segoe UI", Helvetica, ...); no font files vendored.
+  No toast is shown at the bold moment: no source of record shows Notion raising one for a property change.
+
+SUPERBOT HUB UI KIT (carried unchanged with the fork)
+  scenes/tabs-assets/: the hub's app rail icons devin.png, hermes.png, grok.png (marks of Cognition, Nous Research and
+  xAI, used nominatively; as credited in animations/they-wont-tell-you-how-superbot-fccab6d9/CREDITS.txt) and the
+  inline icon symbols in icons.js. The hub's mono is the base's own --font-mono (no font files vendored).
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar in the hub is scenes/tabs-assets/tile.svg (first party).
+
+MADE UP FOR THE SPOT
+  The workspace Pinecrest Studio, the team (Priya Shah, Marcus Lee, Elena Ruiz), the meetings (Launch sync, Design
+  review, Marketing standup), the Launch tracker database, its 12 tasks, owners and due dates, the meeting-note
+  excerpts, the word counts and the check results are fictional. No "@" appears anywhere on screen.

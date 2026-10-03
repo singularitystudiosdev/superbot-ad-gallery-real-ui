@@ -871,6 +871,15 @@
     "desc": "Variant of niche-youtube-model-switch-superbot-3828921d, retimed to a 40 to 45 second before and after. It opens on the latest video's pile of 1,284 unanswered comments, then one ask in superbot: Gemini watches the video and ranks the comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies, each switch at a calmer pace, and it ends on the same YouTube Studio page with the top five answered and the best one pinned. 16:9 only."
   },
   {
+    "id": "niche-ytv5-model-switch-superbot-b0c8e364",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and cut a Short from the moment they talk about most: superbot finds the most-discussed moment, reframes it vertical, captions it, and the Short plays in the ad (4 switches, variant, 16:9)",
+    "src": "animations/niche-ytv5-model-switch-superbot-b0c8e364/",
+    "thumb": "assets/shots/niche-ytv5-model-switch-superbot-b0c8e364.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d that puts the generated asset on screen. One ask in superbot: Gemini maps the 1,284 comments onto the video and finds the moment they talk about most (the blind test at 6:12), GPT-6 Astra cuts it and reframes it vertical, Claude Opus 5.5 writes the captions, the title and the replies, then superbot uploads the captioned Short from YouTube Studio, linked to the full video, and the Short plays inside the ad. 16:9 only."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

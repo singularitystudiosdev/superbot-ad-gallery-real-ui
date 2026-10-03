@@ -1,0 +1,87 @@
+/* Studio beat (beats/studio.js): the checklist card in the chat, and the layer carrying the one YouTube Shorts page
+   (desktop, dark theme) inside a superbot frame, then superbot's lock-up beside it. The checklist card reads chat.css
+   --gm-* (Google's own surfaces). Nothing here transitions: position, size, radius, opacity and transform are written
+   from t in studio.js, so ?t= freezes a frame. Classes: .gk- checklist card, .st- the superbot frame and lock-up,
+   .sh- the Shorts page.
+   The Shorts page follows YouTube's own desktop dark theme (www.youtube.com/shorts, 2025-2026): page #0f0f0f, raised
+   surfaces #272727, text #f1f1f1, secondary #aaa; a 56 px masthead (40 px guide button, the 90 x 20 logo 16 px after it,
+   the 32 px avatar at the right edge); the Shorts player centred under it, 9:16, 12 px radius, black; the bottom
+   overlay on a dark scrim: 32 px channel avatar and the channel name (14 px / 500), the title under it (16 px / 400),
+   16 px padding; Roboto throughout.
+   Policy guard: nothing is a control. No search, Create, bell or voice button in the masthead; no Subscribe, no action
+   rail (like, dislike, comments, share, remix), no counts, no play / mute / more glyphs, no progress or seek bar on
+   the player; the masthead's guide glyph and avatar are dimmed state, the title bar label and the CTA plain text. */
+
+/* Google Sans Flex (SIL OFL 1.1, the variable weight axis, latin) and Roboto (SIL OFL 1.1), from fontsource, vendored
+   under fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "GSF"; font-style: normal; font-weight: 100 1000; font-display: block; src: url("../../../fonts/google-sans-flex-latin-wght-normal.woff2?v=b0c8e364") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/roboto-latin-400-normal.woff2?v=b0c8e364") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/roboto-latin-500-normal.woff2?v=b0c8e364") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/roboto-latin-700-normal.woff2?v=b0c8e364") format("woff2"); }
+
+#s-tabs .yt-i { flex: none; width: 24px; height: 24px; }
+/* ---- the checklist card (light, Google's surfaces), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: var(--gm-radius); background: var(--gm-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: var(--gm-body); }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 300px; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px; font: 12.5px/1 var(--gm-body); color: var(--gm-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 500; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; }
+#s-tabs .sbsite .hub .gk-av { background: #1e8e3e; color: #fff; font: 500 11px/1 var(--gm-sans); }
+#s-tabs .sbsite .hub .gk-img { background: var(--gm-page); }
+#s-tabs .sbsite .hub .gk-img img { width: 13px; height: 10px; }
+#s-tabs .sbsite .hub .gk-ms { background: var(--gm-sel); color: var(--gm-accent); }
+#s-tabs .sbsite .hub .gk-ms .yt-i { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--gm-line); border-top-color: var(--gm-accent); }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #1e8e3e; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: var(--gm-radius); background: var(--gm-page); box-shadow: inset 0 0 0 1px var(--gm-line); }
+
+/* ---- superbot's backdrop behind the open window, and the framed window (scene root px, outside the camera) ---- */
+#s-tabs .st-dim { position: absolute; inset: 0; z-index: 7; opacity: 0; pointer-events: none; background: #050506; }
+#s-tabs .st-full { position: absolute; left: 0; top: 0; z-index: 8; overflow: hidden; opacity: 0; pointer-events: none; background: #0e0e10;
+  box-shadow: 0 0 0 1px #2c2c31; }
+#s-tabs .st-win { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden; background: #0e0e10; }
+/* the superbot title bar: the frame edge that says superbot cut this Short and what it was cut from */
+#s-tabs .st-sb { flex: none; display: flex; align-items: center; gap: 9px; height: 40px; padding: 0 14px; box-sizing: border-box;
+  background: #0e0e10; color: #c9c9cf; font: 500 13px/1 var(--ui); white-space: nowrap; }
+#s-tabs .st-sbt { flex: none; width: 22px; height: 22px; border-radius: 7px; }
+#s-tabs .st-sb b { font-weight: 700; font-size: 14px; color: #fff; }
+#s-tabs .st-sbv { width: 1px; height: 16px; margin: 0 3px; background: #34343a; }
+#s-tabs .st-sby { width: 18px; height: 13px; }
+/* the port clips the Shorts page below the title bar */
+#s-tabs .st-port { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #0f0f0f; }
+
+/* ---- the YouTube Shorts page, dark theme ---- */
+#s-tabs .sh-app { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; background: #0f0f0f; color: #f1f1f1;
+  font: 400 14px/20px var(--gm-body); -webkit-font-smoothing: antialiased; }
+#s-tabs .sh-top { flex: none; display: flex; align-items: center; height: 56px; padding: 0 24px 0 16px; box-sizing: border-box; }
+#s-tabs .sh-guide { flex: none; display: grid; place-items: center; width: 40px; height: 40px; opacity: .55; }
+#s-tabs .sh-guide .yt-i { color: #f1f1f1; }
+#s-tabs .sh-logo { flex: none; display: flex; align-items: center; height: 56px; margin-left: 16px; }
+#s-tabs .sh-logo img { display: block; width: 90px; height: 20px; }
+#s-tabs .sh-me { flex: none; display: grid; place-items: center; width: 32px; height: 32px; margin-left: auto; border-radius: 50%;
+  background: var(--yt-me); color: #fff; font: 500 15px/1 var(--gm-body); }
+/* the player sits centred under the masthead (16 px above it, the rest of the column below it is page) */
+#s-tabs .sh-stage { position: relative; flex: 1; min-height: 0; display: flex; justify-content: center; align-items: flex-start; padding-top: 16px; }
+#s-tabs .sh-player { position: relative; flex: none; height: 780px; aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; background: #000;
+  transform-origin: 50% 0; }
+#s-tabs .sh-vid { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* the burned-in captions (captions.css .sb-cap), at 60% of the player's height, clear of the bottom overlay */
+#s-tabs .sh-cap { top: 57%; font-size: 44px; }
+/* the bottom overlay: scrim, channel line, title (no Subscribe, no sound pill, no action rail, no counts) */
+#s-tabs .sh-ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 72px 16px 18px; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.6));
+  text-shadow: 0 1px 2px rgba(0,0,0,.4); }
+#s-tabs .sh-ch { display: flex; align-items: center; gap: 8px; }
+#s-tabs .sh-av { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--yt-me); color: #fff;
+  font: 500 15px/1 var(--gm-body); text-shadow: none; }
+#s-tabs .sh-ch b { font: 500 14px/20px var(--gm-body); color: #fff; }
+#s-tabs .sh-title { margin-top: 10px; font: 400 16px/22px var(--gm-body); color: #fff; }
+
+/* ---- superbot's lock-up beside the page (the base end card's mascot and wordmark, plus a plain-text line) ---- */
+#s-tabs .st-brand { position: absolute; left: 0; top: 0; z-index: 9; display: flex; flex-direction: column; align-items: center; gap: 26px;
+  transform: translate(-50%, -50%); opacity: 0; pointer-events: none; text-align: center; }
+#s-tabs .st-bface { display: grid; place-items: center; width: 168px; height: 168px; }
+#s-tabs .st-bwords h1 { margin: 0; font: 800 104px/1 var(--ui); letter-spacing: -.03em; color: #fff; }
+#s-tabs .st-bwords p { margin: 16px 0 0; font: 500 32px/1.2 var(--ui); color: #aeb1bc; }

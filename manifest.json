@@ -392,6 +392,15 @@
     "desc": "One prompt in superbot: Gemini reads the messy CSV, Claude Opus 5.5 writes and runs the cleaning script, DuckDB rolls revenue up by month and region, then superbot connects to Google Sheets: duplicates removed, dates and currencies fixed, and a revenue dashboard tab with charts by month and region."
   },
   {
+    "id": "niche-tiktok-model-switch-superbot-fe641576",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Turn my podcast into a TikTok and post it tonight at 7: Gemini, Opus 5.5, GPT Image 2.5, then superbot posts it on TikTok (4 switches)",
+    "src": "animations/niche-tiktok-model-switch-superbot-fe641576/",
+    "thumb": "assets/shots/niche-tiktok-model-switch-superbot-fe641576.png",
+    "desc": "One prompt in superbot: Gemini watches the whole episode and finds the best moment, Claude Opus 5.5 cuts a 45 second vertical clip with captions and writes the hook, GPT Image 2.5 makes the cover, then superbot connects to TikTok Studio, schedules it for 7:00 PM and the post goes live with likes and comments rolling in."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

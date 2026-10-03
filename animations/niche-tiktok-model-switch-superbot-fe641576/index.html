@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: Turn my podcast into a TikTok and post it tonight at 7</title>
+<meta name="description" content="One ask in superbot: Gemini watches the whole episode and finds the hook, Claude Opus 5.5 cuts the vertical clip with captions, GPT Image 2.5 makes the cover, and superbot schedules it on TikTok for 7:00 PM.">
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=fe641576">
+<link rel="stylesheet" href="publish-ui.css?v=fe641576">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="shell.css?v=fe641576">
+<link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=fe641576">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=fe641576">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=fe641576">
+<!-- one stylesheet per beat (scenes/tabs-assets/beats/<name>.css), scoped under #s-tabs -->
+<link rel="stylesheet" href="scenes/tabs-assets/beats/backlog.css?v=fe641576">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/write.css?v=fe641576">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/image.css?v=fe641576">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/tiktok.css?v=fe641576">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment (cards, scenes, end) in order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=fe641576"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+img/ CREDITS (internal, never shown on screen)
+
+The four featured images of the fictional Slow Pour blog are real photographs from Unsplash, used under the
+Unsplash License (https://unsplash.com/license: free to use, commercial use allowed, no attribution required). All
+four were checked as free (premium:false, plus:false) in Unsplash's own search API on 2026-10-03 and fetched from
+images.unsplash.com, resized and cropped to 1200 x 675 by imgix on download (the query below). No credit, author
+name or handle appears anywhere on screen; they are recorded here only. The on-screen file names (.webp) are the
+names the fictional blog gives them; the files here are JPEG.
+
+cold-brew-ratio.jpg     Iced cold brew in a mason jar mug, cream swirling in. Photo by Jackson Schaal.
+                        https://unsplash.com/photos/person-pouring-white-liquid-on-brown-liquid-QXeXqFHu2uE
+                        file https://images.unsplash.com/photo-1565990436705-4bc429d16511?w=1200&h=675&fit=crop&crop=focalpoint&fp-y=0.62&q=80&fm=jpg
+pour-over-ratio.jpg     A kettle pouring into a Chemex pour-over. Photo by Calvin Craig.
+                        https://unsplash.com/photos/white-flower-on-clear-glass-vase-oSKOlCwxmbg (id oSKOlCwxmbg;
+                        Unsplash's auto-generated slug is wrong, the photo is a Chemex)
+                        file https://images.unsplash.com/photo-1588108571234-d22dc3286bbf?w=1200&h=675&fit=crop&crop=focalpoint&fp-y=0.52&q=80&fm=jpg
+french-press-grind.jpg  A full French press outdoors. Photo by Sorin Gheorghita.
+                        https://unsplash.com/photos/a-pitcher-of-liquid-sitting-on-top-of-a-table-flrcFG0rvZU
+                        file https://images.unsplash.com/photo-1639906512494-dd4a536abc4e?w=1200&h=675&fit=crop&crop=entropy&q=80&fm=jpg
+aeropress-recipe.jpg    A kettle pouring into an AeroPress, steam rising. Photo by Onur Kaya.
+                        https://unsplash.com/photos/a-close-up-of-a-coffee-maker-LcOWU5iUkUY
+                        file https://images.unsplash.com/photo-1668022149124-591b9687970f?w=1200&h=675&fit=crop&crop=entropy&q=80&fm=jpg

@@ -1,0 +1,34 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+gemini-logo.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                       Also the mark of Nano Banana Pro (Google's Gemini 3 Pro Image model), as in
+                       niche-thumbnail-model-switch-superbot-94b1d7ea.
+claude-logo.svg        Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                       (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+
+gsc-logo.svg           Google Search Console mark, Simple Icons "googlesearchconsole" icon,
+                       https://cdn.jsdelivr.net/npm/simple-icons/icons/googlesearchconsole.svg (simple-icons 16.33.0,
+                       https://simpleicons.org), fetched 2026-10-03. Licence: CC0 1.0. Path verbatim; only fill="#fff"
+                       was added on the <svg> root so it reads on the dark hub tile (pill tile, reply header, composer chip).
+gsc-logo-blue.svg      The same file with fill="#458CF5" (Simple Icons' brand hex for it): the Search Console tab
+                       favicon and the product mark in the Search Console page header. Google Search Console is a
+                       trademark of Google LLC, used nominatively to name the service superbot reads the queries from
+                       and to mock its Performance report in the result.
+
+wordpress-logo.svg     WordPress mark, Simple Icons "wordpress" icon, https://cdn.jsdelivr.net/npm/simple-icons/icons/wordpress.svg
+                       (simple-icons 16.33.0), fetched 2026-10-03. Licence: CC0 1.0. Path verbatim; fill="#fff" added
+                       for the dark hub tiles and the connect card.
+wordpress-logo-dark.svg The same file with fill="#1d2327" (the wp-admin bar colour): the WordPress tab favicon.
+                       The admin bar's own W mark is the same path inlined in beats/wordpress.js. WordPress and the W
+                       mark are trademarks of the WordPress Foundation, used nominatively to name the platform
+                       superbot publishes to and to mock its admin screen in the result.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+DATA
+  Everything in the spot is made up for it: the Slow Pour blog, the domain slowpour.coffee, the author Dana Reyes,
+  the search queries, impressions, clicks, positions and dates, the post titles, word counts and copy. Any
+  resemblance to a real site is coincidental. The featured images are real photographs credited in ../img/CREDITS.txt.

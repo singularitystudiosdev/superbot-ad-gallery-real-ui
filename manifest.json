@@ -590,6 +590,15 @@
     "desc": "One prompt in superbot: Gemini watches the 2-hour stream and finds 23 moments where chat went wild, ElevenLabs Scribe transcribes every word with timestamps, Claude Opus 5.5 picks the best 5 and writes the captions, SAM 3 reframes them to 9:16, then superbot connects to DaVinci Resolve and exports 5 captioned vertical clips ready to post."
   },
   {
+    "id": "niche-seo-model-switch-superbot-94f70a8d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Write and publish 4 blog posts that target my top search keywords: Search Console, Opus 5.5, Nano Banana Pro, then superbot publishes them on WordPress (4 switches)",
+    "src": "animations/niche-seo-model-switch-superbot-94f70a8d/",
+    "thumb": "assets/shots/niche-seo-model-switch-superbot-94f70a8d.png",
+    "desc": "One ask in superbot: superbot pulls the blog's top queries from Search Console, Claude Opus 5.5 writes 4 posts aimed at them, Nano Banana Pro makes the featured images, then superbot publishes all 4 on WordPress and search impressions climb."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

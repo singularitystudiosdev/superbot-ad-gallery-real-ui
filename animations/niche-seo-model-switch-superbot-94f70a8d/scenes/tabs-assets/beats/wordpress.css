@@ -1,0 +1,264 @@
+/* WordPress beat (beats/wordpress.js): the connect card in the chat (the site line, three steps ticking, the mini
+   window under them) and the full-frame layer carrying the one Chrome window: pinned over the card's window, then
+   opened to the whole frame. The window is a light Chrome at its own px (scaled to the frame by wordpress.js): the tab
+   strip (two tabs), the toolbar and omnibox, and the viewport holding, in turn, wp-admin's Posts screen (.wp-, in
+   wp-admin's own system stack and colours) and Search Console's Performance report (.gs-, Roboto). Nothing here
+   transitions: position, size, radius, opacity, colour and transform are written from t in wordpress.js, so ?t=
+   freezes a frame. Classes: .wc- (card, layer), .cr- (Chrome), .wp- / .ab- (WordPress), .gs- (Search Console). */
+
+/* Roboto (Search Console's page face; Google Sans is not licensed for this), SIL OFL 1.1, latin subset from
+   Fontsource 5.3.0, vendored under fonts/ (fonts/CREDITS.txt), so nothing is fetched at render. */
+@font-face { font-family: "Roboto GSC"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/roboto-latin-400-normal.woff2?v=94f70a8d") format("woff2"); }
+@font-face { font-family: "Roboto GSC"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/roboto-latin-500-normal.woff2?v=94f70a8d") format("woff2"); }
+@font-face { font-family: "Roboto GSC"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/roboto-latin-700-normal.woff2?v=94f70a8d") format("woff2"); }
+
+/* ---- the connect card, in the chat ---- */
+#s-tabs .sbsite .hub .wc-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .wc-cc { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; padding: 8px 10px 10px;
+  border-radius: 10px; background: var(--dt-card); box-shadow: inset 0 0 0 1px var(--dt-line); }
+#s-tabs .sbsite .hub .wc-cc.wc-tall { width: 340px; }
+#s-tabs .sbsite .hub .wc-hd { display: flex; align-items: center; gap: 9px; height: 32px; padding: 0 2px 4px; margin-bottom: 2px; border-bottom: 1px solid var(--dt-line); white-space: nowrap; }
+#s-tabs .sbsite .hub .wc-ht { display: flex; align-items: baseline; gap: 8px; min-width: 0; font: 12.5px/1 var(--ui); }
+#s-tabs .sbsite .hub .wc-ht b { font-weight: 600; color: #ececec; }
+#s-tabs .sbsite .hub .wc-ht small { font: 500 11.5px/1 var(--ui); color: var(--dt-muted); overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .wc-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px;
+  font: 12.5px/1 var(--ui); color: #c9c9cf; white-space: nowrap; }
+#s-tabs .sbsite .hub .wc-step b { font-weight: 600; color: #ececec; }
+#s-tabs .sbsite .hub .wc-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .wc-ct-i { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; background: #26262b; }
+#s-tabs .sbsite .hub .wc-ct-w { width: 22px; height: 22px; border-radius: 50%; background: #2271b1; }
+#s-tabs .sbsite .hub .wc-ct-w img { width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .wc-gi { width: 12px; height: 12px; fill: none; stroke: #ececec; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .wc-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .wc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .wc-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+/* the mini window's frame: the full-frame layer is pinned over it (its aspect is the frame's, set by wordpress.js) */
+#s-tabs .sbsite .hub .wc-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: 8px; background: #fff; }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .wc-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #fff; }
+#s-tabs .cr-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: #fff; color: #1f1f1f; font: 400 13px/1.3 var(--cr-ui); -webkit-font-smoothing: antialiased; }
+#s-tabs .cr-i { flex: none; width: 18px; height: 18px; fill: none; stroke: #474747; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .cr-i .cr-f { fill: #474747; stroke: none; }
+
+/* Chrome's tab strip: the window controls, the tabs (the active one white and joined to the toolbar), the new-tab + */
+#s-tabs .cr-strip { flex: none; display: flex; align-items: flex-end; gap: 2px; height: 42px; padding: 0 10px 0 14px; box-sizing: border-box; background: #dfe3ea; }
+#s-tabs .cr-lights { display: flex; gap: 8px; align-self: center; margin-right: 14px; }
+#s-tabs .cr-lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.12); }
+#s-tabs .cr-lights i:nth-child(2) { background: #febc2e; }
+#s-tabs .cr-lights i:nth-child(3) { background: #28c840; }
+#s-tabs .cr-tab { flex: none; position: relative; display: flex; align-items: center; gap: 8px; width: 236px; height: 34px; padding: 0 8px 0 12px; box-sizing: border-box;
+  border-radius: 10px 10px 0 0; overflow: hidden; white-space: nowrap; font: 400 12.5px/1 var(--cr-ui); color: #3c4043; }
+#s-tabs .cr-tab.on { background: #fff; color: #1f1f1f; }
+#s-tabs .cr-tab:not(.on)::after { content: ''; position: absolute; right: 0; top: 9px; bottom: 9px; width: 1px; background: #b5bac2; }
+#s-tabs .cr-tab .cr-i { width: 14px; height: 14px; margin-left: auto; stroke-width: 2.2; }
+#s-tabs .cr-tt { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .cr-fav { flex: none; width: 15px; height: 15px; }
+#s-tabs .cr-new { align-self: center; display: grid; place-items: center; width: 28px; height: 28px; margin-left: 4px; }
+#s-tabs .cr-new .cr-i { width: 16px; height: 16px; }
+
+/* the toolbar: back, forward, reload, the omnibox pill, the profile and the menu */
+#s-tabs .cr-bar { flex: none; display: flex; align-items: center; gap: 14px; height: 44px; padding: 0 12px 0 16px; box-sizing: border-box; background: #fff;
+  border-bottom: 1px solid #e3e3e3; }
+#s-tabs .cr-omni { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; height: 32px; padding: 0 12px 0 14px; border-radius: 16px; background: #edf0f4; }
+#s-tabs .cr-omni .cr-i { width: 16px; height: 16px; }
+#s-tabs .cr-omni .cr-i:last-child { margin-left: auto; }
+#s-tabs .cr-url { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 400 14px/1 var(--cr-ui); color: #1f1f1f; }
+#s-tabs .cr-av { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #8e5b3e; color: #fff; font: 500 12px/1 var(--cr-ui); }
+
+/* the viewport: the two page bodies stacked, one shown at a time */
+#s-tabs .cr-vp { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #fff; }
+#s-tabs .cr-wp, #s-tabs .cr-gs { position: absolute; inset: 0; overflow: hidden; }
+
+/* ---- WordPress 6.x: the Posts list screen (wp-admin's system stack, 13px, its own greys and blue) ---- */
+#s-tabs .wp { position: absolute; inset: 0; display: flex; flex-direction: column; background: #f0f0f1; color: #3c434a; font: 400 13px/1.4em var(--wp-ui); }
+#s-tabs .wp a { color: #2271b1; text-decoration: none; }
+#s-tabs .wp-di { flex: none; width: 20px; height: 20px; fill: #a7aaad; }
+/* the admin bar */
+#s-tabs .wp-bar { flex: none; display: flex; align-items: center; height: 32px; padding: 0 0 0 1px; background: #1d2327; color: #f0f0f1; font: 400 13px/32px var(--wp-ui); white-space: nowrap; }
+#s-tabs .ab-it { display: flex; align-items: center; gap: 6px; height: 32px; padding: 0 8px; }
+#s-tabs .ab-it .wp-di { fill: #a7aaad; }
+#s-tabs .ab-it b { font-weight: 400; }
+#s-tabs .ab-logo { padding: 0 7px; }
+#s-tabs .ab-w { width: 20px; height: 20px; fill: #a7aaad; }
+#s-tabs .ab-r { display: flex; align-items: center; gap: 4px; margin-left: auto; padding: 0 8px; }
+#s-tabs .ab-r b { font-weight: 400; }
+#s-tabs .ab-av { width: 16px; height: 16px; margin-left: 6px; border: 1px solid #8c8f94; background: linear-gradient(135deg, #c79a6b, #8e5b3e); }
+#s-tabs .wp-body { flex: 1; min-height: 0; display: flex; }
+/* the admin menu: 160px, the current item (Posts) on wp-admin blue with its submenu open on #2c3338 */
+#s-tabs .wp-menu { flex: none; width: 160px; padding-top: 12px; background: #1d2327; }
+#s-tabs .wp-mi { position: relative; display: flex; align-items: center; height: 34px; color: #f0f0f1; font: 400 14px/18px var(--wp-ui); white-space: nowrap; }
+#s-tabs .wp-mi .wp-di { margin: 0 8px; }
+#s-tabs .wp-mi.on { background: #2271b1; color: #fff; }
+#s-tabs .wp-mi.on .wp-di { fill: #fff; }
+/* the current item's notch: a small triangle pointing into the content, in the content's colour */
+#s-tabs .wp-mi.on::after { content: ''; position: absolute; right: 0; top: 50%; margin-top: -8px; border: 8px solid transparent; border-right-color: #f0f0f1; }
+#s-tabs .wp-sub { padding: 7px 0 8px; background: #2c3338; }
+#s-tabs .wp-sub span { display: block; padding: 5px 12px 5px 36px; font: 400 13px/1.4 var(--wp-ui); color: rgba(240, 246, 252, .7); white-space: nowrap; }
+#s-tabs .wp-sub span.on { color: #fff; font-weight: 600; }
+#s-tabs .wp-sep { display: block; height: 5px; margin: 0 0 6px; }
+#s-tabs .wp-col { margin-top: 10px; color: #a7aaad; font-size: 13px; }
+/* the content */
+#s-tabs .wp-main { position: relative; flex: 1; min-width: 0; padding-left: 20px; }
+#s-tabs .wp-scr { position: absolute; right: 20px; top: 0; display: flex; gap: 6px; }
+#s-tabs .wp-scr span { display: flex; align-items: center; gap: 4px; height: 28px; padding: 0 8px 0 16px; box-sizing: border-box; border: 1px solid #c3c4c7; border-top: 0;
+  border-radius: 0 0 4px 4px; background: #fff; color: #646970; font-size: 13px; }
+#s-tabs .wp-scr i { width: 0; height: 0; margin-left: 4px; border: 4px solid transparent; border-top: 5px solid #787c82; border-bottom: 0; }
+#s-tabs .wp-wrap { margin: 10px 20px 0 2px; }
+#s-tabs .wp-h { display: flex; align-items: center; gap: 8px; }
+#s-tabs .wp-h h1 { margin: 0; padding: 9px 0 4px; font: 400 23px/1.3 var(--wp-ui); color: #1d2327; }
+#s-tabs .wp-add { position: relative; top: 1px; display: inline-flex; align-items: center; height: 30px; padding: 0 10px; box-sizing: border-box; border: 1px solid #2271b1;
+  border-radius: 3px; background: #f6f7f7; color: #2271b1; font: 400 13px/1 var(--wp-ui); white-space: nowrap; }
+/* the success notice: white, a 4px green left border; its slot opens to its height as it drops in */
+#s-tabs .wp-nslot { height: 0; overflow: hidden; }
+#s-tabs .wp-notice { position: relative; margin: 5px 0 15px; padding: 1px 38px 1px 12px; border: 1px solid #c3c4c7; border-left: 4px solid #00a32a;
+  background: #fff; box-shadow: 0 1px 1px rgba(0, 0, 0, .04); opacity: 0; }
+#s-tabs .wp-notice p { margin: .5em 0; padding: 2px; font-size: 13px; line-height: 1.5; color: #1d2327; }
+#s-tabs .wp-x { position: absolute; right: 10px; top: 50%; width: 16px; height: 16px; margin-top: -8px; border-radius: 50%; background: #787c82; }
+#s-tabs .wp-x::before, #s-tabs .wp-x::after { content: ''; position: absolute; left: 4px; top: 7.25px; width: 8px; height: 1.5px; background: #fff; transform: rotate(45deg); }
+#s-tabs .wp-x::after { transform: rotate(-45deg); }
+/* the views (All / Published), the search box */
+#s-tabs .wp-subrow { display: flex; align-items: center; margin: 8px 0 0; }
+#s-tabs .wp-ss { color: #646970; font-size: 13px; white-space: nowrap; }
+#s-tabs .wp-ss b { font-weight: 600; color: #000; }
+#s-tabs .wp-ss .wp-cnt { font-weight: 400; color: #50575e; }
+#s-tabs .wp-search { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+#s-tabs .wp-in { display: block; width: 180px; height: 30px; box-sizing: border-box; border: 1px solid #8c8f94; border-radius: 4px; background: #fff; }
+#s-tabs .wp-btn { display: inline-flex; align-items: center; height: 30px; padding: 0 10px; box-sizing: border-box; border: 1px solid #2271b1; border-radius: 3px;
+  background: #f6f7f7; color: #2271b1; font: 400 13px/1 var(--wp-ui); white-space: nowrap; }
+/* the table nav: bulk actions, the filters, the item count */
+#s-tabs .wp-tnav { display: flex; align-items: center; gap: 6px; height: 30px; margin: 6px 0 4px; padding-top: 5px; }
+#s-tabs .wp-sel { display: inline-flex; align-items: center; height: 30px; padding: 0 26px 0 8px; box-sizing: border-box; border: 1px solid #8c8f94; border-radius: 3px;
+  background: #fff url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E") right 5px top 55% / 16px 16px no-repeat;
+  color: #2c3338; font: 400 14px/1 var(--wp-ui); white-space: nowrap; }
+#s-tabs .wp-sel-d { margin-left: 4px; }
+#s-tabs .wp-items { margin-left: auto; color: #3c434a; font-size: 13px; white-space: nowrap; }
+/* the list table: white, #c3c4c7 borders, odd rows striped */
+#s-tabs .wp-tbl { width: 100%; table-layout: fixed; border-spacing: 0; border: 1px solid #c3c4c7; background: #fff; box-shadow: 0 1px 1px rgba(0, 0, 0, .04); }
+#s-tabs .wp-tbl th, #s-tabs .wp-tbl td { padding: 8px 10px; text-align: left; vertical-align: top; overflow-wrap: break-word; }
+#s-tabs .wp-tbl thead th, #s-tabs .wp-tbl thead td { border-bottom: 1px solid #c3c4c7; font: 400 14px/1.4em var(--wp-ui); color: #2c3338; }
+#s-tabs .wp-tbl tfoot th, #s-tabs .wp-tbl tfoot td { border-top: 1px solid #c3c4c7; font: 400 14px/1.4em var(--wp-ui); color: #2c3338; }
+#s-tabs .wp-tbl .wp-sort span { color: #2271b1; }
+#s-tabs .wp-arr { display: inline-block; width: 0; height: 0; margin-left: 6px; vertical-align: 2px; border: 4px solid transparent; border-top: 5px solid #a7aaad; border-bottom: 0; }
+#s-tabs .wp-tbl td { font-size: 13px; line-height: 1.5em; color: #50575e; }
+#s-tabs .wp-tbl .wp-cb { width: 2.2em; padding: 11px 0 0 6px; }
+#s-tabs .wp-tbl thead .wp-cb, #s-tabs .wp-tbl tfoot .wp-cb { padding-top: 10px; }
+#s-tabs .wp-box { display: block; width: 16px; height: 16px; box-sizing: border-box; border: 1px solid #8c8f94; border-radius: 4px; background: #fff; }
+#s-tabs .wp-c-author { width: 10%; }
+#s-tabs .wp-c-cat { width: 9%; }
+#s-tabs .wp-c-tags { width: 12%; }
+#s-tabs .wp-c-kw { width: 13%; }
+#s-tabs .wp-c-seo { width: 56px; white-space: nowrap; }
+#s-tabs .wp-c-date { width: 13%; }
+#s-tabs .wp-row { --wash: 0; background: #fff linear-gradient(rgba(252, 240, 161, calc(var(--wash) * .7)), rgba(252, 240, 161, calc(var(--wash) * .7))); }
+#s-tabs .wp-row.alt { background-color: #f6f7f7; }
+#s-tabs .wp-rt { font-size: 14px; font-weight: 600; line-height: 1.4; color: #2271b1; }
+#s-tabs .wp-c-kw { color: #3c434a; }
+#s-tabs .wp-dot { display: block; width: 12px; height: 12px; margin-top: 3px; border-radius: 50%; background: #7ad03a; }
+#s-tabs .wp-none td { color: #50575e; }
+/* tablet width (4:5): wp-admin folds its menu to icons (as it does under 960px) and the list keeps Title and Date */
+#s-tabs .cr-narrow .wp-menu { width: 36px; }
+#s-tabs .cr-narrow .wp-mi span, #s-tabs .cr-narrow .wp-sub { display: none; }
+#s-tabs .cr-narrow .wp-search .wp-in { width: 120px; }
+#s-tabs .cr-narrow .wp-sel-c, #s-tabs .cr-narrow .wp-btn-f { display: none; }
+#s-tabs .cr-narrow .wp-c-date { width: 32%; }
+
+/* ---- Google Search Console: the Performance report (Roboto, Material greys, the metric colours) ---- */
+#s-tabs .gs { position: absolute; inset: 0; display: flex; flex-direction: column; background: #fff; color: #202124; font: 400 14px/20px var(--gsc-ui); }
+#s-tabs .gs-i { flex: none; width: 24px; height: 24px; fill: #5f6368; }
+#s-tabs .gs-load { position: absolute; left: 0; right: 0; top: 0; z-index: 2; height: 3px; overflow: hidden; background: #c6dafc; opacity: 0; }
+#s-tabs .gs-load i { display: block; height: 100%; background: #1a73e8; transform-origin: 0 50%; }
+#s-tabs .gs-top { flex: none; display: flex; align-items: center; height: 56px; padding: 0 16px 0 12px; box-sizing: border-box; border-bottom: 1px solid #dadce0; white-space: nowrap; }
+#s-tabs .gs-top > .gs-i { margin: 0 12px 0 4px; }
+#s-tabs .gs-logo { width: 28px; height: 28px; }
+#s-tabs .gs-pn { margin-left: 10px; font: 400 21px/1 var(--gsc-ui); color: #5f6368; }
+#s-tabs .gs-q { flex: 0 1 560px; min-width: 0; display: flex; align-items: center; gap: 12px; height: 44px; margin-left: 48px; padding: 0 16px; box-sizing: border-box;
+  border-radius: 8px; background: #f1f3f4; color: #5f6368; font: 400 15px/1 var(--gsc-ui); }
+#s-tabs .gs-q span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .gs-tr { display: flex; align-items: center; gap: 18px; margin-left: auto; padding-left: 16px; }
+#s-tabs .gs-av { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #8e5b3e; color: #fff; font: 500 14px/1 var(--gsc-ui); font-style: normal; }
+#s-tabs .gs-body { flex: 1; min-height: 0; display: flex; }
+/* the nav: the property chip, Overview, Performance (current), URL inspection, then Indexing */
+#s-tabs .gs-nav { flex: none; display: flex; flex-direction: column; width: 248px; padding-top: 8px; box-sizing: border-box; }
+#s-tabs .gs-nav .gs-i { width: 20px; height: 20px; }
+#s-tabs .gs-prop { display: flex; align-items: center; gap: 10px; height: 40px; margin: 4px 12px 10px 16px; padding: 0 6px 0 10px; box-sizing: border-box; border: 1px solid #dadce0; border-radius: 4px; }
+#s-tabs .gs-prop b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 500 14px/1 var(--gsc-ui); color: #202124; }
+#s-tabs .gs-prop .gs-i { width: 18px; height: 18px; }
+#s-tabs .gs-ni { display: flex; align-items: center; gap: 18px; height: 40px; margin-right: 12px; padding-left: 24px; border-radius: 0 20px 20px 0; font: 500 14px/1 var(--gsc-ui); color: #202124; white-space: nowrap; }
+#s-tabs .gs-ni.on { background: #e8f0fe; color: #1967d2; }
+#s-tabs .gs-ni.on .gs-i { fill: #1967d2; }
+#s-tabs .gs-nh { margin: 8px 0 2px; padding: 14px 24px 8px; border-top: 1px solid #dadce0; font: 500 14px/1 var(--gsc-ui); color: #202124; }
+/* the report */
+#s-tabs .gs-main { flex: 1; min-width: 0; padding: 0 24px 0 16px; overflow: hidden; }
+#s-tabs .gs-h { display: flex; align-items: center; height: 46px; padding-top: 4px; }
+#s-tabs .gs-h h1 { margin: 0; font: 400 22px/28px var(--gsc-ui); color: #202124; white-space: nowrap; }
+#s-tabs .gs-exp { display: flex; align-items: center; gap: 8px; margin-left: auto; padding: 0 8px; font: 500 14px/1 var(--gsc-ui); color: #1a73e8; }
+#s-tabs .gs-exp .gs-i { width: 20px; height: 20px; fill: #1a73e8; }
+#s-tabs .gs-flt { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; min-height: 40px; }
+#s-tabs .gs-ch { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 8px 0 12px; box-sizing: border-box; border: 1px solid #dadce0; border-radius: 16px;
+  font: 500 14px/1 var(--gsc-ui); color: #3c4043; white-space: nowrap; }
+#s-tabs .gs-ch .gs-i { width: 18px; height: 18px; }
+#s-tabs .gs-add { padding: 0 12px 0 8px; color: #1a73e8; }
+#s-tabs .gs-add .gs-i { fill: #1a73e8; }
+#s-tabs .gs-upd { margin-left: auto; font: 400 12px/1 var(--gsc-ui); color: #5f6368; white-space: nowrap; }
+#s-tabs .gs-card { margin-top: 8px; border: 1px solid #dadce0; border-radius: 8px; overflow: hidden; background: #fff; }
+/* the four metric tiles: clicks (blue) and impressions (purple) selected, CTR and position not */
+#s-tabs .gs-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+#s-tabs .gs-t { display: grid; grid-template-columns: 18px minmax(0, 1fr) 16px; align-items: center; column-gap: 8px; row-gap: 6px; height: 84px; padding: 12px 16px; box-sizing: border-box;
+  border-right: 1px solid #dadce0; color: #5f6368; }
+#s-tabs .gs-t:last-child { border-right: 0; }
+#s-tabs .gs-cb { width: 18px; height: 18px; fill: currentColor; }
+#s-tabs .gs-inf { width: 16px; height: 16px; fill: currentColor; opacity: .7; }
+#s-tabs .gs-tl { font: 400 14px/1 var(--gsc-ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .gs-tv { grid-column: 1 / -1; font: 400 30px/34px var(--gsc-ui); color: #202124; font-variant-numeric: tabular-nums; }
+#s-tabs .gs-t.on { border-right-color: transparent; color: #fff; }
+#s-tabs .gs-t.on .gs-tv { color: #fff; }
+#s-tabs .gs-t.gs-cl { background: #4285f4; }
+#s-tabs .gs-t.gs-im { background: #5e35b1; }
+/* the chart: its svg is built at this box's px by wordpress.js */
+#s-tabs .gs-chart { position: relative; height: 160px; }
+#s-tabs .gs-svg { display: block; font: 400 11px var(--gsc-ui); }
+#s-tabs .gs-svg text { fill: #5f6368; }
+#s-tabs .gs-svg .gs-axl { font-size: 12px; font-weight: 500; }
+#s-tabs .gs-svg .gs-axc { fill: #4285f4; }
+#s-tabs .gs-svg .gs-axi { fill: #5e35b1; }
+#s-tabs .gs-gl { stroke: #e8eaed; stroke-width: 1; }
+#s-tabs .gs-li { fill: none; stroke: #5e35b1; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+#s-tabs .gs-lc { fill: none; stroke: #4285f4; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+#s-tabs .gs-mk { opacity: 0; }
+#s-tabs .gs-ml { stroke: #80868b; stroke-width: 1; stroke-dasharray: 3 3; }
+#s-tabs .gs-mb { fill: #fff; stroke: #dadce0; }
+#s-tabs .gs-svg .gs-mt { font-size: 11.5px; font-weight: 500; fill: #3c4043; }
+#s-tabs .gs-hi { fill: #5e35b1; stroke: #fff; stroke-width: 2; opacity: 0; }
+#s-tabs .gs-hc { fill: #4285f4; stroke: #fff; stroke-width: 2; opacity: 0; }
+/* the Queries table */
+#s-tabs .gs-qt { margin-top: 10px; }
+#s-tabs .gs-tabs { display: flex; height: 40px; border-bottom: 1px solid #dadce0; overflow: hidden; white-space: nowrap; }
+#s-tabs .gs-tabs span { display: flex; align-items: center; padding: 0 16px; font: 500 13px/1 var(--gsc-ui); letter-spacing: .03em; text-transform: uppercase; color: #5f6368; box-shadow: inset 0 -3px 0 transparent; }
+#s-tabs .gs-tabs span.on { color: #1a73e8; box-shadow: inset 0 -3px 0 #1a73e8; }
+#s-tabs .gs-qh, #s-tabs .gs-qr { display: grid; grid-template-columns: minmax(0, 1fr) 120px 140px 120px; align-items: center; padding: 0 16px; }
+#s-tabs .gs-qh { height: 36px; border-bottom: 1px solid #dadce0; font: 500 12px/1 var(--gsc-ui); color: #5f6368; }
+#s-tabs .gs-qh span:not(:first-child), #s-tabs .gs-qr span:not(:first-child) { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
+#s-tabs .gs-sorted { color: #202124; }
+#s-tabs .gs-dn { width: 16px; height: 16px; fill: #202124; }
+#s-tabs .gs-qr { height: 32px; border-bottom: 1px solid #e8eaed; font: 400 14px/1 var(--gsc-ui); color: #202124; opacity: 0; font-variant-numeric: tabular-nums; }
+#s-tabs .gs-qr:last-child { border-bottom: 0; }
+#s-tabs .gs-up { width: 15px; height: 15px; fill: #188038; }
+/* tablet width (4:5): the nav folds behind the menu button, the tiles go two by two, the chart and table full width */
+#s-tabs .gs-narrow .gs-nav { display: none; }
+#s-tabs .gs-narrow .gs-main { padding: 0 20px; }
+#s-tabs .gs-narrow .gs-q { margin-left: 24px; }
+#s-tabs .gs-narrow .gs-tr .gs-i:first-child, #s-tabs .gs-narrow .gs-tr .gs-i:nth-child(3) { display: none; }
+#s-tabs .gs-narrow .gs-pn { font-size: 20px; }
+#s-tabs .gs-narrow .gs-upd { display: none; }
+#s-tabs .gs-narrow .gs-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#s-tabs .gs-narrow .gs-t { border-bottom: 1px solid #dadce0; }
+#s-tabs .gs-narrow .gs-t:nth-child(2) { border-right: 0; }
+#s-tabs .gs-narrow .gs-t:nth-child(3), #s-tabs .gs-narrow .gs-t:nth-child(4) { border-bottom: 0; }
+#s-tabs .gs-narrow .gs-chart { height: 230px; }
+#s-tabs .gs-narrow .gs-qh, #s-tabs .gs-narrow .gs-qr { grid-template-columns: minmax(0, 1fr) 64px 96px 82px; }
+#s-tabs .gs-narrow .gs-qr { height: 38px; }
+
+/* portrait (4:5): Chrome at tablet width: shorter tabs */
+#s-tabs .cr-app.cr-narrow .cr-tab { width: 210px; }

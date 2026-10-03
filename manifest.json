@@ -698,6 +698,15 @@
     "desc": "One prompt in superbot: Gemini reads the client brief and the model file and writes the spec, Claude Opus 5.5 writes the Blender scene script, Nano Banana Pro recolors the body texture three ways, then superbot connects to Blender and renders one product shot per colorway."
   },
   {
+    "id": "niche-saas-model-switch-superbot-67b3c2c9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Failed card payments keep canceling my customers. Fix it and ship it: Gemini, Opus 5.5, GPT-6 Astra, then superbot connects to Stripe and the payment is recovered (4 switches)",
+    "src": "animations/niche-saas-model-switch-superbot-67b3c2c9/",
+    "thumb": "assets/shots/niche-saas-model-switch-superbot-67b3c2c9.png",
+    "desc": "One ask in superbot: Gemini reads 2,318 Stripe events to find why customers churn on declined cards, Claude Opus 5.5 rewrites the webhook to keep the subscription and email a card update link, GPT-6 Astra runs 38 tests and replays a declined renewal with the Stripe CLI, then superbot connects to Stripe and the retried payment brings the customer back to Active."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

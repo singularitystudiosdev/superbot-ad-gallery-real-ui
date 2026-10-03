@@ -1,0 +1,157 @@
+/* Stripe beat (beats/stripe.js): the Stripe Apps install card and the checklist card in the chat, then the superbot
+   frame (scrim, label bar, framed window) carrying the one Stripe Dashboard client, and the static status card.
+   Stripe's light chrome. Type: the Dashboard's own font stack, read from its public stylesheets
+   (b.stripecdn.com/dashboard-fe-statics-srv/assets/*.css, linked from dashboard.stripe.com/login, fetched 2026-10-03):
+   -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif, and Menlo for ids;
+   system faces, so nothing is bundled. Colours: the install card's from Stripe's docs screenshots (card #ffffff on
+   #f6f8fa, heading #353a44, body #414552, muted #687385, rules #ebeef1, the account icon ring); the Dashboard's from its
+   design tokens as they render (text #353a44 / #414552 / #687385, borders #ebeef1 / #d8dee4, the brand blurple #635bff
+   for the selected nav item and the Install button), the badges in Stripe's positive (#d7f7c2 ground, #006908 text)
+   and critical (#ffe7f2 ground, #b3093c text) pairs. Nothing here transitions: every moving value is written from t in
+   stripe.js, so ?t= freezes a frame. Classes: .sa- install card, .gk- checklist, .sd- the frame and the Dashboard. */
+
+#s-tabs { --sd-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif; --sd-mono: Menlo, Monaco, monospace;
+  --sd-h: #353a44; --sd-t: #414552; --sd-m: #687385; --sd-rule: #ebeef1; --sd-border: #d8dee4; --sd-bg2: #f6f8fa; --sd-brand: #635bff;
+  --sd-pos-bg: #d7f7c2; --sd-pos: #006908; --sd-neg-bg: #ffe7f2; --sd-neg: #b3093c; --sd-acct: #0e7c86; }
+
+/* the app tile: the plain word Stripe in the superbot UI font (no Stripe logo: Stripe's Mark Usage Terms) */
+#s-tabs .sbsite .hub .qc-tile.qc-t-stripe { width: auto; padding: 0 6px; background: #f6f8fa; box-shadow: none; font: 800 9.5px/1 var(--ui); letter-spacing: -.01em; color: #353a44; }
+
+/* the account's letter tile (the business's own colour; Stripe shows an account without a logo as its initial) */
+#s-tabs .sd-acct { display: grid; place-items: center; flex: none; border-radius: 6px; background: var(--sd-acct); color: #ffffff; font: 700 13px/1 var(--sd-font); }
+
+/* ---- the Stripe Apps install card (light) ---- */
+#s-tabs .sbsite .hub .sa-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .sa-card { opacity: 0; box-sizing: border-box; width: 430px; max-width: 100%; margin-top: 2px; border-radius: 10px; overflow: hidden;
+  background: #ffffff; box-shadow: 0 0 0 1px #d8dee4, 0 8px 24px rgba(0,0,0,.25); font: 400 12px/1.45 var(--sd-font); color: var(--sd-t); }
+#s-tabs .sbsite .hub .sa-card.sa-tall { width: 100%; }
+#s-tabs .sbsite .hub .sa-top { padding: 16px 16px 12px; text-align: center; box-shadow: inset 0 -1px 0 var(--sd-rule); }
+#s-tabs .sbsite .hub .sa-logos { display: flex; align-items: center; justify-content: center; gap: 12px; }
+#s-tabs .sbsite .hub .sa-logos .qc-tile { width: 34px; height: 34px; border-radius: 8px; }
+#s-tabs .sbsite .hub .sa-ac { width: 34px; height: 34px; border-radius: 9999px; font-size: 15px; box-shadow: 0 0 0 1px #ffffff, 0 1px 3px rgba(0,0,0,.18); }
+#s-tabs .sbsite .hub .sa-swap { width: 14px; height: 14px; fill: none; stroke: var(--sd-m); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .sa-title { margin-top: 9px; font: 600 15px/1.3 var(--sd-font); color: var(--sd-h); }
+#s-tabs .sbsite .hub .sa-by { margin-top: 2px; font: 400 12px/1.3 var(--sd-font); color: var(--sd-m); }
+#s-tabs .sbsite .hub .sa-by u, #s-tabs .sbsite .hub .sa-warn u { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 2px; color: var(--sd-m); }
+#s-tabs .sbsite .hub .sa-warn u { text-decoration-style: solid; color: var(--sd-t); }
+#s-tabs .sbsite .hub .sa-body { padding: 10px 16px 4px; }
+#s-tabs .sbsite .hub .sa-warn { margin: 0 0 10px; font: 400 12px/1.45 var(--sd-font); color: var(--sd-t); }
+#s-tabs .sbsite .hub .sa-h { margin-bottom: 2px; font: 600 10.5px/1.2 var(--sd-font); letter-spacing: .04em; color: var(--sd-t); }
+#s-tabs .sbsite .hub .sa-row { display: flex; align-items: center; gap: 8px; height: 29px; box-shadow: inset 0 -1px 0 var(--sd-rule); font: 400 12px/1 var(--sd-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .sa-row b { font-weight: 500; color: var(--sd-h); }
+#s-tabs .sbsite .hub .sa-row span { margin-left: auto; color: var(--sd-m); font-size: 11.5px; }
+/* the rows' disclosure chevrons are page furniture, kept small and dim */
+#s-tabs .sbsite .hub .sa-chev { flex: none; width: 11px; height: 11px; fill: none; stroke: var(--sd-m); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: .4; }
+#s-tabs .sbsite .hub .sa-ft { display: flex; justify-content: flex-end; padding: 10px 16px 12px; }
+#s-tabs .sbsite .hub .sa-go { display: inline-flex; align-items: center; height: 28px; padding: 0 14px; border-radius: 6px; background: var(--sd-brand);
+  font: 600 12px/1 var(--sd-font); color: #ffffff; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
+/* pressed: it dims to a quiet grey and is never left on screen as a live control */
+#s-tabs .sbsite .hub .sa-go.sa-hit { background: #ebeef1; color: #a3acba; box-shadow: none; }
+
+/* ---- the checklist card, the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 440px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: 12px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font-family: var(--ui); }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 100%; }
+/* portrait: the mini window keeps the frame's tall shape, so it sits narrower and the steps stay in view */
+#s-tabs .sbsite .hub .gk-card.gk-tall .gk-shot { width: 46%; margin: 8px auto 0; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 27px; padding: 0 2px; font: 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 600; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 9999px; overflow: hidden; }
+#s-tabs .sbsite .hub .gk-av .gk-l { width: 20px; height: 20px; border-radius: 9999px; font-size: 10.5px; }
+#s-tabs .sbsite .hub .gk-oc { background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038; color: #a8abb2; }
+#s-tabs .sbsite .hub .gk-oc .gh-i { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #4fc57f; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: 6px; background: #ffffff; box-shadow: inset 0 0 0 1px #2a2a2e; }
+
+/* ---- the superbot frame, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .sd-scrim { position: absolute; inset: 0; z-index: 5; opacity: 0; pointer-events: none; background: #0b0b0c; }
+#s-tabs .sd-bar { position: absolute; z-index: 7; display: flex; align-items: center; opacity: 0; pointer-events: none; box-sizing: border-box;
+  font: 500 19px/1 var(--ui); color: #a8abb2; white-space: nowrap; gap: 12px; }
+#s-tabs .sd-bar b { font: 700 24px/1 var(--ui); color: #ececec; letter-spacing: -.01em; }
+#s-tabs .sd-bar span { overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sd-sb { flex: none; display: block; width: 30px; height: 30px; border-radius: 8px; }
+#s-tabs .sd-bar .sd-sb { width: 40px; height: 40px; border-radius: 10px; }
+#s-tabs .sd-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #ffffff;
+  box-shadow: 0 0 0 1px #2a2a2e, 0 18px 50px rgba(0,0,0,.55); }
+
+/* ---- the Stripe Dashboard client ---- */
+#s-tabs .sd-app { position: absolute; left: 0; top: 0; display: flex; transform-origin: 0 0; overflow: hidden;
+  background: #ffffff; color: var(--sd-t); font: 400 14px/20px var(--sd-font); -webkit-font-smoothing: antialiased; }
+/* the left nav: page context, not controls, so the whole column sits at 0.4 (stripe.js writes it, easing it out on the push) */
+#s-tabs .sd-nav { flex: none; width: 236px; padding: 18px 12px; box-sizing: border-box; border-right: 1px solid var(--sd-rule); display: flex; flex-direction: column; gap: 1px; opacity: .4; }
+#s-tabs .sd-me { display: flex; align-items: center; gap: 10px; padding: 0 8px 16px; font: 600 14px/1.2 var(--sd-font); color: var(--sd-h); }
+#s-tabs .sd-me-l { width: 26px; height: 26px; }
+#s-tabs .sd-nv { display: flex; align-items: center; height: 30px; padding: 0 8px; border-radius: 6px; font: 500 14px/1 var(--sd-font); color: var(--sd-t); }
+#s-tabs .sd-nv.sd-sub { padding-left: 22px; font-weight: 400; }
+#s-tabs .sd-nv.sd-on { color: var(--sd-brand); font-weight: 600; }
+#s-tabs .sd-ns { margin: 16px 8px 6px; font: 600 12px/1 var(--sd-font); color: var(--sd-m); }
+#s-tabs .sd-main { flex: 1; min-width: 0; padding: 26px 40px 0; box-sizing: border-box; }
+#s-tabs .sd-crumb { font: 500 14px/1 var(--sd-font); color: var(--sd-m); }
+#s-tabs .sd-head { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding-bottom: 22px; border-bottom: 1px solid var(--sd-rule); }
+#s-tabs .sd-hic { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 8px; background: var(--sd-bg2); box-shadow: inset 0 0 0 1px var(--sd-rule); }
+#s-tabs .sd-hic svg { width: 22px; height: 22px; fill: none; stroke: var(--sd-m); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sd-ht { min-width: 0; }
+#s-tabs .sd-h1 { display: flex; align-items: center; gap: 12px; }
+#s-tabs .sd-h1 h1 { margin: 0; font: 700 28px/1.2 var(--sd-font); letter-spacing: -.01em; color: var(--sd-h); white-space: nowrap; }
+#s-tabs .sd-ht p { margin: 6px 0 0; font: 400 16px/1.3 var(--sd-font); color: var(--sd-m); }
+/* the badge: a flat label (not a button), the old and new statuses stacked in one cell */
+#s-tabs .sd-bcell { position: relative; display: inline-block; height: 24px; flex: none; }
+#s-tabs .sd-bcell .sd-badge { position: absolute; left: 0; top: 0; }
+#s-tabs .sd-badge { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 7px; border-radius: 4px; box-sizing: border-box;
+  font: 600 13px/1 var(--sd-font); white-space: nowrap; }
+#s-tabs .sd-h1 .sd-badge { height: 24px; padding: 0 8px; font-size: 14px; }
+#s-tabs .sd-pos { background: var(--sd-pos-bg); color: var(--sd-pos); }
+#s-tabs .sd-neg { background: var(--sd-neg-bg); color: var(--sd-neg); }
+#s-tabs .sd-bi { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sd-ac { opacity: 0; transform-origin: 0 50%; }
+#s-tabs .sd-cols { display: flex; gap: 40px; margin-top: 26px; }
+#s-tabs .sd-pay { flex: 1; min-width: 0; }
+#s-tabs .sd-cols h2 { margin: 0 0 12px; font: 700 18px/1.2 var(--sd-font); color: var(--sd-h); }
+#s-tabs .sd-tbl { border-top: 1px solid var(--sd-rule); }
+#s-tabs .sd-tr { display: grid; grid-template-columns: 1fr 1fr 1.3fr; align-items: center; gap: 12px; height: 48px; padding: 0 10px; border-bottom: 1px solid var(--sd-rule);
+  font: 400 15px/1 var(--sd-font); color: var(--sd-t); white-space: nowrap; }
+#s-tabs .sd-th { height: 36px; font: 600 12.5px/1 var(--sd-font); color: var(--sd-m); }
+#s-tabs .sd-tr.sd-hl { background: #f7f8fe; }
+#s-tabs .sd-amt b { font-weight: 600; color: var(--sd-h); }
+#s-tabs .sd-amt { color: var(--sd-m); }
+#s-tabs .sd-pm { display: flex; align-items: center; gap: 8px; color: var(--sd-t); }
+/* a generic card glyph (no card-network logo) */
+#s-tabs .sd-card { flex: none; display: inline-block; width: 22px; height: 15px; border-radius: 3px; background: #e3e8ee; box-shadow: inset 0 0 0 1px #d8dee4; position: relative; }
+#s-tabs .sd-card::after { content: ""; position: absolute; left: 3px; right: 3px; top: 4px; height: 2px; background: #a3acba; }
+#s-tabs .sd-slot { overflow: hidden; height: 0; }
+#s-tabs .sd-cols h2.sd-h2b { margin-top: 30px; }
+#s-tabs .sd-det { flex: none; width: 330px; }
+#s-tabs .sd-det dl { display: grid; grid-template-columns: auto 1fr; gap: 12px 18px; margin: 0; padding-top: 14px; border-top: 1px solid var(--sd-rule); font: 400 14px/1.3 var(--sd-font); }
+#s-tabs .sd-det dt { color: var(--sd-m); }
+#s-tabs .sd-det dd { margin: 0; display: flex; align-items: center; gap: 8px; color: var(--sd-t); white-space: nowrap; }
+#s-tabs .sd-det .sd-id { font: 400 13px/1.3 var(--sd-mono); }
+/* portrait: no left nav, the details under the payments, a tighter page */
+#s-tabs .sd-app.sd-narrow .sd-nav { display: none; }
+#s-tabs .sd-app.sd-narrow .sd-main { padding: 18px 20px 0; }
+#s-tabs .sd-app.sd-narrow .sd-cols { flex-direction: column; gap: 26px; margin-top: 20px; }
+#s-tabs .sd-app.sd-narrow .sd-det { width: auto; }
+/* portrait: the Details list stops at Payment method (the ID row would sit on the window's bottom edge) */
+#s-tabs .sd-app.sd-narrow .sd-idl, #s-tabs .sd-app.sd-narrow .sd-id { display: none; }
+/* portrait: the columns keep a width that, pushed in, still fits the window with a right margin */
+#s-tabs .sd-app.sd-narrow .sd-main { flex: none; width: 560px; }
+#s-tabs .sd-app.sd-narrow .sd-h1 h1 { font-size: 25px; }
+/* portrait: the payments table drops its Payment method column (the Details panel names the card), so the pushed-in
+   view never cuts a column at the window's edge */
+#s-tabs .sd-app.sd-narrow .sd-tr { grid-template-columns: 1fr 1fr; }
+#s-tabs .sd-app.sd-narrow .sd-tbl:not(.sd-price) .sd-tr > span:nth-child(3) { display: none; }
+#s-tabs .sd-app.sd-narrow .sd-price .sd-tr > span:nth-child(2) { display: none; }
+
+/* ---- the static superbot status card (text only, no buttons) ---- */
+#s-tabs .sd-card2 { position: absolute; z-index: 8; opacity: 0; pointer-events: none; box-sizing: border-box; padding: 20px 24px 18px; border-radius: 16px;
+  background: #141416; box-shadow: 0 0 0 1px #2e2f35, 0 22px 60px rgba(0,0,0,.6); font-family: var(--ui); color: #ececec; }
+#s-tabs .sd-c2h { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+#s-tabs .sd-c2h .sd-sb { width: 36px; height: 36px; }
+#s-tabs .sd-c2h b { font: 700 24px/1.25 var(--ui); letter-spacing: -.01em; }
+#s-tabs .sd-c2r { display: flex; align-items: center; gap: 12px; height: 38px; font: 500 20px/1 var(--ui); color: #d6d6dd; }
+#s-tabs .sb-okc { flex: none; width: 22px; height: 22px; fill: none; stroke: #4fc57f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sd-card2.sd-c2-tall { padding: 16px 18px 14px; }
+#s-tabs .sd-card2.sd-c2-tall .sd-c2h b { font-size: 21px; }
+#s-tabs .sd-card2.sd-c2-tall .sd-c2r { height: 34px; font-size: 18px; }

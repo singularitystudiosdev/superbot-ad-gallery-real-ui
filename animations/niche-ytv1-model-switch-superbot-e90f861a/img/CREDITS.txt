@@ -1,0 +1,47 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+mic-frame.jpg
+  "Close-Up of Studio Microphone in Soft Light", photo by Alpha En on Pexels,
+  https://www.pexels.com/photo/close-up-of-studio-microphone-in-soft-light-31213680/
+  (downloaded from https://images.pexels.com/photos/31213680/pexels-photo-31213680.jpeg?w=1600, 1600 x 1067; the
+  original is kept in the build scratch, /tmp/yt-3828921d/p31213680.jpg), fetched 2026-10-03. Author and title read
+  from the page's Wayback capture of 2026-05-18 (the live page is behind a bot wall). Licence: Pexels License
+  (https://www.pexels.com/license/): free to use, attribution not required, modification allowed. No CC BY /
+  CC BY-SA terms.
+  Derived: cropped with ffmpeg to 16:9 (crop 1600x900 at 0,40, scaled to 1280x720, lanczos), metadata stripped.
+  Used as Studio's video column thumbnail and as the 4:38 frame GPT-6 Astra checks ("for Lena"); strip-1 is a crop of it.
+  What it shows: a black USB microphone hanging from the underside of a low-profile black boom arm (a threaded mount
+  at the arm's end), a monitor and a flip clock blurred behind. No desk clamp is in the shot, so the verdict reads
+  "Low-profile boom arm, mic mounted underneath", not "clamps under the desk". frame.js's highlight boxes are
+  measured on this crop (mount 578,18 to 740,182; arm 744,40 to 1276,304; mic 408,176 to 682,668).
+
+frame-612.jpg (the 6:12 frame, "for Marco") and strip-2.jpg
+  "Black microphone on white surface" (Unsplash title, page shown as "Micrófono negro sobre superficie blanca"),
+  photo by Axel Mencia (axmen) on Unsplash, https://unsplash.com/photos/5SoYbzKhqfA (published 2020-03-25, Apple
+  iPhone X), fetched 2026-10-03. Licence: Unsplash License (https://unsplash.com/license), "free to use under the
+  Unsplash License", NOT Unsplash+; attribution not required, modification allowed. No CC BY / CC BY-SA terms.
+  Original kept in the build scratch /tmp/ytv1-78645997/src/u5SoYbzKhqfA.jpg.
+  Derived (ffmpeg, metadata stripped): frame-612 = transpose=2, crop 2780x1564 at 122,713, scaled to 1280x720
+  (lanczos); strip-2 = transpose=2, crop 1400x788 at 300,900, scaled to 320x180.
+  What it shows: a small black Audio-Technica USB condenser mic in its clip on a small tripod desk stand, lying on a
+  white desk surface. Verdict on screen: "Small USB mic on a desk stand" (true of the photo); the "$29 pick" line is
+  the story's price tag, not read from the photo.
+
+frame-705.jpg (the 7:05 frame, "for Priya"), strip-3.jpg and strip-4.jpg
+  "Professional Studio Microphone Setup with Boom Arms", photo by Jakub Zerdzicki on Pexels,
+  https://www.pexels.com/photo/professional-studio-microphone-setup-with-boom-arms-38493049/ (dated Jul 9, 2026,
+  3000x2000; page description "Close-up of dynamic microphones in a professional studio setting, ideal for podcasts
+  and broadcasts."), fetched 2026-10-03 (page read headless the same day; downloaded from
+  https://images.pexels.com/photos/38493049/pexels-photo-38493049.jpeg at 1600 wide; original kept in
+  /tmp/ytv1-78645997/src/p38493049.jpg). Licence: Pexels License (https://www.pexels.com/license/): free to use,
+  attribution not required, modification allowed. No CC BY / CC BY-SA terms.
+  Derived (ffmpeg, metadata stripped): frame-705 = crop 1600x900 at 0,120 scaled to 1280x720; strip-3 = crop 800x450
+  at 780,420 scaled to 320x180; strip-4 = crop 900x506 at 0,0 scaled to 320x180.
+  What it shows: several dynamic broadcast microphones on boom arms side by side in one room. Verdict on screen:
+  "Three mics side by side, same room" (true: three are in frame); "the $49 dynamic" is plausible since the page itself calls them dynamic
+  microphones.
+
+strip-1.jpg
+  Crop of the Pexels photo 31213680 (see mic-frame.jpg above): crop 900x506 at 0,400, scaled to 320x180.
+
+No identifiable faces in any photo. Every filmstrip thumb is a crop of these three photos.

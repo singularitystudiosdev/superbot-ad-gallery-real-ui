@@ -761,6 +761,15 @@
     "desc": "One ask in superbot for DevOps engineers: Gemini reads the pod logs and events from 3 failed deploys and finds the OOMKill, Claude Opus 5.5 raises the memory limit, adds a startup probe and a rollout check, GPT-6 Astra lints and validates every manifest and rolls it out on staging, then superbot connects to GitLab, opens merge request !318 and the pipeline rolls the fix out to production."
   },
   {
+    "id": "niche-sheets-model-switch-superbot-cb7a5452",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Fix every broken formula in Q3 Revenue.xlsx: Gemini, Opus 5.5, GPT-6 Astra, then superbot writes the fixes back in Excel (4 switches)",
+    "src": "animations/niche-sheets-model-switch-superbot-cb7a5452/",
+    "thumb": "assets/shots/niche-sheets-model-switch-superbot-cb7a5452.png",
+    "desc": "One ask in superbot: Gemini reads all 14 sheets and 48,210 formulas and traces 37 broken formulas to 4 causes, Claude Opus 5.5 rewrites each one with exact-match lookups and table references, GPT-6 Astra checks every region against the ledger, then superbot connects to Excel, writes the fixes back and the workbook ties out."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

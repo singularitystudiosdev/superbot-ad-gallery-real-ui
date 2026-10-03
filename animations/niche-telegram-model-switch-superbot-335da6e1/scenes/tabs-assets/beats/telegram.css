@@ -1,0 +1,149 @@
+/* Telegram beat (beats/telegram.js): the connect sheet in the chat (Telegram Web A's light sheet, three sliding panes)
+   and the full-frame layer carrying the one Telegram Web client: pinned over the sheet, then opened to the whole
+   frame. The client is Telegram Web A's light theme at its own px (scaled to the frame by telegram.js); every colour is
+   a chat.css --tg-* variable (Telegram's own tokens). Nothing here transitions: position, size, radius, height,
+   opacity and transform are written from t in telegram.js, so ?t= freezes a frame. Classes are prefixed .tc- (the
+   sheet) and .tg- (the client). */
+
+/* Roboto (Apache 2.0), Telegram Web A's own --font-family; latin subset from @fontsource/roboto 5.2.10, vendored under
+   fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "Roboto TG"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/roboto-latin-400-normal.woff2?v=335da6e1") format("woff2"); }
+@font-face { font-family: "Roboto TG"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/roboto-latin-500-normal.woff2?v=335da6e1") format("woff2"); }
+@font-face { font-family: "Roboto TG"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/roboto-latin-700-normal.woff2?v=335da6e1") format("woff2"); }
+
+#s-tabs .tg-i { flex: none; width: 24px; height: 24px; fill: currentColor; }
+
+/* ---- the connect sheet, in the chat ---- */
+#s-tabs .sbsite .hub .tc-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .tc-card { opacity: 0; box-sizing: border-box; width: 380px; max-width: 100%; margin-top: 2px; border-radius: 12px;
+  background: var(--tg-bg); box-shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 10px 28px rgba(0, 0, 0, .35); overflow: hidden;
+  font-family: var(--tg-font); color: var(--tg-text); -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .tc-vp { position: relative; height: 246px; overflow: hidden; }
+#s-tabs .sbsite .hub .tc-pane { position: absolute; inset: 0; padding: 0 14px; box-sizing: border-box; background: var(--tg-bg); }
+#s-tabs .sbsite .hub .tc-hd { display: flex; align-items: center; gap: 12px; height: 46px; font: 500 15px/1 var(--tg-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .tc-hd .tg-i { width: 20px; height: 20px; color: var(--tg-icon); }
+#s-tabs .sbsite .hub .tc-hd b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .tc-search { display: flex; align-items: center; gap: 8px; height: 32px; margin-bottom: 6px; padding: 0 12px; border-radius: 16px;
+  background: var(--tg-bg-2); font: 400 14px/1 var(--tg-font); color: var(--tg-ph); }
+#s-tabs .sbsite .hub .tc-search .tg-i { width: 18px; height: 18px; color: var(--tg-ph); }
+#s-tabs .sbsite .hub .tc-grp { display: flex; align-items: center; gap: 11px; height: 50px; margin: 0 -8px; padding: 0 8px; border-radius: 10px; white-space: nowrap; }
+#s-tabs .sbsite .hub .tc-grp.tc-on { background: var(--tg-hover); }
+#s-tabs .sbsite .hub .tc-av { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--g);
+  font: 600 14px/1 var(--tg-font); color: #fff; }
+#s-tabs .sbsite .hub .tc-gt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+#s-tabs .sbsite .hub .tc-gt b { font: 500 14.5px/1.15 var(--tg-font); }
+#s-tabs .sbsite .hub .tc-gt small { font: 400 13px/1.15 var(--tg-font); color: var(--tg-text-2); }
+#s-tabs .sbsite .hub .tc-radio { flex: none; display: grid; place-items: center; width: 20px; height: 20px; margin-left: auto; box-sizing: border-box;
+  border-radius: 50%; border: 2px solid var(--tg-borders); }
+#s-tabs .sbsite .hub .tc-radio .tg-i { width: 14px; height: 14px; color: #fff; opacity: 0; }
+#s-tabs .sbsite .hub .tc-on .tc-radio { border-color: var(--tg-primary); background: var(--tg-primary); }
+#s-tabs .sbsite .hub .tc-on .tc-radio .tg-i { opacity: 1; }
+/* Admin Rights: the section label in Telegram blue, the switches, the button */
+#s-tabs .sbsite .hub .tc-sec { height: 24px; font: 500 13.5px/24px var(--tg-font); color: var(--tg-primary); }
+#s-tabs .sbsite .hub .tc-right { --on: 0; display: flex; align-items: center; justify-content: space-between; height: 31px; font: 400 14.5px/1 var(--tg-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .tc-sw { position: relative; flex: none; width: 30px; height: 13px; border-radius: 7px; background: var(--tg-gray, #c4c9cc); }
+#s-tabs .sbsite .hub .tc-sw::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--tg-primary); opacity: var(--on); }
+#s-tabs .sbsite .hub .tc-sw i { position: absolute; left: -2px; top: -3px; width: 19px; height: 19px; box-sizing: border-box; border-radius: 50%;
+  background: #fff; border: 2px solid #c4c9cc; transform: translateX(calc(var(--on) * 15px)); }
+#s-tabs .sbsite .hub .tc-is-on .tc-sw i { border-color: var(--tg-primary); }
+#s-tabs .sbsite .hub .tc-btn { display: grid; place-items: center; height: 38px; margin-top: 12px; border-radius: 10px; background: var(--tg-primary);
+  font: 500 14.5px/1 var(--tg-font); color: #fff; }
+/* the checklist */
+#s-tabs .sbsite .hub .tc-mark { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #fff; }
+#s-tabs .sbsite .hub .tc-mark img { width: 26px; height: 26px; display: block; }
+#s-tabs .sbsite .hub .tc-hd-tg { margin-bottom: 6px; }
+#s-tabs .sbsite .hub .tc-step { display: flex; align-items: center; gap: 11px; height: 36px; font: 400 14.5px/1 var(--tg-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .tc-ok { position: relative; flex: none; width: 20px; height: 20px; }
+#s-tabs .sbsite .hub .tc-spin { position: absolute; inset: 2px; border-radius: 50%; border: 2px solid var(--tg-borders); border-top-color: var(--tg-primary); }
+#s-tabs .sbsite .hub .tc-done { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: var(--tg-primary); opacity: 0; }
+#s-tabs .sbsite .hub .tc-done .tg-i { width: 14px; height: 14px; color: #fff; }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .tg-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--tg-bg); }
+#s-tabs .tg-app { position: absolute; left: 0; top: 0; display: flex; transform-origin: 0 0; overflow: hidden; background: var(--tg-bg);
+  color: var(--tg-text); font: 400 16px/1.3125 var(--tg-font); -webkit-font-smoothing: antialiased; }
+
+/* the chat list */
+#s-tabs .tg-left { flex: none; width: 400px; display: flex; flex-direction: column; background: var(--tg-bg); box-shadow: 1px 0 0 var(--tg-borders); z-index: 1; }
+#s-tabs .tg-lh { flex: none; display: flex; align-items: center; gap: 14px; height: 56px; padding: 0 12px 0 20px; }
+#s-tabs .tg-lh > .tg-i { color: var(--tg-icon); }
+#s-tabs .tg-search { flex: 1; display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 14px; border-radius: 22px; background: var(--tg-bg-2);
+  font: 400 16px/1 var(--tg-font); color: var(--tg-ph); }
+#s-tabs .tg-search .tg-i { width: 22px; height: 22px; color: var(--tg-ph); }
+#s-tabs .tg-chats { padding: 4px 8px; }
+#s-tabs .tg-row { display: flex; align-items: center; gap: 10px; height: 72px; padding: 0 9px; border-radius: 12px; }
+#s-tabs .tg-rav { flex: none; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--g);
+  font: 600 19px/1 var(--tg-font); color: #fff; }
+#s-tabs .tg-rm { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+#s-tabs .tg-r1, #s-tabs .tg-r2 { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+#s-tabs .tg-r1 b { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 500 16px/22px var(--tg-font); }
+#s-tabs .tg-r1 .tg-mute { width: 16px; height: 16px; color: var(--tg-ph); }
+#s-tabs .tg-r1 time { margin-left: auto; font: 400 12px/1 var(--tg-font); color: var(--tg-meta); }
+#s-tabs .tg-pv { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 400 15px/21px var(--tg-font); color: var(--tg-text-2); }
+#s-tabs .tg-pv em { font-style: normal; color: var(--tg-text); }
+#s-tabs .tg-badge { flex: none; margin-left: auto; min-width: 22px; height: 22px; padding: 0 7px; box-sizing: border-box; border-radius: 11px;
+  background: var(--tg-success); font: 500 14px/22px var(--tg-font); font-style: normal; color: #fff; text-align: center; }
+#s-tabs .tg-badge.tg-muted { background: #c4c9cc; }
+#s-tabs .tg-row.tg-sel { background: var(--tg-primary); }
+#s-tabs .tg-row.tg-sel b, #s-tabs .tg-row.tg-sel time, #s-tabs .tg-row.tg-sel .tg-pv, #s-tabs .tg-row.tg-sel .tg-pv em { color: #fff; }
+
+/* the chat pane: the default light wallpaper's gradient colours (telegram-tt DEFAULT_LIGHT_WALLPAPER), no pattern */
+#s-tabs .tg-chat { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#s-tabs .tg-wall { position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 10% 15%, var(--tg-wall-4) 0, rgba(197, 211, 176, 0) 70%),
+    radial-gradient(ellipse 70% 80% at 90% 20%, var(--tg-wall-1) 0, rgba(189, 205, 140, 0) 70%),
+    radial-gradient(ellipse 70% 80% at 85% 90%, var(--tg-wall-2) 0, rgba(142, 186, 137, 0) 70%),
+    radial-gradient(ellipse 70% 80% at 12% 88%, var(--tg-wall-3) 0, rgba(131, 178, 143, 0) 70%),
+    linear-gradient(135deg, var(--tg-wall-4), var(--tg-wall-2)); }
+#s-tabs .tg-top { position: relative; flex: none; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 12px 0 22px; box-sizing: border-box;
+  background: var(--tg-bg); box-shadow: 0 1px 0 var(--tg-borders), 0 2px 2px rgba(114, 114, 114, .08); white-space: nowrap; z-index: 1; }
+#s-tabs .tg-top > .tg-i { display: none; color: var(--tg-icon); }
+#s-tabs .tg-hav { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--g);
+  font: 600 16px/1 var(--tg-font); color: #fff; }
+#s-tabs .tg-ti { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+#s-tabs .tg-ti b { font: 500 16px/20px var(--tg-font); }
+#s-tabs .tg-sub { font: 400 14px/18px var(--tg-font); color: var(--tg-text-2); }
+#s-tabs .tg-sub-b { color: var(--tg-primary); }
+#s-tabs .tg-sub-b i { font-style: normal; }
+#s-tabs .tg-tools { display: flex; gap: 18px; margin-left: auto; padding-right: 8px; color: var(--tg-icon); }
+#s-tabs .tg-scroll { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+#s-tabs .tg-list { position: absolute; left: 50%; bottom: 0; width: 100%; max-width: 728px; padding: 0 16px 10px; box-sizing: border-box; transform: translateX(-50%); }
+
+/* service lines (date, "Sam added ..."): Telegram's action-message pill */
+#s-tabs .tg-svc { display: flex; justify-content: center; margin: 10px 0 4px; }
+#s-tabs .tg-svc span { padding: 3px 10px; border-radius: 13px; background: var(--tg-action); font: 500 14.5px/20px var(--tg-font); color: #fff; }
+
+/* messages: an incoming group bubble with the sender's avatar, name, the text and its time */
+#s-tabs .tg-slot { height: 0; overflow: hidden; }
+#s-tabs .tg-msg { position: relative; display: flex; align-items: flex-end; gap: 8px; margin-top: 8px; }
+#s-tabs .tg-av { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--g);
+  font: 600 13px/1 var(--tg-font); color: #fff; }
+#s-tabs .tg-bub { position: relative; max-width: 480px; padding: 6px 9px 7px 10px; border-radius: var(--tg-radius) var(--tg-radius) var(--tg-radius) 0;
+  background: var(--tg-bg); box-shadow: 0 1px 2px rgba(114, 114, 114, .25); }
+#s-tabs .tg-tail { position: absolute; left: -8px; bottom: 0; width: 9px; height: 17px; fill: var(--tg-bg); }
+#s-tabs .tg-nm { display: block; font: 500 15px/20px var(--tg-font); }
+#s-tabs .tg-tx { font: 400 16px/21px var(--tg-font); color: var(--tg-text); }
+/* the time sits in the last line's corner, as Telegram floats it */
+#s-tabs .tg-meta { float: right; position: relative; top: 7px; margin-left: 10px; font: 400 12px/14px var(--tg-font); color: var(--tg-meta); }
+/* a reply: the quote strip of the message it answers (the sender's colour, its bar, a one-line snippet) */
+#s-tabs .tg-quote { display: flex; flex-direction: column; margin: 3px 0 5px; padding: 3px 8px 4px 10px; border-radius: 5px; overflow: hidden;
+  background: color-mix(in srgb, var(--q) 10%, transparent); box-shadow: inset 3px 0 0 var(--q); }
+#s-tabs .tg-quote b { font: 500 14px/18px var(--tg-font); color: var(--q); }
+#s-tabs .tg-quote span { font: 400 14px/18px var(--tg-font); color: var(--tg-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* the composer */
+#s-tabs .tg-comp { position: relative; flex: none; display: flex; align-items: flex-end; gap: 8px; width: 100%; max-width: 728px; margin: 0 auto;
+  padding: 4px 16px 20px; box-sizing: border-box; }
+#s-tabs .tg-input { flex: 1; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 14px; border-radius: var(--tg-radius);
+  background: var(--tg-bg); box-shadow: 0 1px 2px rgba(114, 114, 114, .25); font: 400 16px/1 var(--tg-font); color: var(--tg-ph); }
+#s-tabs .tg-input .tg-i { color: var(--tg-icon); }
+#s-tabs .tg-input .tg-clip { margin-left: auto; transform: rotate(45deg); }
+#s-tabs .tg-micb { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--tg-bg);
+  box-shadow: 0 1px 2px rgba(114, 114, 114, .25); color: var(--tg-icon); }
+
+/* portrait (4:5): Telegram's narrow layout, the chat pane alone with its back arrow */
+#s-tabs .tg-app.tg-narrow .tg-left { display: none; }
+#s-tabs .tg-app.tg-narrow .tg-top { padding-left: 12px; }
+#s-tabs .tg-app.tg-narrow .tg-top > .tg-i { display: block; }
+#s-tabs .tg-app.tg-narrow .tg-bub { max-width: 560px; }

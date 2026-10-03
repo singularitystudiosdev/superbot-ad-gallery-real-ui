@@ -1,0 +1,44 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model, tool or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+
+cloudflare-workers-logo.svg
+                     Cloudflare Workers mark, Simple Icons "cloudflareworkers" icon,
+                     https://cdn.jsdelivr.net/npm/simple-icons/icons/cloudflareworkers.svg (simple-icons 16.33.0,
+                     https://simpleicons.org), fetched 2026-10-03. Licence: CC0 1.0 (Simple Icons' licence for its SVG
+                     files). Path verbatim; only a fill="#F38020" attribute was added on the <svg> root (Simple Icons'
+                     recorded brand hex for it, Cloudflare orange) so it reads on the dark hub tile. Cloudflare and
+                     Cloudflare Workers are trademarks of Cloudflare, Inc., used nominatively to name the platform
+                     superbot deploys the bot to (pill tile, reply header, composer chip, the deploy card).
+
+telegram-logo.svg    Telegram mark, Simple Icons "telegram" icon,
+                     https://cdn.jsdelivr.net/npm/simple-icons/icons/telegram.svg (simple-icons 16.33.0,
+                     https://simpleicons.org), fetched 2026-10-03. Licence: CC0 1.0. Path verbatim; only a
+                     fill="#26A5E4" attribute was added on the <svg> root (Simple Icons' recorded Telegram hex). The
+                     paper plane is the path's cut-out, so the mark sits on white wherever it appears. Telegram and the
+                     Telegram logo are trademarks of Telegram FZ-LLC, used nominatively to name the app superbot
+                     connects to and to mock its web client in the result screen. Never redrawn: every Telegram mark in
+                     the spot (pill tile, reply header, composer chip, the connect sheet) is this one file.
+
+ICONS (UI furniture in the Telegram sheet and the Telegram Web screen: menu, search, more, back, close, paperclip,
+smile, microphone, check, muted)
+  Material Design Icons by Pictogrammers (https://github.com/Templarian/MaterialDesign), Apache License 2.0. Paths
+  taken verbatim from the Iconify API (https://api.iconify.design/mdi.json?icons=..., set confirmed with
+  https://api.iconify.design/search?query=paperclip&prefix=mdi), fetched 2026-10-03, inlined in
+  scenes/tabs-assets/beats/telegram.js. The bubble tail and the switches are plain CSS/SVG shapes (UI furniture).
+  The code panel's octicons are Primer octicons (MIT), carried over from the source ad.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+THE SPOT'S DATA
+  Everything in it is made up for the spot: the group "Harbor Lane Run Club" (1,248 members), its chat export
+  (18,240 messages), the questions and their counts, the 12 FAQ answers, the 40 past questions, the bot
+  "Harbor Lane FAQ" and its id, the worker harbor-faq-bot, the other chats (Elena, Saturday Coffee, Race Team 2026,
+  Jonas, Maya, Leo) and every person (Sam, Priya, Elena, Tom, Nora). No photos: every avatar is Telegram's
+  letter-avatar style (initials on Telegram's own userpic gradient colours). The chat background is only the default
+  light wallpaper's gradient colours; Telegram's doodle pattern is not drawn.

@@ -1,0 +1,129 @@
+img/ CREDITS (internal). Provenance is never shown on screen. Every photo is a real photo under the Unsplash License
+(free to use, attribution not required, modification allowed); none is CC BY / CC BY-SA, drawn or generated.
+brand-pinchwell.jpg was sourced as brand-saltbox.jpg (the brand was renamed after a name check) and renamed, unaltered.
+
+roll-01.jpg
+  "A plate of noodles with meat and vegetables", photo by Gourmet Lenz (@gourmetlenz) on Unsplash,
+  https://unsplash.com/photos/a-plate-of-noodles-with-meat-and-vegetables-C8PDfB2dhxc
+  (downloaded from https://images.unsplash.com/photo-1705088295609-3ce7befbe8ee?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzQzfA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 3000x4500, fetched as 1600x2400), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1400x1400 region at x=100,y=550 of the 1600x2400 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-02.jpg
+  "A blue bowl filled with vegetables and a wooden spoon", photo by Sonny Mauricio (@northernstatemedia) on Unsplash,
+  https://unsplash.com/photos/a-blue-bowl-filled-with-vegetables-and-a-wooden-spoon-yhc4pSbl01A
+  (downloaded from https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzQ0fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 4160x5200, fetched as 1600x2000), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1400x1400 region at x=95,y=300 of the 1600x2000 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-03.jpg
+  "A close up of a plate of food with lemons", photo by Ronit Shaked (@ronit_sha) on Unsplash,
+  https://unsplash.com/photos/a-close-up-of-a-plate-of-food-with-lemons-dkyzXKh9UA4
+  (downloaded from https://images.unsplash.com/photo-1642338320882-d966ad8587f2?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzQ1fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 3024x4032, fetched as 1600x2133), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1600x1600 region at x=0,y=266 of the 1600x2133 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-04.jpg
+  "Salmon and rice served on a floral plate", photo by smboro (@smboro) on Unsplash,
+  https://unsplash.com/photos/salmon-and-rice-served-on-a-floral-plate-ANUYfc2aPXU
+  (downloaded from https://images.unsplash.com/photo-1742349166781-70e38f10b7ed?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzQ3fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 4284x5712, fetched as 1600x2133), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1500x1500 region at x=100,y=390 of the 1600x2133 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-05.jpg
+  "Pizza on brown wooden tray", photo by Kelvin T (@gogofoto) on Unsplash,
+  https://unsplash.com/photos/pizza-on-brown-wooden-tray-AcA8moIiD3g
+  (downloaded from https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzQ5fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 5249x3499, fetched as 1600x1067), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1067x1067 region at x=270,y=0 of the 1600x1067 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-06.jpg
+  "A plate of food", photo by Leanna Myers (@myerslk88) on Unsplash,
+  https://unsplash.com/photos/a-plate-of-food-mypgWO69XDY
+  (downloaded from https://images.unsplash.com/photo-1667499707432-0524fcfb63ba?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzUxfA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 4000x5491, fetched as 1600x2196), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1300x1300 region at x=200,y=800 of the 1600x2196 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-07.jpg
+  "Pasta with red sauce on white ceramic round plate", photo by Danijela Prijovic (@dacakockica) on Unsplash,
+  https://unsplash.com/photos/pasta-with-red-sauce-on-white-ceramic-round-plate-qits91IZv1o
+  (downloaded from https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzUzfA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 5078x4160, fetched as 1600x1311), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1311x1311 region at x=40,y=0 of the 1600x1311 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-08.jpg
+  "Blue ceramic teacup with latte", photo by Martin Widenka (@widenka) on Unsplash,
+  https://unsplash.com/photos/blue-ceramic-teacup-with-latte-0rI80lQco18
+  (downloaded from https://images.unsplash.com/photo-1538587888044-79f13ddd7e49?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzU1fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 2874x3834, fetched as 1600x2134), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1600x1600 region at x=0,y=275 of the 1600x2134 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-09.jpg
+  "A wooden bowl filled with a salad and two spoons", photo by Mads Eneqvist (@madseneqvist) on Unsplash,
+  https://unsplash.com/photos/a-wooden-bowl-filled-with-a-salad-and-two-spoons-3YRxJW2GQCc
+  (downloaded from https://images.unsplash.com/photo-1623489254660-db5b367881d9?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzU3fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 2704x4064, fetched as 1600x2405), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1600x1600 region at x=0,y=361 of the 1600x2405 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-10.jpg
+  "Brown bread on brown wooden chopping board", photo by Debbie Widjaja (@debbiewidjaja) on Unsplash,
+  https://unsplash.com/photos/brown-bread-on-brown-wooden-chopping-board-H_PXix_4Bwc
+  (downloaded from https://images.unsplash.com/photo-1597604391235-a7429b4b350c?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzU5fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 4032x3024, fetched as 1600x1200), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1200x1200 region at x=60,y=0 of the 1600x1200 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-11.jpg
+  "Brown cookies on round brown bowl", photo by Mae Mu (@picoftasty) on Unsplash,
+  https://unsplash.com/photos/brown-cookies-on-round-brown-bowl-kID9sxbJ3BQ
+  (downloaded from https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzYxfA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 3286x4107, fetched as 1600x2000), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1300x1300 region at x=300,y=540 of the 1600x2000 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+roll-12.jpg
+  "Avocado, tomatoes, eggs, mushrooms, spring onions, and leaves", photo by Katie Smith (@kate5oh3) on Unsplash,
+  https://unsplash.com/photos/avocado-tomatoes-eggs-mushrooms-spring-onions-and-leaves-uQs1802D0CQ
+  (downloaded from https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzYzfA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 2428x2428, fetched as 1600x1600), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1600x1600 region at x=0,y=0 of the 1600x1600 download (subject-centred), resized to 600x600, JPEG q88, metadata stripped.
+
+brand-hearthline.jpg
+  "A red hot pepper in a cast iron skillet", photo by Joel Rouse (@thebumpercrew) on Unsplash,
+  https://unsplash.com/photos/a-red-hot-pepper-in-a-cast-iron-skillet-0sc9oM6zzTs
+  (downloaded from https://images.unsplash.com/photo-1643316002366-18f968aa46c9?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzY0fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 2702x3600, fetched as 1600x2132), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1300x1300 region at x=156,y=828 of the 1600x2132 download (subject-centred), resized to 240x240, JPEG q88, metadata stripped.
+
+brand-pinchwell.jpg
+  "Assorted spices in clear glass containers", photo by Merve Sehirli Nasir (@32steps) on Unsplash,
+  https://unsplash.com/photos/assorted-spices-in-clear-glass-containers-dSbUXPQ8Sm8
+  (downloaded from https://images.unsplash.com/photo-1591272216626-b09e38519371?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzY2fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 3024x4032, fetched as 1600x2133), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1600x1600 region at x=0,y=267 of the 1600x2133 download (subject-centred), resized to 240x240, JPEG q88, metadata stripped.
+
+brand-greenfold.jpg
+  "A wooden crate filled with assorted fruits and vegetables", photo by Skön Communication (@skoncommunication) on Unsplash,
+  https://unsplash.com/photos/a-wooden-crate-filled-with-assorted-fruits-and-vegetables-OqXXSSPs4zw
+  (downloaded from https://images.unsplash.com/photo-1635341083777-5f93a755e916?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzY3fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 3024x4032, fetched as 1600x2133), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1000x1000 region at x=300,y=500 of the 1600x2133 download (subject-centred), resized to 240x240, JPEG q88, metadata stripped.
+
+brand-brightmilk.jpg
+  "A bowl of oatmeal and a glass of milk", photo by Roman Matveev (@matveevr) on Unsplash,
+  https://unsplash.com/photos/a-bowl-of-oatmeal-and-a-glass-of-milk--6g1luYYAJ0
+  (downloaded from https://images.unsplash.com/photo-1711357193114-ba93da3e2f01?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzY4fA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 4000x6000, fetched as 1600x2400), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1300x1300 region at x=300,y=60 of the 1600x2400 download (subject-centred), resized to 240x240, JPEG q88, metadata stripped.
+
+brand-quickfry.jpg
+  "Golden french fries cooking in a metal basket", photo by Paras Kapoor (@kapoorparas28) on Unsplash,
+  https://unsplash.com/photos/golden-french-fries-cooking-in-a-metal-basket-yCsS66_HTEE
+  (downloaded from https://images.unsplash.com/photo-1774074645537-f72f70d40d12?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzcwfA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 3840x5760, fetched as 1600x2400), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1300x1300 region at x=118,y=636 of the 1600x2400 download (subject-centred), resized to 240x240, JPEG q88, metadata stripped.
+
+avatar-nina.jpg
+  "Smiling woman in front of window", photo by Candice Picard (@candice_picard) on Unsplash,
+  https://unsplash.com/photos/smiling-woman-in-front-of-window-YMYFCxWgHMw
+  (downloaded from https://images.unsplash.com/photo-1536914356815-690cf1fa40e2?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzkxMDExMzcyfA&ixlib=rb-4.1.0&w=1600&q=85&fm=jpg, original 5616x3744, fetched as 1600x1067), fetched 2026-10-03. Licence: Unsplash License
+  (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ photo. No CC BY / CC BY-SA terms.
+  Derived: square crop of the 640x640 region at x=530,y=100 of the 1600x1067 download (subject-centred), resized to 240x240, JPEG q88, metadata stripped.

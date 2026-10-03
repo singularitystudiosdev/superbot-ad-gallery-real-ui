@@ -1,0 +1,90 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the Instagram and Meta Business Suite surfaces superbot connects to) and unaltered
+except where noted. Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the source ad's brand/.)
+openai-logo.svg      OpenAI mark (round badge), copied from animations/bikeride-model-switch-superbot-e13744a9/brand/
+                     (which copied it from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6).
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+                     Used for the "Claude Opus 5.5" pill (model name carried from the sibling forks' citations).
+
+instagram-logo.svg   Instagram glyph (2022 gradient), Wikimedia Commons File:Instagram_logo_2022.svg
+                     https://commons.wikimedia.org/wiki/File:Instagram_logo_2022.svg
+                     (https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg), author Instagram,
+                     licence: public domain (Commons: "Public domain", attribution not required), trademarked.
+                     Fetched 2026-10-03, unaltered. The "Connecting to Instagram" pill, the composer chip, the checklist,
+                     the Planner cards' platform badge and the "Shared to" filter.
+instagram-glyph.svg  Instagram glyph, monochrome, Simple Icons 16.33.0
+                     (https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/instagram.svg), CC0 1.0 (the icon data;
+                     the mark is Instagram's trademark). Fetched 2026-10-03, unaltered (black). The Instagram web
+                     client's collapsed rail.
+instagram-wordmark.svg  Instagram wordmark (script), Wikimedia Commons File:Instagram_logo.svg
+                     https://commons.wikimedia.org/wiki/File:Instagram_logo.svg
+                     (https://upload.wikimedia.org/wikipedia/commons/2/2a/Instagram_logo.svg), author Instagram,
+                     licence: public domain, attribution not required, trademarked. Fetched 2026-10-03, unaltered. The
+                     authorization card's header (the real screen carries the wordmark there).
+meta-logo.svg        Meta Platforms logo (the infinity mark, cropped), Wikimedia Commons
+                     File:Meta_Platforms_Inc._logo_(cropped).svg
+                     https://commons.wikimedia.org/wiki/File:Meta_Platforms_Inc._logo_(cropped).svg
+                     (https://upload.wikimedia.org/wikipedia/commons/0/05/Meta_Platforms_Inc._logo_%28cropped%29.svg),
+                     author Meta Platforms, licence: public domain, attribution not required, trademarked. Fetched
+                     2026-10-03, unaltered. Top of Business Suite's rail.
+
+UI ICONS
+  Every Instagram / Business Suite UI glyph (rail icons, compose, call, video, info, composer icons, toolbar carets,
+  trophy, toast check, default avatar silhouette, the checklist's calendar and bell) is Phosphor Icons (MIT License),
+  fetched from the Iconify API https://api.iconify.design/ph.json on 2026-10-03, path data verbatim in
+  scenes/tabs-assets/beats/ig-icons.js.
+
+PHOTOS
+  img/*.jpg, see img/CREDITS.txt.
+
+INSTAGRAM'S AUTHORIZATION SCREEN (Business Login for Instagram)
+  Scopes (instagram_business_basic, instagram_business_manage_messages, instagram_business_content_publish) and the
+  authorize endpoint https://www.instagram.com/oauth/authorize: Meta for Developers, "Business Login for Instagram",
+  https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/business-login
+  (Wayback capture 2026-04-24 14:15:08 UTC). Meta's docs carry no screenshot of the user-facing screen.
+  User-facing layout and strings, transcribed from real captures of the screen:
+    - ManyChat Help Center, "How to connect Instagram to Manychat",
+      https://help.manychat.com/hc/en-us/articles/14281290924444-How-to-connect-Instagram-to-Manychat
+      (screenshot https://help.manychat.com/hc/article_attachments/26386129775132), fetched 2026-10-03:
+      "<App> is requesting access to: <account>. If you select Allow, <App> will be able to:",
+      "View profile and access media (required)" (locked toggle), "Access and manage messages" (toggle),
+      "By allowing, <App> will receive ongoing access to your information and Instagram will record when <App>
+      accesses it. Learn More about this sharing and the settings you have.", "<App> Privacy Policy and Terms.",
+      buttons "Allow" (blue) and "Cancel" (grey), stacked.
+    - Chatwoot Help Center, "How to setup an Instagram channel via Instagram Login",
+      https://www.chatwoot.com/hc/user-guide/articles/1744361165-how-to-setup-an-instagram-channel-via-instagram-login
+      (Step 3 screenshot), fetched 2026-10-03: the same two permission lines and buttons.
+  The spot shows the two lines that are confirmed verbatim. No capture of the content_publish line was found, so it
+  is not shown (no guessed wording). The account is shown by display name, never a username.
+
+META BUSINESS SUITE PLANNER (week view)
+  Meta Business Help Center, "Use Planner in Meta Business Suite on desktop",
+  https://www.facebook.com/business/help/1678733516458988/ (fetched 2026-10-03): Planner in the left menu (calendar
+  icon), Week / Month at the top left, "Content type: all" and "Shared to: all" filters at the top right.
+  Layout reference screenshot: Hootsuite blog, "How to schedule Facebook posts",
+  https://blog.hootsuite.com/how-to-schedule-facebook-posts/ (image
+  https://blog.hootsuite.com/wp-content/uploads/2025/02/image-34.png), fetched 2026-10-03: collapsed icon rail with
+  the active calendar on a dark tile, Week|Month segmented toggle, arrows round Today, centred month title, day
+  columns labelled "Mon 29" style with no hour grid, scheduled posts as mint cards (teal time over a rounded
+  thumbnail with the platform badge), right panel Goals | Moments | Drafts. Deviation: the spot's cards also carry
+  the caption's first words under the thumbnail (the real cards show none) so the week reads.
+
+MADE UP FOR THE SPOT
+  The creator (Nina Alvarez), the people in the inbox (Aunt Rosa, Dana Park, Theo Mendes) and the brands
+  (Hearthline Cookware, Pinchwell Spice Co., Greenfold Meal Kits, Brightmilk Oat, Quickfry Air Fryers) are
+  fictional. Each brand name was web-searched on 2026-10-03 (Bing via the scraper's metasearch, one query each):
+  "Hearthline Cookware", "Greenfold Meal Kits", "Brightmilk Oat", "Quickfry Air Fryers" returned no matching business
+  or account. The brief's "Saltbox Spice Co." was swapped: "Saltbox" is a real company (saltbox.com) and a real
+  restaurant name (Saltbox Kitchen, Saltbox Seafood Joint); "Pinchwell" spice returned no match. No usernames,
+  @handles or email addresses appear anywhere on screen.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar in the hub is scenes/tabs-assets/tile.svg (first party).

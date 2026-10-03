@@ -1,0 +1,212 @@
+/* Instagram beat (beats/instagram.js): Instagram's authorization card and the checklist card in the chat, and the
+   full-frame layer carrying the two web apps: Instagram's Messages inbox (light) and Meta Business Suite's Planner
+   (week view). Every colour is a chat.css --ig-* / --mp-* variable; type is the platforms' own system stack.
+   Nothing here transitions: position, size, radius, opacity and transform are written from t in instagram.js, so ?t=
+   freezes a frame. Classes: .ic- authorization card, .gk- checklist card, .ig- the Instagram client, .mp- Planner.
+   Radii: 8px cards and buttons, 18px chat bubbles, 9999px pills and avatars. */
+
+#s-tabs .ig-i { flex: none; width: 24px; height: 24px; }
+
+/* ---- the authorization card (Business Login for Instagram, light; per the captures in brand/CREDITS.txt) ---- */
+#s-tabs .sbsite .hub .ig-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .ic-card { opacity: 0; box-sizing: border-box; width: 400px; max-width: 100%; margin-top: 2px; border-radius: 16px;
+  background: var(--ig-bg); box-shadow: 0 0 0 1px #dbdbdb, 0 1px 3px rgba(0,0,0,.3); color: var(--ig-text); font-family: var(--ig-font); overflow: hidden; -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .ic-top { position: relative; display: grid; place-items: center; padding: 18px 0 8px; }
+#s-tabs .sbsite .hub .ic-top img { height: 30px; width: auto; }
+#s-tabs .sbsite .hub .ic-more { position: absolute; right: 14px; top: 8px; width: 18px; height: 18px; color: #000; }
+#s-tabs .sbsite .hub .ic-body { padding: 4px 18px 14px; }
+#s-tabs .sbsite .hub .ic-title { font: 700 12.5px/1.35 var(--ig-font); color: #000; }
+#s-tabs .sbsite .hub .ic-title i { font-style: normal; color: #385799; }
+#s-tabs .sbsite .hub .ic-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; height: 30px; font: 400 12.5px/1.3 var(--ig-font); color: #000; }
+#s-tabs .sbsite .hub .ic-tg { position: relative; flex: none; width: 30px; height: 18px; border-radius: 9999px; background: #0c1014; font-style: normal; }
+#s-tabs .sbsite .hub .ic-tg b { position: absolute; right: 2px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+#s-tabs .sbsite .hub .ic-tg.ic-req { background: #dbdfe4; }
+#s-tabs .sbsite .hub .ic-tg.ic-req b { background: #eef0f3; }
+#s-tabs .sbsite .hub .ic-fine { margin: 6px 0 0; text-align: center; font: 400 9.5px/1.4 var(--ig-font); color: #737373; }
+#s-tabs .sbsite .hub .ic-fine u { text-decoration: none; color: #385799; }
+#s-tabs .sbsite .hub .ic-btns { display: grid; gap: 8px; margin-top: 10px; }
+#s-tabs .sbsite .hub .ic-btns span { display: grid; place-items: center; height: 30px; border-radius: 8px; font: 600 12.5px/1 var(--ig-font); }
+#s-tabs .sbsite .hub .ic-go { background: #4a5ef9; color: #fff; }
+#s-tabs .sbsite .hub .ic-go.ic-hit { background: #3346e0; }
+#s-tabs .sbsite .hub .ic-cancel { background: #f1f2f5; color: #000; }
+
+/* ---- the checklist card (light), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: 8px; background: var(--ig-bg); box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: var(--ig-font); -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 300px; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px; font: 400 12.5px/1 var(--ig-font); color: var(--ig-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 600; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; overflow: hidden; }
+#s-tabs .sbsite .hub .gk-av img { width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .gk-img { border-radius: 5px; }
+#s-tabs .sbsite .hub .gk-img img { width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .gk-ms { background: #e0f1ff; color: var(--ig-blue); }
+#s-tabs .sbsite .hub .gk-ms .ig-i { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--ig-line); border-top-color: var(--ig-blue); }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #1e8e3e; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: 8px; background: var(--ig-bg); box-shadow: inset 0 0 0 1px var(--ig-line); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .ig-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--ig-bg); }
+#s-tabs .ig-app, #s-tabs .mp-app { position: absolute; left: 0; top: 0; display: flex; transform-origin: 0 0; overflow: hidden;
+  font-family: var(--ig-font); -webkit-font-smoothing: antialiased; }
+
+/* ==== RESULT A: Instagram web, Messages ==== */
+#s-tabs .ig-app { background: var(--ig-bg); color: var(--ig-text); font-size: 14px; line-height: 18px; }
+#s-tabs .ig-app .ig-i { color: var(--ig-text); }
+/* the narrow icon rail (Instagram collapses its nav to icons while Messages is open) */
+#s-tabs .ig-rail { flex: none; width: 72px; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 26px 0 20px; box-sizing: border-box; border-right: 1px solid var(--ig-line); }
+#s-tabs .ig-ri { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 8px; }
+#s-tabs .ig-ri .ig-i { width: 26px; height: 26px; }
+#s-tabs .ig-logo { margin-bottom: 22px; }
+#s-tabs .ig-logo img { width: 26px; height: 26px; }
+#s-tabs .ig-me img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+#s-tabs .ig-rgap { flex: 1; }
+/* the inbox column */
+#s-tabs .ig-inbox { flex: none; width: 398px; display: flex; flex-direction: column; border-right: 1px solid var(--ig-line); }
+#s-tabs .ig-ih { flex: none; display: flex; align-items: center; gap: 6px; height: 74px; padding: 14px 24px 0; box-sizing: border-box; }
+#s-tabs .ig-ih b { font: 700 20px/1 var(--ig-font); }
+#s-tabs .ig-ih .ig-cd { width: 16px; height: 16px; }
+#s-tabs .ig-cmp { margin-left: auto; display: grid; }
+#s-tabs .ig-tabs { flex: none; display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 6px 24px 0; box-sizing: border-box; }
+#s-tabs .ig-tabs b { font: 700 16px/1 var(--ig-font); }
+#s-tabs .ig-tabs span { font: 600 14px/1 var(--ig-font); color: var(--ig-text2); }
+#s-tabs .ig-rows { flex: 1; min-height: 0; padding-top: 4px; }
+#s-tabs .ig-row { position: relative; display: flex; align-items: center; gap: 12px; height: 72px; padding: 0 24px; box-sizing: border-box; }
+#s-tabs .ig-row.ig-sel { background: var(--ig-hover); }
+#s-tabs .ig-av { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+#s-tabs .ig-rt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+#s-tabs .ig-rt b { font: 400 14px/18px var(--ig-font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .ig-pv { position: relative; height: 16px; overflow: hidden; }
+#s-tabs .ig-pa, #s-tabs .ig-pb { position: absolute; left: 0; right: 0; top: 0; display: flex; font: 400 12px/16px var(--ig-font); color: var(--ig-text2); white-space: nowrap; }
+#s-tabs .ig-pb { opacity: 0; }
+#s-tabs .ig-pt { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .ig-pm { flex: none; }
+#s-tabs .ig-row.ig-unread .ig-rt b { font-weight: 600; }
+#s-tabs .ig-row.ig-unread .ig-pa { font-weight: 600; color: var(--ig-text); }
+#s-tabs .ig-def { display: grid; place-items: end center; overflow: hidden; background: #dbdbdb; }
+#s-tabs .ig-def .ig-i { width: 80%; height: 80%; margin-bottom: -10%; color: #fff !important; }
+#s-tabs .ig-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--ig-blue); }
+/* the open thread */
+#s-tabs .ig-thread { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#s-tabs .ig-th { flex: none; display: flex; align-items: center; gap: 12px; height: 75px; padding: 0 20px 0 16px; box-sizing: border-box; border-bottom: 1px solid var(--ig-line); }
+#s-tabs .ig-th img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+#s-tabs .ig-th b { font: 600 16px/1 var(--ig-font); }
+#s-tabs .ig-thi { margin-left: auto; display: flex; gap: 18px; }
+#s-tabs .ig-msgs { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-start; gap: 4px; padding: 0 20px 12px; }
+#s-tabs .ig-intro { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 0 26px; }
+#s-tabs .ig-intro img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; }
+#s-tabs .ig-intro b { font: 600 20px/1.2 var(--ig-font); }
+#s-tabs .ig-intro span { display: inline-flex; align-items: center; height: 32px; padding: 0 16px; border-radius: 8px; background: var(--ig-hover); font: 600 14px/1 var(--ig-font); }
+#s-tabs .ig-stamp { align-self: center; margin: 4px 0 12px; font: 600 12px/1 var(--ig-font); color: var(--ig-text2); }
+#s-tabs .ig-in { display: flex; align-items: flex-end; gap: 8px; }
+#s-tabs .ig-in img, #s-tabs .ig-in i { flex: none; width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+#s-tabs .ig-in p, #s-tabs .ig-out p { margin: 0; max-width: 440px; padding: 8px 12px; border-radius: 18px; font: 400 15px/20px var(--ig-font); white-space: pre-line; }
+#s-tabs .ig-in p { background: var(--ig-bubble); color: var(--ig-text); }
+#s-tabs .ig-out { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; margin-top: 6px; }
+#s-tabs .ig-out p { background: var(--ig-sent); color: #fff; opacity: 0; transform-origin: 100% 100%; }
+#s-tabs .ig-out small { opacity: 0; padding-right: 4px; font: 400 12px/1 var(--ig-font); color: var(--ig-text2); }
+#s-tabs .ig-comp { flex: none; padding: 4px 16px 20px; }
+#s-tabs .ig-cbox { display: flex; align-items: center; gap: 14px; height: 44px; padding: 0 16px 0 12px; border: 1px solid var(--ig-line); border-radius: 22px; }
+#s-tabs .ig-cbox .ig-i { width: 24px; height: 24px; }
+#s-tabs .ig-cph { flex: 1; font: 400 15px/1 var(--ig-font); color: var(--ig-text2); }
+
+/* portrait (4:5): no rail; the inbox list on top, a compact thread under it */
+#s-tabs .ig-app.ig-narrow { flex-direction: column; }
+#s-tabs .ig-app.ig-narrow .ig-rail, #s-tabs .ig-app.ig-narrow .ig-other { display: none; }
+#s-tabs .ig-app.ig-narrow .ig-inbox { width: auto; border-right: 0; border-bottom: 1px solid var(--ig-line); }
+#s-tabs .ig-app.ig-narrow .ig-ih { height: 60px; padding: 8px 20px 0; }
+#s-tabs .ig-app.ig-narrow .ig-tabs { height: 40px; padding: 4px 20px 0; }
+#s-tabs .ig-app.ig-narrow .ig-rows { flex: none; padding: 2px 0 6px; }
+#s-tabs .ig-app.ig-narrow .ig-row { height: 64px; padding: 0 20px; }
+#s-tabs .ig-app.ig-narrow .ig-av { width: 48px; height: 48px; }
+#s-tabs .ig-app.ig-narrow .ig-rt b { font-size: 15px; }
+#s-tabs .ig-app.ig-narrow .ig-pv { height: 18px; }
+#s-tabs .ig-app.ig-narrow .ig-pa, #s-tabs .ig-app.ig-narrow .ig-pb { font-size: 13.5px; line-height: 18px; }
+#s-tabs .ig-app.ig-narrow .ig-th { height: 56px; }
+#s-tabs .ig-app.ig-narrow .ig-th img { width: 34px; height: 34px; }
+#s-tabs .ig-app.ig-narrow .ig-stamp, #s-tabs .ig-app.ig-narrow .ig-intro, #s-tabs .ig-app.ig-narrow .ig-in:nth-of-type(3) { display: none; }
+#s-tabs .ig-app.ig-narrow .ig-msgs { justify-content: flex-end; }
+#s-tabs .ig-app.ig-narrow .ig-msgs { padding: 0 16px 6px; gap: 6px; }
+#s-tabs .ig-app.ig-narrow .ig-in p, #s-tabs .ig-app.ig-narrow .ig-out p { max-width: 560px; font-size: 14.5px; line-height: 19px; }
+#s-tabs .ig-app.ig-narrow .ig-comp { padding: 4px 16px 14px; }
+
+/* ==== RESULT B: Meta Business Suite, Planner, week view (per the capture in brand/CREDITS.txt) ==== */
+#s-tabs .mp-app { background: var(--mp-page); color: var(--mp-text); visibility: hidden; }
+#s-tabs .mp-app .ig-i { color: var(--mp-text); }
+/* the collapsed icon rail */
+#s-tabs .mp-rail { flex: none; width: 64px; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 0; box-sizing: border-box; background: var(--mp-surface); }
+#s-tabs .mp-meta { width: 30px; height: auto; margin-bottom: 8px; }
+#s-tabs .mp-me { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; margin-bottom: 8px; }
+#s-tabs .mp-ri { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; }
+#s-tabs .mp-ri .ig-i { width: 24px; height: 24px; color: #1c2b33; }
+#s-tabs .mp-ri.mp-on { background: #283943; }
+#s-tabs .mp-ri.mp-on .ig-i { color: #fff; }
+#s-tabs .mp-rgap { flex: 1; }
+#s-tabs .mp-main { flex: 1; min-width: 0; display: flex; flex-direction: column; margin: 12px 12px 12px 0; border-radius: 10px; background: var(--mp-surface); overflow: hidden; box-shadow: 0 0 0 1px var(--mp-line); }
+/* the toolbar: Week | Month, the arrows round Today, the range, the two filters */
+#s-tabs .mp-bar { position: relative; flex: none; display: flex; align-items: center; gap: 14px; height: 64px; padding: 0 20px; border-bottom: 1px solid var(--mp-line); }
+#s-tabs .mp-seg { display: inline-flex; height: 34px; border-radius: 8px; overflow: hidden; font: 500 14px/34px var(--ig-font); }
+#s-tabs .mp-seg b, #s-tabs .mp-seg span { padding: 0 16px; background: #eeeeee; color: #1c2b33; font-weight: 500; }
+#s-tabs .mp-seg b { background: #e0ecf7; color: #1c7ec2; }
+#s-tabs .mp-arr { display: inline-flex; align-items: center; gap: 14px; font: 600 15px/1 var(--ig-font); }
+#s-tabs .mp-arr .ig-i { width: 18px; height: 18px; }
+#s-tabs .mp-range { position: absolute; left: 50%; transform: translateX(-50%); font: 600 21px/1 var(--ig-font); color: #1c2b33; white-space: nowrap; }
+#s-tabs .mp-filters { margin-left: auto; display: flex; gap: 12px; }
+#s-tabs .mp-dd { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; border-radius: 6px; box-shadow: inset 0 0 0 1px #c9ced3; font: 500 14px/1 var(--ig-font); white-space: nowrap; }
+#s-tabs .mp-dd img { width: 16px; height: 16px; }
+#s-tabs .mp-dd .ig-i { width: 12px; height: 12px; }
+#s-tabs .mp-body { flex: 1; min-height: 0; display: flex; }
+#s-tabs .mp-cal { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#s-tabs .mp-days { flex: none; display: grid; grid-template-columns: repeat(7, 1fr); height: 48px; border-bottom: 1px solid var(--mp-line); box-shadow: 0 3px 6px rgba(0,0,0,.06); }
+#s-tabs .mp-dh { display: flex; align-items: center; justify-content: center; gap: 5px; font: 400 15px/1 var(--ig-font); color: #788086; white-space: nowrap; }
+#s-tabs .mp-dh small, #s-tabs .mp-dh b { font: inherit; }
+#s-tabs .mp-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(7, 1fr); grid-template-rows: 1fr; }
+#s-tabs .mp-col { padding: 8px 6px; border-left: 1px solid #eef0f2; }
+#s-tabs .mp-col:first-child { border-left: 0; }
+/* a scheduled post: mint card, the time in teal over a rounded thumbnail with the Instagram badge */
+#s-tabs .mp-post { opacity: 0; display: flex; flex-direction: column; gap: 6px; padding: 8px 8px 10px; box-sizing: border-box; border-radius: 6px; background: #e5f6f0; transform-origin: 50% 0; }
+#s-tabs .mp-pt { display: flex; align-items: center; gap: 5px; font: 700 13px/1 var(--ig-font); color: #067d82; white-space: nowrap; }
+#s-tabs .mp-pt .ig-i { width: 15px; height: 15px; color: #067d82; }
+#s-tabs .mp-thw { position: relative; display: block; }
+#s-tabs .mp-th { display: block; width: 100%; aspect-ratio: 1; border-radius: 6px; object-fit: cover; }
+#s-tabs .mp-badge { position: absolute; right: 6px; bottom: 6px; width: 18px; height: 18px; border-radius: 5px; box-shadow: 0 0 0 1.5px #fff; }
+#s-tabs .mp-post p { margin: 0; font: 400 12.5px/16px var(--ig-font); color: #1c2b33; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#s-tabs .mp-agenda { display: none; }
+/* the right panel: Goals | Moments | Drafts */
+#s-tabs .mp-side { flex: none; width: 272px; padding: 14px 16px; box-sizing: border-box; border-left: 1px solid var(--mp-line); }
+#s-tabs .mp-tabs { display: flex; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid var(--mp-line); font: 500 14px/1 var(--ig-font); }
+#s-tabs .mp-tabs b, #s-tabs .mp-tabs span { padding: 9px 12px; border-radius: 6px; font-weight: 500; }
+#s-tabs .mp-tabs b { background: #e0ecf7; color: #1c2b33; }
+#s-tabs .mp-goal { padding-top: 16px; }
+#s-tabs .mp-goal b { display: flex; align-items: center; gap: 8px; font: 700 16px/1 var(--ig-font); }
+#s-tabs .mp-goal b .ig-i { width: 20px; height: 20px; }
+#s-tabs .mp-goal p { margin: 12px 0 14px; font: 400 14px/20px var(--ig-font); color: #1c2b33; }
+#s-tabs .mp-btn { display: grid; place-items: center; height: 36px; margin-top: 8px; border-radius: 6px; box-shadow: inset 0 0 0 1px #c9ced3; font: 600 14px/1 var(--ig-font); }
+#s-tabs .mp-btn.mp-pri { background: #0c77bf; box-shadow: none; color: #fff; }
+/* the toast: dark, bottom left, a green check */
+#s-tabs .mp-toast { position: absolute; left: 92px; bottom: 36px; display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 20px 0 14px; border-radius: 8px;
+  background: var(--mp-toast); color: #fff; font: 600 15px/1 var(--ig-font); box-shadow: 0 6px 18px rgba(0,0,0,.25); opacity: 0; white-space: nowrap; }
+#s-tabs .mp-toast .ig-i { width: 24px; height: 24px; color: #31a24c; }
+
+/* portrait (4:5): no rail, no side panel; the week as a vertical agenda, a day per row */
+#s-tabs .mp-app.mp-narrow .mp-rail, #s-tabs .mp-app.mp-narrow .mp-side, #s-tabs .mp-app.mp-narrow .mp-days,
+#s-tabs .mp-app.mp-narrow .mp-grid, #s-tabs .mp-app.mp-narrow .mp-filters .mp-dd:first-child { display: none; }
+#s-tabs .mp-app.mp-narrow .mp-main { margin: 12px; }
+#s-tabs .mp-app.mp-narrow .mp-bar { flex-wrap: wrap; height: auto; padding: 12px 16px; row-gap: 12px; }
+#s-tabs .mp-app.mp-narrow .mp-range { position: static; transform: none; margin-left: auto; }
+#s-tabs .mp-app.mp-narrow .mp-filters { margin-left: 0; width: 100%; }
+#s-tabs .mp-app.mp-narrow .mp-agenda { display: flex; flex-direction: column; padding: 2px 14px; }
+#s-tabs .mp-ag { display: flex; align-items: center; gap: 12px; height: 92px; border-bottom: 1px solid #eef0f2; }
+#s-tabs .mp-ag:last-child { border-bottom: 0; }
+#s-tabs .mp-ag .mp-dh { flex: none; width: 70px; justify-content: flex-start; font-size: 16px; }
+#s-tabs .mp-ag .mp-dh b { font-weight: 700; color: #1c2b33; margin-left: 5px; }
+#s-tabs .mp-ag .mp-post { flex: 1; min-width: 0; display: grid; grid-template-columns: 70px 1fr; grid-template-rows: auto auto; column-gap: 14px; row-gap: 6px; align-content: center; padding: 8px; }
+#s-tabs .mp-ag .mp-thw { grid-column: 1; grid-row: 1 / 3; }
+#s-tabs .mp-ag .mp-th { width: 70px; height: 70px; }
+#s-tabs .mp-ag .mp-badge { right: 4px; bottom: 4px; width: 16px; height: 16px; }
+#s-tabs .mp-ag .mp-pt { grid-column: 2; grid-row: 1; align-self: end; font-size: 14px; }
+#s-tabs .mp-ag .mp-post p { grid-column: 2; grid-row: 2; align-self: start; font-size: 15.5px; line-height: 20px; -webkit-line-clamp: 1; }
+#s-tabs .mp-app.mp-narrow .mp-toast { left: 24px; right: 24px; bottom: 24px; justify-content: center; }

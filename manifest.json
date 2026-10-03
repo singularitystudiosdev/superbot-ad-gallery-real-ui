@@ -401,6 +401,15 @@
     "desc": "One prompt in superbot: Gemini watches the whole episode and finds the best moment, Claude Opus 5.5 cuts a 45 second vertical clip with captions and writes the hook, GPT Image 2.5 makes the cover, then superbot connects to TikTok Studio, schedules it for 7:00 PM and the post goes live with likes and comments rolling in."
   },
   {
+    "id": "niche-instagram-model-switch-superbot-8ae18b85",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Reply to all my DMs from brands and schedule this week's posts: Gemini, Opus 5.5, GPT-6 Astra, then superbot replies in Instagram and fills the week (4 switches)",
+    "src": "animations/niche-instagram-model-switch-superbot-8ae18b85/",
+    "thumb": "assets/shots/niche-instagram-model-switch-superbot-8ae18b85.png",
+    "desc": "One prompt in superbot: Gemini reads 64 Instagram DMs and finds 5 brand offers, Claude Opus 5.5 writes 5 replies in the creator's voice, GPT-6 Astra picks and captions 7 posts from the camera roll, then superbot sends the replies in Instagram and fills the week in Planner."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

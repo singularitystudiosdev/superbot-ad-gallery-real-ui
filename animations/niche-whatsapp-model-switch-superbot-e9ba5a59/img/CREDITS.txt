@@ -1,0 +1,69 @@
+img/ CREDITS (internal). Provenance is never shown on screen. Every photo is a real photo under the Unsplash License
+(free to use, attribution not required, modification allowed); none is CC BY / CC BY-SA, drawn or generated. All were
+found through Unsplash's own search (unsplash.com/napi/search/photos, plus=none) and downloaded from images.unsplash.com
+on 2026-10-03. Every derivative is a crop + resize with ffmpeg (lanczos), JPEG, metadata stripped. People in the photos
+are shown as fictional customers; nothing on screen names the photographer or the person.
+
+bike-wheel.jpg
+  "black bicycle tire with rim" (a detached wheel leaning on a graffiti wall), photo by DESIGNECOLOGIST (designecologist) on Unsplash, https://unsplash.com/photos/L_RIdsEyoxg
+  (downloaded from https://images.unsplash.com/photo-1572805303228-ade6c711059a?w=1600&q=85&fm=jpg, original 4272x2848, fetched as 1600x1067), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1067x1067 region at x=267,y=0, resized to 600x600. Used for: GPT-6 Astra beat: Tom Becker's photo, "Rear wheel out of true".
+
+bike-chain.jpg
+  "grayscale photo of bicycle wheel" (a rear wheel with the chain hanging loose), photo by jurien huggins (jurienh) on Unsplash, https://unsplash.com/photos/APvDwjgd8-s
+  (downloaded from https://images.unsplash.com/photo-1627881032258-599944eab8a1?w=1600&q=85&fm=jpg, original 3463x3753, fetched as 1600x1734), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1100x1100 region at x=0,y=200, resized to 600x600. Used for: GPT-6 Astra beat: João Pereira's photo, "Snapped chain".
+
+bike-flat.jpg
+  "bicycle wheel" (a soft tyre pressed flat on the ground), photo by Ricardo Soria (rsoria89) on Unsplash, https://unsplash.com/photos/toI7r4A83Bw
+  (downloaded from https://images.unsplash.com/photo-1511500711902-c6cb12c4b0b9?w=1600&q=85&fm=jpg, original 6000x4000, fetched as 1600x1067), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 1067x1067 region at x=533,y=0, resized to 600x600. Used for: GPT-6 Astra beat: Priya Shah's photo, "Pinch flat".
+
+bike-brake.jpg
+  "black and silver bicycle wheel" (a disc brake caliper and rotor), photo by streetsh (streetsh) on Unsplash, https://unsplash.com/photos/rERWRZQPA9A
+  (downloaded from https://images.unsplash.com/photo-1618762098304-38e6b03db348?w=1600&q=85&fm=jpg, original 6000x3376, fetched as 1600x900), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 900x900 region at x=150,y=0, resized to 600x600. Used for: GPT-6 Astra beat: Dana Kim's photo, "Pads worn to metal".
+
+workshop.jpg
+  "a man working on a bike in a garage" (a mechanic at a repair stand, tool wall behind), photo by Anton Savinov (tonchik) on Unsplash, https://unsplash.com/photos/-cxC8iFx6V4
+  (downloaded from https://images.unsplash.com/photo-1676531443468-0e2b5a57e48f?w=1600&q=85&fm=jpg, original 6000x4000, fetched as 1600x1067), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: 3:2 crop of the 1500x1000 region at x=50,y=67, resized to 900x600. Used for: the weekend-sale image message (broadcast thread and Message info).
+
+avatar-lucia.jpg
+  "woman in black and white striped shirt smiling", photo by laura adai (lauraadaiphoto) on Unsplash, https://unsplash.com/photos/enkfbbb9yf8
+  (downloaded from https://images.unsplash.com/photo-1615751596346-9df8006e5381?w=900&q=85&fm=jpg, original 3283x3283, fetched as 900x900), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 760x760 region at x=70,y=60, resized to 240x240. Used for: avatar of the fictional customer Lucía Ortega.
+
+avatar-joao.jpg
+  "A smiling man in a black shirt", photo by Alef Morais (alef_visuals) on Unsplash, https://unsplash.com/photos/LPvi7DMp-HU
+  (downloaded from https://images.unsplash.com/photo-1734830268394-6c4a1f165af1?w=900&q=85&fm=jpg, original 3903x3903, fetched as 900x900), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 600x600 region at x=150,y=0, resized to 240x240. Used for: avatar of the fictional customer João Pereira.
+
+avatar-priya.jpg
+  "a woman with long black hair smiling at the camera", photo by Foto Bakirkoy (fotobakirkoy) on Unsplash, https://unsplash.com/photos/rIiV-Yel_TA
+  (downloaded from https://images.unsplash.com/photo-1645107914072-6f16b732f224?w=900&q=85&fm=jpg, original 3543x3543, fetched as 900x900), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 540x540 region at x=180,y=30, resized to 240x240. Used for: avatar of the fictional customer Priya Shah.
+
+avatar-tom.jpg
+  "man in black and white nike zip up jacket smiling", photo by Amir Seilsepour (amiresel) on Unsplash, https://unsplash.com/photos/Pc0ToyoR5Xo
+  (downloaded from https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=900&q=85&fm=jpg, original 5792x5792, fetched as 900x900), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 600x600 region at x=150,y=0, resized to 240x240. Used for: avatar of the fictional customer Tom Becker.
+
+avatar-marco.jpg
+  "Smiling man looks at the camera for a portrait", photo by Kam Star (kamstar) on Unsplash, https://unsplash.com/photos/Lol1HZqfgiA
+  (downloaded from https://images.unsplash.com/photo-1741455620227-3b1c51e01419?w=900&q=85&fm=jpg, original 3200x3200, fetched as 900x900), fetched 2026-10-03.
+  Licence: Unsplash License (https://unsplash.com/license): free to use, attribution not required, modification allowed. Not an Unsplash+ / premium photo (search API: premium false, plus false). No CC BY / CC BY-SA terms.
+  Derived: square crop of the 660x660 region at x=120,y=0, resized to 240x240. Used for: avatar of the fictional shop owner Marco Reyes (consent card account chip, WhatsApp rail profile).
+
+Customers without a photo (Dana Kim, Ama Owusu, Leo Martins, Grace Liu, Nora Patel, Ben Okafor) show WhatsApp's
+default avatar (grey disc, white person glyph: Material Symbols 'person', see brand/CREDITS.txt), as WhatsApp does for a
+contact with no profile photo. The broadcast list shows the grey disc with Material Symbols 'campaign' (megaphone).

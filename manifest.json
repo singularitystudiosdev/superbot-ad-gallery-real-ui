@@ -464,6 +464,15 @@
     "desc": "One ask in superbot: Gemini plans the bakery's one-page site and writes the copy, Claude Opus 5.5 builds it in Next.js and Tailwind, superbot pushes the repo to GitHub, then deploys it on Vercel: Building to Ready, then the live Maple Street Bakery site."
   },
   {
+    "id": "niche-whatsapp-model-switch-superbot-e9ba5a59",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Reply to every customer on WhatsApp and send the weekend sale to my regulars: Gemini, ElevenLabs Scribe, GPT-6 Astra, Opus 5.5, then superbot replies in WhatsApp and sends the sale (5 switches)",
+    "src": "animations/niche-whatsapp-model-switch-superbot-e9ba5a59/",
+    "thumb": "assets/shots/niche-whatsapp-model-switch-superbot-e9ba5a59.png",
+    "desc": "One ask in superbot: Gemini sorts 38 WhatsApp chats, ElevenLabs Scribe transcribes the voice notes in Spanish, Portuguese and English, GPT-6 Astra prices the repairs in 4 customer photos, Claude Opus 5.5 writes a reply in each customer's language and the weekend sale, and superbot sends it all from the shop's own WhatsApp Business number."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

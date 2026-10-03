@@ -1,0 +1,215 @@
+/* WhatsApp beat (beats/whatsapp.js): Meta's permissions review card and the checklist card in the chat, and the
+   full-frame layer carrying WhatsApp Web (light). Every colour is a chat.css --wa-* / --fb-* variable; type is the
+   platforms' own system stack. Nothing here transitions: position, size, radius, opacity and transform are written
+   from t in whatsapp.js, so ?t= freezes a frame. Classes: .fb- the permissions card, .gk- checklist card, .wa- the
+   WhatsApp Web client. Radii: 8px cards and bubbles, 9999px pills and avatars. */
+
+#s-tabs .wa-i { flex: none; width: 24px; height: 24px; fill: currentColor; }
+#s-tabs .wa-i path { fill: currentColor; }
+
+/* ---- Meta's permissions review card (Embedded Signup, Facebook Login for Business; per brand/CREDITS.txt) ---- */
+#s-tabs .sbsite .hub .wa-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .fb-card { opacity: 0; box-sizing: border-box; width: 430px; max-width: 100%; margin-top: 2px; border-radius: 12px;
+  background: #fff; box-shadow: 0 0 0 1px #dadde1, 0 1px 3px rgba(0,0,0,.3); color: var(--fb-text); font-family: var(--wa-font); overflow: hidden; -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .fb-band { display: flex; align-items: center; gap: 7px; height: 46px; padding: 0 14px; background: var(--fb-band); border-bottom: 1px solid #e4e6eb; }
+#s-tabs .sbsite .hub .fb-meta { width: 24px; height: auto; }
+#s-tabs .sbsite .hub .fb-swap { width: 18px; height: 18px; color: #65676b; }
+#s-tabs .sbsite .hub .fb-band .qc-tile { width: 22px; height: 22px; border-radius: 6px; }
+#s-tabs .sbsite .hub .fb-me { margin-left: auto; display: inline-flex; align-items: center; gap: 2px; }
+#s-tabs .sbsite .hub .fb-me img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+#s-tabs .sbsite .hub .fb-me .wa-i { width: 18px; height: 18px; color: #1c2b33; }
+#s-tabs .sbsite .hub .fb-body { padding: 14px 20px 8px; }
+#s-tabs .sbsite .hub .fb-body h4 { margin: 0; font: 700 15px/1.25 var(--wa-font); color: var(--fb-text); }
+#s-tabs .sbsite .hub .fb-sub { margin: 4px 0 10px; font: 400 12px/1.4 var(--wa-font); color: var(--fb-text); }
+#s-tabs .sbsite .hub .fb-body h5 { margin: 10px 0 6px; font: 700 12.5px/1.3 var(--wa-font); color: var(--fb-text); }
+#s-tabs .sbsite .hub .fb-asset { display: flex; align-items: center; gap: 10px; }
+#s-tabs .sbsite .hub .fb-ai { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #f2f4f7; }
+#s-tabs .sbsite .hub .fb-ai img { width: 17px; height: 17px; }
+#s-tabs .sbsite .hub .fb-asset b { display: block; font: 700 12.5px/1.25 var(--wa-font); }
+#s-tabs .sbsite .hub .fb-asset small { display: block; font: 400 11.5px/1.3 var(--wa-font); color: #65676b; }
+#s-tabs .sbsite .hub .fb-body ul { margin: 0; padding: 0 0 0 18px; }
+#s-tabs .sbsite .hub .fb-body li { font: 400 12.5px/1.6 var(--wa-font); color: var(--fb-text); }
+#s-tabs .sbsite .hub .fb-foot { margin-top: 6px; padding: 9px 20px 12px; border-top: 1px solid #dadde1; }
+#s-tabs .sbsite .hub .fb-fine { margin: 0 0 9px; font: 400 10px/1.4 var(--wa-font); color: var(--fb-text); }
+#s-tabs .sbsite .hub .fb-fine u, #s-tabs .sbsite .hub .fb-legal u { text-decoration: none; color: var(--fb-link); }
+#s-tabs .sbsite .hub .fb-act { display: flex; align-items: center; gap: 8px; }
+#s-tabs .sbsite .hub .fb-legal { flex: 1; min-width: 0; font: 400 10px/1.35 var(--wa-font); color: var(--fb-text); }
+#s-tabs .sbsite .hub .fb-back, #s-tabs .sbsite .hub .fb-go { flex: none; display: grid; place-items: center; width: 92px; height: 32px; border-radius: 6px;
+  font: 500 13px/1 var(--wa-font); box-sizing: border-box; }
+#s-tabs .sbsite .hub .fb-back { box-shadow: inset 0 0 0 1px #bec3c9; color: var(--fb-text); }
+#s-tabs .sbsite .hub .fb-go { background: var(--fb-blue); color: #fff; }
+#s-tabs .sbsite .hub .fb-go.fb-hit { background: #2d6299; }
+
+/* ---- the checklist card (light), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: 8px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: var(--wa-font); -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 300px; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px; font: 400 12.5px/1 var(--wa-font); color: var(--wa-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 600; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; overflow: hidden; }
+#s-tabs .sbsite .hub .gk-wa { background: var(--wa-green); }
+#s-tabs .sbsite .hub .gk-wa img { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gk-ms { background: #e7fce3; color: #0b7a3e; }
+#s-tabs .sbsite .hub .gk-ms .wa-i { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--wa-line); border-top-color: var(--wa-green-d); }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #1e8e3e; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: 8px; background: #fff; box-shadow: inset 0 0 0 1px var(--wa-line); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .wa-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #fff; }
+#s-tabs .wa-app { position: absolute; left: 0; top: 0; display: flex; transform-origin: 0 0; overflow: hidden; background: var(--wa-bg);
+  color: var(--wa-text); font-family: var(--wa-font); font-size: 14px; line-height: 19px; -webkit-font-smoothing: antialiased; }
+#s-tabs .wa-app .wa-i { color: var(--wa-icon); }
+
+/* the navigation rail (2025 design): Chats (active), Status, Channels, Communities | Tools, Advertise | settings, profile */
+#s-tabs .wa-rail { flex: none; width: 64px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 0 16px;
+  box-sizing: border-box; background: var(--wa-panel); border-right: 1px solid var(--wa-line); }
+#s-tabs .wa-ri { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
+#s-tabs .wa-ri .wa-i { width: 24px; height: 24px; }
+#s-tabs .wa-ri.wa-on { background: #e4e2de; }
+#s-tabs .wa-ri.wa-on .wa-i { color: var(--wa-text); }
+#s-tabs .wa-rsep { display: block; width: 32px; height: 1px; margin: 4px 0; background: #d1d7db; }
+#s-tabs .wa-rgap { flex: 1; }
+#s-tabs .wa-me img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+
+/* the chat list */
+#s-tabs .wa-list { flex: none; width: 440px; display: flex; flex-direction: column; border-right: 1px solid var(--wa-line); background: var(--wa-bg); overflow: hidden; }
+#s-tabs .wa-lh { flex: none; display: flex; align-items: center; height: 64px; padding: 0 16px 0 20px; box-sizing: border-box; }
+#s-tabs .wa-lh b { font: 700 22px/1 var(--wa-font); color: var(--wa-green-d); letter-spacing: -.01em; }
+#s-tabs .wa-lhi { margin-left: auto; display: flex; gap: 18px; }
+#s-tabs .wa-search { flex: none; display: flex; align-items: center; gap: 12px; height: 40px; margin: 0 16px; padding: 0 14px; border-radius: 9999px;
+  background: var(--wa-panel); font: 400 15px/1 var(--wa-font); color: var(--wa-text2); }
+#s-tabs .wa-search .wa-i { width: 20px; height: 20px; }
+#s-tabs .wa-chips { flex: none; display: flex; gap: 8px; padding: 12px 16px 8px; }
+#s-tabs .wa-chips b, #s-tabs .wa-chips span { height: 32px; padding: 0 13px; border-radius: 9999px; box-sizing: border-box; font: 500 14px/30px var(--wa-font);
+  border: 1px solid var(--wa-line); color: var(--wa-text2); }
+#s-tabs .wa-chips b { background: var(--wa-chip-on); border-color: var(--wa-chip-on); color: var(--wa-chip-ink); }
+#s-tabs .wa-rows { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+#s-tabs .wa-row { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 13px; height: 72px; padding: 0 14px 0 14px;
+  box-sizing: border-box; background: var(--wa-bg); }
+#s-tabs .wa-row.wa-sel { background: var(--wa-sel); }
+#s-tabs .wa-row .wa-av { width: 49px; height: 49px; }
+#s-tabs .wa-av { flex: none; display: block; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+#s-tabs .wa-def { display: grid; place-items: end center; overflow: hidden; background: var(--wa-def); }
+#s-tabs .wa-def .wa-i { width: 86%; height: 86%; margin-bottom: -8%; color: #fff !important; }
+#s-tabs .wa-bc { display: grid; place-items: center; background: var(--wa-def); }
+#s-tabs .wa-bc .wa-i { width: 56%; height: 56%; color: #fff !important; }
+#s-tabs .wa-rt { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 3px; border-bottom: 1px solid var(--wa-line); }
+#s-tabs .wa-r1 { position: relative; display: flex; align-items: baseline; gap: 8px; }
+#s-tabs .wa-r1 b { flex: 1; min-width: 0; font: 400 16.5px/21px var(--wa-font); color: var(--wa-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .wa-r1 time { flex: none; font: 400 12px/1 var(--wa-font); color: var(--wa-text2); }
+#s-tabs .wa-r1 .wa-tb { position: absolute; right: 0; bottom: 3px; opacity: 0; }
+#s-tabs .wa-r2 { position: relative; height: 20px; overflow: hidden; }
+#s-tabs .wa-pa, #s-tabs .wa-pb { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 3px; font: 400 14px/20px var(--wa-font);
+  color: var(--wa-text2); white-space: nowrap; }
+#s-tabs .wa-pb { opacity: 0; }
+#s-tabs .wa-pt { flex: 1; min-width: 0; display: flex; align-items: center; gap: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .wa-pt { display: block; }
+#s-tabs .wa-pk { display: inline-grid; vertical-align: -4px; margin-right: 3px; }
+#s-tabs .wa-pk .wa-i { width: 17px; height: 17px; }
+#s-tabs .wa-badge { flex: none; display: none; min-width: 20px; height: 20px; padding: 0 6px; margin-left: 6px; border-radius: 9999px; box-sizing: border-box;
+  background: var(--wa-green); color: #fff; font: 600 12px/20px var(--wa-font); font-style: normal; text-align: center; }
+#s-tabs .wa-row.wa-unread .wa-badge, #s-tabs .wa-unread .wa-badge { display: block; }
+#s-tabs .wa-row.wa-unread .wa-r1 .wa-ta, #s-tabs .wa-green { color: var(--wa-green-d) !important; font-weight: 500 !important; }
+#s-tabs .wa-row.wa-unread .wa-pa .wa-pt, #s-tabs .wa-unread .wa-pt { font-weight: 600; color: var(--wa-text); }
+#s-tabs .wa-tk { display: inline-grid; flex: none; vertical-align: -4px; }
+#s-tabs .wa-tk .wa-i { width: 18px; height: 18px; color: var(--wa-text2) !important; }
+#s-tabs .wa-tk.wa-blue .wa-i { color: var(--wa-tick) !important; }
+#s-tabs .wa-pt .wa-tk { margin-right: 3px; }
+#s-tabs .wa-new { opacity: 0; }
+
+/* the conversation pane: two threads side by side in one clip (Lucía's, the broadcast) */
+#s-tabs .wa-pane { position: relative; flex: 1; min-width: 0; overflow: hidden; background: var(--wa-chat); }
+#s-tabs .wa-th { position: absolute; inset: 0; display: flex; flex-direction: column; }
+#s-tabs .wa-th-b { visibility: hidden; }
+#s-tabs .wa-hd { flex: none; display: flex; align-items: center; gap: 13px; height: 64px; padding: 0 18px 0 16px; box-sizing: border-box;
+  background: var(--wa-bg); border-bottom: 1px solid var(--wa-line); }
+#s-tabs .wa-hd .wa-av { width: 40px; height: 40px; }
+#s-tabs .wa-hn { display: flex; flex-direction: column; gap: 2px; }
+#s-tabs .wa-hn b { font: 500 16px/1.2 var(--wa-font); }
+#s-tabs .wa-hn small { font: 400 13px/1.2 var(--wa-font); color: var(--wa-text2); }
+#s-tabs .wa-hi { margin-left: auto; display: flex; gap: 22px; }
+#s-tabs .wa-msgs { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 16px 64px 18px; }
+#s-tabs .wa-day { align-self: center; margin-bottom: 6px; padding: 5px 12px; border-radius: 8px; background: var(--wa-bg); box-shadow: 0 1px .5px rgba(11,20,26,.13);
+  font: 500 12.5px/1 var(--wa-font); color: var(--wa-text2); text-transform: uppercase; }
+#s-tabs .wa-note { align-self: center; margin-bottom: 6px; padding: 6px 12px; border-radius: 8px; background: #fff8c5; font: 400 12.5px/1.3 var(--wa-font); color: #54656f; }
+/* Lucía's voice note (incoming, white) with WhatsApp's transcript under it */
+#s-tabs .wa-in { align-self: flex-start; box-sizing: border-box; width: 360px; padding: 7px 10px 8px 8px; border-radius: 8px; background: var(--wa-in);
+  box-shadow: 0 1px .5px rgba(11,20,26,.13); }
+#s-tabs .wa-vp { display: flex; align-items: center; gap: 10px; height: 52px; }
+#s-tabs .wa-vav { width: 52px; height: 52px; }
+#s-tabs .wa-vbtn svg { display: block; width: 28px; height: 28px; fill: var(--wa-icon); }
+#s-tabs .wa-wave { position: relative; flex: 1; display: flex; align-items: center; justify-content: space-between; height: 26px; }
+#s-tabs .wa-wave b { display: block; width: 3px; border-radius: 2px; background: #c3cbcf; }
+#s-tabs .wa-wave i { position: absolute; left: 0; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: var(--wa-tick); }
+#s-tabs .wa-vm { display: flex; justify-content: space-between; padding-left: 100px; font: 400 11.5px/14px var(--wa-font); color: var(--wa-text2); }
+#s-tabs .wa-vt { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--wa-line); font: 400 14.2px/19px var(--wa-font); color: var(--wa-text); }
+#s-tabs .wa-vt small { display: block; margin-bottom: 2px; font: 500 12px/1.3 var(--wa-font); color: var(--wa-text2); }
+/* the reply sent as the shop (outgoing, light green) */
+#s-tabs .wa-out { align-self: flex-end; display: flex; }
+#s-tabs .wa-out p { position: relative; margin: 0; max-width: 520px; padding: 7px 9px 8px 10px; border-radius: 8px; background: var(--wa-out);
+  box-shadow: 0 1px .5px rgba(11,20,26,.13); font: 400 14.2px/19px var(--wa-font); color: var(--wa-text); white-space: pre-line; opacity: 0; transform-origin: 100% 100%; }
+#s-tabs .wa-mt { float: right; display: inline-flex; align-items: center; gap: 3px; margin: 7px 0 -4px 10px; font: 400 11px/1 var(--wa-font); color: var(--wa-text2); }
+#s-tabs .wa-mt .wa-tk .wa-i { width: 17px; height: 17px; }
+/* the sale (an image message with its caption) */
+#s-tabs .wa-sb { box-sizing: border-box; width: 340px; padding: 4px; border-radius: 8px; background: var(--wa-out); box-shadow: 0 1px .5px rgba(11,20,26,.13); transform-origin: 100% 100%; }
+#s-tabs .wa-sale .wa-sb { opacity: 0; }
+#s-tabs .wa-sb img { display: block; width: 100%; aspect-ratio: 3 / 2; border-radius: 6px; object-fit: cover; }
+#s-tabs .wa-sb p { margin: 0; padding: 6px 6px 4px; background: none; box-shadow: none; opacity: 1; max-width: none; font: 400 14.2px/19px var(--wa-font); color: var(--wa-text); white-space: pre-line; }
+#s-tabs .wa-tks.wa-one .wa-i { clip-path: inset(0 0 0 34%); }
+/* the composer */
+#s-tabs .wa-comp { flex: none; display: flex; align-items: center; gap: 12px; height: 62px; padding: 0 18px; box-sizing: border-box; background: var(--wa-chat); }
+#s-tabs .wa-cbox { flex: 1; display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 14px; border-radius: 9999px; background: var(--wa-bg);
+  box-shadow: 0 1px .5px rgba(11,20,26,.1); }
+#s-tabs .wa-cph { flex: 1; font: 400 15px/1 var(--wa-font); color: var(--wa-text2); }
+
+/* Message info (the side panel WhatsApp opens on a sent message) */
+#s-tabs .wa-info { flex: none; width: 0; display: flex; flex-direction: column; overflow: hidden; visibility: hidden; background: var(--wa-bg); border-left: 1px solid var(--wa-line); }
+#s-tabs .wa-ih { flex: none; display: flex; align-items: center; gap: 26px; width: 400px; height: 64px; padding: 0 20px; box-sizing: border-box; border-bottom: 1px solid var(--wa-line); }
+#s-tabs .wa-ih b { font: 500 16px/1 var(--wa-font); }
+#s-tabs .wa-ib { flex: 1; min-height: 0; width: 400px; display: flex; flex-direction: column; }
+#s-tabs .wa-iprev { display: flex; justify-content: flex-end; padding: 18px 24px 22px; background: var(--wa-chat); }
+#s-tabs .wa-iprev .wa-sb { width: 270px; }
+#s-tabs .wa-iprev .wa-sb p { font-size: 13px; line-height: 17px; }
+#s-tabs .wa-istat { display: flex; flex-direction: column; }
+#s-tabs .wa-irow { display: flex; align-items: center; gap: 12px; height: 64px; padding: 0 24px; border-bottom: 1px solid var(--wa-line); }
+#s-tabs .wa-irow .wa-tk .wa-i { width: 22px; height: 22px; }
+#s-tabs .wa-irow b { flex: 1; font: 400 16px/1 var(--wa-font); }
+#s-tabs .wa-n { font: 600 22px/1 var(--wa-font); font-variant-numeric: tabular-nums; color: var(--wa-text); }
+#s-tabs .wa-irow small { font: 400 13px/1 var(--wa-font); color: var(--wa-text2); }
+
+/* the toast: dark, bottom left over the chat list (where WhatsApp Web shows its toasts), a green check */
+#s-tabs .wa-toast { position: absolute; left: 84px; bottom: 24px; display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px 0 14px; border-radius: 8px;
+  background: var(--wa-toast); color: #fff; font: 500 15.5px/1 var(--wa-font); box-shadow: 0 6px 18px rgba(0,0,0,.25); opacity: 0; white-space: nowrap; }
+#s-tabs .wa-toast .wa-i { width: 24px; height: 24px; color: var(--wa-green) !important; }
+
+/* portrait (4:5): no rail; the chat list over a compact thread, then (as the list folds away) the broadcast bubble over
+   the Message info counters */
+#s-tabs .wa-app.wa-narrow { flex-direction: column; }
+#s-tabs .wa-app.wa-narrow .wa-rail { display: none; }
+#s-tabs .wa-app.wa-narrow .wa-list { width: auto; height: 52%; border-right: 0; border-bottom: 1px solid var(--wa-line); }
+#s-tabs .wa-app.wa-narrow .wa-lh { height: 54px; }
+#s-tabs .wa-app.wa-narrow .wa-chips { padding: 10px 16px 6px; }
+#s-tabs .wa-app.wa-narrow .wa-row { height: 64px; }
+#s-tabs .wa-app.wa-narrow .wa-row .wa-av { width: 46px; height: 46px; }
+#s-tabs .wa-app.wa-narrow .wa-r1 b { font-size: 16px; }
+#s-tabs .wa-app.wa-narrow .wa-pa, #s-tabs .wa-app.wa-narrow .wa-pb { font-size: 14.5px; }
+#s-tabs .wa-app.wa-narrow .wa-hd { height: 56px; }
+#s-tabs .wa-app.wa-narrow .wa-msgs { padding: 10px 16px 10px; gap: 6px; }
+#s-tabs .wa-app.wa-narrow .wa-th-a .wa-day { display: none; }
+#s-tabs .wa-app.wa-narrow .wa-in { width: 100%; max-width: 420px; padding: 5px 9px 6px 7px; }
+#s-tabs .wa-app.wa-narrow .wa-vp { height: 40px; }
+#s-tabs .wa-app.wa-narrow .wa-vav { width: 40px; height: 40px; }
+#s-tabs .wa-app.wa-narrow .wa-vm { display: none; }
+#s-tabs .wa-app.wa-narrow .wa-out p { max-width: 560px; font-size: 14.5px; }
+#s-tabs .wa-app.wa-narrow .wa-comp { height: 54px; }
+#s-tabs .wa-app.wa-narrow .wa-th-b .wa-msgs { justify-content: flex-start; padding-top: 14px; }
+#s-tabs .wa-app.wa-narrow .wa-sb { width: 360px; }
+#s-tabs .wa-app.wa-narrow .wa-th-b .wa-comp { display: none; }
+#s-tabs .wa-app.wa-narrow .wa-info { width: auto; height: 0; border-left: 0; border-top: 1px solid var(--wa-line); }
+#s-tabs .wa-app.wa-narrow .wa-ih, #s-tabs .wa-app.wa-narrow .wa-ib { width: auto; }
+#s-tabs .wa-app.wa-narrow .wa-iprev { display: none; }
+#s-tabs .wa-app.wa-narrow .wa-irow { height: 70px; }
+#s-tabs .wa-app.wa-narrow .wa-toast { left: 50%; bottom: 22px; transform: translateX(-50%); }

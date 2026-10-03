@@ -1,0 +1,27 @@
+/* Writing beat (beats/writing.js): Claude Opus 5.5 writing the Gumroad product page. A hub card (the base's card
+   grammar and greys): the header ("Product page"), a well where the draft writes part by part (a muted label column and
+   the text; the name bold, what's inside as three plain lines with a dot, the price bold) and the green check line.
+   No tabs, no chevron, no footer buttons, no field boxes, no caret: the labels sit on the well's own fill with no box
+   of their own, and a part only appears with its text. Nothing here transitions: everything is written from t in
+   render. Every class is prefixed .wr-. Radii: 10px card and 8px well (the base's). */
+
+#s-tabs .sbsite .hub .wr-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 11px 13px 12px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .wr-card .ni { flex: none; display: block; }
+#s-tabs .sbsite .hub .wr-hd { display: flex; align-items: center; gap: 8px; font: 600 13px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .wr-ic { display: grid; place-items: center; width: 16px; height: 16px; color: #c4c7c5; }
+#s-tabs .sbsite .hub .wr-ic .ni { width: 15px; height: 15px; }
+
+/* the draft: label column + text, parts 8px apart */
+#s-tabs .sbsite .hub .wr-well { display: grid; gap: 8px; margin-top: 10px; padding: 12px 14px; border-radius: 8px; background: #0b0b0c; box-shadow: inset 0 0 0 1px #232326; }
+#s-tabs .sbsite .hub .wr-part { display: grid; grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; opacity: 0; }
+#s-tabs .sbsite .hub .wr-lb { font: 500 11px/18px var(--ui); color: #8e8e93; white-space: nowrap; }
+#s-tabs .sbsite .hub .wr-l { font: 400 12.5px/18px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .wr-off { color: transparent; }
+#s-tabs .sbsite .hub .wr-name .wr-l { font: 600 14px/18px var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .wr-price .wr-l { font: 600 13px/18px var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .wr-list .wr-l { position: relative; padding-left: 12px; }
+#s-tabs .sbsite .hub .wr-list .wr-l::before { content: ""; position: absolute; left: 1px; top: 7px; width: 4px; height: 4px; border-radius: 50%; background: #8e8e93; }
+
+#s-tabs .sbsite .hub .wr-ft { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 10px; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .wr-ft .qc-ok { flex: none; }

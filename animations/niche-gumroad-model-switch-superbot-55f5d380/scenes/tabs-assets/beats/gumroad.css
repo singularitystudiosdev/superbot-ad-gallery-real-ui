@@ -1,0 +1,119 @@
+/* Gumroad beat (beats/gumroad.js): the connect card in the chat (superbot's own card, the hub's greys and green check)
+   and the full-frame layer carrying the public Gumroad product page. Every Gumroad value is the one measured on a live
+   product page (chat.css --gr-*, values and source there): white page, black text, 1px black borders, 4px radius, the
+   offset shadow, the pink price tag with Gumroad's notched label shape, h1 32px weight 400, body 16px/22px. The one
+   yellow is the creator's monogram. Nothing on the page is a control and nothing is boxed in the buy-box slot: no buy button, no cart, no quantity, no stars,
+   ratings, sales or follower counts, no share, no wishlist, no carousel dots, the creator's name is not underlined
+   (no link styling), the URL is plain text on superbot's dark band (no browser chrome, no address bar). The banner is a
+   full-width status strip, not a button. Nothing here transitions: position, size, opacity and transform are written
+   from t in gumroad.js. Classes: .vc- the connect card, .gr- the Gumroad page. */
+
+/* ---- the connect card ---- */
+#s-tabs .sbsite .hub .vc-card { opacity: 0; box-sizing: border-box; width: 430px; max-width: 100%; margin-top: 2px; padding: 12px 12px 12px;
+  border-radius: 10px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .vc-card.vc-tall { width: 100%; }
+#s-tabs .sbsite .hub .vc-card .ni { flex: none; display: block; }
+#s-tabs .sbsite .hub .vc-top { display: flex; align-items: center; gap: 14px; padding: 2px 2px 10px; margin-bottom: 4px; box-shadow: inset 0 -1px 0 #232326; }
+#s-tabs .sbsite .hub .vc-marks { display: flex; align-items: center; }
+#s-tabs .sbsite .hub .vc-marks .qc-tile.vc-sb { width: 28px; height: 28px; }
+#s-tabs .sbsite .hub .vc-line { position: relative; display: block; width: 44px; height: 1.5px; margin: 0 8px; background: #2e2f35; overflow: hidden; }
+#s-tabs .sbsite .hub .vc-line i { position: absolute; inset: 0; background: #c4c7c5; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .vc-gr { display: block; width: 26px; height: 26px; }
+#s-tabs .sbsite .hub .vc-acct { display: grid; gap: 4px; min-width: 0; }
+#s-tabs .sbsite .hub .vc-acct b { font: 600 13.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .vc-acct span { font: 500 11.5px/1.2 var(--font-mono); color: #c4c7c5; white-space: nowrap; }
+#s-tabs .sbsite .hub .vc-acct em { font: 500 11.5px/1.2 var(--ui); font-style: normal; color: #8e8e93; margin-right: 3px; }
+#s-tabs .sbsite .hub .vc-step { display: flex; align-items: center; gap: 9px; height: 27px; padding: 0 2px; font: 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .vc-step b { font-weight: 600; }
+#s-tabs .sbsite .hub .vc-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .vc-ic { flex: none; display: grid; place-items: center; width: 16px; height: 16px; color: #a8abb2; }
+#s-tabs .sbsite .hub .vc-ic .ni { width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .vc-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .vc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .vc-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .vc-shot { margin-top: 9px; aspect-ratio: 16 / 9; border-radius: 8px; background: var(--gr-bg); }
+
+/* ---- the full-frame layer: superbot's opaque frame with the store URL on its top band, then the page ---- */
+#s-tabs .gr-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #0a0a0b; }
+#s-tabs .gr-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden; background: #0a0a0b;
+  font: 400 16px/22px var(--gr-sans); color: var(--gr-text); -webkit-font-smoothing: antialiased; }
+#s-tabs .gr-app .ni { flex: none; display: block; }
+#s-tabs .gr-url { flex: none; display: flex; align-items: center; height: 40px; padding: 0 28px; font: 400 14px/1 var(--ui); color: #c4c7c5; white-space: nowrap; }
+#s-tabs .gr-page { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--gr-bg); }
+
+/* the creator header (Gumroad's profile bar: monogram + name; nothing else, no subscribe) */
+#s-tabs .gr-hd { flex: none; display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 32px; box-shadow: inset 0 -1px 0 #000; }
+#s-tabs .gr-av { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; box-sizing: border-box; border: var(--gr-border);
+  background: var(--gr-yellow); font: 500 12px/1 var(--gr-sans); letter-spacing: .02em; color: #000; }
+#s-tabs .gr-cn { font: 500 17px/1 var(--gr-sans); }
+
+/* the bold moment: a full-width status strip over the creator header (Gumroad's pink, black rule under it) */
+#s-tabs .gr-ban { position: absolute; left: 0; right: 0; top: 0; z-index: 2; display: flex; align-items: center; gap: 16px; height: 60px; padding: 0 32px;
+  background: var(--gr-pink); box-shadow: inset 0 -1px 0 #000; white-space: nowrap; visibility: hidden; }
+#s-tabs .gr-bm { flex: none; display: block; width: 36px; height: 36px; }
+#s-tabs .gr-ban b { font: 500 26px/1 var(--gr-sans); letter-spacing: -.01em; }
+#s-tabs .gr-ban span { font: 400 19px/1 var(--gr-sans); }
+
+/* the product: Gumroad's article (1px black border, 4px radius, the offset shadow), two columns on 16:9 */
+#s-tabs .gr-art { flex: none; box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) 390px; width: 1150px; margin: 26px auto 0;
+  border: var(--gr-border); border-radius: var(--gr-radius); background: var(--gr-bg); box-shadow: var(--gr-shadow); overflow: hidden; }
+#s-tabs .gr-main { min-width: 0; box-shadow: inset -1px 0 0 #000; }
+#s-tabs .gr-cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--gr-bg); box-shadow: 0 1px 0 #000; }
+#s-tabs .gr-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+/* the cover's type over the photo's shaded desk (a soft scrim at the bottom left keeps it legible) */
+#s-tabs .gr-ct { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 8px; padding: 0 34px 30px;
+  background: linear-gradient(to top, rgba(10, 10, 11, .55), rgba(10, 10, 11, 0)); color: #ffffff; }
+#s-tabs .gr-ct b { font: 700 46px/1 var(--gr-sans); letter-spacing: -.015em; }
+#s-tabs .gr-ct span { font: 400 19px/1.2 var(--gr-sans); }
+#s-tabs .gr-h1 { margin: 0; padding: 20px 24px; font: 400 32px/1.2 var(--gr-sans); box-shadow: inset 0 -1px 0 #000; }
+#s-tabs .gr-row { display: flex; box-shadow: inset 0 -1px 0 #000; }
+#s-tabs .gr-cell { display: flex; align-items: center; gap: 10px; padding: 14px 24px; box-shadow: inset -1px 0 0 #000; font: 400 16px/22px var(--gr-sans); }
+#s-tabs .gr-av-s { width: 26px; height: 26px; font-size: 10px; }
+/* the price tag: Gumroad's label shape (pink fill, black outline, the notched right edge), not a button */
+#s-tabs .gr-tag { position: relative; display: block; padding: 4px 8px; margin-right: 14px; background: var(--gr-pink); font: 400 16px/22px var(--gr-sans);
+  box-shadow: inset 0 1px 0 #000, inset 0 -1px 0 #000, inset 1px 0 0 #000; transform-origin: 0 50%; }
+#s-tabs .gr-tag::after { content: ""; position: absolute; left: 100%; top: 0; width: 15px; height: 100%; background: #000;
+  clip-path: polygon(0 0, 100% 0, 34% 50%, 100% 100%, 0 100%); }
+#s-tabs .gr-tag::before { content: ""; position: absolute; left: 100%; top: 1px; width: 13px; height: calc(100% - 2px); background: var(--gr-pink); z-index: 1;
+  clip-path: polygon(0 0, 100% 0, 30% 50%, 100% 100%, 0 100%); }
+#s-tabs .gr-desc { padding: 16px 24px 20px; }
+#s-tabs .gr-desc p { margin: 0; font: 400 16px/24px var(--gr-sans); }
+
+#s-tabs .gr-side { display: grid; align-content: start; gap: 22px; padding: 24px; }
+#s-tabs .gr-in h3 { margin: 0 0 12px; font: 500 20px/1.2 var(--gr-sans); }
+#s-tabs .gr-in ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+#s-tabs .gr-in li { display: flex; align-items: center; gap: 10px; font: 400 16px/22px var(--gr-sans); white-space: nowrap; }
+#s-tabs .gr-in .ni { width: 18px; height: 18px; }
+/* the product facts: plain text lines under a small muted label, the same weight as the what's inside list; no border,
+   no cell dividers, no fill (a boxed panel in the buy-box slot would read as a buy box or a selector) */
+#s-tabs .gr-info { display: grid; gap: 8px; }
+#s-tabs .gr-info h4 { margin: 0 0 2px; font: 500 14px/18px var(--gr-sans); color: var(--gr-muted); }
+#s-tabs .gr-info p { margin: 0; font: 400 16px/22px var(--gr-sans); }
+#s-tabs .gr-p0, #s-tabs .gr-p1, #s-tabs .gr-p2, #s-tabs .gr-p3 { opacity: 0; }
+
+/* 4:5: re-laid out for the portrait frame, one column: the cover, the title, the price and creator row, the
+   description, then what's inside and the info box side by side */
+#s-tabs .gr-app.gr-narrow .gr-url { padding: 0 24px; font-size: 13px; }
+#s-tabs .gr-app.gr-narrow .gr-hd, #s-tabs .gr-app.gr-narrow .gr-ban { height: 56px; padding: 0 24px; }
+#s-tabs .gr-app.gr-narrow .gr-ban { gap: 12px; }
+#s-tabs .gr-app.gr-narrow .gr-ban b { font-size: 21px; }
+#s-tabs .gr-app.gr-narrow .gr-ban span { font-size: 16px; }
+#s-tabs .gr-app.gr-narrow .gr-art { grid-template-columns: minmax(0, 1fr); width: auto; margin: 22px 22px 0 18px; }
+#s-tabs .gr-app.gr-narrow .gr-main { box-shadow: inset 0 -1px 0 #000; }
+#s-tabs .gr-app.gr-narrow .gr-cover { aspect-ratio: auto; height: 508px; }
+#s-tabs .gr-app.gr-narrow .gr-ct { padding: 0 28px 28px; gap: 10px; }
+#s-tabs .gr-app.gr-narrow .gr-ct b { font-size: 48px; }
+#s-tabs .gr-app.gr-narrow .gr-ct span { font-size: 20px; }
+#s-tabs .gr-app.gr-narrow .gr-h1 { padding: 18px 22px; font-size: 34px; }
+#s-tabs .gr-app.gr-narrow .gr-cell { padding: 14px 22px; font-size: 18px; }
+#s-tabs .gr-app.gr-narrow .gr-tag { font-size: 18px; line-height: 24px; }
+#s-tabs .gr-app.gr-narrow .gr-av-s { width: 28px; height: 28px; font-size: 10.5px; }
+#s-tabs .gr-app.gr-narrow .gr-desc { padding: 16px 22px 18px; }
+#s-tabs .gr-app.gr-narrow .gr-desc p { font-size: 18px; line-height: 26px; }
+#s-tabs .gr-app.gr-narrow .gr-side { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 18px; padding: 18px 22px 22px; align-items: start; }
+#s-tabs .gr-app.gr-narrow .gr-in h3 { font-size: 21px; margin-bottom: 12px; }
+#s-tabs .gr-app.gr-narrow .gr-in ul { gap: 10px; }
+#s-tabs .gr-app.gr-narrow .gr-in li { font-size: 17px; }
+#s-tabs .gr-app.gr-narrow .gr-info { gap: 10px; }
+#s-tabs .gr-app.gr-narrow .gr-info h4 { font-size: 15px; line-height: 21px; margin-bottom: 2px; }
+#s-tabs .gr-app.gr-narrow .gr-info p { font-size: 17px; line-height: 23px; }

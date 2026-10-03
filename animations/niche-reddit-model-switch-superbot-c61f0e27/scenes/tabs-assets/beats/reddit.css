@@ -1,0 +1,220 @@
+/* Reddit beat (beats/reddit.js): the authorize card in the chat (Reddit's dark colours, the consent folding into the
+   run, five steps ticking, the mini window under them) and the full-frame layer carrying the one Reddit page: pinned
+   over the card's window, then opened to the whole frame. The page is Reddit's desktop web, dark theme, at its own px
+   (scaled to the frame by reddit.js); every colour is a chat.css --rd-* token from Reddit's own stylesheet. Radii are
+   Reddit's two: 16px (cards, banner) and fully round (pills, buttons, avatars). Nothing here transitions: position,
+   size, radius, height, clip-path, opacity and transform are written from t in reddit.js, so ?t= freezes a frame.
+   UI icons are Tabler (rd-icons.js). Every class is prefixed .rx-. */
+
+/* Reddit Sans (SIL OFL 1.1), Reddit's own UI typeface; latin subset from @fontsource/reddit-sans 5.3.0, vendored under
+   fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "Reddit Sans RX"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/reddit-sans-latin-400-normal.woff2?v=c61f0e27") format("woff2"); }
+@font-face { font-family: "Reddit Sans RX"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/reddit-sans-latin-500-normal.woff2?v=c61f0e27") format("woff2"); }
+@font-face { font-family: "Reddit Sans RX"; font-style: normal; font-weight: 600; font-display: block; src: url("../../../fonts/reddit-sans-latin-600-normal.woff2?v=c61f0e27") format("woff2"); }
+@font-face { font-family: "Reddit Sans RX"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/reddit-sans-latin-700-normal.woff2?v=c61f0e27") format("woff2"); }
+
+#s-tabs .rd-i { flex: none; width: 20px; height: 20px; }
+#s-tabs .rd-i * { stroke-width: 1.6; }
+
+/* ---- the authorize card, in the chat ---- */
+#s-tabs .sbsite .hub .rx-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .rx-card { opacity: 0; box-sizing: border-box; width: 440px; max-width: 100%; margin-top: 2px; padding: 10px 12px 12px;
+  border-radius: var(--rd-radius); background: var(--rd-container); box-shadow: inset 0 0 0 1px var(--rd-border-weak);
+  font-family: var(--rd-font); color: var(--rd-text); }
+#s-tabs .sbsite .hub .rx-card.rx-tall { width: 300px; }
+#s-tabs .sbsite .hub .rx-fold { overflow: hidden; }
+#s-tabs .sbsite .hub .rx-run { height: 0; opacity: 0; }
+#s-tabs .sbsite .hub .rx-ah { display: flex; align-items: flex-start; gap: 9px; padding: 2px 0 8px; }
+#s-tabs .sbsite .hub .rx-ah b { font: 600 13.5px/18px var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .sbsite .hub .rx-snoo { flex: none; width: 22px; height: 22px; margin-top: -2px; }
+#s-tabs .sbsite .hub .rx-scopes { margin: 0; padding: 0 0 0 1px; list-style: none; }
+#s-tabs .sbsite .hub .rx-scopes li { display: flex; align-items: center; gap: 9px; min-height: 25px; font: 500 12.5px/16px var(--rd-font); color: var(--rd-text); }
+#s-tabs .sbsite .hub .rx-si { width: 17px; height: 17px; color: var(--rd-text-weak); margin-left: 2px; }
+#s-tabs .sbsite .hub .rx-abtn { display: flex; justify-content: flex-end; gap: 8px; padding-top: 9px; }
+#s-tabs .sbsite .hub .rx-b { display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: 9999px;
+  font: 600 12.5px/1 var(--rd-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .rx-b2 { background: var(--rd-secondary-bg); color: var(--rd-text-strong); }
+/* Allow is Reddit's brand button (its sign-in buttons); pressed, it takes the brand hover colour */
+#s-tabs .sbsite .hub .rx-b1 { background: var(--rd-brand); color: #fff; }
+#s-tabs .sbsite .hub .rx-b1.rx-down { background: #AE2C00; }
+#s-tabs .sbsite .hub .rx-step { display: flex; align-items: center; gap: 9px; height: 26px; font: 500 12.5px/1 var(--rd-font); color: var(--rd-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .rx-step b { font-weight: 600; color: var(--rd-text-strong); }
+#s-tabs .sbsite .hub .rx-signed { margin-bottom: 2px; }
+#s-tabs .sbsite .hub .rx-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .rx-step:not(.rx-signed) .rx-tx { padding-left: 29px; }
+#s-tabs .sbsite .hub .rx-sav { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--c); font: 700 10.5px/1 var(--rd-font); color: #000; }
+#s-tabs .sbsite .hub .rx-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .rx-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--rd-secondary-bg); border-top-color: var(--rd-text-strong); }
+#s-tabs .sbsite .hub .rx-ck { position: absolute; inset: -1px; width: 16px; height: 16px; opacity: 0; color: var(--rd-success); }
+#s-tabs .sbsite .hub .rx-ck * { stroke-width: 3; }
+/* the mini window's frame: the full-frame layer is pinned over it (its aspect is the frame's, set by reddit.js) */
+#s-tabs .sbsite .hub .rx-shot { margin-top: 9px; aspect-ratio: 16 / 9; border-radius: 12px; background: var(--rd-bg); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .rx-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--rd-bg); }
+#s-tabs .rx-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: var(--rd-bg); color: var(--rd-text); font: 400 14px/20px var(--rd-font); -webkit-font-smoothing: antialiased; }
+#s-tabs .rx-app b, #s-tabs .rx-app h1, #s-tabs .rx-app h2, #s-tabs .rx-app h3 { font-weight: 600; }
+#s-tabs .rx-app h1, #s-tabs .rx-app h2, #s-tabs .rx-app h3, #s-tabs .rx-app p { margin: 0; }
+#s-tabs .rx-app hr { width: 100%; height: 1px; margin: 12px 0; border: 0; background: var(--rd-divider); }
+
+/* avatars: an initial on a flair colour; AutoModerator wears the Reddit mark */
+#s-tabs .rx-av { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; overflow: hidden;
+  background: var(--c); font: 700 12px/1 var(--rd-font); color: #000; }
+#s-tabs .rx-av-snoo { background: none; }
+#s-tabs .rx-av-snoo img { width: 100%; height: 100%; }
+
+/* top bar */
+#s-tabs .rx-top { flex: none; display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 16px; box-sizing: border-box;
+  border-bottom: 1px solid var(--rd-border-weak); }
+#s-tabs .rx-logo { display: flex; align-items: center; width: 240px; }
+#s-tabs .rx-logo img { width: 32px; height: 32px; }
+#s-tabs .rx-search { display: flex; align-items: center; gap: 8px; width: 560px; height: 40px; margin: 0 auto; padding: 0 16px; box-sizing: border-box;
+  border-radius: 9999px; background: var(--rd-secondary-bg); font: 400 14px/1 var(--rd-font); color: var(--rd-text-weak); white-space: nowrap; }
+#s-tabs .rx-search .rd-i { color: var(--rd-text-strong); }
+#s-tabs .rx-acts { display: flex; align-items: center; justify-content: flex-end; gap: 8px; width: 240px; color: var(--rd-text-strong); }
+#s-tabs .rx-create { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; font: 600 14px/1 var(--rd-font); }
+#s-tabs .rx-ib { display: grid; place-items: center; width: 40px; height: 40px; }
+#s-tabs .rx-me { width: 32px; height: 32px; margin-left: 4px; font-size: 14px; }
+
+/* the body: left nav and the main column */
+#s-tabs .rx-body { flex: 1; min-height: 0; display: flex; }
+#s-tabs .rx-nav { flex: none; width: 272px; padding: 16px 16px 0; box-sizing: border-box; border-right: 1px solid var(--rd-border-weak); }
+#s-tabs .rx-ni { display: flex; align-items: center; gap: 12px; height: 40px; padding: 0 8px 0 16px; border-radius: 8px;
+  font: 400 14px/1 var(--rd-font); color: var(--rd-text-strong); white-space: nowrap; }
+#s-tabs .rx-ni .rd-i { color: var(--rd-text-strong); }
+#s-tabs .rx-ni.rx-sel { background: var(--rd-selected); }
+#s-tabs .rx-nicon { width: 28px; height: 28px; border-radius: 50%; margin-left: -2px; }
+#s-tabs .rx-ni.rx-sel { gap: 9px; }
+#s-tabs .rx-sec { height: 40px; padding: 0 16px; display: flex; align-items: center; font: 400 12px/1 var(--rd-font);
+  letter-spacing: .05em; color: var(--rd-text-weak); }
+#s-tabs .rx-new { margin-left: auto; padding: 3px 6px; border-radius: 9999px; background: var(--rd-orangered); font: 700 10px/1 var(--rd-font); color: #fff; letter-spacing: .03em; }
+#s-tabs .rx-main { flex: 1; min-width: 0; overflow: hidden; }
+#s-tabs .rx-wrap { width: 1096px; max-width: calc(100% - 48px); margin: 0 auto; padding-top: 8px; }
+
+/* banner, icon, title, buttons */
+#s-tabs .rx-banner { height: 128px; border-radius: var(--rd-radius); overflow: hidden; opacity: 0; background: var(--rd-container); }
+#s-tabs .rx-banner img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .rx-head { position: relative; display: flex; align-items: flex-end; gap: 12px; height: 60px; padding: 0 16px 0 132px; }
+#s-tabs .rx-cicon { position: absolute; left: 16px; bottom: 0; width: 88px; height: 88px; border-radius: 50%; overflow: hidden;
+  box-shadow: 0 0 0 4px var(--rd-bg); opacity: 0; transform-origin: 50% 60%; }
+#s-tabs .rx-cicon img { display: block; width: 100%; height: 100%; }
+#s-tabs .rx-title { flex: 1; min-width: 0; opacity: 0; }
+#s-tabs .rx-title h1 { font: 700 32px/40px var(--rd-font); color: var(--rd-text-strong); white-space: nowrap; }
+#s-tabs .rx-title small { display: none; }
+#s-tabs .rx-hbtns { display: flex; align-items: center; gap: 12px; padding-bottom: 2px; opacity: 0; }
+#s-tabs .rx-btn { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 9999px;
+  font: 600 14px/1 var(--rd-font); white-space: nowrap; }
+#s-tabs .rx-btn .rd-i { width: 18px; height: 18px; }
+#s-tabs .rx-bord { box-shadow: inset 0 0 0 1px var(--rd-border-medium, #FFFFFF80); color: var(--rd-text-strong); }
+/* Reddit's primary button in dark mode: --color-primary-background with --color-primary-onBackground */
+#s-tabs .rx-pri { background: var(--rd-primary-bg); color: var(--rd-on-primary); }
+#s-tabs .rx-dots { width: 40px; padding: 0; justify-content: center; box-shadow: inset 0 0 0 1px #FFFFFF80; color: var(--rd-text-strong); }
+
+/* the feed and the rail */
+#s-tabs .rx-cols { display: flex; gap: 16px; padding-top: 14px; }
+#s-tabs .rx-feed { flex: 1; min-width: 0; }
+#s-tabs .rx-hl-h { height: 32px; font: 600 14px/32px var(--rd-font); color: var(--rd-text-strong); opacity: 0; }
+#s-tabs .rx-hls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+#s-tabs .rx-hl { display: flex; flex-direction: column; gap: 8px; padding: 12px 16px; border-radius: var(--rd-radius); opacity: 0;
+  box-shadow: inset 0 0 0 1px var(--rd-border-weak); background: var(--rd-bg); }
+#s-tabs .rx-hl-top { display: flex; align-items: center; gap: 8px; }
+#s-tabs .rx-pin { width: 16px; height: 16px; color: var(--rd-mod); }
+#s-tabs .rx-hl b { font: 600 15px/20px var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-hl small { display: flex; gap: 12px; font: 400 12px/16px var(--rd-font); color: var(--rd-text-weak); }
+#s-tabs .rx-flair { display: inline-flex; align-items: center; align-self: flex-start; height: 20px; padding: 0 8px; border-radius: 9999px;
+  background: var(--bg); font: 600 12px/1 var(--rd-font); color: var(--fg); white-space: nowrap; }
+#s-tabs .rx-sort { display: flex; align-items: center; gap: 16px; height: 40px; margin-top: 12px; padding: 0 4px; border-bottom: 1px solid var(--rd-divider);
+  font: 600 12px/1 var(--rd-font); color: var(--rd-text-weak); opacity: 0; }
+#s-tabs .rx-sort > span { display: inline-flex; align-items: center; gap: 4px; }
+#s-tabs .rx-sort .rd-i { width: 16px; height: 16px; }
+
+/* the member's post (shreddit's card), and AutoModerator's comment under it */
+#s-tabs .rx-slot { height: 0; overflow: hidden; }
+#s-tabs .rx-post { padding: 10px 16px 8px; margin-top: 8px; border-radius: var(--rd-radius); }
+#s-tabs .rx-ph { display: flex; align-items: center; gap: 6px; height: 24px; font: 400 12px/1 var(--rd-font); color: var(--rd-text-weak); white-space: nowrap; }
+#s-tabs .rx-ph b { font-weight: 600; color: var(--rd-text-strong); }
+#s-tabs .rx-dot { color: var(--rd-text-weak); }
+#s-tabs .rx-pm { display: flex; gap: 16px; margin-top: 6px; }
+#s-tabs .rx-ptx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+#s-tabs .rx-ptx h3 { font: 600 20px/26px var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-thumb { flex: none; width: 128px; height: 96px; border-radius: var(--rd-radius); overflow: hidden; }
+#s-tabs .rx-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .rx-pact { display: flex; gap: 12px; margin-top: 10px; }
+#s-tabs .rx-pill { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 9999px;
+  background: var(--rd-secondary-bg); font: 600 12px/1 var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-pill .rd-i { width: 18px; height: 18px; }
+#s-tabs .rx-vote { padding: 0 8px; }
+#s-tabs .rx-upv { color: var(--rd-orangered); }
+#s-tabs .rx-cmt { --mark: 0; position: relative; margin: 12px 0 2px 2px; padding: 8px 12px 8px 34px; border-radius: 12px;
+  background: rgba(42, 50, 54, calc(var(--mark) * .9)); }
+#s-tabs .rx-ch { display: flex; align-items: center; gap: 6px; height: 24px; font: 400 12px/1 var(--rd-font); color: var(--rd-text-weak); white-space: nowrap; }
+#s-tabs .rx-cav { position: absolute; left: 4px; top: 8px; }
+#s-tabs .rx-mod { font-weight: 700 !important; color: var(--rd-mod); }
+#s-tabs .rx-modtag { display: inline-flex; align-items: center; gap: 3px; font: 700 11px/1 var(--rd-font); color: var(--rd-mod); letter-spacing: .02em; }
+#s-tabs .rx-modtag .rd-i { width: 14px; height: 14px; }
+#s-tabs .rx-pinned { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; font: 600 12px/1 var(--rd-font); color: var(--rd-mod); }
+#s-tabs .rx-pinned .rd-i { width: 14px; height: 14px; }
+#s-tabs .rx-cmt p { margin: 4px 0 6px; font: 400 15px/22px var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-cact { display: flex; gap: 18px; font: 600 12px/1 var(--rd-font); color: var(--rd-text-weak); }
+#s-tabs .rx-cact span { display: inline-flex; align-items: center; gap: 6px; }
+#s-tabs .rx-cact .rd-i { width: 18px; height: 18px; }
+
+/* the rail */
+#s-tabs .rx-rail { flex: none; width: 316px; align-self: flex-start; opacity: 0; padding: 2px 16px 4px; box-sizing: border-box; border-radius: var(--rd-radius); background: var(--rd-weak); }
+#s-tabs .rx-rsec { padding: 10px 0; border-top: 1px solid var(--rd-divider); opacity: 0; }
+#s-tabs .rx-rsec.rx-about { border-top: 0; }
+#s-tabs .rx-about h2 { font: 700 16px/22px var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-about p { margin-top: 4px; font: 400 14px/20px var(--rd-font); color: var(--rd-text); }
+#s-tabs .rx-meta { display: flex; gap: 16px; margin-top: 8px; font: 400 12px/16px var(--rd-font); color: var(--rd-text-weak); }
+#s-tabs .rx-meta span { display: inline-flex; align-items: center; gap: 6px; }
+#s-tabs .rx-meta .rd-i { width: 16px; height: 16px; }
+#s-tabs .rx-stats { display: flex; gap: 40px; margin-top: 10px; }
+#s-tabs .rx-stats > span { display: flex; flex-direction: column; font: 700 16px/20px var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-stats small { font: 400 12px/16px var(--rd-font); color: var(--rd-text-weak); }
+#s-tabs .rx-onl { display: inline-flex; align-items: center; gap: 5px; }
+#s-tabs .rx-on { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--rd-success); }
+/* the 1 -> 2 counter: two numbers stacked in a one-line window, slid by reddit.js */
+#s-tabs .rx-cnt { display: inline-block; height: 1.25em; overflow: hidden; vertical-align: bottom; line-height: 1.25em; }
+#s-tabs .rx-cnt-in { display: flex; flex-direction: column; }
+#s-tabs .rx-cnt-in i { font-style: normal; height: 1.25em; }
+#s-tabs .rx-rh { font: 400 12px/16px var(--rd-font); letter-spacing: .05em; color: var(--rd-text-weak); }
+#s-tabs .rx-rail ol { margin: 8px 0 0; padding: 0; list-style: none; }
+#s-tabs .rx-rail li { display: flex; align-items: center; gap: 12px; height: 27px; font: 400 14px/1 var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-rail li i, #s-tabs .rx-rc i { font-style: normal; color: var(--rd-text-weak); }
+#s-tabs .rx-rail li i { width: 10px; text-align: right; }
+#s-tabs .rx-fls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+#s-tabs .rx-modr { display: flex; align-items: center; gap: 8px; height: 30px; margin-top: 2px; font: 400 14px/1 var(--rd-font); color: var(--rd-text-strong); }
+#s-tabs .rx-modr b { font-weight: 500; }
+#s-tabs .rx-mav { width: 28px; height: 28px; font-size: 13px; }
+#s-tabs .rx-modr:first-of-type { margin-top: 8px; }
+
+/* the compact rules strip: portrait only */
+#s-tabs .rx-strip { display: none; opacity: 0; }
+
+/* portrait (4:5): Reddit's narrow layout. No left nav and no rail; the member count sits under the title, the buttons
+   under it, and the rules become a compact strip under the feed */
+#s-tabs .rx-narrow .rx-nav, #s-tabs .rx-narrow .rx-rail, #s-tabs .rx-narrow .rx-create, #s-tabs .rx-narrow .rx-sort { display: none; }
+#s-tabs .rx-narrow .rx-top { gap: 12px; padding: 0 12px; }
+#s-tabs .rx-narrow .rx-logo { width: auto; }
+#s-tabs .rx-narrow .rx-search { flex: 1; width: auto; margin: 0; }
+#s-tabs .rx-narrow .rx-acts { width: auto; }
+#s-tabs .rx-narrow .rx-wrap { width: auto; max-width: none; margin: 0 12px; }
+#s-tabs .rx-narrow .rx-banner { height: 104px; }
+#s-tabs .rx-narrow .rx-head { flex-wrap: wrap; align-items: flex-start; height: auto; padding: 8px 4px 0 100px; }
+#s-tabs .rx-narrow .rx-cicon { top: -36px; bottom: auto; left: 8px; width: 80px; height: 80px; }
+#s-tabs .rx-narrow .rx-title h1 { font-size: 26px; line-height: 32px; }
+#s-tabs .rx-narrow .rx-title small { display: flex; gap: 14px; margin-top: 2px; font: 400 14px/20px var(--rd-font); color: var(--rd-text-weak); }
+#s-tabs .rx-narrow .rx-title small > span { display: inline-flex; align-items: center; gap: 5px; }
+#s-tabs .rx-narrow .rx-title small .rx-cnt { color: var(--rd-text-strong); font-weight: 700; }
+#s-tabs .rx-narrow .rx-title { flex: 1 1 100%; }
+#s-tabs .rx-narrow .rx-hbtns { width: 100%; margin: 12px 0 0 -96px; padding: 0; }
+#s-tabs .rx-narrow .rx-cols { padding-top: 16px; }
+#s-tabs .rx-narrow .rx-post { padding: 8px 4px; }
+#s-tabs .rx-narrow .rx-ptx h3 { font-size: 19px; line-height: 25px; }
+#s-tabs .rx-narrow .rx-thumb { width: 112px; height: 84px; }
+#s-tabs .rx-narrow .rx-strip { display: block; margin-top: 14px; padding: 12px 14px 14px; border-radius: var(--rd-radius); background: var(--rd-weak); }
+#s-tabs .rx-narrow .rx-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+#s-tabs .rx-rc { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 12px 0 10px; border-radius: 9999px;
+  background: var(--rd-secondary-bg); font: 500 14px/1 var(--rd-font); color: var(--rd-text-strong); white-space: nowrap; }

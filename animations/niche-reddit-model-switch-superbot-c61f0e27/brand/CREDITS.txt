@@ -1,0 +1,26 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted. Carried over from the source ad's brand/CREDITS.txt
+(model-switch-superbot-e13744a9) with their original provenance lines.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+openai-logo.svg      OpenAI mark (round badge), copied from animations/who-are-you-superbot-268c902c/assets/openai.svg.
+                     Trademark of OpenAI, used nominatively for the "GPT Image 2.5" pill (OpenAI's image model,
+                     released 2026-09-08 as ChatGPT Images 2.5 / GPT-Image-2.5).
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+reddit-logo.svg      Reddit icon (Snoo in the orange circle), "Reddit_Logo_Icon.svg" from Wikipedia (en).
+                     Source: https://upload.wikimedia.org/wikipedia/en/b/bd/Reddit_Logo_Icon.svg (fetched 2026-09-25).
+                     Trademark of Reddit, Inc., used nominatively to name the app superbot connects to and to mock its
+                     web page in the result screen. Never redrawn: every Reddit mark in the spot (pill tile, composer
+                     chip, authorize card, top bar, AutoModerator's avatar) is this one file. No "reddit" wordmark is shown.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the hub's rail and
+  avatar tile is scenes/tabs-assets/tile.svg (first party).
+
+The Reddit screen's community (r/NorthsideSourdough, "Northside Sourdough Club"), its people (u/sam_bakes,
+u/rye_and_shine), posts, rules and flair are made up for the spot. r/NorthsideSourdough was checked on 2026-10-03:
+https://www.reddit.com/r/NorthsideSourdough/ answered "We couldn't find that community". User avatars are an initial on
+a flair colour; AutoModerator's avatar is the Reddit mark above. Photos: img/CREDITS.txt. Type and UI icons:
+fonts/CREDITS.txt.

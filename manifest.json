@@ -365,6 +365,15 @@
     "desc": "One prompt in superbot: Grok reads the comments, Gemini learns your voice from your past replies, Claude Opus 5.5 drafts a reply to each comment, then superbot opens your post on X so you approve each draft with one tap before it posts."
   },
   {
+    "id": "niche-reddit-model-switch-superbot-c61f0e27",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Start a subreddit for my sourdough club with rules, flair and AutoMod: Gemini, GPT Image 2.5, Opus 5.5, then superbot builds it in Reddit (4 switches)",
+    "src": "animations/niche-reddit-model-switch-superbot-c61f0e27/",
+    "thumb": "assets/shots/niche-reddit-model-switch-superbot-c61f0e27.png",
+    "desc": "One prompt in superbot: Gemini reads what bread communities post and picks the rules and flair, GPT Image 2.5 turns the club photo into the banner and icon, Claude Opus 5.5 writes the AutoModerator rules and the welcome post, then superbot connects to Reddit and builds r/NorthsideSourdough. The first member post gets AutoMod's recipe reminder."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

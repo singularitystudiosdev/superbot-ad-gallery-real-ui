@@ -1,0 +1,42 @@
+/* Reads beat (beats/reads.js): Gemini reading what bread communities post. A hub card (the takes-card grammar)
+   holding a small Reddit-styled window (Reddit's dark page colour, compact post rows with an upvote count) that scrolls
+   past fast, then dims under a scrim while the two chip groups land over it: the post flair in Reddit's flair colours
+   and the five rules, numbered. Nothing here transitions: opacity/transform/filter are written from t in render, so
+   ?t= freezes a frame. Every class is prefixed .rr-; colours are chat.css --rd-* (Reddit's own tokens). */
+
+#s-tabs .sbsite .hub .rr-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 9px 11px 11px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .rr-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+  font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .rr-n { font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rr-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .rr-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .rr-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the Reddit window: rows of 28px on Reddit's dark page colour */
+#s-tabs .sbsite .hub .rr-vp { position: relative; height: 168px; padding: 0 12px; border-radius: 12px; overflow: hidden;
+  background: var(--rd-bg); box-shadow: inset 0 0 0 1px var(--rd-border-weak); font-family: var(--rd-font); }
+#s-tabs .sbsite .hub .rr-list { will-change: transform; }
+#s-tabs .sbsite .hub .rr-row { display: flex; align-items: center; gap: 10px; height: 28px; font-size: 12.5px; line-height: 1;
+  white-space: nowrap; box-shadow: inset 0 -1px 0 var(--rd-border-weak); }
+#s-tabs .sbsite .hub .rr-v { flex: none; display: inline-flex; align-items: center; gap: 3px; width: 46px;
+  font: 600 11px/1 var(--rd-font); color: var(--rd-text-weak); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rr-up { width: 13px; height: 13px; color: var(--rd-text-weak); }
+#s-tabs .sbsite .hub .rr-up * { stroke-width: 1.8; }
+#s-tabs .sbsite .hub .rr-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 600; color: var(--rd-text-strong); }
+
+/* the resolve: a scrim over the rows, the two chip groups centred over it */
+#s-tabs .sbsite .hub .rr-scrim { position: absolute; inset: 0; opacity: 0; background: rgba(14, 17, 19, .97); }
+#s-tabs .sbsite .hub .rr-chips { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
+  gap: 12px; padding: 0 12px; }
+#s-tabs .sbsite .hub .rr-grp { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 6px; }
+#s-tabs .sbsite .hub .rr-lab { opacity: 0; flex: none; width: 100%; margin-bottom: 1px; font: 600 10.5px/1 var(--rd-font);
+  letter-spacing: .06em; text-transform: uppercase; color: var(--rd-text-weak); }
+#s-tabs .sbsite .hub .rr-chip { opacity: 0; display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px;
+  border-radius: 9999px; font: 600 12px/1 var(--rd-font); white-space: nowrap; }
+/* post flair: Reddit's flair pill, its colour and text colour */
+#s-tabs .sbsite .hub .rr-flair { background: var(--bg); color: var(--fg); }
+/* a rule: the secondary pill with its number */
+#s-tabs .sbsite .hub .rr-rule { padding-left: 4px; background: var(--rd-secondary-bg); color: var(--rd-text-strong); }
+#s-tabs .sbsite .hub .rr-rule i { display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%;
+  background: var(--rd-bg); font: 700 10px/1 var(--rd-font); font-style: normal; color: var(--rd-text-weak); }

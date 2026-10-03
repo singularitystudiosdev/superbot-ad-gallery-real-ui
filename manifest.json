@@ -851,6 +851,17 @@
     "desc": "Variant of niche-youtube-model-switch-superbot-3828921d for YouTube analytics. One ask in superbot: it reads the last video's audience retention in YouTube Studio, Gemini marks the drop-off at 0:21 during the sponsor read, GPT-6 Astra reads the most re-watched frame at 4:38, and Claude Opus 5.5 rewrites the first 30 seconds of the next video, shown beside the old intro. 16:9 only."
   },
   {
+    "id": "niche-ytv9-model-switch-superbot-3cef8909",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Top comments answered, best one pinned: opens on the pinned reply, then Gemini, GPT-6 Astra, Opus 5.5 and YouTube Studio switch fast (16:9 cut, v9)",
+    "src": "animations/niche-ytv9-model-switch-superbot-3cef8909/",
+    "thumb": "assets/shots/niche-ytv9-model-switch-superbot-3cef8909.png",
+    "desc": "Opens on the finished result, a creator reply pinned in YouTube Studio, then shows how one superbot chat got there: Gemini ranks the top comments on the latest video, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies, and superbot posts them and pins the best one.",
+    "download": "assets/video/niche-ytv9-model-switch-superbot-3cef8909.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

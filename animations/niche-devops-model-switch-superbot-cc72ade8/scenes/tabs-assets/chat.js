@@ -9,10 +9,9 @@
 // as a diff), validate.js (GPT-6 Astra runs helm lint, kubeconform and a staging rollout) and gitlab.js (GitLab's OAuth
 // authorize card, the checklist, then the card opened into the superbot frame on the pipeline page of
 // tallowpay/checkout-api, where deploy-production flips to passed). The thread is bottom-anchored so every message
-// rises out of the composer. renderChat(c, t) is a pure function of the scene's local time. ?v= on the beat imports
+// rises up from the frame's foot. renderChat(c, t) is a pure function of the scene's local time. ?v= on the beat imports
 // busts GitHub Pages' 10-minute module cache on republish.
-import { lerp, seg, outCubic, inOutCubic, esc, boxIn, placeCursor, streamCount } from '../../lib.js';
-import { makeCursor } from '../../shell.js';
+import { lerp, seg, outCubic, inOutCubic, esc, boxIn, streamCount } from '../../lib.js';
 import { ZOOM } from './cut.js?v=cc72ade8';
 import incident from './beats/incident.js?v=cc72ade8';
 import helm from './beats/helm.js?v=cc72ade8';
@@ -24,7 +23,7 @@ const brand = (f) => new URL('../../brand/' + f, import.meta.url).href;
 // ---------- the clock of the chat (scene-local seconds) ----------
 export const CHAT_T0 = 0.35;         // the hub has faded up from black; the ask starts typing
 export const TYPE_CPS = 50; /* deliberate */ // a typewriter: one character every 0.02 s (character k lands at CHAT_T0 + k/50)
-const SEND = 0.17;                   // last character to the send press (63 chars land at 1.61, send 1.78)
+const SEND = 0.17;                   // last character to the send (63 chars land at 1.61, send 1.78); no press, no button
 const FIRST_PILL = 0.2;              // send to the first pill landing (1.68)
 // the schedule is content-driven: each beat's times(r).end is its last visible change, and the next thing (the next
 // pill, or the next beat under the same pill) starts GAP after it
@@ -123,10 +122,9 @@ export const OK = '<svg class="qc-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4
 const el = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
 
 export function mountChat(hub) {
-  // the pointer and any full-frame layer live in the scene's root (the section's px, the space placeCursor writes)
+  // any full-frame layer lives in the scene's root (the section's px). No pointer: the ad shows no cursor at all
+  // (X ad policy), so nothing on screen is ever seen being clicked.
   const root = hub.closest('.sbsite').parentNode;
-  const pointer = makeCursor();
-  root.appendChild(pointer);
 
   const sbSrc = hub.querySelector('.rail-item.sb img').src;
   const tile = (app, cls = '') => `<span class="qc-tile qc-t-${app} ${cls}">${app === 'superbot' ? SB_MARK : APPS[app].text ? esc(APPS[app].text) : `<img src="${APPS[app].logo}" alt=""/>`}</span>`;
@@ -166,24 +164,10 @@ export function mountChat(hub) {
     ...b.insts.flatMap((inst) => inst.marks),
   ]).sort((x, y) => x[0] - y[0]);
 
-  // the composer's platform chip names the model, then follows the routed app
-  const plat = hub.querySelector('.rc-plat');
-  const cat = plat.querySelector('.rc-cat');
-  const pIcon = el('<span class="qc-pi"></span>');
-  cat.replaceWith(pIcon);
-  const pImg = el('<img alt="" data-app="superbot"/>');
-  const pMark = el(`<span class="qc-pi-sb">${SB_MARK}</span>`);
-  pIcon.append(pImg, pMark);
-  const label = [...plat.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
-  const pLabel = el(`<span>${APPS.superbot.name}</span>`);
-  if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
-
+  // the composer is a plain prompt line (scenes/tabs.js removed its control row and placeholder): it only ever
+  // shows the ask being typed
   const ph = hub.querySelector('.rc-ph');
-  const chat = {
-    hub, root, pointer, feed, inner, beats, scroll,
-    plat, pIcon, pImg, pMark, pLabel,
-    ph, send: hub.querySelector('.rc-send'), phText: ph.textContent, lastPh: null, lastApp: null,
-  };
+  const chat = { hub, root, feed, inner, beats, scroll, ph, lastPh: null };
   return chat;
 }
 
@@ -193,36 +177,13 @@ function appear(n, t, a, dy = 10) {
   n.style.transform = p >= 1 ? 'none' : `translateY(${((1 - p) * dy).toFixed(2)}px)`;
 }
 
+// the prompt line: empty until typing starts, then the ask character by character (no caret, no placeholder, no
+// send button); from the send on it keeps the whole ask while scenes/tabs.js fades the line out
 function renderComposer(c, t) {
-  const b = c.beats.find(({ k }) => k.ask && t >= k.s && t < k.send);
-  let ph;
-  if (b) {
-    const n = streamCount(b.k.ask, b.k.s, TYPE_CPS, t); // k characters at CHAT_T0 + 0.02k
-    ph = `<span class="qc-typed">${esc(b.k.ask.slice(0, n))}</span><i class="qc-caret"></i>`;
-  } else ph = esc(c.phText);
+  const b = c.beats.find(({ k }) => k.ask);
+  const n = b && t >= b.k.s ? streamCount(b.k.ask, b.k.s, TYPE_CPS, t) : 0; // k characters at CHAT_T0 + 0.02k
+  const ph = n ? `<span class="qc-typed">${esc(b.k.ask.slice(0, n))}</span>` : '';
   if (ph !== c.lastPh) { c.ph.innerHTML = ph; c.lastPh = ph; }
-  c.send.classList.toggle('qc-on', !!b);
-  // the send press: a short dip, no overshoot
-  const at = c.beats.filter(({ k }) => k.ask).map(({ k }) => k.send).find((s) => t >= s - 0.12 && t < s + 0.2);
-  const dip = at === undefined ? 0 : Math.sin(Math.PI * seg(t, at - 0.12, at + 0.2));
-  c.send.style.transform = dip ? `scale(${(1 - 0.16 * dip).toFixed(4)})` : 'none';
-}
-
-function renderRouting(c, t) {
-  let app = 'superbot', swap = -1;
-  c.beats.forEach(({ k }) => { if (t >= k.done) { app = k.app; swap = k.done; } });
-  // the platform chip follows the active model: it dips out, swaps, comes back
-  if (app !== c.lastApp) {
-    const isMark = app === 'superbot', isText = !!APPS[app].text;
-    c.pImg.style.display = isMark || isText ? 'none' : '';
-    c.pMark.style.display = isMark ? 'block' : 'none';
-    c.pIcon.style.display = isText ? 'none' : '';
-    if (!isMark && !isText) c.pImg.src = APPS[app].logo;
-    c.pImg.dataset.app = app;
-    c.pLabel.textContent = APPS[app].name;
-    c.lastApp = app;
-  }
-  c.plat.style.opacity = swap < 0 ? '1' : (1 - 0.85 * Math.sin(Math.PI * seg(t, swap - 0.14, swap + 0.14))).toFixed(3);
 }
 
 // the pill: lands with its tile, the spinner turns while the camera pushes in, and resolves to the green check
@@ -255,7 +216,6 @@ function renderScroll(c, t) {
 export function renderChat(c, t) {
   if (!c) return;
   renderComposer(c, t);
-  renderRouting(c, t);
   c.beats.forEach((b) => {
     if (b.u) appear(b.u, t, b.k.send);
     appear(b.sw.w, t, b.k.sw);
@@ -264,9 +224,6 @@ export function renderChat(c, t) {
     b.insts.forEach((inst) => inst.render(t));
   });
   renderScroll(c, t);
-  // the pointer: beats hand back targets in the section's px (x.box), the same space placeCursor writes
-  const pt = c.beats.flatMap((b) => b.insts).map((inst) => inst.pointer && inst.pointer(t)).find(Boolean);
-  if (pt) placeCursor(c.pointer, pt.x, pt.y, pt.p, pt.v); else c.pointer.style.opacity = '0';
 }
 
 // after the camera has been set for this frame: beats that measure the screen (gitlab.js's framed layer) draw here

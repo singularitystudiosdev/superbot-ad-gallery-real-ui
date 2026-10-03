@@ -15,7 +15,7 @@ openai-logo.svg      OpenAI mark (round badge), copied from animations/bikeride-
 claude-logo.svg      Claude mark, simple-icons (CC0 1.0), https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg,
                      fill #fff for the dark hub tile. Trademark of Anthropic.
 GitLab (no mark)     NO GitLab logo, tanuki or logo mark is used anywhere (brief: no hand-drawn or embedded brand art).
-                     The "GitLab" pill tile, composer chip and reply header show the plain word "GitLab" in the
+                     The "GitLab" pill tile and reply header show the plain word "GitLab" in the
                      superbot UI font (chat.js APPS.gitlab.text). No partnership or endorsement is claimed on screen.
 
 FONTS (scenes/tabs-assets/fonts/)
@@ -33,7 +33,7 @@ ICONS
   gitlab-org/gitlab-svgs (MIT License, https://gitlab.com/gitlab-org/gitlab-svgs), path data verbatim from the sprite
   gitlab.com serves (https://gitlab.com/assets/icons-557611e974a59dbbc29ee0980dc4bc97610b136af3a30b5c715d47d566317bc5.svg,
   fetched 2026-10-03). Avatars are GitLab's own default letter identicons (a letter on a tinted tile), UI furniture.
-  Every superbot-side glyph (checklist steps, status card, file and branch icons) is Lucide (lucide-static 1.50.0, ISC,
+  Every superbot-side glyph (checklist steps, status card, branch icon) is Lucide (lucide-static 1.50.0, ISC,
   https://github.com/lucide-icons/lucide), path data verbatim in scenes/tabs-assets/beats/lucide-icons.js.
 
 GITLAB OAUTH AUTHORIZE CARD (sources of record, fetched 2026-10-03)
@@ -41,8 +41,10 @@ GITLAB OAUTH AUTHORIZE CARD (sources of record, fetched 2026-10-03)
     "%{client_name} is requesting access to your account on %{title}.", the user row, the warning alert "Make sure you
     trust %{client_name} before authorizing.", one accordion per scope titled with t(scope, scope: [:doorkeeper, :scopes]),
     the confirm button "Authorize %{client_name}" and "Cancel". Shown: heading, user (name only; GitLab's "@username"
-    reference omitted for the no-"@" copy rule), alert, the three scope titles as static rows (no accordion chevrons),
-    Authorize. Omitted: Cancel, the "created ... ago" line, the redirect note.
+    reference omitted for the no-"@" copy rule), alert, the three scope titles as static rows (no accordion chevrons).
+    Omitted: BOTH buttons (Authorize and Cancel; X ad policy repair, no button and no cursor in any frame), the
+    "created ... ago" line, the redirect note. In the buttons' place the card resolves with a check and the superbot-
+    written status line "Authorized by kestrel-sre" (not a GitLab string).
   https://gitlab.com/gitlab-org/gitlab/-/raw/master/config/locales/doorkeeper.en.yml (doorkeeper.scopes)
     api: "Access the API on your behalf"; read_repository: "Allows read-only access to the repository";
     write_repository: "Allows read-write access to the repository".
@@ -55,7 +57,8 @@ GITLAB PIPELINE PAGE (sources of record, fetched 2026-10-03)
   https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/presenters/ci/pipeline_presenter.rb
     "Related merge request %{link_to_merge_request} to merge %{source} into %{target}".
   Omitted: Retry / Cancel / Run pipeline / Merge, kebabs, dropdowns, per-job retry icons, copy-SHA button, durations,
-  "Queued", relative and absolute times, the top bar and the left sidebar. Links render as plain text. Stage columns
+  "Queued", relative and absolute times, the top bar and the left sidebar, and the Pipeline / Jobs tab bar (replaced by
+  a plain "Pipeline" heading). Links, refs, the SHA and the breadcrumb render as neutral grey text. Stage columns
   are 260 px wide here (GitLab's are 310 px) so the camera can push in on the graph; portrait wraps them two to a row
   as GitLab's own narrow panel does.
 

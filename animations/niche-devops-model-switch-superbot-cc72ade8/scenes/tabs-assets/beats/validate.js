@@ -14,7 +14,6 @@
 // staging, ready to roll out". The terminal is laid out whole from the start (each typed character a span, revealed
 // in order) and long lines wrap like a terminal, so nothing reflows while it types. Pure function of t.
 import { lerp, seg, outCubic } from '../../../lib.js';
-import { lc } from './lucide-icons.js?v=cc72ade8';
 
 const SAY = 'Linted the chart, validated every manifest and rolled it out to staging.';
 // the terminal, top to bottom: ['$', command] types; ['out', text] and ['ok', text] land (ok in the pass green)
@@ -85,7 +84,7 @@ export default {
       return `<div class="ts-ln ts-out"><span>${esc(ln[1])}</span></div>`;
     };
     const card = x.el(`<div class="ts-card">
-      <div class="ts-hd"><span class="ts-st"><i class="ts-spin"></i>${x.OK}</span><b>Running checks</b><span class="ts-repo">checkout-api</span><code class="ts-br">${lc('git-branch')}fix/checkout-oomkill</code></div>
+      <div class="ts-hd"><span class="ts-st"><i class="ts-spin"></i>${x.OK}</span><b>Running checks</b><span class="ts-repo">checkout-api</span><code class="ts-br">fix/checkout-oomkill</code></div>
       <div class="ts-term">${TERM.map(line).join('')}</div>
       <div class="ts-chips">${CHIPS.map((c) => `<span class="ts-chip">${esc(c)}</span>`).join('')}</div>
       <div class="ts-ft">${x.OK}<span>${esc(DONE)}</span></div>

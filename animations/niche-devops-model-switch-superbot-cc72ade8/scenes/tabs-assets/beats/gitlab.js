@@ -5,10 +5,11 @@
 // "@username" reference is left out, the copy rule bans "@"), the warning alert GitLab shows for a third-party app
 // ("Make sure you trust superbot before authorizing."), the three scopes with GitLab's own scope strings (api: "Access
 // the API on your behalf", read_repository: "Allows read-only access to the repository", write_repository: "Allows
-// read-write access to the repository") as static rows (no accordion chevrons), and the confirm button "Authorize
-// superbot". Cancel, the app's "created ... ago" line and the redirect note are omitted. The pointer presses Authorize
-// within a second; it takes GitLab's active colour, then dims and is never left as a live control. No GitLab logo or
-// tanuki anywhere: the app tile is the plain word.
+// read-write access to the repository") as static rows (no accordion chevrons). X ad policy (zero control-shaped
+// elements, no cursor): the card has NO button at all (no Authorize, Cancel or Deny) and no pointer; where GitLab's
+// buttons sit, the card resolves on its own with a check and the status line "Authorized by kestrel-sre". The app's
+// "created ... ago" line and the redirect note are omitted. No GitLab logo or tanuki anywhere: the app tile is the
+// plain word.
 // Then the sibling's connect-card grammar: a checklist card ("Connected as kestrel-sre", "Opened merge request !318",
 // "Pipeline passed build, test and canary", "Rolled out to production") ticks in turn with a mini window under it; the
 // card holds and the window opens into a SUPERBOT FRAME (policy: never a full-bleed native page): a superbot label bar
@@ -17,7 +18,8 @@
 // (gitlab.com/gitlab-org/frontend/fonts/-/pipelines/2897199447 loaded headlessly, research/pipe-*.json): breadcrumb,
 // the pipeline id heading, the status badge with "Created by kestrel-sre" (GitLab's own no-time variant of that line),
 // "For commit <sha> <title>", "Related merge request !318 to merge fix/checkout-oomkill into main" (GitLab's
-// ref_text wording), the job count, the Pipeline / Jobs tabs as static text, and the pipeline graph: four stage
+// ref_text wording; the refs, the SHA and the breadcrumb are neutral grey text, never link blue or chips), the job
+// count, a plain "Pipeline" heading (no tab bar: no Jobs tab, no underline), and the pipeline graph: four stage
 // columns (build, test, canary, production), each a grey card with the stage name and white job rows with GitLab's
 // ci-icon. It settles with build, test and canary passed and deploy-production running; then THE bold moment (the
 // chime, window.__AD_MARKS.chime): deploy-production flips to passed and the header badge flips from Running to
@@ -28,7 +30,7 @@
 // One GitLab client, on a layer in the scene root (outside the camera), laid out once at a design size and scaled to
 // the layer, so the mini window and the framed window are the same pixels at two sizes. On a portrait frame the
 // stage columns wrap two to a row (GitLab's own narrow-panel wrap). Pure function of t.
-import { lerp, seg, outCubic, outQuint, inOutCubic, streamCount, press } from '../../../lib.js';
+import { lerp, seg, outCubic, outQuint, inOutCubic, streamCount } from '../../../lib.js';
 import { lc } from './lucide-icons.js?v=cc72ade8';
 
 export const GROUP = 'tallowpay';             // checked: gitlab.com groups/tallowpay 404, research/collisions.txt
@@ -69,10 +71,9 @@ const FRAME = { wide: { pad: 44, top: 112, bar: 44 }, tall: { pad: 22, top: 100,
 const CPS = 80;                                 // the reply line streams (the sibling's finale beat)
 const CARD_AT = 0.25;                           // the line streams, then the authorize card lands
 const CARD_IN = 0.3;                            // a card rising into the thread
-const TAP_AT = 0.75; /* deliberate */           // the authorize card landed to the press (policy: within about 1 s)
-const PTR_IN = 0.3;                             // the authorize card landed to the pointer appearing
-const PTR_MOVE = 0.38;                          // the pointer's travel onto the button, ending just before the press
-const LIST_AT = 0.25;                           // the press to the checklist card landing
+const TAP_AT = 0.75; /* deliberate */           // the authorize card landed to its resolution ("Authorized by ...")
+const RES_IN = 0.28;                            // the resolution line rising in
+const LIST_AT = 0.25;                           // the resolution to the checklist card landing
 const CHECK_AT = 0.3;                           // the checklist landing to the first check
 const CHECK_STAGGER = 0.14;                     // one check to the next
 const POP = 0.16;                               // a check popping in
@@ -109,7 +110,7 @@ export default {
   times(r) {
     const T = { r };
     T.card = r + CARD_AT;                              // the authorize card lands
-    T.tap = T.card + TAP_AT;                           // Authorize superbot is pressed
+    T.tap = T.card + TAP_AT;                           // the card resolves: "Authorized by kestrel-sre"
     T.list = T.tap + LIST_AT;                          // the checklist card lands, the mini window in it
     T.ok = STEPS.map((_, i) => T.list + CHECK_AT + i * CHECK_STAGGER);
     T.grow = T.ok[STEPS.length - 1] + POP + CARD_HOLD; // the window starts opening
@@ -132,9 +133,9 @@ export default {
       <div class="gc-who">${identicon('K', 1, 'gl-av-24 gl-av-round')}<strong>${USER}</strong></div>
       <div class="gc-alert">${GLI.warning}<span>Make sure you trust <strong>superbot</strong> before authorizing.</span></div>
       ${SCOPES.map(([sc, title]) => `<div class="gc-scope"><b>${esc(title)}</b><code>${sc}</code></div>`).join('')}
-      <div class="gc-btns"><span class="gc-go">Authorize superbot</span></div>
+      <div class="gc-res">${CHECK.replace('gk-ck', 'gc-ck')}<span>Authorized by <strong>${USER}</strong></span></div>
     </div>`);
-    const go = consent.querySelector('.gc-go');
+    const res = consent.querySelector('.gc-res'), resCk = res.querySelector('.gc-ck');
 
     // ---- the checklist card ----
     const stepIcon = (kind) => (kind === 'avatar' ? `<span class="gk-ic gk-av">${identicon('K', 1, 'gl-av-20 gl-av-round')}</span>` : `<span class="gk-ic gk-oc">${lc(kind)}</span>`);
@@ -153,13 +154,13 @@ export default {
       : ciIcon('success')}<span class="gp-jn">${esc(name)}</span></div>`;
     const layer = x.el(`<div class="gp-full" aria-hidden="true"><div class="gp-app">
       <main class="gp-main">
-        <div class="gp-crumb">${identicon('T', 4, 'gl-av-16')}<span>${GROUP}</span><i>/</i>${identicon('C', 3, 'gl-av-16')}<span>${PROJECT}</span><i>/</i><span>Pipelines</span><i>/</i><b>${PIPELINE}</b></div>
+        <div class="gp-crumb">${identicon('T', 4, 'gl-av-16')}<span>${GROUP}</span><i>/</i>${identicon('C', 3, 'gl-av-16')}<span>${PROJECT}</span><i>/</i><span>Pipelines</span><i>/</i><span>${PIPELINE}</span></div>
         <h1 class="gp-h1">${PIPELINE}</h1>
         <div class="gp-ln gp-stat"><span class="gp-badge">${ciIcon('running', 'Running')}${ciIcon('success', 'Passed')}</span><span>Created by <b>${USER}</b></span></div>
         <div class="gp-ln">For commit <code class="gp-sha">${SHA}</code><span class="gp-ct">${esc(COMMIT)}</span></div>
         <div class="gp-ln">Related merge request <b>${MR}</b> to merge <code class="gp-ref">${BRANCH}</code> into <code class="gp-ref">main</code></div>
         <div class="gp-ln gp-meta"><span class="gp-pill gp-pill-ok">latest</span><span class="gp-jobs">${GLI.pipeline}${JOBS} jobs</span></div>
-        <div class="gp-tabs"><span class="gp-tab gp-tab-on">Pipeline</span><span class="gp-tab">Jobs<span class="gp-pill">${JOBS}</span></span></div>
+        <h2 class="gp-sec">Pipeline</h2>
         <div class="gp-graph">
           ${STAGES.map(([stage, jobs], i) => `<div class="gp-col${i === STAGES.length - 1 ? ' gp-prod' : ''}"><div class="gp-ct2">${esc(stage)}</div><div class="gp-body">${jobs.map((j) => job(j, i === STAGES.length - 1)).join('')}</div></div>`).join('<i class="gp-link"></i>')}
         </div>
@@ -172,7 +173,7 @@ export default {
     x.root.append(scrim, layer, bar, status);
     const app = layer.firstElementChild;
     const $ = (s) => layer.querySelector(s);
-    const tabsRow = $('.gp-tabs'), cols = [...layer.querySelectorAll('.gp-col')], flip = $('.gp-flip'), badge = $('.gp-badge'), prod = $('.gp-prod');
+    const tabsRow = $('.gp-sec'), cols = [...layer.querySelectorAll('.gp-col')], flip = $('.gp-flip'), badge = $('.gp-badge'), prod = $('.gp-prod');
     const [fRun, fOk] = [...flip.children], [bRun, bOk] = [...badge.children];
 
     const vis = say.firstElementChild, hid = say.lastElementChild;
@@ -200,18 +201,6 @@ export default {
       bar.style.top = `${F.y - f.bar - 12}px`; bar.style.height = `${f.bar}px`;
     };
 
-    // the pointer: in the chat, onto Authorize superbot and a press, then away
-    const ptr = (t) => {
-      if (t < T.card + PTR_IN || t > T.tap + 0.45) return null;
-      const a = T.card + PTR_IN, b = T.tap - 0.08;
-      const g = x.box(go);
-      if (!g.w) return null;
-      const ex = g.x + g.w * 0.55, ey = g.y + g.h * 0.6;
-      const m = inOutCubic(seg(t, a, Math.min(a + PTR_MOVE, b)));
-      const leave = outCubic(seg(t, T.tap + 0.2, T.tap + 0.45));
-      return { x: lerp(ex + 150, ex, m) + leave * 40, y: lerp(ey + 110, ey, m) + leave * 30, p: press(t, T.tap), v: seg(t, a, a + 0.12) * (1 - leave) };
-    };
-
     // a node's box in app px (offset chain inside the unscaled app), and the stage columns' union: what the push frames
     const boxInApp = (n) => {
       let gx = 0, gy = 0;
@@ -228,7 +217,6 @@ export default {
     return {
       nodes: [say, consent, card],
       marks: [[T.r, say], [T.card, consent], [T.list, card]],
-      pointer: ptr,
       render(t) {
         layout();
         const n = streamCount(SAY, T.r + 0.05, CPS, t);
@@ -236,11 +224,12 @@ export default {
         const ci = outCubic(seg(t, T.card, T.card + CARD_IN));
         consent.style.opacity = ci.toFixed(3);
         consent.style.transform = ci >= 1 ? 'none' : `translateY(${((1 - ci) * 14).toFixed(2)}px)`;
-        // Authorize superbot: the press (GitLab's active colour), then it dims; never left on screen as a live control
-        const pr = press(t, T.tap);
-        go.style.transform = pr ? `scale(${(1 - 0.06 * pr).toFixed(4)})` : 'none';
-        go.classList.toggle('gc-down', t >= T.tap - 0.04 && t < T.tap + 0.1);
-        go.classList.toggle('gc-hit', t >= T.tap + 0.1);
+        // the resolution: no button, no press; the check and "Authorized by kestrel-sre" rise in where GitLab's buttons sit
+        const rs = outCubic(seg(t, T.tap, T.tap + RES_IN));
+        res.style.opacity = rs.toFixed(3);
+        res.style.transform = rs >= 1 ? 'none' : `translateY(${((1 - rs) * 6).toFixed(2)}px)`;
+        const rk = outCubic(seg(t, T.tap + 0.06, T.tap + 0.06 + POP));
+        resCk.style.transform = `scale(${lerp(0.4, 1, rk).toFixed(4)})`;
 
         const li = outCubic(seg(t, T.list, T.list + CARD_IN));
         card.style.opacity = li.toFixed(3);
@@ -306,9 +295,9 @@ export default {
           const ks1 = Math.min(k0 * (tall ? PUSH.tall : PUSH.wide), (F.w - 2 * gm) / gb.w);
           const ks = lerp(k0, ks1, z);
           const x1 = (F.w - ks1 * gb.w) / 2;
-          // wide: the Pipeline / Jobs tabs land 16 px under the window's top, so the header rows above them leave the
-          // window whole (no sliver at the edge); tall: centred in the room above the status card
-          const y1 = tall ? Math.max(gm * 0.5, (cardTop - ks1 * gb.h) / 2) : 16 + ks1 * (gb.y - boxInApp(tabsRow).y);
+          // both ratios: the Pipeline heading lands 16 px under the window's top, so the header rows above it leave
+          // the window whole (no sliver at the edge); on the tall frame the graph then still clears the status card
+          const y1 = 16 + ks1 * (gb.y - boxInApp(tabsRow).y);
           const px = lerp(k0 * gb.x, x1, z), py = lerp(k0 * gb.y, y1, z);
           app.style.transform = `translate(${(px - ks * gb.x).toFixed(2)}px, ${(py - ks * gb.y).toFixed(2)}px) scale(${ks.toFixed(5)})`;
         } else app.style.transform = `scale(${k0.toFixed(5)})`;

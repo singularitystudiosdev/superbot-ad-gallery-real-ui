@@ -41,16 +41,8 @@
 #s-tabs .sbsite.ask .hub .main > .feed { padding-left: max(24px, calc((100% - var(--hub-column)) / 2)); padding-right: max(24px, calc((100% - var(--hub-column)) / 2)); }
 #s-tabs .sbsite .hub .qc-r .m-main > * { max-width: 100%; }
 
-/* composer: the ask is typed in, the send button lights while there is text */
+/* the prompt line: only the ask's typed text (ask.css; no caret, no send button) */
 #s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
-#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
-#s-tabs .sbsite .hub .rc-send.qc-on { background: #ececec; color: #0b0b0c !important; }
-#s-tabs .sbsite .hub .qc-pi { display: inline-grid; place-items: center; width: 12px; height: 12px; }
-#s-tabs .sbsite .hub .qc-pi img { width: 12px; height: 12px; object-fit: contain; }
-/* the composer chip's mark, sized per app so the swap between models never shifts the row */
-#s-tabs .sbsite .hub .qc-pi img[data-app="gemini"],
-#s-tabs .sbsite .hub .qc-pi img[data-app="astra"],
-#s-tabs .sbsite .hub .qc-pi img[data-app="opus"] { width: 13px; height: 9px; }
 
 
 /* app tiles */
@@ -72,8 +64,6 @@
 #s-tabs .sbsite .hub .sbm-c { background: #00e5c3; transform: translate(-0.6px, -0.6px); }
 #s-tabs .sbsite .hub .sbm-m { background: #c026d3; transform: translate(0.6px, 0.6px); }
 #s-tabs .sbsite .hub .sbm-w { background: #ececec; }
-#s-tabs .sbsite .hub .qc-pi-sb { position: relative; display: none; width: 12px; height: 12px; }
-#s-tabs .sbsite .hub .qc-pi-sb .sbm { inset: 0; }
 
 /* superbot's switch pill: "Switching to X", its spinner resolving to the green check (the camera pushes in on it) */
 #s-tabs .sbsite .hub .qc-sw { display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 12px 0 6px; border-radius: 9999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 13px/1 var(--ui); }
@@ -111,8 +101,6 @@
 #s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
 
 
-/* X ad policy (deceptive content, no fake tappable controls): the composer keeps superbot's own chrome, but the model
-   chip's dropdown chevron and the SUPER on/off switch are dropped, so nothing on screen reads as a dropdown or a toggle
-   nobody presses. The only pressed controls are the send arrow (the send dip) and GitLab's Authorize button. */
-#s-tabs .sbsite .hub .rc-plat .rc-chev, #s-tabs .sbsite.ask .hub .rc-row .rc-super .ask-tg { display: none; }
-#s-tabs .sbsite.ask .hub .rc-row .rc-super { padding: 0 9px; }
+/* X ad policy (deceptive content, no fake tappable controls): zero button- or control-shaped elements and no cursor
+   in any frame. The composer's whole control row is gone (scenes/tabs.js, ask.css), the GitLab consent card resolves
+   with a status line instead of a pressed button (beats/gitlab.css), and nothing is ever seen being clicked. */

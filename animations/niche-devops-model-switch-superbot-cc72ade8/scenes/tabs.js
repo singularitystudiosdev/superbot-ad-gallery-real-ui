@@ -1,6 +1,7 @@
-// niche-devops-model-switch: the real superbot hub, cropped to its thread and composer (rail, sidebar and chat header are
-// hidden, ask.css), laid out at DW design px and scaled to the frame width. It fades up from black on the empty state
-// ("Good evening. Where do we go?" over a centred composer), the ask is typed and sent, and superbot hands the build
+// niche-devops-model-switch: the real superbot hub, cropped to its thread (rail, sidebar, chat header and the composer's
+// whole control row are gone, ask.css), laid out at DW design px and scaled to the frame width. It fades up from black on
+// the empty state ("Good evening. Where do we go?" over a plain prompt line), the ask is typed, the line fades out as the
+// ask rises into the thread as the user's message, and superbot hands the build
 // from model to model (tabs-assets/chat.js). This file owns the CAMERA: at every hand-off it pushes in on the switch
 // pill until the pill sits at frame centre at ~1.8x, holds while the spinner resolves to the check, and pulls back
 // while the reply builds. A beat can ask for its own push (chat.js FOCUS: the Opus panel fills the frame width
@@ -22,7 +23,8 @@ const FIRST = BEATS[0].k;
 const ZOOM = 1.8;          // push-in on a pill, over the resting frame (the brief's 1.6-1.9x)
 const FILL_W = 0.84;       // ...but never wider than this share of the frame, so the longest pill is never clipped
 const OPEN = 0.3;          // the greeting fades up as the scene opens from black
-const DROP = 0.5; /* deliberate */ // on send, the composer glides to the bottom and the empty-state zoom eases out
+const DROP = 0.5; /* deliberate */ // on send, the empty-state zoom eases out
+const COLLAPSE = 0.25;     // on send, the prompt line fades out (it never comes back)
 const TAIL = 0.3;          // the scene's own fade to the end card (timeline.js SCENE_FADE) after the last beat
 
 const reduced = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -79,9 +81,12 @@ export default {
     hero.className = 'ask-hero';
     hero.innerHTML = `<img class="ask-cat" src="${asset('mark-clean.svg')}" alt=""/><h1>Good evening. Where do we go?</h1>`;
     main.appendChild(hero);
-    // the composer as the empty state shows it: SUPER is a switch (off), the platform chip names the model
-    const sup = hub.querySelector('.rc-super');
-    sup.innerHTML = 'SUPER<i class="ask-tg"><b></b>OFF</i>';
+    // X ad policy (no control-shaped elements in any frame): the composer is reduced to a plain prompt line. Its whole
+    // control row (+, SUPER, the model label, monitor, mic, send) is removed from the DOM and the placeholder is
+    // emptied; only the typed ask shows, and on send the line fades out for the rest of the cut (ask.css takes it out
+    // of the flow, so the thread owns the full height and no empty input box is ever left on screen).
+    hub.querySelector('.composer .rc-row').remove();
+    hub.querySelector('.composer .rc-ph').textContent = '';
     el = { site: q('.sbsite'), hub, main, hero, composer: hub.querySelector('.composer'), geo: null };
     el.chat = mountChat(hub);
   },
@@ -94,9 +99,13 @@ export default {
     const up = lift(g);
     const rm = reduced();
 
-    // empty state -> thread: the composer glides down to the bottom and the greeting lifts away
+    // empty state -> thread: the prompt line glides down toward the thread and fades out as the ask rises into it as
+    // the user's message (chat.js); the greeting lifts away and the empty-state zoom eases out
     const drop = rm ? (t >= FIRST.send ? 1 : 0) : inOutCubic(seg(t, FIRST.send, FIRST.send + DROP));
-    el.composer.style.transform = drop >= 1 ? 'none' : `translateY(${(-up * (1 - drop)).toFixed(2)}px)`;
+    const gone = rm ? (t >= FIRST.send ? 1 : 0) : outCubic(seg(t, FIRST.send, FIRST.send + COLLAPSE));
+    el.composer.style.transform = drop >= 1 ? 'none' : `translateY(${(-up * (1 - drop)).toFixed(2)}px)`; // glides down toward the thread
+    el.composer.style.opacity = (1 - gone).toFixed(3);
+    el.composer.style.visibility = gone >= 1 ? 'hidden' : '';
     const heroIn = rm ? 1 : outCubic(seg(t, 0, OPEN));
     const heroOut = rm ? (t >= FIRST.send ? 1 : 0) : outCubic(seg(t, FIRST.send, FIRST.send + OPEN));
     el.hero.style.opacity = (heroIn * (1 - heroOut)).toFixed(3);

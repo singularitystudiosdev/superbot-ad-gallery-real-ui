@@ -26,7 +26,8 @@
 #s-tabs .lc { flex: none; display: block; width: 16px; height: 16px; }
 
 /* the app tile: the plain word GitLab in the superbot UI font (no GitLab logo, no tanuki) */
-#s-tabs .sbsite .hub .qc-tile.qc-t-gitlab { width: auto; padding: 0 6px; background: #ececef; box-shadow: none; font: 800 9.5px/1 var(--ui); letter-spacing: -.01em; color: #18171d; }
+/* dark like the other model tiles (gemini, astra), so the word reads as the tile's mark, never as a light pill button */
+#s-tabs .sbsite .hub .qc-tile.qc-t-gitlab { width: auto; padding: 0 6px; background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; font: 800 9.5px/1 var(--ui); letter-spacing: -.01em; color: #ececec; }
 
 /* GitLab's letter identicons */
 #s-tabs .gl-av { flex: none; display: inline-grid; place-items: center; border-radius: 4px; font-family: var(--gl-sans); font-weight: 400; }
@@ -53,12 +54,10 @@
 #s-tabs .sbsite .hub .gc-scope { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; }
 #s-tabs .sbsite .hub .gc-scope b { font-weight: 600; color: var(--gl-text); }
 #s-tabs .sbsite .hub .gc-scope code { margin-left: auto; padding: 0; background: none; font: 400 11px/1 var(--gl-mono); color: var(--gl-subtle); }
-#s-tabs .sbsite .hub .gc-btns { display: flex; margin-top: 12px; }
-#s-tabs .sbsite .hub .gc-go { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 8px; background: var(--gl-confirm);
-  font: 400 13px/1 var(--gl-sans); color: #fff; }
-#s-tabs .sbsite .hub .gc-go.gc-down { background: var(--gl-confirm-active); }
-/* pressed: it dims to Pajamas' disabled look and is never left on screen as a live control */
-#s-tabs .sbsite .hub .gc-go.gc-hit { background: var(--gl-bg-subtle); box-shadow: inset 0 0 0 1px var(--gl-border); color: #89888d; }
+/* the resolution (X ad policy: no button, no cursor): a check and a plain status line, no box, no fill, in the row
+   GitLab's buttons would take (same 32px height, so the card never changes size) */
+#s-tabs .sbsite .hub .gc-res { display: flex; align-items: center; gap: 8px; height: 32px; margin-top: 12px; opacity: 0; font: 400 13px/1 var(--gl-sans); color: var(--gl-text); }
+#s-tabs .sbsite .hub .gc-ck { flex: none; width: 16px; height: 16px; fill: none; stroke: var(--gl-ok); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---- the checklist card, the mini window under the steps ---- */
 #s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 440px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
@@ -92,24 +91,23 @@
 #s-tabs .gp-app { position: absolute; left: 0; top: 0; transform-origin: 0 0; overflow: hidden; background: var(--gl-bg); color: var(--gl-text);
   font: 400 14px/21px var(--gl-sans); -webkit-font-smoothing: antialiased; }
 #s-tabs .gp-main { padding: 20px 32px 0; box-sizing: border-box; }
-#s-tabs .gp-crumb { display: flex; align-items: center; gap: 8px; height: 24px; font: 400 12px/16px var(--gl-sans); color: var(--gl-text); white-space: nowrap; }
+/* X ad policy: the breadcrumb, the SHA and the refs are neutral grey text (no link blue, no chips) */
+#s-tabs .gp-crumb { display: flex; align-items: center; gap: 8px; height: 24px; font: 400 12px/16px var(--gl-sans); color: var(--gl-subtle); white-space: nowrap; }
 #s-tabs .gp-crumb i { font-style: normal; color: var(--gl-subtle); }
-#s-tabs .gp-crumb b { font-weight: 600; color: var(--gl-strong); }
 #s-tabs .gp-h1 { margin: 8px 0 12px; font: 600 30px/37.5px var(--gl-sans); color: var(--gl-strong); letter-spacing: -.01em; }
 #s-tabs .gp-ln { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; white-space: nowrap; }
 #s-tabs .gp-ln b { font-weight: 600; color: var(--gl-text); }
 #s-tabs .gp-stat { gap: 8px; }
-#s-tabs .gp-sha { padding: 0 4px; border-radius: 4px; background: var(--gl-bg-strong); font: 400 12px/18px var(--gl-mono); color: var(--gl-subtle); }
+#s-tabs .gp-sha { padding: 0; background: none; font: 400 12px/18px var(--gl-mono); color: var(--gl-subtle); }
 #s-tabs .gp-ct { margin-left: 4px; }
-#s-tabs .gp-ref { padding: 0 4px; border-radius: 4px; background: var(--gl-info-ring); font: 400 12px/18px var(--gl-mono); color: #254581; }
+#s-tabs .gp-ref { padding: 0; background: none; font: 400 12px/18px var(--gl-mono); color: var(--gl-subtle); }
 #s-tabs .gp-meta { gap: 10px; }
 #s-tabs .gp-pill { display: inline-block; padding: 2px 6px; border-radius: 160px; background: var(--gl-border); font: 400 12px/16px var(--gl-sans); color: #4c4b51; }
 #s-tabs .gp-pill-ok { background: var(--gl-ok-ring); color: var(--gl-ok-word); }
 #s-tabs .gp-jobs { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; color: var(--gl-strong); }
 #s-tabs .gp-jobs svg { width: 16px; height: 16px; fill: var(--gl-text); }
-#s-tabs .gp-tabs { display: flex; margin-top: 20px; box-shadow: inset 0 -1px 0 var(--gl-border); }
-#s-tabs .gp-tab { display: inline-flex; align-items: center; gap: 6px; padding: 16px 12px; font: 400 14px/16px var(--gl-sans); color: #28272d; }
-#s-tabs .gp-tab-on { font-weight: 600; box-shadow: inset 0 -2px 0 #3a383f; }
+/* a plain static section heading (no tab bar: no Jobs tab, no underline, no divider) */
+#s-tabs .gp-sec { margin: 20px 0 0; padding: 12px 0 4px; font: 600 16px/20px var(--gl-sans); color: var(--gl-strong); }
 
 /* GitLab's ci-icon: the pale ring, the status disk with its glyph; with a word, the badge */
 #s-tabs .gl-ci { flex: none; display: inline-flex; align-items: center; height: 24px; min-width: 24px; box-sizing: border-box; border-radius: 20px; }

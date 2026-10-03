@@ -12,23 +12,22 @@
 #s-tabs .sbsite.ask .hub .inner { opacity: 1; }
 #s-tabs .sbsite.ask .hub > .rail, #s-tabs .sbsite.ask .hub > .chats, #s-tabs .sbsite.ask .hub .chat-head { display: none; }
 #s-tabs .sbsite.ask .hub .main { background: #0a0a0b; }
-#s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 760px) / 2)) 4px; }
-#s-tabs .sbsite.ask .hub .composer { position: relative; z-index: 3; width: min(760px, calc(100% - 48px)); margin: 6px auto 16px; will-change: transform; }
+/* the thread owns the full height (the prompt line is out of the flow and gone after the send); the bottom padding
+   keeps the newest line off the frame's foot */
+#s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 760px) / 2)) 28px; }
+#s-tabs .sbsite.ask .hub .composer { position: absolute; left: 0; right: 0; bottom: 16px; z-index: 3; width: min(760px, calc(100% - 48px)); margin: 0 auto; will-change: transform, opacity; }
 
 /* ---- the empty state (the real app's home: mark + greeting over the composer) ---- */
 #s-tabs .sbsite.ask .ask-hero { position: absolute; left: 50%; top: 30%; z-index: 2; display: flex; align-items: center; gap: .47em; font-size: min(34px, calc(var(--dw, 960px) * .042)); white-space: nowrap; pointer-events: none; opacity: 0; }
 #s-tabs .sbsite.ask .ask-cat { width: 1.18em; height: 1.18em; display: block; }
 #s-tabs .sbsite.ask .ask-hero h1 { margin: 0; font: 400 1em/1.1 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; letter-spacing: -.01em; color: #ececec; }
 
-/* the composer as the empty state shows it: a blue focus ring, SUPER as an off switch, the model chip */
-#s-tabs .sbsite.ask .composer .pill { border-color: #2f5fd6; background: #1b1b1e; }
-#s-tabs .sbsite.ask .hub .rc-seg { display: none; }
-#s-tabs .sbsite.ask .hub .rc-super { display: inline-flex; align-items: center; gap: 6px; margin-left: 4px; height: 22px; padding: 0 4px 0 9px; border-radius: 999px; background: #26262a; font: 700 8.5px/1 var(--ui); letter-spacing: .08em; color: #c7c7cc !important; }
-#s-tabs .sbsite.ask .hub .rc-super::after { display: none; }
-#s-tabs .sbsite.ask .hub .ask-tg { display: inline-flex; align-items: center; gap: 3px; height: 14px; padding: 0 5px 0 2px; border-radius: 999px; background: #3f3f44; font: 700 6.5px/1 var(--ui); font-style: normal; letter-spacing: .04em; color: #e5e5ea; }
-#s-tabs .sbsite.ask .hub .ask-tg b { width: 10px; height: 10px; border-radius: 50%; background: #d6d6db; }
-#s-tabs .sbsite.ask .hub .rc-plat { margin-left: auto; transform-origin: 50% 50%; }
-#s-tabs .sbsite.ask .hub .qc-pi img[data-app="codex"] { border-radius: 50%; }
+/* X ad policy (no control-shaped elements in any frame): the composer is a plain prompt line under the greeting. No
+   box, no focus ring, no placeholder, no caret, no icons, no send button (scenes/tabs.js removes the control row from
+   the DOM): only the ask's own text appears, centred, character by character, and fades out on the send. */
+#s-tabs .sbsite.ask .composer .pill { border: 0; background: none; }
+#s-tabs .sbsite.ask .hub .composer .rc { min-height: 0; padding: 0; border-radius: 0; background: none; box-shadow: none; }
+#s-tabs .sbsite.ask .hub .composer .rc-ph { min-height: 0; padding: 0; white-space: normal; text-align: center; font: 400 14px/1.45 var(--ui); color: #f2f2f7; }
 
 
 /* ---- the end card: the line, then the mascot to its right ---- */

@@ -1,16 +1,17 @@
 // Helm beat: Claude Opus 5.5 writes the fix to the checkout-api chart, in the sibling's code-panel grammar (diff.js, as
-// the roblox fork hardened it): a header with the branch fix/checkout-oomkill, the repo chip and a status ("Working",
-// then a check and "Done"; no clock), the file tabs (values.yaml active, deployment.yaml, .gitlab-ci.yml), and an
+// the roblox fork hardened it): a header with the branch fix/checkout-oomkill, the repo name as plain grey text and a
+// status ("Working", then a check and "Done"; no clock), a plain file label (X ad policy: no tab bar, only the active
+// filename as text: values.yaml, then deployment.yaml), and an
 // editor body with a unified-diff gutter: removed lines tinted red with "-", added lines tinted green with "+", hunk
 // headers muted. values.yaml: the resources block (requests.cpu 250m unchanged context), requests.memory 128Mi gives
 // way to 384Mi and limits.memory 256Mi (line 42, the line Gemini cited) gives way to 512Mi; the 512Mi line is the
-// scene's bold element (it takes a ring once written). The tab then switches to templates/deployment.yaml, where a
+// scene's bold element (it takes a ring once written). The label then switches to deployment.yaml, where a
 // startupProbe on /healthz is added under the existing livenessProbe (line 58, Gemini's second finding; Kubernetes
 // holds liveness checks until the startup probe succeeds: kubernetes.io/docs/concepts/configuration/liveness-
 // readiness-startup-probes). Real Kubernetes field names throughout. The body is an editor window of VIS lines that
 // follows the caret down (a pure function of the stream position). The review bar counts the files ("Writing 1 of 3")
 // and lands on "+19 -3 in 3 files, rollout check added" with the green check: the visible diff is +8 -2, and the
-// .gitlab-ci.yml rollout check (the rest of the count) stays in its unopened tab. No Review / Commit buttons and no
+// .gitlab-ci.yml rollout check (the rest of the count) is the third file, never opened. No Review / Commit buttons and no
 // clock (policy: no fake tappable controls, no timers). In the zoom cut the camera pushes in on the panel while it
 // writes (chat.js FOCUS).
 import { seg, outCubic } from '../../../lib.js';
@@ -140,14 +141,14 @@ export default {
         <span class="em-proj">${lc('git-branch', 'em-ico')}<b>${BRANCH}</b></span><span class="em-br">${REPO}</span>
         <em class="em-state"><i class="em-spin"></i>${TICK}<span class="em-sl">Working</span></em>
       </div>
-      <div class="em-tabs">${TABS.map((f, i) => `<span class="em-tab${i === 0 ? ' on' : ''}">${lc('file-code', 'em-fi')}${f}</span>`).join('')}</div>
+      <div class="em-file"><span class="em-fn">${TABS[0]}</span></div>
       <div class="df-bds">${FILES.map(([, lines], f) => body(lines, f)).join('')}</div>
       <div class="em-ft">
         <span class="em-sum">${TICK.replace('em-tk', 'em-tk em-dn')}<b class="em-nf">Writing</b><span class="em-cnt">1 of ${TABS.length}</span></span>
       </div>
     </div>`);
     const $ = (s) => card.querySelector(s);
-    const tabs = [...card.querySelectorAll('.em-tab')];
+    const fname = card.querySelector('.em-fn');
     const bodies = [...card.querySelectorAll('.df-bd')];
     const scrs = bodies.map((b) => b.querySelector('.df-scr'));
     const bold = card.querySelector('.df-bold');
@@ -196,10 +197,10 @@ export default {
         card.style.transform = e >= 1 ? 'none' : `translateY(${((1 - e) * 16).toFixed(2)}px) scale(${(0.97 + 0.03 * e).toFixed(4)})`;
         const d = t >= T.done;
 
-        // the tab: values.yaml until the switch, then deployment.yaml (its body fades up)
+        // the file: values.yaml until the switch, then deployment.yaml (the label's text changes, its body fades up)
         const tab = t >= T.tab ? 1 : 0;
         if (tab !== onTab) {
-          tabs.forEach((n, i) => n.classList.toggle('on', i === FILES[tab][0]));
+          fname.textContent = TABS[FILES[tab][0]];
           bodies.forEach((n, i) => { n.style.display = i === tab ? '' : 'none'; });
           onTab = tab;
         }

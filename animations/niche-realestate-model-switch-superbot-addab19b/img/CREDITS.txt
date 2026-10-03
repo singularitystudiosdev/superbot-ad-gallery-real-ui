@@ -1,0 +1,73 @@
+img/ CREDITS (internal, never shown on screen)
+
+Every photo in this spot is a real photograph. The nine house exteriors and basement.jpg come from Unsplash and
+are used under the Unsplash License (https://unsplash.com/license: free to use, commercial use allowed, no attribution
+required). Each was checked as free (premium:false, plus:false) in Unsplash's own search API
+(https://unsplash.com/napi/search/photos) on 2026-10-03 and fetched from images.unsplash.com, resized and cropped by
+imgix on download (the query below). roof.jpg comes from the WordPress Photo Directory and is CC0 1.0 (public-domain
+dedication, https://creativecommons.org/publicdomain/zero/1.0/); it was cropped and resized locally. No credit, author
+name or handle appears anywhere on screen; they are recorded here only. Where a small house-number plaque was legible
+it was blurred locally after download (noted per file); nothing else was retouched. The houses stand in for the
+made-up listings in the spot; their real addresses are not known or used.
+
+house-1.jpg     Two-storey colonial-style farmhouse, taupe vinyl siding, grey shutters, white full-width front porch, front lawn. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/house-with-beige-siding-and-porch-KP6jM2TUz1g (id KP6jM2TUz1g)
+                file https://images.unsplash.com/photo-1787094523866-2556cb09110f?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License; house-number plaque blurred locally
+house-2.jpg     Split-level (bi-level) house, brown wood siding over a brick lower level, hydrangeas, front lawn. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/a-brown-split-level-house-with-a-green-lawn-and-trees-4IE-NmsIwsA (id 4IE-NmsIwsA)
+                file https://images.unsplash.com/photo-1785879066231-db27a0f980e1?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License
+house-3.jpg     White Cape Cod with two dormers, black shutters, attached two-car garage and driveway. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/a-white-house-with-a-garage-driveway-and-green-lawn-L8SsHskRWIE (id L8SsHskRWIE)
+                file https://images.unsplash.com/photo-1780080013093-4a4d8acc3c3a?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License
+house-4.jpg     Two-storey grey vinyl-sided house with stone accent, covered entry, striped front lawn. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/a-modern-grey-house-with-a-green-lawn-and-trees-1XRV7Z4lhGo (id 1XRV7Z4lhGo)
+                file https://images.unsplash.com/photo-1781797221329-c3d083ab6d99?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License
+house-5.jpg     Red-brick ranch with a green-sided gable, black shutters, split-rail fence in front. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/red-brick-house-with-a-dark-fence-and-trees-eOE5suDzMaY (id eOE5suDzMaY)
+                file https://images.unsplash.com/photo-1774655762504-5f3a07999cd7?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License
+house-6.jpg     Navy-blue American four-square with white trim and a blooming redbud tree. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/a-blue-house-with-a-pink-tree-in-front-of-it-xFoGP3PRU-g (id xFoGP3PRU-g)
+                file https://images.unsplash.com/photo-1713207424311-e80c2ef5b413?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License
+house-7.jpg     Sage-green Craftsman bungalow with tapered columns on brick piers and a front porch. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/a-house-with-a-porch-and-a-front-porch-7bNemZ5dCWY (id 7bNemZ5dCWY)
+                file https://images.unsplash.com/photo-1649160697540-919919405e76?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License; house-number plaque blurred locally
+house-8.jpg     Two-storey colonial in mauve-brown siding with a stone-faced front porch and big front lawn. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/a-large-suburban-house-with-a-green-lawn-E4oSaNDs0VE (id E4oSaNDs0VE)
+                file https://images.unsplash.com/photo-1773427621086-1f8511c78e39?w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License
+house-9.jpg     Tan-brick ranch with arched entry, grey shingle roof and arborvitae, front lawn. Photo by Roger Starnes Sr.
+                https://unsplash.com/photos/a-suburban-brick-house-with-a-well-kept-lawn-t0CsdU0wopU (id t0CsdU0wopU)
+                file https://images.unsplash.com/photo-1773427663260-8418a314f0ee?rect=320,380,3100,2067&w=900&h=600&fit=crop&q=80&fm=jpg
+                licence: Unsplash License; imgix rect crop to bring the house closer; house-number plaque blurred locally
+roof.jpg        Worn three-tab asphalt-shingle roof with moss, granule loss and debris. Photo by Topher.
+                https://wordpress.org/photos/photo/6456862d81/ (WordPress Photo Directory, "Moss growing on a shingled roof,
+                with a brick wall in the background.", author https://wordpress.org/photos/author/topher1kenobe/)
+                file https://pd.w.org/2025/06/6456862d8140dea31.78723706.jpeg (5712x3213 original)
+                licence: CC0 1.0; cropped locally to 2700x1800+1506+1413 (the shingles, wall behind cut away) and resized
+                to 900x600
+basement.jpg    Water-damage stains running down a concrete foundation wall under exposed beams and pipe. Photo by
+                Maksim Shutov.
+                https://unsplash.com/photos/water-damage-stains-on-a-concrete-wall-lPdS76INCSA (id lPdS76INCSA)
+                file https://images.unsplash.com/photo-1778090533266-8b5d8ea58e3b?w=900&h=600&fit=crop&crop=top&q=80&fm=jpg
+                licence: Unsplash License
+
+MAP (map-westerville.svg, westerville-tiger.geojson)
+  The Zillow page's map is real street geometry of Westerville, OH (bbox lon -82.962 to -82.893, lat 40.100 to 40.152)
+  from the US Census Bureau's TIGER/Line data, queried 2026-10-03 as GeoJSON from the TIGERweb REST services
+  (https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Transportation/MapServer layers 2 Primary Roads,
+  6 Secondary Roads 72_1k scale, 8 Local Roads; .../TIGERweb/Hydro/MapServer layers 0 Linear Hydrography,
+  1 Areal Hydrography; service copyright text "Local roads; January 1, 2026 Source: U.S. Census Bureau").
+  Licence: public domain (a work of the US federal government, 17 U.S.C. 105; TIGER/Line carries no copyright).
+  westerville-tiger.geojson is the cached query result (coordinates rounded to 5 decimals, only NAME/MTFCC kept);
+  map-westerville.svg was drawn from it (equirectangular, 1400 x 1380 px) by /tmp/realestate-addab19b/mkmap.mjs in
+  Zillow's light map style (light grey land, white streets with grey casing, yellow highway, pale blue water). The road
+  labels on screen are the TIGER NAME values set as HTML over the map. No OpenStreetMap, Google, Mapbox or Esri tiles
+  or data are used, so no map attribution is shown. No public-domain park polygons exist for this bbox (TIGER/Line
+  area landmarks and PAD-US returned none), so the map has no green park areas.

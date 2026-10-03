@@ -1,0 +1,34 @@
+/* Schools beat (beats/schools.js): GreatSchools ratings of each home's assigned schools. A hub card: header with the
+   homes counter, a table (home, elementary, middle, high) whose cells are GreatSchools-style rating circles (8 to 10
+   green, 5 to 7 amber, 1 to 4 red), the misses dimmed and struck through, then the filter chip and the result line.
+   Nothing here transitions: every moving value is written from t. Every class is prefixed .gs-. */
+#s-tabs .sbsite .hub .gs-card { contain: inline-size; opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 9px 11px 11px;
+  border-radius: 10px; background: var(--dt-card); transform-origin: 50% 0; box-shadow: inset 0 0 0 1px var(--dt-line); }
+#s-tabs .sbsite .hub .gs-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: pre; }
+#s-tabs .sbsite .hub .gs-hd > b { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gs-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .gs-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .gs-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+#s-tabs .sbsite .hub .gs-cnt { flex: none; margin-left: auto; font: 500 11.5px/1 var(--ui); color: #8e8e93; white-space: nowrap; }
+#s-tabs .sbsite .hub .gs-n { font-weight: 700; color: #ececec; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .gs-vp { border-radius: 8px; overflow: hidden; background: var(--dt-win); padding-bottom: 3px; }
+#s-tabs .sbsite .hub .gs-fh, #s-tabs .sbsite .hub .gs-row { display: grid; grid-template-columns: 1.15fr 1.1fr 1fr 1fr; gap: 8px; padding: 0 12px; align-items: center; }
+#s-tabs .sbsite .hub .gs-fh { height: 24px; border-bottom: 1px solid var(--dt-line); font: 500 11px/1 var(--font-mono); color: var(--dt-muted); white-space: nowrap; }
+#s-tabs .sbsite .hub .gs-row { position: relative; height: 34px; opacity: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .gs-row.gs-miss::after { content: ''; position: absolute; left: 12px; right: 12px; top: 50%; height: 1.5px; background: #8e8e96;
+  transform-origin: 0 50%; transform: scaleX(var(--strike, 0)); }
+#s-tabs .sbsite .hub .gs-home { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 600 12px/1 var(--ui); color: var(--dt-head); }
+#s-tabs .sbsite .hub .gs-c { min-width: 0; display: flex; align-items: center; gap: 7px; }
+#s-tabs .sbsite .hub .gs-r { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font: 700 12px/1 var(--ui); font-style: normal; color: #fff; }
+#s-tabs .sbsite .hub .gs-hi { background: #3f8f3a; }
+#s-tabs .sbsite .hub .gs-mid { background: #d99a1e; }
+#s-tabs .sbsite .hub .gs-lo { background: #d4462f; }
+#s-tabs .sbsite .hub .gs-nm { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+#s-tabs .sbsite .hub .gs-nm b { overflow: hidden; text-overflow: ellipsis; font: 500 11.5px/1 var(--ui); color: #c9c9d1; }
+#s-tabs .sbsite .hub .gs-nm small { font: 500 10px/1 var(--ui); color: #8e8e96; }
+#s-tabs .sbsite .hub .gs-ft { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 9px; }
+#s-tabs .sbsite .hub .gs-flt { opacity: 0; display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: 9999px; white-space: nowrap;
+  background: var(--dt-gold-bg); box-shadow: inset 0 0 0 1px var(--dt-gold); font: 600 12px/1 var(--ui); color: var(--dt-gold); }
+#s-tabs .sbsite .hub .gs-res { opacity: 0; display: inline-flex; align-items: center; gap: 7px; min-width: 0; white-space: nowrap; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .gs-res b { overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+#s-tabs .sbsite .hub .gs-res .qc-ok { flex: none; }

@@ -518,6 +518,15 @@
     "desc": "One prompt in superbot: Gemini reads all 64 listings and 1,280 competing offers, Claude Opus 5.5 rewrites the 6 suppressed titles to Amazon's title rules, GPT-6 Astra checks every title and price against your floor and FBA fees, then superbot connects to Amazon Seller Central: 6 listings active again and the Buy Box back on 4."
   },
   {
+    "id": "niche-realestate-model-switch-superbot-addab19b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Find 3-bedroom homes under $500k near good schools and book viewings: Gemini, GreatSchools, GPT-6 Astra, Opus 5.5, then superbot books the viewings on Zillow (5 switches)",
+    "src": "animations/niche-realestate-model-switch-superbot-addab19b/",
+    "thumb": "assets/shots/niche-realestate-model-switch-superbot-addab19b.png",
+    "desc": "One ask in superbot: Gemini searches 214 homes for sale, GreatSchools rates the schools near each one, GPT-6 Astra reads the listing photos, Claude Opus 5.5 picks the best three and finds free time, then superbot books the viewings on Zillow: a map of 8 matches with school ratings and 3 viewings on your calendar."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

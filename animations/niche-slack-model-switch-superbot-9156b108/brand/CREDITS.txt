@@ -1,0 +1,36 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+elevenlabs-logo.svg  ElevenLabs mark (the two bars), https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg
+                     (simple-icons 16.32.0, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Eleven Labs, Inc.
+                     Used for the "ElevenLabs Scribe" pill (Scribe, now Scribe v2, is ElevenLabs' speech-to-text model:
+                     https://elevenlabs.io/speech-to-text, checked 2026-10-03).
+
+slack-logo.svg       Slack icon (the 2019 multicolour hash mark), Wikimedia Commons File:Slack_icon_2019.svg,
+                     https://commons.wikimedia.org/wiki/File:Slack_icon_2019.svg
+                     (file https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg, SHA-1
+                     e6348a809fecba8504b00d4c04cfc53a76002afd, identical to the Commons record), fetched 2026-10-03.
+                     Author: Slack Technologies (source given there: https://brandfolder.com/slack/logos). Licence on
+                     Commons: public domain (PD-textlogo: simple geometric shapes, below the threshold of originality);
+                     trademarked. File verbatim, colours untouched. Slack and the Slack logo are trademarks of Slack
+                     Technologies, LLC (a Salesforce company), used nominatively to name the app superbot connects to
+                     and to recreate its consent screen and client in the result. Never redrawn: every Slack mark in
+                     the spot (pill tile, composer chip, consent card, the run's first step) is this one file.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); superbot's app icon
+  in the Slack consent card and the Slack client is scenes/tabs-assets/tile.svg (first party).
+
+UI ICONS
+  The Slack-side UI icons (rail, sidebar, top bar, composer, consent permissions, huddle tiles) are Phosphor Icons
+  (https://github.com/phosphor-icons/core, MIT licence), regular weight plus house-fill, fetched 2026-10-03 through the
+  Iconify API (https://api.iconify.design/ph.json, Phosphor 2.1.1) and inlined in scenes/tabs-assets/beats/sk-icons.js.
+
+The Slack workspace ("Tidecrest"), people (Sam, Priya, Leo, Dana, Maya, Marcus) and messages are made up for the spot.
+The name was checked on 2026-10-03: "Fernway" (the first choice) is a real, notable brand (fernway.com), so the spot uses
+"Tidecrest" (a web search found only small unrelated LLCs). No photos of people: every avatar is initials on a colour
+square (Slack's own default-avatar style).

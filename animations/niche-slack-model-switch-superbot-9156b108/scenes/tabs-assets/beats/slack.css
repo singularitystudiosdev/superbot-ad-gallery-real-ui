@@ -1,0 +1,175 @@
+/* Slack beat (beats/slack.js): the OAuth consent card in the chat (Slack's light install screen, the consent folding
+   into the run, four steps ticking, the mini window under them) and the full-frame layer carrying the one Slack client:
+   pinned over the card's window, then opened to the whole frame. The client is Slack's desktop app at its own px
+   (scaled to the frame by slack.js): the 2023+ layout, Aubergine sidebar theme, light conversation pane. Every colour
+   is a chat.css --sk-* token. Radii are two: 8px (avatars, the workspace tile, cards, the window) and 4px (buttons,
+   badges' square kin: the APP tag, sidebar avatars), plus Slack's round count badges. Nothing here transitions:
+   position, size, radius, height, opacity and transform are written from t in slack.js, so ?t= freezes a frame.
+   UI icons are Phosphor (sk-icons.js). Every class is prefixed .sx-. */
+
+/* Lato (SIL OFL 1.1), Slack's UI typeface; latin subset from @fontsource/lato 5.3.0, vendored under fonts/
+   (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "Lato SK"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/lato-latin-400-normal.woff2?v=9156b108") format("woff2"); }
+@font-face { font-family: "Lato SK"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/lato-latin-700-normal.woff2?v=9156b108") format("woff2"); }
+@font-face { font-family: "Lato SK"; font-style: normal; font-weight: 900; font-display: block; src: url("../../../fonts/lato-latin-900-normal.woff2?v=9156b108") format("woff2"); }
+
+/* ---- the consent card, in the chat: Slack's install screen, light ---- */
+#s-tabs .sbsite .hub .sx-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .sx-card { opacity: 0; box-sizing: border-box; width: 440px; max-width: 100%; margin-top: 2px; padding: 12px 14px 12px;
+  border-radius: var(--sk-r); background: var(--sk-pane); font-family: var(--sk-font); color: var(--sk-text); }
+#s-tabs .sbsite .hub .sx-card.sx-tall { width: 312px; }
+#s-tabs .sbsite .hub .sx-fold { overflow: hidden; }
+#s-tabs .sbsite .hub .sx-run { height: 0; opacity: 0; }
+#s-tabs .sbsite .hub .sx-logos { display: flex; align-items: center; gap: 8px; padding-bottom: 10px; }
+#s-tabs .sbsite .hub .sx-lg { display: grid; place-items: center; width: 30px; height: 30px; border-radius: var(--sk-r); overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--sk-line); }
+#s-tabs .sbsite .hub .sx-lg img { width: 18px; height: 18px; }
+#s-tabs .sbsite .hub .sx-lg.sx-sb { box-shadow: none; }
+#s-tabs .sbsite .hub .sx-lg.sx-sb img { width: 30px; height: 30px; }
+#s-tabs .sbsite .hub .sx-dots { display: inline-flex; gap: 3px; }
+#s-tabs .sbsite .hub .sx-dots i { width: 3px; height: 3px; border-radius: 50%; background: var(--sk-muted); }
+#s-tabs .sbsite .hub .sx-ah { padding-bottom: 10px; font: 400 14px/19px var(--sk-font); }
+#s-tabs .sbsite .hub .sx-ah b { font-weight: 900; }
+#s-tabs .sbsite .hub .sx-q { padding: 2px 0 3px; font: 700 12.5px/17px var(--sk-font); }
+#s-tabs .sbsite .hub .sx-perm { margin: 0 0 6px; padding: 0; list-style: none; }
+#s-tabs .sbsite .hub .sx-perm li { display: flex; align-items: center; gap: 8px; min-height: 23px; font: 400 12.5px/16px var(--sk-font); color: var(--sk-text); }
+#s-tabs .sbsite .hub .sx-pi { width: 16px; height: 16px; color: var(--sk-text-2); }
+#s-tabs .sbsite .hub .sx-abtn { display: flex; justify-content: flex-end; gap: 8px; padding-top: 8px; border-top: 1px solid var(--sk-line); }
+#s-tabs .sbsite .hub .sx-b { display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: var(--sk-r2);
+  font: 700 13px/1 var(--sk-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .sx-b2 { background: var(--sk-pane); color: var(--sk-text); box-shadow: inset 0 0 0 1px rgba(29, 28, 29, .3); }
+/* Allow is Slack's primary green; pressed, it takes its hover green */
+#s-tabs .sbsite .hub .sx-b1 { background: var(--sk-green); color: #fff; }
+#s-tabs .sbsite .hub .sx-b1.sx-down { background: var(--sk-green-down); }
+#s-tabs .sbsite .hub .sx-step { display: flex; align-items: center; gap: 9px; height: 27px; font: 400 13px/1 var(--sk-font); color: var(--sk-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .sx-step b { font-weight: 900; }
+#s-tabs .sbsite .hub .sx-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .sx-step:not(:first-child) .sx-tx { padding-left: 27px; }
+#s-tabs .sbsite .hub .sx-sl { flex: none; display: grid; place-items: center; width: 18px; height: 18px; }
+#s-tabs .sbsite .hub .sx-sl img { width: 16px; height: 16px; }
+#s-tabs .sbsite .hub .sx-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .sx-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--sk-line); border-top-color: var(--sk-text); }
+#s-tabs .sbsite .hub .sx-ck { position: absolute; inset: -1px; width: 16px; height: 16px; opacity: 0; color: var(--sk-green); }
+/* the mini window's frame: the full-frame layer is pinned over it (its aspect is the frame's, set by slack.js) */
+#s-tabs .sbsite .hub .sx-shot { margin-top: 9px; aspect-ratio: 16 / 9; border-radius: var(--sk-r); background: var(--sk-rail); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .sx-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--sk-rail); }
+#s-tabs .sx-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: var(--sk-rail); color: var(--sk-text); font: 400 15px/22px var(--sk-font); -webkit-font-smoothing: antialiased; }
+#s-tabs .sx-app b { font-weight: 900; }
+#s-tabs .sx-app .sk-i { width: 20px; height: 20px; }
+
+/* top bar: history arrows, the workspace search, help */
+#s-tabs .sx-top { flex: none; position: relative; display: flex; align-items: center; justify-content: center; height: 40px; color: #fff; }
+#s-tabs .sx-nav { position: absolute; left: 80px; display: flex; gap: 14px; color: rgba(255, 255, 255, .55); }
+#s-tabs .sx-nav .sk-i, #s-tabs .sx-help .sk-i { width: 18px; height: 18px; }
+#s-tabs .sx-search { display: flex; align-items: center; gap: 8px; box-sizing: border-box; width: min(732px, 54%); height: 28px; padding: 0 10px;
+  border-radius: var(--sk-r); background: rgba(255, 255, 255, .2); font: 400 13px/1 var(--sk-font); color: rgba(255, 255, 255, .85); }
+#s-tabs .sx-search .sk-i { width: 16px; height: 16px; }
+#s-tabs .sx-help { position: absolute; right: 16px; color: rgba(255, 255, 255, .7); }
+
+#s-tabs .sx-body { flex: 1; min-height: 0; display: flex; }
+/* the workspace rail */
+#s-tabs .sx-rail { flex: none; width: 70px; display: flex; flex-direction: column; align-items: center; gap: 14px; padding-top: 6px; padding-bottom: 14px; box-sizing: border-box; }
+#s-tabs .sx-ws { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--sk-r); background: #fff;
+  font: 900 18px/1 var(--sk-font); color: var(--sk-rail); }
+#s-tabs .sx-ri { display: flex; flex-direction: column; align-items: center; gap: 3px; color: #fff; }
+#s-tabs .sx-ri small { font: 700 11px/1 var(--sk-font); color: rgba(255, 255, 255, .85); }
+#s-tabs .sx-rib { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--sk-r); }
+#s-tabs .sx-ri.on .sx-rib { background: rgba(255, 255, 255, .2); }
+#s-tabs .sx-rsp { flex: 1; }
+#s-tabs .sx-radd { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, .15); color: #fff; }
+#s-tabs .sx-sav-w { position: relative; flex: none; display: inline-block; }
+#s-tabs .sx-meav { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--sk-r); background: var(--c); color: #fff; font: 900 16px/1 var(--sk-font); }
+#s-tabs .sx-pres { position: absolute; right: -3px; bottom: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--sk-presence); border: 2px solid var(--sk-side); }
+#s-tabs .sx-me .sx-pres { width: 10px; height: 10px; border-color: var(--sk-rail); }
+
+/* the window: sidebar and pane in one rounded panel, as Slack draws it inside the rail and top bar */
+#s-tabs .sx-win { flex: 1; min-width: 0; display: flex; margin: 0 6px 6px 0; border-radius: var(--sk-r); overflow: hidden; box-shadow: 0 0 0 1px rgba(0, 0, 0, .2); }
+#s-tabs .sx-side { flex: none; width: 262px; box-sizing: border-box; padding: 0 8px; background: var(--sk-side); color: var(--sk-side-text); }
+#s-tabs .sx-wsh { display: flex; align-items: center; gap: 4px; height: 50px; padding: 0 4px 0 8px; color: #fff; }
+#s-tabs .sx-wsh b { font: 900 18px/1 var(--sk-font); }
+#s-tabs .sx-car { width: 14px !important; height: 14px !important; }
+#s-tabs .sx-cmp { display: grid; place-items: center; width: 32px; height: 32px; margin-left: auto; border-radius: 50%; background: rgba(255, 255, 255, .15); color: #fff; }
+#s-tabs .sx-cmp .sk-i { width: 18px; height: 18px; }
+#s-tabs .sx-row { display: flex; align-items: center; gap: 8px; height: 28px; padding: 0 10px 0 16px; border-radius: 6px; font: 400 15px/1 var(--sk-font); white-space: nowrap; }
+#s-tabs .sx-si { width: 16px !important; height: 16px !important; }
+#s-tabs .sx-rn { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sx-row.sx-unread { color: #fff; font-weight: 900; }
+#s-tabs .sx-row.sx-sel { background: var(--sk-active); color: #fff; }
+#s-tabs .sx-sav { display: grid; place-items: center; width: 20px; height: 20px; border-radius: var(--sk-r2); overflow: hidden; background: var(--c); color: #fff; font: 900 11px/1 var(--sk-font); }
+#s-tabs .sx-sav img { width: 20px; height: 20px; }
+#s-tabs .sx-badge { margin-left: auto; min-width: 9px; height: 18px; padding: 0 6px; border-radius: 9999px; background: var(--sk-badge);
+  font: 900 12px/18px var(--sk-font); color: #fff; text-align: center; font-variant-numeric: tabular-nums; }
+#s-tabs .sx-cat { display: flex; align-items: center; gap: 6px; height: 28px; margin-top: 10px; padding: 0 10px 0 16px; font: 400 15px/1 var(--sk-font); }
+#s-tabs .sx-cat .sk-i { margin-left: -1px; }
+
+/* the conversation pane */
+#s-tabs .sx-pane { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--sk-pane); }
+#s-tabs .sx-ch { flex: none; display: flex; align-items: center; gap: 8px; height: 49px; padding: 0 20px; box-sizing: border-box; }
+#s-tabs .sx-ch b { font: 900 18px/1 var(--sk-font); }
+#s-tabs .sx-chav { display: block; width: 24px; height: 24px; border-radius: var(--sk-r2); overflow: hidden; }
+#s-tabs .sx-chav img { width: 24px; height: 24px; display: block; }
+#s-tabs .sx-app-b { display: inline-flex; align-items: center; height: 15px; padding: 0 3px; border-radius: 2px; background: rgba(29, 28, 29, .13);
+  font: 700 10px/1 var(--sk-font); color: var(--sk-text-2); letter-spacing: .02em; }
+#s-tabs .sx-tabs { flex: none; display: flex; gap: 22px; height: 34px; padding: 0 20px; box-shadow: inset 0 -1px 0 var(--sk-line); }
+#s-tabs .sx-tabs span { display: flex; align-items: center; font: 700 13px/1 var(--sk-font); color: var(--sk-text-2); }
+#s-tabs .sx-tabs span.on { color: var(--sk-text); box-shadow: inset 0 -2px 0 var(--sk-text); }
+#s-tabs .sx-scroll { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+#s-tabs .sx-list { padding: 0 0 14px; will-change: transform; }
+#s-tabs .sx-day { position: relative; display: flex; justify-content: center; height: 40px; align-items: center; }
+#s-tabs .sx-day::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--sk-line); }
+#s-tabs .sx-day span { position: relative; padding: 0 14px; height: 24px; border-radius: 9999px; background: #fff; box-shadow: inset 0 0 0 1px var(--sk-line);
+  font: 700 13px/24px var(--sk-font); }
+/* a landing block: the slot opens (height written by slack.js), its content fades up inside it */
+#s-tabs .sx-slot { height: 0; overflow: hidden; }
+#s-tabs .sx-slot > * { opacity: 0; }
+#s-tabs .sx-msg { position: relative; padding: 4px 20px 0 76px; }
+#s-tabs .sx-mav { position: absolute; left: 20px; top: 8px; width: 36px; height: 36px; border-radius: var(--sk-r); overflow: hidden; }
+#s-tabs .sx-mav img { width: 36px; height: 36px; display: block; }
+#s-tabs .sx-mh { display: flex; align-items: center; gap: 6px; height: 22px; }
+#s-tabs .sx-mh b { font-size: 15px; }
+#s-tabs .sx-mh time { font: 400 12px/1 var(--sk-font); color: var(--sk-text-2); }
+/* Block Kit: header, context, sections, actions */
+#s-tabs .sx-hdr { margin-top: 4px; font: 900 18px/26px var(--sk-font); }
+#s-tabs .sx-ctx { margin-top: 2px; padding-bottom: 6px; font: 400 13px/18px var(--sk-font); color: var(--sk-text-2); }
+#s-tabs .sx-sec { margin: 0 20px 0 76px; padding: 10px 0 10px; box-shadow: inset 0 1px 0 var(--sk-line); }
+#s-tabs .sx-sh { display: flex; align-items: baseline; gap: 8px; }
+#s-tabs .sx-link { font: 700 15px/22px var(--sk-font); color: var(--sk-link); }
+#s-tabs .sx-new { font: 400 13px/1 var(--sk-font); color: var(--sk-text-2); }
+#s-tabs .sx-li { display: flex; gap: 8px; padding-left: 4px; font: 400 15px/22px var(--sk-font); }
+#s-tabs .sx-li i { flex: none; font-style: normal; color: var(--sk-text); }
+#s-tabs .sx-fyi { margin-top: 2px; font: 400 13px/18px var(--sk-font); color: var(--sk-muted); }
+#s-tabs .sx-dslot { height: 0; overflow: hidden; }
+#s-tabs .sx-draft { padding-top: 6px; }
+#s-tabs .sx-quote { display: flex; flex-direction: column; padding: 1px 0 1px 12px; box-shadow: inset 4px 0 0 var(--sk-line); }
+#s-tabs .sx-quote b { font: 700 13px/18px var(--sk-font); color: var(--sk-text-2); }
+#s-tabs .sx-quote span { font: 400 15px/22px var(--sk-font); }
+#s-tabs .sx-acts { display: flex; gap: 8px; padding: 8px 0 2px; }
+#s-tabs .sx-btn { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--sk-r2); box-sizing: border-box;
+  box-shadow: inset 0 0 0 1px rgba(29, 28, 29, .3); font: 700 13px/1 var(--sk-font); color: var(--sk-text); background: #fff; }
+#s-tabs .sx-btn.sx-pri { background: var(--sk-green); color: #fff; box-shadow: none; }
+#s-tabs .sx-rest { font: 400 13px/18px var(--sk-font); color: var(--sk-text-2); }
+#s-tabs .sx-foot { padding-top: 6px; }
+#s-tabs .sx-fctx { margin-top: 4px; font: 400 13px/18px var(--sk-font); color: var(--sk-text-2); }
+/* the composer */
+#s-tabs .sx-comp { flex: none; margin: 0 20px 20px; border-radius: var(--sk-r); box-shadow: inset 0 0 0 1px rgba(29, 28, 29, .3); }
+#s-tabs .sx-cin { padding: 11px 12px 6px; font: 400 15px/22px var(--sk-font); color: var(--sk-muted); }
+#s-tabs .sx-ctools { display: flex; align-items: center; gap: 14px; height: 38px; padding: 0 8px 0 10px; color: var(--sk-text-2); }
+#s-tabs .sx-ctools .sk-i { width: 18px; height: 18px; }
+#s-tabs .sx-cplus { padding: 3px; border-radius: 50%; background: rgba(29, 28, 29, .08); }
+#s-tabs .sx-csep { width: 1px; height: 18px; background: var(--sk-line); }
+#s-tabs .sx-csend { margin-left: auto; color: var(--sk-muted); }
+
+/* layouts: 16:9 keeps every section, 4:5 drops the rail, the sidebar and the composer and shows sections 1 to 3 */
+#s-tabs .sx-narrow-only { display: none; }
+#s-tabs .sx-narrow .sx-narrow-only { display: block; }
+#s-tabs .sx-narrow .sx-wide-only, #s-tabs .sx-narrow .sx-rail, #s-tabs .sx-narrow .sx-side, #s-tabs .sx-narrow .sx-comp,
+#s-tabs .sx-narrow .sx-nav, #s-tabs .sx-narrow .sx-help { display: none; }
+#s-tabs .sx-narrow .sx-win { margin: 0; border-radius: 0; }
+#s-tabs .sx-narrow .sx-search { width: calc(100% - 32px); }
+#s-tabs .sx-narrow .sx-msg { padding-left: 64px; padding-right: 16px; }
+#s-tabs .sx-narrow .sx-mav { left: 16px; }
+#s-tabs .sx-narrow .sx-sec { margin: 0 16px 0 64px; }
+#s-tabs .sx-narrow .sx-ch, #s-tabs .sx-narrow .sx-tabs { padding: 0 16px; }

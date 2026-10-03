@@ -437,6 +437,15 @@
     "desc": "One prompt in superbot: Gemini reads 412 LinkedIn job posts and finds 21 that fit the resume, Perplexity checks each one against the company careers page and the news and drops 9 ghost listings, Claude Opus 5.5 tailors the resume and writes a note to each hiring manager, then superbot connects to LinkedIn, applies to the 12 real roles with Easy Apply, and the hiring manager writes back to set up a call."
   },
   {
+    "id": "niche-slack-model-switch-superbot-9156b108",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Summarize every channel I missed while I was on vacation and draft my replies: Gemini, ElevenLabs Scribe, Opus 5.5, then superbot catches you up in Slack (4 switches)",
+    "src": "animations/niche-slack-model-switch-superbot-9156b108/",
+    "thumb": "assets/shots/niche-slack-model-switch-superbot-9156b108.png",
+    "desc": "One prompt in superbot: Gemini reads 3,412 messages across 14 channels, ElevenLabs Scribe transcribes the huddles you missed, Claude Opus 5.5 writes a per-channel catch-up and drafts your replies, then superbot connects to Slack and leaves 5 drafts waiting for one tap to send."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

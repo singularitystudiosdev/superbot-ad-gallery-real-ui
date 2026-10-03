@@ -554,6 +554,15 @@
     "desc": "One prompt in superbot: Gemini compares 312 flights and 86 stays, Claude Opus 5.5 plans five relaxed days with no more than 3 stops a day, GPT-6 Astra checks every fare, opening hour and the budget, then superbot connects to Expedia and books the flights, the stay and two activities: $1,657 of a $2,000 budget."
   },
   {
+    "id": "niche-calendar-model-switch-superbot-5cd6e70f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Book my 6 client calls next week and fix the double bookings: Gemini, GPT-6 Astra, Opus 5.5, then superbot updates your Google Calendar (4 switches)",
+    "src": "animations/niche-calendar-model-switch-superbot-5cd6e70f/",
+    "thumb": "assets/shots/niche-calendar-model-switch-superbot-5cd6e70f.png",
+    "desc": "One prompt in superbot: Gemini reads 214 emails and next week's calendar and finds 6 call requests and 2 double bookings, GPT-6 Astra fits all 6 calls inside each client's 9 to 5 across 5 time zones, Claude Opus 5.5 writes every invite with the time in the client's zone, then superbot connects to Google Calendar: 6 calls booked, 2 meetings moved, no overlaps."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

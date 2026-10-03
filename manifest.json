@@ -671,6 +671,15 @@
     "desc": "One prompt in superbot: Gemini reads 40 saved articles on sleep and pulls 46 ideas, Claude Opus 5.5 writes 46 linked notes, GPT-6 Astra checks every note against its article, then superbot opens the Obsidian vault, adds the notes, links them to 31 existing notes and builds a Sleep and Memory map."
   },
   {
+    "id": "niche-roblox-model-switch-superbot-dfb32441",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Fix the lost saves players keep reporting and publish to Roblox: Gemini, Opus 5.5, GPT-6 Astra, then superbot publishes version 214 on Roblox (4 switches)",
+    "src": "animations/niche-roblox-model-switch-superbot-dfb32441/",
+    "thumb": "assets/shots/niche-roblox-model-switch-superbot-dfb32441.png",
+    "desc": "One ask in superbot: Gemini reads 1,240 player reports to find why saves get wiped, Claude Opus 5.5 adds load retries, a session lock and a failed-load test in Luau, GPT-6 Astra runs 42 tests and 2,000 simulated rejoins, then superbot connects to Roblox and publishes version 214 of the experience."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

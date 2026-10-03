@@ -1,0 +1,22 @@
+img/ CREDITS (internal): every photograph in this spot, where it came from, and its licence. All four are Wikimedia
+Commons files tagged CC0 1.0 (public domain dedication), so none owes on-screen attribution, and none is credited on
+screen. Fetched 2026-10-03 through the Commons API (prop=imageinfo, extmetadata LicenseShortName "CC0"). Each file is
+a crop of the source downscaled with Pillow (LANCZOS), JPEG q86. Nothing is drawn or generated.
+
+lisbon-hero.jpg   The trip page's hero (1600 x 480, a full-width 10:3 band). Crop of "Lisbon, Portugal (Unsplash
+                  dRNT zPMZ6k).jpg", a red Lisbon tram on a Baixa street, by Luiz Felipe (Unsplash luiztrix),
+                  https://commons.wikimedia.org/wiki/File:Lisbon,_Portugal_(Unsplash_dRNT_zPMZ6k).jpg
+                  (originally https://unsplash.com/photos/dRNT_zPMZ6k). Licence: CC0 1.0.
+stay-room.jpg     The stay's thumbnail (240 x 240, Gemini's row, the trip page's Stay card). Crop of "Hotel room with
+                  traditional wooden decor and city view.jpg" by JesusisGreat7 (own work),
+                  https://commons.wikimedia.org/wiki/File:Hotel_room_with_traditional_wooden_decor_and_city_view.jpg.
+                  Licence: CC0 1.0. It stands in for the made-up guesthouse's room; it is not a photo of a real
+                  property of that name.
+sintra-pena.jpg   The Sintra day trip's thumbnail (240 x 240; Gemini's row, Opus's Day 3 tab, the trip page). Crop of
+                  "Exterior, Palace of Pena, Sintra, Portugal 03.jpg" by Londonjackbooks (own work),
+                  https://commons.wikimedia.org/wiki/File:Exterior,_Palace_of_Pena,_Sintra,_Portugal_03.jpg.
+                  Licence: CC0 1.0.
+alfama-night.jpg  The Fado dinner's thumbnail (240 x 240; Opus's Day 1 tab, the trip page). Crop of "Baroque Lisbon
+                  (13373586675).jpg", a Lisbon street at night, by Terry Kearney (Flickr oneterry),
+                  https://commons.wikimedia.org/wiki/File:Baroque_Lisbon_(13373586675).jpg. Licence: CC0 1.0. The crop
+                  leaves out the photographer's corner signature.

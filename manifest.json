@@ -545,6 +545,15 @@
     "desc": "One ask in superbot: Gemini reads 36 half marathon plans, Claude Opus 5.5 writes a 12-week plan in TypeScript, GPT-6 Astra checks it, and superbot connects to Strava, where all 48 workouts sync to the training calendar."
   },
   {
+    "id": "niche-travel-model-switch-superbot-4808b6b8",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Plan a relaxed 5-day Lisbon trip in May under $2,000 and book it: Gemini, Opus 5.5, GPT-6 Astra, then superbot books it on Expedia (4 switches)",
+    "src": "animations/niche-travel-model-switch-superbot-4808b6b8/",
+    "thumb": "assets/shots/niche-travel-model-switch-superbot-4808b6b8.png",
+    "desc": "One prompt in superbot: Gemini compares 312 flights and 86 stays, Claude Opus 5.5 plans five relaxed days with no more than 3 stops a day, GPT-6 Astra checks every fare, opening hour and the budget, then superbot connects to Expedia and books the flights, the stay and two activities: $1,657 of a $2,000 budget."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

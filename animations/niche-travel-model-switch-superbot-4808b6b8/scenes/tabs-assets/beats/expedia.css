@@ -1,0 +1,166 @@
+/* Expedia beat (beats/expedia.js): the account connection sheet and the checklist card in the chat, and the
+   full-frame layer carrying the one Expedia trip details page (light). Every colour, shadow, radius and type value is
+   an Expedia EGDS value from expedia.com's own css-vars (chat.css --ex-*, values and source there); icons are Lucide
+   (lucide-icons.js); the Expedia logo and icon are the sourced files in brand/. Nothing here transitions: position,
+   size, radius, opacity and transform are written from t in expedia.js, so ?t= freezes a frame. Classes: .xc- connect
+   sheet, .xk- checklist card, .xp- the trip page, .ex- shared Expedia parts (buttons, avatar, the icon tile). Radii on
+   every Expedia surface, exactly two: --ex-radius 1rem (cards, sheets, the hero, thumbnails, the mini window) and
+   --ex-pill 2500rem (buttons, status chips, avatars, the budget bar, the timeline dots). */
+
+/* Inter stands in for Expedia's Centra No2 (commercial, not bundled), vendored (fonts/CREDITS.txt): the variable wght axis */
+@font-face { font-family: 'Inter EX'; src: url('../../../fonts/inter-latin-wght-normal.woff2?v=4808b6b8') format('woff2'); font-weight: 100 900; font-style: normal; font-display: block; }
+
+#s-tabs .lc { flex: none; display: block; width: 20px; height: 20px; }
+
+/* ---- shared Expedia parts ---- */
+#s-tabs .ex-btn { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 16px; box-sizing: border-box;
+  border-radius: var(--ex-pill); font: 500 14px/18px var(--ex-sans); white-space: nowrap; }
+#s-tabs .ex-btn.ex-sec { background: var(--ex-surface); box-shadow: inset 0 0 0 1px var(--ex-border); color: var(--ex-primary); }
+#s-tabs .ex-btn.ex-pri { background: var(--ex-primary); color: var(--ex-on-primary); }
+#s-tabs .ex-btn.ex-pri.ex-hit { background: var(--ex-primary-active); }
+#s-tabs .ex-av { flex: none; display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: var(--ex-pill); background: var(--ex-text); color: var(--ex-on-primary);
+  font: 500 12px/1 var(--ex-sans); letter-spacing: .02em; }
+/* the Expedia icon: the official logo's own left square (its yellow tile and navy arrow), cropped by the box */
+#s-tabs .ex-ic { flex: none; display: block; width: 40px; height: 40px; overflow: hidden; }
+#s-tabs .ex-ic img { display: block; height: 100%; width: auto; max-width: none; }
+
+/* ---- the connection sheet (light, EGDS) ---- */
+#s-tabs .sbsite .hub .xk-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .xc-card { opacity: 0; box-sizing: border-box; width: 400px; max-width: 100%; margin-top: 2px; padding: 18px 18px 16px; border-radius: var(--ex-radius);
+  background: var(--ex-surface); box-shadow: inset 0 0 0 1px var(--ex-border), var(--ex-shadow); color: var(--ex-text); font-family: var(--ex-sans); }
+#s-tabs .sbsite .hub .xc-card.xc-tall { width: 340px; }
+#s-tabs .sbsite .hub .xc-logos { display: flex; align-items: center; justify-content: center; }
+#s-tabs .sbsite .hub .xc-logos .qc-tile.xc-sb { width: 40px; height: 40px; }
+#s-tabs .sbsite .hub .xc-dots { display: block; width: 40px; margin: 0 10px; border-top: 2px dotted var(--ex-outline); }
+#s-tabs .sbsite .hub .xc-title { margin: 14px 0 14px; text-align: center; font: 700 18px/1.25 var(--ex-sans); color: var(--ex-text); }
+#s-tabs .sbsite .hub .xc-acct { display: flex; align-items: center; gap: 10px; padding: 10px 0; box-shadow: inset 0 1px 0 var(--ex-border), inset 0 -1px 0 var(--ex-border);
+  font: 400 14px/1.3 var(--ex-sans); }
+#s-tabs .sbsite .hub .xc-acct b { font-weight: 500; }
+#s-tabs .sbsite .hub .xc-av { width: 28px; height: 28px; font-size: 11px; }
+#s-tabs .sbsite .hub .xc-perm { display: grid; gap: 2px; padding: 8px 0 2px; }
+#s-tabs .sbsite .hub .xc-row { display: flex; align-items: center; gap: 10px; height: 30px; font: 400 13.5px/1.3 var(--ex-sans); color: var(--ex-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .xc-row .lc { width: 18px; height: 18px; color: var(--ex-muted); }
+#s-tabs .sbsite .hub .xc-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
+/* ---- the checklist card (light, EGDS), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .xk-card { opacity: 0; box-sizing: border-box; width: 400px; max-width: 100%; margin-top: 10px; padding: 10px 12px 12px;
+  border-radius: var(--ex-radius); background: var(--ex-surface); box-shadow: inset 0 0 0 1px var(--ex-border), var(--ex-shadow); font-family: var(--ex-sans); color: var(--ex-text); }
+#s-tabs .sbsite .hub .xk-card.xk-tall { width: 340px; }
+#s-tabs .sbsite .hub .xk-tall .xk-step { font-size: 12.5px; }
+#s-tabs .sbsite .hub .xk-step { display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 2px; font: 400 13px/1 var(--ex-sans); white-space: nowrap; }
+#s-tabs .sbsite .hub .xk-step b { font-weight: 500; }
+#s-tabs .sbsite .hub .xk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .xk-ex { width: 22px; height: 22px; }
+#s-tabs .sbsite .hub .xk-ic { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: var(--ex-pill); background: var(--ex-canvas); color: var(--ex-text); }
+#s-tabs .sbsite .hub .xk-ic .lc { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .xk-ok { position: relative; flex: none; width: 15px; height: 15px; margin-left: auto; }
+#s-tabs .sbsite .hub .xk-spin { position: absolute; inset: 1px; border-radius: var(--ex-pill); border: 2px solid var(--ex-border); border-top-color: var(--ex-muted); }
+#s-tabs .sbsite .hub .xk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: var(--ex-positive); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .xk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: var(--ex-radius); background: var(--ex-canvas); box-shadow: inset 0 0 0 1px var(--ex-border); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .xp-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--ex-canvas); }
+#s-tabs .xp-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: var(--ex-canvas); color: var(--ex-text); font: 400 14px/20px var(--ex-sans); -webkit-font-smoothing: antialiased; }
+
+/* the header (white, a hairline under it) */
+#s-tabs .xp-top { flex: none; display: flex; align-items: center; gap: 28px; height: 60px; padding: 0 28px; background: var(--ex-surface); box-shadow: inset 0 -1px 0 var(--ex-border); }
+#s-tabs .xp-logo { display: block; height: 26px; width: auto; }
+#s-tabs .xp-shop { display: flex; align-items: center; gap: 4px; font: 500 14px/18px var(--ex-sans); color: var(--ex-text); white-space: nowrap; }
+#s-tabs .xp-shop .lc { width: 16px; height: 16px; }
+#s-tabs .xp-tr { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+#s-tabs .xp-nl { display: flex; align-items: center; height: 60px; padding: 0 14px; box-sizing: border-box; font: 500 14px/18px var(--ex-sans); color: var(--ex-text); white-space: nowrap; }
+#s-tabs .xp-nl.xp-cur { color: var(--ex-primary); box-shadow: inset 0 -2px 0 var(--ex-primary); }
+#s-tabs .xp-av { margin-left: 10px; }
+
+/* the page */
+#s-tabs .xp-page { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 1220px; margin: 0 auto; padding: 16px 28px 0; box-sizing: border-box; }
+#s-tabs .xp-hero { position: relative; flex: none; height: 140px; border-radius: var(--ex-radius); overflow: hidden; }
+#s-tabs .xp-hero > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+#s-tabs .xp-done { position: absolute; left: 18px; bottom: 18px; display: flex; align-items: center; gap: 12px; padding: 14px 20px 14px 16px; border-radius: var(--ex-radius);
+  background: var(--ex-overlay); box-shadow: var(--ex-shadow-high); color: var(--ex-on-overlay); opacity: 0; transform-origin: 0 100%; }
+#s-tabs .xp-done .lc { width: 30px; height: 30px; color: var(--ex-positive-dark); }
+#s-tabs .xp-done span { display: grid; gap: 2px; }
+#s-tabs .xp-done b { font: 700 20px/24px var(--ex-sans); white-space: nowrap; }
+#s-tabs .xp-done small { font: 400 14px/18px var(--ex-sans); color: var(--ex-on-overlay-2); white-space: nowrap; }
+#s-tabs .xp-head { flex: none; display: flex; align-items: flex-end; gap: 16px; }
+#s-tabs .xp-ttl h1 { margin: 0; font: 500 28px/32px var(--ex-sans); color: var(--ex-text); }
+#s-tabs .xp-meta { display: flex; gap: 18px; margin-top: 6px; font: 400 14px/18px var(--ex-sans); color: var(--ex-text); white-space: nowrap; }
+#s-tabs .xp-meta span { display: flex; align-items: center; gap: 6px; }
+#s-tabs .xp-meta .lc { width: 16px; height: 16px; color: var(--ex-muted); }
+#s-tabs .xp-itn { margin-left: auto; font: 400 14px/18px var(--ex-sans); color: var(--ex-muted); white-space: nowrap; }
+
+#s-tabs .xp-cols { flex: 1; min-height: 0; display: flex; gap: 20px; align-items: flex-start; }
+#s-tabs .xp-items { flex: 1; min-width: 0; display: grid; gap: 10px; }
+#s-tabs .xp-item { display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: var(--ex-radius); background: var(--ex-surface); box-shadow: inset 0 0 0 1px var(--ex-border); }
+#s-tabs .xp-th { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: var(--ex-radius); overflow: hidden; background: var(--ex-canvas); }
+#s-tabs .xp-th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#s-tabs .xp-gl .lc { width: 28px; height: 28px; color: var(--ex-text); }
+#s-tabs .xp-im { flex: 1; min-width: 0; display: grid; gap: 2px; }
+#s-tabs .xp-kind { font: 400 12px/16px var(--ex-sans); color: var(--ex-muted); }
+#s-tabs .xp-im b { font: 500 16px/20px var(--ex-sans); color: var(--ex-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .xp-d { font: 400 14px/18px var(--ex-sans); color: var(--ex-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .xp-d + .xp-d { color: var(--ex-muted); }
+#s-tabs .xp-ir { flex: none; display: grid; justify-items: end; gap: 6px; }
+#s-tabs .xp-pr { display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+#s-tabs .xp-pr small { font: 400 12px/16px var(--ex-sans); color: var(--ex-muted); }
+#s-tabs .xp-pr b { font: 700 18px/22px var(--ex-sans); color: var(--ex-text); }
+#s-tabs .xp-sw { display: grid; justify-items: end; }
+#s-tabs .xp-st { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 11px 0 9px; box-sizing: border-box; border-radius: var(--ex-pill);
+  font: 500 13px/1 var(--ex-sans); white-space: nowrap; }
+#s-tabs .xp-bk { background: var(--ex-canvas); color: var(--ex-muted); }
+#s-tabs .xp-spin { display: block; width: 12px; height: 12px; box-sizing: border-box; border-radius: var(--ex-pill); border: 2px solid var(--ex-border); border-top-color: var(--ex-muted); }
+#s-tabs .xp-ok { background: var(--ex-positive-bg); color: var(--ex-positive-text); opacity: 0; }
+#s-tabs .xp-ok .lc { width: 14px; height: 14px; stroke-width: 2.6; }
+#s-tabs .xp-cf { font: 400 12px/14px var(--ex-sans); color: var(--ex-muted); white-space: nowrap; opacity: 0; }
+
+/* the rail (16:9): Your days, then the Trip total */
+#s-tabs .xp-rail { flex: none; width: 340px; display: grid; gap: 10px; }
+#s-tabs .xp-card { padding: 14px 16px; border-radius: var(--ex-radius); background: var(--ex-surface); box-shadow: inset 0 0 0 1px var(--ex-border); }
+#s-tabs .xp-card h2 { margin: 0 0 8px; font: 500 16px/20px var(--ex-sans); color: var(--ex-text); }
+#s-tabs .xp-day { position: relative; display: flex; gap: 10px; padding: 4px 0 4px; }
+#s-tabs .xp-day + .xp-day::before { content: ""; position: absolute; left: 4px; top: -9px; height: 14px; border-left: 1px solid var(--ex-border); }
+#s-tabs .xp-dot { flex: none; width: 9px; height: 9px; margin-top: 5px; box-sizing: border-box; border-radius: var(--ex-pill); border: 2px solid var(--ex-primary); }
+#s-tabs .xp-day > div { min-width: 0; display: grid; gap: 1px; }
+#s-tabs .xp-day b { font: 500 13.5px/18px var(--ex-sans); white-space: nowrap; }
+#s-tabs .xp-day span { font: 400 13px/17px var(--ex-sans); color: var(--ex-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .xp-tot h2 { margin-bottom: 2px; }
+#s-tabs .xp-sum { display: block; font: 700 28px/34px var(--ex-sans); color: var(--ex-text); font-variant-numeric: tabular-nums; }
+#s-tabs .xp-bar { display: block; height: 8px; margin: 8px 0 8px; border-radius: var(--ex-pill); background: var(--ex-canvas); overflow: hidden; }
+#s-tabs .xp-bar i { display: block; height: 100%; border-radius: var(--ex-pill); background: var(--ex-primary); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .xp-bl { display: grid; font: 400 13.5px/18px var(--ex-sans); color: var(--ex-muted); white-space: nowrap; }
+#s-tabs .xp-bl > span { grid-area: 1 / 1; }
+#s-tabs .xp-b1 { color: var(--ex-text); font-weight: 500; opacity: 0; }
+
+/* ---- portrait (4:5): no Shop travel, no Your days; a shorter hero, compact items, the total under them ---- */
+#s-tabs .xp-narrow .xp-wide, #s-tabs .xp-narrow .xp-days { display: none; }
+#s-tabs .xp-narrow .xp-top { gap: 12px; padding: 0 16px; }
+#s-tabs .xp-narrow .xp-logo { height: 24px; }
+#s-tabs .xp-narrow .xp-nl { padding: 0 10px; }
+#s-tabs .xp-narrow .xp-av { margin-left: 6px; }
+#s-tabs .xp-narrow .xp-page { gap: 12px; padding: 14px 16px 0; }
+#s-tabs .xp-narrow .xp-hero { height: 150px; }
+#s-tabs .xp-narrow .xp-done { left: 12px; bottom: 12px; padding: 11px 16px 11px 12px; gap: 10px; }
+#s-tabs .xp-narrow .xp-done .lc { width: 26px; height: 26px; }
+#s-tabs .xp-narrow .xp-done b { font-size: 18px; line-height: 22px; }
+#s-tabs .xp-narrow .xp-done small { font-size: 13px; }
+#s-tabs .xp-narrow .xp-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+#s-tabs .xp-narrow .xp-ttl h1 { font-size: 24px; line-height: 28px; }
+#s-tabs .xp-narrow .xp-itn { margin-left: 0; font-size: 13px; }
+#s-tabs .xp-narrow .xp-cols { flex-direction: column; align-items: stretch; gap: 10px; }
+#s-tabs .xp-narrow .xp-items { flex: none; gap: 10px; }
+#s-tabs .xp-narrow .xp-item { gap: 12px; padding: 10px 12px; }
+#s-tabs .xp-narrow .xp-th { width: 52px; height: 52px; }
+#s-tabs .xp-narrow .xp-gl .lc { width: 24px; height: 24px; }
+#s-tabs .xp-narrow .xp-im b { font-size: 14.5px; line-height: 19px; }
+#s-tabs .xp-narrow .xp-d { font-size: 13px; line-height: 17px; }
+#s-tabs .xp-narrow .xp-ir { gap: 4px; }
+#s-tabs .xp-narrow .xp-pr b { font-size: 16px; line-height: 20px; }
+#s-tabs .xp-narrow .xp-cf { display: none; }
+#s-tabs .xp-narrow .xp-st { height: 24px; font-size: 12.5px; }
+#s-tabs .xp-narrow .xp-rail { width: auto; }
+#s-tabs .xp-narrow .xp-tot { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 16px; padding: 12px 14px; }
+#s-tabs .xp-narrow .xp-tot h2 { grid-column: 1; margin: 0; }
+#s-tabs .xp-narrow .xp-sum { grid-column: 1; font-size: 24px; line-height: 30px; }
+#s-tabs .xp-narrow .xp-bar { grid-column: 2; grid-row: 1; align-self: end; margin: 0 0 4px; }
+#s-tabs .xp-narrow .xp-bl { grid-column: 2; grid-row: 2; font-size: 13px; }

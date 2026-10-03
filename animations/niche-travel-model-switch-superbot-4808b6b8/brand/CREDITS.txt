@@ -1,0 +1,57 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the Expedia surfaces superbot connects to) and unaltered except for fill colour as
+noted. Provenance is never shown on screen.
+
+gemini-logo.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                       (Carried over from the base ad's brand/.)
+claude-logo.svg        Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                       (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+openai-logo.svg        OpenAI mark (round badge), copied from animations/niche-youtube-model-switch-superbot-3828921d/brand/
+                       (which carried it from animations/bikeride-model-switch-superbot-e13744a9/brand/, which copied it
+                       from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of OpenAI, used
+                       nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                       https://en.wikipedia.org/wiki/GPT-6).
+expedia-logo.svg       The official Expedia logo (2023: the yellow icon tile and the navy wordmark), Wikimedia Commons
+                       File:Expedia_Logo_2023.svg, https://commons.wikimedia.org/wiki/File:Expedia_Logo_2023.svg
+                       (https://upload.wikimedia.org/wikipedia/commons/3/3b/Expedia_Logo_2023.svg), fetched 2026-10-03,
+                       file verbatim. Licence on Commons: Public domain, PD-textlogo (categories "PD textlogo", "With
+                       trademark"); author Expedia Group, Inc. Used whole in the trip page header, and its own left
+                       square (the icon tile) shown through a cropping box for the Expedia tile on the connect sheet and
+                       the checklist. No Expedia wordmark is typeset anywhere. Trademark of Expedia, Inc.
+expedia-mark.svg       Expedia icon, Simple Icons "expedia", https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/expedia.svg
+                       (simple-icons 16.33.0, CC0 1.0; its data lists hex 191E3B and source
+                       https://brandfolder.com/portals/brand-expedia), fetched 2026-10-03. Path verbatim; only a
+                       fill="#FDDB32" attribute was added on the <svg> root (Expedia's own yellow: the 2023 logo's tile
+                       fill #fddb32, and expedia.com's css-vars button__primary_alt__default__background_color #FDDB32),
+                       so on the hub's dark tile it reads as Expedia's yellow app icon (the pill tile, the reply header,
+                       the composer chip). Trademark of Expedia, Inc., used nominatively to name the platform superbot
+                       connects to and to mock its trip page.
+
+UI ICONS
+  scenes/tabs-assets/beats/lucide-icons.js: Lucide, lucide-static 1.50.0 (ISC, https://github.com/lucide-icons/lucide),
+  SVG files from https://cdn.jsdelivr.net/npm/lucide-static@1.50.0/icons/, fetched 2026-10-03, each name confirmed via
+  https://api.iconify.design/search?query=<q>&prefix=lucide: plane, bed-double, ticket, map-pin, calendar, check,
+  chevron-down, search, credit-card, user-round, circle-check. Path data verbatim. The hub's own
+  glyphs (the check, the spinner, the panel's doc icon) are the base's.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+DATA
+  Everything in the spot's trip is made up for it: the traveler "Jordan Ellis" (initials JE), the itinerary number
+  7291 4408 1132, every price ($784, $178 a night, $712, $89, $72, total $1,657), the confirmation codes, the counts
+  (312 flights, 86 stays) and the guesthouse "Pateo das Laranjeiras". The brief's first name for the stay, "Casa do
+  Miradouro", was dropped: OpenStreetMap Nominatim (2026-10-03) returns a real guest house of that exact name
+  (Rua do Nascente, Nazare, Leiria) and a house in Chamusca; "Pateo das Laranjeiras" returned no match (Nominatim and
+  web search, 2026-10-03). Any resemblance to a real business is coincidental.
+  Facts checked against sources of record (2026-10-03):
+  - Flight: TAP Air Portugal and Delta fly New York JFK to Lisbon nonstop, 14 a week, departures 19:45 to 23:00,
+    6 hours 50 minutes (flightconnections.com/flights-from-jfk-to-lis, Wayback capture 2025-12-13). The spot shows
+    only "overnight" and "6h 50m"; no clock times or flight number are claimed.
+  - Jeronimos Monastery: Tuesday to Sunday 9:30 to 17:30, closed Mondays and 1 May
+    (https://www.mosteirojeronimos.gov.pt/en/). The plan's Thu May 13, 10:30 AM visit stands.
+  - Pena Palace: palace 9:30 AM to 6:30 PM, park 9:00 AM to 7:00 PM
+    (https://www.parquesdesintra.pt/en/parks-monuments/park-and-national-palace-of-pena/ and
+    /en/plan-your-visit/opening-times-and-prices/). The plan's Fri May 14, 10:30 AM visit stands.
+  - May 12, 2027 is a Wednesday.

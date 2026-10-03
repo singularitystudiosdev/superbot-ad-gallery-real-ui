@@ -599,6 +599,15 @@
     "desc": "One ask in superbot: superbot pulls the blog's top queries from Search Console, Claude Opus 5.5 writes 4 posts aimed at them, Nano Banana Pro makes the featured images, then superbot publishes all 4 on WordPress and search impressions climb."
   },
   {
+    "id": "niche-twitch-model-switch-superbot-936ae421",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Plan next week's streams around when my viewers show up and put them on my Twitch schedule: Gemini, Opus 5.5, GPT-6 Astra, then superbot fills your Twitch schedule (4 switches)",
+    "src": "animations/niche-twitch-model-switch-superbot-936ae421/",
+    "thumb": "assets/shots/niche-twitch-model-switch-superbot-936ae421.png",
+    "desc": "One ask in superbot: Gemini reads 14 past broadcasts and finds the 5 best time slots, Claude Opus 5.5 writes 5 streams with a title and a category each, GPT-6 Astra checks every slot, title and category, then superbot connects to Twitch and fills next week's schedule, with Mon and Wed kept free."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

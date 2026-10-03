@@ -1,0 +1,85 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and mocking the Twitch surfaces superbot connects to) and unaltered except where noted.
+Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (round badge), copied from animations/bikeride-model-switch-superbot-e13744a9/brand/
+                     (which copied it from animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6).
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+twitch-mark.svg      Twitch mark, Simple Icons `twitch` (CC0 1.0), fetched from the Iconify API
+                     https://api.iconify.design/simple-icons/twitch.svg on 2026-10-03; path unaltered, fill set to #fff
+                     for the Twitch-purple (#9147ff, measured) hub tile and the composer chip. Trademark of Twitch
+                     Interactive, Inc., used nominatively for the "Connecting to Twitch" pill, the composer chip and the
+                     "Twitch connected" reply header. The same path, inline in scenes/tabs-assets/beats/twitch-icons.js
+                     ('twitch', fill currentColor), is the mark on the authorization page (in #9147ff), on the
+                     checklist's first step and in the Twitch top nav (in the measured nav mark colour #a970ff). Icon
+                     only: no Twitch wordmark is typeset anywhere in the spot (the docs' figure of the authorization
+                     page shows the wordmark; the glitch mark stands in for it).
+
+UI ICONS
+  Every UI glyph on the Twitch surfaces and the hub cards (video, check, calendar-days, chevron-left, chevron-right,
+  calendar, search, inbox, message-square, ellipsis-vertical, arrow-left-to-line, arrow-up-right, triangle-alert, ban,
+  calendar-plus, pencil, calendar-check; scenes/tabs-assets/beats/twitch-icons.js) is a Lucide icon (Lucide
+  Contributors, ISC License, https://github.com/lucide-icons/lucide), fetched from the Iconify API
+  https://api.iconify.design/lucide/<name>.svg on 2026-10-03, markup verbatim. Twitch's own icon sprites are not used.
+  Avatars are sourced photos (scenes/tabs-assets/photos/CREDITS.txt); nothing is drawn.
+
+TWITCH AUTHORIZATION PAGE (sources of record)
+  Twitch developers, "Authentication", https://dev.twitch.tv/docs/authentication/ (fetched 2026-10-03): "The following
+  example shows the dialog that Twitch displays to the user to get their permission for your app ... If the user
+  clicks Authorize, Twitch gives your app an access token". Its figure
+  https://dev.twitch.tv/docs/assets/uploads/authorization-dialog.png ("Screenshot of authorization dialog"), read for
+  layout and wording: the twitch wordmark; "<App>" over "wants to access your account"; the account's avatar, name and
+  "not you? log out."; "Clicking Authorize below will allow <App> to:"; each scope with an orange warning glyph; "This
+  application is requesting your public twitch account information"; "After clicking Authorize, you will be redirected
+  to ..., a website:", "Created less than a day ago", "Not owned or operated by Twitch"; "Only click Authorize if you
+  trust <App>."; fine print; a filled purple Authorize beside an outlined Cancel. The card keeps every line except the
+  redirect URL, the app-age line and the fine print (unreadable at card size). The scope line is
+  channel:manage:schedule's documented description, "Manage a channel’s stream schedule."
+  (https://dev.twitch.tv/docs/authentication/scopes/); the figure shows its polls scopes reworded to "your channel's",
+  but no source shows the schedule scope's consent wording, so the documented description is used verbatim. The flow
+  (https://id.twitch.tv/oauth2/authorize, Authorize) is from https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/.
+  The page itself needs a signed-in account, so its colours are Twitch's light-theme tokens measured on twitch.tv (see
+  beats/twitch.css --tl-*), the buttons in Twitch's current measured 9000px pill radius. No string contains a dash.
+
+TWITCH CHANNEL PAGE, SCHEDULE TAB (sources of record)
+  Layout, palette, radii, sizes and type measured headlessly (Playwright chromium 1920x1080, dark theme via
+  localStorage twilight.theme = 1, getComputedStyle) on https://www.twitch.tv/cohhcarnage/schedule,
+  https://www.twitch.tv/dansgaming/schedule (a channel on the default purple accent) and
+  https://www.twitch.tv/criticalrole/schedule, the following week (Oct 5, 2026 to Oct 11, 2026), 2026-10-03: the top
+  nav, the side nav rows, the channel info row, the tabs (Home, About, Clips, Videos, Schedule, Chat) with the 2px
+  active indicator, the caption ("The next stream is on Saturday at 8:00 AM EDT." format), the toolbar (Today, the
+  week arrows, the date picker, the week range), the hour header with the timezone label, the day rows ("Mon" over
+  "10/5", 90px), and a future segment (title; category in the accent's link colour; the accent bar and "Monday,
+  October 5, 2026 · 8 AM - 3 PM EDT"). Every value used is listed in scenes/tabs-assets/beats/twitch.css (--tw-*). The
+  hour window follows the real grid (the hour before the first start through the hour the last stream ends in). The
+  week range is drawn with " - " where Twitch uses an en dash (the spot's no-dash rule). Schedule setup per Twitch help
+  "Channel Page Setup", https://help.twitch.tv/s/article/channel-page-setup (Stream Schedule: Title, Category, Start
+  time, Duration, Frequency; Specific Day is Affiliate/Partner only; PixelFern is an Affiliate). Title limit: Twitch
+  API reference, Create Channel Stream Schedule Segment, title: "The broadcast’s title. The title may contain a maximum
+  of 140 characters." (https://dev.twitch.tv/docs/api/reference/#create-channel-stream-schedule-segment). Categories
+  verified headlessly by exact name on twitch.tv/directory/category/<slug> (2026-10-03): Retro, Software and Game
+  Development, Just Chatting, Art; the side nav's Science & Technology (the API reference's own example) and Talk Shows
+  & Podcasts (seen live on a scheduled segment). No toast is shown at the bold moment: no source of record shows Twitch
+  raising one when a schedule changes. The channel owner's own view shows no Follow/Subscribe buttons here (not
+  verified for an owner session, so none are drawn).
+
+SUPERBOT HUB UI KIT (carried unchanged with the fork)
+  scenes/tabs-assets/: the hub's app rail icons devin.png, hermes.png, grok.png (marks of Cognition, Nous Research and
+  xAI, used nominatively; as credited in animations/they-wont-tell-you-how-superbot-fccab6d9/CREDITS.txt) and the
+  inline icon symbols in icons.js. The hub's mono is the base's own --font-mono (no font files vendored).
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar in the hub is scenes/tabs-assets/tile.svg (first party).
+
+MADE UP FOR THE SPOT
+  The Twitch channel PixelFern (Affiliate, 12.4K followers), its past broadcasts, view counts and hours, next week's
+  five streams (titles, days, times), the followed channels cozyquill, TideRunner, marrowbyte, LunaKettle and Slowpoke
+  Sam and their viewer counts, and the check results are fictional. No real streamer's name, avatar or handle and no
+  game title or box art appears. No "@" appears anywhere on screen.

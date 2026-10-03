@@ -1,0 +1,72 @@
+/* Streams beat (beats/streams.js): Opus 5.5 planning next week's streams, in the base's reply-panel grammar and colours
+   (the panel greys, the green check and clock, the white primary button; carried over unchanged from the base's reply
+   panel), its body an aligned three column list in the UI sans (day, time range muted, category), then the titles
+   with the day small and muted under each, and the review bar. Nothing here transitions: every moving value is written
+   from t in render, so ?t= freezes a frame. Classes: .em- (the base panel) and .tr- (the streams body). */
+#s-tabs .sbsite .hub .em-x { position: relative; width: 100%; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden;
+  background: #141416; box-shadow: 0 0 0 1px #2a2a2e, 0 14px 36px rgba(0,0,0,.45); font: 12px/1.3 var(--ui); color: #d6d6dd; opacity: 0; }
+#s-tabs .sbsite .hub .em-x.em-done { box-shadow: 0 0 0 1px rgba(79,197,127,.55), 0 0 22px rgba(79,197,127,.12), 0 14px 36px rgba(0,0,0,.45); }
+#s-tabs .sbsite .hub .em-x svg { flex: none; }
+
+/* header: project, draft count, the beat's own clock */
+#s-tabs .sbsite .hub .em-hd { display: flex; align-items: center; gap: 10px; flex: none; height: 36px; padding: 0 12px; border-bottom: 1px solid #232326; background: #18181b; }
+#s-tabs .sbsite .hub .em-proj { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
+#s-tabs .sbsite .hub .em-proj b { font: 600 13px/1 var(--ui); color: #ededf0; }
+#s-tabs .sbsite .hub .em-ico { width: 15px; height: 15px; color: #8b8b93; }
+#s-tabs .sbsite .hub .em-br { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: 6px; background: #222226; font: 11px/1 var(--font-mono); color: #a1a1aa; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-state { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font: 500 12px/1 var(--ui); font-style: normal; color: #9d9da6; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-clk { font: 500 12px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: #c9c9cf; }
+#s-tabs .sbsite .hub .em-spin { display: block; flex: none; width: 11px; height: 11px; border-radius: 50%; border: 1.6px solid #3a3a40; border-top-color: #c9c9cf; box-sizing: border-box; }
+#s-tabs .sbsite .hub .em-state .em-tk { display: none; width: 14px; height: 14px; fill: none; stroke: #4fc57f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .em-state.ok .em-spin { display: none; }
+#s-tabs .sbsite .hub .em-state.ok .em-tk { display: block; }
+#s-tabs .sbsite .hub .em-state.ok .em-clk { color: #4fc57f; }
+
+/* the file tabs: the active one lifts to the editor's colour with a top rule */
+#s-tabs .sbsite .hub .em-tabs { display: flex; flex: none; height: 32px; background: #18181b; border-bottom: 1px solid #232326; overflow: hidden; }
+#s-tabs .sbsite .hub .em-tab { display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border-right: 1px solid #232326;
+  font: 500 12px/1 var(--ui); color: #8b8b93; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-tab.on { background: #141416; color: #ededf0; box-shadow: inset 0 1.5px 0 #d97757; margin-bottom: -1px; }
+
+#s-tabs .sbsite .hub .em-caret { display: none; width: 1.5px; height: 13px; margin-left: 1px; background: #ececec; }
+
+/* the review bar */
+#s-tabs .sbsite .hub .em-ft { display: flex; align-items: center; gap: 10px; flex: none; height: 44px; padding: 0 10px 0 8px; border-top: 1px solid #232326; background: #18181b; white-space: nowrap; }
+#s-tabs .sbsite .hub .em-sum { display: inline-flex; align-items: center; gap: 6px; min-width: 0; font: 500 12.5px/1 var(--ui); color: #b4b4bc; }
+/* the summary is long: on a narrow column it wraps to a second line instead of running under the buttons */
+#s-tabs .sbsite .hub .em-ft.on { height: auto; min-height: 44px; padding-top: 7px; padding-bottom: 7px; }
+#s-tabs .sbsite .hub .em-ft.on .em-sum { white-space: normal; }
+#s-tabs .sbsite .hub .em-ft.on .em-nf { line-height: 1.3; }
+#s-tabs .sbsite .hub .em-cnt { font: 500 12px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: #9d9da6; }
+#s-tabs .sbsite .hub .em-chev { width: 13px; height: 13px; fill: none; stroke: #7c7c85; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .em-nf { font-weight: 600; color: #e2e2e6; }
+#s-tabs .sbsite .hub .em-ft.on .em-nf { color: #4fc57f; }
+/* done: the chevron gives way to the base's green check in front of the summary */
+#s-tabs .sbsite .hub .em-sum .em-dn { display: none; width: 14px; height: 14px; fill: none; stroke: #4fc57f; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .em-ft.on .em-dn { display: block; }
+#s-tabs .sbsite .hub .em-ft.on .em-chev { display: none; }
+#s-tabs .sbsite .hub .em-btns { display: inline-flex; gap: 6px; margin-left: auto; opacity: .4; }
+#s-tabs .sbsite .hub .em-ft.on .em-btns { opacity: 1; }
+#s-tabs .sbsite .hub .em-b { display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: 7px; border: 1px solid #323238; font: 500 12px/1 var(--ui); font-style: normal; color: #d6d6dd; }
+#s-tabs .sbsite .hub .em-b.em-pri { border-color: #ececf1; background: #ececf1; color: #141416; font-weight: 600; }
+
+
+/* the streams body: both tabs share one grid cell, so switching tabs never changes the panel's height */
+#s-tabs .sbsite .hub .tr-bds { display: grid; flex: none; }
+#s-tabs .sbsite .hub .tr-bd { grid-area: 1 / 1; padding: 0 0 8px; }
+#s-tabs .sbsite .hub .tr-txt { padding: 8px 14px 0; }
+#s-tabs .sbsite .hub .tr-l { display: flex; align-items: center; height: 26px; font: 12.5px/26px var(--ui); color: #d6d6dd; white-space: pre; }
+#s-tabs .sbsite .hub .tr-a { display: inline-flex; align-items: center; min-width: 0; }
+#s-tabs .sbsite .hub .tr-row .tr-a { width: 24%; color: #ededf0; font-weight: 500; }
+#s-tabs .sbsite .hub .tr-rest { opacity: 0; display: inline-flex; align-items: center; }
+#s-tabs .sbsite .hub .tr-time { width: 32%; color: #9d9da6; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .tr-cat { flex: 1; min-width: 0; color: #ededf0; }
+#s-tabs .sbsite .hub .tr-l .em-caret { display: none; width: 1.5px; height: 14px; margin-left: 1px; background: #ececec; }
+/* the titles: the title in the text colour, the day small and muted under it */
+#s-tabs .sbsite .hub .tr-dl { flex-direction: column; align-items: flex-start; justify-content: center; height: 38px; }
+#s-tabs .sbsite .hub .tr-ttl { font: 500 13px/17px var(--ui); color: #ededf0; }
+#s-tabs .sbsite .hub .tr-day { font: 400 11.5px/15px var(--ui); color: #9d9da6; }
+#s-tabs .sbsite .hub .em-ico.ni { width: 15px; height: 15px; }
+
+/* the Opus panel spans the composer's column, as the source's panel does */
+#s-tabs .sbsite .hub .qc-r:has(.em-x) { --hub-reply: 100%; }

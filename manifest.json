@@ -509,6 +509,15 @@
     "desc": "One ask in superbot: Gemini reads 212 unassigned tickets and the help center and sorts them into 4 groups, Claude Opus 5.5 drafts 209 replies from the help center articles, GPT-6 Astra checks every draft against the ticket and the policy and holds 3 double charges for a human, then superbot connects to Zendesk, sends the replies and clears the unassigned queue to 0."
   },
   {
+    "id": "niche-amazon-model-switch-superbot-37d4e2c2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Fix my suppressed listings and win back the Buy Box: Gemini, Opus 5.5, GPT-6 Astra, then superbot updates your Amazon Seller Central (4 switches)",
+    "src": "animations/niche-amazon-model-switch-superbot-37d4e2c2/",
+    "thumb": "assets/shots/niche-amazon-model-switch-superbot-37d4e2c2.png",
+    "desc": "One prompt in superbot: Gemini reads all 64 listings and 1,280 competing offers, Claude Opus 5.5 rewrites the 6 suppressed titles to Amazon's title rules, GPT-6 Astra checks every title and price against your floor and FBA fees, then superbot connects to Amazon Seller Central: 6 listings active again and the Buy Box back on 4."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

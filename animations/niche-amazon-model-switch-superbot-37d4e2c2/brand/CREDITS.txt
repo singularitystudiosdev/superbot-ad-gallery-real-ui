@@ -1,0 +1,80 @@
+brand/ CREDITS (internal): every third-party mark, font, icon set and data source in this spot, where it came from, and
+the usage note. All marks are the property of their owners. They appear here nominatively (naming the model or app
+superbot routes the ask to, and mocking the Amazon Seller Central surfaces superbot connects to) and unaltered except
+where noted. Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (round badge), copied from animations/niche-youtube-model-switch-superbot-3828921d/brand/
+                     (which copied it from animations/bikeride-model-switch-superbot-e13744a9/brand/, from
+                     animations/who-are-you-superbot-268c902c/assets/openai.svg). Trademark of OpenAI, used nominatively
+                     for the "GPT-6 Astra" pill (OpenAI's model, GA 2026-09-04, https://en.wikipedia.org/wiki/GPT-6).
+
+amazon-icon.svg      Amazon "a" icon with the smile, Wikimedia Commons File:Amazon_icon.svg
+                     https://commons.wikimedia.org/wiki/File:Amazon_icon.svg
+                     (https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg), author Amazon.com, Inc.
+                     ("Convert from Amazon website", 2021-07-20); licence: public domain (PD-textlogo), trademarked.
+                     Fetched 2026-10-03, unaltered (black letter, #f90 smile). Used on light surfaces: the consent card's
+                     Amazon tile. Simple Icons was checked first: its current release (16.33.0) has no "amazon" icon
+                     (cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/amazon.svg answers "Couldn't find the requested
+                     file"), so the Commons file is the source.
+amazon-icon-white.svg
+                     The same file with the letter's fill changed from #000 to #fff (the smile stays #f90), the way
+                     Amazon shows the mark on dark surfaces (Seller Central's own dark top nav). Used on dark surfaces:
+                     the "Connecting to Amazon Seller Central" pill tile, the composer chip, the reply header, the Gemini
+                     account card, the checklist's first step and the full-frame Seller Central top nav. Icon only: no
+                     Amazon or Seller Central wordmark is typeset anywhere in the spot. #FF9900 appears only inside these
+                     two files.
+
+UI ICONS
+  Lucide, lucide-static 1.51.0 (https://cdn.jsdelivr.net/npm/lucide-static@1.51.0/icons/<name>.svg), ISC License
+  (Copyright (c) 2026 Lucide Icons and Contributors), fetched 2026-10-03, path data verbatim in
+  scenes/tabs-assets/beats/sc-icons.js: menu, search, mail, settings, circle-help, chevron-down, check, circle-check,
+  triangle-alert, ellipsis-vertical, file-text, shield-check, tag. Used in the Seller Central nav and page, the consent
+  and checklist cards and the Opus panel's header. The hub's own glyphs (spinner, check, chevrons) are the base's.
+
+PHOTOS
+  img/*.jpg, the eight product photos, see img/CREDITS.txt.
+
+FONT
+  Seller Central's own stack, "Amazon Ember", Arial, sans-serif, verbatim from the CSS Seller Central's help hub serves
+  (https://ds7igiccqury3.cloudfront.net/help/hub/main.14959435b6d6464027c4.chunk.min.css, fetched 2026-10-03).
+  Amazon Ember is proprietary and is NOT bundled, so Arial (system) renders in headless Chromium. Nothing is vendored;
+  the base's Roboto files (Sheets only) were removed. The superbot hub keeps the source ad's families.
+
+SELLER CENTRAL UI AND PALETTE (sources of record; full sampling log in /tmp/amazon-37d4e2c2/notes.md)
+  Amazon publishes no token package. Every --sc-* colour (scenes/tabs-assets/chat.css) is a pixel sampled from dated
+  screenshots: (A) Amazon's own "New Seller Central enhanced UI" images on https://sell.amazon.com/tools/seller-central
+  (m.media-amazon.com/images/G/01/sell/images/selldot-2026/NEW-SC-orders-enhanced-ui.webp, -home-FINAL.webp,
+  -customers.webp; Last-Modified 2026-07-08..10) and (B) a lossless Seller Central screenshot of 2025-03-11
+  (https://sellersasksellers.com/t/match-low-price-for-multiple-listings-no-longer-exists/5716). Radii measured on the
+  same images: 12px cards (A), fully round outline buttons and filter pills (A), 6px nav search field (A), 3px buttons,
+  inputs and selects (B).
+  Manage All Inventory layout and labels: Seller Central Help "Manage All Inventory"
+  (https://sellercentral.amazon.com/help/hub/reference/external/G41?locale=en-US: "Search by SKU, product name, or
+  ASIN", "Filter by listing status such as active or inactive"), Help "Suppressed listings"
+  (https://sellercentral.amazon.com/help/hub/reference/external/G200898440: Inventory > Manage All Inventory, the Listing
+  status filter) and the Seller Forums announcement "New listing management features available on Manage All Inventory"
+  (https://sellercentral.amazon.com/seller-forums/discussions/t/e423e889-21d8-4ebb-87d1-b984cec8d64f). The "Featured
+  Offer" column is the one ad-specific column (no source shows it in Manage All Inventory), set in plain body text.
+  Consent card: SP-API docs (fetched 2026-10-03): website-authorization-workflow and
+  selling-partner-appstore-authorization-workflow ("Authorize", "reviews the data access request"),
+  learn-how-sellers-authorize-service-providers ("Review roles and confirm ... the seller chooses Confirm") and
+  roles-in-the-selling-partner-api (role names "Product Listing" and "Pricing" and their descriptions), all under
+  https://developer-docs.amazon.com/sp-api/docs/. The consent page itself is login-walled; no public screenshot was found.
+  Title rules (the Astra checks and the old titles that break them): Seller Forums announcement, product title
+  requirements effective 2025-01-21,
+  https://sellercentral.amazon.com/seller-forums/discussions/t/b2b15728-0d43-453e-974f-59eb63f73059 .
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot avatar in
+  the hub is scenes/tabs-assets/tile.svg (first party).
+
+MADE UP FOR THE SPOT
+  The seller "Copperline Kitchen" (a web search on 2026-10-03 found no real brand or store of that exact name), its 64
+  listings, 1,280 competing offers, every product name, title, ASIN (B0 + 8 made-up characters), SKU, price, stock
+  count and Featured Offer state. Any resemblance to a real listing is coincidental. No @handles or email addresses
+  appear on screen.

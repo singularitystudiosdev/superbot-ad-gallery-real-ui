@@ -1,0 +1,37 @@
+brand/ CREDITS (internal): every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to) and unaltered except for fill colour as noted.
+
+gemini-logo.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                       Used for Gemini and for Nano Banana Pro (Google's Gemini 3 Pro Image model,
+                       https://deepmind.google/models/gemini-image/pro/), which ships under the Gemini brand: pill tile,
+                       reply header, composer chip.
+claude-logo.svg        Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                       (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party).
+
+STORY AND DATA
+  Everything in the spot's story is made up for it: the couple Emma & James Hale and their wedding of September 26,
+  2026; the folder hale_wedding_RAW and its 3,412 photos; the cull's numbers (624 keepers; 1,974 duplicates, 512 soft
+  focus, 302 blinks cut); the gallery plan (cover first-look-0412.jpg; sets Getting Ready 96, Ceremony 168, Portraits
+  152, Reception 208 = 624); the photographer's studio brand "Marlow Studio" on the email preview, the recipient
+  "Emma Hale", the email's subject and message. Any resemblance to a real couple, photographer or studio is
+  coincidental. No client data, results or earnings are claimed. The photos on screen are real, sourced stock photos
+  (Unsplash License): see ../img/CREDITS.txt.
+
+pixieset-logo.svg      Pixieset wordmark ("PIXIESET", serif caps, fill #333 via an embedded class style), Wikimedia
+                       Commons File:Pixieset_logo.svg, https://commons.wikimedia.org/wiki/File:Pixieset_logo.svg
+                       (original https://upload.wikimedia.org/wikipedia/commons/a/a4/Pixieset_logo.svg, uploaded by
+                       Bsoyka 2024-10-09; Commons licence: Public domain (text logo), "trademarked"). Fetched 2026-10-03,
+                       saved byte-for-byte unmodified. Checked glyph-for-glyph against Pixieset's own wordmark
+                       https://assets.pixieset.com/images/site/pixieset-logo.jpeg (the logo in pixieset.com's JSON-LD,
+                       3000x680) and the 150x17 "Pixieset Brand Logo" in the site's Contentful CMS: identical letterforms
+                       and spacing. simple-icons has no pixieset icon (cdn.jsdelivr.net/npm/simple-icons@latest/icons/
+                       pixieset.svg is a 404), and the pixieset.com header logo is live CSS text, not an asset.
+pixieset-mark.png      Pixieset square mark (black serif "P" on white), 152x152, https://pixieset.com/apple-touch-icon.png
+                       (the site's own app/touch icon; favicon.ico carries the same P at 64/32/16). Fetched 2026-10-03,
+                       unmodified. Pixieset publishes nothing larger for this mark.
+                       Pixieset is a trademark of Pixieset Media Inc., used nominatively to name the app superbot uploads
+                       the gallery to. Never redrawn.

@@ -635,6 +635,15 @@
     "desc": "One prompt in superbot: Gemini reads 23 saved links and the last 12 issues and keeps the 5 best stories, GPT-6 Astra picks the cover photo and writes its alt text, Claude Opus 5.5 writes issue 87 in the writer's voice, then superbot connects to beehiiv and drafts it, ready to schedule for Sunday 7:00 AM."
   },
   {
+    "id": "niche-photo-model-switch-superbot-eea931bf",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Cull my Hale wedding, edit the keepers and send the gallery: Gemini, Opus 5.5, Nano Banana Pro, then superbot delivers it in Pixieset (4 switches)",
+    "src": "animations/niche-photo-model-switch-superbot-eea931bf/",
+    "thumb": "assets/shots/niche-photo-model-switch-superbot-eea931bf.png",
+    "desc": "One prompt in superbot: Gemini culls 3,412 wedding photos to 624 keepers, Claude Opus 5.5 plans the gallery in four sets, Nano Banana Pro edits every keeper to one look, then superbot connects to Pixieset, uploads the sets and sends the couple their gallery."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

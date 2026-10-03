@@ -1,0 +1,25 @@
+img/ CREDITS (internal; never shown on screen)
+
+All five photos are from one Unsplash series by Fausto Sandoval (https://unsplash.com/@uusaez), "Young man doing a live
+video game sharing online." (Quito, January 2021): the same streamer in the same headset, ring light and RGB room, so
+the 5 clips read as one stream. Licence: Unsplash License (https://unsplash.com/license): free for commercial and
+non-commercial use, no permission or attribution required. None of them is an Unsplash+ (premium) photo; each was
+checked as premium:false / plus:false in Unsplash's own API response (unsplash.com/napi) on 2026-10-03.
+Fetched 2026-10-03 from images.unsplash.com at w=4000 (4000 x 6000, q90), then cropped and scaled with ImageMagick.
+Nothing in any frame is drawn: captions, crop window, tracking box and every other overlay are UI laid over the photos.
+
+clip-1.jpg  "1v4 clutch"             https://unsplash.com/photos/Cc-KUNmV1UE  (man in blue hoodie wearing black headphones)
+            file https://images.unsplash.com/photo-1610041321420-a596dd14ebc9  crop 2700x4800+700+600, 720 x 1280
+clip-2.jpg  "Chat picks my loadout"  https://unsplash.com/photos/RyHy-dGFMPM  (man in red and black hoodie)
+            file https://images.unsplash.com/photo-1610041320921-f3b3c1570248  crop 2700x4800+1050+300, 720 x 1280
+clip-3.jpg  "Boss down, first try"   https://unsplash.com/photos/h3CtElnhcE8  (man in red hoodie wearing black headphones)
+            file https://images.unsplash.com/photo-1610041321461-37a7d578ebad  crop 2700x4800+1050+1000, 720 x 1280
+clip-4.jpg  "The lag spike"          https://unsplash.com/photos/hQ14pyf_JPU  (man in blue shirt wearing blue headphones)
+            file https://images.unsplash.com/photo-1610041321024-0dff35bf9923  crop 2700x4800+1100+500, 720 x 1280
+clip-5.jpg  "Raid welcome"           https://unsplash.com/photos/s4ip4-QiT6w  (black flat screen tv turned on near blue wall)
+            file https://images.unsplash.com/photo-1610041320852-33c250cc68d8  crop 2700x4800+800+0, 720 x 1280
+vod.jpg     the 16:9 frame of the stream (the SAM 3 beat, the connect card, the Media Pool Streams bin):
+            the same photo as clip-4 (hQ14pyf_JPU), crop 4000x2250+0+1000, 1280 x 720
+
+The streamer is a stock model; he is never named. The stream ("Friday ranked stream.mov", 2:03:41, 1080p60), its
+moments, words, timestamps, clip titles and captions are made up for the spot (brand/CREDITS.txt).

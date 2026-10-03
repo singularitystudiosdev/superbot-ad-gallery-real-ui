@@ -419,6 +419,15 @@
     "desc": "One prompt in superbot: Gemini watches the 18:42 vlog and picks three frames, Claude Opus 5.5 writes three thumbnail concepts, Nano Banana Pro renders them at 1280 x 720, then superbot connects to YouTube Studio and runs the A/B test until a winner is shown to all viewers."
   },
   {
+    "id": "niche-youtube-model-switch-superbot-3828921d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and pin the best one: Gemini, GPT-6 Astra, Opus 5.5, then superbot replies and pins in YouTube Studio (4 switches)",
+    "src": "animations/niche-youtube-model-switch-superbot-3828921d/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-3828921d.png",
+    "desc": "One ask in superbot: Gemini watches the latest video and ranks its 1,284 comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies in the creator's voice, then superbot posts them in YouTube Studio and pins the best one."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

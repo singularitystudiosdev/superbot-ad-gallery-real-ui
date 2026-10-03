@@ -806,6 +806,15 @@
     "desc": "Variant of niche-youtube-model-switch-superbot-3828921d with a different model chain and a voice step. One prompt in superbot: Gemini watches the latest video and ranks the top 5 of 1,284 comments, GPT-6 Astra drafts the replies in the creator's voice, superbot connects to YouTube Studio, posts the replies, hearts the top comments and pins the best one, then ElevenLabs reads the pinned reply aloud as a short voice note."
   },
   {
+    "id": "niche-woocommerce-model-switch-superbot-14250a28",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Add the fall line from my supplier sheet to WooCommerce, every size and color: Gemini, Opus 5.5, GPT-6 Astra, then superbot publishes it on WooCommerce (4 switches)",
+    "src": "animations/niche-woocommerce-model-switch-superbot-14250a28/",
+    "thumb": "assets/shots/niche-woocommerce-model-switch-superbot-14250a28.png",
+    "desc": "One prompt in superbot: Gemini reads a 97 row supplier sheet and cleans up 23 messy sizes and colors, Claude Opus 5.5 writes 4 product pages and sets up 96 variations, GPT-6 Astra checks every variation before publishing, then superbot connects to WooCommerce with the store's REST API key and publishes 4 variable products with price, SKU, stock and weight on each one."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

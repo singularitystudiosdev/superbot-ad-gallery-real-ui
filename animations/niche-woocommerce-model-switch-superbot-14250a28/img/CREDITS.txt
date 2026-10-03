@@ -1,0 +1,34 @@
+img/ CREDITS (internal): every photograph in this spot, where it came from, and its licence. All seven are from
+Pexels under the Pexels License (free to use, commercial use allowed, attribution not required,
+https://www.pexels.com/license/), so none is credited on screen. Each file is a square crop of the source (fetched
+from images.pexels.com at 1400 px wide on 2026-10-03), resized to 400 x 400 px (Pillow, LANCZOS), JPEG q85. Nothing
+is drawn, generated or recoloured. Each was checked by eye: the item in the photo is the item on its row (the zip
+hoodie shows its zipper, the crewneck has a crew collar and no hood), no visible brand logos, no watermark, and none
+is WooCommerce sample data.
+Photographer names: the Pexels photo pages did not load from this machine during the build (the browser scraper
+timed out on www.pexels.com/photo/<id>/), so the author is recorded as the photo page to read it from; the Pexels
+License does not require attribution.
+
+heavyweight-hoodie.jpg  Heavyweight Hoodie row and the Opus product card. "Brown hoodie on hanger with hand",
+                        Pexels photo 6786666, https://www.pexels.com/photo/6786666/ (file
+                        https://images.pexels.com/photos/6786666/pexels-photo-6786666.jpeg). Pexels License.
+zip-hoodie.jpg          Zip Hoodie row. "Woman wearing a white zip-up hoodie with the hood on" (studio), Pexels photo
+                        26592662, https://www.pexels.com/photo/26592662/ (file https://images.pexels.com/photos/26592662/
+                        pexels-photo-26592662/free-photo-of-woman-looking-posing-wearing-white-zip-up-hoodie-with-hood-on.jpeg).
+                        Crop on the zipped front and pocket. Pexels License.
+crewneck-sweatshirt.jpg Crewneck Sweatshirt row. "A white sweatshirt against a soft yellow background", Pexels photo
+                        9594089, https://www.pexels.com/photo/9594089/ (file
+                        https://images.pexels.com/photos/9594089/pexels-photo-9594089.jpeg). Crop on the crew collar.
+                        Pexels License.
+long-sleeve-tee.jpg     Long Sleeve Tee row. "Female wearing long sleeve t shirt against white background", Pexels
+                        photo 6311658, https://www.pexels.com/photo/6311658/ (file
+                        https://images.pexels.com/photos/6311658/pexels-photo-6311658.jpeg). Pexels License.
+canvas-tote.jpg         Canvas Tote row. "Black canvas tote bag hanging on a wooden rack", Pexels photo 1214212,
+                        https://www.pexels.com/photo/1214212/ (file
+                        https://images.pexels.com/photos/1214212/pexels-photo-1214212.jpeg). Pexels License.
+wool-socks.jpg          Wool Socks row. "Pair of wool socks drying on a clothesline", Pexels photo 7790150,
+                        https://www.pexels.com/photo/7790150/ (file
+                        https://images.pexels.com/photos/7790150/pexels-photo-7790150.jpeg). Pexels License.
+enamel-mug.jpg          Enamel Mug row. "Simple white metal mug on clean white background", Pexels photo 12024967,
+                        https://www.pexels.com/photo/12024967/ (file
+                        https://images.pexels.com/photos/12024967/pexels-photo-12024967.jpeg). Pexels License.

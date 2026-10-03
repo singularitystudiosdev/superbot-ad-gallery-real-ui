@@ -1,0 +1,60 @@
+brand/ CREDITS (internal): every third-party mark, icon set and font in this spot, where it came from, and the usage
+note. All marks are the property of their owners. They appear here nominatively (naming the model or app superbot
+routes the ask to, and showing the WooCommerce store superbot publishes to) and unaltered except where noted.
+Provenance is never shown on screen.
+
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Google trademark.
+                     (Carried over from the base ad's brand/.)
+openai-logo.svg      OpenAI mark (the knot), Simple Icons `openai` (CC0 1.0), fetched from the Iconify API
+                     https://api.iconify.design/simple-icons/openai.svg?color=%23ffffff on 2026-10-03 (path verbatim,
+                     fill set to #fff by the API's color parameter for the dark hub; no badge, no tile). Trademark of
+                     OpenAI, used nominatively for the "GPT-6 Astra" status line (OpenAI's model, GA 2026-09-04,
+                     https://en.wikipedia.org/wiki/GPT-6). Replaces the base's round black badge, which read as a tile
+                     behind the mark.
+claude-logo.svg      Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                     (simple-icons, CC0 1.0). Fill set to #fff for the dark hub. Trademark of Anthropic.
+woocommerce-logo.svg The official Woo logo (purple wordmark), from WooCommerce's own brand page
+                     https://woocommerce.com/brand-and-logo-guidelines/ ("Download the logo":
+                     https://woocommerce.com/wp-content/uploads/2025/01/woo-logos.zip, fetched 2026-10-03), file
+                     "Woo Logos/Woo_logo_color.svg", byte-identical (sha256
+                     3ec4eb7f7ba69184d499f83a93b5935be46c4ae23c41a38f62c8ae51b5de1dc0), fill #873EFF (the Woo brand
+                     purple as shipped in the file). Used unmodified: never recoloured, distorted or redrawn. Trademark
+                     of Automattic / WooCommerce, used nominatively for the "Connecting to WooCommerce" status line, the
+                     "WooCommerce connected" reply header, the connect card and the WooCommerce header bar of the
+                     store's wp-admin Products screen. The brand page links Woo's brand and trademark guidelines
+                     (https://woocommerce.com/trademark-guidelines/); as a paid ad naming WooCommerce, the publisher
+                     should confirm the trademark guidelines allow this use before it runs.
+
+UI ICONS
+  Every UI glyph on the hub cards (file-spreadsheet, key-round, package, tag, globe, check;
+  scenes/tabs-assets/beats/lucide-icons.js) is a Lucide icon (Lucide Contributors, ISC License,
+  https://github.com/lucide-icons/lucide), fetched from the Iconify API https://api.iconify.design/lucide/<name>.svg on
+  2026-10-03, markup verbatim. No WordPress dashicon and no WooCommerce admin icon is drawn.
+
+WORDPRESS / WOOCOMMERCE LOOK (sources of record)
+  Every colour, size, weight, padding and the font stack of the stripped Products screen were measured headlessly
+  (Playwright chromium, getComputedStyle, 2026-10-03) on a live WordPress Playground running WooCommerce
+  (https://playground.wordpress.net/ with a blueprint installing woocommerce from wordpress.org, landing on
+  /wp-admin/edit.php?post_type=product; WooCommerce footer "Version 11.1.2"), with the WooCommerce header heading
+  measured on /wp-admin/admin.php?page=wc-settings. The list-table add highlight is addColor '#ffff33' from
+  wp-lists, https://raw.githubusercontent.com/WordPress/wordpress-develop/trunk/src/js/_enqueues/lib/lists.js ; the
+  success notice cross-checked in https://raw.githubusercontent.com/WordPress/wordpress-develop/trunk/src/wp-admin/css/common.css
+  (.notice-success: border-left-color #4ab866, background #eff9f1). The values are listed in beats/woo.css. Fonts:
+  wp-admin's system stack (-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, ...), no font files vendored.
+  Stripped on purpose (nothing on screen is a control): the admin bar, the admin menu, Add new product / Import /
+  Export, Screen Options / Help, search, Bulk actions / Filter, the status links, row checkboxes, the featured star,
+  sort arrows, row actions, pagination, the notice's dismiss X, the Activity panel. Product names are drawn in WP's
+  dark text #1d2327 (not link blue) and Categories as plain muted text.
+
+SUPERBOT HUB UI KIT (carried unchanged with the fork)
+  scenes/tabs-assets/: the inline icon symbols in icons.js (the hub's rail, hidden in this crop). The hub's mono is the
+  base's own --font-mono and its sans the base's --ui (no font files vendored); the greeting's serif stack is the
+  base's ("Iowan Old Style", Palatino, Georgia: system fonts).
+
+SUPERBOT
+  The mascot on the end card and in the app is ../../assets/sb-mark-live.{css,js} (first party); the superbot
+  avatar and greeting mark are scenes/tabs-assets/tile.svg and mark-clean.svg (first party).
+
+MADE UP FOR THE SPOT
+  The store Fernhollow (fernhollow.shop), its supplier sheet fall-line.xlsx and its rows, the products, SKUs, prices,
+  costs, stock counts, categories and the check results are fictional. No author names, no "@" anywhere on screen.

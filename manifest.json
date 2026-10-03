@@ -473,6 +473,15 @@
     "desc": "One ask in superbot: Gemini sorts 38 WhatsApp chats, ElevenLabs Scribe transcribes the voice notes in Spanish, Portuguese and English, GPT-6 Astra prices the repairs in 4 customer photos, Claude Opus 5.5 writes a reply in each customer's language and the weekend sale, and superbot sends it all from the shop's own WhatsApp Business number."
   },
   {
+    "id": "niche-github-model-switch-superbot-0cb69286",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Fix the random logouts in issue #482 and ship it: Gemini, Opus 5.5, GPT-6 Astra, then superbot opens and merges the PR on GitHub (4 switches)",
+    "src": "animations/niche-github-model-switch-superbot-0cb69286/",
+    "thumb": "assets/shots/niche-github-model-switch-superbot-0cb69286.png",
+    "desc": "One ask in superbot: Gemini reads the repo, the issue thread and CI to find the root cause, Claude Opus 5.5 writes the fix and a Remember me test, GPT-6 Astra runs all 214 tests and reviews the diff, then superbot connects to GitHub, opens PR #483 and merges it once all four checks pass."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

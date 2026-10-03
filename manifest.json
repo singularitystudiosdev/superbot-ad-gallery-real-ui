@@ -581,6 +581,15 @@
     "desc": "One prompt in superbot: Gemini listens to a 74-minute raw interview and cuts 17:36, Claude Opus 5.5 writes the title, show notes and 7 chapters, GPT-6 Astra checks every chapter, level and name, then superbot connects to Spotify for Creators and publishes episode 42: 56:32, live on Spotify."
   },
   {
+    "id": "niche-musicians-model-switch-superbot-cd0a8aa3",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Get my new single ready and put it out on my Bandcamp: Gemini, Opus 5.5, GPT-6 Astra, then superbot releases it on Bandcamp (4 switches)",
+    "src": "animations/niche-musicians-model-switch-superbot-cd0a8aa3/",
+    "thumb": "assets/shots/niche-musicians-model-switch-superbot-cd0a8aa3.png",
+    "desc": "One ask in superbot: Gemini listens to the new single and finds the lyrics, a bridge that clips and the room noise, Claude Opus 5.5 writes the release page, GPT-6 Astra gets the master, the cover and the lyrics ready, then superbot connects to Bandcamp and puts the single out on the artist's own page, name your price."
+  },
+  {
     "id": "niche-videoedit-model-switch-superbot-55e22579",
     "type": "animation",
     "group": "Ad spots",

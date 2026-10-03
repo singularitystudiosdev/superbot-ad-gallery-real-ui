@@ -1,0 +1,3 @@
+img/ CREDITS (internal): see ../CREDITS.txt.
+cover.jpg  "The Night Bus (Unsplash).jpg" by Paul Smith, https://commons.wikimedia.org/wiki/File:The_Night_Bus_(Unsplash).jpg
+           (originally https://unsplash.com/photos/Sz0kMDeDUc0). Licence CC0 1.0. Square crop, 1000 x 1000. No people.

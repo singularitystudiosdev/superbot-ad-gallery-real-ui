@@ -1,0 +1,61 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+mic-frame.jpg
+  "Close-Up of Studio Microphone in Soft Light", photo by Alpha En on Pexels,
+  https://www.pexels.com/photo/close-up-of-studio-microphone-in-soft-light-31213680/
+  (downloaded from https://images.pexels.com/photos/31213680/pexels-photo-31213680.jpeg?w=1600, 1600 x 1067; the
+  original is kept in the build scratch, /tmp/yt-3828921d/p31213680.jpg), fetched 2026-10-03. Author and title read
+  from the page's Wayback capture of 2026-05-18 (the live page is behind a bot wall). Licence: Pexels License
+  (https://www.pexels.com/license/): free to use, attribution not required, modification allowed. No CC BY /
+  CC BY-SA terms.
+  Derived: cropped with ffmpeg to 16:9 (crop 1600x900 at 0,40, scaled to 1280x720, lanczos), metadata stripped.
+  Used as the video's thumbnail (Gemini's video card, Studio's video column) and as the 4:38 frame GPT-6 Astra reads.
+  What it shows: a black USB microphone hanging from the underside of a low-profile black boom arm (a threaded mount
+  at the arm's end), a monitor and a flip clock blurred behind. No desk clamp is in the shot, so the verdict reads
+  "Low-profile boom arm, mic mounted underneath", not "clamps under the desk". frame.js's highlight boxes are
+  measured on this crop (mount 578,18 to 740,182; arm 744,40 to 1276,304; mic 408,176 to 682,668).
+
+Variant dfm2-youtube-model-switch-detail-ba89fddc: four new images. Scratch originals, the compositing pages
+(thumb.html, frame.html) and render.mjs are kept in /tmp/dfm2-p1/assets-src/. All three new photos were fetched
+2026-10-04; author and title read from the live Pexels page (it answered the fetch this time, no Wayback needed).
+Licence for all three: Pexels License (https://www.pexels.com/license/): free to use, attribution not required,
+modification allowed. No CC BY / CC BY-SA terms. Overlay type: Anton (Google Fonts, SIL Open Font License 1.1, via
+@fontsource/anton 5.x, kept in the scratch folder only; it is baked into the pixels, not shipped as a font).
+
+thumb.jpg (1280 x 720)
+  "Professional Podcast Studio with Modern Microphones", photo by Jakub Zerdzicki on Pexels,
+  https://www.pexels.com/photo/professional-podcast-studio-with-modern-microphones-38493054/
+  (downloaded from https://images.pexels.com/photos/38493054/pexels-photo-38493054.jpeg?w=1600, 1600 x 2400;
+  scratch copy /tmp/dfm2-p1/assets-src/cand-38493054.jpg).
+  Derived: cropped with ffmpeg to 16:9 (crop 1600x900 at 0,420), then composed in headless Chromium at 1280x720:
+  grade (brightness .78, contrast 1.22, saturate 1.05), a dark radial scrim top right and a vignette, the title
+  "12 MICS / UNDER $100" in Anton top right, and two price tags ($29 white, $49 yellow) on the mics. Bottom right is
+  left clear for YouTube's duration badge. JPEG, metadata stripped.
+  Used as the video's thumbnail (Gemini's card, Studio's video column).
+  What it shows: three black dynamic broadcast microphones on desk stands and a boom arm in front of a grey curtain,
+  the nearest one with a foam windscreen.
+
+at-438.jpg (640 x 360)
+  Same photo as mic-frame.jpg above (Alpha En, Pexels 31213680), from that 1280x720 crop scaled to 640x360,
+  plus the video's own lower-third "DESK SETUP" (Anton on a yellow bar, bottom left) composed in headless Chromium.
+  JPEG, metadata stripped. The 4:38 "Desk setup" frame. What it shows: the USB mic hanging under a boom arm.
+
+at-612.jpg (640 x 360)
+  "Content Woman Listening to Music via Headphones", photo by Kaboompics (shown on the page as kaboompics.com) on
+  Pexels, https://www.pexels.com/photo/content-woman-listening-to-music-via-headphones-4467998/
+  (downloaded from https://images.pexels.com/photos/4467998/pexels-photo-4467998.jpeg?w=1600, 1600 x 1067;
+  scratch copy /tmp/dfm2-p1/assets-src/cand-4467998.jpg).
+  Derived: cropped with ffmpeg to 16:9 (crop 1440x810 at 80,230, which also crops the brand print on the headband),
+  scaled to 640x360 in headless Chromium with the lower-third "BLIND TEST". JPEG, metadata stripped.
+  The 6:12 "Blind test" frame. What it shows: a woman in glasses and a green cardigan, eyes lowered, both hands on
+  the cups of closed-back headphones, listening closely.
+
+at-705.jpg (640 x 360)
+  "Man Speaking into the Microphone", photo by Reza Tavakoli on Pexels,
+  https://www.pexels.com/photo/man-speaking-into-the-microphone-23221000/
+  (downloaded from https://images.pexels.com/photos/23221000/pexels-photo-23221000.jpeg?w=1600, 1600 x 2400;
+  scratch copy /tmp/dfm2-p1/assets-src/cand-23221000.jpg).
+  Derived: cropped with ffmpeg to 16:9 (crop 1600x900 at 0,790), scaled to 640x360 in headless Chromium with the
+  lower-third "ROOM ECHO TEST" (kept clear of the mic). JPEG, metadata stripped.
+  The 7:05 "Room echo test" frame. What it shows: a man in glasses and a white shirt talking into a dynamic mic with
+  a grey foam windscreen, one finger raised, in an ordinary room with a plain wall and a slatted wooden panel.

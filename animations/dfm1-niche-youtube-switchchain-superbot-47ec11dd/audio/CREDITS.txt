@@ -1,0 +1,24 @@
+audio/ (ElevenLabs beat, scenes/tabs-assets/beats/voice.js)
+
+No audio file ships with this ad. The ElevenLabs card draws two waveform lanes from baked bar heights in
+scenes/tabs-assets/beats/voice-peaks.js, produced by audio/bake-voice-peaks.mjs (node, macOS).
+
+Voiceover lane and word timing
+- NOT ElevenLabs output. On 2026-10-04 the only ElevenLabs credential on this Mac (keychain service
+  "elevenlabs-key") was rejected by api.elevenlabs.io with invalid_api_key, and no other ElevenLabs credential
+  was found, so no Eleven v4 voiceover was generated.
+- The envelope is derived from a local macOS text to speech take (`say -v "Reed (English (US))" -r 165`) of the
+  three VO lines: "Twelve mics. One blind test." / "And the winner costs twenty-nine dollars." /
+  "I'm Sam. I test the gear so you don't overpay." The take was used only to measure a speech envelope
+  (RMS per 0.25 s) and word times (each word prefix rendered, the voiced end of prefix k = end of word k).
+  The lines were placed at 0:00.8, 0:10.4 and 0:24.3 on the trailer's 0:28 VO timeline. The WAVs stayed in
+  /tmp and were not kept.
+
+Music lane
+- NOT audio and NOT Eleven Music output: a procedural envelope on a 92 BPM grid (keys-only intro to 0:02.6,
+  drums on beats 1 to 4 with eighth-note hats, a lighter break 0:13.0 to 0:15.6, fade out from 0:27.4 to 0:30),
+  with seeded per-bar jitter, written by the same script.
+
+Model and product names shown on the card (Eleven v4, Professional Voice Clone, Eleven Music v2.5) follow
+elevenlabs.io/docs/overview/models as fetched on 2026-10-04. Eleven v4 has no voice-setting sliders or audio
+tags on the card because those docs do not list them for eleven_v4.

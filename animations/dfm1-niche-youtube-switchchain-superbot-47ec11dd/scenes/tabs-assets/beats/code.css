@@ -1,0 +1,73 @@
+/* Code beat (Claude Opus 5.5 writes the trailer in Remotion and renders it). The panel is the base's code-panel grammar
+   (Cursor Dark: #181818 chrome, #1f1f1f editor, #2b2b2b hairlines) with a split body: the editor on the left (VS Code
+   Dark+ token colours), the live preview, frame counter and terminal on the right. Every size is a design px at the
+   hub's scale (k = 2 at 1920 x 1080); the body's height is fixed by the code's 26 lines, so nothing re-lays out. */
+#s-tabs .sbsite .hub .qc-r:has(.cx-x) { --hub-reply: 100%; }
+#s-tabs .sbsite .hub .cx-x { box-sizing: border-box; width: 100%; margin-top: 8px; border: 1px solid #2b2b2b; border-radius: 10px; background: #181818; color: #cccccc; font-family: var(--ui); overflow: hidden; transform-origin: 50% 0; }
+
+/* header: project, branch-style chip, state */
+#s-tabs .sbsite .hub .cx-hd { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 10px; border-bottom: 1px solid #2b2b2b; font-size: 10.5px; }
+#s-tabs .sbsite .hub .cx-proj { display: inline-flex; align-items: center; gap: 5px; color: #e4e4e4; }
+#s-tabs .sbsite .hub .cx-proj b { font-weight: 600; }
+#s-tabs .sbsite .hub .cx-ico { width: 13px; height: 13px; fill: none; stroke: #d97757; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .cx-br { padding: 1px 6px; border: 1px solid #2f2f2f; border-radius: 4px; color: #9d9d9d; font: 9.5px/14px var(--font-mono); }
+#s-tabs .sbsite .hub .cx-state { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font-style: normal; color: #9d9d9d; }
+#s-tabs .sbsite .hub .cx-spin { width: 9px; height: 9px; border: 1.5px solid #3a3a3a; border-top-color: #d97757; border-radius: 50%; }
+#s-tabs .sbsite .hub .cx-tk { width: 12px; height: 12px; fill: none; stroke: #4ec26a; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; display: none; }
+#s-tabs .sbsite .hub .cx-state.ok { color: #e4e4e4; }
+#s-tabs .sbsite .hub .cx-state.ok .cx-spin { display: none; }
+#s-tabs .sbsite .hub .cx-state.ok .cx-tk { display: block; }
+
+/* body: editor | preview + terminal */
+#s-tabs .sbsite .hub .cx-bd { display: grid; grid-template-columns: 360px minmax(0, 1fr); height: 326px; }
+#s-tabs .sbsite .hub .cx-ed { display: grid; grid-template-rows: 22px 1fr; min-width: 0; background: #1f1f1f; border-right: 1px solid #2b2b2b; }
+#s-tabs .sbsite .hub .cx-tabs { display: flex; background: #181818; border-bottom: 1px solid #2b2b2b; font-size: 9.5px; }
+#s-tabs .sbsite .hub .cx-tab { display: inline-flex; align-items: center; gap: 5px; padding: 0 10px; color: #8b8b8b; border-right: 1px solid #2b2b2b; }
+#s-tabs .sbsite .hub .cx-tab.on { background: #1f1f1f; color: #ffffff; box-shadow: inset 0 1px 0 #d97757; margin-bottom: -1px; }
+#s-tabs .sbsite .hub .cx-fi { font: 700 7px/1 var(--font-mono); color: #4fc1ff; }
+#s-tabs .sbsite .hub .cx-fi.ts { color: #3178c6; }
+#s-tabs .sbsite .hub .cx-code { padding: 6px 0; font: 8.5px/11.2px var(--font-mono); white-space: pre; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-l { display: grid; grid-template-columns: 22px 1fr; height: 11.2px; }
+#s-tabs .sbsite .hub .cx-l u { text-decoration: none; text-align: right; padding-right: 8px; color: #6e7681; }
+#s-tabs .sbsite .hub .cx-l code { font: inherit; color: #d4d4d4; }
+#s-tabs .sbsite .hub .cx-l code i { font-style: normal; }
+#s-tabs .sbsite .hub .cx-l .kw { color: #c586c0; }
+#s-tabs .sbsite .hub .cx-l .dc { color: #569cd6; }
+#s-tabs .sbsite .hub .cx-l .fn { color: #dcdcaa; }
+#s-tabs .sbsite .hub .cx-l .vr { color: #9cdcfe; }
+#s-tabs .sbsite .hub .cx-l .at { color: #9cdcfe; }
+#s-tabs .sbsite .hub .cx-l .cp { color: #4ec9b0; }
+#s-tabs .sbsite .hub .cx-l .tg { color: #569cd6; }
+#s-tabs .sbsite .hub .cx-l .st { color: #ce9178; }
+#s-tabs .sbsite .hub .cx-l .nu { color: #b5cea8; }
+#s-tabs .sbsite .hub .cx-l .cm { color: #6a9955; }
+#s-tabs .sbsite .hub .cx-l .br { color: #ffd700; }
+#s-tabs .sbsite .hub .cx-l .tx { color: #d4d4d4; }
+#s-tabs .sbsite .hub .cx-caret { display: inline-block; width: 1.2px; height: 10px; margin-left: 0.5px; vertical-align: -2px; background: #aeafad; }
+
+#s-tabs .sbsite .hub .cx-side { display: grid; grid-template-rows: 22px auto 20px 1fr; min-width: 0; background: #181818; }
+#s-tabs .sbsite .hub .cx-ph { display: flex; align-items: center; gap: 6px; padding: 0 9px; border-bottom: 1px solid #2b2b2b; font-size: 9.5px; color: #8b8b8b; white-space: nowrap; }
+#s-tabs .sbsite .hub .cx-ph b { color: #e4e4e4; font-weight: 600; }
+#s-tabs .sbsite .hub .cx-ph .cx-dim { margin-left: auto; font: 8.5px var(--font-mono); }
+#s-tabs .sbsite .hub .cx-pv { position: relative; margin: 8px 9px 0; aspect-ratio: 16 / 9; background: #000; border-radius: 3px; overflow: hidden; box-shadow: 0 0 0 1px #2b2b2b; }
+#s-tabs .sbsite .hub .cx-ly { position: absolute; inset: 0; display: none; }
+#s-tabs .sbsite .hub .cx-ly img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .cx-h1 { position: absolute; left: 50%; top: 50%; padding: 3px 8px; white-space: nowrap; font: 900 26px/1 var(--ui); letter-spacing: -0.02em; color: #ffffff; background: #ff7a1a; border-radius: 3px; text-shadow: 0 1px 0 rgba(0,0,0,.25); }
+#s-tabs .sbsite .hub .cx-tc { display: flex; align-items: center; gap: 6px; padding: 0 9px; font: 8.5px var(--font-mono); color: #8b8b8b; }
+#s-tabs .sbsite .hub .cx-bar { flex: 1; height: 3px; background: #2b2b2b; border-radius: 2px; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-bar i, #s-tabs .sbsite .hub .cx-rbar i { display: block; height: 100%; background: #d97757; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .cx-fr { color: #e4e4e4; font-weight: 600; min-width: 18px; text-align: right; }
+
+/* terminal */
+#s-tabs .sbsite .hub .cx-term { margin: 4px 9px 9px; padding: 6px 8px; border: 1px solid #2b2b2b; border-radius: 5px; background: #111111; font: 8.4px/12px var(--font-mono); color: #cccccc; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-tl { white-space: pre-wrap; overflow-wrap: anywhere; }
+#s-tabs .sbsite .hub .cx-pr { font-style: normal; color: #4ec26a; margin-right: 5px; }
+#s-tabs .sbsite .hub .cx-tcaret { display: inline-block; width: 5px; height: 10px; vertical-align: -2px; background: #cccccc; }
+#s-tabs .sbsite .hub .cx-rnd { display: flex; align-items: center; gap: 5px; margin-top: 3px; white-space: nowrap; }
+#s-tabs .sbsite .hub .cx-rl { color: #8b8b8b; }
+#s-tabs .sbsite .hub .cx-rc { color: #e4e4e4; font-weight: 600; min-width: 46px; }
+#s-tabs .sbsite .hub .cx-rbar { flex: 1; height: 3px; background: #2b2b2b; border-radius: 2px; overflow: hidden; }
+#s-tabs .sbsite .hub .cx-enc b { color: #e4e4e4; font-weight: 600; }
+#s-tabs .sbsite .hub .cx-out { display: flex; align-items: center; gap: 5px; margin-top: 3px; }
+#s-tabs .sbsite .hub .cx-out b { color: #ffffff; font-weight: 600; }
+#s-tabs .sbsite .hub .cx-tk.cx-ok { display: block; width: 11px; height: 11px; }

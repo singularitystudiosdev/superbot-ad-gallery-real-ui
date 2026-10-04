@@ -1,0 +1,67 @@
+/* Scrape beat (beats/scrape.js): DeepSeek V4 Pro searching and bulk-scraping 40 mic-review trailers. One hub card in
+   DeepSeek's language (its blue #4D6BFE as the only accent, on the hub's dark card): the header with the search state,
+   three counters, a fixed-height body where the tool log rolls and then gives way to the ranked hook patterns, and the
+   footer tag. Nothing here transitions: opacity/transform/visibility are written from t in render, so ?t= freezes a
+   frame. Every class is prefixed .ds-. */
+#s-tabs .sbsite .hub .ds-card { --ds: #4d6bfe; --ds-l: #8fa2ff; opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px;
+  position: relative; border-radius: 10px; overflow: hidden; background: #141416; transform-origin: 50% 0;
+  font: 12px/1.3 var(--ui); color: #d6d6dd; }
+/* the frame rides over the header and footer fills, so it is an overlay rather than the card's own inset shadow */
+#s-tabs .sbsite .hub .ds-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px #2a2a2e; pointer-events: none; }
+#s-tabs .sbsite .hub .ds-card.ds-fin::after { box-shadow: inset 0 0 0 1px rgba(77,107,254,.6); }
+#s-tabs .sbsite .hub .ds-card.ds-fin { box-shadow: 0 0 22px rgba(77,107,254,.14); }
+#s-tabs .sbsite .hub .ds-card svg { flex: none; }
+
+/* header */
+#s-tabs .sbsite .hub .ds-hd { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-bottom: 1px solid #232326; background: #18181b; white-space: nowrap; }
+#s-tabs .sbsite .hub .ds-hd b { font: 600 13px/1 var(--ui); color: #ededf0; }
+#s-tabs .sbsite .hub .ds-ico { width: 15px; height: 15px; fill: none; stroke: var(--ds-l); stroke-width: 2.2; stroke-linecap: round; }
+#s-tabs .sbsite .hub .ds-sub { font: 500 11.5px/1 var(--ui); color: #8b8b93; }
+#s-tabs .sbsite .hub .ds-state { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; font: 500 12px/1 var(--ui); font-style: normal; color: #a9abb8; }
+#s-tabs .sbsite .hub .ds-state.ok { color: var(--ds-l); }
+#s-tabs .sbsite .hub .ds-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .ds-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #2c2f45; border-top-color: var(--ds-l); }
+#s-tabs .sbsite .hub .ds-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the three counters */
+#s-tabs .sbsite .hub .ds-stats { display: flex; gap: 8px; padding: 9px 12px 0; }
+#s-tabs .sbsite .hub .ds-stat { flex: 1; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; height: 26px; padding: 0 10px;
+  border-radius: 7px; background: #1b1c24; box-shadow: inset 0 0 0 1px #262a3d; font: 500 11.5px/26px var(--ui); color: #9a9caa; white-space: nowrap; }
+#s-tabs .sbsite .hub .ds-n { font: 600 12.5px/26px var(--font-mono); color: #ededf0; font-variant-numeric: tabular-nums; }
+
+/* the body: one fixed height, shared by the rolling log and the results laid over it */
+#s-tabs .sbsite .hub .ds-bd { position: relative; height: 146px; margin: 8px 12px 0; }
+#s-tabs .sbsite .hub .ds-log { position: absolute; inset: 0; overflow: hidden; border-radius: 7px; background: #0e0f13; box-shadow: inset 0 0 0 1px #20222c; }
+#s-tabs .sbsite .hub .ds-log { padding: 10px 10px; box-sizing: border-box; }
+#s-tabs .sbsite .hub .ds-clip { height: 126px; overflow: hidden; } /* VIS (7) x LH (18) in scrape.js */
+#s-tabs .sbsite .hub .ds-l { display: flex; align-items: center; gap: 10px; height: 18px; font: 11.5px/18px var(--font-mono); white-space: pre; opacity: 0; }
+#s-tabs .sbsite .hub .ds-l code { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; font: inherit; color: #c9cad3; background: none; padding: 0; }
+#s-tabs .sbsite .hub .ds-l i { font-style: normal; }
+#s-tabs .sbsite .hub .ds-k { color: var(--ds-l); font-weight: 600; }
+#s-tabs .sbsite .hub .ds-s { color: #e8e2c8; }
+#s-tabs .sbsite .hub .ds-p { color: #6b6e80; }
+#s-tabs .sbsite .hub .ds-f { color: #b3b6c6; }
+#s-tabs .sbsite .hub .ds-t { color: #7fc8d6; }
+#s-tabs .sbsite .hub .ds-o code { color: #9fa1ad; }
+#s-tabs .sbsite .hub .ds-r { flex: none; font: 500 11px/18px var(--font-mono); color: #8b8d9a; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ds-r.ok { color: #6fd39a; }
+
+/* the ranked hook patterns */
+#s-tabs .sbsite .hub .ds-res { position: absolute; inset: 0; display: grid; align-content: start; gap: 9px; padding-top: 4px; }
+#s-tabs .sbsite .hub .ds-row { display: flex; align-items: center; gap: 10px; opacity: 0; }
+#s-tabs .sbsite .hub .ds-rk { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: rgba(77,107,254,.16); font: 700 11.5px/1 var(--font-mono); color: var(--ds-l); }
+#s-tabs .sbsite .hub .ds-rm { flex: 1; min-width: 0; display: grid; gap: 5px; }
+#s-tabs .sbsite .hub .ds-rl { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+#s-tabs .sbsite .hub .ds-rl b { font: 600 12.5px/1.15 var(--ui); color: #ececf1; }
+#s-tabs .sbsite .hub .ds-cnt { margin-left: auto; font: 600 12px/1 var(--font-mono); color: var(--ds-l); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ds-bar { position: relative; display: block; height: 5px; border-radius: 9999px; background: #23252f; overflow: hidden; }
+#s-tabs .sbsite .hub .ds-bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 9999px; background: var(--ds); transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .ds-take { display: flex; align-items: center; gap: 7px; margin-top: 3px; padding: 7px 10px; border-radius: 7px;
+  background: rgba(77,107,254,.12); box-shadow: inset 0 0 0 1px rgba(77,107,254,.35); font: 600 13px/1.2 var(--ui); color: #f2f3f7; opacity: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .ds-take b { color: var(--ds-l); }
+#s-tabs .sbsite .hub .ds-take .qc-ok { flex: none; }
+
+/* the footer tag */
+#s-tabs .sbsite .hub .ds-ft { display: flex; align-items: center; gap: 7px; height: 32px; margin-top: 8px; padding: 0 12px; border-top: 1px solid #232326;
+  background: #18181b; font: 500 11.5px/1 var(--ui); color: #a9abb8; opacity: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .ds-ft .qc-ok { flex: none; width: 13px; height: 13px; }

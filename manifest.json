@@ -880,6 +880,15 @@
     "desc": "Variant of niche-youtube-model-switch-superbot-3828921d that puts the generated asset on screen. One ask in superbot: Gemini maps the 1,284 comments onto the video and finds the moment they talk about most (the blind test at 6:12), GPT-6 Astra cuts it and reframes it vertical, Claude Opus 5.5 writes the captions, the title and the replies, then superbot uploads the captioned Short from YouTube Studio, linked to the full video, and the Short plays inside the ad. 16:9 only."
   },
   {
+    "id": "niche-ytx7-model-switch-superbot-0311b486",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer my top comments, pin the best one, and post a community update: a multi-model superbot thread, each bubble in its model's colour, with the replies and a community post landing in YouTube between them (5 switches, variant, 16:9)",
+    "src": "animations/niche-ytx7-model-switch-superbot-0311b486/",
+    "thumb": "assets/shots/niche-ytx7-model-switch-superbot-0311b486.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d told as a multi-author chat thread: in one superbot chat, Gemini ranks the latest video's 1,284 comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies and Nano Banana Pro makes a community post image, each in a bubble with its own colour and mark. Between the bubbles the replies land and the top comment is pinned in YouTube Studio, then the community post with the generated image is published. 16:9 only."
+  },
+  {
     "id": "niche-ytx1-model-switch-superbot-f5a63f38",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,17 @@
+/* scenes/yt/frame.css: the superbot window around every YouTube screen. A copy of the thread window
+   (scenes/thread/thread.css .tw-win/.tw-bar): 56 px side margins, 44 px top and bottom, 26 px radius, the same
+   #0d0d0d surface with the #26262b edge, the 76 px #0a0a0a title bar. Linked by frame.js (ensureCss). */
+.ytf-root { position: absolute; inset: 0; font-family: var(--ui); color: #f2f2f7;
+  background: radial-gradient(120% 90% at 50% 0%, #121218 0%, #060607 62%), #060607; }
+.ytf-win { position: absolute; left: 56px; top: 44px; width: 1808px; height: 992px; border-radius: 26px; overflow: hidden;
+  background: #0d0d0d; box-shadow: 0 0 0 1.5px #26262b, 0 30px 90px rgb(0 0 0 / .6); display: flex; flex-direction: column; }
+.ytf-bar { flex: none; height: 76px; display: flex; align-items: center; gap: 16px; padding: 0 30px; background: #0a0a0a; border-bottom: 1.5px solid #1e1e21; }
+.ytf-mark { width: 46px; height: 46px; display: grid; place-items: center; flex: none; }
+.ytf-brandname { font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+.ytf-sep { width: 2px; height: 30px; border-radius: 2px; background: #2e2e33; margin: 0 4px; }
+.ytf-label { font-size: 28px; font-weight: 600; color: #d1d1d6; white-space: nowrap; }
+.ytf-conn { margin-left: auto; display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 500; color: #8e8e93; }
+.ytf-icon { display: grid; place-items: center; }
+.ytf-icon svg { width: 38px; height: auto; display: block; }
+.ytf-studio svg { height: 26px; width: auto; display: block; }
+.ytf-screen { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #fff; }

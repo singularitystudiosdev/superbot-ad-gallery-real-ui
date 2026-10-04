@@ -1,0 +1,107 @@
+/* scenes/yt/posts.css: YouTube desktop channel page, Posts tab, owner view (posts.js). Native YouTube CSS px, measured
+   off the channel Posts tab reference (posts-mkbhd-top.png / posts-mkbhd-scroll.png, 1920 px viewport, DPR 1): 56 px top
+   bar, banner ~6.2:1 with 16 px radius, 160 px avatar, 36 px channel name, 48 px tab row with a 2 px underline, 640 px
+   post cards with a 1 px border and 12 px radius, 14/20 post text, 512 px post images. At the 1130 px native viewport
+   YouTube shows the 72 px mini guide. The page is scaled 1.6x by .ytp-scaler. No transitions, no animations. */
+.ytp-scaler { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.ytp { --bg: #fff; --fg: #0f0f0f; --fg2: #606060; --chip: #f2f2f2; --line: #e5e5e5; --line2: #f2f2f2; --link: #065fd4;
+  --sbg: #f8f8f8; --sline: #d3d3d3;
+  position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); color: var(--fg);
+  font-family: "Roboto GM", Roboto, Arial, sans-serif; font-size: 14px; line-height: 20px; -webkit-font-smoothing: antialiased; }
+.ytp.is-dark { --bg: #0f0f0f; --fg: #f1f1f1; --fg2: #aaa; --chip: #272727; --line: #3f3f3f; --line2: #272727; --link: #3ea6ff;
+  --sbg: #222; --sline: #303030; }
+.ytp .yti { width: 24px; height: 24px; display: block; flex: none; }
+.ytp .ytp-ib { width: 40px; height: 40px; display: grid; place-items: center; flex: none; color: var(--fg); }
+.ytp h1 { margin: 0; }
+
+/* ---------- top bar ---------- */
+.ytp-top { position: relative; z-index: 3; flex: none; height: 56px; display: flex; align-items: center; padding: 0 16px 0 16px; background: var(--bg); }
+.ytp-logo { margin-left: 16px; display: flex; align-items: center; gap: 1px; }
+.ytp-logo svg { width: 29px; height: auto; display: block; }
+.ytp-logo b { font-family: "Roboto GM", Arial, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -1.1px; color: var(--fg); transform: scaleY(.96); }
+.ytp-searchwrap { position: absolute; left: 50%; top: 8px; margin-left: -260px; display: flex; align-items: center; }
+.ytp-search { width: 380px; height: 40px; box-sizing: border-box; border: 1px solid var(--sline); border-right: 0; border-radius: 20px 0 0 20px;
+  display: flex; align-items: center; padding: 0 16px; color: #888; font-size: 16px; }
+.ytp-sbtn { width: 64px; height: 40px; box-sizing: border-box; border: 1px solid var(--sline); border-radius: 0 20px 20px 0; background: var(--sbg);
+  display: grid; place-items: center; color: var(--fg); }
+.ytp-mic { width: 40px; height: 40px; margin-left: 12px; border-radius: 50%; background: var(--chip); display: grid; place-items: center; color: var(--fg); }
+.ytp-top-r { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.ytp-create { height: 36px; padding: 0 16px 0 10px; border-radius: 18px; background: var(--chip); display: flex; align-items: center; gap: 6px;
+  font-weight: 500; font-size: 14px; }
+.ytp-me { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; display: block; margin: 0 4px 0 8px; }
+
+/* ---------- body: mini guide + main ---------- */
+.ytp-bodyrow { flex: 1; min-height: 0; display: flex; }
+.ytp-guide { flex: none; width: 72px; padding: 4px 4px 0; box-sizing: border-box; }
+.ytp-gi { height: 74px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 10px;
+  font-size: 10px; line-height: 14px; color: var(--fg); }
+.ytp-main { position: relative; flex: 1; min-width: 0; overflow: hidden; }
+.ytp-scroll { position: absolute; left: 0; right: 0; top: 0; padding: 0 24px 40px; }
+
+/* ---------- channel header ---------- */
+.ytp-banner { height: 161px; border-radius: 16px; overflow: hidden; background: var(--chip); }
+.ytp-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ytp-hero { position: relative; height: 216px; }
+.ytp-avatar { position: absolute; left: 0; top: 35px; width: 160px; height: 160px; border-radius: 50%; object-fit: cover; display: block; }
+.ytp-meta { position: absolute; left: 176px; right: 0; top: 19px; }
+.ytp-name { font-size: 36px; line-height: 50px; font-weight: 700; letter-spacing: -.3px; }
+.ytp-line { margin-top: 4px; font-size: 14px; line-height: 20px; color: var(--fg2); white-space: nowrap; }
+.ytp-line b { font-weight: 500; color: var(--fg); }
+.ytp-line i { font-style: normal; margin: 0 4px; }
+.ytp-desc { margin-top: 10px; font-size: 14px; line-height: 20px; color: var(--fg2); white-space: nowrap; }
+.ytp-desc b { font-weight: 500; color: var(--fg); margin-left: 4px; }
+.ytp-links { margin-top: 6px; display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 20px; color: var(--fg2); }
+.ytp-links .yti { width: 16px; height: 16px; color: var(--link); transform: rotate(-45deg); }
+.ytp-links span { color: var(--link); font-weight: 500; }
+.ytp-links em { font-style: normal; color: var(--fg); font-weight: 500; margin-left: 3px; }
+.ytp-btns { margin-top: 12px; display: flex; gap: 8px; }
+.ytp-chip { height: 36px; padding: 0 16px; border-radius: 18px; background: var(--chip); display: flex; align-items: center; font-weight: 500; font-size: 14px; }
+
+/* ---------- tabs ---------- */
+.ytp-tabs { height: 48px; display: flex; align-items: stretch; gap: 24px; border-bottom: 1px solid var(--line); background: var(--bg); }
+.ytp-tab { display: flex; align-items: center; font-size: 16px; font-weight: 500; color: var(--fg2); box-sizing: border-box; border-bottom: 2px solid transparent; }
+.ytp-tab.is-on { color: var(--fg); border-bottom-color: var(--fg); }
+.ytp-tab-search { color: var(--fg2); margin-left: 4px; }
+.ytp-tabs-sticky { position: absolute; left: 0; right: 0; top: 0; z-index: 2; padding: 0 24px; visibility: hidden; }
+
+/* ---------- feed ---------- */
+.ytp-feed { width: 640px; padding-top: 24px; margin-left: -12px; }
+.ytp-card { position: relative; box-sizing: border-box; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.ytp-composer { padding: 16px 16px 12px; margin-bottom: 16px; }
+.ytp-c-head { display: flex; align-items: center; gap: 12px; }
+.ytp-c-av { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; display: block; flex: none; }
+.ytp-c-head > b { font-weight: 500; font-size: 14px; }
+.ytp-vis { margin-left: auto; display: flex; align-items: center; gap: 4px; font-size: 12px; line-height: 18px; color: var(--fg2); }
+.ytp-vis b { font-weight: 500; color: var(--fg); }
+.ytp-vis .yti { width: 18px; height: 18px; }
+.ytp-c-field { margin: 10px 0 0 52px; min-height: 44px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.ytp-c-hint { font-size: 14px; line-height: 20px; color: var(--fg2); padding-top: 4px; }
+.ytp-c-text { font-size: 14px; line-height: 20px; color: var(--fg); padding-top: 4px; white-space: pre-wrap; }
+.ytp-c-img { position: relative; width: 168px; height: 168px; margin-top: 10px; border-radius: 12px; overflow: hidden; }
+.ytp-c-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ytp-c-x { position: absolute; right: 6px; top: 6px; width: 28px; height: 28px; border-radius: 50%; background: rgb(0 0 0 / .6);
+  display: grid; place-items: center; color: #fff; }
+.ytp-c-x .yti { width: 18px; height: 18px; }
+.ytp-c-foot { display: flex; align-items: center; gap: 2px; margin: 10px 0 0 44px; }
+.ytp-tool { height: 36px; padding: 0 9px 0 8px; border-radius: 18px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--fg); }
+.ytp-tool .yti { width: 22px; height: 22px; }
+.ytp-post { margin-left: auto; height: 36px; padding: 0 16px; border-radius: 18px; display: flex; align-items: center;
+  font-weight: 500; font-size: 14px; background: var(--chip); color: #909090; }
+.ytp-post.is-on { background: var(--link); color: #fff; }
+.ytp-slot { overflow: hidden; }
+.ytp-postcard { display: flex; padding: 16px 16px 6px 18px; margin-bottom: 16px; }
+.ytp-p-av { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; display: block; flex: none; }
+.ytp-p-body { flex: 1; min-width: 0; margin-left: 14px; padding-right: 28px; }
+.ytp-p-head { display: flex; align-items: baseline; gap: 6px; height: 18px; }
+.ytp-p-head b { font-weight: 500; font-size: 13px; line-height: 18px; }
+.ytp-p-head span { font-size: 12px; line-height: 18px; color: var(--fg2); }
+.ytp-p-text { margin-top: 3px; font-size: 14px; line-height: 20px; }
+.ytp-p-img { width: 512px; height: 512px; margin-top: 10px; border-radius: 12px; overflow: hidden; background: var(--chip); }
+.ytp-p-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ytp-p-more { position: absolute; right: 8px; top: 8px; }
+.ytp-p-more .yti { width: 20px; height: 20px; }
+.ytp-acts { display: flex; align-items: center; height: 40px; margin-top: 6px; margin-left: -8px; }
+.ytp-act { height: 36px; min-width: 36px; padding: 0 8px; box-sizing: border-box; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--fg2); }
+.ytp-act .yti { width: 20px; height: 20px; color: var(--fg); }
+.ytp-act.ytp-dis .yti { transform: rotate(180deg); }
+.ytp-act + .ytp-act { margin-left: 2px; }

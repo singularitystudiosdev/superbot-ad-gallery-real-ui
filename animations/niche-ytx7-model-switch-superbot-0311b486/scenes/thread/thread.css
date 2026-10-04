@@ -1,0 +1,115 @@
+/* scenes/thread/thread.css: the multi-author superbot thread (thread-a, thread-b). Scoped under .thread-scene.
+   The superbot window: 56 px side margins, 44 px top and bottom (FRAME in thread.js), a 76 px title bar with the
+   mark, "superbot" and the thread title. Each model bubble: the model's mark on an avatar tile, its name label in the
+   model colour (22 px), a surface tinted with the colour and a 5 px accent bar in it, text at 32 px. No composer. */
+
+.thread-scene { background: radial-gradient(120% 90% at 50% 0%, #121218 0%, #060607 62%), #060607; }
+.thread-scene .tw-root { position: absolute; inset: 0; font-family: var(--ui); color: #f2f2f7; }
+.thread-scene .tw-win { position: absolute; left: 56px; top: 44px; width: 1808px; height: 992px; border-radius: 26px; overflow: hidden;
+  background: #0d0d0d; box-shadow: 0 0 0 1.5px #26262b, 0 30px 90px rgb(0 0 0 / .6); display: flex; flex-direction: column; }
+
+/* title bar: mark + superbot + thread title, the YouTube connection as plain text on the right */
+.thread-scene .tw-bar { flex: none; height: 76px; display: flex; align-items: center; gap: 16px; padding: 0 30px; background: #0a0a0a; border-bottom: 1.5px solid #1e1e21; }
+.thread-scene .tw-mark { width: 46px; height: 46px; display: grid; place-items: center; flex: none; }
+.thread-scene .tw-brand { font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: #fff; }
+.thread-scene .tw-sep { width: 2px; height: 30px; border-radius: 2px; background: #2e2e33; margin: 0 4px; }
+.thread-scene .tw-title { font-size: 28px; font-weight: 600; color: #d1d1d6; }
+.thread-scene .tw-conn { margin-left: auto; display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 500; color: #8e8e93; }
+.thread-scene .tw-yt { width: 38px; height: auto; }
+
+/* the thread viewport and its centred column (top-anchored while it fits, then pushed up as bubbles land) */
+.thread-scene .tw-view { position: relative; flex: 1; min-height: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 56px); mask-image: linear-gradient(180deg, transparent 0, #000 56px); }
+.thread-scene .tw-col { position: absolute; left: 50%; top: 0; width: 1320px; margin-left: -660px; padding: 40px 0 0; display: flex; flex-direction: column; gap: 34px; }
+
+/* the thread's opening line: who is in it */
+.thread-scene .tw-intro { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 6px 0 10px; }
+.thread-scene .tw-intro .ti-tiles { display: flex; }
+.thread-scene .tw-intro .ti-tiles .tb-av { width: 80px; height: 80px; margin: 0 -6px; border: 5px solid #0d0d0d; background-clip: padding-box; }
+.thread-scene .tw-intro .ti-tiles .tb-av.is-photo { border-radius: 50%; }
+.thread-scene .tw-intro p { margin: 0; font-size: 26px; font-weight: 500; color: #8e8e93; }
+
+/* ---------- a bubble ---------- */
+.thread-scene .tb { display: flex; align-items: flex-start; gap: 22px; transform-origin: 0 100%; will-change: transform, opacity; }
+.thread-scene .tb-user { justify-content: flex-end; transform-origin: 100% 100%; }
+.thread-scene .tb-col { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.thread-scene .tb-model .tb-col { max-width: 1110px; }
+.thread-scene .tb-user .tb-col { max-width: 880px; align-items: flex-end; }
+.thread-scene .tb-name { font-size: 22px; font-weight: 700; line-height: 26px; letter-spacing: .005em; color: var(--mc); }
+.thread-scene .tb-user .tb-name { color: #aeb1bc; }
+.thread-scene .tb-body { position: relative; padding: 22px 30px 24px 34px; border-radius: 8px 28px 28px 28px; overflow: hidden;
+  background: #141416; box-shadow: inset 0 0 0 1.5px var(--edge); }
+.thread-scene .tb-model .tb-body::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--bar); }
+.thread-scene .tb-user .tb-body { padding: 22px 32px 24px; border-radius: 28px 8px 28px 28px; background: #232327; box-shadow: none; }
+.thread-scene .tb-text { margin: 0; font-size: 32px; line-height: 44px; font-weight: 500; color: #f2f2f7; letter-spacing: -.003em; }
+
+/* avatar tile: the model's mark (Sam: his photo) */
+.thread-scene .tb-av { flex: none; width: 68px; height: 68px; border-radius: 20px; display: grid; place-items: center; position: relative; margin-top: 30px;
+  background: #17171a; box-shadow: inset 0 0 0 2.5px var(--mc); }
+.thread-scene .tb-av img { display: block; }
+.thread-scene .tb-av .tb-av-in { width: 42px; height: 42px; display: grid; place-items: center; }
+.thread-scene .tb-av .tb-av-in img { width: 42px; height: 42px; }
+.thread-scene .tb-av.is-photo { border-radius: 50%; overflow: hidden; background: #2a2a2e; box-shadow: none; }
+.thread-scene .tb-av.is-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* the authors' colours */
+.thread-scene .m-gemini { --mc: #6f8ff0; --edge: rgb(110 140 230 / .26);
+  --bar: linear-gradient(180deg, #1A73E8, #9B72CB); }
+.thread-scene .m-gemini .tb-name { background: linear-gradient(90deg, #4c8df6, #9B72CB); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.thread-scene .tb-av.m-gemini { background: #101526; box-shadow: inset 0 0 0 2.5px #4f7fe0; }
+.thread-scene .m-astra { --mc: #10A37F; --edge: rgb(16 163 127 / .30); --bar: #10A37F; }
+.thread-scene .tb-av.m-astra { background: #000; }
+.thread-scene .tb-av.m-astra .tb-av-in, .thread-scene .tb-av.m-astra .tb-av-in img { width: 52px; height: 52px; }
+.thread-scene .m-opus { --mc: #E08A6C; --edge: rgb(217 119 87 / .30); --bar: #D97757; }
+.thread-scene .tb-av.m-opus { background: #D97757; box-shadow: none; }
+.thread-scene .m-nbp { --mc: #F9AB00; --edge: rgb(249 171 0 / .32); --bar: #F9AB00; }
+.thread-scene .tb-av.m-nbp { background: #1a1607; box-shadow: inset 0 0 0 4px #F9AB00; }
+.thread-scene .m-sam { --mc: #3a3b40; }
+.thread-scene .m-gemini .tb-body { background: linear-gradient(120deg, rgb(26 115 232 / .15), rgb(155 114 203 / .11)), #141416; }
+.thread-scene .m-astra .tb-body { background: linear-gradient(0deg, rgb(16 163 127 / .12), rgb(16 163 127 / .12)), #141416; }
+.thread-scene .m-opus .tb-body { background: linear-gradient(0deg, rgb(217 119 87 / .13), rgb(217 119 87 / .13)), #141416; }
+.thread-scene .m-nbp .tb-body { background: linear-gradient(0deg, rgb(249 171 0 / .10), rgb(249 171 0 / .10)), #141416; }
+
+/* ---------- attachments ---------- */
+.thread-scene .tb-card { margin-top: 20px; border-radius: 18px; background: #0c0c0e; box-shadow: inset 0 0 0 1.5px #26262b; overflow: hidden; }
+
+/* Gemini: the five comments that need Sam, ranked */
+.thread-scene .tb-ranked { padding: 8px 0; width: 760px; }
+.thread-scene .tr-row { display: flex; align-items: center; gap: 18px; height: 62px; padding: 0 26px 0 22px; font-size: 26px; }
+.thread-scene .tr-row + .tr-row { box-shadow: inset 0 1.5px 0 #1c1c20; }
+.thread-scene .tr-n { width: 24px; text-align: center; font-weight: 700; color: #6f8ff0; font-size: 24px; }
+.thread-scene .tr-av { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #2a2a2e; flex: none; }
+.thread-scene .tr-name { font-weight: 600; color: #f2f2f7; }
+.thread-scene .tr-likes { margin-left: auto; display: flex; align-items: center; gap: 10px; color: #c7c7cc; font-weight: 600; }
+.thread-scene .tr-likes svg { width: 26px; height: 26px; fill: #8e8e93; }
+
+/* GPT-6 Astra: the 4:38 frame, the boom arm boxed and labelled */
+.thread-scene .tb-frame { width: 720px; }
+.thread-scene .tf-crop { position: relative; width: 720px; height: 405px; overflow: hidden; background: #1a1a1c; }
+.thread-scene .tf-img { position: absolute; inset: 0; transform: scale(var(--z)); transform-origin: var(--fx) var(--fy); }
+.thread-scene .tf-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.thread-scene .tf-box { position: absolute; border: 4px solid #10A37F; border-radius: 10px; box-shadow: 0 0 0 2px rgb(0 0 0 / .35), inset 0 0 0 2px rgb(0 0 0 / .25); opacity: 0; transform-origin: 50% 50%; }
+.thread-scene .tf-label { position: absolute; left: -4px; top: -48px; padding: 4px 14px; border-radius: 8px 8px 8px 0; background: #10A37F; color: #fff; font-size: 24px; font-weight: 700; line-height: 32px; white-space: nowrap; opacity: 0; }
+.thread-scene .tf-tc { position: absolute; right: 14px; bottom: 14px; padding: 2px 10px; border-radius: 6px; background: rgb(0 0 0 / .78); color: #fff; font: 600 22px/30px Roboto, "Roboto GM", var(--ui); }
+
+/* Claude Opus 5.5: the reply to Priya, quoted */
+.thread-scene .tb-quote { width: 960px; padding: 18px 26px 22px; }
+.thread-scene .tq-head { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 600; color: #aeb1bc; }
+.thread-scene .tq-head svg { width: 26px; height: 26px; fill: #E08A6C; }
+.thread-scene .tq-pin { margin-left: auto; display: flex; align-items: center; gap: 6px; color: #E08A6C; }
+.thread-scene .tq-pin svg { width: 24px; height: 24px; }
+.thread-scene .tq-c, .thread-scene .tq-r { display: flex; gap: 16px; margin-top: 16px; }
+.thread-scene .tq-r { margin-left: 56px; padding-left: 20px; box-shadow: inset 3px 0 0 #D97757; }
+.thread-scene .tq-av { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #2a2a2e; flex: none; }
+.thread-scene .tq-t { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.thread-scene .tq-t b { font-size: 22px; font-weight: 700; color: #e5e5ea; }
+.thread-scene .tq-t span { font-size: 26px; line-height: 34px; color: #c7c7cc; }
+.thread-scene .tq-r .tq-t span { color: #f2f2f7; }
+
+/* Nano Banana Pro: the community post image, resolving from blur to sharp */
+.thread-scene .tb-image { width: 500px; }
+.thread-scene .ti-wrap { position: relative; width: 500px; height: 500px; overflow: hidden; background: #1a1a1c; }
+.thread-scene .ti-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.thread-scene .ti-blur { transform: scale(1.08); }
+.thread-scene .ti-sheen { position: absolute; left: 0; right: 0; top: 0; height: 100%; opacity: 0;
+  background: linear-gradient(180deg, transparent 0%, rgb(249 171 0 / .0) 30%, rgb(255 214 120 / .22) 48%, rgb(249 171 0 / .0) 66%, transparent 100%); }

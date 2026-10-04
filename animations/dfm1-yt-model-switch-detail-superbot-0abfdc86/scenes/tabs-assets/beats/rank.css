@@ -1,0 +1,89 @@
+/* Rank beat (beats/rank.js): GPT-6 Astra's comments analysis, a wide hub card shaped for the 16:9 camera push. The
+   header (thumbnail with the duration chip, title and meta, the comments-read counter with its spinner resolving to
+   the check), the thin read bar, then two columns: the intent stacked bar with its legend and the repeat asks with
+   their share bars on the left, the ranked top-five table (rank, letter avatar, name, intent tag, the comment, likes,
+   repeats) on the right, and the footer with the check. Nothing here transitions: opacity/transform are written from
+   t in render, so ?t= freezes a frame. Every class is prefixed .rk-. Radii: 10px card, 6px thumbnail, pills fully
+   round. One accent (#8ab4f8) for data marks; greys for the non-actionable intents. */
+
+/* the reply spans the whole thread column so the card can read as a wide 16:9 panel when the camera pushes in */
+#s-tabs .sbsite .hub .qc-r:has(.rk-card) { --hub-reply: 100%; }
+
+#s-tabs .sbsite .hub .rk-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 12px 14px 11px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+
+/* header: the video and the counter */
+#s-tabs .sbsite .hub .rk-hd { display: flex; align-items: center; gap: 11px; }
+#s-tabs .sbsite .hub .rk-th { position: relative; flex: none; width: 80px; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000; }
+#s-tabs .sbsite .hub .rk-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .rk-len { position: absolute; right: 3px; bottom: 3px; padding: 2px 3px; border-radius: 4px; background: rgba(0,0,0,.8);
+  font: 600 9px/1 var(--ui); font-style: normal; color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rk-vid { flex: 1; min-width: 0; display: grid; gap: 5px; }
+#s-tabs .sbsite .hub .rk-title { font: 600 13px/1.25 var(--ui); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .rk-meta { font: 11.5px/1.2 var(--ui); color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .rk-ct { flex: none; display: flex; align-items: center; gap: 8px; }
+#s-tabs .sbsite .hub .rk-cn { display: grid; gap: 3px; text-align: right; }
+#s-tabs .sbsite .hub .rk-n { font: 600 19px/1 var(--ui); color: #ececec; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rk-cn small { font: 11px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .rk-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .rk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .rk-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+#s-tabs .sbsite .hub .rk-read { display: block; height: 2px; margin: 10px 0 11px; border-radius: 9999px; background: #26262b; overflow: hidden; }
+#s-tabs .sbsite .hub .rk-read i { display: block; height: 100%; background: #8ab4f8; transform-origin: 0 50%; transform: scaleX(0); }
+
+/* the two columns */
+#s-tabs .sbsite .hub .rk-body { display: grid; grid-template-columns: minmax(0, 212px) minmax(0, 1fr); gap: 16px; }
+#s-tabs .sbsite .hub .rk-left, #s-tabs .sbsite .hub .rk-right { min-width: 0; }
+#s-tabs .sbsite .hub .rk-lb { display: block; font: 500 11px/14px var(--ui); color: #8e8e93; white-space: nowrap; }
+#s-tabs .sbsite .hub .rk-lb2 { margin-top: 13px; }
+
+/* intent: one stacked bar (it grows as one, from the left) and a legend whose counts stream with the read */
+#s-tabs .sbsite .hub .rk-stack { display: block; height: 10px; margin: 7px 0 8px; border-radius: 9999px; background: #26262b; overflow: hidden; }
+#s-tabs .sbsite .hub .rk-segs { display: flex; gap: 2px; height: 100%; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .rk-seg { display: block; height: 100%; }
+#s-tabs .sbsite .hub .rk-question { background: #8ab4f8; }
+#s-tabs .sbsite .hub .rk-request { background: #c6dafc; }
+#s-tabs .sbsite .hub .rk-praise { background: #4a4c55; }
+#s-tabs .sbsite .hub .rk-other { background: #3a3a3f; }
+#s-tabs .sbsite .hub .rk-legend { display: grid; gap: 3px; }
+#s-tabs .sbsite .hub .rk-lg { display: flex; align-items: center; gap: 7px; font: 11.5px/15px var(--ui); color: #c4c7c5; white-space: nowrap; }
+#s-tabs .sbsite .hub .rk-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; }
+#s-tabs .sbsite .hub .rk-lgl { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .rk-lgn { font-weight: 600; color: #ececec; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rk-lgp { width: 30px; text-align: right; color: #8e8e93; font-variant-numeric: tabular-nums; }
+
+/* the repeat asks: count and wording, then the share of its own intent */
+#s-tabs .sbsite .hub .rk-cls { display: grid; gap: 7px; margin-top: 6px; }
+#s-tabs .sbsite .hub .rk-cl { opacity: 0; display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .rk-cl1 { display: flex; align-items: baseline; gap: 6px; font: 11.5px/15px var(--ui); color: #c4c7c5; min-width: 0; }
+#s-tabs .sbsite .hub .rk-cl1 b { flex: none; font-weight: 600; color: #8ab4f8; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rk-cl1 span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .rk-cl2 { display: flex; align-items: center; gap: 8px; }
+#s-tabs .sbsite .hub .rk-cbar { flex: 1; display: block; height: 3px; border-radius: 9999px; background: #26262b; overflow: hidden; }
+#s-tabs .sbsite .hub .rk-cbar i { display: block; height: 100%; background: #8ab4f8; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .rk-cl2 small { flex: none; font: 10.5px/1 var(--ui); color: #8e8e93; font-variant-numeric: tabular-nums; }
+
+/* the ranked table: rows are absolutely placed at their found slot and translated into rank from t */
+#s-tabs .sbsite .hub .rk-th2 { display: flex; align-items: center; gap: 8px; padding-bottom: 4px; border-bottom: 1px solid #1f1f23; }
+#s-tabs .sbsite .hub .rk-th2 .rk-lb { flex: 1; }
+#s-tabs .sbsite .hub .rk-col { flex: none; width: 44px; font: 500 10.5px/14px var(--ui); color: #8e8e93; text-align: right; }
+#s-tabs .sbsite .hub .rk-list { position: relative; }
+#s-tabs .sbsite .hub .rk-row { opacity: 0; position: absolute; left: 0; right: 0; height: 44px; box-sizing: border-box; display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid #1f1f23; background: #141416; }
+#s-tabs .sbsite .hub .rk-rk { flex: none; width: 9px; font: 600 11.5px/1 var(--font-mono); color: #8e8e93; text-align: right; opacity: 0; }
+#s-tabs .sbsite .hub .rk-av { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--c); color: #fff; font: 600 11px/1 var(--ui); }
+#s-tabs .sbsite .hub .rk-main { flex: 1; min-width: 0; display: grid; gap: 3px; }
+#s-tabs .sbsite .hub .rk-l1 { display: flex; align-items: center; gap: 7px; min-width: 0; overflow: hidden; font: 12px/1.3 var(--ui); white-space: nowrap; }
+#s-tabs .sbsite .hub .rk-l1 b { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 600; color: #ececec; }
+#s-tabs .sbsite .hub .rk-tag { flex: none; height: 16px; padding: 0 7px; border-radius: 9999px; background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038;
+  font: 500 10.5px/16px var(--ui); color: #c4c7c5; }
+#s-tabs .sbsite .hub .rk-tx { font: 11.5px/1.3 var(--ui); color: #a8abb2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .rk-lk { flex: none; width: 44px; display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px;
+  font: 500 11.5px/1 var(--ui); color: #c4c7c5; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rk-lk svg { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .rk-rp { flex: none; width: 44px; font: 500 11.5px/1 var(--ui); color: #8e8e93; text-align: right; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rk-rp.on { font-weight: 600; color: #8ab4f8; }
+
+#s-tabs .sbsite .hub .rk-ft { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #1f1f23;
+  font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .rk-ft .qc-ok { flex: none; }

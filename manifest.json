@@ -1611,6 +1611,17 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "dfm1-yt-model-switch-detail-superbot-0abfdc86",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments and pin the best one, in detail: GPT-6 Astra ranks, Gemini finds each answer in the video, Opus 5.5 writes, YouTube Studio posts and pins (16:9)",
+    "src": "animations/dfm1-yt-model-switch-detail-superbot-0abfdc86/",
+    "thumb": "assets/shots/dfm1-yt-model-switch-detail-superbot-0abfdc86.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d with a richer result at every switch, at the same length. One ask in superbot: GPT-6 Astra reads all 1,284 comments and ranks the top five by likes and repeat questions, Gemini watches the 14:32 video and finds the timestamp and fact behind each one, Claude Opus 5.5 writes the five replies in the creator's voice and picks the one to pin, then superbot posts them from YouTube Studio and pins the best one. 16:9 only.",
+    "download": "assets/video/dfm1-yt-model-switch-detail-superbot-0abfdc86.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

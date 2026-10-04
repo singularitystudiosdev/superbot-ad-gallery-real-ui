@@ -67,6 +67,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "every-model-detail-cgm1-sb-superbot-48fc6359",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · GPT Image 2 meme, Perplexity Sonar Reddit search, Superbot Agent orders (detailed, 16:9)",
+    "src": "animations/cgm1-every-model-detail-superbot-48fc6359/",
+    "thumb": "assets/shots/every-model-detail-cgm1-sb-superbot-48fc6359.png",
+    "desc": "Variant of every-model-one-chat-sb-superbot-efa8df82 with more detail in every answer, same length. Make me a Muse meme: GPT Image 2 draws it and shows the prompt, each layer locking, the caption checked for legibility and three export sizes. Scrape Reddit and look for more: Perplexity Sonar searches six subreddits live and returns five cited posts with upvotes, comments and how fast each is climbing. Order me a burger: Superbot Agent opens DoorDash, compares three spots, checks out and tracks the Dasher on a live map. 16:9 only.",
+    "download": "assets/video/every-model-detail-cgm1-sb-superbot-48fc6359.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-one-chat-3d-sb-superbot-5af3c81d",
     "type": "animation",
     "group": "Ad spots",

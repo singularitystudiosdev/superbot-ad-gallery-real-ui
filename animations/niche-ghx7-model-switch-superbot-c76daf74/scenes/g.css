@@ -1,0 +1,8 @@
+/* Beat G: PR #483 Conversation. Dark backdrop, framed window; the merge box and bot comment stay above the caption. */
+#s-g { background: radial-gradient(120% 92% at 50% 0%, #1a2030 0%, #0b0d12 68%, #07080a 100%); }
+#s-g > .ghf {
+  position: absolute; left: 80px; top: 38px;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+#s-g .gh-merge-box { box-shadow: 0 1px 3px rgba(31, 35, 40, .10); }

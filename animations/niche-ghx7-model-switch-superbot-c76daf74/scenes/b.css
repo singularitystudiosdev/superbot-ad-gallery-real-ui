@@ -1,0 +1,33 @@
+/* Beat B: the original superbot hub stylesheets (rescoped from #s-tabs to #s-b), then the crop: the hub fills a
+   framed chat panel that sits on the dark stage with margin all round, never full-bleed. */
+@import './tabs-assets/hub.css?v=c76daf74';
+@import './tabs-assets/ports.css?v=c76daf74';
+@import './tabs-assets/chat.css?v=c76daf74';
+@import './tabs-assets/ask.css?v=c76daf74';
+
+/* the dark stage */
+#s-b { background: #0b0d12; }
+#s-b .ask-root { position: absolute; inset: 0; overflow: hidden; background: #0b0d12; }
+
+/* the chat panel: a 780x440 design box scaled 2x -> 1560x880 on the 1920x1080 stage (180px side, 100px top/bottom
+   margin). ask.css crops the hub to its thread + composer inside it. */
+#s-b .sbsite.ask {
+  position: absolute; left: 50%; top: 50%;
+  width: 780px; height: 440px; margin: -220px 0 0 -390px;
+  transform: scale(2); transform-origin: 50% 50%;
+  visibility: visible; border-radius: 22px; overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .55), 0 0 0 1px #24262c;
+}
+#s-b .sbsite.ask .stage { width: 100%; height: 100%; border: 0; border-radius: 0; background: #0a0a0b; }
+#s-b .sbsite.ask .hub { inset: 0; border: 0; border-radius: 0; }
+
+/* the thread is bottom-anchored so the newest line sits just above the composer */
+#s-b .sbsite.ask .hub .feed { display: flex; flex-direction: column; justify-content: flex-end; }
+
+/* the reply keeps a fixed two-line floor so the thread does not jump as the line types */
+#s-b .sbsite.ask .hub .qc-say { min-height: 38px; }
+#s-b .sbsite.ask .hub .b-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+
+/* faint veil at the top of the panel, so an outgoing line dissolves instead of being sliced at the panel edge */
+#s-b .ask-edge { position: absolute; left: 0; right: 0; top: 0; height: 8%; z-index: 4; pointer-events: none;
+  background: linear-gradient(180deg, #0b0d12 0%, rgba(11, 13, 18, .9) 30%, rgba(11, 13, 18, 0) 100%); }

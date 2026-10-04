@@ -900,6 +900,15 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-ghx7-model-switch-superbot-c76daf74",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "superbot: three models race one failing GitHub test (GitHub devs, ghx7)",
+    "src": "animations/niche-ghx7-model-switch-superbot-c76daf74/",
+    "thumb": "assets/shots/niche-ghx7-model-switch-superbot-c76daf74.png",
+    "desc": "Variant of niche-github-model-switch-superbot-0cb69286 for GitHub developers, told as a race. One ask in superbot: Gemini, Claude Opus 5.5 and GPT-6 Astra each patch the same failing Remember me test side by side in three terminals, two re-runs stay red and Opus 5.5's goes green, superbot keeps the passing patch, CI turns green on all five checks and PR #483 opens to close issue #482. 14.8 s, 16:9 only."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: fix the random logouts in kitebase/web#482</title>
+<meta name="description" content="One ask in superbot: three models race the same failing Remember me test, superbot keeps the patch that passes, CI turns green and the pull request opens on GitHub.">
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=c76daf74">
+<link rel="stylesheet" href="publish-ui.css?v=c76daf74">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="shell.css?v=c76daf74">
+<!-- the ghx7 GitHub screens (light Primer components) -->
+<link rel="stylesheet" href="gh/gh.css?v=c76daf74">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+<link rel="modulepreload" href="video.js?v=c76daf74">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment in order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=c76daf74"></script>
+</body>
+</html>

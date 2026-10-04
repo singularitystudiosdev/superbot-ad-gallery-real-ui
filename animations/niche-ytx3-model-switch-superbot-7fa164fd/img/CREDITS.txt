@@ -1,0 +1,57 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+Every image here was generated through OpenRouter (https://openrouter.ai/api/v1/chat/completions) on 2026-10-03 for
+the fictional creator channel "Sam Rivera" and the video "I Rebuilt My Desk Setup for $89 (It Beat My $1,200 One)"
+(16:42). Prompts, the request script (gen.sh) and the full-size originals are kept in the build scratch,
+/tmp/ytx3-img.b343d06b/ (prompts/, out/). Total spend for this folder: $0.8282 across 8 calls, each logged in
+/tmp/niche-genspend.f3c6d683.log. None of the images was drawn on or retouched. Resizing was done with macOS sips
+(resample to the target height, centre crop, JPEG quality 90). No stock photos, no real-person likeness, no brand logos.
+
+avatar.jpg
+  Generated with Nano Banana Pro (google/gemini-3-pro-image via OpenRouter, provider Google) on 2026-10-03; prompt
+  /tmp/ytx3-img.b343d06b/prompts/avatar.txt, attempt 1; no reference image. Generation gen-1791065981-4eFw3GyBDrwZOPHznnna,
+  $0.1394. The channel avatar for Sam Rivera (the original ad shows only a letter avatar "S"). It is also the face
+  reference for thumb-a.jpg and frame-2.jpg, so the creator is one person throughout. Original 2048 x 2048 kept in
+  the build scratch (out/avatar-1.png); this web copy is scaled to 256 x 256, JPEG.
+
+thumb-a.jpg  (race slot A)
+  Generated with Nano Banana Pro (google/gemini-3-pro-image via OpenRouter, provider Google) on 2026-10-03; prompt
+  /tmp/ytx3-img.b343d06b/prompts/thumb-a.txt, attempt 1; reference: avatar.jpg (above). Generation
+  gen-1791066039-j3j3OjSQTelfzwRnJPBW, $0.1397. Concept: the creator reacting beside the two desks, with a big "$89".
+  Original 2752 x 1536 kept in the build scratch (out/thumb-a-1.png); this web copy is scaled to 1290 x 720 and centre
+  cropped to 1280 x 720, JPEG.
+
+thumb-b.jpg  (race slot B, recommended winner)
+  Generated with GPT-5.4 Image 2 (openai/gpt-5.4-image-2 via OpenRouter, provider OpenAI) on 2026-10-03; prompt
+  /tmp/ytx3-img.b343d06b/prompts/thumb-b.txt, attempt 1; no reference image. Generation
+  gen-1791066039-kt3QEQNqRiSY7vWdJhZY, $0.1331. Concept: a split before/after desk with "$1,200" in red over the
+  cluttered desk (left), "vs" in the middle, and "$89" in green over the budget desk (right). Original 1280 x 720 kept
+  in the build scratch (out/thumb-b-1.png); this web copy is re-encoded as JPEG at the same size.
+
+thumb-c.jpg  (race slot C)
+  Generated with FLUX.2 Pro (black-forest-labs/flux.2-pro via OpenRouter, provider Black Forest Labs) on 2026-10-03;
+  prompt /tmp/ytx3-img.b343d06b/prompts/thumb-c-3.txt, attempt 3 of 3 (the brief's concept plus "exactly one
+  microphone, clear of the monitor" and "every object separate" clauses); no reference image. Generation
+  gen-1791066261-fUjligwOTt1zZjZgXDVD, $0.0450. Concept: a hero shot of the cheap setup glowing at night, with
+  "BUDGET WINS". Rejected attempts, kept in the build scratch: out/thumb-c-1.png (the monitor screen was flat grey and
+  the mic boom arm fused into the lamp, $0.0450) and out/thumb-c-2.png (a stray floating block beside the mic, $0.0450).
+  Original 1920 x 1072 (out/thumb-c-3.png); this web copy is scaled to 1290 x 720 and centre cropped to 1280 x 720, JPEG.
+
+frame-1.jpg
+  Generated with Nano Banana Pro (google/gemini-3-pro-image via OpenRouter, provider Google) on 2026-10-03; prompt
+  /tmp/ytx3-img.b343d06b/prompts/frame-1.txt, attempt 1; references: thumb-a.jpg and thumb-b.jpg (above), so the desk
+  matches the budget desk in the thumbnails. Generation gen-1791066160-gHGgQItIp5i4S5AzqcWT, $0.1404. A frame from the
+  video: the finished $89 desk setup head-on (oak desk, black boom-arm mic, monitor with a landscape wallpaper, black
+  lamp, plant, warm LED glow). No text. Original 2752 x 1536 (out/frame-1-1.png); this web copy is scaled to
+  1935 x 1080 and centre cropped to 1920 x 1080, JPEG.
+
+frame-2.jpg
+  Generated with Nano Banana Pro (google/gemini-3-pro-image via OpenRouter, provider Google) on 2026-10-03; prompt
+  /tmp/ytx3-img.b343d06b/prompts/frame-2.txt, attempt 1; references: thumb-a.jpg and avatar.jpg (above). Generation
+  gen-1791066162-ytl4kbGnPtyu1ywWmVch, $0.1405. A b-roll frame: the creator's hands (charcoal t-shirt, no face)
+  tightening the boom-arm desk clamp on the oak desk edge, beside velcro-tied cables. No text. Original 2752 x 1536
+  (out/frame-2-1.png); this web copy is scaled to 1935 x 1080 and centre cropped to 1920 x 1080, JPEG.
+
+models.json
+  Machine-readable record of the above: slot to file, model id, display name, provider, cost, generation id, prompt
+  file, the recommended winner (slot b) and the total spend.

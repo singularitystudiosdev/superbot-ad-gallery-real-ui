@@ -1,0 +1,15 @@
+/* B3 (beats/studio.js) and B4 (beats/watch.js): the build's own layers inside ux.js's Studio and watch page. The YouTube
+   surfaces themselves are styled by ux/ux.css; these rules only add what the build animates. */
+/* the winner, laid over the row's auto frame inside its 120 x 68 slot (under the length badge) */
+#s-tabs .ytx-st-thumb { transform-origin: 50% 50%; }
+#s-tabs .ytx-st-thumb .x3-slot-win { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; }
+#s-tabs .ytx-st-thumb .ytx-len { z-index: 1; }
+/* the A/B chip is built in, and lands when the test starts */
+#s-tabs [data-ux="ab-chip"] { opacity: 0; transform-origin: 0 50%; }
+#s-tabs [data-ux="scrim"], #s-tabs [data-ux="dialog-layer"] { opacity: 0; }
+/* the in-window camera writes the fit's transform (translate + scale) every frame */
+#s-tabs .ytx-win-fit { will-change: auto; }
+/* the player clip, drawn by frame index over the poster */
+#s-tabs .x3-player-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* the report keeps its natural height (studio.js scales it as a whole to fit the window, never squeezes it) */
+#s-tabs .ytx-dlayer > .ytx-ab { max-height: none; flex: none; transform-origin: 50% 50%; }

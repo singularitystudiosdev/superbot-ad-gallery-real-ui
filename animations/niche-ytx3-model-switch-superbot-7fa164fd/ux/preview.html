@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>ytx3 UX preview</title>
+<link rel="stylesheet" href="./ux.css"/>
+<style>
+  /* preview only: until the build copies the original's fonts/ into AD/fonts/, read them from the original ad */
+  @font-face { font-family: "Roboto YTX"; font-weight: 400; font-display: block; src: url("../fonts/roboto-latin-400-normal.woff2") format("woff2"), url("../../niche-youtube-model-switch-superbot-3828921d/fonts/roboto-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Roboto YTX"; font-weight: 500; font-display: block; src: url("../fonts/roboto-latin-500-normal.woff2") format("woff2"), url("../../niche-youtube-model-switch-superbot-3828921d/fonts/roboto-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Roboto YTX"; font-weight: 700; font-display: block; src: url("../fonts/roboto-latin-700-normal.woff2") format("woff2"), url("../../niche-youtube-model-switch-superbot-3828921d/fonts/roboto-latin-700-normal.woff2") format("woff2"); }
+  html, body { margin: 0; background: #1b1c20; }
+  .stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, #3a3d48 0%, #1d1e24 70%); }
+  .stage + .stage { margin-top: 24px; }
+  .slot { position: absolute; left: 80px; top: 44px; width: 1760px; height: 992px; }
+  .slot.small { left: 360px; top: 240px; width: 1200px; height: 600px; }
+  .label { position: absolute; left: 80px; top: 12px; font: 500 14px/20px Arial, sans-serif; color: rgba(255,255,255,.55); }
+</style>
+</head>
+<body>
+<script type="module">
+import { DATA, studioContent, thumbSection, testCompare, watchPage, overlay, windowFrame } from './ux.js';
+const STUDIO_URL = 'studio.youtube.com/channel/UC7s9xRw2kQm4Lp8tYv3nBaQ/videos/upload';
+const WATCH_URL = `youtube.com/watch?v=${DATA.video.id}`;
+const K = 1760 / 1536;               // the design viewport is 1536 wide (YouTube measured at 1536 x 864)
+const views = {
+  studio: () => windowFrame(studioContent(DATA, { ab: 'running' }), { url: STUDIO_URL, tab: 'Channel content - YouTube Studio', favicon: new URL('./youtube-icon.svg', import.meta.url).href, scale: K }),
+  'studio-empty': () => windowFrame(studioContent(DATA, { ab: null, emptySlot: true }), { url: STUDIO_URL, tab: 'Channel content - YouTube Studio', scale: K }),
+  abtest: () => windowFrame(overlay(studioContent(DATA, { ab: 'running' }), testCompare(DATA, { state: 'running' })), { url: STUDIO_URL, tab: 'Channel content - YouTube Studio', scale: K }),
+  abresult: () => windowFrame(overlay(studioContent(DATA, { ab: 'done' }), testCompare(DATA, { state: 'result' })), { url: STUDIO_URL, tab: 'Channel content - YouTube Studio', scale: K }),
+  'abresult-dark': () => windowFrame(overlay(studioContent(DATA, { ab: 'done', theme: 'dark' }), testCompare(DATA, { state: 'result', theme: 'dark' })), { url: STUDIO_URL, tab: 'Channel content - YouTube Studio', scale: K, theme: 'dark' }),
+  watch: () => windowFrame(watchPage(DATA), { url: WATCH_URL, tab: `${DATA.video.title} - YouTube`, scale: K }),
+  'watch-dark': () => windowFrame(watchPage(DATA, { theme: 'dark' }), { url: WATCH_URL, tab: `${DATA.video.title} - YouTube`, scale: K, theme: 'dark' }),
+  thumb: () => windowFrame(thumbSection(DATA), { url: `studio.youtube.com/video/${DATA.video.id}/edit`, tab: 'Video details - YouTube Studio', scale: 1.5 }),
+};
+const only = new URLSearchParams(location.search).get('view');
+for (const [name, make] of Object.entries(views)) {
+  if (only && only !== name) continue;
+  const stage = document.createElement('div');
+  stage.className = 'stage';
+  stage.innerHTML = `<div class="label">${name}</div><div class="slot${name === 'thumb' ? ' small' : ''}"></div>`;
+  stage.lastElementChild.appendChild(make());
+  document.body.appendChild(stage);
+}
+document.fonts.ready.then(() => { document.body.dataset.ready = '1'; });
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+// niche-ytx3-model-switch-superbot: the thumbnail race, a 6.8 s 16:9 cut on the engine of
+// niche-youtube-model-switch-superbot-3828921d (forked from bikeride-model-switch-superbot-e13744a9; like the ytv9 recut,
+// the first scene opens complete on frame 0, no fade up from black). The whole spot is a pure function of t, like
+// ../waffles-website-superbot-87a583a1/timeline.js: ?t=<s> freezes a frame, ?t=<s>&play=1 plays on from there,
+// space pauses, arrows step 0.25s, R restarts; a 60fps quantised clock; window.__AD.seek(t) draws t and holds.
+// It lays the SEQUENCE end to end: the story scene (scenes/tabs.js, B1 to B4, its marks in
+// scenes/tabs-assets/marks.js) and the superbot end card (B5, the mark and the wordmark, drawn here). A scene module
+// may export a `ready` promise (tabs.js: every frame sequence fetched and decoded); the clock starts, and
+// window.__AD.ready is set, only once it has settled.
+import * as lib from './lib.js';
+import { makeMark } from './mark.js';
+
+const { clamp, lerp, seg, outQuint } = lib;
+const H = 1080;
+const W = () => (window.AR && window.AR.w) || 1920;
+const stage = document.getElementById('stage');
+const dip = document.getElementById('dip');
+
+// ---------- the sequence ----------
+// B1 the hub (the ask lands), B2 the thumbnail race, B3 YouTube Studio (the winner flies into the row, the A/B test),
+// B4 the watch page, all in scenes/tabs.js; then B5, the end card
+const SEQUENCE = [
+  ['scene', 'tabs'],
+  ['end', 'end'],
+];
+// the duration the scene gets if its module fails to load (so the spot keeps its shape); a loaded scene reports its
+// own dur (tabs: marks.js B5 = 5.55), which is what CYCLE follows
+const FALLBACK_DUR = { tabs: 5.55 };
+const SCENE_FADE = 0.2;
+const END_DUR = 1.25, DIP = 0.2; /* deliberate */ // the end card (5.55 to 6.80, CYCLE 6.8 <= the 6.9 s cap); the dip to black at the loop
+
+// ---------- the end card (waffles-website drawEnd) ----------
+// The lock-up is a full-frame composition, so on a narrower frame it scales with the frame width: 4:3 (1440)
+// takes 0.75 of the 16:9 measurements (h1 112px -> 84px, mascot 220px -> 165px, gap 56 -> 42) and keeps 8%
+// margin each side instead of hanging off both edges. style.css holds the matching rules.
+const END_SCALE = { '4x3': 0.75 };
+function buildEnd(sec) {
+  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1></div></div><div class="face"></div></div>';
+  const mark = makeMark(Math.round(220 * (END_SCALE[(window.AR && window.AR.key)] || 1)));
+  sec.querySelector('.face').appendChild(mark.el);
+  return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
+}
+const END_IN = 0.42; /* deliberate */   // the mascot scales up into place
+const END_SLIDE = 0.5; /* deliberate */  // the wordmark slides out from behind it (in by 0.7 s, held to the dip)
+// under prefers-reduced-motion the lock-up is simply there
+const reducedMotion = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function renderEnd(e, lt) {
+  const rm = reducedMotion();
+  const f = rm ? 1 : seg(lt, 0, END_IN);
+  lib.op(e.face, f);
+  e.face.style.transform = `scale(${lerp(0.5, 1, outQuint(f)).toFixed(4)})`;
+  const w = rm ? 1 : seg(lt, 0.2, 0.2 + END_SLIDE);
+  // the line slides out from behind the mascot (it sits to the line's right)
+  e.slide.style.transform = `translateX(${((1 - outQuint(w)) * 110).toFixed(2)}%)`;
+  lib.op(e.slide, w);
+  e.mark.render(lt);
+}
+
+// ---------- load the scene modules (a broken module must not take the spot down) ----------
+const sceneIds = SEQUENCE.filter(([k]) => k === 'scene').map(([, id]) => id);
+const MODS = {};
+await Promise.all(sceneIds.map(async (id) => {
+  const css = document.createElement('link');
+  css.rel = 'stylesheet'; css.href = new URL(`./scenes/${id}.css?v=7fa164fd`, import.meta.url).href;
+  document.head.appendChild(css);
+  try {
+    const m = (await import(`./scenes/${id}.js?v=7fa164fd`)).default;
+    if (!m || typeof m.render !== 'function') throw new Error(`scenes/${id}.js has no default { dur, mount, render } export`);
+    MODS[id] = m;
+  } catch (err) {
+    console.error(`[ytx3] scene "${id}" failed to load:`, err && err.stack ? err.stack : err);
+    MODS[id] = { id, dur: FALLBACK_DUR[id] || 8, broken: true, mount() {}, render() {} };
+  }
+}));
+
+// ---------- lay the timeline ----------
+const SEGS = [];
+let acc = 0;
+for (const [kind, id] of SEQUENCE) {
+  const dur = kind === 'end' ? END_DUR : Math.max(0.5, +MODS[id].dur || FALLBACK_DUR[id] || 8);
+  const sec = document.createElement('section');
+  sec.className = 'scene';
+  sec.id = `s-${id}`;
+  stage.insertBefore(sec, dip);
+  SEGS.push({ kind, id, t0: +acc.toFixed(4), t1: +(acc + dur).toFixed(4), dur, sec });
+  acc += dur;
+}
+const CYCLE = +acc.toFixed(4);
+const T = {};
+SEGS.forEach((s) => { T[s.id] = s.t0; });
+window.__AD = { segments: SEGS.map(({ kind, id, t0, t1 }) => ({ kind, id, t0, t1 })), CYCLE };
+
+// ---------- mount ----------
+const ctx = { W: W(), H, t: 0, lib };
+const errSeen = new Set();
+function report(s, phase, err) {
+  const key = `${s.id}:${phase}:${err && err.message}`;
+  if (errSeen.has(key)) return;
+  errSeen.add(key);
+  console.error(`[ytx3] scene "${s.id}" threw in ${phase}:`, err && err.stack ? err.stack : err);
+}
+function markBroken(s) {
+  s.broken = true;
+  s.sec.innerHTML = `<div class="scene-err">scene "${s.id}" unavailable</div>`;
+}
+for (const s of SEGS) {
+  if (s.kind === 'end') s.end = buildEnd(s.sec);
+  else {
+    s.mod = MODS[s.id];
+    if (s.mod.broken) { markBroken(s); continue; }
+    try { s.mod.mount(s.sec, ctx); } catch (err) { report(s, 'mount', err); markBroken(s); }
+  }
+}
+// every scene's preload (frames decoded, fonts ready) before the first frame: a half-loaded frame never shows
+await Promise.all(SEGS.map((s) => (s.mod && s.mod.ready ? s.mod.ready.catch((err) => { report(s, 'ready', err); markBroken(s); }) : null)));
+await document.fonts.ready;
+
+// ---------- draw one frame ----------
+let active = null;
+function render(t) {
+  ctx.W = W(); ctx.t = t;
+  let cur = SEGS[SEGS.length - 1];
+  for (const s of SEGS) if (t >= s.t0 && t < s.t1) { cur = s; break; }
+  if (active !== cur) {
+    if (active) { active.sec.classList.remove('on'); active.sec.style.opacity = '0'; }
+    cur.sec.classList.add('on');
+    active = cur;
+  }
+  const lt = clamp(t - cur.t0, 0, cur.dur);
+  if (cur.kind === 'end') {
+    cur.sec.style.opacity = '1';
+    renderEnd(cur.end, lt);
+  } else {
+    // the spot's first scene is complete on frame 0 (no fade up); later scenes fade up
+    const fadeIn = cur.t0 === 0 ? 1 : seg(lt, 0, SCENE_FADE);
+    cur.sec.style.opacity = (fadeIn * (1 - seg(lt, cur.dur - SCENE_FADE, cur.dur))).toFixed(3);
+    if (!cur.broken) {
+      try { cur.mod.render(lt, ctx); } catch (err) { report(cur, 'render', err); }
+    }
+  }
+  // the dip at the loop: the end card goes to black over its last DIP seconds (t=0 opens on the ask, complete)
+  dip.style.opacity = seg(t, CYCLE - DIP, CYCLE).toFixed(3);
+}
+
+// ---------- fit the stage to the window (assets/ar.js sets the width) ----------
+function fit() {
+  const w = W();
+  stage.style.width = w + 'px';
+  const k = Math.min(innerWidth / w, innerHeight / H);
+  stage.style.transform = `translate(-50%, -50%) scale(${k})`;
+}
+addEventListener('resize', fit); fit();
+addEventListener('archange', () => {
+  fit(); lastT = NaN;
+  for (const s of SEGS) if (s.kind === 'end') s.end = buildEnd(s.sec); // the end mascot is sized to the frame
+});
+
+// ---------- the clock (waffles-website) ----------
+const q = new URLSearchParams(location.search);
+const hasT = q.has('t'), freeze = hasT && !q.has('play');
+if (freeze) document.body.classList.add('freeze');
+const FPS = 60;
+let paused = freeze, offset = hasT ? parseFloat(q.get('t')) || 0 : 0, t0 = performance.now();
+const clockNow = () => (paused ? offset : offset + (performance.now() - t0) / 1000);
+function setTime(t) { offset = t; t0 = performance.now(); }
+function restart() { setTime(0); paused = false; }
+window.__V7 = { CYCLE, SPEED: 1, restart, T };
+addEventListener('keydown', (e) => {
+  if (e.key === ' ') { e.preventDefault(); if (paused) { paused = false; t0 = performance.now(); } else { offset = clockNow(); paused = true; } }
+  else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { offset = Math.max(0, clockNow() + (e.key === 'ArrowRight' ? 0.25 : -0.25)); paused = true; }
+  else if (e.key === 'r' || e.key === 'R') restart();
+});
+let lastT = NaN;
+function frame() {
+  let t = clockNow();
+  t = ((t % CYCLE) + CYCLE) % CYCLE;
+  t = Math.round(t * FPS) / FPS;
+  if (t >= CYCLE) t = 0;
+  render(t); lastT = t;
+  requestAnimationFrame(frame);
+}
+render(((offset % CYCLE) + CYCLE) % CYCLE);
+requestAnimationFrame(frame);
+// frame-exact export/QA: pause the clock and draw t now
+window.__AD.seek = (t) => { paused = true; offset = t; const c = ((t % CYCLE) + CYCLE) % CYCLE; render(c); lastT = c; };
+window.__AD.ready = true;

@@ -1,0 +1,121 @@
+{
+  "video": {
+    "channel": "Sam Rivera",
+    "title": "I Rebuilt My Desk Setup for $89 (It Beat My $1,200 One)",
+    "length": "16:42"
+  },
+  "slots": [
+    {
+      "slot": "a",
+      "file": "thumb-a.jpg",
+      "concept": "creator reacting beside the two desks, big \"$89\"",
+      "onImageText": "$89",
+      "model_id": "google/gemini-3-pro-image",
+      "display_name": "Nano Banana Pro",
+      "openrouter_name": "Google: Nano Banana Pro (Gemini 3 Pro Image)",
+      "provider": "Google",
+      "chip_logo": "gemini",
+      "cost_usd": 0.139742,
+      "generation_id": "gen-1791066039-j3j3OjSQTelfzwRnJPBW",
+      "prompt_file": "/tmp/ytx3-img.b343d06b/prompts/thumb-a.txt",
+      "original": "/tmp/ytx3-img.b343d06b/out/thumb-a-1.png",
+      "original_size": "2752x1536",
+      "references": ["avatar.jpg"],
+      "attempt": 1,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "slot": "b",
+      "file": "thumb-b.jpg",
+      "concept": "split before/after desk, \"$1,200\" (red, left) vs \"$89\" (green, right)",
+      "onImageText": "$1,200 vs $89",
+      "model_id": "openai/gpt-5.4-image-2",
+      "display_name": "GPT-5.4 Image 2",
+      "openrouter_name": "OpenAI: GPT-5.4 Image 2",
+      "provider": "OpenAI",
+      "chip_logo": "openai",
+      "cost_usd": 0.13307,
+      "generation_id": "gen-1791066039-kt3QEQNqRiSY7vWdJhZY",
+      "prompt_file": "/tmp/ytx3-img.b343d06b/prompts/thumb-b.txt",
+      "original": "/tmp/ytx3-img.b343d06b/out/thumb-b-1.png",
+      "original_size": "1280x720",
+      "references": [],
+      "attempt": 1,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "slot": "c",
+      "file": "thumb-c.jpg",
+      "concept": "hero shot of the cheap setup glowing at night, \"BUDGET WINS\"",
+      "onImageText": "BUDGET WINS",
+      "model_id": "black-forest-labs/flux.2-pro",
+      "display_name": "FLUX.2 Pro",
+      "openrouter_name": "Black Forest Labs: FLUX.2 Pro",
+      "provider": "Black Forest Labs",
+      "chip_logo": null,
+      "cost_usd": 0.045,
+      "generation_id": "gen-1791066261-fUjligwOTt1zZjZgXDVD",
+      "prompt_file": "/tmp/ytx3-img.b343d06b/prompts/thumb-c-3.txt",
+      "original": "/tmp/ytx3-img.b343d06b/out/thumb-c-3.png",
+      "original_size": "1920x1072",
+      "references": [],
+      "attempt": 3,
+      "rejected_attempts": [
+        {"generation_id": "gen-1791066039-NaXvyGoM0e7g5Z2ecEq9", "cost_usd": 0.045, "why": "flat grey monitor screen; mic boom arm fused into the lamp arm"},
+        {"generation_id": "gen-1791066154-WrN00RiqqFSa7XN8zejq", "cost_usd": 0.045, "why": "a stray floating black block beside the microphone"}
+      ],
+      "slot_cost_usd": 0.135,
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "frames": [
+    {
+      "file": "frame-1.jpg",
+      "role": "frame from the video: the finished $89 desk setup, warm practical light, no text",
+      "model_id": "google/gemini-3-pro-image",
+      "display_name": "Nano Banana Pro",
+      "provider": "Google",
+      "cost_usd": 0.1404,
+      "generation_id": "gen-1791066160-gHGgQItIp5i4S5AzqcWT",
+      "prompt_file": "/tmp/ytx3-img.b343d06b/prompts/frame-1.txt",
+      "original": "/tmp/ytx3-img.b343d06b/out/frame-1-1.png",
+      "references": ["thumb-a.jpg", "thumb-b.jpg"],
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "frame-2.jpg",
+      "role": "b-roll frame: the creator's hands tightening the boom-arm desk clamp, velcro-tied cables, no face, no text",
+      "model_id": "google/gemini-3-pro-image",
+      "display_name": "Nano Banana Pro",
+      "provider": "Google",
+      "cost_usd": 0.140534,
+      "generation_id": "gen-1791066162-ytl4kbGnPtyu1ywWmVch",
+      "prompt_file": "/tmp/ytx3-img.b343d06b/prompts/frame-2.txt",
+      "original": "/tmp/ytx3-img.b343d06b/out/frame-2-1.png",
+      "references": ["thumb-a.jpg", "avatar.jpg"],
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "avatar.jpg",
+      "role": "channel avatar for Sam Rivera (the original ad shows only a letter avatar \"S\"); reference face for thumb-a and frame-2",
+      "model_id": "google/gemini-3-pro-image",
+      "display_name": "Nano Banana Pro",
+      "provider": "Google",
+      "cost_usd": 0.139422,
+      "generation_id": "gen-1791065981-4eFw3GyBDrwZOPHznnna",
+      "prompt_file": "/tmp/ytx3-img.b343d06b/prompts/avatar.txt",
+      "original": "/tmp/ytx3-img.b343d06b/out/avatar-1.png",
+      "references": [],
+      "width": 256,
+      "height": 256
+    }
+  ],
+  "recommendedWinner": "b",
+  "recommendedWhy": "It tells the title's whole story in one glance: the cluttered $1,200 desk against the tidy $89 one, with the two prices in red and green. At 168x94 both numbers stay legible and the before/after split still reads, and it looks the most like a real tech-YouTube thumbnail. A and C each carry only one idea (a reaction with a price, or a mood with a slogan).",
+  "totalCostUsd": 0.828168
+}

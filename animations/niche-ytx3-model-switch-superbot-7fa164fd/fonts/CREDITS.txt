@@ -1,0 +1,10 @@
+fonts/ CREDITS (internal)
+
+roboto-latin-{400,500,700}-normal.woff2
+  Roboto, latin subset, from @fontsource/roboto 5.2.8
+  (https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.2.8/files/roboto-latin-<weight>-normal.woff2), fetched 2026-10-03,
+  unmodified (carried over from the base ad niche-youtube-model-switch-superbot-3828921d). Copyright 2011 The Roboto
+  Project Authors. Licence: SIL Open Font License 1.1 (https://openfontlicense.org). YouTube's own UI face: every
+  YouTube Studio and watch page string (ux/ux.css @font-face "Roboto YTX").
+
+Vendored so nothing is fetched at render. The superbot hub, the race and the end card keep the base ad's families.

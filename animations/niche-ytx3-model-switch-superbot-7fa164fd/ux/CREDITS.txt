@@ -1,0 +1,133 @@
+ux/ CREDITS (internal). Provenance is never shown on screen.
+
+This folder rebuilds the real YouTube Studio and YouTube watch page surfaces as layered HTML/CSS (ux.js, ux.css,
+icons.js) for the fictional creator channel "Sam Rivera". Nothing in it is a screenshot: the references below were
+read for layout, wording and measurements only, and none of them is shipped in this folder. The reference files are
+kept in the build scratch, /tmp/ytx3-ux.b343d06b/refs/. Every reference was retrieved on 2026-10-03.
+
+REFERENCES (layout and wording sources, not shipped)
+
+ppcland-notices.webp, ppcland-notices.png
+  PPC Land, "YouTube Studio's Content tab gets a Notices column and estimated revenue view",
+  https://ppc.land/youtube-studios-content-tab-gets-a-notices-column-and-estimated-revenue-view/
+  Image: https://ppc.land/content/images/size/w2000/format/webp/2026/06/3.webp (1600 x 900; the .png is a local
+  conversion of the .webp). Source for the Content tab's Notices column and the Est. revenue column.
+
+smt-content-tab1.webp, smt-content-tab2.webp, smt-content-tab3.webp (and their local .png conversions)
+  Social Media Today, "YouTube Studio display gets a round of updates",
+  https://www.socialmediatoday.com/news/youtube-studio-display-gets-a-round-of-updates/823840/
+  Images (via the site's image proxy):
+  https://imgproxy.divecdn.com/51tGeRsiM3MFfRrTfAOsTUu4dRlATvKbdzntWCwLIRU/g:ce/rs:fit:1600:0/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS95b3V0dWJlX2NvbnRlbnRfdGFiX3BSMGQ5ZFYucG5n.webp (tab1, 500 x 629)
+  https://imgproxy.divecdn.com/3saNlMwwTpIGJgUysEmgN0MCOto9Y1lkqPUqQiJtr3c/g:ce/rs:fit:1600:0/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS95b3V0dWJlX2NvbnRlbnRfdGFiMl8zOWNQdXR2LnBuZw==.webp (tab2, 600 x 468)
+  https://imgproxy.divecdn.com/bmWlQ7HC7rkbeLpXIbZbLv9lc9n-V1trWUZ7Aqe1aO0/g:ce/rs:fit:1600:0/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS95b3V0dWJlX2NvbnRlbnRfdGFiM19BaTlZakU3LnBuZw==.webp (tab3, 600 x 336)
+  Source for the redesigned Content tab (Notices column, no Likes column).
+
+li-joos-1.jpg, li-joos-2.jpg
+  LinkedIn post by Mario Joos, "YouTube Studio is rolling out a change",
+  https://www.linkedin.com/posts/mariojooss_youtube-studio-is-rolling-out-a-change-activity-7461870113743380480-ZoCy
+  Images: https://media.licdn.com/dms/image/v2/D4D22AQHy93oQlZ0D_g/feedshare-shrink_800/B4DZ43jU3FI8Ac-/0/1779048468137?e=2147483647&v=beta&t=T9AyQmxYcUwggfqxfeByRe8ortfO-hZDR6OvBUUcIOc
+  and https://media.licdn.com/dms/image/v2/D4D22AQHVoiwZb0DlkA/feedshare-shrink_800/B4DZ43jU2bG4Ac-/0/1779048468123?e=2147483647&v=beta&t=Xj4XfgPteYTbim_NjwvDqQcQaClPMDs51qKlbFSrHmM
+  (800 x 601 each). The Content tab before and after the redesign.
+
+help-notice-a.svg, help-notice-b.svg, help-notice-c.svg, help-notice-d.svg
+  YouTube Help, support.google.com, https://support.google.com/youtube/answer/17011221?hl=en (the Content page's
+  notices article). Icons served from https://storage.googleapis.com/support-kms-prod/X47bUdevhG9p8NjcREVHg6ZBbgpUa8BGhXjt,
+  .../JFc2wD7ox4mni2Z0YCudYB537Rf8SN3mZJgf, .../35G3M4Nq9GUgVAE3dUnySmdnPHO4uVrZbT6q and
+  .../nYrJy0JOUWHZE52eiEfpW9rZ4qqHaTYFTYhg (all under https://storage.googleapis.com/support-kms-prod/). Also read:
+  https://support.google.com/youtube/answer/13861714?hl=en (Test & compare thumbnails). Source for the Notices
+  wording and the empty value "None".
+
+vidiq-ab-menu.png, vidiq-ab-running.png, vidiq-ab-3way-results.png, vidiq-wts-tooltip.jpg, vidiq-title-test.png,
+vidiq-thumb-test-winner.png
+  vidIQ blog, "YouTube launches new thumbnail testing tool",
+  https://vidiq.com/blog/post/youtube-launches-new-thumbnail-testing-tool/ (also read:
+  https://vidiq.com/blog/post/beginners-guide-youtube-studio/). Images:
+  https://cdn.sanity.io/images/7g6d2cj1/production/9c4fd8dbc95d2118fd60bc89981a5dfa9f20e95b-391x217.png (menu)
+  https://cdn.sanity.io/images/7g6d2cj1/production/d223ef1bd94134491d003c923f11579f66a51f47-387x205.png (running)
+  https://cdn.sanity.io/images/7g6d2cj1/production/e7175450986e813805219bb364dbb79bc3425467-951x787.png (3 way results)
+  https://cdn.sanity.io/images/7g6d2cj1/production/0bfc7b2eedaf3fce65419253cfbbb55fd35e5a93-1280x549.jpg (watch time share tooltip)
+  https://cdn.sanity.io/images/7g6d2cj1/production/932267f00a0f5394d84b804633cc4f6b71ce2e0c-955x793.png (title test)
+  https://cdn.sanity.io/images/7g6d2cj1/production/9a25ae3b1934bde5044bccfff3729dea7028b3b5-956x603.png (thumbnail test winner)
+  Source for thumbSection's A/B Testing menu item and testCompare's A/B Test report dialog ("Thumbnail only",
+  "A/B Test report", watch time share, "Winner", "Now visible to all viewers", "Test finished. Ran from ...", New
+  test / Done). The running state of the dialog is a reconstruction: no screenshot of a test in progress was found.
+
+youtube-watch-live-2026-10-03.png, youtube-watch-light-1920.png, youtube-watch-light-1920-b.png,
+youtube-watch-light-1536.png
+  The live YouTube watch page, https://www.youtube.com/watch?v=dQw4w9WgXcQ, captured on 2026-10-03 (a scraper
+  render, then headless Chromium at 1920 x 1080 and 1536 x 864, light theme) and measured for the watch page layout
+  (player, title, channel row, actions, up next column). The video itself is not used.
+
+UI ICONS AND MARKS (shipped)
+
+icons.js
+  Material Symbols (Google, Apache License 2.0) via the Iconify API, https://api.iconify.design/material-symbols.json,
+  fetched 2026-10-03; path data verbatim (24 x 24). The A/B Testing, spark and verified glyphs in ux.js are drawn
+  by hand to match Studio, not copied.
+
+youtube-logo.svg
+  YouTube logo (2017), Wikimedia Commons, https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg,
+  fetched 2026-10-03, unaltered. Public domain (PD-textlogo), Google trademark. The watch page masthead.
+
+youtube-icon.svg, youtube-studio-logo.svg
+  Copied from the base ad's brand/ (animations/niche-youtube-model-switch-superbot-3828921d/brand/, see its
+  CREDITS.txt): Wikimedia Commons File:YouTube_full-color_icon_(2024).svg and File:YouTube_Studio_logo.svg, public
+  domain (PD-textlogo), Google trademarks, unaltered. The Studio tab favicon and the Studio top bar lockup.
+
+PHOTOS (shipped; thumbnails of the channel's other videos and the up next column)
+
+mic-frame.jpg
+  Copied unchanged from animations/niche-youtube-model-switch-superbot-3828921d/img/mic-frame.jpg (same file, same
+  bytes). "Close-Up of Studio Microphone in Soft Light", photo by Alpha En on Pexels,
+  https://www.pexels.com/photo/close-up-of-studio-microphone-in-soft-light-31213680/, Pexels License
+  (https://www.pexels.com/license/). Full provenance in that ad's img/CREDITS.txt. Used for "I tested 12 budget mics
+  under $100".
+
+The seven ux-*.jpg files are Unsplash photos, all free (none is Unsplash+), searched 2026-10-03 through
+unsplash.com/napi/search/photos and downloaded from images.unsplash.com at 640 x 360 with Unsplash's own crop
+(w=640&h=360&fit=crop&crop=entropy&fm=jpg&q=80). Licence for all seven: Unsplash License,
+https://unsplash.com/license (free to use, commercial use allowed, attribution not required, modification allowed;
+not to be sold unaltered or used to build a competing service). None was drawn on or retouched.
+
+ux-boomarm.jpg
+  Photo by Ritupon Baishya, Unsplash photo id tVv4i-X3yBE, https://unsplash.com/photos/tVv4i-X3yBE
+  (file images.unsplash.com/photo-1659083725992-9d88c12e719c). Condenser microphone on a boom arm. Used for "The $25
+  Boom Arm That Fixed My Neck Pain".
+
+ux-cables.jpg
+  Photo by Bedirhan Gül, Unsplash photo id I_3D0pVrMhY, https://unsplash.com/photos/I_3D0pVrMhY
+  (file images.unsplash.com/photo-1760348213270-7cd00b8c3405). Cable organizer under a desk. Used for "Cable
+  Management Under $40: Before and After".
+
+ux-interface.jpg
+  Photo by Denisse Leon (@denisseleon), Unsplash photo id n4BDkIEls78,
+  https://unsplash.com/photos/closeup-photo-of-audio-mixer-n4BDkIEls78 (file
+  images.unsplash.com/photo-1506704888326-3b8834edb40a, original 5184 x 3456). Close-up of mixer faders in purple
+  light; no logo or brand text in the 640 x 360 crop (checked by eye). Used for "Do You Actually Need an Audio
+  Interface?". Replaced on 2026-10-03 the first pick, photo id 4hXTMl7m5oU by Sven Brandsma
+  (https://unsplash.com/photos/4hXTMl7m5oU, file photo-1549822531-d99bcfebc360), because a Focusrite logo was
+  readable on it. The rejected file is kept in the build scratch, /tmp/ytx3-uxfix.b343d06b/ux-interface.old-focusrite.jpg.
+
+ux-lamp.jpg
+  Photo by Andrej Lišakov, Unsplash photo id 3A4XZUopCJA, https://unsplash.com/photos/3A4XZUopCJA
+  (file images.unsplash.com/photo-1519219788971-8d9797e0928e). Balanced arm lamp on a wood table. Used for "5 Desk
+  Lamps Tested for Video Calls".
+
+ux-panels.jpg
+  Photo by 2H Media, Unsplash photo id 67TcNiqz0X4, https://unsplash.com/photos/67TcNiqz0X4
+  (file images.unsplash.com/photo-1680657438647-0ea9d2c9a825). Foam sound panel backdrop. Used for "Foam vs. Felt:
+  Fixing My Echoey Room for $60".
+
+ux-smalldesk.jpg
+  Photo by Roberto Nickson, Unsplash photo id Gvm2wM3V5PA, https://unsplash.com/photos/Gvm2wM3V5PA
+  (file images.unsplash.com/photo-1616440347437-b1c73416efc2). Home workspace. Used for the up next video "Small
+  Desk, Big Setup: 7 Space Savers That Work".
+
+ux-undercables.jpg
+  Photo by Bedirhan Gül, Unsplash photo id nbxANz4a1tc, https://unsplash.com/photos/nbxANz4a1tc
+  (file images.unsplash.com/photo-1760348213285-c6dd101bf349). Laptop clamped under a wooden desk with cables. Used
+  for the up next video "The Only 3 Cables You Need Under Your Desk".
+
+The photo ids, authors and files for the six kept photos were recorded by the UX build on 2026-10-03 (the Unsplash
+search JSON it used was not kept) and re-verified the same day: each file re-downloaded from its photo URL with the
+parameters above is byte-identical to the shipped copy. Channel names, video titles, numbers and dates on screen are fictional.

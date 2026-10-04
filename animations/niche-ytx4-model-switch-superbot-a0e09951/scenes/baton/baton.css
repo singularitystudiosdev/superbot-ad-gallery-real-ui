@@ -1,0 +1,106 @@
+/* ytx4 relay baton: the rail of model chips, the baton (the glowing task card), the framed window the legs play in,
+   the Opus 5.5 writing pane. Everything is positioned in stage px (1920x1080) and driven by scenes/baton/*.js. */
+#bt-bg { z-index: 1; background: radial-gradient(1200px 700px at 50% 0%, #15161c 0%, #0b0b0d 55%, #070708 100%); }
+#s-relay { z-index: 10; }
+#s-relay * { box-sizing: border-box; }
+
+/* ---------- the rail ---------- */
+.bt-rail { position: absolute; left: 0; top: 0; width: 1920px; height: 90px; }
+.bt-track { position: absolute; top: 45px; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, .08); }
+.bt-track-on { position: absolute; top: 45px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,.15), var(--bt-glow, #8fb0ff)); box-shadow: 0 0 10px var(--bt-glow, #8fb0ff); }
+.bt-chip { position: absolute; top: 16px; width: 300px; height: 60px; margin-left: -150px; border-radius: 30px;
+  display: flex; align-items: center; gap: 12px; padding: 0 18px 0 9px;
+  background: #121318; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .09); transform-origin: 50% 50%; }
+.bt-chip .bt-glowring { position: absolute; inset: -1px; border-radius: 31px; opacity: 0;
+  box-shadow: inset 0 0 0 2px var(--c), 0 0 26px 2px var(--c), 0 0 60px 6px color-mix(in srgb, var(--c) 35%, transparent); }
+.bt-chip .bt-logo { position: relative; flex: none; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; overflow: hidden; }
+.bt-chip .bt-logo img { display: block; }
+.bt-chip .bt-txt { position: relative; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.bt-chip .bt-name { font: 700 21px/1.05 var(--ui); color: #f4f5f8; letter-spacing: -.01em; white-space: nowrap; }
+.bt-chip .bt-role { font: 500 14px/1.1 var(--ui); color: #8d919c; white-space: nowrap; }
+.bt-chip .bt-check { position: absolute; right: 14px; top: 50%; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--c); color: #0b0b0d; opacity: 0; }
+.bt-chip .bt-check svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+
+.bt-logo.l-grok { background: #000; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+.bt-logo.l-grok img { width: 42px; height: 42px; }
+.bt-logo.l-gemini { background: #f4f6fb; }
+.bt-logo.l-gemini img { width: 28px; height: 28px; }
+.bt-logo.l-claude { background: #d97757; }
+.bt-logo.l-claude img { width: 26px; height: 26px; }
+.bt-logo.l-sb { background: #1c1d23; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+.bt-logo.l-sb img { width: 30px; height: 30px; }
+
+/* ---------- the baton: the glowing task card ---------- */
+.bt-ghost, .bt-card { position: absolute; left: 0; top: 0; width: 480px; height: 142px; border-radius: 18px; transform-origin: 0 0; }
+.bt-ghost { background: radial-gradient(closest-side, color-mix(in srgb, var(--bt-glow, #8fb0ff) 70%, transparent), transparent); filter: blur(14px); opacity: 0; }
+.bt-card { padding: 13px 16px 14px 16px; color: #f4f5f8;
+  background: linear-gradient(180deg, #1d1f27 0%, #14151b 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), 0 0 0 1px rgba(143, 176, 255, .35), 0 0 34px 4px rgba(120, 150, 255, .40), 0 18px 40px rgba(0, 0, 0, .55); }
+.bt-card .bt-halo { position: absolute; inset: -2px; border-radius: 20px; pointer-events: none;
+  box-shadow: 0 0 0 2px var(--bt-glow, #8fb0ff), 0 0 40px 8px var(--bt-glow, #8fb0ff); opacity: .0; }
+.bt-card .bt-ask { display: flex; gap: 11px; align-items: flex-start; }
+.bt-card .bt-askmark { flex: none; width: 28px; height: 28px; border-radius: 8px; background: #2a2c36; display: grid; place-items: center; margin-top: 1px; }
+.bt-card .bt-askmark img { width: 20px; height: 20px; }
+.bt-card .bt-asktext { font: 600 17.5px/1.28 var(--ui); letter-spacing: -.005em; color: #f6f7fa; }
+.bt-card .bt-stamps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 8px; margin-top: 11px; }
+.bt-slot { position: relative; height: 31px; border-radius: 9px; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .07); background: rgba(255,255,255,.02); }
+.bt-stamp { position: absolute; inset: 0; display: flex; align-items: center; gap: 7px; padding: 0 9px; border-radius: 9px;
+  font: 800 13.5px/1 var(--ui); letter-spacing: .005em; white-space: nowrap; color: var(--c);
+  background: color-mix(in srgb, var(--c) 13%, #101116); box-shadow: inset 0 0 0 2px var(--c); opacity: 0; transform-origin: 50% 50%; }
+.bt-stamp .bt-sl { flex: none; width: 17px; height: 17px; border-radius: 5px; display: grid; place-items: center; overflow: hidden; }
+.bt-stamp .bt-sl img { display: block; }
+.bt-stamp .bt-sl.l-grok { background: #000; } .bt-stamp .bt-sl.l-grok img { width: 17px; height: 17px; }
+.bt-stamp .bt-sl.l-gemini { background: #f4f6fb; } .bt-stamp .bt-sl.l-gemini img { width: 12px; height: 12px; }
+.bt-stamp .bt-sl.l-claude { background: #d97757; } .bt-stamp .bt-sl.l-claude img { width: 11px; height: 11px; }
+.bt-stamp .bt-sl.l-sb { background: #2a2c36; } .bt-stamp .bt-sl.l-sb img { width: 13px; height: 13px; }
+.bt-ink { position: absolute; inset: -6px; border-radius: 13px; box-shadow: 0 0 0 3px var(--c); opacity: 0; pointer-events: none; }
+
+/* ---------- the framed window (YouTube never full-bleed) ---------- */
+.bt-win { position: absolute; border-radius: 16px; overflow: hidden; background: #0f0f10;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .13), 0 30px 80px rgba(0, 0, 0, .6), 0 0 120px rgba(90, 120, 255, .08); transform-origin: 50% 0; }
+.bt-bar { position: absolute; left: 0; top: 0; right: 0; height: 30px; background: #202124; display: flex; align-items: center; padding: 0 14px;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .06); }
+.bt-bar .bt-dots { display: flex; gap: 7px; }
+.bt-bar .bt-dots i { width: 11px; height: 11px; border-radius: 50%; background: #45474c; }
+.bt-bar .bt-title { position: absolute; left: 0; right: 0; top: 0; height: 30px; display: grid; place-items: center; pointer-events: none; }
+.bt-bar .bt-title span { position: absolute; display: inline-flex; align-items: center; gap: 8px; font: 500 13.5px/1 Roboto, var(--ui); color: #c4c7cc; white-space: nowrap; }
+.bt-bar .bt-title img { width: 15px; height: 15px; border-radius: 3px; }
+.bt-view { position: absolute; left: 0; top: 30px; right: 0; bottom: 0; overflow: hidden; background: #0f0f0f; }
+.bt-page { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; opacity: 0; overflow: hidden; }
+.bt-fallback { position: absolute; inset: 0; display: grid; place-items: center; font: 600 44px/1.2 var(--ui); color: #4a4d55; background: #0f0f0f; }
+
+/* ---------- the open: the superbot hub (section #s-tabs, the original's cropped hub) ---------- */
+#s-tabs { z-index: 5; }
+
+/* ---------- the Opus 5.5 writing pane (a superbot screen, 1920x1080 design px) ---------- */
+.op-root { position: absolute; inset: 0; background: #0d0d0e; color: #ececf0; font-family: var(--ui); }
+.op-head { position: absolute; left: 0; right: 0; top: 0; height: 104px; display: flex; align-items: center; gap: 18px; padding: 0 56px;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .07); }
+.op-head .op-logo { width: 54px; height: 54px; border-radius: 15px; background: #d97757; display: grid; place-items: center; }
+.op-head .op-logo img { width: 32px; height: 32px; }
+.op-head .op-h { display: flex; flex-direction: column; gap: 6px; }
+.op-head .op-h b { font: 700 32px/1 var(--ui); letter-spacing: -.01em; color: #f6f6f8; }
+.op-head .op-h span { font: 500 21px/1 var(--ui); color: #9a9da7; }
+.op-head .op-count { margin-left: auto; font: 700 24px/1 var(--ui); color: #e8a083; display: flex; align-items: center; gap: 12px; }
+.op-head .op-count i { width: 12px; height: 12px; border-radius: 50%; background: #e8a083; box-shadow: 0 0 14px #e8a083; }
+.op-grid { position: absolute; left: 48px; right: 48px; top: 136px; bottom: 44px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 28px; }
+.op-card { position: relative; border-radius: 22px; background: #151518; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .07); padding: 24px 30px; overflow: hidden; }
+.op-card.on { box-shadow: inset 0 0 0 2px rgba(232, 160, 131, .75), 0 0 40px rgba(217, 119, 87, .18); }
+.op-q { display: flex; gap: 16px; padding: 4px 0 4px 18px; border-left: 4px solid #3a3b42; }
+.op-q img, .op-r img { flex: none; width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: #2a2a2e; }
+.op-q .op-qb { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.op-q .op-qh { font: 600 21px/1 Roboto, var(--ui); color: #aaaab3; }
+.op-q .op-qt { font: 400 27px/1.28 Roboto, var(--ui); color: #c8c8ce; }
+.op-r { display: flex; gap: 16px; margin-top: 18px; }
+.op-r .op-rb { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.op-r .op-rh { display: flex; align-items: center; gap: 10px; font: 600 21px/1 Roboto, var(--ui); color: #f1f1f4; }
+.op-r .op-rh em { font-style: normal; font: 600 17px/1 var(--ui); color: #e8a083; padding: 4px 10px; border-radius: 999px; background: rgba(217, 119, 87, .14); }
+.op-r .op-rt { font: 600 34px/1.26 var(--ui); color: #fafafc; letter-spacing: -.01em; }
+.op-caret { display: inline-block; width: 3px; height: 32px; margin-left: 3px; vertical-align: -4px; background: #e8a083; }
+.op-done { position: absolute; right: 26px; top: 24px; width: 34px; height: 34px; border-radius: 50%; background: #e8a083; color: #151518; display: grid; place-items: center; opacity: 0; }
+.op-done svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- the end ---------- */
+#s-end { z-index: 20; }

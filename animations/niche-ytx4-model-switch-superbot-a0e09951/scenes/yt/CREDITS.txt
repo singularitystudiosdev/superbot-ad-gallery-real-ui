@@ -1,0 +1,44 @@
+scenes/yt CREDITS (internal, never shown on screen). Ad niche-ytx4-model-switch-superbot-a0e09951.
+
+REAL REFERENCE SCREENSHOTS (layout, spacing, type and colour were matched against these; refs kept outside the repo
+in /tmp/ytx4-work.4613766c/ux/refs/, all fetched 2026-10-03)
+  YouTube Studio comments (2026 UI, dark theme screen recording):
+    "How to View and Reply to Comments in YouTube Studio (Tested)" https://www.youtube.com/watch?v=GjR8rgaBNeU
+    frames at 0:52, 1:04, 1:44, 1:52, 2:00, 2:08 (Community > Comments list, filter chips, reply composer,
+    posted creator reply with owner handle pill, creator heart, "Reply added" snackbar, left nav, top bar).
+  YouTube desktop watch page (2026 UI, light theme): https://www.youtube.com/watch?v=dQw4w9WgXcQ captured in
+    headless Chromium at 1920x1080 (player, hover scrub preview + time pill, control pills, title, owner row,
+    Subscribe, like/share row, description box, comments). Computed metrics read from the live DOM.
+  YouTube Help "Review & reply to comments" https://support.google.com/youtube/answer/9482367 (left menu, tabs,
+    filter bar, Reply / Heart / Pin; Pin "only appears when viewing comments for an individual video", hence the
+    per-video Studio view).
+  CommentShark "How to pin and heart YouTube comments" https://www.commentshark.com/blog/how-to-pin-and-heart-youtube-comments
+    (hearted state = creator avatar with a small red heart; "Pinned by" label).
+
+FONTS (fonts/, vendored so nothing is fetched at render)
+  roboto-latin-{400,500,700}-normal.woff2: Roboto, @fontsource/roboto 5.2.8, Copyright 2011 The Roboto Project
+    Authors, SIL Open Font License 1.1 (copied unmodified from the source ad's fonts/).
+  google-sans-flex-latin-wght-normal.woff2: Google Sans Flex, @fontsource-variable/google-sans-flex 5.3.1,
+    Copyright 2015 Google LLC, SIL Open Font License 1.1 (full text in fonts/GOOGLE-SANS-FLEX-LICENSE.txt).
+    Used as the YouTube Sans substitute for the Studio page heading.
+
+ICONS (icons.js)
+  Material Symbols, Google, Apache License 2.0, via the Iconify API https://api.iconify.design/material-symbols.json
+  fetched 2026-10-03, SVG path data verbatim. "spark4" (the 4-point star in the Studio top bar) is drawn here.
+
+LOGOS (brand/)
+  youtube-studio-logo.svg: Wikimedia Commons File:YouTube_Studio_logo.svg, public domain (PD-textlogo), trademark of
+    Google. Copied from the source ad's brand/.
+  youtube-icon.svg: Wikimedia Commons File:YouTube_full-color_icon_(2024).svg, PD-textlogo, trademark of Google.
+  youtube-logo.svg: Wikimedia Commons File:YouTube_Logo_2017.svg
+    https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg fetched 2026-10-03, PD-textlogo,
+    trademark of Google. Watch page masthead.
+
+IMAGES
+  Avatars, thumbnail and video frames come from ../../img/ (image agent; see img/CREDITS.txt). Every picture sits
+  on a neutral grey fallback, so a missing file never breaks a frame. Up-next thumbnails reuse those frames
+  (some zoomed by CSS). Superbot mark: the cat mask from the superbot hub stylesheet (source ad chat.css).
+
+CONTENT
+  Channel, video, comments and replies are the fictional story data in story-data.js (story spec). Up-next titles,
+  description copy and Studio's suggested-reply chips are fictional and written for this ad.

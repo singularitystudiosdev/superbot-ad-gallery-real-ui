@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ytx4 motion preview: replies post, c1 pinned</title>
+<link rel="stylesheet" href="../yt/yt.css">
+<style>html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#fff}</style>
+</head><body>
+<script type="module">
+import { mountStudioComments, ytReady } from '../yt/studio-comments.js';
+import data from '../yt/story-data.js';
+import { leg4State, DURATIONS } from './choreo.js';
+const q = new URLSearchParams(location.search);
+const dur = Number(q.get('dur') || DURATIONS.leg4);
+const studio = mountStudioComments(document.body, data);
+const N = Math.round(dur * 30);
+window.__N = N;
+window.__seek = (i) => studio.update(leg4State(i / (N - 1)));
+window.__ready = (async () => { await ytReady(studio.el); window.__seek(0); return true; })();
+</script>
+</body></html>

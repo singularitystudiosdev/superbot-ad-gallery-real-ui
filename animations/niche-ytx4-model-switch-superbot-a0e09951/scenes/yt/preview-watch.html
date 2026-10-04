@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ytx4 preview: YouTube watch page</title>
+<link rel="stylesheet" href="yt.css">
+<style>html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#fff}</style>
+</head>
+<body>
+<script type="module">
+import { mountWatchPage, ytReady } from './watch-page.js';
+import data from './story-data.js';
+
+const BOX = [850, 70, 360, 340]; // the lantern softbox on the top shelf in img/frames/f0742.jpg (1920x1080 video px)
+const PRESETS = {
+  default: { videoTime: 452, playing: false },
+  scrub: { videoTime: 312, playing: false, scrub: { time: 460, previewSrc: 'img/frames/f0740.jpg' } },
+  playing: { videoTime: 461, playing: true },
+  annotating: { videoTime: 462, playing: false, annotation: { box: BOX, label: data.frameRead.label, p: 0.45 } },
+  annotated: { videoTime: 462, playing: false, annotation: { box: BOX, label: data.frameRead.label, p: 1 } },
+  comments: { videoTime: 462, playing: false, scroll: 950, focusCommentId: 'c1' },
+};
+const q = new URLSearchParams(location.search);
+let state = PRESETS[q.get('preset') || 'default'] || {};
+if (q.get('state')) state = JSON.parse(q.get('state'));
+const api = mountWatchPage(document.body, data);
+window.__yt = api;
+window.__presets = PRESETS;
+api.update(state);
+await ytReady(api.el);
+api.update(state);
+window.__ready = true;
+</script>
+</body>
+</html>

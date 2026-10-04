@@ -1,0 +1,35 @@
+Image credits - ad niche-ytx4-model-switch-superbot-a0e09951 (ytx4)
+All images are AI generated on 2026-10-03 via OpenRouter, model google/gemini-3-pro-image.
+Licence: AI generated via OpenRouter for this ad; no third-party photos, stock or rights involved.
+No real people, celebrities, brands or logos are depicted on purpose. Post work (resize, crop,
+JPEG q88, one small badge clean-up) done locally with Pillow.
+
+frames/f0738.jpg  1920x1080  text-to-image base frame: wide handheld vlog shot of Noa (late 20s,
+                  curly dark hair, rust corduroy overshirt) at the oak desk in a 9 m2 closet studio,
+                  floating shelves behind, top shelf dim. Upscaled from 1376x768.   $0.1403
+frames/f0740.jpg  1920x1080  image edit of f0738: Noa stands and reaches up to the top shelf,
+                  unlit paper-lantern softbox visible.                               $0.1394
+frames/f0742.jpg  1920x1080  image edit of f0740: camera tilts up to the top shelf, warm
+                  lantern-style softbox glowing at the back of the top shelf (the
+                  light the comment asks about), Noa's shoulder at lower right.      $0.1404
+frames/f0744.jpg  1920x1080  image edit of f0742 (+ f0738 as face reference): Noa turns to
+                  camera smiling, lantern glow at full.                              $0.1409
+frames/s0410.jpg  1920x1080  generated from f0738/f0740 references: Noa on a step stool
+                  installing the black sliding barn-door rail, mid-build ($0.1411), then
+                  an edit pass to make the drill unbranded ($0.1393).                $0.2804
+frames/s0930.jpg  1920x1080  generated from f0738/f0744 references: Noa pressing a grey felt
+                  acoustic panel onto the wall; a brand-like badge on a shelf speaker
+                  was cloned out locally.                                            $0.1406
+frames/s1105.jpg  1920x1080  generated from f0738/f0744 references: close-up of the PC's
+                  120 mm intake fan, Noa's hand pointing.                            $0.1405
+thumb/latest-video.jpg 1280x720  generated from f0744/f0738 references: YouTube-style
+                  thumbnail, Noa excited on the right third, glowing studio, clean left
+                  area for HTML title. No text baked in.                             $0.1417
+avatars/a01..a10.jpg 256x256  cropped from one 4x3 grid generation (12 tiles, 2 unused):
+                  a01 c1 @danokafor, a02 c2 @priya.makes, a03 c3 @jonah.records,
+                  a04 c4 @leafandlens, a05 c5 @mira_cuts, a06 c6 @tobyfixesthings,
+                  a07 c7 @samwise.audio, a08 c8 @kc.studios, a09 c9 @gearwins.daily
+                  (generic unbranded mic product shot), a10 c10 @rowan.builds.       $0.1411
+avatars/noa.jpg   256x256  crop of the f0744 source frame (no extra call).           $0.0000
+
+Total generation spend: $1.4053 (10 calls).

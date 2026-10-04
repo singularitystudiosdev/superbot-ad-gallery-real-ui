@@ -900,6 +900,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-ytx4-model-switch-superbot-a0e09951",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and pin the best one: one ask handed on like a relay baton through Grok, Gemini and Opus 5.5, then superbot posts and pins in YouTube Studio (4 switches, relay variant, 16:9)",
+    "src": "animations/niche-ytx4-model-switch-superbot-a0e09951/",
+    "thumb": "assets/shots/niche-ytx4-model-switch-superbot-a0e09951.png",
+    "desc": "One ask, four models, handed on like a relay baton. A creator asks superbot to answer the top comments on their latest video and pin the best one; the ask lifts off as a glowing task card and runs a rail of model chips, collecting a stamp at each. Grok sorts 1,284 YouTube comments by sentiment and surfaces the viewer question about the light at 7:42. Gemini scrubs the video to that moment and boxes the Amaran 60x S lantern on the top shelf. Claude Opus 5.5 writes four replies in the creator's voice. superbot posts them in YouTube Studio and pins the best one. 14.4 s, 16:9 only.",
+    "download": "assets/video/niche-ytx4-model-switch-superbot-a0e09951.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-ghx7-model-switch-superbot-c76daf74",
     "type": "animation",
     "group": "Ad spots",

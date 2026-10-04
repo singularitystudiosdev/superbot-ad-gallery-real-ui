@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ytx4 motion preview: creator video on the watch page</title>
+<link rel="stylesheet" href="../yt/yt.css">
+<style>html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#fff}</style>
+</head><body>
+<script type="module">
+// ?rate=2&dur=2.8 (default): scrub to 7:40, then play to 7:44.  ?rate=1&dur=5.3: the same at real speed.
+// ?annot=1: a still at 7:42 with Gemini's box from frameBox(LIGHT_BOX, 462).
+import { mountWatchPage, ytReady } from '../yt/watch-page.js';
+import data from '../yt/story-data.js';
+import { mountCreatorVideo, frameBox, scrubKeyAt, LIGHT_BOX } from './creator-video.js';
+import { scrubThenPlay } from './preview-timeline.js';
+const q = new URLSearchParams(location.search);
+const rate = Number(q.get('rate') || 2), dur = Number(q.get('dur') || 2.8), annot = q.get('annot') === '1';
+const watch = mountWatchPage(document.body, data);
+const vid = mountCreatorVideo(watch.videoSlot, { frames: q.get('frames') || undefined });
+function frame(sec) {
+  if (annot) {
+    vid.render(462);
+    watch.update({ videoTime: 462, playing: false, annotation: { box: frameBox(LIGHT_BOX, 462), label: data.frameRead.label, p: 1 } });
+    return;
+  }
+  const s = scrubThenPlay(sec, { rate });
+  vid.render(s.time, { scrubbing: s.scrubbing });
+  watch.update({
+    videoTime: s.time,
+    playing: !s.scrubbing,
+    scrub: s.scrubbing ? { time: s.time, previewSrc: `img/frames/${scrubKeyAt(s.time)}.jpg` } : null,
+  });
+}
+window.__N = annot ? 1 : Math.round(dur * 30);
+window.__seek = (i) => frame(i / 30);
+window.__info = { LIGHT_BOX, box462: frameBox(LIGHT_BOX, 462) };
+window.__ready = (async () => { frame(0); await ytReady(watch.el); await vid.ready; frame(0); return true; })();
+</script>
+</body></html>

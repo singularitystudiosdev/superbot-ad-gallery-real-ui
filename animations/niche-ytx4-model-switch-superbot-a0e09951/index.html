@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-ar="16x9">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: one ask, four models, handed on like a baton</title>
+<meta name="description" content="One ask in superbot, carried model to model like a relay baton: Grok sorts 1,284 YouTube comments by sentiment, Gemini reads the frame a viewer asked about at 7:42, Claude Opus 5.5 writes the replies in the creator's voice, and superbot posts them in YouTube Studio and pins the best one.">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=a0e09951">
+<link rel="stylesheet" href="publish-ui.css?v=a0e09951">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="scenes/tabs-assets/hub.css?v=a0e09951">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=a0e09951">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=a0e09951">
+<link rel="stylesheet" href="scenes/baton/baton.css?v=a0e09951">
+<link rel="stylesheet" href="scenes/yt/yt.css?v=a0e09951">
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+<style>html, body { background: #000; } #stage { width: 1920px; height: 1080px; } #bt-bg, #s-relay, #s-tabs, #s-end, #bt-layer { position: absolute; inset: 0; } #bt-layer { z-index: 30; pointer-events: none; overflow: hidden; }</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bt-bg"></div>
+  <section id="s-tabs"></section>
+  <section id="s-relay"></section>
+  <section id="s-end"></section>
+  <div id="bt-layer"></div>
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script type="module" src="timeline.js?v=a0e09951"></script>
+</body>
+</html>

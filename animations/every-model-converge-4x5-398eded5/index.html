@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Every model, one chat: twelve apps fuse into Superbot (4:5)</title>
+<title>Every model, one chat: twelve apps fuse into Superbot</title>
 <style>
-/* Plays the rendered 1080x1350 film (final.mp4, 26.4 s, 30 fps, with sound) at 4:5 on
-   the film's own near-black canvas. The gallery loads this page in a frame at any
-   ?ar=; the 4:5 picture is fitted whole and the rest of the frame stays near-black. */
+/* Plays the rendered film (21.6 s, 30 fps, with sound) on its own near-black canvas.
+   ?ar=16x9 plays the native 1920x1080 recomposition (final-16x9.mp4); every other ?ar=
+   plays the 1080x1350 film (final.mp4) fitted whole, the rest of the frame near-black. */
 :root {
   --canvas: #070707;
   --surface: #ffffff;
@@ -36,6 +36,11 @@ body {
   background: var(--canvas);
 }
 
+.wide .frame {
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+}
+
 video {
   display: block;
   width: 100%;
@@ -48,11 +53,15 @@ video {
 </head>
 <body>
 <div class="frame">
-  <video id="film" src="final.mp4" poster="poster.png" autoplay loop playsinline preload="auto"
-    aria-label="Every model, one chat: twelve apps fuse into Superbot (4:5): twelve real app icons lift out of the phone, spiral and fuse into the Superbot tile, then the chat routes each ask to the right model, Gemini makes the meme, DeepSeek V4 Flash scrapes Reddit, and the DoorDash burger order lands in 24 min, with sound on (26.4s loop)."></video>
+  <video id="film" autoplay loop playsinline preload="auto"
+    aria-label="Every model, one chat: twelve apps fuse into Superbot: twelve real app icons lift out of the phone, spiral and fuse into the Superbot tile, then the chat routes each ask to the right model, Gemini makes the meme, DeepSeek V4 Flash scrapes Reddit, and the DoorDash burger order lands in 24 min, with sound on (21.6s loop)."></video>
 </div>
 <script>
   const video = document.getElementById("film");
+  const wide = new URLSearchParams(location.search).get("ar") === "16x9";
+  document.documentElement.classList.toggle("wide", wide);
+  video.poster = wide ? "poster-16x9.png" : "poster.png";
+  video.src = wide ? "final-16x9.mp4" : "final.mp4";
   // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
   // viewer's first click, key or touch.
   const unmute = () => {

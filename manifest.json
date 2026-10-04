@@ -1564,7 +1564,11 @@
     "src": "animations/every-model-converge-4x5-398eded5/",
     "thumb": "assets/shots/every-model-converge-4x5-398eded5.png",
     "download": "animations/every-model-converge-4x5-398eded5/final.mp4",
-    "downloadLabel": "MP4 4:5"
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/every-model-converge-4x5-398eded5/final.mp4",
+      "16x9": "animations/every-model-converge-4x5-398eded5/final-16x9.mp4"
+    }
   },
   {
     "id": "every-model-converge-apps-4x5-4741876c",

@@ -210,6 +210,17 @@ function renderDl() {
     return;
   }
   const label = RATIOS.find(x => x[0] === ar)[1];
+  const own = it.downloads && it.downloads[ar];
+  if (own) { // a video-backed spot that ships its own film at this ratio (same-origin, so the soon card works)
+    a.href = own;
+    a.download = `${it.id}-${label.replace(':', 'x')}.mp4`;
+    a.textContent = `⤓ download ${label}`;
+    a.title = '';
+    a.classList.remove('no-render');
+    soonLabel(a, '');
+    a.hidden = false;
+    return;
+  }
   if (it.download) { // a file too big for Pages lives on a GitHub release (one ratio); no same-origin probe
     a.href = it.download;
     a.removeAttribute('download');

@@ -636,8 +636,11 @@ const more = [
   // and the tile dives back into the phone; then the superbot route plays out (Gemini meme,
   // DeepSeek V4 Flash scraping Reddit, a DoorDash burger order in 24 min) and the end card flies
   // the twelve icons back in from the frame edges into the superbot mark. 26.4 s, 1080x1350,
-  // 30 fps, with sound; ships its own final.mp4.
-  ['every-model-converge-4x5-398eded5', 'every-model-converge-4x5-398eded5/', "Every model, one chat: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-4x5-398eded5/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // 30 fps, with sound; ships its own final.mp4. 16:9 (2026-10-03): a native 1920x1080 recomposition of
+  // the same source (superbot-format-daeon/every-model-converge-16x9.398eded5), final-16x9.mp4, which the
+  // page plays at ?ar=16x9 and the 16:9 download button serves (`downloads`, per ratio).
+  ['every-model-converge-4x5-398eded5', 'every-model-converge-4x5-398eded5/', "Every model, one chat: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-4x5-398eded5/final.mp4', downloadLabel: 'MP4 4:5',
+    downloads: { '4x5': 'animations/every-model-converge-4x5-398eded5/final.mp4', '16x9': 'animations/every-model-converge-4x5-398eded5/final-16x9.mp4' } }],
   // converge variants (2026-10-02): the same 21.6 s converge spine (identical beats, timing and score),
   // rethemed twice. apps: the hook throws the five apps you juggle (ChatGPT, Claude, Grok, Cursor,
   // Copilot) and the copy reads 'five apps, one chat'. day: the hook keeps the router pills and the copy

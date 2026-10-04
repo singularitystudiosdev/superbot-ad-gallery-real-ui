@@ -56,6 +56,17 @@
     "thumb": "assets/shots/every-model-one-chat-sb-combo-efa8df82.png"
   },
   {
+    "id": "every-model-detail-cgm2-sb-superbot-fa1318dd",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Nano Banana Pro meme, ChatGPT agent Reddit hunt, Superbot orders (detailed variant, 16:9)",
+    "src": "animations/cgm2-every-model-detail-superbot-fa1318dd/",
+    "thumb": "assets/shots/every-model-detail-cgm2-sb-superbot-fa1318dd.png",
+    "desc": "Variant of every-model-one-chat-sb-superbot-efa8df82 with the work shown in every answer, same length. Make me a Muse meme: Nano Banana Pro letters it and shows the template, the edits and three export crops. Scrape Reddit and look for more: ChatGPT agent browses six subreddits and returns five matching memes with upvotes, comments and how fast each is climbing. Order me a burger: Superbot compares three spots, adds your usual and places the DoorDash order with a live map and tracker. 16:9 only.",
+    "download": "assets/video/every-model-detail-cgm2-sb-superbot-fa1318dd.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-one-chat-3d-sb-superbot-5af3c81d",
     "type": "animation",
     "group": "Ad spots",

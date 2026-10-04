@@ -545,6 +545,17 @@
     "desc": "One ask in superbot: Gemini reads 36 half marathon plans, Claude Opus 5.5 writes a 12-week plan in TypeScript, GPT-6 Astra checks it, and superbot connects to Strava, where all 48 workouts sync to the training calendar."
   },
   {
+    "id": "dfm2-niche-fitness-detail-p1-69889d8f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Build me a 12-week half marathon plan and sync it to my Strava: Gemini sets the rules, Opus 5.5 writes the plan, GPT-6 Astra sets your paces, then all 48 workouts sync to Strava (4 switches, detailed variant, 16:9)",
+    "src": "animations/dfm2-niche-fitness-detail-p1-69889d8f/",
+    "thumb": "assets/shots/dfm2-niche-fitness-detail-p1-69889d8f.png",
+    "desc": "Variant of niche-fitness-model-switch-superbot-a832b003 with the plan itself on screen. One ask in superbot: Gemini reads 36 half marathon plans and turns what the best ones agree on into the rules for yours, Claude Opus 5.5 writes the 12-week plan week by week with every workout spelled out, GPT-6 Astra sets your paces from a 1:55 goal and checks the mileage, then superbot syncs all 48 workouts to your Strava calendar. 16:9 only.",
+    "download": "assets/video/dfm2-niche-fitness-detail-p1-69889d8f.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-travel-model-switch-superbot-4808b6b8",
     "type": "animation",
     "group": "Ad spots",

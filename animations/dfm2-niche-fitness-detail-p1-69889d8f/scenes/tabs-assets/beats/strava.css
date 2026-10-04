@@ -1,0 +1,147 @@
+/* Strava beat (beats/strava.js): Strava's OAuth authorize page as a sheet in the chat, then the full-frame layer
+   carrying Strava's web app on the plan's Training Calendar (16:9). Pinned over
+   the sheet, then opened to the whole frame. Strava orange is #fc5200, the value strava.com's live stylesheets use
+   (fetched 2026-10-03); the neutrals are a white page, dark grey text and light grey grid lines. The type is the
+   vendored Inter, then the system stack. Nothing here transitions: position, size, clip, opacity and transform are
+   written from t in strava.js, so ?t= freezes a frame. Every class is prefixed .sv-. */
+
+#s-tabs {
+  --sv-or: #fc5200; --sv-or-d: #e04a00; --sv-tint: #ffe8dc; --sv-tint-2: #ffd2bd; --sv-or-text: #b33a00;
+  --sv-text: #242428; --sv-text-2: #6d6d78; --sv-text-3: #9a9aa4; --sv-line: #dfdfe8; --sv-line-2: #ececf2;
+  --sv-page: #f7f7fa; --sv-card: #fff; --sv-green: #1f9d55; --sv-easy: #eeeef3; --sv-race: #242428; --sv-check: #1a73e8;
+  --sv-font: "Inter SB", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+#s-tabs .ui-i { flex: none; width: 24px; height: 24px; fill: currentColor; }
+
+/* ---- the authorize sheet, in the chat ---- */
+#s-tabs .sbsite .hub .sv-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .sv-card { opacity: 0; box-sizing: border-box; width: 380px; max-width: 100%; margin-top: 2px; border-radius: 12px;
+  background: var(--sv-card); box-shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 10px 28px rgba(0, 0, 0, .35); overflow: hidden;
+  font-family: var(--sv-font); color: var(--sv-text); -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .sv-vp { position: relative; height: 318px; padding: 18px 22px 0; box-sizing: border-box; overflow: hidden; }
+#s-tabs .sbsite .hub .sv-pair { display: flex; align-items: center; justify-content: center; gap: 10px; height: 40px; }
+#s-tabs .sbsite .hub .sv-pair .qc-tile, #s-tabs .sbsite .hub .sv-pt { width: 38px; height: 38px; border-radius: 9px; }
+#s-tabs .sbsite .hub .sv-pt-st { display: grid; place-items: center; background: var(--sv-or); }
+#s-tabs .sbsite .hub .sv-pt-st img { width: 24px; height: 24px; display: block; }
+#s-tabs .sbsite .hub .sv-link { display: grid; place-items: center; width: 24px; height: 24px; color: var(--sv-text-3); }
+#s-tabs .sbsite .hub .sv-link .ui-i { width: 20px; height: 20px; }
+#s-tabs .sbsite .hub .sv-h { margin: 12px 0 0; padding-bottom: 12px; border-bottom: 1px solid var(--sv-line-2); text-align: center; font: 500 16.5px/1.3 var(--sv-font); letter-spacing: -.1px; color: var(--sv-text); }
+#s-tabs .sbsite .hub .sv-perm { position: absolute; left: 22px; right: 22px; top: 126px; }
+#s-tabs .sbsite .hub .sv-will { display: block; margin-bottom: 6px; font: 600 12.5px/18px var(--sv-font); }
+#s-tabs .sbsite .hub .sv-sc { display: flex; align-items: center; gap: 7px; height: 22px; font: 400 12.5px/1 var(--sv-font); color: var(--sv-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .sv-cb { flex: none; display: grid; place-items: center; width: 13px; height: 13px; border-radius: 3px; background: var(--sv-check); color: #fff; }
+#s-tabs .sbsite .hub .sv-cb .ui-i { width: 11px; height: 11px; }
+#s-tabs .sbsite .hub .sv-req .sv-cb { background: transparent; box-shadow: inset 0 0 0 1px #c9c9d1; color: #8e8e98; }
+#s-tabs .sbsite .hub .sv-req span { color: var(--sv-text-2); }
+#s-tabs .sbsite .hub .sv-btn { display: grid; place-items: center; height: 34px; margin-top: 8px; border-radius: 4px; font: 600 13.5px/1 var(--sv-font); box-sizing: border-box; }
+#s-tabs .sbsite .hub .sv-auth { margin-top: 10px; background: var(--sv-or); color: #fff; }
+#s-tabs .sbsite .hub .sv-auth.on { background: var(--sv-or-d); }
+#s-tabs .sbsite .hub .sv-cancel { background: #fff; color: var(--sv-text); box-shadow: inset 0 0 0 1px #c9c9d1; font-weight: 500; }
+#s-tabs .sbsite .hub .sv-done { position: absolute; left: 22px; right: 22px; top: 132px; opacity: 0; }
+#s-tabs .sbsite .hub .sv-step { display: flex; align-items: center; gap: 11px; height: 34px; font: 400 14px/1 var(--sv-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .sv-ok { position: relative; flex: none; width: 20px; height: 20px; }
+#s-tabs .sbsite .hub .sv-spin { position: absolute; inset: 2px; border-radius: 50%; border: 2px solid var(--sv-line); border-top-color: var(--sv-or); }
+#s-tabs .sbsite .hub .sv-dn { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: var(--sv-green); opacity: 0; }
+#s-tabs .sbsite .hub .sv-dn .ui-i { width: 13px; height: 13px; color: #fff; }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .sv-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--sv-card); }
+#s-tabs .sv-client { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: visible;
+  background: var(--sv-card); color: var(--sv-text); font: 400 14px/1.3 var(--sv-font); -webkit-font-smoothing: antialiased; }
+
+/* Strava's logged-in header */
+#s-tabs .sv-top { flex: none; display: flex; align-items: center; height: 50px; padding: 0 24px; border-bottom: 1px solid var(--sv-line); white-space: nowrap; }
+#s-tabs .sv-word { flex: none; height: 19px; width: auto; display: block; }
+#s-tabs .sv-top nav { display: flex; gap: 28px; margin-left: 40px; height: 100%; }
+#s-tabs .sv-top nav span { font: 500 14.5px/50px var(--sv-font); color: var(--sv-text); }
+#s-tabs .sv-top nav span.on { box-shadow: inset 0 -3px 0 var(--sv-or); font-weight: 600; }
+#s-tabs .sv-tr { display: inline-flex; align-items: center; gap: 18px; margin-left: auto; color: var(--sv-text); }
+#s-tabs .sv-tr .ui-i { width: 22px; height: 22px; }
+#s-tabs .sv-av { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--sv-text); color: #fff; font: 600 14px/1 var(--sv-font); font-style: normal; }
+
+/* the plan's header: its name, dates and badge; the totals (value over label) */
+#s-tabs .sv-head { flex: none; display: flex; align-items: flex-end; gap: 24px; padding: 14px 24px 12px; background: var(--sv-page); border-bottom: 1px solid var(--sv-line); }
+#s-tabs .sv-ttl { min-width: 0; }
+#s-tabs .sv-ttl h1 { margin: 0; font: 700 25px/1.1 var(--sv-font); letter-spacing: -.4px; white-space: nowrap; }
+#s-tabs .sv-ttl p { display: flex; align-items: center; gap: 12px; margin: 7px 0 0; font: 400 14px/1.2 var(--sv-font); color: var(--sv-text-2); white-space: nowrap; }
+#s-tabs .sv-badge { display: inline-flex; align-items: center; gap: 7px; height: 24px; padding: 0 10px 0 3px; border-radius: 9999px; background: #fff;
+  box-shadow: inset 0 0 0 1px var(--sv-line); font: 500 12.5px/1 var(--sv-font); color: var(--sv-text); white-space: nowrap; }
+#s-tabs .sv-badge img { width: 18px; height: 18px; border-radius: 6px; display: block; }
+#s-tabs .sv-stats { display: flex; gap: 32px; margin-left: auto; white-space: nowrap; }
+#s-tabs .sv-stats span { display: flex; flex-direction: column; gap: 5px; padding-left: 16px; box-shadow: inset 1px 0 0 var(--sv-line); }
+#s-tabs .sv-stats b { font: 700 22px/1 var(--sv-font); color: var(--sv-text); letter-spacing: -.3px; font-variant-numeric: tabular-nums; }
+#s-tabs .sv-stats small { font: 400 12.5px/1 var(--sv-font); color: var(--sv-text-2); font-variant-numeric: tabular-nums; }
+
+/* the calendar's heading row: title, the zone legend (in the bars' own grammar), the sync counter */
+#s-tabs .sv-calhd { flex: none; display: flex; align-items: center; gap: 28px; height: 42px; padding: 0 24px; white-space: nowrap; }
+#s-tabs .sv-calhd h2 { margin: 0; font: 700 17px/1 var(--sv-font); letter-spacing: -.2px; }
+#s-tabs .sv-legend { display: flex; gap: 18px; font: 500 12.5px/1 var(--sv-font); color: var(--sv-text-2); }
+#s-tabs .sv-legend span { display: inline-flex; align-items: flex-end; gap: 7px; }
+#s-tabs .sv-sync { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; font: 600 14px/1 var(--sv-font); color: var(--sv-text); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-sync.done { color: var(--sv-green); }
+#s-tabs .sv-sst { position: relative; flex: none; width: 20px; height: 20px; }
+#s-tabs .sv-sync .sv-spin { position: absolute; inset: 2px; border-radius: 50%; border: 2px solid var(--sv-line); border-top-color: var(--sv-or); }
+#s-tabs .sv-sok { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: var(--sv-green); opacity: 0; }
+#s-tabs .sv-sok .ui-i { width: 13px; height: 13px; color: #fff; }
+
+/* the grid: one CSS grid, a phase column, a week gutter and Mon to Sun (rest days narrow); 12 week rows share the
+   height left. Each phase is a quiet band: Build and Taper rows sit on the page grey, a full line at each phase change */
+#s-tabs .sv-grid { position: relative; flex: 1; min-height: 0; display: grid; margin: 0 24px 12px; border: 1px solid var(--sv-line); border-radius: 12px;
+  grid-template-columns: 122px 132px 40px 1fr 40px 1.3fr 40px .9fr 1.3fr; grid-template-rows: 24px repeat(12, minmax(0, 1fr)); }
+#s-tabs .sv-hd { padding-left: 10px; background: var(--sv-page); border-bottom: 1px solid var(--sv-line); font: 600 12px/23px var(--sv-font); color: var(--sv-text-2);
+  box-shadow: inset 1px 0 0 var(--sv-line-2); }
+#s-tabs .sv-hd-ph { box-shadow: none; border-radius: 11px 0 0 0; }
+#s-tabs .sv-hd.sv-rest { padding-left: 0; text-align: center; color: var(--sv-text-3); }
+#s-tabs .sv-grid > .sv-hd:nth-child(9) { border-radius: 0 11px 0 0; }
+#s-tabs .sv-ph { display: flex; flex-direction: column; gap: 3px; padding: 8px 12px 0; min-width: 0; }
+#s-tabs .sv-ph.sv-pb { box-shadow: inset 0 1px 0 var(--sv-line); }
+#s-tabs .sv-ph.sv-last { border-radius: 0 0 0 11px; }
+#s-tabs .sv-ph b { font: 700 14px/1.1 var(--sv-font); color: var(--sv-text); }
+#s-tabs .sv-ph small { font: 500 11.5px/1.1 var(--sv-font); color: var(--sv-text-2); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-ph span { margin-top: 2px; font: 400 11.5px/1.3 var(--sv-font); color: var(--sv-text-2); }
+#s-tabs .sv-alt { background: var(--sv-page); }
+#s-tabs .sv-rbg { box-shadow: inset 0 1px 0 var(--sv-line-2); }
+#s-tabs .sv-grid > .sv-rbg:nth-child(14) { box-shadow: none; }
+#s-tabs .sv-rbg.sv-pb { box-shadow: inset 0 1px 0 var(--sv-line); }
+#s-tabs .sv-rbg.sv-last { border-radius: 0 0 11px 0; }
+#s-tabs .sv-rbg.sv-live { background: #fffaf7; }
+#s-tabs .sv-wk { position: relative; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; align-content: center; column-gap: 6px; row-gap: 5px;
+  padding: 0 10px; box-shadow: inset 1px 0 0 var(--sv-line); white-space: nowrap; }
+#s-tabs .sv-wk b { font: 700 13px/1 var(--sv-font); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-wk em { justify-self: end; font: 600 12.5px/1 var(--sv-font); font-style: normal; color: var(--sv-text); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-wk small { font: 400 12px/1 var(--sv-font); color: var(--sv-text-2); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-tag { justify-self: end; height: 16px; padding: 0 6px; border-radius: 6px; background: var(--sv-easy); font: 600 11px/16px var(--sv-font); font-style: normal; color: var(--sv-text-2); }
+#s-tabs .sv-cell { position: relative; display: flex; align-items: center; padding: 0 5px; min-width: 0; box-shadow: inset 1px 0 0 var(--sv-line-2); }
+
+/* a workout chip: glyph, name, short form and miles over its structure bar and target pace; the synced tick on its corner */
+#s-tabs .sv-chip { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 4px; height: calc(100% - 6px); max-height: 44px;
+  padding: 0 8px 0 7px; box-sizing: border-box; border-radius: 6px; background: var(--sv-card); box-shadow: inset 0 0 0 1px var(--sv-line); color: var(--sv-text); opacity: 0; }
+#s-tabs .sv-c1, #s-tabs .sv-c2 { display: flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+#s-tabs .sv-gl { width: 15px; height: 15px; color: var(--sv-text-3); }
+#s-tabs .sv-c1 b { flex: none; font: 600 12.5px/14px var(--sv-font); }
+#s-tabs .sv-c1 small { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 500 11.5px/14px var(--sv-font); color: var(--sv-text-2); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-c1 em { flex: none; margin-left: auto; padding-left: 4px; font: 700 12.5px/14px var(--sv-font); font-style: normal; font-variant-numeric: tabular-nums; }
+#s-tabs .sv-c2 { gap: 8px; }
+#s-tabs .sv-trk { flex: 1; min-width: 0; height: 14px; display: flex; align-items: flex-end; }
+#s-tabs .sv-c2 em { flex: none; font: 500 11.5px/13px var(--sv-font); font-style: normal; color: var(--sv-text-2); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-tk { position: absolute; right: -4px; top: -4px; display: grid; place-items: center; width: 13px; height: 13px; border-radius: 50%; background: var(--sv-green);
+  box-shadow: 0 0 0 1.5px #fff; color: #fff; opacity: 0; }
+#s-tabs .sv-tk .ui-i { width: 9px; height: 9px; }
+
+/* the structure bar: width = distance, height = intensity (set from pace in strava.js), the shared zone colours:
+   warm-up, cool-down, jogs and easy neutral, tempo orange at 55%, intervals orange, race pace the text colour */
+#s-tabs .sv-bar { display: flex; align-items: flex-end; gap: 1px; height: 14px; flex: none; }
+#s-tabs .sv-z { display: block; flex-basis: 0; flex-shrink: 1; min-width: 1px; }
+#s-tabs .sv-z-wu, #s-tabs .sv-z-cd, #s-tabs .sv-z-jog, #s-tabs .sv-z-easy { background: #d6d6dd; }
+#s-tabs .sv-z-tempo { background: color-mix(in srgb, #fc5200 55%, transparent); }
+#s-tabs .sv-z-int { background: var(--sv-or); }
+#s-tabs .sv-z-race { background: var(--sv-text); }
+
+/* race day: the dark chip with its flag; the orange ring (--ring 0..1 from strava.js) and the goal line in its own
+   chip, in the pace slot (its opacity is written from t) */
+#s-tabs .sv-race { background: var(--sv-race); box-shadow: none; color: #fff; }
+#s-tabs .sv-race .sv-gl { color: #fff; }
+#s-tabs .sv-race .sv-z-race { background: #fff; }
+#s-tabs .sv-race .sv-c2 em { color: #fff; font-weight: 600; }
+#s-tabs .sv-raceday .sv-chip { box-shadow: 0 0 0 calc(var(--ring, 0) * 3px) var(--sv-or); }
+#s-tabs .sv-goal { opacity: 0; }

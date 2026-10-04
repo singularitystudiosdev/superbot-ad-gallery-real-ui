@@ -1,0 +1,32 @@
+/* scenes/gh.css, beats B to E: the camera rig around the framed GitHub window (gh/screens.css draws the window
+   itself) and the model rail on the stage. Scoped under #s-gh. */
+#s-gh { z-index: 2; }
+#s-gh .gh-cam { position: absolute; left: 0; top: 0; width: 1064px; height: 590px; transform-origin: 0 0; will-change: transform; }
+#s-gh .gh-slot { position: absolute; left: 0; top: 0; }
+#s-gh .gh-slot-pr { opacity: 0; }
+
+/* commit 4's check status, as it shows right after it was clicked open (Primer focus ring) */
+#s-gh .gh-commit-status { transform-origin: 30% 50%; }
+#s-gh .gh-commit-status.ghx2-focus { box-shadow: 0 0 0 2px #1f6feb; }
+#s-gh .gh-check-status { display: inline-grid; transform-origin: 50% 50%; }
+#s-gh #gh-pr-state { transform-origin: 0 50%; }
+
+/* ---- the model rail ---- */
+#s-gh .mrail { position: absolute; left: 56px; top: 0; bottom: 0; width: 404px; display: flex; flex-direction: column; justify-content: center; gap: 22px;
+  z-index: 3; visibility: hidden; }
+#s-gh .mchip { --lit: 0; display: flex; align-items: center; gap: 18px; padding: 18px 18px 18px 18px; border-radius: 22px;
+  background: rgba(22, 25, 31, calc(.55 + .45 * var(--lit)));
+  border: 1.5px solid rgba(var(--c), calc(.18 + .82 * var(--lit)));
+  box-shadow: 0 0 calc(34px * var(--lit)) rgba(var(--c), calc(.34 * var(--lit))), inset 0 0 0 1px rgba(255, 255, 255, .03); }
+#s-gh .mchip-av { flex: none; width: 64px; height: 64px; border-radius: 16px; overflow: hidden; display: grid; place-items: center; background: #000; }
+#s-gh .mchip-av img { width: 64px; height: 64px; display: block; object-fit: cover; }
+#s-gh .mchip-tx { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+#s-gh .mchip-tx b { font: 700 40px/1.05 var(--ui); letter-spacing: -.025em; color: #fff; white-space: nowrap; }
+#s-gh .mchip-tx small { font: 600 24px/1.15 var(--ui); color: rgba(var(--c), 1); filter: brightness(1.25); white-space: nowrap; }
+
+/* connectors from the lit chip to its commit row */
+#s-gh .mlinks { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 4; pointer-events: none; overflow: visible; }
+#s-gh .mlinks g { opacity: 0; }
+#s-gh .mlinks path { fill: none; stroke: rgb(var(--c)); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 6px rgba(var(--c), .6)); }
+#s-gh .mlinks circle { fill: rgb(var(--c)); stroke: #0d1117; stroke-width: 3; }

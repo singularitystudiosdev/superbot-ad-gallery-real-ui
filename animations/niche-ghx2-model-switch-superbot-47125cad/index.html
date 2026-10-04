@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: Fix the random logouts in issue #482 and ship it</title>
+<meta name="description" content="One ask in superbot ships a GitHub fix: on PR #483 every commit has a different author, Gemini writes the repro, Claude Opus 5.5 the fix and the Remember me test, GPT-6 Astra the review fixes, superbot the changelog. Each commit's checks turn green one by one, all 4 checks pass (214 tests), and the pull request is merged.">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=47125cad">
+<link rel="stylesheet" href="gh/screens.css?v=47125cad">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="mark.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per scene module, in storyboard order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=47125cad"></script>
+</body>
+</html>

@@ -920,6 +920,15 @@
     "desc": "Variant of niche-github-model-switch-superbot-0cb69286 for GitHub developers, told as a race. One ask in superbot: Gemini, Claude Opus 5.5 and GPT-6 Astra each patch the same failing Remember me test side by side in three terminals, two re-runs stay red and Opus 5.5's goes green, superbot keeps the passing patch, CI turns green on all five checks and PR #483 opens to close issue #482. 14.8 s, 16:9 only."
   },
   {
+    "id": "niche-ghx2-model-switch-superbot-47125cad",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Fix the random logouts in issue #482 and ship it, for GitHub developers: every commit on PR #483 authored by a different model, then the PR merges (commit-author swap, 6.8 s, variant, 16:9)",
+    "src": "animations/niche-ghx2-model-switch-superbot-47125cad/",
+    "thumb": "assets/shots/niche-ghx2-model-switch-superbot-47125cad.png",
+    "desc": "Variant of niche-github-model-switch-superbot-0cb69286 for GitHub developers: on the Commits tab of PR #483 each commit author is a different model (Gemini, Claude Opus 5.5, GPT-6 Astra, superbot), the checks tick green one by one and the PR flips from Open to Merged. 16:9 only, 6.8 s."
+  },
+  {
     "id": "pdoom-mv-every-model-v3-superbot-abba733b",
     "type": "animation",
     "group": "Ad spots",

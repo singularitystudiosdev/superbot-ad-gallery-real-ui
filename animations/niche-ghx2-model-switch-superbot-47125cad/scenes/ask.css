@@ -1,0 +1,36 @@
+/* scenes/ask.css, beat A: the superbot chat window on the dark stage. Look taken from the original ad's opening
+   (../niche-github-model-switch-superbot-0cb69286/scenes/tabs-assets/hub.css + ask.css tokens: window #0d0d0d,
+   raised #181818, line #262626, fg #ececec, muted #9a9a9a, the SUPER off switch, the storm send button), laid out
+   at final size so the ask reads on a phone. Scoped under #s-ask. */
+#s-ask { z-index: 3; }
+#s-ask .ask-cam { position: absolute; inset: 0; transform-origin: 50% 46%; }
+#s-ask .sb-app { position: absolute; left: 150px; top: 96px; width: 1620px; height: 888px; display: flex; flex-direction: column;
+  background: #0d0d0d; border: 1px solid #262626; border-radius: 24px; overflow: hidden; color: #ececec;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .06), 0 40px 100px rgba(0, 0, 0, .6); }
+#s-ask .sb-bar { position: relative; flex: none; height: 56px; display: flex; align-items: center; padding: 0 22px; border-bottom: 1px solid #1c1c1c; background: #0a0a0a; }
+#s-ask .sb-lights { display: flex; gap: 10px; }
+#s-ask .sb-lights i { width: 15px; height: 15px; border-radius: 50%; background: #ff5f57; }
+#s-ask .sb-lights i:nth-child(2) { background: #febc2e; }
+#s-ask .sb-lights i:nth-child(3) { background: #28c840; }
+#s-ask .sb-title { position: absolute; left: 0; right: 0; text-align: center; font: 600 20px/1 var(--ui); color: #9a9a9a; }
+
+#s-ask .sb-thread { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 52px; padding: 92px 120px 0; }
+#s-ask .sb-user { align-self: flex-end; max-width: 1180px; padding: 30px 44px 32px; border-radius: 40px 40px 12px 40px; background: #1f1f23;
+  border: 1px solid #2c2c31; transform-origin: 100% 100%; }
+#s-ask .sb-user p { margin: 0; font: 600 62px/1.22 var(--ui); letter-spacing: -.012em; color: #f4f4f6; text-wrap: balance; }
+#s-ask .sb-bot { display: flex; align-items: center; gap: 28px; opacity: 0; }
+#s-ask .sb-bot-mark { flex: none; width: 92px; height: 92px; display: grid; place-items: center; }
+#s-ask .sb-bot-tx { display: flex; flex-direction: column; gap: 8px; }
+#s-ask .sb-bot-tx b { font: 700 40px/1.1 var(--ui); color: #fff; }
+#s-ask .sb-bot-tx span { font: 500 36px/1.2 var(--ui); color: #b9bcc6; }
+#s-ask .sb-bot-tx code { font: 600 .92em/1 var(--font-mono); color: #e6e8ee; }
+
+#s-ask .sb-composer { flex: none; display: flex; align-items: center; gap: 18px; margin: 0 120px 48px; height: 92px; padding: 0 16px 0 26px;
+  border-radius: 28px; background: #181818; border: 1px solid #2a2a2e; }
+#s-ask .sb-plus { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #3a3a3f; display: grid; place-items: center; font: 500 28px/1 var(--ui); color: #d6d6db; }
+#s-ask .sb-ph { flex: 1; min-width: 0; font: 500 30px/1 var(--ui); color: #8c8f99; white-space: nowrap; }
+#s-ask .sb-super { flex: none; display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 8px 0 18px; border-radius: 999px; background: #26262a;
+  font: 700 17px/1 var(--ui); letter-spacing: .08em; color: #c7c9d1; }
+#s-ask .sb-tg { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 4px; border-radius: 999px; background: #3f3f44; font: 700 13px/1 var(--ui); font-style: normal; letter-spacing: .04em; color: #e5e5ea; }
+#s-ask .sb-tg b { width: 20px; height: 20px; border-radius: 50%; background: #d6d6db; }
+#s-ask .sb-send { flex: none; width: 60px; height: 60px; border-radius: 50%; background: var(--storm-action); display: grid; place-items: center; }

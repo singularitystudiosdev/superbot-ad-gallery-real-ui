@@ -1,0 +1,65 @@
+CREDITS for img/ (superbot ad ghx2: model switch, PR #483 commit-author swap)
+
+All 7 images below are AI-generated (OpenRouter chat completions, modalities [image,text], image_config.aspect_ratio 1:1).
+Each one is original. None depicts a real person or copies a third-party logo or trademark: the people are invented faces, and the model marks are abstract shapes made
+so they do NOT resemble the Google Gemini sparkle, the Anthropic/Claude starburst or the OpenAI knot.
+Post-processing: 1024x1024 output, center-cropped square, Lanczos-resized to 512x512 PNG. The three photos (mirachen, c1, c2) also got a tighter
+face crop (a 400x400 box around the face of the 512 image, upscaled to 512) so they read at 20-40 px.
+
+== avatar-gemini.png
+description: Abstract mark: faceted blue-to-violet crystal gem on dark navy (stands in for Gemini; deliberately not the Gemini sparkle).
+model: google/gemini-3-pro-image
+date: 2026-10-03T22:23:14.129Z
+generation id: gen-1791066160-aRfkhIoqk9vJnVRcrvQY
+cost: $0.138808
+prompt: Abstract avatar mark: a single bold faceted crystal gem shape, like a chunky cut prism made of 5-6 large flat triangular facets, rendered in a cool gradient from bright cerulean blue to deep violet, on a solid very dark navy background. Large simple facets, crisp edges, slight glow. Square 1:1 app avatar icon, centered, fills the frame edge to edge, flat bold geometric shapes with strong contrast that stay legible when shrunk to 20 pixels inside a circle. No text, no letters, no numbers, no watermark. Original abstract design, must not resemble any existing company or AI brand logo (no four-pointed sparkle star, no radiating asterisk/starburst, no interlocking hexagonal knot).
+
+== avatar-opus.png
+description: Abstract mark: rounded hill of layered terracotta/clay strata bands on cream (stands in for Claude Opus; deliberately not the Anthropic/Claude starburst).
+model: google/gemini-3-pro-image
+date: 2026-10-03T22:23:32.827Z
+generation id: gen-1791066160-zYEuQYsVMdrdOJU7KNbk
+cost: $0.139052
+prompt: Abstract avatar mark: a rounded hill-like shape made of 4 thick horizontal layered strata bands, like sedimentary rock layers or stacked clay ribbons, in warm terracotta, burnt orange, clay and sand tones, on a solid warm cream background. Smooth matte, chunky bands with clear separation. Square 1:1 app avatar icon, centered, fills the frame edge to edge, flat bold geometric shapes with strong contrast that stay legible when shrunk to 20 pixels inside a circle. No text, no letters, no numbers, no watermark. Original abstract design, must not resemble any existing company or AI brand logo (no four-pointed sparkle star, no radiating asterisk/starburst, no interlocking hexagonal knot).
+
+== avatar-astra.png
+description: Abstract mark: pale aqua planet with a tilted orbital ring on deep teal with a few star dots (stands in for GPT-6 Astra; deliberately not the OpenAI knot).
+model: google/gemini-3-pro-image
+date: 2026-10-03T22:23:11.530Z
+generation id: gen-1791066160-fJvAniWLrBizRMe5a0W6
+cost: $0.138830
+prompt: Abstract avatar mark: a solid glowing pale aqua sphere with one thick tilted orbital ring crossing in front of it, on a deep teal background sprinkled with a few tiny white star dots. Bold simple planet-and-ring silhouette, high contrast. Square 1:1 app avatar icon, centered, fills the frame edge to edge, flat bold geometric shapes with strong contrast that stay legible when shrunk to 20 pixels inside a circle. No text, no letters, no numbers, no watermark. Original abstract design, must not resemble any existing company or AI brand logo (no four-pointed sparkle star, no radiating asterisk/starburst, no interlocking hexagonal knot).
+
+== avatar-mirachen.png
+description: Fictional maintainer 'mirachen': photo of a woman in her early 30s, black shoulder-length hair, green sweater, light grey background.
+model: google/gemini-3-pro-image
+date: 2026-10-03T22:23:06.158Z
+generation id: gen-1791066160-1tGHcqS16EVWMHlJQY3P
+cost: $0.137852
+prompt: Realistic GitHub profile photo of a fictional software engineer, a woman in her early 30s of East Asian descent, shoulder-length black hair, friendly slight smile, wearing a plain dark green crew-neck sweater, head and shoulders centered, looking at camera, soft natural window light, plain light grey neutral background, shallow depth of field. Square crop, face fills the center. Not a real or famous person, generic invented face. No text, no watermark.
+
+== avatar-c1.png
+description: Fictional contributor: photo of a bearded man in his late 20s, curly dark hair, navy hoodie, blurred green park.
+model: google/gemini-3-pro-image
+date: 2026-10-03T22:23:08.581Z
+generation id: gen-1791066160-zzDMFkexu5QY9B5eeNpI
+cost: $0.137762
+prompt: Realistic GitHub profile photo of a fictional software developer, a man in his late 20s with a short dark beard and curly dark hair, light brown skin, wearing a navy hoodie, relaxed expression, head and shoulders centered, looking at camera, outdoor soft daylight with a blurred green park background. Square crop, face fills the center. Not a real or famous person, generic invented face. No text, no watermark.
+
+== avatar-c2.png
+description: Fictional contributor: photo of a man in his 40s, sandy blond hair, round glasses, grey t-shirt, beige office wall.
+model: google/gemini-3-pro-image
+date: 2026-10-03T22:23:32.009Z
+generation id: gen-1791066160-fSAEjhvnoHP4e8Y9nu3a
+cost: $0.138336
+prompt: Realistic GitHub profile photo of a fictional software developer, a man in his 40s with short sandy blond hair and round glasses, fair skin, wearing a grey t-shirt, warm smile, head and shoulders centered, looking at camera, indoor office light, plain warm beige wall background. Square crop, face fills the center. Not a real or famous person, generic invented face. No text, no watermark.
+
+== avatar-c3.png
+description: Fictional contributor: flat vector illustration of a person with a purple bob and orange/blue headphones on mustard yellow.
+model: google/gemini-3-pro-image
+date: 2026-10-03T22:23:12.129Z
+generation id: gen-1791066161-7EMl5DMYWODzC3aGbkxU
+cost: $0.137728
+prompt: Illustrated flat vector-style avatar of a fictional developer character: a person with a short purple bob haircut and large headphones, simple friendly face, bold flat colors, thick clean shapes, on a solid bright mustard yellow background, head and shoulders centered. Square 1:1, reads clearly at 20 pixels in a circle. Not a real person. No text, no letters, no watermark.
+
+Total spend: $0.9684 (7 calls, no regenerations).

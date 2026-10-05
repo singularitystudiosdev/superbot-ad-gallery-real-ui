@@ -29,7 +29,6 @@ const grille = (cls) => `<path class="${cls}" d="M124 62h48M124 72h48M124 82h48M
 const yoke = (cls) => `<path class="${cls}" d="M112 58c-13 2-19 12-19 26v34c0 14 6 24 19 26M184 58c13 2 19 12 19 26v34c0 14-6 24-19 26"/>`;
 const cap = (cls) => `<ellipse class="${cls}" cx="148" cy="48" rx="26" ry="8"/>`;
 const stem = (cls) => `<path class="${cls}" d="M148 142v14M126 160h44l-8-12h-28z"/>`;
-const grillDots = () => `<g class="m3-dots">${[0, 1, 2, 3, 4, 5].map((r) => [0, 1, 2, 3, 4, 5].map((c) => `<circle cx="${132 + c * 6.4}" cy="${52 + r * 8}" r="1.1"/>`).join('')).join('')}</g>`;
 // view A: front (straight on). view B: 3/4 (yoke wider, body narrowed, stand swung) — the model turned.
 const viewA = () => `${cap('w')}${body('w')}${grille('w')}${yoke('w')}${stem('w')}`;
 const viewB = () => `<g transform="translate(14 0)"><ellipse class="w" cx="148" cy="48" rx="21" ry="8"/><rect class="w" x="128" y="46" width="40" height="96" rx="17"/><path class="w" d="M130 62h36M130 72h36M130 82h36M130 92h36"/><path class="w" d="M116 58c-16 3-24 13-24 27v33c0 14 8 24 24 27M180 58c16 3 24 13 24 27v33c0 14-8 24-24 27"/><path class="w" d="M148 142v14M128 160h40l-8-12h-24z"/></g>`;

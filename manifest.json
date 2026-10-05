@@ -2120,6 +2120,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "norefuse-swap-16x9-40482867",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: four plans pack into one sbc_ key, a stock endpoint refuses a real request, one base_url swap turns the same call into a full answer, then auto-routes it to Opus 5.5, Gemini or DeepSeek (refuse to swap to answer, 16:9)",
+    "src": "animations/norefuse-swap-16x9-40482867/",
+    "thumb": "assets/shots/norefuse-swap-16x9-40482867.png",
+    "desc": "Claude Max, ChatGPT Plus, Google AI Pro and DeepSeek pile onto one sbc_ Superbot API key (Route Auto). A stock OpenAI endpoint answers a plain request, an nmap scan of your own host, with a flat I can't help with that, stamped refused. Then one line changes in .env: the only edit is OPENAI_BASE_URL, from api.openai.com to beta.superbot.gg; the key and the SDK stay put. The same request goes in again and comes back 200 OK at superbot.gg with a usable answer, and an OpenRouter-style router shows the request auto-routed to Claude Opus 5.5 on Claude Max, with Gemini 3.1 Pro and DeepSeek V4 Flash alongside, every per-token price struck and billed to a plan you already pay for. Ends on: Superbot doesn't refuse. Drop in API replacement. 28 s, 1920x1080, with sound.",
+    "download": "animations/norefuse-swap-16x9-40482867/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "norefuse-split-16x9-40482867",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: one request typed into two endpoints side by side, the stock one refuses and Superbot answers the same question, then the router auto-picks Opus 5.5, Gemini or DeepSeek (split screen, 16:9)",
+    "src": "animations/norefuse-split-16x9-40482867/",
+    "thumb": "assets/shots/norefuse-split-16x9-40482867.png",
+    "desc": "Four plans pack into one sbc_ key. Then the same short question, the standard adult ibuprofen dose, is typed into two endpoints at once: api.openai.com on the left answers I can't help with that and gets a red REFUSED verdict, while beta.superbot.gg on the right answers with the label-standard dose range and a green ANSWERED verdict. A swap badge between them shows the only change, base_url, going from api.openai.com to beta.superbot.gg. The router below then auto-routes three more requests: a hard refactor to Claude Opus 5.5 on Claude Max, three PDFs to Gemini 3.1 Pro, a tiny rename to DeepSeek V4 Flash, every per-token price struck and billed to a plan. Ends on: Superbot doesn't refuse. Drop in API replacement. 24 s, 1920x1080, with sound.",
+    "download": "animations/norefuse-split-16x9-40482867/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "norefuse-raw-16x9-40482867",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: the same curl pointed at api.openai.com and at beta.superbot.gg, a content_filtered refusal becomes a 200 with x-superbot-route, then the key routes to Opus 5.5, Gemini or DeepSeek (raw API, 16:9)",
+    "src": "animations/norefuse-raw-16x9-40482867/",
+    "thumb": "assets/shots/norefuse-raw-16x9-40482867.png",
+    "desc": "Four plans pack into one sbc_ key, then a terminal runs the call the developer already has. curl api.openai.com returns {\"error\":\"content_filtered\",\"message\":\"I can't help with that.\"} in red. One line changes, api.openai.com to beta.superbot.gg, and the identical curl comes back HTTP/2 200 with x-superbot-route: claude-opus-5.5 and x-billed-to: claude-max, streaming a usable answer in 1.2 s. A chip row shows the same key routes to Opus 5.5, Gemini 3.1 Pro or DeepSeek V4 Flash depending on the request. Ends on: Superbot doesn't refuse. Drop in API replacement. 24 s, 1920x1080, with sound.",
+    "download": "animations/norefuse-raw-16x9-40482867/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "onekey-pack-16x9-fc99bee5",
     "type": "animation",
     "group": "Ad spots",

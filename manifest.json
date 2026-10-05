@@ -1107,6 +1107,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-youtube-model-switch-superbot-3828921d-ytmatch-b73828a5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments, pin the best one: every switch to the model built for it, on the real YouTube page (ytmatch, 16:9)",
+    "src": "animations/niche-youtube-model-switch-superbot-3828921d-ytmatch-b73828a5/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-3828921d-ytmatch-b73828a5.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d with every model switch remade to make sense. One ask in superbot: GPT-6 Luna sorts all 1,284 comments and finds the five worth answering, two of which only the video can answer; Gemini 3.1 Pro watches the 14:32 video and finds both answers, at 4:38 and 7:05; Claude Opus 5.5 writes the five replies in the creator's voice from those timestamps; then superbot posts, hearts and pins them on a YouTube watch page matched to the real one. 26 s, 16:9.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-3828921d-ytmatch-b73828a5.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-ghx7-model-switch-superbot-c76daf74",
     "type": "animation",
     "group": "Ad spots",

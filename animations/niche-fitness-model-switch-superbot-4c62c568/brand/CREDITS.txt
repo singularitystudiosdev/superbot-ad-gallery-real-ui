@@ -1,0 +1,40 @@
+brand/ CREDITS (internal): every mark, tile and font in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear nominatively (naming the model or service superbot routes
+each step to, and showing the Garmin surfaces superbot connects to) and unaltered. Provenance is never shown on
+screen.
+
+SUPERBOT'S OWN TILE ART (first party)
+tile-gemini.png, tile-claude.png, tile-openai.webp
+             The superbot desktop app's provider tiles, copied unaltered from superbot-desktop
+             packages/ui/src/marks/tiles/ (google.png, anthropic.png, openai.webp; the app aliases the Gemini models
+             to the google tile and the GPT models to the openai tile). They are what the shipped app paints in the
+             switch pill, the "X in superbot" header and the composer's model chip.
+tile.svg     superbot's own app tile (first party), carried over from
+             animations/niche-youtube-model-switch-superbot-6f7ed36f/brand/. The partner logo on Garmin's consent page.
+
+GARMIN (third party, unaltered)
+tile-garmin.png
+             Garmin's own site icon, https://share-assets.fe.garmin.com/apple-touch-icon.png (180 x 180, the Garmin
+             delta on white), fetched 2026-10-05. superbot paints a service with no tile of its own as the site's icon
+             (switch-mark.tsx, the "site" rung); Garmin's favicon is the black delta, which disappears on the app's
+             #1a1a1c neutral ground, so the spot uses the same mark's touch icon, which carries its own white ground.
+garmin-logo.svg
+             Garmin wordmark, Wikimedia Commons File:Garmin_logo_2006.svg, public domain (PD-textlogo), trademarked.
+             The consent page's header.
+UI reference (not shipped): Garmin's partner consent screen as fitedit.io documents it
+  (fitedit.io/images/user-agent-terms/garmin_connect_consent.png), Garmin Connect iOS Calendar as Final Surge and
+  pocket-lint show it (2024-2025), Garmin Connect Developer Program Training API (workouts and schedules to the
+  Garmin Connect calendar, then to the device).
+
+FONTS (fonts/)
+open-sans-latin.woff2
+             Open Sans (variable 400-700, v44, latin subset) by Steve Matteson, SIL Open Font License 1.1, from Google
+             Fonts (fonts.gstatic.com/s/opensans/v44/...), fetched 2026-10-05. Garmin's web face on the consent page.
+             superbot's own UI uses the system's SF Pro Rounded / New York, Garmin Connect on iPhone uses SF Pro, as the
+             apps do.
+
+UI ICONS
+  Garmin consent and Garmin Connect app glyphs are Material Symbols (Google, Apache License 2.0) from the Iconify API
+  https://api.iconify.design/material-symbols.json, path data verbatim in scenes/icons.js, fetched 2026-10-05.
+  superbot's own glyphs (spinner, check, composer controls) and Chrome's toolbar arrows are Lucide (ISC License)
+  path data, as in shell.js.

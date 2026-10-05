@@ -2696,6 +2696,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-fitness-model-switch-superbot-4c62c568",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Build a 12-week half marathon plan and put it on my Garmin: Garmin connects first, Gemini 3.8 Flash reads 41 runs, GPT-6 Astra sets the goal, Opus 5.5 writes 48 workouts, they land on the Garmin Connect calendar (smooth remake, 16:9)",
+    "src": "animations/niche-fitness-model-switch-superbot-4c62c568/",
+    "thumb": "assets/shots/niche-fitness-model-switch-superbot-4c62c568.png",
+    "desc": "Smoother, app-accurate remake of niche-fitness-model-switch-superbot-a832b003. One ask in superbot, one continuous take: Garmin connects first through its consent page (Activities shared with superbot, Workouts switched on so the plan can come back), Gemini 3.8 Flash reads 41 runs into a baseline (18 mi a week, 10:05 easy, 52:30 10K), GPT-6 Astra predicts a 1:55:00 half and lays out a 12-week, 270-mile ramp with four training paces, Claude Opus 5.5 writes all 48 workouts as Garmin structured workouts, then they fill October on the Garmin Connect calendar on the phone while superbot counts them in. 16:9 only.",
+    "download": "assets/video/niche-fitness-model-switch-superbot-4c62c568.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "dropin-monolith-16x9-d3e53279",
     "type": "animation",
     "group": "Ad spots",

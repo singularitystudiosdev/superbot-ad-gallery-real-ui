@@ -1,0 +1,96 @@
+/* V2 prism (91e2fa71): floating real-UI pieces on a dot grid, 3D deck, prism router, dials. */
+.bgg { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.06) 1.2px, transparent 1.4px); background-size: 34px 34px; -webkit-mask: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 100%); mask: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 100%); }
+.vw { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+.d3 { position: absolute; inset: 0; perspective: 1900px; perspective-origin: 960px 520px; }
+.deck { position: absolute; left: 960px; top: 520px; width: 0; height: 0; transform-style: preserve-3d; }
+.pc { position: absolute; left: -280px; top: -170px; width: 560px; height: 340px; border-radius: 30px; background: #121316; border: 1px solid #2a2c33; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.55); backface-visibility: hidden; }
+.pc .glo { position: absolute; inset: 0; opacity: .5; }
+.pc .pc-top { position: absolute; left: 34px; right: 30px; top: 30px; display: flex; align-items: center; justify-content: space-between; }
+.pc .pc-top .tile { width: 72px; height: 72px; border-radius: 20px; }
+.pc .con { height: 36px; padding: 0 14px; border-radius: 999px; background: rgba(35,165,89,.14); color: #3ccf7b; border: 1px solid rgba(35,165,89,.35); font-size: 16px; font-weight: 750; display: flex; align-items: center; gap: 8px; }
+.pc .con .chk { width: 18px; height: 18px; }
+.pc .pc-nm { position: absolute; left: 34px; top: 130px; font-size: 44px; font-weight: 800; letter-spacing: -.025em; }
+.pc .pc-sub { position: absolute; left: 34px; top: 190px; font-size: 19px; color: var(--muted); }
+.pc .pc-foot { position: absolute; left: 34px; right: 34px; bottom: 30px; display: flex; align-items: center; justify-content: space-between; }
+.pc .pc-num { font-family: var(--mono); font-size: 22px; color: var(--fg-2); letter-spacing: .04em; }
+.pc .pc-num em { font-style: normal; color: var(--muted-2); margin-right: 10px; }
+
+.kk { position: absolute; left: -450px; top: -260px; width: 900px; height: 520px; border-radius: 34px; background: radial-gradient(120% 140% at 0% 0%, #1b2030 0%, #101117 46%, #0b0b0d 100%); border: 1px solid #2d3242; box-shadow: 0 70px 170px rgba(0,0,0,.7); overflow: hidden; backface-visibility: hidden; }
+.kk .rim { position: absolute; inset: 0; border-radius: 34px; padding: 2px; background: var(--grad); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.kk .shine { position: absolute; top: -40%; left: 0; width: 240px; height: 180%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent); }
+.kk .kh { position: absolute; left: 50px; top: 44px; display: flex; align-items: center; gap: 16px; font-size: 24px; font-weight: 750; }
+.kk .kc2 { position: absolute; right: 50px; top: 50px; }
+.kk .kl { position: absolute; left: 50px; top: 150px; font-size: 15px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.kk .kkey { position: absolute; left: 50px; top: 186px; font-family: var(--mono); font-size: 46px; font-weight: 600; white-space: nowrap; display: flex; }
+.kk .kkey .pre0 { color: var(--muted); }
+.kk .kkey .sg0 { position: relative; }
+.kk .kkey .sg0 i { position: absolute; left: 2px; right: 2px; bottom: -10px; height: 6px; border-radius: 3px; transform-origin: 0 50%; }
+.kk .kplans { position: absolute; left: 50px; right: 50px; bottom: 46px; display: flex; align-items: center; gap: 12px; }
+.kk .kp { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; padding: 0; border-radius: 14px; background: #16171c; border: 1px solid var(--line-2); font-size: 17px; font-weight: 700; }
+.kk .kp .tile { width: 40px; height: 40px; border-radius: 12px; }
+.dial .dn .dm { width: 36px; height: 36px; display: block; }
+.kk .kn { margin-left: auto; text-align: right; }
+.kk .kn b { display: block; font-size: 26px; font-weight: 800; }
+.kk .kn span { font-size: 15px; color: var(--muted); }
+.flash { position: absolute; left: 960px; top: 520px; width: 1400px; height: 1400px; margin: -700px 0 0 -700px; border-radius: 50%; background: radial-gradient(closest-side, rgba(150,180,255,.35), rgba(91,141,255,.08) 45%, transparent 70%); }
+
+/* prism */
+.pz { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.pzm { position: absolute; left: 920px; top: 545px; width: 80px; height: 80px; }
+.bub { position: absolute; left: 120px; top: 470px; width: 540px; border-radius: 24px 24px 24px 8px; background: #16171b; border: 1px solid var(--line-2); padding: 22px 26px 24px; }
+.bub .bl { display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 750; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.bub .bl span { font-family: var(--mono); letter-spacing: 0; text-transform: none; color: var(--fg-2); font-size: 16px; }
+.bub .bt { margin-top: 10px; font-size: 27px; line-height: 1.3; font-weight: 650; }
+.whyb { position: absolute; left: 390px; top: 690px; height: 0; }
+.whyb > div { position: absolute; left: 0; top: 0; transform: translateX(-50%); white-space: nowrap; height: 42px; padding: 0 18px; border-radius: 999px; background: #141418; border: 1px solid var(--line-2); font-size: 17px; font-weight: 650; color: var(--fg-2); display: flex; align-items: center; gap: 8px; }
+.whyb > div em { font-style: normal; color: var(--muted); }
+.tgt { position: absolute; left: 1390px; width: 430px; height: 150px; border-radius: 22px; background: #121316; border: 1px solid var(--line-2); display: flex; align-items: center; gap: 18px; padding: 0 26px; }
+.tgt .tile { width: 58px; height: 58px; border-radius: 16px; }
+.tgt b { display: block; font-size: 26px; font-weight: 800; letter-spacing: -.01em; }
+.tgt .vi { font-size: 16px; color: var(--muted); }
+.tgt .fs { margin-left: auto; font-family: var(--mono); font-size: 21px; color: var(--fg-2); }
+.tgt .hl2 { position: absolute; inset: -1px; border-radius: 22px; padding: 2px; background: var(--grad); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.tgt .pk { position: absolute; right: 22px; top: -16px; height: 32px; padding: 0 12px; border-radius: 999px; background: #0f2a1b; border: 1px solid rgba(35,165,89,.5); color: #3ccf7b; font-size: 14px; font-weight: 800; display: flex; align-items: center; }
+
+/* config card */
+.cfg { position: absolute; left: 380px; top: 250px; width: 1160px; height: 560px; border-radius: 26px; background: #0f1012; border: 1px solid var(--line-2); box-shadow: 0 60px 160px rgba(0,0,0,.65); overflow: hidden; transform-origin: 580px 280px; }
+.cfg .ctab { height: 58px; display: flex; align-items: flex-end; gap: 6px; padding: 0 20px; background: #0b0b0c; border-bottom: 1px solid var(--line); }
+.cfg .ctab .tb { height: 46px; padding: 0 22px; border-radius: 12px 12px 0 0; background: #0f1012; border: 1px solid var(--line); border-bottom: 0; display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--fg); }
+.cfg .ctab .tb .dt { width: 8px; height: 8px; border-radius: 50%; background: var(--fg-2); }
+.cfg .ctab .pth { margin-left: auto; align-self: center; font-family: var(--mono); font-size: 15px; color: var(--muted); }
+.cfg .cl { position: absolute; left: 0; width: 1160px; height: 56px; display: flex; align-items: center; font-family: var(--mono); font-size: 30px; white-space: pre; }
+.cfg .cl .no { width: 90px; padding-right: 28px; text-align: right; color: #464953; flex: none; font-size: 24px; }
+.cfg .cl .gg { width: 5px; height: 56px; margin-right: 26px; flex: none; }
+.cfg .cl .tx2 { color: var(--fg-2); }
+.cfg .h1 { color: #c99bff; } .cfg .ky { color: #8fb4ff; } .cfg .eq { color: #8c909b; } .cfg .st2 { color: #a5e3b6; }
+.cfg .flip { position: relative; display: inline-block; height: 56px; vertical-align: top; perspective: 600px; }
+.cfg .flip > span { position: absolute; left: 0; top: 0; height: 56px; line-height: 56px; white-space: pre; transform-origin: 50% 50%; backface-visibility: hidden; }
+.cfg .flip .nw { color: #a5e3b6; }
+.cfg .lbg { position: absolute; inset: 0; background: rgba(35,165,89,.12); }
+.cfg .one { position: absolute; left: 1160px; top: 0; height: 40px; }
+.stamp { position: absolute; height: 46px; padding: 0 18px; border-radius: 12px; background: #0f2a1b; border: 1px solid rgba(35,165,89,.5); color: #3ccf7b; font-size: 19px; font-weight: 800; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+
+/* dials */
+.dial { position: absolute; width: 560px; height: 720px; }
+.dial svg { position: absolute; left: 0; top: 0; width: 560px; height: 560px; overflow: visible; }
+.dial .dc { position: absolute; left: 0; top: 0; width: 560px; height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.dial .dt2 { font-family: var(--mono); font-size: 82px; font-weight: 600; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+.dial .dl { margin-top: 14px; font-size: 15px; font-weight: 750; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+.dial .dn { position: absolute; left: 0; right: 0; top: 590px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 24px; font-weight: 800; }
+.dial .dn .tile { width: 36px; height: 36px; border-radius: 10px; }
+.dial .dn .hs { font-family: var(--mono); font-size: 17px; color: var(--muted); font-weight: 500; }
+.dial .dstep { position: absolute; left: 0; right: 0; top: 650px; height: 40px; }
+.dial .dstep > div { position: absolute; left: 50%; top: 0; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; white-space: nowrap; font-size: 19px; font-weight: 650; color: var(--fg-2); }
+.spd2 { position: absolute; left: 960px; top: 112px; }
+.spd2 .speed { position: absolute; left: 0; top: 0; transform: translateX(-50%); }
+.vx { position: absolute; left: 960px; top: 470px; }
+.vx > div { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%); height: 64px; padding: 0 26px; border-radius: 999px; background: var(--grad); color: #fff; font-size: 30px; font-weight: 800; display: flex; align-items: center; white-space: nowrap; box-shadow: 0 20px 60px rgba(91,141,255,.35); }
+
+/* laps */
+.laps { position: absolute; inset: 0; }
+.lap { position: absolute; width: 132px; height: 132px; }
+.lap svg { width: 132px; height: 132px; overflow: visible; }
+.lap .ln2 { position: absolute; left: 0; right: 0; top: 50px; text-align: center; font-family: var(--mono); font-size: 24px; font-weight: 700; }
+.lapl { position: absolute; font-size: 26px; font-weight: 800; white-space: nowrap; }
+.lapl span { color: var(--muted); font-weight: 650; }
+.lapl b { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }

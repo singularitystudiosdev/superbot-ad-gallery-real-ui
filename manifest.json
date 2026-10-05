@@ -2773,6 +2773,39 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "x7-realui-workspace-16x9-91e2fa71",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: four plans connect and fold into one sk-superbot key, the router picks Opus 5.5, Gemini or DeepSeek per request, one base_url line in agent.yaml, then a live-timer race in two shells (workspace, 16:9)",
+    "src": "animations/x7-realui-workspace-16x9-91e2fa71/",
+    "thumb": "assets/shots/x7-realui-workspace-16x9-91e2fa71.png",
+    "desc": "One superbot window in launch-film grammar, chat on the left and a tabbed workspace on the right. Keys tab: Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek connect one per beat, lift out over a dimmed scrim and dock into one sk-superbot key card, each printing its segment, and the key drops into the chat composer as OPENAI_API_KEY. Router tab: three requests are scored live and a packet flies to the winner: a refactor to Claude Opus 5.5 via Claude Max, 14 earnings calls to Gemini 3.1 Pro via Google AI Pro, 5,000 tickets to DeepSeek V4.1 Flash. agent.yaml: the base_url value is selected and retyped from https://api.openai.com/v1 to https://beta.superbot.gg/v1, 1 line changed. Shell tab: the same agent run (migrate billing to the new Stripe API, open a PR) in two terminals with live timers on one time-lapse clock; the old endpoint sits in a 429 back-off while superbot routes each step and fans the 14 edits out, finishing at 0:24.0 against 2:48.0. A bar chart reads 7.0x faster, $4.60 API spend vs $0.00 extra. Ends on: Superbot drop in replacement makes your agent run x7 faster. 30 s, 16:9, with sound.",
+    "download": "animations/x7-realui-workspace-16x9-91e2fa71/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "x7-realui-prism-16x9-91e2fa71",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: four plan cards laminate into one key that turns into a prism, each request refracts to Opus 5.5, Gemini or DeepSeek, a config.toml line flips, then stopwatch dials race (prism, 16:9)",
+    "src": "animations/x7-realui-prism-16x9-91e2fa71/",
+    "thumb": "assets/shots/x7-realui-prism-16x9-91e2fa71.png",
+    "desc": "Four plan cards, Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek, drop one per beat, stack into a 3D deck and laminate in a flash into one sk-superbot key card whose segments decode from each plan. The key turns edge-on and becomes a glass prism: each request is a beam of light that disperses toward three models and refracts to the best one, a refactor to Claude Opus 5.5, 14 earnings calls to Gemini 3.1 Pro, 5,000 tickets to DeepSeek V4.1 Flash. In config.toml the base_url line flips like a split-flap from https://api.openai.com/v1 to https://beta.superbot.gg/v1. Two stopwatch dials race the same agent task with live timers on one time-lapse clock: superbot closes its ring at 0:24.0 while the old endpoint is a seventh of the way round, and the old run finishes at 2:48.0, 7.0x. Seven superbot laps then fill in the time of one old run. Ends on: Superbot drop in replacement makes your agent run x7 faster. 30 s, 16:9, with sound.",
+    "download": "animations/x7-realui-prism-16x9-91e2fa71/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "x7-realui-trace-16x9-91e2fa71",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: an IDE links four plans into one key in .env, the Traces panel shows each request route to Opus 5.5, Gemini or DeepSeek, baseURL is retyped in config.json, then two trace waterfalls race (trace, 16:9)",
+    "src": "animations/x7-realui-trace-16x9-91e2fa71/",
+    "thumb": "assets/shots/x7-realui-trace-16x9-91e2fa71.png",
+    "desc": "An IDE with the superbot extension. The command palette runs Superbot: Link subscriptions and ticks Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek; each plan key part flies from the sidebar into OPENAI_API_KEY in .env and a hover card names the plans. The Traces panel opens: each POST /v1/chat/completions gets a span waterfall, router.classify then the model span with route.model, route.plan and route.reason: a refactor to Claude Opus 5.5, 14 earnings calls to Gemini 3.1 Pro, 5,000 tickets to DeepSeek V4.1 Flash. In .agent/config.json the baseURL host api.openai.com is backspaced and retyped as beta.superbot.gg, 1 line changed. Run compare traces the same agent task on both endpoints as live waterfalls with timers: the old endpoint runs every step serially on GPT-6.1 and loses 20 s to a 429, superbot routes each step and fans 14 edits out in parallel; at 0:24.0 the axis zooms out from 30 s to 180 s while the old run finishes at 2:48.0. Reads 7.0x faster, $0.00 extra. Ends on: Superbot drop in replacement makes your agent run x7 faster. 30 s, 16:9, with sound.",
+    "download": "animations/x7-realui-trace-16x9-91e2fa71/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -2718,6 +2718,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-fitness-model-switch-superbot-bd0d0cf9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Build me a 12-week half marathon plan from my Strava and add it to my calendar: superbot connects Strava, Gemini reads 41 runs, GPT-6 Astra does the race math, Opus 5.5 writes 48 runs, superbot puts them on Google Calendar (app-accurate remake, 16:9)",
+    "src": "animations/niche-fitness-model-switch-superbot-bd0d0cf9/",
+    "thumb": "assets/shots/niche-fitness-model-switch-superbot-bd0d0cf9.png",
+    "desc": "App-accurate remake of niche-fitness-model-switch-superbot-a832b003 (untouched), every switch handed to the model the step suits. Superbot authorizes Strava on Strava's own authorize page (activity:read_all) and pulls 12 weeks of runs; model switches get pills, superbot's own app connections do not. Gemini reads all 41 of them into a baseline (22 mi a week, 9.3 mi longest, 10:05 easy at 142 bpm, a 52:40 best 10K). GPT-6 Astra does the math and says what it picked (no race was set): Riegel puts the half at 1:56:13 today, the goal is 1:52:00 on Sun Dec 27, five training paces, a 12-week ramp peaking at 32 mi with a cutback every 4th week. Claude Opus 5.5 writes the 48 sessions, each with its paces scaled to the distance. Superbot gets Google's consent (calendar.app.created), creates a Half Marathon Plan calendar and the runs land on Google Calendar in month view; October fills, the view steps to November and December, and race day opens on its event card as the camera pushes in.",
+    "download": "assets/video/niche-fitness-model-switch-superbot-bd0d0cf9.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "dropin-monolith-16x9-d3e53279",
     "type": "animation",
     "group": "Ad spots",

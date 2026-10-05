@@ -1,0 +1,41 @@
+/* Runs beat (beats/runs.js): Gemini reading Sam's 41 Strava runs. A hub card (the takes-card grammar) holding a
+   white list of activities in Strava's web type and colours (#242428 titles, #6d6d78 meta), which scrolls past fast,
+   then collapses under the "What your runs say" sheet; the closing line ticks in under it. Nothing transitions:
+   opacity/transform/filter are written from t. Every class is prefixed .rn-. */
+
+#s-tabs .sbsite .hub .rn-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 9px 11px 10px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .rn-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+  font: 500 12.5px/1.2 var(--ui); color: #c9c9cf; white-space: nowrap; }
+#s-tabs .sbsite .hub .rn-lb { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .rn-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .rn-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .rn-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+#s-tabs .sbsite .hub .rn-cnt { margin-left: auto; padding-left: 10px; color: #8e8e93; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rn-n { font-weight: 700; color: #f2f2f5; font-variant-numeric: tabular-nums; }
+
+/* the activity list: Strava's light page, 5 rows of 31px */
+#s-tabs .sbsite .hub .rn-vp { position: relative; height: 163px; border-radius: 8px; overflow: hidden; background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .rn-list { padding: 4px 12px 0; transform-origin: 50% 0; will-change: transform; }
+#s-tabs .sbsite .hub .rn-row { display: flex; align-items: center; gap: 10px; height: 31px; box-sizing: border-box; border-bottom: 1px solid #ededf0; white-space: nowrap; }
+#s-tabs .sbsite .hub .rn-nm { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+#s-tabs .sbsite .hub .rn-nm b { overflow: hidden; text-overflow: ellipsis; font: 700 11.5px/1.1 "Helvetica Neue", Helvetica, Arial, sans-serif; color: #242428; }
+#s-tabs .sbsite .hub .rn-nm small { font-size: 9px; line-height: 1; color: #6d6d78; }
+#s-tabs .sbsite .hub .rn-sx { display: flex; gap: 12px; margin-left: auto; font-size: 11px; color: #242428; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .rn-sx span:nth-child(1) { width: 40px; text-align: right; }
+#s-tabs .sbsite .hub .rn-sx span:nth-child(2) { width: 54px; text-align: right; }
+#s-tabs .sbsite .hub .rn-sx span:nth-child(3) { width: 50px; text-align: right; color: #6d6d78; }
+
+/* the findings: a white sheet over the list (the hub's light neutrals) */
+#s-tabs .sbsite .hub .rn-top { position: absolute; inset: 0; opacity: 0; padding: 8px 12px 0; box-sizing: border-box; background: var(--ap-card); font-family: var(--ap-font); }
+#s-tabs .sbsite .hub .rn-tt { display: flex; align-items: baseline; justify-content: space-between; height: 22px; opacity: 0;
+  font: 600 12.5px/1 var(--ap-font); color: var(--ap-text); }
+#s-tabs .sbsite .hub .rn-tt span { font-weight: 400; font-size: 11px; color: var(--ap-text-2); }
+#s-tabs .sbsite .hub .rn-q { display: flex; align-items: center; gap: 8px; height: 26px; opacity: 0; box-sizing: border-box;
+  border-top: 1px solid var(--ap-line-2); font: 400 12.5px/1 var(--ap-font); color: var(--ap-text-2); white-space: nowrap; }
+#s-tabs .sbsite .hub .rn-qv { margin-left: auto; font-weight: 600; color: var(--ap-text); font-variant-numeric: tabular-nums; }
+
+#s-tabs .sbsite .hub .rn-ft { display: flex; align-items: center; gap: 7px; margin-top: 9px; opacity: 0;
+  font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .rn-ft .qc-ok { flex: none; }

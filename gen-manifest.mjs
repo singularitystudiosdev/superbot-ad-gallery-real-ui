@@ -638,6 +638,19 @@ const more = [
     { desc: 'Sub-10 s variant of its-a-lie-every-model-superbot-54829cd7, opened like the week\'s top AI videos on X: the game itself, full-bleed with no caption, pulls back into the post that claims it was made in one prompt with Opus 5.5, and IT\'S A LIE lands at 1.1 s. The real superbot chat then routes that one prompt to DeepSeek V4 Flash, Gemini 3 Pro Image, Eleven Music and Claude Opus 5.5 (which drives Blender for the sheep and the pickaxe), each with its real output, and the game plays under the end card. 1920x1080, 60 fps.',
       download: 'assets/video/its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb.16x9.mp4', downloadLabel: '16:9' }],
   // <<< its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb
+  // >>> its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb
+  // r1-a of its-a-lie-every-model-superbot-54829cd7 (untouched) (2026-10-05, loop lv410045ceb arm A): same ask, the same
+  // six tools at their current versions, 14.8 s instead of 29, and every switch now makes one piece of "minecraft in the browser" that ships in the
+  // payoff: DeepSeek V4 Flash writes worldgen.js (its code on screen plus the map it makes), Nano Banana Pro paints the 16
+  // block textures, Meshy 6 models and rigs the pig, ElevenLabs SFX v2 makes four sound effects (each heard as it lands),
+  // Suno v5.5 scores the piano theme (the spot's music from there), and Claude Opus 5.5 wires each asset in, runs the tests and
+  // opens localhost:5173, where the camera flies into the game they made. Everything is built in code for this spot:
+  // the three.js voxel game, its textures, pig, HUD, the X post, the superbot UI and every sound. Fresh-context judge,
+  // flags fixed. 1920x1080 native, 60 fps, H.264 10 Mbps, with sound. index.html plays the MP4; CREDITS.txt has provenance.
+  ["its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb", "its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb/", "IT'S A LIE in 14.8 s · each switch builds a piece of the game: DeepSeek world gen, Nano Banana Pro textures, Meshy 6 pig, ElevenLabs sfx, Suno score, Opus wires it (16:9)", 'Ad spots',
+    { desc: "Under-15 s variant of its-a-lie-every-model-superbot-54829cd7 with more detailed outputs. The post claims Opus 5.5 built the game in one prompt, and IT'S A LIE is stamped across it from the first frame. Then one superbot chat turns \"make me minecraft in the browser\" into the game piece by piece: DeepSeek V4 Flash writes the world generator and shows the map it makes, Nano Banana Pro paints 16 block and plant textures, Meshy 6 models and rigs the pig, ElevenLabs SFX v2 makes four sound effects, Suno v5.5 writes the piano theme, and Claude Opus 5.5 wires every asset in, passes its tests and runs it, and the camera flies into the game they made. 1920x1080, 60 fps.",
+      download: "assets/video/its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb.16x9.mp4", downloadLabel: '16:9' }],
+  // <<< its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb
   // IT'S NOT JUST OPUS 5.5 (2026-09-27): a fork of make-minecraft b055c127 with the pocketsflow-untold X post, where the
   // viewer mines @noahwachnik's Opus 5.5 Minecraft post like a block, then one chat routes "make me minecraft. call it
   // BlockHaven" through six models before @kepochnik's clip plays

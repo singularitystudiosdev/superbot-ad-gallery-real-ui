@@ -1,0 +1,27 @@
+its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb
+Variant of its-a-lie-every-model-superbot-54829cd7 (2026-10-05, loop lv410045ceb, arm A). The source entry is untouched.
+Rendered natively at 1920x1080, 60 fps, H.264 High@4.2 10 Mbps CBR, AAC 192k at -14 LUFS; 14.8 s. index.html plays the MP4.
+
+Same ask as the source ("make me minecraft in the browser"), but each switch now makes one part of that game, and the
+payoff is the game built from exactly those parts. Model names are the current versions (checked 2026-10-05):
+- DeepSeek V4 Flash: worldgen.js. The 8 lines on screen are cut verbatim from the game's worldgen.js (105 lines); the map
+  beside them is what that generator produces for seed 1337, and it is the world the post and the payoff play in.
+- Nano Banana Pro: terrain.png, 16 block and plant textures at 16x16 px. The game samples the same 16 tiles.
+- Meshy 6: pig.glb (1,344 tri, 7 parts, rigged; Meshy auto-rigs quadrupeds), shown in superbot's 3D viewer setup. The
+  same pig walks in the payoff, animated by the game's mobs.js.
+- ElevenLabs SFX v2: four sound effects (grass block break, footsteps on sand, oak plank place, pig oink). Each is heard as its
+  row lands; the waveforms are those sounds' peaks, and the payoff plays them.
+- Suno v5.5: two takes of a 3/4 piano theme; the spot's music from the moment its row plays.
+- Claude Opus 5.5: the work card wires each asset into the game (world.js uses worldgen.js, textures.js uses terrain.png,
+  mobs.js uses pig.glb, sound.js uses the four sfx, music.js uses the theme), runs the tests and opens it at localhost:5173.
+
+Made for this spot, in code, by the agent (no stock footage, photos or samples, and no model API was called):
+- BlockHaven, the voxel game: three.js r186 (MIT) renderer, per-vertex ambient occlusion mesher, seeded terrain, the 16
+  textures painted pixel by pixel from seeded noise, the pig's box model and skin, sky, clouds, HUD and block icons.
+- The X post (Kai @kaiships, the series' fictional persona) and its avatar; the superbot chat UI, rebuilt from the real
+  app's tokens and components (provider switch pill, who header, code block, image card, 3D media embed, audio row).
+- Every sound: UI ticks, the slam, the four game sound effects, the piano theme and its reverb, synthesized sample by sample.
+Fonts at render time: SF Pro, SF Pro Rounded and SF Mono (Apple system fonts, not redistributed).
+Provider marks name the products only: DeepSeek, Google (Nano Banana), ElevenLabs and Anthropic tiles are superbot's own
+app tiles; the Meshy and Suno marks are as listed in ../its-a-lie-every-model-superbot-54829cd7/brand/CREDITS.txt.
+The superbot mark on the end card is the real mascot from beta.superbot.gg (../../assets/sb-mark-live.*).

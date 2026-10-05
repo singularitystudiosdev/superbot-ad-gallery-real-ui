@@ -2850,6 +2850,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "cancel-unused-subscriptions-superbot-695edc23",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "CANCEL WHAT YOU DON’T USE. · DeepSeek V4 Flash reads the bank statement, Superbot cancels 4 unused subscriptions and counts the savings (<7s, 16:9)",
+    "src": "animations/cancel-unused-subscriptions-superbot-695edc23/",
+    "thumb": "assets/shots/cancel-unused-subscriptions-superbot-695edc23.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82, new process: a bank statement PDF read for unused subscriptions, then each one cancelled. One ask in superbot with statement_sep.pdf (6 pages) attached: \"cancel the subscriptions i don't use\". Switching to DeepSeek V4 Flash: it reads the statement (214 transactions, 9 subscriptions, 4 unused for 60+ days) and lists Peacock Premium $13.99/mo (last used Jun 28), Audible Premium Plus $14.95/mo (May 3), Calm $14.99/mo (Mar 11) and NYT Cooking $5.00/mo (Jul 2), each Active. Switched to Superbot: Signed in to 4 accounts, then a stack of the four account pages (Peacock Plans & Payment, Audible Account Details, Calm Manage Subscription, NYT Subscription overview) with Cancel Plan, Cancel membership, Cancel Subscription and Cancel subscription pressed in quick succession while each row flips from Active to Cancelled with a green check. Result: Cancelled 4 plans and the card 4 cancelled. $48.93 a month saved. $587.16 a year., counted up as each plan goes. End card: EVERY MODEL. ONE CHAT. 5.38 s, 1920x1080, 60 fps, with sound (four quick clunk cancels, a coin chime as the savings land).",
+    "download": "assets/video/cancel-unused-subscriptions-superbot-695edc23.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

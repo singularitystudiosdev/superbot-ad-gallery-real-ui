@@ -1,0 +1,113 @@
+/* cancel-unused-subscriptions: the headline kicker, the attached statement_sep.pdf (composer, sent message), DeepSeek's
+   statement card with the four unused subscriptions (beats/read.js) and Superbot's stack of account pages plus the
+   savings card (beats/cancel.js). Chat cards follow ports.css .dd-card: #0e0e10 body, #2e2e31 hairline. The account
+   pages look like the apps: Peacock #000 with #fff text, #a4a5a7 muted, #323538 rules and #fccc12 yellow; Audible #fff
+   with #191919 text and #f7991c orange; Calm #f7f7f7 with #1c1c1c text, #555be4 buttons and its #60b4e7 to #6461e0
+   gradient; NYT Cooking #fff with #121212 text and #df321b red. Service names are text, no logo artwork. */
+#s-tabs .vr-band { position: absolute; left: 0; right: 0; top: 0; height: 190px; z-index: 5; pointer-events: none;
+  background: linear-gradient(#0a0a0b 0%, #0a0a0b 50%, rgba(10,10,11,0) 100%); }
+#s-tabs .vr-kick { position: absolute; left: 0; right: 0; top: 40px; z-index: 6; text-align: center; white-space: nowrap;
+  font: 800 64px/1 var(--ui); letter-spacing: -.03em; color: #fff; transform-origin: 50% 0; }
+
+/* the statement attachment */
+#s-tabs .sbsite .hub .vr-att { overflow: hidden; flex: none; display: flex; gap: 8px; }
+#s-tabs .sbsite .hub .vr-att-in { display: inline-flex; align-items: center; margin-bottom: 8px; padding: 6px 14px 6px 8px; border-radius: 10px;
+  background: #232326; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .vr-att-t { display: flex; flex-direction: column; gap: 2px; }
+#s-tabs .sbsite .hub .vr-att-t b { font: 600 11px/13px var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .vr-att-t small { font: 500 9.5px/11px var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .sb-pdf { display: inline-flex; align-items: center; gap: 9px; }
+#s-tabs .sbsite .hub .sb-pdf-ic { width: 24px; height: 29px; flex: none; }
+#s-tabs .sbsite .hub .sb-pdf-svg { display: block; width: 24px; height: 29px; }
+#s-tabs .sbsite .hub .vr-uatt { display: flex; justify-content: flex-end; gap: 6px; margin-bottom: 6px; }
+#s-tabs .sbsite .hub .eb-ph { position: relative; overflow: hidden; box-shadow: 0 0 0 1px #2e2e31; }
+#s-tabs .sbsite .hub .eb-ph.sb-uph { display: inline-flex; padding: 8px 18px 8px 10px; border-radius: 12px; background: #232326; }
+#s-tabs .sbsite .hub .sb-uph .vr-att-t b { font-size: 12px; line-height: 14px; }
+#s-tabs .sbsite .hub .sb-uph .vr-att-t small { font-size: 10px; line-height: 12px; }
+#s-tabs .sbsite .hub .eb-scan { position: absolute; left: 0; right: 0; top: 0; height: 100%; opacity: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(90,140,255,.0) 30%, rgba(110,150,255,.42) 47%, rgba(196,120,255,.55) 50%, rgba(110,150,255,.42) 53%, transparent 70%); mix-blend-mode: screen; }
+
+/* step chips */
+#s-tabs .sbsite .hub .dd-chiprow.eb-chiprow { display: flex; flex-wrap: nowrap; width: max-content; gap: 0 7px; opacity: 1; }
+#s-tabs .sbsite .hub .eb-chiprow .ch-tool { opacity: 0; font-size: 11px; }
+#s-tabs .sbsite .hub .eb-chiprow .ch-tool.sb-chip-done { color: #e5e5ea; }
+
+/* DeepSeek's statement card */
+#s-tabs .sbsite .hub .dd-card.sb-scard { width: 700px; padding: 0 0 4px; overflow: hidden; }
+#s-tabs .sbsite .hub .sb-sh { display: flex; align-items: center; gap: 7px; padding: 8px 14px 8px 12px; border-bottom: 1px solid #232327;
+  font: 500 10.5px/14px var(--ui); color: #8e8e93; white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-sh b { font: 600 11px/14px var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .sb-sh-ic .sb-pdf-svg { display: block; width: 13px; height: 16px; }
+#s-tabs .sbsite .hub .sb-sh-r { margin-left: auto; color: #f5b84b; font-weight: 600; }
+#s-tabs .sbsite .hub .sb-row { --fl: 0; display: grid; grid-template-columns: 1.5fr 1.05fr .8fr 108px; align-items: center; gap: 10px;
+  height: 33px; padding: 0 14px; border-bottom: 1px solid #1c1c1f; font: 500 12.5px/16px var(--ui); color: #c7c7cc;
+  background: rgba(52,199,89,calc(var(--fl) * .14)); white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-row:last-child { border-bottom: 0; }
+#s-tabs .sbsite .hub .sb-nm b { font-weight: 700; }
+#s-tabs .sbsite .hub .sb-last { color: #8e8e93; font-size: 11.5px; }
+#s-tabs .sbsite .hub .sb-pr { color: #ececec; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sb-pr small { margin-left: 1px; color: #8e8e93; font: 500 10px/1 var(--ui); }
+#s-tabs .sbsite .hub .sb-st { position: relative; justify-self: end; width: 98px; height: 21px; perspective: 160px; }
+#s-tabs .sbsite .hub .sb-st > span { position: absolute; right: 0; top: 0; height: 21px; display: inline-flex; align-items: center; gap: 5px;
+  padding: 0 9px; border-radius: 999px; font: 600 10.5px/21px var(--ui); backface-visibility: hidden; transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .sb-st-a { background: #1f1f23; color: #d1d1d6; box-shadow: inset 0 0 0 1px #2e2e33; }
+#s-tabs .sbsite .hub .sb-st-a i { width: 6px; height: 6px; border-radius: 50%; background: #f5b84b; }
+#s-tabs .sbsite .hub .sb-st-c { background: #0f2419; color: #3ddc84; box-shadow: inset 0 0 0 1px #1d4a31; opacity: 0; }
+#s-tabs .sbsite .hub .sb-st-c .qc-ok { width: 11px; height: 11px; stroke: #3ddc84; stroke-width: 3.2; }
+
+/* Superbot's stack of account pages */
+#s-tabs .sbsite .hub .sb-deck { display: flex; margin: 2px 0 10px; }
+#s-tabs .sbsite .hub .sb-pn { position: relative; flex: 0 0 179px; height: 128px; border-radius: 9px; overflow: hidden; font-family: var(--ui);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), -10px 0 20px rgba(0,0,0,.6); transform-origin: 50% 100%; }
+#s-tabs .sbsite .hub .sb-pn + .sb-pn { margin-left: -6px; }
+#s-tabs .sbsite .hub .sb-pn:not(:last-child) .sb-pn-b { padding-right: 17px; }
+#s-tabs .sbsite .hub .sb-pn.sb-on { box-shadow: 0 0 0 1.5px #7c8cff, 0 10px 26px rgba(0,0,0,.7); }
+#s-tabs .sbsite .hub .sb-pn-bar { height: 19px; display: flex; align-items: center; gap: 3px; padding: 0 8px; font: 500 8.5px/1 var(--ui); white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-pn-bar i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .4; flex: none; }
+#s-tabs .sbsite .hub .sb-pn-bar span { margin-left: 5px; }
+#s-tabs .sbsite .hub .sb-pn-b { display: flex; flex-direction: column; gap: 2px; padding: 8px 12px 0 14px; }
+#s-tabs .sbsite .hub .sb-pn-wm { font: 800 13.5px/16px var(--ui); letter-spacing: -.01em; }
+#s-tabs .sbsite .hub .sb-pn-pg { font: 600 9.5px/12px var(--ui); opacity: .62; }
+#s-tabs .sbsite .hub .sb-pn-pl { display: flex; justify-content: space-between; margin-top: 4px; font: 600 10.5px/14px var(--ui); }
+#s-tabs .sbsite .hub .sb-pn-pl em { font-style: normal; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sb-pn-btn { position: relative; display: grid; place-items: center; height: 26px; margin-top: 8px; overflow: hidden;
+  font: 600 10px/1 var(--ui); white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-pn-btn > span { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 4px; position: relative; }
+#s-tabs .sbsite .hub .sb-pn-bd { opacity: 0; }
+#s-tabs .sbsite .hub .sb-pn-bd .qc-ok { width: 11px; height: 11px; stroke: currentColor; stroke-width: 3.2; }
+#s-tabs .sbsite .hub .sb-pn-rip { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%;
+  background: currentColor; opacity: 0; }
+#s-tabs .sbsite .hub .sb-pn.sb-done .sb-pn-btn { color: #1a8a4a; border-color: #8fd3a9; background: #e9f8ef; }
+
+#s-tabs .sbsite .hub .sb-pn-peacock { background: #000; color: #fff; }
+#s-tabs .sbsite .hub .sb-pn-peacock .sb-pn-bar { background: #141518; color: #a4a5a7; }
+#s-tabs .sbsite .hub .sb-pn-peacock .sb-pn-wm { color: #fccc12; }
+#s-tabs .sbsite .hub .sb-pn-peacock .sb-pn-btn { border: 1px solid #fff; border-radius: 4px; color: #fff; }
+#s-tabs .sbsite .hub .sb-pn-peacock.sb-done .sb-pn-btn { background: #0f2419; border-color: #3ddc84; color: #3ddc84; }
+
+#s-tabs .sbsite .hub .sb-pn-audible { background: #fff; color: #191919; }
+#s-tabs .sbsite .hub .sb-pn-audible .sb-pn-bar { background: #f0f0f0; color: #6b6b6b; }
+#s-tabs .sbsite .hub .sb-pn-audible .sb-pn-wm { color: #f7991c; }
+#s-tabs .sbsite .hub .sb-pn-audible .sb-pn-btn { border: 1px solid #c9c9c9; border-radius: 4px; background: #fff; color: #191919; }
+
+#s-tabs .sbsite .hub .sb-pn-calm { background: #f7f7f7; color: #1c1c1c; }
+#s-tabs .sbsite .hub .sb-pn-calm .sb-pn-bar { background: #e9e9ec; color: #6e6e73; }
+#s-tabs .sbsite .hub .sb-pn-calm .sb-pn-wm { background: linear-gradient(90deg, #60b4e7, #6461e0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#s-tabs .sbsite .hub .sb-pn-calm .sb-pn-btn { border: 1.5px solid #555be4; border-radius: 999px; color: #555be4; }
+
+#s-tabs .sbsite .hub .sb-pn-nyt { background: #fff; color: #121212; }
+#s-tabs .sbsite .hub .sb-pn-nyt .sb-pn-bar { background: #f0f0f0; color: #666; }
+#s-tabs .sbsite .hub .sb-pn-nyt .sb-pn-wm { color: #df321b; font-family: Georgia, 'Times New Roman', serif; font-weight: 700; letter-spacing: 0; }
+#s-tabs .sbsite .hub .sb-pn-nyt .sb-pn-btn { border: 1px solid #121212; border-radius: 3px; color: #121212; }
+
+/* the savings card */
+#s-tabs .sbsite .hub .dd-card.sb-sum { --glow: 0; display: flex; align-items: center; gap: 13px; width: 700px; padding: 11px 16px;
+  box-shadow: inset 0 0 0 1px #2e2e31, 0 0 calc(var(--glow) * 28px) rgba(52,199,89,calc(var(--glow) * .45)); }
+#s-tabs .sbsite .hub .sb-sum-ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #34c759; flex: none; }
+#s-tabs .sbsite .hub .sb-sum-ic .qc-ok { width: 17px; height: 17px; stroke: #fff; stroke-width: 3; }
+#s-tabs .sbsite .hub .sb-sum-t { display: flex; flex-direction: column; gap: 2px; white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-sum-t b { font: 700 15px/19px var(--ui); color: #fff; }
+#s-tabs .sbsite .hub .sb-sum-t > span { font: 500 13.5px/20px var(--ui); color: #c7c7cc; }
+#s-tabs .sbsite .hub .sb-sum-t em { display: inline-block; min-width: 3.6em; font: 800 16px/20px var(--ui); font-style: normal; color: #3ddc84;
+  font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sb-sum-t em.sb-yr { min-width: 4.3em; }

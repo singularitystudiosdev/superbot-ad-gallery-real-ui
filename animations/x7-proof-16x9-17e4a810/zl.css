@@ -1,0 +1,62 @@
+/* Shared look for the x7 aurora set (17e4a810): the reference's grammar (navy-black ground, an arc
+   of light over a perspective grid floor, gradient kinetic headlines, tilted glass panels) built on
+   the superbot real-UI tokens. Every property here is static; motion is set per frame from JS. */
+#stage { background: #04060b; }
+.env { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(130% 90% at 50% 112%, #0b1226 0%, #060912 46%, #04060b 72%); }
+.env .spill { position: absolute; left: 50%; top: -620px; width: 2600px; height: 1500px; margin-left: -1300px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(91,141,255,.30), rgba(34,211,238,.10) 55%, transparent 100%); }
+.env .arc { position: absolute; left: 50%; top: -1130px; width: 3100px; height: 1820px; margin-left: -1550px; border-radius: 50%;
+  background: linear-gradient(90deg, #8b5cf6 8%, #5b8dff 32%, #22d3ee 50%, #5b8dff 68%, #8b5cf6 92%);
+  -webkit-mask-image: radial-gradient(closest-side, transparent 90.2%, rgba(0,0,0,.35) 93.2%, #000 96.4%, rgba(0,0,0,.2) 98.6%, transparent 100%);
+  mask-image: radial-gradient(closest-side, transparent 90.2%, rgba(0,0,0,.35) 93.2%, #000 96.4%, rgba(0,0,0,.2) 98.6%, transparent 100%); }
+.env .arc2 { position: absolute; left: 50%; top: -1240px; width: 3300px; height: 2000px; margin-left: -1650px; border-radius: 50%;
+  background: linear-gradient(90deg, rgba(139,92,246,.0) 10%, rgba(91,141,255,.55) 35%, rgba(34,211,238,.7) 50%, rgba(91,141,255,.55) 65%, rgba(139,92,246,0) 90%);
+  -webkit-mask-image: radial-gradient(closest-side, transparent 80%, rgba(0,0,0,.5) 92%, transparent 100%);
+  mask-image: radial-gradient(closest-side, transparent 80%, rgba(0,0,0,.5) 92%, transparent 100%); opacity: .55; }
+.env .floor { position: absolute; left: -60%; width: 220%; top: 0; height: 1300px; transform-origin: 50% 0;
+  background-image: linear-gradient(rgba(110,150,255,.30) 2px, transparent 2px), linear-gradient(90deg, rgba(110,150,255,.30) 2px, transparent 2px);
+  background-size: 130px 130px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.55) 22%, #000 60%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.55) 22%, #000 60%); }
+.env .horizon { position: absolute; left: 0; right: 0; height: 240px; margin-top: -120px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(91,141,255,.20), transparent 70%); }
+.env .vig { position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 45%, transparent 55%, rgba(0,0,0,.55) 100%); }
+
+/* kinetic headline: each word rises out of its own mask */
+.hd { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; pointer-events: none; z-index: 40; }
+.hd .row { display: flex; gap: .26em; justify-content: center; font-weight: 800; letter-spacing: -.035em; line-height: 1.12; color: #f3f5fa; white-space: nowrap; }
+.hd .w { display: inline-block; overflow: hidden; padding: 0 .04em .12em; margin-bottom: -.12em; }
+.hd .w > span { display: inline-block; }
+.hd .g > span { background: linear-gradient(90deg, #22d3ee, #5b8dff 55%, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hd .m > span { color: #8d97ad; }
+.hd .k { font-family: var(--mono); font-weight: 650; letter-spacing: -.02em; }
+
+/* glass panel with a lit top edge */
+.zp { position: absolute; border-radius: 26px; background: linear-gradient(180deg, #11141c, #0b0d13) padding-box,
+  linear-gradient(160deg, rgba(160,190,255,.42), rgba(91,141,255,.10) 30%, rgba(255,255,255,.05) 60%, rgba(139,92,246,.22)) border-box;
+  border: 1.5px solid transparent; box-shadow: 0 60px 140px rgba(0,0,0,.65), 0 0 0 1px rgba(0,0,0,.4); overflow: hidden; }
+.zp .glint { position: absolute; inset: -40% -60%; pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(200,220,255,.10) 48%, rgba(220,235,255,.22) 50%, rgba(200,220,255,.10) 52%, transparent 58%);
+  transform: translateX(var(--gx, -120%)); }
+.zp .bar { height: 54px; display: flex; align-items: center; gap: 10px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 17px; font-weight: 650; color: var(--muted); background: transparent; border-radius: 0; overflow: visible; }
+.zp .bar .dots { display: flex; gap: 8px; margin-right: 8px; }
+.zp .bar .dots i { width: 12px; height: 12px; border-radius: 50%; background: #262a35; display: block; }
+.zp .bar b { color: var(--fg); font-weight: 700; }
+.zp .bar .r { margin-left: auto; }
+
+/* gradient pill used for "7x" style callouts */
+.gpill { display: inline-flex; align-items: center; gap: 14px; padding: 0 30px; height: 88px; border-radius: 999px; font-size: 52px; font-weight: 800; letter-spacing: -.03em; color: #fff;
+  background: linear-gradient(#0d1018, #0d1018) padding-box, var(--grad) border-box; border: 2.5px solid transparent; box-shadow: 0 30px 90px rgba(40,80,200,.35); white-space: nowrap; }
+.gpill .gx { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.gpill small { font-size: 22px; font-weight: 650; color: var(--muted); letter-spacing: 0; }
+
+/* end line: two rows, last words in the brand gradient */
+.zend { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 45; }
+.zend .face { width: 120px; height: 120px; margin-bottom: 34px; }
+.zend .row { font-size: 96px; font-weight: 800; letter-spacing: -.04em; line-height: 1.1; color: #f3f5fa; display: flex; gap: .24em; white-space: nowrap; }
+.zend .w { display: inline-block; overflow: hidden; padding: 0 .04em .14em; margin-bottom: -.14em; }
+.zend .w > span { display: inline-block; }
+.zend .g > span { background: linear-gradient(90deg, #22d3ee, #5b8dff 55%, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.zend .url { margin-top: 40px; height: 56px; padding: 0 26px; border-radius: 999px; display: inline-flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 24px; font-weight: 600; color: var(--fg-2);
+  background: rgba(20,24,34,.8); border: 1px solid rgba(140,170,255,.25); }
+.zend .url i { width: 10px; height: 10px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 12px var(--ok); }

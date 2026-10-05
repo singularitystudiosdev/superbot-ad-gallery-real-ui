@@ -2817,6 +2817,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "x7-orbit-16x9-17e4a810",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: four plans orbit one superbot key and spiral into it, a beam routes each request to Opus 5.5, Gemini or DeepSeek, one baseURL line in agent.config.ts, then two tilted panels race (orbit, 16:9)",
+    "src": "animations/x7-orbit-16x9-17e4a810/",
+    "thumb": "assets/shots/x7-orbit-16x9-17e4a810.png",
+    "desc": "Arc of light over a perspective grid floor. Four plan cards you already pay for, Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek, orbit a SUPERBOT KEY card in a 3D ring and spiral in one by one, each decoding its own segment of the one superbot key. A chat composer sends three requests through the superbot router and a beam lands each on the best model: a refactor to Claude Opus 5.5 via Claude Max, 14 earnings calls to Gemini 3.1 Pro via Google AI Pro, 5,000 support tickets to DeepSeek V4.1 Flash. In agent.config.ts the baseURL string https://api.openai.com/v1 is selected and retyped as https://beta.superbot.gg/v1, 1 line changed. Two tilted panels run the same agent task (migrate billing to the new Stripe API and open a PR) on one time-lapse clock: superbot stops at 0:24.0, the old endpoint keeps retrying 429s to 2:48.0, 7.0x faster. Ends on: Superbot drop in replacement makes your agent run x7 faster. 30 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/x7-orbit-16x9-17e4a810/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "x7-stream-16x9-17e4a810",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: four API keys pour their characters into one superbot key, a rail switch sends each request to Opus 5.5, Gemini or DeepSeek, git diff shows one base_url line, then two lanes race (stream, 16:9)",
+    "src": "animations/x7-stream-16x9-17e4a810/",
+    "thumb": "assets/shots/x7-stream-16x9-17e4a810.png",
+    "desc": "One continuous camera flight across the grid floor, whip-panning between four stations. Four API keys (ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, DEEPSEEK_API_KEY) pour their characters along arcs into one superbot key, each plan's segment decoding as its glyphs land. A rail switch routes each request: the packet leaves billing-agent, the switch blade flips, and the packet rides its rail to Claude Opus 5.5, Gemini 3.1 Pro or DeepSeek V4.1 Flash, 200 OK. git diff agent.yaml shows the only change, base_url https://api.openai.com/v1 out and https://beta.superbot.gg/v1 in: 1 file changed, 1 insertion, 1 deletion. Two lanes race the same agent task with live timers: superbot reaches PR OPEN at 0:24.0 while the old endpoint is a seventh of the way down its track, then the old run finishes at 2:48.0, 7.0x. Ends on: Superbot drop in replacement makes your agent run x7 faster. 30 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/x7-stream-16x9-17e4a810/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "x7-proof-16x9-17e4a810",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: four plans charge a ring around one key, the chat model chip spins like a slot reel to Opus 5.5, Gemini or DeepSeek, base_url rolls like an odometer, then seven superbot runs fill one old run (proof, 16:9)",
+    "src": "animations/x7-proof-16x9-17e4a810/",
+    "thumb": "assets/shots/x7-proof-16x9-17e4a810.png",
+    "desc": "Macro type and hard pull-backs. The superbot key prefix is typed huge, then the camera pulls back to a charge ring: Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek each send a pulse and fill a quarter of the ring in their colour while the key decodes, 4 plans, 1 key, OpenAI-compatible. In the superbot chat, each request's model chip spins like a slot reel and lands on the model it needs: Claude Opus 5.5 via Claude Max, Gemini 3.1 Pro via Google AI Pro, DeepSeek V4.1 Flash via DeepSeek. In agent_config.py the base_url rolls like an odometer from https://api.openai.com/v1 to https://beta.superbot.gg/v1, then the camera pulls back: 1 line changed, the rest of the code stays the same. A Gantt trace races the same agent task on one clock: the superbot bar stops at 0:24.0, the old bar stalls on 429 retries and ends at 2:48.0, then seven superbot runs drop in end to end and fill the old bar exactly, 7 x 0:24.0 = 2:48.0, 7.0x faster. Ends on: Superbot drop in replacement makes your agent run x7 faster. 30 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/x7-proof-16x9-17e4a810/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "allin-connect-16x9-27df33f2",
     "type": "animation",
     "group": "Ad spots",

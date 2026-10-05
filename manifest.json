@@ -3037,6 +3037,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "marketplace-couch-preview-superbot-aec80d81",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FIND THE COUCH. SEE IT AT HOME. · Gemini reads a cafe couch, Nano Banana Pro puts it in your living room, Superbot finds it used for $380 on Facebook Marketplace and books the pickup (<15s, 16:9)",
+    "src": "animations/marketplace-couch-preview-superbot-aec80d81/",
+    "thumb": "assets/shots/marketplace-couch-preview-superbot-aec80d81.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82 (X ad b5olyc), new process: a photo of a couch you like, previewed in your own living room, then bought used on Facebook Marketplace. One ask in superbot with two photos attached (the couch in a cafe, your living room): \"find this couch used near me and show it in my living room\". Switching to Gemini: \"Mid-century 3-seat sofa, tan leather, walnut legs, about 84 in wide. New, around $1,700.\" with the sofa boxed and tagged tan leather, 84 in and walnut legs. Switching to Nano Banana Pro: the same sofa placed in your living room, keeping your rug, floor lamp and fiddle-leaf fig, shown with a before/after drag wipe and an 84 in guide. Switched to Superbot (\"Found the same sofa used for $380, 1.6 mi away.\"): Opened Marketplace, Found 3 matches, Messaged Elena, Pickup Sat 11 AM. The Marketplace card searches \"tan leather sofa 84\" within 15 mi of Brooklyn ($450 Park Slope, $600 Astoria, $380 Bushwick), opens the $380 listing (\"Leather sofa, barely used, must go by Sunday\", Elena R., 1.6 mi away), sends \"Hi Elena, is this still available? I can pick up Saturday at 11 and pay $380.\" and Elena answers \"Yes! Saturday 11 works.\" in Messenger; the pickup lands on the calendar as \"Couch pickup, Sat 11 AM, 1.6 mi\". Ends on EVERY MODEL. ONE CHAT. 13.3 s with no opener card (the X export prepends its coming-soon card), a soft wipe swoosh and a Messenger pop on the reply.",
+    "download": "assets/video/marketplace-couch-preview-superbot-aec80d81.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

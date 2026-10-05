@@ -1699,6 +1699,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "venmo-split-receipt-superbot-eb14ad58",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SNAP THE BILL. GET PAID BACK. · Gemini reads the receipt, Superbot sends 3 Venmo requests (<7s, 16:9)",
+    "src": "animations/venmo-split-receipt-superbot-eb14ad58/",
+    "thumb": "assets/shots/venmo-split-receipt-superbot-eb14ad58.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82, new process: snap a dinner receipt and send Venmo requests to the three friends who owe you. One ask in superbot with the receipt photo attached (\"split this with maya, jordan and sam\"): Gemini reads the Lucca Trattoria receipt (subtotal $152.00, tax $13.49, tip 20% $30.40, total $195.89) and splits it 4 ways at $48.97 each, then Superbot opens Venmo, adds @maya-chen, @jordan-oku and @sam-reyes and sends 3 requests, $146.91 coming back. 16:9 only, 5.4 s.",
+    "download": "assets/video/venmo-split-receipt-superbot-eb14ad58.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

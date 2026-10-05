@@ -1,0 +1,8 @@
+receipt.jpg, receipt-thumb.jpg: made for this ad. A Lucca Trattoria thermal receipt typeset in code (Menlo) and
+composited onto two public-domain photographs from Wikimedia Commons:
+  - "Surface wooden furniture interior.jpg" (table), public domain,
+    https://commons.wikimedia.org/wiki/File:Surface_wooden_furniture_interior.jpg
+  - "Crumpled olive green paper.jpg" (paper creases, used as a grayscale displacement and shading map), public domain,
+    https://commons.wikimedia.org/wiki/File:Crumpled_olive_green_paper.jpg
+"Lucca Trattoria", its address, check and the names Maya Chen, Jordan Oku and Sam Reyes are made up.
+The Venmo card is drawn in CSS (Venmo blue header, wordmark as plain text); no Venmo logo artwork is used.

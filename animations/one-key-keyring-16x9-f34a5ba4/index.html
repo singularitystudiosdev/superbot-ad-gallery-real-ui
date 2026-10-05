@@ -58,10 +58,9 @@ video {
 </div>
 <script>
   const video = document.getElementById("film");
-  const wide = new URLSearchParams(location.search).get("ar") === "16x9";
-  document.documentElement.classList.toggle("wide", wide);
-  video.poster = wide ? "poster-16x9.png" : "poster.png";
-  video.src = wide ? "final-16x9.mp4" : "final.mp4";
+  // The film is native 16:9, so every ?ar= plays the same file; the frame fits it whole.
+  video.poster = "poster.png";
+  video.src = "final.mp4";
   // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
   // viewer's first click, key or touch.
   const unmute = () => {

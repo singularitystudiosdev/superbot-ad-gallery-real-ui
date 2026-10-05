@@ -1,0 +1,27 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+thumbs/final-boss.jpg, thumbs/every-boss.jpg, thumbs/no-healing.jpg, thumbs/secrets.jpg
+  Generated for this ad on 2026-10-05 with Google gemini-3-pro-image (Nano Banana Pro), called through the OpenRouter
+  API (openrouter.ai/api/v1/chat/completions, model "google/gemini-3-pro-image-preview", image_config aspect_ratio
+  16:9, image_size 2K), one call per image, 2752 x 1536, then cropped to 1280 x 720 and the thumbnail words set over
+  them with ImageMagick in Impact (macOS system font): "100% / FINAL BOSS", "EVERY BOSS / RANKED", "NO / HEALING",
+  "SECRETS / YOU MISSED". "Hollow Crown" and "Jonah Plays" are fictional; every character, creature and armour design
+  is original, nothing from an existing game. No third-party imagery; no attribution owed.
+  Shared style prompt (all four): "Key art for a YouTube gaming video thumbnail about an ORIGINAL dark fantasy action
+  RPG called Hollow Crown (fictional; all characters, creatures and armour are original designs, nothing from any
+  existing game). Cinematic painterly-realistic game render, dramatic rim light, deep teal-black shadows with ember
+  orange and pale gold accents, crisp high contrast that reads at small size, one strong focal subject, 16:9
+  widescreen framing, full-bleed edge to edge. Absolutely no text, no letters, no numbers, no logos, no UI, no
+  watermark, no border."
+  Per image: a lone knight with a cracked lantern facing a colossal stone-and-root king under a broken floating crown
+  in a ruined cathedral (final-boss); five original bosses lined up on a misty ridge at dusk (every-boss); a kneeling
+  knight holding a cracked, empty red healing flask (no-healing); a knight's lantern revealing a rune-lit hidden crypt
+  door with a crown-shaped keyhole (secrets).
+  Used in Gemini's ranked list, the Studio Content list, the video menu, the end screen tile, the panes' picked-video
+  rows.
+
+frames/end-1842.jpg, frames/at-715.jpg, frames/strip.jpg
+  Cut from the same four generated images (gen script: work/a2-02-endscreen-b2b15e3c/gen.b2b15e3c.mjs, not
+  published): end-1842 is final-boss without words, darkened (modulate 72,90), as the video's last 20 s under the end
+  screen; at-715 is a crop of the knight from final-boss, the frame at 7:15 under the info card teaser; strip is twelve
+  160 x 90 crops of the four, the Editor's filmstrip.

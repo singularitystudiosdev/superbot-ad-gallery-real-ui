@@ -41,7 +41,7 @@
 /* router graph */
 .rtw { position: absolute; left: 80px; top: 70px; }
 .rg { position: absolute; inset: 0; }
-.rg svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.rg > svg { position: absolute; left: 0; top: 0; overflow: visible; }
 .rg .edge { fill: none; stroke: #2a2b31; stroke-width: 4; stroke-linecap: round; }
 .rg .edge.live { stroke: url(#g2); }
 .rq2 { position: absolute; left: 80px; top: 195px; width: 470px; height: 220px; padding: 22px 24px; border-radius: 20px; background: #131316; border: 1px solid var(--line-2); }

@@ -1016,6 +1016,15 @@
     "desc": "Variant of niche-youtube-model-switch-superbot-3828921d, retimed to a 40 to 45 second before and after. It opens on the latest video's pile of 1,284 unanswered comments, then one ask in superbot: Gemini watches the video and ranks the comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies, each switch at a calmer pace, and it ends on the same YouTube Studio page with the top five answered and the best one pinned. 16:9 only."
   },
   {
+    "id": "niche-ytv11-model-switch-superbot-de59570a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Make the trailer for my next video and a thumbnail for it: DeepSeek V4 Flash scrapes, Gemini generates the thumbnail, Blender renders the 3D mic, ElevenLabs voices it, Opus 5.5 codes it, then the trailer plays (5 switches, video-production variant, 16:9)",
+    "src": "animations/niche-ytv11-model-switch-superbot-de59570a/",
+    "thumb": "assets/shots/niche-ytv11-model-switch-superbot-de59570a.png",
+    "desc": "A new creative in the niche-youtube model-switch family: the ask is \"Make the trailer for my next video and a thumbnail for it\" and the chain is a production pipeline, a different model and order than the source ad. DeepSeek V4 Flash scrapes the specs, prices and reference clips (12 pages that were blocked to the other models, opened anyway); Gemini generates four thumbnail candidates from the shoot and keeps the strongest; Blender models the mic and renders the hero shot in Cycles; ElevenLabs voices the script; Claude Opus 5.5 codes the timeline that places every asset, and the finished trailer plays. 16:9 only."
+  },
+  {
     "id": "niche-ytv5-model-switch-superbot-b0c8e364",
     "type": "animation",
     "group": "Ad spots",

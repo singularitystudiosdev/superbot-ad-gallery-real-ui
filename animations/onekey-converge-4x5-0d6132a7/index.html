@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>One API key, all your subscriptions: the converge</title>
 <style>
-/* Plays the rendered film (24.0 s, 30 fps, with sound), 1080x1350 fitted whole on a near-black canvas. */
+/* Plays the rendered film (24.0 s, 30 fps, with sound) on its own near-black canvas.
+   ?ar=16x9 plays the native 1920x1080 recomposition (final-16x9.mp4); every other ?ar=
+   plays the 1080x1350 film (final.mp4) fitted whole, the rest of the frame near-black. */
 :root {
   --canvas: #070707;
   --surface: #ffffff;
@@ -34,6 +36,11 @@ body {
   background: var(--canvas);
 }
 
+.wide .frame {
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+}
+
 video {
   display: block;
   width: 100%;
@@ -47,12 +54,14 @@ video {
 <body>
 <div class="frame">
   <video id="film" autoplay loop playsinline preload="auto"
-    aria-label="superbot ad: six subscriptions spiral into one API key, then each request switches to Claude Opus 5.5, Gemini 3.1 Pro or DeepSeek V4"></video>
+    aria-label="superbot ad: six subscriptions spiral into one API key, then each request switches to Claude Opus 5.5, Gemini 3.1 Pro or DeepSeek V4, with sound (24s loop)"></video>
 </div>
 <script>
   const video = document.getElementById("film");
-  video.poster = "poster.png";
-  video.src = "final.mp4";
+  const wide = new URLSearchParams(location.search).get("ar") === "16x9";
+  document.documentElement.classList.toggle("wide", wide);
+  video.poster = wide ? "poster-16x9.png" : "poster.png";
+  video.src = wide ? "final-16x9.mp4" : "final.mp4";
   // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
   // viewer's first click, key or touch.
   const unmute = () => {

@@ -1,0 +1,133 @@
+/* copied from ../waffles-website-superbot-87a583a1/publish-ui.css; ids turned into classes so shell clones can repeat */
+/* publish-ui.css: the Superbot desktop project head (copied rule for rule from the superbot-desktop
+   source with every design token resolved to its value from packages/tokens) and the Publish button,
+   restyled per the owner's reference (2026-09-23): a cyan-to-violet gradient pill with a soft glow,
+   a white rocket and a white bold "Publish", no readiness dot or label. The press sweeps a light
+   shine across it and the rocket turns into a white check (timeline.js drives both).
+
+   Source: superbot-desktop @ 2e6a8bdce945466e9db1ca9aa10585a8404f07c7
+     apps/desktop/src/renderer/src/hub/publish/preview/PreviewButton.tsx
+         idle: button.project-badge.preview-badge.focus-ring (Play 14 + "Preview")
+     apps/desktop/src/renderer/src/hub/project/project-pane.css      .project-head, .project-head-row,
+         .project-title, .project-badge, button.project-badge, .project-head-row > .publish-button-group
+     apps/desktop/src/renderer/src/hub/publish/publish-sheet.css     .publish-button-group
+     apps/desktop/src/renderer/src/hub/publish/preview/preview.css   .preview-badge hover
+     icons: lucide-react 1.41.0 Rocket / Play / Check (24 viewBox, stroke 2, round caps)
+
+   Tokens used (packages/tokens):
+     --spacing-4 4px  --spacing-8 8px  --spacing-12 12px
+     --radius-8 8px   --radius-16 16px --size-hairline 1px
+     --text-caption 11px/16px 400    --text-title 15px/20px 500
+     --color-card #0a0a0a  --color-line #1e1e21  --color-line-strong #3a3b40
+     --color-fg #e6e8ee  --color-fg-secondary #c9ccd4
+     --font-sans SF Pro Rounded, ui-rounded, Inter, system-ui, sans-serif
+   Everything below is scoped under .sbpub so it cannot leak into the rest of the ad. */
+
+.sbpub { font-family: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif; }
+
+/* project-pane.css:39 */
+.sbpub .project-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #1e1e21;
+  border-radius: 16px;
+  background: #0a0a0a;
+}
+/* project-pane.css:57 */
+.sbpub .project-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+/* project-pane.css:98 */
+.sbpub .project-title {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #e6e8ee;
+}
+/* project-pane.css:191 */
+.sbpub .project-head-row > .publish-button-group {
+  margin-inline-start: auto;
+}
+/* project-pane.css:358 */
+.sbpub .project-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 1px solid #1e1e21;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 16px;
+  color: #c9ccd4;
+  font-family: inherit;
+  box-sizing: border-box;
+  margin: 0;
+}
+/* project-pane.css:418 */
+.sbpub button.project-badge {
+  background: transparent;
+  cursor: pointer;
+}
+/* preview.css:12 */
+.sbpub button.project-badge.preview-badge:hover:not(:disabled),
+.sbpub button.project-badge.preview-badge.is-hover {
+  border-color: #3a3b40;
+}
+/* publish-sheet.css:403 */
+.sbpub .publish-button-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* lucide icons at size 14 */
+.sbpub .lucide { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- the Publish button: gradient pill, soft glow, white icon + white bold label ---------- */
+.sbpub button.project-badge.pub-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  gap: 7px;
+  padding: 4px 16px 4px 13px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5ec8e6 0%, #6e7cf2 52%, #a86ef0 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .005em;
+  box-shadow: 0 0 14px rgba(110, 124, 242, .45), 0 0 30px rgba(168, 110, 240, .22), inset 0 1px 0 rgba(255, 255, 255, .22);
+  transform-origin: 50% 50%;
+}
+.sbpub .pub-cta .pub-ic { position: relative; width: 14px; height: 14px; flex: none; }
+.sbpub .pub-cta .pub-ic svg { position: absolute; inset: 0; stroke-width: 2.2; transform-origin: 50% 50%; }
+.sbpub .pub-cta .pub-check { opacity: 0; stroke-width: 2.6; }
+.sbpub .pub-cta .pub-check-p { stroke-dasharray: 23; stroke-dashoffset: 23; }
+.sbpub .pub-cta .pub-label { position: relative; }
+/* the shine: a soft white band, skewed, swept left to right across the pill on the press */
+.sbpub .pub-cta .pub-shine {
+  position: absolute; top: -30%; bottom: -30%; left: 0; width: 42%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .6) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-160%) skewX(-20deg);
+  opacity: 0; pointer-events: none; z-index: 1;
+}

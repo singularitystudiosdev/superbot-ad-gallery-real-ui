@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One API key for all your subscriptions</title>
+<style>
+/* Plays the rendered film (20 s, 1920x1080, 60 fps, with sound) on its own near-black canvas. */
+:root { --canvas: #060607; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--canvas); }
+body { display: grid; place-items: center; }
+.frame { position: relative; width: min(100vw, calc(100vh * 16 / 9)); aspect-ratio: 16 / 9; background: var(--canvas); }
+video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--canvas); }
+</style>
+</head>
+<body>
+<div class="frame">
+  <video id="film" autoplay loop playsinline preload="auto" poster="poster.png" src="final.mp4"
+    aria-label="A cascade of four console windows (a login for every model, a dashboard for every plan, a key for every provider) turns into four plan cards that fan out in 3D and slam into one Superbot keycard. The card drops into the one line that changes, new Anthropic({ baseURL: &quot;http://127.0.0.1:18787&quot;, apiKey }), then each request drops into the model column that fits it: Claude Opus 5.5, Gemini 3.1 Pro or DeepSeek V4, billed to the plans you already pay for. Ends on &quot;One API key for all your subscriptions.&quot; 20 s, 1920x1080, 60 fps, with sound."></video>
+</div>
+<script>
+  const video = document.getElementById("film");
+  // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
+  // viewer's first click, key or touch.
+  const unmute = () => {
+    video.muted = false;
+    video.play().catch(() => {});
+  };
+  const start = () => {
+    video.muted = false;
+    video.play().catch(() => {
+      video.muted = true;
+      video.play().catch(() => {});
+    });
+  };
+  for (const type of ["pointerdown", "keydown", "touchstart"]) addEventListener(type, unmute, { once: true, capture: true });
+  // the gallery lightbox posts { type: "unmute" } on the viewer's first click or key
+  addEventListener("message", (e) => {
+    if (e.data && e.data.type === "unmute") unmute();
+  });
+  if (video.readyState >= 2) start();
+  else video.addEventListener("canplay", start, { once: true });
+</script>
+</body>
+</html>

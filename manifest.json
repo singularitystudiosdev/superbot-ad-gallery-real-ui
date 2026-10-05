@@ -2087,6 +2087,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "onekey-pack-16x9-fc99bee5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: four consoles pack into one sk-superbot key, pasted once, routed to Opus 5.5, Gemini or DeepSeek (pack, 16:9)",
+    "src": "animations/onekey-pack-16x9-fc99bee5/",
+    "thumb": "assets/shots/onekey-pack-16x9-fc99bee5.png",
+    "desc": "Four browser windows bury the desktop: Claude Console, OpenAI Platform, Google AI Studio and DeepSeek Platform, each with its own login, API keys page and quota error. The windows shrink into their plans (Claude Max, ChatGPT Pro, Google AI Pro, DeepSeek balance) and the plans pack into one sk-superbot key. The key is pasted once into the OpenAI client line (base_url http://127.0.0.1:18787/v1), then each request routes to the model that fits: a 2,000-line refactor to Claude Opus 5.5 on Claude Max, three 300-page PDFs to Gemini 3.1 Pro on Google AI Pro, a CSV to JSON job to DeepSeek V4, the cheapest fit. Ends on \"One API key for all your subscriptions.\" 20 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/onekey-pack-16x9-fc99bee5/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-merge-16x9-fc99bee5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: a wall of four consoles, four keys merge into one sk-superbot key, one terminal line, a request log picks the model (merge, 16:9)",
+    "src": "animations/onekey-merge-16x9-fc99bee5/",
+    "thumb": "assets/shots/onekey-merge-16x9-fc99bee5.png",
+    "desc": "A 2x2 wall of the Anthropic, OpenAI, Google and DeepSeek consoles: four logins, four API keys pages, four quota errors. The four keys lift out of their dashboards, stack and scramble into one sk-superbot key that is copied once and pasted into a single terminal line (OPENAI_BASE_URL and OPENAI_API_KEY). A request log then spins a model reel per request: Claude Opus 5.5 on your Claude Max plan, Gemini 3.1 Pro on your Google AI Pro plan, DeepSeek V4 as the cheapest fit. Ends on \"One API key for all your subscriptions.\" 20 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/onekey-merge-16x9-fc99bee5/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-deck-16x9-fc99bee5",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: four plan cards fan out and stack into one Superbot keycard that drops into the Anthropic SDK line (deck, 16:9)",
+    "src": "animations/onekey-deck-16x9-fc99bee5/",
+    "thumb": "assets/shots/onekey-deck-16x9-fc99bee5.png",
+    "desc": "A cascade of four console windows (a login for every model, a dashboard for every plan, a key for every provider) turns into four plan cards that fan out in 3D and slam into one Superbot keycard. The card drops into the one line that changes, new Anthropic({ baseURL: \"http://127.0.0.1:18787\", apiKey }), then each request drops into the model column that fits it: Claude Opus 5.5, Gemini 3.1 Pro or DeepSeek V4, billed to the plans you already pay for. Ends on \"One API key for all your subscriptions.\" 20 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/onekey-deck-16x9-fc99bee5/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

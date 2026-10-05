@@ -2259,6 +2259,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "cg1-1004-yt-comment-router-superbot-8386753e",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ANSWER THE TOP COMMENTS · DeepSeek scrapes, Blender sizes, Gemini designs, ElevenLabs dubs, Opus 5.5 builds, YouTube pins (real superbot UI, 38 s, 16:9)",
+    "src": "animations/cg1-1004-yt-comment-router-superbot-8386753e/",
+    "thumb": "assets/shots/cg1-1004-yt-comment-router-superbot-8386753e.png",
+    "desc": "Rebuild of niche-youtube-model-switch-superbot-3828921d with a new route. A creator asks superbot to answer the top comments on their mic video and pin the best one. DeepSeek V4 Pro reads all 1,284 comments, checks 38 store pages and finds the $29 mic in stock at 3. Blender models it at 158 x 52 mm next to a 330 ml can and renders it in Cycles. Gemini 3 Pro Image turns that into a Community card. ElevenLabs dubs the video into Spanish in the creator's voice, and you hear it. Claude Opus 5.5 codes the compare page, live in superbot's html card. YouTube posts the replies, adds the Spanish track and pins Priya's comment. Shot in superbot's own renderer; the YouTube page is youtube.com's. 1920x1080, 60 fps, with sound.",
+    "download": "assets/video/cg1-1004-yt-comment-router-superbot-8386753e.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "content-id-mute-song-only-superbot-bce0712f",
     "type": "animation",
     "group": "Ad spots",

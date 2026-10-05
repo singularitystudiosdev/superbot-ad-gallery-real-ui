@@ -1,0 +1,43 @@
+cg1-1004-yt-comment-router-superbot-8386753e: CREDITS (internal). Provenance is never shown on screen.
+
+THE SUPERBOT WINDOW (app/, states/)
+  Not drawn: superbot-desktop's own renderer. The turn was played through the real app by its e2e harness
+  (apps/desktop/e2e, hidden window, isolated profile, scripted stub edge) on 2026-10-05; every state the app passed
+  through was dumped as DOM (build script: truth/drive3.2f6aa232.mjs in the build folder). states/base.html and
+  states/new.html are two of those documents with scripts and the CSP meta removed; states/keys.2f6aa232.json holds
+  the app's <main> and sidebar chat row per captured state. states/preview.html is the document the app's html card served at sb-file://preview; states/adopted.css
+  is CodeMirror's runtime stylesheet from the same session. app/assets/ is the renderer's own CSS, fonts and
+  images, copied unmodified from the e2e build (apps/.e2e-app/out/renderer/assets). Edited text only: the account
+  name (stub@example.test -> Sam Rivera) and the e2e seed's recent-chat titles (swapped for a creator's).
+
+MODEL OUTPUTS (media/), all made for this ad on 2026-10-05
+  blender-mic-vs-can.png  Blender 5.2.2 LTS, Cycles, 1200x1200: the mic modelled at 158 x 52 mm (woven wire grille
+                          via a Wireframe modifier) beside a 330 ml can (115 x 66 mm), mm labels as Blender text.
+                          Scene script: assets/mic_scene.2f6aa232.py in the build folder.
+  blender-viewport-wire.png  the same scene through Blender's Workbench engine (solid + wireframe), wire.2f6aa232.py.
+  gemini-community-card.png  gemini-3-pro-image (Google Gemini API), 2048x2048, generated from the Blender render.
+  el-es-sam-dub.mp3       ElevenLabs Dubbing (elevenlabs/dubbing via Replicate), en -> es, of an English line
+                          voiced by ElevenLabs v3 (voice "Drew"). 9.66 s.
+  DeepSeek's report text  deepseek/deepseek-v4-pro via OpenRouter (provider StreamLake), used verbatim (second run,
+                          asked to list each store's price).
+  The compare-page code   written by Claude Opus 5.5 for this ad (assets/mics.html in the build folder).
+  favicon-blender.png     blender.org favicon via Google's favicon service (the app draws a site's favicon for a
+                          service with no tile).
+
+YOUTUBE (yt/)
+  page.jpg, masthead.jpg  youtube.com's own watch page (a public mic-review video), rendered headless at 3x (1280 css wide) on
+                          2026-10-05 and edited in place: title, channel, counts, description, every name, comment
+                          text and avatar replaced; the recommendations column hidden. No third-party name, face or
+                          thumbnail remains. Commenter avatars are YouTube-style letter avatars (SVG).
+  the video frame in the player and the channel avatar
+                          gemini-3-pro-image, 2026-10-05: twelve unbranded budget mics on a desk, the $29 one in front
+                          (matching the Blender model), then edited by the same model to fix the tag and the count.
+  before.jpg              the same page before any reply (no pin, no hearts, no replies), the cold open.
+
+END CARD
+  The superbot.gg mascot (../../assets/sb-mark-live.js) and wordmark, as in the source spot.
+
+SOUND (in the mp4 only)
+  Music bed: ElevenLabs Music (elevenlabs/music via Replicate), 40 s instrumental, ducked under the dub.
+  UI cues synthesized with ffmpeg from the film's own timeline; the Spanish dub above where the cursor presses play.
+  Mastered to -14 LUFS integrated, -1 dBTP.

@@ -1,0 +1,28 @@
+/* cg1-1004 yt comment router: the stage and the layers around superbot's own (re-hosted) renderer. */
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif; }
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #0a0a0a; overflow: hidden; }
+#cam { position: absolute; inset: 0; transform-origin: 0 0; }
+#win { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; transform: scale(1.3333333); transform-origin: 0 0; }
+#win iframe { position: absolute; inset: 0; width: 1440px; height: 810px; border: 0; display: block; background: #0a0a0a; }
+#f-live, #f-ans { visibility: hidden; }
+
+/* YouTube: the real watch page (1280 css wide, shot at 3x), shown at 1.5 stage px per css px */
+#yt, #yt-open { position: absolute; inset: 0; background: #fff; overflow: hidden; opacity: 0; }
+#yt-open { opacity: 1; z-index: 5; }
+#yt-cam, #yt-open-cam { position: absolute; left: 0; top: 0; width: 1920px; transform-origin: 0 0; }
+#yt-page, #yt-open-cam img { position: absolute; left: 0; top: 0; width: 1920px; display: block; }
+#yt-mast { position: absolute; left: 0; top: 0; width: 1920px; display: block; }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 8; }
+
+#cursor { position: absolute; left: 0; top: 0; width: 34px; height: 34px; fill: #fff; stroke: #000; stroke-width: 1.2; stroke-linejoin: round; opacity: 0; transform-origin: 4px 2.5px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.45)); z-index: 30; pointer-events: none; }
+
+/* the end card: the superbot.gg mascot and wordmark (source spot's lock-up) and the line */
+#s-end { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 46px; background: #000; opacity: 0; z-index: 20; }
+#s-end .lock { display: flex; align-items: center; gap: 40px; }
+#s-end .face { flex: none; width: 200px; height: 200px; display: grid; place-items: center; }
+#s-end .words { overflow: hidden; }
+#s-end .words h1 { margin: 0; font-size: 120px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#s-end .end-line { text-align: center; opacity: 0; }
+#s-end .end-line p { margin: 0; font-size: 46px; font-weight: 600; letter-spacing: -.01em; color: #f2f2f2; text-wrap: balance; }
+#s-end .end-line p.url { margin-top: 18px; font-size: 34px; font-weight: 500; color: #9a9a9a; }

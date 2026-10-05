@@ -2368,6 +2368,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "onekey-launch-workspace-16x9-39b5ad8c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: four consoles in browser tabs pack into one sk-superbot key, four SDK clients become one line, then the router sends each request to Opus 5.5, Gemini or DeepSeek (workspace, 16:9)",
+    "src": "animations/onekey-launch-workspace-16x9-39b5ad8c/",
+    "thumb": "assets/shots/onekey-launch-workspace-16x9-39b5ad8c.png",
+    "desc": "Four browser tabs: Anthropic Console sign-in, OpenAI Platform usage, Google AI Studio billing with a low balance, DeepSeek Platform API keys. The camera pulls out to a 2x2 grid of all four consoles, each opens its key page, and the four keys pop out and fly into one sk-superbot key card, each docking its logo and printing its segment. In app.py four SDK clients collapse into one line, client = OpenAI(base_url=\"https://beta.superbot.gg/v1\", api_key=...), and the key is pasted once. A live superbot router then scores three requests: a refactor goes to Claude Opus 5.5 via Claude Max, 14 earnings calls to Gemini 3.1 Pro via Google AI Pro, 5,000 tickets to DeepSeek V4.1 Flash. Cost bars for the same three requests: $14.91 all on Opus 5.5 at API list, $2.86 routed at API list, $0.00 extra on your subscriptions. Ends on: One API key for all your subscriptions. 28 s, 16:9, with sound.",
+    "download": "animations/onekey-launch-workspace-16x9-39b5ad8c/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-launch-desktop-16x9-39b5ad8c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: sixteen console windows pile up and implode into one key that holds all four plans, one export line, then a router graph picks Opus 5.5, Gemini or DeepSeek (desktop, 16:9)",
+    "src": "animations/onekey-launch-desktop-16x9-39b5ad8c/",
+    "thumb": "assets/shots/onekey-launch-desktop-16x9-39b5ad8c.png",
+    "desc": "A desktop fills one window per beat: four logins, four usage dashboards, four billing pages and four API key pages across Anthropic, OpenAI, Google and DeepSeek, with a tally counting each. Everything spirals into the centre and becomes one key: the four logos orbit and lock into its bow, each growing a tooth and printing its segment of the sk-superbot key. In a terminal the four old keys in .env are struck out, one line exports OPENAI_BASE_URL=https://beta.superbot.gg/v1 and OPENAI_API_KEY, the key is pasted once and npm start lists every model on your plans. A superbot router graph sends a packet per request: a refactor to Claude Opus 5.5 via Claude Max, 14 earnings calls to Gemini 3.1 Pro via Google AI Pro, 5,000 tickets to DeepSeek V4.1 Flash, each $0.00 extra. Cost bars: $14.91 all on Opus at API list, $2.86 routed at API list, $0.00 extra on your subscriptions. Ends on: One API key for all your subscriptions. 27 s, 16:9, with sound.",
+    "download": "animations/onekey-launch-desktop-16x9-39b5ad8c/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-launch-keycard-16x9-39b5ad8c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: a wall of four consoles throws errors, four plan cards fan out and flip into one superbot keycard, one settings line, then chat asks route to Opus 5.5, Gemini or DeepSeek (keycard, 16:9)",
+    "src": "animations/onekey-launch-keycard-16x9-39b5ad8c/",
+    "thumb": "assets/shots/onekey-launch-keycard-16x9-39b5ad8c.png",
+    "desc": "Opens on a black title card: Four AI subscriptions. A wall of four scrolling consoles (sign-in, usage, billing, keys) throws a toast per provider: rate limit reached, low credit balance, billing account required, insufficient balance. The four plans, Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek, fan out like a hand of cards, stack, and flip into one superbot keycard whose sk-superbot key is etched in by a scan line. In settings.json four provider blocks collapse into one line with baseURL https://beta.superbot.gg/v1 and the key pasted once. In superbot chat the Auto chip routes three asks through a model picker: a refactor to Claude Opus 5.5, 14 earnings calls to Gemini 3.1 Pro, 5,000 tickets to DeepSeek V4.1 Flash. Cost bars: $14.91 all on Opus at API list, $2.86 routed at API list, $0.00 extra on your subscriptions. Ends on: One API key for all your subscriptions. 27 s, 16:9, with sound.",
+    "download": "animations/onekey-launch-keycard-16x9-39b5ad8c/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

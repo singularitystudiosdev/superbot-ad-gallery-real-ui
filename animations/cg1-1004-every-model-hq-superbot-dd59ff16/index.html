@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920">
+<title>Every model. One chat. (cg1-1004, superbot)</title>
+<link rel="stylesheet" href="ad.css">
+</head>
+<body>
+<div id="stage">
+  <div id="app">
+    <!-- sidebar -->
+    <aside id="sidebar">
+      <span class="hide-btn"><i data-i="panelLeft"></i></span>
+      <span class="hud-mark" data-mark="tile"></span>
+      <span class="wordmark">superbot</span>
+      <div class="avatars">
+        <span class="av"><img src="assets/superbot-app-icon.png" alt=""></span>
+        <span class="av"><img src="assets/tiles/openai.webp" alt=""></span>
+        <span class="av"><img src="assets/tiles/doordash.png" alt=""></span>
+        <span class="chev"><i data-i="chevDown"></i></span>
+        <span class="add"><i data-i="plus" data-s="14"></i></span>
+      </div>
+      <div class="tabs"><span class="tab on"><i data-i="msg"></i>Chat</span><span class="tab"><i data-i="code"></i>Code</span></div>
+      <div class="newchat"><i data-i="plus"></i>New chat</div>
+      <div class="bucket" style="top:240px"><span>Pinned</span></div>
+      <div class="pinned"><span class="tile" data-mark="face" data-size="16"></span><div style="min-width:0"><div class="t">Muse launch checklist</div><div class="p">Here's what's left before Friday...</div></div></div>
+      <div class="bucket" style="top:324px"><span>Recent</span><span class="tools"><i data-i="filter" data-s="14"></i><i data-i="minus" data-s="14"></i><i data-i="plus" data-s="14"></i></span></div>
+      <div class="recent" id="recent">
+        <div class="row live" id="liveRow"><span class="glyph" data-mark="face" data-size="14"></span><span class="ttl">make me a muse meme</span><span class="time" id="liveTime">now</span><span class="prog"><i id="liveProg"></i></span></div>
+        <div class="row" data-r="0"><span class="glyph" data-mark="face" data-size="14"></span><span class="ttl">Name ideas for the cat café</span><span class="dot"></span><span class="time">2:14 PM</span></div>
+        <div class="row" data-r="1"><span class="glyph" data-mark="face" data-size="14"></span><span class="ttl">Fix the Stripe webhook retry</span><span class="time">1:11 PM</span></div>
+        <div class="row" data-r="2"><span class="glyph" data-mark="face" data-size="14"></span><span class="ttl">Flights to Tokyo in May</span><span class="time">Oct 3</span></div>
+        <div class="row" data-r="3"><span class="glyph" data-mark="face" data-size="14"></span><span class="ttl">Summarize the Q3 board deck</span><span class="time">Oct 2</span></div>
+      </div>
+      <div class="account">
+        <div class="acct-top"><span class="acct-av">H</span><div class="acct-id"><div class="e">hi@ezo.dev</div><div class="plan"><span data-mark="face" data-size="11"></span>Free</div></div>
+          <span class="acct-tool"><i data-i="bug"></i></span><span class="acct-tool"><i data-i="gift"></i></span><span class="acct-tool"><i data-i="gear"></i><span class="red"></span></span></div>
+        <div class="upgrade">Upgrade</div>
+        <div class="usage"><span>Usage</span><span class="track"><i></i></span><span>18%</span></div>
+      </div>
+    </aside>
+    <div id="splitter"></div>
+
+    <!-- main pane -->
+    <section id="main">
+      <div class="pane-h">
+        <div class="pane-title"><span id="titleNew" class="abs" style="left:0;top:0">New chat</span><span id="titleThread" class="abs" style="left:0;top:0;opacity:0;white-space:nowrap">make me a muse me...</span>&nbsp;</div>
+        <div class="search"><i data-i="search"></i>Search<kbd>⌘K</kbd></div>
+        <span class="pane-btn" style="left:864px"><i data-i="panelRight"></i></span>
+      </div>
+      <div class="band" id="band">
+        <span class="b" style="left:795px"><i data-i="refresh"></i></span>
+        <span class="b" style="left:828px"><i data-i="share"></i></span>
+        <span class="b boxed" style="left:862px"><i data-i="globe"></i></span>
+      </div>
+
+      <div id="viewport"><div id="feed">
+        <!-- turn 1: media gen, a real model switch -->
+        <div class="bubble" id="u1">make me a muse meme</div>
+        <div class="pill" id="p1"><img class="tile20" src="assets/tiles/openai.webp" alt=""><span class="lbl"><span class="la">Switching to GPT Image 2.5</span><span class="lb">Switched to GPT Image 2.5</span></span><span class="status"><svg class="spin" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="okc" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="nest" id="n1"><i class="rail"></i><div class="who"><img class="tile20" src="assets/tiles/openai.webp" alt=""><b>GPT Image 2.5</b><span>in superbot</span></div></div>
+        <div class="answer" id="a1" data-text="Here is your muse meme, made with GPT Image 2.5."></div>
+        <div class="gen" id="g1"><div class="band-sweep"></div><img class="meme" src="assets/img/meme-main.jpg" alt=""><div class="chip"><img src="assets/tiles/openai.webp" alt="">Creating image</div></div>
+        <div class="prov" id="pv1"><i data-i="key" data-s="12"></i>via your ChatGPT account · GPT Image 2.5</div>
+        <div class="turn-gap"></div>
+
+        <!-- turn 2: a site run on reddit.com (service switch, steps, page-shot deck, link grid) -->
+        <div class="bubble" id="u2">scrape reddit and look for more</div>
+        <div class="pill" id="p2"><img class="tile20" src="assets/tiles/reddit.png" alt=""><span class="lbl"><span class="la">Connecting to Reddit</span><span class="lb">Connected to Reddit</span></span><span class="status"><svg class="spin" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="okc" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="nest" id="n2"><i class="rail"></i><div class="steps" data-steps='[["Searched Reddit for muse memes","reddit.com/search"],["Read top posts in r/memes","reddit.com/r/memes/top"],["Read top posts in r/me_irl","reddit.com/r/me_irl/top"],["Checked 3 more communities","reddit.com/r/dankmemes"]]'></div></div>
+        <div class="shots" id="sh2"><div class="deck-stack">
+          <span class="deck-card" data-depth="2"><img src="assets/shots/reddit-meirl.jpg" alt=""></span>
+          <span class="deck-card" data-depth="1"><img src="assets/shots/reddit-memes.jpg" alt=""></span>
+          <span class="deck-card" data-depth="0"><img src="assets/shots/reddit-search.jpg" alt=""></span>
+        </div><span class="deck-src"><img src="assets/tiles/reddit.png" alt="">reddit.com<span style="margin-left:2px">+3</span></span></div>
+        <div class="answer" id="a2" data-text="Found 4 more muse memes taking off this week."></div>
+        <div class="links" id="lk2">
+          <div class="lcard"><div class="im"><img src="assets/img/meme-r4.jpg" alt="" style="object-position:50% 52%"></div><div class="bd"><div class="src"><img src="assets/tiles/reddit.png" alt="">r/memes</div><div class="au">24K upvotes</div><div class="tt">the galaxy brain move is always the burger</div></div></div>
+          <div class="lcard"><div class="im"><img src="assets/img/meme-r2.jpg" alt="" style="object-position:50% 62%"></div><div class="bd"><div class="src"><img src="assets/tiles/reddit.png" alt="">r/me_irl</div><div class="au">18K upvotes</div><div class="tt">me_irl</div></div></div>
+          <div class="lcard"><div class="im"><img src="assets/img/meme-r1.jpg" alt="" style="object-position:50% 20%"></div><div class="bd"><div class="src"><img src="assets/tiles/reddit.png" alt="">r/dankmemes</div><div class="au">12K upvotes</div><div class="tt">expectation vs reality but it's my creative process</div></div></div>
+          <div class="lcard"><div class="im"><img src="assets/img/meme-r3.jpg" alt="" style="object-position:50% 45%"></div><div class="bd"><div class="src"><img src="assets/tiles/reddit.png" alt="">r/wholesomememes</div><div class="au">9.8K upvotes</div><div class="tt">Muse with 47 tabs open, still smiling</div></div></div>
+        </div>
+        <div class="outcome" id="o2">Worked for 31s · 4 steps<i data-i="chevRight" data-s="12"></i></div>
+        <div class="turn-gap"></div>
+
+        <!-- turn 3: a site run on doordash.com (service switch, steps, one page shot = mini window) -->
+        <div class="bubble" id="u3">winning, order me a burger</div>
+        <div class="pill" id="p3"><img class="tile20" src="assets/tiles/doordash.png" alt=""><span class="lbl"><span class="la">Connecting to DoorDash</span><span class="lb">Connected to DoorDash</span></span><span class="status"><svg class="spin" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="okc" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="nest" id="n3"><i class="rail"></i><div class="steps" data-steps='[["Opened Main Street Burger Co.","doordash.com/store/main-street-burger-co"],["Added Classic Smash Cheeseburger","doordash.com/store/main-street-burger-co"],["Checked out with Visa •••• 4242","doordash.com/consumer/checkout"],["Placed order","doordash.com/orders"]]'></div></div>
+        <div class="shots" id="sh3"><div class="win" id="win3"><div class="bar"><i></i><i></i><i></i><span class="addr">doordash.com</span></div><div class="page"><img src="assets/shots/doordash-order.jpg" alt=""></div></div></div>
+        <div class="answer" id="a3" data-text="Ordered. Your burger lands around 7:06 PM."></div>
+        <div class="outcome" id="o3">Worked for 23s · 4 steps<i data-i="chevRight" data-s="12"></i></div>
+        <div style="height:24px;flex:none"></div>
+      </div></div>
+
+      <!-- new chat hero + chips (collapse on the first send) -->
+      <div id="hero"><div class="hero-row"><span data-mark="glitch" data-size="48"></span><span class="greet">Good evening. What's first?</span></div></div>
+      <div id="composer">
+        <div class="cbox">
+          <span class="cring" id="cring"></span>
+          <div class="cinput"><span class="ph" id="ph">How can superbot help you today?</span><span class="typed" id="typed"></span><span class="caret" id="caret"></span></div>
+          <div class="ctools">
+            <span class="cplus"><i data-i="plus"></i></span>
+            <span class="super" id="super">SUPER<span class="tag">OFF</span></span>
+            <span class="cright">
+              <span class="picker" id="pickSb"><span data-mark="face" data-size="16"></span>superbot<i data-i="chevDown" data-s="12"></i></span>
+              <span class="picker abs" id="pickGpt" style="right:110px;opacity:0"><img src="assets/tiles/openai.webp" alt="">GPT Image 2.5<i data-i="chevDown" data-s="12"></i></span>
+              <span class="cbtn"><i data-i="monitor"></i></span>
+              <span class="mic"><i data-i="mic" data-s="14"></i></span>
+              <span class="send"><div class="idle" id="sendIdle"><i data-i="arrowUp" data-s="14"></i></div><div class="armed" id="sendArmed"><i data-i="arrowUp" data-s="14"></i></div><div class="stop" id="sendStop"><i></i></div></span>
+            </span>
+          </div>
+        </div>
+        <div class="cctx"><span>Context</span><span class="mono">142k of 200k</span><span class="track"><i></i></span><span class="disc">superbot is AI and can make mistakes.</span></div>
+      </div>
+      <div id="chips"><span class="chip"><i data-i="pen"></i>Write</span><span class="chip"><i data-i="code2"></i>Code</span><span class="chip"><i data-i="search"></i>Research</span><span class="chip"><i data-i="globe"></i>Browse</span><span class="chip"><i data-i="workflow"></i>Automate</span></div>
+    </section>
+
+    <!-- lightbox peek over the DoorDash page shot -->
+    <div id="scrim"></div>
+    <div id="peek"><div class="ptitle"><img src="assets/tiles/doordash.png" alt=""><b>doordash.com</b><span>/orders/4f2a-91c</span><span class="close"><i data-i="x" data-s="12"></i>Close</span></div><div class="stagebox" id="pstage"><img src="assets/shots/doordash-order.jpg" alt=""></div></div>
+    <svg id="cursor" viewBox="0 0 18 26"><path d="M1.5 1.5v19.2l4.6-4.4 3.1 7.2 3.2-1.4-3-7h6.4z" fill="#000" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+  </div>
+
+  <!-- end card -->
+  <div id="end">
+    <div class="lockup"><span class="mark" data-mark="tile" data-size="168"></span><h1><span>Every</span> <span>model.</span> <span>One</span> <span>chat.</span></h1></div>
+    <div class="recap">
+      <span class="rp"><img src="assets/tiles/openai.webp" alt="">GPT Image 2.5<svg class="ck" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="rp"><img src="assets/tiles/reddit.png" alt="">Reddit<svg class="ck" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="rp"><img src="assets/tiles/doordash.png" alt="">DoorDash<svg class="ck" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+  </div>
+</div>
+<script type="module" src="ad.js"></script>
+</body>
+</html>

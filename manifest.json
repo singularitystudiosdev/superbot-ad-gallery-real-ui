@@ -56,6 +56,17 @@
     "thumb": "assets/shots/every-model-one-chat-sb-combo-efa8df82.png"
   },
   {
+    "id": "every-model-one-chat-smooth-sb-superbot-2fe9583d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Nano Banana 2 meme, Connecting to Reddit, Connecting to DoorDash (smooth, real UI)",
+    "src": "animations/every-model-one-chat-smooth-superbot-2fe9583d/",
+    "thumb": "assets/shots/every-model-one-chat-smooth-sb-superbot-2fe9583d.png",
+    "desc": "Smooth remake of every-model-one-chat-sb-superbot-efa8df82 on the real Superbot desktop app. Make me a Muse meme: superbot switches to Nano Banana 2, Gemini's image model, and the meme resolves in the thread. Scrape Reddit and look for more: superbot connects to Reddit, searches and reads 48 posts in a live tab and brings back the top 3 Muse memes. Order me a burger: superbot connects to DoorDash, adds a Double Smash Burger and checks out in a live tab, arriving 7:42 PM. Eased motion throughout, 28 s, 16:9.",
+    "download": "assets/video/every-model-one-chat-smooth-sb-superbot-2fe9583d.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-smooth-sb-superbot-2b5923dd",
     "type": "animation",
     "group": "Ad spots",

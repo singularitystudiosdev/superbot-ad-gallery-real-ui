@@ -1,0 +1,18 @@
+Provenance for every-model-one-chat-smooth-superbot-2fe9583d (internal; nothing here is shown on screen).
+
+Generated for this spot with FLUX.2 [dev] (@cf/black-forest-labs/flux-2-dev) on Cloudflare Workers AI, 2026-10-05:
+  muse-meme.jpg   two-panel Muse meme: lecture-hall still of the Muse plush passing a note (reference: the Muse
+                  plush crop from the source spot's img/muse-meme.png) + the note close-up, lettered
+                  "YOU HAVE 40 UNREAD / NOTIFICATIONS FROM MUSE / Check your messages". No real person depicted.
+  meme-bed.jpg    "ME: I'LL SLEEP EARLY / MUSE AT 2AM: ONE MORE IDEA" (Muse plush reference)
+  meme-desk.jpg   "WHEN MUSE REPLIES / BEFORE YOU FINISH TYPING" (Muse plush reference)
+  meme-notes.jpg  "40 UNREAD / AND COUNTING" (Muse plush reference)
+  burger.jpg      double smash cheeseburger menu photo (text prompt only)
+  store-hero.jpg  burger, fries and milkshake store header (text prompt only); its fries basket is also the
+                  Crinkle Fries menu thumbnail
+  Prompts and seeds: work/em-2fe9583d/assets-src/make-jobs-cf.2fe9583d.mjs (jobs-cf.json).
+
+Brand tiles (product UI furniture, unchanged):
+  reddit.png, doordash.png  superbot-desktop packages/ui/src/marks/tiles (the tiles the app shows in its switch pill)
+  Superbot, Gemini and DoorDash marks in icons.2fe9583d.js: superbot-desktop packages/ui/src/marks
+  (mark-superbot.tsx, mark-gemini.tsx, mark-doordash.tsx). UI icons: Lucide (ISC).

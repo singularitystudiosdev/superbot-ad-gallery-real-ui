@@ -2285,6 +2285,17 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "niche-youtube-model-switch-detail-superbot-3a8678e2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments and pin the best one, in detail: Gemini finds each answer in the video, ElevenLabs measures the pinned one, Opus 5.5 writes, YouTube Studio pins (16:9)",
+    "src": "animations/niche-youtube-model-switch-detail-superbot-3a8678e2/",
+    "thumb": "assets/shots/niche-youtube-model-switch-detail-superbot-3a8678e2.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d with a more detailed result at every switch, no longer than the original. One ask in superbot: Gemini watches the 14:32 video, reads all 1,284 comments and matches each top comment to the moment that answers it. ElevenLabs Voice Isolator splits the voice from the room in all 12 clips of the 7:05 room test and measures the echo left, the answer to the most-asked question. Claude Opus 5.5 writes the five replies in the creator's voice from those timestamps and numbers, then superbot posts them from YouTube Studio and pins Priya's. The thumbnail, waveform and charts are drawn for the spot. 16:9 only.",
+    "download": "assets/video/niche-youtube-model-switch-detail-superbot-3a8678e2.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -2608,6 +2608,39 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "dropin-monolith-16x9-d3e53279",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: every subscription packs into one drop-in API key, the request auto-routes to Opus 5.5, Gemini or DeepSeek, a stock endpoint refuses it, one base_url line changes, and the same request comes back a full answer (monolith, 16:9)",
+    "src": "animations/dropin-monolith-16x9-d3e53279/",
+    "thumb": "assets/shots/dropin-monolith-16x9-d3e53279.png",
+    "desc": "Claude Max, ChatGPT Plus, Google AI Pro and DeepSeek fly in and implode into one glowing sbc_ Superbot API key. A real request, an nmap scan of your own server 10.0.3.14, routes auto to Claude Opus 5.5 with Gemini 3.1 Pro and DeepSeek V4 Flash on the lane beside it. A stock OpenAI endpoint answers flatly: I can't help with that, stamped refused. Then the only line that changes is OPENAI_BASE_URL, api.openai.com to beta.superbot.gg; the key and the client stay put. The same request goes in again, returns 200 OK with a usable nmap command, and the lane lights all three models. Ends on: Superbot doesn't refuse. Drop in API replacement. 27 s, 1920x1080, with sound.",
+    "download": "animations/dropin-monolith-16x9-d3e53279/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "dropin-duel-16x9-d3e53279",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: subscriptions pack into one key, a frank medication question routes to Opus 5.5, Gemini or DeepSeek, and the same question refused by a stock endpoint is answered through Superbot after one base_url swap (duel, 16:9)",
+    "src": "animations/dropin-duel-16x9-d3e53279/",
+    "thumb": "assets/shots/dropin-duel-16x9-d3e53279.png",
+    "desc": "Four subscriptions pack into one glowing sbc_ key on the neon field. A frank question, what is a safe ibuprofen dose for an adult?, is routed auto to Claude Opus 5.5. The same question is then typed into two endpoints side by side: api.openai.com answers I can't help with that, stamped refused, while beta.superbot.gg answers with the 200-400 mg every 4-6 hours range, the 1200 mg daily ceiling and the NSAID warning. The only edit between them is OPENAI_BASE_URL; the key is unchanged. Ibuprofen box. Ends on: Superbot doesn't refuse. Drop in API replacement. 27 s, 1920x1080, with sound.",
+    "download": "animations/dropin-duel-16x9-d3e53279/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "dropin-raw-16x9-d3e53279",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: one drop-in API key, the same curl at api.openai.com returns content_filtered, then at beta.superbot.gg returns 200 with x-superbot-route, and the key auto-routes to Opus 5.5, Gemini or DeepSeek (raw API, 16:9)",
+    "src": "animations/dropin-raw-16x9-d3e53279/",
+    "thumb": "assets/shots/dropin-raw-16x9-d3e53279.png",
+    "desc": "Subscriptions pack into one glowing sbc_ key, then a terminal runs one curl: a SQL-injection test against your own site. api.openai.com returns content_filtered, I can't help with that. The only line that changes is the URL, api.openai.com to beta.superbot.gg; the key and the request body are byte identical. The same curl returns HTTP/2 200 with x-superbot-route: claude-opus-5.5 and x-billed-to: claude-max, and the sqlmap answer streams out. A routing lane lights Claude Opus 5.5, Gemini 3.1 Pro and DeepSeek V4 Flash. Ends on: Superbot doesn't refuse. Drop in API replacement. 29 s, 1920x1080, with sound.",
+    "download": "animations/dropin-raw-16x9-d3e53279/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

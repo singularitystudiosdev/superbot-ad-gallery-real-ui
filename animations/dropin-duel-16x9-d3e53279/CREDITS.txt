@@ -1,0 +1,6 @@
+Fonts (SIL OFL 1.1): Plus Jakarta Sans, JetBrains Mono via fonts.googleapis.com; Inter (from superbot-desktop renderer assets). Retrieved 2026-10-05.
+Logos: claude / openai / gemini / deepseek SVGs carried from superbot-ad-gallery-real-ui animations/ (provider brand marks, nominative use).
+Superbot mark: assets/face.svg (superbot-ad-gallery-real-ui).
+Price list (router table): platform.claude.com/docs/en/models/opus-5-5/overview; benchlm.ai/openai/api-pricing; benchlm.ai/google/api-pricing; DeepSeek V4 Flash list rate. Retrieved 2026-10-05.
+Claim source: sell-to-reddit llm_ai complaint output-quality-regressions (overly-restrictive guardrails / refusals). Retrieved 2026-10-05.
+No third-party footage, photography or audio. Every frame is drawn in code or is a provider logo.

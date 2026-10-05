@@ -712,6 +712,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-fitness-model-switch-raceday-superbot-9f1df009",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Make me a Brooklyn Half race-day app, course in 3D, coach in my ear: DeepSeek V4 scrapes the splits, Blender 5.2 builds the course, Nano Banana Pro makes the photos, Eleven v3 voices the coach, Opus 5.5 builds the app (5 switches, reordered variant, 16:9)",
+    "src": "animations/niche-fitness-model-switch-raceday-superbot-9f1df009/",
+    "thumb": "assets/shots/niche-fitness-model-switch-raceday-superbot-9f1df009.png",
+    "desc": "Variant of niche-fitness-model-switch-superbot-a832b003 with a different chain in a different order, each model making the thing it is known for, and every output real. DeepSeek V4 searches for the course map and scrapes three years of results pages with no public API (proxy rotation, backing off a 429, 84,117 finishers parsed) into course.gpx and splits; Blender 5.2 builds the course from real USGS elevation and renders a 96-frame flyover (Solid view, Rendered view, then the camera playing the frames as the timeline renders them); Nano Banana Pro (Gemini 3 Pro Image) generates one photo per stretch; ElevenLabs Eleven v3 voices four coach cues (real waveforms, one plays); Claude Opus 5.5 writes the Next.js app that wires it all together. The app then opens full frame on localhost:3000 and runs the race: the flyover with a live mile, stretch and target pace, the real elevation profile, a 1:55:00 split table, and the coach cue playing as the runner crosses mile 7. 37.9 s, 16:9, 1080p60, with the coach's voice.",
+    "download": "assets/video/niche-fitness-model-switch-raceday-superbot-9f1df009.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-travel-model-switch-superbot-4808b6b8",
     "type": "animation",
     "group": "Ad spots",

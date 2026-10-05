@@ -1,0 +1,91 @@
+/* App beat (beats/app.js): the race-day app Opus built, on localhost:3000. The chat card is a small browser window;
+   the full-frame layer (.ap-full, outside the camera) holds the client at 1371x771 (the frame over APP_SCALE 1.4):
+   browser chrome, the Blender flyover with its HUD, the elevation profile and per-mile targets, and the aside with the
+   coach card, the stretch photo and the credits. Tailwind neutral greys, the route's orange #ff4d12. Prefixed .ap-. */
+#s-tabs .sbsite .hub .ap-card { padding: 0; background: transparent; box-shadow: none; }
+#s-tabs .sbsite .hub .ap-mini { border-radius: 10px; overflow: hidden; background: #1f1f1f; box-shadow: inset 0 0 0 1px #2e2e2e; }
+#s-tabs .sbsite .hub .ap-mbar { display: flex; align-items: center; gap: 8px; height: 22px; padding: 0 8px; }
+#s-tabs .sbsite .hub .ap-mbar .ap-dots b { width: 7px; height: 7px; }
+#s-tabs .sbsite .hub .ap-murl { flex: 1; padding: 3px 10px; border-radius: 999px; background: #2b2b2b; font: 400 9.5px/1.2 var(--ui); color: #d4d4d4; }
+#s-tabs .sbsite .hub .ap-mvp { height: 190px; background: #0a0a0a; }
+#s-tabs .sbsite .hub .ap-mvp img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .ap-dots { display: flex; gap: 6px; flex: none; }
+#s-tabs .ap-dots b { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+#s-tabs .ap-dots b:nth-child(2) { background: #febc2e; } #s-tabs .ap-dots b:nth-child(3) { background: #28c840; }
+
+#s-tabs .ap-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #0a0a0a; }
+#s-tabs .ap-client { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0;
+  font-family: "Inter SB", Inter, "SF Pro Text", system-ui, sans-serif; color: #fafafa; -webkit-font-smoothing: antialiased; }
+#s-tabs .ap-chrome { flex: none; display: flex; align-items: center; gap: 12px; height: 38px; padding: 0 14px; background: #1f1f1f; box-shadow: inset 0 -1px 0 #2a2a2a; }
+#s-tabs .ap-tab { align-self: flex-end; height: 30px; padding: 0 16px; border-radius: 9px 9px 0 0; background: #0a0a0a; font: 500 12.5px/30px "Inter SB", Inter, system-ui; color: #e5e5e5; }
+#s-tabs .ap-url { display: flex; align-items: center; gap: 7px; width: 560px; padding: 6px 14px; border-radius: 999px; background: #2b2b2b; font-size: 13px; color: #d4d4d4; }
+#s-tabs .ap-lock { width: 9px; height: 7px; margin-top: 3px; border-radius: 1.5px; background: #8a8a8a; position: relative; }
+#s-tabs .ap-lock::before { content: ''; position: absolute; left: 1.5px; top: -5px; width: 6px; height: 6px; box-sizing: border-box; border: 1.5px solid #8a8a8a; border-bottom: 0; border-radius: 4px 4px 0 0; }
+#s-tabs .ap-main { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 360px; gap: 16px; padding: 16px; }
+#s-tabs .ap-left { display: flex; flex-direction: column; gap: 12px; min-width: 0; min-height: 0; }
+#s-tabs .ap-fly { position: relative; flex: none; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #000; }
+#s-tabs .ap-fimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .ap-hud { position: absolute; left: 18px; top: 16px; display: flex; flex-direction: column; gap: 4px; padding: 12px 16px 13px;
+  border-radius: 12px; background: rgba(10, 10, 10, .62); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
+#s-tabs .ap-mile { font: 800 34px/1 "Inter SB", Inter, system-ui; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+#s-tabs .ap-where { font: 600 15px/1.2 "Inter SB", Inter, system-ui; color: #ffb899; }
+#s-tabs .ap-tgt, #s-tabs .ap-clk { font: 400 13px/1.3 "Inter SB", Inter, system-ui; color: #d4d4d4; font-variant-numeric: tabular-nums; }
+#s-tabs .ap-tgt b, #s-tabs .ap-clk b { color: #fff; font-weight: 700; }
+#s-tabs .ap-rtag { position: absolute; right: 18px; bottom: 30px; padding: 5px 10px; border-radius: 999px; background: rgba(10, 10, 10, .62); font-size: 11.5px; color: #d4d4d4; }
+#s-tabs .ap-prog { position: absolute; left: 18px; right: 18px; bottom: 16px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .2); overflow: hidden; }
+#s-tabs .ap-prog i { position: absolute; inset: 0; background: #ff4d12; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .ap-prof { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 9px 14px 8px; border-radius: 14px; background: #141414; box-shadow: inset 0 0 0 1px #232323; }
+#s-tabs .ap-ph { display: flex; justify-content: space-between; font-size: 12px; } #s-tabs .ap-ph span { color: #a3a3a3; }
+#s-tabs .ap-sv { position: relative; flex: 1; min-height: 0; margin: 4px 0 3px; }
+#s-tabs .ap-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+#s-tabs .ap-tk { stroke: #262626; stroke-width: 1; vector-effect: non-scaling-stroke; }
+#s-tabs .ap-area0 { fill: rgba(255, 255, 255, .05); }
+#s-tabs .ap-line0 { fill: none; stroke: #525252; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+#s-tabs .ap-line1 { fill: none; stroke: #ff4d12; stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+#s-tabs .ap-dot { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(255, 77, 18, .45); }
+#s-tabs .ap-pace { display: grid; grid-template-columns: repeat(13, calc(100% / 13.1094)); }
+#s-tabs .ap-pace span { padding: 2px 0 3px; border-radius: 6px; text-align: center; font: 600 11px/1.15 "Inter SB", Inter, system-ui; color: #6b6b6b; font-variant-numeric: tabular-nums; }
+#s-tabs .ap-pace s { display: block; text-decoration: none; font-size: 9px; font-weight: 500; color: #525252; }
+#s-tabs .ap-pace .dn { color: #a3a3a3; } #s-tabs .ap-pace .on { color: #fff; background: rgba(255, 77, 18, .2); }
+#s-tabs .ap-side { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+#s-tabs .ap-head h1 { margin: 0; font: 700 25px/1.1 "Inter SB", Inter, system-ui; letter-spacing: -.02em; }
+#s-tabs .ap-head p { margin: 5px 0 0; font-size: 12.5px; color: #a3a3a3; } #s-tabs .ap-head b { color: #fafafa; }
+#s-tabs .ap-coach { padding: 12px; border-radius: 14px; background: #141414; box-shadow: inset 0 0 0 1px #232323; }
+#s-tabs .ap-coach.on { box-shadow: inset 0 0 0 1px rgba(255, 77, 18, .55); }
+#s-tabs .ap-ch { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+#s-tabs .ap-av { width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ffd1a8, #f2709c 55%, #7b5cf0); }
+#s-tabs .ap-ch s { text-decoration: none; color: #a3a3a3; }
+#s-tabs .ap-live { margin-left: auto; padding: 3px 9px; border-radius: 999px; background: #262626; font: 600 10.5px/1.2 "Inter SB", Inter, system-ui; font-style: normal; color: #a3a3a3; }
+#s-tabs .ap-live.on { background: #ff4d12; color: #fff; }
+#s-tabs .ap-cue { display: grid; grid-template-columns: 22px 46px 1fr 30px; gap: 8px; align-items: center; height: 30px; margin-top: 10px; }
+#s-tabs .ap-pl { position: relative; width: 22px; height: 22px; border-radius: 50%; background: #fafafa; }
+#s-tabs .ap-pl::after { content: ''; position: absolute; left: 8px; top: 6px; border-left: 8px solid #0a0a0a; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+#s-tabs .ap-pl.on::after { left: 7px; top: 7px; width: 8px; height: 8px; border: 0; background: linear-gradient(90deg, #0a0a0a 0 35%, transparent 35% 65%, #0a0a0a 65%); }
+#s-tabs .ap-cm { font-size: 11.5px; font-weight: 600; color: #d4d4d4; white-space: nowrap; }
+#s-tabs .ap-wv { position: relative; height: 26px; }
+#s-tabs .ap-wv svg { position: absolute; left: 0; top: 0; width: 212px; height: 26px; }
+#s-tabs .ap-w0 { fill: #404040; } #s-tabs .ap-w1 { fill: #ff4d12; }
+#s-tabs .ap-wc { position: absolute; left: 0; top: 0; bottom: 0; width: 0; overflow: hidden; }
+#s-tabs .ap-cd { font-size: 11px; color: #a3a3a3; text-align: right; font-variant-numeric: tabular-nums; }
+#s-tabs .ap-ctx { margin: 10px 0 0; font: 600 14px/1.4 "Inter SB", Inter, system-ui; color: #525252; }
+#s-tabs .ap-ctx .lit { color: #fafafa; }
+#s-tabs .ap-next { margin: 8px 0 0; font-size: 11.5px; color: #a3a3a3; }
+#s-tabs .ap-photo { position: relative; flex: none; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #141414; }
+#s-tabs .ap-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .ap-p1 { opacity: 0; }
+#s-tabs .ap-photo::after { content: ''; position: absolute; inset: 50% 0 0; background: linear-gradient(transparent, rgba(0, 0, 0, .7)); }
+#s-tabs .ap-pc { position: absolute; left: 12px; bottom: 10px; z-index: 1; display: flex; flex-direction: column; gap: 2px; }
+#s-tabs .ap-pc b { font: 600 13px/1.2 "Inter SB", Inter, system-ui; } #s-tabs .ap-pc s { text-decoration: none; font-size: 10.5px; color: #d4d4d4; }
+#s-tabs .ap-cred { display: flex; flex-direction: column; gap: 6px; margin-top: auto; }
+#s-tabs .ap-cred span { display: flex; align-items: center; gap: 8px; font-size: 11.5px; }
+#s-tabs .ap-cred img { width: 14px; height: 14px; object-fit: contain; }
+#s-tabs .ap-cred s { width: 108px; text-decoration: none; color: #a3a3a3; } #s-tabs .ap-cred b { font-weight: 600; }
+#s-tabs .ap-plan { padding: 12px; border-radius: 14px; background: #141414; box-shadow: inset 0 0 0 1px #232323; }
+#s-tabs .ap-pl2 { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; }
+#s-tabs .ap-pl2 b { font-weight: 600; } #s-tabs .ap-pl2 s { text-decoration: none; font-size: 11px; color: #a3a3a3; }
+#s-tabs .ap-pn { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 9px; }
+#s-tabs .ap-pn span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 3px; }
+#s-tabs .ap-pn s { flex-basis: 100%; text-decoration: none; font-size: 11px; color: #a3a3a3; }
+#s-tabs .ap-pn b { font: 700 26px/1.15 "Inter SB", Inter, system-ui; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+#s-tabs .ap-pn span + span b { color: #ff4d12; } #s-tabs .ap-pn i { font-style: normal; font-size: 12px; color: #a3a3a3; }
+#s-tabs .ap-plan p { margin: 7px 0 0; font-size: 11.5px; color: #a3a3a3; }

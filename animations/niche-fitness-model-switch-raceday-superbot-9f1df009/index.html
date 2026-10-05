@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: Make me a Brooklyn Half race-day app: course in 3D, coach in my ear</title>
+<meta name="description" content="One ask in superbot, each model on what it is best at: DeepSeek V4 scrapes the course and three years of finisher splits with no API, Blender 5.2 builds the course in 3D from real elevation and renders the flyover, Nano Banana Pro makes the course photos, ElevenLabs Eleven v3 voices the coach cues, and Claude Opus 5.5 builds the Next.js race-day app that plays them all.">
+<script>/* 16:9 only: this cut is laid out for 1920x1080, so pin ?ar=16x9 before ar.js reads it */
+(function () { var u = new URL(location.href); if (u.searchParams.get('ar') !== '16x9') { u.searchParams.set('ar', '16x9'); history.replaceState(null, '', u); } })();</script>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=9f1df009">
+<link rel="stylesheet" href="publish-ui.css?v=9f1df009">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="shell.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=9f1df009">
+<!-- one stylesheet per beat (scenes/tabs-assets/beats/<name>.css), scoped under #s-tabs -->
+<link rel="stylesheet" href="scenes/tabs-assets/beats/kit.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/scrape.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/blender.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/images.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/voice.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/code.css?v=9f1df009">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/app.css?v=9f1df009">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment (cards, scenes, end) in order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=9f1df009"></script>
+</body>
+</html>

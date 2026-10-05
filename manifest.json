@@ -2696,6 +2696,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "allagents-workspace-16x9-0cecc5e4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: plans dock into one sbc_ key on the API keys page, a request lifts out of the composer and routes to Opus 5.5, Gemini 3.8 Flash or DeepSeek V4.1 Flash, four agent windows merge into one Superbot, every step labeled by model (workspace, 16:9)",
+    "src": "animations/allagents-workspace-16x9-0cecc5e4/",
+    "thumb": "assets/shots/allagents-workspace-16x9-0cecc5e4.png",
+    "desc": "Styled after Cognition's Introducing Devin film: a dark browser frame, panels that lift out over a dimmed workspace, a sentence-case caption box. Claude Code, Codex, Gemini CLI, Cursor: four agents, four bills. On the Superbot API keys page Claude Max, ChatGPT Pro, Google AI Pro, Cursor Pro and DeepSeek API switch to Connected, the key card lifts out and each plan logo arcs into its rail while the sbc_live_ key prints, then a .env adds OPENAI_BASE_URL=https://beta.superbot.gg/v1. The camera pushes into the composer and the request lifts out into the router: plan the checkout flow goes to Claude Opus 5.5 (hardest reasoning), read 41 payment files to Gemini 3.8 Flash (1M-token context), write the unit tests to DeepSeek V4.1 Flash (routine code). Claude Code, Codex, Gemini CLI and Cursor windows fold into one Superbot agent whose six steps are each labeled Opus 5.5, Gemini 3.8 Flash, GPT-6 Sol or DeepSeek V4.1 Flash, and the test run lifts out. A bar chart of OpenRouter list prices per 1M output tokens (October 2026): $20.00, $10.00, $3.75, $1.20. Ends on \"Superbot is all your agents in one.\" 34 s, 16:9, 60 fps, with sound.",
+    "download": "animations/allagents-workspace-16x9-0cecc5e4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allagents-limit-16x9-0cecc5e4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: four busy agents hit their usage limits, shrink into their logos and dock in one Superbot, plans spiral into one key, a two-line drop-in diff, each step's model chip cycles Opus 5.5, Gemini or DeepSeek and locks (usage limit, 16:9)",
+    "src": "animations/allagents-limit-16x9-0cecc5e4/",
+    "thumb": "assets/shots/allagents-limit-16x9-0cecc5e4.png",
+    "desc": "Cold open on Claude Code, Codex, Gemini CLI and Cursor working at once; the camera pushes in as Claude Code hits its usage limit, then pans to Codex hitting its own. Each window shrinks into its logo, the four logos line up and arc into the header of one Superbot agent. Claude Max, ChatGPT Pro, Google AI Pro and Cursor Pro orbit the Superbot API key and spiral into its rail while the sbc_live_ key prints. agent.py swaps OPENAI_API_KEY for base_url=\"https://beta.superbot.gg/v1\" and SUPERBOT_API_KEY, +2 -1, the rest of the code unchanged. In the agent each step's model chip cycles through Opus 5.5, Gemini 3.8 Flash and DeepSeek V4.1 Flash, then locks: the plan to Opus 5.5, reading 41 files to Gemini 3.8 Flash, 24 unit tests to DeepSeek V4.1 Flash, the webhook to GPT-6 Sol, the review to Opus 5.5. Ends on \"Superbot is all your agents in one.\" 29 s, 16:9, 60 fps, with sound.",
+    "download": "animations/allagents-limit-16x9-0cecc5e4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allagents-envkey-16x9-0cecc5e4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: five provider keys in a .env fold into one SUPERBOT_API_KEY, one request splits on live wires to Opus 5.5, Gemini 3.8 Flash and DeepSeek V4.1 Flash, four agent tabs fold into one, a per-model timeline labels every step (one .env line, 16:9)",
+    "src": "animations/allagents-envkey-16x9-0cecc5e4/",
+    "thumb": "assets/shots/allagents-envkey-16x9-0cecc5e4.png",
+    "desc": "Five keys type into a .env (Anthropic, OpenAI, Gemini, DeepSeek, Cursor) and fold into one line, SUPERBOT_API_KEY=sbc_live_..., then OPENAI_BASE_URL=https://beta.superbot.gg/v1. One request wires into the Superbot router and splits: plan the checkout flow travels to Claude Opus 5.5 ($20.00/1M), read 41 payment files to Gemini 3.8 Flash ($3.75/1M), write the unit tests to DeepSeek V4.1 Flash ($1.20/1M), at OpenRouter list prices. Claude Code, Codex, Gemini CLI and Cursor tabs switch under a sliding underline, then fold into one Superbot tab whose steps carry their model labels. A timeline with one lane per model (Opus 5.5, Gemini 3.8 Flash, GPT-6 Sol, DeepSeek V4.1 Flash) fills under a playhead. Whip-pan cuts. Ends on \"Superbot is all your agents in one.\" 30 s, 16:9, 60 fps, with sound.",
+    "download": "animations/allagents-envkey-16x9-0cecc5e4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

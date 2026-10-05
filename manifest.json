@@ -2208,6 +2208,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "every-model-one-chat-detail-superbot-a951cccf",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · GPT Image 2 makes the meme, GPT-5.6 Sol searches Reddit, Claude Fable 5 orders on DoorDash (detail cut, real superbot UI, 16.6 s, 16:9)",
+    "src": "animations/every-model-one-chat-detail-superbot-a951cccf/",
+    "thumb": "assets/shots/every-model-one-chat-detail-superbot-a951cccf.png",
+    "desc": "Detail cut of every-model-one-chat-sb-superbot-efa8df82 at the same length, inside superbot's real desktop window rebuilt by hand. Make me a muse meme: superbot switches to GPT Image 2, the best released model on the Arena image-edit board, and the meme resolves inside the Creating image frame. Scrape reddit and look for more: it switches to GPT-5.6 Sol, the BrowseComp and Search Arena leader, searches reddit.com, opens the Reddit results page and comes back with four more Muse memes, top posts first. Winning, order me a burger: it switches to Claude Fable 5, the WebVoyager leader on live sites, connects to DoorDash, adds a Double Smash Burger on the store page and checks out with the saved card. Every move eased, one thing moving at a time. 1920x1080, 60 fps, with UI sound.",
+    "download": "assets/video/every-model-one-chat-detail-superbot-a951cccf.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

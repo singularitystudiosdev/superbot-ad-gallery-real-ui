@@ -1,0 +1,19 @@
+brand/ CREDITS: third-party marks in the lifehub spots (assets/lifehub-209a81f4). Fetched 2026-10-05.
+All marks are the property of their owners and appear nominatively (naming the service superbot connects to),
+unaltered except where a fill colour is noted. Internal provenance only, never shown on screen.
+
+gmail.svg     Wikimedia Commons, File:Gmail_icon_(2020).svg
+              https://commons.wikimedia.org/wiki/File:Gmail_icon_(2020).svg  (Google LLC trademark; PD-textlogo on Commons)
+gcal.svg      Wikimedia Commons, File:Google_Calendar_icon_(2020).svg
+              https://commons.wikimedia.org/wiki/File:Google_Calendar_icon_(2020).svg  (Google LLC trademark)
+linkedin.svg  Wikimedia Commons, File:LinkedIn_icon.svg
+              https://commons.wikimedia.org/wiki/File:LinkedIn_icon.svg  (LinkedIn Corporation trademark)
+notion.svg    Wikimedia Commons, File:Notion-logo.svg
+              https://commons.wikimedia.org/wiki/File:Notion-logo.svg  (Notion Labs trademark)
+canvas.svg    simple-icons 16.34.0 icons/canvas.svg (CC0-1.0), https://cdn.jsdelivr.net/npm/simple-icons@16.34.0/icons/canvas.svg
+              fill set to simple-icons' listed brand hex #E72429 (Instructure Canvas LMS trademark)
+github.svg    simple-icons 16.34.0 icons/github.svg (CC0-1.0), fill set to #FFFFFF for the dark UI (GitHub, Inc. trademark)
+
+superbot mark: ../../sb-mark-live.js (the real superbot.gg mascot, see that file's header).
+UI icons (check, repeat, doc, bell, grid, chat, clock, cursor) are kit vector furniture drawn in ui.js.
+Mock data (names, courses, companies such as "Halcyon Labs") is fictional.

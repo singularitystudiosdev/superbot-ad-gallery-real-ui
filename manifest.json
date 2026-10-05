@@ -3114,6 +3114,61 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "lifehub-chaos-16x9-209a81f4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERYTHING IS EVERYWHERE. SUPERBOT SORTS IT. · 16 life cards (deadlines, replies, applications, inbox, gym) fly into one command center, School, Networking, Email up close",
+    "src": "animations/lifehub-chaos-16x9-209a81f4/",
+    "thumb": "assets/shots/lifehub-chaos-16x9-209a81f4.png",
+    "desc": "Sixteen cards from one week of a student's life scatter over kinetic type: ECON 102 midterm, Lena from Halcyon Labs asking for interview times, reply to Marcus (waiting 2 days), the research fellowship that opens tomorrow at 9 AM, gym skipped Thu, ship the streaks API, PSET 4 due Thu, laundry again. The superbot mark lands in the middle, every card flies into its row on one command center page (School, Networking, Projects, Applications, Calendar, Email, Daily), then the camera visits School (midterm in 15 days, 3 review blocks booked), Networking (Marcus is waiting, reply drafted) and Email (142 sorted, 3 need you). Ends on: your whole life. one page. 15.6 s + end card, 16:9.",
+    "download": "assets/video/lifehub-chaos-16x9-209a81f4.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "lifehub-build-16x9-209a81f4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "MAKE ME A COMMAND CENTER FOR MY WHOLE LIFE. · one prompt connects Gmail, Calendar, Canvas, LinkedIn, GitHub, Notion and builds the 7-area page",
+    "src": "animations/lifehub-build-16x9-209a81f4/",
+    "thumb": "assets/shots/lifehub-build-16x9-209a81f4.png",
+    "desc": "The superbot app, Good morning, Alex. One prompt types into the composer: make me a command center for my whole life. superbot answers by connecting the apps one chip at a time (Gmail, Google Calendar, Canvas, LinkedIn, GitHub, Notion), reads 3 weeks of email (142 sorted, 3 need you), finds 11 deadlines and builds the command center in the same window. The camera stops on School (midterm Oct 20, start now), Networking (Marcus is waiting, reply drafted) and Applications (fellowship opens tomorrow 9 AM, reminder set), then pulls back to all 7 areas: your whole life. one page. 16.4 s + end card, 16:9.",
+    "download": "assets/video/lifehub-build-16x9-209a81f4.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "lifehub-day-16x9-209a81f4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "IT PLANS YOUR DAY. AND CHECKS YOU DID IT. · 6 tasks become calendar blocks, a now-line checks them off, said vs did for the week",
+    "src": "animations/lifehub-day-16x9-209a81f4/",
+    "thumb": "assets/shots/lifehub-day-16x9-209a81f4.png",
+    "desc": "Monday, Oct 5. Google Calendar syncs and the fixed events land (ECON 102 lecture 11:00, coffee chat with Marcus 1:00, club meeting 7:00), then six tasks lift off the list and become work blocks in the free slots: Deep work on PSET 4, reply to Marcus, capstone proposal, gym, fellowship essay outline, read 20 pages. A now-line sweeps the day and checks each block; the capstone block stops at 1h 10m of 2h and superbot moves the 50 minutes left to Tue 9 AM. A week card fills: deep work said 12h, did 9h 40m; gym 3 of 4; replies 5 of 5; classes 9 of 9. Ends on the 7-area command center: plans made. plans kept. 16.0 s + end card, 16:9.",
+    "download": "assets/video/lifehub-day-16x9-209a81f4.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "lifehub-nudges-16x9-209a81f4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "IT NUDGES YOU. BEFORE IT'S LATE. · midterm in 15 days, Marcus replied, fellowship opens tomorrow, Lena wants interview times, 1h 10m of 4h deep work",
+    "src": "animations/lifehub-nudges-16x9-209a81f4/",
+    "thumb": "assets/shots/lifehub-nudges-16x9-209a81f4.png",
+    "desc": "Over the dimmed command center, five superbot nudges stack in and get answered with one click each: ECON 102 midterm in 15 days (book 3 review blocks), Marcus replied 2 days ago (draft ready, Send), research fellowship opens tomorrow at 9 AM (essay outline started from your notes), Lena from Halcyon Labs wants interview times (flagged out of 142 new emails, reply with times), and you planned 4h of deep work with 1h 10m done (hold notifications until 5). The stack clears into the full 7-area command center: start early. stay ahead. 15.0 s + end card, 16:9.",
+    "download": "assets/video/lifehub-nudges-16x9-209a81f4.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "lifehub-rollover-16x9-209a81f4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "DIDN'T FINISH IT? IT'S ON TOMORROW. · Mon to Tue to Wed, recurring tasks come back, the thank-you note rolls ×2 until done",
+    "src": "animations/lifehub-rollover-16x9-209a81f4/",
+    "thumb": "assets/shots/lifehub-rollover-16x9-209a81f4.png",
+    "desc": "Three day cards, Mon Oct 5, Tue Oct 6, Wed Oct 7. Monday ticks off read 20 pages, LeetCode, gym, reply to Marcus and PSET 4 part 1; at 11:59 PM laundry and the thank-you note to Prof. Alvarez are still open, so they lift out and land in Tuesday marked from Mon while the daily tasks reappear on their own. Laundry gets done Tuesday; the note does not, rolls again (rolled ×2), and on Wednesday it is finally checked: Done. 2 days late, not forgotten. Wednesday folds into the Daily panel of the 7-area command center: nothing falls through. 15.6 s + end card, 16:9.",
+    "download": "assets/video/lifehub-rollover-16x9-209a81f4.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -2489,6 +2489,39 @@
     "thumb": "assets/shots/superbot-dropin-keyring-16x9-a0a8d85a.png"
   },
   {
+    "id": "allagents-keyring-superbot-9720dde1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: five plans fold into one key, a .env swaps four keys for one, the hub routes each ask to Opus 5.5, Gemini or DeepSeek, four agent windows merge and every step is labeled by model (one key, 16:9)",
+    "src": "animations/allagents-keyring-superbot-9720dde1/",
+    "thumb": "assets/shots/allagents-keyring-superbot-9720dde1.png",
+    "desc": "Claude Max, ChatGPT Pro, Google AI Pro, Cursor Pro and DeepSeek API cards fly into one SUPERBOT_API_KEY and morph into its dock chips while the sbc_ key prints. A .env strikes the ANTHROPIC, OPENAI, GEMINI and DEEPSEEK keys and collapses them into OPENAI_BASE_URL=https://beta.superbot.gg/v1 plus one key. In the hub chat each ask is scored across three lanes and switched: a payments race condition goes to Claude Opus 5.5 on Claude Max, 300 support tickets to Gemini 3.8 Flash on Google AI Pro, 412 docstrings to DeepSeek V4 Flash. Claude Code, Codex, Gemini CLI and Cursor windows converge into one Superbot agent that splits a checkout task into five steps, each tagged with the model it routed to (Opus, Gemini, GPT-6 Sol, DeepSeek, Opus). Ends on \"Superbot is all your agents in one.\" 38.4 s, 16:9, with sound.",
+    "download": "animations/allagents-keyring-superbot-9720dde1/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allagents-routes-superbot-9720dde2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: a request crosses a switchboard to Opus 5.5, Gemini or DeepSeek, five plan cards stack and flip into one key, four agents fold into one, a five-node pipeline labels each subtask by model (router, 16:9)",
+    "src": "animations/allagents-routes-superbot-9720dde2/",
+    "thumb": "assets/shots/allagents-routes-superbot-9720dde2.png",
+    "desc": "POST /v1/chat/completions with \"model\": \"auto\": three requests ride the wire into the Superbot router, which reads what each needs and sends it down one wire. A checkout double charge goes to Claude Opus 5.5 (hard reasoning), a 40 minute demo to Gemini 3.8 Flash (long context), 1,200 UI strings to DeepSeek V4 Flash (bulk work), each on a plan you already pay for. Five plan cards are dealt in a fan, gathered into one deck and flipped over into the Superbot API key card with its drop-in base_url. Claude Code, Codex, Gemini CLI and Cursor are dealt like a hand and slide into one Superbot agent, which runs dark mode as a five-node pipeline, each node labeled with its model. Ends on \"Superbot is all your agents in one.\" 33.0 s, 16:9, with sound.",
+    "download": "animations/allagents-routes-superbot-9720dde2/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allagents-merge-superbot-9720dde3",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: Claude Code, Codex, Gemini CLI and Cursor each hit a usage limit and merge into one Superbot, its settings pack five plans into one key, chat routes asks to Opus 5.5, Gemini or DeepSeek, steps labeled by model (four windows, 16:9)",
+    "src": "animations/allagents-merge-superbot-9720dde3/",
+    "thumb": "assets/shots/allagents-merge-superbot-9720dde3.png",
+    "desc": "Opens on four agent windows at work; each hits its own limit (usage limit reached, quota exceeded). They stack and merge into one Superbot agent. In its Connected plans sheet Claude Max, ChatGPT Pro, Google AI Pro, Cursor Pro and DeepSeek API slide into one SUPERBOT_API_KEY next to the drop-in base_url https://beta.superbot.gg/v1. The hub chat routes a REST to GraphQL plan to Claude Opus 5.5, a 900 page API spec to Gemini 3.8 Flash and a repo-wide rename to DeepSeek V4 Flash, each with a Switching to pill and the plan it bills. The migration then splits into five steps labeled Gemini, Opus, GPT-6 Sol, DeepSeek and Opus. Ends on \"Superbot is all your agents in one.\" 35.0 s, 16:9, with sound.",
+    "download": "animations/allagents-merge-superbot-9720dde3/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

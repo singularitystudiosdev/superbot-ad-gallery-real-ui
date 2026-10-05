@@ -762,6 +762,24 @@ const more = [
   ['image-poll-next-build-superbot-1a09cce6', 'image-poll-next-build-superbot-1a09cce6/', 'LET YOUR VIEWERS PICK · Nano Banana Pro draws 4 poll images, superbot posts an image poll from YouTube Studio (<7s, 16:9)', 'Ad spots',
     { desc: 'Same chat format as niche-youtube-model-switch-superbot-3828921d, new process: Nano Banana Pro draws one image per poll option, superbot posts an image poll from YouTube Studio. One ask in superbot ("Post a poll asking which build I do next, with a picture for each"): Nano Banana Pro renders 4 square 1080 x 1080 option images in the Maya Makes workshop look (Walnut desk, Floating shelves, Cedar planter, Kids\' step stool), then superbot, connected as Maya Makes, opens Create > Create post in YouTube Studio, picks Image poll, asks "Which build is next?" and presses Post. The poll goes live on the @MayaMakes Posts tab (284K subscribers) and the votes count to 1,206: Walnut desk 41%, Floating shelves 27%, Cedar planter 19%, Kids\' step stool 13%. 16:9 only, 5.4 s.',
       download: 'assets/video/image-poll-next-build-superbot-1a09cce6.16x9.mp4', downloadLabel: '16:9' }],
+  // One API key, all your subscriptions, 4:5 (2026-10-05, chat 24e2059d): three 21.6 s forks of the
+  // every-model-converge-4x5 engine (superbot-format-daeon/every-model-converge-4x5.398eded5) in its house look
+  // (Mona Sans Wide headlines over ghost rows, real Superbot UI on springs, end card 'one api key. all your
+  // subscriptions.'). swap: the drop-in, two .env lines change and app.py stays the same. router: one key, the
+  // model picked per request, on Superbot's real API access Usage panel. stack: plans plus per-token API bills,
+  // the plans connect, the API bills drop, one sbc_ key is minted. Hook: sell-to-reddit llm_ai rank-1 complaint
+  // usage-limits-pricing (5,636 authors, wants 'alternative ai subscription'). Strings come from superbot-desktop
+  // hub/stuff (API access, Usage, mint sheet Route and Mode) and hub/settings (Subscriptions & keys); only the
+  // four vendors Superbot connects appear and no price or savings figure is shown. 1080x1350, 30 fps, with sound.
+  ['one-key-swap-4x5-24e2059d', 'one-key-swap-4x5-24e2059d/', 'One API key, all your subscriptions: change two lines (4:5)', 'Ad spots',
+    { desc: 'An OpenAI SDK project in a code editor. Two .env lines change: OPENAI_BASE_URL becomes https://beta.superbot.gg/v1 and OPENAI_API_KEY becomes one sbc_ Superbot key, while app.py stays the same. The same code runs three requests and Superbot switches each one to Claude, ChatGPT or Grok, the Anthropic SDK lines swap the same way, and the Route card reads "Auto: your own vendor credential when it can serve, Superbot credits otherwise." 21.6 s, 4:5, with sound.',
+      download: 'animations/one-key-swap-4x5-24e2059d/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['one-key-router-4x5-24e2059d', 'one-key-router-4x5-24e2059d/', 'One API key, all your subscriptions: it picks the model for each request (4:5)', 'Ad spots',
+    { desc: 'Superbot on the phone, open to Settings > API access > Usage. Four requests reach one sbc_ key and Superbot picks the best model for each: the auth refactor goes to Claude, what is trending on X to Grok, the launch email to ChatGPT, the failing test to Cursor. A wire lights the subscription that serves each one and the row lands in Recent requests. One key, four plans. 21.6 s, 4:5, with sound.',
+      download: 'animations/one-key-router-4x5-24e2059d/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['one-key-stack-4x5-24e2059d', 'one-key-stack-4x5-24e2059d/', 'One API key, all your subscriptions: keep the plans, drop the per-token API bills (4:5)', 'Ad spots',
+    { desc: 'Four AI plans (ChatGPT, Claude, Grok, Cursor) plus three metered per-token API bills, each with its own key. The plans fly into Superbot\'s Subscriptions & keys and connect, the per-token API bills are struck through and fall away, then API access mints one sbc_ key (Route: Auto, Mode: Agent) and the four vendors dock around it like a keyring. 21.6 s, 4:5, with sound.',
+      download: 'animations/one-key-stack-4x5-24e2059d/final.mp4', downloadLabel: 'MP4 4:5' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

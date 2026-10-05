@@ -1866,6 +1866,39 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "one-key-swap-4x5-24e2059d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: change two lines (4:5)",
+    "src": "animations/one-key-swap-4x5-24e2059d/",
+    "thumb": "assets/shots/one-key-swap-4x5-24e2059d.png",
+    "desc": "An OpenAI SDK project in a code editor. Two .env lines change: OPENAI_BASE_URL becomes https://beta.superbot.gg/v1 and OPENAI_API_KEY becomes one sbc_ Superbot key, while app.py stays the same. The same code runs three requests and Superbot switches each one to Claude, ChatGPT or Grok, the Anthropic SDK lines swap the same way, and the Route card reads \"Auto: your own vendor credential when it can serve, Superbot credits otherwise.\" 21.6 s, 4:5, with sound.",
+    "download": "animations/one-key-swap-4x5-24e2059d/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
+    "id": "one-key-router-4x5-24e2059d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: it picks the model for each request (4:5)",
+    "src": "animations/one-key-router-4x5-24e2059d/",
+    "thumb": "assets/shots/one-key-router-4x5-24e2059d.png",
+    "desc": "Superbot on the phone, open to Settings > API access > Usage. Four requests reach one sbc_ key and Superbot picks the best model for each: the auth refactor goes to Claude, what is trending on X to Grok, the launch email to ChatGPT, the failing test to Cursor. A wire lights the subscription that serves each one and the row lands in Recent requests. One key, four plans. 21.6 s, 4:5, with sound.",
+    "download": "animations/one-key-router-4x5-24e2059d/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
+    "id": "one-key-stack-4x5-24e2059d",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: keep the plans, drop the per-token API bills (4:5)",
+    "src": "animations/one-key-stack-4x5-24e2059d/",
+    "thumb": "assets/shots/one-key-stack-4x5-24e2059d.png",
+    "desc": "Four AI plans (ChatGPT, Claude, Grok, Cursor) plus three metered per-token API bills, each with its own key. The plans fly into Superbot's Subscriptions & keys and connect, the per-token API bills are struck through and fall away, then API access mints one sbc_ key (Route: Auto, Mode: Agent) and the four vendors dock around it like a keyring. 21.6 s, 4:5, with sound.",
+    "download": "animations/one-key-stack-4x5-24e2059d/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

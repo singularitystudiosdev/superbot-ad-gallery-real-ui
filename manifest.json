@@ -2032,6 +2032,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "ebay-sell-from-photo-superbot-eda09815",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SNAP IT. SELL IT. · Gemini prices the camera from eBay sold comps, GPT Image 2 cleans the photos, Superbot lists it live on eBay (<15s, 16:9)",
+    "src": "animations/ebay-sell-from-photo-superbot-eda09815/",
+    "thumb": "assets/shots/ebay-sell-from-photo-superbot-eda09815.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82, new process: a photo of an old film camera turned into a priced, clean-photo eBay listing that goes live. One ask in superbot with two casual desk photos attached (\"sell this on ebay\"). Gemini identifies it (\"Canon AE-1 Program, black, with FD 50mm f/1.8 lens.\"), notes the condition (light brassing on the top plate, clean shutter curtains, no lens haze) and pulls eBay sold prices: 38 sold in 90 days, median $214, range $165 to $289, on a dot strip with a $219 marker. GPT Image 2 wipes the messy desk photo into a clean white-sweep shot and makes 4 listing photos (front, back, top plate, lens). Then superbot switches to Superbot: Opened eBay, Uploaded 4 photos, Priced at $219 from 38 sold. It fills List an item (title \"Canon AE-1 Program 35mm SLR Film Camera Black + FD 50mm f/1.8 Lens, Tested\", condition Used, Brand Canon, Model AE-1 Program, Format 35mm, Buy It Now $219.00 with offers allowed and auto-accept at $200.00, USPS Ground Advantage with free shipping), presses the gradient List it pill and the card turns into the live listing: Your listing is live, US $219.00, Free shipping, 3 watchers. Ends on EVERY MODEL. ONE CHAT. with the cat mascot. 13.45 s, 1920x1080, 60 fps, with sound (shutter click on the photo wipe, typing ticks on the title).",
+    "download": "assets/video/ebay-sell-from-photo-superbot-eda09815.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "end-screen-best-performer-superbot-4c7a8eb8",
     "type": "animation",
     "group": "Ad spots",

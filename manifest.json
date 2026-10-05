@@ -2032,6 +2032,39 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "subs-router-pack-16x9-8e534275",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Open router for your subscriptions: four plans pack into one sbc_ key, drop it in, then the router bills Opus 5.5, Gemini and DeepSeek to plans you already pay for (pack and route, 16:9)",
+    "src": "animations/subs-router-pack-16x9-8e534275/",
+    "thumb": "assets/shots/subs-router-pack-16x9-8e534275.png",
+    "desc": "Claude Max, ChatGPT Plus, Google AI Pro and DeepSeek arc into one sbc_ Superbot API key (Route Auto). An .env swap points any OpenAI SDK at https://beta.superbot.gg/v1. Then an OpenRouter-style router panel: every per-token price is struck and billed to a plan instead, and three requests route by job: a hard refactor to Claude Opus 5.5 on Claude Max, three PDFs to Gemini 3.1 Pro on Google AI Pro, a tiny rename to DeepSeek V4 Flash. Below it the subscription meter holds at $0.00 extra while the pay-per-token counter for the same calls climbs past $1,200 at list API rates. Ends on: Open router for your subscriptions. 24 s, 16:9, with sound.",
+    "download": "animations/subs-router-pack-16x9-8e534275/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "subs-router-bill-16x9-8e534275",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Open router for your subscriptions: a live pay-per-token bill climbs while the router sends every request to a plan you already pay for (the bill, 16:9)",
+    "src": "animations/subs-router-bill-16x9-8e534275/",
+    "thumb": "assets/shots/subs-router-bill-16x9-8e534275.png",
+    "desc": "Opens on a giant pay-per-token API bill ticking up live, which docks into a corner and keeps climbing for the whole spot. Your four plans fan in like a hand of cards, square into a stack and morph into one sbc_ key. Then a router dashboard: a live request log on the left, an OpenRouter-style route table with every price struck and billed to Claude Max, ChatGPT Plus, Google AI Pro or DeepSeek, and the meters underneath. Spotlights on Claude Opus 5.5 for a hard refactor, Gemini 3.1 Pro for three PDFs and DeepSeek V4 Flash for a tiny rename, then a flood of requests, each on a plan. Subscription meter flat at $0.00 extra beside the climbing per-token counter. Ends on: Open router for your subscriptions. 22 s, 16:9, with sound.",
+    "download": "animations/subs-router-bill-16x9-8e534275/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "subs-router-twolines-16x9-8e534275",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Open router for your subscriptions: change two lines, the key unfolds into your plans, packets route to Opus 5.5, Gemini and DeepSeek at $0 extra (two lines, 16:9)",
+    "src": "animations/subs-router-twolines-16x9-8e534275/",
+    "thumb": "assets/shots/subs-router-twolines-16x9-8e534275.png",
+    "desc": "An .env file swaps two lines: api.openai.com and sk-proj out, https://beta.superbot.gg/v1 and an sbc_ key in. The key lifts out, unfolds into the four plans it holds (Claude Max, ChatGPT Plus, Google AI Pro, DeepSeek) orbiting it, and packs them back. Then a router graph: request node, Superbot router node and an OpenRouter-style routes panel with per-token prices struck and billed to plans. Packets ride the connectors: a hard refactor to Claude Opus 5.5, three PDFs to Gemini 3.1 Pro, a tiny rename to DeepSeek V4 Flash, then a burst across every route. A bill strip keeps the subscriptions at $0.00 extra while the pay-per-token total climbs, before the full meters take the frame. Ends on: Open router for your subscriptions. 24 s, 16:9, with sound.",
+    "download": "animations/subs-router-twolines-16x9-8e534275/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

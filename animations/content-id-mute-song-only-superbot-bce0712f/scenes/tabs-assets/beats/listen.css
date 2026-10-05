@@ -1,0 +1,50 @@
+/* Listen beat (beats/listen.js): Gemini's waveform card, the hub's dark card grammar (#141416 surface, 1px #2a2a2e inset
+   ring, 10px radius, 12.5px semibold header and footer). The header (spinner/check, the VOD's thumbnail, title and the
+   claimed range), the two lanes over 1:11:40 to 1:16:00 (music: the claimed range shaded red, its bars red once the
+   song is named; voice: Jonah in Gemini blue), the playhead with its time, and the verdict. Nothing here transitions:
+   opacity, clip-path, left and transform are written from t in listen.js. */
+#s-tabs .sbsite .hub .ls-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 10px 12px 11px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .ls-hd { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+#s-tabs .sbsite .hub .ls-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .ls-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .ls-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+#s-tabs .sbsite .hub .ls-th { position: relative; flex: none; width: 64px; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #1c1c1f; }
+#s-tabs .sbsite .hub .ls-th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+#s-tabs .sbsite .hub .ls-ht { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+#s-tabs .sbsite .hub .ls-vt { font: 600 12px/1.2 var(--ui); color: #f2f2f7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .ls-rg { font: 500 11px/1.2 var(--ui); color: #8e8e93; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#s-tabs .sbsite .hub .ls-rg b { font-weight: 600; color: #f28b82; }
+#s-tabs .sbsite .hub .ls-of { margin-left: 4px; }
+#s-tabs .sbsite .hub .ls-len { flex: none; margin-left: auto; padding: 3px 7px; border-radius: 5px; background: rgba(234,67,53,.16);
+  font: 600 11px/1.2 var(--ui); color: #f28b82; font-variant-numeric: tabular-nums; }
+
+/* the two lanes and the playhead */
+#s-tabs .sbsite .hub .ls-wave { position: relative; padding: 0 2px; }
+#s-tabs .sbsite .hub .ls-ruler { position: relative; height: 15px; }
+#s-tabs .sbsite .hub .ls-ruler i { position: absolute; top: 0; transform: translateX(-50%); font: 600 10px/14px var(--ui); font-style: normal;
+  color: #f28b82; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ls-lab { display: flex; align-items: center; gap: 6px; height: 17px; opacity: 0; font: 500 11.5px/1 var(--ui); color: #c7c7cc; white-space: nowrap; }
+#s-tabs .sbsite .hub .ls-lab b { font-weight: 600; color: #f2f2f7; }
+#s-tabs .sbsite .hub .ls-lab span span { color: #8e8e93; }
+#s-tabs .sbsite .hub .ls-lab em { font-style: normal; font-weight: 700; color: #a8c7fa; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .ls-dot { flex: none; width: 8px; height: 8px; border-radius: 2px; }
+#s-tabs .sbsite .hub .ls-dot-m { background: #f28b82; }
+#s-tabs .sbsite .hub .ls-dot-v { background: #8ab4f8; }
+#s-tabs .sbsite .hub .ls-lane { position: relative; height: 34px; margin-bottom: 4px; border-radius: 6px; background: #1c1c20; overflow: hidden; }
+#s-tabs .sbsite .hub .ls-range { position: absolute; top: 0; bottom: 0; opacity: 0; background: rgba(234,67,53,.2);
+  box-shadow: inset 2px 0 0 #ea4335, inset -2px 0 0 #ea4335; }
+#s-tabs .sbsite .hub .ls-bars { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .ls-b { position: absolute; top: 50%; width: 0.5%; border-radius: 1px; transform: translateY(-50%); }
+#s-tabs .sbsite .hub .ls-lane-m .ls-b { background: #6b6b72; }
+#s-tabs .sbsite .hub .ls-card.ls-id .ls-lane-m .ls-b-c { background: #f28b82; }
+#s-tabs .sbsite .hub .ls-lane-v .ls-b { background: #8ab4f8; }
+#s-tabs .sbsite .hub .ls-head { position: absolute; top: 15px; bottom: 0; width: 2px; margin-left: -1px; background: #ececec; opacity: 0; }
+#s-tabs .sbsite .hub .ls-ht2 { position: absolute; left: 50%; top: -15px; transform: translateX(-50%); padding: 1px 4px; border-radius: 3px; background: #ececec;
+  font: 700 9.5px/12px var(--ui); color: #141416; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* the verdict */
+#s-tabs .sbsite .hub .ls-ft { opacity: 0; display: flex; align-items: flex-start; gap: 7px; margin-top: 8px; font: 500 12.5px/1.35 var(--ui); color: #c7c7cc; }
+#s-tabs .sbsite .hub .ls-ft b { font-weight: 600; color: #f2f2f7; }
+#s-tabs .sbsite .hub .ls-ft .qc-ok { flex: none; margin-top: 1px; }
+#s-tabs .sbsite .hub .ls-hi { font-weight: 700; color: #a8c7fa; }

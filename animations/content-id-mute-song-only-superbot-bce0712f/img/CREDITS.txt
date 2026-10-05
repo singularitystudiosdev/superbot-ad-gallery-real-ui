@@ -1,0 +1,31 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+thumbs/vod-final-boss.jpg, thumbs/drowned-keep.jpg, thumbs/ashwood.jpg
+  Generated for this ad on 2026-10-05 with Google gemini-3-pro-image (Nano Banana Pro), called through the OpenRouter
+  API (openrouter.ai/api/v1/chat/completions, model "google/gemini-3-pro-image-preview", image_config aspect_ratio
+  16:9, image_size 2K), one call per image, 2752 x 1536, then cropped to 1280 x 720 and the thumbnail words set over
+  them with ImageMagick in Impact (macOS system font): "FINAL BOSS / NO HEALING", "PART 3 / DROWNED KEEP",
+  "PART 2 / ASHWOOD". "Hollow Crown" and "Jonah Plays" are fictional; every character, creature and armour design is
+  original, nothing from an existing game. No third-party imagery; no attribution owed.
+  Shared style prompt: "Key art for a YouTube gaming video thumbnail about an ORIGINAL dark fantasy action RPG called
+  Hollow Crown (fictional; all characters, creatures and armour are original designs, nothing from any existing
+  game). Cinematic painterly-realistic game render, dramatic rim light, deep teal-black shadows with ember orange and
+  pale gold accents, crisp high contrast that reads at small size, one strong focal subject, 16:9 widescreen framing,
+  full-bleed edge to edge. Absolutely no text, no letters, no numbers, no logos, no UI, no watermark, no border."
+  Per image: a knight mid-dodge before a hollow obsidian monarch with a burning broken crown in a collapsing throne
+  hall (vod-final-boss, the claimed stream VOD); a knight wading a flooded sunken keep (drowned-keep); a knight riding
+  through a burning white-ash forest (ashwood).
+  Used in Gemini's listen card and the Studio Content list (Live tab).
+
+frames/boss-fight.jpg
+  Same model and route, one call, cropped to 1280 x 720, no text. Prompt: a single gameplay frame from a livestream of
+  the same original game, over-the-shoulder on the final boss, with a small streamer webcam overlay bottom right (a
+  fictional young man in a headset, generated, not a real person). Used as the player preview in Video copyright info.
+
+Sound (in the MP4 only; the page itself is silent)
+  "Neon Harbor" by "Kestrel Lane" is fictional: the claimed song is an original instrumental generated for this ad on
+  2026-10-05 with Google Lyria 3 (OpenRouter model "google/lyria-3-clip-preview", 30.7 s mp3). Jonah's three
+  commentary lines were generated with OpenAI gpt-audio (OpenRouter model "openai/gpt-audio", voice "ash"). UI cues
+  from motion-reel's sfx.mjs, the release chime and the boss-fight hits synthesized in code. The song cuts out at
+  "Claim released" while the voice carries on. No third-party recordings; no attribution owed. Claimant "Brightline
+  Music Rights" is fictional.

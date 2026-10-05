@@ -2197,6 +2197,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "content-id-mute-song-only-superbot-bce0712f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FIX THE CLAIM. KEEP YOUR VOICE. · Gemini finds the claimed song under the commentary, superbot uses Mute song only in YouTube Studio and the claim is released (<15s, 16:9)",
+    "src": "animations/content-id-mute-song-only-superbot-bce0712f/",
+    "thumb": "assets/shots/content-id-mute-song-only-superbot-bce0712f.png",
+    "desc": "Same chat format as niche-youtube-model-switch-superbot-3828921d, new process: Gemini finds the claimed song under the commentary, superbot uses Mute song only in the copyright claim so the voice stays and the claim is released. One ask in superbot (\"Fix the copyright claim on my Hollow Crown stream\"): Gemini listens to 1:12:08 to 1:15:31 of the 3:41:16 stream VOD, hears Neon Harbor by Kestrel Lane on the stream speakers under Jonah talking over 94% of the segment, and notes that a trim would cut 3:23 of the final boss. Superbot connects to YouTube Studio as Jonah Plays, opens the Copyright claim from Content, See details, Select action > Mute song > Mute song only, Continue, Save: Claim released, Restrictions None, monetization On for \"Hollow Crown 100% Run, Final Boss (No Healing) LIVE\". The song drops out and the voice stays. 13.4 s, 1920x1080, 60 fps, with sound.",
+    "download": "assets/video/content-id-mute-song-only-superbot-bce0712f.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -2281,6 +2281,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "cmdcenter-converge-16x9-b0bc2096",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Your life, one command center: chaos to order",
+    "src": "animations/cmdcenter-converge-16x9-b0bc2096/",
+    "thumb": "assets/shots/cmdcenter-converge-16x9-b0bc2096.png",
+    "desc": "Notifications from every part of a student's life pile up on a black stage: a Canvas midterm, a problem set due tonight, a LinkedIn coffee follow-up, 1,284 unread in Gmail, GitHub commits with no next step, a Handshake application opening friday and a 6:00 calendar collision. They all fly into the superbot phone, which opens one today overview with seven sections: school, networking, projects, applications, daily, email and calendar. Each row lights up in turn as the captions name it: nudges before exams, next steps synced, unfinished rolls over, work blocks from your tasks. Ends on superbot.gg, your life, one command center. 24 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/cmdcenter-converge-16x9-b0bc2096/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "cmdcenter-day-16x9-b0bc2096",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Your life, one command center: a day in the life",
+    "src": "animations/cmdcenter-day-16x9-b0bc2096/",
+    "thumb": "assets/shots/cmdcenter-day-16x9-b0bc2096.png",
+    "desc": "A large time stamp walks one day in the superbot app. At 7:30 am the user asks what's on today and gets a brief across seven areas. At 9:00 the Gmail inbox is sorted, 1,284 messages with 3 that need you. At 1:00 pm yesterday's GitHub commits become the next step and a LinkedIn follow-up surfaces. At 4:00 a Canvas nudge blocks study time for a midterm 9 days out and a Handshake application opening friday gets a reminder. At 6:00 the calendar fills with work blocks from the task list, a call and gym. At 11:00 pm the recap reads said 4 blocks, did 3, with the unfinished reply moved to tomorrow. Ends on superbot.gg, your life, one command center. 21.6 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/cmdcenter-day-16x9-b0bc2096/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "cmdcenter-rollover-16x9-b0bc2096",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Your life, one command center: rollover and nudges",
+    "src": "animations/cmdcenter-rollover-16x9-b0bc2096/",
+    "thumb": "assets/shots/cmdcenter-rollover-16x9-b0bc2096.png",
+    "desc": "A plain task list in superbot pulls from school, networking, projects, applications and daily chores. The tasks fly into a monday to sunday week as work blocks, with calls, events and gym slotted around them. An unfinished cover letter slides from monday to tuesday to wednesday and picks up a moved twice badge, then superbot nudges: 25 min now, start the midterm reading 9 days early, the summer analyst application opens friday, 3 emails need you. A weekly tally reads planned 21 blocks, did 18, with the missed ones already rescheduled. Ends on superbot.gg, your life, one command center. 22.8 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/cmdcenter-rollover-16x9-b0bc2096/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "onekey-subs-clutter-16x9-a7f3d912",
     "type": "animation",
     "group": "Ad spots",

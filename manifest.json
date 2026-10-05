@@ -1107,6 +1107,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-youtube-model-switch-superbot-3828921d-r1-d-lv410045ceb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Upload this to YouTube with title, chapters and thumbnail at my viewers' best time: Gemini 3.1 Pro writes the chapters, Claude Opus 5.5 the title and description, Nano Banana Pro the thumbnail, YouTube Studio schedules it (r1-d, 16:9)",
+    "src": "animations/niche-youtube-model-switch-superbot-3828921d-r1-d-lv410045ceb/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-3828921d-r1-d-lv410045ceb.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d for the same YouTube creators, with a different chore they do by hand: the upload. One ask from superbot's home screen with the finished video attached. Gemini 3.1 Pro watches all 18:42, writes six chapters starting at 0:00 and picks the 14:31 frame for the thumbnail. Claude Opus 5.5 writes the title and the description in the creator's voice, chapters included. Nano Banana Pro turns that frame into the thumbnail. superbot connects to YouTube Studio through Google's consent card, then its pointer fills the real upload dialog (title, description, custom thumbnail, audience), steps through Video elements and Checks, and schedules the video for Thursday Oct 8 at 4 PM, an hour before the viewers' 5 PM peak. Studio confirms Video scheduled and the new row shows in Channel content. 31.2 s, 16:9, 1920x1080 at 60 fps.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-3828921d-r1-d-lv410045ceb.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-youtube-model-switch-superbot-3828921d-ytmatch-b73828a5",
     "type": "animation",
     "group": "Ad spots",

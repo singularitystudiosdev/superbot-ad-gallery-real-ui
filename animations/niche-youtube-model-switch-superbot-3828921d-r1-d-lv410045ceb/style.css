@@ -1,0 +1,330 @@
+/* The frame and the superbot chat, at native 1920x1080 px. Tokens are superbot's own (the hub's chat.css / ask.css /
+   hub.css in the source spot): page #0a0a0b, bubble #1f1f22, pill #141416 with a #2a2a2e ring, check #34d399,
+   composer #1b1b1e with the #2f5fd6 focus ring, SUPER chip #26262a, type "SF Pro Rounded". Nothing transitions:
+   film.js writes every moving value from t. */
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+#frame { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 0 0;
+  background: #0a0a0b; color: #ececec; font-family: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+.scene { position: absolute; inset: 0; }
+#chat { background: #0a0a0b; }
+.cam { position: absolute; inset: 0; transform-origin: 960px 640px; }
+/* the reference's .ask-edge: messages leaving the top dissolve instead of being sliced */
+.edge { position: absolute; left: 0; right: 0; top: 0; height: 72px; background: linear-gradient(#0a0a0b 8px, rgba(10,10,11,0)); pointer-events: none; }
+
+
+/* ---- the thread ---- */
+.feed { position: absolute; left: 0; right: 0; top: 0; }
+.col { width: 1520px; margin: 0 auto; padding-top: 40px; display: flex; flex-direction: column; align-items: flex-start; }
+.ask { align-self: stretch; display: flex; justify-content: flex-end; margin-bottom: 36px; }
+.bubble { padding: 26px 46px; border-radius: 999px; background: #1f1f22; color: #f2f2f7; font-size: 46px; line-height: 58px; white-space: nowrap; }
+
+.sw { display: inline-flex; align-items: center; gap: 24px; height: 100px; padding: 0 36px 0 16px; margin-bottom: 36px; border-radius: 9999px;
+  background: #141416; box-shadow: inset 0 0 0 2.5px #2a2a2e; font-size: 42px; font-weight: 600; color: #ececec; transform-origin: 0 50%; }
+.tile { flex: none; display: grid; place-items: center; width: 68px; height: 68px; border-radius: 21px; overflow: hidden; }
+.tile img { display: block; width: 44px; height: 44px; object-fit: contain; }
+.t-gemini, .t-banana { background: #1f1f22; box-shadow: inset 0 0 0 2px #34343a; }
+.t-banana .emo { font-size: 44px; line-height: 1; font-style: normal; }
+.who .t-banana .emo { font-size: 34px; }
+.pi .t-banana .emo { font-size: 27px; }
+.t-claude { background: #d97757; }
+.t-claude img { filter: brightness(0) invert(1); }
+.t-youtube { background: #fff; }
+.t-youtube img { width: 46px; height: 32px; }
+.st { position: relative; display: block; flex: none; width: 40px; height: 40px; margin-left: 4px; }
+.g-wrow > span[data-k="g-wst"], .g-rh > span[data-k="g-rst"] { display: flex; }
+.g-wrow .st, .g-rh .st { width: 34px; height: 34px; margin-left: 0; }
+.g-wrow .ok, .g-rh .ok { width: 34px; height: 34px; }
+.spin { position: absolute; inset: 3px; border-radius: 50%; border: 5px solid #3a3a3f; border-top-color: #ececec; }
+.ok { width: 40px; height: 40px; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.st .ok { position: absolute; inset: 0; }
+
+.who { display: flex; align-items: center; gap: 18px; margin: 0 0 16px; font-size: 36px; color: #ececec; }
+.who .tile { width: 52px; height: 52px; border-radius: 16px; }
+.who .tile img { width: 34px; height: 34px; }
+.who .t-youtube img { width: 36px; height: 25px; }
+.who b { font-weight: 600; }
+.who small { font-size: 31px; font-weight: 500; color: #b0b0b5; }
+.say { margin: -6px 0 16px; font-size: 33px; line-height: 44px; color: #d1d1d6; }
+.tail { height: 900px; }
+
+.card { align-self: stretch; margin-bottom: 40px; padding: 24px 36px 20px; border-radius: 30px; background: #141416; box-shadow: inset 0 0 0 2px #26262a; }
+.av { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; color: #fff; font-size: 31px; font-weight: 600; }
+.av.sm { width: 52px; height: 52px; font-size: 26px; }
+
+/* ---- the attached video (the composer's attachment tile, sent above the ask) ---- */
+.att { align-self: stretch; display: flex; justify-content: flex-end; margin-bottom: 20px; }
+.att-card { display: flex; align-items: center; gap: 28px; padding: 16px 44px 16px 16px; border-radius: 32px; background: #1f1f22; box-shadow: inset 0 0 0 2px #2a2a2e; }
+.att-th { position: relative; width: 320px; height: 180px; border-radius: 20px; overflow: hidden; background: #000; }
+.att-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.att-th i { position: absolute; right: 10px; bottom: 10px; padding: 4px 9px; border-radius: 8px; background: rgba(0,0,0,.82); color: #fff; font: 500 28px/1 Roboto, Arial, sans-serif; font-style: normal; }
+.att-tx { display: grid; gap: 8px; }
+.att-tx b { font-size: 46px; font-weight: 600; color: #f2f2f7; }
+.att-tx small { font-size: 38px; font-weight: 500; color: #a1a1a6; }
+
+/* ---- Gemini 3.1 Pro: the file it watched (player, watch row, track with a tick per chapter), the chapters it wrote ---- */
+.g-vid { display: grid; grid-template-columns: 384px minmax(0, 1fr); gap: 34px; align-items: center; }
+.g-player { position: relative; width: 384px; height: 216px; border-radius: 18px; overflow: hidden; background: #000; }
+.g-fr { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.g-fr:first-child { opacity: 1; }
+.g-dur { position: absolute; z-index: 9; right: 8px; bottom: 16px; padding: 3px 8px; border-radius: 7px; background: rgba(0,0,0,.82); color: #fff; font: 500 26px/1 Roboto, Arial, sans-serif; }
+.g-prog { position: absolute; z-index: 9; left: 0; bottom: 0; width: 100%; height: 8px; background: #f03; transform-origin: 0 50%; transform: scaleX(0); }
+.g-title { font-size: 40px; line-height: 48px; font-weight: 600; color: #ececec; }
+.g-wrow { display: flex; align-items: center; gap: 14px; margin-top: 10px; height: 46px; }
+.g-wrow > span[data-k="g-wst"] { display: flex; }
+.g-wrow .st, .g-wrow .ok { width: 34px; height: 34px; margin-left: 0; }
+.g-wl { font-size: 33px; font-weight: 500; color: #d1d1d6; }
+.g-time { margin-left: auto; font: 500 31px/1 ui-monospace, "SF Mono", Menlo, monospace; color: #b4b4bc; font-variant-numeric: tabular-nums; }
+.g-track { position: relative; height: 8px; margin: 70px 0 18px; border-radius: 4px; background: #2c2c30; }
+.g-fill { position: absolute; inset: 0; border-radius: 4px; background: #8ab4f8; transform-origin: 0 50%; transform: scaleX(0); }
+.g-knob { position: absolute; top: 50%; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%; background: #e8eaed; }
+.g-tick { position: absolute; top: -7px; width: 4px; height: 22px; margin-left: -2px; border-radius: 2px; background: #e8eaed; opacity: 0; transform-origin: 50% 100%; }
+.g-tick.up { background: #34d399; height: 26px; top: -9px; }
+.g-tick i { position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%); font-size: 31px; line-height: 1; font-weight: 700; font-style: normal; color: #34d399; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.g-rh { display: flex; align-items: baseline; gap: 16px; margin-top: 18px; padding-bottom: 8px; border-bottom: 2px solid #26262a; }
+.g-rh b { font-size: 34px; font-weight: 700; color: #ececec; }
+.g-rr { margin-left: auto; font-size: 31px; font-weight: 500; color: #b4b4bc; font-variant-numeric: tabular-nums; }
+.g-chs { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(3, 66px); column-gap: 40px; }
+.g-ch { display: flex; align-items: center; gap: 22px; border-bottom: 1.5px solid #1f1f23; opacity: 0; }
+.g-at { min-width: 104px; font-size: 34px; font-weight: 600; color: #3ea6ff; font-variant-numeric: tabular-nums; }
+.g-cn { font-size: 35px; font-weight: 500; color: #ececec; white-space: nowrap; }
+
+/* ---- Nano Banana Pro: the picked frame, and the thumbnail it makes from it ---- */
+.n-row { display: grid; grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1fr); align-items: center; gap: 14px; }
+.n-fig { margin: 0; }
+.n-img { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #1b1b1e; }
+.n-img img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.n-badge { position: absolute; left: 12px; top: 12px; padding: 5px 12px; border-radius: 9px; background: rgba(0,0,0,.78); color: #fff; font: 600 28px/1 Roboto, Arial, sans-serif; }
+.n-shim { position: absolute; inset: 0; background: linear-gradient(100deg, #1b1b1e 30%, #2a2a30 50%, #1b1b1e 70%) 0 0 / 260% 100%; }
+.n-th { opacity: 0; }
+.n-fig figcaption { margin-top: 12px; font-size: 31px; font-weight: 500; color: #b0b0b5; }
+.n-arrow { display: grid; place-items: center; }
+.n-ar { width: 52px; height: 52px; fill: none; stroke: #d1d1d6; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.n-st { display: flex; align-items: center; gap: 16px; margin-top: 12px; height: 54px; }
+.n-st > span[data-k="n-stt"] { display: flex; }
+.n-st .st, .n-st .ok { width: 34px; height: 34px; margin-left: 0; }
+.n-st b { font-size: 34px; font-weight: 700; color: #ececec; }
+.n-spec { margin-left: auto; font-size: 31px; font-weight: 500; color: #c7c7cc; opacity: 0; }
+
+/* ---- Claude Opus 5.5: the replies panel, the real app's code-panel grammar (the reference's .em-x: header with the
+   project and an honest clock, replies.md / pin.md tabs, a line-numbered editor, the review bar with Review / Post all) ---- */
+.card.cx { padding: 0; overflow: hidden; box-shadow: 0 0 0 2px #2a2a2e, 0 20px 50px rgba(0,0,0,.45); }
+.card.cx.done { box-shadow: 0 0 0 2px rgba(79,197,127,.55), 0 0 40px rgba(79,197,127,.12), 0 20px 50px rgba(0,0,0,.45); }
+.x-hd { display: flex; align-items: center; gap: 18px; height: 70px; padding: 0 28px; border-bottom: 2px solid #232326; background: #18181b; }
+.x-proj { display: inline-flex; align-items: center; gap: 14px; }
+.x-proj b { font-size: 33px; font-weight: 600; color: #ededf0; }
+.x-ico { width: 32px; height: 32px; fill: none; stroke: #9d9da6; stroke-width: 2; stroke-linejoin: round; }
+.x-br { display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 10px; background: #222226; font: 32px/1 ui-monospace, "SF Mono", Menlo, monospace; color: #c7c7cc; }
+.x-state { margin-left: auto; display: inline-flex; align-items: center; gap: 12px; font-size: 32px; font-weight: 500; font-style: normal; color: #b4b4bc; }
+.x-clk { font: 500 32px/1 ui-monospace, "SF Mono", Menlo, monospace; color: #d6d6dd; font-variant-numeric: tabular-nums; }
+.x-spin { position: static; display: block; width: 26px; height: 26px; border-width: 4px; box-sizing: border-box; }
+.x-tk { display: none; width: 32px; height: 32px; fill: none; stroke: #4fc57f; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.x-state.is-ok .x-spin { display: none; }
+.x-state.is-ok .x-tk { display: block; }
+.x-state.is-ok .x-clk { color: #4fc57f; }
+.x-tabs { display: flex; height: 56px; background: #18181b; border-bottom: 2px solid #232326; }
+.x-tab { display: inline-flex; align-items: center; gap: 12px; padding: 0 26px; border-right: 2px solid #232326; font-size: 32px; font-weight: 500; color: #9d9da6; }
+.x-tab.on { margin-bottom: -2px; background: #141416; color: #ededf0; box-shadow: inset 0 3px 0 #d97757; }
+.x-tab b { font-size: 25px; font-weight: 800; color: #87c3ff; }
+.x-bd { padding: 12px 0 14px; }
+.x-l { display: flex; align-items: center; height: 41px; font: 32px/41px ui-monospace, "SF Mono", Menlo, monospace; white-space: pre; }
+.x-l u { flex: none; width: 84px; padding-right: 26px; box-sizing: border-box; text-align: right; text-decoration: none; color: #6e6e78; font-variant-numeric: tabular-nums; }
+.x-l code { display: inline-flex; align-items: center; font: inherit; color: #e6e6ea; }
+.x-l .k { font-style: normal; color: #82d2ce; }
+.x-l .ts { font-style: normal; color: #87c3ff; }
+.x-caret { display: inline-block; width: 3px; height: 34px; margin-left: 2px; background: #ececec; opacity: 0; }
+.x-ft { display: flex; align-items: center; gap: 18px; height: 82px; padding: 0 22px 0 20px; border-top: 2px solid #232326; background: #18181b; white-space: nowrap; }
+.x-sum { display: inline-flex; align-items: center; gap: 12px; font-size: 32px; font-weight: 500; color: #c7c7cc; }
+.x-sum b { font-weight: 600; color: #e9e9ec; }
+.x-ft.on .x-sum b { color: #4fc57f; }
+.x-cnt { font: 500 29px/1 ui-monospace, "SF Mono", Menlo, monospace; color: #b4b4bc; font-variant-numeric: tabular-nums; }
+.x-chev { width: 28px; height: 28px; fill: none; stroke: #8e8e96; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.x-dn { display: none; width: 32px; height: 32px; fill: none; stroke: #4fc57f; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.x-ft.on .x-dn { display: block; }
+.x-ft.on .x-chev { display: none; }
+.x-btns { display: inline-flex; gap: 12px; margin-left: auto; opacity: .4; }
+.x-ft.on .x-btns { opacity: 1; }
+.x-ft.posted .x-btns { opacity: .55; }
+.x-b { display: inline-flex; align-items: center; height: 58px; padding: 0 26px; border-radius: 14px; box-shadow: inset 0 0 0 2px #323238; font-size: 29px; font-weight: 500; font-style: normal; color: #d6d6dd; }
+.x-b.x-pri { box-shadow: none; background: rgb(calc(236 - var(--prs, 0) * 40), calc(236 - var(--prs, 0) * 40), calc(241 - var(--prs, 0) * 40)); color: #141416; font-weight: 600; }
+
+/* ---- YouTube: the connection's checklist (the reference's light card), ticked as superbot posts ---- */
+.card.posted { padding: 18px 34px; background: #fff; box-shadow: none; }
+.p-row { display: flex; align-items: center; gap: 26px; height: 88px; opacity: 0; }
+.p-ic { flex: none; display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; }
+.p-av { background: #1e8e3e; color: #fff; font-size: 28px; font-weight: 600; }
+.p-yt { background: #fdecec; }
+.p-yt img { width: 34px; height: 24px; }
+.p-blue { background: #d3e3fd; color: #0b57d0; }
+.p-blue svg { width: 34px; height: 34px; }
+.p-tx { font-size: 40px; color: #1f1f1f; }
+.p-tx b { font-weight: 700; }
+.p-st { margin-left: auto; }
+.p-st .spin { border-color: #dadce0; border-top-color: #5f6368; }
+.p-st .ok { stroke: #1e8e3e; }
+
+/* ---- the composer: the real app's empty-state composer, its model chip following each switch ---- */
+.fade { position: absolute; left: 0; right: 0; top: 832px; bottom: 0; background: linear-gradient(rgba(10,10,11,0) 0, #0a0a0b 38px); }
+.composer { position: absolute; left: 200px; bottom: 34px; width: 1520px; }
+.composer .pill { padding: 24px 26px 20px 34px; border: 2px solid #2f5fd6; border-radius: 40px; background: #1b1b1e; }
+.ph { margin-bottom: 16px; font-size: 35px; line-height: 46px; color: #86868b; }
+.row { display: flex; align-items: center; gap: 18px; }
+.row > span { flex: none; display: inline-flex; align-items: center; justify-content: center; color: #9499a8; }
+.lu { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.plus { margin-left: -4px; color: #a1a5b3 !important; }
+.plus .lu { width: 38px; height: 38px; }
+.super { gap: 16px; height: 58px; margin-left: 6px; padding: 0 10px 0 24px; border-radius: 999px; background: #26262a; font-size: 22px; font-weight: 700; letter-spacing: .08em; color: #c7c7cc !important; }
+.tg { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 5px; border-radius: 999px; background: #3f3f44; font-style: normal; font-size: 17px; font-weight: 700; letter-spacing: .04em; color: #e5e5ea; }
+.tg b { width: 28px; height: 28px; border-radius: 50%; background: #d6d6db; }
+.plat { margin-left: auto; gap: 12px; font-size: 32px; color: #a8acb9 !important; }
+.pms { display: grid; overflow: hidden; }
+.pm { grid-area: 1 / 1; justify-self: end; display: inline-flex; align-items: center; gap: 12px; }
+.sbcat { width: 40px; height: 37px; overflow: visible; }
+.pi .tile { width: 42px; height: 42px; border-radius: 13px; }
+.pi .tile img { width: 27px; height: 27px; }
+.pi .t-youtube img { width: 29px; height: 20px; }
+.plat .lu { width: 28px; height: 28px; }
+.computer .lu { width: 34px; height: 34px; }
+.mic { width: 64px; height: 64px; border-radius: 50%; background: #1f1f21; box-shadow: inset 0 0 0 2.5px #2e2e31; }
+.mic .lu { width: 30px; height: 30px; }
+.send { width: 66px; height: 66px; border-radius: 50%; background: #2c2c2e; color: #5d606f !important; }
+.send .lu { width: 32px; height: 32px; stroke-width: 2.2; }
+
+/* ---- the end card (the source spot's lock-up: wordmark, then the live mark) ---- */
+#end { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; background: #000; visibility: hidden; }
+#end .lock { display: flex; align-items: center; gap: 44px; }
+#end .face { display: grid; place-items: center; width: 220px; height: 220px; }
+#end h1 { margin: 0; font-size: 128px; font-weight: 800; line-height: 1; letter-spacing: -.03em; color: #fff; }
+#end .tag { margin: 0; font-size: 50px; font-weight: 600; color: #a1a1a6; letter-spacing: -.005em; }
+
+/* ---- r1-d overrides of the r1-a tokens (appended last so they win the cascade) ---- */
+.sw { height: 108px; font-size: 46px; }
+/* ---- v3: the two-line ask, a tighter editor, the dim under Studio's window ---- */
+.bubble { border-radius: 48px; }
+.x-l { height: 31px; font-size: 28px; line-height: 31px; }
+.x-ft { height: 70px; }
+.x-hd { height: 62px; }
+.x-tabs { height: 50px; }
+.dim { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+
+/* ---- v4: the reference's composer chip is a bare glyph; Nano Banana Pro's tile carries the banana; banana card width ---- */
+.pi .tile { width: 32px; height: 32px; background: none !important; box-shadow: none !important; }
+.pi .tile img { width: 28px; height: 28px; }
+.tile { position: relative; overflow: visible; }
+.tile .badge { position: absolute; right: -10px; bottom: -8px; font-size: 30px; line-height: 1; font-style: normal; }
+.who .tile .badge { right: -8px; bottom: -6px; font-size: 24px; }
+.pi .tile .badge { right: -7px; bottom: -5px; font-size: 17px; }
+.n-row { grid-template-columns: minmax(0, 620px) 60px minmax(0, 620px); justify-content: start; }
+
+/* ---- v5: the home screen (the real app's empty state, as the source spot opens) ---- */
+.hub { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.hub-hero { position: absolute; left: 0; right: 0; top: 226px; display: flex; justify-content: center; align-items: center; gap: 30px; }
+.hub-cat { width: 88px; height: 88px; display: block; }
+.hub-hero h1 { margin: 0; font: 400 78px/1.1 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; letter-spacing: -.01em; color: #ececec; white-space: nowrap; }
+.hubc { top: 376px; bottom: auto; }
+.hc-body { position: relative; overflow: hidden; margin-bottom: 16px; }
+.hc-in { display: grid; gap: 18px; justify-items: start; }
+.hc-att { display: inline-flex; align-items: center; gap: 22px; padding: 10px 30px 10px 10px; border-radius: 22px; background: #26262a; }
+.hc-att .att-th { width: 224px; height: 126px; border-radius: 14px; }
+.hc-att .att-th i { font-size: 24px; }
+.hc-att .att-tx b { font-size: 36px; }
+.hc-att .att-tx small { font-size: 30px; }
+.hc-txt { font-size: 42px; line-height: 54px; color: #f2f2f7; }
+.hc-caret { display: inline-block; width: 3px; height: 46px; margin-left: 4px; vertical-align: -9px; background: #4c7dff; }
+.hc-ph { position: absolute; left: 0; top: 0; margin: 0; opacity: 0; }
+.send.lit { background: #ececec; color: #141416 !important; }
+/* chapters land row by row, so both columns fill together */
+.g-chs { grid-auto-flow: row; grid-template-rows: none; grid-auto-rows: 66px; }
+.pi .tile .badge { right: -9px; bottom: -6px; font-size: 22px; }
+
+/* ---- v6: the pointer (the source spot's cursor), Google's consent card, the checklist card with its live view ---- */
+.cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; opacity: 0; z-index: 30; pointer-events: none;
+  fill: #fff; stroke: #000; stroke-width: 1.3; stroke-linejoin: round; filter: drop-shadow(0 3px 6px rgb(0 0 0 / .5)); transform-origin: 17px 11px; }
+.card.gc { width: 1000px; padding: 0; background: #fff; border-radius: 28px; overflow: hidden; box-shadow: none; color: #1f1f1f; font-family: Roboto, Arial, sans-serif; }
+.gc-top { display: flex; align-items: center; gap: 18px; height: 70px; padding: 0 32px; border-bottom: 2px solid #e3e3e3; font-size: 27px; color: #444746; }
+.gc-top img { width: 32px; height: 32px; }
+.gc-body { padding: 26px 32px 28px; }
+.gc-title { font-size: 38px; line-height: 1.3; color: #1f1f1f; }
+.gc-acct { display: inline-flex; align-items: center; gap: 12px; height: 52px; margin-top: 18px; padding: 0 12px 0 6px; border-radius: 999px; box-shadow: inset 0 0 0 2px #747775; font-size: 27px; font-weight: 500; }
+.gc-av { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #1e8e3e; color: #fff; font-size: 22px; font-style: normal; }
+.gc-dd { width: 32px; height: 32px; color: #444746; }
+.gc-sel { margin: 24px 0 6px; font-size: 26px; color: #444746; }
+.gc-sel b { color: #1f1f1f; font-weight: 500; }
+.gc-row { display: flex; align-items: center; gap: 22px; min-height: 66px; border-bottom: 2px solid #e3e3e3; font-size: 27px; color: #1f1f1f; }
+.gc-row img { width: 36px; height: 26px; object-fit: contain; }
+.gc-row span { flex: 1; }
+.gc-cb { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 6px; background: #0b57d0; color: #fff; font-style: normal; }
+.gc-cb svg { width: 26px; height: 26px; }
+.gc-btns { display: flex; justify-content: flex-end; gap: 16px; margin-top: 26px; }
+.gc-btns span { display: inline-flex; align-items: center; height: 62px; padding: 0 34px; border-radius: 999px; font-size: 27px; font-weight: 500; }
+.gc-cancel { color: #0b57d0; box-shadow: inset 0 0 0 2px #747775; }
+.gc-go { background: #0b57d0; color: #fff; }
+.gc-go.hit { background: #0842a0; }
+.card.posted { width: 1000px; box-sizing: border-box; }
+.p-row { height: 72px; }
+.p-tx { font-size: 32px; }
+.p-shot { margin: 12px 0 8px; aspect-ratio: 16 / 9; border-radius: 10px; background: #f2f2f2; box-shadow: inset 0 0 0 2px #e3e3e3; }
+
+/* ---- v7: frame 0 leads with the ask; the checklist card fits above the composer; editor rows open smoothly ---- */
+.hub-hero { top: 236px; gap: 24px; }
+.hub-cat { width: 66px; height: 66px; }
+.hub-hero h1 { font-size: 58px; }
+.hc-txt { font-size: 52px; line-height: 64px; }
+.hc-att .att-tx b { font-size: 40px; }
+.hc-att .att-tx small { font-size: 32px; }
+.card.posted { width: 960px; }
+.p-row { height: 64px; }
+.p-tx { font-size: 30px; }
+.x-l { height: 37px; font-size: 31px; line-height: 37px; overflow: hidden; }
+
+/* ---- v8: frame 0's attachment leads; the Gemini timecode in the app's own face ---- */
+.hc-att .att-th { width: 400px; height: 225px; border-radius: 18px; }
+.hc-att .att-th i { font-size: 28px; }
+.hc-att .att-tx b { font-size: 46px; }
+.hc-att .att-tx small { font-size: 36px; }
+.hc-att { padding: 14px 40px 14px 14px; border-radius: 30px; }
+.hubc { top: 330px; }
+.hub-hero { top: 196px; }
+.g-time { font: 500 31px/1 "SF Pro Rounded", ui-rounded, system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+
+/* ---- v9: the home composer docked at the bottom from frame 0; consent trust copy; plain artifact meta ---- */
+.hubc { top: auto; bottom: 34px; }
+.hub-hero { top: 236px; }
+.hc-att .att-th { width: 320px; height: 180px; border-radius: 16px; }
+.hc-att .att-tx b { font-size: 42px; }
+.hc-att .att-tx small { font-size: 34px; }
+.gc-trust { margin-top: 20px; font-size: 22px; line-height: 1.4; color: #444746; }
+.gc-trust b { font-weight: 500; color: #1f1f1f; }
+.gc-trust a { color: #0b57d0; }
+.x-br { padding: 0 !important; background: none !important; box-shadow: none !important; color: #8e8e96 !important; font: 500 26px/1 ui-monospace, "SF Mono", Menlo, monospace !important; }
+.n-row { justify-content: center; }
+
+/* ---- v9: the home composer docked at the bottom from frame 0; consent trust copy; plain artifact meta ---- */
+.hubc { top: auto; bottom: 34px; }
+.hub-hero { top: 236px; }
+.hc-att .att-th { width: 320px; height: 180px; border-radius: 16px; }
+.hc-att .att-tx b { font-size: 42px; }
+.hc-att .att-tx small { font-size: 34px; }
+.gc-trust { margin-top: 20px; font-size: 22px; line-height: 1.4; color: #444746; }
+.gc-trust b { font-weight: 500; color: #1f1f1f; }
+.gc-trust a { color: #0b57d0; }
+.x-br { padding: 0 !important; background: none !important; box-shadow: none !important; color: #8e8e96 !important; font: 500 26px/1 ui-monospace, "SF Mono", Menlo, monospace !important; }
+.n-row { justify-content: center; }
+
+/* ---- v9: the scenes stack as layers, so nothing in Studio (pointer, chip, rings) can sit above the end card ---- */
+#chat { z-index: 1; }
+#studio { z-index: 2; }
+#end { z-index: 3; }
+
+/* ---- v10: the reference's home (greeting and composer centred together); Google's consent as a popup over the chat;
+   a taller top mask; the checklist card centred so the hand-off to Studio stays centred ---- */
+.hub-hero { top: 241px; }
+.hubc { top: 355px; bottom: auto; }
+.gc-pop { position: absolute; left: 460px; top: 110px; z-index: 6; }
+.gc-pop .card.gc { visibility: hidden; transform-origin: 50% 60%; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.edge { height: 110px; background: linear-gradient(#0a0a0b 14px, rgba(10,10,11,0)); }
+.card.posted { align-self: center; }
+
+/* ---- v11: the artifact's meta back in the reference's pill; a readable tagline ---- */
+.x-br { display: inline-flex !important; align-items: center; height: 44px; padding: 0 14px !important; border-radius: 10px; background: #222226 !important; font: 30px/1 ui-monospace, "SF Mono", Menlo, monospace !important; color: #c7c7cc !important; }
+#end .tag { font-size: 58px; color: rgba(255, 255, 255, .82); }

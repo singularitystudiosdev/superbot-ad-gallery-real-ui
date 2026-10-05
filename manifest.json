@@ -2641,6 +2641,17 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "upload-title-chapters-schedule-superbot-3c77307b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "UPLOAD, TITLE, SCHEDULE. ONE ASK. · Gemini writes the chapters, Opus 5.5 the title, description and tags, GPT-6 Astra picks the thumbnail, superbot uploads and schedules in YouTube Studio (<30s, 16:9)",
+    "src": "animations/upload-title-chapters-schedule-superbot-3c77307b/",
+    "thumb": "assets/shots/upload-title-chapters-schedule-superbot-3c77307b.png",
+    "desc": "Same chat format as niche-youtube-model-switch-superbot-3828921d (X ad b5sopf), new process: one ask uploads and schedules a video. Sam attaches desk-tour-2026.mp4 and asks \"Upload desk-tour-2026.mp4 to my channel and schedule it for Thursday 5 PM\". Gemini watches the 16:08 file and writes 7 chapters on a timeline (0:00 The $89 rule to 14:02 What it all cost), Claude Opus 5.5 writes the title \"My Entire Desk Setup Cost $89. Here's Everything.\" (49/100), a 3-paragraph description in Sam's voice with the chapters and 9 gear links, and 15 tags (224/500), GPT-6 Astra picks the 6:41 frame for the thumbnail and runs six checks, all green, then superbot drives YouTube Studio: Create > Upload videos, Details (title, description, thumbnail, playlist Desk Setups, not made for kids, tags), Video elements (end screen imported from the last video), Checks (No issues found) and Visibility > Schedule for Thu, Oct 8, 2026, 5:00 PM. The Content list shows the new video Scheduled and the toast says Video scheduled. Ends on superbot: Upload done. Thursday, 5 PM. 28.2 s, 16:9.",
+    "download": "assets/video/upload-title-chapters-schedule-superbot-3c77307b.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

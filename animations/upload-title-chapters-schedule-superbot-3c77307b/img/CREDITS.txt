@@ -1,0 +1,21 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+Every image here was generated for this spot (2026-10-05) by Nano Banana Pro (google/gemini-3-pro-image-preview) through
+OpenRouter, 16:9 at 2K, then resized with ImageMagick and stripped of metadata. Prompts are in the build scratch
+(gen.ec7377c0.mjs). No stock photo, no third-party footage, nothing that owes attribution. The person ("Sam Rivera"),
+the channel, the desk, the prices and every product are made up for the spot.
+
+frames/desk-641.jpg (1280 x 720)
+  The 6:41 frame of "desk-tour-2026.mp4", the "Lighting under $20" chapter: Sam at the budget desk under the slim LED
+  light bar, pointing up at it, the desk lit. Rendered first, without a reference image.
+frames/desk-000.jpg, desk-340.jpg, desk-848.jpg, desk-1130.jpg (1280 x 720)
+  The 0:00 wide shot, the 3:40 monitor-arm shot, the 8:48 cable-management shot and the 11:30 mic shot, each rendered
+  with desk-641 as the reference image so the person, desk and room match. Gemini's playhead shows them, GPT-6 Astra's
+  candidate strip uses 1:12 (desk-000), 3:40, 6:41 and 11:30, and Studio's auto thumbnails use desk-000, 340, 1130.
+thumbs/desk-89.jpg (1280 x 720)
+  The thumbnail: desk-641 with a soft dark gradient on the left third and "$89" set in Impact (macOS system font,
+  /System/Library/Fonts/Supplemental/Impact.ttf), yellow #FFD60A with a black stroke and shadow, composed with
+  ImageMagick (composition over the generated frame, no drawn subject matter).
+thumbs/mics-12.jpg, upgrades-10.jpg, monitor-arms.jpg (640 x 360)
+  Thumbnails of Sam's three earlier uploads in the Content list ("I tested 12 budget mics under $100",
+  "5 desk upgrades under $10", "Cheap monitor arms, ranked"), generated without text.

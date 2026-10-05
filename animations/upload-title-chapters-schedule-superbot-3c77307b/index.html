@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: Upload desk-tour-2026.mp4 to my channel and schedule it for Thursday 5 PM</title>
+<meta name="description" content="One ask in superbot: Gemini watches the 16:08 desk-tour-2026.mp4 and writes 7 chapters, Claude Opus 5.5 writes the title, description and 15 tags, GPT-6 Astra picks the 6:41 thumbnail frame and checks every field, and superbot uploads and schedules the video in YouTube Studio for Thursday, Oct 8, 2026, 5:00 PM.">
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=3c77307b">
+<link rel="stylesheet" href="publish-ui.css?v=3c77307b">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="shell.css?v=3c77307b">
+<link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=3c77307b">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=3c77307b">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=3c77307b">
+<!-- one stylesheet per beat (scenes/tabs-assets/beats/<name>.css), scoped under #s-tabs -->
+<link rel="stylesheet" href="scenes/tabs-assets/beats/chapters.css?v=3c77307b">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/meta.css?v=3c77307b">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/thumb.css?v=3c77307b">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/upload.css?v=3c77307b">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment (cards, scenes, end) in order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=3c77307b"></script>
+</body>
+</html>

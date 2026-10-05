@@ -1,0 +1,26 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+Every image here was generated for this spot (2026-10-05) by Nano Banana Pro (google/gemini-3-pro-image-preview)
+through OpenRouter, 16:9 at 2K (2752 x 1536), then cropped, resized and composed with ImageMagick and stripped of
+metadata. Prompts are in the build scratch (gen.0c0cc078.mjs); composition in compose.0c0cc078.sh. No stock photo, no
+third-party footage, nothing that owes attribution. The person ("Sam Rivera"), the channel, the video "The $40 Webcam
+That Beat My $400 One", both webcams and every number are made up for the spot.
+
+frames/f214.jpg (960 x 540)
+  The 2:14 frame: Sam at his desk holding the $40 webcam (his right hand) and the $400 webcam (his left), surprised.
+  Rendered first, without a reference image; every other frame uses it as the reference so Sam and the room match.
+frames/f502.jpg (960 x 540)
+  The 5:02 frame: the side-by-side image test, the same shot from both webcams split down the middle.
+frames/f730.jpg (960 x 540)
+  The 7:30 frame: close-up of both webcams on the desk with handwritten price tags "$40" and "$400" (the tags'
+  writing is part of the generated image).
+thumbs/old.jpg (1280 x 720)
+  The video's thumbnail before the test: the bare 5:02 frame.
+thumbs/A.jpg  Round 1 A: the 5:02 split frame, a bottom scrim, "$40" and "$400" in Impact (macOS system font,
+  /System/Library/Fonts/Supplemental/Impact.ttf) white with a black stroke, a red "VS" disc between them.
+thumbs/B.jpg  Round 1 B: the 2:14 frame, "$40 WINS?" in white Impact.
+thumbs/C.jpg  Round 1 C: the 7:30 price-tag frame, cropped in, no added type.
+thumbs/B2.jpg Round 2 B2: the 2:14 frame cropped tighter on the face, "$40" in yellow #FFD60A and "WINS?" in white.
+thumbs/B3.jpg Round 2 B3: a fourth render (f214b3, reference f214) with the $40 webcam pushed toward the lens,
+  "$40 WINS?" in white Impact as on B.
+All thumbnails are 1280 x 720. Composition (crop, scrim, type) only; no drawn subject matter.

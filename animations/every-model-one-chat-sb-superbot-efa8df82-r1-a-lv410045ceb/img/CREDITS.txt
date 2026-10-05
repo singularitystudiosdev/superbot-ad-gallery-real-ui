@@ -1,0 +1,17 @@
+img/ CREDITS (every-model-one-chat-sb-superbot-efa8df82-r1-a-lv410045ceb)
+Every image here was made for this spot in HTML, CSS and SVG (no photos, no stock, no generated images).
+Source artboards: ../assets-src/assets.r1a.html, rendered headless to PNG.
+
+Muse is Meta's personal AI agent (announced 2026-09-08). Its plush mascot is drawn here as an avatar after the
+cream hooded creature in the source spot's meme (../../every-model-one-chat-superbot-efa8df82/img/muse-meme.png);
+no Muse or Meta logo is used.
+
+muse-meme-r1a.png  1600x900. Caption meme ("me: ok, sleeping early tonight / Muse at 3:07 AM:") over a lock screen
+                   with two Muse messages; Gemini sparkle watermark from ../brand/gemini-logo.svg.
+rd-1.png           640x360. "ME AT 3 AM / MUSE AT 3 AM" two-panel meme with Impact captions.
+rd-2.png           640x360. "tasks done, by hour" bar-chart meme, me vs Muse.
+rd-3.png           640x360. Text-message thread with Muse.
+
+Map strip, order card contents, burger tile and all chat UI are live DOM in ../r1a.js and ../r1a.css, on the real
+superbot hub stylesheets (../../assets/hub-real.css plus the source spot's chat/ask/ports/shell CSS).
+The restaurant, prices, address, card digits, Reddit usernames and vote counts are made up.

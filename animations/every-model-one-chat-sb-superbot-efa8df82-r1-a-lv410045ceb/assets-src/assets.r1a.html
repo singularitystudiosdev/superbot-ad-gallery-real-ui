@@ -1,0 +1,156 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .board { position: relative; overflow: hidden; margin: 0 0 40px; }
+
+  /* ---------- the generated meme, 16:9: caption band over a night lock screen of Muse messages ---------- */
+  #meme { width: 1600px; height: 900px; background: #fff; }
+  #meme .cap { height: 222px; padding: 30px 60px 0; font: 700 78px/1.12 -apple-system, "Helvetica Neue", Arial, sans-serif; color: #0f1419; letter-spacing: -.015em; }
+  #meme .lock { position: absolute; left: 0; right: 0; top: 222px; bottom: 0; overflow: hidden;
+    background: radial-gradient(55% 75% at 12% 30%, #5b3fb8 0%, rgba(91,63,184,0) 70%),
+                radial-gradient(50% 70% at 92% 90%, #c2477f 0%, rgba(194,71,127,0) 70%),
+                radial-gradient(70% 80% at 55% 35%, #24307a 0%, rgba(36,48,122,0) 75%),
+                linear-gradient(180deg, #0d1030 0%, #1a1446 55%, #2a1340 100%); }
+  #meme .lock::after { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,.35) 100%); }
+  #meme .clock { position: absolute; z-index: 2; left: 0; right: 0; top: 26px; text-align: center; color: #fff; }
+  #meme .clock .d { font: 600 34px/1 -apple-system, sans-serif; color: rgba(255,255,255,.82); }
+  #meme .clock .c { margin-top: 4px; font: 700 132px/1 -apple-system, sans-serif; letter-spacing: -.03em; color: rgba(255,255,255,.97); }
+  #meme .stack { position: absolute; z-index: 2; left: 70px; right: 70px; bottom: 44px; display: grid; gap: 18px; }
+  .nt { display: grid; grid-template-columns: 112px 1fr; column-gap: 30px; align-items: center; padding: 24px 34px 26px 26px; border-radius: 44px;
+    background: rgba(245,245,255,.2); backdrop-filter: blur(22px) saturate(160%); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.14); color: #fff; }
+  .nt .av { width: 112px; height: 112px; border-radius: 50%; overflow: hidden; }
+  .nt .hd { display: flex; justify-content: space-between; align-items: baseline; font: 700 38px/1 -apple-system, sans-serif; color: rgba(255,255,255,.92); }
+  .nt .hd em { font: 400 32px/1 -apple-system, sans-serif; font-style: normal; color: rgba(255,255,255,.6); }
+  .nt p { margin-top: 10px; font: 700 70px/1.05 -apple-system, sans-serif; letter-spacing: -.015em; color: #fff; white-space: nowrap; }
+  #meme .wm { position: absolute; right: 22px; top: 20px; width: 44px; height: 44px; z-index: 3; opacity: .6; filter: brightness(0) invert(1); }
+
+  /* ---------- found post 1: classic two-panel, Impact captions ---------- */
+  .th { width: 640px; height: 360px; }
+  #t1 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #000; }
+  #t1 .p { position: relative; overflow: hidden; }
+  #t1 .p svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #t1 .imp { position: absolute; left: 0; right: 0; top: 14px; text-align: center; font: 400 46px/1 Impact, "Haettenschweiler", "Arial Narrow Bold", sans-serif; color: #fff; letter-spacing: .01em;
+    -webkit-text-stroke: 2.5px #000; paint-order: stroke fill; text-shadow: 0 2px 0 #000; }
+
+  /* ---------- found post 2: a plain chart meme ---------- */
+  #t2 { background: #fff; padding: 22px 28px 14px; }
+  #t2 h3 { font: 800 34px/1 Helvetica, Arial, sans-serif; color: #111; letter-spacing: -.01em; }
+  #t2 .lg { display: flex; gap: 22px; margin-top: 10px; font: 700 21px/1 Helvetica, Arial, sans-serif; color: #444; }
+  #t2 .lg i { display: inline-block; width: 16px; height: 16px; border-radius: 3px; margin-right: 7px; vertical-align: -2px; }
+  #t2 .chart { height: 196px; margin-top: 14px; border-bottom: 3px solid #111; display: flex; align-items: flex-end; gap: 9px; padding: 0 4px; }
+  #t2 .g { flex: 1; display: flex; align-items: flex-end; gap: 2px; height: 100%; }
+  #t2 .g i { flex: 1; border-radius: 3px 3px 0 0; }
+  #t2 .g i.me { background: #b9bec7; }
+  #t2 .g i.mu { background: #1d64f2; }
+  #t2 .ax { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 9px; padding: 8px 4px 0; font: 700 19px/1 Helvetica, Arial, sans-serif; color: #555; }
+  #t2 .ax span { justify-self: start; white-space: nowrap; }
+
+  /* ---------- found post 3: a text-message screenshot ---------- */
+  #t3 { background: #fff; }
+  #t3 .top { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 0 10px; background: #f6f6f8; border-bottom: 1px solid #e3e3e6; }
+  #t3 .top .av { width: 58px; height: 58px; border-radius: 50%; overflow: hidden; }
+  #t3 .top b { font: 500 19px/1 -apple-system, sans-serif; color: #111; }
+  #t3 .msgs { display: grid; gap: 8px; padding: 14px 22px; }
+  #t3 .m { max-width: 74%; padding: 11px 18px; border-radius: 26px; font: 400 28px/1.15 -apple-system, sans-serif; }
+  #t3 .in { justify-self: start; background: #e9e9eb; color: #111; border-bottom-left-radius: 8px; }
+  #t3 .out { justify-self: end; background: #0a84ff; color: #fff; border-bottom-right-radius: 8px; }
+</style></head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- Muse's plush mascot, as a round avatar (the cream hooded creature from the source spot's meme) -->
+    <symbol id="mascot" viewBox="0 0 100 100"><rect width="100" height="100" fill="#cfc6e8"/><use href="#mascot-body"/></symbol>
+    <symbol id="mascot-body" viewBox="0 0 100 100">
+      <defs>
+        <radialGradient id="hood" cx=".42" cy=".3" r=".75"><stop offset="0" stop-color="#fffdf8"/><stop offset=".7" stop-color="#efe8dc"/><stop offset="1" stop-color="#d9cfc0"/></radialGradient>
+        <radialGradient id="face" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#fff2ea"/><stop offset="1" stop-color="#f3dccf"/></radialGradient>
+      </defs>
+      <path d="M50 14c-21 0-33 15-33 37v49h66V51c0-22-12-37-33-37z" fill="url(#hood)"/>
+      <ellipse cx="50" cy="52" rx="21" ry="17" fill="url(#face)"/>
+      <circle cx="42" cy="50" r="2.9" fill="#2b2522"/><circle cx="58" cy="50" r="2.9" fill="#2b2522"/>
+      <path d="M46 57.5q4 3.2 8 0" fill="none" stroke="#2b2522" stroke-width="1.7" stroke-linecap="round"/>
+      <ellipse cx="36.5" cy="56.5" rx="3.6" ry="2.2" fill="#f2a9a5" opacity=".75"/><ellipse cx="63.5" cy="56.5" rx="3.6" ry="2.2" fill="#f2a9a5" opacity=".75"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- GENERATED MEME 1600x900 -->
+<div class="board" id="meme">
+  <div class="cap">me: ok, sleeping early tonight<br>Muse at 3:07 AM:</div>
+  <div class="lock">
+    <div class="clock"><div class="d">Sunday, October 4</div><div class="c">3:07</div></div>
+    <div class="stack">
+      <div class="nt"><svg class="av"><use href="#mascot"/></svg><div><div class="hd"><span>Muse</span><em>now</em></div><p>Replied to your boss for you.</p></div></div>
+      <div class="nt"><svg class="av"><use href="#mascot"/></svg><div><div class="hd"><span>Muse</span><em>now</em></div><p>Also booked a 6 AM spin class.</p></div></div>
+    </div>
+    <img class="wm" src="../brand/gemini-logo.svg" alt="">
+  </div>
+</div>
+
+<!-- FOUND POST 1: ME AT 3 AM / MUSE AT 3 AM -->
+<div class="board th" id="t1">
+  <div class="p">
+    <svg viewBox="0 0 318 360" preserveAspectRatio="xMidYMid slice">
+      <rect width="318" height="360" fill="#141a33"/>
+      <rect x="196" y="78" width="88" height="96" rx="6" fill="#1d2747" stroke="#2c3a66" stroke-width="5"/>
+      <circle cx="252" cy="110" r="17" fill="#f3efc9"/><circle cx="244" cy="104" r="15" fill="#1d2747"/>
+      <rect x="18" y="252" width="282" height="80" rx="16" fill="#27314f"/>
+      <path d="M40 252c10-40 60-52 100-44s110 10 140 44z" fill="#3a4a7a"/>
+      <ellipse cx="66" cy="238" rx="34" ry="20" fill="#e8e3d6"/>
+      <circle cx="96" cy="222" r="20" fill="#c99a78"/>
+      <text x="140" y="184" font-family="Impact, Arial" font-size="34" fill="#8fa0d6">z</text>
+      <text x="164" y="160" font-family="Impact, Arial" font-size="42" fill="#8fa0d6">z</text>
+    </svg>
+    <div class="imp">ME AT 3 AM</div>
+  </div>
+  <div class="p">
+    <svg viewBox="0 0 318 360" preserveAspectRatio="xMidYMid slice">
+      <defs><radialGradient id="glow" cx=".5" cy=".62" r=".55"><stop offset="0" stop-color="#9fd0ff" stop-opacity=".9"/><stop offset="1" stop-color="#9fd0ff" stop-opacity="0"/></radialGradient></defs>
+      <rect width="318" height="360" fill="#0d0f1a"/>
+      <circle cx="159" cy="236" r="150" fill="url(#glow)"/>
+      <use href="#mascot-body" x="94" y="112" width="130" height="130"/>
+      <rect x="62" y="230" width="194" height="112" rx="10" fill="#c9ccd4"/>
+      <rect x="74" y="242" width="170" height="88" rx="4" fill="#e9edf5"/>
+      <circle cx="159" cy="286" r="12" fill="#b8bec9"/>
+      <g fill="#30d158"><circle cx="52" cy="120" r="16"/><circle cx="270" cy="96" r="16"/><circle cx="276" cy="176" r="13"/></g>
+      <g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M45 120l5 5 9-10"/><path d="M263 96l5 5 9-10"/><path d="M270 176l4 4 7-8"/></g>
+    </svg>
+    <div class="imp">MUSE AT 3 AM</div>
+  </div>
+</div>
+
+<!-- FOUND POST 2: tasks done, by hour -->
+<div class="board th" id="t2">
+  <h3>tasks done, by hour</h3>
+  <div class="lg"><span><i style="background:#b9bec7"></i>me</span><span><i style="background:#1d64f2"></i>Muse</span></div>
+  <div class="chart">
+    <div class="g"><i class="me" style="height:0"></i><i class="mu" style="height:88%"></i></div>
+    <div class="g"><i class="me" style="height:0"></i><i class="mu" style="height:94%"></i></div>
+    <div class="g"><i class="me" style="height:0"></i><i class="mu" style="height:90%"></i></div>
+    <div class="g"><i class="me" style="height:4%"></i><i class="mu" style="height:96%"></i></div>
+    <div class="g"><i class="me" style="height:14%"></i><i class="mu" style="height:91%"></i></div>
+    <div class="g"><i class="me" style="height:9%"></i><i class="mu" style="height:97%"></i></div>
+    <div class="g"><i class="me" style="height:6%"></i><i class="mu" style="height:89%"></i></div>
+    <div class="g"><i class="me" style="height:11%"></i><i class="mu" style="height:95%"></i></div>
+    <div class="g"><i class="me" style="height:3%"></i><i class="mu" style="height:92%"></i></div>
+    <div class="g"><i class="me" style="height:0"></i><i class="mu" style="height:98%"></i></div>
+    <div class="g"><i class="me" style="height:0"></i><i class="mu" style="height:93%"></i></div>
+    <div class="g"><i class="me" style="height:0"></i><i class="mu" style="height:96%"></i></div>
+  </div>
+  <div class="ax"><span>12a</span><span></span><span></span><span>6a</span><span></span><span></span><span>12p</span><span></span><span></span><span>6p</span><span></span><span></span></div>
+</div>
+
+<!-- FOUND POST 3: text thread with Muse -->
+<div class="board th" id="t3">
+  <div class="top"><svg class="av"><use href="#mascot"/></svg><b>Muse</b></div>
+  <div class="msgs">
+    <div class="m in">Finished your whole to-do list.</div>
+    <div class="m in">Added 40 more.</div>
+    <div class="m out">it’s 4 AM</div>
+  </div>
+</div>
+
+</body></html>

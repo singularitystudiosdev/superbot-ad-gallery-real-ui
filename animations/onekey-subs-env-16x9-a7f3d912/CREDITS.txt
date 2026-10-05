@@ -1,0 +1,7 @@
+One API key for all your subscriptions (16:9, 1920x1080, 60 fps, with sound). Rendered from code.
+
+Fonts (SIL OFL 1.1): Plus Jakarta Sans and JetBrains Mono via fonts.googleapis.com (retrieved 2026-10-05); Inter (from the superbot-desktop renderer assets).
+Logos: claude / openai / gemini / deepseek SVGs from superbot-ad-gallery-real-ui animations/austerlitz-every-model-superbot-282e0654/brand/ (provider brand marks, nominative use).
+Superbot mark: ads-src/context-cleanup/face.svg (superbot-ad-gallery-real-ui).
+Prices (list, per 1M tokens, Oct 2026): platform.claude.com/docs/en/models/opus-5-5/overview; benchlm.ai/openai/api-pricing; benchlm.ai/google/api-pricing; DeepSeek V4 Flash list rate (spheron.network blog, 2026-08). Retrieved 2026-10-05.
+Complaint source: sell-to-reddit llm_ai, field pain_points, problem usage-limits-pricing (rank 1, 5,738 authors / 30 d; build 20261005T075220-dfa1b7, data as of 2026-10-05).

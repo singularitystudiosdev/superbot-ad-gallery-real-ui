@@ -2087,6 +2087,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "onekey-subs-clutter-16x9-a7f3d912",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: four logins, four dashboards, four keys collapse into one sk-superbot key pasted once into a single config line, then a request routes to Opus 5.5, Gemini or DeepSeek (clutter to one key, 16:9)",
+    "src": "animations/onekey-subs-clutter-16x9-a7f3d912/",
+    "thumb": "assets/shots/onekey-subs-clutter-16x9-a7f3d912.png",
+    "desc": "Opens on the clutter: four separate dashboards, one per subscription you already pay for. console.anthropic.com signed in with Claude Max, platform.openai.com with ChatGPT Plus, aistudio.google.com with Google AI Pro and platform.deepseek.com with a DeepSeek plan, each with its own login, its own Overview/Usage/Billing/API keys tabs and its own key shape (sk-ant-api03, sk-proj, AIza, sk-ds) drawn in its own box, labelled API key 1 of 4. Your counter reads 4 logins, 4 dashboards, 4 keys. All four windows race inward and collapse into one key: sk-superbot with 4 subscriptions packed into it and Route Auto. The key is pasted once into a single config line, OPENAI_API_KEY=sk-superbot-... OPENAI_BASE_URL=https://api.superbot.gg/v1 MODEL=auto, which works with any OpenAI SDK. Then the router panel: every per-token price is struck through, each row billed to a plan you already own, and three requests land on the model that fits: a hard refactor on Claude Opus 5.5 (Claude Max), three PDFs on Gemini 3.1 Pro (Google AI Pro), a tiny rename on DeepSeek V4 Flash. Ends on: One API key for all your subscriptions. 24 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/onekey-subs-clutter-16x9-a7f3d912/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-subs-merge-16x9-a7f3d912",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: four vendor keys merge into one sk-superbot key, then one request is routed to the best model, Opus 5.5 vs Gemini 3.1 Pro vs DeepSeek V4 Flash (merge and route, 16:9)",
+    "src": "animations/onekey-subs-merge-16x9-a7f3d912/",
+    "thumb": "assets/shots/onekey-subs-merge-16x9-a7f3d912.png",
+    "desc": "Opens on four API keys side by side, each in its vendor's own shape: versatile Claude Max key sk-ant-api03, ChatGPT Plus key sk-proj, Google AI Pro key AIza and DeepSeek plan key sk-ds, with a counter reading 4 keys you have to copy around. The four stream together and merge into one sk-superbot key, and the counter flips to 1 key that works everywhere. Then the routing comparison: a request bar types an ask with model auto, and three model cards stand side by side, Claude Opus 5.5, Gemini 3.1 Pro and DeepSeek V4 Flash, each showing what it is best for and the plan it is billed to. As each ask lands, the right card wins and the other two dim: a hard refactor goes to Opus 5.5, three PDFs to Gemini 3.1 Pro, a tiny rename to DeepSeek V4 Flash. A request log then ticks every ask through to the model that took it. Ends on: One API key for all your subscriptions. 22 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/onekey-subs-merge-16x9-a7f3d912/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-subs-env-16x9-a7f3d912",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: a four-key .env collapses to one config line, the sk-superbot key unfolds into the four plans it holds, then requests route to Opus 5.5, Gemini and DeepSeek (one line, 16:9)",
+    "src": "animations/onekey-subs-env-16x9-a7f3d912/",
+    "thumb": "assets/shots/onekey-subs-env-16x9-a7f3d912.png",
+    "desc": "Opens on the .env you actually have: four keys and four endpoints, OPENAI_API_KEY sk-proj, OPENAI_BASE_URL api.openai.com, ANTHROPIC_API_KEY sk-ant-api03, GEMINI_API_KEY AIza, DEEPSEEK_API_KEY sk-ds, under the caption four subscriptions, four keys, four places to paste them. Every line is struck out, and one line is typed to replace all of them: OPENAI_API_KEY=sk-superbot-... OPENAI_BASE_URL=https://api.superbot.gg/v1 MODEL=auto, working with any OpenAI SDK. The key then lifts out of that line and unfolds into the four plans it holds, Claude Max, ChatGPT Plus, Google AI Pro and DeepSeek, orbiting it on connector lines before they repack into the key. Then the router panel: prices struck, every row billed to a plan you already own, and three requests routed by job to Claude Opus 5.5, Gemini 3.1 Pro and DeepSeek V4 Flash. Ends on: One API key for all your subscriptions. 24 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/onekey-subs-env-16x9-a7f3d912/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "onekey-pack-16x9-fc99bee5",
     "type": "animation",
     "group": "Ad spots",

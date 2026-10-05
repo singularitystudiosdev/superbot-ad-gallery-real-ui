@@ -2588,6 +2588,17 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "niche-youtube-model-switch-superbot-6f7ed36f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Reply to the top comments on my latest video: YouTube connects first, DeepSeek V4 sorts, Gemini 3.1 Pro watches, Opus 5.5 writes, replies land in YouTube Studio (smooth remake, 16:9)",
+    "src": "animations/niche-youtube-model-switch-superbot-6f7ed36f/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-6f7ed36f.png",
+    "desc": "Smoother, app-accurate remake of niche-youtube-model-switch-superbot-3828921d. One ask in superbot, one continuous take: YouTube connects first through Google's consent popup, DeepSeek V4 reads the 1,284 comments and groups the repeat questions, Gemini 3.1 Pro watches the 14:21 video and finds the 3 moments viewers asked about, Claude Opus 5.5 writes five replies in the creator's voice from those moments, then the replies land on the video's YouTube Studio comments page. 16:9 only.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-6f7ed36f.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -1,0 +1,24 @@
+img/ CREDITS (internal): every photo in this spot, where it came from, and what was done to it.
+Provenance is never shown on screen. All five photos are under the Unsplash License (free for commercial use, no
+attribution required, https://unsplash.com/license), fetched 2026-10-05 at 2000 px wide. Each was cropped to frame,
+given one shared grade (contrast 1.06, saturation 0.92, a soft-light warm/cool wash) so four photographers read as
+one channel, and the channel's own on-video type (Arial Black, #ffd21f accents) was set over it in HTML and captured
+headless at its final size (the compositing page is outside the gallery). No subject matter was drawn.
+
+thumb.jpg    1280x720. The video's thumbnail ("12 MICS UNDER $100"): "four black microphones" by Rob Sarmiento,
+             https://unsplash.com/photos/xkAJ3vcQQb0 . Photo shifted left with a mask fade to its own black, type set
+             on the right. Used by the Gemini player's poster and Studio's "Your video" card.
+f438.jpg     1280x720. The 4:38 frame Lena asks about (boom arms over the desk): by Jonathan Farber,
+             https://unsplash.com/photos/wUl6KBqdj2E . Crop only.
+f612.jpg     1280x720. The 6:12 blind-test frame: two condensers on stands by Gritte,
+             https://unsplash.com/photos/Gbl4QDQCxUo , with the channel's "A" / "B" tags and a "BLIND TEST" lower third.
+f940.jpg     1280x720. The 9:40 room-test frame (a desk by a bare brick wall): by Austin Distel,
+             https://unsplash.com/photos/VCFxt2yT1eQ , with a "ROOM TEST" lower third.
+avatar.jpg   256x256. The fictional creator's channel avatar (a microphone grille, no face): by Victor Barrios,
+             https://unsplash.com/photos/_WrDohruzio . Square crop, shown in a circle.
+
+MADE UP FOR THE SPOT
+  The creator "Sam Rivera" (@samrivera.mics), the commenters, the video "I tested 12 budget mics under $100" (id
+  Xk3mP9qL2aE), every comment, count and reply are fictional. Every @handle on screen was checked to be unused on
+  youtube.com (HTTP 404) on 2026-10-05; the natural first choices @priyanair and @lena.fischer belong to real
+  channels and were dropped. No email address appears anywhere: Google's account chip carries the name only.

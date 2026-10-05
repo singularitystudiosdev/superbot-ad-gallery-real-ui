@@ -1,0 +1,45 @@
+brand/ CREDITS (internal): every mark, tile and font in this spot, where it came from, and the usage note.
+All marks are the property of their owners. They appear nominatively (naming the model or service superbot routes
+each step to, and showing the Google / YouTube surfaces superbot connects to) and unaltered. Provenance is never
+shown on screen.
+
+SUPERBOT'S OWN TILE ART (first party)
+tile-deepseek.svg, tile-gemini.png, tile-claude.png, tile-youtube.png
+             The superbot desktop app's provider tiles, copied unaltered from superbot-desktop
+             packages/ui/src/marks/tiles/ (deepseek.svg, google.png, anthropic.png, youtube.png; the app aliases the
+             Gemini models to the google tile). They are what the shipped app paints in the switch pill, the
+             "X in superbot" header and the composer's model chip, so the spot shows the app's own art.
+tile.svg, mark-clean.svg
+             superbot's own mark and app tile (first party), carried over from
+             animations/niche-youtube-model-switch-superbot-3828921d/scenes/tabs-assets/. tile.svg is the app logo
+             on Google's consent page.
+
+THIRD-PARTY MARKS (carried over from niche-youtube-model-switch-superbot-3828921d/brand/, unaltered)
+google-g.svg Google "G" logo, Wikimedia Commons File:Google_"G"_logo.svg, public domain (PD-textlogo), trademarked.
+             The consent page's "Sign in with Google" header.
+youtube-icon.svg
+             YouTube full-color icon (2024), Wikimedia Commons File:YouTube_full-color_icon_(2024).svg, public domain
+             (PD-textlogo), trademarked. The consent page's scope row, the Studio tab's favicon.
+youtube-studio-logo.svg
+             YouTube Studio logo, Wikimedia Commons File:YouTube_Studio_logo.svg, public domain (PD-textlogo),
+             trademarked. Studio's top bar lockup.
+
+FONTS (fonts/)
+roboto-latin.woff2
+             Roboto (variable, v51, latin subset) by Christian Robertson / Google, SIL Open Font License 1.1, from
+             Google Fonts (fonts.gstatic.com/s/roboto/v51/...), fetched 2026-10-05. YouTube Studio's UI face.
+google-sans-latin.woff2
+             Google Sans (variable, v71, latin subset) by Google, SIL Open Font License 1.1, from Google Fonts
+             (fonts.gstatic.com/s/googlesans/v71/...), fetched 2026-10-05. Google's sign-in and consent face.
+             superbot's own UI uses the system's SF Pro Rounded / New York, as the desktop app does.
+
+UI ICONS
+  YouTube Studio and Google consent glyphs are Material Symbols (Google, Apache License 2.0) from the Iconify API
+  https://api.iconify.design/material-symbols.json, path data verbatim in scenes/icons.js (27 carried over from the
+  base ad, fetched 2026-10-03; 14 fetched 2026-10-05). superbot's own glyphs (spinner, check, composer controls,
+  reply arrow) and Chrome's toolbar arrows are Lucide (ISC License) path data, as in shell.js.
+
+CODE
+  spring.js is the closed-form spring module of the Cosmos motion-reel skill (lib/motion.mjs), copied unaltered:
+  the thread's scroll, the composer dock, the Gemini playhead and Studio's list follow it, so every frame is a pure
+  function of t.

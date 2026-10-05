@@ -56,6 +56,17 @@
     "thumb": "assets/shots/every-model-one-chat-sb-combo-efa8df82.png"
   },
   {
+    "id": "every-model-smooth-sb-superbot-2b5923dd",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Nano Banana Pro meme, Perplexity Reddit search, Superbot Agent orders on DoorDash (smooth, 16:9)",
+    "src": "animations/every-model-one-chat-smooth-superbot-2b5923dd/",
+    "thumb": "assets/shots/every-model-smooth-sb-superbot-2b5923dd.png",
+    "desc": "Variant of every-model-one-chat-sb-superbot-efa8df82, simpler and smoother. One superbot window at the desktop app's real proportions, every move eased: the composer docks, answers open in place, the thread scrolls and the model picker morphs instead of jumping. Each ask goes to what is built for it and the route says why. Make me a Muse meme: Nano Banana Pro (Gemini, best at images with text) generates it. Find more Muse memes on Reddit: Perplexity (live web search) returns three climbing posts as real Reddit embeds. Order me a burger: Superbot Agent uses the DoorDash connection, checks out and shows the live order tracker. Every image remade with Nano Banana Pro.",
+    "download": "assets/video/every-model-smooth-sb-superbot-2b5923dd.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-detail-cgm2-sb-superbot-fa1318dd",
     "type": "animation",
     "group": "Ad spots",

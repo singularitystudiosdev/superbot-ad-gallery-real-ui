@@ -3092,6 +3092,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "pocketsflow-untold-realui-superbot-6167be22",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "THEY WONT TELL YOU HOW, real UI: superbot reads pocketsflow.com, Meshy 7.1 makes the mascot 3D, MiniMax H3 animates it, Eleven Music v2.5 scores it, Claude Opus 5.5 cuts the film in code, every switch drawn the way the app draws it (40.5s, 16:9)",
+    "src": "animations/pocketsflow-untold-realui-superbot-6167be22/",
+    "thumb": "assets/shots/pocketsflow-untold-realui-superbot-6167be22.png",
+    "desc": "Variant of pocketsflow-untold-every-model-superbot-673c104b (untouched) with every model switch remapped to the job it fits and every Superbot surface matched to the shipped desktop app. Kai's X post (\"I made this in 1 prompt\") plays the Pocketsflow launch film, THEY WONT TELL YOU HOW cuts in word by word, then the how, inside Superbot's real window: the ask \"make a launch video for pocketsflow.com starring our mascot\" goes out with mascot.png attached. Superbot connects to pocketsflow.com and visits the home, courses and digital products pages (real page shots fan into a deck under the switch). Switched to Meshy 7.1: Creating 3D model, then a real mesh of the mascot orbits in the app's 3D viewer (34,823 tri). Switched to MiniMax H3: Creating video, then the mascot talks. Switched to Eleven Music v2.5: Creating audio, then the theme's audio row. Claude Opus 5.5 takes the composer chip (a chat model draws no switch pill): it saves the three files into the project, writes LaunchFilm.tsx, Storefront.tsx and Checkout.tsx and runs the Remotion render. The answer explains each switch in one line, then the camera pushes into the finished film. One switch block per turn with older pills dimmed and the who header on the newest, the pending surface and media card anatomy, step rows and labels all follow superbot-desktop source. An independent judge audited the cut and its findings were applied. The 3D mesh is a real image-to-3D render (CREDITS.txt). 40.5 s, 1920x1080, 60 fps.",
+    "download": "assets/video/pocketsflow-untold-realui-superbot-6167be22.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "marketplace-couch-preview-superbot-aec80d81",
     "type": "animation",
     "group": "Ad spots",

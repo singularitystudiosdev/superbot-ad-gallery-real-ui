@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: they wont tell you how (Pocketsflow, real UI)</title>
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<!-- superbot-desktop main, as the superbot site ports it (site/assets, fidelity-checked against main) -->
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/hub-boot.css">
+<link rel="stylesheet" href="assets/mascot-mark.css">
+<link rel="stylesheet" href="assets/hero-workspace.css">
+<link rel="stylesheet" href="assets/hero-workspace-chat.css">
+<link rel="stylesheet" href="ad.f108143e.css">
+<link rel="stylesheet" href="pf-chat.f108143e.css">
+<link rel="stylesheet" href="scenes/tweet.f108143e.css">
+<link rel="stylesheet" href="scenes/untold.f108143e.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three/build/three.module.min.js" } }</script>
+<link rel="modulepreload" href="assets/hero-workspace-frontend.js">
+<link rel="modulepreload" href="pf-chat.f108143e.js">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+          <defs>
+            <symbol id="sb-gl-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+                  <symbol id="sb-ic-claude" viewBox="0 0 24 24" fill="currentColor"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></symbol>
+                  <symbol id="sb-ic-cursor" viewBox="0 0 24 24" fill="currentColor"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+                  <symbol id="sb-ic-vscode" viewBox="0 0 100 100" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M70.9119 99.3171C72.4869 99.9307 74.2828 99.8914 75.8725 99.1264L96.4608 89.2197C98.6242 88.1787 100 85.9892 100 83.5872V16.4133C100 14.0113 98.6243 11.8218 96.4609 10.7808L75.8725 0.873756C73.7862 -0.130129 71.3446 0.11576 69.5135 1.44695C69.252 1.63711 69.0028 1.84943 68.769 2.08341L29.3551 38.0415L12.1872 25.0096C10.589 23.7965 8.35363 23.8959 6.86933 25.2461L1.36303 30.2549C-0.452552 31.9064 -0.454633 34.7627 1.35853 36.417L16.2471 50.0001L1.35853 63.5832C-0.454633 65.2374 -0.452552 68.0938 1.36303 69.7453L6.86933 74.7541C8.35363 76.1043 10.589 76.2037 12.1872 74.9905L29.3551 61.9587L68.769 97.9167C69.3925 98.5406 70.1246 99.0104 70.9119 99.3171ZM75.0152 27.2989L45.1091 50.0001L75.0152 72.7012V27.2989Z"/></symbol>
+                  <symbol id="sb-ic-openai" viewBox="0 0 2406 2406" fill="currentColor"><path id="sb-oai-petal" d="M1107.3 299.1c-197.999 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z"/><use href="#sb-oai-petal" transform="rotate(60 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(120 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(180 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(240 1203 1203)"/><use href="#sb-oai-petal" transform="rotate(300 1203 1203)"/></symbol>
+                  <symbol id="sb-ic-gemini" viewBox="0 0 24 24" fill="currentColor"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></symbol>
+                  <symbol id="sb-ic-zed" viewBox="0 0 24 24" fill="currentColor"><path d="M2.25 1.5a.75.75 0 0 0-.75.75v16.5H0V2.25A2.25 2.25 0 0 1 2.25 0h20.095c1.002 0 1.504 1.212.795 1.92L10.764 14.298h3.486V12.75h1.5v1.922a1.125 1.125 0 0 1-1.125 1.125H9.264l-2.578 2.578h11.689V9h1.5v9.375a1.5 1.5 0 0 1-1.5 1.5H5.185L2.562 22.5H21.75a.75.75 0 0 0 .75-.75V5.25H24v16.5A2.25 2.25 0 0 1 21.75 24H1.655C.653 24 .151 22.788.86 22.08L13.19 9.75H9.75v1.5h-1.5V9.375A1.125 1.125 0 0 1 9.375 8.25h5.314l2.625-2.625H5.625V15h-1.5V5.625a1.5 1.5 0 0 1 1.5-1.5h13.19L21.438 1.5z"/></symbol>
+                  <symbol id="sb-ic-windsurf" viewBox="0 0 24 24" fill="currentColor"><path d="M23.55 5.067c-1.2038-.002-2.1806.973-2.1806 2.1765v4.8676c0 .972-.8035 1.7594-1.7597 1.7594-.568 0-1.1352-.286-1.4718-.7659l-4.9713-7.1003c-.4125-.5896-1.0837-.941-1.8103-.941-1.1334 0-2.1533.9635-2.1533 2.153v4.8957c0 .972-.7969 1.7594-1.7596 1.7594-.57 0-1.1363-.286-1.4728-.7658L.4076 5.1598C.2822 4.9798 0 5.0688 0 5.2882v4.2452c0 .2147.0656.4228.1884.599l5.4748 7.8183c.3234.462.8006.8052 1.3509.9298 1.3771.313 2.6446-.747 2.6446-2.0977v-4.893c0-.972.7875-1.7593 1.7596-1.7593h.003a1.798 1.798 0 0 1 1.4718.7658l4.9723 7.0994c.4135.5905 1.05.941 1.8093.941 1.1587 0 2.1515-.9645 2.1515-2.153v-4.8948c0-.972.7875-1.7594 1.7596-1.7594h.194a.22.22 0 0 0 .2204-.2202v-4.622a.22.22 0 0 0-.2203-.2203Z"/></symbol>
+                  <symbol id="sb-ic-cline" viewBox="0 0 24 24" fill="currentColor"><path d="m23.365 13.556-1.442-2.895V8.994c0-2.764-2.218-5.002-4.954-5.002h-2.464c.178-.367.276-.779.276-1.213A2.77 2.77 0 0 0 12.018 0a2.77 2.77 0 0 0-2.763 2.779c0 .434.098.846.276 1.213H7.067c-2.736 0-4.954 2.238-4.954 5.002v1.667L.64 13.549c-.149.29-.149.636 0 .927l1.472 2.855v1.667C2.113 21.762 4.33 24 7.067 24h9.902c2.736 0 4.954-2.238 4.954-5.002V17.33l1.44-2.865c.143-.286.143-.622.002-.91m-12.854 2.36a2.27 2.27 0 0 1-2.261 2.273 2.27 2.27 0 0 1-2.261-2.273v-4.042A2.27 2.27 0 0 1 8.249 9.6a2.267 2.267 0 0 1 2.262 2.274zm7.285 0a2.27 2.27 0 0 1-2.26 2.273 2.27 2.27 0 0 1-2.262-2.273v-4.042A2.267 2.267 0 0 1 15.535 9.6a2.267 2.267 0 0 1 2.261 2.274z"/></symbol>
+                  <symbol id="sb-ic-copilot" viewBox="0 0 24 24" fill="currentColor"><path d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/></symbol>
+                  <symbol id="sb-ic-opencode" viewBox="0 0 24 24" fill="currentColor"><path d="M22 24H2V0h20zM17 4.8H7v14.4h10z"/></symbol>
+                  <symbol id="sb-ic-qwen" viewBox="0 0 24 24" fill="currentColor"><path d="M23.919 14.545 20.817 9.17l1.47-2.544a.56.56 0 0 0 0-.566l-1.633-2.83a.57.57 0 0 0-.49-.283h-6.207L12.487.402a.57.57 0 0 0-.49-.284H8.732a.56.56 0 0 0-.49.284L5.139 5.775h-2.94a.56.56 0 0 0-.49.284L.077 8.887a.56.56 0 0 0 0 .567L3.18 14.83l-1.47 2.545a.56.56 0 0 0 0 .566l1.634 2.83a.57.57 0 0 0 .49.283h6.205l1.47 2.545a.57.57 0 0 0 .49.284h3.266a.57.57 0 0 0 .49-.284l3.104-5.375h2.94a.57.57 0 0 0 .49-.283l1.634-2.828a.55.55 0 0 0-.004-.568M8.733.686l1.634 2.828-1.634 2.828H21.8L20.164 9.17H7.425L5.63 6.06Zm1.306 19.801-6.205-.002 1.634-2.83h3.265L2.201 6.344h3.267q3.182 5.517 6.367 11.032zm10.124-5.66L18.53 12l-6.532 11.315-1.634-2.83c2.129-3.673 4.25-7.351 6.373-11.028h3.592l3.102 5.374z"/></symbol>
+                  <symbol id="sb-ic-roo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="4.5"/><path d="M8.5 17V7.5h4a2.75 2.75 0 0 1 0 5.5H8.5m3.5 0 3.5 4"/></symbol>
+                  <symbol id="sb-ic-kilo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="4.5"/><path d="M8.5 7v10M15.5 7l-6.5 5 6.5 5"/></symbol>
+                  <symbol id="sb-ic-continue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.2v7.6l6.2-3.8z" fill="currentColor" stroke="none"/></symbol>
+                  <symbol id="sb-ic-kiro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4.5v15M17.5 4.5l-8 7.5 8 7.5"/></symbol>
+                  <symbol id="sb-ic-amazonq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 3.2a3.3 3.3 0 1 1 0 6.6 3.3 3.3 0 0 1 0-6.6Z" fill="currentColor" stroke="none"/><path d="m15.2 15.2 3.6 3.6" stroke-width="2.4"/></symbol>
+                  <symbol id="sb-ic-openclaw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6.2A7.5 7.5 0 1 0 19.2 15"/><path d="M17 6.2 13 10.6M19.2 15l-5.4-1.9"/></symbol>
+                  <symbol id="sb-ic-goose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 20.5c0-3.6 2.4-5.6 5.4-6.6 2.6-.9 3.6-2.6 3.6-5V7.5a3 3 0 0 0-6 0"/><path d="M14.5 6.5h4l-4 2.5M3.5 20.5h13"/><circle cx="11.6" cy="6.6" r="1" fill="currentColor" stroke="none"/></symbol>
+                  <symbol id="sb-ic-hermes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="4.5"/><path d="M8.5 7v10M15.5 7v10M8.5 12h7"/></symbol>
+                  <symbol id="sb-ic-devin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="4.5"/><path d="M9 7.5v9h2.5a4.5 4.5 0 0 0 0-9Z"/></symbol>
+                  <symbol id="sb-ic-aider" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="4.5"/><path d="M8.5 17 12 7l3.5 10M9.7 13.5h4.6"/></symbol>
+                </defs>
+        </svg>
+<div id="frame">
+  <section class="scene" id="s-tweet"></section>
+  <section class="scene" id="s-untold"></section>
+  <section class="scene" id="s-thread">
+  <div id="cam">
+    <div class="stage" id="win" data-hero-host="workspace">
+      <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="body"><div class="arena" id="arena">
+<div class="hub" id="hub" aria-hidden="true">
+              <div class="side">
+              <nav class="hud">
+                <!-- ONE row: the Superbot mark, then the wordmark over the
+                     destination discs. The mark wears the app's default "No
+                     background" skin (hub-boot.css .hud-mark): the app icon at
+                     rest; woken (.sel), only the face comes alive on the icon's
+                     own ground. The face is markSvg() markup (mascot-mark.js),
+                     mounted by the page script. `sel` on a disc marks the OPEN
+                     destination: hub-boot.js's `tabs` beat walks it (superbot,
+                     then openai, then claude, then home) -->
+                <span class="hud-mark sel"><img class="tile" src="assets/brand/superbot-app-icon.png" alt="" width="44" height="44"/><span class="ground"></span><span class="face"><svg class="sb-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><defs><mask id="sb-hud-face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160"><g fill="#fff"><rect x="14" y="32" width="72" height="54" rx="15"/><path class="mark-ear mark-ear-l" d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/><path class="mark-ear mark-ear-r" d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/></g><g fill="#000"><ellipse class="mark-eye mark-eye-l" cx="35" cy="58" rx="8" ry="11"/><ellipse class="mark-eye mark-eye-r" cx="65" cy="58" rx="8" ry="11"/></g><g class="mark-happy" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round"><path d="M27 61Q35 53.5 43 61"/><path d="M57 61Q65 53.5 73 61"/></g></mask></defs><g class="mark-body"><rect class="sb-mark-a" x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#sb-hud-face)"/><rect class="sb-mark-b" x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#sb-hud-face)"/><rect x="-30" y="-30" width="160" height="160" fill="#ffffff" mask="url(#sb-hud-face)"/></g></svg></span></span>
+                <span class="hud-text"><b class="hud-word">superbot</b><span class="hud-discs"><span class="hud-disc sb sel"><img src="assets/brand/mono-mark-white.svg" alt="" width="12" height="12"/></span><span class="hud-disc" data-app="openai"><svg><use href="#sb-ic-openai"/></svg></span><span class="hud-disc" data-app="claude"><svg><use href="#sb-ic-claude"/></svg></span><span class="hud-disc" data-app="cursor"><svg><use href="#sb-ic-cursor"/></svg></span><span class="hud-disc add">+</span></span></span>
+                <!-- the Servers menu the mark opens (ServerSwitcherMenu.tsx):
+                     art, name, one short status in words, a hairline, + Add.
+                     Hidden until .hud.menu-open -->
+                <div class="hud-menu">
+                  <span class="hud-menu-row on"><i class="hud-menu-art sb"><img src="assets/brand/mono-mark-white.svg" alt="" width="12" height="12"/></i><span class="hud-menu-tx"><b>Superbot</b><small>Current</small></span></span>
+                  <span class="hud-menu-row"><i class="hud-menu-art" data-app="openai"><svg><use href="#sb-ic-openai"/></svg></i><span class="hud-menu-tx"><b>hi@ezo.dev</b><small>ChatGPT, Usage near the limit</small></span></span>
+                  <span class="hud-menu-row"><i class="hud-menu-art" data-app="claude"><svg><use href="#sb-ic-claude"/></svg></i><span class="hud-menu-tx"><b>hi@ezo.dev</b><small>Claude</small></span></span>
+                  <span class="hud-menu-row"><i class="hud-menu-art" data-app="cursor"><svg><use href="#sb-ic-cursor"/></svg></i><span class="hud-menu-tx"><b>Cursor</b></span></span>
+                  <span class="hud-menu-div" aria-hidden="true"></span>
+                  <span class="hud-menu-row add"><i class="hud-menu-art add">+</i><span class="hud-menu-tx"><b>Add</b></span></span>
+                </div>
+              </nav>
+              <div class="chats inner">
+                <!-- the lane switch, the app's Chat | Code picker as it ships since
+                     superbot-desktop fc132325b: two text tabs on a hairline, the
+                     open lane in the fg ink over its underline, the other muted -->
+                <div class="lane-tabs">
+                  <span class="lane-tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Chat</span>
+                  <span class="lane-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>Code</span>
+                  <i class="side-ic ic-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg></i><i class="side-ic ic-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg></i>
+                </div>
+                <!-- New chat is the list's first row, directly under the tabs and
+                     above the first section header (Pinned/Today): a dashed
+                     outline with a plus in the icon slot (hub.css
+                     .hub-side-new-chat-item) -->
+                <span class="row new"><i class="nc-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 5v14"/><path d="M5 12h14"/></svg></i>New chat</span>
+                <!-- the app's default list (Group by day off): a 'Pinned' label over
+                     the pinned chats as raised rounded cards (tile, title, a muted
+                     one-line preview, no time), then a 'Recent' label (with the
+                     app's collapse and new buttons) over flat one-line rows
+                     (tile, title, time). The open chat is the first Recent row. -->
+                <div class="today">Pinned</div>
+                <span class="row pin"><i class="sp app-claude"><svg><use href="#sb-ic-claude"/></svg></i><span class="tx"><span class="t">Fix the flaky upload test</span><small class="pv">The retry races the upload&#8217;s own timeout.</small></span></span>
+                <span class="row pin"><i class="sp"><img src="assets/brand/mark-clean.svg" alt="" width="11" height="11"/></i><span class="tx"><span class="t">Cheapest GPUs on RunPod</span><small class="pv">Here are the three cheapest tiers right now.</small></span></span>
+                <div class="today">Recent<i class="day-ic">&#8722;</i><i class="day-ic">+</i></div>
+                <span class="row chat on"><i class="sp"><img src="assets/brand/mark-clean.svg" alt="" width="11" height="11"/></i><span class="t">Release notes draft</span><em>3:27 PM</em></span>
+                <span class="row chat"><i class="sp"><img src="assets/brand/mark-clean.svg" alt="" width="11" height="11"/></i><span class="t">Codex lost its MCP servers</span><em>1:11 PM</em></span>
+                <span class="row chat"><i class="sp"><img src="assets/brand/mark-clean.svg" alt="" width="11" height="11"/></i><span class="t">Rules in Cursor and Claude Code</span><em>1:08 PM</em></span>
+                <span class="row chat"><i class="sp app-claude"><svg><use href="#sb-ic-claude"/></svg></i><span class="t">Review the auth middleware</span><em>Sep 23</em></span>
+                <span class="row chat"><i class="sp app-claude"><svg><use href="#sb-ic-claude"/></svg></i><span class="t">Which agent used the most context?</span><em>Sep 23</em></span>
+                <!-- the footer user bar, ONE row (superbot-desktop hub
+                     account-widgets): the avatar with its status dot, the
+                     address over the tier line, then Invite, Report a bug,
+                     Settings and More, then the UPGRADE pill -->
+                <div class="acct">
+                  <span class="avatar" style="--c:var(--raised)">H<i class="dot live"></i></span><span class="acct-names"><b>hi@ezo.dev</b><span class="acct-plan"><img src="assets/brand/tier-free.svg" alt="" width="12" height="12"/>Free</span></span><i class="acct-tool invite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg></i><i class="acct-tool bug"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3 3 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg></i><i class="acct-tool settings"><svg><use href="#sb-gl-gear"/></svg></i><i class="acct-tool more"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></i><span class="upg">UPGRADE</span>
+                </div>
+              </div>
+              </div>
+              <div class="main inner">
+                <div class="chat-head"><b>Release notes draft</b><span class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>Search<kbd>⌘K</kbd></span><span class="ptoggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg></span></div>
+                <!-- the thread toolbar under the header: refresh, share, open in browser -->
+                <div class="chat-tools"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4"/><path d="m15.4 6.5-6.8 4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></i></div>
+                <!-- the open thread, the fixture's: a date rule, the user's bubble on
+                     the right, then the reply under its folded step count and the
+                     turn's outcome chip. The two .msg rows are the story's own
+                     beats: hub-boot.js (feedMsgs) and hub-handoff.js (data-m 1/2)
+                     pop them in, so they stay .msg and keep their data-m. -->
+                <div class="feed thread" id="feed">
+                  <div class="date-div"><span>Today</span></div>
+                  <div class="msg own" data-m="1"><p class="bub">Draft release notes for the context optimizer and rate-limit banner work.</p></div>
+                  <div class="msg reply" data-m="2"><div class="m-main">
+                    <span class="fold"><i class="fd"></i>Completed 3 steps<i class="chev">&#8250;</i></span>
+                    <p class="m-text">Here&#8217;s a draft for the release notes:</p>
+                    <ul class="m-list"><li><b>Context optimizer</b> trims tool output before it reaches the model.</li><li><b>Rate-limit banner</b> shows the cooldown and the vendor that raised it.</li></ul>
+                    <p class="m-text">Want me to open a PR with this?</p>
+                    <span class="worked">Worked for 12.4s, 5 steps<i class="chev dn">&#8250;</i></span>
+                  </div></div>
+                </div>
+                <!-- act two's transcript, stacked over the still frame (hub-boot.js fills it) -->
+                <div class="feed tour" id="tour-feed" aria-hidden="true"></div>
+                <!-- the composer, as the build draws it: one bordered box, the
+                     placeholder over a foot of +, the SUPER switch, the model
+                     picker (superbot), the screen-share, the mic and the send;
+                     the disclaimer under it -->
+                <div class="composer" aria-hidden="true"><div class="pill">
+                  <div class="line"><span class="ph">How can superbot help you today?</span></div>
+                  <div class="line foot"><span class="plus">+</span><span class="super">SUPER<i class="tog"><em>OFF</em></i></span><span class="model"><span class="glitch"><img src="assets/brand/mono-mark-white.svg" alt="" width="10" height="10"/></span>superbot<svg class="cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span><span class="monitor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg></span><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg></span><span class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></span></div>
+                </div><div class="cfoot"><span class="ctx">18k of 200k<i class="bar"><i></i></i></span><p class="disclaim">superbot is AI and can make mistakes.</p></div></div>
+              </div>
+            </div>
+      </div></div>
+    </div>
+  </div>
+  </section>
+  <div id="end"></div>
+  <div id="dip"></div>
+</div>
+<div class="hint">space pause · ←/→ step · R restart</div>
+<script src="../../assets/sb-mark-live.js"></script>
+<script type="module" src="ad.f108143e.js"></script>
+</body>
+</html>

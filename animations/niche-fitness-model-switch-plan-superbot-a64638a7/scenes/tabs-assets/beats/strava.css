@@ -1,0 +1,196 @@
+/* Strava beat (beats/strava.js): Strava's OAuth authorize page as a sheet in the chat, then the full-frame layer
+   carrying Strava's web app on the plan's Training Calendar (16:9) or its compact portrait layout (4:5). Pinned over
+   the sheet, then opened to the whole frame. Strava orange is #fc5200, the value strava.com's live stylesheets use
+   (fetched 2026-10-03); the neutrals are a white page, dark grey text and light grey grid lines. The type is the
+   vendored Inter, then the system stack. Nothing here transitions: position, size, clip, opacity and transform are
+   written from t in strava.js, so ?t= freezes a frame. Every class is prefixed .sv-. */
+
+#s-tabs {
+  --sv-or: #fc5200; --sv-or-d: #e04a00; --sv-tint: #ffe8dc; --sv-tint-2: #ffd2bd; --sv-or-text: #b33a00;
+  --sv-text: #242428; --sv-text-2: #6d6d78; --sv-text-3: #9a9aa4; --sv-line: #dfdfe8; --sv-line-2: #ececf2;
+  --sv-page: #f7f7fa; --sv-card: #fff; --sv-green: #1f9d55; --sv-easy: #eeeef3; --sv-race: #242428; --sv-check: #1a73e8;
+  --sv-font: "Inter SB", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+#s-tabs .ui-i { flex: none; width: 24px; height: 24px; fill: currentColor; }
+
+/* ---- the authorize sheet, in the chat ---- */
+#s-tabs .sbsite .hub .sv-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .sv-card { opacity: 0; box-sizing: border-box; width: 380px; max-width: 100%; margin-top: 2px; border-radius: 12px;
+  background: var(--sv-card); box-shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 10px 28px rgba(0, 0, 0, .35); overflow: hidden;
+  font-family: var(--sv-font); color: var(--sv-text); -webkit-font-smoothing: antialiased; }
+#s-tabs .sbsite .hub .sv-vp { position: relative; height: 318px; padding: 18px 22px 0; box-sizing: border-box; overflow: hidden; }
+#s-tabs .sbsite .hub .sv-pair { display: flex; align-items: center; justify-content: center; gap: 10px; height: 40px; }
+#s-tabs .sbsite .hub .sv-pair .qc-tile, #s-tabs .sbsite .hub .sv-pt { width: 38px; height: 38px; border-radius: 9px; }
+#s-tabs .sbsite .hub .sv-pt-st { display: grid; place-items: center; background: var(--sv-or); }
+#s-tabs .sbsite .hub .sv-pt-st img { width: 24px; height: 24px; display: block; }
+#s-tabs .sbsite .hub .sv-link { display: grid; place-items: center; width: 24px; height: 24px; color: var(--sv-text-3); }
+#s-tabs .sbsite .hub .sv-link .ui-i { width: 20px; height: 20px; }
+#s-tabs .sbsite .hub .sv-h { margin: 12px 0 0; padding-bottom: 12px; border-bottom: 1px solid var(--sv-line-2); text-align: center; font: 500 16.5px/1.3 var(--sv-font); letter-spacing: -.1px; color: var(--sv-text); }
+#s-tabs .sbsite .hub .sv-perm { position: absolute; left: 22px; right: 22px; top: 126px; }
+#s-tabs .sbsite .hub .sv-will { display: block; margin-bottom: 6px; font: 600 12.5px/18px var(--sv-font); }
+#s-tabs .sbsite .hub .sv-sc { display: flex; align-items: center; gap: 7px; height: 22px; font: 400 12.5px/1 var(--sv-font); color: var(--sv-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .sv-cb { flex: none; display: grid; place-items: center; width: 13px; height: 13px; border-radius: 3px; background: var(--sv-check); color: #fff; }
+#s-tabs .sbsite .hub .sv-cb .ui-i { width: 11px; height: 11px; }
+#s-tabs .sbsite .hub .sv-req .sv-cb { background: transparent; box-shadow: inset 0 0 0 1px #c9c9d1; color: #8e8e98; }
+#s-tabs .sbsite .hub .sv-req span { color: var(--sv-text-2); }
+#s-tabs .sbsite .hub .sv-btn { display: grid; place-items: center; height: 34px; margin-top: 8px; border-radius: 4px; font: 600 13.5px/1 var(--sv-font); box-sizing: border-box; }
+#s-tabs .sbsite .hub .sv-auth { margin-top: 10px; background: var(--sv-or); color: #fff; }
+#s-tabs .sbsite .hub .sv-auth.on { background: var(--sv-or-d); }
+#s-tabs .sbsite .hub .sv-cancel { background: #fff; color: var(--sv-text); box-shadow: inset 0 0 0 1px #c9c9d1; font-weight: 500; }
+#s-tabs .sbsite .hub .sv-done { position: absolute; left: 22px; right: 22px; top: 132px; opacity: 0; }
+#s-tabs .sbsite .hub .sv-step { display: flex; align-items: center; gap: 11px; height: 34px; font: 400 14px/1 var(--sv-font); white-space: nowrap; }
+#s-tabs .sbsite .hub .sv-ok { position: relative; flex: none; width: 20px; height: 20px; }
+#s-tabs .sbsite .hub .sv-spin { position: absolute; inset: 2px; border-radius: 50%; border: 2px solid var(--sv-line); border-top-color: var(--sv-or); }
+#s-tabs .sbsite .hub .sv-dn { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: var(--sv-green); opacity: 0; }
+#s-tabs .sbsite .hub .sv-dn .ui-i { width: 13px; height: 13px; color: #fff; }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .sv-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--sv-card); }
+#s-tabs .sv-client { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: visible;
+  background: var(--sv-card); color: var(--sv-text); font: 400 14px/1.3 var(--sv-font); -webkit-font-smoothing: antialiased; }
+
+/* Strava's logged-in header */
+#s-tabs .sv-top { flex: none; display: flex; align-items: center; height: 54px; padding: 0 32px; border-bottom: 1px solid var(--sv-line); white-space: nowrap; }
+#s-tabs .sv-word { flex: none; height: 19px; width: auto; display: block; }
+#s-tabs .sv-top nav { display: flex; gap: 28px; margin-left: 40px; height: 100%; }
+#s-tabs .sv-top nav span { font: 500 14.5px/54px var(--sv-font); color: var(--sv-text); }
+#s-tabs .sv-top nav span.on { box-shadow: inset 0 -3px 0 var(--sv-or); font-weight: 600; }
+#s-tabs .sv-tr { display: inline-flex; align-items: center; gap: 18px; margin-left: auto; color: var(--sv-text); }
+#s-tabs .sv-tr .ui-i { width: 22px; height: 22px; }
+#s-tabs .sv-av { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--sv-text); color: #fff; font: 600 14px/1 var(--sv-font); font-style: normal; }
+
+/* the plan's header */
+#s-tabs .sv-head { flex: none; display: flex; align-items: flex-end; gap: 24px; padding: 20px 32px 16px; background: var(--sv-page); border-bottom: 1px solid var(--sv-line); }
+#s-tabs .sv-ttl { min-width: 0; }
+#s-tabs .sv-ttl h1 { margin: 0; font: 700 27px/1.1 var(--sv-font); letter-spacing: -.4px; }
+#s-tabs .sv-ttl p { margin: 6px 0 10px; font: 400 14.5px/1.2 var(--sv-font); color: var(--sv-text-2); }
+#s-tabs .sv-badge { display: inline-flex; align-items: center; gap: 7px; height: 26px; padding: 0 10px 0 4px; border-radius: 13px; background: #fff;
+  box-shadow: inset 0 0 0 1px var(--sv-line); font: 500 12.5px/1 var(--sv-font); color: var(--sv-text); white-space: nowrap; }
+#s-tabs .sv-badge img { width: 19px; height: 19px; border-radius: 6px; display: block; }
+#s-tabs .sv-stats { display: flex; gap: 34px; margin-left: auto; white-space: nowrap; }
+#s-tabs .sv-stats span { font: 400 14.5px/1 var(--sv-font); color: var(--sv-text-2); }
+#s-tabs .sv-stats b { margin-right: 3px; font: 700 26px/1 var(--sv-font); color: var(--sv-text); letter-spacing: -.3px; }
+#s-tabs .sv-stats span:last-child b { margin: 0 0 0 3px; }
+
+/* the calendar's heading row: title, type legend, the sync counter */
+#s-tabs .sv-calhd { flex: none; display: flex; align-items: center; gap: 26px; height: 48px; padding: 0 32px; white-space: nowrap; }
+#s-tabs .sv-calhd h2 { margin: 0; font: 700 18px/1 var(--sv-font); letter-spacing: -.2px; }
+#s-tabs .sv-legend { display: flex; gap: 16px; font: 500 12.5px/1 var(--sv-font); color: var(--sv-text-2); }
+#s-tabs .sv-legend span { display: inline-flex; align-items: center; gap: 6px; }
+#s-tabs .sv-sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+#s-tabs .sv-sync { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; font: 600 14px/1 var(--sv-font); color: var(--sv-text); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-sync.done { color: var(--sv-green); }
+#s-tabs .sv-sst { position: relative; flex: none; width: 20px; height: 20px; }
+#s-tabs .sv-sync .sv-spin { position: absolute; inset: 2px; border-radius: 50%; border: 2px solid var(--sv-line); border-top-color: var(--sv-or); }
+#s-tabs .sv-sok { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: var(--sv-green); opacity: 0; }
+#s-tabs .sv-sok .ui-i { width: 13px; height: 13px; color: #fff; }
+
+/* the grid: a label column and Mon to Sun; 12 week rows share the height left */
+#s-tabs .sv-grid { flex: 1; min-height: 0; display: flex; flex-direction: column; margin: 0 32px 16px; border: 1px solid var(--sv-line); border-radius: 6px; }
+#s-tabs .sv-dh, #s-tabs .sv-row { display: grid; grid-template-columns: 124px repeat(7, 1fr); }
+#s-tabs .sv-dh { flex: none; height: 26px; background: var(--sv-page); border-bottom: 1px solid var(--sv-line); border-radius: 6px 6px 0 0; }
+#s-tabs .sv-dh span { padding-left: 10px; font: 600 12px/26px var(--sv-font); color: var(--sv-text-2); text-transform: uppercase; letter-spacing: .4px; }
+#s-tabs .sv-row { flex: 1; min-height: 0; }
+#s-tabs .sv-row + .sv-row { border-top: 1px solid var(--sv-line-2); }
+#s-tabs .sv-row.sv-live { background: #fffaf7; }
+#s-tabs .sv-wk { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; align-content: center; column-gap: 6px; row-gap: 3px;
+  padding: 0 10px 0 12px; border-right: 1px solid var(--sv-line-2); white-space: nowrap; }
+#s-tabs .sv-wk b { font: 700 13px/1 var(--sv-font); }
+#s-tabs .sv-wk em { justify-self: end; font: 600 12.5px/1 var(--sv-font); font-style: normal; color: var(--sv-text); font-variant-numeric: tabular-nums; }
+#s-tabs .sv-wk small { font: 400 12px/1 var(--sv-font); color: var(--sv-text-2); }
+#s-tabs .sv-ws { display: none; }
+#s-tabs .sv-tag { justify-self: end; height: 15px; padding: 0 5px; border-radius: 3px; background: var(--sv-easy); font: 600 10.5px/15px var(--sv-font); font-style: normal; color: var(--sv-text-2); }
+#s-tabs .sv-cell { position: relative; display: flex; align-items: center; padding: 0 5px; min-width: 0; }
+#s-tabs .sv-cell + .sv-cell { box-shadow: inset 1px 0 0 var(--sv-line-2); }
+
+/* a workout chip: the run glyph, its name over its distance, the synced tick on its corner */
+#s-tabs .sv-chip { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; gap: 7px; height: calc(100% - 8px); max-height: 38px; padding: 0 8px 0 6px;
+  box-sizing: border-box; border-radius: 5px; opacity: 0; }
+#s-tabs .sv-gl { width: 17px; height: 17px; }
+#s-tabs .sv-ct { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+#s-tabs .sv-ct b { font: 600 12px/1.1 var(--sv-font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sv-ct em { font: 400 12px/1.1 var(--sv-font); font-style: normal; white-space: nowrap; font-variant-numeric: tabular-nums; }
+#s-tabs .sv-tk { position: absolute; right: -4px; top: -4px; display: grid; place-items: center; width: 13px; height: 13px; border-radius: 50%; background: var(--sv-green);
+  box-shadow: 0 0 0 1.5px #fff; color: #fff; opacity: 0; }
+#s-tabs .sv-tk .ui-i { width: 9px; height: 9px; }
+/* the types: easy neutral, tempo/race pace a light orange tint, intervals a deeper tint, long run solid orange,
+   the race itself dark with its flag */
+#s-tabs .sv-easy { background: var(--sv-easy); color: var(--sv-text); }
+#s-tabs .sv-chip.sv-easy .sv-gl { color: var(--sv-text-2); }
+#s-tabs .sv-tempo { background: var(--sv-tint); color: var(--sv-or-text); }
+#s-tabs .sv-int { background: var(--sv-tint-2); color: var(--sv-or-text); }
+#s-tabs .sv-long { background: var(--sv-or); color: #fff; }
+#s-tabs .sv-race { background: var(--sv-race); color: #fff; }
+#s-tabs .sv-chip.sv-tempo em, #s-tabs .sv-chip.sv-int em { color: var(--sv-text); }
+
+/* race day: the orange ring (--ring 0..1 from strava.js) and the goal line inside its own chip: on the distance line
+   at 16:9, a line of its own under the distance at 4:5 (row 12 a little taller there); its opacity is written from t */
+#s-tabs .sv-raceday .sv-chip { box-shadow: 0 0 0 calc(var(--ring, 0) * 3px) var(--sv-or), 0 0 0 calc(var(--ring, 0) * 7px) rgba(252, 82, 0, calc(var(--ring, 0) * .18)); }
+#s-tabs .sv-goal { opacity: 0; font-style: normal; }
+#s-tabs .sv-gt { display: none; }
+#s-tabs .sv-gw { color: #fff; font-weight: 600; }
+
+/* ---- portrait (4:5): compact header, the legend on its own line above the grid, Wk labels, glyph + distance chips ---- */
+#s-tabs .sv-tall .sv-top { height: 50px; padding: 0 20px; }
+#s-tabs .sv-tall .sv-word { height: 17px; }
+#s-tabs .sv-tall .sv-top nav { gap: 18px; margin-left: 24px; }
+#s-tabs .sv-tall .sv-top nav span { font-size: 13.5px; line-height: 50px; }
+#s-tabs .sv-tall .sv-tr { gap: 12px; }
+#s-tabs .sv-tall .sv-tr .ui-i { width: 20px; height: 20px; }
+#s-tabs .sv-tall .sv-av { width: 28px; height: 28px; font-size: 13px; }
+#s-tabs .sv-tall .sv-head { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px 20px 14px; }
+#s-tabs .sv-tall .sv-ttl h1 { font-size: 24px; }
+#s-tabs .sv-tall .sv-ttl p { margin: 5px 0 9px; font-size: 13.5px; }
+#s-tabs .sv-tall .sv-stats { margin-left: 0; gap: 26px; }
+#s-tabs .sv-tall .sv-stats b { font-size: 22px; }
+#s-tabs .sv-tall .sv-stats span { font-size: 13.5px; }
+#s-tabs .sv-tall .sv-calhd { flex-wrap: wrap; row-gap: 10px; height: auto; padding: 12px 20px 10px; }
+#s-tabs .sv-tall .sv-calhd h2 { font-size: 17px; }
+#s-tabs .sv-tall .sv-legend { order: 3; flex-basis: 100%; gap: 14px; font-size: 12.5px; }
+#s-tabs .sv-tall .sv-sync { font-size: 13px; }
+#s-tabs .sv-tall .sv-grid { margin: 0 20px 14px; }
+#s-tabs .sv-tall .sv-dh, #s-tabs .sv-tall .sv-row { grid-template-columns: 66px repeat(7, 1fr); }
+#s-tabs .sv-tall .sv-dh span { padding-left: 0; text-align: center; font-size: 12px; letter-spacing: .2px; }
+#s-tabs .sv-tall .sv-wk { grid-template-columns: 1fr; padding: 0 6px 0 8px; row-gap: 4px; }
+#s-tabs .sv-tall .sv-wl, #s-tabs .sv-tall .sv-wk small { display: none; }
+#s-tabs .sv-tall .sv-ws { display: inline; }
+#s-tabs .sv-tall .sv-wk em { justify-self: start; font-size: 12px; color: var(--sv-text-2); }
+#s-tabs .sv-tall .sv-tag { justify-self: start; font-size: 12px; height: 17px; line-height: 17px; }
+#s-tabs .sv-tall .sv-cell { padding: 0 4px; }
+#s-tabs .sv-tall .sv-chip { flex-direction: column; justify-content: center; gap: 3px; padding: 0 2px; max-height: 50px; }
+#s-tabs .sv-tall .sv-gl { width: 16px; height: 16px; }
+#s-tabs .sv-tall .sv-ct b { display: none; }
+#s-tabs .sv-tall .sv-ct em { font-size: 12.5px; font-weight: 600; text-align: center; }
+#s-tabs .sv-tall .sv-row:last-child { flex: 1.3; }
+#s-tabs .sv-tall .sv-raceday .sv-chip { max-height: 66px; }
+#s-tabs .sv-tall .sv-gw { display: none; }
+#s-tabs .sv-tall .sv-gt { display: block; font: 600 12px/1.1 var(--sv-font); color: #fff; text-align: center; white-space: nowrap; }
+
+/* the richer calendar: a tighter header for taller week rows, the phase stripe on every week, rest-day dates, and a
+   second chip line carrying the workout's structure graph (struct.js) or its easy pace */
+#s-tabs .sv-head { padding: 14px 32px 12px; }
+#s-tabs .sv-calhd { height: 40px; }
+#s-tabs .sv-stats { gap: 28px; }
+#s-tabs .sv-st-rp b { color: var(--sv-or); }
+#s-tabs .sv-wk { box-shadow: inset 3px 0 0 var(--ph); }
+#s-tabs .sv-phn { margin-right: 5px; font-weight: 600; color: color-mix(in srgb, var(--ph) 72%, #1f1f24); }
+#s-tabs .sv-tag-peak { background: rgba(252, 82, 0, .12); color: #c2410c; }
+#s-tabs .sv-tag-taper { background: #f1eaff; color: #6d3fd1; }
+#s-tabs .sv-tag-race { background: var(--sv-race); color: #fff; }
+#s-tabs .sv-dnum { position: absolute; top: 6px; right: 10px; font: 500 11px/1 var(--sv-font); color: #b4b4bc; font-variant-numeric: tabular-nums; }
+#s-tabs .sv-ct { flex: 1; gap: 4px; }
+#s-tabs .sv-l1 { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+#s-tabs .sv-l1 em { margin-left: auto; font-weight: 600; }
+#s-tabs .sv-l2 { display: block; height: 10px; font: 500 10.5px/10px var(--sv-font); white-space: nowrap; overflow: hidden; }
+#s-tabs .sv-sx svg { display: block; width: 100%; height: 10px; }
+#s-tabs .sv-pc { color: var(--sv-text-2); }
+#s-tabs .sv-race .sv-l2 { color: rgba(255, 255, 255, .82); }
+#s-tabs .sv-tall .sv-l2, #s-tabs .sv-tall .sv-dnum, #s-tabs .sv-tall .sv-phn { display: none; }
+#s-tabs .sv-tall .sv-l1 { justify-content: center; }
+#s-tabs .sv-tall .sv-l1 em { margin-left: 0; }
+#s-tabs .sv-dh, #s-tabs .sv-row { grid-template-columns: 140px repeat(7, 1fr); }
+#s-tabs .sv-long .sv-pc { color: rgba(255, 255, 255, .85); }
+#s-tabs .sv-race .sv-l1 em { display: none; }
+#s-tabs .sv-tall .sv-race .sv-l1 em { display: inline; }
+#s-tabs .sv-dh, #s-tabs .sv-row { grid-template-columns: 156px repeat(7, 1fr); }
+#s-tabs .sv-l1 em { padding-right: 5px; }

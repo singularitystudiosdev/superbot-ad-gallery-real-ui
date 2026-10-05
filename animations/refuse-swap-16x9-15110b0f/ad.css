@@ -1,0 +1,32 @@
+/* V1 "Swap" layout */
+.v1-title { margin-top: 12px; font-size: 54px; font-weight: 800; letter-spacing: -.03em; }
+.v1-ask { display: flex; align-items: center; gap: 20px; background: var(--raised); border: 1px solid var(--line-2); border-radius: 20px; padding: 0 26px; }
+.v1-ask .who { font-size: 15px; font-weight: 700; color: var(--muted); writing-mode: horizontal-tb; }
+.v1-ask .body { flex: 1; font-size: 27px; font-weight: 600; }
+.v1-ask .once { font-size: 15px; color: var(--muted-2); border: 1px solid var(--line-2); border-radius: 999px; padding: 6px 14px; }
+
+.v1-col { display: flex; flex-direction: column; gap: 18px; }
+.v1-col .endpill { align-self: flex-start; }
+.v1-col.stock .endpill { border-color: #3a2326; }
+.v1-col.sb .endpill { border-color: #1d3a2a; }
+.v1-col .bub { flex: 1; }
+.v1-col .bub.stock { display: flex; flex-direction: column; }
+.v1-col .bub.stock .body { display: flex; flex-direction: column; justify-content: center; flex: 1; }
+.v1-col .bub.sb .ans { font-size: 18px; }
+.v1-col .endpill .lat { margin-left: auto; color: var(--muted-2); font-size: 14px; }
+
+.v1-col.stock.flash .bub.stock { animation: none; box-shadow: 0 0 0 2px var(--bad); }
+.v1-col.beat .refuse { color: var(--muted); }
+.v1-col.beat .refuse .rk { opacity: .4; }
+.v1-col.beat .refuse::after { content: ""; position: absolute; left: 0; width: 100%; height: 3px; background: var(--bad); }
+.v1-col.beat .refuse { position: relative; }
+.v1-col.beat .refuse::after { position: absolute; left: 54px; right: 0; top: 52%; transform-origin: 0 50%; transform: scaleX(var(--k, 0)); }
+
+.v1-sub { display: flex; align-items: center; gap: 20px; background: var(--panel); border: 1px solid var(--line-2); border-radius: 18px; padding: 0 22px; }
+.v1-sub .nm { flex: 1; display: flex; flex-direction: column; }
+.v1-sub .nm b { font-size: 22px; font-weight: 700; }
+.v1-sub .nm span { font-size: 15px; color: var(--muted); }
+.v1-sub .st { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--ok); }
+.v1-sub .st .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); }
+.refuse .rk.waiting { background: transparent; border-color: var(--muted-2); }
+.refuse .rk.waiting::before, .refuse .rk.waiting::after { display: none; }

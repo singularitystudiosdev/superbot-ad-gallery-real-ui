@@ -792,6 +792,25 @@ const more = [
   ['one-key-stack-4x5-24e2059d', 'one-key-stack-4x5-24e2059d/', 'One API key, all your subscriptions: keep the plans, drop the per-token API bills (4:5)', 'Ad spots',
     { desc: 'Four AI plans (ChatGPT, Claude, Grok, Cursor) plus three metered per-token API bills, each with its own key. The plans fly into Superbot\'s Subscriptions & keys and connect, the per-token API bills are struck through and fall away, then API access mints one sbc_ key (Route: Auto, Mode: Agent) and the four vendors dock around it like a keyring. 21.6 s, 4:5, with sound.',
       download: 'animations/one-key-stack-4x5-24e2059d/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // One API key, all your subscriptions, routed (2026-10-05, chat 0d6132a7): three 24.0 s forks of the
+  // every-model-converge-4x5 engine (superbot-format-daeon/every-model-converge-4x5.398eded5, untouched) in its house
+  // look. Each one packs the six accounts Superbot connects (ChatGPT, Claude, Gemini, Grok, Cursor, DeepSeek; hub/roster.ts
+  // VENDOR_LABELS) into one sbc_ key, then routes three asks to three models: a hard refactor to Claude Opus 5.5, three
+  // PDFs to Gemini 3.1 Pro, a quick rename to DeepSeek V4 (model-registry.data.ts, composer.tsx, provider-switch.ts,
+  // model-picker.tsx). converge: the rows spiral into the key on the phone, then the thread switches per ask. routemap:
+  // the tiles compress into OPENAI_API_KEY, then curl packets ride a route map. dial: the accounts lock into a key ring
+  // that turns to the chosen model. Hook: sell-to-reddit llm_ai rank-1 complaint usage-limits-pricing (5,651 authors,
+  // 2026-10-05, wants 'alternative ai subscription'). Asks and answers illustrative, no price or savings figure.
+  // Source: quick-chats/superbot-onekey-route-4x5.0d6132a7. 1080x1350, 30 fps, with sound.
+  ['onekey-converge-4x5-0d6132a7', 'onekey-converge-4x5-0d6132a7/', 'One API key, all your subscriptions: six accounts spiral into one key, then Opus 5.5, Gemini or DeepSeek per request (converge, 4:5)', 'Ad spots',
+    { desc: 'The six accounts on Superbot\'s Subscriptions & keys page lift off the phone, orbit and collapse into one sbc_ API key. Then three asks in a superbot thread, each switching to the model for the job: a hard refactor to Claude Opus 5.5 on your Claude plan, three PDFs to Gemini 3.1 Pro on your Gemini plan, a quick rename to DeepSeek V4. 24 s, 4:5, with sound.',
+      download: 'animations/onekey-converge-4x5-0d6132a7/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['onekey-routemap-4x5-0d6132a7', 'onekey-routemap-4x5-0d6132a7/', 'One API key, all your subscriptions: six accounts compress into one drop-in key, then each request rides the route map to Opus 5.5, Gemini or DeepSeek (route map, 4:5)', 'Ad spots',
+    { desc: 'Six connected accounts squeeze into one row and stream into OPENAI_API_KEY as a single sbc_ key under the superbot base URL. Then three curl requests ride a route map: Superbot picks Claude Opus 5.5 for a hard refactor, Gemini 3.1 Pro for three PDFs and DeepSeek V4 for a quick rename, passing over the other two paths each time. 24 s, 4:5, with sound.',
+      download: 'animations/onekey-routemap-4x5-0d6132a7/final.mp4', downloadLabel: 'MP4 4:5' }],
+  ['onekey-dial-4x5-0d6132a7', 'onekey-dial-4x5-0d6132a7/', 'One API key, all your subscriptions: six accounts lock into a key dial that turns to Opus 5.5, Gemini or DeepSeek per request (dial, 4:5)', 'Ad spots',
+    { desc: 'Six account pills dock into the notches of a rotary key ring and its face resolves one sbc_ API key. Each request drops into the dial and it turns to the model for the job: Claude Opus 5.5 for a hard refactor, Gemini 3.1 Pro for three PDFs, DeepSeek V4 for a quick rename. 24 s, 4:5, with sound.',
+      download: 'animations/onekey-dial-4x5-0d6132a7/final.mp4', downloadLabel: 'MP4 4:5' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

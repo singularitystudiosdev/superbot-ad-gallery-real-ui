@@ -1,0 +1,31 @@
+/* Rules this spot's own blocks need that the capture's pruned stylesheet (app.css) does not carry. Utilities are
+   copied from the built renderer stylesheet (out/renderer/assets/index-*.css) where it has them, otherwise written
+   the way Tailwind v4 compiles them against the app's tokens. The component rules (code block, action chip) follow
+   packages/ui/src/components/code-block.css and action-chip.tsx. */
+.max-w-\(--size-answer-image\){max-width:var(--size-answer-image)}
+.bg-accent{background-color:var(--color-accent)}
+.text-accent-ink{color:var(--color-accent-ink)}
+.gap-\(--spacing-2\){gap:var(--spacing-2)}
+.bg-line-strong{background-color:var(--color-line-strong)}
+.border-b{border-bottom-style:var(--tw-border-style);border-bottom-width:1px}
+.overflow-x-auto{overflow-x:auto}
+.max-h-\(--size-code-body-max\){max-height:var(--size-code-body-max)}
+.sb-switch{flex:none}
+.size-\(--size-send\){width:var(--size-send);height:var(--size-send)}
+.size-\(--size-favicon\){width:var(--size-favicon);height:var(--size-favicon)}
+.min-h-\(--spacing-2\){min-height:var(--spacing-2)}
+.max-h-\(--size-answer-media-max-h\){max-height:var(--size-answer-media-max-h)}
+/* the media surface at a portrait clip's true aspect: width = min(column, max-h x aspect) (media-embed.tsx) */
+.ad-portrait{aspect-ratio:9/16;width:min(100%,calc(var(--size-answer-media-max-h) * .5625))}
+/* ActionChip: focus-ring inline-flex h-24 shrink-0 items-center gap-4 rounded-pill px-8 text-caption text-muted */
+.ad-chip{display:inline-flex;height:var(--spacing-24);flex-shrink:0;align-items:center;gap:var(--spacing-4);border-radius:var(--radius-pill,9999px);padding-inline:var(--spacing-8);font-size:var(--text-caption);line-height:var(--text-caption--line-height);color:var(--color-muted)}
+[data-slot="code-block-fold"] .code-block-fold-chevron{transition:transform var(--duration-150) var(--ease-standard)}
+[data-slot="code-block-body"]{tab-size:4}
+[data-slot="code-block-body"][data-overflow="true"]:not([data-at-end="true"]){mask-image:linear-gradient(to right,black 0,black calc(100% - var(--spacing-24)),transparent 100%)}
+[data-slot="code-block-body"] code{font:inherit;white-space:pre}
+/* the spot's own plumbing: a block's grow-in wrapper, the composer's caret while the ask is typed */
+.adg{display:block}
+.ad-caret{display:inline-block;width:1.5px;height:20px;margin-left:1px;vertical-align:-4px;background:var(--color-fg);border-radius:1px}
+.hub-browser-host{position:relative;overflow:hidden}
+.sb-line-result{white-space:nowrap;flex:none}
+.sb-line-words{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

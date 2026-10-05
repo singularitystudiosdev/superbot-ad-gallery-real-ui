@@ -1,0 +1,32 @@
+CREDITS (niche-youtube-model-switch-superbot-1db9afb3)
+
+superbot UI   Every app frame is the real superbot desktop renderer's DOM and stylesheet: the states captured from
+              superbot-desktop main @366230a (2026-10-05) by the live-UI spot (every-model-one-chat-live-ui-superbot-
+              9fd25c77), kept in base.js and app/app.css. The thread's rows are cloned from those states (user bubble,
+              live turn head, switch pills with their who rows and step lists, sonar tool lines, markdown, image card).
+              The in-app browser, the audio row, the video embed and the code block follow the components' own markup
+              (hub/Browser.tsx, embeds/audio-row.tsx, embeds/media-embed.tsx, components/code-block.tsx); app/browser.css
+              is the shipped hub/browser.css, app/pane.css the matching rules from the built renderer stylesheet.
+              Provider tiles (app/tile-*.svg, anthropic, google, youtube) are the app's own (packages/ui/src/marks/tiles).
+              Demo chats in the sidebar renamed for the creator; the account reads sam@samrivera.tv.
+
+Model output  All real, made for this spot (work dir work/ytshort-1db9afb3):
+  DeepSeek V4 Pro   deepseek/deepseek-v4-pro via OpenRouter with web search (2,525 reasoning tokens, 8 cited pages).
+                    On screen: its findings, each checked against the cited page (ulanzi.com x2, studiorescue.net x2,
+                    dpamicrophones.com), and its 30-second script, verbatim.
+  Blender 5.2.2 LTS shockmount.blend built by script (blender/scene.py), 630 frames rendered in EEVEE (18 min 49 s on an
+                    M5 Pro). media/blender-ui.jpg is two real GUI captures of that file joined so no playhead shows.
+  Eleven v3         the script voiced with ElevenLabs Eleven v3 (voice Roger, 18.53 s), timed with Scribe v2 (56 words).
+                    The audio row's 48 bars are that file's real peaks (audio.js).
+  Claude Opus 5.5   remotion/src/ShortReply.tsx (code.js shows it, 547 lines after formatting): Remotion 4.0.533,
+                    @remotion/elevenlabs + @remotion/captions captions on the Scribe timings, labels pinned to points
+                    Blender projected (tracks.json). media/studio is the real Remotion Studio previewing it, stepped
+                    frame by frame and captured at 2x; media/short is its render.
+  Gemini 3 Pro Image  google/nano-banana-pro (Nano Banana Pro) from Blender frame 226, prompt in the work dir.
+
+YouTube       The comments page and the Shorts page are rebuilt from the live youtube.com pages captured headless at the
+              browser pane's size (640 x 692), logged out, 2026-10-05; icons are youtube.com's own paths (yticons.js);
+              Roboto (Apache 2.0) in media/fonts. The creator, his channel and every comment are made up for the spot.
+
+Blender window  macOS 26 window chrome drawn by the spot (native chrome, not app UI); title read off the live window.
+Fonts         Inter (OFL) as shipped in the superbot renderer (app/).

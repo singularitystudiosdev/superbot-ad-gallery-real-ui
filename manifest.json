@@ -562,6 +562,17 @@
     "desc": "One ask in superbot: Gemini watches the latest video and ranks its 1,284 comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies in the creator's voice, then superbot posts them in YouTube Studio and pins the best one."
   },
   {
+    "id": "niche-youtube-model-switch-superbot-1db9afb3",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Turn my most-asked comment into a 3D Short and reply with it: DeepSeek V4 Pro, Blender, Eleven v3, Claude Opus 5.5, Gemini 3 Pro Image, then YouTube (6 switches, real superbot UI, 16:9)",
+    "src": "animations/niche-youtube-model-switch-superbot-1db9afb3/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-1db9afb3.png",
+    "desc": "One ask in the real superbot desktop app. DeepSeek V4 Pro reads the video's 1,284 comments in superbot's browser and searches the web: 63 ask whether a shock mount stops desk thumps, so it answers with five cited findings and a 3-sentence script. Blender builds and renders the answer in 3D in its own window, Eleven v3 voices the script, Claude Opus 5.5 writes the Short as Remotion code and previews it in Remotion Studio, Gemini 3 Pro Image makes the custom thumbnail from a Blender frame, then YouTube posts the Short, replies to the commenter and pins a comment that links it.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-1db9afb3.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-linkedin-model-switch-superbot-05fd7f45",
     "type": "animation",
     "group": "Ad spots",

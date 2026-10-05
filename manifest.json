@@ -1954,6 +1954,17 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "onekey-converge-16x9-473fafd4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: six accounts spiral into one key, then Opus 5.5, Gemini or DeepSeek per request (converge, 16:9)",
+    "src": "animations/onekey-converge-16x9-473fafd4/",
+    "thumb": "assets/shots/onekey-converge-16x9-473fafd4.png",
+    "desc": "The 16:9 cut of the converge spot. The six accounts on Superbot's Subscriptions & keys page lift off the phone, orbit beside it and collapse into one sbc_ API key that drops into the phone. Then three asks in a superbot thread, each switching to the model for the job: a hard refactor to Claude Opus 5.5 on your Claude plan, three PDFs to Gemini 3.1 Pro on your Gemini plan, a quick rename to DeepSeek V4. 24 s, 16:9, with sound.",
+    "download": "animations/onekey-converge-16x9-473fafd4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "onekey-routemap-4x5-0d6132a7",
     "type": "animation",
     "group": "Ad spots",

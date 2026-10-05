@@ -2401,6 +2401,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "srs-router-beam-16x9-c1c737b6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Open router for your subscriptions: four plans stream into one sbc_ key, then a router table bills Opus 5.5 / Gemini / DeepSeek to your plans (beam cut, 16:9)",
+    "src": "animations/srs-router-beam-16x9-c1c737b6/",
+    "thumb": "assets/shots/srs-router-beam-16x9-c1c737b6.png",
+    "desc": "Full-bleed cut. Four subscription orbs (Claude Max, ChatGPT Pro, Google AI Pro, DeepSeek) rise under the line \"Every AI subscription you pay for, behind one API key,\" then stream into one sbc_ key card, each plan printing its own segment of the key. The key docks into an OpenRouter-style router table. Three requests type in: a checkout refactor routes to Claude Opus 5.5 on Claude Max, 14 earnings calls to Gemini 3.1 Pro on Google AI Pro, 5,000 tickets to DeepSeek V4.1 Flash on the DeepSeek plan, each list price struck through to $0.00 with the plan it was billed to. Meters: $0.00 extra on your plans while a pay-per-token counter climbs past $500. Ends on: Open router for your subscriptions. 24 s, 16:9, with sound.",
+    "download": "animations/srs-router-beam-16x9-c1c737b6/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "srs-router-stack-16x9-c1c737b6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Open router for your subscriptions: four plans collapse into one key under \"one bill you already pay,\" then the router bills Google AI Pro (stack cut, 16:9)",
+    "src": "animations/srs-router-stack-16x9-c1c737b6/",
+    "thumb": "assets/shots/srs-router-stack-16x9-c1c737b6.png",
+    "desc": "Violet-magenta cut. \"Four subscriptions. One bill you already pay.\" Four plan orbs collapse into one sbc_ key, then an OpenRouter-style router table runs three requests: a checkout refactor to Claude Opus 5.5 on Claude Max, 14 earnings calls to Gemini 3.1 Pro on Google AI Pro, 5,000 tickets to DeepSeek V4.1 Flash on the DeepSeek plan. Every list price is struck to $0.00 and billed to the plan. Then the split meter: $0.00 extra on your plans beside a per-token counter climbing past $500. Ends on: Open router for your subscriptions. 24 s, 16:9, with sound.",
+    "download": "animations/srs-router-stack-16x9-c1c737b6/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "srs-router-terminal-16x9-c1c737b6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Open router for your subscriptions: one drop-in key, every model you pay for, routed and billed to your plans (terminal cut, 16:9)",
+    "src": "animations/srs-router-terminal-16x9-c1c737b6/",
+    "thumb": "assets/shots/srs-router-terminal-16x9-c1c737b6.png",
+    "desc": "Green-cyan cut for the drop-in swap. \"One key. Every model you already pay for.\" Four plan orbs stream into a single sbc_ key (base_url beta.superbot.gg/v1, model auto), then the OpenRouter-style router table routes three requests: a checkout refactor to Claude Opus 5.5 on Claude Max, 14 earnings calls to Gemini 3.1 Pro on Google AI Pro, 5,000 tickets to DeepSeek V4.1 Flash on the DeepSeek plan. List prices struck to $0.00, each billed to the plan behind it. Split meter: $0.00 extra on your plans vs a climbing per-token counter. Ends on: Open router for your subscriptions. 24 s, 16:9, with sound.",
+    "download": "animations/srs-router-terminal-16x9-c1c737b6/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

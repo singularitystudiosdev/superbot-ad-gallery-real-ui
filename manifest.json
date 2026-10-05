@@ -1701,6 +1701,61 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "one-key-keyring-16x9-f34a5ba4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: one key opens every lock (16:9)",
+    "src": "animations/one-key-keyring-16x9-f34a5ba4/",
+    "thumb": "assets/shots/one-key-keyring-16x9-f34a5ba4.png",
+    "desc": "Four subscriptions (ChatGPT, Claude, Grok, Cursor), each padlocked with its own login. The logins fall away, one Superbot caller key drops in and turns each lock, and every tile becomes a connected row in Superbot's Subscriptions & keys page with the key docked beside it. 18.0 s, 16:9, with sound.",
+    "download": "animations/one-key-keyring-16x9-f34a5ba4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "one-key-env-diff-16x9-f34a5ba4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: delete your keys, add one (.env diff, 16:9)",
+    "src": "animations/one-key-env-diff-16x9-f34a5ba4/",
+    "thumb": "assets/shots/one-key-env-diff-16x9-f34a5ba4.png",
+    "desc": "A .env holding separate OpenAI, Anthropic and xAI keys is deleted line by line. Two green lines add the Superbot endpoint (OPENAI_BASE_URL .../v1) and one sbc_ caller key, then a terminal runs the same curl three times and ChatGPT, Claude and Grok each answer through that one key. 18.0 s, 16:9, with sound.",
+    "download": "animations/one-key-env-diff-16x9-f34a5ba4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "one-key-switchboard-16x9-f34a5ba4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: any tool in, every sub out (16:9)",
+    "src": "animations/one-key-switchboard-16x9-f34a5ba4/",
+    "thumb": "assets/shots/one-key-switchboard-16x9-f34a5ba4.png",
+    "desc": "A left to right switchboard: your tools (OpenAI SDK, Anthropic SDK, curl, your scripts) on the left, Superbot's real Your endpoint card with one sbc_ caller key in the middle, and ChatGPT, Claude, Grok and Cursor connected on the right. Requests route through the one key to every subscription and the replies come back. 18.6 s, 16:9, with sound.",
+    "download": "animations/one-key-switchboard-16x9-f34a5ba4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "one-key-split-16x9-f34a5ba4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: 4 logins, 4 keys, 4 tabs, then 1 key (before and after, 16:9)",
+    "src": "animations/one-key-split-16x9-f34a5ba4/",
+    "thumb": "assets/shots/one-key-split-16x9-f34a5ba4.png",
+    "desc": "Before and after. The frame fills with 4 logins, 4 provider keys and 4 tabs for ChatGPT, Claude, Grok and Cursor, then a divider wipes across and leaves one Superbot panel: API access with one caller key, and Subscriptions & keys with all four connected. The split holds both halves while the key reaches each account. 18.0 s, 16:9, with sound.",
+    "download": "animations/one-key-split-16x9-f34a5ba4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "one-key-mint-16x9-f34a5ba4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subscriptions: connect your subs and mint one key in Superbot Settings (16:9)",
+    "src": "animations/one-key-mint-16x9-f34a5ba4/",
+    "thumb": "assets/shots/one-key-mint-16x9-f34a5ba4.png",
+    "desc": "The real Superbot desktop Settings, start to finish: Subscriptions & keys connects ChatGPT, Claude, Grok and Cursor, API access shows Your endpoint, the Mint a caller key sheet mints one sbc_ key, Copy turns to Copied, and the key lands as OPENAI_API_KEY beside the OpenAI dialect endpoint. 20.4 s, 16:9, with sound.",
+    "download": "animations/one-key-mint-16x9-f34a5ba4/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "dfm1-yt-model-switch-detail-superbot-0abfdc86",
     "type": "animation",
     "group": "Ad spots",

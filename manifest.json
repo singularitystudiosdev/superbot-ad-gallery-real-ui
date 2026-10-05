@@ -2971,6 +2971,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "pocketsflow-beatcut-model-relay-superbot-c7e41a92",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Cut to the beat: ElevenLabs scores first, DeepSeek V4 scrapes past a 403, Nano Banana Pro shoots the stills, Blender models the icon, Opus 5.5 codes and cuts the Pocketsflow launch film (5 switches, 54s, 16:9)",
+    "src": "animations/pocketsflow-beatcut-model-relay-superbot-c7e41a92/",
+    "thumb": "assets/shots/pocketsflow-beatcut-model-relay-superbot-c7e41a92.png",
+    "desc": "A new format for the Pocketsflow spot: a 16:9 edit bay in the real Superbot desktop app, the chat on the left, each model's own app opening live on the right, and the film's timeline underneath filling one track per model. Asked to \"make a launch video for Pocketsflow. cut every shot to the beat\", Superbot scores first: ElevenLabs (Eleven Music) composes a 120 BPM track and marks the drop on bar 3. DeepSeek V4 (DeepThink + Search) scrapes gumroad.com and pocketsflow.com pricing, gets a 403 from Reddit and retries in a real browser where most assistants stop, reads 40 threads on Gumroad fees and writes 7 lines, one per bar. Nano Banana Pro makes four 16:9 2K stills with readable in-image text and drops the one whose text came out wrong. Blender models the PF icon over Python and renders a 60-frame Cycles turntable for the drop. Claude Opus 5.5 writes the checkout and payouts scenes in React with a live preview, cuts LaunchFilm.tsx on the bar grid and renders it with Remotion. Then the 14s film plays full frame on the real score: Gumroad keeps $10.50 of every $100, Pocketsflow keeps $5. The Eleven Music take, the Nano Banana Pro images and the Blender renders were generated for this spot. 54s, 1920x1080, 60 fps, with sound.",
+    "download": "assets/video/pocketsflow-beatcut-model-relay-superbot-c7e41a92.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

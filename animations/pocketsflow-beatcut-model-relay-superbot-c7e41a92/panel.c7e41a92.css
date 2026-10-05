@@ -1,0 +1,76 @@
+/* Workspace panel: tool tabs, the live tool viewport, the edit timeline with its flying clips, end card. */
+.panel { position: absolute; top: 0; bottom: 0; background: #0b0b0c; border-left: 1px solid var(--color-line); overflow: hidden; }
+.ptabs { position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; align-items: center; gap: 6px; padding: 0 12px; border-bottom: 1px solid var(--color-line); background: #0d0d0e; }
+.ptab { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 12px 0 6px; border-radius: 9px; font-size: 12.5px; font-weight: 600; color: var(--color-muted); white-space: nowrap; overflow: hidden; max-width: 0; flex: none; border: 1px solid transparent; }
+.ptab.on { background: var(--color-raised); color: var(--color-fg); border-color: var(--color-line-strong); }
+.ptab .tile { width: 20px; height: 20px; }
+.ptab .tile.play { background: #e6e8ee; color: #0d0d0d; font-size: 9px; }
+.ptabs .live { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; color: #fff; background: var(--color-danger); border-radius: 7px; padding: 3px 8px; }
+.ptabs .live i { width: 6px; height: 6px; border-radius: 50%; background: #fff; display: block; }
+.ptabs .dev { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-muted); }
+.ptabs .dev .ic { width: 14px; height: 14px; }
+.toolport { position: absolute; left: 0; right: 0; overflow: hidden; background: #08080a; }
+.tool { position: absolute; inset: 0; overflow: hidden; }
+.t-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--color-muted); font-size: 14px; }
+.t-empty .mk { width: 52px; height: 52px; }
+.t-empty b { color: var(--color-fg); font-size: 18px; }
+
+/* edit timeline */
+.edit { position: absolute; left: 0; right: 0; background: #0e0e10; border-top: 1px solid var(--color-line-strong); }
+.ehead { height: 40px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border-bottom: 1px solid var(--color-line); font-size: 13px; }
+.ehead .nm { display: flex; align-items: center; gap: 7px; font-weight: 700; }
+.ehead .nm .ic { width: 14px; height: 14px; color: var(--color-muted); }
+.ehead .chip { font-family: var(--font-mono); font-size: 11.5px; color: #ffd7cf; background: #2a1714; border: 1px solid #5a2a22; border-radius: 6px; padding: 2px 7px; }
+.ehead .tc { margin-left: auto; font-family: var(--font-mono); font-size: 13px; color: var(--color-fg); letter-spacing: 0.5px; }
+.ehead .tp { width: 26px; height: 26px; border-radius: 50%; background: #1f1f22; display: grid; place-items: center; color: var(--color-fg); }
+.ehead .tp .play { transform: rotate(90deg); width: 13px; height: 13px; }
+.ruler { position: absolute; left: 0; right: 0; height: 26px; border-bottom: 1px solid var(--color-line); }
+.ruler .bar { position: absolute; top: 2px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--color-fg); padding-left: 4px; border-left: 1px solid #6b6e78; height: 22px; line-height: 14px; }
+.ruler .tick { position: absolute; bottom: 0; width: 1px; height: 6px; background: #4a4c54; }
+.ruler .tick.down { height: 10px; background: #8a8d97; }
+.ruler .mark { position: absolute; top: 3px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.6px; color: #fff; border-radius: 4px; padding: 1px 5px; margin-left: 16px; }
+.ruler .mark.drop { background: #e2553f; }
+.ruler .mark.hit { background: #7c5cff; }
+.ruler .sec { position: absolute; top: 6px; font-family: var(--font-mono); font-size: 10px; color: var(--color-faint); }
+.trk { position: absolute; left: 0; right: 0; height: 44px; }
+.tlab { position: absolute; left: 10px; top: 5px; width: 140px; height: 34px; display: flex; align-items: center; gap: 7px; border-radius: 8px; background: #151518; padding: 0 8px 0 6px; }
+.tlab .tile { width: 22px; height: 22px; background: #232326; }
+.tlab .tile img { width: 14px; height: 14px; }
+.tlab .tn { flex: none; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--color-fg); }
+.tlab .tk { display: flex; flex-direction: column; min-width: 0; overflow: hidden; font-size: 11px; font-weight: 600; line-height: 13px; color: var(--color-fg-2); white-space: nowrap; }
+.tlab .tk em { font-style: normal; font-size: 9.5px; color: var(--color-muted); font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+.lane { position: absolute; top: 3px; height: 38px; border-radius: 7px; background: repeating-linear-gradient(135deg, #111114 0 8px, #141418 8px 16px); border: 1px solid #1c1c20; }
+.gridlines { position: absolute; left: 0; right: 0; pointer-events: none; }
+.gridlines i { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0.14); display: block; }
+.phead { position: absolute; left: 0; width: 2px; pointer-events: none; z-index: 3; }
+.phead i { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #ff4d3d; display: block; }
+.phead i::before { content: ""; position: absolute; left: -5px; top: -2px; width: 12px; height: 10px; background: #ff4d3d; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.cliplayer { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+.clip { position: absolute; border-radius: 7px; overflow: hidden; display: flex; align-items: center; gap: 6px; padding: 0 8px; font-size: 11px; font-weight: 600; color: #fff; white-space: nowrap; }
+.clip .cl { position: relative; z-index: 1; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); }
+.clip.wave { background: #23252b; border: 1px solid #4b4f5a; padding: 0; }
+.clip.wave svg { position: absolute; inset: 4px 0; width: 100%; height: calc(100% - 8px); fill: #d9dce4; }
+.clip.wave .cl { position: absolute; left: 8px; top: 3px; font-size: 10px; background: rgba(15, 15, 17, 0.7); border-radius: 4px; padding: 0 5px; }
+.clip.img { background-size: cover; background-position: center; border: 1px solid rgba(255, 255, 255, 0.35); align-items: flex-end; padding-bottom: 3px; }
+.clip.img .cl { font-size: 10px; background: rgba(0, 0, 0, 0.55); border-radius: 4px; padding: 0 5px; }
+.clip.text { background: #2a3bd0; border: 1px solid #6f82ff; }
+.clip.text b { font-family: var(--pf-serif); font-size: 13px; width: 18px; height: 18px; border-radius: 4px; background: rgba(255, 255, 255, 0.2); display: grid; place-items: center; flex: none; }
+.clip.ui { background: #8e4a33; border: 1px solid #d97757; }
+.clip.ui .ic { width: 13px; height: 13px; flex: none; }
+
+/* film wrapper + end card */
+#filmwrap { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; overflow: hidden; background: #000; }
+#end { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+#end .mark { width: 120px; height: 120px; }
+#end h2 { margin-top: 34px; font-size: 92px; line-height: 96px; font-weight: 800; letter-spacing: -2px; display: flex; gap: 0.32em; }
+#end h2 span { display: inline-block; }
+#end .relay { margin-top: 34px; display: flex; align-items: center; gap: 12px; font-size: 19px; font-weight: 600; color: var(--color-fg-2); }
+#end .relay .rl { display: inline-flex; align-items: center; gap: 9px; }
+#end .relay .tile { width: 32px; height: 32px; border-radius: 9px; border: 1px solid #2a2b30; }
+#end .relay .tile img { width: 19px; height: 19px; }
+#end .relay > i { font-style: normal; color: var(--color-faint); font-size: 22px; }
+#end .url { margin-top: 26px; font-size: 26px; font-weight: 600; color: var(--color-muted); letter-spacing: 0.2px; }
+.fposter { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: radial-gradient(80% 80% at 50% 50%, #17171a, #050506); color: #e6e8ee; }
+.fposter .pl { width: 132px; height: 132px; border-radius: 50%; background: #e6e8ee; color: #0d0d0d; display: grid; place-items: center; font-size: 52px; padding-left: 10px; }
+.fposter b { font-size: 46px; font-weight: 700; letter-spacing: -0.5px; }
+.fposter em { font-style: normal; font-family: var(--font-mono); font-size: 24px; color: var(--color-muted); }

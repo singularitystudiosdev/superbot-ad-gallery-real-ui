@@ -1,0 +1,168 @@
+/* Studio beat (beats/studio.js): Google's consent card and the checklist card in the chat, and the full-frame layer
+   carrying the one YouTube Studio client (light theme). The consent and checklist cards read chat.css --gm-* (Google's
+   own surfaces, Google Sans Flex); the Studio client reads chat.css --yt-* (YouTube's light palette, Roboto). Nothing
+   here transitions: position, size, radius, height, opacity and transform are written from t in studio.js, so ?t=
+   freezes a frame. Classes: .gc- consent card, .gk- checklist card, .st- the Studio client. Radii on the Studio
+   surfaces: 8px (thumbnails, filter chip, snackbar) and fully round pills. */
+
+/* Google Sans Flex (SIL OFL 1.1, the variable weight axis, latin) and Roboto (SIL OFL 1.1), from fontsource, vendored
+   under fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "GSF"; font-style: normal; font-weight: 100 1000; font-display: block; src: url("../../../fonts/google-sans-flex-latin-wght-normal.woff2?v=r1e1") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/roboto-latin-400-normal.woff2?v=r1e1") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/roboto-latin-500-normal.woff2?v=r1e1") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/roboto-latin-700-normal.woff2?v=r1e1") format("woff2"); }
+
+#s-tabs .yt-i { flex: none; width: 24px; height: 24px; }
+
+/* ---- the consent card (Google's OAuth consent screen, light) ---- */
+#s-tabs .sbsite .hub .gm-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .gc-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; border-radius: var(--gm-radius);
+  background: var(--gm-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); color: var(--gm-text); font-family: var(--gm-body); overflow: hidden; }
+#s-tabs .sbsite .hub .gc-top { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border-bottom: 1px solid var(--gm-line);
+  font: 500 11.5px/1 var(--gm-sans); color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-top img { width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .gc-body { padding: 12px 14px 12px; }
+#s-tabs .sbsite .hub .gc-title { font: 400 16.5px/1.3 var(--gm-sans); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-acct { display: inline-flex; align-items: center; gap: 6px; height: 24px; margin-top: 9px; padding: 0 6px 0 3px; border-radius: 9999px;
+  box-shadow: inset 0 0 0 1px #747775; font: 500 11.5px/1 var(--gm-sans); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-av { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #1e8e3e; color: #fff; font: 500 10px/1 var(--gm-sans); font-style: normal; }
+#s-tabs .sbsite .hub .gc-dd { width: 15px; height: 15px; color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-sel { margin: 12px 0 4px; font: 400 12px/1.3 var(--gm-body); color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-sel b { font-weight: 500; color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-row { display: flex; align-items: center; gap: 10px; min-height: 30px; padding: 3px 0; border-bottom: 1px solid var(--gm-line);
+  font: 400 12px/1.3 var(--gm-body); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-row img { flex: none; width: 16px; height: 16px; object-fit: contain; }
+#s-tabs .sbsite .hub .gc-row span { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .gc-cb { flex: none; display: grid; place-items: center; width: 15px; height: 15px; border-radius: 3px; background: var(--gm-accent); color: #fff; }
+#s-tabs .sbsite .hub .gc-cb .yt-i { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gc-btns { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 12px; }
+#s-tabs .sbsite .hub .gc-btns span { display: inline-flex; align-items: center; height: 28px; padding: 0 16px; border-radius: 9999px; font: 500 12px/1 var(--gm-sans); }
+#s-tabs .sbsite .hub .gc-cancel { color: var(--gm-accent); box-shadow: inset 0 0 0 1px #747775; }
+#s-tabs .sbsite .hub .gc-go { background: var(--gm-accent); color: #fff; }
+#s-tabs .sbsite .hub .gc-go.gc-hit { background: #0842a0; }
+
+/* ---- the checklist card (light, Google's surfaces), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: var(--gm-radius); background: var(--gm-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: var(--gm-body); }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 300px; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px; font: 12.5px/1 var(--gm-body); color: var(--gm-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 500; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; }
+#s-tabs .sbsite .hub .gk-av { background: #1e8e3e; color: #fff; font: 500 11px/1 var(--gm-sans); }
+#s-tabs .sbsite .hub .gk-img { background: var(--gm-page); }
+#s-tabs .sbsite .hub .gk-img img { width: 13px; height: 10px; }
+#s-tabs .sbsite .hub .gk-ms { background: var(--gm-sel); color: var(--gm-accent); }
+#s-tabs .sbsite .hub .gk-ms .yt-i { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--gm-line); border-top-color: var(--gm-accent); }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #1e8e3e; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: var(--gm-radius); background: var(--gm-page); box-shadow: inset 0 0 0 1px var(--gm-line); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .st-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--yt-bg); }
+#s-tabs .st-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: var(--yt-bg); color: var(--yt-text); font: 400 14px/20px var(--gm-body); -webkit-font-smoothing: antialiased; }
+#s-tabs .st-app .yt-i { color: var(--yt-text2); }
+#s-tabs .st-btn { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
+#s-tabs .st-btn .yt-i { color: var(--yt-text); }
+
+/* top bar */
+#s-tabs .st-top { position: relative; flex: none; display: flex; align-items: center; height: 64px; padding: 0 24px 0 16px; box-sizing: border-box;
+  box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-logo { flex: none; display: flex; align-items: center; margin-left: 12px; }
+#s-tabs .st-logo img { display: block; height: 24px; width: auto; }
+#s-tabs .st-search { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px;
+  width: 600px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 9999px; box-shadow: inset 0 0 0 1px var(--yt-outline-opaque);
+  font: 400 15px/1 var(--gm-body); color: var(--yt-text2); white-space: nowrap; }
+#s-tabs .st-tools { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+#s-tabs .st-create { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px 0 12px; border-radius: 9999px;
+  box-shadow: inset 0 0 0 1px var(--yt-outline); font: 500 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-create .yt-i { color: var(--yt-text); }
+#s-tabs .st-me { flex: none; display: grid; place-items: center; width: 32px; height: 32px; margin-left: 16px; border-radius: 50%; background: var(--yt-me); color: #fff; font: 500 15px/1 var(--gm-body); }
+
+/* the body: left menu | the Community page */
+#s-tabs .st-main { flex: 1; min-height: 0; display: flex; }
+#s-tabs .st-nav { position: relative; flex: none; width: 256px; box-sizing: border-box; box-shadow: inset -1px 0 0 var(--yt-outline); }
+#s-tabs .st-chan { display: flex; flex-direction: column; align-items: center; padding: 24px 0 16px; }
+#s-tabs .st-big { display: grid; place-items: center; width: 112px; height: 112px; border-radius: 50%; background: var(--yt-me); color: #fff; font: 400 52px/1 var(--gm-body); }
+#s-tabs .st-chan b { margin-top: 16px; font: 500 15px/22px var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-chan small { font: 400 13px/18px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .st-nv { display: flex; align-items: center; gap: 24px; height: 48px; padding: 0 24px; font: 400 15px/1 var(--gm-body); color: var(--yt-text); white-space: nowrap; }
+#s-tabs .st-nv.st-on { background: var(--yt-additive); font-weight: 500; }
+#s-tabs .st-nv.st-on .yt-i { color: var(--yt-text); }
+#s-tabs .st-nfoot { position: absolute; left: 0; right: 0; bottom: 8px; }
+
+/* the Community page: title, Published / Held, the filter bar, the comments */
+#s-tabs .st-page { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 0 32px; overflow: hidden; }
+#s-tabs .st-h1 { flex: none; margin: 0; padding: 22px 0 6px; font: 500 25px/32px var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-tabs { flex: none; display: flex; gap: 32px; height: 48px; margin: 0 -32px; padding: 0 32px; box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-tab { display: flex; align-items: center; font: 500 15px/1 var(--gm-body); color: var(--yt-text2); }
+#s-tabs .st-tab-on { color: var(--yt-text); box-shadow: inset 0 -3px 0 var(--yt-text); }
+#s-tabs .st-filter { flex: none; display: flex; align-items: center; gap: 12px; height: 56px; margin: 0 -32px; padding: 0 32px; box-shadow: inset 0 -1px 0 var(--yt-outline); white-space: nowrap; }
+#s-tabs .st-chip { display: inline-flex; align-items: center; min-width: 0; height: 32px; padding: 0 12px; border-radius: 8px; background: var(--yt-additive);
+  font: 500 14px/32px var(--gm-body); color: var(--yt-text); overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .st-sort { flex: none; display: inline-flex; align-items: center; gap: 8px; margin-left: auto; font: 500 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-sort .yt-i { color: var(--yt-text); }
+
+/* the list stops above the snackbar's lane so the toast never covers a comment */
+#s-tabs .st-list { flex: 1; min-height: 0; overflow: hidden; margin-bottom: 72px; box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-blk { position: relative; opacity: 0; padding: 12px 0 8px; background: var(--yt-bg); box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-blk.st-moving { z-index: 2; }
+/* the fifth comment (Tom) never fits whole above the snackbar's lane, so the page shows four (16:9) or three (4:5) */
+#s-tabs .st-blk[data-i="4"] { display: none; }
+#s-tabs .st-wash { position: absolute; inset: 0; margin: 0 -32px; opacity: 0; background: var(--yt-pin-wash); }
+#s-tabs .st-cm { position: relative; display: flex; align-items: flex-start; gap: 16px; }
+#s-tabs .st-av { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--c); color: #fff; font: 500 18px/1 var(--gm-body); }
+#s-tabs .st-av.st-av-s { width: 24px; height: 24px; font-size: 12px; background: var(--yt-me); }
+#s-tabs .st-body { flex: 1; min-width: 0; }
+#s-tabs .st-pslot { height: 0; overflow: hidden; }
+#s-tabs .st-pinned { display: flex; align-items: center; gap: 6px; padding-bottom: 6px; font: 400 13px/18px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .st-pinned .st-pi { width: 16px; height: 16px; }
+#s-tabs .st-meta { font: 500 13px/18px var(--gm-body); color: var(--yt-text); white-space: nowrap; }
+#s-tabs .st-meta span { font-weight: 400; font-size: 12px; color: var(--yt-text2); }
+#s-tabs .st-text { margin-top: 2px; font: 400 14px/20px var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-acts { display: flex; align-items: center; height: 34px; margin-top: 2px; white-space: nowrap; }
+#s-tabs .st-rb { display: inline-flex; align-items: center; height: 32px; margin: 0 4px 0 -12px; padding: 0 12px; border-radius: 9999px; font: 500 13px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-tog { display: inline-flex; align-items: center; height: 32px; margin-right: 8px; padding: 0 4px 0 8px; border-radius: 9999px; opacity: 0;
+  font: 500 13px/1 var(--gm-body); color: var(--yt-blue); }
+#s-tabs .st-tog .yt-i { width: 20px; height: 20px; color: var(--yt-blue); }
+#s-tabs .st-ib { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; }
+#s-tabs .st-ib .yt-i { width: 20px; height: 20px; }
+#s-tabs .st-n { margin: 0 6px 0 -2px; font: 400 12px/1 var(--gm-body); color: var(--yt-text2); font-variant-numeric: tabular-nums; }
+#s-tabs .st-hrt { position: relative; display: block; width: 20px; height: 20px; }
+#s-tabs .st-hrt .yt-i { position: absolute; inset: 0; width: 20px; height: 20px; }
+#s-tabs .st-hrt .st-hf1 { opacity: 0; color: var(--yt-red); }
+#s-tabs .st-hav { position: absolute; right: -6px; bottom: -4px; display: grid; place-items: center; width: 12px; height: 12px; border-radius: 50%; opacity: 0;
+  background: var(--yt-me); box-shadow: 0 0 0 1.5px var(--yt-bg); color: #fff; font: 500 7px/1 var(--gm-body); font-style: normal; }
+#s-tabs .st-rslot { height: 0; overflow: hidden; }
+#s-tabs .st-rep { display: flex; align-items: flex-start; gap: 12px; padding: 6px 0 4px; opacity: 0; }
+#s-tabs .st-owner { display: inline-block; padding: 0 7px; border-radius: 9999px; background: var(--yt-owner); font-weight: 500; }
+#s-tabs .st-vid { flex: none; display: flex; gap: 12px; width: 320px; }
+#s-tabs .st-vid img { flex: none; width: 120px; height: 68px; border-radius: 8px; object-fit: cover; }
+#s-tabs .st-vid span { font: 400 13px/18px var(--gm-body); color: var(--yt-text); }
+
+/* the snackbar: YouTube's inverted surface, bottom left of the page (clear of the left menu's Send feedback) */
+#s-tabs .st-snack { position: absolute; left: 288px; bottom: 12px; display: flex; align-items: center; min-height: 48px; padding: 0 24px; box-sizing: border-box;
+  border-radius: 8px; background: var(--yt-inverted); color: #fff; font: 400 14px/20px var(--gm-body); box-shadow: 0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3);
+  opacity: 0; white-space: nowrap; }
+
+/* ---- portrait (4:5): no left menu, no video column; the search folds to its icon; Create folds away ---- */
+#s-tabs .st-app.st-narrow .st-nav, #s-tabs .st-app.st-narrow .st-vid, #s-tabs .st-app.st-narrow .st-create,
+#s-tabs .st-app.st-narrow .st-search span { display: none; }
+#s-tabs .st-app.st-narrow .st-top { padding: 0 16px 0 8px; }
+#s-tabs .st-app.st-narrow .st-search { position: static; transform: none; width: 40px; padding: 0; justify-content: center; box-shadow: none; margin-left: auto; }
+#s-tabs .st-app.st-narrow .st-search .yt-i { color: var(--yt-text); }
+#s-tabs .st-app.st-narrow .st-tools { margin-left: 4px; }
+#s-tabs .st-app.st-narrow .st-page { padding: 0 20px; }
+#s-tabs .st-app.st-narrow .st-tabs, #s-tabs .st-app.st-narrow .st-filter { margin: 0 -20px; padding: 0 20px; }
+#s-tabs .st-app.st-narrow .st-wash { margin: 0 -20px; }
+#s-tabs .st-app.st-narrow .st-h1 { padding-top: 18px; }
+#s-tabs .st-app.st-narrow .st-sort span { display: none; }
+#s-tabs .st-app.st-narrow .st-text { font-size: 15px; line-height: 21px; }
+#s-tabs .st-app.st-narrow .st-meta { font-size: 14px; }
+#s-tabs .st-app.st-narrow .st-meta span { font-size: 13px; }
+#s-tabs .st-app.st-narrow .st-list { margin-bottom: 76px; }
+/* portrait shows the three comments that matter (Priya pinned, Marco, Lena), each with its reply: a fourth would be cut */
+#s-tabs .st-app.st-narrow .st-blk[data-i="3"], #s-tabs .st-app.st-narrow .st-blk[data-i="4"] { display: none; }
+#s-tabs .st-app.st-narrow .st-snack { left: 20px; bottom: 16px; }

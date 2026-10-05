@@ -1310,6 +1310,17 @@
     "thumb": "assets/shots/its-a-lie-every-model-superbot-54829cd7.png"
   },
   {
+    "id": "its-a-lie-every-model-superbot-54829cd7-r1-b-lv410045ceb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "IT'S A LIE · Opus 5.5 didn't make it alone: DeepSeek scrapes, Blender models, Gemini paints, ElevenLabs scores (29 s, 16:9)",
+    "src": "animations/its-a-lie-every-model-superbot-54829cd7-r1-b-lv410045ceb/",
+    "thumb": "assets/shots/its-a-lie-every-model-superbot-54829cd7-r1-b-lv410045ceb.png",
+    "desc": "Variant of its-a-lie-every-model-superbot-54829cd7 in 29 s with a new chain where every step makes its real output: Opus 5.5 writes the engine and its tests, DeepSeek V4 Flash scrapes minecraft.wiki for break times, the sheep and the stone pickaxe, Blender models the sheep and pickaxe, Gemini 3 Pro Image paints the 16-texture atlas, ElevenLabs scores the theme, and Opus 5.5 wires it all in. The payoff is the game they made, playing live. 1920x1080, 60 fps.",
+    "download": "assets/video/its-a-lie-every-model-superbot-54829cd7-r1-b-lv410045ceb.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "blockhaven-not-just-opus-superbot-2ab31e2c",
     "type": "animation",
     "group": "Ad spots",

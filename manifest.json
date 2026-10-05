@@ -2465,6 +2465,30 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "superbot-dropin-swap-16x9-a0a8d85a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: same prompt, one base_url apart (pen-test script for your own server)",
+    "src": "animations/superbot-dropin-swap-16x9-a0a8d85a/",
+    "thumb": "assets/shots/superbot-dropin-swap-16x9-a0a8d85a.png"
+  },
+  {
+    "id": "superbot-dropin-route-16x9-a0a8d85a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: it routes a refused dosage question to the model that fits (Opus 5.5 vs Gemini vs DeepSeek)",
+    "src": "animations/superbot-dropin-route-16x9-a0a8d85a/",
+    "thumb": "assets/shots/superbot-dropin-route-16x9-a0a8d85a.png"
+  },
+  {
+    "id": "superbot-dropin-keyring-16x9-a0a8d85a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot doesn't refuse: four subscriptions packed into one key, two refused prompts answered",
+    "src": "animations/superbot-dropin-keyring-16x9-a0a8d85a/",
+    "thumb": "assets/shots/superbot-dropin-keyring-16x9-a0a8d85a.png"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

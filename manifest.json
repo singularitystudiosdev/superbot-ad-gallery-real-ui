@@ -1374,6 +1374,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "IT'S A LIE in 9.8 s · cold-open hook: the game first, then the post, then DeepSeek, Gemini, Eleven Music and Opus 5.5 (with Blender) behind it (16:9)",
+    "src": "animations/its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb/",
+    "thumb": "assets/shots/its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb.png",
+    "desc": "Sub-10 s variant of its-a-lie-every-model-superbot-54829cd7, opened like the week's top AI videos on X: the game itself, full-bleed with no caption, pulls back into the post that claims it was made in one prompt with Opus 5.5, and IT'S A LIE lands at 1.1 s. The real superbot chat then routes that one prompt to DeepSeek V4 Flash, Gemini 3 Pro Image, Eleven Music and Claude Opus 5.5 (which drives Blender for the sheep and the pickaxe), each with its real output, and the game plays under the end card. 1920x1080, 60 fps.",
+    "download": "assets/video/its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "blockhaven-not-just-opus-superbot-2ab31e2c",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,23 @@
+its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb (2026-10-05, loop lv410045ceb, arm E). The source entry is untouched.
+Rendered natively at 1920x1080, 60 fps, H.264 High 10 Mbps CBR, AAC 48 kHz, -14 LUFS. index.html plays the MP4.
+
+HOOK
+  Opened in the pattern most common among the week's highest-engagement AI tool / AI agent videos on X (read-only sweep
+  of 2026-09-28 to 2026-10-05; 6 of the top 10, all of the top 4): a silent cinematic cold open. Frame 0 is the made thing
+  itself, full-bleed, with no caption and no voice, already moving; the identity beat lands at 1.0 to 1.25 s.
+
+MADE FOR THIS AD (no third-party footage, photo, avatar or audio)
+  Shearwood, the three.js voxel game the chain built, rendered live for every game shot (frame 0 is its own title screen).
+  Kai (@kaiships) is the series' fictional persona, not a real account; his avatar is a crop of a Shearwood render.
+  The outputs shown are real and are what the game is made of:
+    DeepSeek V4 Flash (deepseek/deepseek-v4-flash via OpenRouter): read six minecraft.wiki pages into spec.json; its
+      summary line is verbatim.
+    Gemini 3 Pro Image (google/gemini-3-pro-image via OpenRouter): the 1024 px 16-tile texture atlas.
+    Blender 5.2.2 (a tool Opus drives, not a model): the sheep and the pickaxe (2 GLBs); the sheep shown Clay and with
+      the atlas on its UVs (real Workbench renders).
+    Eleven Music (ElevenLabs, via Replicate): the Shearwood theme, which is the ad's music bed.
+    Claude Opus 5.5: the game code and its 8 passing node tests.
+  Sound effects are synthesized in code for this cut. Type: Anton (SIL OFL 1.1).
+
+MARKS OF THEIR OWNERS
+  Model and tool logos as superbot's model switcher shows them; minecraft.wiki's favicon; X's interface icons.

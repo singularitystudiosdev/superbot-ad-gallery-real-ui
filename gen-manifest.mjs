@@ -612,6 +612,20 @@ const more = [
     { desc: 'Variant of its-a-lie-every-model-superbot-54829cd7 in 29 s with a new chain where every step makes its real output: Opus 5.5 writes the engine and its tests, DeepSeek V4 Flash scrapes minecraft.wiki for break times, the sheep and the stone pickaxe, Blender models the sheep and pickaxe, Gemini 3 Pro Image paints the 16-texture atlas, ElevenLabs scores the theme, and Opus 5.5 wires it all in. The payoff is the game they made, playing live. 1920x1080, 60 fps.',
       download: 'assets/video/its-a-lie-every-model-superbot-54829cd7-r1-b-lv410045ceb.16x9.mp4', downloadLabel: '16:9' }],
   // <<< its-a-lie-every-model-superbot-54829cd7-r1-b-lv410045ceb
+  // >>> its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb
+  // r1-e of its-a-lie-every-model-superbot-54829cd7 (untouched) (2026-10-05, loop lv410045ceb arm E): the reveal in under
+  // 10 s, opened in the hook pattern most common among that week's highest-engagement AI tool / agent videos on X (a
+  // silent cinematic cold open: the made thing full-bleed, no caption or voice, moving on frame 0, the identity beat at
+  // 1.0-1.25 s). Frame 0 is Shearwood's own title screen (its splash: "Made with Opus 5.5!"); the camera pulls back to Kai's
+  // post, "I MADE THIS IN ONE PROMPT WITH OPUS 5.5", marks the model and IT'S A LIE stamps it at 1.10 s. Then the real superbot chat routes the one prompt to DeepSeek V4
+  // Flash (minecraft.wiki), Gemini 3 Pro Image (the 16-texture atlas), Eleven Music (the theme the spot plays) and Claude
+  // Opus 5.5, which drives Blender for the sheep and the pickaxe and wires it all in (8 tests), and the game plays at localhost:5173. Every
+  // output real; five fresh-context judge rounds, every flag answered. 1920x1080 native, 60 fps, H.264 10 Mbps, with sound.
+  // index.html plays the MP4; provenance in CREDITS.txt.
+  ['its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb', 'its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb/', "IT'S A LIE in 9.8 s · cold-open hook: the game first, then the post, then DeepSeek, Gemini, Eleven Music and Opus 5.5 (with Blender) behind it (16:9)", 'Ad spots',
+    { desc: 'Sub-10 s variant of its-a-lie-every-model-superbot-54829cd7, opened like the week\'s top AI videos on X: the game itself, full-bleed with no caption, pulls back into the post that claims it was made in one prompt with Opus 5.5, and IT\'S A LIE lands at 1.1 s. The real superbot chat then routes that one prompt to DeepSeek V4 Flash, Gemini 3 Pro Image, Eleven Music and Claude Opus 5.5 (which drives Blender for the sheep and the pickaxe), each with its real output, and the game plays under the end card. 1920x1080, 60 fps.',
+      download: 'assets/video/its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< its-a-lie-every-model-superbot-54829cd7-r1-e-lv410045ceb
   // IT'S NOT JUST OPUS 5.5 (2026-09-27): a fork of make-minecraft b055c127 with the pocketsflow-untold X post, where the
   // viewer mines @noahwachnik's Opus 5.5 Minecraft post like a block, then one chat routes "make me minecraft. call it
   // BlockHaven" through six models before @kepochnik's clip plays

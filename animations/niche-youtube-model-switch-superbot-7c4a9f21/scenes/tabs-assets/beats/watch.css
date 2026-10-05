@@ -1,0 +1,65 @@
+/* Watch beat (beats/watch.js): Gemini watching the video and ranking 1,284 comments. A hub card in the base's research
+   grammar, deepened into a ranking board: the video row (thumbnail with the duration chip, title, the playhead on a bar
+   with chapter ticks), the comment counter with its thin bar and the signal list, a column header, then the ranked rows:
+   rank, avatar, name + tag + the comment, a pull bar with its score, likes, "asked N x" repeats and the video timecode
+   the comment is about. Nothing here transitions: opacity/transform/left are written from t in render, so ?t= freezes a
+   frame. Every class is prefixed .wv-. Radii: 10px card, 6px thumbnail, pills fully round.
+   Row grid: [rank 12][avatar 20][comment 1fr][pull 52][likes 44][asked 46][at 34], 7px gap. */
+
+#s-tabs .sbsite .hub .wv-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 10px 12px 11px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+
+/* the video */
+#s-tabs .sbsite .hub .wv-vid { display: flex; gap: 12px; align-items: center; }
+#s-tabs .sbsite .hub .wv-th { position: relative; flex: none; width: 128px; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000; }
+#s-tabs .sbsite .hub .wv-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .wv-len { position: absolute; right: 4px; bottom: 4px; padding: 2px 4px; border-radius: 4px; background: rgba(0,0,0,.8);
+  font: 600 10px/1 var(--ui); font-style: normal; color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .wv-meta { flex: 1; min-width: 0; display: grid; gap: 7px; }
+#s-tabs .sbsite .hub .wv-title { font: 600 13px/1.25 var(--ui); color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .wv-hd { display: flex; align-items: center; gap: 7px; font: 500 12px/1 var(--ui); color: #c4c7c5; white-space: nowrap; }
+#s-tabs .sbsite .hub .wv-tc { margin-left: auto; font: 500 11.5px/1 var(--font-mono); color: #8e8e93; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .wv-bar { position: relative; display: block; height: 3px; border-radius: 9999px; background: #2e2f35; }
+#s-tabs .sbsite .hub .wv-fill { position: absolute; inset: 0; border-radius: 9999px; background: #8ab4f8; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .wv-bar u { position: absolute; top: -2px; width: 2px; height: 7px; margin-left: -1px; background: #4a4c55; text-decoration: none; }
+#s-tabs .sbsite .hub .wv-bar u.on { background: #c6dafc; }
+#s-tabs .sbsite .hub .wv-head { position: absolute; top: 50%; left: 0; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: #e8f0fe; }
+
+/* the status icons (spinner resolving to the check) */
+#s-tabs .sbsite .hub .wv-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .wv-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .wv-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the comments */
+#s-tabs .sbsite .hub .wv-ch { opacity: 0; display: flex; align-items: center; gap: 8px; margin-top: 12px; font: 600 12.5px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .wv-n { font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .wv-sig { margin-left: auto; font: 500 10.5px/1 var(--ui); color: #8e8e93; letter-spacing: .02em; }
+#s-tabs .sbsite .hub .wv-cbar { opacity: 0; display: block; height: 2px; margin: 9px 0 4px; border-radius: 9999px; background: #26262b; overflow: hidden; }
+#s-tabs .sbsite .hub .wv-cbar i { display: block; height: 100%; background: #8ab4f8; transform-origin: 0 50%; transform: scaleX(0); }
+/* the column header row: same grid as a .wv-row, so its labels sit over their columns */
+#s-tabs .sbsite .hub .wv-hdr { display: grid; grid-template-columns: 12px 20px minmax(0, 1fr) 52px 44px 46px 34px; gap: 7px; align-items: center;
+  padding: 3px 0 4px; border-bottom: 1px solid #26262b; font: 600 9.5px/1 var(--ui); letter-spacing: .05em; text-transform: uppercase; color: #777780; }
+#s-tabs .sbsite .hub .wv-hdr span:nth-child(n+4) { text-align: right; }
+#s-tabs .sbsite .hub .wv-list { display: grid; }
+#s-tabs .sbsite .hub .wv-row { opacity: 0; display: grid; grid-template-columns: 12px 20px minmax(0, 1fr) 52px 44px 46px 34px; gap: 7px; align-items: center;
+  padding: 6px 0; border-bottom: 1px solid #1f1f23; }
+#s-tabs .sbsite .hub .wv-rk { font: 600 11px/1 var(--font-mono); color: #8e8e93; text-align: right; }
+#s-tabs .sbsite .hub .wv-av { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--c); color: #fff; font: 600 10px/1 var(--ui); }
+#s-tabs .sbsite .hub .wv-main { min-width: 0; display: grid; gap: 3px; }
+#s-tabs .sbsite .hub .wv-l1 { display: flex; align-items: center; gap: 8px; font: 12px/1 var(--ui); }
+#s-tabs .sbsite .hub .wv-l1 b { font-weight: 600; color: #ececec; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .wv-tag { flex: none; height: 16px; padding: 0 6px; border-radius: 9999px; background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038;
+  font: 500 9.5px/16px var(--ui); color: #c4c7c5; }
+#s-tabs .sbsite .hub .wv-tx { font: 12px/1.3 var(--ui); color: #c4c7c5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the pull score: a bar plus its number */
+#s-tabs .sbsite .hub .wv-pull { display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
+#s-tabs .sbsite .hub .wv-pull > i { position: relative; display: block; width: 26px; height: 3px; border-radius: 9999px; background: #2e2f35; overflow: hidden; }
+#s-tabs .sbsite .hub .wv-pull > i > u { position: absolute; inset: 0; background: linear-gradient(90deg, #8ab4f8, #c6dafc); transform-origin: 0 50%; transform: scaleX(0.06); text-decoration: none; }
+#s-tabs .sbsite .hub .wv-pull > b { font: 600 11px/1 var(--font-mono); color: #c6dafc; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .wv-lk, #s-tabs .sbsite .hub .wv-ask { display: inline-flex; align-items: center; gap: 3px; justify-content: flex-end;
+  font: 500 11px/1 var(--ui); color: #a8abb2; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#s-tabs .sbsite .hub .wv-lk svg, #s-tabs .sbsite .hub .wv-ask svg { width: 11px; height: 11px; color: #8e8e93; }
+#s-tabs .sbsite .hub .wv-at { font: 500 10.5px/1 var(--font-mono); color: #8e8e93; text-align: right; font-variant-numeric: tabular-nums; }
+
+#s-tabs .sbsite .hub .wv-ft { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 9px; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .wv-ft .qc-ok { flex: none; }

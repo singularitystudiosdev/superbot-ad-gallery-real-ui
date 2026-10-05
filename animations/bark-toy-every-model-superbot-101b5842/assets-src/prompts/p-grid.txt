@@ -1,0 +1,13 @@
+An Instagram profile photo grid: exactly nine square photos arranged 3 by 3 with thin 4px white gutters, filling the whole frame edge to edge. No app interface, no text, no icons, no watermarks.
+Every photo shows the SAME dog: a young Pembroke Welsh corgi named Biscuit, red-and-white coat (warm ginger-orange back and head, white blaze running up between the eyes, white muzzle, fluffy white chest and white paws), big upright pointed ears, no tail.
+The nine candid photos, left to right, top to bottom:
+1. classic "sploot" on a light wood floor, belly down, both back legs stretched out behind him, looking at camera
+2. trotting on green grass with a bright yellow tennis ball in his mouth
+3. close-up head tilt on a grey couch, ears up, curious
+4. mid-bark at the camera on a living-room rug, mouth open
+5. wearing a small yellow raincoat on a wet city sidewalk
+6. asleep on his back on a bed, paws in the air
+7. sitting in orange autumn leaves in a park, smiling with tongue out
+8. running full speed on a beach, ears flapping, sand flying
+9. sitting politely at a kitchen counter begging, looking up
+Shot on an iPhone by his owner, natural light, realistic, authentic and slightly imperfect, varied backgrounds and colours, each photo its own composition.

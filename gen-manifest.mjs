@@ -93,6 +93,22 @@ const more = [
   ['every-model-chain-skate-sb-superbot-7520a9ed', 'em-chain-skate-superbot-7520a9ed/', 'EVERY MODEL. ONE CHAT. · One ask, five models: Gemini art, Blender 3D, DeepSeek price, ElevenLabs voice, Opus ships the store (16:9)', 'Ad spots',
     { desc: 'Remake of every-model-one-chat-sb-superbot-efa8df82 with a new chain and a new final output, built for 16:9. One ask, design a skate deck and launch it tonight, handed down five models in a row, each doing what it is built for. Gemini 3 Pro Image makes three takes of the deck graphic and picks the shark. Blender models the 7-ply deck, wraps the graphic on it and renders a Cycles turntable. DeepSeek V4 Flash gets past the 1688.com slider wall to the factory price, reads 212 shop pages and sets the price at $59. ElevenLabs voices the spot with Eleven v3 and adds an ollie-pop sound effect. Claude Opus 5.5 writes the store, wires Stripe and ships lowtide.shop, with every part tagged by the model that made it. 16:9 only.',
       download: 'assets/video/every-model-chain-skate-sb-superbot-7520a9ed.16x9.mp4', downloadLabel: '16:9' }],
+  // Chain remake of the route=superbot spot (2026-10-05, 101b5842): every-model-one-chat-superbot-efa8df82 (untouched)
+  // rebuilt as six handoffs in an order the source never had, each to the model or tool built for that job, ending on
+  // a new final output: a physical toy, ordered. sam asks "make me a toy of my corgi. his insta is @biscuit.loaf".
+  // The 16:9 frame is split: the real hub thread on the left, and on the right the surface of whichever model just ran.
+  // DeepSeek V4 Flash reads the profile logged out (Instagram is a service route: "Connecting to Instagram"); ElevenLabs
+  // isolates the bark (waveform and 26-band spectrum measured from the spot's own synthesised audio, assets/waveform.js);
+  // Gemini 3 Pro Image draws the four-view turnaround (real generation, assets/img/turnaround.jpg); Blender lofts the
+  // figure from two Gemini silhouettes into one watertight mesh, 42,612 tris, 88.0 x 54.5 x 75.6 mm, 0 non-manifold
+  // edges, with a 28 x 14 x 6 mm pocket under the belly, and renders a 16-frame Cycles turntable with its wireframe
+  // (real Blender renders, assets-src/loft.101b5842.py + render-toy.101b5842.py); Claude Opus 5.5 writes bark.ino and
+  // flashes it; Superbot sends the mesh to print, loads bark.wav on two chips and checks out, and the spot ends on the
+  // finished figure barking when the paw is pressed (the video's one sound). Mark provenance in brand/CREDITS.txt.
+  // 16:9 only (index.html pins ?ar=16x9).
+  ['bark-toy-every-model-superbot-101b5842', 'bark-toy-every-model-superbot-101b5842/', 'EVERY MODEL. ONE CHAT. · One ask, six models: DeepSeek scrapes, ElevenLabs isolates the bark, Gemini draws, Blender meshes, Opus 5.5 codes, Superbot orders the toy (16:9)', 'Ad spots',
+    { desc: 'Remake of every-model-one-chat-sb-superbot-efa8df82 with a new chain and a new final output, built for 16:9. One ask, make me a toy of my corgi, handed down six models, each doing what it is built for. DeepSeek V4 Flash reads @biscuit.loaf logged out: 312 posts, 41 reels, 37 s of barking. ElevenLabs isolates the bark from the room noise into 12 clean takes. Gemini draws the toy from four sides with his markings held. Blender turns the drawings into a watertight 88 mm mesh with a pocket for the speaker and the paw switch. Claude Opus 5.5 writes the firmware so a press on the paw plays the bark. Superbot orders two prints with the bark on the chip, and the spot ends on the finished toy barking. 16:9 only.',
+      download: 'assets/video/bark-toy-every-model-superbot-101b5842.16x9.mp4', downloadLabel: '16:9' }],
   // 3D cut (2026-10-01): the route=superbot spot as a floating 3D panel in a parallax void with a keyframed
   // camera — the panel tilts and the camera swings as the chips run, model logos bursting and converging, and
   // the order card punches in at the end. Same source spot as the three 2D entries above, rebuilt as a 3D one.

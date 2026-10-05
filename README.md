@@ -35,6 +35,16 @@ zoom the full-size image or watch the animation play live. Static — no build, 
   spot ends on @JaydenDavisNC's Opus 5.5 Splatoon capture (https://x.com/JaydenDavisNC/status/2103357848961036304).
   `animations/splatoon-every-model-superbot-3081f5d2/` (7 requests, `?v=3`).
 
+- **make me a toy of my corgi, @biscuit.loaf**: a chain remake of the every-model spot. One ask, six handoffs in
+  a new order, and a physical toy as the ending. The 16:9 frame is split: superbot's real thread on the left, and on
+  the right the surface of whichever model just ran. DeepSeek V4 Flash reads the profile logged out (312 posts, 41
+  reels, 37 s of barking); ElevenLabs isolates the bark (12 takes, 0.9 s each); Gemini draws the four-view
+  turnaround; Blender lofts the figure from two silhouettes into a watertight 88 mm mesh (42,612 tris) with a
+  28 x 14 x 6 mm pocket for the speaker and the paw switch; Claude Opus 5.5 writes `bark.ino`; Superbot sends it to
+  print, loads `bark.wav` on two chips and orders. It ends on the finished figure barking when the paw is pressed.
+  `animations/bark-toy-every-model-superbot-101b5842/` (16:9 only; `assets-src/` holds the prompts, the Blender
+  scripts and the audio scripts).
+
 Static image ads (`assets/ads/`):
 
 - **stop burning tokens** · the three-word poster with the superbot icon. Rendered at every

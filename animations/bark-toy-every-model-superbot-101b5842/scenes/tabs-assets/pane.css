@@ -1,0 +1,223 @@
+/* The right-hand output pane (16:9 only). One window per routed model: superbot picks the tool, the tool's own
+   surface shows what it actually made. Every moving value is written by the owning beat's render(t). */
+#outpane { position: absolute; left: 962px; top: 34px; width: 924px; height: 1012px; border-radius: 26px; z-index: 6;
+  background: #0e0e10; box-shadow: inset 0 0 0 2px #23232a, 0 40px 90px rgba(0,0,0,0.55); overflow: hidden; }
+#outpane .view { position: absolute; inset: 0; opacity: 0; }
+#outpane .phead { position: absolute; left: 0; top: 0; right: 0; height: 78px; display: flex; align-items: center; gap: 14px;
+  padding: 0 22px; border-bottom: 2px solid #202027; background: #131317; z-index: 4; }
+#outpane .phead .tile { width: 52px; height: 52px; border-radius: 14px; background: #1f1f24; box-shadow: inset 0 0 0 2px #32323a; display: grid; place-items: center; flex: none; }
+#outpane .phead .tile img { width: 30px; height: 30px; }
+#outpane .phead b { font-size: 27px; font-weight: 750; color: #ececec; letter-spacing: -0.2px; }
+#outpane .phead small { font-size: 21px; color: #8e8e93; font-weight: 500; }
+#outpane .phead .pstat { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 21px; color: #8e8e93; }
+#outpane .phead .pstat .pdot { width: 11px; height: 11px; border-radius: 50%; background: #ff9f0a; }
+#outpane .phead .pstat.ready .pdot { background: #30d158; }
+#outpane .pbody { position: absolute; inset: 80px 0 0 0; overflow: hidden; }
+
+/* tiles inside the pane: the hub's own .qc-tile rules are scoped to #s-tabs .hub, so the pane needs its own */
+#outpane .qc-tile { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
+  overflow: hidden; background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#outpane .qc-tile img { width: 22px; height: 22px; object-fit: contain; display: block; }
+#outpane .qc-tile .qc-glyph svg { width: 22px; height: 22px; display: block; }
+#outpane .qc-t-superbot { position: relative; background: #0b0b0c; }
+/* superbot's own mark, the same three-mask stack chat.css draws inside the hub, here for the pane's header */
+#outpane .sbm { position: absolute; inset: 16%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#outpane .sbm-c { background: #00e5c3; transform: translate(-0.6px, -0.6px); }
+#outpane .sbm-m { background: #c026d3; transform: translate(0.6px, 0.6px); }
+#outpane .sbm-w { background: #ececec; }
+/* the composer's routed-site glyph (a site superbot drives itself has no brand mark to draw) */
+#s-tabs .sbsite .hub .qc-pi-gl, #outpane .qc-pi-gl { display: block; width: 15px; height: 15px; }
+#s-tabs .sbsite .hub .qc-pi-gl svg, #outpane .qc-pi-gl svg { width: 15px; height: 15px; display: block; }
+#s-tabs .sbsite .hub .qc-tile .qc-glyph svg { width: 14px; height: 14px; display: block; }
+
+/* ---------- shared bits ---------- */
+.prow { display: flex; align-items: center; gap: 12px; font-size: 21px; color: #c7c9d1; }
+.pchip { display: inline-flex; align-items: center; gap: 9px; height: 40px; padding: 0 14px; border-radius: 999px;
+  background: #1c1c22; box-shadow: inset 0 0 0 2px #2c2c34; font-size: 19px; color: #d6d8df; font-weight: 600; }
+.pchip.green { background: rgba(48,209,88,0.12); box-shadow: inset 0 0 0 2px rgba(48,209,88,0.35); color: #6fe39a; }
+.pbar { height: 8px; border-radius: 999px; background: #202027; overflow: hidden; }
+.pbar i { display: block; height: 100%; background: linear-gradient(90deg, #5d91ec, #866cf6); }
+
+/* ---------- 1. Instagram profile (DeepSeek scrape) ---------- */
+#v-ig { background: #fff; color: #1a1a1a; font-family: 'SB Rounded', ui-rounded, -apple-system, sans-serif; }
+.ig-top { height: 74px; display: flex; align-items: center; gap: 16px; padding: 0 24px; border-bottom: 1px solid #efefef; }
+.ig-top .ig-user { font-size: 30px; font-weight: 800; letter-spacing: -0.3px; }
+.ig-top .ig-ico { margin-left: auto; display: flex; gap: 22px; color: #1a1a1a; }
+.ig-top .ig-ico svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.ig-head { display: flex; align-items: center; gap: 30px; padding: 26px 30px 10px; }
+.ig-ava { width: 186px; height: 186px; border-radius: 50%; overflow: hidden; flex: none; padding: 6px; background: linear-gradient(120deg, #ffd776, #f14e8a 45%, #9b5cf6); }
+.ig-ava img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 5px solid #fff; }
+.ig-stats { display: flex; gap: 40px; }
+.ig-stats div { text-align: center; }
+.ig-stats b { display: block; font-size: 33px; font-weight: 800; letter-spacing: -0.4px; }
+.ig-stats span { font-size: 20px; color: #6b6b6b; }
+.ig-bio { padding: 4px 30px 14px; font-size: 22px; line-height: 29px; color: #1a1a1a; }
+.ig-bio b { font-weight: 800; }
+.ig-bio em { font-style: normal; color: #5a7bd8; }
+.ig-tabs { display: flex; border-top: 1px solid #efefef; }
+.ig-tabs span { flex: 1; text-align: center; padding: 18px 0 12px; font-size: 21px; font-weight: 700; color: #9b9b9b; }
+.ig-tabs span.on { color: #1a1a1a; box-shadow: inset 0 3px 0 #1a1a1a; }
+.ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 5px; position: relative; }
+.ig-cell { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #eee; }
+.ig-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ig-cell .ig-scan { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(60,110,240,0) 0%, rgba(60,110,240,0.5) 60%, rgba(120,200,255,0.9) 100%); opacity: 0; }
+.ig-cell .ig-tag { position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px;
+  border-radius: 999px; background: rgba(10,10,12,0.82); color: #fff; font-size: 18px; font-weight: 700; }
+.ig-cell .ig-tag svg { width: 18px; height: 18px; fill: #ffd166; }
+.ig-cell.dim { filter: grayscale(0.75) brightness(0.75); }
+.ig-wall { position: absolute; left: 50%; bottom: 116px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px;
+  height: 62px; padding: 0 24px; border-radius: 999px; background: rgba(12,12,14,0.86); box-shadow: 0 12px 40px rgba(0,0,0,0.35); color: #fff; font-size: 22px; font-weight: 650; }
+.ig-wall .pg { width: 22px; height: 22px; border-radius: 50%; background: #30d158; }
+.ig-wall s { color: #9b9b9b; }
+.ig-count { position: absolute; left: 0; right: 0; bottom: 0; height: 96px; display: flex; align-items: center; gap: 30px; padding: 0 30px;
+  background: linear-gradient(180deg, rgba(14,14,16,0) 0%, rgba(14,14,16,0.92) 40%, #0e0e10 100%); color: #fff; font-size: 23px; }
+.ig-count b { font-size: 30px; font-weight: 800; }
+.ig-count .ig-k { display: flex; flex-direction: column; }
+.ig-count .ig-k span { font-size: 18px; color: #9b9b9b; font-weight: 600; }
+
+/* ---------- 2. ElevenLabs Voice Isolator ---------- */
+#v-el { background: #101012; color: #ececec; }
+.el-wrap { position: absolute; inset: 0; padding: 26px 30px; display: flex; flex-direction: column; gap: 18px; }
+.el-card { background: #17171b; border-radius: 18px; box-shadow: inset 0 0 0 2px #24242a; padding: 20px 22px; }
+.el-card .el-lab { font-size: 20px; color: #8e8e93; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.el-card .el-lab b { color: #ececec; font-size: 23px; font-weight: 750; }
+.el-card .el-lab .tan { margin-left: auto; font-size: 19px; }
+.el-wave { position: relative; height: 118px; margin-top: 12px; }
+/* the measured band strip: 26 log bands of the loudest bark, 160 Hz to 5.2 kHz (assets/waveform.js) */
+.el-spec { display: flex; align-items: center; gap: 14px; margin-top: 12px; font-size: 19px; color: #8e8e93; }
+.el-spec b { color: #c7c9d1; font-weight: 700; }
+.el-spec-b { flex: 1; display: flex; align-items: flex-end; gap: 3px; height: 44px; }
+.el-spec-b i { flex: 1; background: linear-gradient(180deg, #9ecbff, #4f7fd6); border-radius: 2px 2px 0 0; height: 4px; }
+.el-wave svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.el-wave .wline { fill: #6b6b73; }
+.el-wave.clean .wline { fill: #a6d7ff; }
+.el-btn { height: 66px; border-radius: 999px; background: linear-gradient(90deg, #5d91ec, #866cf6); color: #fff; font-size: 25px;
+  font-weight: 750; display: grid; place-items: center; letter-spacing: -0.2px; }
+.el-btn.quiet { background: #1c1c22; box-shadow: inset 0 0 0 2px #2c2c34; color: #c7c9d1; }
+.el-outs { display: flex; gap: 14px; }
+.el-clip { flex: 1; background: #17171b; border-radius: 14px; box-shadow: inset 0 0 0 2px #24242a; padding: 12px 14px; }
+.el-clip .el-top { display: flex; align-items: center; gap: 9px; font-size: 19px; color: #c7c9d1; font-weight: 650; }
+.el-clip .el-play { width: 26px; height: 26px; border-radius: 50%; background: #2c2c34; display: grid; place-items: center; }
+.el-clip .el-play i { width: 0; height: 0; border-left: 9px solid #d6d8df; border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 2px; }
+.el-clip .el-mini { height: 40px; margin-top: 8px; }
+.el-clip .el-mini svg { width: 100%; height: 100%; }
+.el-clip .el-mini .wline { fill: #5f6b7a; }
+.el-steps { display: flex; flex-direction: column; gap: 10px; }
+.el-step { display: flex; align-items: center; gap: 12px; font-size: 21px; color: #c7c9d1; }
+.el-step .st { width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 2px #2c2c34; display: grid; place-items: center; }
+.el-step .st svg { width: 20px; height: 20px; fill: none; stroke: #30d158; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.el-step .st i { width: 12px; height: 12px; border-radius: 50%; border: 3px solid #4a4a52; border-top-color: #c7c9d1; }
+.el-note { margin-top: auto; display: flex; align-items: center; gap: 12px; font-size: 20px; color: #8e8e93; }
+
+/* ---------- 3. Gemini image render ---------- */
+#v-gem { background: #0e0e10; color: #ececec; }
+.gem-wrap { position: absolute; inset: 0; padding: 24px 28px; display: flex; flex-direction: column; gap: 16px; }
+.gem-prompt { background: #17171b; border-radius: 16px; box-shadow: inset 0 0 0 2px #24242a; padding: 16px 20px; font-size: 22px; line-height: 30px; color: #c7c9d1; }
+.gem-prompt b { color: #ececec; }
+.gem-shot { position: relative; border-radius: 18px; overflow: hidden; background: #17171b; box-shadow: inset 0 0 0 2px #24242a; }
+.gem-shot img { width: 100%; display: block; }
+.gem-shot .gem-sweep { position: absolute; left: 0; right: 0; height: 42%; background: linear-gradient(180deg, rgba(93,145,236,0) 0%, rgba(134,108,246,0.35) 55%, rgba(214,236,255,0.85) 100%); }
+.gem-shot .gem-gen { position: absolute; left: 18px; bottom: 16px; display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 18px;
+  border-radius: 999px; background: rgba(10,10,12,0.8); font-size: 21px; color: #e6e8ee; font-weight: 650; }
+.gem-shot .gem-gen i { width: 20px; height: 20px; border-radius: 50%; border: 3px solid #4a4a52; border-top-color: #d6d8df; }
+.gem-meta { display: flex; align-items: center; gap: 12px; }
+.gem-sw { width: 46px; height: 46px; border-radius: 12px; box-shadow: inset 0 0 0 2px rgba(255,255,255,0.25); }
+.gem-crops { display: flex; gap: 14px; justify-content: center; }
+.gem-crops .c { flex: none; width: 168px; height: 226px; border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 0 2px #24242a;
+  background-color: #ECE7E1; background-repeat: no-repeat; position: relative; }
+.gem-crops .c span { position: absolute; left: 8px; bottom: 8px; font-size: 17px; color: #d6d8df; background: rgba(10,10,12,0.7); padding: 3px 9px; border-radius: 999px; }
+
+/* ---------- 4. Blender viewport ---------- */
+#v-bl { background: #1c1c1e; color: #d6d8df; }
+.bl-top { position: absolute; left: 0; right: 0; top: 0; height: 54px; display: flex; align-items: center; gap: 20px; padding: 0 18px; background: #26262a; font-size: 19px; color: #b9bcc4; }
+.bl-top b { font-weight: 700; color: #ececec; }
+.bl-top .bl-mode { margin-left: auto; display: flex; gap: 16px; align-items: center; }
+.bl-top .bl-pill { height: 34px; padding: 0 12px; border-radius: 8px; background: #1c1c1e; display: inline-flex; align-items: center; gap: 8px; font-size: 18px; }
+.bl-side { position: absolute; left: 0; top: 54px; bottom: 44px; width: 62px; background: #26262a; display: flex; flex-direction: column; align-items: center; padding-top: 14px; gap: 16px; }
+.bl-side .bl-tool { width: 40px; height: 40px; border-radius: 9px; background: #31313a; display: grid; place-items: center; }
+.bl-side .bl-tool svg { width: 22px; height: 22px; fill: none; stroke: #c9ccd3; stroke-width: 2; stroke-linecap: round; }
+.bl-side .bl-tool.on { background: #3a3a46; box-shadow: inset 0 0 0 2px #6f6ff0; }
+.bl-view { position: absolute; left: 62px; right: 0; top: 54px; bottom: 44px; overflow: hidden; background: #17171a; }
+/* the turntable and wireframe sheets: 24 frames side by side, one frame per background-position step */
+/* frames are rendered at the viewport's aspect with the camera shifted, so the model sits clear of the N-panel */
+.bl-sheet { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-repeat: no-repeat;
+  background-position: 0% 50%; background-size: 1600% 100%; }
+.bl-wire { opacity: 0; mix-blend-mode: screen; }
+.bl-grid { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; background:
+  repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 46px),
+  repeating-linear-gradient(0deg, rgba(255,255,255,0.07) 0 1px, transparent 1px 46px),
+  linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.06)); transform: perspective(520px) rotateX(62deg); transform-origin: bottom center; }
+.bl-axis { position: absolute; left: 18px; bottom: 16px; width: 74px; height: 74px; }
+.bl-axis svg { width: 100%; height: 100%; }
+.bl-n { position: absolute; right: 14px; top: 76px; width: 352px; background: rgba(30,30,34,0.94); border-radius: 12px; padding: 14px 16px; box-shadow: inset 0 0 0 2px #31313a; }
+.bl-n h4 { font-size: 19px; font-weight: 750; color: #ececec; margin-bottom: 10px; }
+.bl-n .bl-r { display: flex; justify-content: space-between; font-size: 19px; color: #b9bcc4; padding: 3px 0; }
+.bl-n .bl-r b { color: #ececec; font-weight: 700; }
+.bl-n .bl-ok { color: #6fe39a; }
+.bl-bot { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; background: #26262a; display: flex; align-items: center; gap: 18px; padding: 0 18px; font-size: 18px; color: #b9bcc4; }
+.bl-bot .bl-frames { display: flex; gap: 2px; }
+.bl-bot .bl-frames i { width: 7px; height: 18px; border-radius: 2px; background: #3d3d46; }
+.bl-bot .bl-frames i.on { background: #6f6ff0; }
+.bl-bot .bl-print { margin-left: auto; display: flex; align-items: center; gap: 10px; color: #ececec; }
+
+/* ---------- 5. Code (Opus 5.5 firmware) ---------- */
+#v-code { background: #101014; color: #e6e8ee; }
+.cd-tabs { height: 56px; display: flex; align-items: flex-end; gap: 4px; padding: 0 14px; background: #16161b; border-bottom: 2px solid #22222a; }
+.cd-tabs span { padding: 10px 18px; border-radius: 10px 10px 0 0; font-size: 20px; color: #8e8e93; }
+.cd-tabs span.on { background: #101014; color: #ececec; box-shadow: inset 0 2px 0 #866cf6; }
+.cd-code { position: absolute; left: 0; right: 0; top: 56px; bottom: 236px; padding: 16px 20px; font-family: 'SF Mono', ui-monospace, monospace; font-size: 21px; line-height: 32px; overflow: hidden; }
+.cd-code .ln { color: #4a4a55; display: inline-block; width: 52px; }
+.cd-code .kw { color: #c792ea; } .cd-code .ty { color: #82d2ce; } .cd-code .fn { color: #8ec07c; }
+.cd-code .st { color: #f0a06a; } .cd-code .cm { color: #5f6470; } .cd-code .nm { color: #d6b0ff; }
+.cd-term { position: absolute; left: 0; right: 0; bottom: 0; height: 250px; background: #0b0b0f; border-top: 2px solid #22222a; padding: 14px 20px;
+  font-family: 'SF Mono', ui-monospace, monospace; font-size: 19px; line-height: 28px; color: #b9bcc4; }
+.cd-term .ok { color: #6fe39a; } .cd-term .wr { color: #ffd166; } .cd-term .dm { color: #6e6e78; }
+.cd-badge { position: absolute; right: 18px; top: 66px; display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border-radius: 999px;
+  background: rgba(48,209,88,0.12); box-shadow: inset 0 0 0 2px rgba(48,209,88,0.35); color: #6fe39a; font-size: 20px; font-weight: 700; }
+
+/* ---------- 6. Superbot order (print + chip) ---------- */
+#v-order { background: #0e0e10; }
+.or-wrap { position: absolute; inset: 0; padding: 22px 26px; display: flex; flex-direction: column; gap: 14px; color: #e6e8ee; }
+.or-card { background: #17171b; border-radius: 20px; box-shadow: inset 0 0 0 2px #24242a; overflow: hidden; }
+.or-head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 2px solid #22222a; font-size: 22px; font-weight: 750; }
+.or-head .or-tag { margin-left: auto; font-size: 19px; color: #8e8e93; font-weight: 600; }
+.or-hero { display: flex; gap: 14px; padding: 16px 18px; align-items: center; }
+.or-hero .or-shot { width: 190px; height: 190px; border-radius: 16px; background: #0d0d10; overflow: hidden; flex: none; box-shadow: inset 0 0 0 2px #24242a; }
+.or-hero .or-shot img { width: 100%; height: 100%; object-fit: cover; }
+.or-hero .or-what { font-size: 24px; line-height: 32px; }
+.or-hero .or-what b { font-weight: 800; }
+.or-hero .or-spec { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+.or-lines { padding: 6px 18px 12px; }
+.or-line { display: flex; justify-content: space-between; font-size: 21px; color: #c7c9d1; padding: 5px 0; }
+.or-line span:last-child { color: #ececec; font-weight: 650; }
+.or-line.tot { border-top: 2px solid #22222a; margin-top: 6px; padding-top: 12px; font-size: 24px; }
+.or-line.tot span { color: #fff; font-weight: 800; }
+.or-btn { position: relative; margin: 4px 18px 18px; height: 72px; border-radius: 999px; background: linear-gradient(90deg, #5d91ec, #866cf6); color: #fff;
+  display: grid; place-items: center; font-size: 27px; font-weight: 800; overflow: hidden; }
+.or-btn .or-b { position: absolute; inset: 0; display: grid; place-items: center; }
+.or-shine { position: absolute; top: 0; bottom: 0; width: 40%; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.55), rgba(255,255,255,0)); }
+.or-steps { display: flex; align-items: center; gap: 10px; padding: 0 4px; }
+.or-step { display: flex; align-items: center; gap: 9px; font-size: 20px; color: #8e8e93; }
+.or-step .d { width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 2px #33333c; }
+.or-step.on { color: #e6e8ee; }
+.or-step.on .d { background: #30d158; box-shadow: inset 0 0 0 2px #30d158; }
+.or-arrow { flex: 1; height: 2px; background: #2a2a32; }
+.or-fina { position: absolute; inset: 0; display: grid; place-items: center; background: #fff; }
+.or-fina .or-big { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+.or-fina img { max-width: 100%; max-height: 100%; }
+.or-fina .or-cap { position: absolute; left: 0; right: 0; bottom: 34px; text-align: center; font-size: 30px; color: #141416; }
+.or-fina .or-cap b { font-weight: 800; }
+.or-fina .or-cap small { display: block; font-size: 23px; color: #6b6b70; margin-top: 6px; }
+/* the bark: three rings out of his mouth when the paw goes down (the sound is the spot's one audio cue) */
+.or-rings { position: absolute; width: 0; height: 0; }
+.or-rings i { position: absolute; left: -60px; top: -60px; width: 120px; height: 120px; border-radius: 50%;
+  border: 5px solid #ff9f0a; border-right-color: transparent; border-bottom-color: transparent; opacity: 0; }
+
+/* ---------- 16:9 thread column: narrower than the app's 760 px so it can be scaled up and read at a glance ---------- */
+#s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 560px) / 2)) 4px; }
+#s-tabs .sbsite.ask .hub .composer { width: min(560px, calc(100% - 48px)); }
+
+/* inline check marks inside the pane (an unsized inline svg falls back to 300 x 150) */
+#outpane .cd-badge svg, #outpane .or-b svg { width: 24px; height: 24px; flex: none; fill: none; stroke: currentColor;
+  stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#outpane .or-b { display: flex; align-items: center; justify-content: center; gap: 10px; }

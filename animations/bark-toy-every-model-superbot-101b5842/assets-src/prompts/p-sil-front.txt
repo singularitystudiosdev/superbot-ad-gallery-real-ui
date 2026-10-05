@@ -1,0 +1,3 @@
+The attached sheet shows a corgi toy in four views. Output ONLY a pure black silhouette of the FRONT view (the leftmost figure) on a pure white background: a single solid black shape, no interior lines, no eyes, no shading, no outline, no text.
+The silhouette must be exactly the toy's outline: body, head, both upright pointed ears, muzzle, four short legs, no tail. Same proportions and pose as the reference's front view.
+Fill about 90% of the frame height, centred, feet at the bottom of the shape, nothing touching the image edges.

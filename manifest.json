@@ -122,6 +122,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "bark-toy-every-model-superbot-101b5842",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · One ask, six models: DeepSeek scrapes, ElevenLabs isolates the bark, Gemini draws, Blender meshes, Opus 5.5 codes, Superbot orders the toy (16:9)",
+    "src": "animations/bark-toy-every-model-superbot-101b5842/",
+    "thumb": "assets/shots/bark-toy-every-model-superbot-101b5842.png",
+    "desc": "Remake of every-model-one-chat-sb-superbot-efa8df82 with a new chain and a new final output, built for 16:9. One ask, make me a toy of my corgi, handed down six models, each doing what it is built for. DeepSeek V4 Flash reads @biscuit.loaf logged out: 312 posts, 41 reels, 37 s of barking. ElevenLabs isolates the bark from the room noise into 12 clean takes. Gemini draws the toy from four sides with his markings held. Blender turns the drawings into a watertight 88 mm mesh with a pocket for the speaker and the paw switch. Claude Opus 5.5 writes the firmware so a press on the paw plays the bark. Superbot orders two prints with the bark on the chip, and the spot ends on the finished toy barking. 16:9 only.",
+    "download": "assets/video/bark-toy-every-model-superbot-101b5842.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-one-chat-3d-sb-superbot-5af3c81d",
     "type": "animation",
     "group": "Ad spots",

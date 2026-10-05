@@ -1421,10 +1421,10 @@
     "id": "its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb",
     "type": "animation",
     "group": "Ad spots",
-    "title": "IT'S A LIE in 14.8 s · each switch builds a piece of the game: DeepSeek world gen, Nano Banana Pro textures, Meshy 6 pig, ElevenLabs sfx, Suno score, Opus wires it (16:9)",
+    "title": "IT'S A LIE in 14.8 s · each switch builds a piece of the game: DeepSeek world gen, Nano Banana Pro textures, Meshy 7.1 pig, ElevenLabs sfx, Suno score, Opus wires it (16:9)",
     "src": "animations/its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb/",
     "thumb": "assets/shots/its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb.png",
-    "desc": "Under-15 s variant of its-a-lie-every-model-superbot-54829cd7 with more detailed outputs. The post claims Opus 5.5 built the game in one prompt, and IT'S A LIE is stamped across it from the first frame. Then one superbot chat turns \"make me minecraft in the browser\" into the game piece by piece: DeepSeek V4 Flash writes the world generator and shows the map it makes, Nano Banana Pro paints 16 block and plant textures, Meshy 6 models and rigs the pig, ElevenLabs SFX v2 makes four sound effects, Suno v5.5 writes the piano theme, and Claude Opus 5.5 wires every asset in, passes its tests and runs it, and the camera flies into the game they made. 1920x1080, 60 fps.",
+    "desc": "Under-15 s variant of its-a-lie-every-model-superbot-54829cd7 with more detailed outputs. The post claims Opus 5.5 built the game in one prompt, and IT'S A LIE is stamped across it from the first frame. Then one superbot chat turns \"make me minecraft in the browser\" into the game piece by piece: DeepSeek V4 Flash writes the world generator and shows the map it makes, Nano Banana Pro paints 16 block and plant textures, Meshy 7.1 models and rigs the pig, ElevenLabs SFX v2 makes four sound effects, Suno v6 writes the piano theme, and Claude Opus 5.5 wires every asset in, passes its tests and runs it, and the camera flies into the game they made. 1920x1080, 60 fps.",
     "download": "assets/video/its-a-lie-every-model-superbot-54829cd7-r1-a-lv410045ceb.16x9.mp4",
     "downloadLabel": "16:9"
   },

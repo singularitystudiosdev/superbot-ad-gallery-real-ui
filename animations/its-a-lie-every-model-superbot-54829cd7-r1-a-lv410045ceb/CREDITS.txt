@@ -7,11 +7,11 @@ payoff is the game built from exactly those parts. Model names are the current v
 - DeepSeek V4 Flash: worldgen.js. The 8 lines on screen are cut verbatim from the game's worldgen.js (105 lines); the map
   beside them is what that generator produces for seed 1337, and it is the world the post and the payoff play in.
 - Nano Banana Pro: terrain.png, 16 block and plant textures at 16x16 px. The game samples the same 16 tiles.
-- Meshy 6: pig.glb (1,344 tri, 7 parts, rigged; Meshy auto-rigs quadrupeds), shown in superbot's 3D viewer setup. The
+- Meshy 7.1: pig.glb (1,344 tri, 7 parts, rigged; Meshy auto-rigs quadrupeds), shown in superbot's 3D viewer setup. The
   same pig walks in the payoff, animated by the game's mobs.js.
 - ElevenLabs SFX v2: four sound effects (grass block break, footsteps on sand, oak plank place, pig oink). Each is heard as its
   row lands; the waveforms are those sounds' peaks, and the payoff plays them.
-- Suno v5.5: two takes of a 3/4 piano theme; the spot's music from the moment its row plays.
+- Suno v6: two takes of a 3/4 piano theme; the spot's music from the moment its row plays.
 - Claude Opus 5.5: the work card wires each asset into the game (world.js uses worldgen.js, textures.js uses terrain.png,
   mobs.js uses pig.glb, sound.js uses the four sfx, music.js uses the theme), runs the tests and opens it at localhost:5173.
 

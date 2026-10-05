@@ -1,0 +1,172 @@
+/* Studio beat (beats/studio.js): the full-frame YouTube Studio client (light theme, chat.css --yt-*) on the Community
+   page, Published tab, filtered to "Every Budget Mic I Own, Ranked", sorted Top comments, and superbot's dark status
+   bar over its header band. The Studio surfaces (.st-*: top bar, left menu, page title, tabs, filter row, comment rows,
+   creator heart, pinned label, snackbar) are carried over from the base ad's studio.css and the A2-06 spot's
+   subs.css; what this spot adds is .hs-*: the spam rows' red wash and "Likely spam" flag, the comment menu (Pin, Hide
+   user from channel), the heart counter badge and the status bar steps. Nothing here transitions: position, size,
+   radius, opacity and transform are written from t in studio.js, so ?t= freezes a frame. Radii: 8px thumbnails and
+   chips, 12px on the menu and the status bar, fully round pills and avatars. */
+
+/* Google Sans Flex (SIL OFL 1.1, the variable weight axis, latin) and Roboto (SIL OFL 1.1), from fontsource, vendored
+   under fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "GSF"; font-style: normal; font-weight: 100 1000; font-display: block; src: url("../../../fonts/google-sans-flex-latin-wght-normal.woff2?v=1ee7c75e") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/roboto-latin-400-normal.woff2?v=1ee7c75e") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/roboto-latin-500-normal.woff2?v=1ee7c75e") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/roboto-latin-700-normal.woff2?v=1ee7c75e") format("woff2"); }
+
+#s-tabs .yt-i { flex: none; width: 24px; height: 24px; }
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .st-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--yt-bg); }
+#s-tabs .st-app { position: absolute; left: 0; top: 0; display: flex; flex-direction: column; transform-origin: 0 0; overflow: hidden;
+  background: var(--yt-bg); color: var(--yt-text); font: 400 14px/20px var(--gm-body); -webkit-font-smoothing: antialiased; }
+#s-tabs .st-app .yt-i { color: var(--yt-text2); }
+#s-tabs .st-btn { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
+#s-tabs .st-btn .yt-i { color: var(--yt-text); }
+
+/* top bar */
+#s-tabs .st-top { position: relative; flex: none; display: flex; align-items: center; height: 64px; padding: 0 24px 0 16px; box-sizing: border-box;
+  box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-logo { flex: none; display: flex; align-items: center; margin-left: 12px; }
+#s-tabs .st-logo img { display: block; height: 24px; width: auto; }
+#s-tabs .st-search { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px;
+  width: 600px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 9999px; box-shadow: inset 0 0 0 1px var(--yt-outline-opaque);
+  font: 400 15px/1 var(--gm-body); color: var(--yt-text2); white-space: nowrap; }
+#s-tabs .st-tools { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+#s-tabs .st-create { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px 0 12px; border-radius: 9999px;
+  box-shadow: inset 0 0 0 1px var(--yt-outline); font: 500 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-create .yt-i { color: var(--yt-text); }
+#s-tabs .st-me { flex: none; display: grid; place-items: center; width: 32px; height: 32px; margin-left: 16px; border-radius: 50%; background: var(--yt-me); color: #fff; font: 500 15px/1 var(--gm-body); }
+
+/* the body: left menu | the Community page */
+#s-tabs .st-main { flex: 1; min-height: 0; display: flex; }
+#s-tabs .st-nav { position: relative; flex: none; width: 256px; box-sizing: border-box; box-shadow: inset -1px 0 0 var(--yt-outline); }
+#s-tabs .st-chan { display: flex; flex-direction: column; align-items: center; padding: 24px 0 16px; }
+#s-tabs .st-big { display: grid; place-items: center; width: 112px; height: 112px; border-radius: 50%; background: var(--yt-me); color: #fff; font: 400 52px/1 var(--gm-body); }
+#s-tabs .st-chan b { margin-top: 16px; font: 500 15px/22px var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-chan small { font: 400 13px/18px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .st-nv { display: flex; align-items: center; gap: 24px; height: 48px; padding: 0 24px; font: 400 15px/1 var(--gm-body); color: var(--yt-text); white-space: nowrap; }
+#s-tabs .st-nv.st-on { background: var(--yt-additive); font-weight: 500; }
+#s-tabs .st-nv.st-on .yt-i { color: var(--yt-text); }
+#s-tabs .st-nfoot { position: absolute; left: 0; right: 0; bottom: 8px; }
+
+/* the Community page: title, Published / Held, the filter bar, the comments */
+#s-tabs .st-page { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 0 32px; overflow: hidden; }
+#s-tabs .st-h1 { flex: none; margin: 0; padding: 22px 0 6px; font: 500 25px/32px var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-tabs { flex: none; display: flex; gap: 32px; height: 48px; margin: 0 -32px; padding: 0 32px; box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-tab { display: flex; align-items: center; font: 500 15px/1 var(--gm-body); color: var(--yt-text2); }
+#s-tabs .st-tab-on { color: var(--yt-text); box-shadow: inset 0 -3px 0 var(--yt-text); }
+
+/* ---- the Channel subtitles table: Video | Language | Modified on | Subtitles ---- */
+
+/* ---- the filter row and the comment list (base studio.css) ---- */
+#s-tabs .st-filter { flex: none; display: flex; align-items: center; gap: 12px; height: 56px; margin: 0 -32px; padding: 0 32px; box-shadow: inset 0 -1px 0 var(--yt-outline); white-space: nowrap; }
+#s-tabs .st-chip { display: inline-flex; align-items: center; min-width: 0; height: 32px; padding: 0 12px; border-radius: 8px; background: var(--yt-additive);
+  font: 500 14px/32px var(--gm-body); color: var(--yt-text); overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .st-sort { flex: none; display: inline-flex; align-items: center; gap: 8px; margin-left: auto; font: 500 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-sort .yt-i { color: var(--yt-text); }
+
+/* the list stops above the snackbar's lane so the toast never covers a comment */
+#s-tabs .st-list { flex: 1; min-height: 0; overflow: hidden; margin-bottom: 72px; box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-blk { position: relative; padding: 12px 0 8px; background: var(--yt-bg); box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-blk.st-moving { z-index: 2; }
+#s-tabs .st-wash { position: absolute; inset: 0; margin: 0 -32px; opacity: 0; background: var(--yt-pin-wash); }
+#s-tabs .st-cm { position: relative; display: flex; align-items: flex-start; gap: 16px; }
+#s-tabs .st-av { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--c); color: #fff; font: 500 18px/1 var(--gm-body); }
+#s-tabs .st-av.st-av-s { width: 24px; height: 24px; font-size: 12px; background: var(--yt-me); }
+#s-tabs .st-body { flex: 1; min-width: 0; }
+#s-tabs .st-pslot { height: 0; overflow: hidden; }
+#s-tabs .st-pinned { display: flex; height: 24px; box-sizing: border-box; align-items: center; gap: 6px; padding-bottom: 6px; font: 400 13px/18px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .st-pinned .st-pi { width: 16px; height: 16px; }
+#s-tabs .st-meta { font: 500 13px/18px var(--gm-body); color: var(--yt-text); white-space: nowrap; }
+#s-tabs .st-meta span { font-weight: 400; font-size: 12px; color: var(--yt-text2); }
+#s-tabs .st-text { margin-top: 2px; font: 400 14px/20px var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-acts { display: flex; align-items: center; height: 34px; margin-top: 2px; white-space: nowrap; }
+#s-tabs .st-rb { display: inline-flex; align-items: center; height: 32px; margin: 0 4px 0 -12px; padding: 0 12px; border-radius: 9999px; font: 500 13px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-ib { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; }
+#s-tabs .st-ib .yt-i { width: 20px; height: 20px; }
+#s-tabs .st-n { margin: 0 6px 0 -2px; font: 400 12px/1 var(--gm-body); color: var(--yt-text2); font-variant-numeric: tabular-nums; }
+#s-tabs .st-hrt { position: relative; display: block; width: 20px; height: 20px; }
+#s-tabs .st-hrt .yt-i { position: absolute; inset: 0; width: 20px; height: 20px; }
+#s-tabs .st-hrt .st-hf1 { opacity: 0; color: var(--yt-red); }
+#s-tabs .st-hav { position: absolute; right: -6px; bottom: -4px; display: grid; place-items: center; width: 12px; height: 12px; border-radius: 50%; opacity: 0;
+  background: var(--yt-me); box-shadow: 0 0 0 1.5px var(--yt-bg); color: #fff; font: 500 7px/1 var(--gm-body); font-style: normal; }
+#s-tabs .st-vid { flex: none; display: flex; gap: 12px; width: 320px; }
+#s-tabs .st-vid img { flex: none; width: 120px; height: 68px; border-radius: 8px; object-fit: cover; }
+#s-tabs .st-vid span { font: 400 13px/18px var(--gm-body); color: var(--yt-text); }
+
+/* the snackbar: YouTube's inverted surface, bottom left of the page (clear of the left menu's Send feedback) */
+#s-tabs .st-snack { position: absolute; left: 288px; bottom: 12px; display: flex; align-items: center; min-height: 48px; padding: 0 24px; box-sizing: border-box;
+  border-radius: 8px; background: var(--yt-inverted); color: #fff; font: 400 14px/20px var(--gm-body); box-shadow: 0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3);
+  opacity: 0; white-space: nowrap; }
+
+
+/* ---- superbot's status bar over the page's header band, top right (the connect checklist laid flat) ---- */
+#s-tabs .sb-bar { position: absolute; top: 74px; right: 24px; z-index: 4; display: flex; align-items: center; gap: 20px; height: 54px; padding: 0 18px 0 10px;
+  border-radius: 12px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 8px 24px rgba(0,0,0,.22); opacity: 0;
+  font: 400 15px/1 var(--ui, "Inter", system-ui, sans-serif); color: #e5e5ea; white-space: nowrap; }
+#s-tabs .sb-tile { position: relative; flex: none; width: 34px; height: 34px; border-radius: 8px; background: #0b0b0c; box-shadow: inset 0 0 0 1px #2a2a2e;
+}
+#s-tabs .sb-tile .sbm { position: absolute; inset: 16%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#s-tabs .sb-tile .sbm-c { background: #00e5c3; transform: translate(-0.8px, -0.8px); }
+#s-tabs .sb-tile .sbm-m { background: #c026d3; transform: translate(0.8px, 0.8px); }
+#s-tabs .sb-tile .sbm-w { background: #ececec; }
+#s-tabs .sb-step { display: inline-flex; align-items: center; gap: 9px; }
+#s-tabs .sb-step + .sb-step { padding-left: 20px; box-shadow: inset 1px 0 0 #2a2a2e; }
+#s-tabs .sb-step b { font-weight: 600; color: #fff; }
+#s-tabs .sb-av { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--yt-me); color: #fff; font: 500 12px/1 var(--gm-body); }
+#s-tabs .sb-ms { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #23324f; }
+#s-tabs .sb-ms .yt-i { width: 14px; height: 14px; color: #8ab4f8; }
+#s-tabs .sb-sep { margin: 0 6px; font-style: normal; color: #6b6e76; }
+#s-tabs .sb-cnt { display: inline-block; font-size: 20px; font-variant-numeric: tabular-nums; transform-origin: 50% 50%; }
+#s-tabs .sb-ok { position: relative; flex: none; width: 15px; height: 15px; }
+#s-tabs .sb-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sb-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- this spot (.hs-*) ---- */
+/* the list scrolls as one track; a row collapses (height written from t) when its spam account is hidden */
+#s-tabs .hs-track { will-change: transform; }
+#s-tabs .hs-full .st-blk { overflow: hidden; }
+#s-tabs .hs-full .st-wash { margin: 0 -32px; }
+#s-tabs .hs-spam .st-wash { background: rgba(255,0,51,.09); }
+#s-tabs .hs-flag { display: inline-block; margin-left: 8px; padding: 0 8px; height: 20px; border-radius: 9999px; opacity: 0; vertical-align: 1px;
+  background: #fde8ea; color: #c5221f; font: 500 12px/20px var(--gm-body); }
+#s-tabs .hs-spam .st-text { color: #3c3c3c; }
+#s-tabs .hs-link { color: var(--yt-blue); }
+#s-tabs .hs-full .st-hb { position: relative; }
+#s-tabs .hs-ring { position: absolute; inset: 0; border-radius: 50%; opacity: 0; box-shadow: 0 0 0 2px rgba(255,0,51,.35); }
+#s-tabs .hs-full .st-hrt { transform-origin: 50% 60%; }
+
+/* the comment menu (More): Studio's popup, white, 12px radius, 40px items with 24px icons */
+#s-tabs .hs-menu { position: absolute; z-index: 3; width: 268px; padding: 8px 0; border-radius: 12px; background: #fff; opacity: 0; transform-origin: 0 0;
+  box-shadow: 0 4px 32px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.12); }
+#s-tabs .hs-mi { position: relative; display: flex; align-items: center; gap: 16px; height: 40px; padding: 0 16px; font: 400 14px/1 var(--gm-body); color: var(--yt-text); white-space: nowrap; }
+#s-tabs .hs-mi .yt-i { position: relative; width: 24px; height: 24px; color: var(--yt-text); }
+#s-tabs .hs-mi span { position: relative; }
+#s-tabs .hs-mi i.hs-hl { position: absolute; inset: 0; opacity: 0; background: rgba(0,0,0,.1); }
+
+/* the status bar steps: the heart counter badge (YouTube red), the spam counter, the pin */
+#s-tabs .hs-hc { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--yt-red); }
+#s-tabs .hs-hc .yt-i { width: 16px; height: 16px; color: #fff; }
+#s-tabs .hs-bc { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #3b1d22; }
+#s-tabs .hs-bc .yt-i { width: 16px; height: 16px; color: #f87171; }
+#s-tabs .hs-pc { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #23324f; }
+#s-tabs .hs-pc .yt-i { width: 16px; height: 16px; color: #8ab4f8; }
+#s-tabs .sb-bar .sb-cnt { min-width: 3.1ch; text-align: right; font-size: 21px; }
+#s-tabs .sb-bar .hs-dim { color: #a8abb2; }
+
+/* the heart counter badge: superbot's overlay (its dark surface), bottom right of the list, clear of the snackbar lane;
+   the hearts line, then the spam line (on the hide) and the pin line (on the pin) open under it */
+#s-tabs .hs-badge { position: absolute; right: 44px; bottom: 100px; z-index: 3; display: flex; flex-direction: column; padding: 18px 28px 18px 18px;
+  border-radius: 20px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 12px 32px rgba(0,0,0,.28); opacity: 0; transform-origin: 100% 100%;
+  font-family: var(--ui, "Inter", system-ui, sans-serif); color: #fff; white-space: nowrap; }
+#s-tabs .hs-bl { display: flex; align-items: center; gap: 14px; }
+#s-tabs .hs-bl-s, #s-tabs .hs-bl-p { height: 0; overflow: hidden; opacity: 0; }
+#s-tabs .hs-bi { flex: none; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--yt-red); }
+#s-tabs .hs-bi .yt-i { width: 30px; height: 30px; color: #fff; }
+#s-tabs .hs-bi-s { background: #3b1d22; }
+#s-tabs .hs-bi-s .yt-i { color: #f87171; }
+#s-tabs .hs-bn { min-width: 4.2ch; text-align: right; font-size: 58px; line-height: 1; font-weight: 700; font-variant-numeric: tabular-nums; }
+#s-tabs .hs-bt { font-size: 24px; color: #c4c7c5; }
+#s-tabs .hs-bi-p { background: #23324f; }
+#s-tabs .hs-bi-p .yt-i { color: #8ab4f8; }
+#s-tabs .hs-bh { font-size: 34px; font-weight: 700; line-height: 1; }

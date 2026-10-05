@@ -1701,6 +1701,61 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "apikey-terminal-16x9-79d27001",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subs · terminal: superbot login, keys --mint, serve (12 s, 16:9)",
+    "src": "animations/apikey-terminal-16x9-79d27001/",
+    "thumb": "assets/shots/apikey-terminal-16x9-79d27001.png",
+    "desc": "A terminal runs superbot login anthropic and openai four times; each new account is thrown out as a pill. superbot keys --mint prints one sk-superbot key that absorbs all four, and superbot serve puts it on the gateway at 127.0.0.1:18787/v1. 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-terminal-16x9-79d27001/final.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "apikey-deck-16x9-79d27001",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subs · deck: four subscription cards flip into one gateway key (12 s, 16:9)",
+    "src": "animations/apikey-deck-16x9-79d27001/",
+    "thumb": "assets/shots/apikey-deck-16x9-79d27001.png",
+    "desc": "Claude Max, Claude Pro, ChatGPT Pro and ChatGPT Plus are dealt as cards into a fan, squared into one deck and flipped. The back is the superbot gateway key, which widens to list the four accounts it carries and checks each one off. 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-deck-16x9-79d27001/final.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "apikey-unlock-16x9-79d27001",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subs · unlock: one key opens every subscription (12 s, 16:9)",
+    "src": "animations/apikey-unlock-16x9-79d27001/",
+    "thumb": "assets/shots/apikey-unlock-16x9-79d27001.png",
+    "desc": "One sk-superbot key slides under four locked subscription cards and turns; each padlock springs open. The camera pulls wide on all four unlocked, the row answers in a wave and the pools line lands under the key. 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-unlock-16x9-79d27001/final.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "apikey-switchboard-16x9-79d27001",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subs · switchboard: Claude Code, Codex and Cursor on one key (12 s, 16:9)",
+    "src": "animations/apikey-switchboard-16x9-79d27001/",
+    "thumb": "assets/shots/apikey-switchboard-16x9-79d27001.png",
+    "desc": "One key is wired into Claude Code, Codex and Cursor. The superbot gateway fans out to the anthropic and openai pools, and requests on /v1/messages, /v1/responses and /v1/chat/completions land on every account in turn. 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-switchboard-16x9-79d27001/final.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "apikey-typestack-16x9-79d27001",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key, all your subs · type: four subscriptions crush into one key (12 s, 16:9)",
+    "src": "animations/apikey-typestack-16x9-79d27001/",
+    "thumb": "assets/shots/apikey-typestack-16x9-79d27001.png",
+    "desc": "claude max, claude pro, chatgpt pro and chatgpt plus slam in as giant type, a spotlight scans them on the beat, and they crush into one bar that opens into the sk-superbot key, with the four names and the gateway line under it. 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-typestack-16x9-79d27001/final.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "one-key-keyring-16x9-f34a5ba4",
     "type": "animation",
     "group": "Ad spots",

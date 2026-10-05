@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One API key, all your subs: Claude Code, Codex and Cursor route through one key (16:9)</title>
+<style>
+/* Plays the rendered 1920x1080 film (final.mp4, 12.0 s, 30 fps, with sound) at 16:9 on
+   the film's own near-black canvas. The gallery loads this page in a frame at any
+   ?ar=; the 16:9 picture is fitted whole and the rest of the frame stays near-black. */
+:root {
+  --canvas: #070707;
+  --surface: #ffffff;
+  --ink: #14171c;
+  --hairline: #d4d8de;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--canvas);
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.frame {
+  position: relative;
+  width: min(100vw, 177.78vh);
+  aspect-ratio: 16 / 9;
+  background: var(--canvas);
+}
+
+video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--canvas);
+}
+
+</style>
+</head>
+<body>
+<div class="frame">
+  <video id="film" src="final.mp4" poster="poster.png" autoplay loop playsinline preload="auto"
+    aria-label="One API key, all your subs: Claude Code, Codex and Cursor route through one key (16:9): one key is wired into Claude Code, Codex and Cursor, the superbot gateway fans out to the anthropic and openai pools, and requests on /v1/messages, /v1/responses and /v1/chat/completions land on every account in turn, with sound on (12 s loop)."></video>
+</div>
+<script>
+  const video = document.getElementById("film");
+  // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
+  // viewer's first click, key or touch.
+  const unmute = () => {
+    video.muted = false;
+    video.play().catch(() => {});
+  };
+  const start = () => {
+    video.muted = false;
+    video.play().catch(() => {
+      video.muted = true;
+      video.play().catch(() => {});
+    });
+  };
+  for (const type of ["pointerdown", "keydown", "touchstart"]) addEventListener(type, unmute, { once: true, capture: true });
+  // the gallery lightbox posts { type: "unmute" } on the viewer's first click or key
+  addEventListener("message", (e) => {
+    if (e.data && e.data.type === "unmute") unmute();
+  });
+  if (video.readyState >= 2) start();
+  else video.addEventListener("canplay", start, { once: true });
+</script>
+</body>
+</html>

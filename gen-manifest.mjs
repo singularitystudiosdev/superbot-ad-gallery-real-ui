@@ -697,6 +697,29 @@ const more = [
   // limit? switch models'. nerfed: output quality regressions (rank 2, rising), 'model nerfed? use another'.
   ['every-model-converge-limit-4x5-7f41c37b', 'every-model-converge-limit-4x5-7f41c37b/', "Hit a limit? Switch models: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-limit-4x5-7f41c37b/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['every-model-converge-nerfed-4x5-04314497', 'every-model-converge-nerfed-4x5-04314497/', "Model nerfed? Use another: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-nerfed-4x5-04314497/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // one api key, all your subs (2026-10-04, chat 79d27001): five 16:9 treatments of one claim, each 12.0 s
+  // (5 bars at 100 bpm), 1920x1080, 30 fps, synthesized score, on the converge ad's stage grammar
+  // (superbot-format-daeon/every-model-converge-16x9.398eded5); source in
+  // quick-chats/superbot-one-api-key-16x9.79d27001. Every product string is real superbot CLI and gateway
+  // output (superbot-gg-frontend/cli/src: login fills the anthropic and openai pools, keys --mint prints
+  // sk-superbot-, serve runs on 127.0.0.1:18787/v1, wire points claude-code, codex and cursor at it), so the
+  // subs shown are two Claude and two ChatGPT accounts. The claim answers the r/LLM rank-1 complaint
+  // usage-limits-pricing (sell-to-reddit llm_ai, 30 days, 5,636 authors). 16:9 only.
+  ['apikey-terminal-16x9-79d27001', 'apikey-terminal-16x9-79d27001/', 'One API key, all your subs · terminal: superbot login, keys --mint, serve (12 s, 16:9)', 'Ad spots',
+    { desc: 'A terminal runs superbot login anthropic and openai four times; each new account is thrown out as a pill. superbot keys --mint prints one sk-superbot key that absorbs all four, and superbot serve puts it on the gateway at 127.0.0.1:18787/v1. 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-terminal-16x9-79d27001/final.mp4', downloadLabel: '16:9' }],
+  ['apikey-deck-16x9-79d27001', 'apikey-deck-16x9-79d27001/', 'One API key, all your subs · deck: four subscription cards flip into one gateway key (12 s, 16:9)', 'Ad spots',
+    { desc: 'Claude Max, Claude Pro, ChatGPT Pro and ChatGPT Plus are dealt as cards into a fan, squared into one deck and flipped. The back is the superbot gateway key, which widens to list the four accounts it carries and checks each one off. 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-deck-16x9-79d27001/final.mp4', downloadLabel: '16:9' }],
+  ['apikey-unlock-16x9-79d27001', 'apikey-unlock-16x9-79d27001/', 'One API key, all your subs · unlock: one key opens every subscription (12 s, 16:9)', 'Ad spots',
+    { desc: 'One sk-superbot key slides under four locked subscription cards and turns; each padlock springs open. The camera pulls wide on all four unlocked, the row answers in a wave and the pools line lands under the key. 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-unlock-16x9-79d27001/final.mp4', downloadLabel: '16:9' }],
+  ['apikey-switchboard-16x9-79d27001', 'apikey-switchboard-16x9-79d27001/', 'One API key, all your subs · switchboard: Claude Code, Codex and Cursor on one key (12 s, 16:9)', 'Ad spots',
+    { desc: 'One key is wired into Claude Code, Codex and Cursor. The superbot gateway fans out to the anthropic and openai pools, and requests on /v1/messages, /v1/responses and /v1/chat/completions land on every account in turn. 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-switchboard-16x9-79d27001/final.mp4', downloadLabel: '16:9' }],
+  ['apikey-typestack-16x9-79d27001', 'apikey-typestack-16x9-79d27001/', 'One API key, all your subs · type: four subscriptions crush into one key (12 s, 16:9)', 'Ad spots',
+    { desc: 'claude max, claude pro, chatgpt pro and chatgpt plus slam in as giant type, a spotlight scans them on the beat, and they crush into one bar that opens into the sk-superbot key, with the four names and the gateway line under it. 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-typestack-16x9-79d27001/final.mp4', downloadLabel: '16:9' }],
   // One API key, all your subscriptions, 5 treatments (2026-10-04, chat f34a5ba4): 16:9 forks of the converge
   // 16:9 engine (superbot-format-daeon/every-model-converge-16x9.398eded5), one line shown five ways: keyring
   // (one key turns four locks), env-diff (.env diff + curl), switchboard (tools -> Your endpoint -> subs), split

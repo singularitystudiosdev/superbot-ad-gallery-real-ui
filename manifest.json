@@ -2252,6 +2252,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "allagents-converge-16x9-ac2c6228",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: six subscriptions spiral into one key, each ask fans out to Opus 5.5, Gemini or DeepSeek, four agent windows fuse into one Superbot (converge, 16:9)",
+    "src": "animations/allagents-converge-16x9-ac2c6228/",
+    "thumb": "assets/shots/allagents-converge-16x9-ac2c6228.png",
+    "desc": "ChatGPT, Claude, Gemini, Cursor, Grok and DeepSeek spiral into one sbc_ API key that drops in as OPENAI_API_KEY. Each ask drops into the key and three model pills fan out: a hard bug picks Claude Opus 5.5, long docs pick Gemini 3.1 Pro, a tiny fix picks DeepSeek V4. Then Claude Code, Codex, Gemini CLI and Cursor pile up and fuse into one Superbot agent that splits one ask into four subtasks, each labelled with the model it routed to. Ends on \"Superbot is all your agents in one.\" 28.8 s, 16:9, with sound.",
+    "download": "animations/allagents-converge-16x9-ac2c6228/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allagents-routemap-16x9-ac2c6228",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: subscriptions drop into one key, the key drops into OPENAI_API_KEY, requests ride a route map to Opus 5.5, Gemini or DeepSeek, four agents fold into one (route map, 16:9)",
+    "src": "animations/allagents-routemap-16x9-ac2c6228/",
+    "thumb": "assets/shots/allagents-routemap-16x9-ac2c6228.png",
+    "desc": "Six subscriptions hop into one sbc_ key and the key drops into the OPENAI_API_KEY line under the superbot base URL: a drop-in replacement. Three requests ride a route map, the packet taking the wire to Claude Opus 5.5 for a hard bug, Gemini 3.1 Pro for long docs and DeepSeek V4 for a tiny fix. Then the Claude Code, Codex, Gemini CLI and Cursor windows fold like a deck into one Superbot agent, each subtask labelled with the model it routed to. Ends on \"Superbot is all your agents in one.\" 28.8 s, 16:9, with sound.",
+    "download": "animations/allagents-routemap-16x9-ac2c6228/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allagents-dial-16x9-ac2c6228",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "All your agents in one: subscriptions orbit into one key, a dial turns each ask to Opus 5.5, Gemini or DeepSeek, four agent windows are pulled into one Superbot (dial, 16:9)",
+    "src": "animations/allagents-dial-16x9-ac2c6228/",
+    "thumb": "assets/shots/allagents-dial-16x9-ac2c6228.png",
+    "desc": "Six subscriptions orbit and spiral into one sbc_ key, shown beside the two env lines that make it a drop-in replacement. The key becomes the hub of a dial: each ask rises into it and the dial turns the right model under the pointer, Claude Opus 5.5 for a hard bug, Gemini 3.1 Pro for long docs, DeepSeek V4 for a tiny fix. Then Claude Code, Codex, Gemini CLI and Cursor fly in from the corners and are pulled into one Superbot agent, each subtask labelled with the model it routed to. Ends on \"Superbot is all your agents in one.\" 28.8 s, 16:9, with sound.",
+    "download": "animations/allagents-dial-16x9-ac2c6228/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

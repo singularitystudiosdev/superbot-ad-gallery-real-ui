@@ -1,0 +1,186 @@
+/* Poll beat (beats/poll.js): the checklist card (in the chat, and its floating copy over the full-frame layer) and the
+   one app client on that layer: YouTube Studio (light theme, the Create menu, the post composer with Image poll
+   selected) and then youtube.com/@MayaMakes on the Posts tab with the live image poll. The checklist reads chat.css
+   --gm-* (Google's own surfaces); Studio and youtube.com read chat.css --yt-* (YouTube's light palette, Roboto).
+   Nothing here transitions: position, size, radius, opacity and transform are written from t in poll.js. */
+
+/* Roboto (SIL OFL 1.1), from fontsource, vendored under fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/roboto-latin-400-normal.woff2?v=1a09cce6") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/roboto-latin-500-normal.woff2?v=1a09cce6") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/roboto-latin-700-normal.woff2?v=1a09cce6") format("woff2"); }
+
+#s-tabs .yt-i { flex: none; width: 24px; height: 24px; }
+#s-tabs .cursor { z-index: 9; }
+
+/* ---- the checklist card (light, Google's surfaces): in the chat, and floating top-right over the layer ---- */
+#s-tabs .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px;
+  border-radius: var(--gm-radius); background: var(--gm-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: var(--gm-body); }
+#s-tabs .gk-card.gk-float { position: absolute; left: 0; top: 0; z-index: 8; margin: 0; max-width: none; transform-origin: 0 0; pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.16); }
+#s-tabs .gk-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px; font: 12.5px/1 var(--gm-body); color: var(--gm-text); white-space: nowrap; }
+#s-tabs .gk-step b { font-weight: 500; }
+#s-tabs .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; }
+#s-tabs .gk-av { background: var(--yt-me); color: #fff; font: 500 11px/1 var(--gm-body); }
+#s-tabs .gk-img { background: var(--gm-page); }
+#s-tabs .gk-img img { width: 13px; height: 10px; }
+#s-tabs .gk-ms { background: var(--gm-sel); color: var(--gm-accent); }
+#s-tabs .gk-ms .yt-i { width: 13px; height: 13px; }
+#s-tabs .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--gm-line); border-top-color: var(--gm-accent); }
+#s-tabs .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #1e8e3e; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .st-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: var(--yt-bg); }
+#s-tabs .st-app { position: absolute; left: 0; top: 0; transform-origin: 0 0; overflow: hidden;
+  background: var(--yt-bg); color: var(--yt-text); font: 400 14px/20px var(--gm-body); -webkit-font-smoothing: antialiased; }
+#s-tabs .st-app .yt-i { color: var(--yt-text2); }
+#s-tabs .st-btn { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
+#s-tabs .st-btn .yt-i { color: var(--yt-text); }
+#s-tabs .pl-studio, #s-tabs .pl-yt { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--yt-bg); }
+#s-tabs .pl-yt { opacity: 0; }
+#s-tabs .pl-av { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--yt-me); color: #fff; font: 500 15px/1 var(--gm-body); }
+#s-tabs .pl-me { margin-left: 16px; }
+
+/* Studio: the top bar */
+#s-tabs .st-top { position: relative; flex: none; display: flex; align-items: center; height: 64px; padding: 0 24px 0 16px; box-sizing: border-box;
+  box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .st-logo { flex: none; display: flex; align-items: center; margin-left: 12px; }
+#s-tabs .st-logo img { display: block; height: 24px; width: auto; }
+#s-tabs .st-search { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px;
+  width: 600px; height: 40px; padding: 0 16px; box-sizing: border-box; border-radius: 9999px; box-shadow: inset 0 0 0 1px var(--yt-outline-opaque);
+  font: 400 15px/1 var(--gm-body); color: var(--yt-text2); white-space: nowrap; }
+#s-tabs .st-tools { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+#s-tabs .st-create { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px 0 12px; border-radius: 9999px;
+  box-shadow: inset 0 0 0 1px var(--yt-outline); font: 500 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-create .yt-i { color: var(--yt-text); }
+#s-tabs .st-create.pl-create-on { background: var(--yt-additive); }
+
+/* Studio: left menu | the dashboard */
+#s-tabs .st-main { flex: 1; min-height: 0; display: flex; }
+#s-tabs .st-nav { position: relative; flex: none; width: 256px; box-sizing: border-box; box-shadow: inset -1px 0 0 var(--yt-outline); }
+#s-tabs .st-chan { display: flex; flex-direction: column; align-items: center; padding: 24px 0 16px; }
+#s-tabs .pl-av.pl-av-xl { width: 112px; height: 112px; font: 400 52px/1 var(--gm-body); }
+#s-tabs .st-chan b { margin-top: 16px; font: 500 15px/22px var(--gm-body); color: var(--yt-text); }
+#s-tabs .st-chan small { font: 400 13px/18px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .st-nv { display: flex; align-items: center; gap: 24px; height: 48px; padding: 0 24px; font: 400 15px/1 var(--gm-body); color: var(--yt-text); white-space: nowrap; }
+#s-tabs .st-nv.st-on { background: var(--yt-additive); font-weight: 500; }
+#s-tabs .st-nv.st-on .yt-i { color: var(--yt-text); }
+#s-tabs .st-nfoot { position: absolute; left: 0; right: 0; bottom: 8px; }
+#s-tabs .st-page { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 0 32px; overflow: hidden; }
+#s-tabs .st-h1 { flex: none; margin: 0; padding: 22px 0 18px; font: 500 25px/32px var(--gm-body); color: var(--yt-text); }
+#s-tabs .pl-dash { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+#s-tabs .pl-dc { display: flex; flex-direction: column; gap: 8px; padding: 20px 24px 24px; border-radius: 8px; box-shadow: inset 0 0 0 1px var(--yt-outline-opaque); }
+#s-tabs .pl-dc b { font: 500 17px/24px var(--gm-body); margin-bottom: 6px; }
+#s-tabs .pl-dc small { font: 400 13px/18px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .pl-big { font: 400 34px/40px var(--gm-body); color: var(--yt-text); }
+#s-tabs .pl-ln { height: 1px; margin: 10px 0; background: var(--yt-outline); }
+#s-tabs .pl-sk { display: block; height: 12px; width: 88%; border-radius: 4px; background: #f2f2f2; }
+#s-tabs .pl-sk2 { width: 64%; }
+#s-tabs .pl-sk3 { height: 120px; width: 100%; border-radius: 8px; }
+#s-tabs .pl-btn { align-self: flex-start; margin-top: 12px; padding: 0 16px; height: 36px; line-height: 36px; border-radius: 9999px; background: var(--yt-inverted); color: #fff; font: 500 14px/36px var(--gm-body); }
+
+/* Studio: the Create menu, under the Create button */
+#s-tabs .pl-menu { position: absolute; right: 64px; top: 58px; z-index: 3; width: 208px; padding: 8px 0; border-radius: 12px; background: #fff;
+  box-shadow: 0 4px 32px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.2); }
+#s-tabs .pl-mi { display: flex; align-items: center; gap: 16px; height: 40px; padding: 0 16px; font: 400 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .pl-mi .yt-i { color: var(--yt-text); }
+#s-tabs .pl-mi.pl-mi-hi { background: rgba(0,0,0,.1); }
+
+/* Studio: the post composer over its scrim */
+#s-tabs .pl-scrim { position: absolute; inset: 0; z-index: 4; background: #000; opacity: 0; }
+#s-tabs .pl-dlg { position: absolute; left: 50%; top: 51%; z-index: 5; width: 760px; box-sizing: border-box; padding: 0 24px 20px; border-radius: 12px;
+  background: #fff; box-shadow: 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2); opacity: 0; }
+#s-tabs .pl-dh { display: flex; align-items: center; justify-content: space-between; height: 64px; margin-right: -12px; }
+#s-tabs .pl-dh b { font: 500 22px/28px var(--gm-body); }
+#s-tabs .pl-acct { display: flex; align-items: center; gap: 12px; font: 500 15px/1 var(--gm-body); }
+#s-tabs .pl-vis { display: inline-flex; align-items: center; gap: 4px; height: 28px; margin-left: 4px; padding: 0 4px 0 10px; border-radius: 9999px;
+  box-shadow: inset 0 0 0 1px var(--yt-outline-opaque); font: 500 13px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .pl-vis .yt-i { width: 18px; height: 18px; color: var(--yt-text); }
+#s-tabs .pl-q { position: relative; display: flex; align-items: center; height: 56px; margin-top: 12px; font: 400 20px/28px var(--gm-body); color: var(--yt-text);
+  box-shadow: inset 0 -1px 0 var(--yt-outline-opaque); }
+#s-tabs .pl-qph { color: var(--yt-text2); }
+#s-tabs .pl-caret { display: inline-block; width: 2px; height: 24px; margin: 0 2px 0 1px; background: var(--yt-blue); }
+#s-tabs .pl-opts { display: flex; gap: 12px; margin-top: 18px; }
+#s-tabs .pl-o { flex: none; width: 128px; }
+#s-tabs .pl-oi { position: relative; width: 128px; height: 128px; border-radius: 8px; overflow: hidden; background: #f2f2f2; }
+#s-tabs .pl-oi img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+#s-tabs .pl-ox { position: absolute; right: 6px; top: 6px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(15,15,15,.7); opacity: 0; }
+#s-tabs .pl-ox .yt-i { width: 16px; height: 16px; color: #fff; }
+#s-tabs .pl-ol { margin-top: 8px; height: 36px; padding: 0 10px; border-radius: 4px; box-shadow: inset 0 0 0 1px var(--yt-outline-opaque);
+  font: 400 14px/36px var(--gm-body); color: var(--yt-text); white-space: nowrap; overflow: hidden; }
+#s-tabs .pl-add .pl-oi { display: grid; place-items: center; background: none; box-shadow: inset 0 0 0 1.5px #c6c6c6; }
+#s-tabs .pl-add .pl-oi .yt-i { width: 32px; height: 32px; }
+#s-tabs .pl-add .pl-ol { box-shadow: none; color: var(--yt-text2); }
+#s-tabs .pl-types { display: flex; gap: 8px; margin-top: 18px; }
+#s-tabs .pl-ty { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px 0 10px; border-radius: 9999px; font: 500 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .pl-ty .yt-i { width: 20px; height: 20px; color: var(--yt-text); }
+#s-tabs .pl-ty.pl-ty-on { background: var(--yt-inverted); color: #fff; }
+#s-tabs .pl-ty.pl-ty-on .yt-i { color: #fff; }
+#s-tabs .pl-df { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+#s-tabs .pl-cnt { margin-right: auto; font: 400 12px/1 var(--gm-body); color: var(--yt-text2); font-variant-numeric: tabular-nums; }
+#s-tabs .pl-cancel, #s-tabs .pl-post { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 9999px; font: 500 14px/1 var(--gm-body); }
+#s-tabs .pl-cancel { color: var(--yt-text); }
+#s-tabs .pl-post { background: var(--yt-blue); color: #fff; }
+#s-tabs .pl-post.pl-post-hit { background: #0450b4; }
+
+/* youtube.com: the masthead */
+#s-tabs .yt-top { position: relative; flex: none; display: flex; align-items: center; height: 56px; padding: 0 16px; box-sizing: border-box; }
+#s-tabs .yt-logo { display: block; height: 20px; width: auto; margin-left: 16px; }
+#s-tabs .yt-sbox { position: absolute; left: 50%; top: 8px; transform: translateX(-54%); display: flex; width: 640px; height: 40px; box-sizing: border-box;
+  border-radius: 9999px; box-shadow: inset 0 0 0 1px #ccc; }
+#s-tabs .yt-sin { flex: 1; padding: 0 16px; font: 400 16px/40px var(--gm-body); color: #888; }
+#s-tabs .yt-sbtn { display: grid; place-items: center; width: 64px; border-radius: 0 9999px 9999px 0; background: #f8f8f8; box-shadow: inset 1px 0 0 #d3d3d3; }
+#s-tabs .yt-sbtn .yt-i { color: var(--yt-text); }
+#s-tabs .yt-mic { position: absolute; left: calc(50% + 316px); top: 8px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #f2f2f2; }
+#s-tabs .yt-mic .yt-i { color: var(--yt-text); }
+#s-tabs .yt-tools { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+#s-tabs .yt-create { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px 0 10px; border-radius: 9999px; background: #f2f2f2; font: 500 14px/1 var(--gm-body); }
+#s-tabs .yt-create .yt-i { color: var(--yt-text); }
+
+/* youtube.com: the mini guide | the channel page */
+#s-tabs .yt-main { flex: 1; min-height: 0; display: flex; }
+#s-tabs .yt-guide { flex: none; width: 72px; padding-top: 4px; }
+#s-tabs .yt-gi { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 0 14px; font: 400 10px/14px var(--gm-body); color: var(--yt-text); }
+#s-tabs .yt-gi .yt-i { color: var(--yt-text); }
+#s-tabs .yt-page { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; padding-top: 20px; overflow: hidden; }
+#s-tabs .yt-chan, #s-tabs .yt-tabs { width: 1100px; box-sizing: border-box; }
+#s-tabs .yt-chan { display: flex; align-items: center; gap: 24px; }
+#s-tabs .pl-av.pl-av-ch { width: 132px; height: 132px; font: 400 60px/1 var(--gm-body); }
+#s-tabs .yt-ci h1 { margin: 0; font: 700 34px/44px var(--gm-body); color: var(--yt-text); letter-spacing: -.01em; }
+#s-tabs .yt-meta { margin-top: 4px; font: 400 14px/20px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .yt-meta b { font-weight: 500; color: var(--yt-text); }
+#s-tabs .yt-desc { margin-top: 4px; font: 400 14px/20px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .yt-desc b { font-weight: 500; color: var(--yt-text); }
+#s-tabs .yt-btns { display: flex; gap: 8px; margin-top: 12px; }
+#s-tabs .yt-btns span { height: 36px; padding: 0 16px; border-radius: 9999px; background: #f2f2f2; font: 500 14px/36px var(--gm-body); color: var(--yt-text); }
+#s-tabs .yt-tabs { flex: none; display: flex; gap: 24px; height: 48px; margin-top: 12px; box-shadow: inset 0 -1px 0 var(--yt-outline); }
+#s-tabs .yt-tab { display: flex; align-items: center; font: 500 16px/1 var(--gm-body); color: var(--yt-text2); }
+#s-tabs .yt-tab-on { color: var(--yt-text); box-shadow: inset 0 -2px 0 var(--yt-text); }
+#s-tabs .yt-ts .yt-i { width: 22px; height: 22px; }
+
+/* youtube.com: the live poll post */
+#s-tabs .yt-post { width: 852px; box-sizing: border-box; margin-top: 20px; padding: 16px 20px 6px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--yt-outline-opaque); }
+#s-tabs .yt-ph { display: flex; align-items: center; gap: 12px; }
+#s-tabs .yt-ph .pl-av { width: 40px; height: 40px; font-size: 18px; }
+#s-tabs .yt-pw { flex: 1; display: flex; align-items: baseline; gap: 6px; }
+#s-tabs .yt-pw b { font: 500 13px/18px var(--gm-body); }
+#s-tabs .yt-pw span { font: 400 12px/18px var(--gm-body); color: var(--yt-text2); }
+#s-tabs .yt-ph .st-btn { margin-right: -10px; }
+#s-tabs .yt-q { margin: 8px 0 14px 52px; font: 400 16px/22px var(--gm-body); color: var(--yt-text); }
+#s-tabs .yt-opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-left: 52px; }
+#s-tabs .yt-oi { aspect-ratio: 1 / 1; border-radius: 8px 8px 0 0; overflow: hidden; background: #f2f2f2; }
+#s-tabs .yt-oi img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .yt-or { position: relative; display: flex; align-items: center; height: 40px; padding: 0 10px; border-radius: 0 0 8px 8px; overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--yt-outline-opaque); font: 500 14px/1 var(--gm-body); color: var(--yt-text); }
+#s-tabs .yt-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgba(0,0,0,.1); }
+#s-tabs .yt-ol { position: relative; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .yt-pc { position: relative; margin-left: 8px; font-weight: 500; font-variant-numeric: tabular-nums; }
+#s-tabs .yt-votes { margin: 10px 0 0 52px; font: 400 13px/18px var(--gm-body); color: var(--yt-text2); font-variant-numeric: tabular-nums; }
+#s-tabs .yt-acts { display: flex; gap: 4px; margin: 2px 0 0 40px; }
+#s-tabs .yt-acts .st-btn .yt-i { width: 22px; height: 22px; }
+
+/* the toast: YouTube's inverted surface, bottom left of the window (on the layer, outside the pushed page) */
+#s-tabs .st-snack { position: absolute; left: 24px; bottom: 24px; z-index: 6; transform-origin: 0 100%; display: flex; align-items: center; min-height: 48px; padding: 0 24px; box-sizing: border-box;
+  border-radius: 8px; background: var(--yt-inverted); color: #fff; font: 400 14px/20px var(--gm-body); box-shadow: 0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3);
+  opacity: 0; white-space: nowrap; }

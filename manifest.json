@@ -1844,6 +1844,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "image-poll-next-build-superbot-1a09cce6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "LET YOUR VIEWERS PICK · Nano Banana Pro draws 4 poll images, superbot posts an image poll from YouTube Studio (<7s, 16:9)",
+    "src": "animations/image-poll-next-build-superbot-1a09cce6/",
+    "thumb": "assets/shots/image-poll-next-build-superbot-1a09cce6.png",
+    "desc": "Same chat format as niche-youtube-model-switch-superbot-3828921d, new process: Nano Banana Pro draws one image per poll option, superbot posts an image poll from YouTube Studio. One ask in superbot (\"Post a poll asking which build I do next, with a picture for each\"): Nano Banana Pro renders 4 square 1080 x 1080 option images in the Maya Makes workshop look (Walnut desk, Floating shelves, Cedar planter, Kids' step stool), then superbot, connected as Maya Makes, opens Create > Create post in YouTube Studio, picks Image poll, asks \"Which build is next?\" and presses Post. The poll goes live on the @MayaMakes Posts tab (284K subscribers) and the votes count to 1,206: Walnut desk 41%, Floating shelves 27%, Cedar planter 19%, Kids' step stool 13%. 16:9 only, 5.4 s.",
+    "download": "assets/video/image-poll-next-build-superbot-1a09cce6.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -1,0 +1,480 @@
+/* hero-workspace: the lander's `?hero=workspace` option (hero-workspace.js). Two parts:
+   .hw-browser, the ad's first act (a dark browser whose tab strip fills with
+   every agent app), drawn inside hero-sphere's .hs-canvas in its design px so
+   each favicon sits exactly where its sphere tile lifts from; and .hw-card,
+   the ads' black text card over the whole stage once the frontend has shown,
+   with the storm gradient and white shine on "one" (the module writes the
+   card's opacity, each word's rise and the gradient every frame). */
+
+/* ---------- the browser (design px; the module sets width, transform, opacity) ---------- */
+.hero-sphere .hw-browser {
+  --hw-strip: #1b1b1d; --hw-tab: #2a2a2e; --hw-page: #111113; --hw-ink: #e6e8ee; --hw-dim: #9a9ca6;
+  position: absolute; left: 0; top: 0;
+  width: 1536px; height: 864px;
+  transform-origin: 0 0;
+  background: var(--hw-page);
+  font: 500 12px/1 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--hw-ink);
+  overflow: hidden;
+}
+
+/* the strip: 40 px, the favicon row at y 23 (hero-sphere HS.FAV_Y) */
+.hero-sphere .hw-strip { position: absolute; left: 0; top: 0; right: 0; height: 40px; background: var(--hw-strip); }
+.hero-sphere .hw-dot { position: absolute; top: 17px; width: 12px; height: 12px; border-radius: 50%; }
+.hero-sphere .hw-dot:nth-child(1) { left: 16px; background: #ff5f57; }
+.hero-sphere .hw-dot:nth-child(2) { left: 36px; background: #febc2e; }
+.hero-sphere .hw-dot:nth-child(3) { left: 56px; background: #28c840; }
+.hero-sphere .hw-tabs { position: absolute; inset: 0; }
+.hero-sphere .hw-tab {
+  position: absolute; left: 0; top: 6px; height: 34px;
+  border-radius: 9px 9px 0 0;
+  color: var(--hw-dim);
+  white-space: nowrap; overflow: hidden;
+}
+/* the separator between two inactive tabs */
+.hero-sphere .hw-tab::before {
+  content: ""; position: absolute; left: 0; top: 10px; bottom: 8px; width: 1px;
+  background: #3a3b40;
+}
+.hero-sphere .hw-tab.on { background: var(--hw-tab); color: var(--hw-ink); }
+.hero-sphere .hw-tab.on::before, .hero-sphere .hw-tab.on + .hw-tab::before { display: none; }
+.hero-sphere .hw-fav {
+  position: absolute; left: 12px; top: 9px;
+  width: 16px; height: 16px; border-radius: 4px; object-fit: cover; display: block;
+}
+.hero-sphere .hw-tt {
+  position: absolute; left: 36px; right: 28px; top: 11px;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.hero-sphere .hw-x { position: absolute; right: 10px; top: 10px; font-size: 13px; color: var(--hw-dim); }
+.hero-sphere .hw-tab[data-size="s"] .hw-x,
+.hero-sphere .hw-tab[data-size="xs"] .hw-x,
+.hero-sphere .hw-tab[data-size="xs"] .hw-tt { display: none; }
+.hero-sphere .hw-tab[data-size="s"] .hw-tt { right: 6px; }
+.hero-sphere .hw-new {
+  position: absolute; left: 0; top: 10px;
+  width: 26px; height: 22px; line-height: 22px; text-align: center;
+  font-size: 18px; color: var(--hw-dim);
+}
+
+/* the toolbar and omnibox */
+.hero-sphere .hw-bar {
+  position: absolute; left: 0; right: 0; top: 40px; height: 44px;
+  background: var(--hw-tab); border-bottom: 1px solid #1f1f22;
+}
+.hero-sphere .hw-nav { position: absolute; top: 14px; font-size: 15px; color: var(--hw-dim); }
+.hero-sphere .hw-nav:nth-child(1) { left: 18px; }
+.hero-sphere .hw-nav:nth-child(2) { left: 46px; }
+.hero-sphere .hw-nav:nth-child(3) { left: 74px; }
+.hero-sphere .hw-omni {
+  position: absolute; left: 110px; right: 110px; top: 7px; height: 30px;
+  border-radius: 15px; background: var(--hw-strip);
+  display: flex; align-items: center; gap: 10px; padding: 0 16px;
+  font-size: 13px; color: var(--hw-ink);
+}
+.hero-sphere .hw-lock {
+  width: 9px; height: 7px; margin-top: 4px; border-radius: 2px; background: var(--hw-dim); position: relative;
+}
+.hero-sphere .hw-lock::before {
+  content: ""; position: absolute; left: 1.5px; top: -5px; width: 4px; height: 5px;
+  border: 1.5px solid var(--hw-dim); border-bottom: 0; border-radius: 3px 3px 0 0;
+}
+
+/* the page: the active tab's app, cut in on every new tab */
+.hero-sphere .hw-page { position: absolute; left: 0; right: 0; top: 84px; bottom: 0; }
+.hero-sphere .hw-app {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+.hero-sphere .hw-app-icon { width: 72px; height: 72px; border-radius: 24%; object-fit: cover; display: block; }
+.hero-sphere .hw-app-name { font-size: 34px; font-weight: 600; letter-spacing: -0.02em; }
+.hero-sphere .hw-compose {
+  position: relative; width: 620px; height: 58px; margin-top: 10px;
+  border-radius: 29px; border: 1px solid #3a3b40; background: #19191c;
+  display: flex; align-items: center; padding: 0 24px;
+  font-size: 16px; color: var(--hw-dim);
+}
+.hero-sphere .hw-send {
+  position: absolute; right: 12px; top: 12px; width: 34px; height: 34px;
+  border-radius: 50%; background: #3a3b40;
+}
+.hero-sphere .hw-count {
+  position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%);
+  padding: 9px 16px; border-radius: 999px;
+  background: #1f1f23; border: 1px solid #3a3b40;
+  font-size: 14px; font-variant-numeric: tabular-nums; color: var(--hw-ink);
+  opacity: 0;
+}
+
+/* ---------- the card: black over the stage, the headline centred ---------- */
+.stage .hw-card {
+  position: absolute; inset: 0; z-index: 60;
+  display: grid; place-items: center;
+  background: #000;
+  container-type: size;
+  opacity: 0; visibility: hidden;
+  pointer-events: none;
+}
+.hw-card .hw-title {
+  margin: 0; padding: 0 8%;
+  max-width: 16ch;
+  text-align: center;
+  font-size: clamp(22px, 7.2cqw, 92px);
+  font-weight: 600; line-height: 1.06; letter-spacing: -0.035em;
+  color: #fff;
+  text-wrap: balance;
+}
+/* the words wait for their beat; the module writes each one's rise */
+.hw-card .hw-w { display: inline-block; opacity: 0; will-change: transform, opacity, filter; }
+/* "one": a white shine band over the storm gradient (the ad's renderGrads),
+   both clipped to the glyphs; the band draws on top, no-repeat, so it only
+   shows while it sweeps */
+.hw-card .hw-one {
+  padding: 0 0.04em; margin: 0 -0.04em;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.92) 50%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(90deg, #2b6bff 0%, #7b3cf0 25%, #c026d3 50%, #ff3d9a 75%, #2b6bff 100%);
+  background-repeat: no-repeat, repeat-x;
+  background-size: 0 100%, 300px 100%;
+  background-position: -100px 0, 0 0;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+
+/* ---------- the ad's HUD discs (hero-workspace.js swapHud(), workspace only) ----------
+   the image disc: an agent whose mark is the app's own icon, not a glyph.
+   hub-boot.css already fills a disc's (and a menu art's) img edge to edge,
+   round and cover (the app's .hud-face > img); here the disc's raised ground
+   is dropped so no fringe shows at the image's edge. Scoped to the workspace
+   host so the shared HUD is untouched. */
+.stage[data-hero-host="workspace"] .hud .hud-disc.logo,
+.stage[data-hero-host="workspace"] .hud .hud-menu-art.logo { background: transparent; }
+
+/* ---------- no phone (2026-09-26, the user: "remove the phone syncing element") ----------
+   The phone mock, its sync beam and its label are not drawn in this arm.
+   hub-handoff.js prepStage reads the phone's display (noPhone), so the beam is
+   never placed and the phone beat never docks: the hub keeps the whole arena
+   at every width, as the phone cut below 640px always did. */
+.stage[data-hero-host="workspace"] .phone,
+.stage[data-hero-host="workspace"] .phone-label,
+.stage[data-hero-host="workspace"] .beam { display: none; }
+
+/* ---------- Inter, main's bundled UI face ----------
+   Main's UI stack is "SF Pro Rounded", ui-rounded, Inter, system-ui
+   (packages/tokens type.tokens.json:10), and main bundles Inter 400/500/600/700
+   for every platform the SF faces cannot reach (apps/desktop/src/renderer/src/
+   index.css:23-49, font-display swap, no unicode-range). Chromium resolves
+   neither of the first two names, so main's own Electron window draws Inter.
+   These are main's four files (assets/fonts/Inter-*.ttf, SIL OFL 1.1, the
+   licence beside them in site/assets/fonts/LICENSE-Inter.txt), repacked to
+   WOFF2 with no glyph or metric change. */
+@font-face { font-family: "Inter"; src: url("fonts/Inter-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* ---------- the frontend: superbot-desktop main's new chat screen (hero-workspace-frontend.js) ----------
+   Main 77f02910, captured live (.tmp/hero-ref.7580bba1/main/new-chat.png,
+   dom/new-chat.json). The module lays .hwf out at main's own 1091px width
+   and scales it once to the hub, so every number below is main's CSS px,
+   pasted from the capture's computed styles; colours are main's dark
+   tokens (packages/tokens color.tokens.json). Scoped to #hub[data-hwf],
+   which only this hero sets, so the shared hub (boot, chaos, sphere,
+   realui) is untouched. No transitions: the hero scrubs (?t=), so every
+   frame is a pure function of the story clock. */
+#hub[data-hwf] {
+  --hwf-bg: #0d0d0d; --hwf-card: #0a0a0a; --hwf-raised: #1a1a1c; --hwf-sunken: #0a0a0b;
+  --hwf-line: #1e1e21; --hwf-strong: #3a3b40; --hwf-control: #6b6f76;
+  --hwf-fg: #e6e8ee; --hwf-fg2: #c9ccd4; --hwf-muted: #aeb1bc;
+  --hwf-accent: #2b6bff; --hwf-danger: #f23f42;
+  --hwf-grad: linear-gradient(135deg, #3fd6d0 0%, #4f7bff 48%, #c45cff 100%);
+  --hwf-glow: #7864ff;
+  --hwf-status: linear-gradient(90deg, #22d3ee 0%, #5b8dff 52%, #8b5cf6 100%);
+  --hwf-ui: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+  --hwf-serif: ui-serif, "New York", "Iowan Old Style", Charter, Georgia, serif;
+  --hwf-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  /* main is a flush window, no inset card: the hub fills the stage under
+     its title bar (the stage's own chrome, the traffic lights and title) */
+  inset: 0; border: 0; border-radius: 0 0 var(--r-lg) var(--r-lg);
+  display: block; background: var(--hwf-bg);
+}
+#hub[data-hwf] > .hwf {
+  position: absolute; left: 0; top: 0;
+  display: flex; flex-direction: row;
+  transform-origin: 0 0;
+  font: 400 13px/19px var(--hwf-ui); color: var(--hwf-fg);
+  -webkit-font-smoothing: antialiased; text-align: left;
+}
+#hub[data-hwf] .hwf *, #hub[data-hwf] .hwf *::before, #hub[data-hwf] .hwf *::after { box-sizing: border-box; transition: none; }
+#hub[data-hwf] .hwf svg { display: block; flex: none; max-width: none; }
+#hub[data-hwf] .hwf i, #hub[data-hwf] .hwf em { font-style: normal; }
+#hub[data-hwf] .hwf button { margin: 0; padding: 0; border: 0; background: none; font: inherit; color: inherit; }
+
+/* a 24px icon button: bare (the Recent tools, the thread band) or boxed
+   (the sidebar and panel toggles: card ground, a line-control hairline) */
+#hub[data-hwf] .hwf-ib { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 8px; color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-ib svg { width: 14px; height: 14px; }
+#hub[data-hwf] .hwf-ib.boxed { background: var(--hwf-card); border: 1px solid var(--hwf-control); color: var(--hwf-fg); }
+
+/* ---- the sidebar (240; SidebarHud.tsx + sidebar-hud.css) ---- */
+#hub[data-hwf] .hwf-side { position: relative; flex: none; width: 240px; display: flex; flex-direction: column; min-height: 0; }
+#hub[data-hwf] .hwf[data-side="0"] .hwf-side, #hub[data-hwf] .hwf[data-side="0"] .hwf-split { display: none; }
+#hub[data-hwf] .hwf-band { position: absolute; left: 0; top: 0; z-index: 3; width: 240px; height: 40px; display: flex; justify-content: flex-end; align-items: center; padding-right: 4px; }
+/* the HUD: 40 titlebar + 16 + the 56 row + 32 = 144 */
+#hub[data-hwf] .hud { flex: none; position: relative; display: block; height: 144px; padding: 56px 0 32px; background: var(--hwf-card); border: 0; z-index: 2; }
+#hub[data-hwf] .hwf-hud-row { display: flex; align-items: flex-start; gap: 24px; height: 56px; padding: 0 4px 0 16px; }
+#hub[data-hwf] .hud-mark { width: 48px; height: 48px; border-radius: 16px; margin-top: 4px; }
+/* main's HUD mark is BARE (StormTile bare + plain skin, 'active':
+   packages/ui storm-tile-plain.css:77-183): no tile and no ground, only the
+   living glitch face on the sidebar's own surface, seated at the component's
+   BARE_LIVE_SEAT (dom/new-chat.json hud-mark: width/height 134.409%, left
+   -17.2043%, top -21.5726%), so the head fills the 48 box. The sphere still
+   lands its app-icon tile on .tile (same png, same pixel); when the mark
+   turns .sel the living face crossfades in over main's --duration-400 on
+   --ease-standard while the tile holds (step-end) and then drops, main's
+   own swap without a dip. */
+#hub[data-hwf] .hud-mark > .ground { display: none; }
+#hub[data-hwf] .hud-mark > .face { overflow: visible; transition: opacity 400ms step-end; }
+#hub[data-hwf] .hud-mark > .tile { transition: opacity 400ms cubic-bezier(0.2, 0, 0, 1); }
+#hub[data-hwf] .hud-mark.sel > .face { transition-timing-function: cubic-bezier(0.2, 0, 0, 1); }
+#hub[data-hwf] .hud-mark.sel > .tile { opacity: 0; transition-timing-function: step-end; }
+#hub[data-hwf] .hud-mark > .face .sb-mark { left: -17.2043%; top: -21.5726%; width: 134.409%; height: 134.409%; }
+#hub[data-hwf] .hud-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+#hub[data-hwf] .hwf-title-line { display: flex; align-items: center; gap: 8px; height: 28px; min-width: 0; }
+#hub[data-hwf] .hud-word { font: 700 22px/28px var(--hwf-ui); letter-spacing: -.44px; color: #fff; }
+#hub[data-hwf] .hud-discs { display: flex; align-items: center; height: 24px; padding: 0; }
+#hub[data-hwf] .hud .hud-disc { width: 24px; height: 24px; box-shadow: 0 0 0 2px var(--hwf-card); translate: none; }
+#hub[data-hwf] .hud .hud-disc + .hud-disc { margin-left: -8px; }
+#hub[data-hwf] .hud .hud-disc::after { box-shadow: inset 0 0 0 1px var(--hwf-line); }
+/* the open destination: a 2px fg ring on the disc, the cutout outside it */
+#hub[data-hwf] .hud .hud-disc.sel { box-shadow: 0 0 0 2px var(--hwf-fg), 0 0 0 4px var(--hwf-card); }
+
+#hub[data-hwf] .hud .hud-disc.hwf-exp,
+#hub[data-hwf] .hud .hud-disc.add { margin-left: 4px; box-shadow: none; }
+#hub[data-hwf] .hud .hud-disc.hwf-exp { background: transparent; color: var(--hwf-muted); }
+#hub[data-hwf] .hud .hud-disc.add { background: var(--hwf-raised); color: var(--hwf-muted); }
+#hub[data-hwf] .hud .hud-disc.hwf-exp::after, #hub[data-hwf] .hud .hud-disc.add::after { content: none; }
+#hub[data-hwf] .hud .hud-disc.hwf-exp svg, #hub[data-hwf] .hud .hud-disc.add svg { width: 12px; height: 12px; }
+
+/* the lists: the tab row (tool rows: padding 8 16 4), then the lane. Main's
+   side scroller reserves its scrollbar's gutter at the right edge
+   (scrollbars.css:101-107 .hub-side-scroll { scrollbar-gutter: stable }, the
+   bar --size-scrollbar 8px, layout.tokens.json:166), so everything in it is
+   8px narrower than the sidebar: tabs 200, New chat 200, rows 216
+   (dom/new-chat.json side-tools 232.1 wide). The gutter is written as padding
+   so it holds where the platform draws overlay scrollbars. */
+#hub[data-hwf] .hwf-lanes { flex: 1 1 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; padding-right: 8px; background: var(--hwf-card); }
+#hub[data-hwf] .hwf-tabs { flex: none; display: flex; gap: 16px; margin: 8px 16px 4px; border-bottom: 1px solid var(--hwf-line); }
+#hub[data-hwf] .hwf-tab { position: relative; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 4px 0 0; color: var(--hwf-muted); font: 400 13px/19px var(--hwf-ui); cursor: pointer; }
+#hub[data-hwf] .hwf-tab svg { width: 16px; height: 16px; }
+#hub[data-hwf] .hwf-tab.on { color: var(--hwf-fg); font-weight: 500; }
+#hub[data-hwf] .hwf-tab.on svg { stroke-width: 2.25; }
+#hub[data-hwf] .hwf-tab.on::after { content: ""; position: absolute; left: 0; right: 4px; bottom: -1px; height: 2px; background: var(--hwf-fg); }
+#hub[data-hwf] .hwf-tab:focus-visible { outline: 2px solid var(--hwf-accent); outline-offset: 2px; border-radius: 4px; }
+@media (hover: hover) { #hub[data-hwf] .hwf-tab:hover { color: var(--hwf-fg); } }
+#hub[data-hwf] .hwf-lane { flex: 1 1 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 4px; padding: 4px 8px 16px; }
+#hub[data-hwf] .hwf-lane[hidden] { display: none; }
+/* New chat: the dashed row (new-chat-row.tsx; hub.css .hub-side-new-chat-item) */
+#hub[data-hwf] .hwf-newchat { flex: none; display: flex; align-items: center; gap: 8px; min-height: 36px; margin: 0 8px; padding: 4px 8px; border: 1px dashed var(--hwf-strong); border-radius: 8px; color: var(--hwf-muted); white-space: nowrap; }
+#hub[data-hwf] .hwf-newchat svg { width: 16px; height: 16px; }
+#hub[data-hwf] .hwf-sect { flex: none; display: flex; flex-direction: column; gap: 4px; }
+#hub[data-hwf] .hwf-sect.recent { gap: 2px; }
+#hub[data-hwf] .hwf-bucket { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 24px; padding: 4px 8px; font: 400 11px/16px var(--hwf-ui); color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-bucket-tools { display: flex; align-items: center; gap: 4px; }
+#hub[data-hwf] .hwf-bucket-tools .hwf-ib { margin: -4px 0; }
+#hub[data-hwf] .hwf-zoom { display: flex; gap: 2px; }
+/* a chat row: 36 tall, the 16 mark, the title 500, the mono stamp in a 45 column */
+#hub[data-hwf] .hwf-row { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 4px 8px; border-radius: 8px; color: var(--hwf-muted); min-width: 0; }
+#hub[data-hwf] .hwf-tx { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+#hub[data-hwf] .hwf-tx .t, #hub[data-hwf] .hwf-tx small { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#hub[data-hwf] .hwf-tx .t { font-weight: 500; }
+#hub[data-hwf] .hwf-tx small { font: 400 10px/14.4px var(--hwf-ui); color: rgba(174, 177, 188, .7); }
+#hub[data-hwf] .hwf-row em { flex: none; min-width: 45px; text-align: right; font: 400 9px/10.8px var(--hwf-mono); font-variant-numeric: tabular-nums; opacity: .8; }
+/* a pinned card: 48 tall, raised, hairline, the 24 tile */
+/* the open chat (hub.css:701-726, chat-row.tsx:470-490): fg text, the title
+   at the title weight, an accent state layer (--overlay-row-active .14,
+   color.tokens.json:231) reaching 4px past the row on each side with no
+   radius, and a 3px accent spine inset 4px top and bottom. The hero adds it
+   at the head of Recent once the chat has a thread (the module's .hwf-live). */
+#hub[data-hwf] .hwf-row.hwf-live { position: relative; isolation: isolate; color: var(--hwf-fg); }
+#hub[data-hwf] .hwf-row.hwf-live[hidden] { display: none; }
+#hub[data-hwf] .hwf-row.hwf-live::before { content: ""; position: absolute; inset: 0 -4px; z-index: -1; background: color-mix(in oklch, var(--hwf-accent) 14%, transparent); pointer-events: none; }
+#hub[data-hwf] .hwf-row.hwf-live::after { content: ""; position: absolute; top: 4px; bottom: 4px; left: 0; width: 3px; border-radius: 9999px; background: var(--hwf-accent); pointer-events: none; }
+#hub[data-hwf] .hwf-row.hwf-live .hwf-tx .t { font-weight: 500; }
+#hub[data-hwf] .hwf-row.hwf-live em { color: var(--hwf-fg); }
+#hub[data-hwf] .hwf-row.pin { min-height: 48px; padding: 6px 8px; background: var(--hwf-raised); border: 1px solid var(--hwf-line); }
+#hub[data-hwf] .hwf-mk { flex: none; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 5.33px; overflow: hidden; }
+#hub[data-hwf] .hwf-row.pin .hwf-mk { width: 24px; height: 24px; border-radius: 8px; }
+#hub[data-hwf] .hwf-mk.sb { background: #000; }
+#hub[data-hwf] .hwf-mk.sb img { width: 78%; height: 78%; display: block; }
+#hub[data-hwf] .hwf-mk svg { width: 70%; height: 70%; }
+#hub[data-hwf] .hwf-mk.app-openai { background: var(--brand-openai); color: var(--brand-openai-ink); }
+#hub[data-hwf] .hwf-mk.app-openai svg { width: 86%; height: 86%; }
+#hub[data-hwf] .hwf-mk.app-claude { background: var(--brand-claude); color: var(--brand-claude-ink); }
+#hub[data-hwf] .hwf-mk.app-cursor { background: var(--brand-cursor); color: var(--brand-cursor-ink); box-shadow: inset 0 0 0 1px var(--hwf-line); }
+#hub[data-hwf] .hwf-mk.app-devin { background: var(--hwf-raised); color: var(--hwf-fg); box-shadow: inset 0 0 0 1px var(--hwf-line); }
+#hub[data-hwf] .hwf-mk.git { color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-mk.git svg { width: 100%; height: 100%; }
+/* the Code lane (Sidebar.tsx projects-new-row, ProjectRows.tsx): New project
+   and Import share the dashed row; a project row is the fold chevron, the
+   origin mark, the title over the origin's name, the stamp, and the chat
+   count while open; the open project's chats sit one text column in */
+#hub[data-hwf] .hwf-code-new { flex: none; display: flex; gap: 6px; margin: 0 8px; }
+#hub[data-hwf] .hwf-code-new .hwf-newchat { flex: 1 1 auto; margin: 0; }
+#hub[data-hwf] .hwf-code-new .hwf-newchat.import { flex: none; }
+#hub[data-hwf] .hwf-row.proj { min-height: 44px; padding: 4px 8px 4px 4px; gap: 6px; }
+#hub[data-hwf] .hwf-row.proj .hwf-tx .t { color: var(--hwf-fg); }
+#hub[data-hwf] .hwf-fold { flex: none; display: grid; place-items: center; width: 12px; height: 12px; color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-fold svg { width: 12px; height: 12px; }
+#hub[data-hwf] .hwf-proj:not(.open) .hwf-fold svg { transform: rotate(-90deg); }
+#hub[data-hwf] .hwf-proj.open > .hwf-row.proj { background: rgba(230, 232, 238, .06); }
+#hub[data-hwf] .hwf-count { flex: none; min-width: 18px; margin-left: 4px; padding: 0 5px; border-radius: 9999px; background: var(--hwf-raised); color: var(--hwf-muted); font: 500 10px/16px var(--hwf-mono); text-align: center; }
+#hub[data-hwf] .hwf-proj-chats { display: flex; flex-direction: column; gap: 2px; margin-top: 2px; }
+#hub[data-hwf] .hwf-proj-chats .hwf-row { padding-left: 40px; }
+
+/* the account card, v00-crisper: the sidebar's foot, the list scrolling under it */
+#hub[data-hwf] .hwf-acct { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; background: var(--hwf-card); }
+#hub[data-hwf] .hwf-acct-card { display: flex; flex-direction: column; gap: 8px; padding: 8px; border: 1px solid var(--hwf-line); border-radius: 16px; background: linear-gradient(rgba(230, 232, 238, .035), rgba(230, 232, 238, .006)), var(--hwf-sunken); }
+#hub[data-hwf] .hwf-acct-bar { display: flex; align-items: center; gap: 8px; height: 32px; min-width: 0; }
+#hub[data-hwf] .hwf-avatar { position: relative; flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 9999px; background: var(--hwf-raised); border: 1px solid rgba(230, 232, 238, .12); font: 600 11px/1 var(--hwf-ui); color: var(--hwf-fg); }
+#hub[data-hwf] .hwf-avatar i { position: absolute; right: -3px; bottom: -3px; width: 8px; height: 8px; border-radius: 9999px; background: var(--hwf-status); box-shadow: 0 0 0 2px var(--hwf-sunken); }
+#hub[data-hwf] .hwf-names { flex: 0 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+#hub[data-hwf] .hwf-names b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 13px/16px var(--hwf-ui); color: var(--hwf-fg); }
+#hub[data-hwf] .hwf-plan { display: flex; align-items: center; gap: 4px; font: 400 11px/16px var(--hwf-ui); color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-tier { flex: none; display: grid; place-items: center; width: 12px; height: 12px; border-radius: 22.5%; background: #000; }
+#hub[data-hwf] .hwf-tier img { width: 72%; height: 72%; display: block; }
+#hub[data-hwf] .hwf-tools { flex: none; display: flex; gap: 2px; margin-left: auto; }
+#hub[data-hwf] .hwf-tool { position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: var(--hwf-fg2); }
+#hub[data-hwf] .hwf-tool svg { width: 16px; height: 16px; }
+#hub[data-hwf] .hwf-tool.hwf-dot::after { content: ""; position: absolute; top: 4px; right: 4px; width: 6px; height: 6px; border-radius: 50%; background: var(--hwf-danger); box-shadow: 0 0 0 1px var(--hwf-sunken); }
+#hub[data-hwf] .hwf-upgrade { display: grid; place-items: center; height: 32px; padding: 0 12px; border: 1px solid var(--hwf-accent); border-radius: 8px; font: 500 13px/19px var(--hwf-ui); color: var(--hwf-fg); }
+#hub[data-hwf] .hwf-usage { display: flex; align-items: center; gap: 8px; height: 24px; padding: 0 4px; font: 400 11px/16px var(--hwf-ui); color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-meter { position: relative; flex: 1 1 auto; height: 6px; border-radius: 9999px; background: rgba(230, 232, 238, .06); overflow: hidden; }
+#hub[data-hwf] .hwf-meter i { position: absolute; left: 0; top: 0; bottom: 0; width: 18%; border-radius: 9999px; background: var(--hwf-accent); }
+
+/* the 8px splitter, its 1px line centred (hub.css .hub-splitter) */
+#hub[data-hwf] .hwf-split { position: relative; flex: none; width: 8px; }
+#hub[data-hwf] .hwf-split::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; transform: translateX(-50%); background: var(--hwf-line); }
+
+/* ---- the pane (MainPane.tsx, Thread.tsx, new-chat.css) ---- */
+#hub[data-hwf] .hwf-pane { position: relative; flex: 1 1 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; background: var(--hwf-card); container: hwf-pane / inline-size; }
+/* the header: one 48px row, title | search | actions (hub-header.css) */
+#hub[data-hwf] .hwf-head { flex: none; display: grid; grid-template-columns: minmax(0, 192px) minmax(0, 450px) minmax(0, 192px); align-items: center; gap: 8px; height: 48px; padding: 0 40.67px 0 16px; border-bottom: 1px solid var(--hwf-line); }
+#hub[data-hwf] .hwf-head-lead { display: flex; align-items: center; gap: 8px; min-width: 0; }
+#hub[data-hwf] .hwf-showside { display: none; }
+#hub[data-hwf] .hwf[data-side="0"] .hwf-showside { display: grid; }
+#hub[data-hwf] .hwf-title { display: inline-flex; align-items: center; gap: 4px; min-width: 0; padding: 2px 4px 2px 6px; border-radius: 8px; font: 500 15px/20px var(--hwf-ui); color: var(--hwf-fg); }
+#hub[data-hwf] .hwf-title-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* the thread title's chevron keeps its box at rest, invisible, and shows only
+   under the pointer (chat-title-menu.css:42-58) */
+#hub[data-hwf] .hwf-title svg { width: 12px; height: 12px; color: var(--hwf-muted); opacity: 0; }
+@media (hover: hover) { #hub[data-hwf] .hwf-pane[data-new="0"] .hwf-title:hover svg { opacity: 1; } }
+#hub[data-hwf] .hwf-search { display: flex; align-items: center; gap: 8px; min-width: 0; height: 32px; padding: 0 8px 0 12px; border: 1px solid var(--hwf-line); border-radius: 8px; background: var(--hwf-raised); color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-search svg { width: 16px; height: 16px; }
+#hub[data-hwf] .hwf-search-l { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; font: 400 11px/16px var(--hwf-ui); }
+#hub[data-hwf] .hwf-search kbd { flex: none; padding: 0 4px; border: 1px solid var(--hwf-line); border-radius: 4px; background: none; box-shadow: none; font: 400 11px/16px var(--hwf-mono); color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-head-act { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+/* the thread band (refresh, share, open in browser): only once a thread
+   exists. It opens with the tail's collapse (the module writes --hwf-band,
+   0 -> 1 on the same 400ms emphasized-decelerate), growing to its 57 and
+   fading up, so the composer's glide never takes a step from it. */
+#hub[data-hwf] .hwf-band2 { --hwf-band: 1; flex: none; display: none; justify-content: flex-end; align-items: center; gap: 8px; height: calc(57px * var(--hwf-band)); padding: 0 16px; border-bottom: 1px solid var(--hwf-line); overflow: hidden; opacity: var(--hwf-band); }
+#hub[data-hwf] .hwf-band2 .hwf-ib.boxed { color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-band2 .hwf-ib svg { width: 16px; height: 16px; }
+
+/* the feed: its own scroll box, rows bottom-anchored (the spacer grows),
+   the row column the composer's 736 (768 less the row's 16px gutters) */
+#hub[data-hwf] .hwf-feed { position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; padding: 16px max(16px, calc((100% - 736px) / 2)); }
+#hub[data-hwf] .hwf-feed::before { content: ""; flex: 1 1 0; }
+/* the chat beat's thread (hero-workspace-chat.js .hwc, flex 1 1 0) pins its
+   own rows to the bottom, so once the pane is a thread (data-new 0: the
+   greeting gone) it takes the whole feed and the spacer goes; on the new chat
+   screen it is empty and takes no room, so the greeting sits where the
+   frontend put it. Its 600 column stays main's (the .hwc 8px gutter inside
+   the feed's 736 lands it 4px left of the pane's centre, as in main). */
+#hub[data-hwf] .hwf-pane[data-new="0"] .hwf-feed::before { display: none; }
+#hub[data-hwf] .hwf-pane[data-new="1"] .hwf-feed > .hwc { display: none; }
+/* the greeting (ThreadIdle variant="hero"): the live mark inline with the serif line */
+#hub[data-hwf] .hwf-hero { flex: none; display: flex; align-items: center; justify-content: center; gap: 16px; padding-bottom: 24px; }
+#hub[data-hwf] .hwf-hero[hidden] { display: none; }
+/* on send main unmounts the greeting; here it fades out with the tail's
+   collapse (the module writes its opacity), held off the flow at exactly the
+   seat it had (the feed's bottom, above its 16px padding) so it rides down
+   with the composer and the thread's rows never wait on it */
+#hub[data-hwf] .hwf-pane[data-new="0"] .hwf-hero { position: absolute; left: max(16px, calc((100% - 736px) / 2)); right: max(16px, calc((100% - 736px) / 2)); bottom: 16px; pointer-events: none; }
+#hub[data-hwf] .hwf-hero-mark { flex: none; width: 48px; height: 48px; }
+#hub[data-hwf] .hwf-glitch { width: 100%; height: 100%; overflow: visible; }
+#hub[data-hwf] .hwf-glitch-a { transform: translate(-.8px, -.6px); }
+#hub[data-hwf] .hwf-glitch-b { transform: translate(.8px, .8px); }
+#hub[data-hwf] .hwf-greet { margin: 0; min-width: 0; font: 400 32px/36px var(--hwf-serif); letter-spacing: -.85px; color: var(--hwf-fg); text-wrap: balance; }
+#hub[data-hwf] .hwf-greet span { white-space: nowrap; }
+
+/* the composer row: max 768, padding 0 16 8; the box, then the context line */
+#hub[data-hwf] .hwf-crow { flex: none; width: 100%; max-width: 768px; margin: 0 auto; padding: 0 16px 8px; }
+/* the box: raised, r16, px 4, gap 4; the ring is v3 "Tide", main's
+   composer-ring-variants.css: a flat storm-1 hairline, at its focus reading
+   (.8) since a new chat opens with the composer focused */
+#hub[data-hwf] .hwf-composer { position: relative; display: flex; flex-direction: column; gap: 4px; min-height: 44px; padding: 0 4px; border: 1px solid transparent; border-radius: 16px; background: var(--hwf-raised); box-shadow: inset 0 0 0 1px rgba(43, 107, 255, .8); }
+#hub[data-hwf] .hwf-input { display: grid; min-height: 44px; }
+#hub[data-hwf] .hwf-ph, #hub[data-hwf] .hwf-draft { grid-area: 1 / 1; padding: 12px 8px; min-width: 0; }
+#hub[data-hwf] .hwf-ph { font: 400 13px/20px var(--hwf-ui); color: var(--hwf-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#hub[data-hwf] .hwf-composer[data-draft] .hwf-ph { visibility: hidden; }
+#hub[data-hwf] .hwf-draft { font: 400 15px/20px var(--hwf-ui); color: var(--hwf-fg); white-space: pre-wrap; overflow-wrap: anywhere; }
+/* the text caret: the native one main shows in its focused composer, 1px of fg, blinking */
+#hub[data-hwf] .hwf-caret { display: none; width: 1px; height: 18px; margin-left: 1px; vertical-align: -3px; background: var(--hwf-fg); animation: hwf-blink 1s step-end infinite; }
+#hub[data-hwf] .hwf-composer[data-caret] .hwf-caret { display: inline-block; }
+@keyframes hwf-blink { 50% { opacity: 0; } }
+/* the foot: + and SUPER left; the model chip, computer use, voice and send right (gap 4 + 6) */
+#hub[data-hwf] .hwf-foot { display: flex; align-items: center; gap: 10px; padding: 8px 6px 8px 8px; min-width: 0; }
+#hub[data-hwf] .hwf-cl { width: 12px; height: 12px; stroke-width: 1.2; }
+#hub[data-hwf] .hwf-plus { flex: none; display: inline-flex; align-items: center; height: 28px; padding: 0 4px; border-radius: 6px; color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-super { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 8px; border-radius: 999px; background: rgba(230, 232, 238, .08); color: var(--hwf-muted); font: 600 11px/1 var(--hwf-ui); letter-spacing: .08em; white-space: nowrap; }
+#hub[data-hwf] .hwf-tag { position: relative; flex: none; width: 34px; height: 14px; border-radius: 999px; background: rgba(230, 232, 238, .1); border: 1px solid rgba(230, 232, 238, .1); }
+#hub[data-hwf] .hwf-tag i { position: absolute; top: 1px; left: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--hwf-muted); }
+#hub[data-hwf] .hwf-tag b { position: absolute; top: 50%; right: 1px; transform: translateY(-50%); font: 700 8px/1 var(--hwf-ui); letter-spacing: .06em; color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-composer[data-sending] .hwf-super { opacity: .4; }
+#hub[data-hwf] .hwf-right { display: flex; align-items: center; gap: 10px; margin-left: auto; min-width: 0; }
+#hub[data-hwf] .hwf-plat { display: inline-flex; align-items: center; gap: 5px; min-width: 0; height: 28px; padding: 0 6px; border-radius: 6px; color: var(--hwf-muted); font: 400 11px/16.5px var(--hwf-ui); }
+#hub[data-hwf] .hwf-plat-mark { flex: none; display: grid; }
+#hub[data-hwf] .hwf-platglitch { display: grid; width: 16px; height: 16px; }
+#hub[data-hwf] .hwf-platicon { display: grid; place-items: center; width: 14px; height: 14px; border-radius: 24%; background: #fff; box-shadow: 0 0 0 1px rgba(230, 232, 238, .12); overflow: hidden; }
+#hub[data-hwf] .hwf-platicon svg { width: 10px; height: 10px; }
+#hub[data-hwf] .hwf-platicon img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#hub[data-hwf] .hwf-plat-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#hub[data-hwf] .hwf-computer { flex: none; display: grid; place-items: center; width: 28px; height: 28px; color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-mic { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; border: 1px solid rgba(230, 232, 238, .08); background: rgba(230, 232, 238, .06); color: var(--hwf-muted); }
+/* send: idle (the empty draft's _wait: an fg 8% well, the line-control
+   arrow), armed (the storm gradient, white, its glow), sending (main's
+   composer-cancel: the same gradient round holding the lucide stop square) */
+#hub[data-hwf] .hwf-send { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(230, 232, 238, .08); color: var(--hwf-control); }
+#hub[data-hwf] .hwf-send > svg { grid-area: 1 / 1; width: 12px; height: 12px; }
+#hub[data-hwf] .hwf-send .hwf-cl { stroke-width: 1.6; }
+#hub[data-hwf] .hwf-send > svg:not(.hwf-cl) { display: none; }
+#hub[data-hwf] .hwf-send[data-armed],
+#hub[data-hwf] .hwf-composer[data-sending] .hwf-send { background: var(--hwf-grad); color: #fff; box-shadow: 0 0 10px rgba(120, 100, 255, .35); }
+#hub[data-hwf] .hwf-composer[data-sending] .hwf-send .hwf-cl { display: none; }
+#hub[data-hwf] .hwf-composer[data-sending] .hwf-send > svg:not(.hwf-cl) { display: block; }
+/* the context line under the box: the name, the mono reading, the 96x4
+   track; the AI caption at the far edge, dimmed by --overlay-figure */
+#hub[data-hwf] .hwf-cline { display: flex; align-items: center; min-width: 0; padding-top: 8px; }
+#hub[data-hwf] .hwf-ctx { flex: none; display: inline-flex; align-items: center; gap: 12px; padding: 4px 8px; border: 1px solid transparent; border-radius: 9999px; font: 400 11px/19px var(--hwf-mono); color: var(--hwf-muted); }
+#hub[data-hwf] .hwf-ctx .nm { font-family: var(--hwf-ui); }
+#hub[data-hwf] .hwf-ctx .trk { position: relative; width: 96px; height: 4px; border-radius: 9999px; background: var(--hwf-line); overflow: hidden; }
+#hub[data-hwf] .hwf-ctx .trk i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 9999px; background: var(--hwf-fg2); }
+#hub[data-hwf] .hwf-ai { margin: 0 0 0 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 11px/16px var(--hwf-ui); color: var(--hwf-muted); opacity: .6; }
+/* the tail: grows beside the feed while the chat is new, so the composer
+   sits mid-pane; the module writes its flex-grow (main's collapse) */
+#hub[data-hwf] .hwf-tail { flex: 0 1 0; min-height: 0; overflow: hidden; }
+#hub[data-hwf] .hwf-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; max-width: 768px; margin: 0 auto; padding: 16px 16px 0; }
+#hub[data-hwf] .hwf-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 8px 16px; border: 1px solid var(--hwf-line); border-radius: 8px; background: var(--hwf-raised); color: var(--hwf-fg2); white-space: nowrap; }
+#hub[data-hwf] .hwf-chip svg { width: 16px; height: 16px; }
+/* a narrow seat (new-chat.css and composer.tsx @container <= 560px): the
+   greeting steps down to the headline and the mark to 32, the model chip
+   keeps its mark and drops its label */
+@container hwf-pane (max-width: 592px) {
+  #hub[data-hwf] .hwf-hero { gap: 12px; }
+  #hub[data-hwf] .hwf-hero-mark { width: 32px; height: 32px; }
+  #hub[data-hwf] .hwf-greet { font-size: 22px; line-height: 28px; letter-spacing: -.4px; }
+  #hub[data-hwf] .hwf-plat-l { display: none; }
+  #hub[data-hwf] .hwf-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; padding-right: 16px; }
+}

@@ -810,6 +810,15 @@ const more = [
   ['every-model-converge-refuse-4x5-e75f98b6', 'every-model-converge-refuse-4x5-e75f98b6/', "Superbot won't refuse: each refusal on screen, struck through, the next model does it (4:5)", 'Ad spots',
     { desc: "Superbot won't refuse. Each ask hits a model that says no, and superbot switches to one that does it. GPT-5 Codex: 'I can't make images here', so Gemini makes the Muse meme. Gemini: 'Sorry, I can't scrape Reddit', so DeepSeek V4 Flash scrapes 6 subreddits. DeepSeek: 'I can't place orders for you', so Superbot orders the burger on DoorDash, 24 min. 21.6 s, 4:5, with sound.",
       download: 'animations/every-model-converge-refuse-4x5-e75f98b6/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // converge variant 5 (2026-10-05, chat 07e96e2b): 'Superbot won't refuse', the refusal leaves of the rank 2
+  // llm_ai complaint (output-quality-regressions, 4,206 authors, rising; overly-restrictive-guardrails,
+  // excessive-censorship). Same 21.6 s spine and score; the hook throws five struck-through refusal pills,
+  // the ghost rows are the refusals other chat apps give, and the headlines read as one sentence: superbot
+  // won't refuse / a meme with a real actor / to scrape reddit / to order your burger / to check out for you
+  // / on any model you pick. Source: quick-chats/superbot-wont-refuse-4x5.07e96e2b.
+  ['every-model-converge-refuse-4x5-07e96e2b', 'every-model-converge-refuse-4x5-07e96e2b/', "Superbot won't refuse: one sentence, refusals struck out, every ask done (4:5)", 'Ad spots',
+    { desc: "Superbot won't refuse. Same phone, motion and score as the every-model converge spot. The hook throws five struck-through refusals (I can't help, As an AI, Against policy) out of the phone, the ghost rows behind every headline are the refusals other chat apps give, and no vendor is shown saying no. The headlines read as one sentence: superbot won't refuse / a meme with a real actor / to scrape reddit / to order your burger / to check out for you / on any model you pick. 'others won't. make me a muse meme': Gemini makes it. 'Scrape reddit for more. No excuses.': DeepSeek V4 Flash scrapes 6 subreddits. 'Now actually order me a burger.': Superbot places the DoorDash order, 24 min. Ends on superbot.gg, it won't refuse. 21.6 s, 1080x1350, 30 fps, with sound.",
+      download: 'animations/every-model-converge-refuse-4x5-07e96e2b/final.mp4', downloadLabel: 'MP4 4:5' }],
   // one api key, all your subs (2026-10-04, chat 79d27001): five 16:9 treatments of one claim, each 12.0 s
   // (5 bars at 100 bpm), 1920x1080, 30 fps, synthesized score, on the converge ad's stage grammar
   // (superbot-format-daeon/every-model-converge-16x9.398eded5); source in

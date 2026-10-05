@@ -1917,6 +1917,17 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "every-model-converge-refuse-4x5-07e96e2b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot won't refuse: one sentence, refusals struck out, every ask done (4:5)",
+    "src": "animations/every-model-converge-refuse-4x5-07e96e2b/",
+    "thumb": "assets/shots/every-model-converge-refuse-4x5-07e96e2b.png",
+    "desc": "Superbot won't refuse. Same phone, motion and score as the every-model converge spot. The hook throws five struck-through refusals (I can't help, As an AI, Against policy) out of the phone, the ghost rows behind every headline are the refusals other chat apps give, and no vendor is shown saying no. The headlines read as one sentence: superbot won't refuse / a meme with a real actor / to scrape reddit / to order your burger / to check out for you / on any model you pick. 'others won't. make me a muse meme': Gemini makes it. 'Scrape reddit for more. No excuses.': DeepSeek V4 Flash scrapes 6 subreddits. 'Now actually order me a burger.': Superbot places the DoorDash order, 24 min. Ends on superbot.gg, it won't refuse. 21.6 s, 1080x1350, 30 fps, with sound.",
+    "download": "animations/every-model-converge-refuse-4x5-07e96e2b/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "apikey-terminal-16x9-79d27001",
     "type": "animation",
     "group": "Ad spots",

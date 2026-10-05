@@ -2938,6 +2938,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "pocketsflow-launch-pipeline-superbot-37e3c221",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "THEY WONT TELL YOU HOW, the launch video pipeline: DeepSeek V4 Flash writes the script from pocketsflow.com, Nano Banana Pro storyboards it, Hailuo 02 animates the checkout, ElevenLabs voices and scores it, Opus 5.5 cuts it in Remotion, Superbot renders and plays the film (6 switches, 49.5s, 16:9)",
+    "src": "animations/pocketsflow-launch-pipeline-superbot-37e3c221/",
+    "thumb": "assets/shots/pocketsflow-launch-pipeline-superbot-37e3c221.png",
+    "desc": "Variant of pocketsflow-untold-every-model-superbot-673c104b with every model switch made coherent with the ask \"make a launch video for Pocketsflow\" and every output shown in full detail. Kai's X post (\"I made this in 1 prompt\") plays a hand-built 15s Pocketsflow launch film (hook, product page, Apple Pay checkout with LAUNCH20, tax and VAT handled worldwide, the $2,480 week, logo lockup), then THEY WONT TELL YOU HOW, then the chat. DeepSeek V4 Flash reads 5 sections of pocketsflow.com and writes launch-script.md: 6 shots with timecodes, on-screen notes and voiceover lines, sourced facts underlined. Nano Banana Pro storyboards all 6 shots in Pocketsflow's own look, each frame resolving step by step. MiniMax Hailuo 02 animates storyboard frame 03 into the 6s 1080p checkout shot. ElevenLabs (Eleven v3, voice Brian) voices the 6 lines and scores the cut: voice, 112 BPM bed and 6 SFX cues on one 15s timeline, previewed with a word-by-word caption. Claude Opus 5.5 builds it in Remotion (9 files, +702 lines, every sequence cut on its voice line) and scrubs the preview end to end. Superbot renders pocketsflow-launch.mp4 and plays it with captions. End card unchanged. 49.49 s, 1920x1080, 60 fps.",
+    "download": "assets/video/pocketsflow-launch-pipeline-superbot-37e3c221.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

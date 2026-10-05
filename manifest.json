@@ -1129,6 +1129,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-youtube-model-switch-superbot-real-ui-04c12afd",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments, pin the best one: GPT-6 Luna reads them, Gemini 3.7 Flash finds the answers in the video, Opus 5.5 writes, posted on a real-UI youtube.com (real-ui, 16:9)",
+    "src": "animations/niche-youtube-model-switch-superbot-real-ui-04c12afd/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-real-ui-04c12afd.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d with every model switch remade to make sense and the YouTube screen matched to the real one. One ask in superbot: GPT-6 Luna, OpenAI's low-cost tier, reads all 1,284 comments, ranks the top five and flags the two questions only the video can answer; Gemini 3.7 Flash jumps straight to 7:05 and 4:38 and brings back both answers with timestamps; Claude Opus 5.5 writes the five replies in the creator's voice from them; then superbot posts, hearts and pins them on youtube.com's watch page, built from captures of the live page. 26.2 s, plays at 16:9, 4:3, 1:1 and 4:5.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-real-ui-04c12afd.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-ghx7-model-switch-superbot-c76daf74",
     "type": "animation",
     "group": "Ad spots",

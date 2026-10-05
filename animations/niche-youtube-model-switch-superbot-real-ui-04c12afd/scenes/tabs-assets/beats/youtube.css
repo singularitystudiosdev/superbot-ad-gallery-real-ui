@@ -1,0 +1,184 @@
+/* YouTube beat (beats/youtube.js): Google's consent card and the checklist card in the chat, and the full-frame layer
+   carrying youtube.com's watch page (light theme, signed in), scrolled to the comments. The consent and checklist cards
+   read chat.css --gm-* (Google's own surfaces, Google Sans Flex). The watch page is built from a headless capture of
+   the live page at 1920 x 1080 (https://www.youtube.com/watch?v=FBCcN9n-oT0, 2026-10-05): every size, offset, colour
+   and type value below is the computed value read off that page, noted where it is not obvious. Nothing here
+   transitions: position, size, radius, height, opacity and transform are written from t in youtube.js, so ?t= freezes
+   a frame. Classes: .gc- consent card, .gk- checklist card, .yw- the watch page. */
+
+/* Google Sans Flex (SIL OFL 1.1, the variable weight axis, latin) and Roboto (SIL OFL 1.1), from fontsource, vendored
+   under fonts/ (fonts/CREDITS.txt), so nothing is fetched at render */
+@font-face { font-family: "GSF"; font-style: normal; font-weight: 100 1000; font-display: block; src: url("../../../fonts/google-sans-flex-latin-wght-normal.woff2?v=04c12afd") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 400; font-display: block; src: url("../../../fonts/roboto-latin-400-normal.woff2?v=04c12afd") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 500; font-display: block; src: url("../../../fonts/roboto-latin-500-normal.woff2?v=04c12afd") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 700; font-display: block; src: url("../../../fonts/roboto-latin-700-normal.woff2?v=04c12afd") format("woff2"); }
+
+#s-tabs .yt-i { flex: none; width: 24px; height: 24px; }
+
+/* ---- the consent card (Google's OAuth consent screen, light) ---- */
+#s-tabs .sbsite .hub .gm-say { margin-top: 2px; }
+#s-tabs .sbsite .hub .gc-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 2px; border-radius: var(--gm-radius);
+  background: var(--gm-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); color: var(--gm-text); font-family: var(--gm-body); overflow: hidden; }
+#s-tabs .sbsite .hub .gc-top { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border-bottom: 1px solid var(--gm-line);
+  font: 500 11.5px/1 var(--gm-sans); color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-top img { width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .gc-body { padding: 12px 14px 12px; }
+#s-tabs .sbsite .hub .gc-title { font: 400 16.5px/1.3 var(--gm-sans); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-acct { display: inline-flex; align-items: center; gap: 6px; height: 24px; margin-top: 9px; padding: 0 6px 0 3px; border-radius: 9999px;
+  box-shadow: inset 0 0 0 1px #747775; font: 500 11.5px/1 var(--gm-sans); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-av { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #1e8e3e; color: #fff; font: 500 10px/1 var(--gm-sans); font-style: normal; }
+#s-tabs .sbsite .hub .gc-dd { width: 15px; height: 15px; color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-sel { margin: 12px 0 4px; font: 400 12px/1.3 var(--gm-body); color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-sel b { font-weight: 500; color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-row { display: flex; align-items: center; gap: 10px; min-height: 30px; padding: 3px 0; border-bottom: 1px solid var(--gm-line);
+  font: 400 12px/1.3 var(--gm-body); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-row img { flex: none; width: 16px; height: 16px; object-fit: contain; }
+#s-tabs .sbsite .hub .gc-row span { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .gc-cb { flex: none; display: grid; place-items: center; width: 15px; height: 15px; border-radius: 3px; background: var(--gm-accent); color: #fff; }
+#s-tabs .sbsite .hub .gc-cb .yt-i { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gc-btns { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 12px; }
+#s-tabs .sbsite .hub .gc-btns span { display: inline-flex; align-items: center; height: 28px; padding: 0 16px; border-radius: 9999px; font: 500 12px/1 var(--gm-sans); }
+#s-tabs .sbsite .hub .gc-cancel { color: var(--gm-accent); box-shadow: inset 0 0 0 1px #747775; }
+#s-tabs .sbsite .hub .gc-go { background: var(--gm-accent); color: #fff; }
+#s-tabs .sbsite .hub .gc-go.gc-hit { background: #0842a0; }
+
+/* ---- the checklist card (light, Google's surfaces), the mini window under the steps ---- */
+#s-tabs .sbsite .hub .gk-card { opacity: 0; box-sizing: border-box; width: 420px; max-width: 100%; margin-top: 10px; padding: 8px 10px 10px;
+  border-radius: var(--gm-radius); background: var(--gm-surface); box-shadow: 0 1px 3px rgba(0,0,0,.3); font-family: var(--gm-body); }
+#s-tabs .sbsite .hub .gk-card.gk-tall { width: 300px; }
+#s-tabs .sbsite .hub .gk-step { display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 2px; font: 12.5px/1 var(--gm-body); color: var(--gm-text); white-space: nowrap; }
+#s-tabs .sbsite .hub .gk-step b { font-weight: 500; }
+#s-tabs .sbsite .hub .gk-tx { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .gk-ic { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; }
+#s-tabs .sbsite .hub .gk-av { background: #1e8e3e; color: #fff; font: 500 11px/1 var(--gm-sans); }
+#s-tabs .sbsite .hub .gk-img { background: var(--gm-page); }
+#s-tabs .sbsite .hub .gk-img img { width: 13px; height: 10px; }
+#s-tabs .sbsite .hub .gk-ms { background: var(--gm-sel); color: var(--gm-accent); }
+#s-tabs .sbsite .hub .gk-ms .yt-i { width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .gk-ok { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gk-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid var(--gm-line); border-top-color: var(--gm-accent); }
+#s-tabs .sbsite .hub .gk-ck { position: absolute; inset: 0; opacity: 0; fill: none; stroke: #1e8e3e; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .gk-shot { margin-top: 8px; aspect-ratio: 16 / 9; border-radius: var(--gm-radius); background: var(--gm-page); box-shadow: inset 0 0 0 1px var(--gm-line); }
+
+/* ---- the full-frame layer, in the scene root's px (outside the camera), above the hub ---- */
+#s-tabs .yw-full { position: absolute; left: 0; top: 0; z-index: 6; overflow: hidden; opacity: 0; pointer-events: none; background: #fff; }
+#s-tabs .yw-app { position: absolute; left: 0; top: 0; overflow: hidden; transform-origin: 0 0; background: #fff; color: #0f0f0f;
+  font: 400 14px/20px "Roboto GM", Roboto, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+#s-tabs .yw-app .yi { display: block; flex: none; width: 24px; height: 24px; fill: currentColor; }
+#s-tabs .yw-app .yt-i { display: block; flex: none; width: 24px; height: 24px; }
+
+/* the per-width layout (--pill-l, --pill-w, --voice-l, --pri-w, --sec-l, --sec-w, --th-w, --th-h) is set by youtube.js
+   from youtube.com's own layout at the frame's width; the defaults are the 1920 ones */
+#s-tabs .yw-app { --pill-l: 642px; --pill-w: 536px; --voice-l: 1258px; --pri-w: 1344px; --sec-l: 1376px; --sec-w: 528px; --th-w: 330px; --th-h: 186px; }
+
+/* masthead: 56 tall, white, fixed over the page */
+#s-tabs .yw-top { position: absolute; left: 0; top: 0; right: 0; z-index: 2; height: 56px; background: #fff; }
+#s-tabs .yw-ib { position: absolute; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: #0f0f0f; }
+#s-tabs .yw-guide { left: 16px; top: 8px; }
+#s-tabs .yw-logo { position: absolute; left: 72px; top: 18px; width: 93px; height: 20px; color: #000; }
+#s-tabs .yw-logo .yi { width: 93px; height: 20px; }
+/* the search box: input pill x642 w536 (1px #ccc, inset 0 1px 2px #eee, radius 40 0 0 40), button x1178 w64 #f8f8f8 */
+#s-tabs .yw-search { position: absolute; left: var(--pill-l); top: 8px; display: flex; height: 40px; }
+#s-tabs .yw-in { box-sizing: border-box; width: var(--pill-w); height: 40px; padding: 0 16px 0 17px; border: 1px solid #ccc; border-right: 0; border-radius: 40px 0 0 40px;
+  box-shadow: inset 0 1px 2px #eee; font: 400 16px/38px "Roboto GM", Roboto, Arial, sans-serif; color: #888; }
+#s-tabs .yw-sb { box-sizing: border-box; display: grid; place-items: center; width: 64px; height: 40px; border: 1px solid #d3d3d3; border-radius: 0 40px 40px 0; background: #f8f8f8; }
+#s-tabs .yw-mic { left: var(--voice-l); top: 8px; background: rgba(0,0,0,.05); }
+/* signed in: Create (pill), notifications, the account avatar, right-aligned to x1904 like the signed-out end */
+#s-tabs .yw-end { position: absolute; right: 16px; top: 8px; display: flex; align-items: center; gap: 8px; height: 40px; }
+#s-tabs .yw-end .yw-ib { position: static; }
+#s-tabs .yw-create { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px 0 10px; border-radius: 18px; background: rgba(0,0,0,.05);
+  font: 500 14px/36px "Roboto GM", Roboto, Arial, sans-serif; color: #0f0f0f; }
+#s-tabs .yw-me { width: 32px; height: 32px; margin: 4px; border-radius: 50%; font-size: 15px; }
+
+/* the page under the masthead, scrolled to the comments (written from t: translateY) */
+#s-tabs .yw-scroll { position: absolute; left: 0; top: 0; right: 0; will-change: transform; }
+#s-tabs .yw-pri { position: absolute; left: 16px; top: 80px; width: var(--pri-w); }
+#s-tabs .yw-sec { position: absolute; left: var(--sec-l); top: 62px; width: var(--sec-w); display: grid; gap: 8px; }
+#s-tabs .yw-narrow .yw-sec { display: none; }
+
+/* comments header: "1,284 Comments" 20/28 700, Sort by (icon 24, label 14/22 500 .5px) 32 to its right, 24 below */
+#s-tabs .yw-ch { display: flex; align-items: center; height: 28px; margin-bottom: 24px; }
+#s-tabs .yw-ch h2 { margin: 0; font: 700 20px/28px "Roboto GM", Roboto, Arial, sans-serif; color: #0f0f0f; }
+#s-tabs .yw-sort { display: flex; align-items: center; gap: 8px; margin-left: 32px; font: 500 14px/22px "Roboto GM", Roboto, Arial, sans-serif; letter-spacing: .5px; }
+/* the add-a-comment box: avatar 24, placeholder 14/20 #606060 at +36, underline, 32 to the first thread */
+#s-tabs .yw-sbox { display: flex; gap: 12px; margin-bottom: 32px; }
+#s-tabs .yw-ph { flex: 1; padding-bottom: 4px; border-bottom: 1px solid #e5e5e5; color: #606060; }
+
+/* letter avatars (YouTube's default for accounts with no photo) */
+#s-tabs .yw-av { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--c); color: #fff;
+  font: 500 17px/1 "Roboto GM", Roboto, Arial, sans-serif; }
+#s-tabs .yw-av24 { width: 24px; height: 24px; font-size: 12px; }
+#s-tabs .yw-meav { --c: #1e8e3e; }
+
+/* a thread: avatar 36 at the left, the body 16 to its right (x68); header 20 (22 with the owner pill), 2, text 14/20,
+   4, the toolbar (32; 36 once the creator heart is in it). 16 between threads. */
+#s-tabs .yw-th { position: relative; margin-bottom: 16px; background: #fff; }
+#s-tabs .yw-wash { position: absolute; inset: 0; border-radius: 8px; background: rgba(0,0,0,.05); opacity: 0; }
+#s-tabs .yw-cm { position: relative; display: flex; gap: 16px; }
+#s-tabs .yw-main { flex: 1; min-width: 0; }
+/* Pinned by: pin 12 at -2, label 12/18 #606060 at +16, 8 above the header */
+#s-tabs .yw-pin { display: flex; align-items: center; gap: 6px; height: 18px; margin: 0 0 8px -2px; font: 400 12px/18px "Roboto GM", Roboto, Arial, sans-serif; color: #606060; white-space: nowrap; }
+#s-tabs .yw-pin .yi { width: 12px; height: 12px; color: #0f0f0f; }
+#s-tabs .yw-hd { display: flex; align-items: center; min-height: 20px; margin-bottom: 2px; white-space: nowrap; }
+#s-tabs .yw-au { margin-right: 4px; font: 500 12px/18px "Roboto GM", Roboto, Arial, sans-serif; color: #0f0f0f; }
+/* the owner pill: #0f0f0f, radius 100, 20 tall, 6 side padding, 12/18 500 #f1f1f1 */
+#s-tabs .yw-own { height: 20px; margin: 0 4px 0 0; padding: 1px 6px; box-sizing: border-box; border-radius: 100px; background: #0f0f0f;
+  font: 500 12px/18px "Roboto GM", Roboto, Arial, sans-serif; color: #f1f1f1; }
+#s-tabs .yw-tm { font: 400 12px/18px "Roboto GM", Roboto, Arial, sans-serif; color: #606060; }
+#s-tabs .yw-tx { font: 400 14px/20px "Roboto GM", Roboto, Arial, sans-serif; color: #0f0f0f; white-space: pre-wrap; }
+/* toolbar: like 32 (icon 18) at -8, count 12/18 #606060 then 8, dislike 32, creator heart 36, Reply (12/32 500, pad 0 12, r16) 8 after */
+#s-tabs .yw-tb { display: flex; align-items: center; height: 36px; margin: 2px 0 0 -8px; }
+#s-tabs .yw-b32 { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: #0f0f0f; }
+#s-tabs .yw-b32 .yi { width: 18px; height: 18px; }
+#s-tabs .yw-ct { margin-right: 8px; font: 400 12px/18px "Roboto GM", Roboto, Arial, sans-serif; color: #606060; }
+#s-tabs .yw-hb { position: relative; width: 36px; height: 36px; }
+#s-tabs .yw-h0 { position: absolute; left: 9px; top: 8px; width: 18px; height: 18px; color: #0f0f0f; }
+#s-tabs .yw-hon { position: absolute; inset: 0; opacity: 0; }
+#s-tabs .yw-hon .yw-av24 { position: absolute; left: 6px; top: 6px; font-size: 11px; }
+/* the creator heart: 15 at (18,17), YouTube's white outline over the red (#ff0033) fill */
+#s-tabs .yw-hrt { position: absolute; left: 18px; top: 17px; width: 15px; height: 15px; }
+#s-tabs .yw-hrt .yi { position: absolute; inset: 0; width: 15px; height: 15px; }
+#s-tabs .yw-hrt .yw-hf { color: #ff0033; }
+#s-tabs .yw-hrt .yw-hl { color: #fff; }
+#s-tabs .yw-rb { margin-left: 8px; padding: 0 12px; border-radius: 16px; font: 500 12px/32px "Roboto GM", Roboto, Arial, sans-serif; color: #0f0f0f; }
+
+/* the creator's reply under a comment: the threadline (1px #e5e5e5 from under the avatar, curving in with radius 16),
+   avatar 24 at x64, body at x104, 16 under the comment */
+#s-tabs .yw-line { position: absolute; left: 18px; top: 36px; bottom: -4px; border-left: 1px solid #e5e5e5; opacity: 0; }
+#s-tabs .yw-rslot { height: 0; overflow: hidden; }
+#s-tabs .yw-rp { position: relative; display: flex; gap: 16px; padding: 16px 0 0 48px; }
+#s-tabs .yw-conn { position: absolute; left: 18px; top: 4px; box-sizing: border-box; width: 18px; height: 24px; border-left: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; border-bottom-left-radius: 16px; }
+#s-tabs .yw-rp .yw-tb { height: 32px; }
+
+/* related videos: thumb 330 x 186 r12 with the duration badge, meta 12 to its right (title 14/20 500;
+   channel and stats 12/18 #606060); the title clamps at 3 lines as on the live page */
+#s-tabs .yw-lk { display: flex; gap: 12px; height: var(--th-h); }
+#s-tabs .yw-thm { position: relative; flex: none; width: var(--th-w); height: var(--th-h); border-radius: 12px; overflow: hidden; background: #e5e5e5; }
+#s-tabs .yw-thm img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .yw-dur { position: absolute; right: 8px; bottom: 8px; height: 20px; padding: 0 4px; border-radius: 4px; background: rgba(0,0,0,.6);
+  font: 500 12px/20px "Roboto GM", Roboto, Arial, sans-serif; color: #fff; }
+#s-tabs .yw-meta { min-width: 0; padding-right: 24px; }
+#s-tabs .yw-lt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin: 0 0 4px; font: 500 14px/20px "Roboto GM", Roboto, Arial, sans-serif; color: #0f0f0f; }
+#s-tabs .yw-lc, #s-tabs .yw-ls { display: flex; align-items: center; gap: 4px; font: 400 12px/18px "Roboto GM", Roboto, Arial, sans-serif; color: #606060; white-space: nowrap; }
+#s-tabs .yw-ls svg { width: 12px; height: 12px; fill: currentColor; }
+#s-tabs .yw-ls span + span { margin-left: 4px; }
+
+/* the pinned copy that opens at the top of the list: already answered, hearted and pinned */
+#s-tabs .yw-pinslot { height: 0; overflow: hidden; }
+#s-tabs .yw-pinslot .yw-th { opacity: 0; }
+#s-tabs .yw-done .yw-rslot { height: auto; }
+#s-tabs .yw-done .yw-line, #s-tabs .yw-done .yw-hon { opacity: 1; }
+#s-tabs .yw-done .yw-h0 { opacity: 0; }
+
+/* other viewers' threads under the top five, with YouTube's collapsed replies row: the threadline curving into the
+   replier's avatar (24 at x64), then the button at x88 (pad 0 16 0 4): "·" 28/38 900, "N replies" 14/40 500, chevron 24 */
+#s-tabs .yw-fill .yw-line { opacity: 1; bottom: 0; }
+#s-tabs .yw-more { position: relative; height: 52px; }
+#s-tabs .yw-more .yw-conn { top: 0; height: 30px; }
+#s-tabs .yw-more .yw-av24 { position: absolute; left: 48px; top: 18px; }
+#s-tabs .yw-mb { position: absolute; left: 72px; top: 12px; display: flex; align-items: center; gap: 4px; height: 40px; padding: 0 16px 0 4px;
+  font: 500 14px/40px "Roboto GM", Roboto, Arial, sans-serif; color: #0f0f0f; white-space: nowrap; }
+#s-tabs .yw-dot { font: 900 28px/38px "Roboto GM", Roboto, Arial, sans-serif; }
+
+/* the checklist's heart row in YouTube's creator-heart red */
+#s-tabs .sbsite .hub .gk-ms.gk-heart { background: #fde8ec; color: #ff0033; }

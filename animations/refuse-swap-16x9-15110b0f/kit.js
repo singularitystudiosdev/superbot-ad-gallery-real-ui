@@ -222,7 +222,7 @@ export function editorLines(ed) {
       src.appendChild(h(`<span class="kw">${esc(parts[0])}</span>`));
       src.appendChild(h(`<span class="str"><span class="old">${esc(parts[1])}</span><span class="new">${esc(parts[2])}</span></span>`));
     } else {
-      parts.forEach((p) => src.appendChild(h(`<span>${esc(p) || '&nbsp;'}</span>`)));
+      parts.filter((p) => typeof p === 'string').forEach((p) => src.appendChild(h(`<span>${esc(p) || '&nbsp;'}</span>`)));
     }
     ed.code.appendChild(ln);
     return ln;

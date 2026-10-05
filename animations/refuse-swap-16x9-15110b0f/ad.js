@@ -132,9 +132,11 @@ function render(t) {
   op(head, win(t, 0.0, 5.4, 0.35, 0.3));
   const onCompare = win(t, 0.2, T_SWAP + 0.2, 0.35, 0.25);
   const inCompare = t < T_SWAP + 0.3;
+  const ba = smooth((t - T_ANSWER + 0.2) / 0.45);
   op(ask, onCompare);
-  op(left.el, inCompare ? win(t, 1.5, T_SWAP + 0.1, 0.3, 0.25) : 0.55);
-  op(right.el, inCompare ? win(t, 1.9, T_SWAP + 0.1, 0.3, 0.25) * 0.55 : 1);
+  op(left.el, inCompare ? win(t, 1.5, T_SWAP + 0.1, 0.3, 0.25) : 0.55 + 0.45 * ba);
+  tf(left.el, `translateX(${(1 - ba) * 365}px)`);
+  op(right.el, inCompare ? 0 : ba);
   $(ask, '.txt').textContent = typed(REQ.ask, t, 1.3, 46);
   $(ask, '.caret').style.opacity = t > 1.3 && t < 4.4 && Math.floor(t * 4) % 2 === 0 ? 1 : 0;
   const onceK = sp(t, 1.55, PRESETS.snappy);

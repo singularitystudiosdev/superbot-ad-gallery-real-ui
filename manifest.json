@@ -1034,6 +1034,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-youtube-model-switch-superbot-3828921d-r1-a-lv410045ceb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and pin the best one: Gemini 3.1 Pro ranks them, Claude Opus 5.5 writes the replies, YouTube Studio pins the best (detailed 9.95 s cut, r1-a, 16:9)",
+    "src": "animations/niche-youtube-model-switch-superbot-3828921d-r1-a-lv410045ceb/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-3828921d-r1-a-lv410045ceb.png",
+    "desc": "Variant of niche-youtube-model-switch-superbot-3828921d, shorter and more detailed. One ask in superbot: Gemini 3.1 Pro watches the 14:32 video, ticking the moments viewers ask about, reads all 1,284 comments and ranks the top five by likes and repeats. Claude Opus 5.5 writes all five replies in the creator's voice, each grounded in what the video shows, and picks Priya's question to pin because 214 people asked it. superbot connects to YouTube Studio as the creator, posts the five replies and pins Priya's comment, shown live on the watch page. 9.95 s, 16:9, 1920x1080 at 60 fps.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-3828921d-r1-a-lv410045ceb.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-ghx7-model-switch-superbot-c76daf74",
     "type": "animation",
     "group": "Ad spots",

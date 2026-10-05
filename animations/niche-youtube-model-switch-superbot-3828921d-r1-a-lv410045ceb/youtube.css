@@ -1,0 +1,85 @@
+/* YouTube's watch page, dark theme, in YouTube's own CSS px under zoom: 2.6 (738x415 CSS px fill the 1920x1080
+   frame, so 14 px comment text lands at 36 px and the 12 px "Pinned by" at 31 px). Palette: YouTube's --yt-spec-* dark values (base background #0f0f0f,
+   text primary #f1f1f1, text secondary #aaa, additive background rgba(255,255,255,.1), call to action #3ea6ff,
+   menu #282828, brand red #f03); the creator badge is text-secondary with inverse text. Type: Roboto (fonts/). */
+@font-face { font-family: "Roboto"; font-weight: 400; src: url(fonts/roboto-400.woff2) format("woff2"); }
+@font-face { font-family: "Roboto"; font-weight: 500; src: url(fonts/roboto-500.woff2) format("woff2"); }
+@font-face { font-family: "Roboto"; font-weight: 700; src: url(fonts/roboto-700.woff2) format("woff2"); }
+
+#yt { visibility: hidden; overflow: hidden; transform-origin: 960px 540px; }
+.ybg, .ycont { position: absolute; inset: 0; }
+.ybg { background: #0f0f0f; }
+.ytop { pointer-events: none; }
+.yt { position: absolute; inset: 0; zoom: 2.6; transform-origin: 34px 56px; overflow: hidden; font-family: Roboto, Arial, sans-serif; color: #f1f1f1; -webkit-font-smoothing: antialiased; }
+.yin { position: absolute; left: 22px; top: 56px; width: 690px; }
+.ymast { position: absolute; left: 0; right: 0; top: 0; height: 56px; display: flex; align-items: center; gap: 4px; padding: 0 16px 0 8px; background: #0f0f0f; }
+.ymi { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
+.ymi svg { width: 24px; height: 24px; fill: #f1f1f1; }
+.ylogo { height: 20px; margin: 0 8px 0 8px; }
+.ysearch { display: flex; align-items: center; width: 280px; height: 40px; margin-left: 24px; border-radius: 20px; box-shadow: inset 0 0 0 1px #303030; background: #121212; font-size: 16px; color: #888; }
+.ysearch span { flex: 1; padding-left: 16px; }
+.ysearch b { display: grid; place-items: center; width: 64px; height: 40px; border-radius: 0 20px 20px 0; background: #222; }
+.ysearch svg { width: 24px; height: 24px; fill: #f1f1f1; }
+.ymic { margin-left: 8px; background: #181818; }
+.ymast i { flex: 1; }
+.ycreate { display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 16px 0 10px; border-radius: 18px; background: rgba(255,255,255,.1); font-size: 14px; font-weight: 500; }
+.ycreate svg { width: 24px; height: 24px; fill: #f1f1f1; }
+.yav.s32 { width: 32px; height: 32px; margin-left: 8px; font-size: 14px; }
+
+.yplayer { position: relative; width: 752px; height: 423px; border-radius: 12px; overflow: hidden; background: #000; }
+.yplayer > svg { display: block; width: 100%; height: 100%; }
+.ygrad { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.78)); }
+.ybar { position: absolute; left: 12px; right: 12px; bottom: 46px; height: 3px; background: rgba(255,255,255,.3); }
+.yplayed { position: absolute; left: 0; top: 0; bottom: 0; background: #f03; }
+.yknob { position: absolute; top: 50%; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; border-radius: 50%; background: #f03; }
+.yctl { position: absolute; left: 6px; right: 6px; bottom: 0; height: 46px; display: flex; align-items: center; }
+.yctl > span { display: grid; place-items: center; width: 40px; }
+.yctl svg { display: block; width: 26px; height: 26px; fill: #fff; }
+.yctl .ytime { width: auto; margin-left: 8px; font-size: 13px; color: #eee; }
+.yctl i { flex: 1; }
+
+.ytitle { margin: 12px 0 0; font-size: 20px; line-height: 28px; font-weight: 700; }
+.yown { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+.yav { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-size: 18px; font-weight: 500; }
+.yav.s24 { width: 24px; height: 24px; font-size: 12px; }
+.yav.s16 { width: 16px; height: 16px; font-size: 9px; }
+.yname { display: grid; margin: 0 14px 0 2px; }
+.yname b { font-size: 16px; line-height: 22px; font-weight: 500; }
+.yname span { font-size: 12px; line-height: 18px; color: #aaa; }
+.ypillbtn { flex: none; display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 18px; background: rgba(255,255,255,.1); font-size: 14px; font-weight: 500; }
+.yown i { flex: 1; }
+.yown .ypillbtn svg { width: 24px; height: 24px; fill: #f1f1f1; }
+.yown .yic { gap: 6px; padding: 0 16px 0 12px; }
+.yown .yround { width: 36px; padding: 0; justify-content: center; }
+.ylike { margin-right: 8px; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: 18px; background: rgba(255,255,255,.1); font-size: 14px; font-weight: 500; }
+.ylike svg { width: 24px; height: 24px; fill: #f1f1f1; }
+.ylike b { width: 1px; height: 24px; margin: 0 6px; background: rgba(255,255,255,.2); }
+
+.ych { display: flex; align-items: center; gap: 32px; margin-top: 24px; }
+.ych b { font-size: 20px; line-height: 28px; font-weight: 700; }
+.ych span { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }
+.ych svg { width: 24px; height: 24px; fill: #f1f1f1; }
+.yadd { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+.yph { flex: 1; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.2); font-size: 14px; color: #aaa; }
+
+.yc { position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; margin-top: 24px; padding-right: 40px; }
+.ypin { overflow: hidden; }
+.ypin span { display: flex; align-items: center; gap: 6px; padding-bottom: 4px; font-size: 12px; line-height: 18px; color: #aaa; }
+.ypin svg { width: 16px; height: 16px; fill: #aaa; }
+.yhd { display: flex; align-items: center; gap: 4px; margin-bottom: 2px; line-height: 18px; }
+.yhd b { font-size: 13px; font-weight: 500; }
+.yago { margin-left: 4px; font-size: 12px; color: #aaa; }
+.yowner { padding: 0 6px; border-radius: 10px; background: #aaa; color: #0f0f0f; font-size: 13px; line-height: 18px; font-weight: 500; }
+.ytx { font-size: 14px; line-height: 20px; }
+.ytx a { color: #3ea6ff; }
+.yact { display: flex; align-items: center; height: 32px; margin: 4px 0 0 -8px; }
+.ybtn.ic { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; }
+.ybtn.ic svg { width: 21px; height: 21px; fill: #f1f1f1; }
+.yact.sm .ybtn.ic svg { width: 20px; height: 20px; }
+.ycount { margin: 0 8px 0 2px; font-size: 12px; color: #aaa; }
+.ybtn.txt { display: inline-flex; align-items: center; height: 32px; margin-left: 4px; padding: 0 16px; border-radius: 16px; font-size: 12px; font-weight: 500; }
+.ytog { display: inline-flex; align-items: center; gap: 6px; height: 36px; margin: 2px 0 0 -8px; padding: 0 16px 0 8px; border-radius: 18px; color: #3ea6ff; font-size: 14px; font-weight: 500; }
+.ytog svg { width: 24px; height: 24px; fill: #3ea6ff; }
+.yr { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 16px; margin-top: 8px; }
+.ymore { position: absolute; right: 0; top: 0; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
+.ymore svg { width: 24px; height: 24px; fill: #f1f1f1; }

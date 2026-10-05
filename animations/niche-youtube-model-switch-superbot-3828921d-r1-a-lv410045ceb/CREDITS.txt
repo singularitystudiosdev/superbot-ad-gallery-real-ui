@@ -1,0 +1,48 @@
+CREDITS (internal, never shown on screen)
+niche-youtube-model-switch-superbot-3828921d-r1-a-lv410045ceb, made 2026-10-04.
+Variant of animations/niche-youtube-model-switch-superbot-3828921d (same ask, same creator world), rebuilt from scratch.
+Audited by eight rounds of fresh-context judges (rendered frames + the source URL only); every flag fixed or, where two rounds asked for opposite things, resolved toward the ask and the reference UI.
+Everything on screen:
+every scene, card, thumbnail, video frame and UI in this folder is authored here in HTML/CSS/SVG (no stock imagery,
+no generated imagery, nothing copied from the source spot's files).
+
+THIRD-PARTY MARKS (nominative use, unaltered except where noted)
+brand/gemini.svg        Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg
+                        https://upload.wikimedia.org/wikipedia/commons/1/1d/Google_Gemini_icon_2025.svg, fetched 2026-10-04.
+                        Google trademark. Model named on screen: Gemini 3.1 Pro (Google, Pro tier since 2026-02-19).
+brand/claude.svg        Claude mark, simple-icons (CC0 1.0) https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg,
+                        fetched 2026-10-04; painted white on the #d97757 tile in CSS. Anthropic trademark.
+                        Model named on screen: Claude Opus 5.5.
+brand/youtube-logo-dark.svg  YouTube logo (2017), Wikimedia Commons File:YouTube_Logo_2017.svg
+                        https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg, public domain (PD-textlogo),
+                        trademarked, fetched 2026-10-04; wordmark fill changed rgb(40,40,40) -> white for the dark masthead.
+brand/youtube-icon.svg  YouTube full-color icon (2024), Wikimedia Commons File:YouTube_full-color_icon_(2024).svg
+                        https://upload.wikimedia.org/wikipedia/commons/f/fd/YouTube_full-color_icon_%282024%29.svg,
+                        public domain (PD-textlogo), trademarked, fetched 2026-10-04.
+
+ICONS
+icons.js                Material Symbols (Google, Apache License 2.0), path data verbatim from
+                        https://api.iconify.design/material-symbols.json, fetched 2026-10-04.
+chat.js LUCIDE          plus, monitor, mic, arrow-up, chevron-down path data from Lucide (ISC licence), the glyph set the
+                        superbot composer uses.
+
+FONTS
+fonts/roboto-{400,500,700}.woff2  Roboto latin, @fontsource/roboto 5.2.8 (SIL OFL 1.1),
+                        https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.2.8/files/roboto-latin-<w>-normal.woff2, fetched
+                        2026-10-04. YouTube's UI face. The superbot UI uses the system "SF Pro Rounded" (ui-rounded), as the
+                        real app does.
+
+SUPERBOT
+../../assets/sb-mark-live.{css,js}: the real superbot mascot (first party), driven deterministically by end.js.
+UI tokens follow the real superbot hub as reproduced in the source spot (page #0a0a0b, pill #141416, check #34d399,
+composer #1b1b1e with the #2f5fd6 ring).
+
+YOUTUBE UI
+Watch page, dark theme, YouTube's --yt-spec-* dark values (base #0f0f0f, text #f1f1f1 / #aaa, additive
+rgba(255,255,255,.1), call to action #3ea6ff, brand red #f03). Comment anatomy, creator badge, the "1 reply" toggle with
+the creator's avatar and the "Pinned by @channel" label follow youtube.com as of 2026. The light checklist card in the
+chat follows Google's Material 3 account surfaces, as the source spot's does.
+
+MADE UP FOR THE SPOT
+Sam Rivera (@samrivera), the commenters (Priya Nair, Marco Ruiz, Lena Fischer, Dee Okafor, Tom Hale), the video
+"I tested 12 budget mics under $100", its thumbnail and its 7:05 frame, and every comment and reply are fictional.

@@ -2806,6 +2806,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "allin-connect-16x9-27df33f2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot is all your agents in one: four subscriptions connect and pack into one API key, a Playground request routes to Opus 5.5, Gemini or DeepSeek, then Claude Code, Codex, Gemini CLI and Cursor merge into one agent that labels every step with its model (connect, 16:9)",
+    "src": "animations/allin-connect-16x9-27df33f2/",
+    "thumb": "assets/shots/allin-connect-16x9-27df33f2.png",
+    "desc": "On the superbot API keys page Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek connect one by one and each key part arcs into a single superbot key. In the Playground that key sends three requests with model auto; the router scores Claude Opus 5.5, Gemini 3.1 Pro and DeepSeek V4.1 Flash and sends a refactor to Claude Opus 5.5, 14 earnings calls to Gemini 3.1 Pro, 5,000 support tickets to DeepSeek V4.1 Flash. Claude Code, Codex, Gemini CLI and Cursor each hit their own usage limit, then fold into one superbot agent: Migrate billing to Stripe and open a PR, six steps, each badged with the model it routed to and the plan it bills. Same 3 requests: $14.91 on Opus 5.5 alone vs $2.86 routed (OpenRouter list prices, Oct 5 2026). Ends on: Superbot is all your agents in one. 32 s, 16:9, with sound.",
+    "download": "animations/allin-connect-16x9-27df33f2/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allin-shell-16x9-27df33f2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot is all your agents in one: four provider keys in .env collapse into one SUPERBOT_API_KEY line, a terminal router tree picks Opus 5.5, Gemini or DeepSeek per request, then four agent windows stack, flip and become one agent with per-model step lanes (shell, 16:9)",
+    "src": "animations/allin-shell-16x9-27df33f2/",
+    "thumb": "assets/shots/allin-shell-16x9-27df33f2.png",
+    "desc": "A .env holds ANTHROPIC, OPENAI, GEMINI and DEEPSEEK keys. npx superbot link turns each value into a key part and the four lines physically collapse into one SUPERBOT_API_KEY line. superbot chat prints a router tree per request with live fit bars and a pop-out of the pick: a refactor to Claude Opus 5.5, 14 earnings calls to Gemini 3.1 Pro, 5,000 support tickets to DeepSeek V4.1 Flash. Claude Code, Codex, Gemini CLI and Cursor fan out and hit their limits, stack into one deck and flip into the superbot agent, whose six steps run on Opus 5.5, Gemini 3.1 Pro, DeepSeek V4.1 and GPT-6.1 lanes, every bar labeled with its model. A usage receipt reads $14.91 on Opus 5.5 alone vs $2.86 routed (OpenRouter list prices, Oct 5 2026), 5.2x cheaper. Ends on: Superbot is all your agents in one. 32.5 s, 16:9, with sound.",
+    "download": "animations/allin-shell-16x9-27df33f2/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "allin-hub-16x9-27df33f2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot is all your agents in one: four subscription cards orbit a key card and slot in, a hub routes each request to Opus 5.5, Gemini or DeepSeek, then Claude Code, Codex, Gemini CLI and Cursor are absorbed into the mascot, which deals every step into its model's column (hub, 16:9)",
+    "src": "animations/allin-hub-16x9-27df33f2/",
+    "thumb": "assets/shots/allin-hub-16x9-27df33f2.png",
+    "desc": "Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek cards orbit a superbot key card in 3D and dive into its four slots; the card turns flat with a sheen, one key. A request leaves the composer for the superbot hub, three model nodes fill fit rings and the winning link fires: a refactor to Claude Opus 5.5, 14 earnings calls to Gemini 3.1 Pro, 5,000 support tickets to DeepSeek V4.1 Flash. Claude Code, Codex, Gemini CLI and Cursor stand in a coverflow, each at its own limit, then shrink into the mascot, which opens into one agent board and deals six step cards into Opus 5.5, Gemini 3.1 Pro, DeepSeek V4.1 and GPT-6.1 columns, each card labeled with its model. Same 3 requests: $14.91 on Opus 5.5 alone vs $2.86 routed (OpenRouter list prices, Oct 5 2026). Ends on: Superbot is all your agents in one. 32 s, 16:9, with sound.",
+    "download": "animations/allin-hub-16x9-27df33f2/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

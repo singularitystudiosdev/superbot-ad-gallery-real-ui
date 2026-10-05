@@ -811,6 +811,14 @@ const more = [
   ['onekey-dial-4x5-0d6132a7', 'onekey-dial-4x5-0d6132a7/', 'One API key, all your subscriptions: six accounts lock into a key dial that turns to Opus 5.5, Gemini or DeepSeek per request (dial, 4:5)', 'Ad spots',
     { desc: 'Six account pills dock into the notches of a rotary key ring and its face resolves one sbc_ API key. Each request drops into the dial and it turns to the model for the job: Claude Opus 5.5 for a hard refactor, Gemini 3.1 Pro for three PDFs, DeepSeek V4 for a quick rename. 24 s, 4:5, with sound.',
       download: 'animations/onekey-dial-4x5-0d6132a7/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // Snap a nearly empty fridge and get a delivered Instacart restock (2026-10-05, manager cg3-1004, cell A1-02):
+  // every-model-one-chat-sb-superbot-efa8df82 (untouched, the #1 X ad by CTR) with a new process in the same chat format,
+  // cut to a <10s spot with no opener card (the X export adds it). GPT-6 Astra reads the attached fridge photo and boxes
+  // seven items (5 out, 2 low), then superbot switches to Superbot, which checks out the list on Instacart at Sprouts.
+  // 8.47 s, 1920x1080, 60 fps, with sound. Fridge, product and shopper images made for this ad (Nano Banana Pro).
+  ['instacart-fridge-restock-superbot-d6736e8f', 'instacart-fridge-restock-superbot-d6736e8f/', 'SNAP THE FRIDGE. GET GROCERIES. · GPT-6 Astra reads the fridge, Superbot restocks it on Instacart (<10s, 16:9)', 'Ad spots',
+    { desc: 'Same chat format as every-model-one-chat-sb-superbot-efa8df82, new process: snap a photo of a nearly empty fridge and get a delivered Instacart restock order. One ask in superbot with the fridge photo attached ("restock this"): GPT-6 Astra reads the photo and boxes what is missing (empty egg carton, oat milk nearly empty, no spinach in the crisper, one yogurt cup left, no lemons, butter almost gone, cheddar end piece) and answers "Out of 5 things, low on 2. Here is your list." with a 7-row checklist. Then superbot switches to Superbot, which opens Instacart, sets the store to Sprouts Farmers Market (0.9 mi), adds the 7 items (subtotal $35.33, delivery $3.99, service fee $2.85, total $42.17) and checks out for Today, 6-7 PM to 1480 Market St on Visa ending 4242. The card flips to "Order placed. Arriving today 6-7 PM." with Rosa shopping. End card: EVERY MODEL. ONE CHAT. 8.5 s at 16:9 with sound; the X export adds the coming soon card.',
+      download: 'assets/video/instacart-fridge-restock-superbot-d6736e8f.16x9.mp4', downloadLabel: '16:9' }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

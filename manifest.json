@@ -1965,6 +1965,17 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "instacart-fridge-restock-superbot-d6736e8f",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SNAP THE FRIDGE. GET GROCERIES. · GPT-6 Astra reads the fridge, Superbot restocks it on Instacart (<10s, 16:9)",
+    "src": "animations/instacart-fridge-restock-superbot-d6736e8f/",
+    "thumb": "assets/shots/instacart-fridge-restock-superbot-d6736e8f.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82, new process: snap a photo of a nearly empty fridge and get a delivered Instacart restock order. One ask in superbot with the fridge photo attached (\"restock this\"): GPT-6 Astra reads the photo and boxes what is missing (empty egg carton, oat milk nearly empty, no spinach in the crisper, one yogurt cup left, no lemons, butter almost gone, cheddar end piece) and answers \"Out of 5 things, low on 2. Here is your list.\" with a 7-row checklist. Then superbot switches to Superbot, which opens Instacart, sets the store to Sprouts Farmers Market (0.9 mi), adds the 7 items (subtotal $35.33, delivery $3.99, service fee $2.85, total $42.17) and checks out for Today, 6-7 PM to 1480 Market St on Visa ending 4242. The card flips to \"Order placed. Arriving today 6-7 PM.\" with Rosa shopping. End card: EVERY MODEL. ONE CHAT. 8.5 s at 16:9 with sound; the X export adds the coming soon card.",
+    "download": "assets/video/instacart-fridge-restock-superbot-d6736e8f.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

@@ -2522,6 +2522,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "onekey-aurora-stack-16x9-bdadac04",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: four consoles stack up, their keys pack into one glowing sk-superbot key, paste it once into one SDK line, then each request routes to Opus 5.5, Gemini or DeepSeek (aurora stack, 16:9)",
+    "src": "animations/onekey-aurora-stack-16x9-bdadac04/",
+    "thumb": "assets/shots/onekey-aurora-stack-16x9-bdadac04.png",
+    "desc": "Opens on a glowing horizon: Four AI subscriptions. Four logins. Four dashboards. Four API keys. Twelve console cards rise and stack for Anthropic, OpenAI, Google and DeepSeek: sign-in with a 2FA code, a usage dashboard that hits its limit, an API key page, while counters tick to 4 logins, 4 dashboards, 4 API keys. The logins and dashboards fall away and the four keys fly into one glowing pill, each printing its segment of the sk-superbot key and docking its logo. The camera pushes into Copy, the key rides the cursor down to app.py and is pasted once into ai = OpenAI(base_url=\"https://beta.superbot.gg/v1\", api_key=...), with model=\"auto\". In an Ask pill three requests route live: a refactor goes to Claude Opus 5.5 via Claude Max, 14 earnings calls to Gemini 3.1 Pro via Google AI Pro, 5,000 support tickets to DeepSeek V4.1 Flash. Bars for the same three requests: $14.91 all on Opus 5.5, $2.86 routed, 5.2x cheaper. Ends on: One API key for all your subscriptions. 27 s, 16:9, with sound.",
+    "download": "animations/onekey-aurora-stack-16x9-bdadac04/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-aurora-tray-16x9-bdadac04",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: 4 logins, 4 dashboards, 4 API keys pour out of a 3D tray that flips into one superbot keycard, paste it into one settings.json line, then an orbit router picks Opus 5.5, Gemini or DeepSeek (aurora tray, 16:9)",
+    "src": "animations/onekey-aurora-tray-16x9-bdadac04/",
+    "thumb": "assets/shots/onekey-aurora-tray-16x9-bdadac04.png",
+    "desc": "Kinetic open: 4 logins. 4 dashboards. 4 API keys. A tilted tray of the four consoles (Anthropic, OpenAI, Google AI Studio, DeepSeek) shows each one stuck: login plus 2FA, limit hit, rate limited, no billing, low balance, and twelve console windows pour out of it. Everything sinks back, the four logo tiles fan into one pile and the tray flips into a superbot keycard: ONE API KEY, the sk-superbot key etched in, includes Claude Max, ChatGPT Pro, Google AI Pro and DeepSeek. Copy, then paste once into the apiKey line of settings.json (openai-compatible, baseUrl https://beta.superbot.gg/v1, model auto). An orbit router with the live mark at its hub takes three asks from the Send pill: a refactor goes to Claude Opus 5.5 via Claude Max, 14 earnings calls to Gemini 3.1 Pro via Google AI Pro, 5,000 support tickets to DeepSeek V4.1 Flash. Same 3 requests: $14.91 struck out, $2.86 routed. Ends on: One API key for all your subscriptions. 26.5 s, 16:9, with sound.",
+    "download": "animations/onekey-aurora-tray-16x9-bdadac04/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "onekey-aurora-env-16x9-bdadac04",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "One API key for all your subscriptions: a desktop buried in four consoles and a four-key .env, the keys fly out into one sk-superbot key, one SUPERBOT_API_KEY line, then chat routes each ask to Opus 5.5, Gemini or DeepSeek (aurora env, 16:9)",
+    "src": "animations/onekey-aurora-env-16x9-bdadac04/",
+    "thumb": "assets/shots/onekey-aurora-env-16x9-bdadac04.png",
+    "desc": "A desktop fills up: Anthropic Console sign-in with a 2FA code, OpenAI Platform and Google AI Studio usage dashboards, DeepSeek sign-in, alerts for a usage limit, a 429 rate limit, billing required and a $0.42 balance, and a .env holding four API keys. The camera pushes into the .env: each key value flies out of its line into one glowing sk-superbot key while the lines fold shut, leaving an empty file. Copy, type SUPERBOT_API_KEY= and paste once: one line, every model (Opus 5.5, GPT-6.1, Gemini 3.1 Pro, DeepSeek V4.1). In superbot chat with model auto, each ask scans the three models and locks one: a refactor goes to Claude Opus 5.5 via Claude Max, 14 earnings calls to Gemini 3.1 Pro via Google AI Pro, 5,000 support tickets to DeepSeek V4.1 Flash. A receipt adds the same three requests: $0.75, $1.29, $0.82, routed total $2.86 against $14.91 all on Opus 5.5, 5.2x cheaper. Ends on: One API key for all your subscriptions. 26.5 s, 16:9, with sound.",
+    "download": "animations/onekey-aurora-env-16x9-bdadac04/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

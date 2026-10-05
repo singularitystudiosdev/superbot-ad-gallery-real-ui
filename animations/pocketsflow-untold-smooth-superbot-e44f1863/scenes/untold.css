@@ -1,0 +1,14 @@
+/* untold: Act 2, "THEY / WONT / TELL / YOU / HOW". Pure black frame, one centred column of heavy condensed caps.
+   The stage is always 1080 px high, so the type is sized in stage px: five lines at line-height .92 fill ~80% of it.
+   Anton is linked by index.html; the fallbacks are the nearest heavy condensed faces on the box. */
+#s-untold { background: #000; display: grid; place-items: center; }
+#s-untold .untold-col {
+  --fs: 188px;
+  display: flex; flex-direction: column; align-items: center;
+  font-family: "Anton", "Bebas Neue", Impact, "Haettenschweiler", "Helvetica Neue Condensed Black", "Arial Narrow", sans-serif;
+  font-weight: 400; font-size: var(--fs); line-height: .92; letter-spacing: .01em;
+  text-transform: uppercase; color: #fff; text-align: center; white-space: nowrap;
+  transform-origin: 50% 50%;
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+}
+#s-untold .untold-w { display: block; opacity: 0; transform-origin: 50% 55%; will-change: transform, opacity, filter; }

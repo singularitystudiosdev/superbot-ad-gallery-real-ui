@@ -1,0 +1,76 @@
+/* The thread (thread.js): the user's turn, superbot's line, the step boxes and their receipts, the composer's
+   attachment strip and model chip. Every moving value is written from lt, so nothing here transitions.
+   All selectors are scoped under the cropped hub (#s-tabs .sbsite .hub), on top of hub.css + hub-real.css. */
+#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
+#s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
+
+/* the user's turn: the attached image over the grey pill, right-aligned like the real hub */
+#s-tabs .sbsite .hub .qc-u { overflow: visible; }
+#s-tabs .sbsite .hub .qc-u .m-main { display: grid; justify-items: end; align-content: start; gap: 6px; }
+#s-tabs .sbsite .hub .u-att { display: block; width: 92px; height: 92px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
+
+/* superbot's answer: one line, then the steps */
+#s-tabs .sbsite .hub .qc-m { opacity: 1; }
+#s-tabs .sbsite .hub .qc-m .m-main { display: block; width: 100%; max-width: 600px; }
+#s-tabs .sbsite .hub .qc-say { height: 0; overflow: hidden; font: 12.5px/18px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .say-off { color: transparent; }
+
+/* one step: an eased-height box; the app's card and its one-line receipt share it, top-anchored */
+#s-tabs .sbsite .hub .st { position: relative; height: 0; overflow: hidden; border-radius: 14px; }
+#s-tabs .sbsite .hub .st-card { position: absolute; left: 0; right: 0; top: 0; opacity: 0; will-change: transform, opacity; }
+#s-tabs .sbsite .hub .st-row { position: absolute; left: 0; right: 0; top: 0; height: 30px; display: flex; align-items: center; gap: 8px; padding: 0 2px; opacity: 0; font: 12px/1 var(--ui); color: #8e8e93; white-space: nowrap; }
+#s-tabs .sbsite .hub .st-row b { color: #ececec; font-weight: 600; }
+#s-tabs .sbsite .hub .rx-ok { flex: none; width: 14px; height: 14px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* app tiles (receipts) */
+#s-tabs .sbsite .hub .qc-tile { flex: none; position: relative; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-tile img { width: 13px; height: 13px; object-fit: contain; display: block; }
+#s-tabs .sbsite .hub .qc-t-gemini { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-meshy { background: #181818; box-shadow: inset 0 0 0 1px #2c2c2c; }
+#s-tabs .sbsite .hub .qc-t-meshy img { width: 15px; height: 15px; }
+#s-tabs .sbsite .hub .qc-t-hailuo { background: #16171c; box-shadow: inset 0 0 0 1px #2c2d36; }
+#s-tabs .sbsite .hub .qc-t-eleven { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-eleven img { width: 11px; height: 11px; }
+#s-tabs .sbsite .hub .qc-t-opus { background: #d97757; }
+#s-tabs .sbsite .hub .qc-t-opus img { filter: brightness(0) invert(1); }
+#s-tabs .sbsite .hub .qc-t-superbot { background: #0b0b0c; box-shadow: inset 0 0 0 1px #2a2a2e; }
+/* superbot's mark as a three-layer CSS mask (the silhouette of assets/sb-mark-live) */
+#s-tabs .sbsite .hub { --sb-cat: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%2212%2018%2076%2070%22%3E%3Cmask%20id%3D%22m%22%3E%3Cg%20fill%3D%22white%22%3E%3Crect%20x%3D%2214%22%20y%3D%2232%22%20width%3D%2272%22%20height%3D%2254%22%20rx%3D%2215%22%2F%3E%3Cpath%20d%3D%22M14%2046V28Q14%2020%2021%2021Q28%2024%2036%2032Z%22%2F%3E%3Cpath%20d%3D%22M86%2046V28Q86%2020%2079%2021Q72%2024%2064%2032Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22black%22%3E%3Cellipse%20cx%3D%2235%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3Cellipse%20cx%3D%2265%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3C%2Fg%3E%3C%2Fmask%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20mask%3D%22url(%23m)%22%2F%3E%3C%2Fsvg%3E"); }
+#s-tabs .sbsite .hub .sbm { position: absolute; inset: 16%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#s-tabs .sbsite .hub .sbm-c { background: #00e5c3; transform: translate(-0.6px, -0.6px); }
+#s-tabs .sbsite .hub .sbm-m { background: #c026d3; transform: translate(0.6px, 0.6px); }
+#s-tabs .sbsite .hub .sbm-w { background: #ececec; }
+
+/* composer: the attachment strip, the typed ask, the lit send button */
+#s-tabs .sbsite .hub .rc-att { height: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .rc-att-in { display: inline-flex; align-items: center; gap: 8px; margin: 2px 0 8px; padding: 5px 12px 5px 5px; border-radius: 10px; background: #26262a; opacity: 0; }
+#s-tabs .sbsite .hub .rc-att-in img { width: 34px; height: 34px; border-radius: 7px; object-fit: cover; display: block; }
+#s-tabs .sbsite .hub .rc-att-in span { display: grid; gap: 3px; }
+#s-tabs .sbsite .hub .rc-att-in b { font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .rc-att-in small { font: 9.5px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
+#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+#s-tabs .sbsite .hub .rc-send.qc-on { background: linear-gradient(90deg, #5d91ec, #866cf6); color: #fff !important; }
+
+/* the model chip: stacked names, one visible at a time, the stack's width eased between them */
+#s-tabs .sbsite .hub .rc-plat { gap: 5px; }
+#s-tabs .sbsite .hub .pl-stack { position: relative; display: inline-block; height: 14px; }
+#s-tabs .sbsite .hub .pl-it { position: absolute; left: 0; top: 0; height: 14px; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; will-change: transform, opacity; }
+#s-tabs .sbsite .hub .qc-pi { display: inline-grid; place-items: center; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi img { width: 12px; height: 12px; object-fit: contain; }
+#s-tabs .sbsite .hub .qc-pi img[data-app="eleven"] { width: 10px; height: 10px; }
+#s-tabs .sbsite .hub .qc-pi-sb { position: relative; display: block; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi-sb .sbm { inset: 0; }
+
+/* the composer floats over the thread; the thread dissolves into this band at the composer's top edge */
+#s-tabs .sbsite.ask .hub.qc-v4 .composer { position: absolute; left: 0; right: 0; bottom: 0; }
+#s-tabs .sbsite.ask .hub.qc-v4 .qc-v4fade { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(10, 10, 11, 0) 0, #0a0a0b var(--qc-fade, 22px), #0a0a0b 100%); }
+#s-tabs .sbsite.ask .hub.qc-v4 .main::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 26px; z-index: 2;
+  pointer-events: none; background: linear-gradient(to bottom, #0a0a0b 0, rgba(10, 10, 11, 0) 100%); }
+
+/* shimmer text shared by every step ("Reading…", "Generating", "Cutting the film…") */
+#s-tabs .sbsite .hub .gm-sh, #s-tabs .sbsite .hub .hl-sh, #s-tabs .sbsite .hub .el-gen, #s-tabs .sbsite .hub .cc-sh, #s-tabs .sbsite .hub .rn-sh {
+  background: linear-gradient(90deg, var(--sh-a, #7d7d84) 0%, var(--sh-a, #7d7d84) 40%, var(--sh-b, #ffffff) 50%, var(--sh-a, #7d7d84) 60%, var(--sh-a, #7d7d84) 100%);
+  background-size: 250% 100%; background-position: var(--sh, 100%) 0; -webkit-background-clip: text; background-clip: text; color: transparent; }

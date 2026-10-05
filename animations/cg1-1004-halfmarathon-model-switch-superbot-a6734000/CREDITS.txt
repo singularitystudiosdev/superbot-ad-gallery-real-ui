@@ -1,0 +1,37 @@
+CREDITS (internal): where every third-party mark and reference in this spot came from. Nothing here is shown on screen.
+
+BRAND MARKS (brand/), used nominatively to name the model or service superbot routes each step to
+  claude-logo.svg, gemini-logo.svg, strava-logo.svg, strava-wordmark.svg
+                       copied unchanged from animations/niche-fitness-model-switch-superbot-a832b003/brand/
+                       (provenance and licences in that folder's CREDITS.txt: Simple Icons CC0 for the Claude and
+                       Strava marks, Wikimedia Commons for the Gemini icon and the Strava wordmark).
+  deepseek-logo.svg    DeepSeek whale mark in the @lobehub/icons format (MIT), copied from
+                       work/lie-r1a-lv410045ceb/film/brand/deepseek-logo.svg. Trademark of DeepSeek.
+  superbot mark        first party: ../../assets/sb-mark-live.{css,js}, the live mascot in the app and on the end
+                       card. This spot scrubs its CSS keyframes from the timeline and blinks it at fixed times so
+                       every render repeats frame for frame.
+
+FONTS (fonts/)  Inter 4 (latin 400/500/600/700, SIL Open Font License 1.1), copied from the source spot.
+  superbot's own UI uses the system face (-apple-system); Strava surfaces use Inter in place of Strava's licensed
+  web font, which is not redistributable.
+
+STRAVA SURFACES (drawn in HTML/CSS/SVG in strava.a6734000.js and map.a6734000.js)
+  Route Builder layout follows Strava's help-centre screenshot in "Routes on Web",
+  https://support.strava.com/en-us/articles/15401971-routes-on-web (panel: STRAVA Routes, My Routes / New,
+  Build your route, Start, numbered waypoints, End, Add waypoint, Routing preferences; map toolbar with Save).
+  The save step ("Save to My Routes") and the My Routes card (date, star, menu, underlined name, distance, time,
+  elevation) follow https://support.strava.com/en-us/articles/15401678-how-do-i-find-my-saved-routes-on-the-strava-website.
+  Why routes and not a calendar: Strava's own training plans moved to Runna
+  (https://support.strava.com/en-us/articles/15401942) and Strava has no import for third-party planned workouts,
+  so superbot saves each long run as a route (Route Builder needs a Strava subscription).
+  The neighbourhood map, its streets, lake, parks and labels are invented and hand-built in SVG.
+
+IMAGES THE SPOT SHOWS GEMINI READING (carousel slide, scanned PDF, blog chart): built in HTML/CSS in
+gemini.a6734000.js. No photos, no generated imagery, no stock.
+
+DATA: invented for the spot. 36 plans found (27 text, 9 image only), the rule counts, the source titles shown as
+search results, the 12-week plan (48 runs, 295 mi, Oct 5 to Dec 27, 2026, paces from an assumed 1:55:00 goal), the
+route names, distances, elevation and Strava's estimated times (at 10:20/mi), and the street address.
+
+UI GLYPHS (spinner, check, chevrons, shoe, clock, elevation, toolbar icons, cursor) are plain SVG paths drawn for
+this spot (UI furniture).

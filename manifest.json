@@ -3213,6 +3213,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "cg1-1004-halfmarathon-model-switch-superbot-a6734000",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "HALF MARATHON PLAN, ROUTED · DeepSeek V4 scrapes 36 plans, Gemini 3.1 Pro reads the 9 image-only ones, Claude Opus 5.5 codes the plan and its page, superbot saves 12 long-run routes in Strava (real UI, 27.9 s, 16:9)",
+    "src": "animations/cg1-1004-halfmarathon-model-switch-superbot-a6734000/",
+    "thumb": "assets/shots/cg1-1004-halfmarathon-model-switch-superbot-a6734000.png",
+    "desc": "Remake of niche-fitness-model-switch-superbot-a832b003 with the same ask: build me a 12-week half marathon plan and sync it to my Strava. superbot plans four steps and gives each to the model that is best at it. DeepSeek V4 reads 41 pages, finds 36 published plans, scrapes the 27 that are text and tables what they agree on. Gemini 3.1 Pro reads the 9 that only exist as images (a carousel slide, a scanned club PDF, a chart). Claude Opus 5.5 writes plan.tsx and flips its artifact to the page it built: weekly miles by phase, paces from a 1:55 goal, all 48 runs. Strava cannot import planned workouts, so superbot opens Route Builder, draws the week 9 long run (12.02 mi), saves it with that week's runs in the description, and My Routes fills to 12 dated long-run routes. Every UI and picture is drawn in code; 16:9 only.",
+    "download": "assets/video/cg1-1004-halfmarathon-model-switch-superbot-a6734000.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

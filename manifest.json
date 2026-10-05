@@ -3224,6 +3224,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "photos-to-flights-austria-superbot-4ffa1cd6",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SEND A PHOTO. GET A FLIGHT. · Gemini places three saved shots in Austria, Perplexity Sonar finds Nov 20 to 27, DeepSeek V4 Flash compares 1,248 fares, Claude Opus 5.5 picks LH 411, Superbot books it in Google Flights, Lufthansa and Google Calendar (<30s, 16:9)",
+    "src": "animations/photos-to-flights-austria-superbot-4ffa1cd6/",
+    "thumb": "assets/shots/photos-to-flights-austria-superbot-4ffa1cd6.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82 (X ad b5olyc), new process: three inspiration screenshots turned into a booked November trip (place identified, best week found, fares compared, flights booked). One ask in superbot with three saved shots attached (a lakeside village with a church spire, a Christmas market at dusk, a hilltop fortress over a snowy city): \"take us here in november, 2 of us, under $900 each\". Switching to Gemini: \"All three are in Austria: Hallstatt and Salzburg.\" with captions Hallstatt, Austria / Salzburg Christmas market / Hohensalzburg Fortress, Salzburg, and three pins dropped on a map of Austria and southern Bavaria with a route line from Munich. Switching to Perplexity Sonar: \"Nov 20 to 27. Christmas markets open Nov 19, first snow likely, smaller crowds than December.\" with four sources and the route Munich (MUC), 1h 46m train to Salzburg, 2h to Hallstatt. Switching to DeepSeek V4 Flash: 1,248 round-trip fares from JFK and EWR to MUC, SZG and VIE narrowed to three (Lufthansa LH 411 JFK-MUC nonstop $798, United EWR-MUC nonstop $846, Austrian JFK-VIE nonstop $871). Switching to Claude Opus 5.5: \"LH 411. Nonstop, lands 7:10 AM, trains to Salzburg every hour, $102 under your limit each.\" and the week as Salzburg x3, Hallstatt x2, Munich x2. Switched to Superbot: Opened Google Flights, Booked LH 411 with Lufthansa, Seats 34A and 34B, Added to your calendar. It searches Google Flights (JFK to MUC, Fri Nov 20 to Fri Nov 27, 2 passengers), selects LH 411 at $798 and presses Book with Lufthansa; in Lufthansa's checkout Alex Rivera and Sam Rivera are prefilled, seats 34A and 34B are picked, Visa ending 4242, total $1,596.00, and Pay and book lands booking code K7Q2LM; Google Calendar gets \"Flight to Munich, LH 411\" on Fri Nov 20. Ends on a boarding pass (JFK to MUC, Fri Nov 20, 2 passengers, $798 each, confirmation K7Q2LM) and EVERY MODEL. ONE CHAT. 27.8 s with no opener card (the X export prepends its coming-soon card), with map pin drops, a fare counter whirr and a booking chime.",
+    "download": "assets/video/photos-to-flights-austria-superbot-4ffa1cd6.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

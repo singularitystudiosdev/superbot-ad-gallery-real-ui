@@ -1,0 +1,47 @@
+brand/ CREDITS: every third-party mark, image and dataset in this spot, where it came from, and the usage note.
+
+OPENAI (the GPT-5 Codex tile the composer's model picker starts on)
+  openai-logo.svg   carried over unchanged from every-model-one-chat-superbot-efa8df82/brand (see that folder's
+                    CREDITS.txt for its source). Trademark of OpenAI.
+
+GOOGLE (the Gemini tile, routing chip and model picker)
+  gemini-logo.svg   carried over unchanged from every-model-one-chat-superbot-efa8df82/brand. Trademark of Google LLC.
+
+PERPLEXITY (the Perplexity Sonar tile, routing chip and model picker)
+  perplexity-logo.svg   Simple Icons path (CC0, https://simpleicons.org) recoloured #20B8CD, as used by
+                        opentable-group-dinner-superbot-7a9bf1d1 in this gallery. Trademark of Perplexity AI, Inc.
+
+DEEPSEEK (the DeepSeek V4 Flash tile, routing chip and model picker)
+  deepseek-logo.svg   DeepSeek whale mark, icons/deepseek-color.svg from @lobehub/icons-static-svg (MIT), unmodified,
+                      as used by every-model-one-chat-superbot-efa8df82. Trademark of Hangzhou DeepSeek Artificial
+                      Intelligence Co., Ltd.
+
+ANTHROPIC (the Claude Opus 5.5 tile, routing chip and model picker)
+  claude-logo.svg   Simple Icons path (CC0, https://simpleicons.org) recoloured #D97757, as used by
+                    opentable-group-dinner-superbot-7a9bf1d1 in this gallery. Trademark of Anthropic PBC.
+
+GOOGLE FLIGHTS / LUFTHANSA / GOOGLE CALENDAR (the Superbot card) and the airlines in the fare table
+  No logo or image is used. "Google Flights", "Lufthansa", "Google Calendar", "United", "Austrian" and "SWISS" are
+  set as text (the airline squares in the results list are two-letter codes on a flat colour). The three screens
+  are drawn in HTML/CSS after each app's current light UI: Google Flights (Round trip / passengers / Economy
+  selectors, from/to/date fields, "Top departing flights" list, #1a73e8 blue, #188038 lowest price), Lufthansa's
+  checkout (#05164d navy header, passengers, A350 3-3-3 seat map, summary and payment) and Google Calendar's
+  3-day view (#039be5 event). Flight times, prices, seats and the booking code are fictional and consistent across
+  the spot. Trademarks of Google LLC, Deutsche Lufthansa AG, United Airlines, Austrian Airlines AG and Swiss
+  International Air Lines AG.
+
+MAP (Gemini's card, scenes/tabs-assets/map-data.js)
+  Austria and neighbouring borders: Natural Earth 1:50m admin-0 countries; Bavaria: Natural Earth 1:10m admin-1
+  states and provinces; lakes: Natural Earth 1:10m Europe lakes. Natural Earth is public domain
+  (https://www.naturalearthdata.com, github.com/nvkelso/natural-earth-vector), projected and simplified for this
+  spot by assets-src/geo/build-map.fc9c3334.mjs (equirectangular, lon 10.0 to 16.8, lat 46.4 to 48.94).
+
+GENERATED FOR THIS SPOT (no third-party source)
+  scenes/tabs-assets/img/*.jpg: the three saved inspiration shots (Hallstatt village and church spire on the lake in
+  late autumn, a Christmas market in Salzburg's old town at dusk, the Hohensalzburg Fortress over snowy Salzburg)
+  were generated for this ad with Nano Banana Pro (google/gemini-3-pro-image-preview via OpenRouter, 2026-10-05)
+  and cropped to 3:4 and square. Any people in them are fictional.
+
+FONT
+  fonts/inter-latin.woff2   Inter (variable, weights 400-800, latin subset) by Rasmus Andersson, SIL Open Font
+                            License 1.1, downloaded from Google Fonts (fonts.gstatic.com, Inter v20) 2026-10-05.

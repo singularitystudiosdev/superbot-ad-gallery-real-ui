@@ -1,0 +1,26 @@
+Claude cold open (claude.js, claude.css): provenance, internal only
+
+Rebuilt by hand in HTML/CSS to match claude.ai (web, light theme) as it ships on 2026-10-04.
+
+Copy
+- Limit notice: "You’ve reached your usage limit. It resets at {time}." is the default composer-notice
+  string in claude.ai's shipped bundle (shared-6 chunk, component gP), fetched 2026-10-04.
+  Session / weekly / model variants exist in the same component; the generic one is used.
+- "Upgrade" action, "Reply" composer, model chip "Opus 5.5" with effort "Medium": the live app's own labels
+  (bundle strings and r/ClaudeAI screenshots from the week of 2026-09-28).
+
+Measurements
+- Light tokens resolved on a live claude.ai page (share view) 2026-10-04: page #fcfcfb, surface-0 #f9f9f7,
+  text #0b0b0b / #52514e / #898781, user bubble rgba(11,11,11,.05) r12 pad 12/16 sans 15/20,
+  assistant serif 16/24 in a 720 px column, composer radius 20 with the notice docked above the editor.
+
+Type and icons
+- anthropic-sans, anthropic-serif and the Anthropicons glyph font are Anthropic's. The published page loads
+  them from Anthropic's own asset CDN (assets-proxy.anthropic.com, served with access-control-allow-origin: *);
+  they are not redistributed in this repository. The local render used byte-identical copies.
+- The Claude spark is the path claude.ai draws (shared-frame chunk, fill var(--cds-clay, #d97757)).
+
+Complaint this ad answers
+- sell-to-reddit llm_ai pain_points, 7 days, build 20261004T211228-72c2b8 (data_as_of 2026-10-04T21:00Z):
+  usage-limits-pricing, rank 1, 3,444 authors; wants: alternative ai subscription, affordable ai
+  subscription, alternative platform.

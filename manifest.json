@@ -122,6 +122,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "every-model-one-chat-sb-superbot-efa8df82-r1-e-lv410045ceb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Hit your Claude usage limit mid-task? The same ask in superbot: DeepSeek V4 Flash finds the memes, Gemini makes yours (16:9)",
+    "src": "animations/every-model-one-chat-sb-superbot-efa8df82-r1-e-lv410045ceb/",
+    "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82-r1-e-lv410045ceb.png",
+    "desc": "Opens on Claude mid-task, its usage-limit notice over the next ask. Superbot opens with that same ask in the composer: DeepSeek V4 Flash searches six subreddits and returns the top three Muse memes, then Gemini renders the meme Claude only described. 21.4 s, 16:9.",
+    "download": "assets/video/every-model-one-chat-sb-superbot-efa8df82-r1-e-lv410045ceb.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-one-chat-sb-superbot-efa8df82-r1-a-lv410045ceb",
     "type": "animation",
     "group": "Ad spots",

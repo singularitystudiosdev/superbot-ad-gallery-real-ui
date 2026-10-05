@@ -793,6 +793,13 @@ const more = [
   // limit? switch models'. nerfed: output quality regressions (rank 2, rising), 'model nerfed? use another'.
   ['every-model-converge-limit-4x5-7f41c37b', 'every-model-converge-limit-4x5-7f41c37b/', "Hit a limit? Switch models: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-limit-4x5-7f41c37b/final.mp4', downloadLabel: 'MP4 4:5' }],
   ['every-model-converge-nerfed-4x5-04314497', 'every-model-converge-nerfed-4x5-04314497/', "Model nerfed? Use another: Superbot desktop on the knit phone", 'Ad spots', { download: 'animations/every-model-converge-nerfed-4x5-04314497/final.mp4', downloadLabel: 'MP4 4:5' }],
+  // won't refuse (2026-10-05, chat 47a3ead8): copy-only fork of every-model-converge-4x5-398eded5, source in
+  // superbot-format-daeon/every-model-converge-norefuse-4x5.47a3ead8, motion untouched. Each ask is one a stock
+  // assistant refuses and the switch chip names the refusal (the real provider-switch 'refused' cause). Answers
+  // sell-to-reddit llm_ai output-quality-regressions (rank 2, 4,206 authors, rising; leaf overly-restrictive-guardrails).
+  ['every-model-converge-norefuse-4x5-47a3ead8', 'every-model-converge-norefuse-4x5-47a3ead8/', "Superbot won't refuse: Codex, Gemini and DeepSeek say no, the chat switches and it gets done (4:5)", 'Ad spots',
+    { desc: "Superbot won't refuse. Same phone, motion and score as the every-model converge spot, with every ask, switch and headline recut around refusals. 'make a muse meme of zuck': Codex refused, switched to Gemini, which makes the meme. 'scrape reddit for more like it': Gemini refused, switched to DeepSeek V4 Flash, which scrapes six subreddits (2,418 posts). 'order me a burger on my card': DeepSeek refused, switched to Superbot, which opens DoorDash and checks out with the saved card. Headlines quote the refusals (i can't edit real people, i can't scrape reddit, i can't make purchases), then no lecture. just dinner. and one says no, next says yes. Ends on superbot.gg, it won't refuse. 21.6 s, 1080x1350, 30 fps, with sound.",
+      download: 'animations/every-model-converge-norefuse-4x5-47a3ead8/final.mp4', downloadLabel: 'MP4 4:5' }],
   // one api key, all your subs (2026-10-04, chat 79d27001): five 16:9 treatments of one claim, each 12.0 s
   // (5 bars at 100 bpm), 1920x1080, 30 fps, synthesized score, on the converge ad's stage grammar
   // (superbot-format-daeon/every-model-converge-16x9.398eded5); source in

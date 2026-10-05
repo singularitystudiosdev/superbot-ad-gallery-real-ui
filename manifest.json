@@ -1895,6 +1895,17 @@
     "downloadLabel": "MP4 4:5"
   },
   {
+    "id": "every-model-converge-norefuse-4x5-47a3ead8",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot won't refuse: Codex, Gemini and DeepSeek say no, the chat switches and it gets done (4:5)",
+    "src": "animations/every-model-converge-norefuse-4x5-47a3ead8/",
+    "thumb": "assets/shots/every-model-converge-norefuse-4x5-47a3ead8.png",
+    "desc": "Superbot won't refuse. Same phone, motion and score as the every-model converge spot, with every ask, switch and headline recut around refusals. 'make a muse meme of zuck': Codex refused, switched to Gemini, which makes the meme. 'scrape reddit for more like it': Gemini refused, switched to DeepSeek V4 Flash, which scrapes six subreddits (2,418 posts). 'order me a burger on my card': DeepSeek refused, switched to Superbot, which opens DoorDash and checks out with the saved card. Headlines quote the refusals (i can't edit real people, i can't scrape reddit, i can't make purchases), then no lecture. just dinner. and one says no, next says yes. Ends on superbot.gg, it won't refuse. 21.6 s, 1080x1350, 30 fps, with sound.",
+    "download": "animations/every-model-converge-norefuse-4x5-47a3ead8/final.mp4",
+    "downloadLabel": "MP4 4:5"
+  },
+  {
     "id": "apikey-terminal-16x9-79d27001",
     "type": "animation",
     "group": "Ad spots",

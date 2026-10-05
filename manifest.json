@@ -2335,6 +2335,39 @@
     "downloadLabel": "MP4 16:9"
   },
   {
+    "id": "x7-dropin-pills-16x9-0b79993e",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: six subscriptions dock into one API key, requests route to Opus 5.5, Gemini or DeepSeek, one base_url line changes, then a live race (pills, 16:9)",
+    "src": "animations/x7-dropin-pills-16x9-0b79993e/",
+    "thumb": "assets/shots/x7-dropin-pills-16x9-0b79993e.png",
+    "desc": "Six subscription pills you already pay for (Claude Max, ChatGPT Pro, Google AI Pro, SuperGrok, Cursor Pro, DeepSeek API) orbit, then spiral one by one into the slots of a single SUPERBOT_API_KEY card while the key resolves to sbc_...7f3a and the counter reads 6 subscriptions in 1 key. The key shrinks into the router hub and three requests come in with \"model\": \"auto\": a schema migration plan is routed to Opus 5.5 via Claude Max, 40 screenshots to Gemini 3.8 Flash via Google AI Pro, a repo-wide rename to DeepSeek V4 Flash via the DeepSeek API, each packet travelling the wire to the model it fits. Then agent.yaml: line 4, base_url https://api.openai.com/v1, is selected, struck and retyped as https://beta.superbot.gg/v1, -1 +1, nothing else changes. Finally the same agent run, fix the failing checkout tests, races side by side: the old endpoint grinds step by step on one model while Superbot routes every step to its best model and finishes at 0:36.0; the old endpoint finishes at 4:12.0, 4:12.0 / 0:36.0 = 7.0x. Ends on: Superbot drop in replacement makes your agent run x7 faster. 25.2 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/x7-dropin-pills-16x9-0b79993e/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "x7-dropin-type-16x9-0b79993e",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: subscription names collapse into one API key, a slot reel picks Opus 5.5, Gemini or DeepSeek per request, the base_url rolls over, two giant clocks race (type, 16:9)",
+    "src": "animations/x7-dropin-type-16x9-0b79993e/",
+    "thumb": "assets/shots/x7-dropin-type-16x9-0b79993e.png",
+    "desc": "The same story told in type. Six subscriptions set huge, claude max, chatgpt pro, google ai pro, supergrok, cursor pro, deepseek api, collapse into one line of mono type, the SUPERBOT_API_KEY sbc_...7f3a, while their logos drop into a row under it: 6 subscriptions inside 1 key. You ask, typed large: plan a safe migration, read 40 screenshots, rename userId across the repo; it picks the model, a slot reel spins and lands on Opus 5.5 (hard reasoning, via Claude Max), Gemini 3.8 Flash (vision, long context, via Google AI Pro) and DeepSeek V4 Flash (bulk edit, via the DeepSeek API). One line in your config: base_url in agent.yaml, the old URL struck and rolled out character by character, https://beta.superbot.gg/v1 rolled in, same agent, same tools, same prompts. Then two lanes with 200 px clocks run the same task: Superbot shows which model each step went to and stops green at 0:36.0, the old endpoint keeps running to 4:12.0, 7.0x. Ends on: Superbot drop in replacement makes your agent run x7 faster. 25.2 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/x7-dropin-type-16x9-0b79993e/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
+    "id": "x7-dropin-track-16x9-0b79993e",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Superbot drop in replacement makes your agent run x7 faster: a 3D ring of subscriptions implodes into one exported API key, each request is scored and the best model wins, a one line git diff, then a checkpoint race (track, 16:9)",
+    "src": "animations/x7-dropin-track-16x9-0b79993e/",
+    "thumb": "assets/shots/x7-dropin-track-16x9-0b79993e.png",
+    "desc": "Every sub you pay for spins in a tilted 3D ring of app tiles (Claude Max, ChatGPT Pro, Google AI Pro, SuperGrok, Cursor Pro, DeepSeek API), then implodes into the Superbot icon and one exported key: $ export SUPERBOT_API_KEY=sbc_...7f3a, 6 subscriptions, 1 key. Each request is scored: a chat bubble asks with \"model\": \"auto\", the router reads what it needs (hard reasoning, vision and long context, bulk edit) and three fit bars move for Opus 5.5, Gemini 3.8 Flash and DeepSeek V4 Flash; the best fit lights up and is routed, the others dim. A one line diff: git diff agent.yaml in a terminal, - base_url https://api.openai.com/v1, + base_url https://beta.superbot.gg/v1, then git commit, 1 file changed. The same task, raced: two agents run down checkpoint tracks (read, test, plan, edit, edit, test, pr) with live clocks, the Superbot car carrying a badge for the model each step was routed to; it crosses the flag at 0:36.0 while the old endpoint reaches it at 4:12.0, 7.0x faster. Ends on: Superbot drop in replacement makes your agent run x7 faster. 25.2 s, 1920x1080, 60 fps, with sound.",
+    "download": "animations/x7-dropin-track-16x9-0b79993e/final.mp4",
+    "downloadLabel": "MP4 16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

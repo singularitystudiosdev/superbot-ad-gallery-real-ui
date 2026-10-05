@@ -2960,6 +2960,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "stubhub-price-drop-buy-superbot-a4fb9b37",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "NAME YOUR PRICE. GET THE SEATS. · ChatGPT agent watches 1,936 listings until a pair drops to $138 each, Superbot buys Section 224, Row 7 on StubHub for $276.00 (<10s, 16:9)",
+    "src": "animations/stubhub-price-drop-buy-superbot-a4fb9b37/",
+    "thumb": "assets/shots/stubhub-price-drop-buy-superbot-a4fb9b37.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82 (X ad b5olyc), new process: a ticket price watch that buys a pair on StubHub the moment it drops under your limit. One ask in superbot: \"get 2 seats for knicks vs celtics under $150 each\". Switching to ChatGPT agent: it watches 1,936 listings for Knicks vs Celtics, Wed, Oct 21, 7:30 PM at Madison Square Garden, and the cheapest 200-level pair drifts down from $171 until it drops through the red dashed $150 limit to $138 at 4:12 PM: \"Pair in Section 224 just dropped to $138 each.\" Switched to Superbot (\"Under your $150 limit. Buying them on StubHub.\"): Opened StubHub, Grabbed Sec 224, Row 7, Paid $276.00. The StubHub card drives the event page (seat map with Section 224 lit and priced, filters Qty 2 and Under $150, Section 224, Row 7, Seats 11-12 at $138 incl. fees, marked Best price), checkout with Visa ending 4242 for $276.00, Buy now to a spinner, then \"You're going! 2 tickets in your StubHub app.\" with both mobile tickets (Sec 224, Row 7, Seats 11 and 12). Ends on EVERY MODEL. ONE CHAT. 8.45 s with no opener card (the X export prepends its coming-soon card), tick on the price drop and a buy chime.",
+    "download": "assets/video/stubhub-price-drop-buy-superbot-a4fb9b37.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

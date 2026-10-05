@@ -1,0 +1,49 @@
+/* Scribe beat (beats/scribe.js): ElevenLabs Scribe transcribing the ten uploads. A hub card in the base's research
+   grammar (watch.css): header with the spinner resolving to the check, the counter, the thumbnail strip (progress bar
+   while a file is in flight, a check once its .srt is written), the SRT snippet, the Keyterms row and the footer.
+   Nothing here transitions: opacity/transform are written from t in render, so ?t= freezes a frame. Every class is
+   prefixed .sc-. Radii: 10px card, 5px thumbnails, pills fully round. */
+
+#s-tabs .sbsite .hub .sc-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 11px 12px 11px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+
+#s-tabs .sbsite .hub .sc-hd { display: flex; align-items: center; gap: 8px; font: 600 13px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-dur { font: 500 12px/1 var(--ui); color: #a8abb2; }
+#s-tabs .sbsite .hub .sc-model { margin-left: auto; height: 19px; padding: 0 8px; border-radius: 9999px; background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038;
+  font: 500 10.5px/19px var(--font-mono); color: #c4c7c5; }
+#s-tabs .sbsite .hub .sc-st { position: relative; flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .sc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .sc-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the counter: the line the brief names, "10 of 10, 24,118 words" */
+#s-tabs .sbsite .hub .sc-count { margin: 10px 0 9px; font: 500 15px/1 var(--ui); color: #c4c7c5; white-space: nowrap; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-count b { font-weight: 700; font-size: 19px; color: #fff; }
+
+/* the ten uploads, newest first */
+#s-tabs .sbsite .hub .sc-strip { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 5px; }
+#s-tabs .sbsite .hub .sc-th { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 5px; overflow: hidden; background: #000; opacity: .42; }
+#s-tabs .sbsite .hub .sc-th.on { opacity: 1; }
+#s-tabs .sbsite .hub .sc-th img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .sc-len { position: absolute; right: 2px; bottom: 3px; padding: 1px 2px; border-radius: 2px; background: rgba(0,0,0,.8);
+  font: 600 6.5px/1 var(--ui); font-style: normal; color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-pr { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.25); opacity: 0; }
+#s-tabs .sbsite .hub .sc-pr i { display: block; height: 100%; background: #fff; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .sc-ck { position: absolute; top: 2px; right: 2px; display: grid; place-items: center; width: 12px; height: 12px; border-radius: 50%;
+  background: #0b0b0c; opacity: 0; }
+#s-tabs .sbsite .hub .sc-ck .qc-ok { width: 9px; height: 9px; stroke-width: 3; }
+
+/* the SRT snippet: four cues tall, scrolling */
+#s-tabs .sbsite .hub .sc-tx { height: 72px; margin-top: 9px; padding: 0 10px; border-radius: 7px; background: #0c0c0e; box-shadow: inset 0 0 0 1px #222227; overflow: hidden;
+  -webkit-mask: linear-gradient(transparent, #000 22%, #000 78%, transparent); mask: linear-gradient(transparent, #000 22%, #000 78%, transparent); }
+#s-tabs .sbsite .hub .sc-tx-in { padding-top: 5px; will-change: transform; }
+#s-tabs .sbsite .hub .sc-ln { display: flex; align-items: baseline; gap: 10px; height: 17px; font: 12px/17px var(--ui); color: #e5e5ea; white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-tc { flex: none; font: 500 10.5px/17px var(--font-mono); font-style: normal; color: #7c7f87; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sc-ln mark { padding: 0 3px; border-radius: 3px; background: rgba(138,180,248,.18); color: #c6dafc; font-weight: 600; }
+
+#s-tabs .sbsite .hub .sc-kt { display: flex; align-items: center; gap: 6px; margin-top: 9px; white-space: nowrap; }
+#s-tabs .sbsite .hub .sc-ktl { margin-right: 2px; font: 500 11.5px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .sc-chip { height: 20px; padding: 0 8px; border-radius: 9999px; background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038;
+  font: 600 11px/20px var(--ui); color: #c6dafc; }
+
+#s-tabs .sbsite .hub .sc-ft { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 10px; font: 600 12.5px/1.2 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .sc-ft .qc-ok { flex: none; }

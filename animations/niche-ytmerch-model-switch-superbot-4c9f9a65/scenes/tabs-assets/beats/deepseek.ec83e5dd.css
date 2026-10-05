@@ -1,0 +1,51 @@
+/* Link 1, DeepSeek V4 Pro (deepseek.ec83e5dd.js). DeepSeek's dark chat palette: #292a2d fields, #4d6bfe accent. */
+#s-tabs .ds { position: absolute; inset: 0; padding: 24px 28px; font-family: var(--wsf); }
+#s-tabs .ds .ic { width: 1em; height: 1em; flex: none; }
+#s-tabs .ds-q { display: flex; align-items: center; gap: 10px; height: 60px; padding: 0 12px 0 22px; border-radius: 18px; background: #212226;
+  box-shadow: inset 0 0 0 1px #303137; }
+#s-tabs .ds-qt { flex: 1; font: 500 19px/1.2 var(--wsf); color: #dcdce2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .ds-tg { display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border-radius: 999px; font: 600 16px/1 var(--wsf); color: #b9c6ff;
+  background: rgba(77, 107, 254, .2); box-shadow: inset 0 0 0 1px rgba(77, 107, 254, .7); }
+#s-tabs .ds-tg .ic { font-size: 19px; }
+#s-tabs .ds-warn { display: inline-flex; align-items: center; gap: 9px; margin: 14px 0 0; padding: 9px 14px; border-radius: 10px; background: #2a2416;
+  box-shadow: inset 0 0 0 1px #57461f; color: #f3c969; font: 600 16px/1 var(--wsf); opacity: 0; }
+#s-tabs .ds-warn .ic { font-size: 19px; }
+
+#s-tabs .ds-l { position: absolute; left: 28px; top: 166px; width: 560px; }
+#s-tabs .ds-think { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; font: 500 16px/1 var(--wsf); color: #8e8e96; opacity: 0; }
+#s-tabs .ds-think .ic { font-size: 19px; }
+#s-tabs .ds-row { position: relative; display: flex; align-items: center; gap: 14px; height: 92px; margin-bottom: 12px; padding: 0 18px; border-radius: 14px;
+  background: #18181c; box-shadow: inset 0 0 0 1px #2a2a30; opacity: 0; overflow: hidden; }
+#s-tabs .ds-ri { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 11px; background: rgba(77, 107, 254, .16); color: #8fa4ff; font-size: 24px; }
+#s-tabs .ds-row.ds-done .ds-ri { background: rgba(52, 199, 89, .14); color: #67d98a; }
+#s-tabs .ds-rt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; font: 500 18px/1.15 var(--wsf); color: #e8e8ec; }
+#s-tabs .ds-rt b { font-weight: 700; color: #fff; }
+#s-tabs .ds-rt em { font: 500 17px/1.15 var(--wsm); font-style: normal; color: #c9d3ff; }
+#s-tabs .ds-rt small { font: 500 15px/1 var(--wsf); color: #8a8a93; white-space: nowrap; }
+#s-tabs .ds-rt > b + em { margin-left: 2px; }
+#s-tabs .ds-rn { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+#s-tabs .ds-rn b { font: 700 28px/1 var(--wsf); color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .ds-rn small { font: 500 14px/1 var(--wsf); color: #8a8a93; }
+#s-tabs .ds-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: transparent; }
+#s-tabs .ds-bar i { display: block; height: 100%; background: #4d6bfe; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .ds-row.ds-done .ds-bar i { background: #34c759; }
+
+#s-tabs .ds-r { position: absolute; left: 616px; right: 28px; top: 166px; display: flex; flex-direction: column; gap: 14px; }
+#s-tabs .ds-card { padding: 18px 22px; border-radius: 16px; background: #18181c; box-shadow: inset 0 0 0 1px #2a2a30; opacity: 0; }
+#s-tabs .ds-card h4 { margin: 0 0 14px; font: 600 15px/1 var(--wsf); letter-spacing: .04em; text-transform: uppercase; color: #8e8e96; }
+#s-tabs .ds-ask { display: grid; grid-template-columns: 92px 1fr 48px; align-items: center; gap: 12px; height: 32px; font: 600 18px/1 var(--wsf); color: #c9c9d0; }
+#s-tabs .ds-ask i { height: 14px; border-radius: 7px; background: #23232a; overflow: hidden; }
+#s-tabs .ds-ask i b { display: block; height: 100%; width: calc(var(--w) * 100%); border-radius: 7px; background: #5a5a66; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .ds-ask.ds-top { color: #fff; }
+#s-tabs .ds-ask.ds-top i b { background: linear-gradient(90deg, #4d6bfe, #8fa4ff); }
+#s-tabs .ds-ask em { font-style: normal; text-align: right; font-variant-numeric: tabular-nums; opacity: 0; }
+#s-tabs .ds-c2 q { display: block; font: 750 38px/1.05 var(--wsf); color: #fff; letter-spacing: -.01em; quotes: "“" "”"; }
+#s-tabs .ds-c2 small { display: block; margin-top: 8px; font: 500 16px/1 var(--wsf); color: #8e8e96; }
+#s-tabs .ds-rv { display: grid; grid-template-columns: 170px 1fr 50px 86px; align-items: center; gap: 10px; height: 34px; font: 500 16px/1 var(--wsf); color: #c9c9d0; opacity: 0; }
+#s-tabs .ds-rv span:first-child { font-family: var(--wsm); font-size: 15px; color: #c9d3ff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .ds-rv b { color: #fff; font-weight: 700; text-align: right; }
+#s-tabs .ds-rv em { font-style: normal; color: #8e8e96; text-align: right; }
+#s-tabs .ds-price { display: flex; align-items: baseline; justify-content: space-between; margin-top: 12px; padding: 12px 18px; border-radius: 12px;
+  background: rgba(77, 107, 254, .16); box-shadow: inset 0 0 0 1px rgba(77, 107, 254, .55); opacity: 0; transform-origin: 0 50%; }
+#s-tabs .ds-price span { font: 600 19px/1 var(--wsf); color: #c9d3ff; }
+#s-tabs .ds-price b { font: 800 38px/1 var(--wsf); color: #fff; }

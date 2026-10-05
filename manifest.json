@@ -1025,6 +1025,15 @@
     "desc": "A new creative in the niche-youtube model-switch family: the ask is \"Make the trailer for my next video and a thumbnail for it\" and the chain is a production pipeline, a different model and order than the source ad. DeepSeek V4 Flash scrapes the specs, prices and reference clips (12 pages that were blocked to the other models, opened anyway); Gemini generates four thumbnail candidates from the shoot and keeps the strongest; Blender models the mic and renders the hero shot in Cycles; ElevenLabs voices the script; Claude Opus 5.5 codes the timeline that places every asset, and the finished trailer plays. 16:9 only."
   },
   {
+    "id": "niche-ytmerch-model-switch-superbot-4c9f9a65",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Everyone keeps asking for merch. Make it and sell it under my videos: DeepSeek V4 Pro scrapes, Blender models the mug, Nano Banana Pro prints it, Opus 5.5 ships the store, ElevenLabs voices the Short, YouTube tags the mug (6 switches, merch-drop split-screen variant, 16:9)",
+    "src": "animations/niche-ytmerch-model-switch-superbot-4c9f9a65/",
+    "thumb": "assets/shots/niche-ytmerch-model-switch-superbot-4c9f9a65.png",
+    "desc": "A new creative in the niche-youtube model-switch family (source: niche-youtube-model-switch-superbot-3828921d), with a different ask, a different chain and a different format. The 16:9 frame splits: the superbot thread on the left, a live workspace on the right where each tool works on its own screen, and a strip that tracks the hand-offs. DeepSeek V4 Pro scrapes 3,912 comments and six rival stores (the task two other models declined) and prices the mug at $24; Blender 5.2 models it and renders it in Cycles; Nano Banana Pro generates four print designs and prints #1 onto the render; Claude Opus 5.5 writes and deploys the store with a 3D viewer and Stripe checkout; ElevenLabs v3 voices the shoutout; YouTube Studio posts the Short with the mug tagged, and it ends on the Short playing with the Products panel open. Every design, render and the voice are real outputs of those tools. 16:9 only."
+  },
+  {
     "id": "niche-ytv5-model-switch-superbot-b0c8e364",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,68 @@
+/* The 16:9 split (tabs.js) and superbot's workspace panel (ws.ec83e5dd.js). Frame px: the panel is not scaled. */
+@font-face { font-family: "GSF"; font-style: normal; font-weight: 100 1000; font-display: block; src: url("../../fonts/google-sans-flex-latin-wght-normal.woff2?v=4c9f9a65") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 400; font-display: block; src: url("../../fonts/roboto-latin-400-normal.woff2?v=4c9f9a65") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 500; font-display: block; src: url("../../fonts/roboto-latin-500-normal.woff2?v=4c9f9a65") format("woff2"); }
+@font-face { font-family: "Roboto GM"; font-style: normal; font-weight: 700; font-display: block; src: url("../../fonts/roboto-latin-700-normal.woff2?v=4c9f9a65") format("woff2"); }
+#s-tabs .mx-root { --wsf: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
+  --wsm: "SF Mono", ui-monospace, Menlo, Consolas, monospace; }
+#s-tabs .mx-ws-host { position: absolute; top: 0; right: 0; bottom: 0; padding: 16px 16px 16px 10px; z-index: 3; }
+#s-tabs .ws { position: relative; height: 100%; display: grid; grid-template-rows: 78px 1fr 132px; background: #111113;
+  border: 1px solid #26262b; border-radius: 22px; overflow: hidden; font-family: var(--wsf); color: #ececf0;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
+
+/* head */
+#s-tabs .ws-head { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 26px;
+  border-bottom: 1px solid #222226; }
+#s-tabs .ws-whos { position: relative; height: 52px; flex: 1; }
+#s-tabs .ws-who { position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; opacity: 0; }
+#s-tabs .ws-names { display: flex; flex-direction: column; gap: 4px; }
+#s-tabs .ws-names b { font: 650 25px/1.05 var(--wsf); letter-spacing: -.01em; color: #f4f4f6; }
+#s-tabs .ws-names small { font: 500 17px/1.1 var(--wsf); color: #8e8e96; }
+#s-tabs .ws .ws-tile { width: 44px; height: 44px; border-radius: 12px; }
+#s-tabs .ws .ws-tile img { width: 28px; height: 28px; }
+#s-tabs .ws-meta { display: flex; align-items: center; gap: 12px; font: 600 16px/1 var(--wsf); color: #b8b8c0; }
+#s-tabs .ws-live { display: inline-flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 999px; background: #1b2a1f; color: #7ee2a0; }
+#s-tabs .ws-live i { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 0 4px rgba(52, 199, 89, .18); }
+#s-tabs .ws-live.ws-live-done { background: #1c1c20; color: #9a9aa2; }
+#s-tabs .ws-live.ws-live-done i { background: #6e6e76; box-shadow: none; }
+#s-tabs .ws-step { padding: 8px 13px; border-radius: 999px; background: #1c1c20; box-shadow: inset 0 0 0 1px #2c2c31; }
+
+/* body */
+#s-tabs .ws-body { position: relative; overflow: hidden; }
+#s-tabs .ws-screen { position: absolute; inset: 0; visibility: hidden; }
+#s-tabs .ws-idle { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; opacity: 0; }
+#s-tabs .ws-idle-t { font: 650 34px/1 var(--wsf); color: #f0f0f3; letter-spacing: -.01em; }
+#s-tabs .ws-idle-s { font: 500 20px/1 var(--wsf); color: #8e8e96; white-space: pre; }
+
+/* strip: the chain */
+#s-tabs .ws-strip { display: flex; align-items: center; padding: 0 30px; gap: 0; border-top: 1px solid #222226; background: #0e0e10; }
+#s-tabs .ws-node { position: relative; flex: none; width: 128px; display: flex; flex-direction: column; align-items: center; gap: 7px; opacity: 0; }
+#s-tabs .ws .ws-nt { width: 40px; height: 40px; border-radius: 11px; transition: none; }
+#s-tabs .ws .ws-nt img { width: 25px; height: 25px; }
+#s-tabs .ws-node.ws-on .ws-nt { box-shadow: 0 0 0 3px #111113, 0 0 0 5px #8ab4ff, 0 0 26px rgba(138, 180, 255, .45); }
+#s-tabs .ws-node.ws-ok .ws-nt::after { content: ""; position: absolute; top: -5px; left: calc(50% + 12px); width: 18px; height: 18px; border-radius: 50%;
+  background: #34c759 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+  box-shadow: 0 0 0 2px #0e0e10; }
+#s-tabs .ws-nn { font: 600 16px/1 var(--wsf); color: #d8d8de; white-space: nowrap; }
+#s-tabs .ws-no { font: 500 14px/1 var(--wsm); color: #8ab4ff; white-space: nowrap; opacity: 0; }
+#s-tabs .ws-link { position: relative; flex: 1; height: 3px; margin: 0 6px 40px; border-radius: 2px; background: #2a2a30; opacity: 0; }
+#s-tabs .ws-link b { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--fill, 0) * 100%); border-radius: 2px; background: linear-gradient(90deg, #4e7cff, #8ab4ff); }
+#s-tabs .ws-tok { position: absolute; top: -15px; padding: 6px 10px; border-radius: 8px; background: #8ab4ff; color: #0b1020;
+  font: 600 13px/1 var(--wsm); white-space: nowrap; box-shadow: 0 6px 18px rgba(80, 130, 255, .45); opacity: 0; }
+
+/* tiles for the chain's tools (thread pill, reply head, workspace head, strip) */
+#s-tabs .qc-t-deepseek { background: #fff; }
+#s-tabs .qc-t-blender { background: #fff; }
+#s-tabs .qc-t-blender img { transform: scale(1.06); }
+#s-tabs .qc-t-eleven { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .ws .qc-t-studio img { width: 28px; height: 20px; }
+#s-tabs .ws .qc-t-studio .ws-nt img, #s-tabs .ws-node .qc-t-studio img { width: 25px; height: 18px; }
+
+/* the thread's per-link output chips */
+#s-tabs .sbsite .hub .qc-files { display: flex; flex-wrap: wrap; gap: 6px; margin: -2px 0 6px; }
+#s-tabs .sbsite .hub .qc-file { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 7px; background: #17171a;
+  box-shadow: inset 0 0 0 1px #2c2c31; font: 500 10.5px/1 var(--wsm, ui-monospace, Menlo, monospace); color: #a8c4ff; opacity: 0; }
+#s-tabs .sbsite .hub .qc-file::before { content: ""; width: 6px; height: 6px; border-radius: 2px; background: #8ab4ff; }
+
+/* the hub in the thread pane: a narrower greeting, and the pane's right edge */
+#s-tabs .mx-root .ask-hero h1 { font-size: 25px; }

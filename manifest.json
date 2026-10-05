@@ -100,6 +100,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "every-model-chain-skate-sb-superbot-7520a9ed",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · One ask, five models: Gemini art, Blender 3D, DeepSeek price, ElevenLabs voice, Opus ships the store (16:9)",
+    "src": "animations/em-chain-skate-superbot-7520a9ed/",
+    "thumb": "assets/shots/every-model-chain-skate-sb-superbot-7520a9ed.png",
+    "desc": "Remake of every-model-one-chat-sb-superbot-efa8df82 with a new chain and a new final output, built for 16:9. One ask, design a skate deck and launch it tonight, handed down five models in a row, each doing what it is built for. Gemini 3 Pro Image makes three takes of the deck graphic and picks the shark. Blender models the 7-ply deck, wraps the graphic on it and renders a Cycles turntable. DeepSeek V4 Flash gets past the 1688.com slider wall to the factory price, reads 212 shop pages and sets the price at $59. ElevenLabs voices the spot with Eleven v3 and adds an ollie-pop sound effect. Claude Opus 5.5 writes the store, wires Stripe and ships lowtide.shop, with every part tagged by the model that made it. 16:9 only.",
+    "download": "assets/video/every-model-chain-skate-sb-superbot-7520a9ed.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-one-chat-3d-sb-superbot-5af3c81d",
     "type": "animation",
     "group": "Ad spots",

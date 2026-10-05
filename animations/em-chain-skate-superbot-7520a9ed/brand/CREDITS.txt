@@ -1,0 +1,9 @@
+brand/ CREDITS: every third-party mark in this spot, where it came from. All marks are the property of their owners
+and appear nominatively (naming the model or app superbot routes to), unaltered except for scaling. Fetched 2026-10-04.
+
+claude-mark.svg      Claude mark, byte-for-byte copy of https://claude.ai/favicon.svg (Anthropic).
+blender.svg          Blender logo (no text), Wikimedia Commons File:Blender_logo_no_text.svg
+                     (https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg). Blender Foundation.
+elevenlabs.png       ElevenLabs mark, the 48 px layer of https://elevenlabs.io/favicon.ico scaled to 64 px.
+gemini-logo.svg      Carried over from every-model-one-chat-superbot-efa8df82 (Google Gemini mark).
+deepseek-logo.svg    Carried over from every-model-one-chat-superbot-efa8df82 (DeepSeek whale mark).

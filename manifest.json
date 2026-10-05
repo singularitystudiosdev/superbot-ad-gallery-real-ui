@@ -3235,6 +3235,116 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "cc-school-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "DESCRIBE IT. IT BUILDS IT. · \"a command center for school\" becomes exam countdowns, deadlines, professors to email; \"add a countdown for my capstone too\"",
+    "src": "animations/cc-school-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-school-16x9-3e1e5589.png",
+    "desc": "The prompt types into superbot: build me a command center for school: deadlines, exam countdowns, and professors I need to email back. Canvas, Gmail and Google Calendar connect, the layout draws in as skeleton panels and fills: ECON 102 midterm in 15 days (review 2 of 6 done), due this week, professors to email, study blocks today. One follow-up, add a countdown for my capstone too, reflows the page and the new 25-day countdown lands next to the midterm. 16:9.",
+    "download": "assets/video/cc-school-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-jobhunt-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "YOUR JOB HUNT. YOUR LAYOUT. · applications pipeline, interviews, recruiters to answer; \"move interviews to the top\"",
+    "src": "animations/cc-jobhunt-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-jobhunt-16x9-3e1e5589.png",
+    "desc": "Prompt: track my internship search: applications, interviews this week, and recruiters I owe a reply. Gmail, LinkedIn and Google Calendar connect and the page builds: a pipeline (14 applied, 3 interviewing, 1 offer), recruiters waiting 1 to 4 days, interviews this week, programs opening soon. Then: move interviews to the top, and the panels swap places live. 16:9.",
+    "download": "assets/video/cc-jobhunt-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-startup-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUILT THE WAY YOU WORK. · MRR, open PRs, investor follow-ups, today's calls; \"put churn next to MRR\"",
+    "src": "animations/cc-startup-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-startup-16x9-3e1e5589.png",
+    "desc": "Prompt: one page for my startup: MRR, open PRs, investor follow-ups, and today's calls. Stripe, GitHub, Gmail and Google Calendar connect; MRR counts up to $18.4k (+9% this month) with its bars, PRs needing review, investors waiting, today's calls. Follow-up: put churn next to MRR, and a 2.1% churn card slides in beside it. 16:9.",
+    "download": "assets/video/cc-startup-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-training-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "TRACK WHAT YOU CARE ABOUT. · half marathon page: miles, long run, gym streak, sleep; \"make the long run bigger\"",
+    "src": "animations/cc-training-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-training-16x9-3e1e5589.png",
+    "desc": "Prompt: my half marathon training: miles this week, the long run, gym streak, and sleep. Strava and Google Calendar connect; 24.6 of 30 miles in daily bars, Saturday's 11 mile long run, a 12 day gym streak, the week's plan, 7.4 h average sleep. Follow-up: make the long run bigger, and the page re-lays itself around it. 16:9.",
+    "download": "assets/video/cc-training-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-creator-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ANY LAYOUT. ONE SENTENCE. · a channel dashboard: upload week, ideas, comments, sponsors; \"hide ideas until Friday\"",
+    "src": "animations/cc-creator-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-creator-16x9-3e1e5589.png",
+    "desc": "Prompt: a dashboard for my channel: upload schedule, video ideas, comments to answer, sponsor deadlines. YouTube, Notion and Gmail connect; the week fills with script, film, edit and upload blocks, plus ideas, comments to answer and sponsor deadlines. Follow-up: hide ideas until Friday, and the panel steps aside while comments and sponsors take the room. 16:9.",
+    "download": "assets/video/cc-creator-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-people-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "BUILD IT AROUND PEOPLE. · everyone waiting on you, sorted by days; drafts ready; \"add birthdays this month\"",
+    "src": "animations/cc-people-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-people-16x9-3e1e5589.png",
+    "desc": "Prompt: everyone I need to follow up with, sorted by how long they've been waiting. Gmail and LinkedIn connect; six people ranked from 6 days to today, three drafts ready to send, who you met this week. Follow-up: add birthdays this month, and a new panel lands with Mom in 4 days. 16:9.",
+    "download": "assets/video/cc-people-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-home-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "THE BORING STUFF, ON ONE PAGE. · bills, renewals, groceries, landlord email; \"add what I've spent this month\"",
+    "src": "animations/cc-home-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-home-16x9-3e1e5589.png",
+    "desc": "Prompt: bills due, subscriptions renewing this month, groceries, and anything from my landlord. Gmail and Google Calendar connect; rent and bills with amounts, renewals (one unused for 6 weeks), the grocery list, a water shutoff notice. Follow-up: add what I've spent this month, and $1,284 of $1,900 slides in first. 16:9.",
+    "download": "assets/video/cc-home-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-liveedit-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "CHANGE ANYTHING. JUST ASK. · three edits to a live page: add a gym streak, move email to the top, make it pink",
+    "src": "animations/cc-liveedit-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-liveedit-16x9-3e1e5589.png",
+    "desc": "A command center already running (school, networking, projects, email, daily). Three plain requests in the ask bar reshape it live: add my gym streak (a 12 day streak lands), move email to the top (the grid reflows), make it pink (the accent changes across every panel). 16:9.",
+    "download": "assets/video/cc-liveedit-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-montage-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ANY LIFE. ONE PROMPT. · one page becomes four: school, job hunt, marathon training, startup",
+    "src": "animations/cc-montage-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-montage-16x9-3e1e5589.png",
+    "desc": "Starts on a school command center, then three short prompts build three more, each a different layout and set of widgets: now one for my job hunt (pipeline, recruiters, interviews), and one for marathon training (miles, long run, streak, sleep), and one for my startup (MRR, PRs, investors, calls). Each new page joins the sidebar. 16:9.",
+    "download": "assets/video/cc-montage-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
+    "id": "cc-week-16x9-3e1e5589",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "YOUR WEEK, YOUR WAY. · classes, shifts, gym and what's due on one week grid; \"add my free time this week\"",
+    "src": "animations/cc-week-16x9-3e1e5589/",
+    "thumb": "assets/shots/cc-week-16x9-3e1e5589.png",
+    "desc": "Prompt: show my whole week: classes, work shifts, gym, and what's due. Google Calendar and Canvas connect and a week grid fills with CS 161 and ECON 102, three café shifts, four gym sessions and the PSET 4 deadline, beside what's due and 14 h of work. Follow-up: add my free time this week, and 11.5 h (most of it Sunday) joins the page. 16:9.",
+    "download": "assets/video/cc-week-16x9-3e1e5589.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

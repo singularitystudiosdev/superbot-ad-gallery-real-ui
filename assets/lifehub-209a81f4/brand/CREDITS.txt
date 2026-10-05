@@ -17,3 +17,6 @@ github.svg    simple-icons 16.34.0 icons/github.svg (CC0-1.0), fill set to #FFFF
 superbot mark: ../../sb-mark-live.js (the real superbot.gg mascot, see that file's header).
 UI icons (check, repeat, doc, bell, grid, chat, clock, cursor) are kit vector furniture drawn in ui.js.
 Mock data (names, courses, companies such as "Halcyon Labs") is fictional.
+stripe.svg    simple-icons 16.34.0 icons/stripe.svg (CC0-1.0), fill #635BFF (Stripe, Inc. trademark)
+strava.svg    simple-icons 16.34.0 icons/strava.svg (CC0-1.0), fill #FC4C02 (Strava, Inc. trademark)
+youtube.svg   simple-icons 16.34.0 icons/youtube.svg (CC0-1.0), fill #FF0000 (Google LLC trademark)

@@ -166,6 +166,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "every-model-one-chat-sb-superbot-efa8df82-live-ui-9fd25c77",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Live superbot UI: model picker, Gemini 3 Pro Image meme, Reddit read in chat, DoorDash order",
+    "src": "animations/every-model-one-chat-live-ui-superbot-9fd25c77/",
+    "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82-live-ui-9fd25c77.png",
+    "desc": "Variant of every-model-one-chat-sb-superbot-efa8df82 played on the real superbot desktop app, captured from its own renderer. Opens on the app's model picker (superbot, GPT-5 Codex, GPT-5, Sonnet 4.6). Make me a muse meme: superbot switches to Gemini 3 Pro Image, the composer chip follows, and the meme lands via Gemini 3 Pro Image. Scrape reddit and look for more: no switch, because a public read stays on superbot; the search trail reads reddit.com and lists five finds. Winning, order me a burger: Connecting to DoorDash, then nested steps (open, add to cart, check out) and the order with its total and arrival time. Ends on the app's mascot, Every model. One chat., superbot.gg. 20.9 s, 30 fps, 16:9, 4:3, 1:1 and 4:5.",
+    "download": "assets/video/every-model-one-chat-sb-superbot-efa8df82-live-ui-9fd25c77.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-chain-skate-sb-superbot-7520a9ed",
     "type": "animation",
     "group": "Ad spots",

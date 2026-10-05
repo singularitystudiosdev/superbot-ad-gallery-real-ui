@@ -1,0 +1,12 @@
+html { --ar-ready: 1; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+#stage {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--stage-w, 1920px); height: 1080px; overflow: hidden;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(var(--fit, 1));
+  background: var(--app-bg, #0e0e10);
+}
+#cam { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; transform-origin: 0 0; }
+#cam iframe { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border: 0; pointer-events: none; background: transparent; }
+#ghost { visibility: hidden; opacity: 0; }

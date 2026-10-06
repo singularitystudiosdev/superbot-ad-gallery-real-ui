@@ -48,6 +48,17 @@
     "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82.png"
   },
   {
+    "id": "every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Launch my soda brand tonight: DeepSeek V4 Flash, Gemini, Blender, ElevenLabs, Claude Opus 5.5 (5 switches, 16:9)",
+    "src": "animations/every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb/",
+    "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb.png",
+    "desc": "Remake of every-model-one-chat-sb-superbot-efa8df82 with a new chain of five switches, each doing what that tool is for. One ask in superbot, launch my soda brand tonight: DeepSeek V4 Flash scrapes r/Soda and finds the gap, Gemini makes the can label, Blender models the can in 3D and renders it, ElevenLabs records the voiceover, Claude Opus 5.5 codes the launch page, which ends on screen with the can in it. 9.8 s, 16:9 only.",
+    "download": "assets/video/every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-one-chat-sb-combo-efa8df82",
     "type": "animation",
     "group": "Ad spots",

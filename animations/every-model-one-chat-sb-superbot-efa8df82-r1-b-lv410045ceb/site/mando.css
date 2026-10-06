@@ -1,0 +1,15 @@
+/* MANDO launch page (the page Claude Opus 5.5 writes in the spot). Designed at 1280 x 800; every rule is scoped
+   under .mando so the page can also sit inside the spot's preview card. The outlined display type is a static
+   (non-variable) rounded face: a stroke on a variable font draws its overlapping contours as zigzags. */
+.mando { background: #ff7a1a; }
+.mando { position: relative; width: 1280px; height: 800px; overflow: hidden; color: #3b1300; font-family: "Arial Rounded MT Bold", "Arial Rounded MT", ui-rounded, system-ui, sans-serif; }
+.mando nav { position: relative; z-index: 2; display: flex; align-items: center; gap: 44px; padding: 36px 72px; font-size: 38px; }
+.mando nav a { color: inherit; text-decoration: none; }
+.mando nav b { margin-right: auto; font-size: 42px; font-weight: 400; letter-spacing: 0.02em; color: #fff4e0; -webkit-text-stroke: 2px #c2410c; paint-order: stroke fill; }
+.mando .hero { position: relative; z-index: 2; padding: 0 72px; }
+.mando .hero h1 { margin: 14px 0 0; font-size: 196px; font-weight: 400; line-height: 0.92; letter-spacing: 0; color: #fff4e0; -webkit-text-stroke: 12px #c2410c; paint-order: stroke fill; }
+.mando .hero p { margin: 24px 0 38px; font-size: 56px; line-height: 1.05; max-width: 640px; }
+.mando .buy { display: inline-block; padding: 28px 40px; border-radius: 999px; background: #1c1917; color: #fff; font-size: 40px; text-decoration: none; }
+.mando .hero button { margin-left: 16px; padding: 28px 36px; border: 0; border-radius: 999px; background: #fff4e0; color: #3b1300; font: inherit; font-size: 40px; }
+.mando .hero img, .mando .hero canvas { position: absolute; right: 40px; top: -150px; width: 470px; height: 604px; object-fit: contain; }
+.mando .wave { position: absolute; z-index: 1; left: -12%; right: -12%; bottom: -250px; height: 440px; border-radius: 50%; background: #fff4e0; }

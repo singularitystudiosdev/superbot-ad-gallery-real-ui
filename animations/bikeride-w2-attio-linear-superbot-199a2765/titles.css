@@ -1,0 +1,40 @@
+/* The titles cut's extras (?cut=titles). Loaded for every cut but only ever matched when the titles cut builds its
+   extra markup (scenes/open, play.js's .play-titles, timeline.js's .end-tag/.end-cta/.end-sweep/.grain), so the
+   default and nozoom cuts render byte-identical to before. */
+
+/* ---------- the finale: three title cards over the ride, lower third, white uppercase like the reference ---------- */
+.play-titles {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  display: grid; place-items: center; padding-top: 20%;
+}
+.play-title {
+  position: absolute; left: 50%; top: 62%; transform: translate(-50%, -50%);
+  color: #fff; font: 800 92px/1 var(--ui, "SF Pro Rounded", system-ui, sans-serif);
+  letter-spacing: .06em; white-space: nowrap; opacity: 0;
+  text-shadow: 0 3px 30px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* ---------- the end card's tagline, call to action and specular sweep (titles cut only) ---------- */
+#s-end .end-tag {
+  margin: 16px 0 0 8px; color: var(--fg-2); font: 600 34px/1.2 var(--ui, system-ui, sans-serif);
+  letter-spacing: .12em; opacity: 0;
+}
+#s-end .end-cta {
+  margin: 14px 0 0 8px; color: #fff; font: 700 30px/1 var(--font-mono, monospace);
+  letter-spacing: .04em; opacity: 0;
+}
+#s-end .end-sweep {
+  position: absolute; inset: -30% -10%; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+  background: linear-gradient(104deg, transparent 44%, rgba(255,255,255,.5) 50%, transparent 56%);
+  will-change: transform;
+}
+html[data-ar="4x5"] #s-end .end-tag, html[data-ar="1x1"] #s-end .end-tag,
+html[data-ar="4x5"] #s-end .end-cta, html[data-ar="1x1"] #s-end .end-cta { margin-left: 0; text-align: center; }
+html[data-ar="4x5"] #s-end .end-tag { font-size: 28px; }
+
+/* ---------- the film grain (titles cut only), jittered from t in timeline.js ---------- */
+.grain {
+  position: absolute; inset: -8%; z-index: 60; pointer-events: none; opacity: .5; mix-blend-mode: overlay;
+  background-repeat: repeat; background-size: 180px 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

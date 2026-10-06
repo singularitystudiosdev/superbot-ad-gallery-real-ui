@@ -1,0 +1,34 @@
+/* Art beat (beats/art.js): Gemini's six decals (img/bike/decals/*.png, real alpha) as one sheet across the reply
+   column, each on a dark checkerboard tile so the transparency reads, its file name stamped beneath. 3x2 by default;
+   .art-row (set once by art.js when a 3x2 would run taller than 80% of the feed) lays them out as one row of six.
+   Nothing here transitions: opacity/filter/transform are written from t in render, so ?t= freezes a frame. Every
+   selector is scoped under the hub and prefixed .art-. The band and its label follow chat.css .qc-gen/.qc-genl
+   (make-minecraft's generating band), restated here so this beat owns its look. */
+
+#s-tabs .sbsite .hub .art-deck { position: relative; width: 100%; box-sizing: border-box; padding: 12px 12px 10px;
+  border-radius: 12px; overflow: hidden; background: #111113; opacity: 0; transform-origin: 50% 0;
+  box-shadow: 0 0 0 1px #2a2a2e, 0 12px 30px rgba(0, 0, 0, .4); }
+#s-tabs .sbsite .hub .art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 10px; }
+#s-tabs .sbsite .hub .art-deck.art-row .art-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px 8px; }
+#s-tabs .sbsite .hub .art-dc { margin: 0; min-width: 0; }
+/* the decal tile: a dark checkerboard under the transparent PNG */
+#s-tabs .sbsite .hub .art-px { display: block; width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden;
+  background: conic-gradient(#232327 25%, #19191c 0 50%, #232327 0 75%, #19191c 0) 0 0 / 14px 14px;
+  box-shadow: 0 0 0 1px #2c2c30; }
+#s-tabs .sbsite .hub .art-px img { display: block; width: 100%; height: 100%; object-fit: contain; opacity: 0;
+  transform-origin: 50% 50%; will-change: filter, transform; }
+/* the file name, stamped once the decal is crisp (the longest, sakura-petals.png, fits a 3x2 tile untruncated) */
+#s-tabs .sbsite .hub .art-dc figcaption { display: block; min-width: 0; margin-top: 6px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; opacity: 0; font: 600 10.5px/1.1 var(--mono); color: #e5e5ea; }
+/* a row of six leaves ~68px a tile: the name wraps (at its hyphen, or before .png) onto two lines, never cut */
+#s-tabs .sbsite .hub .art-deck.art-row .art-dc figcaption { margin-top: 5px; white-space: normal; font-size: 9px;
+  line-height: 1.2; }
+
+/* the sweeping "generating" band over the sheet and its label chip (top right) */
+#s-tabs .sbsite .hub .art-gen { position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(100deg, transparent 25%, rgba(120, 160, 255, .38) 45%, rgba(214, 120, 255, .38) 55%, transparent 75%); }
+#s-tabs .sbsite .hub .art-genl { position: absolute; right: 18px; top: 18px; display: inline-flex; align-items: center;
+  gap: 7px; height: 28px; padding: 0 11px 0 4px; border-radius: 9999px; background: rgba(12, 12, 14, .82);
+  box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 11px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .art-genl .qc-tile { width: 20px; height: 20px; border-radius: 9999px; }
+#s-tabs .sbsite .hub .art-genl .qc-tile img { width: 13px; height: 13px; }

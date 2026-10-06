@@ -1651,6 +1651,19 @@ const more = [
     { desc: "The bikeride model-switch spot combining the Deadpool titles and the Attio demo, with a mono status line relabelling 0..3 in place. 16:9." }],
   ['bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9', 'bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9/', 'bikeride model switch, variant: Gemini Omni + Runway Gen-4 (four tiles converge into the send button)', 'Ad spots',
     { desc: "The bikeride model-switch spot combining Gemini Omni and Runway Gen-4, with four tiles converging into the send button. 16:9." }],
+  // wave-2 combos (2026-10-06): six bikeride model-switch variants, each a two-reference combo of earlier spots.
+  ['bikeride-w2-deadpool-attio-v2-superbot-3d4b491c', 'bikeride-w2-deadpool-attio-v2-superbot-3d4b491c/', 'bikeride model switch, wave-2 combo: Deadpool titles x Attio status line', 'Ad spots',
+    { desc: "Deadpool titles lend the credit-slot relabel (the switch pill's label rolls claim to fact in place) and Attio lends the mono status line under the composer, counting commands as each hand-off lands. 16:9." }],
+  ['bikeride-w2-google-year-okgo-drone-superbot-abfda58e', 'bikeride-w2-google-year-okgo-drone-superbot-abfda58e/', 'bikeride model switch, wave-2 combo: Google Year-in-Search x OK Go drone', 'Ad spots',
+    { desc: "Google Year-in-Search lends the dot crowd that resolves into the greeting and OK Go's drone shot lends the motion-match pill hand-offs, a reply's tile arcing into the next pill as one gesture. 16:9." }],
+  ['bikeride-w2-daftpunk-okgo-writing-superbot-6bdacb8a', 'bikeride-w2-daftpunk-okgo-writing-superbot-6bdacb8a/', 'bikeride model switch, wave-2 combo: Daft Punk x OK Go plane-swing', 'Ad spots',
+    { desc: "Daft Punk lends the four-lane score strip, one lane per model lit as its pill plays, and OK Go lends the turning set, the hub swinging on a perspective hinge on every pull-back. 16:9." }],
+  ['bikeride-w2-kendrick-apple-bounce-superbot-2fbc1904', 'bikeride-w2-kendrick-apple-bounce-superbot-2fbc1904/', 'bikeride model switch, wave-2 combo: Kendrick x Apple Bounce', 'Ad spots',
+    { desc: "Kendrick lends the match cut, the backdrop hard-cutting to the routed model's own colour on the downbeat, and Apple Bounce lends the pill parked centre with its landing hop and squash. 16:9." }],
+  ['bikeride-w2-attio-linear-superbot-199a2765', 'bikeride-w2-attio-linear-superbot-199a2765/', 'bikeride model switch, wave-2 combo: Attio x Linear', 'Ad spots',
+    { desc: "Attio lends the mono status line under the composer and Linear lends the human/agent activity timeline, its status chip advancing Todo to In Progress to In Review to Done as each hand-off lands. 16:9." }],
+  ['bikeride-w2-cursor-n8n-superbot-8ad6b5eb', 'bikeride-w2-cursor-n8n-superbot-8ad6b5eb/', 'bikeride model switch, wave-2 combo: Cursor x n8n', 'Ad spots',
+    { desc: "Cursor lends the right-rail concurrent tasks, one row per hand-off queued, running then done, and n8n lends the 'What is your big idea?' cold open resolving word by word out of a blur. 16:9." }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1707,6 +1720,14 @@ const KEEP_IDS = new Set([
   'bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9',
   'bikeride-deadpool-opening-title-attio-crm-agentic-superbot-e13744a9',
   'bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9',
+  // added (2026-10-06): six wave-2 bikeride-model-switch combos, each fusing two earlier references.
+  // Their entries are in `more` above; listing the ids here is what makes the trimmed gallery ship them.
+  'bikeride-w2-deadpool-attio-v2-superbot-3d4b491c',
+  'bikeride-w2-google-year-okgo-drone-superbot-abfda58e',
+  'bikeride-w2-daftpunk-okgo-writing-superbot-6bdacb8a',
+  'bikeride-w2-kendrick-apple-bounce-superbot-2fbc1904',
+  'bikeride-w2-attio-linear-superbot-199a2765',
+  'bikeride-w2-cursor-n8n-superbot-8ad6b5eb',
 ]);
 const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 

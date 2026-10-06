@@ -1,0 +1,54 @@
+/* it-does-what-you-ask: the crop, the empty state and the cards the new beats add. Everything is scoped under the
+   cropped hub (#s-tabs .sbsite.ask) so the generated hub stylesheets stay untouched. */
+
+/* ---- the crop: the hub fills the design box; rail, sidebar, chat header and window chrome are hidden ---- */
+/* the root takes the hub's own background, so a push-in that centres a pill near the hub's edge shows no seam */
+#s-tabs .ask-root { position: absolute; inset: 0; overflow: hidden; background: #0a0a0b; }
+#s-tabs .sbsite.ask { visibility: visible; transform-origin: 0 0; }
+#s-tabs .sbsite.ask .stage { grid-template-rows: minmax(0, 1fr); border: 0; border-radius: 0; box-shadow: none; background: #000; }
+#s-tabs .sbsite.ask .stage-bar { display: none; }
+#s-tabs .sbsite.ask .body { grid-row: 1; grid-template-columns: minmax(0, 1fr); }
+#s-tabs .sbsite.ask .hub { --hub-column: 640px; inset: 0; border: 0; border-radius: 0; opacity: 1; grid-template-columns: minmax(0, 1fr); background: #0a0a0b; }
+#s-tabs .sbsite.ask .hub .inner { opacity: 1; }
+#s-tabs .sbsite.ask .hub > .rail, #s-tabs .sbsite.ask .hub > .chats, #s-tabs .sbsite.ask .hub .chat-head { display: none; }
+#s-tabs .sbsite.ask .hub .main { background: #0a0a0b; }
+#s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 760px) / 2)) 4px; }
+#s-tabs .sbsite.ask .hub .composer { position: relative; z-index: 3; width: min(760px, calc(100% - 48px)); margin: 6px auto 16px; will-change: transform; }
+
+/* ---- the empty state (the real app's home: mark + greeting over the composer) ---- */
+#s-tabs .sbsite.ask .ask-hero { position: absolute; left: 50%; top: 30%; z-index: 2; display: flex; align-items: center; gap: .47em; font-size: min(34px, calc(var(--dw, 960px) * .042)); white-space: nowrap; pointer-events: none; opacity: 0; }
+#s-tabs .sbsite.ask .ask-cat { width: 1.18em; height: 1.18em; display: block; }
+#s-tabs .sbsite.ask .ask-hero h1 { margin: 0; font: 400 1em/1.1 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; letter-spacing: -.01em; color: #ececec; }
+
+/* the composer as the empty state shows it: a blue focus ring, SUPER as an off switch, the model chip */
+#s-tabs .sbsite.ask .composer .pill { border-color: #2f5fd6; background: #1b1b1e; }
+#s-tabs .sbsite.ask .hub .rc-seg { display: none; }
+#s-tabs .sbsite.ask .hub .rc-super { display: inline-flex; align-items: center; gap: 6px; margin-left: 4px; height: 22px; padding: 0 4px 0 9px; border-radius: 999px; background: #26262a; font: 700 8.5px/1 var(--ui); letter-spacing: .08em; color: #c7c7cc !important; }
+#s-tabs .sbsite.ask .hub .rc-super::after { display: none; }
+#s-tabs .sbsite.ask .hub .ask-tg { display: inline-flex; align-items: center; gap: 3px; height: 14px; padding: 0 5px 0 2px; border-radius: 999px; background: #3f3f44; font: 700 6.5px/1 var(--ui); font-style: normal; letter-spacing: .04em; color: #e5e5ea; }
+#s-tabs .sbsite.ask .hub .ask-tg b { width: 10px; height: 10px; border-radius: 50%; background: #d6d6db; }
+#s-tabs .sbsite.ask .hub .rc-plat { margin-left: auto; transform-origin: 50% 50%; }
+#s-tabs .sbsite.ask .hub .qc-pi img[data-app="codex"] { border-radius: 50%; }
+
+
+/* ---- the end card: the line, then the mascot to its right ---- */
+#s-end .lock.ask-end { gap: 56px; }
+#s-end .ask-end .words h1 { font-size: 112px; letter-spacing: -.02em; white-space: nowrap; }
+#s-end .ask-end .words h1 br { display: none; }
+html[data-ar="1x1"] #s-end .lock.ask-end, html[data-ar="4x5"] #s-end .lock.ask-end, html[data-ar="9x16"] #s-end .lock.ask-end { flex-direction: row; gap: 32px; text-align: left; }
+html[data-ar="1x1"] #s-end .ask-end .words h1, html[data-ar="4x5"] #s-end .ask-end .words h1 { font-size: 96px; }
+html[data-ar="9x16"] #s-end .ask-end .words h1 { font-size: 64px; }
+html[data-ar="1x1"] #s-end .ask-end .words h1 br, html[data-ar="4x5"] #s-end .ask-end .words h1 br, html[data-ar="9x16"] #s-end .ask-end .words h1 br { display: inline; }
+html[data-ar="9x16"] #s-end .ask-end .face { width: 150px; height: 150px; }
+
+/* n8n cold open: the greeting resolves word by word */
+#s-tabs .sbsite.ask .ask-hero .ask-w { display: inline-block; opacity: 0; will-change: transform, filter; }
+/* Cursor's tasks rail: queued / running / done, top right of the thread */
+#s-tabs .sbsite.ask .ask-tasks { position: absolute; right: 10px; top: 12px; z-index: 4; width: 92px; padding: 7px 8px; border-radius: 8px; background: rgba(27,27,30,.92); border: 1px solid #2c2c31; opacity: 0; pointer-events: none; font: 600 7px/1 var(--ui); color: #c7c7cc; }
+#s-tabs .sbsite.ask .at-h { display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #8e8e93; }
+#s-tabs .sbsite.ask .at-h b { color: #e5e5ea; }
+#s-tabs .sbsite.ask .at-r { display: flex; align-items: center; gap: 5px; padding: 3px 0; white-space: nowrap; overflow: hidden; }
+#s-tabs .sbsite.ask .at-r i { flex: none; width: 6px; height: 6px; border-radius: 50%; border: 1px solid #55555b; }
+#s-tabs .sbsite.ask .at-r.run i { border-color: #2f5fd6; background: #2f5fd6; box-shadow: 0 0 6px #2f5fd6; }
+#s-tabs .sbsite.ask .at-r.run { color: #fff; }
+#s-tabs .sbsite.ask .at-r.done i { border-color: #34c759; background: #34c759; }

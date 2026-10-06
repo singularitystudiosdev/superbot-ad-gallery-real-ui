@@ -1,5 +1,5 @@
 // Generates manifest.json by scanning assets/. Run: node gen-manifest.mjs
-import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 
 const ONLY_GROUP = 'Ad spots';
 
@@ -1638,6 +1638,9 @@ for (const g of groups.filter(g => g.group === ONLY_GROUP)) {
 }
 
 for (const [id, title] of ads) {
+  // a trimmed spot's PNGs may be gone (the 2026-10-05 trim removed assets/ads for un-kept static ads); skip any whose
+  // files are absent instead of crashing, so the generator runs on a trimmed tree.
+  if (!AD_ARS.every((k) => existsSync(`assets/ads/${id}.${k}.png`))) continue;
   const sizes = {};
   for (const k of AD_ARS) sizes[k] = pngSize(`assets/ads/${id}.${k}.png`);
   items.push({ id, type: 'image', group: 'Ad spots', title, ars: AD_ARS, sizes,
@@ -1652,6 +1655,9 @@ const KEEP_IDS = new Set([
   'bikeride-model-switch-superbot-e13744a9',
   'every-model-converge-4x5-398eded5',
   'every-model-one-chat-sb-superbot-efa8df82',
+  // re-enabled (2026-10-06, 7267635b): the title-card cut of the bikeride spot, a ?cut of the ad already in the list, so
+  // it adds one thumbnail and one render, no new animation directory.
+  'bikeride-titlecards-superbot-7267635b',
 ]);
 const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 

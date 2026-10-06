@@ -510,6 +510,17 @@
     "desc": "The bikeride-model-switch spot with an A24-teaser ending grafted on. Cold open: the superbot mark centred over the ride's own establishing frame, the brand line \"EVERY MODEL. ONE CHAT.\" typed in below it. Then the same one ask (\"Relaxing Japanese bike riding game\") through Gemini (decals), Blender (3D props), ElevenLabs (sound effects) and Claude Opus 5.5 (the code). Then the close: a hard cut into the ride running full frame, three titles swapping in place over the motion (MAKE A GAME / IN ONE CHAT / superbot.gg), a held 1.2 s of black and silence, and the giant superbot wordmark end card with its corner tagline. 35.1 s, 1920x1080, 60 fps. Clip @prasenx (x.com/prasenx/status/2102717687604633959)."
   },
   {
+    "id": "bikeride-titlecards-superbot-7267635b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a relaxing Japanese bike riding game, title card cut: a cold open on the ride, then ONE ASK. / FOUR MODELS. / ONE RIDE. over the build, then the real Opus 5.5 build plays (4 switches)",
+    "src": "animations/bikeride-model-switch-superbot-e13744a9/?cut=titles",
+    "thumb": "assets/shots/bikeride-titlecards-superbot-7267635b.png",
+    "desc": "Variant of bikeride-model-switch-superbot-e13744a9 (?cut=titles), the teaser treatment: a cold open on the ride with \"ONE ASK. EVERY MODEL.\", the same one-ask chat (Gemini decals, Blender models, ElevenLabs sound, Claude Opus 5.5 code), then the ride held full frame in slow motion under three title cards, and an end card with the promise and superbot.gg over a longer dip to black and a light grain. Same ask, pills, camera and beats as the default cut.",
+    "download": "assets/video/bikeride-titlecards-superbot-7267635b.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-stocks-model-switch-superbot-8d2a45f0",
     "type": "animation",
     "group": "Ad spots",

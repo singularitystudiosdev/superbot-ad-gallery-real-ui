@@ -9,7 +9,7 @@
 // the scene's local time. ?v= on the beat imports busts GitHub Pages' 10-minute module cache on republish.
 import { lerp, seg, outCubic, inOutCubic, esc, boxIn, placeCursor, streamCount } from '../../lib.js';
 import { makeCursor } from '../../shell.js';
-import { ZOOM } from './cut.js?v=e2834f7d';
+import { ZOOM, TITLES } from './cut.js?v=e2834f7d';
 import art from './beats/art.js?v=e2834f7d';
 import blender from './beats/blender.e2834f7d.js?v=e2834f7d';
 import assets from './beats/assets.js?v=e2834f7d';
@@ -94,7 +94,8 @@ function timeBeats(route) {
       end = k.reply;                  // the check's own pop (0.2 s) has finished by then
     }
     let r = k.reply;
-    const opts = { ...a.opts, zoom: ZOOM };
+    const opts = { ...a.opts, zoom: ZOOM, titles: TITLES };
+    k.opts = opts;   // the beat builders read k.opts (play.js decides its finale from opts.titles)
     k.parts = a.mods.map((mod) => {
       const T = mod.times(r, opts);
       end = Math.max(end, T.end);

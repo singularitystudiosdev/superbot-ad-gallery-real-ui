@@ -21,6 +21,12 @@ const POSTER = 'bike/poster.jpg';
 const CLIP = 'bike/ride.mp4';
 const CLIP_LEN = 3.4; /* deliberate */ // ride.mp4's length
 const ON_SCREEN = 3.0; /* deliberate */ // clip start to the scene's fade to the end card (the brief's ~3 s ending)
+// titles cut (chat.js passes opts.titles): the ride is held full frame longer and slowed, so three title cards can
+// hard-cut in under it. 3.4 s of footage at 0.52x spans ~6.5 s, matching TITLES_ON.
+const TITLES_ON = 6.6; /* deliberate */
+const TITLE_RATE = 0.52; /* deliberate */
+const CARDS = ['ONE ASK.', 'FOUR MODELS.', 'ONE RIDE.'];
+const TITLE_HOLD = 1.5, TITLE_GAP = 0.35, TITLE_FADE = 0.22; // per card, from T.full
 const CLIP_END = CLIP_LEN - 0.05;     // inside the last frame: a seek never lands past the end
 const CPS = 80;
 const CARD_AT = 0.25;                  // "Press play." streams, then the card lands
@@ -46,13 +52,13 @@ function hookSeek() {
 }
 
 export default {
-  times(r) {
-    const T = { r };
+  times(r, opts = {}) {
+    const T = { r, titles: !!opts.titles };
     T.card = r + CARD_AT;              // the card lands in the chat, the poster under a play glyph
     T.c0 = T.card + CARD_IN;           // ...and once it has landed the clip starts rolling in it
     T.grow = T.c0 + CARD_HOLD;         // the card starts opening
     T.full = T.grow + GROW;            // full frame
-    T.end = T.c0 + ON_SCREEN;          // full frame until here, then the scene fades to the end card
+    T.end = T.c0 + (T.titles ? TITLES_ON : ON_SCREEN); // then the scene fades to the end card
     return T;
   },
   build(k, x) {
@@ -67,6 +73,15 @@ export default {
     const layer = x.el(`<div class="play-full" aria-hidden="true"><video class="play-vid" playsinline preload="auto" poster="${x.img(POSTER)}" src="${x.img(CLIP)}"></video><span class="play-btn">${PLAY}</span></div>`);
     x.root.appendChild(layer);
     const vid = layer.querySelector('video'), btn = layer.querySelector('.play-btn');
+    const titles = !!(k.opts && k.opts.titles);
+    let tcards = [];
+    if (titles) {
+      vid.playbackRate = TITLE_RATE;   // slowed, so the 3.4 s clip spans TITLES_ON
+      const wrap = document.createElement('div');
+      wrap.className = 'play-titles';
+      tcards = CARDS.map((c) => { const d = document.createElement('div'); d.className = 'play-title'; d.textContent = c; wrap.appendChild(d); return d; });
+      layer.appendChild(wrap);         // inside the full-frame layer, so the cards sit over the ride and clip with it
+    }
     vid.muted = true; // the muted content attribute does not set the IDL property; start muted, unmute on the first live play
     vid.defaultMuted = true;
 
@@ -114,10 +129,12 @@ export default {
           if (HOLD.fresh) { HOLD.t = t; HOLD.fresh = false; } else if (Math.abs(t - HOLD.t) > 0.02) HOLD.on = false;
         }
         const running = !document.body.classList.contains('freeze') && !HOLD.on && now - clkAt < 150;
+        const rate = titles ? TITLE_RATE : 1;
         const len = Number.isFinite(vid.duration) && vid.duration > 0 ? vid.duration - 0.05 : CLIP_END;
-        const want = clamp(t - T.c0, 0, Math.min(CLIP_END, len));
+        const clip = Math.min(CLIP_END, len);             // the clip's own length (footage seconds)
+        const want = clamp((t - T.c0) * rate, 0, clip);   // slowed to `rate`, so currentTime tracks t * rate
         // live through the scene's fade to the end card too (the file runs past T.end), so the fade is not a stepped seek
-        const live = running && t >= T.c0 && t < T.c0 + Math.min(CLIP_END, len);
+        const live = running && t >= T.c0 && t < T.c0 + clip / rate;
         if (live) {
           playing = true;
           if (vid.paused) start();
@@ -126,6 +143,15 @@ export default {
           playing = false;
           if (!vid.paused) vid.pause();
           if (vid.readyState >= 1 && Math.abs(vid.currentTime - want) > SEED_TOL) vid.currentTime = want;
+        }
+        // the titles cut: three cards hard-cut in under the ride, in the lower third
+        if (titles) {
+          const start = T.full + 0.15;
+          tcards.forEach((el, i) => {
+            const a = start + i * (TITLE_HOLD + TITLE_GAP);
+            const o = seg(t, a, a + TITLE_FADE) * (1 - seg(t, a + TITLE_HOLD, a + TITLE_HOLD + TITLE_FADE));
+            el.style.opacity = o.toFixed(3);
+          });
         }
       },
       // after the camera: pin the layer over the card's picture, then open it to the whole frame

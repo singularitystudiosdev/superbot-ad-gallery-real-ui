@@ -5,29 +5,32 @@
 // and the superbot end card (the mark and the wordmark, drawn here).
 import * as lib from './lib.js';
 import * as shell from './shell.js';
-import { CUT } from './scenes/tabs-assets/cut.js?v=e2834f7d';
+import { CUT, TITLES } from './scenes/tabs-assets/cut.js?v=e2834f7d';
 
 const { clamp, lerp, seg, outQuint } = lib;
 const H = 1080;
 const W = () => (window.AR && window.AR.w) || 1920;
 const stage = document.getElementById('stage');
 const dip = document.getElementById('dip');
+document.body.classList.add('cut-' + CUT);
+// the titles cut carries a light film grain over the whole stage (jittered from t in render(), kept seek-exact)
+let grain = null;
+if (TITLES) { grain = document.createElement('div'); grain.className = 'grain'; grain.setAttribute('aria-hidden', 'true'); stage.appendChild(grain); }
 
 // ---------- the sequence ----------
 // the hub cropped to its thread, fading up from black on the empty state, then the one-ask chat
 // "Relaxing Japanese bike riding game" (scenes/tabs-assets/chat.js: Gemini, Blender, ElevenLabs, Claude Opus 5.5,
 // one switch pill each; in the default zoom cut the camera pushes in on every pill, in ?cut=nozoom it never moves;
 // it ends on the ride playing full frame), then the end card
-const SEQUENCE = [
-  ['scene', 'tabs'],
-  ['end', 'end'],
-];
+const SEQUENCE = TITLES
+  ? [['scene', 'open'], ['scene', 'tabs'], ['end', 'end']]
+  : [['scene', 'tabs'], ['end', 'end']];
 // the durations a scene gets if its module fails to load (so the spot keeps its shape). A loaded scene reports its
 // own dur (tabs: its content-driven chat schedule + the 0.3 s fade), which is what CYCLE follows; this mirrors it by
 // hand, per cut (measured v4: zoom CHAT_END 19.554 + 0.3, nozoom 17.954 + 0.3).
-const FALLBACK_DUR = { tabs: CUT === 'nozoom' ? 18.254 : 19.854 };
+const FALLBACK_DUR = { open: 2.6, tabs: CUT === 'nozoom' ? 18.254 : 19.854 };
 const SCENE_FADE = 0.3;
-const END_DUR = 4.4, DIP = 0.35; /* deliberate */ // the end card holds; the dip to black at the loop
+const END_DUR = TITLES ? 4.8 : 4.4, DIP = TITLES ? 0.9 : 0.35; /* deliberate */ // the end card holds; the dip to black at the loop
 
 // ---------- the end card (waffles-website drawEnd) ----------
 // The lock-up is a full-frame composition, so on a narrower frame it scales with the frame width: 4:3 (1440)
@@ -35,10 +38,13 @@ const END_DUR = 4.4, DIP = 0.35; /* deliberate */ // the end card holds; the dip
 // margin each side instead of hanging off both edges. style.css holds the matching rules.
 const END_SCALE = { '4x3': 0.75 };
 function buildEnd(sec) {
-  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot</h1></div></div><div class="face"></div></div>';
+  sec.innerHTML = `<div class="lock ask-end">
+    <div class="words"><div class="end-slide"><h1>superbot</h1></div>${TITLES ? '<div class="end-tag">ONE ASK. EVERY MODEL.</div><div class="end-cta">superbot.gg</div>' : ''}</div>
+    <div class="face"></div>${TITLES ? '<div class="end-sweep" aria-hidden="true"></div>' : ''}</div>`;
   const mark = shell.makeMark(Math.round(220 * (END_SCALE[(window.AR && window.AR.key)] || 1)));
   sec.querySelector('.face').appendChild(mark.el);
-  return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
+  return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark,
+    tag: sec.querySelector('.end-tag'), cta: sec.querySelector('.end-cta'), sweep: sec.querySelector('.end-sweep') };
 }
 const END_IN = 0.5; /* deliberate */   // the mascot scales up into place
 const END_SLIDE = 0.7; /* deliberate */ // the wordmark slides out from behind it
@@ -54,6 +60,16 @@ function renderEnd(e, lt) {
   e.slide.style.transform = `translateX(${((1 - outQuint(w)) * 110).toFixed(2)}%)`;
   lib.op(e.slide, w);
   e.mark.render(lt);
+  // the titles cut: the promise and the call to action rise under the wordmark, and a specular sweep crosses the lock
+  if (e.tag) {
+    const ti = seg(lt, 0.8, 1.3);
+    lib.op(e.tag, ti);
+    e.tag.style.transform = `translateY(${((1 - lib.outCubic(ti)) * 8).toFixed(2)}px)`;
+    lib.op(e.cta, seg(lt, 1.5, 2.0));
+    const sw = seg(lt, 1.15, 2.35);
+    e.sweep.style.transform = `translateX(${(-130 + 260 * sw).toFixed(2)}%)`;
+    e.sweep.style.opacity = (seg(lt, 1.05, 1.25) * (1 - seg(lt, 2.25, 2.5))).toFixed(3);
+  }
 }
 
 // ---------- load the scene modules (a broken module must not take the spot down) ----------
@@ -135,6 +151,8 @@ function render(t) {
   }
   // the dip at the loop: the end card goes to black over its last DIP seconds (t=0 opens on black too)
   dip.style.opacity = seg(t, CYCLE - DIP, CYCLE).toFixed(3);
+  // the titles cut's grain jitters deterministically from t
+  if (grain) grain.style.transform = `translate(${(lib.rand(t * 24) * 9).toFixed(1)}px, ${(lib.rand(t * 24 + 7.3) * 9).toFixed(1)}px)`;
 }
 
 // ---------- fit the stage to the window (assets/ar.js sets the width) ----------

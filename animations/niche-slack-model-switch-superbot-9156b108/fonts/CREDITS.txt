@@ -1,9 +1,0 @@
-fonts/ CREDITS (internal)
-
-lato-latin-{400,700,900}-normal.woff2
-  Lato, latin subset, from @fontsource/lato 5.3.0
-  (https://cdn.jsdelivr.net/npm/@fontsource/lato/files/lato-latin-<weight>-normal.woff2), fetched 2026-10-03,
-  unmodified. Copyright 2010-2014 Lukasz Dziedzic (tyPoland, http://www.typoland.com/).
-  Licence: SIL Open Font License 1.1 (https://openfontlicense.org).
-  Used for the Slack-styled UI (scenes/tabs-assets/beats/slack.css @font-face "Lato SK"): Lato is Slack's UI typeface.
-  Vendored so nothing is fetched at render. The superbot hub keeps the source ad's families.

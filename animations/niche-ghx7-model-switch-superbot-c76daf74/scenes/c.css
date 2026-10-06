@@ -1,3 +1,0 @@
-/* Beat C: dark superbot backdrop, same framed GitHub window geometry as beat A. */
-#s-c { background: #07080a; }
-#s-c .ghf { position: absolute; left: 80px; top: 40px; will-change: transform; }

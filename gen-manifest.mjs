@@ -1645,7 +1645,15 @@ for (const [id, title] of ads) {
 }
 
 // Ship only the ad spots; the other groups stay defined above for easy re-enable.
-const shipped = items.filter(i => i.group === ONLY_GROUP);
+// The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
+// spot's entries stay defined above so a later pass can re-enable them by removing an id here.
+const KEEP_IDS = new Set([
+  'niche-youtube-model-switch-superbot-3828921d',
+  'bikeride-model-switch-superbot-e13744a9',
+  'every-model-converge-4x5-398eded5',
+  'every-model-one-chat-sb-superbot-efa8df82',
+]);
+const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 
 writeFileSync('manifest.json', JSON.stringify(shipped, null, 2));
 console.log(`manifest.json: ${shipped.length} items (${ONLY_GROUP})`);

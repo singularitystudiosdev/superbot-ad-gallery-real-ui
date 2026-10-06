@@ -1,7 +1,0 @@
-Logo files (copied unmodified from the gallery's bikeride-model-switch-superbot-e13744a9/brand/), used nominatively to name the services a subscription belongs to:
-- claude-logo.svg: simple-icons "claude" (CC0), fill #fff. Claude is a trademark of Anthropic.
-- openai-logo.svg: OpenAI round badge, from animations/who-are-you-superbot-268c902c/assets/openai.svg. OpenAI and ChatGPT are trademarks of OpenAI.
-- gemini-logo.svg: Google Gemini icon 2025, Wikimedia Commons File:Google_Gemini_icon_2025.svg. Gemini is a trademark of Google.
-- deepseek-logo.svg: lobehub icons-static-svg deepseek-color.svg, unmodified. DeepSeek is a trademark of DeepSeek.
-superbot mark: ../../assets/sb-mark-live.js (gallery shared asset).
-Per-token list prices shown: openrouter.ai/api/v1/models, read 2026-10-05.

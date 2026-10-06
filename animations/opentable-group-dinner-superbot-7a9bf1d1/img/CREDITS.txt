@@ -1,4 +1,0 @@
-opentable-group-dinner-superbot-7a9bf1d1 stills (2026-10-05)
-tacos.jpg, bowl.jpg, pasta.jpg, sushi.jpg, burger.jpg, room.jpg: generated for this ad by Nano Banana Pro
-(google/gemini-3-pro-image-preview via OpenRouter), prompts in the builder's assets-src/gen.63289434.mjs. Owned output,
-no third-party footage or attribution owed.

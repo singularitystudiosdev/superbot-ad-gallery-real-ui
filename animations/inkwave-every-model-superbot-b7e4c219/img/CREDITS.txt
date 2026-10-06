@@ -1,6 +1,0 @@
-img CREDITS (inkwave-every-model-superbot)
-
-All media for this ad lives in img/ink/ and is credited in img/ink/CREDITS.txt: every frame and the clip are cut from
-the "Splatoon Game made by Opus 5.5" video by @JaydenDavisNC,
-https://x.com/JaydenDavisNC/status/2103357848961036304
-Beat workers add their sourced files under img/ink/<beat>/ with their own CREDITS.txt.

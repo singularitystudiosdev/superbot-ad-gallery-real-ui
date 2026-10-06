@@ -1,4 +1,0 @@
-three.js r186 (npm three@0.186.1), MIT (see LICENSE). Vendored 2026-09-28 for beats/meshy.js.
-Files: build/three.module.js, build/three.core.js (unchanged), examples/jsm/loaders/GLTFLoader.js,
-examples/jsm/utils/BufferGeometryUtils.js, examples/jsm/utils/SkeletonUtils.js, examples/jsm/environments/RoomEnvironment.js (bare 'three' import rewritten to
-'../../../build/three.module.js'; nothing else changed).

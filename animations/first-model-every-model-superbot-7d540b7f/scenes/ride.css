@@ -1,5 +1,0 @@
-/* ride: the post's own footage, full size (object-fit cover) in a window that ride.js clips from the chat card's rect
-   to the full frame. Every value that moves is written by ride.js render(lt); no transitions or keyframes here. */
-#s-ride { background: #0a0a0b; }
-#s-ride .rd-win { position: absolute; inset: 0; overflow: hidden; background: #0a0a0b; }
-#s-ride .rd-vid { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; background: #0a0a0b; }

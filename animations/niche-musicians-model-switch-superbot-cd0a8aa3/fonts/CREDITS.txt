@@ -1,9 +1,0 @@
-fonts/ CREDITS (internal)
-
-inter-latin-wght-normal.woff2
-  Inter (variable, wght axis 100 to 900), latin subset, from @fontsource-variable/inter 5.3.0
-  (https://cdn.jsdelivr.net/npm/@fontsource-variable/inter@5/files/inter-latin-wght-normal.woff2), fetched 2026-10-03,
-  unmodified. Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter).
-  Licence: SIL Open Font License 1.1 (https://openfontlicense.org).
-  Used on the Bandcamp page (scenes/tabs-assets/beats/bandcamp.css @font-face "Inter BC") as the last fallback
-  after Bandcamp's own stack 'Helvetica Neue', Helvetica, Arial. Vendored so nothing is fetched at render.

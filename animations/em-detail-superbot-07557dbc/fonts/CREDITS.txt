@@ -1,2 +1,0 @@
-gochi-hand.woff2   Gochi Hand by Huerta Tipografica, SIL Open Font License 1.1, from Google Fonts
-                   (fonts.googleapis.com/css2?family=Gochi+Hand). Used for the meme card's lettering preview.

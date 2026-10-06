@@ -1,8 +1,0 @@
-/* scenes/end.css, beat F: the lock-up on the dark stage (wordmark weight and tracking from
-   ../niche-ytv5-model-switch-superbot-b0c8e364/style.css #s-end). Scoped under #s-end. */
-#s-end { z-index: 4; background: radial-gradient(1200px 800px at 50% 46%, #0f1218 0%, #07090c 70%); }
-#s-end .end-lock { position: absolute; left: 50%; top: 50%; display: flex; flex-direction: column; align-items: center; gap: 30px; transform-origin: 50% 50%; }
-#s-end .end-row { display: flex; align-items: center; gap: 48px; }
-#s-end h1 { margin: 0; font: 800 150px/1 var(--ui); letter-spacing: -.035em; color: #fff; }
-#s-end .end-mark { flex: none; width: 200px; height: 200px; display: grid; place-items: center; }
-#s-end p { margin: 0; font: 600 52px/1 var(--ui); letter-spacing: .005em; color: #b9bcc6; }

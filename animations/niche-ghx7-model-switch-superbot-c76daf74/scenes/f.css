@@ -1,9 +1,0 @@
-/* Beat F: PR #483 Checks. Same dark backdrop and framed window placement as E; caption sits in the reserved strip. */
-#s-f { background: radial-gradient(120% 92% at 50% 0%, #1a2030 0%, #0b0d12 68%, #07080a 100%); }
-#s-f > .ghf {
-  position: absolute; left: 80px; top: 38px;
-  transform-origin: 50% 50%;
-  will-change: transform;
-}
-/* the graph highlight: the run graph card gets a faint lift so the moving nodes read against the panel */
-#s-f .gh-graph { box-shadow: 0 0 0 1px rgba(31, 35, 40, .06); }

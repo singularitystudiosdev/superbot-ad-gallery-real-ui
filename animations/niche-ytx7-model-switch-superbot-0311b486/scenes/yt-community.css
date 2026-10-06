@@ -1,8 +1,0 @@
-/* scenes/yt-community.css: the yt-community scene (scenes/yt-community.js). One superbot window holding the channel
-   Posts tab inside a camera box (.yc-cam) that render(lt) zooms for the final push-in. Every moving value is written
-   by render(lt): nothing here transitions or animates. */
-.yc .ytf-screen { background: #fff; }
-.yc .yc-cam { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; transform-origin: 0 0; background: #fff; }
-/* the composer preview grows its box while attaching: the image keeps its full size and is revealed, never squashed */
-.yc .ytp-c-img { transform-origin: 0 0; }
-.yc .ytp-c-img img.yc-cimg { height: 168px; }

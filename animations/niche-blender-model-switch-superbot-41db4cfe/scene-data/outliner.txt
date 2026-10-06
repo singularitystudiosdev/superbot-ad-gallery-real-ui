@@ -1,8 +1,0 @@
-Scene Collection
-  AlarmClock
-    AlarmClock_rig
-  Camera_85mm
-  Fill light
-  Key light
-  Rim light
-  Sweep

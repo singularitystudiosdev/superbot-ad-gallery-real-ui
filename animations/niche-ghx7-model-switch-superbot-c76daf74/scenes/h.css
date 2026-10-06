@@ -1,9 +1,0 @@
-/* Beat H: Projects board. Dark backdrop, framed window; no caption for this fast beat. */
-#s-h { background: radial-gradient(120% 92% at 50% 0%, #1a2030 0%, #0b0d12 68%, #07080a 100%); }
-#s-h > .ghf {
-  position: absolute; left: 80px; top: 38px;
-  transform-origin: 50% 50%;
-  will-change: transform;
-}
-/* the moving hero card rides above the neighbouring cards while it slides between columns */
-#s-h .gh-pcard[data-card="482"] { position: relative; }

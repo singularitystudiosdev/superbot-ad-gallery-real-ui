@@ -1,9 +1,0 @@
-img/ CREDITS (internal): the one image in this spot, where it came from, and the licence. Provenance is never shown on screen.
-
-mic-thumb.jpg   The thumbnail of the spot's fictional upload "Every Budget Mic I Own, Ranked" (Sam Rivera), shown in
-                every YouTube Studio comment row. Composed 2026-10-05 (work/a2-07-heart-581ce8cc/photos/thumb.581ce8cc.mjs)
-                over the photo "four black microphones" by Rob Sarmiento,
-                https://unsplash.com/photos/four-black-microphones-xkAJ3vcQQb0 (downloaded from
-                https://unsplash.com/photos/xkAJ3vcQQb0/download?force=true&w=1600), Unsplash License (free to use,
-                commercial use allowed, no attribution required). Cropped to 16:9, a dark scrim on the left, the title
-                type ("EVERY BUDGET MIC / RANKED", three price tags $29 / $49 / $120) set in Anton (SIL OFL 1.1).

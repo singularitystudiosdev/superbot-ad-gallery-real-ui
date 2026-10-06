@@ -1,4 +1,0 @@
-Brand marks are used nominatively to name the products Superbot routes to and replaces.
-claude-logo.svg, openai-logo.svg, gemini-logo.svg, deepseek-logo.svg: copied from animations/austerlitz-every-model-superbot-282e0654/brand/ in this gallery (see its CREDITS.txt for sources).
-cursor-logo.svg: copied from animations/bikeride-model-switch-superbot-e13744a9/brand/ in this gallery.
-Superbot mascot: ../../assets/sb-mark-live.js (shared gallery asset).

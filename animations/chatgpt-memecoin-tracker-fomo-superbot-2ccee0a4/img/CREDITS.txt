@@ -1,8 +1,0 @@
-img CREDITS (chatgpt-memecoin-tracker-fomo-superbot-2ccee0a4)
-
-This spot ships no photographic image assets. The hub chrome, the work cards, the volume bars and the app screen are
-drawn in CSS/SVG from code in this folder. Third-party marks: fomo's app icon and the icons of the eight real coins in
-the watchlist (see ../brand/CREDITS.txt).
-
-The coins are real and listed on fomo, but the market figures and every alert are fictional mock UI data. superbot is
-shown as a read-only tracker: it watches and sends alerts, and takes no action in the account.

@@ -1,0 +1,20 @@
+niche-youtube-model-switch-superbot-7993d5b0, image provenance (2026-10-06)
+
+All raster images in this folder are original work made for this spot; no third-party photos or footage are used.
+
+wren-hero.webp, wren-rival.webp, stage-0..4.webp, turn/t00..t23.jpg
+  Rendered in Blender 5.2.2 LTS from an original procedural model (the "Wren H2" headset, a made-up product).
+  Script: work/ytpremiere-7993d5b0/assets-src/blender/headset.7993d5b0.py (Cycles for hero/rival/turntable,
+  Workbench for the clay stages). The same model ships as guide/wren-h2.glb.
+
+thumb-a.jpg, thumb-b.jpg, thumb-c.jpg
+  Thumbnails composed over the Blender renders above (typography and colour fields only), headless Chrome,
+  source work/ytpremiere-7993d5b0/assets-src/banana/compose.7993d5b0.html. They stand in for the Nano Banana Pro
+  generations shown in the spot until fal / Gemini API credit is available; same file names, swapped in place.
+
+guide-shot.webp
+  Headless capture of guide/index.html (this folder), the real page the Opus beat builds, with the GLB rendered
+  live by <model-viewer> 4.3.1 (Google, Apache-2.0, loaded from ajax.googleapis.com).
+
+Data: headset names, prices, review counts and comment counts are made up. Waveform in el.js / bl.js is drawn from
+a stand-in voice track (macOS "Reed"), assets-src/audio/standin.aiff, until the Eleven v4 take can be generated.

@@ -1,0 +1,24 @@
+/* Nano Banana Pro window (nb.js): Gemini's dark chat with the image model picked */
+#s-tabs .sbsite .hub .nb { position: absolute; inset: 0; display: flex; flex-direction: column; background: #131314; color: #e3e3e3; font: 400 8.4px/1.4 "GSF", "Google Sans", -apple-system, sans-serif; }
+#s-tabs .sbsite .hub .nb-top { flex: 0 0 26px; display: flex; align-items: center; gap: 8px; padding: 0 12px; }
+#s-tabs .sbsite .hub .nb-word { font: 500 12px/1 "GSF", "Google Sans", -apple-system, sans-serif; color: #e3e3e3; }
+#s-tabs .sbsite .hub .nb-pick { padding: 3px 8px; border-radius: 999px; background: #1e1f20; color: #c4c7c5; font-size: 7.8px; }
+#s-tabs .sbsite .hub .nb-sp { flex: 1; }
+#s-tabs .sbsite .hub .nb-tool { padding: 3px 9px; border-radius: 999px; background: #1f3760; color: #d3e3fd; font-size: 7.8px; }
+#s-tabs .sbsite .hub .nb-body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 8px; padding: 2px 16px 8px; }
+#s-tabs .sbsite .hub .nb-user { align-self: flex-end; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 360px; }
+#s-tabs .sbsite .hub .nb-refs { display: flex; gap: 4px; }
+#s-tabs .sbsite .hub .nb-refs img { width: 46px; height: 34px; object-fit: contain; border-radius: 6px; background: #2b2c2e; }
+#s-tabs .sbsite .hub .nb-ptext { padding: 6px 10px; border-radius: 14px 4px 14px 14px; background: #282a2c; font-size: 8.4px; }
+#s-tabs .sbsite .hub .nb-ans { display: flex; gap: 8px; min-height: 0; }
+#s-tabs .sbsite .hub .nb-spark { flex: 0 0 14px; width: 14px; height: 14px; margin-top: 1px; }
+#s-tabs .sbsite .hub .nb-out { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+#s-tabs .sbsite .hub .nb-making { color: #c4c7c5; font-size: 8.4px; opacity: 0; }
+#s-tabs .sbsite .hub .nb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; opacity: 0; }
+#s-tabs .sbsite .hub .nb-fig { position: relative; margin: 0; }
+#s-tabs .sbsite .hub .nb-ph, #s-tabs .sbsite .hub .nb-fig img { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 9px; }
+#s-tabs .sbsite .hub .nb-ph { background: linear-gradient(100deg, #1e1f20 30%, #3a3d42 50%, #1e1f20 70%) 0 0 / 300% 100%, #1e1f20; }
+#s-tabs .sbsite .hub .nb-fig img { position: absolute; left: 0; top: 0; object-fit: cover; opacity: 0; }
+#s-tabs .sbsite .hub .nb-fig figcaption { display: flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 7.4px; color: #9aa0a6; opacity: 0; }
+#s-tabs .sbsite .hub .nb-fig figcaption b { width: 13px; height: 13px; border-radius: 50%; display: grid; place-items: center; background: #e3e3e3; color: #131314; font-size: 7.4px; }
+#s-tabs .sbsite .hub .nb-note { font-size: 7.2px; color: #9aa0a6; opacity: 0; }

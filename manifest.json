@@ -103,6 +103,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "niche-youtube-model-switch-superbot-7993d5b0",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Get my headset video ready to premiere Friday · premiere relay (16:9): DeepSeek V4 Pro, Eleven v4, Blender 5.2, Nano Banana Pro, Claude Opus 5.5, then YouTube Studio (6 hand-offs)",
+    "src": "animations/niche-youtube-model-switch-superbot-7993d5b0/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-7993d5b0.png",
+    "desc": "Rebuild of the YouTube Studio spot with a new deliverable and a new switch order, every model doing only what it is actually for, every output handed to the next. One ask, get my headset video ready to premiere Friday. DeepSeek V4 Pro with DeepThink and Search on walks Amazon review pages to the end, retries a Best Buy 403 with a rotated user agent, and pulls Walmart, Reddit and nine rival videos' comments into a price and mic table; its hook ($39 beat $99) goes to Eleven v4, which voices the trailer with audio tags and makes the hit. Blender 5.2 models the winning headset, renders it in Cycles and cuts the turntable trailer to the voice. Nano Banana Pro turns the renders into three thumbnails for Test & compare. Claude Opus 5.5 in Claude Code writes and deploys the buyer's guide with the 3D model live in the page. YouTube Studio gets all of it: title and chapters, the guide link, A/B/C thumbnails, the trailer, and a premiere scheduled for Friday 6:00 PM. Each app window is 16:9 and fills the frame. The Blender renders, the GLB and the guide page are real; the thumbnails are composed over the renders and the waveform comes from a stand-in voice until generator credit is back. Headset names, prices and counts are made up.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-7993d5b0.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-converge-4x5-398eded5",
     "type": "animation",
     "group": "Ad spots",

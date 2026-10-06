@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: Get my headset video ready to premiere Friday</title>
+<meta name="description" content="One ask in superbot, relayed model to model: DeepSeek V4 Pro scrapes every price and review, Eleven v4 voices the trailer, Blender 5.2 models and renders the winning headset, Nano Banana Pro makes three thumbnails from the render, Claude Opus 5.5 builds the buyer's guide, and YouTube Studio schedules the premiere with all of it.">
+<script src="../../assets/ar.js"></script>
+<link rel="stylesheet" href="../../assets/ar.css">
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=7993d5b0">
+<link rel="stylesheet" href="publish-ui.css?v=7993d5b0">
+<link rel="stylesheet" href="../../assets/hub-real.css">
+<link rel="stylesheet" href="shell.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=7993d5b0">
+<!-- one stylesheet per beat (scenes/tabs-assets/beats/<name>.css), scoped under #s-tabs -->
+<link rel="stylesheet" href="scenes/tabs-assets/beats/kit.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/ds.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/el.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/bl.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/nb.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/op.css?v=7993d5b0">
+<link rel="stylesheet" href="scenes/tabs-assets/beats/studio.css?v=7993d5b0">
+<!-- scenes/<id>.css are linked by timeline.js, one per scene module -->
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="shell.js">
+</head>
+<body>
+<div id="stage">
+  <!-- timeline.js creates one <section class="scene" id="s-<id>"> per segment (cards, scenes, end) in order -->
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="timeline.js?v=7993d5b0"></script>
+</body>
+</html>

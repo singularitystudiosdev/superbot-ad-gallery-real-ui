@@ -1,0 +1,20 @@
+/* the relay's window card (kit.js): a 16:9 app window with superbot's hand-off strip under it */
+#s-tabs .sbsite .hub .kc { position: relative; width: 600px; height: 338px; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+  background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e, 0 10px 30px rgba(0,0,0,.35); opacity: 0; }
+#s-tabs .sbsite .hub .kc-app { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .kc-io { flex: 0 0 26px; display: flex; align-items: center; gap: 4px; padding: 0 9px; background: #0d0d0f; border-top: 1px solid #25252a;
+  font: 700 7px/1 var(--ui); letter-spacing: .08em; color: #8e8e96; white-space: nowrap; }
+#s-tabs .sbsite .hub .kc-lab { margin-right: 1px; }
+#s-tabs .sbsite .hub .kc-ask { font: 500 8.5px/1 var(--ui); letter-spacing: 0; color: #c9c9cf; }
+#s-tabs .sbsite .hub .kc-sp { flex: 1; }
+#s-tabs .sbsite .hub .kc-chip { display: inline-flex; align-items: center; gap: 3px; height: 15px; padding: 0 5px; border-radius: 5px; background: #1b1b1f;
+  box-shadow: inset 0 0 0 1px #2f2f35; font: 500 7.3px/1 var(--font-mono); letter-spacing: 0; color: #e4e4e7; }
+#s-tabs .sbsite .hub .kc-chip img { width: 10px; height: 10px; object-fit: contain; }
+#s-tabs .sbsite .hub .kc-chip[data-i^="o"] { opacity: 0; background: #16201a; box-shadow: inset 0 0 0 1px #2c4a35; color: #c8f2d4; }
+#s-tabs .sbsite .hub .kc-outl { opacity: 0; color: #6fdc8c; }
+#s-tabs .sbsite .hub .kc-arrow { opacity: 0; font: 600 10px/1 var(--ui); color: #8e8e96; }
+#s-tabs .sbsite .hub .kc-next { opacity: 0; display: inline-flex; align-items: center; gap: 4px; height: 16px; padding: 0 7px 0 3px; border-radius: 999px; background: #232327;
+  font: 600 8px/1 var(--ui); letter-spacing: 0; color: #f2f2f4; }
+#s-tabs .sbsite .hub .kc-next img { width: 11px; height: 11px; object-fit: contain; border-radius: 3px; }
+#s-tabs .sbsite .hub .kc-next.kc-n-dark img { background: #000; padding: 1px; }
+#s-tabs .sbsite .hub .kc-next.kc-n-opus img { background: #d97757; padding: 1.5px; filter: none; }

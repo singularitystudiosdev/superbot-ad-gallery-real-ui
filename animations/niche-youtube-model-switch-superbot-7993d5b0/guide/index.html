@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 headsets under $100, ranked by mic · Sam Rivera</title>
+<meta property="og:image" content="thumb-a.jpg">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
+<style>
+  :root { --ink: #f4f1ec; --dim: #a29d96; --line: #2a2724; --bg: #12100e; --hot: #ff6a1a; --win: #3ddc84; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  nav { display: flex; align-items: center; gap: 28px; padding: 18px 48px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  nav b { font-size: 16px; margin-right: auto; letter-spacing: -.01em; }
+  nav a { color: var(--dim); text-decoration: none; }
+  nav a.on { color: var(--ink); }
+  .hero { display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; gap: 24px; padding: 40px 48px 8px; }
+  .kick { display: inline-flex; gap: 8px; align-items: center; color: var(--hot); font-weight: 600; font-size: 14px; }
+  .kick i { width: 8px; height: 8px; border-radius: 50%; background: var(--hot); }
+  h1 { font-size: 56px; line-height: 1.02; letter-spacing: -.035em; margin: 14px 0 16px; }
+  h1 em { font-style: normal; color: var(--hot); }
+  .sub { color: var(--dim); font-size: 18px; max-width: 30ch; }
+  .cta { display: flex; gap: 12px; margin-top: 28px; }
+  .btn { border: 0; border-radius: 999px; padding: 12px 20px; font: 600 15px system-ui, sans-serif; cursor: pointer; }
+  .btn.yt { background: #ff0033; color: #fff; }
+  .btn.ghost { background: #1f1c19; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+  model-viewer { width: 100%; height: 400px; --poster-color: transparent; }
+  h2 { font-size: 22px; letter-spacing: -.02em; padding: 8px 48px 12px; }
+  table { width: calc(100% - 96px); margin: 0 48px 40px; border-collapse: collapse; font-size: 15px; }
+  th { text-align: left; color: var(--dim); font-weight: 500; font-size: 13px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  td { padding: 11px 10px; border-bottom: 1px solid var(--line); }
+  td.num { font-variant-numeric: tabular-nums; }
+  tr.win td { background: rgba(255, 106, 26, .08); }
+  .bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--win); margin-right: 8px; vertical-align: middle; }
+  footer { color: var(--dim); font-size: 13px; padding: 0 48px 40px; }
+</style>
+</head>
+<body>
+<nav><b>Sam Rivera</b><a href="#">Videos</a><a href="#">Mics</a><a class="on" href="#">Headsets</a></nav>
+
+<section class="hero">
+  <div>
+    <span class="kick"><i></i>Premieres Fri, Oct 9 · 6:00 PM</span>
+    <h1>The <em>$39</em> headset beat the $99 one.</h1>
+    <p class="sub">I tested 10 gaming headsets under $100. Every price below was checked today.</p>
+    <div class="cta">
+      <button class="btn yt" onclick="location.href='https://youtube.com/'">Set a reminder</button>
+      <button class="btn ghost" id="play">▶ Play trailer</button>
+    </div>
+  </div>
+  <model-viewer src="wren-h2.glb" poster="hero.png" alt="Wren H2 headset, 3D"
+    auto-rotate camera-controls interaction-prompt="none" camera-orbit="35deg 78deg 0.62m" exposure="1.1" shadow-intensity="0.6"></model-viewer>
+</section>
+
+<h2>All 10, ranked by mic</h2>
+<table id="rank">
+  <thead><tr><th>#</th><th>Headset</th><th>Reviews say the mic is clear</th><th>Lowest price today</th><th>Where</th><th>Biggest complaint</th></tr></thead>
+  <tbody></tbody>
+</table>
+<footer>Prices and review counts scraped Oct 6, 2026 from Amazon, Best Buy and Walmart. 2,418 reviews, 612 Reddit threads, 31,906 comments.</footer>
+
+<script type="module">
+  // rows come straight from the scrape (prices.json): name, mic %, price, store, complaint
+  const rows = [
+    ['Wren H2', 81, 39, 'Walmart', 'Clamps tight the first week'],
+    ['Tarn 7', 71, 79, 'Amazon', 'Heavy at 352 g'],
+    ['Halden Pro', 64, 99, 'Amazon', 'Mic hiss at max gain'],
+    ['Corvo Air', 58, 59, 'Best Buy', 'Creaky hinge'],
+    ['Pike S2', 55, 45, 'Amazon', 'Cushions flatten'],
+    ['Velo X1', 52, 69, 'Best Buy', 'Sidetone too quiet'],
+    ['Kesh Nova', 49, 89, 'Amazon', 'RGB app crashes'],
+    ['Marlo 3', 47, 35, 'Walmart', 'Short cable'],
+    ['Ostra Lite', 33, 29, 'Amazon', 'Mic sounds like a phone call'],
+    ['Brisk 200', 28, 25, 'Walmart', 'Tinny mic'],
+  ];
+  document.querySelector('#rank tbody').innerHTML = rows.map(([name, mic, usd, store, gripe], i) => `
+    <tr class="${i ? '' : 'win'}"><td class="num">${i + 1}</td><td><b>${name}</b></td>
+    <td class="num"><span class="bar" style="width:${mic}px"></span>${mic}%</td>
+    <td class="num">$${usd}</td><td>${store}</td><td>${gripe}</td></tr>`).join('');
+
+  const trailer = new Audio('trailer-vo.mp3');
+  document.getElementById('play').onclick = () => (trailer.paused ? trailer.play() : trailer.pause());
+</script>
+</body>
+</html>

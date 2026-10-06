@@ -1,0 +1,34 @@
+/* Claude Opus 5.5 window (op.js): a Claude Code session beside the page it builds */
+#s-tabs .sbsite .hub .op { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 268px; gap: 8px; padding: 8px; background: #0f0f10; }
+#s-tabs .sbsite .hub .op-term { position: relative; display: flex; flex-direction: column; min-width: 0; border-radius: 8px; overflow: hidden; background: #1a1a1a;
+  box-shadow: inset 0 0 0 1px #2c2c2c; font: 400 6.9px/1.5 var(--font-mono); color: #e8e6e3; }
+#s-tabs .sbsite .hub .op-bar { position: relative; z-index: 1; flex: 0 0 16px; display: flex; align-items: center; gap: 4px; padding: 0 7px; background: #242424; color: #9a9a9a; font-size: 6.4px; }
+#s-tabs .sbsite .hub .op-bar i, #s-tabs .sbsite .hub .op-chrome i { width: 6px; height: 6px; border-radius: 50%; background: #4a4a4a; }
+#s-tabs .sbsite .hub .op-bar span { margin-left: 6px; }
+#s-tabs .sbsite .hub .op-log { flex: 1; min-height: 0; padding: 7px 9px 0; display: flex; flex-direction: column; gap: 4px; }
+#s-tabs .sbsite .hub .op-u { color: #b5b5b5; padding: 4px 6px; border-radius: 4px; background: #232323; }
+#s-tabs .sbsite .hub .op-l { display: flex; gap: 5px; opacity: 0; }
+#s-tabs .sbsite .hub .op-dot { color: #e8e6e3; font-weight: 400; }
+#s-tabs .sbsite .hub .op-dot.op-g { color: #4eba65; }
+#s-tabs .sbsite .hub .op-l b:not(.op-dot) { font-weight: 700; }
+#s-tabs .sbsite .hub .op-code { margin-left: 12px; padding: 4px 6px; border-radius: 4px; background: #141414; box-shadow: inset 2px 0 0 #3a3a3a; font-size: 6.3px; line-height: 1.55; }
+#s-tabs .sbsite .hub .op-cl { display: flex; gap: 6px; white-space: pre; opacity: 0; }
+#s-tabs .sbsite .hub .op-cl i { width: 10px; text-align: right; color: #5c5c5c; font-style: normal; }
+#s-tabs .sbsite .hub .op-tg { color: #7ee787; }
+#s-tabs .sbsite .hub .op-at { color: #79c0ff; }
+#s-tabs .sbsite .hub .op-st { color: #a5d6ff; }
+#s-tabs .sbsite .hub .op-kw { color: #ff7b72; }
+#s-tabs .sbsite .hub .op-nm { color: #f2cc60; }
+#s-tabs .sbsite .hub .op-r { margin-left: 12px; color: #9a9a9a; opacity: 0; }
+#s-tabs .sbsite .hub .op-live { color: #d7f5dd; }
+#s-tabs .sbsite .hub .op-foot { position: relative; z-index: 1; flex: 0 0 15px; display: flex; justify-content: space-between; align-items: center; padding: 0 9px; background: #1a1a1a;
+  border-top: 1px solid #2c2c2c; color: #d97757; font-size: 6.2px; }
+#s-tabs .sbsite .hub .op-foot span + span { color: #8a8a8a; }
+#s-tabs .sbsite .hub .op-br { display: flex; flex-direction: column; min-width: 0; border-radius: 8px; overflow: hidden; background: #12100e; box-shadow: inset 0 0 0 1px #2c2c2c; }
+#s-tabs .sbsite .hub .op-chrome { flex: 0 0 18px; display: flex; align-items: center; gap: 4px; padding: 0 7px; background: #202124; }
+#s-tabs .sbsite .hub .op-url { flex: 1; display: flex; align-items: center; gap: 3px; height: 12px; margin-left: 6px; padding: 0 7px; border-radius: 999px; background: #35363a;
+  font: 400 6.6px/1 -apple-system, sans-serif; color: #e8eaed; }
+#s-tabs .sbsite .hub .op-lock { font-size: 5.5px; opacity: 0; }
+#s-tabs .sbsite .hub .op-page { position: relative; flex: 1; overflow: hidden; }
+#s-tabs .sbsite .hub .op-page img { display: block; width: 100%; }
+#s-tabs .sbsite .hub .op-veil { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: #12100e; }

@@ -26,7 +26,10 @@ jobs:
       - name: Stage the site (no .git, no workflow files)
         run: |
           mkdir -p dist
-          rsync -a --exclude .git --exclude .github ./ dist/
+          # --exclude /dist keeps rsync from descending into the destination directory it is
+          # writing into (the staging dir lives inside the source), which otherwise nests
+          # dist/dist/dist/... until the runner runs out of disk.
+          rsync -a --exclude .git --exclude .github --exclude /dist ./ dist/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

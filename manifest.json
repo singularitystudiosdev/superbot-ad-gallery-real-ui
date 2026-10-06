@@ -8,6 +8,17 @@
     "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82.png"
   },
   {
+    "id": "every-model-one-chat-sb-superbot-efa8df82-canvas-66f654f1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · canvas cut (16:9): each model's full output builds beside the chat",
+    "src": "animations/every-model-one-chat-canvas-superbot-66f654f1/",
+    "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82-canvas-66f654f1.png",
+    "desc": "Same three asks and the same 21 s as the Switched to Superbot spot, rebuilt for 16:9: the chat narrows to the left and a canvas opens on the right, one tab per answer. \"make me a muse meme\" goes to Nano Banana Pro (best at text inside images): the brief it wrote, the three panels rendered as scene, lettering and reaction passes, the mascot held on-model, a 10/10 lettering check, 4:5, 1:1 and 9:16 cuts, caption and alt text. \"Scrape reddit and look for more\" goes to Claude Haiku 4.5 (it reads every image, which a text-only model cannot): 2,418 posts read, 1,912 images looked at, 31 Muse matches against 4 by titles alone, and the five climbing fastest with upvotes, match scores and climb lines. \"Winning, order me a burger.\" goes to Superbot (it uses DoorDash for you): 14 spots compared, the pick, the order, a live map with the route and the delivery tracker. All UI, maps, charts and screenshot memes are built in HTML/CSS/SVG; photos are crops of the spot's own meme and burger. Numbers and names are made up.",
+    "download": "assets/video/every-model-one-chat-canvas-superbot-66f654f1.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "bikeride-model-switch-superbot-e13744a9",
     "type": "animation",
     "group": "Ad spots",

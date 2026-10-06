@@ -501,6 +501,15 @@
     "desc": "The bikeride-model-switch ad with a teaser film's grammar layered on, no footage from any teaser used. It opens on the superbot wordmark over a breathing green horizon (one ask, every model), the ask is spoken as it types, each switch pill holds longer and speaks its line (Gemini paints the decals, Blender builds the models, ElevenLabs gives it sound, Opus 5.5 writes the game), a deadpan \"Good chat.\" lands, the real build opens to full frame, then the close is a three-card title run over the ride (One ask. / Gemini. Blender. ElevenLabs. Opus. / superbot.gg), a black breath, and a chrome superbot wordmark card. A synthesized music bed and spoken lines run under all of it. Ends on a bike ride game built in the browser with Claude Opus 5.5."
   },
   {
+    "id": "bikeride-titledrive-superbot-3f9a7c21",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a relaxing Japanese bike riding game · title-drive cut: cold open on the mark over the ride, Gemini, Blender, ElevenLabs, Opus 5.5, then the ride full frame with titles swapping over it and a giant wordmark end card (4 switches; clip @prasenx)",
+    "src": "animations/bikeride-titledrive-superbot-3f9a7c21/",
+    "thumb": "assets/shots/bikeride-titledrive-superbot-3f9a7c21.png",
+    "desc": "The bikeride-model-switch spot with an A24-teaser ending grafted on. Cold open: the superbot mark centred over the ride's own establishing frame, the brand line \"EVERY MODEL. ONE CHAT.\" typed in below it. Then the same one ask (\"Relaxing Japanese bike riding game\") through Gemini (decals), Blender (3D props), ElevenLabs (sound effects) and Claude Opus 5.5 (the code). Then the close: a hard cut into the ride running full frame, three titles swapping in place over the motion (MAKE A GAME / IN ONE CHAT / superbot.gg), a held 1.2 s of black and silence, and the giant superbot wordmark end card with its corner tagline. 35.1 s, 1920x1080, 60 fps. Clip @prasenx (x.com/prasenx/status/2102717687604633959)."
+  },
+  {
     "id": "niche-stocks-model-switch-superbot-8d2a45f0",
     "type": "animation",
     "group": "Ad spots",
@@ -3255,6 +3264,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "voice-note-moving-day-superbot-f02468e4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SAY IT ONCE. MOVE OUT. · ElevenLabs Scribe transcribes a 0:38 voice note, Gemini lists what moves from the walkthrough, DeepSeek V4 Flash reads the lease and 3 years of email, Claude Opus 5.5 writes the deposit email, Superbot books movers on TaskRabbit, files the USPS change of address and sends it in Gmail (<45s, 16:9)",
+    "src": "animations/voice-note-moving-day-superbot-f02468e4/",
+    "thumb": "assets/shots/voice-note-moving-day-superbot-f02468e4.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82 (X ad b5olyc), new process: one voice note about moving turned into movers booked on TaskRabbit, a USPS change of address and the deposit email sent to the landlord. The ask is a 0:38 voice note with a 0:52 walkthrough video of the old apartment attached: \"we're moving to the new place saturday. sort the movers, change our address and get the deposit back\". Switching to ElevenLabs Scribe: the note plays and is transcribed word by word under its waveform, then three tasks: Movers, Sat Oct 10 / Change address / Get $2,800 deposit back. Switching to Gemini: it watches the walkthrough and marks four frames (bedroom, living room, boxes, stairwell); inventory 1 queen bed, 2 dressers, 1 three-seat sofa, 1 55 in TV, 1 desk, 18 boxes; note \"3rd floor walk-up, no elevator.\"; estimate \"2 movers, about 4 hours, truck needed.\" Switching to DeepSeek V4 Flash: the 14-page lease turns to section 6 while 1,284 emails are read; Deposit $2,800 with Greenpoint Realty Mgmt, returned within 14 days of move-out, photos required; old address 218 Kent Ave, Apt 3R; new address 45 Prospect Pl, Apt 2 (new lease). Switching to Claude Opus 5.5: the email to Dana at Greenpoint Realty types out (\"Hi Dana, we moved out of 218 Kent Ave, Apt 3R on Oct 10. Keys are in the lockbox. 24 move-out photos attached. Please return the $2,800 deposit within 14 days per section 6 of the lease.\") with the 24 move-out photos attached. Switched to Superbot: Opened TaskRabbit, Booked Marcus T. + truck, Sat 9 AM, Filed USPS change of address, Emailed Greenpoint Realty. TaskRabbit Help Moving on Sat, Oct 10, 9:00 AM, Large, est. 4 hrs, Truck; Marcus T. (4.98, 612 moving tasks, $79/hr) selected, Confirm and chat. USPS Change of Address: Family, 218 Kent Ave, Apt 3R to 45 Prospect Pl, Apt 2, starting Oct 10, $1.10 identity check on Visa ending 4242, confirmation number. Gmail: the email with 24 photos, Send, Message sent. Ends on a 3-row checklist (Movers booked, Sat Oct 10, 9 AM, est. $316 / Mail forwarding starts Oct 10 / Deposit request sent, $2,800 due by Oct 24) with three chimes, then EVERY MODEL. ONE CHAT. 41.1 s with no opener card (the X export prepends its coming-soon card).",
+    "download": "assets/video/voice-note-moving-day-superbot-f02468e4.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "cc-school-16x9-3e1e5589",
     "type": "animation",
     "group": "Ad spots",
@@ -3385,6 +3405,15 @@
     "desc": "A new format for the Pocketsflow spot, output first. The finished launch film opens the ad (\"Got something to sell?\", a halftone mascot waving), pauses and comes apart into an exploded stack of its 7 layers: \"Here's who made each layer.\" The stack is the spine. For each layer the camera cuts into the real Superbot desktop app for one prompt, \"make a launch film for Pocketsflow\", and the asset lifts out of its card and flies into its layer, which lights with its model chip: Superbot connects to pocketsflow.com (the site, the pricing page, the creator pages) and Claude Opus 5.5 writes the copy from those facts (a chat model, so only the composer chip changes); Nano Banana Pro makes the key art; Rodin Gen-2 the 3D figure (150,000 triangles, turning); Kling 3.0 Pro the clip; Eleven v3 the voiceover; Eleven Music the score; and Claude Opus 5.5 writes LaunchFilm.tsx, halftones the clip and the figure, cuts the theme to 0:12 under the voiceover and renders it. Each switch uses Superbot's own pill, \"in superbot\" header and pending box, with the card landing in its place. The layers collapse back into the frame and the film resumes: the real Pocketsflow product form, product page and Studio Nord storefront, a blue \"Checkout, tax and payouts, handled.\" scene with the dashboard, and the wordmark with 65K+ people, 160+ countries, $70M+ processed. Ends on: superbot. One prompt. The right model for every layer. Every asset was generated by the model the ad credits for it; Pocketsflow screens captured from pocketsflow.com. 48 s, 1920x1080, 60 fps, with sound.",
     "download": "assets/video/pocketsflow-layer-teardown-superbot-9e2b8aa9.16x9.mp4",
     "downloadLabel": "16:9"
+  },
+  {
+    "id": "bikeride-cinema-superbot-b4e7c21a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · film cut: cold-open ident, the refrain at every switch, tagline card, 3D wordmark end card (clip @prasenx)",
+    "src": "animations/bikeride-cinema-superbot-b4e7c21a/",
+    "thumb": "assets/shots/bikeride-cinema-superbot-b4e7c21a.png",
+    "desc": "The bikeride-model-switch spot after A24's 'You Can See Everything' teaser. The ask is unchanged ('Relaxing Japanese bike riding game'), routing Gemini -> Blender -> ElevenLabs -> Claude Opus 5.5, but the spot now opens on a brand ident over a drifting plate, and every hand-off carries one line of the refrain, 'You can see it paint / model / sound / ship', landing on the payoff 'You can see everything.' over the ride in a letterbox. Ends on a tagline card, then a 3D extruded wordmark end card with a dated CTA and a model lower-third, vignette and grain over the whole frame. 27.4 s, 1920x1080."
   },
   {
     "id": "stop-burning-tokens",

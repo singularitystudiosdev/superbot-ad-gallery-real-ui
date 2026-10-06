@@ -1,0 +1,13 @@
+img/ CREDITS (every-model-one-chat-fluid-superbot-aae36d42). Every image here was generated for this ad on 2026-10-06
+with Nano Banana Pro (google/gemini-3-pro-image via OpenRouter, 2K output, then resized), so no licence or attribution
+is owed. Muse renders were conditioned on one reference crop of the Muse plush (work/em-2fe9583d/assets-src/ref-muse.png)
+so the mascot stays on-model across all four memes. No real people appear.
+
+muse-meme.jpg       "OPENED MUSE AT 11PM / IT'S 6AM NOW", Muse in bed with a phone at sunrise (4:5, 960w).
+reddit-3am.jpg      "nobody: / muse at 3am: u up?", Muse in a dark bedroom (1:1, 720).
+reddit-cafe.jpg     "when someone says they've never heard of muse", shocked Muse at a cafe table (1:1, 720).
+reddit-coffee.jpg   "muse: you've been working for 6 hours / muse: here's a coffee", Muse at a desk (1:1, 720).
+cheeseburger.jpg    menu photo of a cheeseburger on checkered paper (1:1, 320).
+store-hero.jpg      diner counter spread, cropped to the right 70% to drop background signage (1400x437).
+store-logo.png      "MAIN STREET BURGER CO." round logo, a fictional store (256, circle crop).
+Subreddit posts, vote counts, the store, its prices and the address are made up.

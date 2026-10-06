@@ -3246,6 +3246,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "voice-note-moving-day-superbot-f02468e4",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SAY IT ONCE. MOVE OUT. · ElevenLabs Scribe transcribes a 0:38 voice note, Gemini lists what moves from the walkthrough, DeepSeek V4 Flash reads the lease and 3 years of email, Claude Opus 5.5 writes the deposit email, Superbot books movers on TaskRabbit, files the USPS change of address and sends it in Gmail (<45s, 16:9)",
+    "src": "animations/voice-note-moving-day-superbot-f02468e4/",
+    "thumb": "assets/shots/voice-note-moving-day-superbot-f02468e4.png",
+    "desc": "Same chat format as every-model-one-chat-sb-superbot-efa8df82 (X ad b5olyc), new process: one voice note about moving turned into movers booked on TaskRabbit, a USPS change of address and the deposit email sent to the landlord. The ask is a 0:38 voice note with a 0:52 walkthrough video of the old apartment attached: \"we're moving to the new place saturday. sort the movers, change our address and get the deposit back\". Switching to ElevenLabs Scribe: the note plays and is transcribed word by word under its waveform, then three tasks: Movers, Sat Oct 10 / Change address / Get $2,800 deposit back. Switching to Gemini: it watches the walkthrough and marks four frames (bedroom, living room, boxes, stairwell); inventory 1 queen bed, 2 dressers, 1 three-seat sofa, 1 55 in TV, 1 desk, 18 boxes; note \"3rd floor walk-up, no elevator.\"; estimate \"2 movers, about 4 hours, truck needed.\" Switching to DeepSeek V4 Flash: the 14-page lease turns to section 6 while 1,284 emails are read; Deposit $2,800 with Greenpoint Realty Mgmt, returned within 14 days of move-out, photos required; old address 218 Kent Ave, Apt 3R; new address 45 Prospect Pl, Apt 2 (new lease). Switching to Claude Opus 5.5: the email to Dana at Greenpoint Realty types out (\"Hi Dana, we moved out of 218 Kent Ave, Apt 3R on Oct 10. Keys are in the lockbox. 24 move-out photos attached. Please return the $2,800 deposit within 14 days per section 6 of the lease.\") with the 24 move-out photos attached. Switched to Superbot: Opened TaskRabbit, Booked Marcus T. + truck, Sat 9 AM, Filed USPS change of address, Emailed Greenpoint Realty. TaskRabbit Help Moving on Sat, Oct 10, 9:00 AM, Large, est. 4 hrs, Truck; Marcus T. (4.98, 612 moving tasks, $79/hr) selected, Confirm and chat. USPS Change of Address: Family, 218 Kent Ave, Apt 3R to 45 Prospect Pl, Apt 2, starting Oct 10, $1.10 identity check on Visa ending 4242, confirmation number. Gmail: the email with 24 photos, Send, Message sent. Ends on a 3-row checklist (Movers booked, Sat Oct 10, 9 AM, est. $316 / Mail forwarding starts Oct 10 / Deposit request sent, $2,800 due by Oct 24) with three chimes, then EVERY MODEL. ONE CHAT. 41.1 s with no opener card (the X export prepends its coming-soon card).",
+    "download": "assets/video/voice-note-moving-day-superbot-f02468e4.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "cc-school-16x9-3e1e5589",
     "type": "animation",
     "group": "Ad spots",

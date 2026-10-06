@@ -1,0 +1,24 @@
+Relay cut (b5e8a114), every image, mesh and sound here is real model or tool output, made 2026-10-06 for this spot.
+
+Nano Banana Pro (Gemini 3 Pro Image), run through Replicate google/nano-banana-pro (Google AI Studio prepay and fal were empty):
+  hero.jpg   16:9, 2K, downscaled to 1600 w   prompt: double smash cheeseburger on toasted brioche, butcher paper, food truck window, golden hour
+  menu.jpg   4:5, 2K, downscaled to 900       prompt: chalkboard menu lettered MAIN STREET BURGER CO., SMASH BURGER $9, DOUBLE SMASH $12, FRIES $4, SHAKE $6, TOASTED BRIOCHE. NEVER SOGGY.
+  sides.jpg  1:1, 1K, downscaled to 640       prompt: crinkle-cut fries and a vanilla milkshake, overhead
+  iso.jpg    1:1, 2K (PNG), downscaled to 760 prompt: the burger alone on pure white, for 3D reconstruction
+  truck.jpg  16:9, 1K                         prompt: cream food truck, sign MAIN STREET BURGER CO., Mission District at blue hour
+  Prompts in full: work/emswitch-b5e8a114/gen-gemini.b5e8a114.mjs (JOBS).
+
+3D model: Replicate hyper3d/rodin (Gen-2, PBR, quad, medium) from iso.png, prediction neemvhk3kdrmy0d127ysqep2yw, 37,085 faces.
+blender/g_00..35.webp: screen captures of the real Blender 5.2 window (bpy.ops.screen.screenshot from a timer while the
+  viewport orbits), factory startup, the Rodin mesh imported, shaded smooth, metallic 0, three area lights:
+  2 frames before the mesh exists, 10 in Solid with the wireframe overlay, 24 in Material Preview.
+turn/t_00..35.webp: Blender 5.2 EEVEE render of the same scene swaying -45 to +45 degrees over its front, 36 frames, transparent film.
+  Scripts: work/emswitch-b5e8a114/assets-src/blender/{build,capture,sway}.b5e8a114.py
+
+Voice (MP4 audio only): Eleven v3 via Replicate elevenlabs/v3, voice "Mark", script with v3 audio tags
+  "[excited] Main Street Burger Co. is open tonight! [short pause] Nine-dollar smash burgers on toasted brioche.
+   [confident] No soggy buns. Ever. [chuckles] Twenty-fourth and Mission. Come hungry."  10.48 s.
+  The ElevenLabs pane's waveform is that take's RMS envelope (data.js PEAKS).
+
+Fraunces (fonts/fraunces-latin.woff2): Google Fonts, SIL Open Font License 1.1.
+Spot names, ratings and review counts in the DeepSeek pane are made up.

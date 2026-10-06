@@ -1,0 +1,23 @@
+Brand marks, copied unmodified from animations/bikeride-model-switch-superbot-e13744a9/brand (provenance below, from that folder's CREDITS.txt). Used nominatively to name each product.
+
+gemini-logo.svg: Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg, Google trademark, used nominatively.
+  deepseek-logo.svg         DeepSeek whale mark, icons/deepseek-color.svg from @lobehub/icons-static-svg (unpkg), unmodified.
+                            Trademark of Hangzhou DeepSeek Artificial Intelligence Co., Ltd.
+
+mmorpg-every-model-superbot (fetched 2026-09-26):
+  claude-logo.svg           Claude mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg
+                            (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of Anthropic.
+  github-logo.svg           GitHub mark, https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg
+                            (simple-icons, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of GitHub, Inc.
+                            Both are used nominatively, to name the model/app superbot routes to.
+
+ELEVENLABS (chat tile for the vocal-takes beat)
+  elevenlabs-logo.svg       ElevenLabs mark (the two bars), https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg
+                            (simple-icons 16.32.0, CC0 1.0). Fill set to #fff for the dark hub tile. Trademark of
+                            Eleven Labs, Inc., used nominatively to name the voice model superbot routes to.
+
+bikeride-model-switch-superbot-e13744a9 (fetched 2026-09-28):
+  blender-logo.svg          Blender logo mark without the wordmark, Wikimedia Commons "File:Blender logo no text.svg",
+                            original https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg
+                            (file page https://commons.wikimedia.org/wiki/File:Blender_logo_no_text.svg), unmodified.
+                            Commons licence: Public domain (below the threshold of originality); vectorised by

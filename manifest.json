@@ -19,6 +19,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "every-model-one-chat-sb-superbot-efa8df82-relay-b5e8a114",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · relay cut (16:9): one ask relayed through DeepSeek V4 Pro, Claude Opus 5.5, Nano Banana Pro, Blender and ElevenLabs into a live site",
+    "src": "animations/every-model-one-chat-relay-superbot-b5e8a114/",
+    "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82-relay-b5e8a114.png",
+    "desc": "One ask, one relay, one finished launch. The Switched to Superbot spot rebuilt for 16:9 as a camera that travels a strip of seven panes, each model in its own product UI, while a courier carries the growing bundle of files down a cable into the next one. DeepSeek V4 Pro (DeepThink and Search on) scrapes Yelp, DoorDash, Uber Eats, Maps and Reddit for 47 rival burger spots and finds the top complaint, soggy buns. Claude Opus 5.5 in Claude Code builds the site from that data with an empty slot for every asset still to come. Nano Banana Pro fills the photo slots, including a chalk menu lettered with the site's prices. Blender 5.2, driven over the Blender MCP, turns the burger photo into a 3D model. Eleven v3 voices the radio spot. Superbot deploys it and the page fills in while the spot plays, then the whole relay in one shot and the end card. Real outputs: the five photos (Nano Banana Pro), the mesh (Hyper3D Rodin Gen-2), every Blender frame (screen captures of Blender 5.2), the turntable (a Blender render) and the voice (Eleven v3, plays in the MP4). Spot names and review counts are made up. 41 s, 16:9 only.",
+    "download": "assets/video/every-model-one-chat-relay-superbot-b5e8a114.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "bikeride-model-switch-superbot-e13744a9",
     "type": "animation",
     "group": "Ad spots",

@@ -1,0 +1,35 @@
+/* Blender beat (beats/blender.e2834f7d.js): a card with Blender's logo, name and build over one row of five square
+   frames: the four models, each its own Blender viewport capture turning on a canvas with its .glb name and a green
+   check beneath, then a '+130 more' square. One row of five keeps every square the same size and fully inside the
+   card at 16:9 and 4:5. Nothing here transitions: opacity/transform are written from t in render, so ?t= freezes a
+   frame. Scoped under the hub, every class prefixed .bl- (the check is chat.css .qc-ok). */
+
+/* the card: the hub's card radius and edge, as wide as the thread allows */
+#s-tabs .sbsite .hub .bl-card { opacity: 0; box-sizing: border-box; width: 100%; max-width: 560px; margin-top: 2px;
+  border-radius: 10px; background: #141416; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .bl-head { display: flex; align-items: center; gap: 7px; padding: 7px 10px;
+  box-shadow: inset 0 -1px 0 #2a2a2e; }
+#s-tabs .sbsite .hub .bl-logo { display: block; width: auto; height: 15px; flex: none; }
+#s-tabs .sbsite .hub .bl-head b { font: 600 12px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .bl-head small { margin-left: auto; font: 500 10px/1 var(--mono); color: #8e8e93; }
+
+/* the squares: five equal columns */
+#s-tabs .sbsite .hub .bl-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px;
+  padding: 8px 8px 8px; }
+#s-tabs .sbsite .hub .bl-sq { margin: 0; min-width: 0; opacity: 0; }
+/* a square: the capture, on the logo-tile fill until its first frame is drawn */
+#s-tabs .sbsite .hub .bl-view { position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden;
+  background: #1c1c1f; box-shadow: 0 0 0 1px #2c2c30; }
+#s-tabs .sbsite .hub .bl-view canvas { display: block; width: 100%; height: 100%; }
+/* the file name and its check, one line under the square */
+#s-tabs .sbsite .hub .bl-sq figcaption { display: flex; align-items: center; justify-content: center; gap: 3px;
+  height: 12px; margin-top: 6px; }
+#s-tabs .sbsite .hub .bl-sq figcaption b { min-width: 0; overflow: hidden; white-space: nowrap;
+  font: 600 9px/1 var(--mono); color: #ececec; opacity: .5; }
+#s-tabs .sbsite .hub .bl-sq figcaption .qc-ok { flex: none; width: 10px; height: 10px; margin: 0; opacity: 0; }
+
+/* the '+130 more' square: the same frame, a dark tile with the count */
+#s-tabs .sbsite .hub .bl-more .bl-view { display: flex; align-items: center; justify-content: center; }
+#s-tabs .sbsite .hub .bl-more .bl-view span { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+#s-tabs .sbsite .hub .bl-more .bl-view b { font: 600 24px/1 var(--ui); letter-spacing: -.01em; color: #ececee; }
+#s-tabs .sbsite .hub .bl-more .bl-view small { font: 500 11px/1 var(--ui); color: #8e8e93; }

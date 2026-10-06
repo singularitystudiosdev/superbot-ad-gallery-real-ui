@@ -1619,6 +1619,38 @@ const more = [
   // untracked on disk and published so nothing is stranded. Titles are the pages' own <title>.
   ['niche-tiktok-model-switch-superbot-fe641576', 'niche-tiktok-model-switch-superbot-fe641576/', 'Turn my podcast into a TikTok and post it tonight at 7: Gemini, GPT Image 2.5, Claude Opus 5.5, then superbot posts it in TikTok', 'Ad spots'],
   ['same-chat-new-model-superbot-693c3a7f', 'same-chat-new-model-superbot-693c3a7f/', 'New model, same chat: superbot switches the model under the same conversation (Gemini, GPT-6, Claude Opus 5.5)', 'Ad spots'],
+  // bikeride-model-switch variants (2026-10-06): fifteen copies of bikeride-model-switch-superbot-e13744a9, each
+  // borrowing one element from a reference ad. Copy-then-borrow only; the base ride ad is untouched.
+  ['bikeride-cowork-fanin-superbot-e13744a9', 'bikeride-cowork-fanin-superbot-e13744a9/', 'bikeride model switch, variant: Anthropic "Introducing Cowork" (tool tiles converge into the ride card)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing Anthropic's \"Introducing Cowork\" fan-in board, where the tool tiles converge into the ride card. 16:9." }],
+  ['bikeride-bbc-music-god-superbot-e13744a9', 'bikeride-bbc-music-god-superbot-e13744a9/', 'bikeride model switch, variant: BBC "God Only Knows" (end-card tiles enter one by one, pulse on one beat)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing the BBC \"God Only Knows\" vocal relay, where the end-card tiles enter one by one and pulse on one beat. 16:9." }],
+  ['bikeride-google-2024-year-superbot-e13744a9', 'bikeride-google-2024-year-superbot-e13744a9/', 'bikeride model switch, variant: Google "Year in Search 2024" (end-card model terms rise in sequence)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing Google's \"Year in Search\" convergence, where the end-card model terms rise in sequence. 16:9." }],
+  ['bikeride-ok-go-i-superbot-e13744a9', 'bikeride-ok-go-i-superbot-e13744a9/', 'bikeride model switch, variant: OK Go "I Won\'t Let You Down" (dot grid resolves into the wordmark)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing OK Go's \"I Won't Let You Down\" pixel reveal, where the dot grid resolves into the wordmark. 16:9." }],
+  ['bikeride-nike-write-future-superbot-e13744a9', 'bikeride-nike-write-future-superbot-e13744a9/', 'bikeride model switch, variant: Nike "Write the Future" (three typographic panels after the ask)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing Nike's \"Write the Future\" branching cutaways, adding three typographic panels after the ask. 16:9." }],
+  ['bikeride-daft-punk-around-superbot-e13744a9', 'bikeride-daft-punk-around-superbot-e13744a9/', 'bikeride model switch, variant: Daft Punk "Around the World" (four-lane model roster in the composer)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing Daft Punk's \"Around the World\", laying a four-lane model roster in the composer. 16:9." }],
+  ['bikeride-zombieland-opening-title-superbot-e13744a9', 'bikeride-zombieland-opening-title-superbot-e13744a9/', 'bikeride model switch, variant: Zombieland titles (oversized switch pills slam down and stack)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing the Zombieland titles, where oversized switch pills slam down and stack. 16:9." }],
+  ['bikeride-figma-can-just-superbot-e13744a9', 'bikeride-figma-can-just-superbot-e13744a9/', 'bikeride model switch, variant: Figma "You can just Make things" (named collaborator cursors beside each pill)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing Figma's \"You can just Make things\", adding named collaborator cursors beside each pill. 16:9." }],
+  ['bikeride-apple-airpods-bounce-superbot-e13744a9', 'bikeride-apple-airpods-bounce-superbot-e13744a9/', 'bikeride model switch, variant: Apple "Bounce" (camera push overshoots and rebounds)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing Apple's \"Bounce\", where the camera push overshoots and rebounds. 16:9." }],
+  ['bikeride-ok-go-writing-superbot-e13744a9', 'bikeride-ok-go-writing-superbot-e13744a9/', 'bikeride model switch, variant: OK Go "The Writing\'s On the Wall" (hub plane swings in 3D at each pill)', 'Ad spots',
+    { desc: "The bikeride model-switch spot borrowing OK Go's \"The Writing's On the Wall\", with the hub plane swinging in 3D at each pill. 16:9." }],
+  ['bikeride-coldplay-up-up-kendrick-lamar-humble-superbot-e13744a9', 'bikeride-coldplay-up-up-kendrick-lamar-humble-superbot-e13744a9/', 'bikeride model switch, variant: Coldplay "Up&Up" + Kendrick Lamar "HUMBLE." (0.1s beat-locked snap cut, one shared zoom scale)', 'Ad spots',
+    { desc: "The bikeride model-switch spot combining Coldplay's \"Up&Up\" and Kendrick Lamar's \"HUMBLE.\", with a 0.1s beat-locked snap cut and one shared zoom scale. 16:9." }],
+  ['bikeride-kendrick-lamar-humble-deadpool-opening-title-superbot-e13744a9', 'bikeride-kendrick-lamar-humble-deadpool-opening-title-superbot-e13744a9/', 'bikeride model switch, variant: Kendrick Lamar "HUMBLE." + Deadpool titles (in-place striking model-chip relabel)', 'Ad spots',
+    { desc: "The bikeride model-switch spot combining Kendrick Lamar's \"HUMBLE.\" and the Deadpool titles, with an in-place striking model-chip relabel. 16:9." }],
+  ['bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9', 'bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9/', 'bikeride model switch, variant: Honda "Cog" + Copilot (pill landing knocks a link onto the reply; chip ring-snap)', 'Ad spots',
+    { desc: "The bikeride model-switch spot combining Honda's \"Cog\" and Copilot, where a pill landing knocks a link onto the reply and the chip ring-snaps. 16:9." }],
+  ['bikeride-deadpool-opening-title-attio-crm-agentic-superbot-e13744a9', 'bikeride-deadpool-opening-title-attio-crm-agentic-superbot-e13744a9/', 'bikeride model switch, variant: Deadpool titles + Attio (mono status line relabels 0..3 in place)', 'Ad spots',
+    { desc: "The bikeride model-switch spot combining the Deadpool titles and the Attio demo, with a mono status line relabelling 0..3 in place. 16:9." }],
+  ['bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9', 'bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9/', 'bikeride model switch, variant: Gemini Omni + Runway Gen-4 (four tiles converge into the send button)', 'Ad spots',
+    { desc: "The bikeride model-switch spot combining Gemini Omni and Runway Gen-4, with four tiles converging into the send button. 16:9." }],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1658,6 +1690,23 @@ const KEEP_IDS = new Set([
   // re-enabled (2026-10-06, 7267635b): the title-card cut of the bikeride spot, a ?cut of the ad already in the list, so
   // it adds one thumbnail and one render, no new animation directory.
   'bikeride-titlecards-superbot-7267635b',
+  // added (2026-10-06): fifteen bikeride-model-switch variants, each borrowing one element from a reference ad.
+  // Their entries are in `more` above; listing the ids here is what makes the trimmed gallery actually ship them.
+  'bikeride-cowork-fanin-superbot-e13744a9',
+  'bikeride-bbc-music-god-superbot-e13744a9',
+  'bikeride-google-2024-year-superbot-e13744a9',
+  'bikeride-ok-go-i-superbot-e13744a9',
+  'bikeride-nike-write-future-superbot-e13744a9',
+  'bikeride-daft-punk-around-superbot-e13744a9',
+  'bikeride-zombieland-opening-title-superbot-e13744a9',
+  'bikeride-figma-can-just-superbot-e13744a9',
+  'bikeride-apple-airpods-bounce-superbot-e13744a9',
+  'bikeride-ok-go-writing-superbot-e13744a9',
+  'bikeride-coldplay-up-up-kendrick-lamar-humble-superbot-e13744a9',
+  'bikeride-kendrick-lamar-humble-deadpool-opening-title-superbot-e13744a9',
+  'bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9',
+  'bikeride-deadpool-opening-title-attio-crm-agentic-superbot-e13744a9',
+  'bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9',
 ]);
 const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 

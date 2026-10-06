@@ -49,5 +49,140 @@
       "4x5": "animations/every-model-converge-4x5-398eded5/final.mp4",
       "16x9": "animations/every-model-converge-4x5-398eded5/final-16x9.mp4"
     }
+  },
+  {
+    "id": "bikeride-cowork-fanin-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Anthropic \"Introducing Cowork\" (tool tiles converge into the ride card)",
+    "src": "animations/bikeride-cowork-fanin-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-cowork-fanin-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing Anthropic's \"Introducing Cowork\" fan-in board, where the tool tiles converge into the ride card. 16:9."
+  },
+  {
+    "id": "bikeride-bbc-music-god-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: BBC \"God Only Knows\" (end-card tiles enter one by one, pulse on one beat)",
+    "src": "animations/bikeride-bbc-music-god-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-bbc-music-god-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing the BBC \"God Only Knows\" vocal relay, where the end-card tiles enter one by one and pulse on one beat. 16:9."
+  },
+  {
+    "id": "bikeride-google-2024-year-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Google \"Year in Search 2024\" (end-card model terms rise in sequence)",
+    "src": "animations/bikeride-google-2024-year-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-google-2024-year-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing Google's \"Year in Search\" convergence, where the end-card model terms rise in sequence. 16:9."
+  },
+  {
+    "id": "bikeride-ok-go-i-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: OK Go \"I Won't Let You Down\" (dot grid resolves into the wordmark)",
+    "src": "animations/bikeride-ok-go-i-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-ok-go-i-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing OK Go's \"I Won't Let You Down\" pixel reveal, where the dot grid resolves into the wordmark. 16:9."
+  },
+  {
+    "id": "bikeride-nike-write-future-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Nike \"Write the Future\" (three typographic panels after the ask)",
+    "src": "animations/bikeride-nike-write-future-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-nike-write-future-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing Nike's \"Write the Future\" branching cutaways, adding three typographic panels after the ask. 16:9."
+  },
+  {
+    "id": "bikeride-daft-punk-around-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Daft Punk \"Around the World\" (four-lane model roster in the composer)",
+    "src": "animations/bikeride-daft-punk-around-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-daft-punk-around-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing Daft Punk's \"Around the World\", laying a four-lane model roster in the composer. 16:9."
+  },
+  {
+    "id": "bikeride-zombieland-opening-title-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Zombieland titles (oversized switch pills slam down and stack)",
+    "src": "animations/bikeride-zombieland-opening-title-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-zombieland-opening-title-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing the Zombieland titles, where oversized switch pills slam down and stack. 16:9."
+  },
+  {
+    "id": "bikeride-figma-can-just-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Figma \"You can just Make things\" (named collaborator cursors beside each pill)",
+    "src": "animations/bikeride-figma-can-just-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-figma-can-just-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing Figma's \"You can just Make things\", adding named collaborator cursors beside each pill. 16:9."
+  },
+  {
+    "id": "bikeride-apple-airpods-bounce-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Apple \"Bounce\" (camera push overshoots and rebounds)",
+    "src": "animations/bikeride-apple-airpods-bounce-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-apple-airpods-bounce-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing Apple's \"Bounce\", where the camera push overshoots and rebounds. 16:9."
+  },
+  {
+    "id": "bikeride-ok-go-writing-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: OK Go \"The Writing's On the Wall\" (hub plane swings in 3D at each pill)",
+    "src": "animations/bikeride-ok-go-writing-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-ok-go-writing-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot borrowing OK Go's \"The Writing's On the Wall\", with the hub plane swinging in 3D at each pill. 16:9."
+  },
+  {
+    "id": "bikeride-coldplay-up-up-kendrick-lamar-humble-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Coldplay \"Up&Up\" + Kendrick Lamar \"HUMBLE.\" (0.1s beat-locked snap cut, one shared zoom scale)",
+    "src": "animations/bikeride-coldplay-up-up-kendrick-lamar-humble-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-coldplay-up-up-kendrick-lamar-humble-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot combining Coldplay's \"Up&Up\" and Kendrick Lamar's \"HUMBLE.\", with a 0.1s beat-locked snap cut and one shared zoom scale. 16:9."
+  },
+  {
+    "id": "bikeride-kendrick-lamar-humble-deadpool-opening-title-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Kendrick Lamar \"HUMBLE.\" + Deadpool titles (in-place striking model-chip relabel)",
+    "src": "animations/bikeride-kendrick-lamar-humble-deadpool-opening-title-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-kendrick-lamar-humble-deadpool-opening-title-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot combining Kendrick Lamar's \"HUMBLE.\" and the Deadpool titles, with an in-place striking model-chip relabel. 16:9."
+  },
+  {
+    "id": "bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Honda \"Cog\" + Copilot (pill landing knocks a link onto the reply; chip ring-snap)",
+    "src": "animations/bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot combining Honda's \"Cog\" and Copilot, where a pill landing knocks a link onto the reply and the chip ring-snaps. 16:9."
+  },
+  {
+    "id": "bikeride-deadpool-opening-title-attio-crm-agentic-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Deadpool titles + Attio (mono status line relabels 0..3 in place)",
+    "src": "animations/bikeride-deadpool-opening-title-attio-crm-agentic-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-deadpool-opening-title-attio-crm-agentic-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot combining the Deadpool titles and the Attio demo, with a mono status line relabelling 0..3 in place. 16:9."
+  },
+  {
+    "id": "bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "bikeride model switch, variant: Gemini Omni + Runway Gen-4 (four tiles converge into the send button)",
+    "src": "animations/bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9/",
+    "thumb": "assets/shots/bikeride-google-introducing-gemini-runway-introducing-runway-superbot-e13744a9.png",
+    "desc": "The bikeride model-switch spot combining Gemini Omni and Runway Gen-4, with four tiles converging into the send button. 16:9."
   }
 ]

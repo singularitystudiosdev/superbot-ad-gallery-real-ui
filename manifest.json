@@ -52,6 +52,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "cg1-1004-every-model-one-chat-sb-superbot-6d2ac617",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · cg1-1004: real superbot app, Gemini 3 Pro Image meme, DeepSeek Flash scrape, DoorDash order",
+    "src": "animations/cg1-1004-every-model-one-chat-superbot-6d2ac617/",
+    "thumb": "assets/shots/cg1-1004-every-model-one-chat-sb-superbot-6d2ac617.png",
+    "desc": "Same hook, three asks, pacing and 21 s as the Switched to Superbot spot, played on the real superbot desktop app (its own DOM and CSS, sidebar folded so only the thread and composer show). Good evening. Where do we go? Make me a muse meme: Switching to Gemini 3 Pro Image, the composer chip names it while it works, and the meme resolves via your Gemini account. Scrape reddit and look for more: Switched to DeepSeek Flash, which scrapes 6 subreddits (2,418 posts), spots the mascot in the images and returns 3 more Muse memes. Winning, order me a burger: Connected to DoorDash, Opened DoorDash, Picked Main Street Burger Co., Checked out with your saved card, then the live order card. Every move is an eased glide between real app states. 21.2 s, 1920x1080, 60 fps.",
+    "download": "assets/video/cg1-1004-every-model-one-chat-sb-superbot-6d2ac617.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "bikeride-model-switch-superbot-e13744a9",
     "type": "animation",
     "group": "Ad spots",

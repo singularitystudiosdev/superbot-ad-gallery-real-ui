@@ -1,0 +1,18 @@
+/* Playback-only rules layered over the app's own CSS: nothing here restyles the app. */
+html, body { overflow: hidden !important; }
+* { cursor: default !important; }
+/* the typing caret (a focused contenteditable shows the system caret; snapshots carry no focus) */
+.ad-caret { display: inline-block; width: 1.5px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; background: currentColor; animation: ad-caret 1.06s steps(1) infinite; }
+@keyframes ad-caret { 50% { opacity: 0; } }
+html.ad-freeze .ad-caret { animation: none; }
+/* the player drives every move as a function of t: no CSS transition may lag behind it */
+*, *::before, *::after { transition: none !important; }
+[data-ad-key] { will-change: transform, opacity; }
+/* the layer being left shows only its atoms (the player marks them visible) over the one entered */
+html.ad-ghost, html.ad-ghost body { background: transparent !important; }
+html.ad-ghost body { visibility: hidden; }
+/* the renderer skips off-screen rows (content-visibility: auto); every layer here, including the
+   off-screen measuring one, must lay rows out at their real size */
+* { content-visibility: visible !important; }
+/* the player owns every scroll offset: no scroll anchoring may move content when a picture loads */
+* { overflow-anchor: none !important; }

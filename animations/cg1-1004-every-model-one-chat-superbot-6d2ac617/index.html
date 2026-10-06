@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: every model, one chat</title>
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="ad.css?v=1">
+</head>
+<body>
+<div id="stage" role="img" aria-label="The superbot desktop app. Good evening, where do we go? Asked to make a muse meme, superbot switches to Gemini 3 Pro Image and returns the meme. Asked to scrape Reddit for more, it switches to DeepSeek Flash, scrapes 6 subreddits and finds 5 more Muse memes. Asked to order a burger, it connects to DoorDash, checks out with the saved card and shows the order. Every model. One chat.">
+  <section class="scene" id="s-app" aria-hidden="true">
+    <div id="cam"><div id="win">
+      <iframe id="lb" src="app/frame.html" title="superbot" tabindex="-1" scrolling="no"></iframe>
+      <iframe id="la" src="app/frame.html" title="superbot (previous step)" tabindex="-1" scrolling="no"></iframe>
+    </div></div>
+  </section>
+  <section class="scene" id="s-end" aria-hidden="true"></section>
+  <div id="dip"></div>
+</div>
+<iframe id="lm" src="app/frame.html" title="measure" tabindex="-1" scrolling="no" aria-hidden="true"></iframe>
+<div class="hint">space pause · ←/→ step · R restart</div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="app/snaps.js"></script>
+<script type="module" src="player.js?v=1"></script>
+</body>
+</html>

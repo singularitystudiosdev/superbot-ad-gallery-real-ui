@@ -1,0 +1,14 @@
+cg1-1004 every model, one chat (6d2ac617): provenance of the pictures in media/
+
+All of them were generated for this ad on 2026-10-06 with Google Gemini 3 Pro Image (Nano Banana Pro),
+run through Replicate's google/nano-banana-pro (allow_fallback_model: false). Prompts live in
+work/cg1004-6d2ac617/assets-src/gen.6d2ac617.mjs.
+
+muse-meme.webp   2K re-render of the original spot's img/muse-meme.png (passed as the reference image),
+                 same three-panel composition, the note lettering re-drawn legible.
+rd-1, rd-3,      Reddit finds shown in the gallery card, the Muse mascot held on-model from the same
+rd-4.webp        reference image.
+burger.webp      DoorDash order card hero: a diner cheeseburger product photo, no brand marks.
+
+App UI: superbot-desktop renderer (main @bcb624c7f) DOM, CSS, fonts and icons, captured by
+work/cg1004-6d2ac617/capture/capture-story.6d2ac617.mjs and built by build.6d2ac617.mjs.

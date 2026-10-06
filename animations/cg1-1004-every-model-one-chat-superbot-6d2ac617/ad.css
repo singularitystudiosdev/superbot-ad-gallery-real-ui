@@ -1,0 +1,36 @@
+/* cg1-1004 every model, one chat: the stage, the real-app layers and the end card.
+   The app itself is styled only by app/app.css (the renderer's own CSS); nothing here restyles it. */
+@font-face { font-family: "Inter"; font-weight: 800; src: url("app/assets/Inter-Bold-CGGXExDp.woff2") format("woff2"); }
+:root {
+  --ui: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+  --muted: #aeb1bc;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: #e6e8ee; -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; overflow: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* the camera, then the window: two 1200x675 CSS px layers of the real renderer at 1.6x = 1920x1080.
+   #lb is the phase being entered (whole), #la the phase being left (only its moving atoms). */
+#cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; will-change: transform; }
+#win { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform: scale(1.6); transform-origin: 0 0; background: rgb(13 13 13); }
+#win iframe { position: absolute; inset: 0; width: 1200px; height: 675px; border: 0; background: transparent; pointer-events: none; }
+#la { z-index: 2; visibility: hidden; }
+#lm { position: absolute; left: -20000px; top: 0; width: 1200px; height: 675px; border: 0; visibility: hidden; }
+
+/* ================= end card (the original spot's lock-up, unchanged) ================= */
+#s-end { display: grid; place-items: center; background: #000; z-index: 20; }
+#s-end .lock { display: flex; align-items: center; gap: 44px; }
+#s-end .face { flex: none; width: 220px; height: 220px; display: grid; place-items: center; }
+#s-end .words { overflow: hidden; }
+#s-end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#s-end .lock.ask-end { gap: 56px; }
+#s-end .ask-end .words h1 { font-size: 112px; letter-spacing: -.02em; white-space: nowrap; }
+#s-end .ask-end .words h1 br { display: none; }
+
+.hint { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); font: 500 12px/1 var(--ui); color: #6b6f7a; opacity: .7; pointer-events: none; }
+body.freeze .hint { display: none; }

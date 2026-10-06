@@ -1615,6 +1615,10 @@ const more = [
   ['bikeride-cinema-superbot-b4e7c21a', 'bikeride-cinema-superbot-b4e7c21a/', 'EVERY MODEL. ONE CHAT. · film cut: cold-open ident, the refrain at every switch, tagline card, 3D wordmark end card (clip @prasenx)', 'Ad spots',
     { desc: "The bikeride-model-switch spot after A24's 'You Can See Everything' teaser. The ask is unchanged ('Relaxing Japanese bike riding game'), routing Gemini -> Blender -> ElevenLabs -> Claude Opus 5.5, but the spot now opens on a brand ident over a drifting plate, and every hand-off carries one line of the refrain, 'You can see it paint / model / sound / ship', landing on the payoff 'You can see everything.' over the ride in a letterbox. Ends on a tagline card, then a 3D extruded wordmark end card with a dated CTA and a model lower-third, vignette and grain over the whole frame. 27.4 s, 1920x1080." }],
   // <<< bikeride-cinema-superbot-b4e7c21a
+  // Two ads that were built in an earlier local lineage of this repo and never reached this history, found
+  // untracked on disk and published so nothing is stranded. Titles are the pages' own <title>.
+  ['niche-tiktok-model-switch-superbot-fe641576', 'niche-tiktok-model-switch-superbot-fe641576/', 'Turn my podcast into a TikTok and post it tonight at 7: Gemini, GPT Image 2.5, Claude Opus 5.5, then superbot posts it in TikTok', 'Ad spots'],
+  ['same-chat-new-model-superbot-693c3a7f', 'same-chat-new-model-superbot-693c3a7f/', 'New model, same chat: superbot switches the model under the same conversation (Gemini, GPT-6, Claude Opus 5.5)', 'Ad spots'],
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {

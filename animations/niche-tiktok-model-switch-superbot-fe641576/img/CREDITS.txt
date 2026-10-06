@@ -1,0 +1,15 @@
+img/ CREDITS (internal; never shown on screen)
+
+clip/f001.jpg .. f090.jpg, cover-frame.jpg
+  Source: Mixkit, "Man talking in front of a radio station microphone" (item 2963), a vertical (720 x 1280, 24 fps)
+  stock clip of a man in headphones talking into a studio podcast microphone.
+  Page: https://mixkit.co/free-stock-video/man-talking-in-front-of-a-radio-station-microphone-2963/
+  File: https://assets.mixkit.co/videos/2963/2963-720.mp4 (fetched 2026-10-03). Mixkit lists no individual author.
+  Licence: Mixkit Stock Video Free License (https://mixkit.co/license/): free for commercial and personal use, no
+  attribution required.
+  Processing: clip/ is 6.0 s from 1.6 s into the source, scaled to 540 x 960 (no crop needed, the source is 9:16),
+  resampled to 15 fps, JPEG (ffmpeg -q:v 7), 90 frames, 2.7 MB. cover-frame.jpg is the source frame at 3.4 s,
+  540 x 960, JPEG (-q:v 3).
+  In the spot the footage stands in for "The Drift Pod" episode 42 (made up, brand/CREDITS.txt): the "frame at 31:12"
+  the cover is made from and the 45 s clip that plays in the Studio preview and on the TikTok video page. The person in
+  it is a stock model, not the podcast's host, and is never named.

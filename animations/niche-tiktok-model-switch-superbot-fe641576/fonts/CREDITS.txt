@@ -1,0 +1,10 @@
+fonts/ CREDITS (internal)
+
+tiktok-sans-latin-{400,500,600,700,800}-normal.woff2
+  TikTok Sans, latin subset, from @fontsource/tiktok-sans 5.3.0
+  (https://cdn.jsdelivr.net/npm/@fontsource/tiktok-sans/files/tiktok-sans-latin-<weight>-normal.woff2), fetched 2026-10-03,
+  unmodified. Licence: SIL Open Font License 1.1 (https://openfontlicense.org), as published by Fontsource.
+  Used for every TikTok surface (the connect card, the Studio upload page, the tiktok.com video page, the burned-in
+  captions) and the hook on the GPT Image cover. Registered by scenes/tabs-assets/beats/tiktok.js through the FontFace
+  API and loaded before the spot reports ready, so nothing is fetched at render and no frame uses a fallback face.
+  The superbot hub keeps the source ad's families.

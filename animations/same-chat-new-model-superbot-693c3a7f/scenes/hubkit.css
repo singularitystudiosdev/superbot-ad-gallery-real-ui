@@ -1,0 +1,133 @@
+/* hubkit.css: the story scenes' shared layer over the landed hub (hubkit.js).
+   Every selector starts with :is(#z,.hbx): #z never matches, it only lends id specificity so these rules
+   outrank tabs.css / hub.css (rescoped to :is(#s-tabs,.sbx), id-weight) without touching the intro scene. */
+
+/* the story scenes drive every value per frame: no CSS transitions or keyframes may lag the clock */
+:is(#z,.hbx) .sbsite, :is(#z,.hbx) .sbsite * { transition: none !important; animation: none !important; }
+:is(#z,.hbx) .cz-cam { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform; }
+:is(#z,.hbx) .cz-over { position: absolute; inset: 0; z-index: 30; pointer-events: none; }
+:is(#z,.hbx) .cz-cursor { position: absolute; left: 0; top: 0; width: 34px; height: 44px; z-index: 50; opacity: 0; transform-origin: 5.6px 3.6px;
+  fill: #fff; stroke: #000; stroke-width: 1.3px; stroke-linejoin: round; filter: drop-shadow(0 3px 7px rgba(0,0,0,.55)); }
+:is(#z,.hbx) .cz-ring { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; z-index: 49; opacity: 0;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.85), 0 0 18px rgba(93,145,236,.55); }
+
+/* ---------- the rail: one travelling selection bar and a name tip ---------- */
+:is(#z,.hbx) .sbsite .rail { position: relative; }
+:is(#z,.hbx) .sbsite .vz-ind { position: absolute; left: 0; top: 0; width: 3px; height: 26px; border-radius: 0 999px 999px 0; background: var(--fg); z-index: 3; }
+:is(#z,.hbx) .sbsite .rail-item { transform-origin: 50% 50%; }
+:is(#z,.hbx) .sbsite .vz-tip { position: absolute; left: 0; top: 0; z-index: 20; opacity: 0; padding: 0 8px; height: 22px; display: inline-flex; align-items: center;
+  border-radius: 7px; background: #1c1c1e; box-shadow: inset 0 0 0 1px #2e2e31, 0 6px 16px rgba(0,0,0,.4); color: #ececec; font: 600 10.5px/1 var(--ui); white-space: nowrap; }
+
+/* ---------- agent views: everything right of the rail ---------- */
+:is(#z,.hbx) .sbsite .vz-layer { position: absolute; left: 64px; top: 0; right: 0; bottom: 0; z-index: 8; pointer-events: none; }
+:is(#z,.hbx) .sbsite .vz { position: absolute; inset: 0; display: grid; grid-template-columns: 200px minmax(0, 1fr); visibility: hidden; color: var(--vz-fg); font: 11px/15px var(--ui);
+  --vz-side: #0d0d0d; --vz-main: #0d0d0d; --vz-fg: #ececec; --vz-mut: #9a9a9a; --vz-line: #262626; --vz-ubg: #1f1f22; --vz-row: #181818; --vz-comp: #1a1a1c; --vz-ring: #2c4596; }
+:is(#z,.hbx) .sbsite .vz.v-claude { --vz-side: #1f1e1d; --vz-main: #262624; --vz-fg: #f5f4ef; --vz-mut: #a6a39a; --vz-line: #3a3935; --vz-ubg: #141413; --vz-row: #2f2e2b; --vz-comp: #30302e; --vz-ring: rgba(217,119,87,.55); }
+:is(#z,.hbx) .sbsite .vz.v-gpt { --vz-side: #181818; --vz-main: #212121; --vz-fg: #ececec; --vz-mut: #afafaf; --vz-line: #2f2f2f; --vz-ubg: #303030; --vz-row: #2a2a2a; --vz-comp: #303030; --vz-ring: rgba(255,255,255,.14); }
+/* GPT-6: the newest OpenAI model, cooler and a shade deeper than ChatGPT's neutral grey */
+:is(#z,.hbx) .sbsite .vz.v-gpt6 { --vz-side: #101114; --vz-main: #191b1f; --vz-fg: #eef0f4; --vz-mut: #a3a8b3; --vz-line: #2b2f36; --vz-ubg: #2a3038; --vz-row: #23262c; --vz-comp: #262a31; --vz-ring: rgba(120,170,255,.26); }
+
+:is(#z,.hbx) .sbsite .vz-side { background: var(--vz-side); border-right: 1px solid var(--vz-line); padding: 10px 8px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+:is(#z,.hbx) .sbsite .vz-sh { display: flex; align-items: center; gap: 8px; padding: 2px 6px 10px; font-size: 12.5px; }
+:is(#z,.hbx) .sbsite .vz-sh b { font-weight: 650; letter-spacing: -.01em; }
+:is(#z,.hbx) .sbsite .vz-tile { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; flex: none; overflow: hidden; }
+:is(#z,.hbx) .sbsite .vz-tile .vz-ic { width: 14px; height: 14px; }
+:is(#z,.hbx) .sbsite .vz-tile img { width: 100%; height: 100%; display: block; }
+:is(#z,.hbx) .sbsite .vz-tile.t-claude { background: #d97757; color: #fff; }
+:is(#z,.hbx) .sbsite .vz-tile.t-gpt { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+:is(#z,.hbx) .sbsite .vz-tile.t-gpt6 { background: #000; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+/* the newer model's turn keeps ChatGPT's pill geometry */
+:is(#z,.hbx) .sbsite .vz.v-gpt6 .vz-m.is-u .vz-b { border-radius: 18px; }
+:is(#z,.hbx) .sbsite .vz-new { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; color: var(--vz-fg); font-weight: 550; }
+:is(#z,.hbx) .sbsite .vz-new svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+:is(#z,.hbx) .sbsite .vz.v-claude .vz-new svg { color: #fff; background: #d97757; border-radius: 50%; padding: 2px; width: 16px; height: 16px; }
+:is(#z,.hbx) .sbsite .vz-lab { padding: 12px 8px 4px; font-size: 9.5px; color: var(--vz-mut); font-weight: 600; }
+:is(#z,.hbx) .sbsite .vz-rows { display: flex; flex-direction: column; gap: 1px; }
+:is(#z,.hbx) .sbsite .vz-row { padding: 6px 8px; border-radius: 8px; color: color-mix(in srgb, var(--vz-fg) 82%, transparent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+:is(#z,.hbx) .sbsite .vz-row.on { background: var(--vz-row); color: var(--vz-fg); }
+
+:is(#z,.hbx) .sbsite .vz-main { position: relative; background: var(--vz-main); min-width: 0; overflow: hidden; }
+:is(#z,.hbx) .sbsite .vz-head { position: absolute; left: 0; right: 0; top: 0; height: 43px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px 0 16px; z-index: 2; }
+:is(#z,.hbx) .sbsite .vz-title { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 600; color: var(--vz-fg); }
+:is(#z,.hbx) .sbsite .vz-title .rc-chev { width: 10px; height: 10px; fill: none; stroke: var(--vz-mut); stroke-width: 2.4; }
+:is(#z,.hbx) .sbsite .vz-share { padding: 4px 10px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--vz-line); color: var(--vz-fg); font-size: 10.5px; font-weight: 550; }
+:is(#z,.hbx) .sbsite .vz-feed { position: absolute; left: 0; right: 0; top: 43px; bottom: 108px; overflow: hidden; }
+:is(#z,.hbx) .sbsite .vz-col { position: absolute; left: 50%; bottom: 8px; width: 560px; margin-left: -280px; display: flex; flex-direction: column; row-gap: 16px; will-change: transform; }
+:is(#z,.hbx) .sbsite .vz-m { display: flex; flex-direction: column; }
+:is(#z,.hbx) .sbsite .vz-m.is-u { align-items: flex-end; }
+:is(#z,.hbx) .sbsite .vz-m.is-u .vz-b { max-width: 420px; padding: 7px 13px; border-radius: 16px; background: var(--vz-ubg); font-size: 12.5px; line-height: 1.45; color: var(--vz-fg); }
+:is(#z,.hbx) .sbsite .vz-m.is-a .vz-b { font-size: 12.5px; line-height: 1.6; color: var(--vz-fg); padding-left: 2px; }
+:is(#z,.hbx) .sbsite .vz.v-gpt .vz-m.is-u .vz-b { border-radius: 18px; }
+/* Claude: the user's turn is a box on the left with an initial; the reply is set in a serif */
+:is(#z,.hbx) .sbsite .vz.v-claude .vz-m.is-u { align-items: flex-start; }
+:is(#z,.hbx) .sbsite .vz.v-claude .vz-m.is-u .vz-b { display: inline-flex; align-items: center; gap: 9px; padding: 7px 14px 7px 8px; border-radius: 12px; }
+:is(#z,.hbx) .sbsite .vz.v-claude .vz-m.is-u .vz-b::before { content: 'S'; flex: none; width: 19px; height: 19px; border-radius: 50%; background: #d4d0c6; color: #1f1e1d; display: grid; place-items: center; font: 700 9.5px/1 var(--ui); }
+:is(#z,.hbx) .sbsite .vz.v-claude .vz-m.is-a .vz-b { font-family: ui-serif, "New York", "Iowan Old Style", Georgia, serif; font-size: 13.5px; }
+:is(#z,.hbx) .sbsite .vz-m .w { display: inline; }
+/* a small provenance line: where this thread came from */
+:is(#z,.hbx) .sbsite .vz-carry { align-self: center; display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 4px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--vz-line); color: var(--vz-mut); font-size: 10px; }
+:is(#z,.hbx) .sbsite .vz-carry .vz-tile { width: 16px; height: 16px; border-radius: 50%; }
+:is(#z,.hbx) .sbsite .vz-carry .vz-tile .vz-ic { width: 10px; height: 10px; }
+
+/* ---------- the composer: the real .rc, tinted to the view ---------- */
+:is(#z,.hbx) .sbsite .vz-comp { position: absolute; left: 50%; bottom: 10px; width: 590px; margin-left: -295px; }
+:is(#z,.hbx) .sbsite .vz-comp .rc { background: var(--vz-comp); box-shadow: inset 0 0 0 1px var(--vz-ring), 0 10px 30px rgba(0,0,0,.18); min-height: 88px; }
+:is(#z,.hbx) .sbsite .vz-comp .rc-ph { color: color-mix(in srgb, var(--vz-fg) 52%, transparent); font-size: 11.5px; }
+:is(#z,.hbx) .sbsite .vz-draft { color: var(--vz-fg); }
+:is(#z,.hbx) .sbsite .vz-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: var(--vz-fg); border-radius: 1px; }
+:is(#z,.hbx) .sbsite .vz-comp .rc-send.on { background: var(--storm-action, linear-gradient(135deg,#5d91ec,#866cf6)); color: #fff !important; }
+:is(#z,.hbx) .sbsite .vz-plat { color: var(--vz-fg) !important; padding: 3px 7px 3px 5px; border-radius: 999px; margin: 0 1px 0 3px !important; }
+:is(#z,.hbx) .sbsite .vz-plat .vz-ic { width: 12px; height: 12px; }
+:is(#z,.hbx) .sbsite .vz-plat.k-claude .vz-ic { color: #d97757; }
+:is(#z,.hbx) .sbsite .vz-plat .rc-chev { width: 9px; height: 9px; fill: none; stroke: currentColor; stroke-width: 2.4; }
+:is(#z,.hbx) .sbsite .vz-top { height: 0; overflow: hidden; }
+
+/* the usage-limit notice, 1:1 Thread.tsx UsageLimitNotice (.hub-usage-limit: an inline row on the bar's raised surface) */
+:is(#z,.hbx) .sbsite .hub-usage-limit { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; padding: 0 2px 9px; font-size: 11.5px; line-height: 1.35; color: color-mix(in srgb, var(--vz-fg) 72%, transparent); white-space: nowrap; }
+:is(#z,.hbx) .sbsite .hub-usage-limit b { font-weight: 600; color: var(--vz-fg); }
+:is(#z,.hbx) .sbsite .hub-usage-limit .cd { font-variant-numeric: tabular-nums; }
+:is(#z,.hbx) .sbsite .hub-usage-limit small { font-size: 10px; color: var(--vz-mut); }
+:is(#z,.hbx) .sbsite .hub-usage-limit u { font-size: 10px; color: var(--vz-fg); text-underline-offset: 2px; }
+
+/* the agent picker, opened from the composer's platform chip */
+:is(#z,.hbx) .sbsite .vz-pick { position: absolute; z-index: 6; width: 188px; padding: 5px; border-radius: 12px; background: #1c1c1e; box-shadow: inset 0 0 0 1px #2e2e31, 0 16px 40px rgba(0,0,0,.5);
+  transform-origin: 70% 100%; opacity: 0; color: #ececec; font: 11.5px/1 var(--ui); }
+:is(#z,.hbx) .sbsite .vz-pick .pk-lab { padding: 6px 8px 5px; font-size: 9.5px; color: #8e8e93; font-weight: 600; }
+:is(#z,.hbx) .sbsite .vz-pick .pk { position: relative; display: flex; align-items: center; gap: 9px; height: 30px; padding: 0 8px; border-radius: 8px; }
+:is(#z,.hbx) .sbsite .vz-pick .pk .vz-tile { width: 18px; height: 18px; border-radius: 6px; }
+:is(#z,.hbx) .sbsite .vz-pick .pk .vz-tile .vz-ic { width: 11px; height: 11px; }
+:is(#z,.hbx) .sbsite .vz-pick .pk .vz-tile.t-sb { background: #000; }
+:is(#z,.hbx) .sbsite .vz-pick .pk .vz-tile.t-gemini { background: #fff; color: #1f1f1f; }
+:is(#z,.hbx) .sbsite .vz-pick .pk em { margin-left: auto; font-style: normal; font-size: 9.5px; color: #d9b86b; }
+/* a freshly added model: the row carries a NEW badge until you have used it */
+:is(#z,.hbx) .sbsite .vz-pick .pk em.new { padding: 3px 6px; border-radius: 999px; background: linear-gradient(135deg, var(--storm-1, #2b6bff), var(--storm-3, #c026d3));
+  color: #fff; font-weight: 700; font-size: 8.5px; letter-spacing: .06em; }
+:is(#z,.hbx) .sbsite .vz-pick .pk.is-new .vz-tile { box-shadow: 0 0 10px rgba(120,170,255,.45); }
+:is(#z,.hbx) .sbsite .vz-pick .pk .ok { margin-left: auto; width: 11px; height: 11px; fill: none; stroke: #ececec; stroke-width: 2.4; }
+:is(#z,.hbx) .sbsite .vz-pick .pk-hl { position: absolute; left: 5px; right: 5px; height: 30px; border-radius: 8px; background: #2a2a2d; opacity: 0; }
+
+/* the thinking marks: Claude's spark, ChatGPT's dot, superbot's tool line */
+:is(#z,.hbx) .sbsite .vz-spark { width: 22px; height: 22px; color: #d97757; }
+:is(#z,.hbx) .sbsite .vz-spark .vz-ic { width: 22px; height: 22px; display: block; }
+:is(#z,.hbx) .sbsite .vz-dot { width: 11px; height: 11px; border-radius: 50%; background: #ececec; margin: 4px 0 0 3px; }
+
+/* superbot's own view covers only the thread under the native chat header: the chats column and the header stay
+   the real hub's, so a switch back to superbot uncovers the window the intro landed on */
+:is(#z,.hbx) .sbsite .vz.v-sb { left: 200px; top: 43px; grid-template-columns: minmax(0, 1fr); }
+:is(#z,.hbx) .sbsite .vz.v-sb .vz-side, :is(#z,.hbx) .sbsite .vz.v-sb .vz-head { display: none; }
+:is(#z,.hbx) .sbsite .vz.v-sb .vz-feed { top: 0; }
+:is(#z,.hbx) .sbsite .vz.v-sb .vz-comp .rc { box-shadow: inset 0 0 0 1px #2c4596; }
+
+/* superbot's tool line: the hub's .ch-tool idiom (spinner, then a green check) */
+:is(#z,.hbx) .sbsite .vz-tool { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; padding: 5px 11px 5px 8px; border-radius: 999px; background: #151517; box-shadow: inset 0 0 0 1px #262626; color: #cfcfcf; font-size: 10.5px; }
+:is(#z,.hbx) .sbsite .vz-tool .sp { position: relative; width: 12px; height: 12px; flex: none; }
+:is(#z,.hbx) .sbsite .vz-tool .sp i { position: absolute; inset: 0; border-radius: 50%; border: 1.6px solid rgba(255,255,255,.18); border-top-color: #8ab4ff; }
+:is(#z,.hbx) .sbsite .vz-tool .sp svg { position: absolute; inset: -1px; width: 14px; height: 14px; fill: none; stroke: #3ddc97; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+:is(#z,.hbx) .sbsite .vz-tool b { font-weight: 600; color: #ececec; }
+:is(#z,.hbx) .sbsite .vz-tool .n { font-variant-numeric: tabular-nums; color: #9a9a9a; }
+
+/* the switch's wave front (hubkit rim): a hairline ring in the storm gradient with a soft glow either side */
+:is(#z,.hbx) .sbsite .vz-rim { position: absolute; left: 0; top: 0; z-index: 9; border-radius: 50%; opacity: 0; pointer-events: none;
+  padding: 1.5px; background: conic-gradient(from 210deg, #2b6bff, #6a1fd8, #c026d3, #ff3d9a, #00e5c3, #2b6bff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 6px rgba(134,108,246,.75)) drop-shadow(0 0 16px rgba(43,107,255,.35)); box-sizing: border-box; }

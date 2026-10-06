@@ -1,0 +1,26 @@
+/* switch.css: the hub scene's own deltas over hubkit.css (the picker row for a just-added model, the carry
+   chip's emphasis, and the narrow-frame type steps). Every value is still written from switch.js per frame. */
+:is(#z,.hbx).sw .sbsite .stage-bar i:nth-child(1) { background: #ff5f57; }
+:is(#z,.hbx).sw .sbsite .stage-bar i:nth-child(2) { background: #febc2e; }
+:is(#z,.hbx).sw .sbsite .stage-bar i:nth-child(3) { background: #28c840; }
+
+/* the picker: one wider column, so a model name and its badge both fit */
+:is(#z,.hbx).sw .sbsite .vz-pick { width: 216px; }
+:is(#z,.hbx).sw .sbsite .vz-pick .pk .vz-tile.t-grok { background: #000; box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+:is(#z,.hbx).sw .sbsite .vz-pick .pk .vz-tile.t-grok img { width: 100%; height: 100%; display: block; }
+:is(#z,.hbx).sw .sbsite .vz-pick .pk .ok { opacity: 0; }
+/* the row that just arrived: the badge is the only thing in the picker with colour */
+:is(#z,.hbx).sw .sbsite .vz-pick .pk.is-new span { color: #fff; font-weight: 600; }
+
+/* the chip that says this thread did not start here */
+:is(#z,.hbx).sw .sbsite .vz-carry { background: rgba(139,92,246,.12); box-shadow: inset 0 0 0 1px rgba(139,92,246,.34); color: #cfc9e6; }
+
+/* narrow frames: the window scales to 68%, so the picker and the thread step up with it */
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz-pick, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz-pick { width: 250px; font-size: 14px; }
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz-pick .pk, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz-pick .pk { height: 38px; }
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz-pick .pk-lab, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz-pick .pk-lab { font-size: 12px; }
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz-pick .pk em.new, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz-pick .pk em.new { font-size: 10.5px; }
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz-m.is-u .vz-b, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz-m.is-u .vz-b { font-size: 15px; }
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz.v-claude .vz-m.is-a .vz-b, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz.v-claude .vz-m.is-a .vz-b { font-size: 16px; }
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz-m.is-a .vz-b, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz-m.is-a .vz-b { font-size: 15px; }
+html[data-ar="1x1"] :is(#z,.hbx).sw .sbsite .vz-carry, html[data-ar="4x5"] :is(#z,.hbx).sw .sbsite .vz-carry { font-size: 13px; }

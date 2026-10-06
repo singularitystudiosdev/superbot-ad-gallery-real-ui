@@ -1,0 +1,107 @@
+/* The hub's four-hand-off chat (chat.js + beats/{watch,frame,replies,studio}.js). Every moving value is written from lt,
+   so nothing here transitions. The shared tool-chip styles live in ports.css; each beat's own card styles live in
+   scenes/tabs-assets/beats/<name>.css. */
+/* Two light themes, set on the scene root so both the hub's beats and the full-frame layer (outside the hub) read them.
+   --gm-*: Google's own account surfaces (Material 3), for the OAuth consent card and the checklist card (studio.css).
+   --yt-*: YouTube Studio's light palette, for the full-frame Studio client (studio.css). Values are YouTube's own
+   --yt-sys-color-baseline--* light values, read from www.youtube.com's stylesheets on 2026-10-03: base-background #fff,
+   text-primary #0f0f0f, text-secondary #606060, outline rgba(0,0,0,.1), outline-opaque #e5e5e5, additive-background
+   rgba(0,0,0,.05), call-to-action #065fd4, inverted-background #0f0f0f, static-brand-red #f03 (the heart only).
+   Type: Google Sans Flex (the consent card) and Roboto (everything Studio), both vendored under fonts/ (studio.css
+   @font-face). */
+#s-tabs {
+  --gm-page: #f6f8fc; --gm-surface: #ffffff; --gm-text: #1f1f1f; --gm-text2: #444746;
+  --gm-line: #e0e3e7; --gm-accent: #0b57d0; --gm-sel: #d3e3fd;
+  --gm-radius: 8px;
+  --yt-bg: #ffffff; --yt-text: #0f0f0f; --yt-text2: #606060; --yt-outline: rgba(0,0,0,.1); --yt-outline-opaque: #e5e5e5;
+  --yt-additive: rgba(0,0,0,.05); --yt-blue: #065fd4; --yt-inverted: #0f0f0f; --yt-red: #f03; --yt-owner: #e5e5e5;
+  --yt-pin-wash: rgba(6,95,212,.06); --yt-me: #1e8e3e;
+  --gm-sans: "GSF", "Google Sans", "Roboto GM", Roboto, Arial, sans-serif;
+  --gm-body: "Roboto GM", Roboto, Arial, sans-serif;
+}
+#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
+#s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
+#s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
+#s-tabs .sbsite .hub .qc-r .m-main { max-width: min(100%, var(--hub-column)); width: 100%; }
+/* one column with the composer: ask.css centres the composer on --hub-column (640px), so the feed column and
+   the reply indent follow the same box. The ask's pill and every reply line then share the composer's edges
+   instead of the whole thread sitting half the difference (760 - 640) to the composer's left. */
+#s-tabs .sbsite.ask .hub { --hub-reply-inset: 0px; }
+#s-tabs .sbsite.ask .hub .main > .feed { padding-left: max(24px, calc((100% - var(--hub-column)) / 2)); padding-right: max(24px, calc((100% - var(--hub-column)) / 2)); }
+#s-tabs .sbsite .hub .qc-r .m-main > * { max-width: 100%; }
+
+/* composer: the ask is typed in, the send button lights while there is text */
+#s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
+#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+#s-tabs .sbsite .hub .rc-send.qc-on { background: #ececec; color: #0b0b0c !important; }
+#s-tabs .sbsite .hub .qc-pi { display: inline-grid; place-items: center; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi img { width: 12px; height: 12px; object-fit: contain; }
+/* the composer chip's mark, sized per app so the swap between models never shifts the row */
+#s-tabs .sbsite .hub .qc-pi img[data-app="gemini"],
+#s-tabs .sbsite .hub .qc-pi img[data-app="sol"],
+#s-tabs .sbsite .hub .qc-pi img[data-app="opus"],
+#s-tabs .sbsite .hub .qc-pi img[data-app="studio"] { width: 13px; height: 9px; }
+
+
+/* app tiles */
+#s-tabs .sbsite .hub .qc-tile { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-tile img { width: 15px; height: 15px; object-fit: contain; display: block; }
+#s-tabs .sbsite .hub .qc-t-gemini { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+/* YouTube Studio: YouTube's full-colour icon (brand/youtube-icon.svg, Wikimedia Commons, unaltered) on a white tile */
+#s-tabs .sbsite .hub .qc-t-studio { background: #fff; }
+#s-tabs .sbsite .hub .qc-t-studio img { width: 16px; height: 11px; }
+/* GPT-6 Sol: OpenAI's round badge (brand/openai-logo.svg, black disc, white knot) fills its tile */
+#s-tabs .sbsite .hub .qc-t-sol { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-sol img { width: 100%; height: 100%; }
+/* Claude: its orange tile, mark painted white (brand/claude-logo.svg is fetched white already; the filter pins it) */
+#s-tabs .sbsite .hub .qc-t-opus { background: #d97757; }
+#s-tabs .sbsite .hub .qc-t-opus img { filter: brightness(0) invert(1); }
+/* superbot's tile: its mark, static. The silhouette is the mask geometry of assets/sb-mark-live.html (eyes cut out)
+   used as a CSS mask, three layers deep like the live mark (storm-0 up-left, storm-3 down-right, fg on top), so
+   it needs no SVG mask ids and draws the same in every browser */
+#s-tabs .sbsite .hub { --sb-cat: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%2212%2018%2076%2070%22%3E%3Cmask%20id%3D%22m%22%3E%3Cg%20fill%3D%22white%22%3E%3Crect%20x%3D%2214%22%20y%3D%2232%22%20width%3D%2272%22%20height%3D%2254%22%20rx%3D%2215%22%2F%3E%3Cpath%20d%3D%22M14%2046V28Q14%2020%2021%2021Q28%2024%2036%2032Z%22%2F%3E%3Cpath%20d%3D%22M86%2046V28Q86%2020%2079%2021Q72%2024%2064%2032Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22black%22%3E%3Cellipse%20cx%3D%2235%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3Cellipse%20cx%3D%2265%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3C%2Fg%3E%3C%2Fmask%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20mask%3D%22url(%23m)%22%2F%3E%3C%2Fsvg%3E"); }
+#s-tabs .sbsite .hub .qc-t-superbot { position: relative; background: #0b0b0c; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .sbm { position: absolute; inset: 16%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#s-tabs .sbsite .hub .sbm-c { background: #00e5c3; transform: translate(-0.6px, -0.6px); }
+#s-tabs .sbsite .hub .sbm-m { background: #c026d3; transform: translate(0.6px, 0.6px); }
+#s-tabs .sbsite .hub .sbm-w { background: #ececec; }
+#s-tabs .sbsite .hub .qc-pi-sb { position: relative; display: none; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi-sb .sbm { inset: 0; }
+
+/* superbot's switch pill: "Switching to X", its spinner resolving to the green check (the camera pushes in on it) */
+#s-tabs .sbsite .hub .qc-sw { display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 12px 0 6px; border-radius: 9999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 13px/1 var(--ui); }
+/* the label is solid and never changes once the pill lands, so it reads the whole time the camera holds on it */
+#s-tabs .sbsite .hub .qc-swl { color: #ececec; white-space: nowrap; }
+/* what this hand-off makes, in the same sentence as the switch, one step quieter */
+#s-tabs .sbsite .hub .qc-why { margin-left: -4px; color: #9a9aa2; font-weight: 500; white-space: nowrap; }
+#s-tabs .sbsite .hub .qc-st { position: relative; width: 14px; height: 14px; margin-left: 2px; }
+#s-tabs .sbsite .hub .qc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .qc-ok { width: 14px; height: 14px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .qc-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the routed app's answer */
+#s-tabs .sbsite .hub .qc-who { display: flex; align-items: center; gap: 7px; margin: 2px 0 7px; font: 600 12.5px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .qc-who .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .qc-who .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-who .qc-t-superbot img { width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .qc-who small { font-weight: 500; font-size: 10.5px; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-say { min-height: 18px; margin-bottom: 9px; font: 12.5px/18px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .qc-say .qc-hid { color: transparent; }
+#s-tabs .sbsite .hub .qc-fin2 { margin: 12px 0 8px; }
+
+/* tool chips inside the hub (the shell's spinner, with the hub's colours) */
+#s-tabs .sbsite .hub .ch-tool { margin: 0 0 7px; }
+#s-tabs .sbsite .hub .spin { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; flex: none; box-sizing: border-box; }
+#s-tabs .sbsite .hub .spin.done { border: 0; background: #34d399; position: relative; }
+#s-tabs .sbsite .hub .spin.done::after { content: ""; position: absolute; left: 4px; top: 2.5px; width: 3px; height: 5.5px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
+
+
+
+
+
+#s-tabs .sbsite .hub .dd-chiprow { opacity: 0; }
+
+
+/* the hub's own welcome line and date divider are not part of this spot: the chat starts on an empty thread */
+#s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
+

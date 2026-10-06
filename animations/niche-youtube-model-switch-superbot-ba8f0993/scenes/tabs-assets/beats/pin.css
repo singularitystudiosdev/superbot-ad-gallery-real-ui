@@ -1,0 +1,46 @@
+/* Pin beat (beats/pin.js): GPT-6 Sol's pin scorecard. Five candidate rows, three measured columns (bars, pips), a
+   score; the winner's row lights with a blue wash and a Pin badge. Nothing transitions: every moving value is written
+   from t. Every class is prefixed .pn-. */
+
+#s-tabs .sbsite .hub .pn-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 10px 12px 10px;
+  border-radius: 10px; background: #141416; transform-origin: 50% 0; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .pn-hd { display: flex; align-items: center; gap: 7px; font: 600 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .pn-hd small { margin-left: auto; font: 11px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .pn-ic { width: 14px; height: 14px; color: #ececec; }
+
+#s-tabs .sbsite .hub .pn-cols, #s-tabs .sbsite .hub .pn-row { display: grid; grid-template-columns: minmax(104px, 1fr) minmax(0, 104px) minmax(0, 104px) 92px 74px; column-gap: 12px; align-items: center; }
+#s-tabs .sbsite .hub .pn-cols { margin: 10px 0 0; padding: 0 8px 5px; border-bottom: 1px solid #232327;
+  font: 600 9.5px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; color: #77777e; }
+#s-tabs .sbsite .hub .pn-cols span:last-child { text-align: right; }
+#s-tabs .sbsite .hub .pn-row { position: relative; padding: 6px 8px; border-radius: 7px; }
+#s-tabs .sbsite .hub .pn-row + .pn-row { margin-top: 1px; }
+#s-tabs .sbsite .hub .pn-wash { position: absolute; inset: 0; border-radius: 7px; background: rgba(62,166,255,.12); box-shadow: inset 0 0 0 1px rgba(62,166,255,.45); opacity: 0; }
+#s-tabs .sbsite .hub .pn-row > :not(.pn-wash) { position: relative; }
+#s-tabs .sbsite .hub .pn-who { display: flex; align-items: center; gap: 8px; min-width: 0; font: 600 12px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .pn-av { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--c); color: #fff; font: 600 10px/1 var(--ui); }
+#s-tabs .sbsite .hub .pn-m { display: flex; align-items: center; gap: 7px; }
+#s-tabs .sbsite .hub .pn-m em { font: 600 11px/1 var(--ui); font-style: normal; color: #c4c7c5; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#s-tabs .sbsite .hub .pn-bar { flex: 1; height: 6px; border-radius: 9999px; background: #23242a; overflow: hidden; }
+#s-tabs .sbsite .hub .pn-bar i { display: block; height: 100%; border-radius: 9999px; background: #9aa0a6; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .pn-lit .pn-bar i { background: #3ea6ff; }
+#s-tabs .sbsite .hub .pn-pips { gap: 4px; }
+#s-tabs .sbsite .hub .pn-pip { width: 9px; height: 9px; border-radius: 3px; background: #2a2b31; opacity: .25; }
+#s-tabs .sbsite .hub .pn-pip-on { background: #c4c7c5; }
+#s-tabs .sbsite .hub .pn-lit .pn-pip-on { background: #3ea6ff; }
+#s-tabs .sbsite .hub .pn-pips em { margin-left: 4px; }
+#s-tabs .sbsite .hub .pn-sc { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+#s-tabs .sbsite .hub .pn-sc b { font: 700 13px/1 var(--ui); color: #ececec; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .pn-badge { order: -1; display: inline-flex; align-items: center; gap: 2px; height: 18px; padding: 0 7px 0 4px; border-radius: 9999px;
+  background: #3ea6ff; color: #0b0b0c; font: 700 10.5px/1 var(--ui); opacity: 0; }
+#s-tabs .sbsite .hub .pn-badge svg { width: 12px; height: 12px; }
+
+#s-tabs .sbsite .hub .pn-verd { opacity: 0; display: flex; align-items: center; gap: 7px; margin-top: 8px; padding: 8px 8px 0; border-top: 1px solid #1f1f23;
+  font: 600 12px/1.2 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .pn-verd .qc-ok { flex: none; width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .pn-chip { height: 20px; padding: 0 9px; border-radius: 9999px; background: rgba(62,166,255,.12); box-shadow: inset 0 0 0 1px rgba(62,166,255,.4);
+  font: 500 11px/20px var(--ui); color: #b7dcff; opacity: 0; }
+#s-tabs .sbsite .hub .pn-verd .pn-chip:first-of-type { margin-left: 3px; }
+/* narrow frames (4:5): the bars give way before the names do */
+#s-tabs .sbsite .hub .pn-who b { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .pn-m { min-width: 0; }
+#s-tabs .sbsite .hub .pn-bar { min-width: 0; }

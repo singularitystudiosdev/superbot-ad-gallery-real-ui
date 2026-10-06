@@ -92,6 +92,17 @@
     "desc": "One ask in superbot: Gemini watches the latest video and ranks its 1,284 comments, GPT-6 Astra reads the frame a viewer asked about, Claude Opus 5.5 writes the replies in the creator's voice, then superbot posts them in YouTube Studio and pins the best one."
   },
   {
+    "id": "niche-youtube-model-switch-superbot-ba8f0993",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and pin the best one · detailed cut (16:9): Gemini finds them, Opus 5.5 answers them, GPT-6 Sol picks the pin, Studio posts it",
+    "src": "animations/niche-youtube-model-switch-superbot-ba8f0993/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-ba8f0993.png",
+    "desc": "Same ask and same 26 s as the YouTube Studio spot, with the output shown in full. Gemini reads all 1,284 comments, merges the repeats into 38 questions and ranks the top five by how many viewers asked the same thing, each tied to the moment in the video that answers it (7:05 echo test, 6:12 blind test, 4:38 desk setup). Claude Opus 5.5 writes all five replies in the creator's voice with the timestamps linked, Priya's as a short buyer's guide. GPT-6 Sol scores the five on likes, demand and how many questions the reply answers, and picks Priya's to pin. Superbot then posts, hearts and pins from YouTube Studio. 16:9.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-ba8f0993.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-converge-4x5-398eded5",
     "type": "animation",
     "group": "Ad spots",

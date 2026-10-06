@@ -1,0 +1,39 @@
+/* Drafts beat (beats/drafts.js): Claude Opus 5.5's drafts panel. The hub's card grammar; each draft is the comment
+   (grey, one line) over Sam's reply on a reply rail, its timestamps in YouTube's dark-theme link blue (#3ea6ff).
+   Nothing transitions: every moving value is written from t. Every class is prefixed .dr-. */
+
+#s-tabs .sbsite .hub .dr-card { opacity: 0; box-sizing: border-box; width: 100%; margin-top: 2px; padding: 10px 12px 10px;
+  border-radius: 10px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .dr-hd { display: flex; align-items: center; gap: 7px; font: 600 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .dr-ic { width: 14px; height: 14px; color: #d97757; }
+#s-tabs .sbsite .hub .dr-n { padding: 3px 7px; border-radius: 9999px; background: #1e1f24; box-shadow: inset 0 0 0 1px #2e3038; font: 500 10.5px/1 var(--ui); color: #c4c7c5; }
+#s-tabs .sbsite .hub .dr-voice { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font: 500 11px/1 var(--ui); color: #a8abb2; }
+#s-tabs .sbsite .hub .dr-eq { width: 13px; height: 13px; color: #d97757; }
+#s-tabs .sbsite .hub .dr-meter { display: block; width: 64px; height: 4px; border-radius: 9999px; background: #26262b; overflow: hidden; }
+#s-tabs .sbsite .hub .dr-meter i { display: block; height: 100%; background: #d97757; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .dr-pc { width: 26px; font: 600 11px/1 var(--ui); color: #ececec; text-align: right; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .dr-tone { margin: 6px 0 4px 21px; font: 11px/1.3 var(--ui); color: #8e8e93; }
+
+#s-tabs .sbsite .hub .dr-list { display: grid; }
+#s-tabs .sbsite .hub .dr-it { display: grid; grid-template-columns: 20px minmax(0, 1fr) 14px; column-gap: 9px; align-items: start; padding: 7px 0 6px; border-top: 1px solid #1f1f23; }
+#s-tabs .sbsite .hub .dr-av { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--c); color: #fff; font: 600 10px/1 var(--ui); }
+#s-tabs .sbsite .hub .dr-b { min-width: 0; display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .dr-q { display: flex; gap: 7px; font: 11px/20px var(--ui); color: #8e8e93; white-space: nowrap; overflow: hidden; }
+#s-tabs .sbsite .hub .dr-q b { font-weight: 600; color: #c4c7c5; }
+#s-tabs .sbsite .hub .dr-q span { overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .dr-r { position: relative; padding-left: 10px; font: 12px/17px var(--ui); color: #ececec; text-wrap: pretty; }
+#s-tabs .sbsite .hub .dr-r::before { content: ""; position: absolute; left: 0; top: 2px; bottom: 2px; width: 2px; border-radius: 2px; background: #3a3a40; }
+#s-tabs .sbsite .hub .dr-rh { color: transparent; }
+#s-tabs .sbsite .hub .dr-rh .yt-ts { color: transparent; }
+#s-tabs .sbsite .hub .dr-r .yt-ts { color: #3ea6ff; font-weight: 500; text-decoration: none; }
+#s-tabs .sbsite .hub .dr-caret { display: inline-block; width: 1.5px; height: 12px; margin-left: 1px; vertical-align: -2px; background: #d97757; }
+#s-tabs .sbsite .hub .dr-st { position: relative; width: 14px; height: 14px; margin-top: 3px; }
+#s-tabs .sbsite .hub .dr-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; opacity: 0; }
+#s-tabs .sbsite .hub .dr-st .qc-ok { position: absolute; inset: 0; width: 14px; height: 14px; opacity: 0; }
+
+#s-tabs .sbsite .hub .dr-ft { opacity: 0; display: flex; align-items: center; gap: 10px; margin-top: 4px; padding-top: 8px; border-top: 1px solid #1f1f23; }
+#s-tabs .sbsite .hub .dr-fl { flex: 1; min-width: 0; font: 11px/1.2 var(--ui); color: #a8abb2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .dr-go { display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 11px 0 8px; border-radius: 9999px; background: #2a2a2e;
+  font: 600 11.5px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .dr-go svg { width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .dr-go.dr-on { background: #ececec; color: #0b0b0c; }

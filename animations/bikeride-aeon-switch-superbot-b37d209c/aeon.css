@@ -1,0 +1,45 @@
+/* aeon.css: the two beats this cut adds around the bike scene, both taken from the A24 teaser's grammar:
+   an INTRO wordmark plate over a breathing green horizon (the teaser's "A24" over the ocean), and an END that is a
+   three-card title run over the ride, then a black breath and a chrome wordmark card (the teaser's "AAA24" close). */
+
+/* ---------- intro: centred wordmark over a quiet plate ---------- */
+#s-intro { background: #050506; z-index: 18; overflow: hidden; }
+#s-intro .aeon { position: absolute; inset: 0; overflow: hidden; }
+#s-intro .aeon-arc { position: absolute; left: -30%; right: -30%; bottom: 0; height: 78%;
+  background: radial-gradient(120% 62% at 50% 118%, rgba(0, 229, 195, .34) 0%, rgba(43, 107, 255, .15) 30%, rgba(0, 0, 0, 0) 62%);
+  filter: blur(1.5px); }
+#s-intro .aeon-lock { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column;
+  align-items: center; gap: 22px; text-align: center; }
+#s-intro .aeon-mark { width: 84px; height: 84px; display: grid; place-items: center; }
+#s-intro .aeon-word { font: 800 84px/1 var(--ui); letter-spacing: -.04em; color: #fff; }
+#s-intro .aeon-tag { font: 500 27px/1.2 var(--ui); color: var(--muted); letter-spacing: .01em; }
+
+/* ---------- end: title run over the ride, then the chrome card ---------- */
+#s-end { background: #000; z-index: 20; overflow: hidden; }
+#s-end .aeon-end { position: absolute; inset: 0; overflow: hidden; }
+#s-end .aeon-plate { position: absolute; inset: -4%; z-index: 0; }
+#s-end .aeon-plate img { width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 46%; }
+#s-end .aeon-scrim { position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.10) 42%, rgba(0,0,0,.72) 100%); }
+#s-end .aeon-cards { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; }
+#s-end .aeon-card { position: absolute; left: 0; right: 0; top: 56%; text-align: center; font: 800 76px/1.06 var(--ui);
+  letter-spacing: -.02em; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,.55); padding: 0 8%; }
+#s-end .aeon-chrome { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; background: #000; }
+#s-end .aeon-chrome .stack { display: flex; flex-direction: column; align-items: center; gap: 26px; }
+#s-end .aeon-chrome .mark { width: 66px; height: 66px; display: grid; place-items: center; }
+#s-end .aeon-chrome .chromeword { font: 800 132px/1 var(--ui); letter-spacing: -.045em;
+  background: linear-gradient(180deg, #ffffff 0%, #eef1f5 20%, #8b939e 42%, #4d555f 50%, #e8ecf1 56%, #b9c0c9 72%, #6b737d 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5), 0 16px 34px rgba(0,0,0,.7); }
+#s-end .aeon-chrome .row { position: absolute; left: 7%; right: 7%; display: flex; justify-content: space-between;
+  font: 600 22px/1.3 var(--ui); color: #c9ccd4; letter-spacing: .01em; }
+#s-end .aeon-chrome .row.top { top: 7%; }
+#s-end .aeon-chrome .row.bot { bottom: 7%; color: #8e929b; }
+
+/* narrow frames: the wordmark and the cards scale with the width */
+html[data-ar="4x3"] #s-end .aeon-card { font-size: 60px; }
+html[data-ar="4x3"] #s-end .aeon-chrome .chromeword { font-size: 104px; }
+html[data-ar="4x5"] #s-end .aeon-card { font-size: 56px; }
+html[data-ar="4x5"] #s-end .aeon-chrome .chromeword { font-size: 92px; }
+html[data-ar="1x1"] #s-end .aeon-card { font-size: 52px; }
+html[data-ar="1x1"] #s-end .aeon-chrome .chromeword { font-size: 84px; }

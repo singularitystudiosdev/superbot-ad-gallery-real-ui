@@ -288,6 +288,14 @@ const more = [
     { desc: 'Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5.' }],
   ['bikeride-model-switch-nozoom-superbot-e13744a9', 'bikeride-model-switch-superbot-e13744a9/?cut=nozoom', 'make a relaxing Japanese bike riding game, no zoom: Gemini, Blender, ElevenLabs, Opus 5.5, then the real Opus 5.5 build plays (4 switches; clip @prasenx)', 'Ad spots',
     { desc: 'Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5.' }],
+  // A24-teaser cut of bikeride-model-switch (2026-10-06): the same one-ask / four-switch ad, framed like a film teaser.
+  // Cold open wordmark over a green horizon ("One ask. Every model."), the ask spoken as it types, each switch pill held
+  // longer and spoken (Gemini decals, Blender models, ElevenLabs sound, Opus 5.5 code, then "Good chat." and "Press
+  // play."), the real build open to full frame, then a three-card title run over the ride, a black breath, and a chrome
+  // "superbot" wordmark close. A music bed and the spoken lines run under all of it; pronounced style lifted from A24's
+  // "You Can See Everything" teaser (youtube GGJSRFWALTI), no footage from it used.
+  ['bikeride-aeon-switch-superbot-b37d209c', 'bikeride-aeon-switch-superbot-b37d209c/', 'make a relaxing Japanese bike riding game, cut like a film teaser: a wordmark cold open, a spoken line per switch, then the real build plays into a three-card title run and a chrome wordmark close (Gemini, Blender, ElevenLabs, Opus 5.5)', 'Ad spots',
+    { desc: 'The bikeride-model-switch ad with a teaser film\'s grammar layered on, no footage from any teaser used. It opens on the superbot wordmark over a breathing green horizon (one ask, every model), the ask is spoken as it types, each switch pill holds longer and speaks its line (Gemini paints the decals, Blender builds the models, ElevenLabs gives it sound, Opus 5.5 writes the game), a deadpan "Good chat." lands, the real build opens to full frame, then the close is a three-card title run over the ride (One ask. / Gemini. Blender. ElevenLabs. Opus. / superbot.gg), a black breath, and a chrome superbot wordmark card. A synthesized music bed and spoken lines run under all of it. Ends on a bike ride game built in the browser with Claude Opus 5.5.' }],
   // Watch my portfolio (2026-10-03): stock-trading remake of bikeride-model-switch. One chat hands off to Gemini (watch
   // rule), Finnhub (live quotes), Twilio (SMS verified), Claude Opus 5.5 (read-only watch.js) and a view-only brokerage,
   // then NVDA slips past -5% and the lock-screen text lands. Watching only: no trade buttons, no return claims.

@@ -1,0 +1,19 @@
+pocketsflow-layer-teardown-superbot-9e2b8aa9 · provenance (internal; nothing here is shown on screen)
+
+Generated for this spot (each by the model the ad credits for that layer):
+- media/keyart.jpg, media/keyart-cut.png: Nano Banana Pro (google/gemini-3-pro-image-preview via OpenRouter, 4K), from frames of the original spot's mascot as reference. keyart-cut.png = ImageMagick flood-fill cutout.
+- media/mascot.glb: Rodin Gen-2 (hyper3d/rodin on Replicate, PBR, from a Nano Banana Pro figurine still), simplified to 150k tris + webp textures with gltf-transform. (Hunyuan3D 3.1 was tried first and failed twice upstream: ResourceInsufficient.)
+- media/kling.mp4: Kling 3.0 Pro image-to-video (kwaivgi/kling-v3.0-pro via OpenRouter's video API, 1080p, 5 s) from keyart.jpg.
+- media/kling60.mp4: the same clip motion-interpolated to 60 fps with ffmpeg minterpolate, used only under the film's halftone pass (Superbot's card shows Kling's own file).
+- Voiceover: Eleven v3 (elevenlabs/v3 on Replicate, voice "Hope"): "Got something to sell? Pocketsflow turns it into a store in minutes. Checkout, tax and payouts, handled."
+- Score: Eleven Music (elevenlabs/music on Replicate, 52 s instrumental, 118 BPM).
+- media/soundtrack.mp3: mixed in ffmpeg from the two ElevenLabs takes plus synthesized ticks, pops and noise whooshes (tools/mix.bd889861.sh).
+
+Captured (real UI, headless Playwright, 2026-10-05):
+- media/pf-form.jpg, pf-page.jpg, pf-dash.jpg, pf-phone.png, shot-home.jpg, shot-creators.jpg: https://www.pocketsflow.com/ (product form, product page, dashboard, Studio Nord creator-page template; the site labels its demo creators as fictional).
+- media/shot-pricing.jpg: https://www.pocketsflow.com/pricing
+- Stats (65K+ people, 160+ countries, $70M+ processed) and Merchant of Record copy: pocketsflow.com, 2026-10-05.
+
+Fonts: Satoshi (Fontshare, ITF Free Font License), Averia Serif Libre, Geist Mono, Instrument Serif (SIL OFL, Google Fonts), Inter (SIL OFL). Same families pocketsflow.com serves.
+Superbot UI: anatomy and CSS ported from the superbot-desktop source (provider-switch, media-pending, media-embed, audio-row, step-line) via the realui spot; provider tiles from packages/ui/src/marks/tiles.
+three.js r16x (MIT) for the Rodin turntable viewer.

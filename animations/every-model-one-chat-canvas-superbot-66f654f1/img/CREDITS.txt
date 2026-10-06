@@ -1,0 +1,13 @@
+img CREDITS (it-does-what-you-ask)
+
+muse-meme.png            Carried over from do-that-too-apps-superbot-e8871e50 (the Gemini meme).
+burger.jpg               Carried over from do-that-too-apps-superbot-e8871e50; see scenes/dash-assets notes in
+                         ../brand/CREDITS.txt (public domain, NCI).
+
+The Reddit handle, subreddit numbers and post stats shown in the spot are made up.
+
+Canvas cut (66f654f1, 2026-10-06): every image in the canvas is a crop of muse-meme.png or burger.jpg. The meme's
+reference crops, feed cuts, found-meme thumbnails (caption type over crops, and the lock-screen, post and chat
+screenshot memes), the live map, tracker, funnel, scan bars, sparklines and chart are built in HTML/CSS/SVG in
+scenes/tabs-assets/beats/*.66f654f1.js. Post handle, subreddit and post numbers, restaurants, Dasher stats and the
+address are made up.

@@ -1,0 +1,11 @@
+brand/ CREDITS (every-model-one-chat-fluid-superbot-aae36d42). Third-party marks appear nominatively, naming the
+model or app superbot routes a turn to. All marks are the property of their owners.
+
+gemini-logo.svg    Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg (copied from
+                   animations/every-model-one-chat-superbot-efa8df82/brand/). Google trademark. Used for the Nano Banana
+                   Pro and Gemini 3.8 Flash rows, the same mark superbot-desktop's media-mark.ts gives Google models.
+reddit.png         Reddit app tile, copied unmodified from superbot-desktop packages/ui/src/marks/tiles/reddit.png (the
+                   tile the desktop app draws on its "Connected to Reddit" pill). Trademark of Reddit, Inc.
+doordash.png       DoorDash app tile, copied unmodified from superbot-desktop packages/ui/src/marks/tiles/doordash.png
+                   (the tile on the app's "Connected to DoorDash" pill). Trademark of DoorDash, Inc.
+superbot-mark.svg  the superbot cat mark, animations/every-model-one-chat-superbot-efa8df82/scenes/tabs-assets/mark-clean.svg.

@@ -68,6 +68,33 @@ const more = [
   ['it-does-what-you-ask-superbot-da5f6b38', 'it-does-what-you-ask-superbot-da5f6b38/', 'IT DOES WHAT YOU ASK · meme to Reddit to burger', 'Ad spots'],
   ['every-model-one-chat-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/', 'EVERY MODEL. ONE CHAT. · Connecting to DoorDash', 'Ad spots'],
   ['every-model-one-chat-sb-superbot-efa8df82', 'every-model-one-chat-superbot-efa8df82/?route=superbot', 'EVERY MODEL. ONE CHAT. · Switched to Superbot', 'Ad spots'],
+  // >>> every-model-one-chat-sb-superbot-efa8df82-canvas-66f654f1
+  // Canvas cut (2026-10-06, 66f654f1): the route=superbot spot rebuilt for 16:9 as a split view, same 21.241 s.
+  // The thread narrows to the left and a canvas column opens on the right where each model's full output builds.
+  // Switches follow what each ask makes: Nano Banana Pro for the lettered meme, Claude Haiku 4.5 to read every
+  // Reddit image (DeepSeek V4 Flash is text-only), Superbot to work DoorDash. Pinned to ?ar=16x9.
+  ['every-model-one-chat-sb-superbot-efa8df82-canvas-66f654f1', 'every-model-one-chat-canvas-superbot-66f654f1/', 'EVERY MODEL. ONE CHAT. · canvas cut (16:9): each model\'s full output builds beside the chat', 'Ad spots',
+    { desc: 'Same three asks and the same 21 s as the Switched to Superbot spot, rebuilt for 16:9: the chat narrows to the left and a canvas opens on the right, one tab per answer. "make me a muse meme" goes to Nano Banana Pro (best at text inside images): the brief it wrote, the three panels rendered as scene, lettering and reaction passes, the mascot held on-model, a 10/10 lettering check, 4:5, 1:1 and 9:16 cuts, caption and alt text. "Scrape reddit and look for more" goes to Claude Haiku 4.5 (it reads every image, which a text-only model cannot): 2,418 posts read, 1,912 images looked at, 31 Muse matches against 4 by titles alone, and the five climbing fastest with upvotes, match scores and climb lines. "Winning, order me a burger." goes to Superbot (it uses DoorDash for you): 14 spots compared, the pick, the order, a live map with the route and the delivery tracker. All UI, maps, charts and screenshot memes are built in HTML/CSS/SVG; photos are crops of the spot\'s own meme and burger. Numbers and names are made up.',
+      download: 'assets/video/every-model-one-chat-canvas-superbot-66f654f1.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< every-model-one-chat-sb-superbot-efa8df82-canvas-66f654f1
+  // >>> every-model-one-chat-sb-superbot-efa8df82-relay-b5e8a114
+  // Relay cut (2026-10-06, b5e8a114): the route=superbot spot rebuilt for 16:9 around ONE ask and ONE deliverable.
+  // A camera travels a strip of seven panes (superbot, DeepSeek, Claude Code, Gemini, Blender, ElevenLabs, the live
+  // page); a courier carries the growing bundle of files down a cable from each model into the next. Switch order
+  // differs from the source and from r1-b: DeepSeek V4 Pro, Claude Opus 5.5 (site first, with empty slots), Nano
+  // Banana Pro, Blender 5.2 over MCP, Eleven v3, then superbot deploys. Credits in the dir's CREDITS.txt.
+  ['every-model-one-chat-sb-superbot-efa8df82-relay-b5e8a114', 'every-model-one-chat-relay-superbot-b5e8a114/', 'EVERY MODEL. ONE CHAT. · relay cut (16:9): one ask relayed through DeepSeek V4 Pro, Claude Opus 5.5, Nano Banana Pro, Blender and ElevenLabs into a live site', 'Ad spots',
+    { desc: 'One ask, one relay, one finished launch. The Switched to Superbot spot rebuilt for 16:9 as a camera that travels a strip of seven panes, each model in its own product UI, while a courier carries the growing bundle of files down a cable into the next one. DeepSeek V4 Pro (DeepThink and Search on) scrapes Yelp, DoorDash, Uber Eats, Maps and Reddit for 47 rival burger spots and finds the top complaint, soggy buns. Claude Opus 5.5 in Claude Code builds the site from that data with an empty slot for every asset still to come. Nano Banana Pro fills the photo slots, including a chalk menu lettered with the site\'s prices. Blender 5.2, driven over the Blender MCP, turns the burger photo into a 3D model. Eleven v3 voices the radio spot. Superbot deploys it and the page fills in while the spot plays, then the whole relay in one shot and the end card. Real outputs: the five photos (Nano Banana Pro), the mesh (Hyper3D Rodin Gen-2), every Blender frame (screen captures of Blender 5.2), the turntable (a Blender render) and the voice (Eleven v3, plays in the MP4). Spot names and review counts are made up. 41 s, 16:9 only.',
+      download: 'assets/video/every-model-one-chat-relay-superbot-b5e8a114.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< every-model-one-chat-sb-superbot-efa8df82-relay-b5e8a114
+  // >>> every-model-one-chat-sb-superbot-efa8df82-fluid-aae36d42
+  // Fluid cut (2026-10-06, aae36d42): the route=superbot spot rebuilt as the real superbot-desktop thread at 16:9, one clock,
+  // every row eased in, the thread following its own bottom edge. Switches fit the ask: Nano Banana Pro letters the meme,
+  // Reddit + Gemini 3.8 Flash read image posts (a text-only model cannot), superbot itself works DoorDash. Assets regenerated.
+  ['every-model-one-chat-sb-superbot-efa8df82-fluid-aae36d42', 'every-model-one-chat-fluid-superbot-aae36d42/', 'EVERY MODEL. ONE CHAT. · fluid cut (16:9): the real superbot thread, each ask routed to the model or app that fits it', 'Ad spots',
+    { desc: 'The Switched to Superbot spot rebuilt as the real superbot desktop thread at 16:9: the switch pill, the nested column on its rail, the who row, the large answer lead and the composer chip that shows the routed model, all driven by one clock so rows ease in, the thread follows its own bottom edge and the camera holds one framing until the pull back. "make me a muse meme" switches to Nano Banana Pro, the image model that letters text cleanly, and the frame resolves into the meme. "find more muse memes on reddit" connects to Reddit, then switches to Gemini 3.8 Flash because the memes are images a text-only model cannot read; three Reddit posts land. "winning. order me a burger" stays on superbot, which connects to DoorDash and works the checkout itself (Place Order, then the tracker). Memes, burger, storefront and logo regenerated with Nano Banana Pro around one on-model Muse. Posts, numbers and the store are made up.',
+      download: 'assets/video/every-model-one-chat-fluid-superbot-aae36d42.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< every-model-one-chat-sb-superbot-efa8df82-fluid-aae36d42
   // >>> every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb
   // New switch chain for the route=superbot spot (2026-10-04, loop lv410045ceb round 1 arm B): every-model-one-chat-superbot-efa8df82 (untouched) rebuilt as a 9.8 s 16:9 cut with a different set and order of switches, each doing what that tool really does. One ask, "Launch my soda brand tonight.": DeepSeek V4 Flash scrapes r/Soda (real post titles) and names the gap, Gemini makes the MANDO wraparound can label (real gemini-3-pro-image output), superbot connects to Blender, which models the can and renders it in Cycles (real Blender 5.2 renders, raw passes then denoised), ElevenLabs records a 4 s voiceover (player only, no audio ships), Claude Opus 5.5 writes the launch page (site/ is the real page, wiring in can.webp, the voiceover and the label orange) and it renders with the can in the hero; the end card carries all five marks. Ad rail on the left names the five steps; real hub thread on the right, live from frame 0. Credits in animations/every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb/img/CREDITS.txt and brand/CREDITS.txt. 16:9 only (index.html pins ?ar=16x9).
   ['every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb', 'every-model-one-chat-sb-superbot-efa8df82-r1-b-lv410045ceb/', 'EVERY MODEL. ONE CHAT. · Launch my soda brand tonight: DeepSeek V4 Flash, Gemini, Blender, ElevenLabs, Claude Opus 5.5 (5 switches, 16:9)', 'Ad spots',
@@ -1700,6 +1727,12 @@ const KEEP_IDS = new Set([
   'bikeride-model-switch-superbot-e13744a9',
   'every-model-converge-4x5-398eded5',
   'every-model-one-chat-sb-superbot-efa8df82',
+  // added (2026-10-06, 66f654f1): the canvas cut of the route=superbot spot (own animation dir, 16:9 render)
+  'every-model-one-chat-sb-superbot-efa8df82-canvas-66f654f1',
+  // added (2026-10-06, b5e8a114): the relay cut of the route=superbot spot (own animation dir, 16:9 render with voice)
+  'every-model-one-chat-sb-superbot-efa8df82-relay-b5e8a114',
+  // added (2026-10-06, aae36d42): the fluid cut of the route=superbot spot (own animation dir, 16:9 render)
+  'every-model-one-chat-sb-superbot-efa8df82-fluid-aae36d42',
   // re-enabled (2026-10-06, 7267635b): the title-card cut of the bikeride spot, a ?cut of the ad already in the list, so
   // it adds one thumbnail and one render, no new animation directory.
   'bikeride-titlecards-superbot-7267635b',

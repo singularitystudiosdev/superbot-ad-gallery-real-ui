@@ -1,0 +1,64 @@
+/* mainstreetburger.co. Look plan: paper #F4EDE1, ink #1B1714, ketchup red #C8102E (the one accent, the truck
+   sign's red), muted #6B625A, white #FFFFFF, hairline #E4DACA; Fraunces for display, the system sans for body;
+   radii 8px (controls) and 16px (images, panels). The bold element is the headline beside the spinning burger. */
+.site { --paper: #F4EDE1; --ink: #1B1714; --red: #C8102E; --muted: #6B625A; --white: #FFFFFF; --line: #E4DACA; --r1: 8px; --r2: 16px;
+  width: 1560px; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+.site a { color: inherit; text-decoration: none; }
+
+.s-nav { height: 76px; display: flex; align-items: center; justify-content: space-between; padding: 0 80px; border-bottom: 1px solid var(--line); }
+.s-word { font: 800 26px/1 Fraunces, serif; letter-spacing: -.01em; }
+.s-links { display: flex; align-items: center; gap: 32px; font: 500 16px/1 var(--sans); }
+.s-btn { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: var(--r1); background: var(--red); color: var(--white); font: 600 16px/1 var(--sans); }
+.s-btn-lg { height: 62px; padding: 0 28px; font-size: 19px; }
+
+.s-hero { height: 560px; display: grid; grid-template-columns: 1fr 600px; gap: 48px; padding: 56px 80px 48px; }
+.s-copy h1 { margin: 0 0 24px; font: 900 112px/.94 Fraunces, serif; font-variation-settings: "opsz" 144; letter-spacing: -.03em; }
+.s-copy p { max-width: 560px; margin: 0 0 32px; font: 400 22px/1.45 var(--sans); color: var(--muted); }
+.s-cta { display: flex; align-items: center; gap: 16px; }
+.s-radio { position: relative; display: flex; align-items: center; gap: 12px; height: 62px; padding: 0 20px 0 10px; border-radius: var(--r1); background: var(--white); box-shadow: inset 0 0 0 1px var(--ink); }
+.s-radio > :not(.slot-ph) { opacity: var(--fill, 0); }
+.s-play { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); }
+.s-play svg { width: 16px; height: 16px; fill: var(--white); }
+.s-radio.playing .s-play { background: var(--red); }
+.s-radio-txt { display: flex; flex-direction: column; gap: 4px; font: 600 15px/1 var(--sans); }
+.s-radio-txt em { font: 500 13px/1 var(--sans); font-style: normal; font-variant-numeric: tabular-nums; color: var(--muted); }
+.s-bars { width: 120px; height: 30px; display: flex; align-items: center; gap: 2px; }
+.s-bars i { flex: 1; border-radius: 1px; background: var(--line); }
+.s-bars i.on { background: var(--red); }
+.s-stats { display: flex; gap: 40px; margin-top: 40px; }
+.s-stats span { display: flex; flex-direction: column; gap: 6px; font: 400 15px/1.2 var(--sans); color: var(--muted); }
+.s-stats b { font: 800 40px/1 Fraunces, serif; letter-spacing: -.02em; color: var(--ink); }
+
+.s-3d { position: relative; height: 456px; }
+.s-disc, .s-turn, .s-spin-hint { opacity: var(--fill, 0); }
+.s-disc { position: absolute; left: 50%; top: 50%; width: 440px; height: 440px; margin: -230px 0 0 -220px; border-radius: 50%; background: var(--line); }
+.s-turn { position: absolute; inset: 0; transform: scale(calc(.94 + .06 * var(--fill, 0))); }
+.s-turn img { position: absolute; left: 50%; top: 50%; width: 520px; height: 520px; margin: -280px 0 0 -260px; }
+.s-spin-hint { position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; font: 500 14px/1 var(--sans); color: var(--muted); white-space: nowrap; }
+.s-spin-hint svg { width: 20px; height: 20px; fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.s-photos { display: grid; grid-template-columns: 680px 306px 1fr; gap: 24px; padding: 24px 80px 56px; }
+.s-photos figure { position: relative; margin: 0; }
+.s-photos img { display: block; width: 100%; height: 383px; object-fit: cover; border-radius: var(--r2); opacity: var(--fill, 0); }
+.s-photos figcaption { margin-top: 12px; font: 400 15px/1.3 var(--sans); color: var(--muted); }
+
+.s-price { padding: 24px 80px 80px; }
+.s-price h2 { margin: 0; font: 800 48px/1 Fraunces, serif; letter-spacing: -.02em; }
+.s-price > p { margin: 10px 0 32px; font: 400 17px/1.4 var(--sans); color: var(--muted); }
+.s-bar { height: 52px; display: grid; grid-template-columns: 200px 1fr 90px; align-items: center; gap: 24px; font: 500 17px/1 var(--sans); }
+.s-bar i { height: 20px; border-radius: var(--r1); background: var(--ink); opacity: .18; }
+.s-bar.us i { background: var(--red); opacity: 1; }
+.s-bar b { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* an asset slot before its model has filled it */
+.slot-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  border-radius: var(--r2); background: repeating-linear-gradient(135deg, var(--paper) 0 12px, var(--line) 12px 24px); box-shadow: inset 0 0 0 2px var(--line);
+  opacity: calc(1 - var(--fill, 0)); }
+.s-radio .slot-ph { border-radius: var(--r1); flex-direction: row; gap: 10px; }
+.s-3d .slot-ph { inset: 8px 40px; }
+.s-photos .slot-ph { bottom: auto; height: 383px; }
+.slot-file { padding: 6px 10px; border-radius: var(--r1); background: var(--white); font: 600 20px/1 var(--mono); color: var(--ink); }
+.slot-who { font: 500 17px/1 var(--sans); color: var(--muted); }
+.s-radio .slot-file { font-size: 14px; }
+.s-radio .slot-who { font-size: 13px; }
+[data-slot].filled .slot-ph { display: none; }

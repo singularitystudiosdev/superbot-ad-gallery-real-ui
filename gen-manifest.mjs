@@ -288,6 +288,12 @@ const more = [
     { desc: 'Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5.' }],
   ['bikeride-model-switch-nozoom-superbot-e13744a9', 'bikeride-model-switch-superbot-e13744a9/?cut=nozoom', 'make a relaxing Japanese bike riding game, no zoom: Gemini, Blender, ElevenLabs, Opus 5.5, then the real Opus 5.5 build plays (4 switches; clip @prasenx)', 'Ad spots',
     { desc: 'Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5.' }],
+  // the title-drive cut (2026-10-05): bikeride-model-switch with an A24-teaser close grafted on, rebuilt in the ad's own
+  // material. New cold open (the mark over the ride's own framing, the brand line typed in), the same one-ask chat, then
+  // a close that hard-cuts into the ride running full frame with three titles swapping in place over the motion, a 1.2 s
+  // black-and-silence hold, and a giant wordmark end card with a corner tagline. Same clip @prasenx.
+  ['bikeride-titledrive-superbot-3f9a7c21', 'bikeride-titledrive-superbot-3f9a7c21/', 'make a relaxing Japanese bike riding game · title-drive cut: cold open on the mark over the ride, Gemini, Blender, ElevenLabs, Opus 5.5, then the ride full frame with titles swapping over it and a giant wordmark end card (4 switches; clip @prasenx)', 'Ad spots',
+    { desc: 'The bikeride-model-switch spot with an A24-teaser ending grafted on. Cold open: the superbot mark centred over the ride\'s own establishing frame, the brand line "EVERY MODEL. ONE CHAT." typed in below it. Then the same one ask ("Relaxing Japanese bike riding game") through Gemini (decals), Blender (3D props), ElevenLabs (sound effects) and Claude Opus 5.5 (the code). Then the close: a hard cut into the ride running full frame, three titles swapping in place over the motion (MAKE A GAME / IN ONE CHAT / superbot.gg), a held 1.2 s of black and silence, and the giant superbot wordmark end card with its corner tagline. 35.1 s, 1920x1080, 60 fps. Clip @prasenx (x.com/prasenx/status/2102717687604633959).' }],
   // Watch my portfolio (2026-10-03): stock-trading remake of bikeride-model-switch. One chat hands off to Gemini (watch
   // rule), Finnhub (live quotes), Twilio (SMS verified), Claude Opus 5.5 (read-only watch.js) and a view-only brokerage,
   // then NVDA slips past -5% and the lock-screen text lands. Watching only: no trade buttons, no return claims.

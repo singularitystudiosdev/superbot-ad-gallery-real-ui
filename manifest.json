@@ -492,6 +492,17 @@
     "desc": "Ends on a bike ride game by @prasenx (x.com/prasenx/status/2102717687604633959), built in the browser with Claude Opus 5.5."
   },
   {
+    "id": "bikeride-titledrive-superbot-3f9a7c21",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a relaxing Japanese bike riding game · title-drive cut: cold open on the mark over the ride, Gemini, Blender, ElevenLabs, Opus 5.5, then the ride full frame with titles swapping over it and a giant wordmark end card (4 switches; clip @prasenx)",
+    "src": "animations/bikeride-titledrive-superbot-3f9a7c21/",
+    "thumb": "assets/shots/bikeride-titledrive-superbot-3f9a7c21.png",
+    "desc": "The bikeride-model-switch spot with an A24-teaser ending grafted on. Cold open: the superbot mark centred over the ride's own establishing frame, the brand line \"EVERY MODEL. ONE CHAT.\" typed in below it. Then the same one ask (\"Relaxing Japanese bike riding game\") through Gemini (decals), Blender (3D props), ElevenLabs (sound effects) and Claude Opus 5.5 (the code). Then the close: a hard cut into the ride running full frame, three titles swapping in place over the motion (MAKE A GAME / IN ONE CHAT / superbot.gg), a held 1.2 s of black and silence, and the giant superbot wordmark end card with its corner tagline. 35.1 s, 1920x1080, 60 fps. Clip @prasenx (x.com/prasenx/status/2102717687604633959).",
+    "download": "assets/video/bikeride-titledrive-superbot-3f9a7c21.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "niche-stocks-model-switch-superbot-8d2a45f0",
     "type": "animation",
     "group": "Ad spots",

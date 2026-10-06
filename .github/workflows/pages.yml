@@ -1,0 +1,34 @@
+# Deploy the gallery to GitHub Pages from an artifact, not the legacy branch build.
+# The repo's git history is ~5.5GB (years of ad renders), which the legacy "build from main" step
+# refuses; this workflow checks out one commit, stages the current site (~50MB) without .git, and
+# publishes that. Same output, far under Pages' size limit.
+name: Deploy gallery to Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Stage the site (no .git, no workflow files)
+        run: |
+          mkdir -p dist
+          rsync -a --exclude .git --exclude .github ./ dist/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

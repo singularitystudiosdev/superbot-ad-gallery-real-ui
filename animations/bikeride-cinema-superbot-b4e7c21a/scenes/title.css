@@ -1,0 +1,8 @@
+/* the cold-open ident plate: two wide soft glows on near-black, drifting against each other */
+.title-cine { position: absolute; inset: 0; background: #040407; overflow: hidden; }
+.title-cine .t-plate { position: absolute; width: 1500px; height: 1500px; left: 50%; top: 50%;
+  margin: -750px 0 0 -750px; border-radius: 50%; will-change: transform; }
+.title-cine .t-plate-a { background: radial-gradient(circle, rgba(60,86,190,.5) 0%, rgba(28,38,96,.22) 42%, rgba(0,0,0,0) 70%); }
+.title-cine .t-plate-b { background: radial-gradient(circle, rgba(150,58,205,.4) 0%, rgba(70,24,110,.18) 44%, rgba(0,0,0,0) 72%); }
+.title-cine .t-mark { position: absolute; inset: 0; display: grid; place-items: center;
+  filter: drop-shadow(0 0 48px rgba(120,140,255,.32)); }

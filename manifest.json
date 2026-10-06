@@ -3389,6 +3389,15 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "bikeride-cinema-superbot-b4e7c21a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · film cut: cold-open ident, the refrain at every switch, tagline card, 3D wordmark end card (clip @prasenx)",
+    "src": "animations/bikeride-cinema-superbot-b4e7c21a/",
+    "thumb": "assets/shots/bikeride-cinema-superbot-b4e7c21a.png",
+    "desc": "The bikeride-model-switch spot after A24's 'You Can See Everything' teaser. The ask is unchanged ('Relaxing Japanese bike riding game'), routing Gemini -> Blender -> ElevenLabs -> Claude Opus 5.5, but the spot now opens on a brand ident over a drifting plate, and every hand-off carries one line of the refrain, 'You can see it paint / model / sound / ship', landing on the payoff 'You can see everything.' over the ride in a letterbox. Ends on a tagline card, then a 3D extruded wordmark end card with a dated CTA and a model lower-third, vignette and grain over the whole frame. 27.4 s, 1920x1080."
+  },
+  {
     "id": "stop-burning-tokens",
     "type": "image",
     "group": "Ad spots",

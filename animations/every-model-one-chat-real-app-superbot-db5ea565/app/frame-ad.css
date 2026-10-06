@@ -1,0 +1,7 @@
+/* Playback-only rules layered over the app's own CSS: nothing here restyles the app. */
+html, body { overflow: hidden !important; }
+* { cursor: default !important; }
+/* the typing caret (a focused contenteditable shows the system caret; snapshots carry no focus) */
+.ad-caret { display: inline-block; width: 1.5px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; background: currentColor; animation: ad-caret 1.06s steps(1) infinite; }
+@keyframes ad-caret { 50% { opacity: 0; } }
+html.ad-freeze .ad-caret { animation: none; }

@@ -41,6 +41,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "every-model-one-chat-sb-superbot-efa8df82-real-app-db5ea565",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "EVERY MODEL. ONE CHAT. · Real superbot app: Gemini 3 Pro Image meme, Sora 2 clip, DoorDash order",
+    "src": "animations/every-model-one-chat-real-app-superbot-db5ea565/",
+    "thumb": "assets/shots/every-model-one-chat-sb-superbot-efa8df82-real-app-db5ea565.png",
+    "desc": "Variant of every-model-one-chat-sb-superbot-efa8df82 played on the real superbot desktop app: every frame is the app's own DOM and CSS, captured from its renderer and replayed. Each ask goes to the model or app built for it. Make me a muse meme: Switching to Gemini 3 Pro Image, the composer chip names it while it works, and the meme lands via your Gemini account. Now make it move: Switched to Sora 2, and a 6-second clip lands in the media card. Perfect, order me a burger to celebrate: Connected to DoorDash, then Opened DoorDash, Added a Double Smash Burger and fries, Checked out with your saved card, and the live order tracker. 26.7 s, 1920x1080, 30 fps.",
+    "download": "assets/video/every-model-one-chat-sb-superbot-efa8df82-real-app-db5ea565.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "bikeride-model-switch-superbot-e13744a9",
     "type": "animation",
     "group": "Ad spots",

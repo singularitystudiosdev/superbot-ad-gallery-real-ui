@@ -1,0 +1,59 @@
+/* every-model-one-chat-real-app: the stage around the real superbot-desktop renderer (app/frame.html).
+   The app itself carries no styles from here; it renders with its own pruned stylesheet (app/app.css). */
+/* the app's own stack and its bundled Inter, so the end card sets in the face the app renders in
+   (Chromium has no ui-rounded: without SF Pro Rounded installed, the app itself is Inter) */
+@font-face { font-family: Inter; font-weight: 700 900; font-display: block; src: url("app/assets/Inter-Bold-CGGXExDp.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-weight: 500 600; font-display: block; src: url("app/assets/Inter-SemiBold-CoRPLEbp.woff2") format("woff2"); }
+:root {
+  --fg: #e6e8ee; --muted: #aeb1bc; --danger: #ef4444; --accent: #5b8dff;
+  --ui: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; overflow: hidden; }
+.scene.on { visibility: visible; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* the app window: laid out at the captured CSS viewport (1200 x 675 at the app's 1.2 zoom), scaled to
+   the 1920 x 1080 stage by #cam, which also carries the camera's pan and zoom */
+#s-app { background: #050505; }
+#cam { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform-origin: 0 0; will-change: transform; }
+#app { position: absolute; inset: 0; width: 1200px; height: 675px; border: 0; display: block; background: #0d0d0d; pointer-events: none; }
+
+/* macOS traffic lights: the native cluster the renderer never paints (main/window.ts: hiddenInset,
+   trafficLightPosition {x:10,y:14} pt, 60 x 14 pt on macOS 26). In CSS px at zoom 1.2: x 8.33, y 11.67,
+   14 pt circles = 11.67 px on a 23 pt (19.17 px) pitch. */
+.lights { position: absolute; left: 8.33px; top: 11.67px; height: 11.67px; display: flex; gap: 7.5px; pointer-events: none; }
+.lights i { width: 11.67px; height: 11.67px; border-radius: 50%; box-shadow: inset 0 0 0 0.5px rgb(0 0 0 / .22); }
+.lights i:nth-child(1) { background: #ff5f57; }
+.lights i:nth-child(2) { background: #febc2e; }
+.lights i:nth-child(3) { background: #28c840; }
+
+/* ================= end card (the source spot's lock-up, unchanged) ================= */
+#s-end { display: grid; place-items: center; background: #000; z-index: 20; }
+#s-end .lock { display: flex; align-items: center; gap: 44px; }
+#s-end .face { flex: none; width: 220px; height: 220px; display: grid; place-items: center; }
+#s-end .words { overflow: hidden; }
+#s-end .words h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
+#s-end .words .url { margin: 22px 0 0 6px; font-size: 44px; font-weight: 600; letter-spacing: -.01em; color: var(--muted); }
+
+.hint { position: fixed; right: 18px; bottom: 14px; font-size: 11px; color: var(--muted); opacity: .6; user-select: none; transition: opacity .3s; }
+body.freeze .hint { display: none; }
+/* the controls sit over the app's header at 16:9: shown only while the pointer moves */
+body.idle .hint, body.idle .rec-btn:not(.recording) { opacity: 0; pointer-events: none; }
+.rec-btn { transition: opacity .3s, border-color .15s; }
+.rec-btn { position: fixed; top: 18px; right: 18px; z-index: 40; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
+  border: 1px solid #2a2b30; background: #111; color: var(--fg); font: 600 13px/1 var(--ui); cursor: pointer; }
+.rec-btn:hover { border-color: var(--accent); }
+.rec-btn .rec-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--danger); flex: none; }
+.rec-btn.recording { background: #1a0e0e; border-color: var(--danger); color: #fff; }
+.rec-btn.recording .rec-dot { animation: wr-rec-blink 1s steps(2) infinite; }
+@keyframes wr-rec-blink { 50% { opacity: .25; } }
+.rec-btn:disabled { opacity: .7; cursor: default; }
+.rec-hud { display: none; position: fixed; bottom: 18px; left: 18px; z-index: 40; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+  background: rgb(0 0 0 / .7); color: #fff; font: 600 12px/1 var(--ui); }
+.rec-hud .rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: wr-rec-blink 1s steps(2) infinite; }
+body.freeze .rec-btn { display: none; }

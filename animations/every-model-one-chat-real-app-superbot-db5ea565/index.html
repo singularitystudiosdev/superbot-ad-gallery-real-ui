@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: every model, one chat</title>
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="ad.css?v=2">
+<link rel="modulepreload" href="lib.js">
+</head>
+<body>
+<div id="stage" role="img" aria-label="The superbot desktop app. Asked to make a muse meme, superbot switches to Gemini 3 Pro Image and returns the meme. Asked to make it move, it switches to Sora 2 and returns a six-second clip. Asked to order a burger, it connects to DoorDash, places the order with the saved card and shows the order tracker. Every model. One chat. superbot.gg">
+  <!-- the real superbot-desktop renderer (app/frame.html), replayed from DOM snapshots; #cam is the camera -->
+  <section class="scene on" id="s-app" aria-hidden="true">
+    <div id="cam">
+      <iframe id="app" src="app/frame.html" title="superbot" tabindex="-1" scrolling="no"></iframe>
+      <div class="lights"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+  <section class="scene" id="s-end" aria-hidden="true">
+    <div class="lock"><div class="words"><div class="end-slide"><h1>EVERY MODEL.<br> ONE CHAT.</h1><p class="url">superbot.gg</p></div></div><div class="face"></div></div>
+  </section>
+  <div id="dip"></div>
+</div>
+
+<div class="hint" id="hint">space pause · ←/→ step · R restart</div>
+<button class="rec-btn" id="recordBtn" type="button"><i class="rec-dot"></i><span id="recordLabel">Record</span></button>
+<div class="rec-hud" id="recHud"><i class="rec-dot"></i><span id="recTime">0.0s</span></div>
+
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="app/snaps.js"></script>
+<script src="recorder.js"></script>
+<script type="module" src="player.js?v=2"></script>
+</body>
+</html>

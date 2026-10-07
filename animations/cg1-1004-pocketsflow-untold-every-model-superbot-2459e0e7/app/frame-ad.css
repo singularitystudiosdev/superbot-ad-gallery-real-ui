@@ -1,0 +1,15 @@
+/* frame-ad.css: playback-only rules layered over the app's own CSS; nothing here restyles the app. */
+html, body { overflow: hidden !important; }
+* { cursor: default !important; }
+/* the typing caret (a focused contenteditable shows the system caret; snapshots carry no focus) */
+.ad-caret { display: inline-block; width: 1.5px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; background: currentColor; animation: ad-caret 1.06s steps(1) infinite; }
+@keyframes ad-caret { 50% { opacity: 0; } }
+/* the 3D canvas the spot draws into the viewer's stage, over the captured (empty) one */
+canvas.ad-3d { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* a pointer opened the viewer: no keyboard focus ring on it */
+dialog.hub-viewer-modal, dialog.hub-viewer-modal:focus, dialog.hub-viewer-modal:focus-visible { outline: none !important; }
+dialog.hub-viewer-modal::backdrop { background: transparent; }
+/* an artifact placed under its switch takes the column's width, as it does in the settled answer */
+[data-ad-out] { align-self: stretch; width: 100%; min-width: 0; }
+/* the app skips layout for off-screen feed rows (content-visibility: auto); a camera that moves needs them laid out */
+.hub-feed > [data-message-id] { content-visibility: visible !important; }

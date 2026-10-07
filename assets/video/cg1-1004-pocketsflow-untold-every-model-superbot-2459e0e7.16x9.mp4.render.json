@@ -1,0 +1,16 @@
+{
+  "contract": "frame-exact:60fps+seek+settle (window.__AD.seek, __AD.settle), headless Chromium 1920x1080",
+  "fps": 60,
+  "id": "cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7",
+  "folder": "cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7",
+  "at": "2026-10-07T09:40:13Z",
+  "ar": "16x9",
+  "width": 1920,
+  "height": 1080,
+  "frames": 2973,
+  "cycle": 49.549,
+  "duration": 49.55,
+  "encoder": "libx264 crf16 preset slow yuv420p tv-range bt709 +faststart (JPEG q95 frames)",
+  "audio": "none (silent spot, as the original)",
+  "bytes": 41838738
+}

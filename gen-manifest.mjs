@@ -188,6 +188,15 @@ const more = [
     { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b rebuilt on the real superbot desktop app. Same hook: Kai's X post, I made this in 1 prompt, with the Pocketsflow launch film autoplaying in X's own dark timeline (no credit line), then They won't tell you how. Then the prompt itself, typed into superbot's real composer: make a 15s launch film for pocketsflow.com. 3D mascot, halftone look, upbeat score. Every frame of the app is its own DOM and CSS, captured from superbot-desktop by driving that prompt through its provider_switch wire. One turn, four switches, each to the model built for that part: Gemini 3 Pro Image draws the mascot, Kling 3.0 animates it (the lean-in and the psst), Lyria 3 Pro scores it at 118 BPM, and Claude Opus 5.5 reads pocketsflow.com, writes the Remotion composition, cuts every shot to the score and renders the film. Every output is a real generation shown in the app's own cards (the mascot, the clip, the score row), then the film lifts out of its card and plays full frame on the score's drop. A spring-damped camera eases between framings and the turn clock runs as a time-lapse. Ends on One prompt. Every model. superbot.gg. 38.9 s, 1920x1080, 60 fps, with the Lyria score.",
       download: 'assets/video/pocketsflow-one-prompt-real-app-superbot-62ab1544.16x9.mp4', downloadLabel: '16:9' }],
   // <<< pocketsflow-one-prompt-real-app-superbot-62ab1544
+  // >>> cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
+  // cg1-1004 remake of pocketsflow-untold-every-model-superbot-673c104b (2026-10-07, 2459e0e7): same hook, acts, beat
+  // clock and 49.549 s (untouched original). Act 3 is superbot-desktop's own DOM and CSS (main @bcb624c) captured through
+  // the provider_switch wire; routing per the edge tables (pocketsflow.com, Meshy 3D, Hailuo 3 Max, Lyria 3.5, Claude
+  // Opus 5.5); outputs land under their own switch; judge-audited.
+  ["cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7", "cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7/", "make a launch video for Pocketsflow · cg1-1004: the original spot beat for beat on the real superbot app, routed to pocketsflow.com, Meshy 3D, Hailuo 3 Max, Lyria 3.5 and Claude Opus 5.5", 'Ad spots',
+    { desc: "Same hook, acts, beat clock and 49.5 s as pocketsflow-untold-every-model-superbot-673c104b: Kai's X post, I made this in 1 prompt, with the Pocketsflow launch film, then THEY WONT TELL YOU HOW, then the same prompt typed into superbot. Every app frame is the real superbot desktop app (its own DOM and CSS, captured while it ran this turn), one beat on screen at a time, every move eased. Each part of the job goes to its specialist, by the edge's own routing: superbot reads pocketsflow.com for the brand card and the mascot, Meshy 3D models the mascot and it opens in superbot's 3D viewer, Hailuo 3 Max animates it, Lyria 3.5 scores it, Claude Opus 5.5 cuts it in Remotion, and the answer plays the film. The X post uses X's own icons and Chirp; the end card is superbot's real echo lockup. Remade assets: the mascot as a textured 3D model graded to the film, the clip generated from that model, the score with its real waveform. Audited by an independent judge and revised before render. 1920x1080, 60 fps, silent.",
+      download: "assets/video/cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7.16x9.mp4", downloadLabel: '16:9' }],
+  // <<< cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // >>> pocketsflow-untold-real-routes-superbot-9b368874
   // Variant of pocketsflow-untold-every-model-superbot-673c104b (2026-10-07, 9b368874): its X hook and untold line, then
   // its own prompt replayed on superbot-desktop's real renderer (DOM and CSS captured from main through the
@@ -1942,6 +1951,10 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
+  // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
+  'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',
+  // <<< keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // >>> keep cursor-api-pricing-ab187b45
   // added (2026-10-07, ab187b45): Cursor charges API pricing, four cuts (own animation dirs, rendered films with score)
   'cursor-api-pricing-cards-16x9-ab187b45',

@@ -123,6 +123,17 @@
     "desc": "One ask in superbot, each part sent to what is built for it. Superbot connects YouTube with the one scope replies need. Gemini 3.8 Flash watches the 14:32 video, reads all 1,284 comments, ties each top comment to its moment and finds the boom arm in the 4:38 frame. Claude Opus 5.5 writes the four replies in the creator's voice. The replies post through the API, then superbot hearts them and pins Priya's answer on the video's Comments page in YouTube Studio."
   },
   {
+    "id": "niche-youtube-model-switch-superbot-0b34d5a7",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and pin the best one · real Studio cut: Gemini 3.8 Flash watches, Grok 4.6 checks what's newer than the video, Opus 5.5 replies, pinned in Studio",
+    "src": "animations/niche-youtube-model-switch-superbot-0b34d5a7/",
+    "thumb": "assets/shots/niche-youtube-model-switch-superbot-0b34d5a7.png",
+    "desc": "One ask in superbot, each part sent to the model built for it. Gemini 3.8 Flash watches the 14:32 video and reads all 1,284 comments, ranks the top five and finds where the video answers each one, which leaves Kai's question about firmware 2.1, released after the upload. Grok 4.6 searches X and the web live and finds 2.1 fixed the hiss. Claude Opus 5.5 learns the creator's voice from 200 past replies and writes all five answers from those findings. The replies post through the YouTube Data API; the API has no pin, so superbot pins Priya's question by hand on the video's Comments page in YouTube Studio, rebuilt to match 2026 Studio in dark theme. 16:9.",
+    "download": "assets/video/niche-youtube-model-switch-superbot-0b34d5a7.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "every-model-converge-4x5-398eded5",
     "type": "animation",
     "group": "Ad spots",

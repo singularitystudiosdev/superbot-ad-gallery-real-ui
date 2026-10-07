@@ -408,6 +408,18 @@ const more = [
   ['niche-youtube-model-switch-superbot-88a89e94', 'niche-youtube-model-switch-superbot-88a89e94/', 'Answer the top comments on my latest video and pin the best one · smooth cut: connect YouTube, Gemini 3.8 Flash watches, Opus 5.5 replies, Studio pins', 'Ad spots',
     { desc: 'One ask in superbot, each part sent to what is built for it. Superbot connects YouTube with the one scope replies need. Gemini 3.8 Flash watches the 14:32 video, reads all 1,284 comments, ties each top comment to its moment and finds the boom arm in the 4:38 frame. Claude Opus 5.5 writes the four replies in the creator\'s voice. The replies post through the API, then superbot hearts them and pins Priya\'s answer on the video\'s Comments page in YouTube Studio.' }],
   // <<< niche-youtube-model-switch-superbot-88a89e94
+  // >>> niche-youtube-model-switch-superbot-0b34d5a7
+  // Real Studio cut (2026-10-06, 0b34d5a7): niche-youtube-model-switch-superbot-3828921d (untouched) with every switch
+  // re-picked for its job and YouTube Studio rebuilt from 2026 Studio screenshots. Gemini 3.8 Flash (native video, long
+  // context) watches the 14:32 video, reads all 1,284 comments and ties each top question to its answer in the video,
+  // which leaves one question newer than the upload (firmware 2.1); Grok 4.6 (live X + web search) answers that one;
+  // Claude Opus 5.5 learns the creator's voice from 200 past replies and writes the five answers from both findings. The
+  // replies post through the Data API, which has no pin, so superbot pins by hand on the video's Comments page in dark
+  // 2026 Studio (Help 9482367). Credits in brand/CREDITS.txt, fonts/CREDITS.txt, img/CREDITS.txt.
+  ['niche-youtube-model-switch-superbot-0b34d5a7', 'niche-youtube-model-switch-superbot-0b34d5a7/', 'Answer the top comments on my latest video and pin the best one · real Studio cut: Gemini 3.8 Flash watches, Grok 4.6 checks what\'s newer than the video, Opus 5.5 replies, pinned in Studio', 'Ad spots',
+    { desc: 'One ask in superbot, each part sent to the model built for it. Gemini 3.8 Flash watches the 14:32 video and reads all 1,284 comments, ranks the top five and finds where the video answers each one, which leaves Kai\'s question about firmware 2.1, released after the upload. Grok 4.6 searches X and the web live and finds 2.1 fixed the hiss. Claude Opus 5.5 learns the creator\'s voice from 200 past replies and writes all five answers from those findings. The replies post through the YouTube Data API; the API has no pin, so superbot pins Priya\'s question by hand on the video\'s Comments page in YouTube Studio, rebuilt to match 2026 Studio in dark theme. 16:9.',
+      download: 'assets/video/niche-youtube-model-switch-superbot-0b34d5a7.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< niche-youtube-model-switch-superbot-0b34d5a7
   // >>> niche-youtube-model-switch-superbot-1db9afb3
   // Rebuild of niche-youtube-model-switch-superbot-3828921d (untouched) in a different format (2026-10-05, 1db9afb3): the deliverable is a 3D Short that answers the most-asked comment, made by six hand-offs in the order the work needs them, each tool doing only what it is best at, on the REAL superbot desktop app (captured renderer DOM and CSS, main @366230a) with its docked in-app browser. DeepSeek V4 Pro (scrape + search) reads the 1,284 comments and answers with five findings checked against their pages plus a 3-sentence script; Blender 5.2.2 LTS (3D) renders the scene in its own window (real GUI captures of the real .blend, real EEVEE render); Eleven v3 (audio) voices the script, timed by Scribe v2; Claude Opus 5.5 (code) writes the Remotion composition, previewed in the real Remotion Studio, rendered; Gemini 3 Pro Image (Nano Banana Pro) makes the custom Shorts thumbnail from a Blender frame; YouTube posts it, replies and pins a linking comment (youtube.com comments and Shorts pages rebuilt from live headless captures at the pane size). Every model output is the real one (work/ytshort-1db9afb3); provenance in animations/niche-youtube-model-switch-superbot-1db9afb3/CREDITS.txt. 16:9 only. Audited by a fresh-context judge; findings applied.
   ['niche-youtube-model-switch-superbot-1db9afb3', 'niche-youtube-model-switch-superbot-1db9afb3/', 'Turn my most-asked comment into a 3D Short and reply with it: DeepSeek V4 Pro, Blender, Eleven v3, Claude Opus 5.5, Gemini 3 Pro Image, then YouTube (6 switches, real superbot UI, 16:9)', 'Ad spots',
@@ -1787,6 +1799,9 @@ const KEEP_IDS = new Set([
   'niche-youtube-model-switch-superbot-7993d5b0',
   // added (2026-10-06, 88a89e94): the smooth cut of the YouTube Studio spot (task-fit hand-offs, real Studio Pin flow)
   'niche-youtube-model-switch-superbot-88a89e94',
+  // added (2026-10-06, 0b34d5a7): the real Studio cut of the YouTube Studio spot (task-fit switches incl. Grok live search,
+  // dark 2026 Studio rebuilt from screenshots, pin by hand)
+  'niche-youtube-model-switch-superbot-0b34d5a7',
   'bikeride-model-switch-superbot-e13744a9',
   'every-model-converge-4x5-398eded5',
   'every-model-one-chat-sb-superbot-efa8df82',

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A refusal, relayed (side by side): claude alone, refused 3x; claude + superbot, answered 2 of 2 (16:9)</title>
+<title>One download, fixed in every app (side by side): without superbot, refused 3x; with superbot, answered 2 of 2 in the same app (16:9)</title>
 <style>
 /* Plays the rendered 1920x1080 film (final.mp4, 14.4 s, 30 fps, with sound) at 16:9 on the film's own
    near-black canvas. The gallery loads this page in a frame at any ?ar=; the 16:9 picture is fitted whole
@@ -19,7 +19,7 @@ video { display: block; width: 100%; height: 100%; object-fit: contain; backgrou
 <body>
 <div class="frame">
   <video id="film" src="final.mp4" poster="poster.png" autoplay loop playsinline preload="auto"
-    aria-label="Before and after: two phones, the same ask typed into both on Claude Opus 5.5. &quot;same ask. same claude.&quot; Both get &quot;I can’t help with that.&quot; Left, Claude alone: the user rephrases twice and is refused each time, the counter reaching refused 3x. Right, Claude + Superbot: the refusal switches to DeepSeek V4 Flash, which answers, then ChatGPT refuses a villain speech and it switches to Grok 4.7, which answers: answered 2 of 2. &quot;only one gets an answer.&quot; Ends on superbot.gg, never get refused again. 14.4 s, 1920x1080, 30 fps, with sound."></video>
+    aria-label="Before and after, in the same app. &quot;same app. same ask.&quot; Two Claude windows, without superbot on the left and with superbot on the right, each over its own Dock; both get &quot;I can’t help with that.&quot; On the right, Download now is pressed and Superbot’s icon lands in its Dock: &quot;one download fixes it right there.&quot; Superbot’s notice, Switched to DeepSeek V4 Flash and the answer land inside the right Claude window while the left one is refused again. Then a ChatGPT pair: the left refuses, the right is fixed in place with Grok 4.7. Counters end on refused 3x against answered 2 of 2. Ends on Download now, one download. fixed in every app., superbot.gg. 14.4 s, 1920x1080, 30 fps, with sound."></video>
 </div>
 <script>
   const video = document.getElementById("film");

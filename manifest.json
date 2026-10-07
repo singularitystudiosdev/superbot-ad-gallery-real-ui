@@ -668,5 +668,61 @@
       "4x5": "animations/apikey-for-subscriptions-superbot-027da5ad/final-c.mp4",
       "16x9": "animations/apikey-for-subscriptions-superbot-027da5ad/final-c-16x9.mp4"
     }
+  },
+  {
+    "id": "cursor-api-pricing-cards-16x9-ab187b45",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Cursor charges API pricing · Cursor's chat runs up $4.82, superbot's SUPER toggle flips on in the composer, Superbot makes it charge subscription, the meter reads FREE (cards, 14.4 s, 16:9)",
+    "src": "animations/cursor-api-pricing-cards-16x9-ab187b45/",
+    "thumb": "assets/shots/cursor-api-pricing-cards-16x9-ab187b45.png",
+    "desc": "In the every-model-one-chat-sb-superbot-efa8df82 card look. Cursor's agent runs \"Add Stripe checkout to /pricing and make the tests pass\" and its On-Demand meter climbs to $4.82 as the camera pushes in. Black card: Cursor charges API pricing, the Cursor cube pops. Back in Cursor, superbot's own SUPER toggle slides into the composer and the pointer flips it ON; the model chip takes the mascot. Black card: Superbot makes it charge subscription, subscription in the storm gradient, the mascot pops. The meter strikes $4.82 and reads Subscription FREE; a follow-up runs and stays FREE. superbot.gg with the mascot to its right. 14.4 s, 1920x1080, 60 fps, 100 bpm, with sound. The Cursor UI is Cursor 3.23's Agents Window in Cursor Dark, rebuilt in HTML from Anysphere's own Agents Window screenshot and the installed app's theme tokens and strings (Plan, Build, / for skills, @ for context; Thought briefly; Explored; Undo All; Review; On-Demand); the per-chat dollar meter is the ad's one addition. $4.82 is Claude Opus 5.5 at API rates ($4/MTok in, $20/MTok out, platform.claude.com pricing, 2026-10-07): 820K in + 77K out. Copy verbatim in all four cuts: Cursor charges API pricing, then Superbot makes it charge subscription, then FREE. The mascot is the real superbot.gg mark (sb-mark-live), driven frame by frame; the gradient is the efa8df82 storm gradient under its shine band. Score and UI sounds synthesized in code, mixed to -14 LUFS. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits, pricing and token spend\", rank 1, 5,816 authors in 30 days, build of 2026-10-05; want: alternative ai subscription).",
+    "download": "animations/cursor-api-pricing-cards-16x9-ab187b45/final.mp4",
+    "downloadLabel": "MP4 16:9",
+    "downloads": {
+      "16x9": "animations/cursor-api-pricing-cards-16x9-ab187b45/final.mp4"
+    }
+  },
+  {
+    "id": "cursor-api-pricing-overlay-16x9-ab187b45",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Cursor charges API pricing · headlines over the live Cursor window, the Superbot menu-bar switch bills Cursor to your subscription, $9.36 becomes FREE (overlay, 12 s, 16:9)",
+    "src": "animations/cursor-api-pricing-overlay-16x9-ab187b45/",
+    "thumb": "assets/shots/cursor-api-pricing-overlay-16x9-ab187b45.png",
+    "desc": "No cutaways: the headlines rise over the dimmed Cursor window. The meter climbs to $9.36 as the camera pushes onto it; Cursor charges API pricing over the window; the Superbot menu-bar panel drops in and the pointer flips Cursor from Billed at API pricing to Billed to your subscription; Superbot makes it charge subscription; the camera pushes back onto the meter as it strikes $9.36 and reads FREE, and a follow-up stays FREE. The mascot over superbot.gg. 12 s, 1920x1080, 60 fps, 120 bpm, with sound. The Cursor UI is Cursor 3.23's Agents Window in Cursor Dark, rebuilt in HTML from Anysphere's own Agents Window screenshot and the installed app's theme tokens and strings (Plan, Build, / for skills, @ for context; Thought briefly; Explored; Undo All; Review; On-Demand); the per-chat dollar meter is the ad's one addition. $9.36 is Claude Opus 5.5 at API rates ($4/MTok in, $20/MTok out, platform.claude.com pricing, 2026-10-07): 1.6M in + 148K out. Copy verbatim in all four cuts: Cursor charges API pricing, then Superbot makes it charge subscription, then FREE. The mascot is the real superbot.gg mark (sb-mark-live), driven frame by frame; the gradient is the efa8df82 storm gradient under its shine band. Score and UI sounds synthesized in code, mixed to -14 LUFS. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits, pricing and token spend\", rank 1, 5,816 authors in 30 days, build of 2026-10-05; want: alternative ai subscription).",
+    "download": "animations/cursor-api-pricing-overlay-16x9-ab187b45/final.mp4",
+    "downloadLabel": "MP4 16:9",
+    "downloads": {
+      "16x9": "animations/cursor-api-pricing-overlay-16x9-ab187b45/final.mp4"
+    }
+  },
+  {
+    "id": "cursor-api-pricing-converge-4x5-ab187b45",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Cursor charges API pricing · the $6.16 pill is thrown out of Cursor's meter, a Superbot switch is flipped, Superbot makes it charge subscription, the pill reads FREE (converge, 14.4 s, 4:5)",
+    "src": "animations/cursor-api-pricing-converge-4x5-ab187b45/",
+    "thumb": "assets/shots/cursor-api-pricing-converge-4x5-ab187b45.png",
+    "desc": "In the every-model-converge-4x5-398eded5 look: #070707, Mona Sans Wide headlines over drifting ghost rows, Cursor's agent pane tilted in 3D. As the meter lands, a $6.16 pill is thrown out of it; Cursor charges API pricing; a Superbot switch pill is thrown out of the model chip, a touch flips it on and it flies home; Superbot makes it charge subscription; the thrown pill strikes $6.16 and reads Subscription FREE while a follow-up runs. The pane drops away to the converge end card: the app icon, superbot.gg, cursor, on your subscription. 14.4 s, 1080x1350, 60 fps, 100 bpm, with sound. The Cursor UI is Cursor 3.23's Agents Window in Cursor Dark, rebuilt in HTML from Anysphere's own Agents Window screenshot and the installed app's theme tokens and strings (Plan, Build, / for skills, @ for context; Thought briefly; Explored; Undo All; Review; On-Demand); the per-chat dollar meter is the ad's one addition. $6.16 is Claude Opus 5.5 at API rates ($4/MTok in, $20/MTok out, platform.claude.com pricing, 2026-10-07): 1.1M in + 88K out. Copy verbatim in all four cuts: Cursor charges API pricing, then Superbot makes it charge subscription, then FREE. The mascot is the real superbot.gg mark (sb-mark-live), driven frame by frame; the gradient is the efa8df82 storm gradient under its shine band. Score and UI sounds synthesized in code, mixed to -14 LUFS. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits, pricing and token spend\", rank 1, 5,816 authors in 30 days, build of 2026-10-05; want: alternative ai subscription).",
+    "download": "animations/cursor-api-pricing-converge-4x5-ab187b45/final.mp4",
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/cursor-api-pricing-converge-4x5-ab187b45/final.mp4"
+    }
+  },
+  {
+    "id": "cursor-api-pricing-picker-1x1-ab187b45",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Cursor charges API pricing · a Superbot row in Cursor's own model picker switches it to your subscription, $13.82 becomes FREE (picker, 12 s, 1:1)",
+    "src": "animations/cursor-api-pricing-picker-1x1-ab187b45/",
+    "thumb": "assets/shots/cursor-api-pricing-picker-1x1-ab187b45.png",
+    "desc": "Square captions over Cursor's agent pane. The meter lands on $13.82; Cursor charges API pricing; the pointer opens Cursor's model picker, where a Superbot row (Use my subscription) sits above Auto and MAX Mode, and flips its switch; the model chip takes the mascot; Superbot makes it charge subscription; the camera pushes onto the meter as it strikes $13.82 and reads FREE. The mascot over superbot.gg. 12 s, 1080x1080, 60 fps, 120 bpm, with sound. The Cursor UI is Cursor 3.23's Agents Window in Cursor Dark, rebuilt in HTML from Anysphere's own Agents Window screenshot and the installed app's theme tokens and strings (Plan, Build, / for skills, @ for context; Thought briefly; Explored; Undo All; Review; On-Demand); the per-chat dollar meter is the ad's one addition. $13.82 is Claude Opus 5.5 at API rates ($4/MTok in, $20/MTok out, platform.claude.com pricing, 2026-10-07): 2.4M in + 211K out. Copy verbatim in all four cuts: Cursor charges API pricing, then Superbot makes it charge subscription, then FREE. The mascot is the real superbot.gg mark (sb-mark-live), driven frame by frame; the gradient is the efa8df82 storm gradient under its shine band. Score and UI sounds synthesized in code, mixed to -14 LUFS. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits, pricing and token spend\", rank 1, 5,816 authors in 30 days, build of 2026-10-05; want: alternative ai subscription).",
+    "download": "animations/cursor-api-pricing-picker-1x1-ab187b45/final.mp4",
+    "downloadLabel": "MP4 1:1",
+    "downloads": {
+      "1x1": "animations/cursor-api-pricing-picker-1x1-ab187b45/final.mp4"
+    }
   }
 ]

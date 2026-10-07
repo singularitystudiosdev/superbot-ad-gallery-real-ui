@@ -1,0 +1,21 @@
+cursor-api-pricing-picker-1x1-ab187b45: provenance (never shown on screen)
+
+Source      quick-chats/cursor-api-toggle.ab187b45/ (index.html?v=d, window.seek(t)), rendered frame by frame
+            in chrome-headless-shell by motion-reel scripts/render.mjs, 1080x1080, 60 fps, H.264 CRF 16.
+Cursor UI   Cursor 3.23.12 Agents Window ("glass"), Cursor Dark, rebuilt in HTML/CSS: layout from Anysphere's
+            screenshot https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/changelog/agent-tabs
+            (cursor.com/changelog/3-0); colours from Cursor.app extensions/theme-cursor/themes/
+            cursor-dark-color-theme.json; strings from out/vs/workbench/workbench.glass.main.js. The On-Demand
+            dollar meter, the SUPER switch, the Superbot picker row and the menu-bar panel are the ad's additions.
+Cursor mark cursor-logo.svg (CUBE_25D) and cursor-cube-2d.svg (CUBE_2D_DARK), unmodified, from the official
+            brand kit linked at https://cursor.com/brand. Trademarks of Anysphere, Inc., used nominatively.
+Mascot      the real superbot.gg mark, assets/sb-mark-live.js (MARK_SVG verbatim from https://beta.superbot.gg/,
+            snapshot 2026-09-23); app icon superbot-icon.png from superbot-mobile/assets/icon.png.
+Type        SF Pro Rounded and SF Pro (Apple system fonts, used at render time, not redistributed);
+            Mona Sans (variable, SIL Open Font License 1.1, GitHub); Menlo (system).
+Price       $13.82 = Claude Opus 5.5 at API rates, 2.4M in + 211K out tokens at $4/MTok in and $20/MTok out
+            (https://platform.claude.com/docs/en/about-claude/pricing, fetched 2026-10-07).
+Market      sell-to-reddit llm_ai pain_points, rank 1 usage-limits-pricing, 5,816 authors / 30 days,
+            build 20261005T152216-0e60b4 (data_as_of 2026-10-05); wants: alternative ai subscription.
+Sound       score and UI cues synthesized in code (scripts/score.ab187b45.mjs, fork of the converge score;
+            scripts/sfx.mjs), mixed to -14 LUFS integrated.

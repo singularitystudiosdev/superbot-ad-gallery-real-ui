@@ -69,9 +69,10 @@ svg { flex: none; }
 .end { display: grid; place-items: center; visibility: hidden; }
 .end .lock { display: flex; align-items: center; gap: 44px; }
 .end .face { flex: none; width: 220px; height: 220px; display: grid; place-items: center; }
-/* the clip box must hold superbot.gg's descenders (p, g); the matching negative margin keeps the lock-up centred
-   on the cap band as before (the reference line was all caps, so .1em was enough there) */
-.end .words { overflow: hidden; padding: .04em .02em .3em; margin-bottom: -.2em; }
+/* the clip box must hold superbot.gg's descenders (p, g): their ink runs ~8px under the 128px line box (measured,
+   canvas actualBoundingBoxDescent). In px, not em: .words inherits the 16px body size, so an em here is 16px, not
+   the h1's 128px. The negative margin cancels the extra padding so the lock-up sits exactly where it did. */
+.end .words { overflow: hidden; padding: 1px 1px 32px; margin-bottom: -30.4px; }
 .end h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
 
 /* ---------- variant layouts ---------- */

@@ -6,7 +6,7 @@
   "v": "a",
   "cut": null,
   "query": "v=a",
-  "at": "2026-10-07T06:15:09.989Z",
+  "at": "2026-10-07T06:27:21.091Z",
   "ar": "16x9",
   "width": 1920,
   "height": 1080,
@@ -14,5 +14,5 @@
   "cycle": 9.5,
   "duration": 9.5,
   "encoder": "libx264 crf18 yuv420p +faststart",
-  "bytes": 632962
+  "bytes": 634696
 }

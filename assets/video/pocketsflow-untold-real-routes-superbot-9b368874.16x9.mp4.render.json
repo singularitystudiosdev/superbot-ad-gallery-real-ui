@@ -1,0 +1,16 @@
+{
+  "contract": "frame-exact:60fps+seek+settle (window.__AD.seek, __AD.settle), headless Chromium 1920x1080",
+  "fps": 60,
+  "id": "pocketsflow-untold-real-routes-superbot-9b368874",
+  "folder": "pocketsflow-untold-real-routes-superbot-9b368874",
+  "at": "2026-10-07T07:31:54Z",
+  "ar": "16x9",
+  "width": 1920,
+  "height": 1080,
+  "frames": 2502,
+  "cycle": 41.7,
+  "duration": 41.7,
+  "encoder": "libx264 crf18 preset slow yuv420p +faststart (JPEG q93 frames)",
+  "audio": "none (silent spot)",
+  "bytes": 32366435
+}

@@ -188,6 +188,16 @@ const more = [
     { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b rebuilt on the real superbot desktop app. Same hook: Kai's X post, I made this in 1 prompt, with the Pocketsflow launch film autoplaying in X's own dark timeline (no credit line), then They won't tell you how. Then the prompt itself, typed into superbot's real composer: make a 15s launch film for pocketsflow.com. 3D mascot, halftone look, upbeat score. Every frame of the app is its own DOM and CSS, captured from superbot-desktop by driving that prompt through its provider_switch wire. One turn, four switches, each to the model built for that part: Gemini 3 Pro Image draws the mascot, Kling 3.0 animates it (the lean-in and the psst), Lyria 3 Pro scores it at 118 BPM, and Claude Opus 5.5 reads pocketsflow.com, writes the Remotion composition, cuts every shot to the score and renders the film. Every output is a real generation shown in the app's own cards (the mascot, the clip, the score row), then the film lifts out of its card and plays full frame on the score's drop. A spring-damped camera eases between framings and the turn clock runs as a time-lapse. Ends on One prompt. Every model. superbot.gg. 38.9 s, 1920x1080, 60 fps, with the Lyria score.",
       download: 'assets/video/pocketsflow-one-prompt-real-app-superbot-62ab1544.16x9.mp4', downloadLabel: '16:9' }],
   // <<< pocketsflow-one-prompt-real-app-superbot-62ab1544
+  // >>> pocketsflow-untold-real-routes-superbot-9b368874
+  // Variant of pocketsflow-untold-every-model-superbot-673c104b (2026-10-07, 9b368874): its X hook and untold line, then
+  // its own prompt replayed on superbot-desktop's real renderer (DOM and CSS captured from main through the
+  // provider_switch wire). Switches follow the edge media table and hand each other their inputs: pocketsflow.com
+  // (brand), Gemini 3.1 Flash Image (on-model still), Veo 3.1 (opening shot from it), Eleven Music v2.5 (score),
+  // Claude Opus 5.5 (Remotion cut + render). Judge-audited; the film lifts out and plays to its end card.
+  ['pocketsflow-untold-real-routes-superbot-9b368874', 'pocketsflow-untold-real-routes-superbot-9b368874/', 'make a launch video for Pocketsflow: the real superbot app routing pocketsflow.com, Gemini 3.1 Flash Image, Veo 3.1, Eleven Music v2.5 and Claude Opus 5.5', 'Ad spots',
+    { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b. Same hook: Kai's X post, I made this in 1 prompt, with the Pocketsflow launch film playing (no credit line), then THEY WONT TELL YOU HOW. Then the original prompt, make a launch video for Pocketsflow, typed into the real superbot desktop app: its own DOM and CSS, captured from superbot-desktop main through the provider_switch wire, not a replica. The routing follows the edge's own media table and every switch hands the next its input: it connects to pocketsflow.com and reads the brand, switches to Gemini 3.1 Flash Image for an on-model still of the mascot, Veo 3.1 animates that still into the opening shot, Eleven Music v2.5 scores it, and Claude Opus 5.5 cuts it in Remotion and renders it. The answer is toured card by card, then the film lifts out of its card full frame, picks up where the X post left off and plays to its own end card. 41.7 s, silent, audited by an independent judge.",
+      download: 'assets/video/pocketsflow-untold-real-routes-superbot-9b368874.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< pocketsflow-untold-real-routes-superbot-9b368874
   // >>> cg1-1004-yt-model-switch-superbot-48dc1fe1
   // cg1-1004 remake of niche-youtube-model-switch-superbot-3828921d (2026-10-06, 48dc1fe1): same hook, four hand-offs, beat
   // times and 26.298 s (untouched original). Thread rebuilt to superbot-desktop's provider-switch UI and tile art; switches
@@ -1941,6 +1951,8 @@ const KEEP_IDS = new Set([
   // <<< keep cursor-api-pricing-ab187b45
   // added (2026-10-07, 62ab1544): the real-app one-prompt cut of the Pocketsflow spot (own animation dir, 16:9 render with score)
   'pocketsflow-one-prompt-real-app-superbot-62ab1544',
+  // added (2026-10-07, 9b368874): the real-app, real-routes variant of the Pocketsflow untold spot (own animation dir, 16:9 render)
+  'pocketsflow-untold-real-routes-superbot-9b368874',
   // added (2026-10-06, 3960b9f9): the detailed 16:9 canvas cut of the Pocketsflow spot (own animation dir, 16:9 render)
   'pocketsflow-untold-launch-film-superbot-3960b9f9',
   // added (2026-10-06, a0f39f40): the flow-graph cut of the Pocketsflow spot (own animation dir, 16:9 render with VO)

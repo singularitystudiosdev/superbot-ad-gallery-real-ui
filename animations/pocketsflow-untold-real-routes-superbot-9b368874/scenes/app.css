@@ -1,0 +1,18 @@
+/* scenes/app.css: act 3, the real superbot desktop app. The app carries no styles from here; it renders inside
+   app/frame.html with its own pruned stylesheet (app/app.css). This file only places the window, the camera
+   and the lifted film on the 1920x1080 stage. */
+#s-app { background: #050505; }
+/* the app's CSS viewport at its 1.2 zoom (1200 x 675 = 1920 x 1080 / 1.6); the camera scales it onto the stage */
+#s-app .app-cam { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform-origin: 0 0; will-change: transform; }
+#s-app .app-frame { position: absolute; inset: 0; width: 1200px; height: 675px; border: 0; display: block; background: #0d0d0d; pointer-events: none; }
+/* the window's traffic lights: native chrome over the renderer's hiddenInset title bar (12pt at 1.2 zoom) */
+#s-app .lights { position: absolute; left: 8.33px; top: 11.67px; height: 11.67px; display: flex; gap: 7.5px; pointer-events: none; }
+#s-app .lights i { width: 11.67px; height: 11.67px; border-radius: 50%; box-shadow: inset 0 0 0 .5px rgb(0 0 0 / .22); }
+#s-app .lights i:nth-child(1) { background: #ff5f57; }
+#s-app .lights i:nth-child(2) { background: #febc2e; }
+#s-app .lights i:nth-child(3) { background: #28c840; }
+#s-app .app-shade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+/* the film, lifted out of its card into the frame */
+#s-app .film-box { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; opacity: 0; visibility: hidden; will-change: transform, border-radius; }
+/* contain: on a stage narrower than 16:9 the film letterboxes instead of losing its titles' first words */
+#s-app .film-box video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }

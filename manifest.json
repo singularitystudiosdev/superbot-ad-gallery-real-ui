@@ -85,6 +85,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "pocketsflow-untold-real-routes-superbot-9b368874",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a launch video for Pocketsflow: the real superbot app routing pocketsflow.com, Gemini 3.1 Flash Image, Veo 3.1, Eleven Music v2.5 and Claude Opus 5.5",
+    "src": "animations/pocketsflow-untold-real-routes-superbot-9b368874/",
+    "thumb": "assets/shots/pocketsflow-untold-real-routes-superbot-9b368874.png",
+    "desc": "Variant of pocketsflow-untold-every-model-superbot-673c104b. Same hook: Kai's X post, I made this in 1 prompt, with the Pocketsflow launch film playing (no credit line), then THEY WONT TELL YOU HOW. Then the original prompt, make a launch video for Pocketsflow, typed into the real superbot desktop app: its own DOM and CSS, captured from superbot-desktop main through the provider_switch wire, not a replica. The routing follows the edge's own media table and every switch hands the next its input: it connects to pocketsflow.com and reads the brand, switches to Gemini 3.1 Flash Image for an on-model still of the mascot, Veo 3.1 animates that still into the opening shot, Eleven Music v2.5 scores it, and Claude Opus 5.5 cuts it in Remotion and renders it. The answer is toured card by card, then the film lifts out of its card full frame, picks up where the X post left off and plays to its own end card. 41.7 s, silent, audited by an independent judge.",
+    "download": "assets/video/pocketsflow-untold-real-routes-superbot-9b368874.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "cg1-1004-yt-model-switch-superbot-48dc1fe1",
     "type": "animation",
     "group": "Ad spots",

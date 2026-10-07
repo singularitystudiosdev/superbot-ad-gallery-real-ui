@@ -1,0 +1,43 @@
+pocketsflow-untold-real-routes-superbot-9b368874: provenance (internal; nothing here is shown on screen)
+
+A variant of pocketsflow-untold-every-model-superbot-673c104b (commit 09139d4 of superbot-ad-gallery-real-ui).
+Acts 1 and 2 (the X post, "THEY WONT TELL YOU HOW") are that spot's own scenes, with the X post's on-screen
+footage credit removed. The end card is that spot's own, shortened to 3.4 s and given the superbot.gg line. Act 3
+replaces its hub replica with the real superbot desktop app.
+
+The app (act 3)
+  app/snaps.js, app/app.css, app/assets/: the superbot-desktop main renderer's own DOM and stylesheets, captured
+  2026-10-07 from a clone of superbot-desktop main (built 2026-10-06) booted against its e2e fake helper and edge
+  stub, with one scripted turn through the real provider_switch wire (capture/capture.9b368874.mjs in the work
+  folder). Pills, who rows, "Creating ..." frames, activity rows, the composer's routed-model chip, the answer's
+  image, video and audio cards and the sidebar are what the app itself rendered. Sidebar rows are seeded titles;
+  the account is shown as kai@kaiships.com (the poster in act 1).
+  app/assets/fav-pocketsflow.com.png: pocketsflow.com's favicon, as the app resolves it.
+
+The routing (why each switch)
+  The chain follows the superbot edge's media routing table (new-superbot-hero-animation
+  adapters/media-capabilities.ts), each step handing the next its input:
+  1. pocketsflow.com (a service switch): the brand is read first (homepage, pricing), saved as brand notes.
+  2. Gemini 3.1 Flash Image (image lane, gemini-3.1-flash-image; Google's Nano Banana 2, documented for
+     multi-reference image consistency at ai.google.dev/gemini-api/docs/image-generation, 2026-10-07): the site's
+     mascot kept on-model as one still. The label is the edge's own modelLabel for that id (adapters/media-lane.ts).
+  3. Veo 3.1 (video lane, veo-3.1-generate-preview): that still as its reference image, animated into the
+     opening shot, with room left for the title the cut adds.
+  4. Eleven Music v2.5 (music lane; music_v2_5 per elevenlabs.io/docs/api-reference/music/compose, 2026-10-07).
+     The table leaves the music model to the vendor; the label names the current one.
+  5. Claude Opus 5.5 (code): the Remotion composition, cut to the score, with the titles, and the render.
+  An earlier cut used Meshy (3D) between 1 and 3; the audit dropped it because nothing downstream can consume a
+  GLB (Veo takes text and images).
+
+Depicted outputs (none of these models was called; the outputs are the real film's own footage)
+  img/pf/clip.mp4: the real 15 s Pocketsflow launch film by @achxvi (X status 2103918792845963545), its 1920x1080
+  60 fps variant, remuxed without audio. It plays in the X post (0.8 to 5.8 s) and, after the lift, from 5.8 s to
+  its end card.
+  media/pf-veo.mp4: the same film, 0.05 to 2.25 s (the mascot leans in, "psst", smiles), with the title text and
+  the film's corner labels painted out to white so it reads as the untitled plate the cut was built on, then held
+  on its last frame to 4 s.
+  media/pf-still.jpg: one frame of that plate (1.55 s), cropped 4:5 around the mascot.
+  The score row's waveform (PEAKS in scenes/app.js) is drawn from a real Lyria 3 Pro generation (OpenRouter,
+  2026-10-06, reused from pocketsflow-one-prompt-real-app-superbot-62ab1544); the spot is silent and ships no audio.
+  A real Eleven Music generation was attempted for this spot: the stored ElevenLabs key lacks the
+  music_generation permission and the fal.ai balance is exhausted.

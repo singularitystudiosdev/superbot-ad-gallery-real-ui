@@ -6,13 +6,13 @@
   "v": "c",
   "cut": null,
   "query": "v=c",
-  "at": "2026-10-07T06:03:56.527Z",
+  "at": "2026-10-07T06:15:03.249Z",
   "ar": "16x9",
   "width": 1920,
   "height": 1080,
-  "frames": 552,
-  "cycle": 9.2,
-  "duration": 9.2,
+  "frames": 432,
+  "cycle": 7.2,
+  "duration": 7.2,
   "encoder": "libx264 crf18 yuv420p +faststart",
-  "bytes": 1051384
+  "bytes": 909019
 }

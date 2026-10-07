@@ -2,12 +2,12 @@
 // Same engine contract as ../every-model-one-chat-superbot-efa8df82/timeline.js: the frame is a pure function of t
 // on a 60 fps quantised clock, ?t=<s> freezes a frame (?t=<s>&play=1 plays on), space pauses, arrows step 0.25 s,
 // R restarts, and window.__AD = { CYCLE, ready, seek(t) } drives the frame-exact renderer (render.e65959ff.mjs).
-// ?v=a|b|c picks the variant. The four beats and their copy are the same in all three; only motion, layout and
+// ?v=a|b|c picks the variant. The beats and their copy are the same in all three; only motion, layout and
 // pacing differ:
 //   1. STOP PAYING API PRICING over a plain pay-per-token key
-//   2. the key turns into the superbot key (storm gradient + shine), the mascot lands to its right
-//   3. the headline turns into SUPERBOT REROUTES TO SUBSCRIPTION
-//   4. superbot.gg with the mascot to its right (the reference end card)
+//   2. at the same moment, the key turns into the superbot key (storm gradient + shine) with the mascot landing
+//      to its right, and the headline turns into SUPERBOT REROUTES TO SUBSCRIPTION
+//   3. superbot.gg with the mascot to its right (the reference end card)
 
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, f) => a + (b - a) * f;
@@ -223,27 +223,27 @@ function renderA(t) {
   // beat 1 (0.15 s): the headline rises in word by word, the plain key under it
   R.hl1.el.style.opacity = '1';
   R.hl2.el.style.opacity = '1';
-  wordsRise(R.hl1.words, t, 0.15, 5.0);
   const kIn = outQuint(seg(t, 0.75, 1.35)), kOut = inOutCubic(seg(t, 2.6, 3.0));
   put(R.plain.el, { o: kIn * (1 - kOut), y: (1 - kIn) * 18, s: lerp(1, 0.97, kOut), blur: (1 - kIn) * 8 + kOut * 10 });
-  // beat 2 (2.6 s): the plain key blurs away, the superbot key resolves in its place, the row re-centres
-  // as the mascot pops in on the key's right
+  // beats 2 + 3 together (2.6 s): the plain key blurs away and the superbot key resolves in its place while the
+  // old line lifts away word by word (gone by 3.07 s) and SUPERBOT REROUTES TO SUBSCRIPTION rises in from 3.07 s,
+  // SUBSCRIPTION in the key's gradient, so the two lines never share a frame; the row re-centres as the mascot
+  // pops in on the key's right
+  wordsRise(R.hl1.words, t, 0.15, 2.6);
+  wordsRise(R.hl2.words, t, 3.07, null);
+  paintGrad(R.hl2.grad, t, 0, R.gradW, [[3.85, 4.75]]);
   const sIn = outCubic(seg(t, 2.75, 3.25));
   put(R.shine.el, { o: sIn, s: lerp(1.03, 1, sIn), blur: (1 - sIn) * 10 });
-  paintShineKey(t, [[3.05, 3.95], [6.2, 7.1]]);
+  paintShineKey(t, [[3.05, 3.95], [4.95, 5.85]]);
   const shift = lerp(R.rowHalf, 0, inOutCubic(seg(t, 3.0, 3.7)));
   R.row.style.transform = `translateX(${shift.toFixed(2)}px)`;
-  // beat 3 (5.0 s): the old line lifts away (gone by 5.47 s), then the new one rises in, SUBSCRIPTION in the
-  // key's gradient; the two lines never share a frame, so no mixed reading
-  wordsRise(R.hl2.words, t, 5.5, null);
-  paintGrad(R.hl2.grad, t, 0, R.gradW, [[6.3, 7.2]]);
-  // out (8.2 s): beats 1-3 leave on the reference card exit, then the reference end card
-  const ex = inOutCubic(seg(t, 8.2, 8.55)), cs = lerp(1, 0.985, ex);
+  // out (6.1 s): beats 1-3 leave on the reference card exit, then the reference end card
+  const ex = inOutCubic(seg(t, 6.1, 6.45)), cs = lerp(1, 0.985, ex);
   setCam(cs, 1 - ex);
   const pop = seg(t, 3.15, 3.65), at = camMap({ x: R.anchorKey.x + shift, y: R.anchorKey.y }, cs);
   placeMark(at.x, at.y, KEY_SCALE * cs * lerp(0.5, 1, outBack(pop)), outCubic(clamp(pop * 2.2)) * (1 - ex));
   R.mark.render(t);
-  endRef(t, 8.55);
+  endRef(t, 6.45);
 }
 
 // ---------- variant b, Decode: the key is typed, then decoded glyph by glyph; the headline rolls ----------
@@ -282,33 +282,35 @@ function typeAndDecode(t) {
 
 function renderB(t) {
   // beat 1: the headline slams in whole; the key field opens and the key types in
-  const D = R.hlH, slam = outCubic(seg(t, 0.1, 0.48)), r1 = inOutCubic(seg(t, 4.9, 5.4));
+  // beats 2 + 3 together (2.4 s): the headline rolls up and the new line rolls in under it as the decode wave
+  // starts through the key
+  const D = R.hlH, slam = outCubic(seg(t, 0.1, 0.48)), r1 = inOutCubic(seg(t, 2.4, 2.9));
   put(R.hl1.el, { o: clamp(slam * 1.4), s: lerp(1.14, 1, slam), blur: (1 - slam) * 14, y: -r1 * D });
-  // beat 3 (4.9 s): the headline rolls up and the new line rolls in under it
-  const r2in = outQuint(seg(t, 5.05, 5.65)), r2out = inOutCubic(seg(t, 7.6, 8.05));
-  put(R.hl2.el, { o: t >= 5.05 ? 1 : 0, y: (1 - r2in) * D - r2out * D });
-  const open = outCubic(seg(t, 0.6, 0.85)), outro = inOutCubic(seg(t, 7.7, 8.1));
+  const r2in = outQuint(seg(t, 2.55, 3.15)), r2out = inOutCubic(seg(t, 6.0, 6.45));
+  put(R.hl2.el, { o: t >= 2.55 ? 1 : 0, y: (1 - r2in) * D - r2out * D });
+  const open = outCubic(seg(t, 0.6, 0.85)), outro = inOutCubic(seg(t, 6.1, 6.5));
   put(R.plain.el, { o: open * (1 - outro), y: (1 - open) * 12, s: lerp(1, 0.94, outro), blur: outro * 10 });
   put(R.shine.el, { o: 1 - outro, s: lerp(1, 0.94, outro), blur: outro * 10 });
-  // beat 2 (2.4 s): a decode wave turns the key into the superbot key; the mascot slides in from the right
+  // the decode wave (2.4 s) turns the key into the superbot key; the mascot slides in from the right
   typeAndDecode(t);
-  paintShineKey(t, [[3.45, 4.3], [5.75, 6.6]]);
+  paintShineKey(t, [[3.45, 4.3], [4.95, 5.8]]);
   const shift = lerp(R.rowHalf, 0, inOutCubic(seg(t, 2.95, 3.6)));
   R.row.style.transform = `translateX(${shift.toFixed(2)}px)`;
-  // beat 4 (7.75 s): the mascot flies onto the end card's seat and superbot.gg rolls up beside it
-  const m = seg(t, 3.0, 3.65), fly = inOutCubic(seg(t, 7.75, 8.55));
+  // beat 4 (6.15 s): the mascot flies onto the end card's seat and superbot.gg rolls up beside it
+  const m = seg(t, 3.0, 3.65), fly = inOutCubic(seg(t, 6.15, 6.95));
   const fx = R.anchorKey.x + shift + lerp(320, 0, outQuint(m));
-  const hop = Math.sin(Math.PI * seg(t, 8.6, 8.95)) * 22;
+  const hop = Math.sin(Math.PI * seg(t, 7.0, 7.35)) * 22;
   const x = lerp(fx, R.anchorEnd.x, fly), y = lerp(R.anchorKey.y, R.anchorEnd.y, fly) - Math.sin(Math.PI * fly) * 70 - hop;
   placeMark(x, y, lerp(KEY_SCALE, 1, fly), outCubic(clamp(m * 2)), lerp(16, 0, outBack(m)));
-  R.mark.render(t, t >= 8.6 && t < 9.5);
-  R.end.style.visibility = t >= 8.0 ? 'visible' : 'hidden';
-  R.endSlide.style.transform = `translateY(${((1 - outQuint(seg(t, 8.3, 8.9))) * 115).toFixed(2)}%)`;
+  R.mark.render(t, t >= 7.0 && t < 7.9);
+  R.end.style.visibility = t >= 6.4 ? 'visible' : 'hidden';
+  R.endSlide.style.transform = `translateY(${((1 - outQuint(seg(t, 6.7, 7.3))) * 145).toFixed(2)}%)`;
 }
 
 // ---------- variant c, Sweep: left-set two-line headline, a slow push, light sweeps carry every change ----------
-function renderC(t) {
-  const cs = lerp(1, 1.04, seg(t, 0, 6.3));
+function renderC(t, tReal) {
+  // the push runs on the real clock, so the beat-1 cut does not jolt it
+  const cs = lerp(1, 1.04, seg(tReal, 0, 4.9 - VARIANTS.c.skip));
   setCam(cs);
   // beat 1: the words pop in one by one, the plain key slides in from the left
   R.hl1.el.style.opacity = '1';
@@ -319,29 +321,37 @@ function renderC(t) {
   const kIn = outQuint(seg(t, 0.6, 1.1));
   put(R.plain.el, { o: kIn, x: (1 - kIn) * -60 });
   put(R.shine.el, { o: 1 });
-  // beat 2 (2.0 s): the sweep crosses the key and leaves the superbot key behind it; the mascot pops in
+  // beats 2 + 3 together (2.0 s): one pass of the sweep crosses the headline and the key at once, leaving
+  // SUPERBOT REROUTES TO SUBSCRIPTION and the superbot key behind it; the mascot pops in
+  R.hl2.el.style.opacity = '1';
+  wipe(R.hl1.el, R.hl2.el, R.hlSweep, t, 2.0, 2.65, R.hlW);
   wipe(R.plain.el, R.shine.el, R.keySweep, t, 2.0, 2.65, R.keyW);
-  paintShineKey(t, [[4.75, 5.55]]);
+  paintShineKey(t, [[3.4, 4.2]]);
   const pop = seg(t, 2.5, 2.95), at = camMap(R.anchorKey, cs);
   placeMark(at.x, at.y, KEY_SCALE * cs * lerp(0.4, 1, outBack(pop)), outCubic(clamp(pop * 2.2)), lerp(-14, 0, outBack(pop)));
   R.mark.render(t);
-  // beat 3 (3.9 s): the sweep crosses the headline and the new line is behind it
-  R.hl2.el.style.opacity = '1';
-  wipe(R.hl1.el, R.hl2.el, R.hlSweep, t, 3.9, 4.55, R.hlW);
-  // beat 4 (6.3 s): one sweep across the frame wipes to the end card; the mascot pops as the band reaches it
-  R.end.style.visibility = t >= 6.3 ? 'visible' : 'hidden';
-  wipe(R.scn, R.end, R.stageSweep, t, 6.3, 6.8, 1920);
-  const reach = sweepReach(6.3, 6.8, 1920, R.anchorEnd.x - END_MARK / 2), f = seg(t, reach, reach + 0.45);
+  // beat 4 (4.9 s): one sweep across the frame wipes to the end card; the mascot pops as the band reaches it
+  R.end.style.visibility = t >= 4.9 ? 'visible' : 'hidden';
+  wipe(R.scn, R.end, R.stageSweep, t, 4.9, 5.4, 1920);
+  const reach = sweepReach(4.9, 5.4, 1920, R.anchorEnd.x - END_MARK / 2), f = seg(t, reach, reach + 0.45);
   R.endFace.style.opacity = outCubic(clamp(f * 2)).toFixed(3);
   R.endFace.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(4)})`;
-  R.endMark.render(t, t >= 7.05 && t < 7.75);
+  R.endMark.render(t, t >= 5.65 && t < 6.35);
 }
 
-const VARIANTS = { a: { cycle: 12.2, render: renderA }, b: { cycle: 11.0, render: renderB }, c: { cycle: 9.2, render: renderC } };
-const CYCLE = VARIANTS[V].cycle;
+// Beat 1's hold is cut short: from `cut` on, the variant's timeline runs `skip` seconds ahead. Nothing on screen
+// moves inside the skipped span (the plain key has landed, the shine key and the mascot are not on yet), so the
+// swap to the superbot key just comes `skip` seconds sooner. `cycle` is the timeline's length before the cut.
+const VARIANTS = {
+  a: { cycle: 10.1, cut: 1.5, skip: 0.6, render: renderA },
+  b: { cycle: 9.4, cut: 1.6, skip: 0.6, render: renderB },
+  c: { cycle: 7.8, cut: 1.2, skip: 0.6, render: renderC },
+};
+const VV = VARIANTS[V];
+const CYCLE = +(VV.cycle - VV.skip).toFixed(4);
 
 function render(t) {
-  VARIANTS[V].render(t);
+  VV.render(t < VV.cut ? t : t + VV.skip, t);
   // the dip at the loop: the end card goes to black over its last DIP seconds (t = 0 opens on black too)
   dip.style.opacity = seg(t, CYCLE - DIP, CYCLE).toFixed(3);
 }

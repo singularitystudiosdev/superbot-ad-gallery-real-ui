@@ -69,7 +69,9 @@ svg { flex: none; }
 .end { display: grid; place-items: center; visibility: hidden; }
 .end .lock { display: flex; align-items: center; gap: 44px; }
 .end .face { flex: none; width: 220px; height: 220px; display: grid; place-items: center; }
-.end .words { overflow: hidden; padding: .04em .02em .1em; }
+/* the clip box must hold superbot.gg's descenders (p, g); the matching negative margin keeps the lock-up centred
+   on the cap band as before (the reference line was all caps, so .1em was enough there) */
+.end .words { overflow: hidden; padding: .04em .02em .3em; margin-bottom: -.2em; }
 .end h1 { margin: 0; font-size: 128px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: #fff; }
 
 /* ---------- variant layouts ---------- */

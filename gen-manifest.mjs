@@ -168,6 +168,16 @@ const more = [
     { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b at the same 49.5 s, with far more in every answer. The tweet now plays a 15 s Pocketsflow launch film built for this ad from pocketsflow.com's own copy, creators, prices and numbers (the third-party clip and its credit are gone). In superbot the thread slides left and a 16:9 canvas opens beside it, and each model's output lands there full size: Gemini 3.1 Pro reads pocketsflow.com and writes the brief (brand board, proof, a six-shot script with VO); Nano Banana Pro resolves six style frames, one per shot; Kling 3.0 animates them, its motion plan drawn over shot 03 before the shot plays; ElevenLabs voices the script word by word, scores it at 112 BPM and pins the SFX to the film's own clicks; Claude Opus 5.5 writes LaunchFilm.tsx in Remotion and snaps the cuts to the beat; Superbot renders 450 frames and premieres the film full frame.",
       download: 'assets/video/pocketsflow-untold-launch-film-superbot-3960b9f9.16x9.mp4', downloadLabel: '16:9' }],
   // <<< pocketsflow-untold-launch-film-superbot-3960b9f9
+  // >>> pocketsflow-node-graph-every-model-superbot-a0f39f40
+  // Flow-graph variant of pocketsflow-untold-every-model-superbot-673c104b (2026-10-06, a0f39f40): same tweet hook and
+  // THEY WONT TELL YOU HOW, then the full 16:9 hub answers with a dataflow graph instead of a thread. New order and
+  // jobs: Claude Opus 5.5 codes the buy page, Nano Banana Pro photographs it, Blender models the PF tile, DeepSeek
+  // V4.1 Flash scrapes the fee pages past a bot wall, ElevenLabs v3 voices DeepSeek's script, Superbot cuts and renders.
+  // Every node shows that model's real output (img/CREDITS.txt); the film it renders is the tweet's video.
+  ['pocketsflow-node-graph-every-model-superbot-a0f39f40', 'pocketsflow-node-graph-every-model-superbot-a0f39f40/', 'make a launch video for Pocketsflow: the flow cut, Opus 5.5 codes the buy page, Nano Banana Pro shoots it, Blender models the mark, DeepSeek scrapes the fees, ElevenLabs voices it, Superbot renders', 'Ad spots',
+    { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b with a different machine behind the film. Same hook (I made this in 1 prompt, now playing the film this ad actually renders) and THEY WONT TELL YOU HOW, then the real superbot hub at full 16:9 width, rail and chats included. Superbot does not answer in a thread: it plans a flow, six nodes wired into one graph, and runs them in a new order. Claude Opus 5.5 writes BuyPage.tsx and renders both states. Nano Banana Pro takes that page as a reference and returns four photographs of it in the world. Blender models the PF tile from Pocketsflow's own mark and turns it in Cycles. DeepSeek V4.1 Flash scrapes four pricing pages, gets past Payhip's bot wall and writes the fee table and the script. ElevenLabs v3 voices that script with word timings. Superbot lays every output on one timeline and renders the 8.6 s launch film, which takes the frame with its voiceover. Each node opens into a 16:9 stage showing what that model really made (no mock output), then folds back to a thumbnail while its result travels the edges to the next node.",
+      download: 'assets/video/pocketsflow-node-graph-every-model-superbot-a0f39f40.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< pocketsflow-node-graph-every-model-superbot-a0f39f40
   // >>> cg1-1004-yt-model-switch-superbot-48dc1fe1
   // cg1-1004 remake of niche-youtube-model-switch-superbot-3828921d (2026-10-06, 48dc1fe1): same hook, four hand-offs, beat
   // times and 26.298 s (untouched original). Thread rebuilt to superbot-desktop's provider-switch UI and tile art; switches
@@ -1817,6 +1827,8 @@ for (const [id, title] of ads) {
 const KEEP_IDS = new Set([
   // added (2026-10-06, 3960b9f9): the detailed 16:9 canvas cut of the Pocketsflow spot (own animation dir, 16:9 render)
   'pocketsflow-untold-launch-film-superbot-3960b9f9',
+  // added (2026-10-06, a0f39f40): the flow-graph cut of the Pocketsflow spot (own animation dir, 16:9 render with VO)
+  'pocketsflow-node-graph-every-model-superbot-a0f39f40',
   // added (2026-10-06, 48dc1fe1): cg1-1004 remake of the YouTube Studio spot (own animation dir, 16:9 render)
   'cg1-1004-yt-model-switch-superbot-48dc1fe1',
   'niche-youtube-model-switch-superbot-3828921d',

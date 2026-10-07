@@ -63,6 +63,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "pocketsflow-node-graph-every-model-superbot-a0f39f40",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a launch video for Pocketsflow: the flow cut, Opus 5.5 codes the buy page, Nano Banana Pro shoots it, Blender models the mark, DeepSeek scrapes the fees, ElevenLabs voices it, Superbot renders",
+    "src": "animations/pocketsflow-node-graph-every-model-superbot-a0f39f40/",
+    "thumb": "assets/shots/pocketsflow-node-graph-every-model-superbot-a0f39f40.png",
+    "desc": "Variant of pocketsflow-untold-every-model-superbot-673c104b with a different machine behind the film. Same hook (I made this in 1 prompt, now playing the film this ad actually renders) and THEY WONT TELL YOU HOW, then the real superbot hub at full 16:9 width, rail and chats included. Superbot does not answer in a thread: it plans a flow, six nodes wired into one graph, and runs them in a new order. Claude Opus 5.5 writes BuyPage.tsx and renders both states. Nano Banana Pro takes that page as a reference and returns four photographs of it in the world. Blender models the PF tile from Pocketsflow's own mark and turns it in Cycles. DeepSeek V4.1 Flash scrapes four pricing pages, gets past Payhip's bot wall and writes the fee table and the script. ElevenLabs v3 voices that script with word timings. Superbot lays every output on one timeline and renders the 8.6 s launch film, which takes the frame with its voiceover. Each node opens into a 16:9 stage showing what that model really made (no mock output), then folds back to a thumbnail while its result travels the edges to the next node.",
+    "download": "assets/video/pocketsflow-node-graph-every-model-superbot-a0f39f40.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "cg1-1004-yt-model-switch-superbot-48dc1fe1",
     "type": "animation",
     "group": "Ad spots",

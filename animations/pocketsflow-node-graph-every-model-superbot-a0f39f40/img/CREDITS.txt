@@ -1,0 +1,32 @@
+img CREDITS (pocketsflow-node-graph-every-model-superbot-a0f39f40, 2026-10-06)
+
+This ad forks pocketsflow-untold-every-model-superbot-673c104b (superbot-ad-gallery-real-ui @09139d4). The fork drops
+that ad's third-party launch clip and every frame cut from it (pf/clip.mp4, poster, search/meshy/hailuo frames).
+Kept from it: pf/avatar-kai.jpg (the mock tweet's fictional author avatar: a 200x200 crop of Pocketsflow's mascot at
+2.2s of the 15s Pocketsflow launch film by @achxvi, https://x.com/achxvi/status/2103918792845963545).
+
+Everything under gen/ is real model output, made for this ad on 2026-10-06 and shown as what that model produced.
+Nothing under gen/ is hand-drawn. Generators and scripts live in the build workspace (work/pfroute-a0f39f40/gen).
+
+gen/ (scenes/tabs-assets/gen-data.js bundles the text outputs)
+  BuyPage.tsx (in gen-data OPUS.tsx)  Claude Opus 5.5 (anthropic/claude-opus-5.5 via OpenRouter, 37.3 s, $0.09), from a
+                     brief with Pocketsflow's real copy (pocketsflow.com: Ines Duarte, Lightroom Presets Vol. 3, $29,
+                     LAUNCH20 to $23.20). Shown verbatim. Rendered with react-dom/server into gen-data BUYPAGE.idle/.paid
+                     (the harness unescapes React's quoted <style> text; the component is untouched).
+  buypage-ref.jpg    screenshot of that render, the reference image sent to Nano Banana Pro.
+  studio.jpg, notify.jpg, street.jpg, flatlay.jpg (+ -sm.jpg)
+                     Nano Banana Pro (google/gemini-3-pro-image via OpenRouter, Google as provider), 16:9 2K
+                     (2752x1536, scaled to 1920w), about $0.14 each. Prompts are in gen-data NBP[].prompt.
+  blender/           Blender 5.2.2 LTS, headless (pf_tile.a0f39f40.py): the PF tile modelled from Pocketsflow's mark
+                     (Averia Serif Libre Bold "PF" extruded on a bevelled slab). wb-solid/wb-wire.webp are Workbench
+                     renders (the viewport's Edit Mode look); cycles-hero.webp is Cycles 256 spp; turn/turn-00..35.webp is
+                     a 36-frame Cycles turntable at 64 spp (AgX). stats.json holds the evaluated mesh counts.
+  fees.json + script (gen-data DS)  DeepSeek V4.1 Flash (deepseek/deepseek-v4.1-flash via OpenRouter) extracting the fee
+                     schedules from the captured pricing pages of pocketsflow.com, gumroad.com, lemonsqueezy.com and
+                     payhip.com (Payhip refused the browser identity and answered as Slackbot-LinkExpanding 1.0), and
+                     writing the four-line voiceover. Shown verbatim.
+  vo.mp3 (+ gen-data VO)  ElevenLabs text to speech, model eleven_v3, voice Sarah (EXAVITQu4vr4xnSDxMaL), reading
+                     DeepSeek's script; word timings from the with-timestamps endpoint, waveform peaks from the take.
+                     Muxed into the 16:9 render under the film.
+  fonts/AveriaSerifLibre-Bold.ttf  google/fonts ofl/averiaseriflibre (SIL OFL 1.1), Pocketsflow's mark typeface.
+  fonts/Inter-latin.woff2           Inter, Google Fonts (SIL OFL 1.1), Pocketsflow's UI typeface.

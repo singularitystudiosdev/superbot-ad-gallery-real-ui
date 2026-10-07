@@ -1,0 +1,15 @@
+brand/ CREDITS: every third-party mark in this spot, where it came from, and the usage note.
+All marks are the property of their owners and appear nominatively (naming the model or app that does the work in
+the flow), unaltered except where noted.
+
+claude-logo.svg      Claude mark, simple-icons (CC0 1.0), https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/claude.svg.
+                     Fill white, shown on Claude's orange tile. Trademark of Anthropic, PBC.
+gemini-logo.svg      Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg. Names Nano Banana Pro
+                     (Gemini 3 Pro Image). Trademark of Google LLC.
+blender-logo.svg     Blender logo (no text), Wikimedia Commons File:Blender_logo_no_text.svg, fetched 2026-10-06.
+                     Trademark of the Blender Foundation, used to name the app per https://www.blender.org/about/logo/.
+deepseek-logo.svg    DeepSeek whale mark, icons/deepseek-color.svg from @lobehub/icons-static-svg (unpkg), unmodified.
+                     Trademark of Hangzhou DeepSeek Artificial Intelligence Co., Ltd.
+elevenlabs-logo.svg  ElevenLabs mark, simple-icons (CC0 1.0), https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg.
+                     Trademark of ElevenLabs.
+Superbot's own mark (tile.svg, mark-clean.svg under scenes/tabs-assets) is superbot's.

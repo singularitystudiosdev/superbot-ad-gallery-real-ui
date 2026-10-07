@@ -1,0 +1,27 @@
+/* The Pocketsflow launch film (scenes/film.js): a 1920x1080 box, scaled by its host. Fonts are Pocketsflow's own
+   (Averia Serif Libre for the mark, Inter for the UI), both OFL, shipped under img/gen/fonts. */
+@font-face { font-family: "Averia Serif Libre"; font-weight: 700; src: url("../img/gen/fonts/AveriaSerifLibre-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Inter"; font-weight: 400 700; src: url("../img/gen/fonts/Inter-latin.woff2") format("woff2"); }
+
+.pff { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0b0b0c; transform-origin: 0 0; font-family: "Inter", system-ui, sans-serif; }
+.pff-shot { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+.pff-shot > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; will-change: transform; }
+
+.pff-ui { background: #f4f3ef; }
+.pff-bpw { position: absolute; left: 50%; top: 50%; width: 1280px; height: 720px; transform-origin: 50% 50%; transform: translate(-50%, -50%) scale(1.36); }
+.pff-bp { position: absolute; inset: 0; }
+.pff-paid { opacity: 0; }
+.pff[data-shot="ui"] .pff-vig, .pff[data-shot="end"] .pff-vig { opacity: .25; }
+.pff .bp-btn { transform-origin: 50% 50%; }
+
+.pff-end { background: radial-gradient(120% 90% at 30% 50%, #1b1b1e 0%, #0b0b0c 60%, #050506 100%); }
+.pff-turn { position: absolute; left: 90px; top: 50%; width: 960px; height: 540px; transform: translateY(-50%); }
+.pff-turn img { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+.pff-wm { position: absolute; left: 1010px; top: 50%; margin-top: -120px; display: flex; flex-direction: column; gap: 22px; color: #f4f3ef; opacity: 0; }
+.pff-wm b { font: 700 132px/1 "Averia Serif Libre", Georgia, serif; letter-spacing: -.02em; }
+.pff-wm span { font: 500 34px/1.25 "Inter", system-ui, sans-serif; color: #c9c8c2; max-width: 760px; }
+.pff-wm em { font: 600 26px/1 "Inter", system-ui, sans-serif; font-style: normal; letter-spacing: .02em; color: #8d8c86; }
+
+.pff-cap { position: absolute; left: 96px; bottom: 88px; max-width: 1500px; font: 700 92px/1.04 "Inter", system-ui, sans-serif; letter-spacing: -.035em; color: #fff; text-shadow: 0 4px 28px rgba(0,0,0,.45), 0 1px 3px rgba(0,0,0,.4); visibility: hidden; }
+.pff-cap span { display: inline-block; opacity: 0; }
+.pff-vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(130% 100% at 50% 45%, transparent 55%, rgba(0,0,0,.38) 100%), linear-gradient(0deg, rgba(0,0,0,.42) 0%, transparent 34%); }

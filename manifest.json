@@ -117,12 +117,10 @@
     "id": "niche-youtube-model-switch-superbot-88a89e94",
     "type": "animation",
     "group": "Ad spots",
-    "title": "Answer the top comments on my latest video and pin the best one · smooth cut (16:9): connect YouTube, Gemini 3.8 Flash watches, Opus 5.5 replies, Studio pins",
+    "title": "Answer the top comments on my latest video and pin the best one · smooth cut: connect YouTube, Gemini 3.8 Flash watches, Opus 5.5 replies, Studio pins",
     "src": "animations/niche-youtube-model-switch-superbot-88a89e94/",
     "thumb": "assets/shots/niche-youtube-model-switch-superbot-88a89e94.png",
-    "desc": "One ask in superbot, each part sent to what is built for it. Superbot connects YouTube with the one scope replies need. Gemini 3.8 Flash watches the 14:32 video, reads all 1,284 comments, ties each top comment to its moment and finds the boom arm in the 4:38 frame. Claude Opus 5.5 writes the four replies in the creator's voice. The replies post through the API, then superbot hearts them and pins Priya's answer on the video's Comments page in YouTube Studio. 16:9.",
-    "download": "assets/video/niche-youtube-model-switch-superbot-88a89e94.16x9.mp4",
-    "downloadLabel": "16:9"
+    "desc": "One ask in superbot, each part sent to what is built for it. Superbot connects YouTube with the one scope replies need. Gemini 3.8 Flash watches the 14:32 video, reads all 1,284 comments, ties each top comment to its moment and finds the boom arm in the 4:38 frame. Claude Opus 5.5 writes the four replies in the creator's voice. The replies post through the API, then superbot hearts them and pins Priya's answer on the video's Comments page in YouTube Studio."
   },
   {
     "id": "every-model-converge-4x5-398eded5",

@@ -64,7 +64,8 @@
 #s-tabs .st-c { position: relative; display: flex; gap: 16px; padding: 16px 48px 12px 12px; margin: 0 -12px; border-bottom: 1px solid var(--yt-outline-opaque); border-radius: 0; }
 #s-tabs .st-av { flex: none; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
 #s-tabs .st-cm { flex: 1; min-width: 0; }
-#s-tabs .st-pinwrap { height: 0; overflow: hidden; }
+#s-tabs .st-pinwrap, #s-tabs .st-rs { display: grid; grid-template-rows: 0fr; }
+#s-tabs .st-clip { min-height: 0; overflow: hidden; }
 #s-tabs .st-pinned { display: flex; align-items: center; gap: 6px; padding-bottom: 4px; font: 400 12px/18px var(--gm-body); color: var(--yt-text2); }
 #s-tabs .st-pinned .yt-i { width: 16px; height: 16px; }
 #s-tabs .st-h { display: flex; align-items: baseline; gap: 4px; font: 400 12px/18px var(--gm-body); color: var(--yt-text2); }
@@ -83,7 +84,6 @@
 #s-tabs .st-more { position: absolute; right: 4px; top: 12px; color: var(--yt-text); }
 #s-tabs .st-more.st-hov { background: var(--yt-additive); }
 
-#s-tabs .st-rs { height: 0; overflow: hidden; }
 #s-tabs .st-rin { padding-top: 2px; opacity: 0; }
 #s-tabs .st-tog { display: inline-flex; align-items: center; height: 32px; margin-left: -6px; font: 500 14px/1 var(--gm-body); color: var(--yt-blue); }
 #s-tabs .st-tog .yt-i { transform: rotate(180deg); }

@@ -63,15 +63,15 @@ export default {
     const row = (c, i) => `<div class="st-c${i === PINNED ? ' st-pick' : ''}">
       <img class="st-av" src="${x.img(c.av)}" alt=""/>
       <div class="st-cm">
-        ${i === PINNED ? `<div class="st-pinwrap"><div class="st-pinned">${ms('keep-outline')}Pinned by ${esc(ACCOUNT.handle)}</div></div>` : ''}
+        ${i === PINNED ? `<div class="st-pinwrap"><div class="st-clip"><div class="st-pinned">${ms('keep-outline')}Pinned by ${esc(ACCOUNT.handle)}</div></div></div>` : ''}
         <div class="st-h"><b>${esc(c.handle)}</b><span>• ${esc(c.ago)}</span></div>
         <div class="st-t">${esc(c.text)}</div>
         <div class="st-a"><span class="st-reply">Reply</span><span class="st-ib">${ms('thumb-up-outline')}</span><em>${c.likes}</em><span class="st-ib">${ms('thumb-down-outline')}</span>
           <span class="st-ib st-heart">${ms('favorite-outline', 'st-h0')}${ms('favorite', 'st-h1')}<img class="st-hav" src="${x.img(ACCOUNT.avatar)}" alt=""/></span></div>
-        <div class="st-rs"><div class="st-rin">
+        <div class="st-rs"><div class="st-clip"><div class="st-rin">
           <div class="st-tog">${ms('arrow-drop-down')}1 reply</div>
           <div class="st-r"><img class="st-rav" src="${x.img(ACCOUNT.avatar)}" alt=""/><div><div class="st-h"><b class="st-own">${esc(ACCOUNT.handle)}</b><span>• Just now</span></div><div class="st-t">${esc(REPLY[c.first])}</div></div></div>
-        </div></div>
+        </div></div></div>
       </div>
       <span class="st-ib st-more">${ms('more-vert')}</span>
     </div>`;
@@ -112,7 +112,7 @@ export default {
     const list = q('.st-list'), scroll = q('.st-scroll');
     const menu = q('.st-menu'), mpin = q('.st-mpin');
     const scrim = q('.st-scrim'), dlg = q('.st-dlg'), dpin = q('.st-dpin');
-    const pinWrap = rows[PINNED].querySelector('.st-pinwrap'), pinIn = pinWrap.firstElementChild;
+    const pinWrap = rows[PINNED].querySelector('.st-pinwrap'), pinIn = pinWrap.querySelector('.st-pinned');
     const pick = rows[PINNED];
     let lastLine = '', heights = slots.map(() => ''), pinH = '';
 
@@ -168,8 +168,9 @@ export default {
         // 1. replies arrive, the list glides down to the last one
         T.rep.forEach((a, i) => {
           const f = inOutQuart(seg(t, a, a + REP_OPEN));
-          const want = f <= 0 ? '0px' : f >= 1 ? 'auto' : `${(f * ins[i].offsetHeight).toFixed(2)}px`;
-          if (want !== heights[i]) { slots[i].style.height = want; heights[i] = want; }
+          // one-row grids opened from 0fr to 1fr: exact heights all the way, no snap to auto at the end
+          const want = `${f.toFixed(4)}fr`;
+          if (want !== heights[i]) { slots[i].style.gridTemplateRows = want; heights[i] = want; }
           ins[i].style.opacity = clamp(f * 1.5).toFixed(3);
         });
         const room = Math.max(0, scroll.offsetHeight - list.clientHeight + 16);
@@ -199,8 +200,8 @@ export default {
         dpin.classList.toggle('st-hov', t >= T.ok - 0.2);
         // the pinned line opens above the handle; the comment washes blue and fades back
         const pf = inOutQuart(seg(t, T.pinned, T.pinned + PIN_OPEN));
-        const want = pf <= 0 ? '0px' : pf >= 1 ? 'auto' : `${(pf * pinIn.offsetHeight).toFixed(2)}px`;
-        if (want !== pinH) { pinWrap.style.height = want; pinH = want; }
+        const want = `${pf.toFixed(4)}fr`;
+        if (want !== pinH) { pinWrap.style.gridTemplateRows = want; pinH = want; }
         pinIn.style.opacity = clamp(pf * 1.4).toFixed(3);
         const wash = Math.sin(Math.PI * seg(t, T.pinned, T.pinned + 1.4));
         pick.style.background = wash > 0 ? `rgba(6,95,212,${(0.07 * wash).toFixed(4)})` : '';

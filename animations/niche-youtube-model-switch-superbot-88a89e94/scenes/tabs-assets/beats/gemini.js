@@ -62,8 +62,8 @@ export default {
         <img class="gm-av" src="${x.img(c.av)}" alt=""/>
         <span class="gm-ct"><b>${x.esc(c.name)}</b><span>${x.esc(c.text)}</span></span>
         <span class="gm-chips">${chip(c)}</span>
-      </div>${i === LENA ? `<div class="gm-find"><div class="gm-findin"><span class="gm-shot"><img src="${x.img(momentAt(c.at)[2])}" alt=""/>
-          <i class="gm-box" style="top:${ymin / 10}%;left:${xmin / 10}%;height:${(ymax - ymin) / 10}%;width:${(xmax - xmin) / 10}%"><em>${x.esc(BOX.label)}</em></i></span></div></div>` : ''}`).join('')}</div>
+      </div>${i === LENA ? `<div class="gm-find"><div class="gm-clip"><div class="gm-findin"><span class="gm-shot"><img src="${x.img(momentAt(c.at)[2])}" alt=""/>
+          <i class="gm-box" style="top:${ymin / 10}%;left:${xmin / 10}%;height:${(ymax - ymin) / 10}%;width:${(xmax - xmin) / 10}%"><em>${x.esc(BOX.label)}</em></i></span></div></div></div>` : ''}`).join('')}</div>
     </div>`);
     const q = (s) => card.querySelector(s);
     const qa = (s) => [...card.querySelectorAll(s)];
@@ -74,7 +74,7 @@ export default {
     const rows = qa('.gm-row');
     const find = q('.gm-find'), findin = q('.gm-findin'), box = q('.gm-box'), boxLabel = box.firstElementChild;
     const lenaTs = rows[LENA].querySelector('.gm-ts');
-    let lastClock = '', lastN = '', hW = '';
+    let lastClock = '', lastN = '', rowsW = '';
 
     return {
       nodes: [card],
@@ -104,8 +104,9 @@ export default {
         lenaTs.classList.toggle('gm-hot', t >= T.find);
         rows[LENA].classList.toggle('gm-sel', t >= T.find);
         const f = inOutQuart(seg(t, T.open, T.open + OPEN));
-        const want = f <= 0 ? '0px' : f >= 1 ? 'auto' : `${(f * findin.offsetHeight).toFixed(2)}px`;
-        if (want !== hW) { find.style.height = want; hW = want; }
+        // a one-row grid opened from 0fr to 1fr: exact fractional heights all the way, no snap to auto at the end
+        const want = `${f.toFixed(4)}fr`;
+        if (want !== rowsW) { find.style.gridTemplateRows = want; rowsW = want; }
         findin.style.opacity = clamp(f * 1.6).toFixed(3);
         findin.style.transform = f >= 1 ? 'none' : `translateY(${lerp(-8, 0, f).toFixed(2)}px)`;
         const b = outQuart(seg(t, T.box, T.box + BOX_IN));

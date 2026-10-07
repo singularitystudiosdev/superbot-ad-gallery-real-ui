@@ -1,0 +1,27 @@
+apikey-for-subscriptions-superbot-027da5ad: provenance (internal; nothing here is shown on screen)
+
+Built 2026-10-07 in chat f01da68e (Cosmos quick-chats), source in
+quick-chats/superbot-apikey-subs.027da5ad (index.html ?v=a|b|c&ar=4x5|16x9, window.seek(t), rendered frame by frame
+with the motion-reel render.mjs in chrome-headless-shell; 30 fps, H.264 CRF 16, mixed to -14 LUFS).
+
+Style references (same gallery): every-model-one-chat-sb-superbot-efa8df82 (card motion: words rise 18 px and unblur
+8 px, outQuint .55 s, staggered .06 s; end card: white SF Rounded 800 with the mascot to the right, the line sliding
+out from behind it) and every-model-converge-4x5-398eded5 (4:5 frame, #070707 canvas, Mona Sans 700 at 125% width,
+faint ghost ticker rows).
+
+Assets, all first party (Superbot) or open:
+  Key card + Copy button  superbot-desktop apps/desktop/src/renderer/src/hub/panes/Developer.tsx "Key minted" reveal
+                          (.developer-reveal: sunken #0a0a0b, 1px accent #2b6bff, radius 8, padding 12) and the
+                          packages/ui Button size="sm" normal (raised #1a1a1c, line #1e1e21, "Copy" -> "Copied" for
+                          COPIED_RESET_MS 1600 ms), redrawn at ad scale from the desktop tokens.
+  The key                 sbc_k7Qm2x••••••••7f3a: a fake caller key in the sbc_ format the app mints; not a real key.
+  Mascot                  superbot-desktop packages/ui/src/marks/mark-superbot-glitch.tsx (via superbot-hero-mark.svg),
+                          teal #00e5c3 and magenta #c026d3 ghosts under the white face; eye holes animated for blinks.
+  Cursor                  the pointer from every-model-one-chat-superbot-efa8df82/shell.js makeCursor().
+  Type                    Mona Sans (GitHub, SIL OFL 1.1); SF Pro Rounded and SF Mono (macOS system fonts, rendered
+                          into the film, not distributed).
+  Music + sound           synthesized in code (audio/score.mjs, motion-reel sfx.mjs); no samples, no licensed music.
+
+Claim: answers sell-to-reddit llm_ai usage-limits-pricing (rank 1, 5,816 authors / 30 d, data as of
+2026-10-05; leaves: ai usage limits 437, high token consumption 258, expensive subscription 192; wants: alternative ai
+subscription). No price or stat claim in the copy.

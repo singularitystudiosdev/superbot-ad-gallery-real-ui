@@ -623,5 +623,50 @@
     "downloads": {
       "1x1": "animations/stop-api-pricing-stack-1x1-ef7bd5a2/final.mp4"
     }
+  },
+  {
+    "id": "apikey-for-subscriptions-superbot-027da5ad-a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "The api key, for your subscriptions · the superbot key decodes on its Key minted card, Copy clicks to Copied, then superbot.gg (mint, 15 s, 4:5)",
+    "src": "animations/apikey-for-subscriptions-superbot-027da5ad/?v=a",
+    "thumb": "assets/shots/apikey-for-subscriptions-superbot-027da5ad-a.png",
+    "desc": "The api key, for your subscriptions rises in word by word over superbot's own Key minted card. The key decodes glyph by glyph into a purple, pink and blue gradient with a white shine, the superbot mascot pops in to its right, and the cursor clicks the app's Copy button to Copied on the downbeat while the mascot hops. The screen holds for 10 s, then superbot.gg slides out from behind the mascot. 15 s, 1080x1350 and 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-for-subscriptions-superbot-027da5ad/final-a.mp4",
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/apikey-for-subscriptions-superbot-027da5ad/final-a.mp4",
+      "16x9": "animations/apikey-for-subscriptions-superbot-027da5ad/final-a-16x9.mp4"
+    }
+  },
+  {
+    "id": "apikey-for-subscriptions-superbot-027da5ad-b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "The api key, for your subscriptions · a tilting holo key card with a drifting gradient, the mascot carries into superbot.gg (holo, 15 s, 4:5)",
+    "src": "animations/apikey-for-subscriptions-superbot-027da5ad/?v=b",
+    "thumb": "assets/shots/apikey-for-subscriptions-superbot-027da5ad-b.png",
+    "desc": "The api key, for your subscriptions rises out of its line masks while the key card tilts up into place, its purple, pink and blue gradient drifting under a white shine. The superbot mascot glitches in from the right, the cursor clicks the app's Copy button to Copied, and the card sways for 10 s. The headline leaves upward, and the same mascot carries across the cut into the superbot.gg lock-up. 15 s, 1080x1350 and 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-for-subscriptions-superbot-027da5ad/final-b.mp4",
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/apikey-for-subscriptions-superbot-027da5ad/final-b.mp4",
+      "16x9": "animations/apikey-for-subscriptions-superbot-027da5ad/final-b-16x9.mp4"
+    }
+  },
+  {
+    "id": "apikey-for-subscriptions-superbot-027da5ad-c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "The api key, for your subscriptions · the key is typed in, a gradient wipe ends in a glint, a band wipes to superbot.gg (type, 15 s, 4:5)",
+    "src": "animations/apikey-for-subscriptions-superbot-027da5ad/?v=c",
+    "thumb": "assets/shots/apikey-for-subscriptions-superbot-027da5ad-c.png",
+    "desc": "A left-set The api key, for your subscriptions rises word by word under a slow camera push. The key is typed into the field in white, then a purple, pink and blue wipe runs across it and ends in a glint, and the superbot mascot springs up to its right. The cursor clicks the app's Copy button to Copied. After 10 s a gradient band sweeps the frame into superbot.gg with the mascot to its right. 15 s, 1080x1350 and 1920x1080, 30 fps, with sound.",
+    "download": "animations/apikey-for-subscriptions-superbot-027da5ad/final-c.mp4",
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/apikey-for-subscriptions-superbot-027da5ad/final-c.mp4",
+      "16x9": "animations/apikey-for-subscriptions-superbot-027da5ad/final-c-16x9.mp4"
+    }
   }
 ]

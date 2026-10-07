@@ -1863,6 +1863,30 @@ const more = [
   ["stop-api-pricing-stack-1x1-ef7bd5a2", "stop-api-pricing-stack-1x1-ef7bd5a2/", "STOP PAYING API PRICING · the superbot key pushes the API key out of its slot, mascot slides in, SUPERBOT REROUTES TO SUBSCRIPTION wipes in, pan up to superbot.gg (stack, 12 s, 1:1)", 'Ad spots',
     {"desc":"Flush-left Mona Sans Wide lines, each sized to the column, on #070707. STOP PAYING API PRICING over a typed sk- key; the purple, pink and blue superbot key pushes the plain key up and out of its slot while the mascot slides in from the right edge. The lines wipe up through their masks into SUPERBOT REROUTES TO SUBSCRIPTION. The camera pans up while the mascot rides across to settle beside superbot.gg, then squints happy. 12 s, 1080x1080, 60 fps, 90 bpm, with sound. Copy verbatim: STOP PAYING API PRICING, then SUPERBOT REROUTES TO SUBSCRIPTION, then superbot.gg. The mascot is the real superbot.gg mark (sb-mark-live), its ears, glitch, blink and happy squint driven frame by frame; the gradient is the efa8df82 storm gradient (blue, violet, magenta, pink) under its white shine band. Both keys are made up and masked (sk-...3f9a, sbc_...7f3a). Score and UI sounds synthesized in code, mixed to -14 LUFS. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits, pricing and token spend\", rank 1, 5,816 authors in 30 days, build of 2026-10-05).","download":"animations/stop-api-pricing-stack-1x1-ef7bd5a2/final.mp4","downloadLabel":"MP4 1:1","downloads":{"1x1":"animations/stop-api-pricing-stack-1x1-ef7bd5a2/final.mp4"}}],
   // <<< stop-api-pricing-ef7bd5a2
+  // >>> apikey-for-subscriptions-superbot-027da5ad
+  // The api key, for your subscriptions (2026-10-07, chat 027da5ad): three cuts of one two-beat spot in the
+  // every-model-converge-4x5-398eded5 frame with the every-model-one-chat-sb-superbot-efa8df82 end card. Beat 1 holds
+  // 10 s: the headline over superbot-desktop's own Key minted reveal (Developer pane), the sbc_ key (fake, masked) in a
+  // purple, pink and blue gradient with a white shine, the glitch mascot to its right, the app's size="sm" Copy button
+  // clicked to Copied on the 5.0 s downbeat. Beat 2 (the 10.0 s cut): superbot.gg with the mascot to its right.
+  // a Mint (card rise + decode, efa8df82 lock-up), b Holo (line masks, drifting gradient, tilting card, the mascot
+  // carries across the cut), c Type (left-set, typed key, gradient wipe with a glint, band wipe to the lock-up).
+  // 15.0 s, 30 fps, with sound; 1080x1350 plus a native 1920x1080 render per cut (`downloads`, per ratio). Answers
+  // sell-to-reddit llm_ai usage-limits-pricing (rank 1, 5,816 authors / 30 d; wants: alternative ai subscription); no
+  // price or stat claim. Source: quick-chats/superbot-apikey-subs.027da5ad. Provenance in the folder's CREDITS.txt.
+  ['apikey-for-subscriptions-superbot-027da5ad-a', 'apikey-for-subscriptions-superbot-027da5ad/?v=a', 'The api key, for your subscriptions · the superbot key decodes on its Key minted card, Copy clicks to Copied, then superbot.gg (mint, 15 s, 4:5)', 'Ad spots',
+    { desc: 'The api key, for your subscriptions rises in word by word over superbot\'s own Key minted card. The key decodes glyph by glyph into a purple, pink and blue gradient with a white shine, the superbot mascot pops in to its right, and the cursor clicks the app\'s Copy button to Copied on the downbeat while the mascot hops. The screen holds for 10 s, then superbot.gg slides out from behind the mascot. 15 s, 1080x1350 and 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-for-subscriptions-superbot-027da5ad/final-a.mp4', downloadLabel: 'MP4 4:5',
+      downloads: { '4x5': 'animations/apikey-for-subscriptions-superbot-027da5ad/final-a.mp4', '16x9': 'animations/apikey-for-subscriptions-superbot-027da5ad/final-a-16x9.mp4' } }],
+  ['apikey-for-subscriptions-superbot-027da5ad-b', 'apikey-for-subscriptions-superbot-027da5ad/?v=b', 'The api key, for your subscriptions · a tilting holo key card with a drifting gradient, the mascot carries into superbot.gg (holo, 15 s, 4:5)', 'Ad spots',
+    { desc: 'The api key, for your subscriptions rises out of its line masks while the key card tilts up into place, its purple, pink and blue gradient drifting under a white shine. The superbot mascot glitches in from the right, the cursor clicks the app\'s Copy button to Copied, and the card sways for 10 s. The headline leaves upward, and the same mascot carries across the cut into the superbot.gg lock-up. 15 s, 1080x1350 and 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-for-subscriptions-superbot-027da5ad/final-b.mp4', downloadLabel: 'MP4 4:5',
+      downloads: { '4x5': 'animations/apikey-for-subscriptions-superbot-027da5ad/final-b.mp4', '16x9': 'animations/apikey-for-subscriptions-superbot-027da5ad/final-b-16x9.mp4' } }],
+  ['apikey-for-subscriptions-superbot-027da5ad-c', 'apikey-for-subscriptions-superbot-027da5ad/?v=c', 'The api key, for your subscriptions · the key is typed in, a gradient wipe ends in a glint, a band wipes to superbot.gg (type, 15 s, 4:5)', 'Ad spots',
+    { desc: 'A left-set The api key, for your subscriptions rises word by word under a slow camera push. The key is typed into the field in white, then a purple, pink and blue wipe runs across it and ends in a glint, and the superbot mascot springs up to its right. The cursor clicks the app\'s Copy button to Copied. After 10 s a gradient band sweeps the frame into superbot.gg with the mascot to its right. 15 s, 1080x1350 and 1920x1080, 30 fps, with sound.',
+      download: 'animations/apikey-for-subscriptions-superbot-027da5ad/final-c.mp4', downloadLabel: 'MP4 4:5',
+      downloads: { '4x5': 'animations/apikey-for-subscriptions-superbot-027da5ad/final-c.mp4', '16x9': 'animations/apikey-for-subscriptions-superbot-027da5ad/final-c-16x9.mp4' } }],
+  // <<< apikey-for-subscriptions-superbot-027da5ad
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1978,6 +2002,10 @@ const KEEP_IDS = new Set([
   'stop-api-pricing-converge-4x5-ef7bd5a2',
   'stop-api-pricing-card-16x9-ef7bd5a2',
   'stop-api-pricing-stack-1x1-ef7bd5a2',
+  // added (2026-10-07, 027da5ad): The api key, for your subscriptions, three cuts (own animation dir, 4:5 + 16:9 films with sound)
+  'apikey-for-subscriptions-superbot-027da5ad-a',
+  'apikey-for-subscriptions-superbot-027da5ad-b',
+  'apikey-for-subscriptions-superbot-027da5ad-c',
 ]);
 const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 

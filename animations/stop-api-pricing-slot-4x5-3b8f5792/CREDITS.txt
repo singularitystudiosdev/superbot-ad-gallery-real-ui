@@ -1,5 +1,5 @@
 stop-api-pricing-slot-4x5-3b8f5792: rendered from code (quick-chats/superbot-stop-api-pricing.3b8f5792, scenes/slot.js), headless chrome-headless-shell, 30 fps.
 Mascot: superbot-desktop hero mark (assets/desktop/superbot-hero-mark.svg), the product's own art.
-Display face: Mona Sans (GitHub, SIL OFL 1.1). Key icon: lucide "key" (ISC).
+Type: SF Pro Rounded Heavy and SF Mono (Apple system faces, rendered locally, no font files shipped). Key icon: lucide "key" (ISC).
 Score and effects synthesized in code (shared/score.mjs, scripts/sfx.mjs); no third-party audio.
 Keys shown are illustrative and masked; neither is a real key.

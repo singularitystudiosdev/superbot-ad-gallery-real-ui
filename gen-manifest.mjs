@@ -1825,6 +1825,18 @@ const more = [
     { desc: 'A two-line STOP PAYING API PRICING pops in word by word, set left over a plain API key (masked), under a slow camera push. One light sweep crosses the headline and the key together and leaves SUPERBOT REROUTES TO SUBSCRIPTION over the purple, pink and blue superbot key, and the superbot mascot pops in to its right. One last sweep across the frame wipes to superbot.gg with the mascot to its right. 7.2 s, 1920x1080, 60 fps.',
       download: 'assets/video/stop-api-pricing-superbot-e65959ff-c.16x9.mp4', downloadLabel: '16:9', downloads: { '16x9': 'assets/video/stop-api-pricing-superbot-e65959ff-c.16x9.mp4' } }],
   // <<< stop-api-pricing-superbot-e65959ff
+  // >>> stop-api-pricing-3b8f5792
+  // STOP PAYING API PRICING (2026-10-07, chat 3b8f5792): three cuts of one 4-beat brief in the every-model-converge-4x5-398eded5
+  // house look (black canvas, Mona Sans Wide headline over ghost rows): STOP PAYING API PRICING over a plain API key, the key
+  // becomes the purple, pink and blue superbot key with the mascot to its right, SUPERBOT REROUTES TO SUBSCRIPTION, superbot.gg
+  // with the mascot. shine wipes, slot strikes and drops, type types and pastes. 9.6 s, 4:5 with a native 16:9 (?ar=16x9).
+  ["stop-api-pricing-shine-4x5-3b8f5792", "stop-api-pricing-shine-4x5-3b8f5792/", "STOP PAYING API PRICING · shine: a light band wipes the API key into the superbot key, SUPERBOT REROUTES TO SUBSCRIPTION, superbot.gg (4:5)", 'Ad spots',
+    {"desc":"STOP PAYING API PRICING rises word by word over a plain grey API key; on the bar-2 downbeat a light band wipes it into the purple, pink and blue superbot key and the superbot mascot pops in to its right. The headline swaps word by word to SUPERBOT REROUTES TO SUBSCRIPTION while the mascot hops and the key shines; ends on superbot.gg with the mascot gliding in to its right. 9.6 s, 1080x1350 with a native 1920x1080 recomposition (?ar=16x9), 30 fps, with sound. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits and pricing\", rank 1, 5,816 authors in 30 days, data as of 2026-10-05; leaf high-token-costs). Keys are illustrative and masked: sk-ant-api03- is the shape of a pay-per-token API key, sk-superbot- the shape `superbot keys --mint` prints. Mascot: superbot-desktop's hero mark. Source quick-chats/superbot-stop-api-pricing.3b8f5792.","download":"animations/stop-api-pricing-shine-4x5-3b8f5792/final.mp4","downloadLabel":"MP4 4:5","downloads":{"4x5":"animations/stop-api-pricing-shine-4x5-3b8f5792/final.mp4","16x9":"animations/stop-api-pricing-shine-4x5-3b8f5792/final-16x9.mp4"}}],
+  ["stop-api-pricing-slot-4x5-3b8f5792", "stop-api-pricing-slot-4x5-3b8f5792/", "STOP PAYING API PRICING · slot: the API key is struck and dropped, the superbot key falls into its slot, SUPERBOT REROUTES TO SUBSCRIPTION, superbot.gg (4:5)", 'Ad spots',
+    {"desc":"STOP PAYING API PRICING slams in a word per eighth; a plain grey API key rises, is struck through and drops out of frame as the purple, pink and blue superbot key falls into its slot on the downbeat and the mascot peeks in from the right. The headline scrambles into SUPERBOT REROUTES TO SUBSCRIPTION and the key flips; then its own text scrambles into superbot.gg with the mascot to its right. 9.6 s, 1080x1350 with a native 1920x1080 recomposition (?ar=16x9), 30 fps, with sound. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits and pricing\", rank 1, 5,816 authors in 30 days, data as of 2026-10-05; leaf high-token-costs). Keys are illustrative and masked: sk-ant-api03- is the shape of a pay-per-token API key, sk-superbot- the shape `superbot keys --mint` prints. Mascot: superbot-desktop's hero mark. Source quick-chats/superbot-stop-api-pricing.3b8f5792.","download":"animations/stop-api-pricing-slot-4x5-3b8f5792/final.mp4","downloadLabel":"MP4 4:5","downloads":{"4x5":"animations/stop-api-pricing-slot-4x5-3b8f5792/final.mp4","16x9":"animations/stop-api-pricing-slot-4x5-3b8f5792/final-16x9.mp4"}}],
+  ["stop-api-pricing-type-4x5-3b8f5792", "stop-api-pricing-type-4x5-3b8f5792/", "STOP PAYING API PRICING · typed: an API key is typed, selected and pasted over with the superbot key, SUPERBOT REROUTES TO SUBSCRIPTION, superbot.gg (4:5)", 'Ad spots',
+    {"desc":"The camera opens on STOP PAYING API PRICING being typed, pulls back to a key field that types a plain API key, selects all, and the purple, pink and blue superbot key is pasted on the downbeat while the mascot slides in to its right. The headline is backspaced and retyped as SUPERBOT REROUTES TO SUBSCRIPTION; superbot.gg types out with the mascot hopping across to its right. 9.6 s, 1080x1350 with a native 1920x1080 recomposition (?ar=16x9), 30 fps, with sound. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits and pricing\", rank 1, 5,816 authors in 30 days, data as of 2026-10-05; leaf high-token-costs). Keys are illustrative and masked: sk-ant-api03- is the shape of a pay-per-token API key, sk-superbot- the shape `superbot keys --mint` prints. Mascot: superbot-desktop's hero mark. Source quick-chats/superbot-stop-api-pricing.3b8f5792.","download":"animations/stop-api-pricing-type-4x5-3b8f5792/final.mp4","downloadLabel":"MP4 4:5","downloads":{"4x5":"animations/stop-api-pricing-type-4x5-3b8f5792/final.mp4","16x9":"animations/stop-api-pricing-type-4x5-3b8f5792/final-16x9.mp4"}}],
+  // <<< stop-api-pricing-3b8f5792
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1926,6 +1938,12 @@ const KEEP_IDS = new Set([
   'stop-api-pricing-superbot-e65959ff-a',
   'stop-api-pricing-superbot-e65959ff-b',
   'stop-api-pricing-superbot-e65959ff-c',
+  // >>> stop-api-pricing-3b8f5792-keep
+  // added (2026-10-07, 3b8f5792): the three STOP PAYING API PRICING cuts (own animation dirs, 4:5 + 16:9 renders with sound)
+  'stop-api-pricing-shine-4x5-3b8f5792',
+  'stop-api-pricing-slot-4x5-3b8f5792',
+  'stop-api-pricing-type-4x5-3b8f5792',
+  // <<< stop-api-pricing-3b8f5792-keep
 ]);
 const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 

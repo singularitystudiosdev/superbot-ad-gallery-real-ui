@@ -1,0 +1,218 @@
+/* The Pocketsflow launch film (film.js). 1280x720 film px, scaled as one block by its host.
+   Look plan: ink #0a0a0a, paper #fff, panel #fafafa, line #e5e5e5, muted #737373, one accent #2563eb;
+   Satoshi (pocketsflow.com's own face) for type, Geist Mono for the "// label" motif; radii 14px and pills. */
+@font-face { font-family: 'PF Satoshi'; src: url('fonts/satoshi-var.woff2') format('woff2'); font-weight: 300 900; font-display: block; }
+@font-face { font-family: 'PF Mono'; src: url('fonts/geist-mono.woff2') format('woff2'); font-weight: 100 900; font-display: block; }
+
+.pf-host { position: relative; overflow: hidden; background: #fff; }
+.pf-film {
+  position: absolute; left: 0; top: 0; width: 1280px; height: 720px; overflow: hidden; transform-origin: 0 0;
+  background: #fff; color: #0a0a0a; font-family: 'PF Satoshi', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; contain: layout paint;
+}
+.pf-film * { box-sizing: border-box; }
+.pf-s { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.pf-s > div[class$='-cam'] { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.pf-tag { font-family: 'PF Mono', ui-monospace, monospace; font-size: 17px; color: #737373; letter-spacing: 0; }
+.pf-left { position: absolute; left: 96px; top: 176px; width: 480px; }
+.pf-left .pf-tag { display: block; margin-bottom: 22px; }
+.pf-h { margin: 0; font-weight: 900; font-size: 78px; line-height: .98; letter-spacing: -.045em; }
+.pf-hl { display: block; will-change: transform, opacity; }
+.pf-mut { color: #a3a3a3; }
+.pf-blue { color: #2563eb; }
+.pf-pill { font-family: 'PF Mono', monospace; font-size: 13px; color: #737373; border: 1px solid #e5e5e5; border-radius: 999px; padding: 4px 11px; }
+.pf-ico { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.pf-curw { position: absolute; left: 0; top: 0; width: 30px; height: 30px; z-index: 40; opacity: 0; will-change: transform; }
+.pf-cur { width: 30px; height: 30px; display: block; filter: drop-shadow(0 3px 5px rgba(0,0,0,.25)); }
+
+/* ---------- product covers ---------- */
+.pf-cv { position: relative; overflow: hidden; height: 128px; }
+.pf-cv-portra, .pf-ban { background: linear-gradient(180deg, #f6c08a 0%, #ec9663 38%, #c2606b 66%, #4a2b55 100%); }
+.pf-cv-sun { position: absolute; right: 34px; top: 24px; width: 40px; height: 40px; border-radius: 50%; background: #ffe7bf; box-shadow: 0 0 28px 10px rgba(255, 220, 170, .55); }
+.pf-cv-hill { position: absolute; left: -12%; bottom: -6%; width: 124%; height: 50%; border-radius: 50% 50% 0 0 / 70% 70% 0 0; background: #2d1b38; }
+.pf-cv-hill::after { content: ''; position: absolute; left: 38%; top: -18%; width: 70%; height: 80%; border-radius: 50% 50% 0 0 / 70% 70% 0 0; background: #3c2448; }
+.pf-cv-strip { position: absolute; inset: 0; border-top: 15px solid #121212; border-bottom: 15px solid #121212; }
+.pf-cv-strip::before, .pf-cv-strip::after { content: ''; position: absolute; left: 4px; right: 4px; height: 6px; background: repeating-linear-gradient(90deg, #f6e5cc 0 7px, transparent 7px 14px); }
+.pf-cv-strip::before { top: -11px; }
+.pf-cv-strip::after { bottom: -11px; }
+.pf-cv-iso { position: absolute; left: 12px; top: 22px; font-weight: 900; font-size: 26px; letter-spacing: -.03em; color: #fff4e2; }
+.pf-cv-nord { background: #0f1115; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 18px 22px; }
+.pf-cv-n { border: 2px solid #e8e8e8; border-radius: 14px; aspect-ratio: 1; }
+.pf-cv-n0 { border-radius: 50%; }
+.pf-cv-n1 { background: #2563eb; border-color: #2563eb; }
+.pf-cv-n3 { transform: rotate(45deg) scale(.72); border-radius: 4px; }
+.pf-cv-brush { background: #f6f1e7; }
+.pf-cv-brush i { position: absolute; height: 26px; border-radius: 26px 8px 30px 10px; }
+.pf-cv-b1 { left: 18px; top: 24px; width: 168px; background: #111; transform: rotate(-7deg); }
+.pf-cv-b2 { left: 28px; top: 58px; width: 150px; background: #2563eb; transform: rotate(4deg); }
+.pf-cv-b3 { left: 40px; top: 90px; width: 120px; background: #e9a23b; transform: rotate(-3deg); }
+.pf-cv-drum { background: #0a0a0a; display: flex; align-items: center; gap: 3px; padding: 0 16px; }
+.pf-cv-drum i { flex: 1; background: #2563eb; border-radius: 2px; }
+.pf-cv-drum i:nth-child(3n) { background: #93b4f5; }
+.pf-cv-film { background: linear-gradient(160deg, #e2ddd0, #9c9686); }
+.pf-cv-film i { position: absolute; width: 44px; height: 68px; border-radius: 6px; background: #1a1a1a; border-top: 12px solid #e9a23b; }
+.pf-cv-f1 { left: 34%; top: 22px; transform: rotate(-12deg); }
+.pf-cv-f2 { left: 49%; top: 18px; transform: rotate(4deg); border-top-color: #2563eb !important; }
+.pf-cv-f3 { left: 62%; top: 26px; transform: rotate(16deg); border-top-color: #f5f5f5 !important; }
+
+/* ---------- S1 hook ---------- */
+.pf-grid { position: absolute; inset: 0; background-image: linear-gradient(#f3f3f3 1px, transparent 1px), linear-gradient(90deg, #f3f3f3 1px, transparent 1px); background-size: 64px 64px; background-position: -1px -1px; }
+.pf-s1-tag { position: absolute; left: 64px; top: 48px; }
+.pf-hook { position: absolute; left: 0; right: 0; top: 206px; margin: 0; text-align: center; font-weight: 900; font-size: 128px; line-height: .96; letter-spacing: -.05em; }
+.pf-hook .pf-l { display: block; }
+.pf-hook i { display: inline-block; font-style: normal; will-change: transform, opacity, filter; }
+.pf-pc { position: absolute; width: 214px; background: #fff; border: 1px solid #e5e5e5; border-radius: 14px; overflow: hidden; box-shadow: 0 26px 50px -22px rgba(10, 10, 10, .28); will-change: transform; }
+.pf-pc-b { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 11px 12px 12px; }
+.pf-pc-b b { font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+.pf-pc-b span, .pf-ph-b span { font-family: 'PF Mono', monospace; font-size: 13px; font-weight: 600; background: #f3f3f3; border-radius: 999px; padding: 3px 9px; flex: none; }
+.pf-pc1 { left: 54px; top: 74px; }
+.pf-pc2 { left: 1014px; top: 58px; }
+.pf-pc3 { left: 72px; top: 462px; }
+.pf-pc4 { left: 996px; top: 446px; }
+
+/* ---------- S2 product form ---------- */
+.pf-s2, .pf-s4 { background: #fafafa; }
+.pf-s2-h .pf-hl { color: #d4d4d4; }
+.pf-form { position: absolute; left: 636px; top: 92px; width: 556px; background: #fff; border: 1px solid #e5e5e5; border-radius: 14px; padding: 26px 28px 28px; box-shadow: 0 34px 70px -34px rgba(10, 10, 10, .3); }
+.pf-form-hd { display: flex; align-items: center; justify-content: space-between; }
+.pf-form-hd b { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.pf-fl { display: block; font-family: 'PF Mono', monospace; font-size: 13px; color: #737373; margin: 18px 0 8px; }
+.pf-in { height: 52px; border: 1px solid #e5e5e5; border-radius: 14px; padding: 0 16px; display: flex; align-items: center; font-size: 19px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
+.pf-in.on { border-color: #0a0a0a; box-shadow: 0 0 0 4px rgba(37, 99, 235, .14); }
+.pf-in em { font-style: normal; color: #737373; margin-right: 4px; }
+.pf-in small { margin-left: auto; font-family: 'PF Mono', monospace; font-size: 13px; color: #737373; font-weight: 500; }
+.pf-in-type { color: #525252; font-weight: 500; font-size: 17px; }
+.pf-caret { width: 2px; height: 24px; background: #2563eb; margin-left: 2px; opacity: 0; }
+.pf-in.on .pf-caret { opacity: 1; }
+.pf-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pf-drop { border: 1.5px dashed #d4d4d4; border-radius: 14px; padding: 14px 16px 16px; }
+.pf-file { display: flex; align-items: center; gap: 12px; }
+.pf-file .pf-ico { width: 26px; height: 26px; color: #0a0a0a; }
+.pf-file-t b { display: block; font-size: 16px; font-weight: 700; }
+.pf-file-t small { font-family: 'PF Mono', monospace; font-size: 12.5px; color: #737373; }
+.pf-file-ok { margin-left: auto; width: 28px; height: 28px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; transform: scale(0); }
+.pf-file-ok .pf-ico { width: 16px; height: 16px; stroke-width: 3; color: #fff; }
+.pf-bar { height: 6px; background: #f0f0f0; border-radius: 999px; margin-top: 14px; overflow: hidden; }
+.pf-bar i { display: block; height: 100%; width: 0; background: #2563eb; border-radius: 999px; }
+.pf-form-ft { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+.pf-prev { display: flex; align-items: center; gap: 6px; font-family: 'PF Mono', monospace; font-size: 12.5px; color: #737373; }
+.pf-prev .pf-ico { width: 15px; height: 15px; }
+.pf-btn { position: relative; display: grid; background: #0a0a0a; color: #fff; border-radius: 999px; font-size: 15px; font-weight: 700; padding: 14px 24px; }
+.pf-btn > span { grid-area: 1 / 1; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.pf-pub-b { opacity: 0; }
+.pf-pub-b .pf-ico { width: 17px; height: 17px; stroke-width: 3; }
+
+/* ---------- S3 creator page ---------- */
+.pf-s3-h .pf-hl:first-child { color: #0a0a0a; }
+.pf-link { position: relative; margin-top: 40px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid #e5e5e5; border-radius: 999px; padding: 8px 8px 8px 18px; font-family: 'PF Mono', monospace; font-size: 18px; background: #fff; }
+.pf-link > .pf-ico { width: 18px; height: 18px; color: #737373; }
+.pf-link-c { width: 38px; height: 38px; border-radius: 50%; background: #0a0a0a; color: #fff; display: grid; place-items: center; }
+.pf-link-c .pf-ico { width: 17px; height: 17px; }
+.pf-toast { position: absolute; right: -6px; top: -50px; display: flex; align-items: center; gap: 6px; background: #0a0a0a; color: #fff; font-size: 14px; border-radius: 999px; padding: 8px 13px; opacity: 0; }
+.pf-toast .pf-ico { width: 15px; height: 15px; stroke-width: 3; }
+.pf-phone { position: absolute; left: 744px; top: 40px; width: 344px; height: 712px; background: #0a0a0a; border-radius: 58px; padding: 12px; box-shadow: 0 50px 90px -40px rgba(0, 0, 0, .45), inset 0 0 0 2px #2a2a2a; }
+.pf-scr { position: relative; width: 100%; height: 100%; background: #fff; border-radius: 46px; overflow: hidden; }
+.pf-isl { position: absolute; top: 26px; left: 50%; width: 98px; height: 28px; background: #0a0a0a; border-radius: 999px; transform: translateX(-50%); }
+.pf-scroll { position: absolute; left: 0; right: 0; top: 0; padding: 62px 18px 0; display: flex; flex-direction: column; align-items: center; will-change: transform; }
+.pf-url { display: flex; align-items: center; gap: 6px; font-family: 'PF Mono', monospace; font-size: 11px; color: #737373; background: #f4f4f4; border-radius: 999px; padding: 5px 11px; margin-bottom: 12px; }
+.pf-url .pf-ico { width: 11px; height: 11px; }
+.pf-ban { position: relative; width: 100%; height: 100px; border-radius: 14px; overflow: hidden; flex: none; }
+.pf-av { width: 74px; height: 74px; margin-top: -37px; border-radius: 50%; border: 4px solid #fff; background: linear-gradient(135deg, #2563eb, #0a0a0a); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 23px; position: relative; flex: none; }
+.pf-nm { font-size: 21px; font-weight: 800; letter-spacing: -.02em; margin-top: 8px; }
+.pf-bio { font-size: 13px; color: #737373; margin: 2px 0 14px; }
+.pf-lk { width: 100%; border: 1px solid #e5e5e5; border-radius: 14px; padding: 12px; text-align: center; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.pf-ph { position: relative; width: 100%; border: 1px solid #e5e5e5; border-radius: 14px; overflow: hidden; margin-top: 6px; margin-bottom: 4px; flex: none; }
+.pf-ph .pf-cv { height: 112px; }
+.pf-ph-b { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 2px; }
+.pf-ph-b b { font-size: 14.5px; font-weight: 800; letter-spacing: -.01em; }
+.pf-buy { display: block; margin: 8px 12px 12px; background: #0a0a0a; color: #fff; text-align: center; font-size: 14px; font-weight: 700; padding: 11px; border-radius: 999px; will-change: transform; }
+.pf-buy-o { background: #fff; color: #0a0a0a; border: 1px solid #e5e5e5; }
+.pf-tap { position: absolute; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; border: 2px solid #2563eb; background: rgba(37, 99, 235, .16); opacity: 0; }
+
+/* ---------- S4 checkout ---------- */
+.pf-mor { margin-top: 36px; max-width: 380px; }
+.pf-mor b { display: block; font-family: 'PF Mono', monospace; font-size: 14px; font-weight: 600; }
+.pf-mor span { display: block; margin-top: 6px; font-size: 17px; line-height: 1.45; color: #737373; }
+.pf-co { position: absolute; left: 598px; top: 66px; width: 424px; background: #fff; border: 1px solid #e5e5e5; border-radius: 14px; padding: 22px 24px 24px; box-shadow: 0 34px 70px -34px rgba(10, 10, 10, .3); }
+.pf-co-hd { display: flex; align-items: center; gap: 10px; }
+.pf-co-hd img { width: 28px; height: 28px; border-radius: 7px; }
+.pf-co-hd b { font-size: 16px; font-weight: 800; }
+.pf-co-sec { margin-left: auto; display: flex; align-items: center; gap: 4px; font-family: 'PF Mono', monospace; font-size: 12px; color: #737373; }
+.pf-co-sec .pf-ico { width: 13px; height: 13px; }
+.pf-co-geo { display: flex; align-items: center; gap: 7px; margin: 18px 0 12px; }
+.pf-co-cc, .pf-co-cur { font-family: 'PF Mono', monospace; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
+.pf-co-cc { background: #0a0a0a; color: #fff; }
+.pf-co-cur { border: 1px solid #e5e5e5; }
+.pf-co-geo small { margin-left: auto; font-size: 13px; color: #737373; }
+.pf-co-geo b { font-size: 14px; font-weight: 800; }
+.pf-co-it { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; }
+.pf-co-it .pf-cv { width: 58px; height: 58px; border-radius: 14px; flex: none; }
+.pf-co-it .pf-cv-iso, .pf-co-it .pf-cv-sun { display: none; }
+.pf-co-it .pf-cv-strip { border-width: 7px; }
+.pf-co-it .pf-cv-strip::before, .pf-co-it .pf-cv-strip::after { display: none; }
+.pf-co-it b { display: block; font-size: 15px; font-weight: 800; }
+.pf-co-it small { font-size: 13px; color: #737373; }
+.pf-co-p { margin-left: auto; }
+.pf-roll { display: inline-block; font-family: 'PF Mono', monospace; font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; will-change: transform, opacity; }
+.pf-co-ln { display: flex; justify-content: space-between; align-items: center; padding: 9px 0 0; font-size: 15px; color: #737373; }
+.pf-co-tot { margin-top: 10px; padding-top: 12px; border-top: 1px solid #e5e5e5; color: #0a0a0a; font-weight: 800; font-size: 19px; }
+.pf-co-tot .pf-roll { font-size: 19px; font-weight: 700; }
+.pf-ap { position: relative; display: grid; margin-top: 18px; height: 52px; background: #0a0a0a; color: #fff; border-radius: 999px; font-size: 16px; font-weight: 700; }
+.pf-ap > span { grid-area: 1 / 1; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.pf-ap-b { opacity: 0; }
+.pf-ap-b .pf-ico { width: 19px; height: 19px; stroke-width: 3; }
+.pf-co-alt { display: flex; gap: 8px; margin-top: 10px; }
+.pf-co-alt span { flex: 1; text-align: center; border: 1px solid #e5e5e5; border-radius: 999px; padding: 9px 0; font-size: 13px; font-weight: 700; }
+.pf-sales { position: absolute; left: 1050px; top: 112px; width: 196px; }
+.pf-sale { position: absolute; left: 0; width: 196px; display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #e5e5e5; border-radius: 14px; padding: 12px 14px; box-shadow: 0 18px 30px -22px rgba(10, 10, 10, .3); opacity: 0; }
+.pf-sale i { width: 8px; height: 8px; border-radius: 50%; background: #2563eb; flex: none; }
+.pf-sale span { font-size: 14px; color: #737373; font-weight: 600; }
+.pf-sale b { margin-left: auto; font-family: 'PF Mono', monospace; font-size: 14px; font-weight: 600; }
+
+/* ---------- S5 dashboard ---------- */
+.pf-s5 .pf-left { top: 214px; width: 340px; }
+.pf-db { position: absolute; left: 446px; top: 62px; width: 800px; height: 598px; background: #fff; border: 1px solid #e5e5e5; border-radius: 14px; overflow: hidden; display: grid; grid-template-columns: 166px 1fr 206px; box-shadow: 0 34px 70px -34px rgba(10, 10, 10, .28); }
+.pf-db-side { background: #fafafa; border-right: 1px solid #ededed; padding: 18px 12px; display: flex; flex-direction: column; gap: 3px; }
+.pf-db-br { display: flex; align-items: center; gap: 8px; margin: 0 0 16px 4px; }
+.pf-db-br img { width: 24px; height: 24px; border-radius: 6px; }
+.pf-db-br b { font-size: 15px; font-weight: 800; letter-spacing: -.02em; }
+.pf-nav { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 14px; font-size: 13.5px; font-weight: 700; color: #737373; border: 1px solid transparent; }
+.pf-nav .pf-ico { width: 16px; height: 16px; }
+.pf-nav.on { background: #fff; border-color: #e5e5e5; color: #0a0a0a; }
+.pf-db-main { padding: 20px 18px; min-width: 0; }
+.pf-db-hd { display: flex; align-items: center; justify-content: space-between; }
+.pf-db-hd b { font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+.pf-db-hd .pf-pill { font-size: 11.5px; }
+.pf-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.pf-kpi { border: 1px solid #ededed; border-radius: 14px; padding: 12px; }
+.pf-kpi small { display: block; font-size: 12px; color: #737373; font-weight: 600; white-space: nowrap; }
+.pf-kpi b { display: block; margin: 4px 0 2px; font-size: 27px; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.pf-kpi em { font-style: normal; font-family: 'PF Mono', monospace; font-size: 12px; color: #2563eb; font-weight: 600; }
+.pf-chart { position: relative; margin-top: 14px; height: 300px; border: 1px solid #ededed; border-radius: 14px; padding: 18px 14px 34px; }
+.pf-chart svg { width: 100%; height: 100%; overflow: visible; }
+.pf-ch-grid { stroke: #f0f0f0; stroke-width: 1; fill: none; }
+.pf-ch-line { stroke: #2563eb; stroke-width: 3.2; fill: none; stroke-linecap: round; stroke-dasharray: 1; vector-effect: non-scaling-stroke; }
+.pf-ch-dot { fill: #2563eb; stroke: #fff; stroke-width: 3; }
+.pf-ch-x { position: absolute; left: 14px; right: 14px; bottom: 10px; display: flex; justify-content: space-between; font-family: 'PF Mono', monospace; font-size: 11px; color: #a3a3a3; }
+.pf-db-feed { position: relative; border-left: 1px solid #ededed; padding: 20px 12px; }
+.pf-feed-h { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; }
+.pf-feed-h i { width: 8px; height: 8px; border-radius: 50%; background: #2563eb; box-shadow: 0 0 0 4px rgba(37, 99, 235, .15); }
+.pf-fd { position: absolute; left: 12px; right: 12px; top: 54px; border: 1px solid #ededed; border-radius: 14px; padding: 10px 12px; background: #fff; display: grid; grid-template-columns: 1fr auto; row-gap: 3px; opacity: 0; }
+.pf-fd-k { font-family: 'PF Mono', monospace; font-size: 11px; color: #737373; }
+.pf-fd b { grid-column: 1 / -1; font-size: 13px; font-weight: 800; line-height: 1.25; }
+.pf-fd-v { font-family: 'PF Mono', monospace; font-size: 13.5px; font-weight: 600; }
+.pf-fd small { grid-row: 1; grid-column: 2; font-size: 11px; color: #a3a3a3; text-align: right; }
+.pf-fd-payout { background: #0a0a0a; border-color: #0a0a0a; color: #fff; }
+.pf-fd-payout .pf-fd-k, .pf-fd-payout small { color: #a3a3a3; }
+
+/* ---------- S6 lockup ---------- */
+.pf-s6 { background: #0a0a0a; color: #fff; }
+.pf-lock { position: absolute; left: 0; right: 0; top: 214px; display: flex; align-items: center; justify-content: center; gap: 28px; }
+.pf-lock-ic { width: 118px; height: 118px; border-radius: 26px; box-shadow: 0 0 0 1.5px #333; }
+.pf-lock-wm { font-size: 116px; font-weight: 900; letter-spacing: -.055em; line-height: 1; }
+.pf-lock-line { position: absolute; left: 0; right: 0; top: 380px; margin: 0; text-align: center; font-size: 34px; font-weight: 500; letter-spacing: -.015em; color: #a3a3a3; }
+.pf-stats { position: absolute; left: 0; right: 0; top: 462px; display: flex; justify-content: center; gap: 12px; }
+.pf-stats span { font-family: 'PF Mono', monospace; font-size: 16px; color: #a3a3a3; border: 1px solid #262626; border-radius: 999px; padding: 9px 16px; }
+.pf-stats b { color: #fff; font-weight: 600; }
+.pf-url-pill { position: absolute; left: 50%; bottom: 72px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; font-family: 'PF Mono', monospace; font-size: 18px; background: #171717; border-radius: 999px; padding: 11px 20px; }
+.pf-url-pill i { width: 9px; height: 9px; border-radius: 50%; background: #2563eb; }

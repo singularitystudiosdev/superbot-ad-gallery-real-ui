@@ -1,0 +1,41 @@
+/* Beat 2 canvas page (frames.js): Nano Banana Pro's style frames. Every class the beat owns is prefixed .nb-. */
+#s-tabs .sbsite .hub .nb { display: flex; flex-direction: column; gap: 10px; }
+#s-tabs .sbsite .hub .nb-pr { display: grid; grid-template-columns: 30px 1fr; column-gap: 10px; row-gap: 8px; padding: 10px 12px; background: #161618; border: 1px solid #26262b; border-radius: 12px; }
+#s-tabs .sbsite .hub .nb-pr .qc-tile { width: 30px; height: 30px; border-radius: 8px; grid-row: span 2; }
+#s-tabs .sbsite .hub .nb-pr .qc-tile img { width: 18px; height: 18px; }
+#s-tabs .sbsite .hub .nb-pr p { margin: 0; font-size: 12.5px; line-height: 1.4; color: #f2f2f7; }
+#s-tabs .sbsite .hub .nb-off { color: transparent; }
+#s-tabs .sbsite .hub .nb-ps { display: flex; gap: 6px; }
+#s-tabs .sbsite .hub .nb-ps span { font: 500 10.5px/1 var(--font-mono, monospace); color: #a1a1a6; background: #1f1f23; border-radius: 999px; padding: 5px 9px; }
+#s-tabs .sbsite .hub .nb-ps .nb-ref { color: #8fb0ff; background: #17213a; }
+
+#s-tabs .sbsite .hub .nb-grid { position: relative; height: 415px; flex: none; }
+#s-tabs .sbsite .hub .nb-f { position: absolute; border-radius: 10px; overflow: hidden; background: #1b1b1f; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .nb-f0 { left: 0; top: 0; width: 484px; height: 272px; }
+#s-tabs .sbsite .hub .nb-f1 { left: 494px; top: 0; width: 233px; height: 131px; }
+#s-tabs .sbsite .hub .nb-f2 { left: 494px; top: 141px; width: 233px; height: 131px; }
+#s-tabs .sbsite .hub .nb-f3, #s-tabs .sbsite .hub .nb-f4, #s-tabs .sbsite .hub .nb-f5 { top: 282px; width: 236px; height: 133px; }
+#s-tabs .sbsite .hub .nb-f3 { left: 0; }
+#s-tabs .sbsite .hub .nb-f4 { left: 246px; }
+#s-tabs .sbsite .hub .nb-f5 { left: 492px; }
+#s-tabs .sbsite .hub .nb-film { position: absolute; left: 0; top: 0; will-change: filter, transform; }
+#s-tabs .sbsite .hub .nb-noise {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: normal;
+  background-color: #6d6d74;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .58 0 0 0 0 .7 0 0 0 1.4 -.2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+#s-tabs .sbsite .hub .nb-scan { position: absolute; left: 0; right: 0; top: -40%; height: 40%; background: linear-gradient(180deg, rgba(91, 141, 255, 0), rgba(91, 141, 255, .28) 70%, rgba(170, 200, 255, .7)); opacity: 0; }
+#s-tabs .sbsite .hub .nb-lb { position: absolute; left: 7px; bottom: 7px; display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 999px; background: rgba(10, 10, 12, .82); color: #f2f2f7; font-size: 10.5px; font-weight: 600; }
+#s-tabs .sbsite .hub .nb-lb b { font: 600 10px/1 var(--font-mono, monospace); color: #8e8e93; }
+#s-tabs .sbsite .hub .nb-pc { position: absolute; right: 8px; top: 7px; font: 600 10.5px/1 var(--font-mono, monospace); color: #fff; background: rgba(10, 10, 12, .7); border-radius: 999px; padding: 4px 7px; }
+#s-tabs .sbsite .hub .nb-ok { position: absolute; right: 7px; top: 7px; width: 20px; height: 20px; border-radius: 50%; background: #34c759; display: grid; place-items: center; opacity: 0; }
+#s-tabs .sbsite .hub .nb-ok .qc-ok { width: 12px; height: 12px; stroke: #fff; stroke-width: 3; fill: none; opacity: 1 !important; transform: none !important; position: static; }
+#s-tabs .sbsite .hub .nb-f.done { box-shadow: inset 0 0 0 1px #2f3a55; }
+
+#s-tabs .sbsite .hub .nb-ft { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+#s-tabs .sbsite .hub .nb-ck { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #a1a1a6; padding: 5px 9px 5px 6px; border-radius: 999px; background: #18181b; white-space: nowrap; }
+#s-tabs .sbsite .hub .nb-ck .qc-ok { width: 12px; height: 12px; stroke: #6e6e73; stroke-width: 3; fill: none; opacity: 1 !important; transform: none !important; position: static; }
+#s-tabs .sbsite .hub .nb-ck.on { color: #e5e5ea; }
+#s-tabs .sbsite .hub .nb-ck.on .qc-ok { stroke: #34c759; }
+#s-tabs .sbsite .hub .nb-seed { margin-left: auto; font: 500 10.5px/1 var(--font-mono, monospace); color: #6e6e73; }

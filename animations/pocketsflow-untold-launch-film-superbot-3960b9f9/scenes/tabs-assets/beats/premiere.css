@@ -1,0 +1,25 @@
+/* Beat 6 canvas page (premiere.js): the render and the full-frame premiere. Every class the beat owns is prefixed .pm-. */
+#s-tabs .sbsite .hub .pm { display: flex; flex-direction: column; gap: 10px; }
+#s-tabs .sbsite .hub .pm-pl { position: relative; flex: none; border-radius: 10px; overflow: hidden; background: #fff; }
+#s-tabs .sbsite .hub .pm.pm-th .pm-pl { border-radius: 0; }
+#s-tabs .sbsite .hub .pm-film { position: relative; }
+#s-tabs .sbsite .hub .pm-rn { position: absolute; left: 50%; top: 50%; width: 300px; transform: translate(-50%, -50%); padding: 14px 16px; border-radius: 12px; background: rgba(10, 10, 12, .88); color: #fff; display: grid; grid-template-columns: 1fr auto; row-gap: 10px; box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .6); }
+#s-tabs .sbsite .hub .pm-rf { font: 600 13px/1 var(--font-mono, monospace); }
+#s-tabs .sbsite .hub .pm-rp { font: 600 13px/1 var(--font-mono, monospace); color: #8fb0ff; }
+#s-tabs .sbsite .hub .pm-rn i { grid-column: span 2; height: 5px; border-radius: 3px; background: #2a2a2e; overflow: hidden; }
+#s-tabs .sbsite .hub .pm-rn i b { display: block; height: 100%; background: #5b8dff; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .pm-ch { position: absolute; left: 16px; right: 16px; bottom: 16px; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; column-gap: 12px; row-gap: 10px; align-items: center; padding: 12px 16px; border-radius: 14px; background: rgba(10, 10, 12, .82); color: #fff; opacity: 0; }
+#s-tabs .sbsite .hub .pm-pp { width: 30px; height: 30px; border-radius: 50%; background: #fff; display: grid; place-items: center; grid-row: span 2; }
+#s-tabs .sbsite .hub .pm-pp i { width: 4px; height: 12px; border-left: 4px solid #0a0a0a; border-right: 4px solid #0a0a0a; width: 12px; box-sizing: border-box; }
+#s-tabs .sbsite .hub .pm-ch b { font: 600 13px/1 var(--font-mono, monospace); }
+#s-tabs .sbsite .hub .pm-tc { font: 500 12px/1 var(--font-mono, monospace); color: #c7c7cc; }
+#s-tabs .sbsite .hub .pm-sc { grid-column: 2 / span 2; height: 4px; border-radius: 3px; background: rgba(255, 255, 255, .22); overflow: hidden; }
+#s-tabs .sbsite .hub .pm-sc b { display: block; height: 100%; background: #fff; transform-origin: 0 50%; }
+#s-tabs .sbsite .hub .pm-specs { display: flex; gap: 6px; }
+#s-tabs .sbsite .hub .pm-specs span { display: inline-flex; gap: 7px; font: 500 11px/1 var(--font-mono, monospace); color: #f2f2f7; background: #18181b; border-radius: 999px; padding: 7px 11px; }
+#s-tabs .sbsite .hub .pm-specs em { font-style: normal; color: #8e8e93; }
+#s-tabs .sbsite .hub .pm-strip { display: grid; grid-template-columns: repeat(8, 84px); gap: 8px; }
+#s-tabs .sbsite .hub .pm-cell { position: relative; height: 47.25px; border-radius: 6px; overflow: hidden; background: #1b1b1f; opacity: .22; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .pm-cell.on { opacity: 1; }
+#s-tabs .sbsite .hub .pm-cf { position: absolute; left: 0; top: 0; }
+#s-tabs .sbsite .hub .pm-cell span { position: absolute; left: 4px; bottom: 4px; padding: 1px 5px; border-radius: 999px; background: rgba(10, 10, 12, .78); color: #fff; font: 600 8.5px/1.4 var(--font-mono, monospace); }

@@ -158,6 +158,16 @@ const more = [
     { desc: 'Variant of every-model-one-chat-sb-superbot-efa8df82 played on the real superbot desktop app: every frame is the app\'s own DOM and CSS, captured from its renderer and replayed. Each ask goes to the model or app built for it. Make me a muse meme: Switching to Gemini 3 Pro Image, the composer chip names it while it works, and the meme lands via your Gemini account. Now make it move: Switched to Sora 2, and a 6-second clip lands in the media card. Perfect, order me a burger to celebrate: Connected to DoorDash, then Opened DoorDash, Added a Double Smash Burger and fries, Checked out with your saved card, and the live order tracker. 26.7 s, 1920x1080, 30 fps.',
       download: 'assets/video/every-model-one-chat-sb-superbot-efa8df82-real-app-db5ea565.16x9.mp4', downloadLabel: '16:9' }],
   // <<< every-model-one-chat-sb-superbot-efa8df82-real-app-db5ea565
+  // >>> pocketsflow-untold-launch-film-superbot-3960b9f9
+  // Detailed 16:9 variant of pocketsflow-untold-every-model-superbot-673c104b (2026-10-06, 3960b9f9): same tweet hook,
+  // untold card, end card and 49.549 s. The hub is laid out at 16:9 with a canvas pane beside the thread; the launch
+  // film (film/) is built in HTML/CSS from pocketsflow.com's copy and replaces the third-party clip in the tweet and in
+  // every beat; switches fit each step of the film (Gemini 3.1 Pro brief and script, Nano Banana Pro style frames,
+  // Kling 3.0 shots, ElevenLabs VO and score, Claude Opus 5.5 Remotion cut, Superbot render and premiere).
+  ['pocketsflow-untold-launch-film-superbot-3960b9f9', 'pocketsflow-untold-launch-film-superbot-3960b9f9/', 'make a launch video for Pocketsflow: 16:9 canvas cut, a launch film built for the ad, Gemini 3.1 Pro brief, Nano Banana Pro frames, Kling 3.0 shots, ElevenLabs mix, Opus 5.5 Remotion edit', 'Ad spots',
+    { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b at the same 49.5 s, with far more in every answer. The tweet now plays a 15 s Pocketsflow launch film built for this ad from pocketsflow.com's own copy, creators, prices and numbers (the third-party clip and its credit are gone). In superbot the thread slides left and a 16:9 canvas opens beside it, and each model's output lands there full size: Gemini 3.1 Pro reads pocketsflow.com and writes the brief (brand board, proof, a six-shot script with VO); Nano Banana Pro resolves six style frames, one per shot; Kling 3.0 animates them, its motion plan drawn over shot 03 before the shot plays; ElevenLabs voices the script word by word, scores it at 112 BPM and pins the SFX to the film's own clicks; Claude Opus 5.5 writes LaunchFilm.tsx in Remotion and snaps the cuts to the beat; Superbot renders 450 frames and premieres the film full frame.",
+      download: 'assets/video/pocketsflow-untold-launch-film-superbot-3960b9f9.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< pocketsflow-untold-launch-film-superbot-3960b9f9
   // >>> cg1-1004-yt-model-switch-superbot-48dc1fe1
   // cg1-1004 remake of niche-youtube-model-switch-superbot-3828921d (2026-10-06, 48dc1fe1): same hook, four hand-offs, beat
   // times and 26.298 s (untouched original). Thread rebuilt to superbot-desktop's provider-switch UI and tile art; switches
@@ -1805,6 +1815,8 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // added (2026-10-06, 3960b9f9): the detailed 16:9 canvas cut of the Pocketsflow spot (own animation dir, 16:9 render)
+  'pocketsflow-untold-launch-film-superbot-3960b9f9',
   // added (2026-10-06, 48dc1fe1): cg1-1004 remake of the YouTube Studio spot (own animation dir, 16:9 render)
   'cg1-1004-yt-model-switch-superbot-48dc1fe1',
   'niche-youtube-model-switch-superbot-3828921d',

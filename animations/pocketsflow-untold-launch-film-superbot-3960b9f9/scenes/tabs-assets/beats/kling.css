@@ -1,0 +1,36 @@
+/* Beat 3 canvas page (kling.js): Kling 3.0's shot player and job strip. Every class the beat owns is prefixed .kl-. */
+#s-tabs .sbsite .hub .kl { display: flex; flex-direction: column; gap: 9px; }
+#s-tabs .sbsite .hub .kl-pl { position: relative; width: 728px; height: 409.5px; border-radius: 10px; overflow: hidden; background: #fff; flex: none; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .kl-film { position: absolute; left: 0; top: 0; }
+#s-tabs .sbsite .hub .kl-plan { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+#s-tabs .sbsite .hub .kl-plan path { fill: none; stroke: #ff5a1f; stroke-width: 4; stroke-dasharray: 1; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+#s-tabs .sbsite .hub .kl-plan marker path { fill: #ff5a1f; stroke: none; }
+#s-tabs .sbsite .hub .kl-tag { position: absolute; padding: 4px 8px; border-radius: 999px; background: #ff5a1f; color: #fff; font: 600 10.5px/1 var(--font-mono, monospace); white-space: nowrap; opacity: 0; box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .4); }
+#s-tabs .sbsite .hub .kl-mode { position: absolute; left: 10px; top: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px 5px 8px; border-radius: 999px; background: rgba(10, 10, 12, .85); color: #fff; font-size: 11px; }
+#s-tabs .sbsite .hub .kl-mode i { width: 8px; height: 8px; border-radius: 50%; background: #ff5a1f; }
+#s-tabs .sbsite .hub .kl-mode.play i { background: #34c759; box-shadow: 0 0 0 3px rgba(52, 199, 89, .25); }
+#s-tabs .sbsite .hub .kl-bar { position: absolute; left: 10px; right: 10px; bottom: 7px; display: flex; align-items: center; gap: 10px; padding: 5px 12px; border-radius: 999px; background: rgba(10, 10, 12, .85); color: #fff; font: 600 10.5px/1 var(--font-mono, monospace); }
+#s-tabs .sbsite .hub .kl-dur { color: #8e8e93; }
+#s-tabs .sbsite .hub .kl-sc { position: relative; flex: 1; display: flex; gap: 3px; height: 5px; }
+#s-tabs .sbsite .hub .kl-sc i { height: 100%; border-radius: 3px; background: #3a3a40; }
+#s-tabs .sbsite .hub .kl-sc i:nth-child(3), #s-tabs .sbsite .hub .kl-sc i:nth-child(4) { background: #6b6b75; }
+#s-tabs .sbsite .hub .kl-ph { position: absolute; top: -4px; width: 3px; height: 13px; margin-left: -1.5px; border-radius: 2px; background: #fff; }
+
+#s-tabs .sbsite .hub .kl-meta { display: flex; gap: 6px; align-items: center; }
+#s-tabs .sbsite .hub .kl-meta span { display: inline-flex; align-items: center; gap: 6px; font: 500 10.5px/1 var(--font-mono, monospace); color: #a1a1a6; background: #18181b; border-radius: 999px; padding: 5px 9px; white-space: nowrap; }
+#s-tabs .sbsite .hub .kl-meta span:first-child { color: #f2f2f7; padding-left: 4px; font-family: var(--ui); font-weight: 600; font-size: 11.5px; }
+#s-tabs .sbsite .hub .kl-meta .qc-tile { width: 18px; height: 18px; border-radius: 5px; }
+#s-tabs .sbsite .hub .kl-meta .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .kl-meta .kl-src { margin-left: auto; color: #8fb0ff; background: #17213a; }
+
+#s-tabs .sbsite .hub .kl-strip { display: grid; grid-template-columns: repeat(6, 113px); gap: 10px; }
+#s-tabs .sbsite .hub .kl-jf { position: relative; width: 113px; height: 63.6px; border-radius: 8px; overflow: hidden; background: #1b1b1f; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .kl-jfilm { position: absolute; left: 0; top: 0; }
+#s-tabs .sbsite .hub .kl-jbar { position: absolute; left: 6px; right: 6px; bottom: 5px; height: 4px; border-radius: 3px; background: rgba(10, 10, 12, .55); overflow: hidden; }
+#s-tabs .sbsite .hub .kl-jbar b { display: block; height: 100%; background: #5b8dff; transform-origin: 0 50%; transform: scaleX(0); }
+#s-tabs .sbsite .hub .kl-j.done .kl-jbar { opacity: 0; }
+#s-tabs .sbsite .hub .kl-jd { position: absolute; right: 5px; top: 5px; padding: 2px 5px; border-radius: 999px; background: rgba(10, 10, 12, .75); color: #fff; font: 600 9px/1.2 var(--font-mono, monospace); }
+#s-tabs .sbsite .hub .kl-j.live .kl-jf { box-shadow: 0 0 0 2px #5b8dff; }
+#s-tabs .sbsite .hub .kl-jl { display: flex; gap: 5px; margin-top: 6px; font-size: 11px; font-weight: 600; color: #c7c7cc; }
+#s-tabs .sbsite .hub .kl-jl b { font: 600 10px/1.4 var(--font-mono, monospace); color: #6e6e73; }
+#s-tabs .sbsite .hub .kl-tag-r { transform: translateX(-100%); }

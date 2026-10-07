@@ -52,6 +52,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "pocketsflow-untold-launch-film-superbot-3960b9f9",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a launch video for Pocketsflow: 16:9 canvas cut, a launch film built for the ad, Gemini 3.1 Pro brief, Nano Banana Pro frames, Kling 3.0 shots, ElevenLabs mix, Opus 5.5 Remotion edit",
+    "src": "animations/pocketsflow-untold-launch-film-superbot-3960b9f9/",
+    "thumb": "assets/shots/pocketsflow-untold-launch-film-superbot-3960b9f9.png",
+    "desc": "Variant of pocketsflow-untold-every-model-superbot-673c104b at the same 49.5 s, with far more in every answer. The tweet now plays a 15 s Pocketsflow launch film built for this ad from pocketsflow.com's own copy, creators, prices and numbers (the third-party clip and its credit are gone). In superbot the thread slides left and a 16:9 canvas opens beside it, and each model's output lands there full size: Gemini 3.1 Pro reads pocketsflow.com and writes the brief (brand board, proof, a six-shot script with VO); Nano Banana Pro resolves six style frames, one per shot; Kling 3.0 animates them, its motion plan drawn over shot 03 before the shot plays; ElevenLabs voices the script word by word, scores it at 112 BPM and pins the SFX to the film's own clicks; Claude Opus 5.5 writes LaunchFilm.tsx in Remotion and snaps the cuts to the beat; Superbot renders 450 frames and premieres the film full frame.",
+    "download": "assets/video/pocketsflow-untold-launch-film-superbot-3960b9f9.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "cg1-1004-yt-model-switch-superbot-48dc1fe1",
     "type": "animation",
     "group": "Ad spots",

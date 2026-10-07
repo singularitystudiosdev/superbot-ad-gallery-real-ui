@@ -1,0 +1,10 @@
+img CREDITS (pocketsflow-untold-launch-film-superbot-3960b9f9)
+
+This variant ships no third-party footage or photos. The source spot (pocketsflow-untold-every-model-superbot-673c104b)
+played a third-party launch film in its tweet and cut every model beat from it; all of that was removed here.
+
+The launch film the ad shows is film/ (markup.js, film.js, film.css), built in HTML/CSS for this ad: the six shots,
+the product covers, the phone, the checkout, the dashboard and the lockup. Copy, demo creators, products, prices and
+numbers are the ones pocketsflow.com publishes (fetched 2026-10-06). Fonts: film/fonts/satoshi-var.woff2 (Satoshi,
+Indian Type Foundry, ITF Free Font License, served by pocketsflow.com/fonts/), film/fonts/geist-mono.woff2 (Geist
+Mono, Vercel, SIL OFL 1.1, Google Fonts). The tweet author ("Kai") is fictional and has a monogram avatar drawn in CSS.

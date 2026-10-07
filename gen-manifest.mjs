@@ -158,6 +158,16 @@ const more = [
     { desc: 'Variant of every-model-one-chat-sb-superbot-efa8df82 played on the real superbot desktop app: every frame is the app\'s own DOM and CSS, captured from its renderer and replayed. Each ask goes to the model or app built for it. Make me a muse meme: Switching to Gemini 3 Pro Image, the composer chip names it while it works, and the meme lands via your Gemini account. Now make it move: Switched to Sora 2, and a 6-second clip lands in the media card. Perfect, order me a burger to celebrate: Connected to DoorDash, then Opened DoorDash, Added a Double Smash Burger and fries, Checked out with your saved card, and the live order tracker. 26.7 s, 1920x1080, 30 fps.',
       download: 'assets/video/every-model-one-chat-sb-superbot-efa8df82-real-app-db5ea565.16x9.mp4', downloadLabel: '16:9' }],
   // <<< every-model-one-chat-sb-superbot-efa8df82-real-app-db5ea565
+  // >>> cg1-1004-yt-model-switch-superbot-48dc1fe1
+  // cg1-1004 remake of niche-youtube-model-switch-superbot-3828921d (2026-10-06, 48dc1fe1): same hook, four hand-offs, beat
+  // times and 26.298 s (untouched original). Thread rebuilt to superbot-desktop's provider-switch UI and tile art; switches
+  // fit each task (Gemini 3.1 Pro video + comments, GPT-6 Astra frame crop/zoom, Claude Opus 5.5 writing, YouTube service);
+  // Google consent (2024 granular layout) and YouTube Studio Community (Nov 2025) rebuilt from references; assets remade with
+  // Nano Banana Pro (Gemini 3 Pro Image).
+  ["cg1-1004-yt-model-switch-superbot-48dc1fe1", "cg1-1004-yt-model-switch-superbot-48dc1fe1/", "Answer the top comments on my latest video and pin the best one · cg1-1004: real superbot thread, Gemini 3.1 Pro ranks, GPT-6 Astra zooms the 4:38 frame, Opus 5.5 writes, YouTube Studio pins", 'Ad spots',
+    { desc: "Same hook, four hand-offs, pacing and 26.3 s as niche-youtube-model-switch-superbot-3828921d, rebuilt on the real superbot thread: pills that read Switching to, then Switched to (Connecting to, then Connected to for YouTube), each with its who header, step rows and details nested on the rail, older switches dimming, and superbot's own tile art on every pill. Each part of the ask goes to its specialist: Gemini 3.1 Pro watches the whole 14:32 video and ranks 1,284 comments; GPT-6 Astra zooms into the 4:38 frame and names the low-profile boom arm with the mic mounted underneath; Claude Opus 5.5 writes the five replies in the creator's voice and picks Priya's question to pin; YouTube connects through Google's current consent page, then the same browser window docks in the thread and opens to YouTube Studio's Community page, where the replies post, the hearts fill, Priya's comment rises to the top as pinned and Studio's snackbar says Comment pinned. The composer is the app's own (project and machine row, voice and stop controls, context meter), the chip names each routed model and reverts to superbot for the YouTube service. Eased camera (in-out both ways, zoom tweened in log space), one browser window tweened through three rects. Audited by an independent judge and revised before render. Thumbnail, the 4:38 frame and avatars made with Gemini 3 Pro Image. 26.3 s, 1920x1080, 60 fps.",
+      download: "assets/video/cg1-1004-yt-model-switch-superbot-48dc1fe1.16x9.mp4", downloadLabel: '16:9' }],
+  // <<< cg1-1004-yt-model-switch-superbot-48dc1fe1
   // >>> cg1-1004-every-model-one-chat-sb-superbot-6d2ac617
   // cg1-1004 remake of the route=superbot spot (2026-10-06, 6d2ac617): same hook, three asks, beat times and 21.241 s as
   // every-model-one-chat-superbot-efa8df82 (untouched). Every app frame is superbot-desktop's own DOM and CSS (main @bcb624c7f,
@@ -1795,6 +1805,8 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // added (2026-10-06, 48dc1fe1): cg1-1004 remake of the YouTube Studio spot (own animation dir, 16:9 render)
+  'cg1-1004-yt-model-switch-superbot-48dc1fe1',
   'niche-youtube-model-switch-superbot-3828921d',
   // added (2026-10-06, ba8f0993): the detailed cut of the YouTube Studio spot (own animation dir, 16:9 render)
   'niche-youtube-model-switch-superbot-ba8f0993',

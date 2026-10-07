@@ -1,0 +1,23 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+Every image in this folder was generated for this ad on 2026-10-06 with Google's Gemini 3 Pro Image
+(model id google/gemini-3-pro-image, called through OpenRouter's chat completions API, 2K output). No stock or
+third-party photo is used, so no licence or attribution is owed. Prompts are kept in the build scratch
+(work/cg1yt-48dc1fe1/gen/). Downscaled with ffmpeg (lanczos), JPEG q2-q3.
+
+avatar of the creator, "Sam Rivera"
+  av-sam.jpg       256 x 256   headshot, home studio behind. Also the reference image for thumb.jpg and frame-438.jpg,
+                               so the channel avatar, the thumbnail host and the man in the 4:38 frame are one person.
+
+the video ("I tested 12 budget mics under $100")
+  thumb.jpg        1280 x 720  the video's thumbnail: Sam with a dynamic mic, twelve budget mics in a row, the baked
+                               words "UNDER $100". Used by Gemini's watch card and Studio's video column.
+  frame-438.jpg    1920 x 1080 the frame at 4:38 Lena asks about: a black dynamic mic hanging upside down under the
+                               tip of a slim black boom arm, Sam talking behind it. GPT-6 Astra's crop boxes are
+                               measured on this file (see scenes/tabs-assets/beats/frame.js).
+
+commenters (Studio rows and Gemini's ranked list)
+  av-priya.jpg     256 x 256   Priya Nair
+  av-lena.jpg      256 x 256   Lena Fischer
+  av-tom.jpg       256 x 256   Tom Hale
+  Marco Ruiz and Dee Okafor keep YouTube's default letter avatars, as many real accounts do.

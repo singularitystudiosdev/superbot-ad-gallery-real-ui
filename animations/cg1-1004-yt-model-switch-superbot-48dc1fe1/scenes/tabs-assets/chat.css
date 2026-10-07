@@ -1,0 +1,93 @@
+/* The hub's four-switch thread (chat.js + thread-ui.js + beats/{watch,frame,replies,studio}.js), laid out as the
+   superbot desktop app lays out a turn (superbot-desktop provider-switch.{tsx,css}, read 2026-10-06): the date
+   divider, the ask as a right-hand bubble, one assistant turn headed "Replying · Ns", and per switch a pill with its
+   nest (who header, step rows, details) inset on a hairline rail. Sizes are the app's own design px (text-body 13,
+   caption 11, pill 32 tall, tile 20, nest 35, rail 17); the scene scales the hub, so nothing here is screen px.
+   Every moving value is written from t, so nothing here transitions. Each beat's card styles live in
+   scenes/tabs-assets/beats/<name>.css. */
+/* Two light themes, set on the scene root so both the hub's beats and the full-frame layer read them.
+   --gm-*: Google's account surfaces (Material 3) for the consent window (studio.css).
+   --yt-*: YouTube Studio's light palette (studio.css), YouTube's own --yt-sys-color-baseline--* light values:
+   base-background #fff, text-primary #0f0f0f, text-secondary #606060, outline rgba(0,0,0,.1), additive-background
+   rgba(0,0,0,.05) (Studio's #f2f2f2 chips and selected nav row), call-to-action #065fd4, static-brand-red #f03. */
+#s-tabs {
+  --gm-page: #f0f4f9; --gm-surface: #ffffff; --gm-text: #1f1f1f; --gm-text2: #444746; --gm-line: #c4c7c5;
+  --gm-hair: #e1e3e1; --gm-accent: #0b57d0; --gm-sel: #d3e3fd; --gm-outline: #747775;
+  --yt-bg: #ffffff; --yt-text: #0f0f0f; --yt-text2: #606060; --yt-outline: rgba(0,0,0,.1); --yt-outline-opaque: #e5e5e5;
+  --yt-additive: rgba(0,0,0,.05); --yt-chip: #f2f2f2; --yt-blue: #065fd4; --yt-red: #f03;
+  --gm-sans: "GSF", "Google Sans", "Roboto GM", Roboto, Arial, sans-serif;
+  --gm-body: "Roboto GM", Roboto, Arial, sans-serif;
+  /* the superbot app's own type and dark surfaces (the desktop renderer's fallback theme values) */
+  --sb-font: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+  --sb-bg: #0d0d0d; --sb-raised: #1a1a1c; --sb-line: #26262a; --sb-fg: #e6e8ee; --sb-muted: #aeb1bc; --sb-faint: #6f7280;
+  --sb-ok: #23a559;
+}
+#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 14px; will-change: transform; font-family: var(--sb-font); }
+#s-tabs .sbsite.ask .hub { --hub-reply-inset: 0px; }
+#s-tabs .sbsite.ask .hub .main > .feed { padding-left: max(24px, calc((100% - var(--hub-column)) / 2)); padding-right: max(24px, calc((100% - var(--hub-column)) / 2)); }
+
+/* ---- the thread ---- */
+#s-tabs .sbsite .hub .sb-date { display: flex; align-items: center; gap: 12px; font: 500 11px/1 var(--sb-font); color: var(--sb-faint); opacity: 0; }
+#s-tabs .sbsite .hub .sb-date::before, #s-tabs .sbsite .hub .sb-date::after { content: ''; flex: 1; height: 1px; background: var(--sb-line); }
+#s-tabs .sbsite .hub .sb-ub { justify-self: end; max-width: 78%; padding: 8px 14px; border-radius: 18px; background: #1f1f22; color: #f2f2f7; font: 400 13px/18px var(--sb-font); opacity: 0; }
+#s-tabs .sbsite .hub .feed-in > .sb-ub { width: auto; max-width: 78%; }
+#s-tabs .sbsite .hub .sb-turn { display: grid; justify-items: start; gap: 12px; min-width: 0; }
+#s-tabs .sbsite .hub .sb-head { display: flex; align-items: center; gap: 8px; height: 20px; font: 400 13px/1 var(--sb-font); color: #8e919c; opacity: 0; }
+#s-tabs .sbsite .hub .sb-head img { width: 18px; height: 18px; display: block; }
+#s-tabs .sbsite .hub .sb-head b { font-weight: 600; color: #c9cbd3; font-variant-numeric: tabular-nums; }
+
+/* one switch: the pill, then its nest on the rail */
+#s-tabs .sbsite .hub .sb-sw { display: grid; justify-items: start; gap: 8px; width: 100%; min-width: 0; opacity: 0; }
+#s-tabs .sbsite .hub .sb-pill { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px 0 6px; border-radius: 999px; border: 1px solid var(--sb-line); background: var(--sb-raised); font: 600 13px/1 var(--sb-font); color: var(--sb-fg); white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-tile { position: relative; flex: none; width: 20px; height: 20px; border-radius: 7px; overflow: hidden; background: #fff; }
+#s-tabs .sbsite .hub .sb-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+/* the label sweep: the words at 55% ink with a full-ink band crossing them while the switch runs */
+#s-tabs .sbsite .hub .sb-ink { display: inline-block; }
+#s-tabs .sbsite .hub .sb-pill.sb-live .sb-ink { color: transparent; -webkit-background-clip: text; background-clip: text; background-image: linear-gradient(90deg, rgba(230,232,238,.55) 0%, rgba(230,232,238,.55) 38%, #ffffff 50%, rgba(230,232,238,.55) 62%, rgba(230,232,238,.55) 100%); background-size: 250% 100%; }
+#s-tabs .sbsite .hub .sb-st { position: relative; flex: none; width: 16px; height: 16px; }
+#s-tabs .sbsite .hub .sb-st svg, #s-tabs .sbsite .hub .sb-ss svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .sb-spin { stroke: #8e919c; stroke-width: 2.4; }
+#s-tabs .sbsite .hub .sb-check { stroke: var(--sb-ok); stroke-width: 3; opacity: 0; }
+
+#s-tabs .sbsite .hub .sb-nest { position: relative; display: grid; justify-items: start; gap: 6px; width: calc(100% - 35px); min-width: 0; margin-left: 35px; padding-bottom: 2px; }
+#s-tabs .sbsite .hub .sb-nest::before { content: ''; position: absolute; left: -18px; top: -6px; bottom: 0; width: 1px; background: var(--sb-line); transform-origin: 50% 0; transform: scaleY(var(--rail, 0)); }
+#s-tabs .sbsite .hub .sb-who { display: flex; align-items: center; gap: 8px; height: 20px; white-space: nowrap; opacity: 0; }
+#s-tabs .sbsite .hub .sb-who b { font: 600 13px/1 var(--sb-font); color: var(--sb-fg); }
+#s-tabs .sbsite .hub .sb-who small { font: 500 11px/1 var(--sb-font); color: #8e919c; }
+#s-tabs .sbsite .hub .sb-chev { width: 12px; height: 12px; fill: none; stroke: #8e919c; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transform: rotate(180deg); }
+#s-tabs .sbsite .hub .sb-steps { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+#s-tabs .sbsite .hub .sb-step + .sb-step { margin-top: 4px; }
+#s-tabs .sbsite .hub .sb-step { display: flex; align-items: center; gap: 8px; height: 20px; white-space: nowrap; opacity: 0; }
+#s-tabs .sbsite .hub .sb-ss { position: relative; flex: none; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .sb-sl { font: 400 13px/1 var(--sb-font); color: var(--sb-muted); }
+#s-tabs .sbsite .hub .sb-step.sb-run .sb-sl { color: var(--sb-fg); }
+#s-tabs .sbsite .hub .sb-sd { font: 400 11px/1 var(--sb-font); color: var(--sb-faint); }
+#s-tabs .sbsite .hub .sb-det { width: 100%; min-width: 0; margin-top: 4px; }
+
+/* ---- composer: the ask is typed in, the send button lights while there is text ---- */
+#s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
+#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+#s-tabs .sbsite .hub .rc-ph .qc-hint { color: #6f7280; }
+#s-tabs .sbsite .hub .rc-send.qc-on { background: linear-gradient(135deg, #3b9dff, #9b5cff); color: #fff !important; box-shadow: none; }
+#s-tabs .sbsite .hub .rc-send .qc-stop { display: none; width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.4; }
+#s-tabs .sbsite .hub .rc-send.qc-run svg:not(.qc-stop) { display: none; }
+#s-tabs .sbsite .hub .rc-send.qc-run .qc-stop { display: block; }
+/* the model chip: superbot's cat at rest, the routed model's real tile art and name while it answers */
+#s-tabs .sbsite .hub .rc-plat { font-family: var(--sb-font); }
+#s-tabs .sbsite .hub .qc-pi { position: relative; display: inline-grid; place-items: center; width: 14px; height: 14px; border-radius: 4px; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-pi img { width: 14px; height: 14px; object-fit: cover; display: block; }
+#s-tabs .sbsite .hub .qc-pi.qc-cat { overflow: visible; border-radius: 0; }
+#s-tabs .sbsite .hub .qc-pi.qc-cat img { object-fit: contain; }
+/* the row above the composer the app shows on every chat */
+#s-tabs .sbsite .hub .sb-ctx { display: flex; gap: 14px; margin: 0 0 8px 6px; font: 500 11px/1 var(--sb-font); color: #8e919c; }
+#s-tabs .sbsite .hub .sb-ctx span { display: inline-flex; align-items: center; gap: 4px; }
+#s-tabs .sbsite .hub .sb-ctx svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .rc-voice { width: 24px; height: 24px; border-radius: 50%; background: #1f1f21; box-shadow: inset 0 0 0 1px #2e2e31; display: inline-grid !important; place-items: center; }
+#s-tabs .sbsite .hub .rc-voice svg { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .sb-meter { display: flex; justify-content: space-between; align-items: center; margin: 8px 6px 0; font: 400 10.5px/1 var(--sb-font); color: #8e919c; }
+#s-tabs .sbsite .hub .sb-meter > span:first-child { display: inline-flex; align-items: center; gap: 8px; color: #c9cbd3; }
+#s-tabs .sbsite .hub .sb-meter b { font: 400 10.5px/1 ui-monospace, "SF Mono", Menlo, monospace; color: #c9cbd3; }
+#s-tabs .sbsite .hub .sb-meter i { display: block; width: 64px; height: 3px; border-radius: 2px; background: #2b2c31; overflow: hidden; }
+#s-tabs .sbsite .hub .sb-meter u { display: block; width: 6%; height: 100%; background: #e6e8ee; }
+
+#s-tabs .sbsite .hub .feed-in > :not(.sb-date):not(.sb-ub):not(.sb-turn) { display: none; }

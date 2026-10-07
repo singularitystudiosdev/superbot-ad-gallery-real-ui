@@ -52,6 +52,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "cg1-1004-yt-model-switch-superbot-48dc1fe1",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "Answer the top comments on my latest video and pin the best one · cg1-1004: real superbot thread, Gemini 3.1 Pro ranks, GPT-6 Astra zooms the 4:38 frame, Opus 5.5 writes, YouTube Studio pins",
+    "src": "animations/cg1-1004-yt-model-switch-superbot-48dc1fe1/",
+    "thumb": "assets/shots/cg1-1004-yt-model-switch-superbot-48dc1fe1.png",
+    "desc": "Same hook, four hand-offs, pacing and 26.3 s as niche-youtube-model-switch-superbot-3828921d, rebuilt on the real superbot thread: pills that read Switching to, then Switched to (Connecting to, then Connected to for YouTube), each with its who header, step rows and details nested on the rail, older switches dimming, and superbot's own tile art on every pill. Each part of the ask goes to its specialist: Gemini 3.1 Pro watches the whole 14:32 video and ranks 1,284 comments; GPT-6 Astra zooms into the 4:38 frame and names the low-profile boom arm with the mic mounted underneath; Claude Opus 5.5 writes the five replies in the creator's voice and picks Priya's question to pin; YouTube connects through Google's current consent page, then the same browser window docks in the thread and opens to YouTube Studio's Community page, where the replies post, the hearts fill, Priya's comment rises to the top as pinned and Studio's snackbar says Comment pinned. The composer is the app's own (project and machine row, voice and stop controls, context meter), the chip names each routed model and reverts to superbot for the YouTube service. Eased camera (in-out both ways, zoom tweened in log space), one browser window tweened through three rects. Audited by an independent judge and revised before render. Thumbnail, the 4:38 frame and avatars made with Gemini 3 Pro Image. 26.3 s, 1920x1080, 60 fps.",
+    "download": "assets/video/cg1-1004-yt-model-switch-superbot-48dc1fe1.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "cg1-1004-every-model-one-chat-sb-superbot-6d2ac617",
     "type": "animation",
     "group": "Ad spots",

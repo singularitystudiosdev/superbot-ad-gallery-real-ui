@@ -77,11 +77,13 @@
 #s-tabs .st-top { position: relative; flex: none; display: flex; align-items: center; height: 64px; padding: 0 24px 0 11px; box-sizing: border-box; }
 #s-tabs .st-logo { flex: none; display: flex; align-items: center; margin-left: 18px; }
 #s-tabs .st-logo img { display: block; height: 24px; width: auto; }
-#s-tabs .st-search { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); display: flex; align-items: center; gap: 14px;
-  box-sizing: border-box; width: min(600px, 40%); height: 40px; padding: 0 16px; border-radius: 20px; background: var(--st-fill);
+/* the search sits centred between the logo and the tools and shrinks before it ever reaches them (narrow ratios) */
+#s-tabs .st-search { display: flex; flex: 0 1 600px; min-width: 150px; margin: 0 auto; align-items: center; gap: 14px;
+  box-sizing: border-box; height: 40px; padding: 0 16px; border-radius: 20px; background: var(--st-fill);
   font: 400 16px/1 "Roboto GM", Roboto, Arial, sans-serif; color: var(--st-text2); white-space: nowrap; overflow: hidden; }
 #s-tabs .st-search .si { color: var(--st-text); }
-#s-tabs .st-tools { display: flex; align-items: center; margin-left: auto; }
+#s-tabs .st-tools { display: flex; align-items: center; margin-left: 16px; }
+#s-tabs .st-logo { margin-right: 24px; }
 #s-tabs .st-bell i { position: absolute; top: 7px; right: 8px; width: 9px; height: 9px; border-radius: 50%; background: #ff0033; }
 #s-tabs .st-pill { display: inline-flex; align-items: center; gap: 8px; height: 36px; margin-left: 12px; padding: 0 16px 0 11px; box-sizing: border-box; border-radius: 18px;
   box-shadow: inset 0 0 0 1px var(--st-line); font: 500 15px/1 "Roboto GM", Roboto, Arial, sans-serif; color: var(--st-text); white-space: nowrap; }
@@ -184,9 +186,14 @@
 
 /* portrait (4:5): no video menu, no header tools, the search shortened */
 #s-tabs .st-app.st-narrow .st-nav, #s-tabs .st-app.st-narrow .st-tools, #s-tabs .st-app.st-narrow .st-fph { display: none; }
-#s-tabs .st-app.st-narrow .st-search { width: 46%; }
+/* mid width (4:3, 1:1): Ask Studio folds to its spark, the Inspiration button goes, as Studio does when narrow */
+#s-tabs .st-app.st-mid .st-ask { width: 36px; padding: 0; justify-content: center; }
+#s-tabs .st-app.st-mid .st-ask span, #s-tabs .st-app.st-mid .st-tools > .st-btn:first-child { display: none; }
 #s-tabs .st-app.st-narrow .st-h1 { padding-left: 16px; }
 #s-tabs .st-app.st-narrow .st-me { margin-left: auto; }
 /* the like count, beside the like button (YouTube writes it there once a comment has likes) */
 #s-tabs .st-ib.st-lk { margin-right: 0; }
 #s-tabs .st-n { margin: 0 20px 0 2px; font: 400 13px/1 "Roboto GM", Roboto, Arial, sans-serif; color: var(--st-text2); }
+/* wide (16:9): the search pill is centred on the page, as in Studio's own header */
+#s-tabs .st-app:not(.st-mid):not(.st-narrow) .st-search { position: absolute; left: 50%; top: 12px; width: 600px; transform: translateX(-50%); }
+#s-tabs .st-app:not(.st-mid):not(.st-narrow) .st-tools { margin-left: auto; }

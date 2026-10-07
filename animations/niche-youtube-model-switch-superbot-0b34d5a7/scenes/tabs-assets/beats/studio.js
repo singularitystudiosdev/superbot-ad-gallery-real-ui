@@ -238,6 +238,7 @@ export default {
       AW = Math.round(W / s); AH = Math.round(H / s);
       app.style.width = `${AW}px`; app.style.height = `${AH}px`;
       app.classList.toggle('st-narrow', tall);
+      app.classList.toggle('st-mid', !tall && AW < 1400); // 4:3 and 1:1: the header tools fold
       shot.style.aspectRatio = `${W} / ${H}`;
       card.classList.toggle('gk-tall', tall);
       consent.classList.toggle('gc-tall', tall);

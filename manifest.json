@@ -438,5 +438,47 @@
     "downloads": {
       "16x9": "animations/refusal-relay-split-16x9-8d1a06d2/final.mp4"
     }
+  },
+  {
+    "id": "stop-api-pricing-superbot-e65959ff-a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "STOP PAYING API PRICING · a plain API key turns into the superbot key, SUPERBOT REROUTES TO SUBSCRIPTION, superbot.gg (rise, 12.2 s, 16:9)",
+    "src": "animations/stop-api-pricing-superbot-e65959ff/?v=a",
+    "thumb": "assets/shots/stop-api-pricing-superbot-e65959ff-a.png",
+    "desc": "STOP PAYING API PRICING rises in word by word over a plain grey API key (masked). The key blurs away and the superbot key resolves in its place, a purple, pink and blue gradient with a white shine and a soft glow, as the superbot mascot pops in to its right. The headline lifts away and SUPERBOT REROUTES TO SUBSCRIPTION rises in, SUBSCRIPTION in the key's gradient. Ends on superbot.gg with the mascot to its right, the end card of every-model-one-chat-sb-superbot-efa8df82. 12.2 s, 1920x1080, 60 fps.",
+    "download": "assets/video/stop-api-pricing-superbot-e65959ff-a.16x9.mp4",
+    "downloadLabel": "16:9",
+    "downloads": {
+      "16x9": "assets/video/stop-api-pricing-superbot-e65959ff-a.16x9.mp4"
+    }
+  },
+  {
+    "id": "stop-api-pricing-superbot-e65959ff-b",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "STOP PAYING API PRICING · a typed API key decodes into the superbot key, SUPERBOT REROUTES TO SUBSCRIPTION rolls in, superbot.gg (decode, 11 s, 16:9)",
+    "src": "animations/stop-api-pricing-superbot-e65959ff/?v=b",
+    "thumb": "assets/shots/stop-api-pricing-superbot-e65959ff-b.png",
+    "desc": "STOP PAYING API PRICING slams in and a plain API key is typed into a grey field under it (masked). A decode wave runs through the key glyph by glyph and leaves the superbot key behind, a purple, pink and blue gradient with a white shine, while the superbot mascot slides in to its right. The headline rolls up and SUPERBOT REROUTES TO SUBSCRIPTION rolls in. The mascot hops onto the end card and superbot.gg rolls up beside it. 11 s, 1920x1080, 60 fps.",
+    "download": "assets/video/stop-api-pricing-superbot-e65959ff-b.16x9.mp4",
+    "downloadLabel": "16:9",
+    "downloads": {
+      "16x9": "assets/video/stop-api-pricing-superbot-e65959ff-b.16x9.mp4"
+    }
+  },
+  {
+    "id": "stop-api-pricing-superbot-e65959ff-c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "STOP PAYING API PRICING · a light sweep turns the API key into the superbot key, then the headline, then the frame into superbot.gg (sweep, 9.2 s, 16:9)",
+    "src": "animations/stop-api-pricing-superbot-e65959ff/?v=c",
+    "thumb": "assets/shots/stop-api-pricing-superbot-e65959ff-c.png",
+    "desc": "A two-line STOP PAYING API PRICING pops in word by word, set left over a plain API key (masked), under a slow camera push. A light sweep crosses the key and leaves the purple, pink and blue superbot key behind it, and the superbot mascot pops in to its right. The same sweep crosses the headline and leaves SUPERBOT REROUTES TO SUBSCRIPTION, then one last sweep across the frame wipes to superbot.gg with the mascot to its right. 9.2 s, 1920x1080, 60 fps.",
+    "download": "assets/video/stop-api-pricing-superbot-e65959ff-c.16x9.mp4",
+    "downloadLabel": "16:9",
+    "downloads": {
+      "16x9": "assets/video/stop-api-pricing-superbot-e65959ff-c.16x9.mp4"
+    }
   }
 ]

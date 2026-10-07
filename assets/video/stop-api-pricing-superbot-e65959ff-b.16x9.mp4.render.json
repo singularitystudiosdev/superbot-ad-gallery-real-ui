@@ -1,0 +1,18 @@
+{
+  "contract": "frame-exact-v6:60fps+freeze+css-birth+per-clip-grid+midframe-seek+single-seek-authority",
+  "fps": 60,
+  "id": "stop-api-pricing-superbot-e65959ff-b",
+  "folder": "stop-api-pricing-superbot-e65959ff",
+  "v": "b",
+  "cut": null,
+  "query": "v=b",
+  "at": "2026-10-07T06:04:01.161Z",
+  "ar": "16x9",
+  "width": 1920,
+  "height": 1080,
+  "frames": 660,
+  "cycle": 11,
+  "duration": 11,
+  "encoder": "libx264 crf18 yuv420p +faststart",
+  "bytes": 618902
+}

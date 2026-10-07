@@ -1,0 +1,22 @@
+stop-api-pricing-superbot-e65959ff: provenance (internal; nothing here is shown on screen)
+
+Style source
+  ../every-model-one-chat-superbot-efa8df82 (gallery id every-model-one-chat-sb-superbot-efa8df82):
+  stage, type (SF Pro Rounded 800 caps), end card lock-up and its motion (style.css #s-end, timeline.js renderEnd),
+  card word motion (rise 18 px out of an 8 px blur), the storm gradient tile and white shine band (cards.css .gt).
+
+Mascot
+  ../../assets/sb-mark-live.js and .css: the superbot.gg mark, extracted verbatim from https://beta.superbot.gg/
+  (snapshot 2026-09-23); see the header of those files. Frozen off the wall clock as in the reference shell.js makeMark.
+
+Icons
+  Lucide "key-round" and "copy" (https://lucide.dev, ISC licence). Vector UI furniture, no attribution owed on screen.
+
+Copy
+  The brief's, verbatim: STOP PAYING API PRICING / SUPERBOT REROUTES TO SUBSCRIPTION / superbot.gg.
+  The keys are masked placeholders (sk-proj-...Qx7f, sbc_...7f3a), never a real key.
+
+Market
+  Answers sell-to-reddit llm_ai usage-limits-pricing (rank 1, 5,816 authors over 30 days, data as of 2026-10-05;
+  top leaves: ai usage limits, high token consumption, expensive subscription; wants: alternative ai subscription).
+  No price or stat claim is made in the ad.

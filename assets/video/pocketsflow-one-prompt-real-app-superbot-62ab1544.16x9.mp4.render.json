@@ -1,0 +1,16 @@
+{
+  "contract": "frame-exact:60fps+seek+settle (window.__AD.seek, __AD.settle), headless Chromium 1920x1080",
+  "fps": 60,
+  "id": "pocketsflow-one-prompt-real-app-superbot-62ab1544",
+  "folder": "pocketsflow-one-prompt-real-app-superbot-62ab1544",
+  "at": "2026-10-07T06:14:18Z",
+  "ar": "16x9",
+  "width": 1920,
+  "height": 1080,
+  "frames": 2331,
+  "cycle": 38.85,
+  "duration": 38.85,
+  "encoder": "libx264 crf17 yuv420p +faststart",
+  "audio": "Lyria 3 Pro score (aac 192k, loudnorm -14 LUFS): track 24.0-29.95 s under the X post, track 0-32.1 s from 6.75 s so the drop lands as the film fills the frame",
+  "bytes": 28181864
+}

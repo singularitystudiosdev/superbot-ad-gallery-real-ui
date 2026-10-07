@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: the Pocketsflow launch film, one prompt</title>
+<link rel="stylesheet" href="../../assets/sb-mark-live.css">
+<link rel="stylesheet" href="ad.css?v=1">
+<link rel="modulepreload" href="lib.js">
+<link rel="modulepreload" href="x.js">
+</head>
+<body>
+<div id="stage" role="img" aria-label="An X post from Kai: I made this in 1 prompt, with the Pocketsflow launch film playing. They won't tell you how. In the superbot desktop app, one prompt asks for a 15 second launch film for pocketsflow.com. Superbot switches to Gemini 3 Pro Image for the mascot, Kling 3.0 to animate it, Lyria 3 Pro for the score, then Claude Opus 5.5 reads pocketsflow.com, writes the Remotion cut and renders the film, which lifts out of the chat and plays. One prompt. Every model. superbot.gg">
+  <section class="scene" id="s-x" aria-hidden="true"></section>
+  <section class="scene" id="s-untold" aria-hidden="true">
+    <h2 class="untold"><span class="w">They</span> <span class="w">won’t</span> <span class="w">tell</span> <span class="w">you</span> <span class="w">how.</span></h2>
+  </section>
+  <!-- the real superbot-desktop renderer (app/frame.html), replayed from DOM snapshots; #cam is the camera -->
+  <section class="scene" id="s-app" aria-hidden="true">
+    <div id="cam">
+      <iframe id="app" src="app/frame.html" title="superbot" tabindex="-1" scrolling="no"></iframe>
+      <div class="lights"><i></i><i></i><i></i></div>
+    </div>
+    <div id="app-shade"></div>
+  </section>
+  <section class="scene" id="s-film" aria-hidden="true">
+    <div id="film-box"><video id="film" muted playsinline preload="auto" src="media/pocketsflow-launch.mp4"></video></div>
+  </section>
+  <section class="scene" id="s-end" aria-hidden="true">
+    <div class="lock"><div class="face"></div><div class="words"><h1><span>One prompt.</span><span>Every model.</span></h1><p class="url">superbot.gg</p></div></div>
+  </section>
+  <div id="dip"></div>
+</div>
+<div class="hint">space pause · ←/→ step · R restart</div>
+<script src="../../assets/sb-mark-live.js"></script>
+<script src="app/snaps.js"></script>
+<script type="module" src="player.js?v=1"></script>
+</body>
+</html>

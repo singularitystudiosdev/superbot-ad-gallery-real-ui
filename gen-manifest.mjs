@@ -178,6 +178,16 @@ const more = [
     { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b with a different machine behind the film. Same hook (I made this in 1 prompt, now playing the film this ad actually renders) and THEY WONT TELL YOU HOW, then the real superbot hub at full 16:9 width, rail and chats included. Superbot does not answer in a thread: it plans a flow, six nodes wired into one graph, and runs them in a new order. Claude Opus 5.5 writes BuyPage.tsx and renders both states. Nano Banana Pro takes that page as a reference and returns four photographs of it in the world. Blender models the PF tile from Pocketsflow's own mark and turns it in Cycles. DeepSeek V4.1 Flash scrapes four pricing pages, gets past Payhip's bot wall and writes the fee table and the script. ElevenLabs v3 voices that script with word timings. Superbot lays every output on one timeline and renders the 8.6 s launch film, which takes the frame with its voiceover. Each node opens into a 16:9 stage showing what that model really made (no mock output), then folds back to a thumbnail while its result travels the edges to the next node.",
       download: 'assets/video/pocketsflow-node-graph-every-model-superbot-a0f39f40.16x9.mp4', downloadLabel: '16:9' }],
   // <<< pocketsflow-node-graph-every-model-superbot-a0f39f40
+  // >>> pocketsflow-one-prompt-real-app-superbot-62ab1544
+  // Real-app cut of pocketsflow-untold-every-model-superbot-673c104b (2026-10-07, 62ab1544): same X hook and untold line,
+  // then one prompt replayed on superbot-desktop's own renderer (DOM and CSS captured from main @bcb624c7f through its
+  // provider_switch wire). One turn, four task-fit switches: Gemini 3 Pro Image (mascot), Kling 3.0 (clip), Lyria 3 Pro
+  // (score), Claude Opus 5.5 (reads pocketsflow.com, Remotion cut, render). Outputs are real generations
+  // (CREDITS.txt); spring-damped camera; the film lifts out of its card full frame.
+  ['pocketsflow-one-prompt-real-app-superbot-62ab1544', 'pocketsflow-one-prompt-real-app-superbot-62ab1544/', 'make a 15s launch film for pocketsflow.com: one prompt on the real superbot app, Gemini 3 Pro Image mascot, Kling 3.0 clip, Lyria 3 Pro score, Claude Opus 5.5 Remotion cut', 'Ad spots',
+    { desc: "Variant of pocketsflow-untold-every-model-superbot-673c104b rebuilt on the real superbot desktop app. Same hook: Kai's X post, I made this in 1 prompt, with the Pocketsflow launch film autoplaying in X's own dark timeline (no credit line), then They won't tell you how. Then the prompt itself, typed into superbot's real composer: make a 15s launch film for pocketsflow.com. 3D mascot, halftone look, upbeat score. Every frame of the app is its own DOM and CSS, captured from superbot-desktop by driving that prompt through its provider_switch wire. One turn, four switches, each to the model built for that part: Gemini 3 Pro Image draws the mascot, Kling 3.0 animates it (the lean-in and the psst), Lyria 3 Pro scores it at 118 BPM, and Claude Opus 5.5 reads pocketsflow.com, writes the Remotion composition, cuts every shot to the score and renders the film. Every output is a real generation shown in the app's own cards (the mascot, the clip, the score row), then the film lifts out of its card and plays full frame on the score's drop. A spring-damped camera eases between framings and the turn clock runs as a time-lapse. Ends on One prompt. Every model. superbot.gg. 38.9 s, 1920x1080, 60 fps, with the Lyria score.",
+      download: 'assets/video/pocketsflow-one-prompt-real-app-superbot-62ab1544.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< pocketsflow-one-prompt-real-app-superbot-62ab1544
   // >>> cg1-1004-yt-model-switch-superbot-48dc1fe1
   // cg1-1004 remake of niche-youtube-model-switch-superbot-3828921d (2026-10-06, 48dc1fe1): same hook, four hand-offs, beat
   // times and 26.298 s (untouched original). Thread rebuilt to superbot-desktop's provider-switch UI and tile art; switches
@@ -1846,6 +1856,8 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // added (2026-10-07, 62ab1544): the real-app one-prompt cut of the Pocketsflow spot (own animation dir, 16:9 render with score)
+  'pocketsflow-one-prompt-real-app-superbot-62ab1544',
   // added (2026-10-06, 3960b9f9): the detailed 16:9 canvas cut of the Pocketsflow spot (own animation dir, 16:9 render)
   'pocketsflow-untold-launch-film-superbot-3960b9f9',
   // added (2026-10-06, a0f39f40): the flow-graph cut of the Pocketsflow spot (own animation dir, 16:9 render with VO)

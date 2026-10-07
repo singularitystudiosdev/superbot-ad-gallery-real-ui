@@ -74,6 +74,17 @@
     "downloadLabel": "16:9"
   },
   {
+    "id": "pocketsflow-one-prompt-real-app-superbot-62ab1544",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "make a 15s launch film for pocketsflow.com: one prompt on the real superbot app, Gemini 3 Pro Image mascot, Kling 3.0 clip, Lyria 3 Pro score, Claude Opus 5.5 Remotion cut",
+    "src": "animations/pocketsflow-one-prompt-real-app-superbot-62ab1544/",
+    "thumb": "assets/shots/pocketsflow-one-prompt-real-app-superbot-62ab1544.png",
+    "desc": "Variant of pocketsflow-untold-every-model-superbot-673c104b rebuilt on the real superbot desktop app. Same hook: Kai's X post, I made this in 1 prompt, with the Pocketsflow launch film autoplaying in X's own dark timeline (no credit line), then They won't tell you how. Then the prompt itself, typed into superbot's real composer: make a 15s launch film for pocketsflow.com. 3D mascot, halftone look, upbeat score. Every frame of the app is its own DOM and CSS, captured from superbot-desktop by driving that prompt through its provider_switch wire. One turn, four switches, each to the model built for that part: Gemini 3 Pro Image draws the mascot, Kling 3.0 animates it (the lean-in and the psst), Lyria 3 Pro scores it at 118 BPM, and Claude Opus 5.5 reads pocketsflow.com, writes the Remotion composition, cuts every shot to the score and renders the film. Every output is a real generation shown in the app's own cards (the mascot, the clip, the score row), then the film lifts out of its card and plays full frame on the score's drop. A spring-damped camera eases between framings and the turn clock runs as a time-lapse. Ends on One prompt. Every model. superbot.gg. 38.9 s, 1920x1080, 60 fps, with the Lyria score.",
+    "download": "assets/video/pocketsflow-one-prompt-real-app-superbot-62ab1544.16x9.mp4",
+    "downloadLabel": "16:9"
+  },
+  {
     "id": "cg1-1004-yt-model-switch-superbot-48dc1fe1",
     "type": "animation",
     "group": "Ad spots",

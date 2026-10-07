@@ -1,0 +1,117 @@
+/* pocketsflow-one-prompt-real-app (62ab1544): the stage around four acts. The superbot app carries no styles
+   from here; it renders inside app/frame.html with its own pruned stylesheet (app/app.css). */
+@font-face { font-family: Inter; font-weight: 400; font-display: block; src: url("app/assets/Inter-Regular-C_F0_eS_.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-weight: 500; font-display: block; src: url("app/assets/Inter-Medium-CU3JTDxk.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-weight: 600; font-display: block; src: url("app/assets/Inter-SemiBold-CoRPLEbp.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-weight: 700 900; font-display: block; src: url("app/assets/Inter-Bold-CGGXExDp.woff2") format("woff2"); }
+:root {
+  --fg: #e6e8ee; --muted: #aeb1bc;
+  --ui: "SF Pro Rounded", ui-rounded, Inter, system-ui, sans-serif;
+  --x: "TwitterChirp", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--ui); color: var(--fg); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; background: #000; overflow: hidden; }
+.scene { position: absolute; inset: 0; overflow: hidden; visibility: hidden; opacity: 0; }
+#dip { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; }
+
+/* ================= act 1: X, dark ("Lights out"), at X's own px; .x-cam carries the camera ================= */
+#s-x { background: #000; z-index: 2; }
+.x-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; will-change: transform;
+  font-family: var(--x); color: #e7e9ea; font-size: 15px; line-height: 20px; }
+.x-page { position: relative; width: 1920px; height: 1080px; display: flex; justify-content: center; background: #000; }
+.x-shade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+.xi { width: 18.75px; height: 18.75px; fill: currentColor; flex: none; display: block; }
+
+.x-nav { width: 275px; padding: 0 12px 0 8px; display: flex; flex-direction: column; align-items: flex-start; height: 1080px; position: relative; }
+.x-logo { width: 52px; height: 52px; display: grid; place-items: center; margin-top: 2px; }
+.x-logo-ic { width: 32px; height: 32px; fill: #e7e9ea; }
+.x-nav-item { display: flex; align-items: center; gap: 20px; padding: 12px; height: 52px; font-size: 20px; line-height: 24px; color: #e7e9ea; border-radius: 9999px; }
+.x-nav-item.on { font-weight: 700; }
+.x-nav-ic { width: 26.25px; height: 26.25px; fill: #e7e9ea; }
+.x-post-btn { margin-top: 16px; width: 233px; height: 52px; border-radius: 9999px; background: #eff3f4; color: #0f1419; font-weight: 700; font-size: 17px; display: grid; place-items: center; }
+.x-me { position: absolute; left: 8px; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 12px; padding: 12px; }
+.x-me img { width: 40px; height: 40px; border-radius: 50%; }
+.x-me div { flex: 1; display: flex; flex-direction: column; }
+.x-me b { font-weight: 700; } .x-me span { color: #71767b; }
+.x-me .xi { fill: #e7e9ea; }
+
+.x-main { width: 600px; border-left: 1px solid #2f3336; border-right: 1px solid #2f3336; position: relative; height: 1080px; }
+.x-tabs { position: absolute; top: 0; left: 0; right: 0; height: 53px; display: flex; border-bottom: 1px solid #2f3336; background: rgb(0 0 0 / .65); backdrop-filter: blur(12px); z-index: 2; }
+.x-tab { flex: 1; display: grid; place-items: center; color: #71767b; font-weight: 500; position: relative; }
+.x-tab.on { color: #e7e9ea; font-weight: 700; }
+.x-tab i { position: absolute; bottom: 0; left: 50%; width: 56px; margin-left: -28px; height: 4px; border-radius: 9999px; background: #1d9bf0; }
+.x-feed { position: absolute; left: 0; right: 0; top: 126px; }
+
+.x-post { display: flex; padding: 12px 16px 0; border-bottom: 1px solid #2f3336; }
+.x-av { flex: none; width: 40px; margin-right: 8px; }
+.x-av img { display: block; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #16181c; }
+.x-body { flex: 1; min-width: 0; }
+.x-head { position: relative; display: flex; align-items: center; height: 20px; white-space: nowrap; }
+.x-name { font-weight: 700; }
+.x-badge { width: 18.75px; height: 18.75px; margin-left: 2px; fill: #1d9bf0; }
+.x-handle { margin-left: 4px; color: #71767b; }
+.x-dot { padding: 0 4px; color: #71767b; }
+.x-ago { color: #71767b; }
+.x-head .x-more { position: absolute; right: 0; top: 50%; margin-top: -9.375px; fill: #71767b; }
+.x-text { margin-top: 2px; overflow-wrap: break-word; }
+.x-media { position: relative; margin-top: 12px; aspect-ratio: 16 / 9; border: 1px solid #2f3336; border-radius: 16px; overflow: hidden; background: #16181c; }
+.x-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.x-pill { position: absolute; left: 12px; bottom: 12px; padding: 0 4px; border-radius: 4px; background: rgb(0 0 0 / .77); color: #fff; font-size: 13px; line-height: 16px; font-variant-numeric: tabular-nums; }
+.x-mute { position: absolute; right: 12px; bottom: 12px; width: 32px; height: 32px; border-radius: 50%; background: rgb(0 0 0 / .77); display: grid; place-items: center; }
+.x-mute .xi { width: 18px; height: 18px; }
+.x-acts { display: flex; align-items: center; justify-content: space-between; height: 32px; margin: 4px 0 8px; }
+.x-act { display: flex; align-items: center; color: #71767b; font-size: 13px; line-height: 16px; min-width: 60px; }
+.x-act-ic { position: relative; width: 34.75px; height: 34.75px; margin: -8px; display: grid; place-items: center; }
+.x-act-ic .xi { fill: currentColor; grid-area: 1 / 1; }
+.x-n { padding: 0 12px 0 12px; font-variant-numeric: tabular-nums; }
+.x-act-end { display: flex; align-items: center; gap: 12px; }
+.x-act-end .x-act { min-width: 0; }
+.x-act-end .x-act-ic { margin: -8px -4px; }
+.x-act-like.on { color: #f91880; }
+.x-like-on { fill: #f91880 !important; opacity: 0; transform-origin: 50% 55%; }
+.x-like-ring { grid-area: 1 / 1; width: 34px; height: 34px; border-radius: 50%; border: 2px solid #f91880; opacity: 0; }
+
+.x-side { width: 350px; margin-left: 30px; padding-top: 6px; }
+.x-search { height: 42px; border-radius: 9999px; background: #202327; display: flex; align-items: center; gap: 12px; padding: 0 16px; color: #71767b; }
+.x-search .xi { fill: #71767b; }
+.x-box { margin-top: 16px; border: 1px solid #2f3336; border-radius: 16px; overflow: hidden; }
+.x-box h2 { margin: 0; padding: 12px 16px; font-size: 20px; line-height: 24px; font-weight: 800; }
+.x-trend { position: relative; padding: 12px 16px; }
+.x-trend-meta { color: #71767b; font-size: 13px; line-height: 16px; }
+.x-trend-name { font-weight: 700; margin: 2px 0; }
+.x-trend .x-more { position: absolute; right: 16px; top: 12px; fill: #71767b; }
+
+/* ================= act 2: the line ================= */
+#s-untold { display: grid; place-items: center; background: #000; z-index: 3; }
+.untold { margin: 0; font: 800 112px/1.02 var(--ui); letter-spacing: -.035em; color: #fff; text-align: center; }
+.untold .w { display: inline-block; will-change: transform, opacity, filter; }
+
+/* ================= act 3: the real superbot app, laid out at its captured CSS viewport ================= */
+#s-app { background: #050505; z-index: 1; }
+#cam { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; transform-origin: 0 0; will-change: transform; }
+#app { position: absolute; inset: 0; width: 1200px; height: 675px; border: 0; display: block; background: #0d0d0d; pointer-events: none; }
+/* macOS traffic lights the renderer never paints (hiddenInset, trafficLightPosition {10,14} pt at the app's 1.2 zoom) */
+.lights { position: absolute; left: 8.33px; top: 11.67px; height: 11.67px; display: flex; gap: 7.5px; pointer-events: none; }
+.lights i { width: 11.67px; height: 11.67px; border-radius: 50%; box-shadow: inset 0 0 0 .5px rgb(0 0 0 / .22); }
+.lights i:nth-child(1) { background: #ff5f57; } .lights i:nth-child(2) { background: #febc2e; } .lights i:nth-child(3) { background: #28c840; }
+#app-shade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+
+/* the film, lifted out of its card into the frame */
+#s-film { z-index: 4; background: transparent; }
+#film-box { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; overflow: hidden; background: #000; will-change: transform, border-radius; }
+#film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ================= end card ================= */
+#s-end { display: grid; place-items: center; background: #000; z-index: 6; }
+#s-end .lock { display: flex; align-items: center; gap: 48px; }
+#s-end .face { flex: none; width: 220px; height: 220px; display: grid; place-items: center; }
+#s-end .words { overflow: hidden; padding: 8px 0; }
+#s-end h1 { margin: 0; font: 800 116px/1.0 var(--ui); letter-spacing: -.035em; color: #fff; }
+#s-end h1 span { display: block; }
+#s-end .url { margin: 26px 0 0 4px; font: 600 42px/1 var(--ui); letter-spacing: -.01em; color: var(--muted); }
+
+.hint { position: fixed; right: 18px; bottom: 14px; font: 11px var(--ui); color: var(--muted); opacity: .6; user-select: none; transition: opacity .3s; }
+body.freeze .hint, body.idle .hint { opacity: 0; }

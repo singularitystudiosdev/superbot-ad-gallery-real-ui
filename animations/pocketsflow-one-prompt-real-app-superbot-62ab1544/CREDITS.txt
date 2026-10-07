@@ -1,0 +1,26 @@
+pocketsflow-one-prompt-real-app-superbot-62ab1544: provenance (internal; nothing here is shown on screen)
+
+The superbot app (app/)
+  app/frame.html, app/app.css, app/snaps.js, app/assets/*: superbot-desktop main @bcb624c7f, its own renderer DOM and
+  CSS, captured per phase by booting the app through its e2e harness and driving one prompt through the real
+  provider_switch wire (capture/capture.62ab1544.mjs, build-app.62ab1544.mjs in the work folder). First-party.
+  The score row's 48 bars are audio-row.tsx downsamplePeaks run over media/pf-score.mp3 (the capture harness could not
+  decode the served file).
+
+Generated for this ad (each by the model the ad names for it)
+  media/pf-mascot.webp      Gemini 3 Pro Image (Nano Banana Pro, via Replicate google/nano-banana-pro, 2026-10-06),
+                            prompted with three stills of the Pocketsflow film's mascot as references.
+  media/pf-kling.mp4        Kling 3.0 Pro image-to-video (OpenRouter kwaivgi/kling-v3.0-pro, 2026-10-06, 5 s, from
+                            pf-mascot), audio stripped. Cost 0.84 USD.
+  media/pf-score.mp3        Lyria 3 Pro (OpenRouter google/lyria-3-pro-preview, 2026-10-06), 15 s cut (21.0 to 36.0 s)
+                            of a 59 s instrumental. The ad's 16:9 MP4 soundtrack is the same track. Cost 0.08 USD.
+  media/av-kai.jpg          Gemini 3 Pro Image (Replicate), a made-up creator's profile photo.
+  media/av-lena.jpg, av-theo.jpg   Gemini 3 Pro Image (OpenRouter), made-up timeline neighbours.
+
+Third-party footage
+  media/pocketsflow-launch.mp4  the Pocketsflow launch film (the clip the original 673c104b spot used), 1280x720, 15 s.
+                                Credit lives here only (no on-screen credit, per the no-creator-credit rule).
+
+Marks and type
+  X icon paths: X's own web icon set (as in the original spot's tweet scene). superbot live mark: ../../assets/sb-mark-live.*.
+  Inter (OFL) from the app's own bundle (app/assets/Inter-*.woff2).

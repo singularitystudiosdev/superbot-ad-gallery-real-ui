@@ -1,4 +1,4 @@
-subs-key-type-b8c369c3: provenance (internal; nothing here is shown on screen)
+subs-key-sweep-b8c369c3: provenance (internal; nothing here is shown on screen)
 
 Source and render scripts: quick-chats/superbot-subs-key.b8c369c3 (chat b8c369c3, 2026-10-07).
 Style source: stop-api-pricing-superbot-e65959ff (?v=a look; b typed key and c light sweep motions), itself

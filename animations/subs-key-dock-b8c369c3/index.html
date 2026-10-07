@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>API KEY THAT USES YOUR SUBSCRIPTIONS · dock</title>
 <style>
-/* Plays the rendered film (33 s, 30 fps, with sound) on its own near-black canvas.
-   ?ar=16x9 plays the native 1920x1080 recomposition (final-16x9.mp4); every other ?ar=
-   plays the 1080x1350 film (final.mp4) fitted whole, the rest of the frame near-black. */
+/* Plays the rendered 1920x1080 film (final-16x9.mp4: 36 s, 60 fps, with sound) on its own near-black canvas.
+   The spot is 16:9 only, so every ?ar= the gallery passes plays the same film, fitted whole. */
 :root {
   --canvas: #070707;
   --surface: #ffffff;
@@ -54,14 +53,13 @@ video {
 <body>
 <div class="frame">
   <video id="film" autoplay loop playsinline preload="auto"
-    aria-label="API KEY THAT USES YOUR SUBSCRIPTIONS: eleven headlines, three seconds each, over one superbot API key with the mascot beside it and the ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons docked after SUBSCRIPTIONS (dock cut, 33 s loop, with sound)."></video>
+    aria-label="API KEY THAT USES YOUR SUBSCRIPTIONS: eleven headlines, three seconds each, over the superbot API key with the superbot mascot beside it and the ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons right of SUBSCRIPTIONS, then the superbot.gg end card (dock cut, 36 s loop, with sound)."></video>
 </div>
 <script>
   const video = document.getElementById("film");
-  const wide = new URLSearchParams(location.search).get("ar") === "16x9";
-  document.documentElement.classList.toggle("wide", wide);
-  video.poster = wide ? "poster-16x9.png" : "poster.png";
-  video.src = wide ? "final-16x9.mp4" : "final.mp4";
+  document.documentElement.classList.add("wide");
+  video.poster = "poster-16x9.png";
+  video.src = "final-16x9.mp4";
   // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
   // viewer's first click, key or touch.
   const unmute = () => {

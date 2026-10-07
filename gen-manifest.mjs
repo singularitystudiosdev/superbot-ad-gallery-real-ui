@@ -1825,21 +1825,6 @@ const more = [
     { desc: 'A two-line STOP PAYING API PRICING pops in word by word, set left over a plain API key (masked), under a slow camera push. One light sweep crosses the headline and the key together and leaves SUPERBOT REROUTES TO SUBSCRIPTION over the purple, pink and blue superbot key, and the superbot mascot pops in to its right. One last sweep across the frame wipes to superbot.gg with the mascot to its right. 7.2 s, 1920x1080, 60 fps.',
       download: 'assets/video/stop-api-pricing-superbot-e65959ff-c.16x9.mp4', downloadLabel: '16:9', downloads: { '16x9': 'assets/video/stop-api-pricing-superbot-e65959ff-c.16x9.mp4' } }],
   // <<< stop-api-pricing-superbot-e65959ff
-  // >>> subs-key-b8c369c3
-  // API KEY THAT USES YOUR SUBSCRIPTIONS (2026-10-07, chat b8c369c3): three cuts in the type, ghost rows, key pill and mascot
-  // of every-model-converge-4x5-398eded5 and every-model-one-chat-sb-superbot-efa8df82 (both untouched). Eleven headlines from the
-  // brief, one per 3 s bar; the app icons sit right of SUBSCRIPTIONS. Self-contained dirs (player + both renders), like 398eded5.
-  // Source and render scripts: quick-chats/superbot-subs-key.b8c369c3.
-  ['subs-key-dock-b8c369c3', 'subs-key-dock-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · dock: words rise, the app icons fly between SUBSCRIPTIONS and the key (33 s, 4:5 + 16:9)', 'Ad spots',
-    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Each line rises in word by word on its downbeat and leaves upward before the next. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons pop into a facepile right of SUBSCRIPTIONS, arc down to park in a row under the key, and fly back up for ALL YOUR SUBSCRIPTIONS, 1 API KEY. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.',
-      download: 'animations/subs-key-dock-b8c369c3/final.mp4', downloadLabel: 'MP4 4:5', downloads: { '4x5': 'animations/subs-key-dock-b8c369c3/final.mp4', '16x9': 'animations/subs-key-dock-b8c369c3/final-16x9.mp4' } }],
-  ['subs-key-type-b8c369c3', 'subs-key-type-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · type: a terminal types each line, the icons pop in at the caret (33 s, 4:5 + 16:9)', 'Ad spots',
-    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Each line is typed flush left behind a caret and backspaced out just before the next; the key types itself in under the first line. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons pop in one by one as the caret crosses the slot after SUBSCRIPTIONS and drop with a bounce to their row under the key when it is deleted. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.',
-      download: 'animations/subs-key-type-b8c369c3/final.mp4', downloadLabel: 'MP4 4:5', downloads: { '4x5': 'animations/subs-key-type-b8c369c3/final.mp4', '16x9': 'animations/subs-key-type-b8c369c3/final-16x9.mp4' } }],
-  ['subs-key-flip-b8c369c3', 'subs-key-flip-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · flip: a split-flap board, icons dealt like cards (33 s, 4:5 + 16:9)', 'Ad spots',
-    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Every line flips in char by char through scrambled glyphs with a camera punch on the downbeat, and flips away before the next. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons live in a row above the headline and are dealt like cards (a full turn per move) into the slot after SUBSCRIPTIONS. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.',
-      download: 'animations/subs-key-flip-b8c369c3/final.mp4', downloadLabel: 'MP4 4:5', downloads: { '4x5': 'animations/subs-key-flip-b8c369c3/final.mp4', '16x9': 'animations/subs-key-flip-b8c369c3/final-16x9.mp4' } }],
-  // <<< subs-key-b8c369c3
   // >>> stop-api-pricing-ef7bd5a2
   // STOP PAYING API PRICING (2026-10-07, chat ef7bd5a2): one four-beat spot in three formats, each its own film with
   // sound and its own animation dir (index.html plays final.mp4): converge 4:5 (398eded5 grammar), card 16:9 (efa8df82
@@ -1900,6 +1885,21 @@ const more = [
   ["stop-api-pricing-type-4x5-3b8f5792", "stop-api-pricing-type-4x5-3b8f5792/", "STOP PAYING API PRICING · typed: an API key is typed, selected and pasted over with the superbot key, SUPERBOT REROUTES TO SUBSCRIPTION, superbot.gg (4:5)", 'Ad spots',
     {"desc":"The camera opens on STOP PAYING API PRICING being typed, pulls back to a key field that types a plain API key, selects all, and the purple, pink and blue superbot key is pasted on the downbeat while the mascot slides in to its right. The headline is backspaced and retyped as SUPERBOT REROUTES TO SUBSCRIPTION; superbot.gg types out with the mascot hopping across to its right. 9.6 s, 1080x1350 with a native 1920x1080 recomposition (?ar=16x9), 30 fps, with sound. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits and pricing\", rank 1, 5,816 authors in 30 days, data as of 2026-10-05; leaf high-token-costs). Keys are illustrative and masked: sk-ant-api03- is the shape of a pay-per-token API key, sk-superbot- the shape `superbot keys --mint` prints. Mascot: superbot-desktop's hero mark. Source quick-chats/superbot-stop-api-pricing.3b8f5792.","download":"animations/stop-api-pricing-type-4x5-3b8f5792/final.mp4","downloadLabel":"MP4 4:5","downloads":{"4x5":"animations/stop-api-pricing-type-4x5-3b8f5792/final.mp4","16x9":"animations/stop-api-pricing-type-4x5-3b8f5792/final-16x9.mp4"}}],
   // <<< stop-api-pricing-3b8f5792
+  // >>> subs-key-b8c369c3
+  // API KEY THAT USES YOUR SUBSCRIPTIONS (2026-10-07, chat b8c369c3): three cuts in the look of
+  // stop-api-pricing-superbot-e65959ff-a (untouched), its rise / typed key / light sweep motions. Eleven headlines from
+  // the brief, one per 3 s bar, then the superbot.gg end card; 16:9 only. Self-contained dirs (player + render).
+  // Source and render scripts: quick-chats/superbot-subs-key.b8c369c3.
+  ['subs-key-dock-b8c369c3', 'subs-key-dock-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · rise: each line rises in word by word, the app icons right after SUBSCRIPTIONS (36 s, 16:9)', 'Ad spots',
+    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each, in the look and motion of stop-api-pricing-superbot-e65959ff-a: each line rises word by word out of a blur and lifts away before the next. Still black stage, SF Pro Rounded caps, SUBSCRIPTIONS in the storm gradient with the ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons right of it, the superbot key (sbc_ masked, storm-gradient border and shine) under the headline with the superbot.gg mascot to its right: it hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. Ends on the superbot.gg end card. Synth score at 80 bpm (one bar per line), 36 s, 16:9, 60 fps.',
+      download: 'animations/subs-key-dock-b8c369c3/final-16x9.mp4', downloadLabel: 'MP4 16:9', downloads: { '16x9': 'animations/subs-key-dock-b8c369c3/final-16x9.mp4' } }],
+  ['subs-key-type-b8c369c3', 'subs-key-type-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · type: each line typed in behind a caret, the icons pop in at the caret (36 s, 16:9)', 'Ad spots',
+    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each, in the look of stop-api-pricing-superbot-e65959ff-a with its b cut\'s typed key: each line is typed in behind a caret and backspaced before the next, the icons pop in one by one as the caret crosses them, the key types itself in and the mascot slides in. Still black stage, SF Pro Rounded caps, SUBSCRIPTIONS in the storm gradient with the ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons right of it, the superbot key (sbc_ masked, storm-gradient border and shine) under the headline with the superbot.gg mascot to its right: it hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. Ends on the superbot.gg end card. Synth score at 80 bpm (one bar per line), 36 s, 16:9, 60 fps.',
+      download: 'animations/subs-key-type-b8c369c3/final-16x9.mp4', downloadLabel: 'MP4 16:9', downloads: { '16x9': 'animations/subs-key-type-b8c369c3/final-16x9.mp4' } }],
+  ['subs-key-sweep-b8c369c3', 'subs-key-sweep-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · sweep: set left, a light band carries every change of line (36 s, 16:9)', 'Ad spots',
+    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each, in the look of stop-api-pricing-superbot-e65959ff-a with its c cut\'s motion: set left under a slow push, one storm-tinted light band carries every change of line, the icons popping as it reaches them, and one last band wipes to the end card. Still black stage, SF Pro Rounded caps, SUBSCRIPTIONS in the storm gradient with the ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons right of it, the superbot key (sbc_ masked, storm-gradient border and shine) under the headline with the superbot.gg mascot to its right: it hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. Ends on the superbot.gg end card. Synth score at 80 bpm (one bar per line), 36 s, 16:9, 60 fps.',
+      download: 'animations/subs-key-sweep-b8c369c3/final-16x9.mp4', downloadLabel: 'MP4 16:9', downloads: { '16x9': 'animations/subs-key-sweep-b8c369c3/final-16x9.mp4' } }],
+  // <<< subs-key-b8c369c3
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -2008,10 +2008,6 @@ const KEEP_IDS = new Set([
   'stop-api-pricing-superbot-e65959ff-a',
   'stop-api-pricing-superbot-e65959ff-b',
   'stop-api-pricing-superbot-e65959ff-c',
-  // added (2026-10-07, b8c369c3): API KEY THAT USES YOUR SUBSCRIPTIONS, three cuts (own animation dirs, 4:5 + 16:9 renders with score)
-  'subs-key-dock-b8c369c3',
-  'subs-key-type-b8c369c3',
-  'subs-key-flip-b8c369c3',
   // added (2026-10-07, ef7bd5a2): STOP PAYING API PRICING in three formats (own animation dirs, renders with sound)
   'stop-api-pricing-converge-4x5-ef7bd5a2',
   'stop-api-pricing-card-16x9-ef7bd5a2',
@@ -2026,6 +2022,10 @@ const KEEP_IDS = new Set([
   'stop-api-pricing-slot-4x5-3b8f5792',
   'stop-api-pricing-type-4x5-3b8f5792',
   // <<< stop-api-pricing-3b8f5792-keep
+  // added (2026-10-07, b8c369c3): API KEY THAT USES YOUR SUBSCRIPTIONS, three cuts (own animation dirs, 16:9 renders with score)
+  'subs-key-dock-b8c369c3',
+  'subs-key-type-b8c369c3',
+  'subs-key-sweep-b8c369c3',
 ]);
 const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 

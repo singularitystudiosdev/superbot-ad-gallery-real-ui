@@ -1,0 +1,8 @@
+stop-api-pricing, variant a (converge, 4:5), chat ef7bd5a2. Provenance only: no credit, handle or watermark appears in the film.
+SOURCE: quick-chats/stop-api-pricing.ef7bd5a2/ (a.html + film.js + variants.js + mark.js; window.seek(t) rendered frame by frame by the motion-reel render.mjs in headless Chrome).
+MASCOT: the superbot.gg mark (first party). SVG byte-for-byte from this gallery's assets/sb-mark-live.js (extracted from https://beta.superbot.gg/, 2026-09-23); its ear wiggle, breath, bob, glitch layers, blink, happy squint and eye direction re-expressed as functions of t.
+GRADIENT: the storm gradient and white shine band of animations/every-model-one-chat-superbot-efa8df82/cards.css (.gt).
+TYPEFACES: Mona Sans variable (SIL Open Font License 1.1, github.com/github/mona-sans) for the a and c headlines and ghost rows; SF Pro Rounded (macOS system font, not bundled) for the b headline and superbot.gg; Menlo (macOS system font) for the keys.
+KEYS: made up and masked. sk-••••••••••••••3f9a is a generic provider-style secret key; sbc_••••••••••••7f3a uses superbot's caller-key shape (sbc_ prefix), as in onekey-converge-4x5-0d6132a7. Neither is a real credential.
+AUDIO: score (audio/score.mjs) and UI sounds (motion-reel sfx.mjs) synthesized in code; no samples, no third-party music. Mixed to -14 LUFS integrated, -1 dBTP.
+Market: sell-to-reddit llm_ai usage-limits-pricing ("Usage limits, pricing and token spend", rank 1, 5,816 authors in 30 days, build of 2026-10-05).

@@ -1,0 +1,72 @@
+Source: refuse-relay.8d1a06d2/v4-chain (window.seek(t) film on the refusal-relay kit, chat 8d1a06d2).
+UI: superbot desktop CSS and strings via the every-model-converge-4x5-398eded5 engine. Music and sound synthesized in code.
+
+every-model-4x5/ assets: provenance. No on-screen credit or handle appears in the film; this file is the record.
+All third-party marks are the property of their owners and appear nominatively (naming the model or app the copy
+refers to), unaltered. Carried over from the superbot ad 'every-model-one-chat' (animations/every-model-one-chat-superbot-efa8df82),
+fetched 2026-09-24 to 2026-09-26, unless noted.
+
+BRAND MARKS (assets/brand/)
+  gemini-logo.svg         Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg.
+                          Trademark of Google, used nominatively. Byte-for-byte copy from the source ad's brand/.
+  deepseek-logo.svg       DeepSeek whale mark, icons/deepseek-color.svg from @lobehub/icons-static-svg (unpkg), unmodified.
+                          Trademark of Hangzhou DeepSeek Artificial Intelligence Co., Ltd.
+  openai-logo.svg         OpenAI mark (round badge), copied from animations/who-are-you-superbot-268c902c/assets/openai.svg.
+                          Trademark of OpenAI, used nominatively for the 'GPT-5 Codex' model chip.
+  doordash-logo.svg       The DoorDash dash logomark: the inline <svg viewBox="0 0 99.5 56.5"> from the www.doordash.com
+                          header. Paths verbatim; fill set to DoorDash Red #FF3008 (DoorDash's brand red).
+  doordash-wordmark.svg   The DOORDASH wordmark: inline <svg viewBox="0 0 361.1 42"> from the same header, same note.
+                          Both are trademarks of DoorDash, Inc.
+  reddit-logo.svg         Reddit icon (Snoo in the orange circle), 'Reddit_Logo_Icon.svg' from Wikipedia (en).
+                          Source: https://upload.wikimedia.org/wikipedia/en/b/bd/Reddit_Logo_Icon.svg (fetched 2026-09-25).
+                          Trademark of Reddit, Inc., used nominatively to name the app superbot routes to.
+  superbot-mark.svg       The superbot duostorm mark (teal #00e5c3 / magenta #c026d3 offsets under the white #ececec face):
+                          a byte-for-byte copy of superbot-mobile/assets/brand/duostorm/mark.svg (first party).
+  superbot-mark-clean.svg The flat single-colour duostorm mark, superbot-mobile/assets/brand/duostorm/mark-clean.svg
+                          (first party), used where the mark must read small.
+  superbot-tile.svg       The duostorm app tile, superbot-mobile/assets/brand/duostorm/tile.svg (first party);
+                          the Home rail tile and the model pill / sheet row tile for superbot.
+  superbot-mascot.svg     superbot-mobile/assets/mascot.svg (first party), kept for the app's own chrome.
+                          (The app's own mark/wordmark are first party throughout this film.)
+
+IMAGES (assets/img/)
+  muse-meme.png           User-supplied Muse meme (The Social Network still edit), carried over from the source ad.
+                          Shown as the answer to the first ask.
+  burger.jpg              "Cheeseburger.jpg" by Renee Comet (photographer), released by the National Cancer Institute
+                          (NCI Visuals Online, image id 2652). Licence: Public domain (US federal government work).
+                          Source: https://commons.wikimedia.org/wiki/File:Cheeseburger.jpg (960px Commons thumbnail,
+                          unmodified). Fetched 2026-09-24. The DoorDash order card photo and item thumbnail.
+
+TYPEFACES
+  mona-sans-vf-wdth-opsz-wght.woff2  Mona Sans variable (wdth/opsz/wght), SIL Open Font License 1.1,
+                          github.com/github/mona-sans. The film sets every stage headline in it (Wide 700).
+                          Copied byte-identical from the Knit on GroupMe 4:5 ad's assets/brand/.
+  The app's own chrome and prose use the macOS system rounded face (CSS ui-rounded / 'SF Pro Rounded'), and every
+  count and path uses Menlo: both are OS faces, not bundled.
+
+FICTIONAL DATA: the Reddit handle, the six subreddit post counts, the 2,418-post total, the DoorDash order details,
+"Main Street Burger Co." and the user name 'sam' are all made up for the spot.
+
+No CC-BY assets are used in this film.
+CONVERGE FORK (every-model-converge-4x5.398eded5)
+  This film is a fork of every-model-4x5 (same project), retimed to a 26.4 s spine with two new
+  chapters: the 'apps' home grid and the 'merge' where the twelve icons combine into Superbot on the
+  full stage. The every-model-4x5 assets (assets/brand/, assets/img/, assets/CREDITS.txt) are carried
+  over byte-for-byte; nothing in this folder was re-fetched.
+
+  NEW ASSETS
+  assets/apps/            the twelve app marks, copied byte-for-byte from
+                          every-model-merge-4x5.d10630b5/assets/apps/ (which copied them from
+                          superbot-mobile/assets/providers/*.webp|png|svg and
+                          every-model-one-chat-superbot-efa8df82/brand/). Same twelve marks, same
+                          tile colours (root.APPS[].bg in scenes/icons.js); used on the home grid,
+                          on the merge tiles, and for the twelve icons on the end card.
+  assets/superbot-icon.png  Superbot app icon (1024) — the white cat with cyan/magenta glitch on a dark
+                          squircle, copied from superbot-mobile/assets/icon.png via
+                          every-model-merge-4x5.d10630b5/assets/superbot-icon.png. The tile the 12
+                          icons implode into during the merge. The end card still uses
+                          assets/brand/superbot-mark.svg.
+  All third-party marks are the property of their owners and appear nominatively, unaltered.
+
+grok-logo.svg  Grok mark (xAI), lobehub icons/grok.svg, currentColor fill set to #fff; copied from the gallery's first-model-every-model-superbot-7d540b7f/brand/grok-logo.svg (refusal-relay family, 8d1a06d2).
+claude-logo.svg  Claude mark (Anthropic), copied from the gallery's bikeride-honda-cog-2003-microsoft-new-copilot-superbot-e13744a9/brand/claude-logo.svg.

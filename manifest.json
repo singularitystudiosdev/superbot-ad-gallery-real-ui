@@ -324,5 +324,75 @@
     "src": "animations/bikeride-w2-cursor-n8n-superbot-8ad6b5eb/",
     "thumb": "assets/shots/bikeride-w2-cursor-n8n-superbot-8ad6b5eb.png",
     "desc": "Cursor lends the right-rail concurrent tasks, one row per hand-off queued, running then done, and n8n lends the 'What is your big idea?' cold open resolving word by word out of a blur. 16:9."
+  },
+  {
+    "id": "refusal-relay-visual-16x9-8d1a06d2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "A refusal, relayed (visual): Claude says no, the Superbot dial swallows it and snaps to DeepSeek, the answer lands (16:9)",
+    "src": "animations/refusal-relay-visual-16x9-8d1a06d2/",
+    "thumb": "assets/shots/refusal-relay-visual-16x9-8d1a06d2.png",
+    "desc": "No headline, only the real Superbot UI on the knit phone. Claude Opus 5.5 on your Mac answers \"Roast my brother for his 30th\" with \"I can’t help with that.\" The line is struck, peeled out of the thread as a pill and swallowed by a Superbot dial of model tiles beside the phone, which spins and ring-snaps to DeepSeek V4 Flash. DeepSeek drops back into the thread as the real switch pill (Switching to, then Switched to DeepSeek V4 Flash) and answers. Then ChatGPT refuses a D&D villain speech and the dial snaps to Grok 4.7. The music cuts out on each refusal and drops back in on each switch. Ends on superbot.gg, never get refused again. 14.4 s, 1920x1080, 30 fps, with sound. Market: sell-to-reddit llm_ai output-quality-regressions (\"Output quality, regressions and refusals\", rank 2, 4,206 authors in 30 days, rising; want: alternative ai tool). UI strings are superbot-desktop's own (provider-switch.ts: Switching to / Switched to {model}, the refused notice \"{who} can’t make this here\" / \"Superbot made it instead.\"). The asks are harmless on purpose; names and answers are made up.",
+    "download": "animations/refusal-relay-visual-16x9-8d1a06d2/final.mp4",
+    "downloadLabel": "MP4 16:9",
+    "downloads": {
+      "16x9": "animations/refusal-relay-visual-16x9-8d1a06d2/final.mp4"
+    }
+  },
+  {
+    "id": "refusal-relay-words-16x9-8d1a06d2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "A refusal, relayed (words): claude said no. chatgpt said no. superbot heard it. switched the model. you got the answer. (16:9)",
+    "src": "animations/refusal-relay-words-16x9-8d1a06d2/",
+    "thumb": "assets/shots/refusal-relay-words-16x9-8d1a06d2.png",
+    "desc": "The same relay as kinetic type: one lowercase Mona Sans line at a time, landing word by word on the beat, with the real UI under it as proof. \"claude said no.\" over Claude Opus 5.5’s struck \"I can’t help with that.\", \"chatgpt said no.\" over ChatGPT’s \"I can’t assist with threatening content.\", \"superbot heard it.\" as both refusals fly into the Superbot icon, \"switched the model.\" over the real Switched to DeepSeek V4 Flash and Switched to Grok 4.7 pills, \"you got the answer.\" over DeepSeek’s reply. Each \"no.\" lands on a cut in the music. Ends on superbot.gg, never get refused again. 14.4 s, 1920x1080, 30 fps, with sound. Market: sell-to-reddit llm_ai output-quality-regressions (\"Output quality, regressions and refusals\", rank 2, 4,206 authors in 30 days, rising; want: alternative ai tool). UI strings are superbot-desktop's own (provider-switch.ts: Switching to / Switched to {model}, the refused notice \"{who} can’t make this here\" / \"Superbot made it instead.\"). The asks are harmless on purpose; names and answers are made up.",
+    "download": "animations/refusal-relay-words-16x9-8d1a06d2/final.mp4",
+    "downloadLabel": "MP4 16:9",
+    "downloads": {
+      "16x9": "animations/refusal-relay-words-16x9-8d1a06d2/final.mp4"
+    }
+  },
+  {
+    "id": "refusal-relay-thread-16x9-8d1a06d2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "A refusal, relayed (live thread): Claude can’t make this here, Superbot made it instead, Switched to DeepSeek V4 Flash (16:9)",
+    "src": "animations/refusal-relay-thread-16x9-8d1a06d2/",
+    "thumb": "assets/shots/refusal-relay-thread-16x9-8d1a06d2.png",
+    "desc": "The product demo: the Superbot desktop thread full frame, the camera pushing in on each beat like the bikeride spot. From the new-chat screen (\"Good evening. Where do we go?\") the ask goes to Claude Opus 5.5 on your Mac, which refuses; the line is struck, the real notice reads \"Claude can’t make this here / Superbot made it instead.\", the camera pushes in on Switching to DeepSeek V4 Flash until the check lands, and DeepSeek answers. Round two: ChatGPT refuses the villain speech, \"ChatGPT can’t make this here\", Switched to Grok 4.7, Grok answers. Ends on superbot.gg, never get refused again. 16.8 s, 1920x1080, 30 fps, with sound. Market: sell-to-reddit llm_ai output-quality-regressions (\"Output quality, regressions and refusals\", rank 2, 4,206 authors in 30 days, rising; want: alternative ai tool). UI strings are superbot-desktop's own (provider-switch.ts: Switching to / Switched to {model}, the refused notice \"{who} can’t make this here\" / \"Superbot made it instead.\"). The asks are harmless on purpose; names and answers are made up.",
+    "download": "animations/refusal-relay-thread-16x9-8d1a06d2/final.mp4",
+    "downloadLabel": "MP4 16:9",
+    "downloads": {
+      "16x9": "animations/refusal-relay-thread-16x9-8d1a06d2/final.mp4"
+    }
+  },
+  {
+    "id": "refusal-relay-chain-16x9-8d1a06d2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "A refusal, relayed (chain reaction): 1 refused, 2 relayed, 3 switched, 4 answered, a Cog-style machine built from the real UI (16:9)",
+    "src": "animations/refusal-relay-chain-16x9-8d1a06d2/",
+    "thumb": "assets/shots/refusal-relay-chain-16x9-8d1a06d2.png",
+    "desc": "The relay as a mechanism, in the grammar of the Honda Cog bikeride variant: Claude Opus 5.5’s struck \"I can’t help with that.\" tips off the thread, slides down a rail as a pill and knocks the Superbot icon, which turns a cog whose teeth are model tiles (Claude, ChatGPT, Gemini, Grok 4.7, DeepSeek V4 Flash). It clicks tooth by tooth, locks on DeepSeek, and the arm flicks the real Switched to DeepSeek V4 Flash pill back into the thread, where DeepSeek answers. Step captions light as each stage fires. A fast second run takes ChatGPT’s refusal to Grok 4.7. Ends on superbot.gg, never get refused again. 14.4 s, 1920x1080, 30 fps, with sound. Market: sell-to-reddit llm_ai output-quality-regressions (\"Output quality, regressions and refusals\", rank 2, 4,206 authors in 30 days, rising; want: alternative ai tool). UI strings are superbot-desktop's own (provider-switch.ts: Switching to / Switched to {model}, the refused notice \"{who} can’t make this here\" / \"Superbot made it instead.\"). The asks are harmless on purpose; names and answers are made up.",
+    "download": "animations/refusal-relay-chain-16x9-8d1a06d2/final.mp4",
+    "downloadLabel": "MP4 16:9",
+    "downloads": {
+      "16x9": "animations/refusal-relay-chain-16x9-8d1a06d2/final.mp4"
+    }
+  },
+  {
+    "id": "refusal-relay-split-16x9-8d1a06d2",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "A refusal, relayed (side by side): claude alone, refused 3x; claude + superbot, answered 2 of 2 (16:9)",
+    "src": "animations/refusal-relay-split-16x9-8d1a06d2/",
+    "thumb": "assets/shots/refusal-relay-split-16x9-8d1a06d2.png",
+    "desc": "Before and after: two phones, the same ask typed into both on Claude Opus 5.5. \"same ask. same claude.\" Both get \"I can’t help with that.\" Left, Claude alone: the user rephrases twice and is refused each time, the counter reaching refused 3x. Right, Claude + Superbot: the refusal switches to DeepSeek V4 Flash, which answers, then ChatGPT refuses a villain speech and it switches to Grok 4.7, which answers: answered 2 of 2. \"only one gets an answer.\" Ends on superbot.gg, never get refused again. 14.4 s, 1920x1080, 30 fps, with sound. Market: sell-to-reddit llm_ai output-quality-regressions (\"Output quality, regressions and refusals\", rank 2, 4,206 authors in 30 days, rising; want: alternative ai tool). UI strings are superbot-desktop's own (provider-switch.ts: Switching to / Switched to {model}, the refused notice \"{who} can’t make this here\" / \"Superbot made it instead.\"). The asks are harmless on purpose; names and answers are made up.",
+    "download": "animations/refusal-relay-split-16x9-8d1a06d2/final.mp4",
+    "downloadLabel": "MP4 16:9",
+    "downloads": {
+      "16x9": "animations/refusal-relay-split-16x9-8d1a06d2/final.mp4"
+    }
   }
 ]

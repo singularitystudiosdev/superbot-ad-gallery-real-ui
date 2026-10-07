@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A refusal, relayed (chain reaction): 1 refused, 2 relayed, 3 switched, 4 answered, a Cog-style machine built from the real UI (16:9)</title>
+<style>
+/* Plays the rendered 1920x1080 film (final.mp4, 14.4 s, 30 fps, with sound) at 16:9 on the film's own
+   near-black canvas. The gallery loads this page in a frame at any ?ar=; the 16:9 picture is fitted whole
+   and the rest of the frame stays near-black. Source: refuse-relay.8d1a06d2/v4-chain (window.seek(t)). */
+:root { --canvas: #070707; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--canvas); }
+body { display: grid; place-items: center; }
+.frame { position: relative; width: min(100vw, calc(100vh * 16 / 9)); aspect-ratio: 16 / 9; background: var(--canvas); }
+video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--canvas); }
+</style>
+</head>
+<body>
+<div class="frame">
+  <video id="film" src="final.mp4" poster="poster.png" autoplay loop playsinline preload="auto"
+    aria-label="The relay as a mechanism, in the grammar of the Honda Cog bikeride variant: Claude Opus 5.5’s struck &quot;I can’t help with that.&quot; tips off the thread, slides down a rail as a pill and knocks the Superbot icon, which turns a cog whose teeth are model tiles (Claude, ChatGPT, Gemini, Grok 4.7, DeepSeek V4 Flash). It clicks tooth by tooth, locks on DeepSeek, and the arm flicks the real Switched to DeepSeek V4 Flash pill back into the thread, where DeepSeek answers. Step captions light as each stage fires. A fast second run takes ChatGPT’s refusal to Grok 4.7. Ends on superbot.gg, never get refused again. 14.4 s, 1920x1080, 30 fps, with sound."></video>
+</div>
+<script>
+  const video = document.getElementById("film");
+  // Sound is always on: try unmuted autoplay, and if the browser refuses it, play muted and unmute on the
+  // viewer's first click, key or touch.
+  const unmute = () => {
+    video.muted = false;
+    video.play().catch(() => {});
+  };
+  const start = () => {
+    video.muted = false;
+    video.play().catch(() => {
+      video.muted = true;
+      video.play().catch(() => {});
+    });
+  };
+  for (const type of ["pointerdown", "keydown", "touchstart"]) addEventListener(type, unmute, { once: true, capture: true });
+  // the gallery lightbox posts { type: "unmute" } on the viewer's first click or key
+  addEventListener("message", (e) => {
+    if (e.data && e.data.type === "unmute") unmute();
+  });
+  if (video.readyState >= 2) start();
+  else video.addEventListener("canplay", start, { once: true });
+</script>
+</body>
+</html>

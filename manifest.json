@@ -536,5 +536,50 @@
       "4x5": "animations/stop-api-pricing-type-4x5-3b8f5792/final.mp4",
       "16x9": "animations/stop-api-pricing-type-4x5-3b8f5792/final-16x9.mp4"
     }
+  },
+  {
+    "id": "subs-key-dock-b8c369c3",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "API KEY THAT USES YOUR SUBSCRIPTIONS · dock: words rise, the app icons fly between SUBSCRIPTIONS and the key (33 s, 4:5 + 16:9)",
+    "src": "animations/subs-key-dock-b8c369c3/",
+    "thumb": "assets/shots/subs-key-dock-b8c369c3.png",
+    "desc": "API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Each line rises in word by word on its downbeat and leaves upward before the next. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons pop into a facepile right of SUBSCRIPTIONS, arc down to park in a row under the key, and fly back up for ALL YOUR SUBSCRIPTIONS, 1 API KEY. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.",
+    "download": "animations/subs-key-dock-b8c369c3/final.mp4",
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/subs-key-dock-b8c369c3/final.mp4",
+      "16x9": "animations/subs-key-dock-b8c369c3/final-16x9.mp4"
+    }
+  },
+  {
+    "id": "subs-key-type-b8c369c3",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "API KEY THAT USES YOUR SUBSCRIPTIONS · type: a terminal types each line, the icons pop in at the caret (33 s, 4:5 + 16:9)",
+    "src": "animations/subs-key-type-b8c369c3/",
+    "thumb": "assets/shots/subs-key-type-b8c369c3.png",
+    "desc": "API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Each line is typed flush left behind a caret and backspaced out just before the next; the key types itself in under the first line. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons pop in one by one as the caret crosses the slot after SUBSCRIPTIONS and drop with a bounce to their row under the key when it is deleted. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.",
+    "download": "animations/subs-key-type-b8c369c3/final.mp4",
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/subs-key-type-b8c369c3/final.mp4",
+      "16x9": "animations/subs-key-type-b8c369c3/final-16x9.mp4"
+    }
+  },
+  {
+    "id": "subs-key-flip-b8c369c3",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "API KEY THAT USES YOUR SUBSCRIPTIONS · flip: a split-flap board, icons dealt like cards (33 s, 4:5 + 16:9)",
+    "src": "animations/subs-key-flip-b8c369c3/",
+    "thumb": "assets/shots/subs-key-flip-b8c369c3.png",
+    "desc": "API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Every line flips in char by char through scrambled glyphs with a camera punch on the downbeat, and flips away before the next. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons live in a row above the headline and are dealt like cards (a full turn per move) into the slot after SUBSCRIPTIONS. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.",
+    "download": "animations/subs-key-flip-b8c369c3/final.mp4",
+    "downloadLabel": "MP4 4:5",
+    "downloads": {
+      "4x5": "animations/subs-key-flip-b8c369c3/final.mp4",
+      "16x9": "animations/subs-key-flip-b8c369c3/final-16x9.mp4"
+    }
   }
 ]

@@ -1837,6 +1837,21 @@ const more = [
   ["stop-api-pricing-type-4x5-3b8f5792", "stop-api-pricing-type-4x5-3b8f5792/", "STOP PAYING API PRICING · typed: an API key is typed, selected and pasted over with the superbot key, SUPERBOT REROUTES TO SUBSCRIPTION, superbot.gg (4:5)", 'Ad spots',
     {"desc":"The camera opens on STOP PAYING API PRICING being typed, pulls back to a key field that types a plain API key, selects all, and the purple, pink and blue superbot key is pasted on the downbeat while the mascot slides in to its right. The headline is backspaced and retyped as SUPERBOT REROUTES TO SUBSCRIPTION; superbot.gg types out with the mascot hopping across to its right. 9.6 s, 1080x1350 with a native 1920x1080 recomposition (?ar=16x9), 30 fps, with sound. Market: sell-to-reddit llm_ai usage-limits-pricing (\"Usage limits and pricing\", rank 1, 5,816 authors in 30 days, data as of 2026-10-05; leaf high-token-costs). Keys are illustrative and masked: sk-ant-api03- is the shape of a pay-per-token API key, sk-superbot- the shape `superbot keys --mint` prints. Mascot: superbot-desktop's hero mark. Source quick-chats/superbot-stop-api-pricing.3b8f5792.","download":"animations/stop-api-pricing-type-4x5-3b8f5792/final.mp4","downloadLabel":"MP4 4:5","downloads":{"4x5":"animations/stop-api-pricing-type-4x5-3b8f5792/final.mp4","16x9":"animations/stop-api-pricing-type-4x5-3b8f5792/final-16x9.mp4"}}],
   // <<< stop-api-pricing-3b8f5792
+  // >>> subs-key-b8c369c3
+  // API KEY THAT USES YOUR SUBSCRIPTIONS (2026-10-07, chat b8c369c3): three cuts in the type, ghost rows, key pill and mascot
+  // of every-model-converge-4x5-398eded5 and every-model-one-chat-sb-superbot-efa8df82 (both untouched). Eleven headlines from the
+  // brief, one per 3 s bar; the app icons sit right of SUBSCRIPTIONS. Self-contained dirs (player + both renders), like 398eded5.
+  // Source and render scripts: quick-chats/superbot-subs-key.b8c369c3.
+  ['subs-key-dock-b8c369c3', 'subs-key-dock-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · dock: words rise, the app icons fly between SUBSCRIPTIONS and the key (33 s, 4:5 + 16:9)', 'Ad spots',
+    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Each line rises in word by word on its downbeat and leaves upward before the next. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons pop into a facepile right of SUBSCRIPTIONS, arc down to park in a row under the key, and fly back up for ALL YOUR SUBSCRIPTIONS, 1 API KEY. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.',
+      download: 'animations/subs-key-dock-b8c369c3/final.mp4', downloadLabel: 'MP4 4:5', downloads: { '4x5': 'animations/subs-key-dock-b8c369c3/final.mp4', '16x9': 'animations/subs-key-dock-b8c369c3/final-16x9.mp4' } }],
+  ['subs-key-type-b8c369c3', 'subs-key-type-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · type: a terminal types each line, the icons pop in at the caret (33 s, 4:5 + 16:9)', 'Ad spots',
+    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Each line is typed flush left behind a caret and backspaced out just before the next; the key types itself in under the first line. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons pop in one by one as the caret crosses the slot after SUBSCRIPTIONS and drop with a bounce to their row under the key when it is deleted. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.',
+      download: 'animations/subs-key-type-b8c369c3/final.mp4', downloadLabel: 'MP4 4:5', downloads: { '4x5': 'animations/subs-key-type-b8c369c3/final.mp4', '16x9': 'animations/subs-key-type-b8c369c3/final-16x9.mp4' } }],
+  ['subs-key-flip-b8c369c3', 'subs-key-flip-b8c369c3/', 'API KEY THAT USES YOUR SUBSCRIPTIONS · flip: a split-flap board, icons dealt like cards (33 s, 4:5 + 16:9)', 'Ad spots',
+    { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each. Every line flips in char by char through scrambled glyphs with a camera punch on the downbeat, and flips away before the next. The ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons live in a row above the headline and are dealt like cards (a full turn per move) into the slot after SUBSCRIPTIONS. The superbot key (masked, illustrative) sits under the headline with the mascot to its right, acting each line: hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. A superbot.gg pill lands for the download pitch. Synth score at 80 bpm (one bar per line), 33 s, 4:5 and 16:9.',
+      download: 'animations/subs-key-flip-b8c369c3/final.mp4', downloadLabel: 'MP4 4:5', downloads: { '4x5': 'animations/subs-key-flip-b8c369c3/final.mp4', '16x9': 'animations/subs-key-flip-b8c369c3/final-16x9.mp4' } }],
+  // <<< subs-key-b8c369c3
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1944,6 +1959,10 @@ const KEEP_IDS = new Set([
   'stop-api-pricing-slot-4x5-3b8f5792',
   'stop-api-pricing-type-4x5-3b8f5792',
   // <<< stop-api-pricing-3b8f5792-keep
+  // added (2026-10-07, b8c369c3): API KEY THAT USES YOUR SUBSCRIPTIONS, three cuts (own animation dirs, 4:5 + 16:9 renders with score)
+  'subs-key-dock-b8c369c3',
+  'subs-key-type-b8c369c3',
+  'subs-key-flip-b8c369c3',
 ]);
 const shipped = items.filter(i => i.group === ONLY_GROUP && KEEP_IDS.has(i.id));
 

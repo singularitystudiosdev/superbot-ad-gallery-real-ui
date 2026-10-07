@@ -1,0 +1,20 @@
+img/ CREDITS (internal). Provenance is never shown on screen.
+
+Every raster here is one generated set, made for this spot on 2026-10-06 with Nano Banana Pro (google/nano-banana-pro on
+Replicate; fal answered 403 TOP_UP and the Gemini API 402 that day). One fictional creator (Sam Rivera), one home
+studio: walnut desk, charcoal felt panels, brass lamp, low-profile black boom arm with the mic hung underneath. No real
+people, products or logos are depicted. The 4:38 frame was generated first and passed as the reference image for the
+other frames and the thumbnail, so the room, light and arm match across every shot. Prompts and prediction ids are
+kept beside the raw PNGs in the build scratch (work/ytbetter-88a89e94/raw-assets/*.json).
+
+f0438.jpg   the 4:38 frame (desk setup, the boom arm end to end): Gemini's detection box draws around the arm.
+f0042.jpg   0:42, twelve budget mics in a row on the desk.
+f0612.jpg   6:12, the blind test: two mics, waveforms on the laptop, headphones.
+f0705.jpg   7:05, the $49 dynamic mic close on the arm (Priya's answer).
+thumb.jpg   the video's thumbnail: generated photo of Sam holding a budget mic, headline composed over it
+            (Impact, "12 MICS" / "UNDER $100") by work/ytbetter-88a89e94/thumb.88a89e94.mjs at 1280x720.
+av-sam.jpg  Sam's channel avatar, cropped from the thumbnail photo (crop 780x780 at 1840,30, 160 px).
+av-priya.jpg av-marco.jpg av-lena.jpg av-dee.jpg
+            the four commenters' profile photos, cropped from one generated 2x2 grid of fictional people (160 px).
+Frames are 960 px wide (q4 JPEG), resized from the 2752x1536 originals with lanczos; metadata stripped by ffmpeg.
+Licence: generated output, owned by the account that generated it; no third-party attribution owed.

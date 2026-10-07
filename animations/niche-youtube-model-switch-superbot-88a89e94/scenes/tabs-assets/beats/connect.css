@@ -1,0 +1,39 @@
+/* Connect beat (beats/connect.js): Google's single-scope OAuth consent screen, light Material 3 (Google Sans Flex for
+   the title and buttons, Roboto for body copy, #0b57d0 primary, 1px #747775 outline on the account chip and Cancel),
+   then the one "connected" line it folds into. Nothing here transitions: every moving value is written from t. */
+#s-tabs .sbsite .hub .gc-slot { position: relative; width: 400px; max-width: 100%; margin-top: 2px; opacity: 0; overflow: clip; overflow-clip-margin: 12px; }
+#s-tabs .sbsite .hub .gc-card { box-sizing: border-box; width: 100%; border-radius: 20px; background: var(--gm-surface); color: var(--gm-text);
+  font-family: var(--gm-body); transform-origin: 50% 0; box-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15); }
+#s-tabs .sbsite .hub .gc-top { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 18px; border-bottom: 1px solid var(--gm-line);
+  font: 400 12px/1 var(--gm-sans); color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-top img { width: 14px; height: 14px; }
+#s-tabs .sbsite .hub .gc-body { padding: 14px 18px 12px; }
+#s-tabs .sbsite .hub .gc-title { margin-top: 0; font: 400 19px/25px var(--gm-sans); color: var(--gm-text); letter-spacing: 0; }
+#s-tabs .sbsite .hub .gc-acct { display: inline-flex; align-items: center; gap: 6px; height: 24px; margin-top: 10px; padding: 0 6px 0 3px; border-radius: 9999px;
+  box-shadow: inset 0 0 0 1px #747775; font: 500 11.5px/1 var(--gm-sans); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-av { width: 18px; height: 18px; border-radius: 50%; object-fit: cover; }
+#s-tabs .sbsite .hub .gc-dd { width: 15px; height: 15px; color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-lead { margin: 12px 0 6px; font: 400 12.5px/1.35 var(--gm-body); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-lead b { font-weight: 500; }
+#s-tabs .sbsite .hub .gc-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-top: 1px solid var(--gm-line); border-bottom: 1px solid var(--gm-line);
+  font: 400 12px/1.35 var(--gm-body); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-row img { flex: none; width: 18px; height: 13px; object-fit: contain; }
+#s-tabs .sbsite .hub .gc-row span { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .gc-info { width: 16px; height: 16px; color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-trust { margin-top: 12px; font: 400 11px/1.4 var(--gm-body); color: var(--gm-text2); }
+#s-tabs .sbsite .hub .gc-trust b { display: block; margin-bottom: 2px; font: 500 12px/1.3 var(--gm-sans); color: var(--gm-text); }
+#s-tabs .sbsite .hub .gc-btns { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 12px; }
+#s-tabs .sbsite .hub .gc-btns span { display: inline-flex; align-items: center; height: 30px; padding: 0 18px; border-radius: 9999px; font: 500 12.5px/1 var(--gm-sans); }
+#s-tabs .sbsite .hub .gc-cancel { color: var(--gm-accent); box-shadow: inset 0 0 0 1px #747775; }
+#s-tabs .sbsite .hub .gc-go { background: var(--gm-accent); color: #fff; }
+#s-tabs .sbsite .hub .gc-go.gc-hit { background: #0842a0; }
+
+/* the line the card folds into: in the hub's own dark grammar, Sam's photo, the scope it holds, the green check */
+#s-tabs .sbsite .hub .gc-done { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 9px; box-sizing: border-box;
+  height: 40px; padding: 0 12px 0 8px; border-radius: 9999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; opacity: 0;
+  font: 12.5px/1 var(--ui); color: #ececec; white-space: nowrap; }
+#s-tabs .sbsite .hub .gc-dav { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+#s-tabs .sbsite .hub .gc-done b { font-weight: 600; }
+#s-tabs .sbsite .hub .gc-done small { font: 500 11px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .gc-dok { position: relative; width: 14px; height: 14px; margin-left: auto; }
+#s-tabs .sbsite .hub .gc-dok .qc-ok { position: absolute; inset: 0; opacity: 0; }

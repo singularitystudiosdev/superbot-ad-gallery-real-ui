@@ -396,6 +396,19 @@ const more = [
     { desc: 'Rebuild of the YouTube Studio spot with a new deliverable and a new switch order, every model doing only what it is actually for, every output handed to the next. One ask, get my headset video ready to premiere Friday. DeepSeek V4 Pro with DeepThink and Search on walks Amazon review pages to the end, retries a Best Buy 403 with a rotated user agent, and pulls Walmart, Reddit and nine rival videos\' comments into a price and mic table; its hook ($39 beat $99) goes to Eleven v4, which voices the trailer with audio tags and makes the hit. Blender 5.2 models the winning headset, renders it in Cycles and cuts the turntable trailer to the voice. Nano Banana Pro turns the renders into three thumbnails for Test & compare. Claude Opus 5.5 in Claude Code writes and deploys the buyer\'s guide with the 3D model live in the page. YouTube Studio gets all of it: title and chapters, the guide link, A/B/C thumbnails, the trailer, and a premiere scheduled for Friday 6:00 PM. Each app window is 16:9 and fills the frame. The Blender renders, the GLB and the guide page are real; the thumbnails are composed over the renders and the waveform comes from a stand-in voice until generator credit is back. Headset names, prices and counts are made up.',
       download: 'assets/video/niche-youtube-model-switch-superbot-7993d5b0.16x9.mp4', downloadLabel: '16:9' }],
   // <<< niche-youtube-model-switch-superbot-7993d5b0
+  // >>> niche-youtube-model-switch-superbot-88a89e94
+  // Smooth cut (2026-10-06, 88a89e94): niche-youtube-model-switch-superbot-3828921d (untouched) rebuilt so every hand-off
+  // matches the job and every surface matches the real app. The connection is a connection (Google's single-scope
+  // consent for youtube.force-ssl, no switch pill); Gemini 3.8 Flash does all the video work (watches the 14:32 video,
+  // notes the moments, reads all 1,284 comments, boxes the boom arm in the 4:38 frame) instead of handing a frame to
+  // GPT; Claude Opus 5.5 writes the replies as replies (no editor); the pin happens on the video's own Comments page
+  // (YouTube Help 9482367: Pin only appears there) with More > Pin > "Pin this comment?". Motion: symmetric camera
+  // eases at 1.6x with log-space zoom, summed eased scroll, every entrance outQuart, pointer on bowed paths. Every
+  // raster is one generated set from the same room (img/CREDITS.txt). 16:9.
+  ['niche-youtube-model-switch-superbot-88a89e94', 'niche-youtube-model-switch-superbot-88a89e94/', 'Answer the top comments on my latest video and pin the best one · smooth cut (16:9): connect YouTube, Gemini 3.8 Flash watches, Opus 5.5 replies, Studio pins', 'Ad spots',
+    { desc: 'One ask in superbot, each part sent to what is built for it. Superbot connects YouTube with the one scope replies need. Gemini 3.8 Flash watches the 14:32 video, reads all 1,284 comments, ties each top comment to its moment and finds the boom arm in the 4:38 frame. Claude Opus 5.5 writes the four replies in the creator\'s voice. The replies post through the API, then superbot hearts them and pins Priya\'s answer on the video\'s Comments page in YouTube Studio. 16:9.',
+      download: 'assets/video/niche-youtube-model-switch-superbot-88a89e94.16x9.mp4', downloadLabel: '16:9' }],
+  // <<< niche-youtube-model-switch-superbot-88a89e94
   // >>> niche-youtube-model-switch-superbot-1db9afb3
   // Rebuild of niche-youtube-model-switch-superbot-3828921d (untouched) in a different format (2026-10-05, 1db9afb3): the deliverable is a 3D Short that answers the most-asked comment, made by six hand-offs in the order the work needs them, each tool doing only what it is best at, on the REAL superbot desktop app (captured renderer DOM and CSS, main @366230a) with its docked in-app browser. DeepSeek V4 Pro (scrape + search) reads the 1,284 comments and answers with five findings checked against their pages plus a 3-sentence script; Blender 5.2.2 LTS (3D) renders the scene in its own window (real GUI captures of the real .blend, real EEVEE render); Eleven v3 (audio) voices the script, timed by Scribe v2; Claude Opus 5.5 (code) writes the Remotion composition, previewed in the real Remotion Studio, rendered; Gemini 3 Pro Image (Nano Banana Pro) makes the custom Shorts thumbnail from a Blender frame; YouTube posts it, replies and pins a linking comment (youtube.com comments and Shorts pages rebuilt from live headless captures at the pane size). Every model output is the real one (work/ytshort-1db9afb3); provenance in animations/niche-youtube-model-switch-superbot-1db9afb3/CREDITS.txt. 16:9 only. Audited by a fresh-context judge; findings applied.
   ['niche-youtube-model-switch-superbot-1db9afb3', 'niche-youtube-model-switch-superbot-1db9afb3/', 'Turn my most-asked comment into a 3D Short and reply with it: DeepSeek V4 Pro, Blender, Eleven v3, Claude Opus 5.5, Gemini 3 Pro Image, then YouTube (6 switches, real superbot UI, 16:9)', 'Ad spots',
@@ -1759,6 +1772,8 @@ const KEEP_IDS = new Set([
   'niche-youtube-model-switch-superbot-ba8f0993',
   // added (2026-10-06, 7993d5b0): the premiere relay of the YouTube Studio spot (own animation dir, 16:9 render)
   'niche-youtube-model-switch-superbot-7993d5b0',
+  // added (2026-10-06, 88a89e94): the smooth cut of the YouTube Studio spot (task-fit hand-offs, real Studio Pin flow)
+  'niche-youtube-model-switch-superbot-88a89e94',
   'bikeride-model-switch-superbot-e13744a9',
   'every-model-converge-4x5-398eded5',
   'every-model-one-chat-sb-superbot-efa8df82',

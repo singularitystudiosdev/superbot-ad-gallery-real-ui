@@ -743,5 +743,14 @@
     "downloads": {
       "16x9": "animations/subs-key-sweep-b8c369c3/final-16x9.mp4"
     }
+  },
+  {
+    "id": "usage-limit-keep-going-superbot-7fcf1c91",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "LIMIT HIT? KEEP GOING. · Claude hits its 5-hour limit, the same chat carries on in Superbot (21 s)",
+    "src": "animations/usage-limit-keep-going-superbot-7fcf1c91/",
+    "thumb": "assets/shots/usage-limit-keep-going-superbot-7fcf1c91.png",
+    "desc": "Limit hit. Again. A Claude Opus 5.5 task is cut off mid-refactor by its plan's 5-hour limit (resets 4:12 PM). Superbot shows live limits on every plan in its Accounts panel (5-hour and 7-day bars per plan), the call moves to your next sign-in, the same chat finishes the job, and one more ask runs on GPT-6 Sol from the composer's model chip. Ends on Limit hit? Keep going., the Superbot mascot and superbot.gg. Account names and percentages are made up. 21 s, 60 fps, 4:5 and 16:9."
   }
 ]

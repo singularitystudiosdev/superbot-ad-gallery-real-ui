@@ -1919,6 +1919,14 @@ const more = [
     { desc: 'API KEY THAT USES YOUR SUBSCRIPTIONS through OK DOWNLOAD BYEEEE, all eleven lines verbatim and in order, three seconds each, in the look of stop-api-pricing-superbot-e65959ff-a with its c cut\'s motion: set left under a slow push, one storm-tinted light band carries every change of line, the icons popping as it reaches them, and one last band wipes to the end card. Still black stage, SF Pro Rounded caps, SUBSCRIPTIONS in the storm gradient with the ChatGPT, Grok, Claude, Cursor, Gemini and Copilot icons right of it, the superbot key (sbc_ masked, storm-gradient border and shine) under the headline with the superbot.gg mascot to its right: it hops on ITS FREE?, leans in on YOUR STILL HERE?, grows on WITH A CUTE MASCOT, bounces through I CAN DO THIS ALL DAY, waves on BYEEEE. Ends on the superbot.gg end card. Synth score at 80 bpm (one bar per line), 36 s, 16:9, 60 fps.',
       download: 'animations/subs-key-sweep-b8c369c3/final-16x9.mp4', downloadLabel: 'MP4 16:9', downloads: { '16x9': 'animations/subs-key-sweep-b8c369c3/final-16x9.mp4' } }],
   // <<< subs-key-b8c369c3
+  // >>> usage-limit-keep-going-superbot-7fcf1c91
+  // LIMIT HIT? KEEP GOING. (2026-10-11, 7fcf1c91, negativity-agg feed ad 1): theme usage-limits, the ranked #1 complaint in the
+  // feed (a five-hour or weekly limit hit mid-task). Forked from the every-model-one-chat-superbot-efa8df82 engine (hub UI,
+  // text cards, mascot end card), 21 s, 60 fps, silent; 4:5, 16:9, 4:3 and 1:1 renders. Copy checked against
+  // superbot.gg/features (relay Accounts: live limits on every plan) and superbot.gg/docs.md (failover to a sibling sign-in on a 429).
+  ['usage-limit-keep-going-superbot-7fcf1c91', 'usage-limit-keep-going-superbot-7fcf1c91/', 'LIMIT HIT? KEEP GOING. · Claude hits its 5-hour limit, the same chat carries on in Superbot (21 s)', 'Ad spots',
+    { desc: 'Limit hit. Again. A Claude Opus 5.5 task is cut off mid-refactor by its plan\'s 5-hour limit (resets 4:12 PM). Superbot shows live limits on every plan in its Accounts panel (5-hour and 7-day bars per plan), the call moves to your next sign-in, the same chat finishes the job, and one more ask runs on GPT-6 Sol from the composer\'s model chip. Ends on Limit hit? Keep going., the Superbot mascot and superbot.gg. Account names and percentages are made up. 21 s, 60 fps, 4:5 and 16:9.' }],
+  // <<< usage-limit-keep-going-superbot-7fcf1c91
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1951,6 +1959,10 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // >>> keep usage-limit-keep-going-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): LIMIT HIT? KEEP GOING., the usage-limits feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
+  'usage-limit-keep-going-superbot-7fcf1c91',
+  // <<< keep usage-limit-keep-going-superbot-7fcf1c91
   // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
   'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',

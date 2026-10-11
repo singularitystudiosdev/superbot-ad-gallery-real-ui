@@ -1,5 +1,14 @@
 [
   {
+    "id": "negagg-crashes-bugs-superbot-85553d96",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "CHATGPT WENT OFFLINE · same chat, Gemini picks the ask up",
+    "src": "animations/negagg-crashes-bugs-superbot-85553d96/",
+    "thumb": "assets/shots/negagg-crashes-bugs-superbot-85553d96.png",
+    "desc": "One ask typed into superbot, routed to ChatGPT, which comes back with its own failure state instead of an answer: blank thread, \"Looks like you're offline. Reconnect to send messages.\" and, after a Retry that spins and gives up, \"There's a problem with your request\". Nothing is retyped: superbot carries the same ask on in Gemini in the same thread, and Gemini answers it and drafts the launch post. The hook card is the strongest one star ChatGPT review verbatim (2,418 thumbs up) and the count card is the cluster total, 20,488 one and two star reviews of ChatGPT and Meta AI that mention crashes or errors (negativity-agg complaint rank 1, crashes-bugs). The ChatGPT failure is recreated as a UI state, no ChatGPT screenshots; the hub is the real superbot UI. 21.9 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Copies its 4:5 style basis from every-model-one-chat-superbot-efa8df82."
+  },
+  {
     "id": "every-model-one-chat-sb-superbot-efa8df82",
     "type": "animation",
     "group": "Ad spots",

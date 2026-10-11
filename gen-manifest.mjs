@@ -1973,6 +1973,10 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // >>> keep negagg-crashes-bugs-superbot-85553d96
+  // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
+  'negagg-crashes-bugs-superbot-85553d96',
+  // <<< keep negagg-crashes-bugs-superbot-85553d96
   // >>> keep usage-limit-keep-going-superbot-7fcf1c91
   // added (2026-10-11, 7fcf1c91): LIMIT HIT? KEEP GOING., the usage-limits feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
   'usage-limit-keep-going-superbot-7fcf1c91',

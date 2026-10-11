@@ -27,6 +27,15 @@
     "desc": "The headline card, then the feature working in the real superbot hub: one question typed into the composer and routed to ChatGPT, which answers it; then the routing chip \"Ask Claude too\" runs the same ask past Claude in the same thread, so both takes stack one above the other and the pointer presses \"Use this\" on the second. Nothing is retyped, the composer platform chip follows the switch, and the end card closes on EVERY MODEL. ONE CHAT. 22 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Clean solution cut of negativity-agg complaint rank 2 wrong-hallucinated-answers; no complaint, quote or count card on screen."
   },
   {
+    "id": "negagg-privacy-superbot-30c6568c",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "KEEP IT ON YOUR MACHINE.",
+    "src": "animations/negagg-privacy-superbot-30c6568c/",
+    "thumb": "assets/shots/negagg-privacy-superbot-30c6568c.png",
+    "desc": "The headline card, then the feature working in the real superbot hub. The first ask is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing the models on the account: ChatGPT, Claude, and superbot-omni, the house model that runs on the user's own computer, marked ON THIS DEVICE. The pointer picks superbot-omni, the chip wears LOCAL, and the same thread carries on: the follow-up \"Add the salary band numbers to point two.\" is typed and sent, and it is answered on this device, with everything above it still in context. It closes on the line \"Same thread. Answered on this machine.\" and the end card EVERY MODEL. ONE CHAT. 22.5 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. That superbot-omni runs on the user's computer is a published Superbot house-model fact (superbot.gg/api, house models). Clean solution cut of negativity-agg complaint rank 3 privacy-data: no complaint, quote, count or error state on screen."
+  },
+  {
     "id": "every-model-one-chat-sb-superbot-efa8df82",
     "type": "animation",
     "group": "Ad spots",

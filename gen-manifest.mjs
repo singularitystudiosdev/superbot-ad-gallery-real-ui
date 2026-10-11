@@ -80,6 +80,13 @@ const more = [
   ['negagg-wrong-answers-superbot-4444df6a', 'negagg-wrong-answers-superbot-4444df6a/', 'ASK ANOTHER MODEL. SAME CHAT.', 'Ad spots',
     { desc: 'The headline card, then the feature working in the real superbot hub: one question typed into the composer and routed to ChatGPT, which answers it; then the routing chip "Ask Claude too" runs the same ask past Claude in the same thread, so both takes stack one above the other and the pointer presses "Use this" on the second. Nothing is retyped, the composer platform chip follows the switch, and the end card closes on EVERY MODEL. ONE CHAT. 22 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Clean solution cut of negativity-agg complaint rank 2 wrong-hallucinated-answers; no complaint, quote or count card on screen.' }],
   // <<< negagg-wrong-answers-superbot-4444df6a
+  // >>> negagg-privacy-superbot-30c6568c (negativity-agg complaint rank 3 'privacy-data' is the internal
+  // reason for the feature only; nothing from the complaint is on screen in this cut: no quote, no review
+  // count, no negative hook copy. Source
+  // quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-privacy-superbot-30c6568c)
+  ['negagg-privacy-superbot-30c6568c', 'negagg-privacy-superbot-30c6568c/', 'KEEP IT ON YOUR MACHINE.', 'Ad spots',
+    { desc: 'The headline card, then the feature working in the real superbot hub. The first ask is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing the models on the account: ChatGPT, Claude, and superbot-omni, the house model that runs on the user\'s own computer, marked ON THIS DEVICE. The pointer picks superbot-omni, the chip wears LOCAL, and the same thread carries on: the follow-up "Add the salary band numbers to point two." is typed and sent, and it is answered on this device, with everything above it still in context. It closes on the line "Same thread. Answered on this machine." and the end card EVERY MODEL. ONE CHAT. 22.5 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. That superbot-omni runs on the user\'s computer is a published Superbot house-model fact (superbot.gg/api, house models). Clean solution cut of negativity-agg complaint rank 3 privacy-data: no complaint, quote, count or error state on screen.' }],
+  // <<< negagg-privacy-superbot-30c6568c
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
@@ -2015,6 +2022,9 @@ const KEEP_IDS = new Set([
   // >>> keep negagg-wrong-answers-superbot-4444df6a
   'negagg-wrong-answers-superbot-4444df6a',
   // <<< keep negagg-wrong-answers-superbot-4444df6a
+  // >>> keep negagg-privacy-superbot-30c6568c
+  'negagg-privacy-superbot-30c6568c',
+  // <<< keep negagg-privacy-superbot-30c6568c
   // >>> keep negagg-crashes-bugs-superbot-85553d96
   // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
   'negagg-crashes-bugs-superbot-85553d96',

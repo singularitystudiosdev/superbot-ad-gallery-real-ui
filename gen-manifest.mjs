@@ -1964,6 +1964,18 @@ const more = [
   ['keep-the-thread-superbot-7fcf1c91', 'keep-the-thread-superbot-7fcf1c91/', 'SWITCH AI. KEEP THE THREAD. · every agent\'s chats in one searchable list, and the same thread goes on (12 s)', 'Ad spots',
     { desc: 'Chats from every agent you pay for (ChatGPT, Claude, Gemini, Grok, Cursor, Copilot, Devin, Hermes) sit in one searchable list. The user types, the list narrows to the chat that was started in Claude Code, and opens it: the thread is already there, the composer shows Context 31k of 1m, and Pinned context and on your phone too chips land beside it. The user taps the composer\'s model chip, sends ship it, and the same thread finishes on Gemini 3 Pro (Shipped to staging. 3 checks green.). Ends on Switch AI. / Keep the thread., the Superbot mascot and superbot.gg. No complaint is shown: the spot is the solution only (user ruling). The search box, the list rows, the asks and the counts are made up; the model pick is the user\'s, not superbot\'s. 12.4 s, 60 fps, 4:5 and 16:9.' }],
   // <<< keep-the-thread-superbot-7fcf1c91
+  // >>> live-limits-every-plan-superbot-7fcf1c91
+  // EVERY PLAN'S LIMITS, LIVE. (2026-10-11, 7fcf1c91, negativity-agg feed ad 1 v2): replaces ad 1 (which showed the
+  // limit). SOLUTION ONLY (user ruling p4): no hook card, no limit notice, no red callout. The spot opens on the real
+  // Superbot chat, a Claude task runs on across the plans you already pay for, the relay's Accounts view shows every
+  // plan's live five-hour and seven-day bars and the one endpoint, and the same task finishes. Forked from the
+  // usage-limit-keep-going engine with the outage-next-model framing fixes (13.5 design px text floor, 16:9 k=2.10 and
+  // an 820-column). 15 s, 60 fps, silent; 4:5, 16:9, 4:3 and 1:1 renders. Copy checked against superbot.gg/features
+  // (live limits on every plan; your plans, one endpoint) and superbot.gg/docs.md (failover between your sign-ins; a
+  // seat at its limit hands the call on).
+  ['live-limits-every-plan-superbot-7fcf1c91', 'live-limits-every-plan-superbot-7fcf1c91/', 'EVERY PLAN\'S LIMITS, LIVE. · the relay\'s Accounts view with a 5-hour and 7-day bar per plan, and a Claude task that keeps going across them (15 s)', 'Ad spots',
+    { desc: 'The spot opens on the Superbot chat with the model set to Claude Opus 5.5. The ask, finish the auth refactor then run the tests, sends and the task runs (On it. Refactoring auth across 14 files. with an Editing files 9 / 14 chip). The relay\'s Accounts view comes up over it with the caption Every plan\'s limits, live. and one row per plan (two Claude sign-ins and ChatGPT Plus), each with a live five-hour and seven-day bar; the foot line reads One endpoint for every plan and key. It lifts and the chip Running on your next Claude plan lands with a green check, then the task finishes (Done. 14 files edited, 42 tests pass.). Ends on Every plan\'s limits, live., the Superbot mascot and superbot.gg. No limit hit, error or complaint is ever shown (user ruling). The account emails and percentages are made up. 15 s, 60 fps, 4:5 and 16:9.' }],
+  // <<< live-limits-every-plan-superbot-7fcf1c91
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -2019,6 +2031,10 @@ const KEEP_IDS = new Set([
   // added (2026-10-11, 7fcf1c91): SWITCH AI. KEEP THE THREAD., the context-memory-loss feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
   'keep-the-thread-superbot-7fcf1c91',
   // <<< keep keep-the-thread-superbot-7fcf1c91
+  // >>> keep live-limits-every-plan-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): EVERY PLAN'S LIMITS, LIVE., the usage-limits feed ad 1 v2, solution only (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
+  'live-limits-every-plan-superbot-7fcf1c91',
+  // <<< keep live-limits-every-plan-superbot-7fcf1c91
   // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
   'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',

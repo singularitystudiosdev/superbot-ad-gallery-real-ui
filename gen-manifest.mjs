@@ -68,6 +68,12 @@ const more = [
   ['negagg-crashes-bugs-superbot-85553d96', 'negagg-crashes-bugs-superbot-85553d96/', 'CHATGPT WENT OFFLINE · same chat, Gemini picks the ask up', 'Ad spots',
     { desc: 'One ask typed into superbot, routed to ChatGPT, which comes back with its own failure state instead of an answer: blank thread, "Looks like you\'re offline. Reconnect to send messages." and, after a Retry that spins and gives up, "There\'s a problem with your request". Nothing is retyped: superbot carries the same ask on in Gemini in the same thread, and Gemini answers it and drafts the launch post. The hook card is the strongest one star ChatGPT review verbatim (2,418 thumbs up) and the count card is the cluster total, 20,488 one and two star reviews of ChatGPT and Meta AI that mention crashes or errors (negativity-agg complaint rank 1, crashes-bugs). The ChatGPT failure is recreated as a UI state, no ChatGPT screenshots; the hub is the real superbot UI. 21.9 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Copies its 4:5 style basis from every-model-one-chat-superbot-efa8df82.' }],
   // <<< negagg-crashes-bugs-superbot-85553d96
+  // >>> negagg-wrong-answers-superbot-4444df6a (negativity-agg complaint rank 2 'wrong-hallucinated-answers' is
+  // the internal reason for the feature only; nothing from the complaint is on screen in this cut. Source
+  // quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-wrong-answers-superbot-4444df6a)
+  ['negagg-wrong-answers-superbot-4444df6a', 'negagg-wrong-answers-superbot-4444df6a/', 'ASK ANOTHER MODEL. SAME CHAT.', 'Ad spots',
+    { desc: 'The headline card, then the feature working in the real superbot hub: one question typed into the composer and routed to ChatGPT, which answers it; then the routing chip "Ask Claude too" runs the same ask past Claude in the same thread, so both takes stack one above the other and the pointer presses "Use this" on the second. Nothing is retyped, the composer platform chip follows the switch, and the end card closes on EVERY MODEL. ONE CHAT. 22 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Clean solution cut of negativity-agg complaint rank 2 wrong-hallucinated-answers; no complaint, quote or count card on screen.' }],
+  // <<< negagg-wrong-answers-superbot-4444df6a
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
@@ -1984,6 +1990,9 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // >>> keep negagg-wrong-answers-superbot-4444df6a
+  'negagg-wrong-answers-superbot-4444df6a',
+  // <<< keep negagg-wrong-answers-superbot-4444df6a
   // >>> keep negagg-crashes-bugs-superbot-85553d96
   // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
   'negagg-crashes-bugs-superbot-85553d96',

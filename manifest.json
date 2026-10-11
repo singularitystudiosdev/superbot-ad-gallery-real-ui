@@ -9,6 +9,15 @@
     "desc": "One ask typed into superbot, routed to ChatGPT, which comes back with its own failure state instead of an answer: blank thread, \"Looks like you're offline. Reconnect to send messages.\" and, after a Retry that spins and gives up, \"There's a problem with your request\". Nothing is retyped: superbot carries the same ask on in Gemini in the same thread, and Gemini answers it and drafts the launch post. The hook card is the strongest one star ChatGPT review verbatim (2,418 thumbs up) and the count card is the cluster total, 20,488 one and two star reviews of ChatGPT and Meta AI that mention crashes or errors (negativity-agg complaint rank 1, crashes-bugs). The ChatGPT failure is recreated as a UI state, no ChatGPT screenshots; the hub is the real superbot UI. 21.9 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Copies its 4:5 style basis from every-model-one-chat-superbot-efa8df82."
   },
   {
+    "id": "negagg-wrong-answers-superbot-4444df6a",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ASK ANOTHER MODEL. SAME CHAT.",
+    "src": "animations/negagg-wrong-answers-superbot-4444df6a/",
+    "thumb": "assets/shots/negagg-wrong-answers-superbot-4444df6a.png",
+    "desc": "The headline card, then the feature working in the real superbot hub: one question typed into the composer and routed to ChatGPT, which answers it; then the routing chip \"Ask Claude too\" runs the same ask past Claude in the same thread, so both takes stack one above the other and the pointer presses \"Use this\" on the second. Nothing is retyped, the composer platform chip follows the switch, and the end card closes on EVERY MODEL. ONE CHAT. 22 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Clean solution cut of negativity-agg complaint rank 2 wrong-hallucinated-answers; no complaint, quote or count card on screen."
+  },
+  {
     "id": "every-model-one-chat-sb-superbot-efa8df82",
     "type": "animation",
     "group": "Ad spots",

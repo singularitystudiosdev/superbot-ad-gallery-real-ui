@@ -29,7 +29,7 @@ const END_DUR = 3.8, DIP = 0.35;
 // ---------- the end card ----------
 function buildEnd(sec) {
   sec.innerHTML = '<div class="lock ul-end"><div class="face"></div><div class="words"><div class="end-slide"><h1>One key.<br><em>Every model.</em></h1><p class="ul-url">superbot.gg</p><p class="ul-sub">Private beta. Invite only.</p></div></div></div>';
-  const mark = shell.makeMark(250);
+  const mark = shell.makeMark(250, { freeze: 0 });
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
 }

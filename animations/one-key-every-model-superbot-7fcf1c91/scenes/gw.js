@@ -37,13 +37,14 @@ const asset = (f) => new URL('../brand/' + f, import.meta.url).href;
 
 let el = null;
 
-// the design box: a console laid out at DW design px, scaled so it fills the frame width
+// the design box: a console laid out at DW design px and enlarged to the frame with CSS `zoom`, NOT with a
+// transform. A `transform: scale(k)` composites the scene at its own width (DW px, DPR 1) and then the browser
+// resamples that raster up to the frame width, which softens every glyph (k=1.70 at 16:9, 1.45 at 4:5). `zoom`
+// participates in layout, so text is rasterized at the delivered size: 1:1 device pixels, crisp.
 function geo(W) {
   if (el.geo && el.geo.W === W) return el.geo;
   const k = W >= 1700 ? 1.70 : W >= 1400 ? 1.60 : W >= 1000 ? 1.50 : 1.45;
   const DW = W / k, DH = H / k;
-  el.root.style.width = DW + 'px';
-  el.root.style.height = DH + 'px';
   el.root.classList.toggle('tall', DW < 800);   // 1x1 and 4x5 stack the rail under the terminal
   el.geo = { W, DW, DH, k };
   return el.geo;
@@ -132,14 +133,19 @@ export default {
     const W = (ctx && ctx.W) || 1920;
     const g = geo(W);
 
-    // the console is laid out at DW and scaled to the frame; the camera push-in is on the shell itself, so the
-    // scene box never exceeds the frame (the containment gate measures boxes, not clips).
-    el.root.style.transform = `translate(${(W / 2).toFixed(2)}px,${(H / 2).toFixed(2)}px) scale(${g.k.toFixed(5)}) translate(${(-g.DW / 2).toFixed(2)}px,${(-g.DH / 2).toFixed(2)}px)`;
-    // camera: a slow push-in so the console is never quite static; the console eases in on top of it
-    const z = lerp(1.022, 1.0, inOutCubic(seg(t, 0, 3.2)));
+    // the console is laid out at DW design px and enlarged with `zoom` (crisp: no transform-scale rasterization).
+    // The camera push-in IS the zoom: a smaller layout box at a bigger zoom reads as a 2% push-in while the
+    // rendered box stays exactly the frame, so nothing ever leaves the frame. Values are written every frame but
+    // the layout is untouched between frames except during the 3.2 s push-in, which is deliberately moving.
+    const z = lerp(1.02, 1.0, inOutCubic(seg(t, 0, 3.2)));
+    const kk = g.k * z;
+    el.root.style.zoom = kk.toFixed(5);
+    el.root.style.width = (W / kk).toFixed(3) + 'px';
+    el.root.style.height = (H / kk).toFixed(3) + 'px';
+    // the console eases in; the entry offset is whole pixels so text never sits on a half pixel once it lands
     const inP = outCubic(seg(t, 0.02, 0.62));
     el.sh.style.opacity = inP.toFixed(3);
-    el.sh.style.transform = `translateY(${((1 - inP) * 22).toFixed(2)}px) scale(${z.toFixed(5)})`;
+    el.sh.style.transform = `translateY(${Math.round((1 - inP) * 22)}px)`;
 
     // which exchange is live (its model id read from the request that has landed)
     let live = -1;

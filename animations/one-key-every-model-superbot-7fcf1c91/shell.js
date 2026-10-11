@@ -36,9 +36,14 @@ const h = (html) => { const t = document.createElement('template'); t.innerHTML 
 const $ = (root, sel) => root.querySelector(sel);
 
 // ---------- the live mark, made deterministic ----------
-/** makeMark(size) -> { el, render(t) }. The assets/sb-mark-live mascot, but frozen off the wall clock:
-    its CSS loops are paused and seeked to t, and it blinks on a fixed schedule. Call render(t) per frame. */
-export function makeMark(size = 16) {
+/** makeMark(size, opts) -> { el, render(t) }. The assets/sb-mark-live mascot, but frozen off the wall clock:
+    its CSS loops are paused and seeked, and it blinks on a fixed schedule. Call render(t) per frame.
+    opts.freeze = a seconds value: every loop holds that one pose forever (a still mascot, for an end card that
+    must not wobble). Every animation is collected from the wrapper ITSELF as well as its subtree: mark-bob lives
+    on .mark-wrap, and getAnimations({subtree:true}) does not include the element's own animations, so the bob
+    used to keep running on the wall clock and the mark shook by up to ~2 px frame to frame in a render
+    (measured with .tmp/render/22-mascot-jitter.mjs: centroid dy 2.14 px over 6 end-card frames). */
+export function makeMark(size = 16, opts = {}) {
   const host = document.createElement('span');
   host.className = 'sbx-markhost';
   host.style.cssText = `display:grid;place-items:center;width:${size}px;height:${size}px`;
@@ -52,14 +57,18 @@ export function makeMark(size = 16) {
   host.appendChild(wrap);
   const eyes = [...wrap.querySelectorAll('.mark-eye')];
   const baseRy = eyes.map((e) => e.getAttribute('ry'));
+  const freeze = opts.freeze == null ? null : +opts.freeze;
   let anims = null, lastT = NaN;
   return {
     el: host,
     render(t) {
-      if (t === lastT) return; lastT = t;
-      if (!anims || !anims.length) anims = host.isConnected ? wrap.getAnimations({ subtree: true }) : null;
-      if (anims) for (const a of anims) { try { a.pause(); a.currentTime = Math.max(0, t) * 1000; } catch (e) { /* ignore */ } }
-      // blinks: a 0.12s shut every 3.6s (every third one a one-eye wink)
+      if (t === lastT && freeze == null) return; lastT = t;
+      if (!anims || !anims.length) {
+        anims = host.isConnected ? [...new Set([...wrap.getAnimations(), ...wrap.getAnimations({ subtree: true })])] : null;
+      }
+      const at = freeze == null ? Math.max(0, t) : freeze;
+      if (anims) for (const a of anims) { try { a.pause(); a.currentTime = at * 1000; } catch (e) { /* ignore */ } }
+      // blinks: a 0.12s shut every 3.6s (every third one a one-eye wink). Eyes only: the mark's box never moves.
       const k = Math.floor(t / 3.6), ph = t - k * 3.6;
       const shut = ph > 2.2 && ph < 2.32;
       eyes.forEach((e, i) => e.setAttribute('ry', shut && !(k % 3 === 2 && i === 0) ? '1' : baseRy[i]));

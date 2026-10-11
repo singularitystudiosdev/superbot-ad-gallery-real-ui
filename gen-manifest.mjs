@@ -2043,6 +2043,13 @@ const more = [
   ['keep-the-thread-real-superbot-7fcf1c91', 'keep-the-thread-real-superbot-7fcf1c91/', 'SWITCH AI. KEEP THE THREAD. (real UI) · one superbot thread, three models: search, switch in the picker, the same thread keeps working (31 s)', 'Ad spots',
     { desc: "A real superbot desktop thread, built from the app's own UI (the Real-UI kit), carried across three models. The spot opens on the hub with its populated chat list; the search palette (date parser) finds a thread mid-task, a GPT-5 Codex fix of utils/date.ts with its code block, an unfolded diff and a passing npm test run. The next ask (does utils/time.ts have the same bug? fix it and run the whole suite) is typed, the model picker opens and switches to Sonnet 4.6, and the same thread answers with a new diff of utils/time.ts and a green full suite (58 of 58). A third ask (add a regression test for the Z suffix, then write the commit message) switches the picker to superbot, which lands a table of the three changes, the commit message and a third diff (59 of 59), the thread scrolling as it grows. Ends on Switch AI. Keep the thread., the Superbot mascot, superbot.gg and Private beta. Invite only. No error, outage, limit or complaint on screen. The file contents, counts and asks are made up; every frame is the real app DOM. 31 s, 60 fps, 4:5, 16:9, 4:3 and 1:1." }],
   // <<< keep-the-thread-real-superbot-7fcf1c91
+  // >>> live-limits-real-superbot-7fcf1c91
+  // EVERY PLAN'S LIMITS, LIVE. (real UI) (2026-10-11, 7fcf1c91, negativity-agg feed ad 1 v2): rebuilt on the Real-UI kit (captured superbot-desktop DOM + stylesheet, native 1.2 zoom layout). Solution only (user ruling): no
+  // limit hit, amber or red bar, reset time or error on screen. A real thread does the work, the real Usage panel (sidebar account widget) shows every plan's 5 hour and 7 day bars filling to calm readings and ticking live, the same thread carries on.
+  // 32.4 s, 60 fps, silent; 4:5, 16:9, 4:3 and 1:1 renders. Claims checked against superbot.gg/features ("live limits on every plan"), /docs.md (failover between your sign-ins; seats of one vendor are shared) and /llms.txt (registry entry in ads-feed/registry.7fcf1c91.json).
+  ['live-limits-real-superbot-7fcf1c91', 'live-limits-real-superbot-7fcf1c91/', 'EVERY PLAN\'S LIMITS, LIVE. (real UI) · the real Usage panel: every plan\'s 5 hour and 7 day bars fill and tick live while the same thread keeps working (32 s)', 'Ad spots',
+    { desc: "A real superbot desktop thread, built from the app's own UI (the Real-UI kit). The spot opens on the hub with its composer on GPT-5 Codex; a coding ask (toCsv drops the quotes around cells that contain commas) is typed and sent, the live row works through reading, editing and running the tests, and the answer lands with a code block, an unfolded diff of utils/csv.ts and a green npm test run (9 of 9) while the composer's context meter climbs. The sidebar account widget opens the Usage panel: the Superbot Pro credits (8,200 of 10,000) and the ChatGPT Plus and Claude Pro limit bars (5 hour, 7 day and the per-model weekly bar) fill row by row to calm readings, then tick up live. The same thread carries on: the next ask (does utils/tsv.ts have the same bug? fix it and run the whole suite) is typed, the model picker opens and switches to Sonnet 4.6 (Claude Pro), and the thread answers with a new diff of utils/tsv.ts and a green full suite (41 of 41). The Usage panel opens once more and Claude's bars have moved with the work. Ends on Every plan's limits, live., the Superbot mascot, superbot.gg and Private beta. Invite only. No limit hit, red or amber bar, reset time or error on screen. The file contents, counts and asks are made up; every frame is the real app DOM. 32 s, 60 fps, 4:5, 16:9, 4:3 and 1:1." }],
+  // <<< live-limits-real-superbot-7fcf1c91
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -2131,6 +2138,10 @@ const KEEP_IDS = new Set([
   // added (2026-10-11, 7fcf1c91): SWITCH AI. KEEP THE THREAD. (real UI), feed ad 3 v2 on the Real-UI kit (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
   'keep-the-thread-real-superbot-7fcf1c91',
   // <<< keep keep-the-thread-real-superbot-7fcf1c91
+  // >>> keep live-limits-real-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): EVERY PLAN'S LIMITS, LIVE. (real UI), feed ad 1 v2 on the Real-UI kit (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
+  'live-limits-real-superbot-7fcf1c91',
+  // <<< keep live-limits-real-superbot-7fcf1c91
   // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
   'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',

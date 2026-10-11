@@ -2,16 +2,17 @@
    phone), the Claude / GPT tiles, the limit notice, the Accounts panel and the end card. Sizes marked "video px" are
    written for the delivered frame; --k turns them into stage px (a 4:5 stage is 864 wide and is delivered at 1080). */
 
-/* ---- thread text, one step up from the reference ---- */
-#s-tabs .sbsite.ask .hub .qc-u .m-text { font-size: 13.5px; line-height: 19px; padding: 8px 15px; }
-#s-tabs .sbsite.ask .hub .qc-say { font-size: 13.5px; line-height: 19px; }
-#s-tabs .sbsite.ask .hub .qc-who { font-size: 13.5px; }
-#s-tabs .sbsite.ask .hub .qc-who small { font-size: 11.5px; }
-#s-tabs .sbsite.ask .hub .qc-sw { font-size: 13.5px; height: 36px; }
-#s-tabs .sbsite.ask .hub .ch-tool { font-size: 12px; line-height: 18px; }
-#s-tabs .sbsite.ask .hub .ch-tool .yt-count { font-size: 11px; line-height: 18px; }
-#s-tabs .sbsite.ask .hub .rc-ph { font-size: 13.5px; }
-#s-tabs .sbsite.ask .hub .rc-plat { font-size: 12.5px; }
+/* ---- thread text: the 13.5 design px floor carried from ad 2 / ad 3 (15 px asks and replies, 14 px composer and
+   routing chips, 13.5 px sub-labels and tool chips) so nothing on screen reads under the floor in the feed ---- */
+#s-tabs .sbsite.ask .hub .qc-u .m-text { font-size: 15px; line-height: 21px; padding: 9px 16px; }
+#s-tabs .sbsite.ask .hub .qc-say { font-size: 14px; line-height: 20px; margin-bottom: 6px; }
+#s-tabs .sbsite.ask .hub .qc-who { font-size: 15px; }
+#s-tabs .sbsite.ask .hub .qc-who small { font-size: 13.5px; }
+#s-tabs .sbsite.ask .hub .qc-sw { font-size: 14px; height: 38px; }
+#s-tabs .sbsite.ask .hub .ch-tool { font-size: 13.5px; line-height: 19px; }
+#s-tabs .sbsite.ask .hub .ch-tool .yt-count { font-size: 13.5px; line-height: 19px; }
+#s-tabs .sbsite.ask .hub .rc-ph { font-size: 14px; }
+#s-tabs .sbsite.ask .hub .rc-plat { font-size: 14px; }
 #s-tabs .sbsite.ask .hub .qc-pi img[data-app="claude"], #s-tabs .sbsite.ask .hub .qc-pi img[data-app="gpt"] { width: 13px; height: 13px; }
 #s-tabs .sbsite.ask .hub .qc-pi img[data-app="gpt"] { border-radius: 50%; }
 

@@ -52,3 +52,21 @@
 /* the follow-up lands as a new turn: the same bubble, one step in from the history above it */
 #s-tabs .sbsite.ask .hub .kc-new { opacity: 0; }
 #s-tabs .sbsite.ask .hub .kc-hist .qc-say { color: #e5e5ea; }
+/* ---- the text floor: every line the thread shows is one step up from the hub reference (12.5 px) so nothing in
+   the delivered file lands under ~28 px (13.5 design px * 2.15 at 4:5, * 2.10 at 16:9). Carried over from the frames
+   the review rejected in ads 1-2: chips and sub-labels included. ---- */
+#s-tabs .sbsite.ask .hub .qc-u .m-text { font-size: 15px; line-height: 21px; padding: 9px 16px; }
+#s-tabs .sbsite.ask .hub .qc-say { font-size: 14px; line-height: 20px; margin-bottom: 6px; }
+#s-tabs .sbsite.ask .hub .qc-who { font-size: 15px; margin: 1px 0 5px; }
+#s-tabs .sbsite.ask .hub .qc-who small { font-size: 13.5px; }
+#s-tabs .sbsite.ask .hub .qc-sw { font-size: 14px; height: 38px; }
+#s-tabs .sbsite.ask .hub .ch-tool { font-size: 13.5px; line-height: 19px; margin-bottom: 4px; }
+#s-tabs .sbsite.ask .hub .ch-tool .yt-count { font-size: 13.5px; line-height: 19px; }
+#s-tabs .sbsite.ask .hub .rc-ph { font-size: 14px; }
+#s-tabs .sbsite.ask .hub .rc-plat { font-size: 14px; }
+#s-tabs .sbsite.ask .hub .qc-pi img[data-app] { width: 14px; height: 14px; }
+#s-tabs .sbsite.ask .hub .qc-pi img[data-app="gpt"] { border-radius: 50%; }
+#s-tabs .sbsite.ask .hub .feed-in { gap: 7px; }
+#s-tabs .sbsite.ask .hub .composer { margin-bottom: 10px; }
+#s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 590px) / 2)) 4px; }
+#s-tabs .sbsite.ask .hub .kc-row .qc-tile { width: 26px; height: 26px; }

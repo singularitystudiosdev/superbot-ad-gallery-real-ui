@@ -121,6 +121,13 @@ const more = [
   ['negagg-quick-superbot-e89033d8', 'negagg-quick-superbot-e89033d8/', 'FAST MODEL. ONE CLICK.', 'Ad spots',
     { desc: 'Opens straight in the real superbot hub, no headline card. The user drops 12 travel photos into the composer (a compact grid chip), types "rename these by date and place", opens the composer\'s model picker and picks superbot-fast, the house model listed as "Quick and cheap, for small jobs" (FAST pill). A routing chip confirms "Switched to superbot-fast" and the reply, under a FAST badge, shows a before/after file list with a thumbnail for each photo: IMG_4471.jpg becomes 2026-06-12 Porto, Ribeira.jpg and so on, five rows and "+7 more". For "make a caption for the best one" it returns the Sintra, Pena Palace photo as a large card with a one-line caption and three hashtag chips. For "translate it to Spanish, French and Japanese" it returns three language rows with flags and the translated line, then a "Copied all 3" chip. Then the headline card FAST MODEL. ONE CLICK. and the end card EVERY MODEL. ONE CHAT. 23 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The photos are sourced Unsplash photographs (img/CREDITS.txt); the camera file names, dates, caption and translations are invented demo content. Solution-only: no complaint, quote, count, speed number or error UI on screen.' }],
   // <<< negagg-quick-superbot-e89033d8
+  // >>> negagg-cost-superbot-c8101703 (negativity-agg theme 'subscription-cost' (paying for several AI subscriptions) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no price of another product, no error UI, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply, sourced Unsplash photos (img/CREDITS.txt).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-cost-superbot-c8101703)
+  ['negagg-cost-superbot-c8101703', 'negagg-cost-superbot-c8101703/', 'ONE APP FOR EVERY AI YOU PAY FOR.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. "connect my AI accounts": superbot signs in to ChatGPT, Claude and Gemini (three ticking steps with each app\'s mark) and a "Your plans" card lists the three plans, ChatGPT Plus, Claude Pro and Google AI Pro, each marked connected, with the footer "superbot, Free plan, $0". For "make a poster for my bakery\'s Saturday sale" the user opens the composer\'s model picker and picks ChatGPT; a routing chip confirms "Switching to ChatGPT, on your plan" and the reply is a poster image card (a sourced bakery bread photo with the type laid over it: Maple Street Bakery, Saturday Sale, 20% off, Saturday 10am to 3pm, 14 Maple St) next to a "0 superbot credits, made on your ChatGPT plan" chip. For "write the Instagram caption and schedule it for Saturday 9am" the picker picks Claude, the chip confirms "on your plan", the caption streams into a card with three hashtags, two tool steps tick (Opened Instagram, Scheduled Sat 9:00 AM) and a scheduled-post card lands with the poster thumbnail. Then the headline card ONE APP FOR EVERY AI YOU PAY FOR. and the end card EVERY MODEL. ONE CHAT. 24 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The bakery, sale, caption and time are invented demo content; the two photos are sourced Unsplash photographs (img/CREDITS.txt). Models on your own subscriptions cost no superbot credits (superbot.gg/api.md). Solution-only: no complaint, quote, count, competitor price or error UI on screen.' }],
+  // <<< negagg-cost-superbot-c8101703
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
@@ -2086,6 +2093,9 @@ const KEEP_IDS = new Set([
   // >>> keep negagg-quick-superbot-e89033d8
   'negagg-quick-superbot-e89033d8',
   // <<< keep negagg-quick-superbot-e89033d8
+  // >>> keep negagg-cost-superbot-c8101703
+  'negagg-cost-superbot-c8101703',
+  // <<< keep negagg-cost-superbot-c8101703
   // >>> keep negagg-crashes-bugs-superbot-85553d96
   // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
   'negagg-crashes-bugs-superbot-85553d96',

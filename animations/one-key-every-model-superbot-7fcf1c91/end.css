@@ -1,0 +1,20 @@
+/* end.css: the end card only (mascot, the benefit line, the address). Lifted from
+   ../live-limits-every-plan-superbot-7fcf1c91/scenes/tabs-assets/ul.css (the hub's end card), reduced to the
+   #s-end rules this spot uses: no hook card, no accounts panel, no thread styles. --grad and --muted come from
+   style.css's :root. */
+#s-end .lock.ul-end { display: flex; flex-direction: row; align-items: center; gap: 64px; text-align: left; }
+#s-end .ul-end .face { flex: none; width: 250px; height: 250px; }
+#s-end .ul-end .words { overflow: visible; }
+#s-end .ul-end .words h1 { margin: 0; font-size: 116px; font-weight: 800; letter-spacing: -.025em; line-height: 1.04; color: #fff; white-space: nowrap; }
+#s-end .ul-end .words h1 em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; padding-bottom: .06em; }
+#s-end .ul-end .words p { margin: 22px 0 0 4px; }
+#s-end .ul-end .ul-url { font-size: 56px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+#s-end .ul-end .ul-sub { margin-top: 10px; font-size: 32px; font-weight: 500; color: var(--muted); }
+html[data-ar="4x5"] #s-end .lock.ul-end, html[data-ar="1x1"] #s-end .lock.ul-end { flex-direction: column; gap: 34px; text-align: center; }
+html[data-ar="4x5"] #s-end .ul-end .words h1 { font-size: 84px; }
+html[data-ar="1x1"] #s-end .ul-end .words h1 { font-size: 100px; }
+html[data-ar="4x5"] #s-end .ul-end .face { width: 200px; height: 200px; }
+html[data-ar="4x5"] #s-end .ul-end .ul-url, html[data-ar="1x1"] #s-end .ul-end .ul-url { margin-left: 0; font-size: 46px; }
+html[data-ar="4x5"] #s-end .ul-end .ul-sub, html[data-ar="1x1"] #s-end .ul-end .ul-sub { margin-left: 0; font-size: 28px; }
+html[data-ar="4x3"] #s-end .ul-end .words h1 { font-size: 92px; }
+html[data-ar="4x3"] #s-end .lock.ul-end { gap: 44px; }

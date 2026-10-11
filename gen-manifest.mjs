@@ -1983,6 +1983,18 @@ const more = [
   ['live-limits-every-plan-superbot-7fcf1c91', 'live-limits-every-plan-superbot-7fcf1c91/', 'EVERY PLAN\'S LIMITS, LIVE. · the relay\'s Accounts view with a 5-hour and 7-day bar per plan, and a Claude task that keeps going across them (15 s)', 'Ad spots',
     { desc: 'The spot opens on the Superbot chat with the model set to Claude Opus 5.5. The ask, finish the auth refactor then run the tests, sends and the task runs (On it. Refactoring auth across 14 files. with an Editing files 9 / 14 chip). The relay\'s Accounts view comes up over it with the caption Every plan\'s limits, live. and one row per plan (two Claude sign-ins and ChatGPT Plus), each with a live five-hour and seven-day bar; the foot line reads One endpoint for every plan and key. It lifts and the chip Running on your next Claude plan lands with a green check, then the task finishes (Done. 14 files edited, 42 tests pass.). Ends on Every plan\'s limits, live., the Superbot mascot and superbot.gg. No limit hit, error or complaint is ever shown (user ruling). The account emails and percentages are made up. 15 s, 60 fps, 4:5 and 16:9.' }],
   // <<< live-limits-every-plan-superbot-7fcf1c91
+  // >>> one-key-every-model-superbot-7fcf1c91
+  // ONE KEY. EVERY MODEL. (2026-10-11, 7fcf1c91, negativity-agg feed ad 2 v2): a developer's gateway console. One
+  // caller key calls https://api.superbot.gg/v1 three times; the request body's model id changes (Claude, GPT,
+  // Gemini) and each answer streams back until data: [DONE]. SOLUTION ONLY (user ruling p4): no hook card, no error,
+  // no outage, no complaint. No cross-vendor failover is implied: each call names its own model id. Engine base:
+  // live-limits-every-plan (ad 2 / ad 3's 13.5 design px text floor). 17 s, 60 fps, silent; 4:5, 16:9, 4:3 and 1:1
+  // renders. Copy checked against superbot.gg/api.md (the endpoint, the route, the Bearer key, the body and the
+  // scope), superbot.gg/docs.md (the <vendor>/<model> id form, the data: frames and data: [DONE], the sign-in kinds)
+  // and superbot.gg/features (your plans, one endpoint; one key calls all of them).
+  ['one-key-every-model-superbot-7fcf1c91', 'one-key-every-model-superbot-7fcf1c91/', 'ONE KEY. EVERY MODEL. · one endpoint, one key: the request\'s model id changes (Claude, GPT, Gemini) and each answer streams back (17 s)', 'Ad spots',
+    { desc: 'A developer\'s gateway console opens on https://api.superbot.gg/v1 with the caller key sbc_…7f2a (scope gateway:invoke). Three POST /v1/chat/completions calls run in it: the same ask (summarize the notes) reaches anthropic/claude-opus-5.5, then openai/gpt-6-sol, then google/gemini-3-pro, and each answer streams back as text/event-stream until data: [DONE]. Beside the terminal a rail shows what is behind that one key: the key and its scope, and the three plans it already covers (Claude Pro/Max, ChatGPT Plus, Gemini Code Assist). The spot closes on the foot line 1 key · 3 providers · one endpoint, then One key. / Every model., the Superbot mascot and superbot.gg. No error, outage, limit or complaint is on screen anywhere, and no cross-vendor failover is implied: each call names its own model id. The key, the ask and the answers are made up; the model ids are the <vendor>/<model> form docs.md documents, spelled with the model names superbot.gg shows. 17 s, 60 fps, 4:5 and 16:9.' }],
+  // <<< one-key-every-model-superbot-7fcf1c91
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -2045,6 +2057,10 @@ const KEEP_IDS = new Set([
   // added (2026-10-11, 7fcf1c91): EVERY PLAN'S LIMITS, LIVE., the usage-limits feed ad 1 v2, solution only (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
   'live-limits-every-plan-superbot-7fcf1c91',
   // <<< keep live-limits-every-plan-superbot-7fcf1c91
+  // >>> keep one-key-every-model-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): ONE KEY. EVERY MODEL., the one-endpoint gateway feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
+  'one-key-every-model-superbot-7fcf1c91',
+  // <<< keep one-key-every-model-superbot-7fcf1c91
   // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
   'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',

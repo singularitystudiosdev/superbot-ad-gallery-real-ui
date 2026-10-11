@@ -815,5 +815,14 @@
     "src": "animations/live-limits-every-plan-superbot-7fcf1c91/",
     "thumb": "assets/shots/live-limits-every-plan-superbot-7fcf1c91.png",
     "desc": "The spot opens on the Superbot chat with the model set to Claude Opus 5.5. The ask, finish the auth refactor then run the tests, sends and the task runs (On it. Refactoring auth across 14 files. with an Editing files 9 / 14 chip). The relay's Accounts view comes up over it with the caption Every plan's limits, live. and one row per plan (two Claude sign-ins and ChatGPT Plus), each with a live five-hour and seven-day bar; the foot line reads One endpoint for every plan and key. It lifts and the chip Running on your next Claude plan lands with a green check, then the task finishes (Done. 14 files edited, 42 tests pass.). Ends on Every plan's limits, live., the Superbot mascot and superbot.gg. No limit hit, error or complaint is ever shown (user ruling). The account emails and percentages are made up. 15 s, 60 fps, 4:5 and 16:9."
+  },
+  {
+    "id": "one-key-every-model-superbot-7fcf1c91",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ONE KEY. EVERY MODEL. · one endpoint, one key: the request's model id changes (Claude, GPT, Gemini) and each answer streams back (17 s)",
+    "src": "animations/one-key-every-model-superbot-7fcf1c91/",
+    "thumb": "assets/shots/one-key-every-model-superbot-7fcf1c91.png",
+    "desc": "A developer's gateway console opens on https://api.superbot.gg/v1 with the caller key sbc_…7f2a (scope gateway:invoke). Three POST /v1/chat/completions calls run in it: the same ask (summarize the notes) reaches anthropic/claude-opus-5.5, then openai/gpt-6-sol, then google/gemini-3-pro, and each answer streams back as text/event-stream until data: [DONE]. Beside the terminal a rail shows what is behind that one key: the key and its scope, and the three plans it already covers (Claude Pro/Max, ChatGPT Plus, Gemini Code Assist). The spot closes on the foot line 1 key · 3 providers · one endpoint, then One key. / Every model., the Superbot mascot and superbot.gg. No error, outage, limit or complaint is on screen anywhere, and no cross-vendor failover is implied: each call names its own model id. The key, the ask and the answers are made up; the model ids are the <vendor>/<model> form docs.md documents, spelled with the model names superbot.gg shows. 17 s, 60 fps, 4:5 and 16:9."
   }
 ]

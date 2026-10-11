@@ -1,0 +1,97 @@
+/* scenes/gw (one-key-every-model): the gateway console. Everything is scoped under .gw and laid out at DW design
+   px (scenes/gw.js sets .gw's width/height and the scale transform). Text floor 13.5 design px, carried from
+   ad 2 / ad 3 / live-limits: mono lines, the endpoint, the key and the rail labels are all >= 13.5 px. Nothing
+   here animates on its own: every moving value is written from lt in scenes/gw.js, so ?t= freezes a frame. */
+.gw { position: absolute; left: 0; top: 0; transform-origin: 0 0; background: #000; overflow: hidden; }
+.gw-glow { position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(58% 52% at 20% 8%, rgba(91,141,255,.20), transparent 70%),
+    radial-gradient(54% 52% at 88% 92%, rgba(192,38,211,.14), transparent 72%); }
+
+/* the console shell */
+.gw-sh { position: absolute; inset: 16px; display: flex; flex-direction: column; border-radius: 16px;
+  background: #0b0b0e; box-shadow: 0 0 0 1px #232329, 0 34px 90px rgba(0,0,0,.72); overflow: hidden; }
+
+/* header: the app, the endpoint, the connection state */
+.gw-bar { flex: none; display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px;
+  border-bottom: 1px solid #1b1b20; background: linear-gradient(#131317, #0f0f13); }
+.gw-dots { flex: none; display: flex; gap: 6px; }
+.gw-dots i { width: 10px; height: 10px; border-radius: 50%; background: #2a2a31; box-shadow: inset 0 0 0 1px #34343c; }
+.gw-name { font: 700 14px/1 var(--ui); color: #ececf1; white-space: nowrap; }
+.gw-url { font: 500 13.5px/1 var(--font-mono); color: #7f8695; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gw-live { flex: none; margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font: 600 13.5px/1 var(--font-mono); color: #8b8b96; white-space: nowrap; }
+.gw-live-d { width: 8px; height: 8px; border-radius: 50%; background: #2f3a34; box-shadow: inset 0 0 0 1px #3c4a43; }
+.gw-live.on { color: #7fe0a8; }
+.gw-live.on .gw-live-d { background: #3ad07a; box-shadow: 0 0 9px rgba(58,208,122,.75); }
+
+/* body: the terminal (calls) beside the rail (what is behind the one key) */
+.gw-body { flex: 1; min-height: 0; display: flex; }
+.gw-term { flex: 1; min-width: 0; min-height: 0; overflow: hidden; padding: 14px 16px; background: #08080a; }
+.gw-exs { display: flex; flex-direction: column; gap: 14px; will-change: transform; }
+
+/* one call */
+.gw-ex { border-left: 2px solid #33343c; padding-left: 11px; }
+.gw-v-claude { border-left-color: #d97757; }
+.gw-v-openai { border-left-color: #10a37f; }
+.gw-v-google { border-left-color: #4285f4; }
+.gw-l { font: 500 13.5px/20px var(--font-mono); color: #b6bac4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gw-m { color: #8ab4ff; font-weight: 700; }
+.gw-path { color: #d3d7e0; }
+.gw-k { color: #6f7480; }
+.gw-dim { color: #6f7480; }
+.gw-keyv { color: #ffd479; }
+.gw-code { margin: 1px 0 0; font: 500 13.5px/20px var(--font-mono); color: #cad0da; }
+.gw-code > div { white-space: pre; overflow: hidden; }
+.gw-p { color: #7d8291; }
+.gw-s { color: #9fd8a6; }
+.gw-n { color: #f0a35e; }
+.gw-ask { color: #d9c8ff; }
+.gw-id { color: #fff; background: rgba(255,255,255,.07); border-radius: 4px; padding: 0 3px; }
+.gw-v-claude .gw-id { color: #ffb08a; background: rgba(217,119,87,.16); }
+.gw-v-openai .gw-id { color: #6fe3b6; background: rgba(16,163,127,.18); }
+.gw-v-google .gw-id { color: #97bcff; background: rgba(66,133,244,.18); }
+
+/* the streamed reply */
+.gw-res { margin-top: 6px; }
+.gw-ok { color: #3ad07a; font-weight: 700; }
+.gw-stream { font: 500 13.5px/20px var(--font-mono); color: #e9ebf1; white-space: pre-wrap; word-break: break-word; }
+.gw-dl { color: #6f7480; }
+.gw-caret { display: inline-block; width: 7px; height: 15px; vertical-align: -2px; margin-left: 1px; background: #8ab4ff; }
+.gw-done { color: #6f7480; }
+
+/* the rail: the key and the plans behind the one endpoint */
+.gw-rail { flex: none; width: 300px; padding: 14px 16px 12px; background: #0a0a0d; border-left: 1px solid #1b1b20; display: flex; flex-direction: column; gap: 9px; }
+.gw-rail-hd { font: 700 15px/1 var(--ui); color: #ececf1; }
+.gw-keyrow { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.gw-ico { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 9px; background: #17171c; box-shadow: inset 0 0 0 1px #2a2a31; }
+.gw-ico svg { width: 17px; height: 17px; fill: none; stroke: #ffd479; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.gw-ktext { min-width: 0; display: grid; gap: 2px; }
+.gw-ktext b { font: 650 14px/1.2 var(--font-mono); color: #ffd479; overflow: hidden; text-overflow: ellipsis; }
+.gw-ktext small { font: 500 13.5px/1.2 var(--ui); color: #868b98; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gw-rail-sub { margin-top: 6px; font: 700 13.5px/1 var(--ui); color: #7c8290; text-transform: uppercase; letter-spacing: .07em; }
+.gw-prow { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 6px 8px; border-radius: 10px; box-shadow: inset 0 0 0 1px transparent; }
+.gw-plogo { flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: #17171c; box-shadow: inset 0 0 0 1px #2a2a31; }
+.gw-plogo img { width: 17px; height: 17px; display: block; object-fit: contain; }
+.gw-prow .gw-ktext b { font-family: var(--ui); color: #e9ebf1; font-weight: 650; }
+.gw-pdot { flex: none; margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #3ad07a; box-shadow: 0 0 7px rgba(58,208,122,.55); }
+.gw-prow.on { background: #15161d; box-shadow: inset 0 0 0 1px #2c3040; }
+.gw-prow.on .gw-pdot { box-shadow: 0 0 10px rgba(58,208,122,.95); }
+
+/* the closing banner */
+.gw-foot { flex: none; display: flex; align-items: center; gap: 9px; height: 54px; padding: 0 16px; border-top: 1px solid #1b1b20; background: linear-gradient(#141419, #0f0f13); }
+.gw-fb { font: 700 15px/1 var(--ui); color: #f2f3f7; white-space: nowrap; }
+.gw-fsep { color: #4a4a54; }
+.gw-furl { margin-left: auto; font: 500 13.5px/1 var(--font-mono); color: #9fb0ff; white-space: nowrap; }
+
+/* narrow frames (1x1, 4x5): the rail drops to a strip under the terminal */
+.gw.tall .gw-body { flex-direction: column; }
+.gw.tall .gw-rail { width: auto; flex-direction: row; align-items: center; gap: 10px; padding: 9px 14px; border-left: 0; border-top: 1px solid #1b1b20; }
+.gw.tall .gw-rail-hd, .gw.tall .gw-rail-sub { display: none; }
+.gw.tall .gw-keyrow { flex: none; }
+.gw.tall .gw-ktext small { display: none; }
+.gw.tall .gw-prow { flex: none; padding: 3px 5px; }
+.gw.tall .gw-prow .gw-ktext { display: none; }
+.gw.tall .gw-term { padding: 12px 14px; }
+.gw.tall .gw-url { display: none; }
+.gw.tall .gw-foot { gap: 7px; padding: 0 14px; }
+.gw.tall .gw-furl { font-size: 13.5px; }

@@ -1941,6 +1941,17 @@ const more = [
   ['outage-next-model-superbot-7fcf1c91', 'outage-next-model-superbot-7fcf1c91/', 'DOWN AGAIN? SAME CHAT, NEXT MODEL. · a ChatGPT task errors and the same chat finishes on Claude (17 s)', 'Ad spots',
     { desc: 'Down. Again. A finished ask to GPT-6 Sol comes back with the vendor error Selected model is at capacity. The user opens the composer model picker and picks Claude Opus 5.5, sends the same ask, and the same thread finishes the job (14 files refactored, 42 tests pass). Ends on Down again? Same chat, next model., the Superbot mascot and superbot.gg. The failed call shows in Activity; the model pick is the user\'s. 17 s, 60 fps, 4:5 and 16:9.' }],
   // <<< outage-next-model-superbot-7fcf1c91
+  // >>> keep-the-thread-superbot-7fcf1c91
+  // SWITCH AI. KEEP THE THREAD. (2026-10-11, 7fcf1c91, negativity-agg feed ad 3): theme context-memory-loss, the theme
+  // with the fastest-rising share in the feed (23 of its 31 authors in the last 3 days; STR llm_ai/pain/missing-chat-history,
+  // 33 authors, rising). NO COMPLAINT IS SHOWN (user ruling 2026-10-11): the spot is the solution only, no hook card, no
+  // error or forgetting beat. Forked from the outage-next-model engine (hub UI, mascot end card), 12.4 s, 60 fps, silent;
+  // 4:5, 16:9, 4:3 and 1:1 renders. Copy checked against superbot.gg/features (chats from 30+ agents in one searchable list
+  // on every device, a Claude Code chat carried on from the phone; the composer's context meter; memory and pinned-context
+  // tools) and superbot.gg/docs.md (the model pick is the user's).
+  ['keep-the-thread-superbot-7fcf1c91', 'keep-the-thread-superbot-7fcf1c91/', 'SWITCH AI. KEEP THE THREAD. · every agent\'s chats in one searchable list, and the same thread goes on (12 s)', 'Ad spots',
+    { desc: 'Chats from every agent you pay for (ChatGPT, Claude, Gemini, Grok, Cursor, Copilot, Devin, Hermes) sit in one searchable list. The user types, the list narrows to the chat that was started in Claude Code, and opens it: the thread is already there, the composer shows Context 31k of 1m, and Pinned context and on your phone too chips land beside it. The user taps the composer\'s model chip, sends ship it, and the same thread finishes on Gemini 3 Pro (Shipped to staging. 3 checks green.). Ends on Switch AI. / Keep the thread., the Superbot mascot and superbot.gg. No complaint is shown: the spot is the solution only (user ruling). The search box, the list rows, the asks and the counts are made up; the model pick is the user\'s, not superbot\'s. 12.4 s, 60 fps, 4:5 and 16:9.' }],
+  // <<< keep-the-thread-superbot-7fcf1c91
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1985,6 +1996,10 @@ const KEEP_IDS = new Set([
   // added (2026-10-11, 7fcf1c91): DOWN AGAIN? SAME CHAT, NEXT MODEL., the outages-errors feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
   'outage-next-model-superbot-7fcf1c91',
   // <<< keep outage-next-model-superbot-7fcf1c91
+  // >>> keep keep-the-thread-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): SWITCH AI. KEEP THE THREAD., the context-memory-loss feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
+  'keep-the-thread-superbot-7fcf1c91',
+  // <<< keep keep-the-thread-superbot-7fcf1c91
   // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
   'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',

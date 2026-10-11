@@ -1,0 +1,21 @@
+/* keep-the-thread: the end card. The live mascot (assets/sb-mark-live, driven by shell.makeMark) on the left, the
+   line and the address on the right; the line stacks over the mascot on the narrow frames. */
+#s-end .lock.kt-end { gap: 56px; }
+#s-end .kt-end .face { flex: none; width: 250px; height: 250px; }
+#s-end .kt-end .words { overflow: visible; }
+#s-end .kt-end .words h1 { margin: 0; font-size: 100px; font-weight: 800; letter-spacing: -.025em; line-height: 1.06; color: #fff; white-space: nowrap; }
+#s-end .kt-end .words h1 em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; padding-bottom: .06em; }
+#s-end .kt-end .words p { margin: 20px 0 0 4px; }
+#s-end .kt-end .ot-url { font-size: 52px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+#s-end .kt-end .ot-sub { margin-top: 10px; font-size: 30px; font-weight: 500; color: var(--muted); }
+html[data-ar="4x5"] #s-end .lock.kt-end, html[data-ar="1x1"] #s-end .lock.kt-end { flex-direction: column; gap: 30px; text-align: center; }
+html[data-ar="4x5"] #s-end .kt-end .words h1 { font-size: 66px; }
+html[data-ar="1x1"] #s-end .kt-end .words h1 { font-size: 72px; }
+html[data-ar="4x5"] #s-end .kt-end .face, html[data-ar="1x1"] #s-end .kt-end .face { width: 196px; height: 196px; }
+html[data-ar="4x5"] #s-end .kt-end .ot-url, html[data-ar="1x1"] #s-end .kt-end .ot-url { margin-left: 0; font-size: 42px; }
+html[data-ar="4x5"] #s-end .kt-end .ot-sub, html[data-ar="1x1"] #s-end .kt-end .ot-sub { margin-left: 0; font-size: 28px; }
+html[data-ar="4x3"] #s-end .kt-end .words h1 { font-size: 84px; }
+html[data-ar="4x3"] #s-end .lock.kt-end { gap: 44px; }
+
+/* the hook card: a size up on the narrow frames */
+html[data-ar="4x5"] .card .cl, html[data-ar="1x1"] .card .cl { font-size: 118px; }

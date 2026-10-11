@@ -770,5 +770,14 @@
     "src": "animations/outage-next-model-superbot-7fcf1c91/",
     "thumb": "assets/shots/outage-next-model-superbot-7fcf1c91.png",
     "desc": "Down. Again. A finished ask to GPT-6 Sol comes back with the vendor error Selected model is at capacity. The user opens the composer model picker and picks Claude Opus 5.5, sends the same ask, and the same thread finishes the job (14 files refactored, 42 tests pass). Ends on Down again? Same chat, next model., the Superbot mascot and superbot.gg. The failed call shows in Activity; the model pick is the user's. 17 s, 60 fps, 4:5 and 16:9."
+  },
+  {
+    "id": "keep-the-thread-superbot-7fcf1c91",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SWITCH AI. KEEP THE THREAD. · every agent's chats in one searchable list, and the same thread goes on (12 s)",
+    "src": "animations/keep-the-thread-superbot-7fcf1c91/",
+    "thumb": "assets/shots/keep-the-thread-superbot-7fcf1c91.png",
+    "desc": "Chats from every agent you pay for (ChatGPT, Claude, Gemini, Grok, Cursor, Copilot, Devin, Hermes) sit in one searchable list. The user types, the list narrows to the chat that was started in Claude Code, and opens it: the thread is already there, the composer shows Context 31k of 1m, and Pinned context and on your phone too chips land beside it. The user taps the composer's model chip, sends ship it, and the same thread finishes on Gemini 3 Pro (Shipped to staging. 3 checks green.). Ends on Switch AI. / Keep the thread., the Superbot mascot and superbot.gg. No complaint is shown: the spot is the solution only (user ruling). The search box, the list rows, the asks and the counts are made up; the model pick is the user's, not superbot's. 12.4 s, 60 fps, 4:5 and 16:9."
   }
 ]

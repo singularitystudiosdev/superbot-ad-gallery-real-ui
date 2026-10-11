@@ -1,0 +1,17 @@
+img/ CREDITS: every photo in this spot is a real, sourced Unsplash photograph, never drawn or generated.
+License: the Unsplash License (https://unsplash.com/license): free to use, including commercial use, no permission
+or attribution required (attribution is given here anyway). Fetched 2026-10-11 from each photo's Unsplash download
+endpoint (https://unsplash.com/photos/<id>/download?force=true&w=1400), resized to 900 px on the long edge,
+otherwise unmodified. Shown nowhere on screen as a credit. The hotel name, prices, itinerary and booking details in
+the spot are invented demo content.
+
+day1.jpg   Day 1 thumbnail (Baixa, yellow tram). Unsplash photo ljhCEaHYWJ8.
+           https://unsplash.com/photos/yellow-tram-in-historic-lisbon-street-ljhCEaHYWJ8
+day2.jpg   Day 2 thumbnail (Belem Tower). Unsplash photo KXgZd1KweoQ by Abigail Ybarra (@creativecoast).
+           https://unsplash.com/photos/belem-tower-in-lisbon-KXgZd1KweoQ
+day3.jpg   Day 3 thumbnail (Pena Palace, Sintra). Unsplash photo ci19YINguoc by Julia Solonina (@julie_soul).
+           https://unsplash.com/photos/pena-palace-in-sintra-portugal-ci19YINguoc
+day4.jpg   Day 4 thumbnail (Alfama rooftops at dusk). Unsplash photo _tvHkvtlG9c by Hongbin (@hbsun2013).
+           https://unsplash.com/photos/a-view-of-a-city-with-red-roofs-_tvHkvtlG9c
+hotel.jpg  Booking confirmation photo (hotel room). Unsplash photo T6WRDVQBn8M by Wes Hicks (@sickhews).
+           https://unsplash.com/photos/a-hotel-room-with-a-bed-chair-and-window-T6WRDVQBn8M

@@ -36,6 +36,15 @@
     "desc": "The headline card, then the feature working in the real superbot hub. The first ask is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing the models on the account: ChatGPT, Claude, and superbot-omni, the house model that runs on the user's own computer, marked ON THIS DEVICE. The pointer picks superbot-omni, the chip wears LOCAL, and the same thread carries on: the follow-up \"Add the salary band numbers to point two.\" is typed and sent, and it is answered on this device, with everything above it still in context. It closes on the line \"Same thread. Answered on this machine.\" and the end card EVERY MODEL. ONE CHAT. 22.5 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. That superbot-omni runs on the user's computer is a published Superbot house-model fact (superbot.gg/api, house models). Clean solution cut of negativity-agg complaint rank 3 privacy-data: no complaint, quote, count or error state on screen."
   },
   {
+    "id": "negagg-fast-superbot-3f3e0f39",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "FAST MODEL. ONE CLICK.",
+    "src": "animations/negagg-fast-superbot-3f3e0f39/",
+    "thumb": "assets/shots/negagg-fast-superbot-3f3e0f39.png",
+    "desc": "The headline card, then the feature working in the real superbot hub. The first ask, \"Draft the beta invite.\", is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing ChatGPT, Claude, and superbot-fast, the house model superbot.gg describes as quick and cheap, for small jobs. The pointer picks superbot-fast, the chip follows the pick, and the same thread carries on: the follow-up \"Give me three subject lines.\" is typed and sent and superbot-fast answers it, with everything above it still in context. It closes on the line \"Same thread. Answered by the fast model.\" and the end card EVERY MODEL. ONE CHAT. 21 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. No speed figure is stated. Clean solution cut of negativity-agg complaint rank 4 slow-laggy: no complaint, quote, count or loading state on screen."
+  },
+  {
     "id": "every-model-one-chat-sb-superbot-efa8df82",
     "type": "animation",
     "group": "Ad spots",

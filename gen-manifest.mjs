@@ -87,6 +87,12 @@ const more = [
   ['negagg-privacy-superbot-30c6568c', 'negagg-privacy-superbot-30c6568c/', 'KEEP IT ON YOUR MACHINE.', 'Ad spots',
     { desc: 'The headline card, then the feature working in the real superbot hub. The first ask is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing the models on the account: ChatGPT, Claude, and superbot-omni, the house model that runs on the user\'s own computer, marked ON THIS DEVICE. The pointer picks superbot-omni, the chip wears LOCAL, and the same thread carries on: the follow-up "Add the salary band numbers to point two." is typed and sent, and it is answered on this device, with everything above it still in context. It closes on the line "Same thread. Answered on this machine." and the end card EVERY MODEL. ONE CHAT. 22.5 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. That superbot-omni runs on the user\'s computer is a published Superbot house-model fact (superbot.gg/api, house models). Clean solution cut of negativity-agg complaint rank 3 privacy-data: no complaint, quote, count or error state on screen.' }],
   // <<< negagg-privacy-superbot-30c6568c
+  // >>> negagg-fast-superbot-3f3e0f39 (negativity-agg complaint rank 4 'slow-laggy' is the internal reason for the feature only; nothing from
+  // the complaint is on screen in this cut: no quote, no review count, no slow or loading UI, no negative hook copy.
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-fast-superbot-3f3e0f39)
+  ['negagg-fast-superbot-3f3e0f39', 'negagg-fast-superbot-3f3e0f39/', 'FAST MODEL. ONE CLICK.', 'Ad spots',
+    { desc: 'The headline card, then the feature working in the real superbot hub. The first ask, "Draft the beta invite.", is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing ChatGPT, Claude, and superbot-fast, the house model superbot.gg describes as quick and cheap, for small jobs. The pointer picks superbot-fast, the chip follows the pick, and the same thread carries on: the follow-up "Give me three subject lines." is typed and sent and superbot-fast answers it, with everything above it still in context. It closes on the line "Same thread. Answered by the fast model." and the end card EVERY MODEL. ONE CHAT. 21 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. No speed figure is stated. Clean solution cut of negativity-agg complaint rank 4 slow-laggy: no complaint, quote, count or loading state on screen.' }],
+  // <<< negagg-fast-superbot-3f3e0f39
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
@@ -2037,6 +2043,9 @@ const KEEP_IDS = new Set([
   // >>> keep negagg-privacy-superbot-30c6568c
   'negagg-privacy-superbot-30c6568c',
   // <<< keep negagg-privacy-superbot-30c6568c
+  // >>> keep negagg-fast-superbot-3f3e0f39
+  'negagg-fast-superbot-3f3e0f39',
+  // <<< keep negagg-fast-superbot-3f3e0f39
   // >>> keep negagg-crashes-bugs-superbot-85553d96
   // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
   'negagg-crashes-bugs-superbot-85553d96',

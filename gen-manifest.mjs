@@ -68,6 +68,12 @@ const more = [
   ['negagg-crashes-bugs-superbot-85553d96', 'negagg-crashes-bugs-superbot-85553d96/', 'CHATGPT WENT OFFLINE · same chat, Gemini picks the ask up', 'Ad spots',
     { desc: 'One ask typed into superbot, routed to ChatGPT, which comes back with its own failure state instead of an answer: blank thread, "Looks like you\'re offline. Reconnect to send messages." and, after a Retry that spins and gives up, "There\'s a problem with your request". Nothing is retyped: superbot carries the same ask on in Gemini in the same thread, and Gemini answers it and drafts the launch post. The hook card is the strongest one star ChatGPT review verbatim (2,418 thumbs up) and the count card is the cluster total, 20,488 one and two star reviews of ChatGPT and Meta AI that mention crashes or errors (negativity-agg complaint rank 1, crashes-bugs). The ChatGPT failure is recreated as a UI state, no ChatGPT screenshots; the hub is the real superbot UI. 21.9 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Copies its 4:5 style basis from every-model-one-chat-superbot-efa8df82.' }],
   // <<< negagg-crashes-bugs-superbot-85553d96
+  // >>> negagg-crashes-v2-superbot-e85b3b49 (negativity-agg complaint rank 1 'crashes-bugs' is the internal
+  // reason for the feature only; nothing from the complaint is on screen in this cut. Source
+  // quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-crashes-v2-superbot-e85b3b49)
+  ['negagg-crashes-v2-superbot-e85b3b49', 'negagg-crashes-v2-superbot-e85b3b49/', 'SWITCH MODELS. KEEP THE CHAT.', 'Ad spots',
+    { desc: 'The headline card, then one thread in the real superbot hub with the model switched twice mid-conversation. ChatGPT plans a three day trip to Lisbon; the model chip in the composer is pressed, the same thread carries on in Gemini, and the follow-up "make day two the museum day" is answered as a change to that plan, so the earlier turn is visibly still in context; pressed again, Claude adds the packing list for the same trip. Three turns, three models, one conversation, nothing retyped. Closes on the line "Same thread, three models, nothing retyped" and the end card EVERY MODEL. ONE CHAT. 25 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Clean solution cut of negativity-agg complaint rank 1 crashes-bugs: no complaint, quote, count or recreated error state on screen.' }],
+  // <<< negagg-crashes-v2-superbot-e85b3b49
   // >>> negagg-wrong-answers-superbot-4444df6a (negativity-agg complaint rank 2 'wrong-hallucinated-answers' is
   // the internal reason for the feature only; nothing from the complaint is on screen in this cut. Source
   // quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-wrong-answers-superbot-4444df6a)
@@ -1990,6 +1996,10 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // >>> keep negagg-crashes-v2-superbot-e85b3b49
+  // added (2026-10-11, e85b3b49): SWITCH MODELS. KEEP THE CHAT., one thread switched twice mid-conversation (ChatGPT -> Gemini -> Claude), 16:9 + 4:5 renders, silent
+  'negagg-crashes-v2-superbot-e85b3b49',
+  // <<< keep negagg-crashes-v2-superbot-e85b3b49
   // >>> keep negagg-wrong-answers-superbot-4444df6a
   'negagg-wrong-answers-superbot-4444df6a',
   // <<< keep negagg-wrong-answers-superbot-4444df6a

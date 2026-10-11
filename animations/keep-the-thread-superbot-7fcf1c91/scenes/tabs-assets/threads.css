@@ -70,3 +70,12 @@
 #s-tabs .sbsite.ask .hub .composer { margin-bottom: 10px; }
 #s-tabs .sbsite.ask .hub .feed { padding: 10px max(24px, calc((100% - 590px) / 2)) 4px; }
 #s-tabs .sbsite.ask .hub .kc-row .qc-tile { width: 26px; height: 26px; }
+
+/* ---- 4:5 only: the composer's row is 454 design px wide there, ~80 px short of what the row asks for, so the
+   meter drops its word, its bar shortens and its padding tightens; the readout stays 13.5 px and the send button
+   keeps its normal right padding inside the composer (16:9, 4:3 and 1:1 are wide enough and are untouched). ---- */
+html[data-ar="4x5"] #s-tabs .sbsite.ask .hub .kc-ctx-w { display: none; }
+html[data-ar="4x5"] #s-tabs .sbsite.ask .hub .kc-ctx { gap: 6px; padding: 0 7px; }
+html[data-ar="4x5"] #s-tabs .sbsite.ask .hub .kc-ctx-b { width: 26px; }
+html[data-ar="4x5"] #s-tabs .sbsite.ask .hub .rc-row { gap: 5px; }
+html[data-ar="4x5"] #s-tabs .sbsite.ask .hub .rc-plat { margin: 0 1px 0 3px; }

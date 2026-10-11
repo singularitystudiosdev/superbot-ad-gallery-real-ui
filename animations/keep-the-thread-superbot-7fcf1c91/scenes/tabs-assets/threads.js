@@ -36,7 +36,9 @@ export const TYPE_END = T0 + QUERY.length / TYPE_CPS;
 export const TAP = TYPE_END + 0.85; // the pointer presses the row
 export const SWAP = TAP + 0.55;     // the list gives way to the thread
 export const ASK = 'ship it';       // the follow-up the user types in the thread
-export const CTX = 'Context 31k of 1m';
+// the meter's readout, in two pieces: the word drops on the narrow frame so the row fits (the numbers never do)
+export const CTX_W = 'Context', CTX_N = '31k of 1m';
+export const CTX = `${CTX_W} ${CTX_N}`;
 
 // the thread act's clock, laid out from the moment the list gives way
 const TH = (() => {
@@ -122,10 +124,8 @@ export function mountThreads(hub) {
   const pLabel = el(`<span>${MODELS.claude.name}</span>`);
   if (label) label.replaceWith(pLabel); else plat.insertBefore(pLabel, pIcon.nextSibling);
   const row = hub.querySelector('.rc-row');
-  const meter = el('<span class="kc-ctx"><i class="kc-ctx-b"></i></span>');
+  const meter = el(`<span class="kc-ctx"><i class="kc-ctx-b"></i><span class="kc-ctx-w">${CTX_W}</span><span class="kc-ctx-t">${CTX_N}</span></span>`);
   row.insertBefore(meter, row.querySelector('.rc-computer'));
-  const ctxLbl = el(`<span class="kc-ctx-t">${CTX}</span>`);
-  meter.appendChild(ctxLbl);
   const ph = hub.querySelector('.rc-ph');
   const send = hub.querySelector('.rc-send');
 

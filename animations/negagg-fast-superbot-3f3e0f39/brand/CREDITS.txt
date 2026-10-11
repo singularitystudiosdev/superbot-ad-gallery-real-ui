@@ -1,0 +1,2 @@
+openai-logo.svg  OpenAI knot mark, vendor asset (unchanged)
+claude-logo.svg  Claude mark path data copied from superbot-desktop packages/ui/src/marks/mark-claude.tsx (nominative use; "Claude" and the Claude mark are trademarks of Anthropic PBC)

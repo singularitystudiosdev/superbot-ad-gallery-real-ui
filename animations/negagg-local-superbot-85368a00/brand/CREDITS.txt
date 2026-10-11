@@ -1,0 +1,4 @@
+openai-logo.svg  OpenAI knot mark, vendor asset (unchanged). Trademark of OpenAI, used nominatively for the ChatGPT option in the composer's model picker.
+claude-logo.svg  Claude mark path data copied from superbot-desktop packages/ui/src/marks/mark-claude.tsx (nominative use; "Claude" and the Claude mark are trademarks of Anthropic PBC), used for the Claude option in the composer's model picker.
+superbot-omni is drawn with superbot's own mark (CSS mask in scenes/tabs-assets/chat.css), never a vendor logo.
+No photos in this ad (see negativity-agg ads/negagg-local/img/CREDITS.txt).

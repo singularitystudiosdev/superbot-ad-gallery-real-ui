@@ -87,6 +87,47 @@ const more = [
   ['negagg-privacy-superbot-30c6568c', 'negagg-privacy-superbot-30c6568c/', 'KEEP IT ON YOUR MACHINE.', 'Ad spots',
     { desc: 'The headline card, then the feature working in the real superbot hub. The first ask is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing the models on the account: ChatGPT, Claude, and superbot-omni, the house model that runs on the user\'s own computer, marked ON THIS DEVICE. The pointer picks superbot-omni, the chip wears LOCAL, and the same thread carries on: the follow-up "Add the salary band numbers to point two." is typed and sent, and it is answered on this device, with everything above it still in context. It closes on the line "Same thread. Answered on this machine." and the end card EVERY MODEL. ONE CHAT. 22.5 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. That superbot-omni runs on the user\'s computer is a published Superbot house-model fact (superbot.gg/api, house models). Clean solution cut of negativity-agg complaint rank 3 privacy-data: no complaint, quote, count or error state on screen.' }],
   // <<< negagg-privacy-superbot-30c6568c
+  // >>> negagg-fast-superbot-3f3e0f39 (negativity-agg complaint rank 4 'slow-laggy' is the internal reason for the feature only; nothing from
+  // the complaint is on screen in this cut: no quote, no review count, no slow or loading UI, no negative hook copy.
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-fast-superbot-3f3e0f39)
+  ['negagg-fast-superbot-3f3e0f39', 'negagg-fast-superbot-3f3e0f39/', 'FAST MODEL. ONE CLICK.', 'Ad spots',
+    { desc: 'The headline card, then the feature working in the real superbot hub. The first ask, "Draft the beta invite.", is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing ChatGPT, Claude, and superbot-fast, the house model superbot.gg describes as quick and cheap, for small jobs. The pointer picks superbot-fast, the chip follows the pick, and the same thread carries on: the follow-up "Give me three subject lines." is typed and sent and superbot-fast answers it, with everything above it still in context. It closes on the line "Same thread. Answered by the fast model." and the end card EVERY MODEL. ONE CHAT. 21 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. No speed figure is stated. Clean solution cut of negativity-agg complaint rank 4 slow-laggy: no complaint, quote, count or loading state on screen.' }],
+  // <<< negagg-fast-superbot-3f3e0f39
+  // >>> negagg-switch-superbot-73abddeb (negativity-agg theme 'crashes-bugs' (apps crash or fail mid-task) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no error UI, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply, sourced Unsplash photos (img/CREDITS.txt).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-switch-superbot-73abddeb)
+  ['negagg-switch-superbot-73abddeb', 'negagg-switch-superbot-73abddeb/', 'SWITCH MODELS. KEEP THE CHAT.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. Three casual asks in one thread, three models. "find me a 2 bed in Austin under $2k, near a park" is answered by ChatGPT: a search status chip, filter pills and three listing cards with photos, rent, beds and baths and the park each is near. Superbot switches the same thread to Gemini ("Switching to Gemini") for "which one has the shortest bike ride downtown?": the same three listings ranked by bike time with the shortest ride marked. It then switches to Claude for "message the landlord of that one, ask about a June 1 move in": a drafted message to that listing\'s leasing office, three tool steps ticking (opened the listing, pasted the message, sent) and a Message sent card. Then the headline card SWITCH MODELS. KEEP THE CHAT. and the end card EVERY MODEL. ONE CHAT. 24 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Building names, rents and distances are invented demo content; photos are Unsplash (license in img/CREDITS.txt). Solution-only: no complaint, quote, count or error state on screen.' }],
+  // <<< negagg-switch-superbot-73abddeb
+  // >>> negagg-second-superbot-0741e029 (negativity-agg theme 'wrong-hallucinated-answers' (confident wrong answers) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no error UI, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply, sourced Unsplash photos (img/CREDITS.txt).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-second-superbot-0741e029)
+  ['negagg-second-superbot-0741e029', 'negagg-second-superbot-0741e029/', 'ASK ANOTHER MODEL. SAME CHAT.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. Three casual asks in one thread. "plan 4 days in Lisbon for two, under $1,500" is answered by ChatGPT: a status chip, a day by day itinerary with a place photo, the main stop and the cost for each of four days, and a budget bar that adds up to $1,460 of $1,500. Superbot then offers a second opinion ("Ask Claude too") and switches the same thread to Claude for "double check the budget": it checks 14 line items, flags one that was missing from the plan (airport transfers, $60), shows the corrected total of $1,520 and a suggested swap that brings it to $1,470, under budget. For "book the hotel for night one", three tool steps tick (opened the hotel page, picked 1 night and 2 guests, booked with the saved card) and a booking confirmation card lands with the hotel photo, dates and price. Then the headline card ASK ANOTHER MODEL. SAME CHAT. and the end card EVERY MODEL. ONE CHAT. 23 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The hotel, prices and booking are invented demo content; photos are Unsplash (license in img/CREDITS.txt). Solution-only: no complaint, quote, count or error UI on screen.' }],
+  // <<< negagg-second-superbot-0741e029
+  // >>> negagg-local-superbot-85368a00 (negativity-agg theme 'privacy-data' (worry about sending personal files to a cloud AI) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no error UI, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply (no photos in this one, img/CREDITS.txt says so).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-local-superbot-85368a00)
+  ['negagg-local-superbot-85368a00', 'negagg-local-superbot-85368a00/', 'KEEP IT ON YOUR MACHINE.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. The user drops a bank statement PDF (statement-sept.pdf) into the composer, types "sort my spending", opens the composer\'s model picker and picks superbot-omni, the option tagged ON THIS DEVICE. A routing chip confirms "Switching to superbot-omni, on this device" and the reply, under a LOCAL badge, reads 86 transactions and breaks September into Rent $1,450, Groceries $412, Eating out $286, Transport $128, Subscriptions $94 and Other $230, $2,600 in total, then notes it ran on this device. For "which subscriptions did I forget about?" it lists five subscriptions with their monthly price and last use, adding up to the $94 line, and flags two as unused for 3+ months, $31 a month. For "cancel the two I don\'t use" four tool steps tick (opened and cancelled each one) and a result card reads "Saved $31/mo, $372 a year". Then the headline card KEEP IT ON YOUR MACHINE. and the end card EVERY MODEL. ONE CHAT. 23 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The statement, service names and prices are invented demo content. Solution-only: no complaint, quote, count or error UI on screen.' }],
+  // <<< negagg-local-superbot-85368a00
+  // >>> negagg-quick-superbot-e89033d8 (negativity-agg theme 'slow-laggy' (apps that feel slow on small jobs) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no error UI, no speed number, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply, sourced Unsplash photos (img/CREDITS.txt).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-quick-superbot-e89033d8)
+  ['negagg-quick-superbot-e89033d8', 'negagg-quick-superbot-e89033d8/', 'FAST MODEL. ONE CLICK.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. The user drops 12 travel photos into the composer (a compact grid chip), types "rename these by date and place", opens the composer\'s model picker and picks superbot-fast, the house model listed as "Quick and cheap, for small jobs" (FAST pill). A routing chip confirms "Switched to superbot-fast" and the reply, under a FAST badge, shows a before/after file list with a thumbnail for each photo: IMG_4471.jpg becomes 2026-06-12 Porto, Ribeira.jpg and so on, five rows and "+7 more". For "make a caption for the best one" it returns the Sintra, Pena Palace photo as a large card with a one-line caption and three hashtag chips. For "translate it to Spanish, French and Japanese" it returns three language rows with flags and the translated line, then a "Copied all 3" chip. Then the headline card FAST MODEL. ONE CLICK. and the end card EVERY MODEL. ONE CHAT. 23 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The photos are sourced Unsplash photographs (img/CREDITS.txt); the camera file names, dates, caption and translations are invented demo content. Solution-only: no complaint, quote, count, speed number or error UI on screen.' }],
+  // <<< negagg-quick-superbot-e89033d8
+  // >>> negagg-cost-superbot-c8101703 (negativity-agg theme 'subscription-cost' (paying for several AI subscriptions) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no price of another product, no error UI, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply, sourced Unsplash photos (img/CREDITS.txt).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-cost-superbot-c8101703)
+  ['negagg-cost-superbot-c8101703', 'negagg-cost-superbot-c8101703/', 'ONE APP FOR EVERY AI YOU PAY FOR.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. "connect my AI accounts": superbot signs in to ChatGPT, Claude and Gemini (three ticking steps with each app\'s mark) and a "Your plans" card lists the three plans, ChatGPT Plus, Claude Pro and Google AI Pro, each marked connected, with the footer "superbot, Free plan, $0". For "make a poster for my bakery\'s Saturday sale" the user opens the composer\'s model picker and picks ChatGPT; a routing chip confirms "Switching to ChatGPT, on your plan" and the reply is a poster image card (a sourced bakery bread photo with the type laid over it: Maple Street Bakery, Saturday Sale, 20% off, Saturday 10am to 3pm, 14 Maple St) next to a "0 superbot credits, made on your ChatGPT plan" chip. For "write the Instagram caption and schedule it for Saturday 9am" the picker picks Claude, the chip confirms "on your plan", the caption streams into a card with three hashtags, two tool steps tick (Opened Instagram, Scheduled Sat 9:00 AM) and a scheduled-post card lands with the poster thumbnail. Then the headline card ONE APP FOR EVERY AI YOU PAY FOR. and the end card EVERY MODEL. ONE CHAT. 24 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The bakery, sale, caption and time are invented demo content; the two photos are sourced Unsplash photographs (img/CREDITS.txt). Models on your own subscriptions cost no superbot credits (superbot.gg/api.md). Solution-only: no complaint, quote, count, competitor price or error UI on screen.' }],
+  // <<< negagg-cost-superbot-c8101703
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
@@ -2044,6 +2085,24 @@ const KEEP_IDS = new Set([
   // >>> keep negagg-privacy-superbot-30c6568c
   'negagg-privacy-superbot-30c6568c',
   // <<< keep negagg-privacy-superbot-30c6568c
+  // >>> keep negagg-fast-superbot-3f3e0f39
+  'negagg-fast-superbot-3f3e0f39',
+  // <<< keep negagg-fast-superbot-3f3e0f39
+  // >>> keep negagg-switch-superbot-73abddeb
+  'negagg-switch-superbot-73abddeb',
+  // <<< keep negagg-switch-superbot-73abddeb
+  // >>> keep negagg-second-superbot-0741e029
+  'negagg-second-superbot-0741e029',
+  // <<< keep negagg-second-superbot-0741e029
+  // >>> keep negagg-local-superbot-85368a00
+  'negagg-local-superbot-85368a00',
+  // <<< keep negagg-local-superbot-85368a00
+  // >>> keep negagg-quick-superbot-e89033d8
+  'negagg-quick-superbot-e89033d8',
+  // <<< keep negagg-quick-superbot-e89033d8
+  // >>> keep negagg-cost-superbot-c8101703
+  'negagg-cost-superbot-c8101703',
+  // <<< keep negagg-cost-superbot-c8101703
   // >>> keep negagg-crashes-bugs-superbot-85553d96
   // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
   'negagg-crashes-bugs-superbot-85553d96',

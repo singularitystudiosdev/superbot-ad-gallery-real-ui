@@ -1,0 +1,12 @@
+img/ CREDITS: every photo in this spot is a real, sourced Unsplash photograph, never drawn or generated.
+License: the Unsplash License (https://unsplash.com/license): free to use, including commercial use, no permission
+or attribution required (attribution is given here anyway). Fetched 2026-10-11 from the photo's Unsplash download
+endpoint (https://unsplash.com/photos/<id>/download?force=true&w=1400), resized to 900 px wide, otherwise unmodified.
+Shown nowhere on screen as a credit; the apartment and building names in the spot are invented.
+
+apt-bouldin.jpg   "Bouldin Row" listing photo. Unsplash photo AgK_XAqSbfk by @danrop.
+                  https://unsplash.com/photos/a-living-room-with-a-large-window-AgK_XAqSbfk
+apt-eastline.jpg  "Eastline Lofts" listing photo. Unsplash photo ojLOdyLG_as by @ubeyonroad.
+                  https://unsplash.com/photos/modern-living-room-with-green-sofa-and-brick-wall-ojLOdyLG_as
+apt-hyde.jpg      "Hyde Park Flats" listing photo. Unsplash photo harmkQ-37kk by @akasm.
+                  https://unsplash.com/photos/modern-living-room-with-minimalist-decor-and-large-window-harmkQ-37kk

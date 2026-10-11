@@ -1,0 +1,23 @@
+{
+ "ios-sheet": {
+  "source": "superbot-mobile/docs/screenshots/dark-sheet.png",
+  "lastCommit": "29f2b825 2026-09-08",
+  "size": "1206x2622",
+  "sha256": "c7ce66d60d36fb74a57fe5cc06d353fc0bf0a0d98c59eb47006ab2c75844938a",
+  "what": "Lane sheet over Home (Superbot: your hub lane, model in use)"
+ },
+ "ios-connect": {
+  "source": "superbot-mobile/docs/screenshots/dark-lane-gated-connect.png",
+  "lastCommit": "65dd2972 2026-09-12",
+  "size": "1170x2532",
+  "sha256": "26a8fccbe03a0e976edf7760e84b22f6d495e2bb5d1f017c6335af493ae5a2b9",
+  "what": "Provider rail (Superbot, Claude, ChatGPT \u2026) with the Connect CTA"
+ },
+ "ios-composer": {
+  "source": "superbot-mobile/docs/screenshots/dark-composer-keyboard.png",
+  "lastCommit": "29f2b825 2026-09-08",
+  "size": "1206x2622",
+  "sha256": "08a935fba5cde8b46407a000e2cf06e901b5bde95d7175898ac9a9230a2e204b",
+  "what": "New chat: the composer (Platforms picker, send) with the iOS keyboard"
+ }
+}

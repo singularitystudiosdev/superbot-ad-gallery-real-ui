@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Superbot real-UI stage</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0a0a0a; overflow: hidden; }
+  iframe { border: 0; display: block; }
+</style>
+</head>
+<body>
+<script>
+/* Outer page: lays the real app out NATIVELY. The desktop app runs at browser zoom 1.2 (900x1125 CSS px in a 1080x1350 window),
+ * so the frame is an <iframe style="zoom:1.2"> sized viewport/1.2: Chromium then gives the app's document the real
+ * innerWidth/innerHeight/devicePixelRatio/media-query/vh behaviour of a zoomed window, and rasterises at the final pixel size
+ * (no transform:scale, no bitmap enlargement).  Contract for the gallery renderer (prep.mjs / xexport.mjs):
+ *   window.__AD = { ready, CYCLE, seek(t) }   and   window.seek(t)
+ * ?ar=4x5|16x9 (default: from the viewport)   ?scene=<scenes/NAME.js>   ?t=<seconds>   ?state=<captured state> (static)   ?zoom=1.2
+ */
+(() => {
+  const q = new URLSearchParams(location.search)
+  const W = innerWidth, H = innerHeight
+  const zoom = Number(q.get('zoom') || 1.2)
+  const ar = q.get('ar') || (W / H > 1.2 ? '16x9' : '4x5')
+  const f = document.createElement('iframe')
+  f.style.cssText = `width:${W / zoom}px;height:${H / zoom}px;zoom:${zoom}`
+  const p = new URLSearchParams({ ar }); for (const k of ['scene', 't', 'state']) if (q.has(k)) p.set(k, q.get(k))
+  if (!p.has('scene') && !p.has('state')) p.set('scene', 'ep') // the gallery renderer opens index.html?ar=... with no scene: this ad's scene is the default
+  f.src = 'frame.html?' + p
+  document.body.appendChild(f)
+  const AD = (window.__AD = { ready: false, CYCLE: 0, ar, zoom, seek(t) { f.contentWindow.SB.seek(t) } })
+  window.seek = (t) => AD.seek(t)
+  f.addEventListener('load', async () => {
+    const SB = f.contentWindow.SB
+    await SB.whenReady()
+    AD.CYCLE = SB.cycle; AD.error = SB.error || null; AD.ready = true
+  })
+})()
+</script>
+</body>
+</html>

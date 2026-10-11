@@ -1,0 +1,155 @@
+/* The hub's three-ask chat (chat.js + beats/*.js): the statement, the subscription audit, the cancellations. Every moving value is written
+   from lt, so nothing here transitions. Scoped under #s-tabs so the generated hub stylesheets stay untouched. */
+#s-tabs .sbsite .hub .feed-in { display: grid; align-content: start; gap: 12px; will-change: transform; }
+#s-tabs .sbsite .hub .qc-u .m-text { font-size: 12.5px; line-height: 17px; padding: 8px 14px; }
+#s-tabs .sbsite .hub .qc-m .m-main { display: grid; justify-items: start; gap: 0; }
+#s-tabs .sbsite .hub .qc-r .m-main { max-width: min(100%, var(--hub-column)); width: 100%; }
+#s-tabs .sbsite .hub .qc-r .m-main > * { max-width: 100%; }
+
+/* composer: the ask is typed in, the send button lights while there is text */
+#s-tabs .sbsite .hub .rc-ph .qc-typed { color: #f2f2f7; }
+#s-tabs .sbsite .hub .rc-ph .qc-caret { display: inline-block; width: 1.5px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #5d91ec; }
+#s-tabs .sbsite .hub .rc-send.qc-on { background: linear-gradient(90deg, #5d91ec, #866cf6); color: #fff !important; }
+#s-tabs .sbsite .hub .qc-pi { display: inline-grid; place-items: center; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi img { width: 12px; height: 12px; object-fit: contain; }
+#s-tabs .sbsite.ask .hub .qc-pi img[data-app="gpt"] { border-radius: 50%; }
+
+/* app tiles */
+#s-tabs .sbsite .hub .qc-tile { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; overflow: hidden; }
+#s-tabs .sbsite .hub .qc-tile img { width: 15px; height: 15px; object-fit: contain; display: block; }
+#s-tabs .sbsite .hub .qc-t-gpt { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-gemini, #s-tabs .sbsite .hub .qc-t-claude { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+/* superbot's own mark, static (the composer chip's spare slot). The silhouette is the mask geometry of
+   assets/sb-mark-live.html (eyes cut out) used as a CSS mask, three layers deep like the live mark (storm-0
+   up-left, storm-3 down-right, fg on top), so it needs no SVG mask ids and draws the same in every browser */
+#s-tabs .sbsite .hub { --sb-cat: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%2212%2018%2076%2070%22%3E%3Cmask%20id%3D%22m%22%3E%3Cg%20fill%3D%22white%22%3E%3Crect%20x%3D%2214%22%20y%3D%2232%22%20width%3D%2272%22%20height%3D%2254%22%20rx%3D%2215%22%2F%3E%3Cpath%20d%3D%22M14%2046V28Q14%2020%2021%2021Q28%2024%2036%2032Z%22%2F%3E%3Cpath%20d%3D%22M86%2046V28Q86%2020%2079%2021Q72%2024%2064%2032Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22black%22%3E%3Cellipse%20cx%3D%2235%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3Cellipse%20cx%3D%2265%22%20cy%3D%2258%22%20rx%3D%228%22%20ry%3D%2211%22%2F%3E%3C%2Fg%3E%3C%2Fmask%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20mask%3D%22url(%23m)%22%2F%3E%3C%2Fsvg%3E"); }
+#s-tabs .sbsite .hub .sbm { position: absolute; inset: 16%; -webkit-mask: var(--sb-cat) center / contain no-repeat; mask: var(--sb-cat) center / contain no-repeat; }
+#s-tabs .sbsite .hub .sbm-c { background: #00e5c3; transform: translate(-0.6px, -0.6px); }
+#s-tabs .sbsite .hub .sbm-m { background: #c026d3; transform: translate(0.6px, 0.6px); }
+#s-tabs .sbsite .hub .sbm-w { background: #ececec; }
+#s-tabs .sbsite .hub .qc-pi-sb { position: relative; display: none; width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-pi-sb .sbm { inset: 0; }
+
+/* superbot's routing chip: shimmering until it resolves to a check */
+#s-tabs .sbsite .hub .qc-sw { display: inline-flex; align-items: center; gap: 9px; height: 34px; padding: 0 12px 0 6px; border-radius: 999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 13px/1 var(--ui); }
+#s-tabs .sbsite .hub .qc-swl { background: linear-gradient(90deg, #8e8e93 0%, #8e8e93 40%, #ffffff 50%, #8e8e93 60%, #8e8e93 100%); background-size: 250% 100%; background-position: var(--sh, 100%) 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+#s-tabs .sbsite .hub .qc-sw.qc-done .qc-swl { background: none; color: #ececec; }
+#s-tabs .sbsite .hub .qc-st { position: relative; width: 14px; height: 14px; margin-left: 2px; }
+#s-tabs .sbsite .hub .qc-spin { position: absolute; inset: 1px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #ececec; }
+#s-tabs .sbsite .hub .qc-ok { width: 14px; height: 14px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .qc-st .qc-ok { position: absolute; inset: 0; opacity: 0; }
+
+/* the model that answered */
+#s-tabs .sbsite .hub .qc-who { display: flex; align-items: center; gap: 7px; margin: 2px 0 7px; font: 600 12.5px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite .hub .qc-who .qc-tile { width: 18px; height: 18px; border-radius: 6px; }
+#s-tabs .sbsite .hub .qc-who .qc-tile img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-who small { font-weight: 500; font-size: 10.5px; color: #8e8e93; }
+#s-tabs .sbsite .hub .qc-say { min-height: 18px; margin-bottom: 9px; font: 12.5px/18px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .qc-say .qc-hid { color: transparent; }
+
+/* the hub's own welcome line and date divider are not part of this spot: the chat starts on an empty thread */
+#s-tabs .sbsite .hub .feed-in > :not(.qc-u):not(.qc-m) { display: none; }
+
+/* ---------------- the three beats' artifacts (beats/*.js) ---------------- */
+#s-tabs .sbsite .hub .sw-sp { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #3a3a3f; border-top-color: #5b8dff; flex: none; box-sizing: border-box; }
+#s-tabs .sbsite .hub .sw-sp.done { border: 0; background: #34c759; position: relative; }
+#s-tabs .sbsite .hub .sw-sp.done::after { content: ""; position: absolute; left: 4px; top: 2.5px; width: 3px; height: 5.5px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }
+#s-tabs .sbsite .hub .sw-chip { display: inline-flex; align-items: center; gap: 8px; height: 28px; margin: 0 0 8px; padding: 0 12px 0 10px; border-radius: 999px; background: #141416; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 11.5px/1 var(--ui); color: #d8d8de; opacity: 0; }
+#s-tabs .sbsite .hub .sw-chip-n { margin-left: 2px; padding: 3px 7px; border-radius: 999px; background: #1f1f24; font: 600 10px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: #9a9aa2; }
+
+
+/* ---- the local model: its tile, the LOCAL badge on its reply, the LOCAL pill on the composer chip ---- */
+#s-tabs .sbsite .hub .qc-t-local { position: relative; background: #0b0b0c; box-shadow: inset 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .qc-t-local::before { content: ""; position: absolute; inset: 2px; border-radius: 5px; box-shadow: inset 0 0 0 1px rgba(0, 229, 195, .35); }
+#s-tabs .sbsite .hub .pv-chip-dev { display: none; align-items: center; height: 14px; margin-left: 1px; padding: 0 6px; border-radius: 999px;
+  background: rgba(0, 229, 195, .15); font: 700 7.5px/1 var(--ui); font-style: normal; letter-spacing: .07em; color: #00e5c3; }
+#s-tabs .sbsite .hub .qc-dev { display: inline-flex; align-items: center; height: 16px; margin-left: 1px; padding: 0 7px; border-radius: 999px;
+  background: rgba(0, 229, 195, .15); box-shadow: inset 0 0 0 1px rgba(0, 229, 195, .3); font: 700 8px/1 var(--ui); font-style: normal; letter-spacing: .07em; color: #00e5c3; }
+#s-tabs .sbsite .hub .qc-swt { margin-left: 2px; font: 500 11.5px/1 var(--ui); color: #00e5c3; }
+#s-tabs .sbsite .hub .qc-swt::before { content: "·"; margin-right: 8px; color: #6e6e76; }
+
+/* ---- the composer's model picker (chat.js renderPicker): opens below the centred composer, the pointer picks a row ---- */
+#s-tabs .sbsite.ask .hub .pv-pick { position: absolute; right: 0; top: calc(100% + 10px); z-index: 6; width: 316px; padding: 8px; border-radius: 16px;
+  background: #101012; box-shadow: 0 0 0 1px #2c2c31, 0 18px 44px rgba(0,0,0,.6); display: none; opacity: 0; transform-origin: 100% 0; }
+#s-tabs .sbsite.ask .hub .pv-pick-h { padding: 4px 8px 8px; font: 700 13.5px/1 var(--ui); letter-spacing: .02em; color: #8e8e93; }
+#s-tabs .sbsite.ask .hub .pv-opt { position: relative; display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 10px; border-radius: 11px; }
+#s-tabs .sbsite.ask .hub .pv-opt.pv-hot { background: #1e1e22; box-shadow: inset 0 0 0 1px #33333a; }
+#s-tabs .sbsite.ask .hub .pv-opt-n { font: 600 14px/1 var(--ui); color: #ececec; }
+#s-tabs .sbsite.ask .hub .pv-dev { display: inline-flex; align-items: center; height: 18px; padding: 0 8px; border-radius: 999px;
+  background: rgba(0, 229, 195, .14); box-shadow: inset 0 0 0 1px rgba(0, 229, 195, .28); font: 700 8.5px/1 var(--ui); letter-spacing: .07em; color: #00e5c3; }
+#s-tabs .sbsite.ask .hub .pv-opt-ck { position: absolute; right: 11px; display: grid; place-items: center; width: 16px; height: 16px; opacity: 0; }
+#s-tabs .sbsite.ask .hub .pv-opt.pv-cur .pv-opt-ck { opacity: 1; }
+#s-tabs .sbsite.ask .hub .pv-ck { width: 16px; height: 16px; fill: none; stroke: #34d399; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- the dropped statement: a file chip on the composer, then the same chip in the sent message ---- */
+#s-tabs .sbsite .hub .qc-att-ic { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: rgba(245, 80, 70, .14); }
+#s-tabs .sbsite .hub .qc-att-ic svg { width: 15px; height: 15px; fill: none; stroke: #ff6b5e; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .qc-att-n { font: 600 12px/1 var(--ui); color: #ececf1; }
+#s-tabs .sbsite .hub .pv-file small, #s-tabs .sbsite .hub .qc-att small { font: 700 8px/1 var(--ui); letter-spacing: .08em; color: #8e8e93; }
+#s-tabs .sbsite.ask .hub .pv-file { position: absolute; left: 0; top: calc(100% + 10px); z-index: 5; display: none; align-items: center; gap: 9px; height: 38px; padding: 0 13px 0 7px; border-radius: 11px;
+  background: #151518; box-shadow: inset 0 0 0 1px #34343a, 0 12px 30px rgba(0,0,0,.45); opacity: 0; }
+#s-tabs .sbsite .hub .qc-att { display: inline-flex; align-items: center; gap: 9px; height: 34px; margin: 0 0 5px; padding: 0 12px 0 6px; border-radius: 10px; background: #151518; box-shadow: inset 0 0 0 1px #2c2c31; justify-self: start; }
+
+/* ---------------- the three beats' artifacts (beats/*.js) ---------------- */
+/* beat 1: the September breakdown */
+#s-tabs .sbsite .hub .sp-card { width: 100%; box-sizing: border-box; margin: 2px 0 8px; padding: 12px 14px 11px; border-radius: 13px; background: #131316; box-shadow: inset 0 0 0 1px #26262b, 0 10px 26px rgba(0,0,0,.3); opacity: 0; }
+#s-tabs .sbsite .hub .sp-h { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 10px; margin-bottom: 4px; border-bottom: 1px solid #202024; }
+#s-tabs .sbsite .hub .sp-h span { display: grid; gap: 5px; font: 700 12.5px/1 var(--ui); color: #f2f2f7; }
+#s-tabs .sbsite .hub .sp-h small { font: 700 8.5px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: #00e5c3; }
+#s-tabs .sbsite .hub .sp-sum { font: 800 20px/1 var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sp-row { display: grid; grid-template-columns: 26px 86px minmax(0, 1fr) 54px; align-items: center; column-gap: 10px; height: 31px; opacity: 0; }
+#s-tabs .sbsite .hub .sp-ic { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: color-mix(in srgb, var(--c) 16%, #131316); }
+#s-tabs .sbsite .hub .sp-ic svg { width: 14px; height: 14px; fill: none; stroke: var(--c); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .sp-l { font: 600 11.5px/1 var(--ui); color: #d8d8de; white-space: nowrap; }
+#s-tabs .sbsite .hub .sp-bar { display: block; height: 9px; border-radius: 5px; background: #1b1b1f; overflow: hidden; }
+#s-tabs .sbsite .hub .sp-bar i { display: block; height: 100%; width: 0; border-radius: 5px; }
+#s-tabs .sbsite .hub .sp-amt { text-align: right; font: 700 12.5px/1 var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sp-f { display: flex; justify-content: space-between; margin-top: 6px; padding-top: 9px; border-top: 1px solid #202024; font: 500 9.5px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .sp-dev { display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 11px 0 7px; border-radius: 999px; background: rgba(0, 229, 195, .1); box-shadow: inset 0 0 0 1px rgba(0, 229, 195, .3); font: 600 11px/1 var(--ui); color: #5ff0d8; opacity: 0; }
+#s-tabs .sbsite .hub .sp-dev-ic svg { display: block; width: 15px; height: 15px; fill: none; stroke: #00e5c3; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .sp-dev-ok svg { display: block; width: 13px; height: 13px; fill: none; stroke: #34d399; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* beat 2: the subscription table, two rows flagged */
+#s-tabs .sbsite .hub .sb-list { width: 100%; box-sizing: border-box; margin: 2px 0 8px; border-radius: 13px; overflow: hidden; background: #131316; box-shadow: inset 0 0 0 1px #26262b, 0 10px 26px rgba(0,0,0,.3); }
+#s-tabs .sbsite .hub .sb-row { position: relative; display: grid; grid-template-columns: 30px minmax(0, 1fr) auto auto; align-items: center; column-gap: 11px; height: 46px; padding: 0 14px 0 12px; border-top: 1px solid #1d1d21; opacity: 0; }
+#s-tabs .sbsite .hub .sb-row:first-child { border-top: 0; }
+#s-tabs .sbsite .hub .sb-row.sb-idle.on { background: rgba(245, 165, 36, calc(.09 * var(--f, 1))); box-shadow: inset 3px 0 0 #f5a524; }
+#s-tabs .sbsite .hub .sb-ic { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: #1e1e23; }
+#s-tabs .sbsite .hub .sb-ic svg { width: 16px; height: 16px; fill: none; stroke: #aab4c8; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .sb-idle.on .sb-ic { background: rgba(245, 165, 36, .16); }
+#s-tabs .sbsite .hub .sb-idle.on .sb-ic svg { stroke: #f5a524; }
+#s-tabs .sbsite .hub .sb-m { display: grid; gap: 4px; min-width: 0; }
+#s-tabs .sbsite .hub .sb-m b { font: 700 12.5px/1 var(--ui); color: #f2f2f7; white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-m em { font: 500 9.5px/1 var(--ui); font-style: normal; color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .sb-flag { font: 800 8px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; padding: 5px 8px; border-radius: 999px; background: #f5a524; color: #2a1a00; opacity: 0; white-space: nowrap; }
+#s-tabs .sbsite .hub .sb-row:not(.sb-idle) .sb-flag { display: none; }
+#s-tabs .sbsite .hub .sb-row:not(.sb-idle) { grid-template-columns: 30px minmax(0, 1fr) auto; }
+#s-tabs .sbsite .hub .sb-idle.on .sb-flag { opacity: 1; }
+#s-tabs .sbsite .hub .sb-p { min-width: 54px; text-align: right; font: 700 13.5px/1 var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sb-p small { font: 500 9.5px/1 var(--ui); color: #8e8e93; }
+#s-tabs .sbsite .hub .sb-foot { display: flex; align-items: center; justify-content: space-between; width: 100%; box-sizing: border-box; height: 46px; padding: 0 14px; border-radius: 12px; background: #17171a; box-shadow: inset 0 0 0 1px #26262b; opacity: 0; }
+#s-tabs .sbsite .hub .sb-ft { display: grid; gap: 4px; }
+#s-tabs .sbsite .hub .sb-ft small { font: 700 8.5px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: #8e8e93; }
+#s-tabs .sbsite .hub .sb-ft b { font: 700 15px/1 var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sb-un { display: inline-flex; align-items: baseline; padding: 7px 11px; border-radius: 999px; background: rgba(245, 165, 36, .16); box-shadow: inset 0 0 0 1px rgba(245, 165, 36, .45); font: 700 11px/1 var(--ui); color: #f5a524; font-variant-numeric: tabular-nums; transform-origin: 100% 50%; }
+#s-tabs .sbsite .hub .sb-un i { font-style: normal; font-size: 14px; }
+
+/* beat 3: the cancel steps and the result card */
+#s-tabs .sbsite .hub .sw-step { display: flex; width: 100%; box-sizing: border-box; align-items: center; gap: 9px; height: 26px; margin: 0 0 3px; padding: 0 12px 0 9px; border-radius: 8px; background: #141416; box-shadow: inset 0 0 0 1px #26262b; font: 600 11.5px/1 var(--ui); color: #c9c9d0; opacity: 0; }
+#s-tabs .sbsite .hub .sv-card { width: 100%; box-sizing: border-box; margin: 8px 0 0; padding: 12px 14px 11px; border-radius: 13px; background: #0f2019; box-shadow: inset 0 0 0 1.5px rgba(52, 211, 153, .5), 0 0 26px rgba(52, 211, 153, .14); opacity: 0; }
+#s-tabs .sbsite .hub .sv-top { display: flex; align-items: center; gap: 12px; padding-bottom: 10px; }
+#s-tabs .sbsite .hub .sv-ic { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #34d399; flex: none; }
+#s-tabs .sbsite .hub .sv-ic svg { width: 22px; height: 22px; fill: none; stroke: #052e1f; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .sv-p { stroke-dasharray: 23; stroke-dashoffset: 23; }
+#s-tabs .sbsite .hub .sv-t { display: grid; gap: 6px; }
+#s-tabs .sbsite .hub .sv-t small { font: 700 8.5px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: #5fe3b4; }
+#s-tabs .sbsite .hub .sv-t b { font: 800 17px/1 var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sv-t b i { font-style: normal; color: #6fa793; padding: 0 3px; }
+#s-tabs .sbsite .hub .sv-lines { display: grid; gap: 1px; border-top: 1px solid rgba(52, 211, 153, .2); }
+#s-tabs .sbsite .hub .sv-line { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; column-gap: 10px; height: 30px; opacity: 0; font: 600 11.5px/1 var(--ui); color: #d4e6de; }
+#s-tabs .sbsite .hub .sv-line em { font: 700 8px/1 var(--ui); font-style: normal; letter-spacing: .07em; text-transform: uppercase; padding: 4px 7px; border-radius: 999px; background: rgba(52, 211, 153, .16); color: #5fe3b4; }
+#s-tabs .sbsite .hub .sv-line b { min-width: 66px; text-align: right; font: 700 12.5px/1 var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sv-f { display: flex; align-items: center; justify-content: space-between; padding-top: 9px; border-top: 1px solid rgba(52, 211, 153, .2); font: 600 10.5px/1 var(--ui); color: #9fb8ad; }
+#s-tabs .sbsite .hub .sv-f b { font: 700 13px/1 var(--ui); color: #f2f2f7; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sv-f s { margin-right: 6px; font: 500 10.5px/1 var(--ui); color: #6e8a7d; }
+#s-tabs .sbsite .hub .sv-f small { font: 500 9.5px/1 var(--ui); color: #9fb8ad; }

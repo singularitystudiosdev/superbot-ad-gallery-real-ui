@@ -107,6 +107,13 @@ const more = [
   ['negagg-second-superbot-0741e029', 'negagg-second-superbot-0741e029/', 'ASK ANOTHER MODEL. SAME CHAT.', 'Ad spots',
     { desc: 'Opens straight in the real superbot hub, no headline card. Three casual asks in one thread. "plan 4 days in Lisbon for two, under $1,500" is answered by ChatGPT: a status chip, a day by day itinerary with a place photo, the main stop and the cost for each of four days, and a budget bar that adds up to $1,460 of $1,500. Superbot then offers a second opinion ("Ask Claude too") and switches the same thread to Claude for "double check the budget": it checks 14 line items, flags one that was missing from the plan (airport transfers, $60), shows the corrected total of $1,520 and a suggested swap that brings it to $1,470, under budget. For "book the hotel for night one", three tool steps tick (opened the hotel page, picked 1 night and 2 guests, booked with the saved card) and a booking confirmation card lands with the hotel photo, dates and price. Then the headline card ASK ANOTHER MODEL. SAME CHAT. and the end card EVERY MODEL. ONE CHAT. 23 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The hotel, prices and booking are invented demo content; photos are Unsplash (license in img/CREDITS.txt). Solution-only: no complaint, quote, count or error UI on screen.' }],
   // <<< negagg-second-superbot-0741e029
+  // >>> negagg-local-superbot-85368a00 (negativity-agg theme 'privacy-data' (worry about sending personal files to a cloud AI) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no error UI, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply (no photos in this one, img/CREDITS.txt says so).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-local-superbot-85368a00)
+  ['negagg-local-superbot-85368a00', 'negagg-local-superbot-85368a00/', 'KEEP IT ON YOUR MACHINE.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. The user drops a bank statement PDF (statement-sept.pdf) into the composer, types "sort my spending", opens the composer\'s model picker and picks superbot-omni, the option tagged ON THIS DEVICE. A routing chip confirms "Switching to superbot-omni, on this device" and the reply, under a LOCAL badge, reads 86 transactions and breaks September into Rent $1,450, Groceries $412, Eating out $286, Transport $128, Subscriptions $94 and Other $230, $2,600 in total, then notes it ran on this device. For "which subscriptions did I forget about?" it lists five subscriptions with their monthly price and last use, adding up to the $94 line, and flags two as unused for 3+ months, $31 a month. For "cancel the two I don\'t use" four tool steps tick (opened and cancelled each one) and a result card reads "Saved $31/mo, $372 a year". Then the headline card KEEP IT ON YOUR MACHINE. and the end card EVERY MODEL. ONE CHAT. 23 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. The statement, service names and prices are invented demo content. Solution-only: no complaint, quote, count or error UI on screen.' }],
+  // <<< negagg-local-superbot-85368a00
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
@@ -2066,6 +2073,9 @@ const KEEP_IDS = new Set([
   // >>> keep negagg-second-superbot-0741e029
   'negagg-second-superbot-0741e029',
   // <<< keep negagg-second-superbot-0741e029
+  // >>> keep negagg-local-superbot-85368a00
+  'negagg-local-superbot-85368a00',
+  // <<< keep negagg-local-superbot-85368a00
   // >>> keep negagg-crashes-bugs-superbot-85553d96
   // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
   'negagg-crashes-bugs-superbot-85553d96',

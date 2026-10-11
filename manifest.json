@@ -907,6 +907,15 @@
     "desc": "A real superbot desktop thread, built from the app's own UI (the Real-UI kit). The spot opens on the hub and the real model picker lists every model (superbot, superbot Fast, GPT-5 Codex, GPT-5, Sonnet 4.6). An ask (point the review bot at our relay: one base URL, one key, the model named per call, then run it on three models) is typed and sent and the live row works. Meanwhile the real Settings sheet opens on Connections > API access: the one endpoint (https://api.superbot.gg, the OpenAI and Anthropic dialects), the drop-in snippets, the curl request whose model id changes from gpt-5-codex to claude-sonnet-4-6 to superbot, the three caller keys, and the Usage page where the call log fills with eight calls across models with tokens and cost per call. Back in the thread the answer lands with a code block, an unfolded diff of bot/ask.ts and the run. A second ask (which of the three is cheapest for the review job?) switches the picker to Sonnet 4.6 and the same thread answers with a table of tokens and cost per model. Ends on One key. Every model., the Superbot mascot, superbot.gg and Private beta. Invite only. No error, outage, limit or complaint on screen. Third-party product names are kept only as model and plan names (GPT-5 Codex, Sonnet 4.6, ChatGPT Plus, Claude Pro); third-party logo artwork and third-party chat titles are replaced by the app's own generic marks. The numbers, file contents and asks are made up; every frame is the real app DOM. 33 s, 60 fps, 4:5, 16:9, 4:3 and 1:1."
   },
   {
+    "id": "one-key-short-superbot-7fcf1c91",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "ONE KEY. EVERY MODEL. (real UI, 15 s cut) · the real API access screen with the one endpoint, the model id swapping in the same request, the call log across models, the answer with its diff (15 s)",
+    "src": "animations/one-key-short-superbot-7fcf1c91/",
+    "thumb": "assets/shots/one-key-short-superbot-7fcf1c91.png",
+    "desc": "The 15 second cut of the One key. Every model. spot, built from the real superbot desktop UI (the Real-UI kit). It opens straight on the real Settings sheet on Connections > API access: the one endpoint (https://api.superbot.gg, the OpenAI and Anthropic dialects), with a small superbot.gg wordmark in the corner from the first second. The pane scrolls to the curl request and its model id changes from gpt-5-codex to claude-sonnet-4-6 to superbot; the Usage page's call log fills with eight calls across models with tokens and cost per call; the sheet closes and the thread answers with a code block and an unfolded diff of bot/ask.ts. Ends on One key. Every model., the Superbot mascot, superbot.gg and Private beta. Invite only. No error, outage, limit or complaint on screen. Third-party product names are kept only as model names (GPT-5 Codex, Sonnet 4.6); third-party logo artwork and chat titles are replaced by the app's own generic marks. The numbers, file contents and asks are made up; every frame is the real app DOM. 15 s, 60 fps, 4:5, 16:9, 4:3 and 1:1."
+  },
+  {
     "id": "one-spend-number-real-superbot-7fcf1c91",
     "type": "animation",
     "group": "Ad spots",

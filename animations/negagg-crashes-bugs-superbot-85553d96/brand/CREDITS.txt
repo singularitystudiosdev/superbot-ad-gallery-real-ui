@@ -1,0 +1,2 @@
+openai-logo.svg  OpenAI knot mark, vendor asset (unchanged)
+gemini-logo.svg  Google Gemini spark, vendor asset (unchanged)

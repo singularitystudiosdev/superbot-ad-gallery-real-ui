@@ -62,6 +62,12 @@ const items = anims.map(([id, src, title, desc]) => ({
 // Second sweep — ad spots, site variants, hero FX and related pages.
 // [name, pagePath, title, group]
 const more = [
+  // >>> negagg-crashes-bugs-superbot-85553d96 (negativity-agg complaint rank 1 'crashes-bugs': 20,488 one and two
+  // star reviews of ChatGPT and Meta AI mention crashes, errors or chats that will not load, ChatGPT 9.1% of its
+  // negatives; source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-crashes-bugs-superbot-85553d96)
+  ['negagg-crashes-bugs-superbot-85553d96', 'negagg-crashes-bugs-superbot-85553d96/', 'CHATGPT WENT OFFLINE · same chat, Gemini picks the ask up', 'Ad spots',
+    { desc: 'One ask typed into superbot, routed to ChatGPT, which comes back with its own failure state instead of an answer: blank thread, "Looks like you\'re offline. Reconnect to send messages." and, after a Retry that spins and gives up, "There\'s a problem with your request". Nothing is retyped: superbot carries the same ask on in Gemini in the same thread, and Gemini answers it and drafts the launch post. The hook card is the strongest one star ChatGPT review verbatim (2,418 thumbs up) and the count card is the cluster total, 20,488 one and two star reviews of ChatGPT and Meta AI that mention crashes or errors (negativity-agg complaint rank 1, crashes-bugs). The ChatGPT failure is recreated as a UI state, no ChatGPT screenshots; the hub is the real superbot UI. 21.9 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Copies its 4:5 style basis from every-model-one-chat-superbot-efa8df82.' }],
+  // <<< negagg-crashes-bugs-superbot-85553d96
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],

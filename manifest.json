@@ -45,6 +45,15 @@
     "desc": "The headline card, then the feature working in the real superbot hub. The first ask, \"Draft the beta invite.\", is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing ChatGPT, Claude, and superbot-fast, the house model superbot.gg describes as quick and cheap, for small jobs. The pointer picks superbot-fast, the chip follows the pick, and the same thread carries on: the follow-up \"Give me three subject lines.\" is typed and sent and superbot-fast answers it, with everything above it still in context. It closes on the line \"Same thread. Answered by the fast model.\" and the end card EVERY MODEL. ONE CHAT. 21 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. No speed figure is stated. Clean solution cut of negativity-agg complaint rank 4 slow-laggy: no complaint, quote, count or loading state on screen."
   },
   {
+    "id": "negagg-switch-superbot-73abddeb",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "SWITCH MODELS. KEEP THE CHAT.",
+    "src": "animations/negagg-switch-superbot-73abddeb/",
+    "thumb": "assets/shots/negagg-switch-superbot-73abddeb.png",
+    "desc": "Opens straight in the real superbot hub, no headline card. Three casual asks in one thread, three models. \"find me a 2 bed in Austin under $2k, near a park\" is answered by ChatGPT: a search status chip, filter pills and three listing cards with photos, rent, beds and baths and the park each is near. Superbot switches the same thread to Gemini (\"Switching to Gemini\") for \"which one has the shortest bike ride downtown?\": the same three listings ranked by bike time with the shortest ride marked. It then switches to Claude for \"message the landlord of that one, ask about a June 1 move in\": a drafted message to that listing's leasing office, three tool steps ticking (opened the listing, pasted the message, sent) and a Message sent card. Then the headline card SWITCH MODELS. KEEP THE CHAT. and the end card EVERY MODEL. ONE CHAT. 24 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Building names, rents and distances are invented demo content; photos are Unsplash (license in img/CREDITS.txt). Solution-only: no complaint, quote, count or error state on screen."
+  },
+  {
     "id": "every-model-one-chat-sb-superbot-efa8df82",
     "type": "animation",
     "group": "Ad spots",

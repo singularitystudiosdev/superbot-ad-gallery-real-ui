@@ -1,0 +1,4 @@
+openai-logo.svg  OpenAI knot mark, vendor asset (unchanged). Trademark of OpenAI, used nominatively for the ChatGPT model header.
+claude-logo.svg  Claude mark path data copied from superbot-desktop packages/ui/src/marks/mark-claude.tsx (nominative use; "Claude" and the Claude mark are trademarks of Anthropic PBC)
+gemini-logo.svg  Google Gemini icon (2025), Wikimedia Commons File:Google_Gemini_icon_2025.svg, Google trademark, used nominatively (copied from the every-model-one-chat spot).
+Photos: see ../img/CREDITS.txt (Unsplash, Unsplash License).

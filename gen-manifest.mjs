@@ -93,6 +93,13 @@ const more = [
   ['negagg-fast-superbot-3f3e0f39', 'negagg-fast-superbot-3f3e0f39/', 'FAST MODEL. ONE CLICK.', 'Ad spots',
     { desc: 'The headline card, then the feature working in the real superbot hub. The first ask, "Draft the beta invite.", is typed into the composer and answered by ChatGPT. The user then presses the model chip in the composer and the model picker opens, listing ChatGPT, Claude, and superbot-fast, the house model superbot.gg describes as quick and cheap, for small jobs. The pointer picks superbot-fast, the chip follows the pick, and the same thread carries on: the follow-up "Give me three subject lines." is typed and sent and superbot-fast answers it, with everything above it still in context. It closes on the line "Same thread. Answered by the fast model." and the end card EVERY MODEL. ONE CHAT. 21 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. No speed figure is stated. Clean solution cut of negativity-agg complaint rank 4 slow-laggy: no complaint, quote, count or loading state on screen.' }],
   // <<< negagg-fast-superbot-3f3e0f39
+  // >>> negagg-switch-superbot-73abddeb (negativity-agg theme 'crashes-bugs' (apps crash or fail mid-task) is the internal reason for the feature only; nothing from
+  // the complaint is on screen: no quote, no review count, no error UI, no negative hook copy. Rebuilt to the every-model-one-chat
+  // reference's detail level: concrete artifacts per reply, sourced Unsplash photos (img/CREDITS.txt).
+  // Source quick-chats/superbot-ad-gallery-real-ui.ea5050ae/animations/negagg-switch-superbot-73abddeb)
+  ['negagg-switch-superbot-73abddeb', 'negagg-switch-superbot-73abddeb/', 'SWITCH MODELS. KEEP THE CHAT.', 'Ad spots',
+    { desc: 'Opens straight in the real superbot hub, no headline card. Three casual asks in one thread, three models. "find me a 2 bed in Austin under $2k, near a park" is answered by ChatGPT: a search status chip, filter pills and three listing cards with photos, rent, beds and baths and the park each is near. Superbot switches the same thread to Gemini ("Switching to Gemini") for "which one has the shortest bike ride downtown?": the same three listings ranked by bike time with the shortest ride marked. It then switches to Claude for "message the landlord of that one, ask about a June 1 move in": a drafted message to that listing\'s leasing office, three tool steps ticking (opened the listing, pasted the message, sent) and a Message sent card. Then the headline card SWITCH MODELS. KEEP THE CHAT. and the end card EVERY MODEL. ONE CHAT. 24 s, 16:9 and 4:5, 1920x1080 and 1080x1350, 60 fps, no audio. Building names, rents and distances are invented demo content; photos are Unsplash (license in img/CREDITS.txt). Solution-only: no complaint, quote, count or error state on screen.' }],
+  // <<< negagg-switch-superbot-73abddeb
     ['youtube-refusal-superbot-7f2c9a41', 'youtube-refusal-superbot-7f2c9a41/', "WE DON'T REFUSE", 'Ad spots'],
     ['waffles-website-superbot-87a583a1', 'waffles-website-superbot-87a583a1/', '1 click publish', 'Ad spots'],
   ['do-that-too-apps-superbot-e8871e50', 'do-that-too-apps-superbot-e8871e50/', 'I can do that too · every app in one chat', 'Ad spots'],
@@ -2046,6 +2053,9 @@ const KEEP_IDS = new Set([
   // >>> keep negagg-fast-superbot-3f3e0f39
   'negagg-fast-superbot-3f3e0f39',
   // <<< keep negagg-fast-superbot-3f3e0f39
+  // >>> keep negagg-switch-superbot-73abddeb
+  'negagg-switch-superbot-73abddeb',
+  // <<< keep negagg-switch-superbot-73abddeb
   // >>> keep negagg-crashes-bugs-superbot-85553d96
   // added (2026-10-11, 85553d96): CHATGPT WENT OFFLINE, the same chat carries on in Gemini (own animation dir, 16:9 + 4:5 renders, silent)
   'negagg-crashes-bugs-superbot-85553d96',

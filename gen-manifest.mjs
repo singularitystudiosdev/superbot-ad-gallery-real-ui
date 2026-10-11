@@ -1995,6 +1995,13 @@ const more = [
   ['one-key-every-model-superbot-7fcf1c91', 'one-key-every-model-superbot-7fcf1c91/', 'ONE KEY. EVERY MODEL. · one endpoint, one key: the request\'s model id changes (Claude, GPT, Gemini) and each answer streams back (17 s)', 'Ad spots',
     { desc: 'A developer\'s gateway console opens on https://api.superbot.gg/v1 with the caller key sbc_…7f2a (scope gateway:invoke). Three POST /v1/chat/completions calls run in it: the same ask (summarize the notes) reaches anthropic/claude-opus-5.5, then openai/gpt-6-sol, then google/gemini-3-pro, and each answer streams back as text/event-stream until data: [DONE]. Beside the terminal a rail shows what is behind that one key: the key and its scope, and the three plans it already covers (Claude Pro/Max, ChatGPT Plus, Gemini Code Assist). The spot closes on the foot line 1 key · 3 providers · one endpoint, then One key. / Every model., the Superbot mascot and superbot.gg. No error, outage, limit or complaint is on screen anywhere, and no cross-vendor failover is implied: each call names its own model id. The key, the ask and the answers are made up; the model ids are the <vendor>/<model> form docs.md documents, spelled with the model names superbot.gg shows. 17 s, 60 fps, 4:5 and 16:9.' }],
   // <<< one-key-every-model-superbot-7fcf1c91
+  // >>> keep-the-thread-real-superbot-7fcf1c91
+  // SWITCH AI. KEEP THE THREAD. (real UI) (2026-10-11, 7fcf1c91, negativity-agg feed ad 3 v2): rebuilt on the Real-UI kit (captured superbot-desktop DOM + stylesheet, native 1.2 zoom layout). Solution only (user ruling): no
+  // complaint, error, outage or limit on screen. Search finds a thread mid-task, a real model picker switches GPT-5 Codex -> Sonnet 4.6 -> superbot and the same thread keeps working (diff + test run per turn).
+  // 31.2 s, 60 fps, silent; 4:5, 16:9, 4:3 and 1:1 renders. Claims checked against superbot.gg/features, /docs.md and /llms.txt (registry entry in ads-feed/registry.7fcf1c91.json).
+  ['keep-the-thread-real-superbot-7fcf1c91', 'keep-the-thread-real-superbot-7fcf1c91/', 'SWITCH AI. KEEP THE THREAD. (real UI) · one superbot thread, three models: search, switch in the picker, the same thread keeps working (31 s)', 'Ad spots',
+    { desc: "A real superbot desktop thread, built from the app's own UI (the Real-UI kit), carried across three models. The spot opens on the hub with its populated chat list; the search palette (date parser) finds a thread mid-task, a GPT-5 Codex fix of utils/date.ts with its code block, an unfolded diff and a passing npm test run. The next ask (does utils/time.ts have the same bug? fix it and run the whole suite) is typed, the model picker opens and switches to Sonnet 4.6, and the same thread answers with a new diff of utils/time.ts and a green full suite (58 of 58). A third ask (add a regression test for the Z suffix, then write the commit message) switches the picker to superbot, which lands a table of the three changes, the commit message and a third diff (59 of 59), the thread scrolling as it grows. Ends on Switch AI. Keep the thread., the Superbot mascot, superbot.gg and Private beta. Invite only. No error, outage, limit or complaint on screen. The file contents, counts and asks are made up; every frame is the real app DOM. 31 s, 60 fps, 4:5, 16:9, 4:3 and 1:1." }],
+  // <<< keep-the-thread-real-superbot-7fcf1c91
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -2061,6 +2068,10 @@ const KEEP_IDS = new Set([
   // added (2026-10-11, 7fcf1c91): ONE KEY. EVERY MODEL., the one-endpoint gateway feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
   'one-key-every-model-superbot-7fcf1c91',
   // <<< keep one-key-every-model-superbot-7fcf1c91
+  // >>> keep keep-the-thread-real-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): SWITCH AI. KEEP THE THREAD. (real UI), feed ad 3 v2 on the Real-UI kit (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
+  'keep-the-thread-real-superbot-7fcf1c91',
+  // <<< keep keep-the-thread-real-superbot-7fcf1c91
   // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
   'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',

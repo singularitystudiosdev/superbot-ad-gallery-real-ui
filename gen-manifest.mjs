@@ -1933,6 +1933,14 @@ const more = [
   ['usage-limit-keep-going-superbot-7fcf1c91', 'usage-limit-keep-going-superbot-7fcf1c91/', 'LIMIT HIT? KEEP GOING. · Claude hits its 5-hour limit, the same chat carries on in Superbot (21 s)', 'Ad spots',
     { desc: 'Limit hit. Again. A Claude Opus 5.5 task is cut off mid-refactor by its plan\'s 5-hour limit (resets 4:12 PM). Superbot shows live limits on every plan in its Accounts panel (5-hour and 7-day bars per plan), the call moves to your next sign-in, the same chat finishes the job, and one more ask runs on GPT-6 Sol from the composer\'s model chip. Ends on Limit hit? Keep going., the Superbot mascot and superbot.gg. Account names and percentages are made up. 21 s, 60 fps, 4:5 and 16:9.' }],
   // <<< usage-limit-keep-going-superbot-7fcf1c91
+  // >>> outage-next-model-superbot-7fcf1c91
+  // DOWN AGAIN? SAME CHAT, NEXT MODEL. (2026-10-11, 7fcf1c91, negativity-agg feed ad 2): theme outages-errors, rising in the
+  // feed (a vendor error mid-task). Forked from the usage-limit-keep-going engine (hub UI, text cards, mascot end card), 16.8 s,
+  // 60 fps, silent; 4:5, 16:9, 4:3 and 1:1 renders. Copy checked against superbot.gg/docs.md (failover between your sign-ins) and
+  // superbot.gg/features (every call, one log; their models join the same picker).
+  ['outage-next-model-superbot-7fcf1c91', 'outage-next-model-superbot-7fcf1c91/', 'DOWN AGAIN? SAME CHAT, NEXT MODEL. · a ChatGPT task errors and the same chat finishes on Claude (17 s)', 'Ad spots',
+    { desc: 'Down. Again. A finished ask to GPT-6 Sol comes back with the vendor error Selected model is at capacity. The user opens the composer model picker and picks Claude Opus 5.5, sends the same ask, and the same thread finishes the job (14 files refactored, 42 tests pass). Ends on Down again? Same chat, next model., the Superbot mascot and superbot.gg. The failed call shows in Activity; the model pick is the user\'s. 17 s, 60 fps, 4:5 and 16:9.' }],
+  // <<< outage-next-model-superbot-7fcf1c91
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -1969,6 +1977,10 @@ const KEEP_IDS = new Set([
   // added (2026-10-11, 7fcf1c91): LIMIT HIT? KEEP GOING., the usage-limits feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
   'usage-limit-keep-going-superbot-7fcf1c91',
   // <<< keep usage-limit-keep-going-superbot-7fcf1c91
+  // >>> keep outage-next-model-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): DOWN AGAIN? SAME CHAT, NEXT MODEL., the outages-errors feed ad (own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent)
+  'outage-next-model-superbot-7fcf1c91',
+  // <<< keep outage-next-model-superbot-7fcf1c91
   // >>> keep cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7
   // added (2026-10-07, 2459e0e7): cg1-1004 remake of the Pocketsflow untold spot (own animation dir, 16:9 render)
   'cg1-1004-pocketsflow-untold-every-model-superbot-2459e0e7',

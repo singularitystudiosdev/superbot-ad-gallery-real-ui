@@ -752,5 +752,14 @@
     "src": "animations/usage-limit-keep-going-superbot-7fcf1c91/",
     "thumb": "assets/shots/usage-limit-keep-going-superbot-7fcf1c91.png",
     "desc": "Limit hit. Again. A Claude Opus 5.5 task is cut off mid-refactor by its plan's 5-hour limit (resets 4:12 PM). Superbot shows live limits on every plan in its Accounts panel (5-hour and 7-day bars per plan), the call moves to your next sign-in, the same chat finishes the job, and one more ask runs on GPT-6 Sol from the composer's model chip. Ends on Limit hit? Keep going., the Superbot mascot and superbot.gg. Account names and percentages are made up. 21 s, 60 fps, 4:5 and 16:9."
+  },
+  {
+    "id": "outage-next-model-superbot-7fcf1c91",
+    "type": "animation",
+    "group": "Ad spots",
+    "title": "DOWN AGAIN? SAME CHAT, NEXT MODEL. · a ChatGPT task errors and the same chat finishes on Claude (17 s)",
+    "src": "animations/outage-next-model-superbot-7fcf1c91/",
+    "thumb": "assets/shots/outage-next-model-superbot-7fcf1c91.png",
+    "desc": "Down. Again. A finished ask to GPT-6 Sol comes back with the vendor error Selected model is at capacity. The user opens the composer model picker and picks Claude Opus 5.5, sends the same ask, and the same thread finishes the job (14 files refactored, 42 tests pass). Ends on Down again? Same chat, next model., the Superbot mascot and superbot.gg. The failed call shows in Activity; the model pick is the user's. 17 s, 60 fps, 4:5 and 16:9."
   }
 ]

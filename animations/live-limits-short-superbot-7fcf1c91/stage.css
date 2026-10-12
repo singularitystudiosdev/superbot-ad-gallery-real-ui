@@ -1,0 +1,27 @@
+/* Stage-only rules. Nothing here restyles the app: it only (a) hides the native caret so the blink can be a pure function of t,
+   (b) draws that caret, (c) freezes the mascot for the end card. */
+html { overflow: hidden; }
+[data-testid="composer-input"] { caret-color: transparent !important; }
+.sb-caret { display: inline-block; width: 0; height: 1.15em; position: relative; vertical-align: text-bottom; }
+.sb-caret::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--color-fg, #fff); }
+.sb-static, .sb-static * { animation: none !important; transition: none !important; }
+/* The app lets off-screen rows skip layout (content-visibility:auto) and remembers each row's real size once seen. A freshly
+   inserted static DOM has no remembered sizes, so thread height / scroll positions would drift: lay every row out fully. */
+.hub-feed > [data-message-id], .sb-tool-thumbs, .diff-tailwindcss-wrapper .diff-style-root tr { content-visibility: visible !important; }
+/* Faux classic h-scrollbar under an overflowing code block (SB.decorate): thumb width/offset follow the real scroll geometry. */
+.sb-hscroll { position: relative; }
+.sb-hscroll > [data-slot="code-block-body"] { padding-bottom: calc(var(--spacing-8, 8px) + 8.4px); }
+.sb-hscroll .diff-table-scroll-container { padding-bottom: 7.8px; }
+.sb-hscroll::after { content: ""; position: absolute; left: 4px; right: 4px; bottom: 3px; height: 5px; border-radius: 3px; background: linear-gradient(90deg, transparent var(--sb-x, 0%), #7d7d82 var(--sb-x, 0%), #7d7d82 calc(var(--sb-x, 0%) + var(--sb-thumb, 90%)), transparent calc(var(--sb-x, 0%) + var(--sb-thumb, 90%))); pointer-events: none; }
+/* The desktop shell reports env(titlebar-area-height) (Window Controls Overlay) = 34px; a plain page reports 0. Only Settings' top reserve
+   reads it without a max() fallback, so pin that one to the shell's value (measured: capture boxes, settings-window dy = -17px). */
+.settings-sheet { --settings-top-reserve: calc(34px + var(--spacing-8)); }
+/* The stylesheet dump (build-assets) serialised shorthands that contain var() as empty longhands, which blanked the live status label
+   (its glyphs are transparent ink over this ::after's gradient). Restored verbatim from apps/desktop/src/renderer/src/hub/sonar-trace.css. */
+.sb-sonar-label .sb-swap-line::after {
+  background: linear-gradient(90deg, var(--color-muted) 0%, var(--color-muted) 35%, var(--color-fg) 50%, var(--color-muted) 65%, var(--color-muted) 100%);
+  background-size: calc(100% / 3) 100%;
+}
+.sb-sonar-label .sb-swap-line { -webkit-mask-image: linear-gradient(var(--color-fg) 0 0); -webkit-mask-clip: text; }
+/* the app's mascot marks (sidebar tile, model chip, live-row mark) rest still: no bob / glitch / ear loops anywhere on screen */
+.mark-superbot-glitch, .mark-superbot-glitch *, [class*="mark-superbot"], [class*="mark-superbot"] *, .mark-ear { animation: none !important; }

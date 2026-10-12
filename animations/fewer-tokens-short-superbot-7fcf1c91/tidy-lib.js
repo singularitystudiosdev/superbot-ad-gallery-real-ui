@@ -2,7 +2,7 @@
  * captured from the gate-on copy of the prebuilt app (.tmp/realui-kit.7fcf1c91/capture/ext2/capture-ext2.mjs -> snap-ext2/<ar>/ctx-*.json).
  *   SB.loadCtx(names)     fetch snap-ext2/<ar>/<name>.json into SB.snaps['x2:<name>']
  *   SB.ctxGo(name)        swap the open Settings sheet for another captured Context state (the sheet stays, no entrance replay): ctx-asis | ctx-tidy | ctx-open
- *   SB.ctxFigures(p)      the served figures, as a function of p (0 = the as-is block, 1 = the tidy block): "~8.2k" -> "~3.4k" sent each turn, "8.2k -> 3.4k always on", -59%
+ *   SB.ctxFigures()       removes every token figure / percentage (see below): no saving is claimed on screen
  * Only text of figures the pane already shows is retargeted (same elements, same classes).
  */
 (() => {
@@ -26,17 +26,11 @@
     for (const a of el.getAnimations({ subtree: true })) { try { a.finish() } catch (e) { /* ignore */ } }
     return el
   }
-  const k = (n) => (n / 1000).toFixed(1) + 'k'
-  const LANES = { superbot: [8200, 3400], 'relay-agent': [6100, 2600] }
-  const set = (sel, txt) => { const el = $(sel); if (el && el.textContent !== txt) el.textContent = txt }
-  SB.ctxFigures = (p) => {
-    const e = ease.inOut(clamp01(p))
-    for (const [lane, [a, b]] of Object.entries(LANES)) {
-      const v = a + (b - a) * e, pct = Math.round(((a - v) / a) * 100)
-      set(`[data-testid="guardian-summary-${lane}-figure"]`, `${k(a)} → ${k(v)}`)
-      set(`[data-testid="guardian-summary-${lane}-saving"]`, pct < 1 ? '' : `−${pct}%`)
-    }
-    const [a, b] = LANES.superbot
-    set('[data-testid="settings-context-sent-figure"]', '~' + k(a + (b - a) * e))
+  /* NO token figure, percentage or saving is shown (ruling after the first publish: fixture before/after numbers must not appear as a saving):
+   * the value cells of "What Tidy did" (the "8.2k -> 3.4k always on -59%" group) and the Context map's size readouts ("~N sent each turn", "N on disk") are removed;
+   * the lane names, the rule counts and the map itself stay as the app draws them. Idempotent; called on every seek (p is ignored). */
+  SB.ctxFigures = () => {
+    for (const el of $$('[data-testid^="guardian-summary-"][data-testid$="-figure"]')) { const g = el.parentElement; if (g) g.remove() }
+    for (const el of $$('[data-testid="settings-context-sent"], [data-testid="settings-context-ondisk"]')) el.remove()
   }
 })()

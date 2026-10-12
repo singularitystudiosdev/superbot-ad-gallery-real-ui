@@ -1,12 +1,12 @@
 /* fewer-tokens-short (real UI): token-burn in the 15 s short format (the recipe of one-key-short, same kit + ok-lib + ktr-lib + ext.js).
  *   t=0 the video opens ON the real Settings > Context page of superbot-desktop (the thread that asked for the work sits behind it):
  *   "Tidy it for Superbot chats / Recommended / Your other apps keep their setup. We never rewrite your words." -> the click on Tidy
- *   -> the Context map ("~8.2k -> ~3.4k sent each turn", 44k on disk) -> "What Tidy did" (8.2k -> 3.4k always on, -59%, how the rules land)
+ *   -> the Context map (the treemap of what a turn can load) -> Per app -> "What Tidy did" (how its rules land: every turn / on demand / pointers / off)
  *   -> the sheet closes, the same thread does the work (answer, the sync/client.ts diff, npm test) with a calm context meter
  *   -> end card (static mascot, Fewer tokens. Same work., superbot.gg, Private beta. Invite only.) at 11.7 s, held 3.3 s.
  * The persistent "superbot.gg" wordmark (ad copy, header gap, from ~1 s) keeps the destination on screen at any drop-off point.
  * Every frame is the real app's DOM (captured from a gate-on copy of the prebuilt app); only text / numbers / transforms are retargeted. run() is idempotent in p.
- * The figures (8.2k -> 3.4k etc.) are the demo account's fixture figures, served through the app's own /me plan view, not a benchmark claim.
+ * NO token figure, percentage or saving is on screen (SB.ctxFigures removes the value cells): the ad claims nothing numeric.
  */
 import { ensureCtx } from './ctx-common.js'
 await ensureCtx(window.SB, ['ctx-asis', 'ctx-tidy', 'ctx-open'])
@@ -101,15 +101,14 @@ export default (SB) => {
 
       /* -------------------------------------------------- 0.8 s: the click on "Tidy it for Superbot chats" (radio moves, the Learn row opens) */
       { at: 0.8, run() { once('tidy', () => { sheet('ctx-tidy') }) } },
-      /* 1.5 s: the Context map and the Advanced fold open; the figures are still the as-is block */
-      { at: 1.5, run() { once('open', () => { sheet('ctx-open') }); SB.ctxFigures(0) } },
+      /* 1.5 s: the Context map and the Advanced fold open (their token figures removed) */
+      { at: 1.5, run() { once('open', () => { sheet('ctx-open') }); SB.ctxFigures() } },
 
-      /* -------------------------------------------------- 1.7 s: to the Context map: what each turn sends, the number falls as Tidy takes over */
-      { at: 1.7, dur: 1.1, run(_, p) { scrollTo('s1', '[data-testid="settings-context-map"]', p); SB.ctxFigures(0) } },
-      { at: 2.8, dur: 1.5, run(_, p) { SB.ctxFigures(p) } },
+      /* -------------------------------------------------- 1.7 s: to the Context map (the treemap of what a turn can load) */
+      { at: 1.7, dur: 1.1, run(_, p) { scrollTo('s1', '[data-testid="settings-context-map"]', p); SB.ctxFigures() } },
 
-      /* -------------------------------------------------- 4.6 s: What Tidy did: the always-on figure per app and how its rules land */
-      { at: 4.6, dur: 1.4, run(_, p) { SB.ctxFigures(1); scrollTo('s2', '[data-testid="settings-context-per-app"]', p) } },
+      /* -------------------------------------------------- 4.6 s: What Tidy did: how its rules land per app (counts only) */
+      { at: 4.6, dur: 1.4, run(_, p) { SB.ctxFigures(); scrollTo('s2', '[data-testid="settings-context-per-app"]', p) } },
 
       /* -------------------------------------------------- 7.3 s: the sheet closes, the same thread does the work */
       { at: 7.3, run() { liveAdd('running', 'npm test', 5, [R('Read', 'client.ts'), R('Read', 'client.test.ts'), R('Edited', 'client.ts')]); SB.ctxClose(); SB.setContext(38, 200) } },

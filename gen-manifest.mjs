@@ -2063,6 +2063,14 @@ const more = [
   ['one-key-short-superbot-7fcf1c91', 'one-key-short-superbot-7fcf1c91/', 'ONE KEY. EVERY MODEL. (real UI, 15 s cut) · the real API access screen with the one endpoint, the model id swapping in the same request, the call log across models, the answer with its diff (15 s)', 'Ad spots',
     { desc: "The 15 second cut of the One key. Every model. spot, built from the real superbot desktop UI (the Real-UI kit). It opens straight on the real Settings sheet on Connections > API access: the one endpoint (https://api.superbot.gg, the OpenAI and Anthropic dialects), with a small superbot.gg wordmark in the corner from the first second. The pane scrolls to the curl request and its model id changes from gpt-5-codex to claude-sonnet-4-6 to superbot; the Usage page's call log fills with eight calls across models with tokens and cost per call; the sheet closes and the thread answers with a code block and an unfolded diff of bot/ask.ts. Ends on One key. Every model., the Superbot mascot, superbot.gg and Private beta. Invite only. No error, outage, limit or complaint on screen. Third-party product names are kept only as model names (GPT-5 Codex, Sonnet 4.6); third-party logo artwork and chat titles are replaced by the app's own generic marks. The numbers, file contents and asks are made up; every frame is the real app DOM. 15 s, 60 fps, 4:5, 16:9, 4:3 and 1:1." }],
   // <<< one-key-short-superbot-7fcf1c91
+  // >>> fewer-tokens-short-superbot-7fcf1c91
+  // FEWER TOKENS. SAME WORK. 15 s (real UI) (2026-10-11, 7fcf1c91, negativity-agg feed ad 6, #50): token-burn in the 15 s short format on the real superbot-desktop Settings > Context (Tidy) pane
+  // (a gate-on copy of the prebuilt app; the app itself unchanged). Opens straight on "How should Superbot use your setup?", the click on Tidy, the Context map (what each turn sends), Per app and "What Tidy did", then the thread does the work.
+  // Solution only (user ruling): no error, limit or complaint on screen. The figures (8.2k -> 3.4k always on) are the demo account's fixture figures, not a benchmark claim.
+  // 15.0 s, 60 fps, silent; 4:5, 16:9, 4:3 and 1:1 renders. Claims checked against superbot.gg/features and /docs.md (registry entry in ads-feed/registry.7fcf1c91.json).
+  ['fewer-tokens-short-superbot-7fcf1c91', 'fewer-tokens-short-superbot-7fcf1c91/', 'FEWER TOKENS. SAME WORK. (real UI, 15 s) · the real Settings > Context page: Tidy chosen, the Context map of what each turn sends, per-app Tidy, what Tidy did, then the thread does the work (15 s)', 'Ad spots',
+    { desc: "A 15 second spot built from the real superbot desktop UI (the Real-UI kit, captured from a build with the Tidy settings switched on). It opens straight on the real Settings > Context page, How should Superbot use your setup?, with Tidy it for Superbot chats (Recommended: Your other apps keep their setup. We never rewrite your words.) and Keep everything exactly as is; a small superbot.gg wordmark sits in the header from the first second. The choice moves to Tidy, the Context map opens (about 8.2k then 3.4k sent each turn, 44k on disk) and the list scrolls to Per app (Tidy, Keep as is or Default for superbot.gg, Claude, ChatGPT, OpenAI API, Mac agent and Delegated tasks) and What Tidy did (superbot.gg 8.2k to 3.4k always on, minus 59 percent, 6 every turn, 14 on demand, 9 pointers, 3 off; Mac agent 6.1k to 2.6k). The sheet closes and the thread does the work: retry with backoff added to the sync client, the code block, the unfolded diff of sync/client.ts (+7 -2) and an npm test run. Ends on Fewer tokens. Same work., the Superbot mascot, superbot.gg and Private beta. Invite only. No error, limit or complaint on screen. The figures, file contents and asks are made up (the demo account's fixture figures, not a benchmark); every frame is the real app DOM. 15 s, 60 fps, 4:5, 16:9, 4:3 and 1:1." }],
+  // <<< fewer-tokens-short-superbot-7fcf1c91
   // >>> one-spend-number-real-superbot-7fcf1c91
   // ALL YOUR AI. ONE NUMBER. (real UI) (2026-10-11, 7fcf1c91, negativity-agg feed ad 4): built on the Real-UI kit (captured superbot-desktop DOM + stylesheet, native 1.2 zoom layout). Solution only (user ruling): no
   // error, outage or limit hit on screen. Real work in a thread across two models, then the real Spend modal (All AI, per-day bars, provider totals, live limits, paid by key) and the API usage call log.
@@ -2178,6 +2186,10 @@ const KEEP_IDS = new Set([
   // added (2026-10-11, 7fcf1c91): ONE KEY. EVERY MODEL. 15 s cut (real UI), feed ad 2 v3 (#46): own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent
   'one-key-short-superbot-7fcf1c91',
   // <<< keep one-key-short-superbot-7fcf1c91
+  // >>> keep fewer-tokens-short-superbot-7fcf1c91
+  // added (2026-10-11, 7fcf1c91): FEWER TOKENS. SAME WORK. 15 s (real UI), feed ad 6 (#50): own animation dir, 4:5 / 16:9 / 4:3 / 1:1 renders, silent
+  'fewer-tokens-short-superbot-7fcf1c91',
+  // <<< keep fewer-tokens-short-superbot-7fcf1c91
   // >>> keep one-spend-number-real-superbot-7fcf1c91
   'one-spend-number-real-superbot-7fcf1c91',
   // <<< keep one-spend-number-real-superbot-7fcf1c91

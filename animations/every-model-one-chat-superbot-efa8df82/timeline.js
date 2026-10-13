@@ -164,7 +164,7 @@ function measureCaps() {
 
 // ---------- the end card (waffles-website drawEnd) ----------
 function buildEnd(sec) {
-  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>EVERY MODEL.<br> ONE CHAT.</h1></div></div><div class="face"></div></div>';
+  sec.innerHTML = '<div class="lock ask-end"><div class="words"><div class="end-slide"><h1>superbot.gg</h1></div></div><div class="face"></div></div>';
   const mark = shell.makeMark(220);
   sec.querySelector('.face').appendChild(mark.el);
   return { face: sec.querySelector('.face'), slide: sec.querySelector('.end-slide'), mark };
@@ -172,12 +172,14 @@ function buildEnd(sec) {
 function renderEnd(e, lt, t) {
   const f = seg(lt, 0, 0.5);
   lib.op(e.face, f);
-  e.face.style.transform = `scale(${lerp(0.5, 1, outBack(f)).toFixed(4)})`;
+  // no overshoot, and the mark held still at its t=0 pose: its idle loops (bob, breath, glitch layers, ears) are
+  // authored for a 16px mark and read as shaking at 220px
+  e.face.style.transform = `scale(${lerp(0.5, 1, outQuint(f)).toFixed(4)})`;
   const w = seg(lt, 0.3, 1.0);
   // the line slides out from behind the mascot (it sits to the line's right)
   e.slide.style.transform = `translateX(${((1 - outQuint(w)) * 110).toFixed(2)}%)`;
   lib.op(e.slide, w);
-  e.mark.render(lt);
+  e.mark.render(0);
 }
 
 // ---------- load the scene modules (a broken module must not take the spot down) ----------

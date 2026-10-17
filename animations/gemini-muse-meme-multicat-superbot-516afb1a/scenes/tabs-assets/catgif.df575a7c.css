@@ -1,0 +1,26 @@
+/* The 'catgif' variant's GIF answer (beats/catgif.df575a7c.js): a square player that shimmers while the GIF is created, then
+   loops a three.js render of a dancing cat. Same card language as the catsurf card (catsurf.e2265c3a.css). Loaded by the beat
+   module itself, so index.html needs no link. */
+#s-tabs .sbsite .hub .cg { width: 296px; max-width: 100%; }
+#s-tabs .sbsite .hub .cg-player { position: relative; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 12px; background: #1c1c20; box-shadow: 0 0 0 1px #2a2a2e, 0 12px 30px rgba(0,0,0,.4); }
+#s-tabs .sbsite .hub .cg-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .cg-sh { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.08) 50%, transparent 70%); }
+#s-tabs .sbsite .hub .cg-tag { position: absolute; left: 6px; bottom: 6px; padding: 1px 4px; border-radius: 4px; background: rgba(0,0,0,.8); font: 600 10px/14px var(--ui); color: #fff; opacity: 0; }
+#s-tabs .sbsite .hub .cg-prog, #s-tabs .sbsite .hub .cg-xp { position: absolute; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.22); }
+#s-tabs .sbsite .hub .cg-prog { bottom: 0; }
+#s-tabs .sbsite .hub .cg-xp { top: 0; opacity: 0; }
+#s-tabs .sbsite .hub .cg-exporting .cg-xp { opacity: 1; }
+#s-tabs .sbsite .hub .cg-prog i, #s-tabs .sbsite .hub .cg-xp i { position: absolute; inset: 0; background: #5b8dff; transform: scaleX(0); transform-origin: 0 50%; }
+#s-tabs .sbsite .hub .cg-save, #s-tabs .sbsite .hub .cg-share { all: unset; box-sizing: border-box; position: absolute; right: 6px; bottom: 6px; display: block; width: 21px; height: 21px; padding: 4px; border-radius: 4px; background: rgba(0,0,0,.8); cursor: pointer; opacity: 0; }
+#s-tabs .sbsite .hub .cg-save:focus-visible, #s-tabs .sbsite .hub .cg-share:focus-visible { outline: 2px solid #5b8dff; outline-offset: 1px; }
+#s-tabs .sbsite .hub .cg-save svg { display: block; width: 13px; height: 13px; fill: none; }
+/* the Share button is the download button's twin, 4px to its left; its glyph is the Share module's stroke-less path set */
+#s-tabs .sbsite .hub .cg-share { right: 31px; }
+#s-tabs .sbsite .hub .cg-share svg { display: block; width: 13px; height: 13px; fill: none; stroke: #fff; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+/* "Link copied" sits above it, the player's bottom edge clips below */
+#s-tabs .sbsite .hub .cg-share.is-copied::after { top: auto; bottom: calc(100% + 6px); }
+#s-tabs .sbsite .hub .cg-save.cg-busy { opacity: .45; cursor: progress; }
+#s-tabs .sbsite .hub .cg-t { margin-top: 7px; }
+#s-tabs .sbsite .hub .cg-t b { display: block; font: 600 12px/16px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .cg-t small { display: block; margin-top: 2px; font: 400 10.5px/14px var(--ui); color: #a1a1a6; }
+@media (prefers-reduced-motion: reduce) { #s-tabs .sbsite .hub .cg-sh { display: none; } }

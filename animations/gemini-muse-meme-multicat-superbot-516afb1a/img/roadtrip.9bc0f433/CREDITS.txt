@@ -1,0 +1,17 @@
+img/roadtrip.9bc0f433 CREDITS: the 'roadtrip' variant ("Plan a road trip from LA to SF on a map"). Both map datasets are
+public domain, so no on-screen credit is owed. Nothing in this folder is loaded by the page: the map data is baked into
+scenes/tabs-assets/beats/roadtrip.9bc0f433.js as coordinate arrays. The stop names, the day-by-day itinerary and the
+"see" highlights in the spot are made up.
+
+Coastline   Natural Earth ne_10m_land (1:10m physical vectors), clipped to lon -123.3..-117.6, lat 33.5..38.3 and
+            simplified to under 200 points. Licence: Public domain (Natural Earth places no restrictions on use).
+            https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-land/
+            Fetched 2026-10-14.
+Route       US Census Bureau TIGER/Line 2024 shapefile, California primary and secondary roads (tl_2024_06_prisecroads):
+            the State Rte 1 and US Hwy 101 centrelines, plus the connecting freeway at the Los Angeles end, joined
+            into one ordered path by a shortest-path search between the stops and simplified to under 250 points.
+            Licence: Public domain (US federal government work).
+            https://www2.census.gov/geo/tiger/TIGER2024/PRISECROADS/tl_2024_06_prisecroads.zip
+            Fetched 2026-10-14.
+Day figures Distances (100 / 213 / 140 mi) and times (2 h 15 m / 4 h 45 m / 3 h 15 m) for the three days are generic
+            driving figures, rounded; they sit within 10% of the length measured along the route above.

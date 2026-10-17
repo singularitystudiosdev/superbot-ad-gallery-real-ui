@@ -1,0 +1,27 @@
+/* The 'climbing' variant's YouTube answer (beats/climb.080da517.js): a source row, then six equal 16:9 tiles in a
+   3x2 grid; the first carries YouTube's player controls. Loaded by the beat module itself, so index.html needs no link. */
+#s-tabs .sbsite .hub .cv { width: 560px; max-width: 100%; }
+#s-tabs .sbsite .hub .cv-src { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; font: 500 11px/16px var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .cv-src .cv-yt { display: block; width: 20px; height: 14px; }
+#s-tabs .sbsite .hub .cv-src b { font-weight: 600; color: #e5e5ea; }
+#s-tabs .sbsite .hub .cv-src span::before { content: '·'; margin-right: 6px; }
+#s-tabs .sbsite .hub .cv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 10px; }
+#s-tabs .sbsite .hub .cv-item { min-width: 0; }
+#s-tabs .sbsite .hub .cv-v { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #1c1c20; box-shadow: 0 0 0 1px #2a2a2e, 0 12px 30px rgba(0,0,0,.4); }
+#s-tabs .sbsite .hub .cv-pic { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .cv-sh { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.08) 50%, transparent 70%); }
+#s-tabs .sbsite .hub .cv-len { position: absolute; right: 6px; bottom: 6px; padding: 1px 4px; border-radius: 4px; background: rgba(0,0,0,.8); font: 600 10px/14px var(--ui); color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cv-ctl { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 7px; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
+#s-tabs .sbsite .hub .cv-bar { position: relative; height: 3px; margin-bottom: 7px; background: rgba(255,255,255,.22); }
+#s-tabs .sbsite .hub .cv-buf, #s-tabs .sbsite .hub .cv-played { position: absolute; left: 0; top: 0; bottom: 0; }
+#s-tabs .sbsite .hub .cv-buf { background: rgba(255,255,255,.42); }
+#s-tabs .sbsite .hub .cv-played { background: #f00; }
+#s-tabs .sbsite .hub .cv-dot { position: absolute; top: 50%; width: 9px; height: 9px; border-radius: 50%; background: #f00; transform: translate(-50%, -50%); }
+#s-tabs .sbsite .hub .cv-row { display: flex; align-items: center; gap: 9px; font: 500 10px/1 var(--ui); color: #fff; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .cv-row svg { display: block; width: 13px; height: 13px; fill: #fff; }
+#s-tabs .sbsite .hub .cv-t { margin-top: 7px; }
+#s-tabs .sbsite .hub .cv-t b { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font: 600 12px/16px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .cv-t small { display: block; margin-top: 2px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 400 10.5px/14px var(--ui); color: #a1a1a6; }
+/* the clamp's ellipsis paints in the block's colour, not the span's, so the waiting block hides it too */
+#s-tabs .sbsite .hub .cv-t.cv-wait b, #s-tabs .sbsite .hub .cv-t.cv-wait small { color: transparent; }
+#s-tabs .sbsite .hub .cv-t.cv-wait span { color: transparent; background: #232327; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }

@@ -1,0 +1,25 @@
+img/climb.080da517 CREDITS: the 'climbing' variant ("Show me rock climbing videos"). Fetched 2026-10-14 from
+Wikimedia Commons (960px thumbnails), centre/top cropped to 640x360 (16:9) and re-encoded. Only public-domain or CC0
+files are used, so no on-screen credit is owed. The video titles, channel names, view counts and durations in the
+spot are made up; none of these photos is from a real video.
+
+1.jpg  "Climber Steward climbing at White Cliffs of Dover (51132141561).jpg", Joshua Tree National Park (NPS).
+       Licence: Public domain (US federal government work).
+       https://commons.wikimedia.org/wiki/File:Climber_Steward_climbing_at_White_Cliffs_of_Dover_(51132141561).jpg
+2.jpg  "Rock Climber (53611501110).jpg", Joshua Tree National Park (NPS). Licence: Public domain (US federal government work).
+       https://commons.wikimedia.org/wiki/File:Rock_Climber_(53611501110).jpg
+3.jpg  "High cliff in Lyse with climbers 6.jpg" by W.carter. Licence: CC0 1.0.
+       https://commons.wikimedia.org/wiki/File:High_cliff_in_Lyse_with_climbers_6.jpg
+4.jpg  "Sport climbing at the 2024 Summer Olympics - 20240809 - 1.jpg" by DarDarCH. Licence: CC0 1.0.
+       https://commons.wikimedia.org/wiki/File:Sport_climbing_at_the_2024_Summer_Olympics_-_20240809_-_1.jpg
+5.jpg  "Climber Steward throwing rope at White Cliffs of Dover (51132914314).jpg", Joshua Tree National Park (NPS).
+       Licence: Public domain (US federal government work).
+       https://commons.wikimedia.org/wiki/File:Climber_Steward_throwing_rope_at_White_Cliffs_of_Dover_(51132914314).jpg
+6.jpg  "Climber Steward climbing at White Cliffs of Dover (51132916744).jpg", Joshua Tree National Park (NPS).
+       Licence: Public domain (US federal government work).
+       https://commons.wikimedia.org/wiki/File:Climber_Steward_climbing_at_White_Cliffs_of_Dover_(51132916744).jpg
+
+youtube.svg  YouTube icon (red rounded rectangle and white play triangle, viewBox 0 0 28.57 20), the inline SVG from the
+             youtube.com header, copied unmodified from knit-agents/youtube/ads/reasons-superbot.c519eb6a/assets/yt/youtube.svg.
+             Trademark of Google LLC, used nominatively to name the app DeepSeek searches (also the tile of the
+             'Connecting to Youtube' routing chip, chat.9b47fc30.js APPS.youtube).

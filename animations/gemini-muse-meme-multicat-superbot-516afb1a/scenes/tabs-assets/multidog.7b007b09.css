@@ -1,0 +1,54 @@
+/* The 'multidog' variant's four answers (beats/multidog.7b007b09.js). Loaded by the beat module itself, so index.html
+   needs no link. The 3D frame and the order frame are the bakery artifact frame (bakery.005f5570.css .bk); the song
+   player is the song variant's strip (song.b217c2c1.css), restated here under md- so this variant stands on its own
+   beside its cat sibling (multicat.516afb1a.css), whose layout it matches. */
+
+/* the two apps the chain routes to that no single-ask variant uses: GPT Image 2 (OpenAI's mark) and ElevenLabs (its
+   two bars), both on black tiles; the multicat sheet carries the same rules, restated so this variant needs no other sheet */
+#s-tabs .sbsite .hub .qc-t-gptimage, #s-tabs .sbsite .hub .qc-t-elevenlabs { background: #000; box-shadow: inset 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .qc-t-gptimage img, #s-tabs .sbsite .hub .qc-who .qc-t-gptimage img, #s-tabs .sbsite .hub .qc-genl .qc-t-gptimage img { width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .qc-t-elevenlabs img { width: 12px; height: 12px; }
+#s-tabs .sbsite .hub .qc-who .qc-t-elevenlabs img, #s-tabs .sbsite .hub .qc-genl .qc-t-elevenlabs img { width: 10px; height: 10px; }
+#s-tabs .sbsite .hub .qc-pi img[data-app="elevenlabs"] { width: 10px; height: 10px; }
+
+/* 1. the photo: 4:3, wider than the meme card */
+#s-tabs .sbsite .hub .md-img { width: 360px; aspect-ratio: 4 / 3; }
+#s-tabs .sbsite .hub .md-img img { height: 100%; object-fit: cover; }
+
+/* 2. the model's title and the order's carry their format and scope, as spending's does */
+#s-tabs .sbsite .hub .md-3d .bk-title small, #s-tabs .sbsite .hub .md-dd .bk-title small { margin-left: 6px; font: 400 12px/16px var(--ui); color: #a1a1a6; }
+
+/* 3. the order: the rebuilt page (896 x 560 CSS px) fitted to the 560 x 350 view; the landing settle scales the wrapper */
+#s-tabs .sbsite .hub a.bk-btn.md-dd-open { text-decoration: none; cursor: pointer; }
+#s-tabs .sbsite .hub a.bk-btn.md-dd-open:hover { background: #fff; }
+#s-tabs .sbsite .hub .bk-btn.md-dd-open img { display: block; width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .md-dd-cam { position: absolute; inset: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .md-dd-zoom { position: absolute; inset: 0; background: #fff; }
+#s-tabs .sbsite .hub .md-dd-shot { position: absolute; top: 0; left: 0; width: 896px; height: 560px; max-width: none; transform: scale(.625); transform-origin: 0 0; }
+
+/* 4. the song: cover, title over play button, the measured waveform and the clock; the sung line under the strip */
+#s-tabs .sbsite .hub .md-sg { width: 100%; }
+#s-tabs .sbsite .hub .md-sg-card { position: relative; display: flex; gap: 12px; padding: 10px; border-radius: 14px; overflow: hidden; background: #1c1c20; box-shadow: 0 0 0 1px #2a2a2e, 0 12px 30px rgba(0,0,0,.4); }
+#s-tabs .sbsite .hub .md-sg-art { flex: none; width: 56px; height: 56px; border-radius: 8px; overflow: hidden; background: #2a2a30; box-shadow: 0 0 0 1px #34343a; }
+#s-tabs .sbsite .hub .md-sg-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#s-tabs .sbsite .hub .md-sg-side { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding-top: 1px; }
+#s-tabs .sbsite .hub .md-sg-t { display: flex; align-items: baseline; gap: 8px; min-width: 0; padding-right: 68px; white-space: nowrap; }
+#s-tabs .sbsite .hub .md-sg-t b { flex: none; font: 600 14px/18px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .md-sg-t small { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 400 11px/15px var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .md-sg-row { display: flex; align-items: center; gap: 10px; }
+#s-tabs .sbsite .hub .md-sg-btn { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #ececf0; }
+#s-tabs .sbsite .hub .md-sg-btn svg { display: block; width: 13px; height: 13px; fill: #131316; }
+#s-tabs .sbsite .hub .md-sg-wave { position: relative; flex: 1; min-width: 0; height: 26px; contain: inline-size; }
+#s-tabs .sbsite .hub .md-sg-wave svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+#s-tabs .sbsite .hub .md-w0 path { fill: #4a4a52; }
+#s-tabs .sbsite .hub .md-w1 { clip-path: inset(0 100% 0 0); }
+#s-tabs .sbsite .hub .md-w1 path { fill: #fff; }
+#s-tabs .sbsite .hub .md-sg-time { flex: none; font: 500 10.5px/1 var(--ui); color: #a1a1a6; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .md-sg-dl, #s-tabs .sbsite .hub .md-sg-share { all: unset; box-sizing: border-box; position: absolute; top: 8px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #2a2a30; box-shadow: inset 0 0 0 1px #34343a; color: #ececf0; cursor: pointer; }
+#s-tabs .sbsite .hub .md-sg-dl { right: 10px; }
+#s-tabs .sbsite .hub .md-sg-share { right: 42px; }
+#s-tabs .sbsite .hub .md-sg-dl:hover, #s-tabs .sbsite .hub .md-sg-share:hover { background: #34343a; }
+#s-tabs .sbsite .hub .md-sg-dl:focus-visible, #s-tabs .sbsite .hub .md-sg-share:focus-visible { outline: 2px solid #5b8dff; outline-offset: 1px; }
+#s-tabs .sbsite .hub .md-sg-dl svg, #s-tabs .sbsite .hub .md-sg-share svg { display: block; width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .md-ly { min-height: 22px; margin: 10px 2px 0; font: 600 15px/22px var(--ui); color: #55555c; letter-spacing: -.005em; }
+#s-tabs .sbsite .hub .md-ly span.on { color: #f5f5f7; }

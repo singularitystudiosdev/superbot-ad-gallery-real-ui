@@ -1,0 +1,9 @@
+Real page captures for the 'computer-control-v3-soft' variant's live view (scenes/tabs-assets/beats/computer.ba3976b6.js).
+Both are 1470x839, the page area of a full-screen Chrome on a 1470px-wide desktop, captured 2026-10-16 headless with
+Playwright in a throwaway profile, nothing signed in.
+
+superbot-home.png: https://superbot.gg/ (superbot's own site), its home page as served that day ("the agent to manage your
+agents."). Captured in Playwright's Chromium.
+
+new-tab.png: Google Chrome's New Tab page (chrome://new-tab-page/) in a fresh profile, Google Chrome stable, headless.
+Google logo and page are Google's; shown as the real page a new Chrome tab opens to.

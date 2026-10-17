@@ -1,0 +1,24 @@
+/* The 'roadtrip' variant's result card (beats/roadmaps.40d88617.js) wears the pitch deck's frame (pitchdeck.fad54971.css:
+   .pd card, header, 496 x 279 stage, nav, filmstrip, ring); these rules draw the Google Maps view inside it.
+   Maps palette: water #aad3f2, land #f1efe8, route #1a73e8 on a white casing, selected place #ea4335. */
+#s-tabs .sbsite .hub .rm-v { position: absolute; left: 0; top: 0; width: 496px; height: 279px; overflow: hidden; background: #aad3f2; font-family: var(--ui); transform-origin: 50% 50%; }
+#s-tabs .sbsite .hub .pd-th .rm-v { transform: scale(.153226); transform-origin: 0 0; }
+#s-tabs .sbsite .hub .rm-map { position: absolute; inset: 0; display: block; width: 496px; height: 279px; }
+#s-tabs .sbsite .hub .rm-map text { font-family: var(--ui); font-size: 11px; font-weight: 500; fill: #3c4043; paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .rm-map .rm-sea { font-size: 11px; font-style: italic; font-weight: 400; letter-spacing: .06em; fill: #4a7cb5; stroke: none; }
+
+/* Maps UI over the map: the directions summary (top left) and a place card per stop view (bottom left) */
+#s-tabs .sbsite .hub .rm-dir { position: absolute; left: 10px; top: 10px; display: flex; align-items: center; gap: 8px; padding: 6px 11px 6px 9px; border-radius: 8px; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, .24); }
+#s-tabs .sbsite .hub .rm-dir > svg { flex: none; width: 17px; height: 17px; color: #1a73e8; }
+#s-tabs .sbsite .hub .rm-dir b { display: block; font: 600 11.5px/15px var(--ui); color: #202124; white-space: nowrap; }
+#s-tabs .sbsite .hub .rm-dir span { display: block; font: 400 11px/14px var(--ui); color: #5f6368; white-space: nowrap; }
+#s-tabs .sbsite .hub .rm-dir em { font-style: normal; font-weight: 600; color: #188038; }
+#s-tabs .sbsite .hub .rm-pc { position: absolute; left: 10px; bottom: 10px; padding: 7px 11px; border-radius: 8px; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, .24); opacity: 0; }
+#s-tabs .sbsite .hub .rm-pc b { display: block; font: 600 12px/15px var(--ui); color: #202124; white-space: nowrap; }
+#s-tabs .sbsite .hub .rm-pc span { display: block; font: 400 11px/14px var(--ui); color: #5f6368; white-space: nowrap; }
+
+/* the deck's nav sits on paper; on a map it is a white Maps control. The labels are stop names, not slide numbers. */
+#s-tabs .sbsite .hub .rm .pd-nav { padding: 3px; border-radius: 999px; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, .24); }
+#s-tabs .sbsite .hub .rm .pd-n { white-space: nowrap; }
+/* the Share button in front of Open in Maps takes the head's push to the right (chat.css .pd-head .bk-share) */
+#s-tabs .sbsite .hub .pd-head .bk-share + .pd-exp { margin-left: 0; }

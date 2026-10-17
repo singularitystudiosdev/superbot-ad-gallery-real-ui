@@ -1,0 +1,6 @@
+moonrise.jpg
+  Source: https://commons.wikimedia.org/wiki/File:Summer_Moonrise_Over_Grand_Canyon_Village_(South_Rim)_(53944644813).jpg
+  Author: Grand Canyon NPS (https://www.flickr.com/people/grand_canyon_nps/)
+  Licence: Public domain (US National Park Service work)
+  Edit: cropped to a 400x400 square around the rising moon, resized to 320x320.
+  Retrieved: 2026-10-14

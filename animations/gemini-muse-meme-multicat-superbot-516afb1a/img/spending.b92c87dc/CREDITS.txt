@@ -1,0 +1,6 @@
+google-sheets.svg (inlined as SHEETS in scenes/tabs-assets/beats/spending.b92c87dc.js, on the Export to Sheets button)
+  Title:   Google Sheets 2020 Logo
+  Author:  Google (Wikimedia Commons)
+  License: Public domain (PD-shape; no attribution required). Google Sheets is a Google trademark.
+  Source:  https://commons.wikimedia.org/wiki/File:Google_Sheets_2020_Logo.svg
+  Fetched: 2026-10-14

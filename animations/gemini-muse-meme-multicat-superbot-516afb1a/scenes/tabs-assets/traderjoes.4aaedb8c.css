@@ -1,0 +1,55 @@
+/* The 'traderjoes' variant's answer (beats/traderjoes.4aaedb8c.js): a grocery list in the bakery variant's artifact frame
+   (bakery.005f5570.css .bk, whose header, button and shimmer rules it reuses, like the spending and doordash variants). The
+   card spans the 760px chat column like the Default 10 grid (catsurf10.a35789f3.css .cs10) instead of the bakery's 560px: the
+   same 40px header (title, Share, Expand, View on Trader Joe's) over a 475px view (350 x 760 / 560), so it is 760 x 515, and
+   everything in the view is the 560 design scaled by about 1.36. The view first shows the bare surface and the sweep (.bk-sh),
+   the same skeleton as a climbing tile, until the list lands.
+   Palette: the frame's #1c1c20 surface, #2a2a2e hairline, #ececf0 primary, #a1a1a6 secondary and #8a8a90 tertiary text, plus
+   Trader Joe's red, set inline as --tj-red from the data module's RED (the fill of the site's own logo): the one accent, on
+   the total and the group dots. Radii: 6px (thumbnails) and 999px (pills, dots). The list is laid out so it fits the 475px
+   view: 16 padding, the 30 pill row, 16 gap, then a column of at most 3 headings of 26, 11 rows of 26 and 2 section gaps of
+   14 = 392, and 16 padding = 470 (<= 475). Two columns of (760 - 2 x 20 padding - 32 gap) / 2 = 344px; a row is a 24px
+   thumbnail, the name (the rest, ellipsized when the card is narrower), the quantity (only when above 1) and the line price. */
+/* Width: 760px wherever the reply column has room for it (16x9, 4x3, 1x1), else the reply's width (.m-main, already
+   inset 10px from the column's left) less a matching 10px on the right, so both margins are equal (4x5's 864px stage leaves a
+   617px column). The bakery's `.bk { max-width: 100% }` cannot clamp it by itself: the reply's
+   .m-main is a grid whose auto track grows to the card's width, and hub.css caps .m-main at --hub-reply (471px) besides, so
+   this variant's .m-main (and only it, via :has) spans the column and is the container the card's width is measured in. */
+#s-tabs .sbsite .hub .msg.qc-r .m-main:has(> .bk.tj) { max-width: none; container-type: inline-size; }
+#s-tabs .sbsite .hub .bk.tj { width: calc(100cqw - 10px); }
+@container (min-width: 740px) { #s-tabs .sbsite .hub .bk.tj { width: 760px; } }
+#s-tabs .sbsite .hub .tj .bk-view { height: 475px; }
+#s-tabs .sbsite .hub .tj .bk-title small { margin-left: 6px; font: 400 12px/16px var(--ui); color: #a1a1a6; }
+/* the connected store's chip tile, as the other connectors' (chat.css .qc-t-gemini) */
+#s-tabs .sbsite .hub .qc-t-traderjoes { background: #1f1f22; box-shadow: inset 0 0 0 1px #34343a; }
+/* the site's wordmark is 210 x 23 and would shrink to a hairline in a 22px tile: show its leading T (the first 8.4% of the image,
+   drawn 18px tall, so 164px wide) centred in the tile */
+#s-tabs .sbsite .hub .qc-t-traderjoes img { width: 164px; height: 18px; max-width: none; justify-self: start; margin-left: 4px; clip-path: inset(0 91.6% 0 0); }
+/* View on Trader Joe's is a real link to the store, styled as the header's light button; the site's wordmark is its mark */
+#s-tabs .sbsite .hub a.bk-btn.tj-open { text-decoration: none; cursor: pointer; }
+#s-tabs .sbsite .hub a.bk-btn.tj-open:hover { background: #fff; }
+#s-tabs .sbsite .hub .bk-btn.tj-open img { display: block; width: 82px; height: 9px; }
+
+/* the list: pills over two columns of borderless groups */
+#s-tabs .sbsite .hub .tj-list { position: absolute; inset: 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; padding: 16px 20px; font-family: var(--ui); opacity: 0; }
+#s-tabs .sbsite .hub .tj-pills { display: flex; gap: 10px; height: 30px; }
+#s-tabs .sbsite .hub .tj-kpi { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 15px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2a2a2e; font: 400 13px/1 var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .tj-kpi b { font: 600 13px/1 var(--ui); color: #ececf0; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .tj-total { background: var(--tj-red); box-shadow: none; color: #ececf0; }
+#s-tabs .sbsite .hub .tj-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 32px; align-items: start; }
+#s-tabs .sbsite .hub .tj-col { min-width: 0; }
+#s-tabs .sbsite .hub .tj-g + .tj-g { margin-top: 14px; }
+#s-tabs .sbsite .hub .tj-g h3 { display: flex; align-items: center; gap: 8px; height: 26px; margin: 0; font: 600 15px/20px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .tj-g h3 i { flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--tj-red); }
+#s-tabs .sbsite .hub .tj-g h3 small { font: 400 13px/20px var(--ui); color: #8a8a90; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .tj-g ul { margin: 0; padding: 0; list-style: none; }
+#s-tabs .sbsite .hub .tj-g li { display: flex; align-items: center; gap: 10px; height: 26px; font: 500 13px/26px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .tj-g li img { flex: none; display: block; width: 24px; height: 24px; border-radius: 6px; }
+#s-tabs .sbsite .hub .tj-n { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#s-tabs .sbsite .hub .tj-q { flex: none; font: 400 12px/26px var(--ui); color: #a1a1a6; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .tj-q:empty { display: none; }
+#s-tabs .sbsite .hub .tj-g li b { flex: none; width: 54px; text-align: right; font: 500 13px/26px var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .tj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* a variant that types a long ask (chat.9b47fc30.js typeCps): the composer wraps it instead of clipping it on one line */
+#s-tabs .sbsite .hub.qc-long .rc-ph { white-space: normal; overflow-wrap: anywhere; line-height: 20px; }

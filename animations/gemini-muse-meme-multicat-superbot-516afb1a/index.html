@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>superbot: make me a muse meme (Gemini)</title>
+  <link rel="icon" href="data:,">
+<script src="assets/ar.js"></script>
+<link rel="stylesheet" href="assets/ar.css">
+<link rel="stylesheet" href="assets/sb-mark-live.css">
+<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="assets/hub-real.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="scenes/tabs.css">
+<link rel="stylesheet" href="scenes/tabs-assets/ports.css?v=8">
+<link rel="stylesheet" href="scenes/tabs-assets/chat.css?v=10">
+<link rel="stylesheet" href="scenes/tabs-assets/ask.css?v=3">
+<script type="importmap">{ "imports": { "three": "./vendor/three/build/three.module.js" } }</script>
+<link rel="modulepreload" href="lib.9b47fc30.js">
+<link rel="modulepreload" href="shell.9b47fc30.js">
+<style>
+/* the boot guard's note (the script before the module tags): centred over the black stage while it retries */
+.boot { position: fixed; left: 50%; top: 50%; z-index: 100; display: flex; align-items: center; gap: 12px; transform: translate(-50%, -50%); font: 500 14px/1.4 system-ui, sans-serif; color: #a1a1a6; }
+.boot button { height: 32px; padding: 0 14px; border: 0; border-radius: 16px; background: #e8e8ed; font: 600 13px/1 system-ui, sans-serif; color: #111113; cursor: pointer; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+
+<div class="hint" id="hint">space pause · ←/→ step · ,/. speed · R restart</div>
+
+<script src="assets/sb-mark-live.js"></script>
+<script>
+// Boot guard. The spot is ~230 files, and an ES module graph runs only if every one of them downloads: when GitHub
+// Pages refuses some of a cold load's requests (it does, for an address that loads the page over and over), nothing
+// runs and the page stays black. A failed graph fires `error` on its module script, so bootFailed() reloads instead,
+// waiting longer each time; the HTTP cache keeps every file that did arrive, so each try refetches only what failed.
+// The count of tries clears once both entry modules have loaded. After the last try the page says so, with a Retry
+// button: never a silent black page.
+(function () {
+  var KEY = 'boot-tries:' + location.pathname, WAIT = [1500, 4000, 10000], ENTRIES = 2, loaded = 0, failed = false;
+  function note(text, retry) {
+    var el = document.getElementById('boot') || document.body.appendChild(Object.assign(document.createElement('div'), { id: 'boot', className: 'boot' }));
+    el.textContent = text;
+    if (retry) {
+      var again = document.createElement('button');
+      again.textContent = 'Retry';
+      again.onclick = function () { location.reload(); };
+      el.appendChild(again);
+    }
+  }
+  window.bootLoaded = function () {
+    if (++loaded === ENTRIES) sessionStorage.removeItem(KEY);
+  };
+  window.bootFailed = function () {
+    if (failed) return;
+    failed = true;
+    var n = Number(sessionStorage.getItem(KEY) || 0);
+    console.error(new Error('the spot\'s modules failed to download (try ' + (n + 1) + ' of ' + (WAIT.length + 1) + ')'));
+    if (n < WAIT.length) {
+      sessionStorage.setItem(KEY, String(n + 1));
+      note('Loading…');
+      setTimeout(function () { location.reload(); }, WAIT[n]);
+    } else {
+      sessionStorage.removeItem(KEY);
+      note('The spot could not download all its files.', true);
+    }
+  };
+})();
+</script>
+<script type="module" src="timeline.9b47fc30.js?v=17" onload="bootLoaded()" onerror="bootFailed()"></script>
+<script type="module" src="variant-select.9e82faf1.js?v=11" onload="bootLoaded()" onerror="bootFailed()"></script>
+</body>
+</html>

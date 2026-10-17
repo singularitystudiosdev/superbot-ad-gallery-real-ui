@@ -9,6 +9,11 @@ zoom the full-size image or watch the animation play live. Static — no build, 
 
 28 ad spots, gathered from the workspace projects and the GitHub repos:
 
+- **a cat, four tools**: one chat asks for a realistic cat photo (GPT Image 2), an animated 3D model of it
+  (Meshy, walk rigged by superbot), cat food from DoorDash (a Petco order card) and a song about cats
+  (ElevenLabs, plays with sound), each answer a real generation, then the superbot.gg end card with the
+  mascot (29s). `animations/gemini-muse-meme-multicat-superbot-516afb1a/?variant=multicat`, a snapshot of the
+  original gallery's muse meme spot.
 - **14 tabs?** — the same prompt pasted into fourteen AI tabs; superbot asks every agent from one window (15s loop).
 - **youtube to mp3?** — ChatGPT refuses in 166 words; the superbot popup opens the app, which fetches,
   converts and hands back a clean download link, then the pain words roll through

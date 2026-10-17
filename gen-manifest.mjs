@@ -2093,6 +2093,14 @@ const more = [
     { desc: "A real superbot desktop thread, built from the app's own UI (the Real-UI kit), then the real Superbot iOS app. The spot opens on the hub and the real model picker chooses Sonnet 4.6. An ask (move the invoice export to a background job and run the tests) is typed and sent, the live row works through reading, editing and running, and the answer lands with a code block, an unfolded diff of src/export.ts and a passing npm test run. A second ask (add a retry with backoff to the mail step and test it) is typed, the picker switches to GPT-5 Codex and the same thread answers. Then the desktop dims and the shipped iOS app's own simulator screenshots rise in beside short captions: the provider rail with Superbot, Claude and ChatGPT and the line 2 desktop chats are waiting (Your desktop chats wait on your phone.), the composer with the iOS keyboard (Pick up any chat. Keep going.), and a crop of the lane sheet, Superbot, Your hub lane (Same account. Same chats.). Ends on Every AI you pay for. In your pocket., the Superbot mascot, superbot.gg and Private beta. Invite only. No error, outage or limit hit on screen. The phone is never drawn: only the app's real iOS screenshots (cropped, with the offline row and the notification badge outside the crop) are shown. Third-party product names appear as the app shows them (model and plan names, provider rows); fixture chat titles that name a third-party product are renamed to generic task titles. The asks and file contents are made up; every desktop frame is the real app DOM. 33 s, 60 fps, 4:5, 16:9, 4:3 and 1:1." }],
   // <<< every-ai-pocket-real-superbot-7fcf1c91
   // <<< live-limits-real-superbot-7fcf1c91
+  // >>> gemini-muse-meme-multicat-superbot-516afb1a
+  // Multi-tool cat (2026-10-17, 516afb1a): a snapshot of the original gallery's muse meme spot
+  // (superbot-ad-gallery animations/gemini-muse-meme-superbot-6fbc38f8) opened at its ?variant=multicat cut: four asks in one
+  // chat, GPT Image 2, Meshy, DoorDash and ElevenLabs, each a real generation, ending on the superbot.gg end card with the mascot.
+  // Provenance in the snapshot's img/multicat.516afb1a, media/multicat.516afb1a and models CREDITS.
+  ['gemini-muse-meme-multicat-superbot-516afb1a', 'gemini-muse-meme-multicat-superbot-516afb1a/?variant=multicat', 'superbot: a cat photo, a walking 3D cat, cat food and a cat song in one chat (GPT Image 2, Meshy, DoorDash, ElevenLabs)', 'Ad spots',
+    { desc: 'The muse meme spot, multi-tool cat cut: four asks in one chat, each routed to its own tool. "Make me a realistic image of a cat": Switching to GPT Image 2, and a photoreal tabby lands. "Make me an animated 3d model of a realistic cat": Switching to Meshy, then Rigging and animating the cat, and the Meshy model of that same cat walks on a turntable in a 3D frame with Download. "Order me catfood from doordash": Connecting to DoorDash, and a Petco "Confirming your order" card for a Fancy Feast broths 12-pack ($16.49 subtotal, $0.00 delivery fee) with View in DoorDash. "Make me a song about cats": Switching to ElevenLabs, and "Tiny Chaos" plays with sound through its first two sung lines, its real waveform filling in and each line lighting word by word, then the chat fades into the superbot.gg end card with the mascot. The composer types each ask and its model chip follows every switch; the generating steps carry the credits row the single-tool cuts show (4, 20 and 15 credits). 29 s. Every asset is a real generation: GPT Image 2 (fal), Meshy 7.1 image-to-3D (fal), ElevenLabs Music v2.5 (fal) with lyrics by Claude Opus 4.5; Meshy’s rigger takes humanoids only, so the walk was rigged and keyed in Blender and the chip says superbot did it. The DoorDash card rebuilds a real Petco listing; nothing was ordered. Sound starts on the first click or key (browser autoplay policy). Market: sell-to-reddit llm_ai usage-limits-pricing ("Usage limits, pricing and token spend", 10,223 authors in 30 days, data as of 2026-10-17); want: alternative ai tool (164 authors).' }],
+  // <<< gemini-muse-meme-multicat-superbot-516afb1a
 ];
 // an optional 5th field carries extra item fields, e.g. { download, downloadLabel } for a file too big for Pages
 for (const [name, src, title, group, extra] of more) {
@@ -2125,6 +2133,10 @@ for (const [id, title] of ads) {
 // The gallery was trimmed to just these four spots on 2026-10-05 (the page is this list). Every other
 // spot's entries stay defined above so a later pass can re-enable them by removing an id here.
 const KEEP_IDS = new Set([
+  // >>> keep gemini-muse-meme-multicat-superbot-516afb1a
+  // added (2026-10-17, 516afb1a): multi-tool cat, four asks in one chat (GPT Image 2, Meshy, DoorDash, ElevenLabs), superbot.gg end card, with sound
+  'gemini-muse-meme-multicat-superbot-516afb1a',
+  // <<< keep gemini-muse-meme-multicat-superbot-516afb1a
   // >>> keep negagg-crashes-v2-superbot-e85b3b49
   // added (2026-10-11, e85b3b49): SWITCH MODELS. KEEP THE CHAT., one thread switched twice mid-conversation (ChatGPT -> Gemini -> Claude), 16:9 + 4:5 renders, silent
   'negagg-crashes-v2-superbot-e85b3b49',

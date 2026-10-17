@@ -1,0 +1,28 @@
+dock-for-x10.jpg
+  752x367 JPEG, cropped (rect 600,1180,2375,1160 of the 3575x2507 original) and resized by the site's own image CDN, q80, no
+  other edits: Skydio's own product image of an open Skydio Dock for X10 with a Skydio X10 drone docked on a rooftop at sunset (the site's alt text:
+  "open Skydio Dock for X10 with Skydio X10 drone on a rooftop in a city setting"). Shown inside the slide's Fort Collins
+  panel, which says flight test operators fly docked and hand-flown missions.
+  Source page: https://www.skydio.com/dock (the image sits in the site's product navigation, also served on https://www.skydio.com/x10)
+  Direct image URL: https://cdn.sanity.io/images/mgxz50fq/production-v3-red/f7d19072039f498ee4f69635af8f5c127d4c49b8-3575x2507.jpg
+  (fetched 2026-10-16 as ...jpg?rect=600,1180,2375,1160&w=752&q=80, which crops to the docked X10 so it reads at 188x92)
+  (c) Skydio, Inc.; the subject company's own product imagery, shown inside a mock slide about Skydio (same basis as the
+  traderjoes variant's retailer images). Not a Fort Collins photo. Never credited on screen.
+
+skydio-mark.png
+  The Skydio mark, resized to 64x64 from the site's own apple-touch-icon, no edits otherwise.
+  Source: https://www.skydio.com/assets/apple-touch-icon.png (page https://www.skydio.com/, 2026-10-16)
+  Shown only as the connector chip's tile ("Reading skydio.com").
+
+Slide facts (every line on the slide), checked 2026-10-16:
+  Founded 2014, HQ San Mateo, CA: https://en.wikipedia.org/wiki/Skydio
+  Products (X10 and Dock for X10, F10 Lightrunner, R10), Skydio Command, focus areas (Drone as First Responder, Physical
+  Security, Asset Inspection, Mapping, National Security): https://www.skydio.com/ and its product pages
+  Fort Collins flight test site at CSU's Christman Field; flight test operators (Dock Generalist, Handflown Generalist
+  tracks); flight data collection for training the follow / subject-tracking AI: Skydio's careers listings for Flight Test
+  Operator (Fort Collins, Colorado) and Skydio's LinkedIn post of ~Dec 2025
+  https://www.linkedin.com/posts/activity-7407228539730694144-Yg7M ; Christman Field is Colorado State University's airfield
+  (https://www.cbsnews.com/colorado/news/colorado-state-expands-fort-collins-airfield-and-uas-drone-research-program/).
+  The sources describe a test site, not an office, so the slide says test site.
+
+Owner: Skydio, Inc. (name, mark, product names). Internal provenance only: never shown on screen.

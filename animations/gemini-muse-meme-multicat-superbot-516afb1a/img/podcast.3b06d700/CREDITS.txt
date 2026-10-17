@@ -1,0 +1,7 @@
+earthrise.jpg
+  Source: https://commons.wikimedia.org/wiki/File:NASA-Apollo8-Dec24-Earthrise.jpg
+  Title: Earthrise (AS08-14-2383), taken by Bill Anders on Apollo 8, 24 December 1968
+  Author: NASA / Bill Anders
+  Licence: Public domain (work of NASA, a US federal agency). No attribution required.
+  Use: resized to 320x320 (JPEG q82) for the 'podcast' variant's episode cover.
+  Retrieved: 2026-10-14

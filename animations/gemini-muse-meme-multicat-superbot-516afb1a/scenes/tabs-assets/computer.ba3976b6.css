@@ -1,0 +1,86 @@
+/* The 'computer-control-v3-soft' variant's answer (beats/computer.ba3976b6.js): the artifact frame
+   (bakery.005f5570.css .bk) over a live view of the user's screen, built as a real screen share: a 1470x919 desktop with
+   Chrome full screen on it at Chrome's own sizes, scaled whole into the view by the beat (its FIT), so text, pages and
+   cursor keep their real proportions. The pages are real captures (img/computer.ba3976b6/). Over it, at the view's own
+   size, what a real takeover overlay (a click-through window over the whole display) can draw: a thin pink and purple
+   vignette round the display's edges, fading inward, and a status pill. No CSS animation or transition in the scene:
+   the beat sets every opacity, width and transform from t, so frozen frames (?t=) hold. The one transition is the
+   Expand side panel's slide (.cc3-side), the viewer's own UI and never part of a frame. Loaded by the beat module
+   itself, so index.html needs no link. Chrome palette: tab strip #dee1e6, tab and toolbar #fff, omnibox #f1f3f4, ink #1f1f1f,
+   icons #474747, focus #1a73e8. */
+#s-tabs .sbsite .hub .cc3 .bk-title small, #s-tabs .sbsite .hub .cc3-side .bk-title small { margin-left: 6px; font: 400 12px/16px var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .cc3 .bk-expand { cursor: pointer; }
+#s-tabs .sbsite .hub .cc3 .bk-expand:hover, #s-tabs .sbsite .hub .cc3 .bk-expand[aria-expanded="true"] { background: #2a2a2e; }
+#s-tabs .sbsite .hub .cc3 .bk-expand:focus-visible { outline: 2px solid #8b8bf5; outline-offset: 2px; }
+
+/* Expand's side panel: docked to the right edge of the app, full height, sliding in over the thread; the same screen
+   share, larger (.cc3-big, the beat's FIT_BIG). Closed it sits off the edge, hidden from clicks and focus */
+#s-tabs .sbsite .hub .cc3-side { position: absolute; top: 0; right: 0; bottom: 0; z-index: 40; display: flex; flex-direction: column; width: 720px; max-width: 100%; box-sizing: border-box; background: #1c1c20; box-shadow: -1px 0 0 #2a2a2e, -24px 0 48px rgba(0,0,0,.45); transform: translateX(100%); visibility: hidden; transition: transform .32s cubic-bezier(.2,.8,.2,1), visibility 0s linear .32s; }
+#s-tabs .sbsite .hub .cc3-side.is-open { transform: none; visibility: visible; transition: transform .32s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+#s-tabs .sbsite .hub .cc3-side .bk-head { flex: none; height: 52px; padding: 0 12px 0 16px; }
+#s-tabs .sbsite .hub .cc3-side-x { flex: none; display: grid; place-items: center; width: 30px; height: 30px; padding: 7px; border: 0; border-radius: 8px; background: transparent; color: #a1a1a6; cursor: pointer; }
+#s-tabs .sbsite .hub .cc3-side-x:hover { background: #2a2a2e; color: #e5e5ea; }
+#s-tabs .sbsite .hub .cc3-side-x:focus-visible { outline: 2px solid #8b8bf5; outline-offset: 1px; }
+#s-tabs .sbsite .hub .cc3-side-x svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+#s-tabs .sbsite .hub .cc3-big { position: relative; flex: none; width: 688px; height: 430px; margin: 16px; overflow: hidden; border-radius: 12px; box-shadow: 0 0 0 1px #2a2a2e; }
+#s-tabs .sbsite .hub .cc3-big .cc3-edge { border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { #s-tabs .sbsite .hub .cc3-side, #s-tabs .sbsite .hub .cc3-side.is-open { transition: none; } }
+#s-tabs .sbsite .hub .cc3-stop { gap: 7px; }
+#s-tabs .sbsite .hub .cc3-stop i { width: 7px; height: 7px; border-radius: 1.5px; background: #111113; }
+
+/* the desktop, in its own px, scaled into the view from its top left; Chrome fills it, no margin a real screen lacks */
+#s-tabs .sbsite .hub .cc3-desk { position: absolute; left: 0; top: 0; width: 1470px; height: 919px; overflow: hidden; transform-origin: 0 0; background: #fff; }
+#s-tabs .sbsite .hub .cc3-win { position: absolute; inset: 0; overflow: hidden; background: #fff; }
+#s-tabs .sbsite .hub .cc3-win svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#s-tabs .sbsite .hub .cc3-ic { flex: none; display: grid; place-items: center; width: 28px; height: 28px; box-sizing: border-box; padding: 5px; border-radius: 50%; color: #474747; }
+#s-tabs .sbsite .hub .cc3-dim { opacity: .38; }
+
+/* tab strip, 42px: traffic lights, the open tab, the new tab (width set by the beat), the new-tab button */
+#s-tabs .sbsite .hub .cc3-strip { display: flex; align-items: flex-end; height: 42px; box-sizing: border-box; padding: 0 8px 0 14px; background: #dee1e6; }
+#s-tabs .sbsite .hub .cc3-lights { display: flex; gap: 8px; align-self: center; margin-right: 22px; }
+#s-tabs .sbsite .hub .cc3-lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.12); }
+#s-tabs .sbsite .hub .cc3-lights i:nth-child(2) { background: #febc2e; }
+#s-tabs .sbsite .hub .cc3-lights i:nth-child(3) { background: #28c840; }
+#s-tabs .sbsite .hub .cc3-tab { position: relative; flex: none; display: flex; align-items: center; gap: 8px; width: 240px; height: 34px; box-sizing: border-box; padding: 0 8px 0 12px; overflow: hidden; white-space: nowrap; font: 400 12px/1 var(--ui); color: #1f1f1f; }
+/* the new tab's padding lives on its children, so at width 0 it takes no room and the + sits where it was clicked */
+#s-tabs .sbsite .hub .cc3-t2 { width: 0; padding: 0; opacity: 0; }
+#s-tabs .sbsite .hub .cc3-t2 .cc3-tt { margin-left: 12px; }
+#s-tabs .sbsite .hub .cc3-t2 .cc3-x { margin-right: 8px; }
+#s-tabs .sbsite .hub .cc3-bg { position: absolute; inset: 0; border-radius: 10px 10px 0 0; background: #fff; }
+#s-tabs .sbsite .hub .cc3-tab > span { position: relative; }
+#s-tabs .sbsite .hub .cc3-fav { flex: none; width: 16px; height: 16px; }
+#s-tabs .sbsite .hub .cc3-fav .qc-tile { width: 16px; height: 16px; border-radius: 4px; }
+/* Chrome fades a long title out rather than ending it in an ellipsis */
+#s-tabs .sbsite .hub .cc3-tt { flex: 1; min-width: 0; overflow: hidden; -webkit-mask: linear-gradient(90deg, #000 82%, transparent); mask: linear-gradient(90deg, #000 82%, transparent); }
+#s-tabs .sbsite .hub .cc3-x { flex: none; width: 16px; height: 16px; box-sizing: border-box; padding: 3px; color: #474747; }
+#s-tabs .sbsite .hub .cc3-plus { flex: none; display: grid; place-items: center; align-self: center; width: 28px; height: 28px; margin: 8px 0 0 8px; box-sizing: border-box; padding: 6px; border-radius: 50%; color: #474747; }
+
+/* toolbar, 40px: back, forward, reload, the omnibox (its two contents crossfade with the active tab), profile, menu */
+#s-tabs .sbsite .hub .cc3-bar { display: flex; align-items: center; gap: 4px; height: 40px; box-sizing: border-box; padding: 0 8px; border-bottom: 1px solid #e3e3e3; background: #fff; }
+#s-tabs .sbsite .hub .cc3-omni { position: relative; flex: 1; height: 34px; margin: 0 6px; border-radius: 17px; background: #f1f3f4; }
+#s-tabs .sbsite .hub .cc3-url { position: absolute; inset: 0; display: flex; align-items: center; gap: 4px; padding: 0 14px 0 5px; font: 400 14px/1 var(--ui); color: #1f1f1f; }
+#s-tabs .sbsite .hub .cc3-url .cc3-ic { width: 24px; height: 24px; padding: 4px; }
+#s-tabs .sbsite .hub .cc3-u2 { opacity: 0; }
+#s-tabs .sbsite .hub .cc3-caret { flex: none; width: 1px; height: 18px; margin: 0 1px 0 4px; background: #1f1f1f; }
+#s-tabs .sbsite .hub .cc3-ph { color: #5f6368; }
+#s-tabs .sbsite .hub .cc3-me { flex: none; width: 24px; height: 24px; margin: 0 4px; border-radius: 50%; background: #c2e7ff; }
+
+/* the pages: the real captures, below the 82px of tab strip and toolbar */
+#s-tabs .sbsite .hub .cc3-page { position: absolute; top: 82px; left: 0; display: block; width: 1470px; height: auto; }
+#s-tabs .sbsite .hub .cc3-p2 { opacity: 0; }
+
+/* the screen's own cursor: a macOS arrow at its real size on this desktop (about 14x19 of its 24px box), so it shrinks
+   with the screen. Placed by the beat with a transform from its hotspot */
+#s-tabs .sbsite .hub .cc3-cursor { position: absolute; left: 0; top: 0; z-index: 2; width: 24px; height: 24px; overflow: visible; fill: #000; stroke: #fff; stroke-width: 1.5px; stroke-linejoin: round; paint-order: stroke; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.35)); }
+
+/* the takeover's edge: a thin pink and purple vignette. .cc3-edge has the view's visible shape (square under the
+   header, the card's 12px radius at the bottom; bakery.005f5570.css .bk clips there), so nothing cuts it. Inside, a
+   turning conic band runs from 5px outside the edge to 8px inside it (a 13px padding masked out of a box set 5px out),
+   and .cc3-soft blurs it: brightest on the edge, fading smoothly to nothing about 14px in, its outer half clipped away
+   by .cc3-edge. Band extents and blur scale together, so a deeper or thinner edge keeps the same smooth falloff. The
+   blur sits on the band's parent because a filter on the masked element itself would run before its mask. */
+#s-tabs .sbsite .hub .cc3-edge { position: absolute; inset: 0; z-index: 4; overflow: hidden; border-radius: 0 0 12px 12px; opacity: 0; pointer-events: none; }
+#s-tabs .sbsite .hub .cc3-soft { position: absolute; inset: -5px; filter: blur(4px); }
+#s-tabs .sbsite .hub .cc3-band { position: absolute; inset: 0; padding: 13px; border-radius: 0 0 25px 25px; background: conic-gradient(from var(--cc3-a, 0deg), #f472b6, #a855f7, #ec4899, #8b5cf6, #f472b6); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+#s-tabs .sbsite .hub .cc3-pill { position: absolute; left: 50%; bottom: 16px; z-index: 5; display: flex; align-items: center; gap: 8px; height: 30px; box-sizing: border-box; padding: 0 14px 0 6px; border-radius: 15px; white-space: nowrap; opacity: 0; transform: translate(-50%, 8px); background: rgba(22,22,26,.9); box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 8px 24px rgba(0,0,0,.35); font: 500 11.5px/1 var(--ui); color: #f2f2f5; }
+#s-tabs .sbsite .hub .cc3-pill .qc-tile { width: 20px; height: 20px; border-radius: 10px; }

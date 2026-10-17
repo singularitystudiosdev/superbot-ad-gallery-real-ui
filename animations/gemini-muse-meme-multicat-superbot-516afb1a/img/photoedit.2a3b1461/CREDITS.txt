@@ -1,0 +1,25 @@
+photoedit variant assets (provenance only, never shown on screen)
+
+photo.jpg (original upload)
+  Source:    https://unsplash.com/photos/TgvLvABRlpU
+             "a man and a woman standing in a parking lot" (Hannover, Germany)
+  Author:    Filipp Romanovski (https://unsplash.com/@filipp_roman_photography)
+  License:   Unsplash License, https://unsplash.com/license (free commercial use, no attribution required)
+  Retrieved: 2026-10-14
+  Processing: downloaded 2400px wide JPEG from images.unsplash.com, cropped to 4:3 (left-aligned crop, 2133x1600), resized to 1200x900, JPEG q82.
+
+removed.jpg (edit 1, applied to photo.jpg)
+  Model:    fal-ai/nano-banana-pro/edit (Google Gemini 3 Pro Image, "Nano Banana Pro"), resolution 2K, aspect ratio 4:3
+  Provider: fal.ai (api key fal-key). Direct Gemini API was tried first but the keys had no image quota (free tier limit 0 / prepay credits depleted).
+  Date:     2026-10-14
+  Prompt:   "Remove the man in the background. Fill the area naturally with the background behind him. Keep everything else exactly the same: same framing, crop, people, colors and lighting."
+  Post:     2400x1792 output resized to 1200x900 (0.45% vertical scale difference, keeps pixel alignment).
+
+night.jpg (edit 2, applied to removed.jpg)
+  Model:    fal-ai/nano-banana-pro/edit (Google Gemini 3 Pro Image, "Nano Banana Pro"), resolution 2K, aspect ratio 4:3
+  Provider: fal.ai
+  Date:     2026-10-14
+  Prompt:   "Make it night. Keep the exact same framing, crop, people and poses; only change the lighting and sky to a convincing night scene."
+  Post:     2400x1792 output resized to 1200x900.
+
+meta.json: guy = bounding box of the removed man in photo.jpg as fractions of width/height, padded.

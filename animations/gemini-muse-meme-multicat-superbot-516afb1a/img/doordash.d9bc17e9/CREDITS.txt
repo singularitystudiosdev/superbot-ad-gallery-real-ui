@@ -1,0 +1,18 @@
+cart.jpg
+  Screenshot of doordash.com: the Burger King store page (San Francisco, store 52959) with the order cart open,
+  one Double Whopper Meal (Medium, fries, Coca-Cola) at $22.49, $25.86 total before taxes, delivering to
+  455 Market St, Ste 1480, San Francisco. Captured 2026-10-14 at 1728x906 CSS px (2x) from a guest session via
+  the Chrome DevTools Protocol (Page.captureScreenshot), downscaled to 2592px wide. Nothing was ordered.
+  Source: https://www.doordash.com/store/burger-king-san-francisco-52959/
+  The DoorDash UI and the Burger King menu photos belong to DoorDash and Burger King. Internal provenance only:
+  never shown on screen.
+
+order-placed.jpg
+  REBUILT, not captured: 896x560 CSS px page (rendered headless at 2x, 1792x1120) redrawing DoorDash's post-checkout
+  "Confirming your order" status card from a reference frame of the live DoorDash app (YouTube 3de0bvmBL7Y @1:24,
+  Nov 2025), with this ad's order facts (Burger King, 1x Double Whopper Meal $22.49, $25.86 total, 455 Market St,
+  Ste 1480, Arrives between 7:42 PM-7:52 PM). No order was placed. Real pixels: the DoorDash logo glyph
+  (brand/doordash-logo.svg) and the meal photo, cropped from cart.jpg. Everything else (card, progress track icons,
+  type set in Avenir Next as a stand-in for DoorDash's TT Norms) is redrawn. Source page: .tmp/order-placed.2b014ad8.html
+  (render with .tmp/3-render.2b014ad8.mjs). Built 2026-10-14. The DoorDash UI belongs to DoorDash. Internal provenance
+  only: never shown on screen.

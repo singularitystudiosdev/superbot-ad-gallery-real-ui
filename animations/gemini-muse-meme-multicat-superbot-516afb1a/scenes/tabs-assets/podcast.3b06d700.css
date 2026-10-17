@@ -1,0 +1,53 @@
+/* The 'podcast' variant's episode card (beats/podcast.3b06d700.js): an episode row with the hosts' avatars, a player
+   (play/pause, a speaker-tinted waveform, elapsed time, stop), a chapter-segmented progress line, the chapters as show
+   notes and the transcript as speaker turns with a word highlight. Colours and radii are the hub's own tokens
+   (hub.css); each host's colour is a lightened storm hue (--storm-1 for Nova, --storm-3 for Theo), carried as --c on
+   anything tagged .pc-a or .pc-b. Loaded by the beat module itself, so index.html needs no link. */
+#s-tabs .sbsite .hub .pc { --pc-a: color-mix(in srgb, var(--storm-1, #2b6bff) 62%, #fff); --pc-b: color-mix(in srgb, var(--storm-3, #c026d3) 62%, #fff); width: 440px; max-width: 100%; padding: 12px; border-radius: var(--r-surface); background: var(--raised); box-shadow: 0 0 0 1px var(--line); }
+#s-tabs .sbsite .hub .pc .pc-a { --c: var(--pc-a); }
+#s-tabs .sbsite .hub .pc .pc-b { --c: var(--pc-b); }
+#s-tabs .sbsite .hub .pc-head { display: flex; align-items: center; gap: 12px; }
+#s-tabs .sbsite .hub .pc-cover { flex: none; display: block; width: 48px; height: 48px; border-radius: var(--r-control); object-fit: cover; }
+#s-tabs .sbsite .hub .pc-meta { flex: 1; min-width: 0; }
+#s-tabs .sbsite .hub .pc-meta b { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 600 13px/18px var(--ui); color: var(--fg); }
+#s-tabs .sbsite .hub .pc-meta small { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 400 11px/16px var(--ui); color: var(--muted); }
+#s-tabs .sbsite .hub .pc-hosts { flex: none; display: flex; padding-right: 4px; }
+#s-tabs .sbsite .hub .pc-av { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: color-mix(in srgb, var(--c) 22%, var(--raised)); box-shadow: 0 0 0 2px var(--raised); font: 700 10.5px/1 var(--ui); font-style: normal; color: var(--c); }
+#s-tabs .sbsite .hub .pc-av + .pc-av { margin-left: -5px; }
+#s-tabs .sbsite .hub .pc-av.talk { position: relative; z-index: 1; }
+#s-tabs .sbsite .hub .pc-player { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+#s-tabs .sbsite .hub .pc-play { flex: none; position: relative; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: var(--pc-a); cursor: pointer; }
+#s-tabs .sbsite .hub .pc-play svg { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; fill: var(--raised); }
+#s-tabs .sbsite .hub .pc-play .pc-i-pause, #s-tabs .sbsite .hub .pc-play.on .pc-i-play { display: none; }
+#s-tabs .sbsite .hub .pc-play.on .pc-i-pause { display: block; }
+#s-tabs .sbsite .hub .pc-wave { flex: 1; min-width: 0; position: relative; height: 32px; }
+#s-tabs .sbsite .hub .pc-bars { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; }
+#s-tabs .sbsite .hub .pc-bars i { display: block; width: 3px; height: 3px; border-radius: var(--r-pill); background: color-mix(in srgb, var(--c) 28%, var(--line)); }
+#s-tabs .sbsite .hub .pc-bars i.on { background: var(--c); }
+#s-tabs .sbsite .hub .pc-prep { left: 0; top: 2px; bottom: auto; opacity: 0; }
+#s-tabs .sbsite .hub .pc-time { flex: none; font: 500 10.5px/1 var(--ui); color: var(--muted); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .pc-stop { flex: none; position: relative; width: 28px; height: 28px; padding: 0; border: 0; border-radius: var(--r-control); background: transparent; box-shadow: inset 0 0 0 1px var(--line); cursor: pointer; }
+#s-tabs .sbsite .hub .pc-stop svg { position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; fill: var(--fg); }
+#s-tabs .sbsite .hub .pc-stop:disabled { opacity: .4; cursor: default; }
+#s-tabs .sbsite .hub .pc button:focus-visible { outline: 2px solid var(--pc-a); outline-offset: 2px; }
+#s-tabs .sbsite .hub .pc-track { display: flex; gap: 3px; height: 3px; margin-top: 12px; }
+#s-tabs .sbsite .hub .pc-seg { min-width: 0; overflow: hidden; border-radius: var(--r-pill); background: var(--line); }
+#s-tabs .sbsite .hub .pc-seg i { display: block; width: 0; height: 100%; background: var(--fg); }
+#s-tabs .sbsite .hub .pc-chs { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; margin: 8px 0 0; padding: 0; list-style: none; }
+#s-tabs .sbsite .hub .pc-ch { display: flex; gap: 8px; min-width: 0; font: 500 11px/18px var(--ui); color: var(--muted); }
+#s-tabs .sbsite .hub .pc-ch time { flex: none; font-variant-numeric: tabular-nums; opacity: .7; }
+#s-tabs .sbsite .hub .pc-ch span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#s-tabs .sbsite .hub .pc-ch.on { color: var(--fg); }
+#s-tabs .sbsite .hub .pc-ch.on time { opacity: 1; color: var(--pc-a); }
+#s-tabs .sbsite .hub .pc-view { height: 92px; margin-top: 10px; padding-top: 10px; overflow: hidden; box-shadow: inset 0 1px 0 var(--line); -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
+/* isolate: the highlight (z-index -1) paints under the words but over the card */
+#s-tabs .sbsite .hub .pc-page { position: relative; isolation: isolate; font: 400 13px/20px var(--ui); color: var(--muted); }
+#s-tabs .sbsite .hub .pc-turn { margin: 0; }
+#s-tabs .sbsite .hub .pc-turn + .pc-turn { margin-top: 4px; }
+#s-tabs .sbsite .hub .pc-who { margin-right: 6px; font: 600 10.5px/20px var(--ui); letter-spacing: .04em; text-transform: uppercase; color: var(--c); }
+#s-tabs .sbsite .hub .pc-w.on { color: var(--fg); }
+#s-tabs .sbsite .hub .pc-hl { position: absolute; left: 0; top: 0; z-index: -1; width: 0; height: 0; border-radius: var(--r-control); background: color-mix(in srgb, var(--c, var(--pc-a)) 26%, transparent); opacity: 0; }
+/* the Share button, the stop button's outlined twin, at the head's right end (beats/share.29a362ea.js) */
+#s-tabs .sbsite .hub .pc-share { flex: none; position: relative; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: var(--r-control); background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--fg); cursor: pointer; }
+#s-tabs .sbsite .hub .pc-share:hover { background: rgba(255, 255, 255, .06); }
+#s-tabs .sbsite .hub .pc-share svg { display: block; width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

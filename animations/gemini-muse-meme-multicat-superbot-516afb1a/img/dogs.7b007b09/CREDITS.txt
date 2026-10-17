@@ -1,0 +1,29 @@
+img/dogs.7b007b09 CREDITS (the 'multidog' variant, beats/multidog.7b007b09.js). Internal provenance only: never shown on screen.
+
+beagle.jpg (1536x1152, the first answer's photo)
+  Generator: GPT Image 2 (OpenAI) via fal.ai, endpoint openai/gpt-image-2, quality high, 1536x1152, 2 candidates
+  Request id: 01a1485d-2517-7482-be60-e2257cbabff6 (the first of the two candidates was used)
+  Prompt: "A photorealistic full-body photograph of a tricolor beagle standing on short, freshly mown grass in a sunny park,
+  three-quarter side view facing left, all four legs and paws clearly visible, tail raised, head turned slightly toward the
+  camera with a friendly expression. Warm late-afternoon sunlight, soft background bokeh of trees, shot on a full-frame
+  camera with an 85mm lens at f/2.8, crisp fur detail, true-to-life colors, no text."
+  Generated 2026-10-17 (UTC). AI-generated, output owned by the user (paid generation); no attribution owed.
+  The same image is the input of the 3D model (models/dog-meshy.7b007b09.glb).
+
+cover.jpg (320x320, the song's cover art)
+  A 560x560 crop of beagle.jpg's head (x 198, y 110), scaled to 320x320.
+
+order-placed.jpg (896x560 CSS px page, rendered at 2x: 1792x1120)
+  REBUILT, not captured: DoorDash's post-checkout "Confirming your order" status card, forked from the doordash variant's
+  rebuild (quick-chats/gemini-muse-meme-clone/.tmp/order-placed.2b014ad8.html, itself drawn from a reference frame of the
+  live DoorDash app), with this order's facts as listed on DoorDash on 2026-10-17:
+    store    PetSmart, 4300 East Alameda Avenue (Glendale, CO), DoorDash store 1440871
+             https://www.doordash.com/convenience/store/1440871/ (business page https://www.doordash.com/business/petsmart-627594)
+    item     Purina Pro Plan Chicken & Rice Formula Complete Essentials Adult Dry Dog Food Bag, 35 lb, $74.99
+             (the listing's other sizes: 5 lb $17.99, 21.3 kg $96.99; DoorDash product id 23683169773)
+  The arrival window and "Delivering to Home" are illustrative; the card shows the item subtotal only (no fees or taxes were
+  quoted without an address). Nothing was ordered.
+  Real pixels: the DoorDash logo glyph (brand/doordash-logo.svg) and DoorDash's own product photo of the 35 lb bag,
+  https://doordash-static.s3.amazonaws.com/media/photosV2/5f031f17-bee9-4374-b9bd-2c8fbf6284ba-retina-large-variant-1.jpg.
+  Source page and renderer: quick-chats/dogchain.7b007b09/order-placed.7b007b09.html, render-order.7b007b09.mjs.
+  The DoorDash UI, the PetSmart name and the Purina packaging belong to their owners; shown nominatively.

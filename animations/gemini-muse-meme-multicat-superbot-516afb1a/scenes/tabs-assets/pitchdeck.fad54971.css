@@ -1,0 +1,88 @@
+/* The 'pitchdeck' variant's result card (beats/pitchdeck.fad54971.js): a header, a 16:9 stage showing one slide at a time,
+   and a filmstrip of all six. Slides are authored once at stage size (496 x 279); the thumbs scale the same markup down.
+   New colours: paper #f7f5f0, ink #16181d, accent #1f7a5a. Loaded by the beat module itself, so index.html needs no link. */
+#s-tabs .sbsite .hub .pd { box-sizing: border-box; width: 520px; max-width: 100%; padding: 12px; border-radius: 12px; background: #1c1c20; box-shadow: 0 0 0 1px #2a2a2e, 0 12px 30px rgba(0,0,0,.4); font-family: var(--ui); }
+#s-tabs .sbsite .hub .pd * { box-sizing: border-box; }
+#s-tabs .sbsite .hub .pd-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+#s-tabs .sbsite .hub .pd-head b { font: 600 13px/18px var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .pd-head span:not(.bk-btn) { font: 400 12px/18px var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .pd-exp { display: inline-flex; align-items: center; gap: 6px; height: 26px; margin-left: auto; padding: 0 11px 0 9px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2a2a2e; font: 600 11px/1 var(--ui); color: #e5e5ea; }
+#s-tabs .sbsite .hub .pd-exp img { display: block; width: 11px; height: 15px; object-fit: contain; }
+/* the bakery frame's Expand (beats/bakery.005f5570.js EXPAND) sits right-aligned beside Export to Slides */
+#s-tabs .sbsite .hub .pd-head .bk-expand { margin-left: auto; }
+#s-tabs .sbsite .hub .pd-head .bk-expand + .pd-exp { margin-left: 0; }
+/* the head's glyph-only Download (beats/pitchdeck.fad54971.js DOWNLOAD): a square twin of the Share in front of it
+   (chat.css .bk-share), so it rides that control's push to the right and Expand stays beside it */
+#s-tabs .sbsite .hub .pd-dl { justify-content: center; width: 26px; padding: 0; color: #e5e5ea; box-shadow: inset 0 0 0 1px #3a3a3e; }
+#s-tabs .sbsite .hub .pd-head .pd-dl + .bk-expand { margin-left: 0; }
+
+/* the stage */
+#s-tabs .sbsite .hub .pd-stage { position: relative; width: 496px; height: 279px; overflow: hidden; border-radius: 6px; background: #232327; }
+#s-tabs .sbsite .hub .pd-sw { position: absolute; inset: 0; }
+#s-tabs .sbsite .hub .pd-shm { position: absolute; inset: 0; overflow: hidden; }
+#s-tabs .sbsite .hub .pd-shm i { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.08) 50%, transparent 70%); }
+#s-tabs .sbsite .hub .pd-stage .qc-genl { z-index: 3; }
+#s-tabs .sbsite .hub .pd-nav { position: absolute; right: 10px; bottom: 10px; z-index: 2; display: flex; align-items: center; gap: 6px; }
+#s-tabs .sbsite .hub .pd-nav em { min-width: 34px; text-align: center; font: normal 600 11px/1 var(--ui); color: #16181d; opacity: .62; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .pd-nb { display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 999px; background: rgba(22, 24, 29, .09); color: #16181d; }
+#s-tabs .sbsite .hub .pd-nb svg { display: block; width: 12px; height: 12px; }
+
+/* the filmstrip */
+#s-tabs .sbsite .hub .pd-strip { position: relative; display: grid; grid-template-columns: repeat(6, 76px); gap: 8px; margin-top: 10px; }
+#s-tabs .sbsite .hub .pd-th { position: relative; width: 76px; height: 42.75px; overflow: hidden; border-radius: 6px; background: #232327; }
+#s-tabs .sbsite .hub .pd-tin { position: absolute; inset: 0; }
+/* the thumb's 1px gray border sits over its own edge: drawn outside, the two anti-aliased edges left a dark seam at fractional scales */
+#s-tabs .sbsite .hub .pd-th::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px #c5c7c5; pointer-events: none; }
+#s-tabs .sbsite .hub .pd-th .pd-sl { transform: scale(.153226); transform-origin: 0 0; }
+#s-tabs .sbsite .hub .pd-n { margin-top: 5px; text-align: center; font: 500 10px/12px var(--ui); color: #a1a1a6; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .pd-n.on { color: #e5e5ea; }
+/* the active thumb's ring: solid blue, 1.5px outside the thumb and 1px over its gray border (no seam), inner radius 5 like the border's */
+#s-tabs .sbsite .hub .pd-ring { position: absolute; left: -1.5px; top: -1.5px; width: 79px; height: 45.75px; border-radius: 7.5px; border: 2.5px solid #2656c9; pointer-events: none; }
+
+/* the slides: light paper, one accent */
+#s-tabs .sbsite .hub .pd-sl { position: absolute; left: 0; top: 0; width: 496px; height: 279px; padding: 26px 28px; overflow: hidden; background: #f7f5f0; color: #16181d; font-family: var(--ui); }
+#s-tabs .sbsite .hub .pd-h { margin: 0; font: 700 22px/26px var(--ui); letter-spacing: -.02em; color: #16181d; }
+#s-tabs .sbsite .hub .pd-mut { color: rgba(22, 24, 29, .62); }
+#s-tabs .sbsite .hub .pd-abs { position: absolute; }
+
+/* 1 title */
+#s-tabs .sbsite .hub .pd-s1 { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 54px; }
+#s-tabs .sbsite .hub .pd-s1 .pd-rule { width: 36px; height: 3px; margin-bottom: 18px; background: #1f7a5a; transform-origin: 0 50%; }
+#s-tabs .sbsite .hub .pd-s1 .pd-h { font-size: 46px; line-height: 50px; letter-spacing: -.03em; }
+#s-tabs .sbsite .hub .pd-s1 p { margin: 10px 0 0; font: 400 15px/20px var(--ui); color: rgba(22, 24, 29, .62); }
+#s-tabs .sbsite .hub .pd-s1 small { display: block; margin-top: 22px; font: 600 12px/16px var(--ui); color: #1f7a5a; }
+/* 2 problem */
+#s-tabs .sbsite .hub .pd-lines { position: absolute; left: 28px; right: 28px; top: 100px; }
+#s-tabs .sbsite .hub .pd-line { padding: 12px 0; border-top: 1px solid rgba(22, 24, 29, .14); font: 500 14px/18px var(--ui); }
+/* 3 solution */
+#s-tabs .sbsite .hub .pd-bul { position: absolute; left: 28px; top: 96px; width: 200px; margin: 0; padding: 0; list-style: none; }
+#s-tabs .sbsite .hub .pd-bul li { position: relative; padding: 0 0 14px 16px; font: 500 14px/19px var(--ui); }
+#s-tabs .sbsite .hub .pd-bul li::before { content: ''; position: absolute; left: 0; top: 6px; width: 7px; height: 7px; border-radius: 999px; background: #1f7a5a; }
+#s-tabs .sbsite .hub .pd-route { position: absolute; left: 268px; top: 84px; width: 200px; height: 150px; overflow: visible; }
+#s-tabs .sbsite .hub .pd-route text { font-family: var(--ui); }
+#s-tabs .sbsite .hub .pd-fx { transform-box: fill-box; transform-origin: 50% 50%; }
+/* 4 market */
+#s-tabs .sbsite .hub .pd-nest { position: absolute; left: 38px; top: 78px; width: 176px; height: 176px; }
+#s-tabs .sbsite .hub .pd-circ { position: absolute; left: 50%; bottom: 0; border-radius: 999px; transform-origin: 50% 100%; }
+#s-tabs .sbsite .hub .pd-lgs { position: absolute; left: 250px; top: 92px; width: 220px; }
+#s-tabs .sbsite .hub .pd-lg { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 18px; }
+#s-tabs .sbsite .hub .pd-lg i { flex: none; width: 10px; height: 10px; margin-top: 6px; border-radius: 999px; }
+#s-tabs .sbsite .hub .pd-lg b { display: block; font: 700 20px/22px var(--ui); letter-spacing: -.02em; }
+#s-tabs .sbsite .hub .pd-lg span { display: block; margin-top: 2px; font: 400 11px/14px var(--ui); color: rgba(22, 24, 29, .62); }
+/* 5 traction */
+#s-tabs .sbsite .hub .pd-chart { position: absolute; left: 28px; right: 28px; top: 78px; height: 162px; display: flex; align-items: flex-end; gap: 14px; }
+#s-tabs .sbsite .hub .pd-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-end; }
+#s-tabs .sbsite .hub .pd-col b { margin-bottom: 4px; text-align: center; font: 600 11px/14px var(--ui); font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .pd-col u { display: block; background: rgba(22, 24, 29, .16); text-decoration: none; transform-origin: 50% 100%; }
+#s-tabs .sbsite .hub .pd-col.hi u { background: #1f7a5a; }
+#s-tabs .sbsite .hub .pd-col span { margin-top: 6px; text-align: center; font: 500 11px/14px var(--ui); color: rgba(22, 24, 29, .62); }
+/* 6 ask */
+#s-tabs .sbsite .hub .pd-fund { position: absolute; left: 28px; right: 28px; top: 120px; }
+#s-tabs .sbsite .hub .pd-fund > small { display: block; margin-bottom: 10px; font: 500 12px/16px var(--ui); color: rgba(22, 24, 29, .62); }
+#s-tabs .sbsite .hub .pd-seg { display: flex; gap: 2px; height: 36px; }
+#s-tabs .sbsite .hub .pd-seg i { display: block; height: 100%; transform-origin: 0 50%; }
+#s-tabs .sbsite .hub .pd-seg i:first-child { border-radius: 6px 0 0 6px; }
+#s-tabs .sbsite .hub .pd-seg i:last-child { border-radius: 0 6px 6px 0; }
+#s-tabs .sbsite .hub .pd-key { display: flex; gap: 2px; margin-top: 8px; }
+#s-tabs .sbsite .hub .pd-key div { min-width: 0; font: 600 12px/16px var(--ui); }
+#s-tabs .sbsite .hub .pd-key span { display: block; font-weight: 400; color: rgba(22, 24, 29, .62); }

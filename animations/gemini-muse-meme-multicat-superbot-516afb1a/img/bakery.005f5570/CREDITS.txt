@@ -1,0 +1,6 @@
+hero.jpg (16:9 centre crop of the 1280px Commons thumbnail, resized to 800x450)
+  Title:   Freshippo croissant bread
+  Author:  Fumikas Sagisavas (Wikimedia Commons)
+  License: CC0 (no attribution required)
+  Source:  https://commons.wikimedia.org/wiki/File:Freshippo_croissant_bread.jpg
+  Fetched: 2026-10-14

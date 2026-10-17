@@ -1,0 +1,15 @@
+/* The 'doordash' variant's order answer (beats/doordash.d9bc17e9.js): a rebuilt DoorDash order-placed screen
+   (img/doordash.d9bc17e9/order-placed.jpg, the page at 896 x 560 CSS px) in the bakery variant's artifact frame
+   (bakery.005f5570.css .bk, whose frame, header, button and shimmer rules it reuses), like the spending variant: a
+   560px frame, a 40px header (title, View in DoorDash) over a 350px view. Loaded by the beat module itself, so
+   index.html needs no link. The screenshot is laid out at the page's own CSS size and the beat frames it with one
+   transform (origin top left), so the framing is plain page px; the landing animation runs on the wrapper above it. */
+#s-tabs .sbsite .hub .ddx .bk-title small { margin-left: 6px; font: 400 12px/16px var(--ui); color: #a1a1a6; }
+/* View in DoorDash is a real link to the store, styled as the header's light button */
+#s-tabs .sbsite .hub a.bk-btn.ddx-open { text-decoration: none; cursor: pointer; }
+#s-tabs .sbsite .hub a.bk-btn.ddx-open:hover { background: #fff; }
+#s-tabs .sbsite .hub .bk-btn.ddx-open img { display: block; width: 13px; height: 13px; }
+#s-tabs .sbsite .hub .ddx-cam { position: absolute; inset: 0; overflow: hidden; }
+/* the landing settle scales this wrapper (about the view's centre) inside the clipped cam, as the climbing tiles' image does in its box */
+#s-tabs .sbsite .hub .ddx-zoom { position: absolute; inset: 0; background: #fff; }
+#s-tabs .sbsite .hub .ddx-shot { position: absolute; top: 0; left: 0; width: 896px; height: 560px; max-width: none; transform-origin: 0 0; }

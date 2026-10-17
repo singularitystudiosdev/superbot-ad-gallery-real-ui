@@ -1,0 +1,19 @@
+media/dogs.7b007b09 CREDITS (the 'multidog' variant, beats/multidog.7b007b09.js). Internal provenance only.
+
+tails-up.mp3 ("Tails Up", 54.05 s, MP3 44.1 kHz 192 kbps)
+  Generator: ElevenLabs Music v2.5 via fal.ai, endpoint elevenlabs/music/v2.5, composition plan, seed 7
+  Request id: 01a14860-16b6-7110-bf71-480f5ca82d32 (a second take, seed 42, opened on an 8 s instrumental intro and was not used)
+  Plan: four chunks, Chorus 16 s / Verse 15 s / Chorus 16 s / Outro 7 s; styles: upbeat indie pop, feel-good, bright
+  acoustic guitar strums, handclaps, punchy live drums, playful bass line, warm male lead vocal, group sing-along
+  harmonies, 118 bpm, major key, polished radio-ready production.
+  Lyrics: written for this spot by the agent (Claude Opus 5.5 in Cosmos), all original:
+    Wag, wag, here they come / Tails up, running in the morning sun / Muddy paws and a happy bark /
+    Best friends racing through the park / Chewed-up shoes and a squeaky toy / Floppy ears and a heart of joy /
+    Doesn't matter if you're gone all day / At the door they'll be there to stay / (chorus again) /
+    Who's a good dog? You're a good dog
+  Checked: whisper large-v3-turbo hears "wag, here they come, tails up running in the morning" in the first 7 s.
+  Word timings (scenes/tabs-assets/beats/multidog-data.7b007b09.js): ElevenLabs Forced Alignment via fal.ai
+  (fal-ai/elevenlabs/forced-alignment, request 01a1486f-4da4-7762-abaa-922f2bb89b4f, loss 1.226) over those lyrics.
+  Generated 2026-10-17 (UTC). Output owned by the user (paid generation); no attribution owed.
+  The ElevenLabs API key supplied for this task answered 401 invalid_api_key, so the generation ran on ElevenLabs'
+  own model through fal.ai instead of api.elevenlabs.io.

@@ -1,0 +1,38 @@
+/* The 'spending' variant's chart answer (beats/spending.b92c87dc.js): a stacked column chart (legend, monthly average,
+   six columns over hairline gridlines, a hover tooltip) plus a screen-reader table of the same figures. Loaded by the
+   beat module itself, so index.html needs no link. Series colours are set inline from the beat's CATS.
+   Framed like the bakery variant's artifact (bakery.005f5570.css .bk, whose frame, header, button and shimmer rules it
+   reuses): a 560px frame, a 40px header (title, Expand, Export to Sheets) over a 350px view, so both frames are 560 x 390.
+   The view stacks 12px padding, the 26px legend row, a 14px gap, the plot (the beat's H), the 22px x axis and 14px
+   padding: 12 + 26 + 14 + 262 + 22 + 14 = 350. */
+#s-tabs .sbsite .hub .sp .bk-title small { margin-left: 6px; font: 400 12px/16px var(--ui); color: #a1a1a6; }
+/* the Google Sheets mark keeps its own fills, so the header button rule's stroke is turned off */
+#s-tabs .sbsite .hub .bk-btn.sp-export svg { width: 10px; height: 14px; stroke: none; }
+#s-tabs .sbsite .hub .sp-body { box-sizing: border-box; height: 100%; padding: 12px 14px 14px; font-family: var(--ui); }
+#s-tabs .sbsite .hub .sp-top { display: flex; align-items: center; gap: 8px; height: 26px; }
+#s-tabs .sbsite .hub .sp-kpi { display: inline-flex; align-items: center; gap: 5px; height: 26px; margin-left: auto; padding: 0 11px; border-radius: 999px; box-shadow: inset 0 0 0 1px #2a2a2e; font: 400 11px/1 var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .sp-kpi b { font: 600 11px/1 var(--ui); color: #e5e5ea; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sp-leg { display: flex; flex-wrap: wrap; gap: 4px 14px; font: 500 11px/14px var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .sp-leg span { display: inline-flex; align-items: center; gap: 6px; }
+#s-tabs .sbsite .hub .sp-leg i { width: 9px; height: 9px; border-radius: 2px; }
+/* the plot: y labels in a 30px gutter, six equal bands to their right; its height is the beat's H */
+#s-tabs .sbsite .hub .sp-plot { position: relative; height: 262px; margin-top: 14px; }
+#s-tabs .sbsite .hub .sp-grid { position: absolute; inset: 0 0 0 30px; }
+#s-tabs .sbsite .hub .sp-tick { position: absolute; left: 0; right: 0; height: 0; border-top: 1px solid #2c2c31; }
+#s-tabs .sbsite .hub .sp-tick.base { border-top-color: #3a3a40; }
+#s-tabs .sbsite .hub .sp-tick span { position: absolute; right: calc(100% + 7px); top: -6px; font: 500 10px/11px var(--ui); color: #8a8a90; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sp-cols { position: absolute; inset: 0 0 0 30px; display: grid; grid-template-columns: repeat(6, 1fr); }
+#s-tabs .sbsite .hub .sp-col { position: relative; height: 100%; }
+#s-tabs .sbsite .hub .sp-col.hot::before { content: ""; position: absolute; left: 8%; right: 8%; top: -6px; bottom: 0; border-radius: 6px; background: rgba(255,255,255,.05); }
+#s-tabs .sbsite .hub .sp-bar { position: absolute; bottom: 0; left: 50%; width: 36px; margin-left: -18px; }
+#s-tabs .sbsite .hub .sp-bar i { position: absolute; left: 0; right: 0; }
+#s-tabs .sbsite .hub .sp-bar i.top { border-radius: 5px 5px 0 0; }
+#s-tabs .sbsite .hub .sp-cap { position: absolute; left: 0; right: 0; text-align: center; font: 600 11px/13px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .sp-x { display: grid; grid-template-columns: repeat(6, 1fr); margin: 8px 0 0 30px; font: 500 11px/14px var(--ui); color: #8a8a90; text-align: center; }
+/* the tooltip sits left of the highest (5th) column's bar, its right edge 8px clear of the bar (half bar 18 + 8) */
+#s-tabs .sbsite .hub .sp-tip { position: absolute; top: 2px; right: calc(100% - (30px + (100% - 30px) * 4.5 / 6 - 26px)); width: 134px; padding: 8px 9px; border-radius: 9px; background: #2a2a30; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 8px 20px rgba(0,0,0,.45); opacity: 0; pointer-events: none; }
+#s-tabs .sbsite .hub .sp-tip b { display: flex; justify-content: space-between; margin-bottom: 5px; font: 600 11px/14px var(--ui); color: #ececf0; }
+#s-tabs .sbsite .hub .sp-tip p { display: flex; align-items: center; gap: 6px; margin: 0; font: 400 10.5px/16px var(--ui); color: #a1a1a6; }
+#s-tabs .sbsite .hub .sp-tip p i { flex: none; width: 8px; height: 8px; border-radius: 2px; }
+#s-tabs .sbsite .hub .sp-tip p span:last-child { margin-left: auto; color: #ececf0; font-variant-numeric: tabular-nums; }
+#s-tabs .sbsite .hub .sp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

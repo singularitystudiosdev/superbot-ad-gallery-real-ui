@@ -1,0 +1,19 @@
+traderjoes-logo.svg
+  The site's own header logo, byte-for-byte, no edits. Brand red fill #C81E24.
+  Source: https://www.traderjoes.com/content/dam/trjo/pictures/logo.svg
+
+p-*.jpg (22 files)
+  96x96 JPEG q82 thumbnails of each product's primary image on traderjoes.com (transparent PNG flattened on white,
+  trimmed, fitted inside 90x90 and centred on 96x96, i.e. contain not crop, so wide packs stay whole).
+  Sources: https://www.traderjoes.com/content/dam/trjo/products/<dir>/<sku>.png as returned by the site's GraphQL
+  field primary_image for each SKU (e.g. m20802/83847.png); product pages at
+  https://www.traderjoes.com/home/products/pdp/<title-slug>-<sku>.
+
+../../scenes/tabs-assets/beats/traderjoes-data.4aaedb8c.js
+  Titles, sizes, prices, SKUs and Nutrition Facts panels read 2026-10-15 from traderjoes.com/api/graphql (the same
+  SearchProducts / product queries the site's own pages issue, storeCode "TJ" = national default) and checked
+  against each product page's rendered text (titles, protein, servings). Prices are as listed and vary by store.
+  Protein per package = servings per container x protein per serving. Brown Rice, Russet Potatoes, Bananas,
+  Honeycrisp Apples, Strawberries and Persian Cucumbers have no panel on the site, so protein is null.
+
+Owner: Trader Joe's (name, logo, product names and photos). Internal provenance only: never shown on screen.

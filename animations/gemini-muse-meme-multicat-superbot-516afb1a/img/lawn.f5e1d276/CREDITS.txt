@@ -1,0 +1,70 @@
+lawn variant assets (provenance only, never shown on screen)
+
+before.jpg (the plain front lawn: the "before" of the wipe)
+  Title:     "Modern two-story dark gray house with large windows, surrounded by a green lawn
+              and trees under a clear blue sky" (photo 6366ab10fd)
+  Source:    https://wordpress.org/photos/photo/6366ab10fd/
+  Author:    "Outsource Image" (https://wordpress.org/photos/author/imagemaskingservice/)
+  Licence:   CC0 1.0 Universal (public domain dedication), https://creativecommons.org/publicdomain/zero/1.0/
+             No attribution and no on-screen credit required. The photographer asks for none.
+  Retrieved: 2026-10-16 (full resolution 6041x4033 JPEG, https://pd.w.org/2026/09/6366ab10fdb8d7714.06157003.jpg)
+  Processing: cropped to 4:3 (centre crop of the 3:2 original, 5377x4033), resized to 1200x900,
+             JPEG q92 4:4:4. Scripts: .tmp/lawn.f5e1d276/src/{wp.py,render_garden.py}.
+  Note:      a generic sourced stock house, not an address lookup: the crop shows no street number,
+             no licence plate, no person, no sign and no other identifying detail, and the spot never
+             states an address beyond "Raleigh, North Carolina". The house is unnamed and unlocated
+             on screen.
+
+after.jpg (the same lawn with a garden planted in it: the "after" of the wipe)
+  Model:     fal-ai/nano-banana-pro/edit (Google Gemini 3 Pro Image, "Nano Banana Pro"),
+             resolution 2K, aspect ratio 4:3, output_format jpeg, num_images 1
+  Provider:  fal.ai, POST https://fal.run/fal-ai/nano-banana-pro/edit (API key in the login keychain
+             as the item "fal-key"; the key itself is never written to the repo). HTTP 200.
+  Date:      2026-10-16
+  Prompt:    "Add a lush garden to the front lawn of this house. Keep the house, roof, windows, driveway,
+             walkway, sidewalk, trees, hedges, sky, framing, camera angle, perspective and lighting exactly
+             the same and unchanged. Replace the plain grass lawn with layered garden beds: a curved
+             flowering border along the front of the house, shrub clusters and ornamental grasses in the
+             middle, drifts of spring bulbs and perennials toward the walkway, and a fresh planted strip
+             along the sidewalk. Photorealistic, natural daylight, same time of day, no people, no text,
+             no house number."
+             One sentence was appended on the second call: "Do not add, widen or move any walkway, path,
+             sidewalk, kerb or paving, and do not put a lawn edge or concrete strip where the photo has
+             grass: keep every paved surface exactly as it is." The first call used the prompt as quoted
+             above and the model laid new paving over the grass (pavement mask 0.1% -> 23.1% in the walk
+             corridor, 0% -> 10.6% in the bottom band), which the prompt's own "keep the walkway and
+             sidewalk exactly the same" forbids, so it was not shipped; its request and output are kept
+             as .tmp/lawn.f5e1d276/src/fal-{req,response}-v2.json and fal-edit-raw-v2.jpg.
+  Request:   .tmp/lawn.f5e1d276/src/fal-req.json: that prompt, plus before.jpg downscaled to a 1024x768
+             JPEG q85 upload (.tmp/lawn.f5e1d276/src/src.jpg, 201 KB) as a data URL in image_urls; body
+             275 KB. Built by .tmp/lawn.f5e1d276/src/mkreq.py, which reproduces the shipped body byte for
+             byte and prints sizes only, never the base64 (printing it is how an earlier worker in this
+             item stalled).
+  Response:  .tmp/lawn.f5e1d276/src/fal-response.json; output 2400x1792, fetched as
+             .tmp/lawn.f5e1d276/src/fal-edit-raw.jpg
+  Post:      resized to exactly 1200x900, JPEG q92 4:4:4 (497 KB), written as after.jpg. The model returns
+             1792 rows, 0.45% short of 4:3, so the output is resized and not cropped: a crop would shift
+             the framing against before.jpg.
+  Identity:  measured against before.jpg, both 1200x900. Best framing offset 0,0 (blurred MAD 16.4 against
+             a 25.5 median over a +-16 px search), so the camera did not move. Rows 0-470 - sky, trees,
+             roof, windows, front door - MAD 9.8 with 82% of their pixels within 16 levels; the driveway's
+             pavement mask is 0.082 against 0.086 before, and the walk corridor and the bottom band
+             measure 0.031 and 0.033 against 0.001 and 0.000 before: a little paving appears at the lawn's
+             edge (~3% of those bands, the model's kerb suggestion), where the unpinned first call put 23%
+             and 11%, so the walkway and sidewalk stay as they were within that edge.
+             Rows 560-900, the lawn, MAD 54.1 with only 3.9% of pixels within 8 levels: every visible
+             change is the ground the garden was planted in. The frame is nonetheless regenerated pixel by
+             pixel by the model, so the two files are not bit-identical outside the lawn.
+  Note:      an image-model edit of before.jpg, not a composition of that photo's own pixels.
+             .tmp/lawn.f5e1d276/src/render_garden.py, whose drawn output is
+             .tmp/lawn.f5e1d276/src/out/{before,after}.jpg, no longer produces the shipped after.jpg; it is
+             kept only as the record of the source crop, the frame geometry and the first alignment
+             measurements. An earlier model run with a longer prompt (fal-*-v1) was shipped before this
+             one: it left the lawn nearly plain and let flowers spill over the driveway. No on-screen
+             credit is owed or shown.
+
+
+The address typed in the card (Raleigh, North Carolina, USA) is the one the ask names. No Maps API key is
+used and no map tile or embed is loaded: the card's map is SVG drawn in scenes/tabs-assets/beats/lawn.f5e1d276.js.
+Google Maps is a trademark of Google LLC, shown nominatively (naming the app superbot routes to); its mark is
+brand/maps-logo.svg, credited in ../brand/CREDITS.txt.

@@ -1,0 +1,51 @@
+/* sb-mark-live.css
+   The real superbot.gg animated mascot ("the mark"), extracted verbatim.
+
+   Source URL : https://beta.superbot.gg/
+   Snapshot   : /Users/adrianagne/Documents/cosmos/work/refs/beta.superbot.gg-2026-09-23.html
+   Retrieved  : 2026-09-23
+   Copied from: that snapshot's inline <style>
+                  line 8    : :root { --storm-0:#00e5c3; --storm-3:#c026d3; }
+                  line 5    : :root { --fg:#ececec; }
+                  lines 66-85: .sb-mark, .mark-body, .sb-mark-a/b/c, .mark-ear*, .mark-happy,
+                               .mark-wrap, .sb-mark.is-happy and @keyframes mark-bob, mark-breath,
+                               mark-happy-bob, mark-ear-l, mark-ear-r, mark-glitch-a, mark-glitch-b
+   Everything below the marked VERBATIM line is byte-for-byte the source text. The only authored
+   block is the scoped custom-property declaration (the source kept those on :root); no other rule
+   was retyped, reordered or renamed. Keyframe names are the source's, so a page that already
+   defines mark-bob / mark-breath / mark-glitch-* will collide: this asset is meant to be the only
+   definition on the page.
+
+   Pair with assets/sb-mark-live.js, which injects the matching markup, or with the raw fragment in
+   assets/sb-mark-live.html. The mark carries no intrinsic size: size it through sbMarkLive's
+   { size } or your own width/height on .sb-mark (the source used 96px via `.panel .sb-mark`).
+   Recolour by re-declaring --storm-0 / --storm-3 / --fg on .sb-mark or an ancestor. */
+
+.sb-mark,
+.mark-wrap {
+  --storm-0: #00e5c3;
+  --storm-3: #c026d3;
+  --fg: #ececec;
+}
+
+/* --- VERBATIM: source lines 66-85 --- */
+.sb-mark{display:block;overflow:visible;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sb-mark .mark-body{transform-box:fill-box;transform-origin:50% 50%;animation:mark-breath 5.5s ease-in-out infinite}/* deliberate */
+.sb-mark-a{fill:var(--storm-0);transform:translate(-1.2px,-1.2px);animation:mark-glitch-a 7s ease-in-out infinite}/* deliberate */
+.sb-mark-b{fill:var(--storm-3);transform:translate(1.2px,1.2px);animation:mark-glitch-b 11s ease-in-out infinite}/* deliberate */
+.sb-mark-c{fill:var(--fg)}
+.sb-mark .mark-ear{transform-box:fill-box;transform-origin:50% 100%}
+.sb-mark .mark-ear-l{animation:mark-ear-l 3.1s ease-in-out infinite}/* deliberate */
+.sb-mark .mark-ear-r{animation:mark-ear-r 4.3s ease-in-out infinite}/* deliberate */
+.sb-mark .mark-happy{opacity:0}
+.sb-mark.is-happy .mark-happy{opacity:1}
+.sb-mark.is-happy .mark-eye{opacity:0}
+.sb-mark.is-happy{animation:mark-happy-bob 600ms ease-out}/* deliberate */
+.mark-wrap{display:flex;animation:mark-bob 2.4s ease-in-out infinite}/* deliberate */
+@keyframes mark-bob{0%,100%{transform:translateY(-1.5px)}50%{transform:translateY(1.5px)}}
+@keyframes mark-breath{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+@keyframes mark-happy-bob{0%,100%{transform:none}25%{transform:translateY(-4px)}50%{transform:none}75%{transform:translateY(-4px)}}
+@keyframes mark-ear-l{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes mark-ear-r{0%,100%{transform:rotate(3deg)}50%{transform:rotate(-3deg)}}
+@keyframes mark-glitch-a{0%,100%{transform:translate(-1.2px,-1.2px)}38%{transform:translate(-0.5px,-0.6px)}41%{transform:translate(-2.2px,-1px)}44%{transform:translate(-1.2px,-1.2px)}72%{transform:translate(-0.7px,-0.5px)}}
+@keyframes mark-glitch-b{0%,100%{transform:translate(1.2px,1.2px)}27%{transform:translate(0.6px,0.5px)}61%{transform:translate(1.2px,1.2px)}63%{transform:translate(2px,0.6px)}66%{transform:translate(1.2px,1.2px)}84%{transform:translate(0.5px,0.8px)}}
